@@ -1,0 +1,100 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import ExportButtons from '../../../components/ExportButtons.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '字數統計';
+const description = '在瀏覽器中統計字元、字數、句子、行數與預估閱讀時間。';
+const faq = [
+  {
+    question: '字數如何計算？',
+    answer: '拉丁文字會依空白與常見文字模式切分，中文、日文與韓文字元會以單一字元計入，讓混合語言文字有較合理的估算。',
+  },
+  {
+    question: '我的文字會被上傳嗎？',
+    answer: '不會。統計邏輯在你的瀏覽器中執行，文字不會送到自訂後端伺服器。',
+  },
+  {
+    question: '可以離線使用嗎？',
+    answer: '頁面載入後，統計功能會在本機執行。完整離線可用性取決於你的網站部署與快取設定。',
+  },
+];
+const related = [
+  {
+    title: '大小寫轉換',
+    href: localizedPath(locale, '/tools/case-converter'),
+  },
+];
+---
+
+<ToolLayout
+  title={title}
+  description={description}
+  locale={locale}
+  tool={{ name: title }}
+  faq={faq}
+  related={related}
+>
+  <label for="wc-input">要統計的文字</label>
+  <textarea id="wc-input" rows="12" placeholder="在這裡貼上或輸入文字"></textarea>
+
+  <ExportButtons targetId="wc-input" filename="word-count.txt" />
+
+  <div class="results" aria-live="polite">
+    <p>字元數：<strong id="wc-characters">0</strong></p>
+    <p>不含空白字元：<strong id="wc-characters-no-spaces">0</strong></p>
+    <p>字數：<strong id="wc-words">0</strong></p>
+    <p>句子數：<strong id="wc-sentences">0</strong></p>
+    <p>行數：<strong id="wc-lines">0</strong></p>
+    <p>預估閱讀時間：<strong id="wc-reading-time">0 分鐘</strong></p>
+  </div>
+
+  <script>
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const input = document.getElementById('wc-input');
+    const characters = document.getElementById('wc-characters');
+    const charactersNoSpaces = document.getElementById('wc-characters-no-spaces');
+    const words = document.getElementById('wc-words');
+    const sentences = document.getElementById('wc-sentences');
+    const lines = document.getElementById('wc-lines');
+    const readingTime = document.getElementById('wc-reading-time');
+    const cjkPattern = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\u3040-\u30ff\uac00-\ud7af]/gu;
+    const latinWordPattern = /[\p{L}\p{N}]+(?:['-][\p{L}\p{N}]+)*/gu;
+
+    function countWords(value: string): number {
+      const cjkMatches = value.match(cjkPattern) ?? [];
+      const withoutCjk = value.replace(cjkPattern, ' ');
+      const latinMatches = withoutCjk.match(latinWordPattern) ?? [];
+      return cjkMatches.length + latinMatches.length;
+    }
+
+    function setText(element: HTMLElement | null, value: string): void {
+      if (element) element.textContent = value;
+    }
+
+    function updateStats() {
+      if (!(input instanceof HTMLTextAreaElement)) return;
+      const value = input.value;
+      const wordCount = countWords(value);
+      const trimmed = value.trim();
+      const sentenceCount = trimmed === '' ? 0 : (trimmed.match(/[^.!?。！？]+[.!?。！？]?/g) ?? []).length;
+      const lineCount = value === '' ? 0 : value.split(/\r\n|\r|\n/).length;
+      const minutes = wordCount === 0 ? 0 : Math.max(1, Math.ceil(wordCount / 200));
+
+      setText(characters, String(Array.from(value).length));
+      setText(charactersNoSpaces, String(Array.from(value.replace(/\s/g, '')).length));
+      setText(words, String(wordCount));
+      setText(sentences, String(sentenceCount));
+      setText(lines, String(lineCount));
+      setText(readingTime, `${minutes} 分鐘`);
+    }
+
+    if (input instanceof HTMLTextAreaElement) {
+      bindPersistentField(input, 'word-counter:input');
+      input.addEventListener('input', updateStats);
+      updateStats();
+    }
+  </script>
+</ToolLayout>

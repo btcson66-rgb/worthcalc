@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const tools = [
+  {
+    title: 'Word Counter',
+    href: localizedPath(locale, '/tools/word-counter'),
+    description: 'Count words, characters, sentences, lines, and reading time in your browser.',
+  },
+  {
+    title: 'Case Converter',
+    href: localizedPath(locale, '/tools/case-converter'),
+    description: 'Convert text to uppercase, lowercase, title case, or sentence case instantly.',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Online Tools"
+  description="Free, fast, browser-based tools for everyday text tasks with no account required."
+  locale={locale}
+>
+  <section class="hero">
+    <h1>Free, fast, browser-based tools</h1>
+    <p>
+      Simple utilities that run locally in your browser, so you can get quick
+      results without creating an account or sending text to a backend.
+    </p>
+  </section>
+
+  <section id="tools">
+    <h2>Tools</h2>
+    <div class="grid">
+      {tools.map((tool) => (
+        <article class="card">
+          <h3><a href={tool.href}>{tool.title}</a></h3>
+          <p>{tool.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

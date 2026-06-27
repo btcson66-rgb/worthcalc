@@ -1,0 +1,35 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const locale = 'zh';
+---
+
+<!-- [Customize this page for your site] -->
+<ArticleLayout
+  title="隱私權政策"
+  description="適用於靜態工具網站的隱私權範本，涵蓋本機工具、可選分析與可選廣告。"
+  locale={locale}
+  updated="2026-06-28"
+>
+  <p>
+    本隱私權政策是範本。[Replace with your details]，包含你的法定名稱、
+    公司或品牌名稱、必要地址，以及聯絡信箱。
+  </p>
+  <h2>工具資料</h2>
+  <p>
+    本站工具預期在你的瀏覽器用戶端執行。我們不提供會接收工具輸入文字的自訂後端服務。
+    如果工具使用 localStorage，該資料會保留在你的裝置上，除非你清除工具內容、
+    清除瀏覽器資料，或手動刪除本機儲存資料。
+  </p>
+  <h2>分析與廣告</h2>
+  <p>
+    設定完成後，本站可能使用 Google Analytics 4 了解整體流量趨勢，並使用
+    Google AdSense 顯示廣告。Google 服務可能設定 Cookie 或使用類似技術。
+    你可以在瀏覽器設定中管理 Cookie，也可以在
+    https://adssettings.google.com/ 檢視 Google 廣告個人化設定。
+  </p>
+  <h2>聯絡方式</h2>
+  <p>
+    隱私聯絡信箱：[Replace with your details]，例如 hello@example.com。
+  </p>
+</ArticleLayout>

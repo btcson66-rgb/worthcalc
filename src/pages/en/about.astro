@@ -1,0 +1,29 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const locale = 'en';
+---
+
+<!-- [Customize this page for your site] -->
+<ArticleLayout
+  title="About"
+  description="Learn what this static tool site starter provides and how its browser-based tools work."
+  locale={locale}
+  updated="2026-06-28"
+>
+  <p>
+    This site is a reusable starter for fast, static, browser-based tools. It is
+    designed for small utilities that help visitors complete practical tasks
+    without creating an account.
+  </p>
+  <p>
+    The included tools run locally in the visitor's browser. Text entered into a
+    tool is processed on the device, not sent to a custom application server.
+    Some tools may optionally save input in localStorage so a draft remains
+    available after a page refresh.
+  </p>
+  <p>
+    Use this page to introduce your brand, explain who maintains the site, and
+    describe the kinds of tools you publish.
+  </p>
+</ArticleLayout>

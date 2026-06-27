@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'zh';
+const tools = [
+  {
+    title: '字數統計',
+    href: localizedPath(locale, '/tools/word-counter'),
+    description: '在瀏覽器中統計字元、字數、句子、行數與預估閱讀時間。',
+  },
+  {
+    title: '大小寫轉換',
+    href: localizedPath(locale, '/tools/case-converter'),
+    description: '快速轉換大寫、小寫、標題式大小寫與句首大寫。',
+  },
+];
+---
+
+<BaseLayout
+  title="免費線上工具"
+  description="免費、快速、以瀏覽器執行的日常文字工具，不需要帳號。"
+  locale={locale}
+>
+  <section class="hero">
+    <h1>免費、快速、以瀏覽器執行的工具</h1>
+    <p>
+      這些簡單工具會在你的瀏覽器本機執行，適合快速處理文字，不需要建立帳號，
+      也不會把輸入內容送到後端伺服器。
+    </p>
+  </section>
+
+  <section id="tools">
+    <h2>工具</h2>
+    <div class="grid">
+      {tools.map((tool) => (
+        <article class="card">
+          <h3><a href={tool.href}>{tool.title}</a></h3>
+          <p>{tool.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

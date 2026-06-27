@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../consts';
+import { LOCALE_HREFLANG } from '../consts';
+import type { SeoInput } from '../lib/seo';
+import { getLocaleFromUrl } from '../i18n/utils';
+import SEO from '../components/SEO.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  locale?: Locale;
+  url?: URL;
+  site?: URL;
+  image?: string;
+  type?: SeoInput['type'];
+  noindex?: boolean;
+  jsonLd?: object[];
+}
+
+const {
+  title,
+  description,
+  locale = getLocaleFromUrl(Astro.url),
+  url = Astro.url,
+  site = Astro.site,
+  image,
+  type,
+  noindex,
+  jsonLd = [],
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={LOCALE_HREFLANG[locale]}>
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      locale={locale}
+      url={url}
+      site={site}
+      image={image}
+      type={type}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
+    <GoogleAnalytics />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

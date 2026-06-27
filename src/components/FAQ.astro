@@ -1,0 +1,30 @@
+---
+import type { FaqItem } from '../lib/seo';
+import { faqJsonLd } from '../lib/seo';
+import { getLocaleFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  items: FaqItem[];
+  heading?: string;
+}
+
+const { items, heading } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const resolvedHeading = heading ?? t('tool.faqHeading');
+---
+
+{items.length > 0 && (
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">{resolvedHeading}</h2>
+    <div class="faq-list">
+      {items.map((item) => (
+        <details class="faq-item">
+          <summary>{item.question}</summary>
+          <div>{item.answer}</div>
+        </details>
+      ))}
+    </div>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd(items))} />
+  </section>
+)}

@@ -1,0 +1,25 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const locale = 'zh';
+---
+
+<!-- [Customize this page for your site] -->
+<ArticleLayout
+  title="關於本站"
+  description="了解這個靜態工具網站範本，以及瀏覽器本機工具的運作方式。"
+  locale={locale}
+  updated="2026-06-28"
+>
+  <p>
+    本站是一個可重複使用的靜態工具網站範本，適合建立快速、實用、以瀏覽器執行的線上工具。
+    目標是讓訪客不用註冊帳號，也能完成日常任務。
+  </p>
+  <p>
+    內建工具會在訪客的瀏覽器本機處理輸入內容，不會送到自訂後端伺服器。
+    部分工具可能會使用 localStorage 儲存草稿，方便重新整理頁面後繼續使用。
+  </p>
+  <p>
+    請使用本頁介紹你的品牌、維護者，以及你計畫提供的工具類型。
+  </p>
+</ArticleLayout>

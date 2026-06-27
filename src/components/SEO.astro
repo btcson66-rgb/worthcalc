@@ -1,0 +1,31 @@
+---
+import type { SeoInput } from '../lib/seo';
+import { resolveSeo } from '../lib/seo';
+
+interface Props extends SeoInput {
+  jsonLd?: object[];
+}
+
+const { jsonLd = [], ...seoInput } = Astro.props;
+const seo = resolveSeo(seoInput);
+---
+
+<title>{seo.fullTitle}</title>
+<meta name="description" content={seo.description} />
+<link rel="canonical" href={seo.canonical} />
+<meta name="robots" content={seo.robots} />
+{seo.alternates.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+))}
+{Object.entries(seo.openGraph).map(([property, content]) => (
+  <meta property={property} content={content} />
+))}
+{Object.entries(seo.twitter).map(([name, content]) => (
+  <meta name={name} content={content} />
+))}
+<meta name="generator" content={Astro.generator} />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{jsonLd.map((obj) => (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(obj)} />
+))}

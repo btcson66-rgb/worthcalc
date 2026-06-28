@@ -1,100 +1,286 @@
-# Reusable Static SEO Tool-Site Starter
+# Multi-Site Static SEO Tool System
 
-This is a reusable static SEO tool-site starter built with Astro 5 and TypeScript. It ships with bilingual English and Traditional Chinese routes, SEO-ready layouts, static legal pages, and browser-based utility tools. It has no backend, database, AI service, or server-side user accounts.
+## Overview
 
-## Tech Stack & Requirements
+This repo helps you manage many independent static SEO tool websites from one place. Each site can have its own name, domain, tools, content, analytics, and deployment settings while still starting from the same reusable template.
 
-- Astro 5
-- TypeScript
-- ESLint
-- `@astrojs/sitemap`
-- Node.js 18+
+Each generated site is built for browser-based tools. There is no backend, no database, and no AI API requirement. The finished site is static HTML, CSS, and JavaScript, so it is free or low-cost to host on services like Cloudflare Pages, Vercel, GitHub Pages, or any static host.
+
+## Architecture
+
+```text
+root/
+  starter-template/  reusable Astro starter copied when creating a new site
+  sites/             independent generated websites
+  shared/            reusable code ideas and shared utilities
+  scripts/           root management scripts
+  docs/              setup guides, policies, and checklists
+```
+
+`starter-template/` is the source template for new sites. Edit it when you want future sites to start with improved layouts, scripts, or content patterns.
+
+`sites/` contains your real websites. Each subfolder is a separate static site with its own package.json and build output.
+
+`shared/` stores reusable utilities and examples that can be copied into a site when needed.
+
+`scripts/` contains root-level management tools for creating, auditing, checking, and comparing sites.
+
+`docs/` contains practical guides for SEO content, analytics, AdSense readiness, licensing, and launches.
+
+## Requirements
+
+- Node.js 18 or newer
 - npm
+
+No other tools are required.
 
 ## Quick Start
 
+1. Clone or download this repo.
+2. Create your first site:
+
 ```bash
-npm install
-npm run dev
-npm run build
-npm run preview
+npm run create-site -- --slug my-first-site --name "My First Site"
 ```
 
-## Scripts
+3. Start local development:
 
-| Script | Purpose |
-| --- | --- |
-| `npm run dev` | Start the local Astro development server. |
-| `npm run build` | Build the static site into `dist/`. |
-| `npm run preview` | Preview the production build locally. |
-| `npm run typecheck` | Run Astro and TypeScript checks. |
-| `npm run lint` | Run ESLint. |
-| `npm run check:links` | Run the project link checker. |
-| `npm run verify` | Run the combined verification workflow. |
+```bash
+cd sites/my-first-site
+npm install
+npm run dev
+```
 
-## Cloning Into a New Site
+4. Open http://localhost:4321 in your browser.
 
-Use this 5-site workflow when creating another tool site from the starter:
+## Creating a New Site
 
-1. Copy the whole folder to a new project directory.
-2. Edit `src/consts.ts` for the site name, canonical URL, social handle, locale metadata, and navigation labels.
-3. Edit `.env` for `SITE_URL`, `PUBLIC_GA_ID`, and `PUBLIC_ADSENSE_CLIENT`.
-4. Add new tools under `src/pages/{en,zh}/tools` and keep both locales in sync.
-5. Add `og-default.png` to `/public` and replace placeholder legal/contact details before launch.
+Use the root create script:
 
-## Deploy
+```bash
+npm run create-site -- --slug my-first-site --name "My First Site"
+```
 
-The site is static. `npm run build` outputs production files to `dist/`. Set `SITE_URL` at build time so sitemap and canonical URLs match the deployed domain.
+`--slug` is the folder name and package name. Use lowercase letters, numbers, and hyphens.
 
-- Netlify: connect the repo, set build command `npm run build`, publish directory `dist`, and add `SITE_URL` in environment variables.
-- Vercel: import the repo, keep Astro defaults, set output directory `dist`, and add `SITE_URL` in environment variables.
-- Cloudflare Pages: set framework preset Astro, build command `npm run build`, output directory `dist`, and add `SITE_URL` in build variables.
-- GitHub Pages: build with `npm run build`, then publish the `dist/` folder with your Pages workflow.
+`--name` is the human-readable site name shown in docs and generated config.
 
-## GA4 Setup
+The command creates `sites/my-first-site/` by copying `starter-template/`. It also creates or updates starter files such as `site.config.ts`, `.env.example`, `package.json`, `README.md`, `launch-checklist.md`, and `license-audit.md` inside the new site.
 
-Create a Google Analytics 4 property, copy the Measurement ID in the form `G-XXXX`, and set `PUBLIC_GA_ID` in `.env` or the host build environment. The analytics script only loads when this value is set.
+After creating a site, edit:
 
-## Google Search Console Setup
+- `site.config.ts` for the site name, description, URL, language settings, navigation, and tool metadata.
+- `.env` for production values such as `SITE_URL`, `PUBLIC_GA_ID`, and `PUBLIC_ADSENSE_CLIENT`.
 
-Add your site in Google Search Console as either a Domain property or a URL-prefix property. Verify ownership with a DNS TXT record or by placing the provided HTML verification file in `/public`. After the site is live, submit the sitemap.
+To add tools, create new Astro pages under `src/pages/en/tools/` and `src/pages/zh/tools/`, then add the page to the site navigation, related links, and sitemap metadata if your site config requires it.
 
-## Sitemap Submission
+## Site Development
 
-The sitemap is generated automatically by `@astrojs/sitemap` at `/sitemap-index.xml`. `robots.txt` references it. Submit `/sitemap-index.xml` in Google Search Console after deployment.
+### Add a New Tool Page
 
-## AdSense Review Checklist
+Create a `.astro` file in:
 
-- Set `PUBLIC_ADSENSE_CLIENT` only when your publisher ID is ready.
-- Add `ads.txt` to `/public`.
-- Keep about, privacy, terms, contact, and disclaimer pages published.
-- Replace all legal placeholders with real site details.
-- Publish original, useful content beyond thin placeholder pages.
-- Confirm navigation works on desktop and mobile.
-- Confirm the privacy policy discloses cookies, analytics, and advertising.
-- Ad placeholders render inert until AdSense is configured.
+```text
+src/pages/en/tools/
+src/pages/zh/tools/
+```
 
-## License Audit Workflow
+Use `ToolLayout` for tool pages. A complete tool page should include a clear title, description, tool controls, FAQ content, related links, and enough explanatory text for search visitors.
 
-See `license-audit.md`. Before shipping each of the 5 sites, run `npm ls --all` and a license audit tool, then record the result and any exceptions.
+### Add a New Landing Page
 
-## i18n
+Create a `.astro` file in:
 
-Routes are locale-prefixed: `/en` for English and `/zh` for Traditional Chinese. Internal links should use `localizedPath(locale, '/route')`.
+```text
+src/pages/en/
+src/pages/zh/
+```
 
-To add a language, add the locale to `LOCALES` and the locale maps in `src/consts.ts`, add UI strings in `src/i18n/ui.ts`, then create matching `src/pages/<locale>/` pages.
+Use `ArticleLayout` for article-style landing pages. Follow `docs/seo-content-standard.md` and include sections like what the tool does, how to use it, examples, use cases, FAQ, privacy notes, and related links.
+
+### Edit Legal Pages
+
+Legal and trust pages live under each locale folder, for example:
+
+```text
+src/pages/en/privacy.astro
+src/pages/en/terms.astro
+src/pages/en/contact.astro
+src/pages/en/disclaimer.astro
+src/pages/zh/privacy.astro
+src/pages/zh/terms.astro
+src/pages/zh/contact.astro
+src/pages/zh/disclaimer.astro
+```
+
+Update these pages for each real site before launch.
+
+## Building & Deploying
+
+Inside a site folder, run:
+
+```bash
+npm run build
+```
+
+This produces a static `dist/` folder. Deploy the contents of `dist/` to a static host.
+
+Recommended hosting options:
+
+- Cloudflare Pages, recommended and free: connect your GitHub repo, set the build command to `npm run build`, and set the output directory to `dist`.
+- Vercel: connect the repo, use the same build command, and set the output directory to `dist`.
+- GitHub Pages: use GitHub Actions to build the site and publish `dist/`.
+- Any static host: upload the generated `dist/` folder.
+
+Set `SITE_URL` at build time so sitemap and canonical URLs use the production domain.
+
+## GA4 & Search Console
+
+Use GA4 to measure traffic and Google Search Console to verify indexing, submit sitemaps, and review search performance.
+
+See `docs/ga4-gsc-setup.md` for the full guide.
+
+## AdSense
+
+AdSense readiness depends on useful content, working navigation, legal pages, a stable domain, and ad placements that do not block the tools.
+
+See `docs/adsense-checklist.md` for requirements.
+
+## Checking All Sites
+
+Run this from the repo root:
+
+```bash
+npm run check-all-sites
+```
+
+The script checks every site in `sites/`. It installs dependencies when `node_modules/` is missing, runs build, runs audit after a successful build, counts generated pages and tool pages, and checks for sitemap, GA4, and AdSense markers.
+
+Example output:
+
+```text
+Site          | Build | Audit | Pages | Tools | Sitemap | GA4  | AdSense
+--------------|-------|-------|-------|-------|---------|------|--------
+my-first-site | PASS  | PASS  | 18    | 2     | PASS    | PASS | PASS
+```
+
+## Auditing a Single Site
+
+Run this from the repo root:
+
+```bash
+npm run audit-site -- --slug my-site
+```
+
+This delegates to the selected site's `npm run audit` script.
+
+## Updating Sites from Starter
+
+Run this from the repo root:
+
+```bash
+npm run update-starter
+```
+
+This is a report-only script. It compares selected files in `starter-template/` with each site in `sites/` and reports files that are missing or diverged.
+
+It does not overwrite anything. To sync a file, copy it from `starter-template/` to `sites/<slug>/` after reviewing the difference.
+
+## License Policy
+
+Keep every dependency, copied asset, icon, snippet, and third-party file compatible with your site license and hosting plan. Track decisions before publishing a site.
+
+See `docs/license-policy.md`.
 
 ## Project Structure
 
 ```text
-src/
-  components/       Shared UI, SEO, ads, export controls
-  i18n/             Locale utilities and UI strings
-  layouts/          Base, article, and tool layouts
-  lib/              SEO and browser storage helpers
-  pages/            Static routes, tools, robots.txt
-  styles/           Global styles
-public/             Static assets such as og-default.png and ads.txt
-dist/               Build output
+root/
+  README.md
+  package.json
+  starter-template/
+    package.json
+    site.config.example.ts
+    src/
+      components/
+      layouts/
+      lib/
+      i18n/
+      pages/
+        en/
+          tools/
+        zh/
+          tools/
+      styles/
+    scripts/
+      audit.mjs
+      check-links.mjs
+    public/
+    docs/
+    license-audit.md
+  sites/
+    site-name/
+      package.json
+      site.config.ts
+      .env.example
+      src/
+        components/
+        layouts/
+        lib/
+        i18n/
+        pages/
+          en/
+            tools/
+          zh/
+            tools/
+        styles/
+      scripts/
+      public/
+      dist/
+      launch-checklist.md
+      license-audit.md
+  shared/
+    ads/
+    analytics/
+    export/
+    seo/
+    storage/
+    ui/
+  scripts/
+    create-site.mjs
+    audit-site.mjs
+    check-all-sites.mjs
+    update-starter.mjs
+  docs/
+    adsense-checklist.md
+    ga4-gsc-setup.md
+    license-policy.md
+    seo-content-standard.md
+    site-launch-checklist.md
 ```
 
+## Scripts Reference
+
+### Root Scripts
+
+| Script | Command | Purpose |
+| --- | --- | --- |
+| create-site | `npm run create-site -- --slug my-site --name "My Site"` | Creates a new site from `starter-template/`. |
+| audit-site | `npm run audit-site -- --slug my-site` | Runs the selected site's audit script. |
+| check-all-sites | `npm run check-all-sites` | Builds and audits every site, then prints a summary table. |
+| update-starter | `npm run update-starter` | Reports template files that are missing or diverged in each site. |
+
+### Per-Site Scripts
+
+Run these inside a site folder such as `sites/my-site/`.
+
+| Script | Command | Purpose |
+| --- | --- | --- |
+| dev | `npm run dev` | Starts the local development server. |
+| build | `npm run build` | Builds the static production site into `dist/`. |
+| preview | `npm run preview` | Previews the built site locally. |
+| audit | `npm run audit` | Runs the site's SEO and AdSense readiness audit. |
+| lint | `npm run lint` | Checks code style and common issues. |
+| typecheck | `npm run typecheck` | Checks TypeScript and Astro types. |
+| check:links | `npm run check:links` | Checks internal links in the generated site. |
+| verify | `npm run verify` | Runs the site's combined verification workflow, when configured. |

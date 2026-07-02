@@ -1,0 +1,28 @@
+---
+import type { BreadcrumbItem } from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+      return (
+        <li>
+          {isLast ? (
+            <span aria-current="page">{item.name}</span>
+          ) : (
+            <a href={item.url}>{item.name}</a>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd(items, Astro.site))} />

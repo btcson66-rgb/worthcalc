@@ -1,0 +1,48 @@
+---
+import { ADSENSE_CLIENT } from '../consts';
+import { getLocaleFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  slot?: string;
+  format?: string;
+  label?: boolean;
+}
+
+const { slot, format = 'auto', label = true } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const adLabel = t('ad.placeholder');
+---
+
+{ADSENSE_CLIENT ? (
+  <div class="ad-slot" role="complementary" aria-label={adLabel}>
+    {label && <span class="ad-label">{adLabel}</span>}
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={ADSENSE_CLIENT}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline define:vars={{ ADSENSE_CLIENT }}>
+      (function () {
+        var src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
+        if (!document.querySelector('script[data-adsbygoogle-loader="true"]')) {
+          var loader = document.createElement('script');
+          loader.async = true;
+          loader.crossOrigin = 'anonymous';
+          loader.src = src;
+          loader.dataset.adsbygoogleLoader = 'true';
+          document.head.appendChild(loader);
+        }
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+      })();
+    </script>
+  </div>
+) : (
+  <div class="ad-slot" role="complementary" aria-label={adLabel}>
+    <span class="ad-label">{adLabel}</span>
+  </div>
+)}

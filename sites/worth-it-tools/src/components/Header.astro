@@ -1,0 +1,23 @@
+---
+import { SITE } from '../consts';
+import { getLocaleFromUrl, localizedPath, useTranslations } from '../i18n/utils';
+import LanguageSwitch from './LanguageSwitch.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href={localizedPath(locale, '/')}>{SITE.name}</a>
+    <div class="site-header__actions">
+      <nav class="primary-nav" aria-label="Primary">
+        <a href={localizedPath(locale, '/')}>{t('nav.home')}</a>
+        <a href={`${localizedPath(locale, '/')}#tools`}>{t('nav.tools')}</a>
+        <a href={localizedPath(locale, '/about')}>{t('nav.about')}</a>
+        <a href={localizedPath(locale, '/contact')}>{t('nav.contact')}</a>
+      </nav>
+      <LanguageSwitch />
+    </div>
+  </div>
+</header>

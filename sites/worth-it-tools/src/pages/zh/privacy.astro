@@ -1,0 +1,82 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const locale = 'zh';
+---
+
+<ArticleLayout
+  title="隱私權政策"
+  description="WorthCalc 如何處理你的資料：所有計算機都在瀏覽器端執行，本頁也說明 Google AdSense 與分析 Cookie 的使用方式。"
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    這份隱私權政策說明你在使用 WorthCalc 時，資料會如何被處理。簡單來說：
+    每一個計算機都在你自己的瀏覽器裡執行，我們不會收集你輸入的數字，而這個頁面
+    會清楚告訴你，有哪些第三方服務（例如廣告）仍然可能在你的裝置上設定 Cookie。
+  </p>
+
+  <h2>計算機資料</h2>
+  <p>
+    WorthCalc 上的所有計算機——分期付款真實利率、訂閱服務稽核、好市多會員、
+    電動機車 vs 油車、租屋 vs 買房、通勤成本、手搖飲存錢，以及信用卡回饋回本——
+    都完全以瀏覽器端 JavaScript 執行。我們沒有自訂的後端伺服器會接收你輸入的
+    價格、收入、貸款條件或任何其他數字。你在計算機裡輸入的任何內容都不會傳送給
+    我們。部分計算機可能會把你輸入的內容儲存在瀏覽器的 localStorage 中，純粹是
+    為了讓你重新整理頁面後，數字還在，這些資料只會留在你的裝置上，不會被上傳。
+    你可以隨時透過工具本身的清除功能，或瀏覽器的網站資料設定來清除這些資料。
+  </p>
+
+  <h2>Google AdSense 與第三方廣告 Cookie</h2>
+  <p>
+    WorthCalc 透過廣告（包含 Google AdSense）維持營運。Google 與其廣告合作夥伴
+    可能會使用 Cookie、裝置識別碼或類似技術，根據你先前造訪本站或其他網站的紀錄
+    來投放廣告，並衡量廣告成效。這有時稱為「個人化廣告」或「興趣導向廣告」。
+  </p>
+  <p>
+    包含 Google 在內的第三方供應商，會使用 Cookie 根據使用者先前造訪本站或其他
+    網站的紀錄來投放廣告。Google 使用廣告 Cookie，讓 Google 與其合作夥伴能根據
+    你造訪本站及（或）網路上其他網站的紀錄，向你顯示廣告。你可以前往 Google
+    廣告設定頁面
+    <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">www.google.com/settings/ads</a>
+    選擇停用個人化廣告。你也可以在
+    <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">policies.google.com/technologies/partner-sites</a>
+    了解更多 Google 如何使用資料的說明；歐洲經濟區、英國與瑞士的使用者，也可以在
+    該頁面查看額外的同意機制設定。此外，你也可以前往
+    <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a>
+    選擇停用部分第三方供應商的個人化廣告 Cookie。
+  </p>
+
+  <h2>分析工具</h2>
+  <p>
+    我們可能會使用注重隱私的分析工具（例如 Google Analytics）來了解整體流量趨勢
+    ——例如哪些計算機最常被使用、哪些頁面需要改善。分析資料以彙總方式呈現，
+    不會與你在計算機中輸入的數字連結，因為那些數字本來就不會離開你的瀏覽器。
+  </p>
+
+  <h2>Cookie 說明</h2>
+  <p>
+    本站使用的 Cookie 分為兩類：我們自己設定、用於基本網站功能的 Cookie
+    （例如記住你的語言偏好），以及如上所述由 Google AdSense 與分析服務等
+    第三方設定的 Cookie。大部分瀏覽器都能透過設定封鎖或刪除 Cookie，
+    這麼做可能會影響廣告個人化程度，但不會影響計算機的運作，因為計算機本身
+    不依賴 Cookie 才能運作。
+  </p>
+
+  <h2>兒童隱私</h2>
+  <p>
+    WorthCalc 並非針對 13 歲以下兒童設計，我們也不會蓄意蒐集兒童的個人資料。
+  </p>
+
+  <h2>政策更新</h2>
+  <p>
+    我們可能會不定期更新本隱私權政策，例如新增計算機或調整廣告設定時。
+    頁面最上方的「更新日期」會反映最新的修訂時間。
+  </p>
+
+  <h2>聯絡方式</h2>
+  <p>
+    若對本政策有任何疑問，歡迎寄信至
+    <a href="mailto:hello@example.com">hello@example.com</a>。
+  </p>
+</ArticleLayout>

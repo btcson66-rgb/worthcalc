@@ -1,0 +1,57 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const locale = 'en';
+---
+
+<ArticleLayout
+  title="Disclaimer"
+  description="WorthCalc's calculators produce estimates for general information only. Not financial or investment advice."
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    <strong>WorthCalc's calculators are for general informational purposes
+    only and do not constitute financial, investment, tax, legal, or other
+    professional advice.</strong> Results are estimates only, not investment
+    or financial advice — every calculator on this site simplifies a
+    real-world decision into a set of formulas and the numbers you provide.
+  </p>
+  <h2>Estimates, not guarantees</h2>
+  <p>
+    Every calculator — including the installment true APR tool, subscription
+    audit, Costco membership break-even, EV vs. gas TCO, rent vs. buy, commute
+    cost comparison, latte factor, and cashback break-even — relies on
+    simplified assumptions that are documented on each tool's page (for
+    example, a fixed investment return rate or a flat annual price increase).
+    Real-world outcomes depend on factors these calculators cannot know:
+    future interest rates, market performance, inflation, your personal
+    credit terms, promotional changes, and more. Small changes in assumptions
+    can meaningfully change the result.
+  </p>
+  <h2>Not financial or investment advice</h2>
+  <p>
+    Nothing on this site should be interpreted as a recommendation to buy,
+    sell, borrow, lease, subscribe to, or cancel any specific product,
+    service, security, or financial instrument. Before making a significant
+    financial decision — taking on debt, buying a home, purchasing a vehicle,
+    or signing a membership contract — consider speaking with a licensed
+    financial advisor, accountant, or other qualified professional who can
+    review your complete financial situation.
+  </p>
+  <h2>No professional relationship</h2>
+  <p>
+    Using WorthCalc does not create an advisory, fiduciary, or professional
+    relationship between you and the site operator. We are not a bank,
+    lender, broker-dealer, registered investment advisor, or insurance
+    provider.
+  </p>
+  <h2>Accuracy</h2>
+  <p>
+    We try to keep the underlying math correct and the default values
+    reasonable, but accuracy is not guaranteed. Public figures referenced on
+    tool pages (such as membership fee ranges) are approximate and may change
+    over time; always verify current pricing and terms with the relevant
+    provider before relying on a calculator's output for a real decision.
+  </p>
+</ArticleLayout>

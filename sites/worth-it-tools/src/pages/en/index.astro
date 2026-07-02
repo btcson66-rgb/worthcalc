@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const tools = [
+  {
+    title: 'Word Counter',
+    href: localizedPath(locale, '/tools/word-counter'),
+    description: 'Count words, characters, sentences, lines, and reading time in your browser.',
+  },
+  {
+    title: 'Case Converter',
+    href: localizedPath(locale, '/tools/case-converter'),
+    description: 'Convert text to uppercase, lowercase, title case, or sentence case instantly.',
+  },
+];
+---
+
+<BaseLayout
+  title="WorthCalc — Free Calculators That Tell You If It's Worth It"
+  description="Free browser-based calculators for real money decisions: installments, subscriptions, Costco, EV vs. gas, rent vs. buy, commuting, daily habits, and cashback cards."
+  locale={locale}
+>
+  <section class="hero">
+    <h1>WorthCalc — free calculators that tell you if it's actually worth it.</h1>
+    <p>
+      Before you sign up, sign the lease, or swipe the card, run the numbers.
+      Every calculator below does real math on real money decisions, right in
+      your browser. No sign-up, no data sent anywhere, no vague advice —
+      just a clear verdict.
+    </p>
+  </section>
+
+  <section id="tools">
+    <h2>Calculators</h2>
+    <div class="grid">
+      {tools.map((tool) => (
+        <article class="card">
+          <h3><a href={tool.href}>{tool.title}</a></h3>
+          <p>{tool.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

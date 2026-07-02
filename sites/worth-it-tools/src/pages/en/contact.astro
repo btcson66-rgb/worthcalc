@@ -1,0 +1,38 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+---
+
+<ArticleLayout
+  title="Contact WorthCalc"
+  description="Reach the WorthCalc team about calculator bugs, math corrections, feature requests, or partnership inquiries."
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    WorthCalc is a small, independently run site, so we keep contact simple:
+    email us directly rather than filling out a form.
+  </p>
+  <p>
+    Email: <a href="mailto:hello@example.com">hello@example.com</a>
+  </p>
+  <p>
+    Good reasons to write in:
+  </p>
+  <ul>
+    <li>You think a calculator's math is wrong — tell us the inputs you used and what result you expected, and we will check it.</li>
+    <li>A default value (like a membership fee or interest rate) looks out of date.</li>
+    <li>You have an idea for a new "is it worth it" calculator.</li>
+    <li>You found a bug, broken link, or display issue on mobile or desktop.</li>
+    <li>You're interested in advertising or a partnership.</li>
+  </ul>
+  <p>
+    We read every message, though as a small team we can't guarantee a
+    response to every one. For general questions about how the site works,
+    see the <a href={localizedPath(locale, '/about')}>About page</a>, and for
+    how we handle data, see our
+    <a href={localizedPath(locale, '/privacy')}>Privacy Policy</a>.
+  </p>
+</ArticleLayout>

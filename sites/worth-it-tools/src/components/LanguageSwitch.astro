@@ -1,0 +1,18 @@
+---
+import { LOCALE_LABELS, LOCALES } from '../consts';
+import { getLocaleFromUrl, switchLocalePath, useTranslations } from '../i18n/utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<nav class="language-switch" aria-label={t('lang.switch')}>
+  {LOCALES.map((target) => (
+    <a
+      href={switchLocalePath(Astro.url, target)}
+      aria-current={target === locale ? 'true' : undefined}
+    >
+      {LOCALE_LABELS[target]}
+    </a>
+  ))}
+</nav>

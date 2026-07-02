@@ -1,0 +1,72 @@
+---
+import type { Locale } from '../consts';
+import type { BreadcrumbItem, FaqItem } from '../lib/seo';
+import { softwareAppJsonLd } from '../lib/seo';
+import { localizedPath, useTranslations } from '../i18n/utils';
+import AdSlot from '../components/AdSlot.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FAQ from '../components/FAQ.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface RelatedLink {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  tool: { name: string };
+  breadcrumb?: BreadcrumbItem[];
+  faq?: FaqItem[];
+  related?: RelatedLink[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  locale,
+  tool,
+  breadcrumb,
+  faq = [],
+  related = [],
+  noindex,
+} = Astro.props;
+const t = useTranslations(locale);
+const crumbs = breadcrumb ?? [
+  { name: t('breadcrumb.home'), url: localizedPath(locale, '/') },
+  { name: tool.name, url: Astro.url.pathname },
+];
+const jsonLd = [
+  softwareAppJsonLd({
+    name: tool.name,
+    description,
+    url: Astro.url.pathname,
+    locale,
+    site: Astro.site,
+  }),
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  type="website"
+  noindex={noindex}
+  jsonLd={jsonLd}
+>
+  <Breadcrumb items={crumbs} />
+  <h1>{title}</h1>
+  <AdSlot />
+  <section class="tool">
+    <slot />
+  </section>
+  <p class="privacy-note">{t('tool.privacyNote')}</p>
+  <FAQ items={faq} />
+  <RelatedLinks links={related} />
+  <AdSlot />
+</BaseLayout>

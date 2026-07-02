@@ -1,0 +1,33 @@
+{
+  "name": "worth-it-tools",
+  "version": "1.0.0",
+  "description": "WorthCalc — free, fast, browser-based tools.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "eslint . --ext .js,.mjs,.ts,.astro",
+    "lint:fix": "eslint . --ext .js,.mjs,.ts,.astro --fix",
+    "check:links": "node scripts/check-links.mjs",
+    "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",
+    "verify": "npm run build && npm run typecheck && npm run lint && npm run check:links"
+  },
+  "dependencies": {
+    "astro": "^5.6.1",
+    "@astrojs/sitemap": "^3.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.8.2",
+    "eslint": "^9.23.0",
+    "@eslint/js": "^9.23.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "globals": "^16.0.0"
+  }
+}

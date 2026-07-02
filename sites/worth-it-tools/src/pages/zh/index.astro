@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'zh';
+const tools = [
+  {
+    title: '字數統計',
+    href: localizedPath(locale, '/tools/word-counter'),
+    description: '在瀏覽器中統計字元、字數、句子、行數與預估閱讀時間。',
+  },
+  {
+    title: '大小寫轉換',
+    href: localizedPath(locale, '/tools/case-converter'),
+    description: '快速轉換大寫、小寫、標題式大小寫與句首大寫。',
+  },
+];
+---
+
+<BaseLayout
+  title="WorthCalc 值不值得計算機 — 花錢之前，先算一下"
+  description="免費的瀏覽器端計算機，專門回答「值不值得」：分期利率、訂閱花費、好市多會員、電動機車 vs 油車、租屋 vs 買房、通勤成本、手搖飲存錢、信用卡回饋。"
+  locale={locale}
+>
+  <section class="hero">
+    <h1>花錢之前，先算一下。</h1>
+    <p>
+      分期划不划算、訂閱是不是在燒錢、好市多會員值不值得續、租屋還是買房比較好——
+      這些問題不用憑感覺，直接算給你看。所有計算都在你的瀏覽器本機完成，
+      不需要註冊、不會把資料送到任何伺服器，只給你一個清楚的答案。
+    </p>
+  </section>
+
+  <section id="tools">
+    <h2>計算機</h2>
+    <div class="grid">
+      {tools.map((tool) => (
+        <article class="card">
+          <h3><a href={tool.href}>{tool.title}</a></h3>
+          <p>{tool.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import type { Locale } from '../consts';
+import type { BreadcrumbItem } from '../lib/seo';
+import { localizedPath, useTranslations } from '../i18n/utils';
+import AdSlot from '../components/AdSlot.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  updated?: string;
+  breadcrumb?: BreadcrumbItem[];
+  noindex?: boolean;
+}
+
+const { title, description, locale, updated, breadcrumb, noindex } = Astro.props;
+const t = useTranslations(locale);
+const crumbs = breadcrumb ?? [
+  { name: t('breadcrumb.home'), url: localizedPath(locale, '/') },
+  { name: title, url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  type="article"
+  noindex={noindex}
+>
+  <Breadcrumb items={crumbs} />
+  <article class="prose">
+    <h1>{title}</h1>
+    {updated && <p class="updated">{updated}</p>}
+    <slot />
+  </article>
+  <AdSlot />
+</BaseLayout>

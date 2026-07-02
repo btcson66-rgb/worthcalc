@@ -1,0 +1,44 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+---
+
+<ArticleLayout
+  title="About WorthCalc"
+  description="WorthCalc is a free set of browser-based calculators that answer one question: is it actually worth it?"
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    WorthCalc exists because most "is it worth it" questions get answered with
+    gut feeling instead of arithmetic. Is that 0% installment plan actually
+    free? Are your subscriptions quietly eating a month's rent every year?
+    Would a Costco membership pay for itself at your spending level? These are
+    math problems, not opinions — so we built calculators instead of writing
+    another listicle.
+  </p>
+  <p>
+    Every tool on this site runs entirely in your browser. There is no backend
+    that receives the numbers you type in — no account, no upload, no server
+    round-trip. You can check the math, close the tab, and nothing you entered
+    ever leaves your device (aside from anything you explicitly choose to save
+    locally for next time).
+  </p>
+  <p>
+    We currently publish eight calculators covering everyday money decisions:
+    true APR on installment and BNPL plans, subscription cost audits, Costco
+    membership break-even, EV vs. gas total cost of ownership, rent vs. buy,
+    commute cost comparison, the "latte factor" daily habit calculator, and
+    cashback credit card break-even. Each one is free, ad-supported, and
+    built to give you a plain verdict — not just a pile of numbers.
+  </p>
+  <p>
+    WorthCalc is independently run. We are not a bank, lender, brokerage, or
+    financial advisor, and nothing on this site is investment or financial
+    advice — see our <a href={localizedPath(locale, '/disclaimer')}>disclaimer</a> for details.
+    If you spot a calculation that looks wrong or have a tool idea, reach us at
+    the address on the <a href={localizedPath(locale, '/contact')}>contact page</a>.
+  </p>
+</ArticleLayout>

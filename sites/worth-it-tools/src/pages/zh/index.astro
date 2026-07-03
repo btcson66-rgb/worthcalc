@@ -5,41 +5,49 @@ import { localizedPath } from '../../i18n/utils';
 const locale = 'zh';
 const tools = [
   {
+    icon: '💳',
     title: '分期付款真實 APR 計算機',
     href: localizedPath(locale, '/tools/installment-true-apr'),
     description: '看穿「0 利率」分期背後的真實年利率，手續費其實是幾 % 利息。',
   },
   {
+    icon: '📺',
     title: '訂閱支出健檢計算機',
     href: localizedPath(locale, '/tools/subscription-audit'),
     description: '把 Netflix、Spotify 等訂閱加總，看每月、一年、五年到底花多少。',
   },
   {
+    icon: '🛒',
     title: 'Costco 會員值不值得計算機',
     href: localizedPath(locale, '/tools/costco-membership'),
     description: '算出好市多金星、商業、黑鑽會員的回本消費門檻與年度淨效益。',
   },
   {
+    icon: '🛵',
     title: '電動機車 vs 油車計算機',
     href: localizedPath(locale, '/tools/ev-vs-gas'),
     description: '比較 Gogoro 類電動機車與 125cc 油車的五年總持有成本與回本年。',
   },
   {
+    icon: '🏠',
     title: '租屋 vs 買房計算機',
     href: localizedPath(locale, '/tools/rent-vs-buy'),
     description: '把房貸、房價增值、租金成長與頭期款投資報酬放在一起比較。',
   },
   {
+    icon: '🚌',
     title: '通勤成本計算機',
     href: localizedPath(locale, '/tools/commute-cost'),
     description: '比較機車、汽車、大眾運輸與 Uber 的每月、每年通勤花費。',
   },
   {
+    icon: '🧋',
     title: '拿鐵因子計算機',
     href: localizedPath(locale, '/tools/latte-factor'),
     description: '每天一杯手搖或咖啡，一年花多少？改成投資又會變多少？',
   },
   {
+    icon: '🎁',
     title: '信用卡回饋打平計算機',
     href: localizedPath(locale, '/tools/cashback-breakeven'),
     description: '算出年費卡要刷多少才回本，並跟免年費 1% 回饋卡直接比較。',
@@ -53,21 +61,30 @@ const tools = [
   locale={locale}
 >
   <section class="hero">
-    <h1>花錢之前，先算一下。</h1>
+    <span class="hero__eyebrow">💸 花錢決定，交給數字</span>
+    <h1>花錢之前，<span class="accent">先算一下</span>。</h1>
     <p>
       分期划不划算、訂閱是不是在燒錢、好市多會員值不值得續、租屋還是買房比較好——
       這些問題不用憑感覺，直接算給你看。所有計算都在你的瀏覽器本機完成，
-      不需要註冊、不會把資料送到任何伺服器，只給你一個清楚的答案。
+      不需要註冊、資料不外傳，只給你一個清楚的答案。
     </p>
+    <ul class="hero__badges">
+      <li>免註冊</li>
+      <li>完全隱私</li>
+      <li>永久免費</li>
+    </ul>
   </section>
 
   <section id="tools">
     <h2>計算機</h2>
+    <p class="section-lead">八個工具，專門回答大家真的會搜尋的「值不值得？」。</p>
     <div class="grid">
       {tools.map((tool) => (
         <article class="card">
+          <span class="card__icon" aria-hidden="true">{tool.icon}</span>
           <h3><a href={tool.href}>{tool.title}</a></h3>
           <p>{tool.description}</p>
+          <span class="card__cta">開啟計算機</span>
         </article>
       ))}
     </div>

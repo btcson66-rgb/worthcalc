@@ -9,7 +9,20 @@ const t = useTranslations(locale);
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href={localizedPath(locale, '/')}>{SITE.name}</a>
+    <a class="brand" href={localizedPath(locale, '/')} aria-label={SITE.name}>
+      <svg class="brand__mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="brandMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#14b8a6" />
+            <stop offset="1" stop-color="#0d9488" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#brandMark)" />
+        <path d="M8 16.5l4.2 4.4L24 9.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="10.5" cy="10.5" r="1.7" fill="#fff" opacity="0.9" />
+      </svg>
+      <span class="brand__name">Worth<b>Calc</b></span>
+    </a>
     <div class="site-header__actions">
       <nav class="primary-nav" aria-label="Primary">
         <a href={localizedPath(locale, '/')}>{t('nav.home')}</a>

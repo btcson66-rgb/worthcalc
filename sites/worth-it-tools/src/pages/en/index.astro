@@ -5,41 +5,49 @@ import { localizedPath } from '../../i18n/utils';
 const locale = 'en';
 const tools = [
   {
+    icon: '💳',
     title: 'Installment True APR Calculator',
     href: localizedPath(locale, '/tools/installment-true-apr'),
     description: 'See the real interest rate hiding behind "0%" installment and BNPL plans.',
   },
   {
+    icon: '📺',
     title: 'Subscription Audit Calculator',
     href: localizedPath(locale, '/tools/subscription-audit'),
     description: 'Add up every subscription and see what you really pay per month, year, and 5 years.',
   },
   {
+    icon: '🛒',
     title: 'Costco Membership Calculator',
     href: localizedPath(locale, '/tools/costco-membership'),
     description: 'Find the monthly spend where a Gold Star or Executive membership pays for itself.',
   },
   {
+    icon: '🚗',
     title: 'EV vs Gas Car TCO Calculator',
     href: localizedPath(locale, '/tools/ev-vs-gas'),
     description: 'Compare total cost of ownership — purchase, energy, maintenance — and the break-even year.',
   },
   {
+    icon: '🏠',
     title: 'Rent vs Buy Calculator',
     href: localizedPath(locale, '/tools/rent-vs-buy'),
     description: 'Weigh mortgage, appreciation, and invested down payment against renting.',
   },
   {
+    icon: '🚌',
     title: 'Commute Cost Calculator',
     href: localizedPath(locale, '/tools/commute-cost'),
     description: 'Compare car, transit, rideshare, and bike costs per month — including your time.',
   },
   {
+    icon: '☕',
     title: 'Latte Factor Calculator',
     href: localizedPath(locale, '/tools/latte-factor'),
     description: 'What a daily habit really costs per year — and what it could grow to if invested.',
   },
   {
+    icon: '🎁',
     title: 'Cashback Break-even Calculator',
     href: localizedPath(locale, '/tools/cashback-breakeven'),
     description: 'Check whether an annual-fee card beats a no-fee 1% card at your spending level.',
@@ -53,22 +61,30 @@ const tools = [
   locale={locale}
 >
   <section class="hero">
-    <h1>WorthCalc — free calculators that tell you if it's actually worth it.</h1>
+    <span class="hero__eyebrow">💸 Money decisions, settled by math</span>
+    <h1>Free calculators that tell you if it's <span class="accent">actually worth it</span>.</h1>
     <p>
       Before you sign up, sign the lease, or swipe the card, run the numbers.
-      Every calculator below does real math on real money decisions, right in
-      your browser. No sign-up, no data sent anywhere, no vague advice —
-      just a clear verdict.
+      Every calculator does real math on real money decisions, right in your
+      browser — no sign-up, no data sent anywhere, just a clear verdict.
     </p>
+    <ul class="hero__badges">
+      <li>No sign-up</li>
+      <li>100% private</li>
+      <li>Free forever</li>
+    </ul>
   </section>
 
   <section id="tools">
     <h2>Calculators</h2>
+    <p class="section-lead">Eight tools for the decisions people actually search “is it worth it?” about.</p>
     <div class="grid">
       {tools.map((tool) => (
         <article class="card">
+          <span class="card__icon" aria-hidden="true">{tool.icon}</span>
           <h3><a href={tool.href}>{tool.title}</a></h3>
           <p>{tool.description}</p>
+          <span class="card__cta">Open calculator</span>
         </article>
       ))}
     </div>

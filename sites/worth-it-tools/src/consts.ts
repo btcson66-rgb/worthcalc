@@ -7,7 +7,7 @@ export const SITE = {
   /** Internal default; the production origin comes from `Astro.site` (SITE_URL). */
   url: 'https://example.com',
   /** Brand name, appended to page titles. */
-  name: 'SEO Tool Starter',
+  name: 'WorthCalc',
   /** Twitter / X handle for Open Graph (optional, include the @). */
   twitter: '',
   /** Default social share image, served from /public. */

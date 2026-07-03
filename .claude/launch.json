@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "worth-it-tools-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "sites/worth-it-tools", "run", "preview", "--", "--port", "4399"],
+      "port": 4399,
+      "autoPort": false
+    }
+  ]
+}

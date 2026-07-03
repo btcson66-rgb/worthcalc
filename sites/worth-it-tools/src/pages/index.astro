@@ -2,7 +2,10 @@
 // Root "/" entry page. Astro's i18n auto-redirect is disabled
 // (redirectToDefaultLocale: false) so this page is served at the root URL that
 // Google crawls. It carries the GA tag (and GSC verification meta) so GA4/GSC
-// install detection succeeds, then forwards visitors to the default locale.
+// install detection succeeds. It then forwards visitors to the default locale,
+// but ONLY AFTER the GA measurement hit has actually been sent — GA4's tag
+// tester loads this URL and needs the network request to fire before we
+// navigate away, otherwise detection fails even though the tag is present.
 import { GA_ID, GSC_VERIFICATION } from '../consts';
 ---
 
@@ -18,21 +21,27 @@ import { GA_ID, GSC_VERIFICATION } from '../consts';
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', GA_ID);
+          // Redirect only after GA confirms the initial hit was sent, so the
+          // GA4 tag tester reliably detects the install. Falls back to a timer
+          // if the callback never fires (e.g. gtag blocked).
+          var redirected = false;
+          function go(){ if (!redirected) { redirected = true; location.replace('/en/'); } }
+          gtag('config', GA_ID, { event_callback: go });
+          setTimeout(go, 3000);
         </script>
       </>
     )}
     {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
-    <meta http-equiv="refresh" content="1; url=/en/" />
+    <meta http-equiv="refresh" content="4; url=/en/" />
     <link rel="canonical" href="/en/" />
     <title>Continue to the site</title>
   </head>
   <body>
     <p><a href="/en/">Continue to the site</a></p>
-    <script is:inline>
-      setTimeout(function () {
+    {!GA_ID && (
+      <script is:inline>
         location.replace('/en/');
-      }, 800);
-    </script>
+      </script>
+    )}
   </body>
 </html>

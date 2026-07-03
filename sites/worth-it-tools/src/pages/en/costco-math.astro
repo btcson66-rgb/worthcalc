@@ -1,0 +1,137 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Is a Costco membership worth it for a single person?',
+    answer:
+      'It can be, but the math is tighter. At roughly a $65 annual fee and around 15% typical savings versus regular stores, you need about $36 of warehouse spending a month to break even. Singles who buy gas, keep a pantry, or split bulk purchases with friends often clear that bar; occasional shoppers may not.',
+  },
+  {
+    question: 'How much do I need to spend for an Executive membership to break even?',
+    answer:
+      'The Executive upgrade costs about $65 more per year and earns a 2% reward on most warehouse purchases. Two percent of your annual spend must exceed $65, which happens at roughly $3,250 a year, or about $271 a month. Below that, Gold Star is the better tier.',
+  },
+  {
+    question: 'How much cheaper is Costco than a regular supermarket, really?',
+    answer:
+      'It varies a lot by category. Per-unit savings are often strongest on staples, gas, and pharmacy items, and weaker or absent on promotional items at regular stores. Many estimates land somewhere around 15% on a comparable basket, which is why our calculator uses that as an editable default rather than a fixed truth.',
+  },
+  {
+    question: 'Does the calculator account for buying more than I need?',
+    answer:
+      'Only indirectly — you control the savings-rate assumption. If bulk sizes lead to waste or unplanned purchases at your house, lower the assumed savings percentage and see whether the verdict still holds. An honest input matters more than an optimistic one.',
+  },
+  {
+    question: 'What if I mostly go to Costco for gas?',
+    answer:
+      'Gas-only members can absolutely come out ahead, since warehouse gas is often meaningfully cheaper per gallon. Estimate your monthly fuel spend and the per-gallon discount, convert it into monthly savings, and compare that against the fee — the calculator handles the comparison once you translate gas savings into a monthly amount.',
+  },
+];
+---
+
+<ArticleLayout
+  title="The Math of Warehouse Club Memberships"
+  description="Is a Costco membership worth it? Break-even spend for Gold Star and Executive tiers, the 2% reward math, and a free calculator to check your numbers."
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    A warehouse club membership is one of the cleanest "is it worth it"
+    problems in personal finance: you pay a known annual fee in exchange for
+    lower prices, and the answer depends almost entirely on one variable —
+    how much you actually spend there. This guide walks through the math for
+    both Costco tiers, shows you the break-even points, and links to a free
+    <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership calculator</a>
+    that does it all with your own numbers.
+  </p>
+
+  <h2>The basic model: fee versus savings</h2>
+  <p>
+    Strip away the food court and the free samples and a membership is a
+    simple trade. Suppose warehouse prices save you about 15% compared with
+    what you would pay at regular stores for the same basket (a common
+    estimate — and an assumption you can edit in the calculator). Then every
+    dollar you spend at the warehouse "earns back" about 15 cents. The
+    membership is worth it when those earned-back cents exceed the annual
+    fee.
+  </p>
+  <p>
+    With a Gold Star membership at approximately $65 per year, the break-even
+    is:
+  </p>
+  <ul>
+    <li>$65 ÷ 15% ≈ <strong>$433 of warehouse spending per year</strong></li>
+    <li>That is roughly <strong>$36 a month</strong> — a single decent grocery run.</li>
+  </ul>
+  <p>
+    That low bar explains why memberships work for most regular shoppers.
+    But "most" is not "you": if you live far from a warehouse, shop there
+    three times a year, or find that bulk sizes go stale in your pantry, your
+    effective savings rate is lower and the equation can flip. Run your own
+    figures in the
+    <a href={localizedPath(locale, '/tools/costco-membership')}>calculator</a>
+    before deciding.
+  </p>
+
+  <h2>The Executive membership break-even</h2>
+  <p>
+    The Executive tier costs about $130 a year — roughly $65 more than Gold
+    Star — and adds a 2% annual reward on most warehouse purchases (capped at
+    a fairly high annual maximum that most households never reach). The
+    upgrade question is separate from the basic membership question:
+  </p>
+  <ul>
+    <li>The extra $65 fee must be covered by the 2% reward.</li>
+    <li>$65 ÷ 2% = <strong>$3,250 of annual spend</strong>, or about <strong>$271 a month</strong>.</li>
+  </ul>
+  <p>
+    Spend more than that and Executive strictly beats Gold Star; spend less
+    and you are paying for a reward you will not fully earn. Families doing
+    a weekly warehouse run usually clear the bar easily; a single person
+    topping up the pantry monthly usually does not. The
+    <a href={localizedPath(locale, '/tools/costco-membership')}>membership calculator</a>
+    compares both tiers at your spending level and recommends one.
+  </p>
+
+  <h2>Second-order effects the simple model ignores</h2>
+  <p>
+    Two honest caveats keep this from being a pure slam dunk. First,
+    <strong>bulk sizes change behavior</strong>: some households genuinely
+    consume more (or waste more) when quantities are larger, which silently
+    erodes the savings rate. Second, <strong>the treasure-hunt effect is
+    real</strong> — warehouse retail is engineered around discovery
+    purchases, and an unplanned $40 item per trip can wipe out a month of
+    per-unit savings. Neither effect shows up on a receipt as a line item,
+    which is why the calculator lets you set a conservative savings
+    assumption instead of taking 15% on faith.
+  </p>
+
+  <h2>How to actually decide</h2>
+  <ol>
+    <li>Estimate your realistic monthly warehouse spend — groceries, gas, pharmacy, everything.</li>
+    <li>Pick an honest savings rate versus your normal stores (start at 15% and adjust).</li>
+    <li>Enter both into the <a href={localizedPath(locale, '/tools/costco-membership')}>calculator</a> and read the verdict for each tier.</li>
+    <li>If you are near the break-even line, the membership is roughly a wash — decide on convenience, not economics.</li>
+  </ol>
+  <p>
+    Memberships are also a good gateway drug into auditing the rest of your
+    recurring costs. If this exercise felt satisfying, point the same lens at
+    your streaming and app charges with our
+    <a href={localizedPath(locale, '/subscription-creep')}>subscription creep guide</a>,
+    or at your credit card's annual fee with the
+    <a href={localizedPath(locale, '/tools/cashback-breakeven')}>cashback break-even calculator</a>.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the membership calculator runs entirely in your browser and
+    your spending figures are never sent to a server. Fees cited here are
+    approximate and may change — verify current pricing with the retailer.
+    Results are estimates, not financial advice.
+  </p>
+</ArticleLayout>

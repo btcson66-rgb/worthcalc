@@ -1,0 +1,151 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Is a 0% installment plan ever really free?',
+    answer:
+      'Sometimes, yes — if there is genuinely no handling fee, no price markup, and you would not have gotten a discount for paying cash. But any fee, markup, or lost cash discount turns "0%" into a real interest rate, which is often surprisingly high once you account for the declining balance.',
+  },
+  {
+    question: 'Why does a 3% handling fee equal roughly 5-6% APR, not 3%?',
+    answer:
+      'Because you do not keep the full loan for the whole year. On a 12-month plan you repay part of the principal every month, so on average you are only borrowing about half the amount — but the fee is charged on the full amount. A one-time 3% fee on a 12-month installment works out to a true APR of roughly 5.6%.',
+  },
+  {
+    question: 'What is the real interest rate on BNPL (buy now, pay later)?',
+    answer:
+      'Many BNPL plans are genuinely 0% if you pay on time, because the merchant pays the fee instead of you. The real cost appears in late fees, account fees, or higher sticker prices. Late fees on a small purchase can translate into a triple-digit effective APR.',
+  },
+  {
+    question: 'How do I calculate the true APR of my installment plan?',
+    answer:
+      'You need the cash price, the number of payments, and the total you will actually pay (including all fees). The true APR is the rate that makes those monthly payments equal the cash price today — an IRR calculation. Our installment true APR calculator solves it for you instantly in your browser.',
+  },
+  {
+    question: 'Should I ever take a 0% installment plan on purpose?',
+    answer:
+      'If it is truly fee-free and you have the discipline to make every payment, taking the plan and keeping your cash earning interest can be rational. The danger is stacking several plans until the combined monthly payments strain your budget.',
+  },
+];
+---
+
+<ArticleLayout
+  title="The Truth About 0% Installment Plans"
+  description="That 0% installment plan may hide a real interest rate. Learn why a 3% handling fee is closer to 6% APR, and check your plan's true cost."
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    "0% interest, 12 easy payments." It sounds like free money — and retailers,
+    credit card issuers, and BNPL apps know exactly how good it sounds. But a
+    surprising number of "zero interest" offers carry a real, measurable
+    interest rate hidden inside a handling fee, a setup charge, or a price you
+    could have negotiated down if you paid cash. This guide explains where the
+    hidden cost lives, why the math is worse than it looks, and how to compute
+    the <strong>true APR of an installment plan</strong> in under a minute.
+  </p>
+
+  <p>
+    Want to skip straight to the answer? Enter your plan into our free
+    <a href={localizedPath(locale, '/tools/installment-true-apr')}>Installment True APR Calculator</a>
+    — it runs entirely in your browser and gives you the real annual rate
+    instantly.
+  </p>
+
+  <h2>Where the hidden cost hides</h2>
+  <p>
+    A "0% installment" can cost you money through three main doors:
+  </p>
+  <ul>
+    <li>
+      <strong>Handling or processing fees.</strong> The most common trick.
+      "0% interest, 3% one-time handling fee" is not 0% — and as we will see,
+      it is not 3% either.
+    </li>
+    <li>
+      <strong>Price markup.</strong> Some merchants quietly quote a higher
+      price for installment purchases, or refuse the cash discount they would
+      otherwise offer. The difference is interest by another name.
+    </li>
+    <li>
+      <strong>Penalty terms.</strong> Miss one payment on some plans and
+      deferred interest applies retroactively to the whole original balance.
+      BNPL late fees on small purchases can be brutal relative to the amount
+      borrowed.
+    </li>
+  </ul>
+
+  <h2>Why a 3% fee is really about 6% APR</h2>
+  <p>
+    Here is the part almost everyone gets wrong, and it is the single most
+    important idea in this article: <strong>a one-time fee of 3% on a
+    12-month installment plan is roughly a 5.6% true APR — close to double
+    the sticker number.</strong>
+  </p>
+  <p>
+    The reason is the declining balance. When you borrow $1,200 for a year
+    with a normal loan, you pay interest on $1,200 for the whole year. But an
+    installment plan makes you repay $100 of principal every month. By month
+    six you only owe about half; by month twelve, almost nothing. On average
+    across the year, you were only borrowing about half the original amount —
+    yet the 3% fee was charged on the <em>full</em> amount. Paying a
+    full-balance fee for a half-balance loan is what pushes the effective
+    rate to nearly twice the fee percentage.
+  </p>
+  <p>
+    The precise way to compute it is an IRR (internal rate of return)
+    calculation: find the monthly rate at which your stream of payments is
+    exactly worth the cash price today, then annualize it. That is exactly
+    what our
+    <a href={localizedPath(locale, '/tools/installment-true-apr')}>true APR calculator</a>
+    does — you enter the cash price, the number of payments, the payment
+    amount, and any upfront fee, and it solves for the real rate.
+  </p>
+
+  <h2>The BNPL real interest rate question</h2>
+  <p>
+    Buy-now-pay-later services complicate the picture. Pay-in-four plans are
+    often genuinely free to the customer — the merchant pays the BNPL provider
+    a cut instead. So where is the catch? Three places: late fees that are
+    huge relative to small balances, longer BNPL financing plans that do
+    charge interest (sometimes 20-36% APR), and the well-documented tendency
+    to spend more when a $120 purchase is framed as "$30 today." The
+    <strong>BNPL real interest rate</strong> you personally experience depends
+    almost entirely on whether you ever pay late — one late fee on a $60
+    purchase can exceed any credit card's annualized cost.
+  </p>
+
+  <h2>How to decide: a simple framework</h2>
+  <ol>
+    <li>Find the true cash price — including any discount you would get for paying upfront.</li>
+    <li>Add up everything you will actually pay on the plan: all installments plus all fees.</li>
+    <li>Run the numbers through the <a href={localizedPath(locale, '/tools/installment-true-apr')}>calculator</a> to get the true APR.</li>
+    <li>Compare it against your alternatives — what your savings earn, or the rate on other debt you could pay down instead.</li>
+    <li>Only then decide. A true APR under what your money earns elsewhere is fine; a "0%" plan that solves to 12% is just an expensive loan in a costume.</li>
+  </ol>
+
+  <h2>The bigger pattern: small recurring costs add up</h2>
+  <p>
+    Installment plans are one member of a larger family: costs engineered to
+    feel smaller than they are. Monthly subscriptions work the same way —
+    each one feels tiny, and together they quietly consume a paycheck. If
+    this article changed how you look at "easy monthly payments," you may
+    also want to read our guide to
+    <a href={localizedPath(locale, '/subscription-creep')}>subscription creep</a>,
+    or check whether your annual-fee credit card actually earns its keep with
+    the <a href={localizedPath(locale, '/tools/cashback-breakeven')}>cashback break-even calculator</a>.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the calculators linked from this article run entirely in
+    your browser. The prices and payment amounts you enter are never sent to
+    a server. Results are estimates for general information, not financial
+    advice.
+  </p>
+</ArticleLayout>

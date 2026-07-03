@@ -46,10 +46,6 @@ function walkHtml(dir) {
   return files;
 }
 
-function relPath(file) {
-  return relative(distDir, file).split(sep).join('/');
-}
-
 // ── Pre-checks ──────────────────────────────────────────────────────────────
 
 console.log(`\nAuditing: ${siteRoot}\n`);

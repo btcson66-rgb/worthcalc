@@ -1,0 +1,124 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'How much is the average person spending on subscriptions?',
+    answer:
+      'Surveys consistently find that people underestimate their subscription spending — often by a wide margin, sometimes guessing less than half of the real figure. The exact number matters less than this: almost everyone who actually adds theirs up is surprised. Listing yours in a subscription cost calculator takes about five minutes and removes the guesswork.',
+  },
+  {
+    question: 'What counts as subscription creep?',
+    answer:
+      'Subscription creep is the slow, unnoticed growth of recurring charges: free trials that quietly convert, annual renewals you forgot about, price increases you never re-evaluated, and services you stopped using but never cancelled. Each individual charge feels too small to act on, which is exactly why the total grows.',
+  },
+  {
+    question: 'How do I find subscriptions I forgot about?',
+    answer:
+      'Scan 12 months of credit card and bank statements — a full year, because annual renewals only appear once. Also check your app store subscription page, PayPal recurring payments, and any "manage subscriptions" pages in your email receipts. Add everything you find to a single list.',
+  },
+  {
+    question: 'Should I judge a subscription by cost per month or cost per use?',
+    answer:
+      'Cost per use is the sharper lens. A $15/month service you use daily costs about 50 cents per use; a $8/month one you open twice a month costs $4 per use. Our subscription audit calculator computes cost per use automatically when you enter your monthly hours.',
+  },
+  {
+    question: 'Is it worth cancelling small subscriptions of just a few dollars?',
+    answer:
+      'Individually, maybe not. Collectively, yes: three unused $5-8 subscriptions are roughly $200-300 a year, and over five years that is a four-figure sum. The five-year view is the most honest one, because subscriptions tend to stay until you actively remove them.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Subscription Creep: How Much Are You Really Paying?"
+  description="Streaming, cloud, apps, memberships — find every recurring charge and see the real monthly, yearly, and 5-year total with a free subscription cost calculator."
+  locale={locale}
+  updated="2026-07-03"
+>
+  <p>
+    Quick: how much are you spending on subscriptions each month? If you just
+    produced a number, there is a very good chance it is too low. Streaming
+    services, cloud storage, music, fitness apps, news, software, delivery
+    memberships — each one was a small, reasonable decision at the time.
+    Together they behave like a silent second rent payment. This guide walks
+    you through a proper subscription audit and shows you how to see the real
+    number in minutes with a free
+    <a href={localizedPath(locale, '/tools/subscription-audit')}>subscription cost calculator</a>.
+  </p>
+
+  <h2>Why subscription creep happens to everyone</h2>
+  <p>
+    Subscription creep is not a discipline problem — it is a design outcome.
+    Recurring billing is specifically built to minimize the moments where you
+    reconsider:
+  </p>
+  <ul>
+    <li><strong>Free trials convert silently.</strong> The default is "keep charging," and the reminder email lands in a folder you never open.</li>
+    <li><strong>Annual renewals happen once a year.</strong> You get 12 months to forget the service exists before the charge reappears.</li>
+    <li><strong>Prices ratchet upward.</strong> A service you judged worth it at one price quietly becomes a different deal two increases later — but nothing prompts you to re-decide.</li>
+    <li><strong>Small numbers evade attention.</strong> No single line item on your statement looks worth investigating. The total never appears anywhere — unless you compute it yourself.</li>
+  </ul>
+
+  <h2>The audit: 30 minutes, four steps</h2>
+  <ol>
+    <li>
+      <strong>Collect a full year of statements.</strong> Twelve months of
+      credit card and bank records, because annual subscriptions only show up
+      once. Include app store subscriptions and PayPal recurring payments.
+    </li>
+    <li>
+      <strong>List every recurring charge</strong> in the
+      <a href={localizedPath(locale, '/tools/subscription-audit')}>subscription audit calculator</a>
+      — name, price, and whether it bills monthly, quarterly, or yearly. The
+      tool normalizes everything to a comparable monthly figure and totals it
+      per month, per year, and over five years. (It also saves your list in
+      your browser, so you can update it whenever a new charge appears.)
+    </li>
+    <li>
+      <strong>Add your actual usage.</strong> For each service, estimate
+      hours used per month. The calculator turns that into cost per use —
+      the single most clarifying number in the whole exercise. A subscription
+      that costs $4 every time you open it reads very differently from its
+      innocent monthly price.
+    </li>
+    <li>
+      <strong>Sort into keep, downgrade, cancel.</strong> Keep what you use
+      and value. Downgrade where a cheaper tier or an ad-supported plan
+      covers your real usage. Cancel anything you had forgotten existed —
+      if you did not remember paying for it, you will not miss it.
+    </li>
+  </ol>
+
+  <h2>The five-year number is the honest one</h2>
+  <p>
+    Monthly framing is how subscriptions get in the door; five-year framing
+    is how you evaluate them like an owner. A $15/month service is "just
+    $15" in the monthly view and $900 in the five-year view. A stack of
+    subscriptions totalling $120/month is $7,200 over five years — the price
+    of a very nice vacation, a used car, or a meaningful investment
+    contribution. Neither view is wrong, but only one of them matches how
+    long subscriptions actually tend to stick around: until you actively
+    remove them.
+  </p>
+
+  <h2>Rules that keep creep from coming back</h2>
+  <ul>
+    <li><strong>Set a renewal calendar.</strong> When you start any trial or annual plan, create a reminder two days before it renews.</li>
+    <li><strong>One in, one out.</strong> Adding a new streaming service? Pick one to pause. Rotation beats accumulation.</li>
+    <li><strong>Re-run the audit twice a year.</strong> Your saved list makes round two a five-minute job.</li>
+    <li><strong>Watch the same pattern elsewhere.</strong> "Small recurring amounts that dodge scrutiny" is also how installment plans and daily habits work. See our guide to <a href={localizedPath(locale, '/zero-interest-installments-truth')}>the truth about 0% installment plans</a>, or measure a daily habit's long-run cost with the <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the subscription audit calculator runs entirely in your
+    browser. Your subscription list is stored only on your device (in
+    localStorage) and is never uploaded. Results are estimates for general
+    information, not financial advice.
+  </p>
+</ArticleLayout>

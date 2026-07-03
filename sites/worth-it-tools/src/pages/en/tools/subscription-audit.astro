@@ -1,0 +1,374 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Subscription Audit Calculator';
+const description = 'Subscription cost calculator that shows how much you are spending on subscriptions per month, year, and 5 years.';
+const faq = [
+  {
+    question: 'How much am I spending on subscriptions?',
+    answer: 'Enter each subscription, its billing cycle, and optional monthly use. The calculator normalizes everything to monthly, yearly, and 5-year totals.',
+  },
+  {
+    question: 'How does cost per use work?',
+    answer: 'If you enter hours used per month, the calculator divides that subscription monthly cost by those hours. Blank hours are ignored.',
+  },
+  {
+    question: 'Which subscriptions should I cancel first?',
+    answer: 'Start with the highest monthly cost and any service with high cost per hour. A cheap service can still be wasteful if you barely use it.',
+  },
+  {
+    question: 'Are my subscription rows saved?',
+    answer: 'Yes. Rows are stored in your browser localStorage only, so they can survive a refresh without being sent to a server.',
+  },
+  {
+    question: 'Can this include yearly software renewals?',
+    answer: 'Yes. Choose yearly billing and enter the annual price. It will be converted to an equivalent monthly cost.',
+  },
+];
+const related = [
+  { title: 'Costco Membership Calculator', href: localizedPath(locale, '/tools/costco-membership') },
+  { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
+  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: 'Subscription creep audit guide', href: localizedPath(locale, '/subscription-creep') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This subscription cost calculator answers how much you are spending on subscriptions after monthly, quarterly, and yearly renewals are normalized. Add hours used to see whether a service is still earning its place in your budget.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="subscription-inputs">
+      <h2 id="subscription-inputs">Subscriptions</h2>
+      <div id="subscription-rows" class="subscription-rows"></div>
+      <button id="add-row" type="button">Add subscription</button>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="subscription-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="subscription-result" class="verdict">Add your subscriptions to see the total.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Monthly total</span><strong id="monthly-total">$0</strong></p>
+        <p class="metric"><span>Yearly total</span><strong id="yearly-total">$0</strong></p>
+        <p class="metric"><span>5-year total</span><strong id="five-year-total">$0</strong></p>
+        <p class="metric"><span>Most expensive</span><strong id="largest-subscription">None</strong></p>
+      </div>
+      <ul id="subscription-breakdown" class="breakdown"></ul>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="subscription-how">
+    <h2 id="subscription-how">How it works</h2>
+    <p>
+      Each row is converted to a monthly cost: monthly bills stay the same, quarterly bills are divided by 3, and yearly bills are divided by 12. The yearly and 5-year totals are simple projections before price increases.
+    </p>
+    <p>
+      If you enter monthly hours used, the tool also estimates cost per hour. That helps separate subscriptions you genuinely use from quiet recurring charges.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation,
+    .breakdown {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .metric-grid,
+    .subscription-rows,
+    .subscription-row {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation,
+    .subscription-row {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .subscription-row {
+      box-shadow: none;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 0.5rem;
+      padding-left: 1.2rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .subscription-row {
+        grid-template-columns: 1.1fr 0.8fr 0.8fr 0.8fr auto;
+        align-items: end;
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { getItem, setItem } from '../../../lib/storage';
+
+    type Cycle = 'monthly' | 'quarterly' | 'yearly';
+    interface Row {
+      id: string;
+      name: string;
+      price: number;
+      cycle: Cycle;
+      hours: number;
+    }
+
+    const locale = 'en';
+    const storageKey = 'subscription-audit:rows';
+    const rowsContainer = byId<HTMLElement>('subscription-rows');
+    const addButton = byId<HTMLButtonElement>('add-row');
+    const verdict = byId<HTMLElement>('subscription-result');
+    const monthlyTotal = byId<HTMLElement>('monthly-total');
+    const yearlyTotal = byId<HTMLElement>('yearly-total');
+    const fiveYearTotal = byId<HTMLElement>('five-year-total');
+    const largestSubscription = byId<HTMLElement>('largest-subscription');
+    const breakdown = byId<HTMLElement>('subscription-breakdown');
+    const defaultRows: Row[] = [
+      { id: 'netflix', name: 'Netflix', price: 15.49, cycle: 'monthly', hours: 12 },
+      { id: 'spotify', name: 'Spotify', price: 10.99, cycle: 'monthly', hours: 20 },
+      { id: 'cloud-storage', name: 'Cloud storage', price: 29.99, cycle: 'yearly', hours: 2 },
+    ];
+    let rows = sanitizeRows(getItem<Row[]>(storageKey, defaultRows));
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function sanitizeRows(input: Row[]): Row[] {
+      const validCycles: Cycle[] = ['monthly', 'quarterly', 'yearly'];
+      return input.map((row) => ({
+        id: typeof row.id === 'string' ? row.id : makeId(),
+        name: typeof row.name === 'string' ? row.name : '',
+        price: Number.isFinite(Number(row.price)) ? Number(row.price) : 0,
+        cycle: validCycles.includes(row.cycle) ? row.cycle : 'monthly',
+        hours: Number.isFinite(Number(row.hours)) ? Number(row.hours) : 0,
+      }));
+    }
+
+    function makeId(): string {
+      return `row-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+
+    function cycleMonths(cycle: Cycle): number {
+      if (cycle === 'quarterly') return 3;
+      if (cycle === 'yearly') return 12;
+      return 1;
+    }
+
+    function monthlyCost(row: Row): number {
+      return Math.max(0, row.price) / cycleMonths(row.cycle);
+    }
+
+    function persist(): void {
+      setItem(storageKey, rows);
+    }
+
+    function createField(labelText: string, control: HTMLInputElement | HTMLSelectElement): HTMLDivElement {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'field';
+      const label = document.createElement('label');
+      label.textContent = labelText;
+      label.htmlFor = control.id;
+      wrapper.append(label, control);
+      return wrapper;
+    }
+
+    function createInput(id: string, value: string, type = 'text'): HTMLInputElement {
+      const input = document.createElement('input');
+      input.id = id;
+      input.type = type;
+      input.value = value;
+      if (type === 'number') {
+        input.min = '0';
+        input.step = '0.01';
+        input.inputMode = 'decimal';
+      }
+      return input;
+    }
+
+    function renderRows(): void {
+      rowsContainer.textContent = '';
+      rows.forEach((row) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'subscription-row';
+
+        const nameInput = createInput(`${row.id}-name`, row.name);
+        nameInput.addEventListener('input', () => {
+          row.name = nameInput.value;
+          persist();
+          update();
+        });
+
+        const priceInput = createInput(`${row.id}-price`, String(row.price), 'number');
+        priceInput.addEventListener('input', () => {
+          row.price = Number(priceInput.value);
+          persist();
+          update();
+        });
+
+        const cycleSelect = document.createElement('select');
+        cycleSelect.id = `${row.id}-cycle`;
+        [
+          ['monthly', 'Monthly'],
+          ['quarterly', 'Quarterly'],
+          ['yearly', 'Yearly'],
+        ].forEach(([value, label]) => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label;
+          option.selected = row.cycle === value;
+          cycleSelect.append(option);
+        });
+        cycleSelect.addEventListener('change', () => {
+          row.cycle = cycleSelect.value as Cycle;
+          persist();
+          update();
+        });
+
+        const hoursInput = createInput(`${row.id}-hours`, String(row.hours), 'number');
+        hoursInput.addEventListener('input', () => {
+          row.hours = Number(hoursInput.value);
+          persist();
+          update();
+        });
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+          rows = rows.filter((item) => item.id !== row.id);
+          persist();
+          renderRows();
+          update();
+        });
+
+        wrapper.append(
+          createField('Name', nameInput),
+          createField('Price', priceInput),
+          createField('Cycle', cycleSelect),
+          createField('Hours/month', hoursInput),
+          removeButton,
+        );
+        rowsContainer.append(wrapper);
+      });
+    }
+
+    function update(): void {
+      const totals = rows.map((row) => ({ row, monthly: monthlyCost(row) }));
+      const monthly = totals.reduce((sum, item) => sum + item.monthly, 0);
+      const largest = totals.reduce<typeof totals[number] | null>(
+        (winner, item) => (winner === null || item.monthly > winner.monthly ? item : winner),
+        null,
+      );
+
+      monthlyTotal.textContent = formatCurrency(monthly, locale);
+      yearlyTotal.textContent = formatCurrency(monthly * 12, locale);
+      fiveYearTotal.textContent = formatCurrency(monthly * 60, locale);
+      largestSubscription.textContent = largest && largest.monthly > 0
+        ? `${largest.row.name || 'Unnamed'} (${formatCurrency(largest.monthly, locale)}/mo)`
+        : 'None';
+
+      breakdown.textContent = '';
+      totals
+        .filter((item) => item.row.hours > 0 && item.monthly > 0)
+        .forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = `${item.row.name || 'Unnamed'} costs ${formatCurrency(item.monthly / item.row.hours, locale)} per hour used.`;
+          breakdown.append(li);
+        });
+
+      if (monthly <= 0) {
+        verdict.textContent = 'Add your subscriptions to see the total.';
+      } else if (largest && largest.monthly >= monthly * 0.35) {
+        verdict.textContent = `Audit ${largest.row.name || 'your largest subscription'} first: it is ${formatCurrency(largest.monthly, locale)} per month, a large share of your stack.`;
+      } else {
+        verdict.textContent = `Your subscriptions cost ${formatCurrency(monthly, locale)} per month, or ${formatCurrency(monthly * 12, locale)} per year.`;
+      }
+    }
+
+    addButton.addEventListener('click', () => {
+      rows.push({ id: makeId(), name: '', price: 0, cycle: 'monthly', hours: 0 });
+      persist();
+      renderRows();
+      update();
+    });
+
+    renderRows();
+    update();
+  </script>
+</ToolLayout>

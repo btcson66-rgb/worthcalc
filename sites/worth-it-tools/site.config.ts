@@ -1,5 +1,5 @@
 /**
- * Site configuration — the single source of truth for each deployed site.
+ * Site configuration - the single source of truth for each deployed site.
  *
  * When you create a new site with `npm run create-site`, this file is copied
  * to `sites/<slug>/site.config.ts` and populated with the values you provide.
@@ -60,12 +60,10 @@ export interface FooterGroup {
   links: { label: string; path: string }[];
 }
 
-// ─── Default config (copy & customise per site) ────────────────────────────
-
 const config: SiteConfig = {
   siteId: 'worth-it-tools',
   siteName: 'WorthCalc',
-  siteDescription: 'WorthCalc — free, fast, browser-based tools.',
+  siteDescription: "Free money-decision calculators - find out if it's actually worth it. 值不值得？用數字幫你判斷。",
   defaultLocale: 'en',
   locales: ['en', 'zh'],
   baseUrl: 'https://example.com',
@@ -77,8 +75,23 @@ const config: SiteConfig = {
   launchStatus: 'draft',
 
   pages: ['index', 'about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'],
-  tools: ['demo-tool'],
-  categories: [],
+  tools: [
+    'installment-true-apr',
+    'subscription-audit',
+    'costco-membership',
+    'ev-vs-gas',
+    'rent-vs-buy',
+    'commute-cost',
+    'latte-factor',
+    'cashback-breakeven',
+  ],
+  categories: [
+    'spending-decisions',
+    'subscriptions-memberships',
+    'transport',
+    'housing',
+    'credit-finance',
+  ],
   legalPages: ['about', 'privacy', 'terms', 'contact', 'disclaimer'],
   navigation: [
     { labelKey: 'nav.home', path: '/' },

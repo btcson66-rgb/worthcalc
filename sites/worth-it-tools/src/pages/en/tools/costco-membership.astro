@@ -1,0 +1,283 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Costco Membership Calculator';
+const description = 'Is Costco membership worth it calculator with Gold Star, Executive, savings rate, and break-even monthly spend.';
+const faq = [
+  {
+    question: 'How is the Costco membership break-even calculated?',
+    answer: 'The calculator divides the annual fee by your expected savings rate and eligible reward rate. With a $65 fee and 15% savings, break-even is about $36 per month.',
+  },
+  {
+    question: 'Does Executive always beat Gold Star?',
+    answer: 'No. Executive needs enough eligible spending for the 2% reward to overcome the higher annual fee. The recommendation compares both tiers from the same monthly spend.',
+  },
+  {
+    question: 'What savings rate should I use?',
+    answer: 'Use the discount you realistically get versus your usual stores. The default 15% is an assumption, not a promise that every item is cheaper.',
+  },
+  {
+    question: 'Should gas, travel, and services be included?',
+    answer: 'Include categories only if they are part of your normal spending and eligible for the savings or rewards you are modeling.',
+  },
+  {
+    question: 'Is this exact for every Costco rule?',
+    answer: 'No. It is a planning calculator. Official membership terms, eligible categories, reward exclusions, and caps should be checked before buying.',
+  },
+];
+const related = [
+  { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
+  { title: 'The math of warehouse memberships', href: localizedPath(locale, '/costco-math') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This is Costco membership worth it calculator compares your annual fee, estimated store savings, and Executive rewards. Use it to see the monthly spend needed to break even before you sign up or upgrade.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="costco-inputs">
+      <h2 id="costco-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="tier">Membership tier</label>
+          <select id="tier">
+            <option value="gold">Gold Star - $65/year</option>
+            <option value="executive">Executive - $130/year</option>
+          </select>
+          <p class="helper">Choose the tier you are evaluating.</p>
+        </div>
+        <div class="field">
+          <label for="monthly-spend">Monthly Costco spend</label>
+          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="10" value="250" />
+          <p class="helper">Your realistic monthly warehouse spend.</p>
+        </div>
+        <div class="field">
+          <label for="savings-rate">Assumed savings vs regular stores (%)</label>
+          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
+          <p class="helper">Editable assumption for price savings.</p>
+        </div>
+        <div class="field">
+          <label for="reward-rate">Executive reward (%)</label>
+          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
+          <p class="helper">Used for Executive tier comparisons.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="costco-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="costco-result" class="verdict">Enter your monthly spend to see if membership pays off.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Break-even spend</span><strong id="break-even">$0/month</strong></p>
+        <p class="metric"><span>Annual net benefit</span><strong id="net-benefit">$0</strong></p>
+        <p class="metric"><span>Estimated reward</span><strong id="reward">$0</strong></p>
+        <p class="metric"><span>Recommended tier</span><strong id="recommended-tier">Gold Star</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="costco-how">
+    <h2 id="costco-how">How it works</h2>
+    <p>
+      The calculator estimates yearly savings as monthly spend times 12 times your assumed savings rate. Executive also receives the reward percentage on eligible spend. Net benefit is savings plus rewards minus the annual fee.
+    </p>
+    <p>
+      Break-even monthly spend is the point where estimated savings and rewards equal the membership fee. If your regular prices are not actually higher than Costco, lower the savings rate.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField, getItem, setItem } from '../../../lib/storage';
+
+    type TierKey = 'gold' | 'executive';
+    interface Tier {
+      key: TierKey;
+      name: string;
+      fee: number;
+    }
+
+    const locale = 'en';
+    const tiers: Record<TierKey, Tier> = {
+      gold: { key: 'gold', name: 'Gold Star', fee: 65 },
+      executive: { key: 'executive', name: 'Executive', fee: 130 },
+    };
+    const tier = byId<HTMLSelectElement>('tier');
+    const monthlySpend = byId<HTMLInputElement>('monthly-spend');
+    const savingsRate = byId<HTMLInputElement>('savings-rate');
+    const rewardRate = byId<HTMLInputElement>('reward-rate');
+    const verdict = byId<HTMLElement>('costco-result');
+    const breakEven = byId<HTMLElement>('break-even');
+    const netBenefit = byId<HTMLElement>('net-benefit');
+    const reward = byId<HTMLElement>('reward');
+    const recommendedTier = byId<HTMLElement>('recommended-tier');
+    const fields = [monthlySpend, savingsRate, rewardRate];
+    const tierStorageKey = 'costco-membership:tier';
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function readNumber(input: HTMLInputElement): number {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function tierRewardRate(selectedTier: Tier): number {
+      return selectedTier.key === 'executive' ? Math.max(0, readNumber(rewardRate)) / 100 : 0;
+    }
+
+    function netFor(monthly: number, selectedTier: Tier): { net: number; rewardValue: number } {
+      const annualSpend = Math.max(0, monthly) * 12;
+      const savings = annualSpend * (Math.max(0, readNumber(savingsRate)) / 100);
+      const rewardValue = annualSpend * tierRewardRate(selectedTier);
+      return { net: savings + rewardValue - selectedTier.fee, rewardValue };
+    }
+
+    function breakEvenSpend(selectedTier: Tier): number {
+      if (netFor(0, selectedTier).net >= 0) return 0;
+      let upper = 50;
+      for (let index = 0; index < 40 && netFor(upper, selectedTier).net < 0; index += 1) {
+        upper *= 2;
+      }
+      let lower = 0;
+      for (let index = 0; index < 80; index += 1) {
+        const middle = (lower + upper) / 2;
+        if (netFor(middle, selectedTier).net >= 0) upper = middle;
+        else lower = middle;
+      }
+      return upper;
+    }
+
+    function update(): void {
+      const selectedTier = tiers[tier.value as TierKey] ?? tiers.gold;
+      const spend = Math.max(0, readNumber(monthlySpend));
+      const result = netFor(spend, selectedTier);
+      const recommended = Object.values(tiers).reduce((best, candidate) =>
+        netFor(spend, candidate).net > netFor(spend, best).net ? candidate : best,
+      );
+      const needed = breakEvenSpend(selectedTier);
+
+      breakEven.textContent = `${formatCurrency(needed, locale)}/month`;
+      netBenefit.textContent = formatCurrency(result.net, locale);
+      reward.textContent = formatCurrency(result.rewardValue, locale);
+      recommendedTier.textContent = recommended.name;
+
+      if (result.net >= 0) {
+        verdict.textContent = `Worth it: your estimated annual net benefit is ${formatCurrency(result.net, locale)}.`;
+      } else {
+        verdict.textContent = `Not worth it yet: you need about ${formatCurrency(needed, locale)} per month at these assumptions.`;
+      }
+    }
+
+    const savedTier = getItem<TierKey>(tierStorageKey, 'gold');
+    if (tiers[savedTier]) tier.value = savedTier;
+    tier.addEventListener('change', () => {
+      setItem(tierStorageKey, tier.value);
+      update();
+    });
+
+    fields.forEach((field) => {
+      bindPersistentField(field, `costco-membership:${field.id}`);
+      field.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

@@ -1,0 +1,275 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '電動機車 vs 油車總持有成本計算機';
+const description = '電動機車 vs 油車成本計算機，比較 Gogoro 類電動機車與 125cc 油車的五年總成本。';
+const faq = [
+  {
+    question: '電動機車和油車總持有成本包含什麼？',
+    answer: '這個模型包含購車價、補助、每月里程、電池資費或油錢、年度保養，以及持有年限。不包含保險、牌照稅、停車和轉售價。',
+  },
+  {
+    question: '電池資費要怎麼填？',
+    answer: '請填你每月會選的電池月租或能源方案費用。如果是依里程計價，請先換算成平均月費。',
+  },
+  {
+    question: '油車油耗要填什麼？',
+    answer: '請填每公升可以騎幾公里，例如 125cc 機車常見可先用 40 km/L 作為保守估算。',
+  },
+  {
+    question: '打平年是什麼意思？',
+    answer: '打平年代表電動機車多出的購車成本，被每年較低的能源或保養成本追回的時間。如果電動機車一開始就比較便宜，會顯示立即打平。',
+  },
+  {
+    question: '如果持有期間內打不平，就一定不值得買嗎？',
+    answer: '若只看金錢成本通常不划算，但你仍可能因為安靜、加速、環保或換電便利而選擇電動機車。',
+  },
+];
+const related = [
+  { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: '分期付款真實 APR 計算機', href: localizedPath(locale, '/tools/installment-true-apr') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個電動機車 vs 油車成本計算機用台灣常見情境，比較 Gogoro 類電動機車和 125cc 油車的總持有成本。你可以調整里程、電池資費、油價和保養費，看哪一邊真的省。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="ev-inputs">
+      <h2 id="ev-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="ev-price">電動機車購車價</label>
+          <input id="ev-price" type="number" inputmode="decimal" min="0" step="1000" value="85000" />
+        </div>
+        <div class="field">
+          <label for="gas-price">油車購車價</label>
+          <input id="gas-price" type="number" inputmode="decimal" min="0" step="1000" value="75000" />
+        </div>
+        <div class="field">
+          <label for="subsidy">電動機車補助</label>
+          <input id="subsidy" type="number" inputmode="decimal" min="0" step="500" value="3000" />
+        </div>
+        <div class="field">
+          <label for="km-month">每月騎乘公里</label>
+          <input id="km-month" type="number" inputmode="decimal" min="0" step="50" value="600" />
+        </div>
+        <div class="field">
+          <label for="battery-fee">電池資費月費</label>
+          <input id="battery-fee" type="number" inputmode="decimal" min="0" step="50" value="899" />
+        </div>
+        <div class="field">
+          <label for="gas-cost">油價 (每公升)</label>
+          <input id="gas-cost" type="number" inputmode="decimal" min="0" step="0.1" value="32" />
+        </div>
+        <div class="field">
+          <label for="km-per-liter">油車油耗 (km/L)</label>
+          <input id="km-per-liter" type="number" inputmode="decimal" min="1" step="0.1" value="40" />
+        </div>
+        <div class="field">
+          <label for="ev-maintenance">電動機車年度保養</label>
+          <input id="ev-maintenance" type="number" inputmode="decimal" min="0" step="500" value="3000" />
+        </div>
+        <div class="field">
+          <label for="gas-maintenance">油車年度保養</label>
+          <input id="gas-maintenance" type="number" inputmode="decimal" min="0" step="500" value="5000" />
+        </div>
+        <div class="field">
+          <label for="years">持有年限</label>
+          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="ev-result">
+      <p class="eyebrow">判斷</p>
+      <p id="ev-result" class="verdict">輸入騎乘假設後會比較總成本。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>電動機車總成本</span><strong id="ev-total">NT$0</strong></p>
+        <p class="metric"><span>油車總成本</span><strong id="gas-total">NT$0</strong></p>
+        <p class="metric"><span>打平年</span><strong id="break-even">無法打平</strong></p>
+        <p class="metric"><span>電動每公里成本</span><strong id="ev-per-km">NT$0</strong></p>
+        <p class="metric"><span>油車每公里成本</span><strong id="gas-per-km">NT$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="ev-how">
+    <h2 id="ev-how">計算方式</h2>
+    <p>
+      電動機車總成本是購車價扣掉補助，再加上電池資費和保養費。油車總成本是購車價加上汽油費和保養費。持有期間總成本較低的一方，在金錢面比較划算。
+    </p>
+    <p>
+      打平年會比較購車價差和每年營運成本差。模型刻意保持簡單，如果保險、停車、牌照稅或二手殘值對你很重要，請另外加回自己的估算。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'zh';
+    const inputs = [
+      'ev-price',
+      'gas-price',
+      'subsidy',
+      'km-month',
+      'battery-fee',
+      'gas-cost',
+      'km-per-liter',
+      'ev-maintenance',
+      'gas-maintenance',
+      'years',
+    ].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('ev-result');
+    const evTotal = byId<HTMLElement>('ev-total');
+    const gasTotal = byId<HTMLElement>('gas-total');
+    const breakEven = byId<HTMLElement>('break-even');
+    const evPerKm = byId<HTMLElement>('ev-per-km');
+    const gasPerKm = byId<HTMLElement>('gas-per-km');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const input = byId<HTMLInputElement>(id);
+      const parsed = Number(input.value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function moneyPerKm(amount: number): string {
+      return `${formatCurrency(amount, locale)}/km`;
+    }
+
+    function update(): void {
+      const evPrice = Math.max(0, value('ev-price'));
+      const gasPrice = Math.max(0, value('gas-price'));
+      const subsidy = Math.max(0, value('subsidy'));
+      const kmMonth = Math.max(0, value('km-month'));
+      const years = Math.max(1, value('years'));
+      const evNetPrice = Math.max(0, evPrice - subsidy);
+      const evEnergyMonthly = Math.max(0, value('battery-fee'));
+      const gasFuelMonthly = (kmMonth / Math.max(1, value('km-per-liter'))) * Math.max(0, value('gas-cost'));
+      const evOperatingAnnual = evEnergyMonthly * 12 + Math.max(0, value('ev-maintenance'));
+      const gasOperatingAnnual = gasFuelMonthly * 12 + Math.max(0, value('gas-maintenance'));
+      const evTotalCost = evNetPrice + evOperatingAnnual * years;
+      const gasTotalCost = gasPrice + gasOperatingAnnual * years;
+      const totalKm = Math.max(1, kmMonth * 12 * years);
+      const annualSavings = gasOperatingAnnual - evOperatingAnnual;
+      const upfrontGap = evNetPrice - gasPrice;
+      const breakEvenYears = upfrontGap <= 0 ? 0 : annualSavings > 0 ? upfrontGap / annualSavings : Number.POSITIVE_INFINITY;
+
+      evTotal.textContent = formatCurrency(evTotalCost, locale);
+      gasTotal.textContent = formatCurrency(gasTotalCost, locale);
+      evPerKm.textContent = moneyPerKm(evTotalCost / totalKm);
+      gasPerKm.textContent = moneyPerKm(gasTotalCost / totalKm);
+      breakEven.textContent = Number.isFinite(breakEvenYears)
+        ? breakEvenYears === 0
+          ? '立即'
+          : `${breakEvenYears.toFixed(1)} 年`
+        : '無法打平';
+
+      if (evTotalCost < gasTotalCost) {
+        verdict.textContent = `以成本來看電動機車較划算，${years.toFixed(0)} 年約省 ${formatCurrency(gasTotalCost - evTotalCost, locale)}。`;
+      } else {
+        verdict.textContent = `以成本來看油車較便宜，${years.toFixed(0)} 年約省 ${formatCurrency(evTotalCost - gasTotalCost, locale)}。`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `ev-vs-gas:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

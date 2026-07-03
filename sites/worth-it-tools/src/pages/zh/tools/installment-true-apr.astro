@@ -1,0 +1,256 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '分期付款真實 APR 計算機';
+const description = '分期付款真實 APR 計算機，幫你看懂 0 利率分期、手續費和隱藏借款成本。';
+const faq = [
+  {
+    question: '為什麼 3% 手續費不是 3% APR？',
+    answer: 'APR 會看每個月還剩多少本金。分期付款每月都在還本金，所以 12 期收一次 3% 手續費，換算後常接近 5.6% APR。',
+  },
+  {
+    question: '現金價要填什麼？',
+    answer: '請填如果不分期、今天一次付清的價格。計算機會把它視為你透過分期借到的金額。',
+  },
+  {
+    question: '每期付款和含手續費總額都要填嗎？',
+    answer: '不用。如果每期付款有填，會優先使用每期金額；如果留空，就用總額除以期數。',
+  },
+  {
+    question: '這個分期真實利率有包含逾期費嗎？',
+    answer: '沒有。請只填已知的手續費或前置費用。逾期費、罰息、失去折扣都會讓實際成本更高。',
+  },
+  {
+    question: '可接受 APR 應該設多少？',
+    answer: '請用你自己能接受的短期借款成本。預設 10% 只是提醒門檻，不是理財建議。',
+  },
+];
+const related = [
+  { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: '0 利率分期的真相', href: localizedPath(locale, '/zero-interest-installments-truth') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    用這個分期付款真實 APR 計算機，把 0 利率分期或一次性手續費換算成真正的年化借款成本。買東西前先算一次，比只看「零利率」更接近你的實際負擔。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="installment-inputs">
+      <h2 id="installment-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="cash-price">現金價</label>
+          <input id="cash-price" type="number" inputmode="decimal" min="0" step="100" value="10000" />
+          <p class="helper">不分期、一次付清的價格。</p>
+        </div>
+        <div class="field">
+          <label for="installments">期數</label>
+          <input id="installments" type="number" inputmode="numeric" min="1" step="1" value="12" />
+          <p class="helper">每月付款一次的期數。</p>
+        </div>
+        <div class="field">
+          <label for="payment">每期付款金額</label>
+          <input id="payment" type="number" inputmode="decimal" min="0" step="1" placeholder="可留空" />
+          <p class="helper">有填時優先使用。</p>
+        </div>
+        <div class="field">
+          <label for="total-paid">含費用總付款</label>
+          <input id="total-paid" type="number" inputmode="decimal" min="0" step="100" value="10300" />
+          <p class="helper">每期金額留空時，會用總額除以期數。</p>
+        </div>
+        <div class="field">
+          <label for="upfront-fee">前置費用</label>
+          <input id="upfront-fee" type="number" inputmode="decimal" min="0" step="1" value="0" />
+          <p class="helper">今天另外先付的手續費或開辦費。</p>
+        </div>
+        <div class="field">
+          <label for="acceptable-apr">可接受 APR (%)</label>
+          <input id="acceptable-apr" type="number" inputmode="decimal" min="0" step="0.1" value="10" />
+          <p class="helper">你願意接受的分期成本上限。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="installment-result">
+      <p class="eyebrow">判斷</p>
+      <p id="installment-result" class="verdict">輸入方案後會顯示真實 APR。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>真實 APR</span><strong id="apr">0.0%</strong></p>
+        <p class="metric"><span>總分期成本</span><strong id="interest">NT$0</strong></p>
+        <p class="metric"><span>採用的每月付款</span><strong id="monthly-payment">NT$0</strong></p>
+        <p class="metric"><span>總付款</span><strong id="total-cost">NT$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="installment-how">
+    <h2 id="installment-how">計算方式</h2>
+    <p>
+      計算機把現金價當成今天拿到的本金，再把每期付款和前置費用當成還款現金流，解出每月內部報酬率，最後年化成真實 APR。
+    </p>
+    <p>
+      一次性手續費通常比表面數字貴，因為你每個月都在還本金，但手續費是用原始價格收取。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { aprFromMonthlyRate, formatCurrency, formatPercent, irrMonthly } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'zh';
+    const cashPrice = byId<HTMLInputElement>('cash-price');
+    const installments = byId<HTMLInputElement>('installments');
+    const payment = byId<HTMLInputElement>('payment');
+    const totalPaid = byId<HTMLInputElement>('total-paid');
+    const upfrontFee = byId<HTMLInputElement>('upfront-fee');
+    const acceptableApr = byId<HTMLInputElement>('acceptable-apr');
+    const verdict = byId<HTMLElement>('installment-result');
+    const aprOutput = byId<HTMLElement>('apr');
+    const interestOutput = byId<HTMLElement>('interest');
+    const monthlyPaymentOutput = byId<HTMLElement>('monthly-payment');
+    const totalCostOutput = byId<HTMLElement>('total-cost');
+    const fields = [cashPrice, installments, payment, totalPaid, upfrontFee, acceptableApr];
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function readNumber(input: HTMLInputElement): number {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function update(): void {
+      const price = Math.max(0, readNumber(cashPrice));
+      const count = Math.max(1, Math.round(readNumber(installments)));
+      const directPayment = Math.max(0, readNumber(payment));
+      const total = Math.max(0, readNumber(totalPaid));
+      const upfront = Math.max(0, readNumber(upfrontFee));
+      const threshold = Math.max(0, readNumber(acceptableApr));
+      const paymentAmount = directPayment > 0 ? directPayment : total / count;
+      const fullPaid = paymentAmount * count + upfront;
+      const financingCost = fullPaid - price;
+      const cashflows = [price - upfront, ...Array.from({ length: count }, () => -paymentAmount)];
+      const monthlyRate = irrMonthly(cashflows);
+      const apr = aprFromMonthlyRate(monthlyRate);
+
+      monthlyPaymentOutput.textContent = formatCurrency(paymentAmount, locale);
+      totalCostOutput.textContent = formatCurrency(fullPaid, locale);
+      interestOutput.textContent = formatCurrency(financingCost, locale);
+      aprOutput.textContent = Number.isFinite(apr) ? formatPercent(apr) : '0.0%';
+
+      if (price <= 0 || paymentAmount <= 0 || !Number.isFinite(apr)) {
+        verdict.textContent = '請輸入有效現金價與分期付款資料，才能計算真實 APR。';
+        return;
+      }
+
+      if (apr <= threshold) {
+        verdict.textContent = `可以考慮：真實 APR 是 ${formatPercent(apr)}，低於你設定的 ${formatPercent(threshold)}。`;
+      } else {
+        verdict.textContent = `不太划算：真實 APR 是 ${formatPercent(apr)}，高於你設定的 ${formatPercent(threshold)}。`;
+      }
+    }
+
+    fields.forEach((field) => {
+      bindPersistentField(field, `installment-true-apr:${field.id}`);
+      field.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

@@ -1,0 +1,373 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '訂閱支出健檢計算機';
+const description = '訂閱支出計算機，統計 Netflix、Spotify 等訂閱每月、一年和五年到底花多少。';
+const faq = [
+  {
+    question: '我每個月到底花多少訂閱費？',
+    answer: '把每個訂閱的名稱、價格和扣款週期填入，計算機會統一換算成每月、一年和五年成本。',
+  },
+  {
+    question: '每小時使用成本怎麼算？',
+    answer: '如果你填每月使用時數，計算機會用該訂閱的月成本除以時數。沒有填時數的項目會略過。',
+  },
+  {
+    question: '應該先取消哪個訂閱？',
+    answer: '先看月成本最高、或每小時成本偏高的服務。便宜訂閱如果幾乎沒用，也可能是浪費。',
+  },
+  {
+    question: '我的訂閱清單會被保存嗎？',
+    answer: '會，資料只存在你的瀏覽器 localStorage，重新整理後仍可看到，不會送到伺服器。',
+  },
+  {
+    question: '年繳軟體或雲端空間可以算嗎？',
+    answer: '可以。扣款週期選年繳並輸入年度價格，工具會換算成等效月成本。',
+  },
+];
+const related = [
+  { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
+  { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
+  { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: '訂閱慢慢變多的健檢指南', href: localizedPath(locale, '/subscription-creep') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個訂閱支出計算機會把月繳、季繳、年繳都換成每月成本，讓你看清 Netflix、Spotify、雲端空間和 App 會員一年會吃掉多少預算。填入使用時數後，也能看出哪個訂閱最該重新評估。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="subscription-inputs">
+      <h2 id="subscription-inputs">訂閱項目</h2>
+      <div id="subscription-rows" class="subscription-rows"></div>
+      <button id="add-row" type="button">新增訂閱</button>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="subscription-result">
+      <p class="eyebrow">判斷</p>
+      <p id="subscription-result" class="verdict">新增訂閱後會顯示總成本。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>每月總額</span><strong id="monthly-total">NT$0</strong></p>
+        <p class="metric"><span>一年總額</span><strong id="yearly-total">NT$0</strong></p>
+        <p class="metric"><span>五年總額</span><strong id="five-year-total">NT$0</strong></p>
+        <p class="metric"><span>最貴訂閱</span><strong id="largest-subscription">無</strong></p>
+      </div>
+      <ul id="subscription-breakdown" class="breakdown"></ul>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="subscription-how">
+    <h2 id="subscription-how">計算方式</h2>
+    <p>
+      每一列都會先換成月成本：月繳不變、季繳除以 3、年繳除以 12。年度和五年成本是用目前價格直接推估，尚未加入漲價。
+    </p>
+    <p>
+      如果填入每月使用時數，工具會估算每小時成本，幫你分辨真正常用的服務和只是默默扣款的訂閱。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation,
+    .breakdown {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .metric-grid,
+    .subscription-rows,
+    .subscription-row {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation,
+    .subscription-row {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .subscription-row {
+      box-shadow: none;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 0.5rem;
+      padding-left: 1.2rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .subscription-row {
+        grid-template-columns: 1.1fr 0.8fr 0.8fr 0.8fr auto;
+        align-items: end;
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { getItem, setItem } from '../../../lib/storage';
+
+    type Cycle = 'monthly' | 'quarterly' | 'yearly';
+    interface Row {
+      id: string;
+      name: string;
+      price: number;
+      cycle: Cycle;
+      hours: number;
+    }
+
+    const locale = 'zh';
+    const storageKey = 'subscription-audit:rows:zh';
+    const rowsContainer = byId<HTMLElement>('subscription-rows');
+    const addButton = byId<HTMLButtonElement>('add-row');
+    const verdict = byId<HTMLElement>('subscription-result');
+    const monthlyTotal = byId<HTMLElement>('monthly-total');
+    const yearlyTotal = byId<HTMLElement>('yearly-total');
+    const fiveYearTotal = byId<HTMLElement>('five-year-total');
+    const largestSubscription = byId<HTMLElement>('largest-subscription');
+    const breakdown = byId<HTMLElement>('subscription-breakdown');
+    const defaultRows: Row[] = [
+      { id: 'netflix', name: 'Netflix', price: 390, cycle: 'monthly', hours: 12 },
+      { id: 'spotify', name: 'Spotify', price: 180, cycle: 'monthly', hours: 20 },
+      { id: 'cloud-storage', name: '雲端儲存', price: 690, cycle: 'yearly', hours: 2 },
+    ];
+    let rows = sanitizeRows(getItem<Row[]>(storageKey, defaultRows));
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function sanitizeRows(input: Row[]): Row[] {
+      const validCycles: Cycle[] = ['monthly', 'quarterly', 'yearly'];
+      return input.map((row) => ({
+        id: typeof row.id === 'string' ? row.id : makeId(),
+        name: typeof row.name === 'string' ? row.name : '',
+        price: Number.isFinite(Number(row.price)) ? Number(row.price) : 0,
+        cycle: validCycles.includes(row.cycle) ? row.cycle : 'monthly',
+        hours: Number.isFinite(Number(row.hours)) ? Number(row.hours) : 0,
+      }));
+    }
+
+    function makeId(): string {
+      return `row-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+
+    function cycleMonths(cycle: Cycle): number {
+      if (cycle === 'quarterly') return 3;
+      if (cycle === 'yearly') return 12;
+      return 1;
+    }
+
+    function monthlyCost(row: Row): number {
+      return Math.max(0, row.price) / cycleMonths(row.cycle);
+    }
+
+    function persist(): void {
+      setItem(storageKey, rows);
+    }
+
+    function createField(labelText: string, control: HTMLInputElement | HTMLSelectElement): HTMLDivElement {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'field';
+      const label = document.createElement('label');
+      label.textContent = labelText;
+      label.htmlFor = control.id;
+      wrapper.append(label, control);
+      return wrapper;
+    }
+
+    function createInput(id: string, value: string, type = 'text'): HTMLInputElement {
+      const input = document.createElement('input');
+      input.id = id;
+      input.type = type;
+      input.value = value;
+      if (type === 'number') {
+        input.min = '0';
+        input.step = '1';
+        input.inputMode = 'decimal';
+      }
+      return input;
+    }
+
+    function renderRows(): void {
+      rowsContainer.textContent = '';
+      rows.forEach((row) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'subscription-row';
+
+        const nameInput = createInput(`${row.id}-name`, row.name);
+        nameInput.addEventListener('input', () => {
+          row.name = nameInput.value;
+          persist();
+          update();
+        });
+
+        const priceInput = createInput(`${row.id}-price`, String(row.price), 'number');
+        priceInput.addEventListener('input', () => {
+          row.price = Number(priceInput.value);
+          persist();
+          update();
+        });
+
+        const cycleSelect = document.createElement('select');
+        cycleSelect.id = `${row.id}-cycle`;
+        [
+          ['monthly', '月繳'],
+          ['quarterly', '季繳'],
+          ['yearly', '年繳'],
+        ].forEach(([value, label]) => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label;
+          option.selected = row.cycle === value;
+          cycleSelect.append(option);
+        });
+        cycleSelect.addEventListener('change', () => {
+          row.cycle = cycleSelect.value as Cycle;
+          persist();
+          update();
+        });
+
+        const hoursInput = createInput(`${row.id}-hours`, String(row.hours), 'number');
+        hoursInput.addEventListener('input', () => {
+          row.hours = Number(hoursInput.value);
+          persist();
+          update();
+        });
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = '移除';
+        removeButton.addEventListener('click', () => {
+          rows = rows.filter((item) => item.id !== row.id);
+          persist();
+          renderRows();
+          update();
+        });
+
+        wrapper.append(
+          createField('名稱', nameInput),
+          createField('價格', priceInput),
+          createField('週期', cycleSelect),
+          createField('每月時數', hoursInput),
+          removeButton,
+        );
+        rowsContainer.append(wrapper);
+      });
+    }
+
+    function update(): void {
+      const totals = rows.map((row) => ({ row, monthly: monthlyCost(row) }));
+      const monthly = totals.reduce((sum, item) => sum + item.monthly, 0);
+      const largest = totals.reduce<typeof totals[number] | null>(
+        (winner, item) => (winner === null || item.monthly > winner.monthly ? item : winner),
+        null,
+      );
+
+      monthlyTotal.textContent = formatCurrency(monthly, locale);
+      yearlyTotal.textContent = formatCurrency(monthly * 12, locale);
+      fiveYearTotal.textContent = formatCurrency(monthly * 60, locale);
+      largestSubscription.textContent = largest && largest.monthly > 0
+        ? `${largest.row.name || '未命名'} (${formatCurrency(largest.monthly, locale)}/月)`
+        : '無';
+
+      breakdown.textContent = '';
+      totals
+        .filter((item) => item.row.hours > 0 && item.monthly > 0)
+        .forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = `${item.row.name || '未命名'} 每使用 1 小時約 ${formatCurrency(item.monthly / item.row.hours, locale)}。`;
+          breakdown.append(li);
+        });
+
+      if (monthly <= 0) {
+        verdict.textContent = '新增訂閱後會顯示總成本。';
+      } else if (largest && largest.monthly >= monthly * 0.35) {
+        verdict.textContent = `先檢查 ${largest.row.name || '最貴訂閱'}：它每月 ${formatCurrency(largest.monthly, locale)}，佔訂閱支出很大一部分。`;
+      } else {
+        verdict.textContent = `目前訂閱每月約 ${formatCurrency(monthly, locale)}，一年約 ${formatCurrency(monthly * 12, locale)}。`;
+      }
+    }
+
+    addButton.addEventListener('click', () => {
+      rows.push({ id: makeId(), name: '', price: 0, cycle: 'monthly', hours: 0 });
+      persist();
+      renderRows();
+      update();
+    });
+
+    renderRows();
+    update();
+  </script>
+</ToolLayout>

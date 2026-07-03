@@ -1,0 +1,281 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Rent vs Buy Calculator';
+const description = 'Rent vs buy calculator that compares mortgage payments, rent growth, appreciation, invested down payment, and holding period.';
+const faq = [
+  {
+    question: 'What does this rent vs buy calculator include?',
+    answer: 'It includes down payment, mortgage payments, a simple 1.5% annual owner-cost assumption, home appreciation, rent growth, and investment gains on the down payment.',
+  },
+  {
+    question: 'What does net cost of buying mean?',
+    answer: 'It is cash paid into the home plus owner costs, minus the equity you would have if you sold at the end of the holding period.',
+  },
+  {
+    question: 'Why invest the down payment in the renting case?',
+    answer: 'Renting keeps the down payment liquid. The calculator subtracts the investment gain on that money from total rent cost.',
+  },
+  {
+    question: 'Does this include taxes, insurance, HOA, or closing costs?',
+    answer: 'Those are not separate inputs. The 1.5% annual owner-cost assumption is a simplified placeholder, so adjust your interpretation if your local costs are much higher or lower.',
+  },
+  {
+    question: 'What is the crossover year?',
+    answer: 'It is the first year when the modeled net cost of buying becomes lower than renting. If it is beyond your holding period, renting wins on this model.',
+  },
+];
+const related = [
+  { title: 'Installment True APR Calculator', href: localizedPath(locale, '/tools/installment-true-apr') },
+  { title: 'Commute Cost Calculator', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: 'EV vs Gas Car TCO Calculator', href: localizedPath(locale, '/tools/ev-vs-gas') },
+  { title: 'How to think about renting vs buying', href: localizedPath(locale, '/rent-vs-buy-guide') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This rent vs buy calculator gives a practical first-pass comparison between buying a home and renting an equivalent one. It keeps the assumptions visible so you can test interest rates, rent growth, appreciation, and your likely holding period.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="rent-buy-inputs">
+      <h2 id="rent-buy-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="home-price">Home price</label>
+          <input id="home-price" type="number" inputmode="decimal" min="0" step="5000" value="450000" />
+        </div>
+        <div class="field">
+          <label for="down-payment">Down payment (%)</label>
+          <input id="down-payment" type="number" inputmode="decimal" min="0" max="100" step="1" value="20" />
+        </div>
+        <div class="field">
+          <label for="mortgage-rate">Mortgage rate (%)</label>
+          <input id="mortgage-rate" type="number" inputmode="decimal" min="0" step="0.1" value="6.5" />
+        </div>
+        <div class="field">
+          <label for="loan-years">Loan years</label>
+          <input id="loan-years" type="number" inputmode="numeric" min="1" step="1" value="30" />
+        </div>
+        <div class="field">
+          <label for="monthly-rent">Monthly rent</label>
+          <input id="monthly-rent" type="number" inputmode="decimal" min="0" step="100" value="2500" />
+        </div>
+        <div class="field">
+          <label for="rent-growth">Rent growth per year (%)</label>
+          <input id="rent-growth" type="number" inputmode="decimal" step="0.1" value="3" />
+        </div>
+        <div class="field">
+          <label for="appreciation">Home appreciation per year (%)</label>
+          <input id="appreciation" type="number" inputmode="decimal" step="0.1" value="3" />
+        </div>
+        <div class="field">
+          <label for="investment-return">Investment return on down payment (%)</label>
+          <input id="investment-return" type="number" inputmode="decimal" step="0.1" value="5" />
+        </div>
+        <div class="field">
+          <label for="holding-years">Holding years</label>
+          <input id="holding-years" type="number" inputmode="numeric" min="1" step="1" value="7" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="rent-buy-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="rent-buy-result" class="verdict">Enter your housing assumptions to compare.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Net cost of buying</span><strong id="buy-cost">$0</strong></p>
+        <p class="metric"><span>Net cost of renting</span><strong id="rent-cost">$0</strong></p>
+        <p class="metric"><span>Monthly mortgage</span><strong id="mortgage-payment">$0</strong></p>
+        <p class="metric"><span>Crossover year</span><strong id="crossover">None</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="rent-buy-how">
+    <h2 id="rent-buy-how">How it works</h2>
+    <p>
+      Buying cost is down payment plus mortgage payments and a simple 1.5% annual owner-cost allowance, minus ending equity. Ending equity is the appreciated home value minus the remaining mortgage balance.
+    </p>
+    <p>
+      Renting cost is rent paid with annual rent growth, minus the investment gain you could earn by investing the down payment instead. This is a simplified comparison, not a full tax or closing-cost model.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { compoundValue, formatCurrency, monthlyPayment, remainingLoanBalance } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'en';
+    const ownerCostRate = 0.015;
+    const inputs = [
+      'home-price',
+      'down-payment',
+      'mortgage-rate',
+      'loan-years',
+      'monthly-rent',
+      'rent-growth',
+      'appreciation',
+      'investment-return',
+      'holding-years',
+    ].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('rent-buy-result');
+    const buyCost = byId<HTMLElement>('buy-cost');
+    const rentCost = byId<HTMLElement>('rent-cost');
+    const mortgagePaymentOutput = byId<HTMLElement>('mortgage-payment');
+    const crossover = byId<HTMLElement>('crossover');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function rentPaid(monthlyRent: number, growthPct: number, years: number): number {
+      let total = 0;
+      for (let year = 0; year < years; year += 1) {
+        total += monthlyRent * 12 * (1 + growthPct / 100) ** year;
+      }
+      return total;
+    }
+
+    function modeledCosts(years: number): { buy: number; rent: number; payment: number } {
+      const price = Math.max(0, value('home-price'));
+      const down = price * (Math.min(100, Math.max(0, value('down-payment'))) / 100);
+      const loan = Math.max(0, price - down);
+      const loanYears = Math.max(1, Math.round(value('loan-years')));
+      const mortgageRate = Math.max(0, value('mortgage-rate'));
+      const payment = monthlyPayment(loan, mortgageRate, loanYears);
+      const paidMonths = Math.min(years * 12, loanYears * 12);
+      const balance = remainingLoanBalance(loan, mortgageRate, loanYears, paidMonths);
+      const homeValue = price * (1 + value('appreciation') / 100) ** years;
+      const equity = Math.max(0, homeValue - balance);
+      const ownerCosts = price * ownerCostRate * years;
+      const buy = down + payment * paidMonths + ownerCosts - equity;
+      const rent = rentPaid(Math.max(0, value('monthly-rent')), value('rent-growth'), years) -
+        (compoundValue(down, value('investment-return'), years) - down);
+      return { buy, rent, payment };
+    }
+
+    function update(): void {
+      const years = Math.max(1, Math.round(value('holding-years')));
+      const costs = modeledCosts(years);
+      let crossoverYear = 0;
+      for (let year = 1; year <= years; year += 1) {
+        const yearCosts = modeledCosts(year);
+        if (yearCosts.buy <= yearCosts.rent) {
+          crossoverYear = year;
+          break;
+        }
+      }
+
+      buyCost.textContent = formatCurrency(costs.buy, locale);
+      rentCost.textContent = formatCurrency(costs.rent, locale);
+      mortgagePaymentOutput.textContent = formatCurrency(costs.payment, locale);
+      crossover.textContent = crossoverYear > 0 ? `Year ${crossoverYear}` : 'None in holding period';
+
+      if (costs.buy < costs.rent) {
+        verdict.textContent = `Buying wins by ${formatCurrency(costs.rent - costs.buy, locale)} over ${years} years in this simplified model.`;
+      } else {
+        verdict.textContent = `Renting wins by ${formatCurrency(costs.buy - costs.rent, locale)} over ${years} years in this simplified model.`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `rent-vs-buy:${input.id}`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

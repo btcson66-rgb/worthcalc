@@ -1,0 +1,224 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Latte Factor Calculator';
+const description = 'Latte factor calculator and daily coffee cost calculator for yearly spending, habit savings, and future value.';
+const faq = [
+  {
+    question: 'What is the latte factor?',
+    answer: 'It is the idea that small repeated purchases can become a large annual cost. This calculator shows the number without judging the habit.',
+  },
+  {
+    question: 'Does this mean I should never buy coffee?',
+    answer: 'No. The goal is awareness. If the habit brings value and fits your budget, it can still be worth it.',
+  },
+  {
+    question: 'How is the future value calculated?',
+    answer: 'The calculator treats the savings versus the alternative as monthly contributions and compounds them at the annual return you enter.',
+  },
+  {
+    question: 'What should I enter as the alternative cost?',
+    answer: 'Use the cost of a realistic substitute, such as making coffee at home or choosing a cheaper snack.',
+  },
+  {
+    question: 'Can I use this for habits besides coffee?',
+    answer: 'Yes. It works for any repeated purchase, including delivery fees, convenience-store snacks, or paid drinks.',
+  },
+];
+const related = [
+  { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: 'Commute Cost Calculator', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This latte factor calculator turns a daily coffee or small habit into yearly spending, long-term cost, and possible future value. Use it as a daily coffee cost calculator or for any repeat purchase.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="latte-inputs">
+      <h2 id="latte-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="habit-cost">Habit cost each time</label>
+          <input id="habit-cost" type="number" inputmode="decimal" min="0" step="0.25" value="6" />
+        </div>
+        <div class="field">
+          <label for="times-week">Times per week</label>
+          <input id="times-week" type="number" inputmode="decimal" min="0" step="1" value="5" />
+        </div>
+        <div class="field">
+          <label for="years">Years</label>
+          <input id="years" type="number" inputmode="numeric" min="1" step="1" value="10" />
+        </div>
+        <div class="field">
+          <label for="alternative-cost">Alternative cost each time</label>
+          <input id="alternative-cost" type="number" inputmode="decimal" min="0" step="0.25" value="1.5" />
+        </div>
+        <div class="field">
+          <label for="return-rate">Investment return (%)</label>
+          <input id="return-rate" type="number" inputmode="decimal" step="0.1" value="5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="latte-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="latte-result" class="verdict">Enter a habit to see the long-term cost.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Yearly habit spend</span><strong id="yearly-spend">$0</strong></p>
+        <p class="metric"><span>Total habit spend</span><strong id="total-spend">$0</strong></p>
+        <p class="metric"><span>Yearly savings vs alternative</span><strong id="yearly-savings">$0</strong></p>
+        <p class="metric"><span>Future value if invested</span><strong id="future-value">$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="latte-how">
+    <h2 id="latte-how">How it works</h2>
+    <p>
+      Yearly spend is cost per time multiplied by times per week and 52 weeks. Savings compare the habit with your alternative cost. Future value treats those savings as monthly contributions invested at your chosen return.
+    </p>
+    <p>
+      The verdict is framed positively: it shows what the habit costs and what changing it could unlock, without assuming every small pleasure should be removed.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency, futureValue } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'en';
+    const inputs = ['habit-cost', 'times-week', 'years', 'alternative-cost', 'return-rate'].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('latte-result');
+    const yearlySpend = byId<HTMLElement>('yearly-spend');
+    const totalSpend = byId<HTMLElement>('total-spend');
+    const yearlySavingsOutput = byId<HTMLElement>('yearly-savings');
+    const futureValueOutput = byId<HTMLElement>('future-value');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function update(): void {
+      const cost = Math.max(0, value('habit-cost'));
+      const alternative = Math.max(0, value('alternative-cost'));
+      const times = Math.max(0, value('times-week'));
+      const years = Math.max(1, value('years'));
+      const yearly = cost * times * 52;
+      const yearlySavings = Math.max(0, (cost - alternative) * times * 52);
+      const future = futureValue(yearlySavings / 12, value('return-rate'), years);
+
+      yearlySpend.textContent = formatCurrency(yearly, locale);
+      totalSpend.textContent = formatCurrency(yearly * years, locale);
+      yearlySavingsOutput.textContent = formatCurrency(yearlySavings, locale);
+      futureValueOutput.textContent = formatCurrency(future, locale);
+
+      if (yearlySavings > 0) {
+        verdict.textContent = `Switching to the alternative frees ${formatCurrency(yearlySavings, locale)} per year, worth about ${formatCurrency(future, locale)} after ${years.toFixed(0)} years if invested.`;
+      } else {
+        verdict.textContent = `This habit is already no more expensive than your alternative, so the money case for changing it is weak.`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `latte-factor:${input.id}`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

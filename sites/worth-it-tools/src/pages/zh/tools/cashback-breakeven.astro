@@ -1,0 +1,258 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '信用卡回饋打平計算機';
+const description = '信用卡回饋打平計算機，估算年費卡是否值得、回饋率、月消費、首刷禮與 1% 免年費基準。';
+const faq = [
+  {
+    question: '怎麼判斷年費信用卡值不值得？',
+    answer: '把年度回饋、首刷禮和年費相加減，再和免年費 1% 回饋卡比較。如果年費卡扣除成本後仍勝出，就比較可能值得。',
+  },
+  {
+    question: '回饋打平月消費是什麼？',
+    answer: '它是依照你目前的消費類別比例，估算年費卡要花到多少月消費，才會補回年費並勝過 1% 免年費卡。',
+  },
+  {
+    question: '首刷禮要算進去嗎？',
+    answer: '如果你能在不增加額外消費的情況下拿到，可以算進第一年。評估長期價值時，建議把首刷禮設為 0 再算一次。',
+  },
+  {
+    question: '為什麼要和 1% 免年費卡比較？',
+    answer: '因為免年費卡是你的機會成本。年費卡不只要有回饋，還要比簡單免費選項更好。',
+  },
+  {
+    question: '點數轉哩程或高價值兌換有算嗎？',
+    answer: '沒有。此工具把回饋視為現金百分比。如果點數對你價值更高或更低，請換算成等效回饋率。',
+  },
+];
+const related = [
+  { title: '分期付款真實 APR 計算機', href: localizedPath(locale, '/tools/installment-true-apr') },
+  { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個信用卡回饋打平計算機會比較分類回饋、首刷禮、年費和免年費 1% 基準卡。辦年費卡前，先看你的月消費是否足夠補回年費。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="cashback-inputs">
+      <h2 id="cashback-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="annual-fee">年費</label>
+          <input id="annual-fee" type="number" inputmode="decimal" min="0" step="100" value="3000" />
+        </div>
+        <div class="field">
+          <label for="welcome-bonus">首刷禮價值</label>
+          <input id="welcome-bonus" type="number" inputmode="decimal" min="0" step="100" value="1000" />
+        </div>
+        <div class="field">
+          <label for="category-one-spend">餐飲每月消費</label>
+          <input id="category-one-spend" type="number" inputmode="decimal" min="0" step="500" value="12000" />
+        </div>
+        <div class="field">
+          <label for="category-one-rate">餐飲回饋 (%)</label>
+          <input id="category-one-rate" type="number" inputmode="decimal" min="0" step="0.1" value="3" />
+        </div>
+        <div class="field">
+          <label for="category-two-spend">網購每月消費</label>
+          <input id="category-two-spend" type="number" inputmode="decimal" min="0" step="500" value="8000" />
+        </div>
+        <div class="field">
+          <label for="category-two-rate">網購回饋 (%)</label>
+          <input id="category-two-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
+        </div>
+        <div class="field">
+          <label for="category-three-spend">一般消費每月</label>
+          <input id="category-three-spend" type="number" inputmode="decimal" min="0" step="500" value="10000" />
+        </div>
+        <div class="field">
+          <label for="category-three-rate">一般消費回饋 (%)</label>
+          <input id="category-three-rate" type="number" inputmode="decimal" min="0" step="0.1" value="1.2" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="cashback-result">
+      <p class="eyebrow">判斷</p>
+      <p id="cashback-result" class="verdict">輸入消費與回饋率後會比較信用卡。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>年度回饋</span><strong id="annual-cashback">NT$0</strong></p>
+        <p class="metric"><span>年度淨價值</span><strong id="net-value">NT$0</strong></p>
+        <p class="metric"><span>免年費 1% 基準</span><strong id="baseline">NT$0</strong></p>
+        <p class="metric"><span>打平月消費</span><strong id="break-even">NT$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="cashback-how">
+    <h2 id="cashback-how">計算方式</h2>
+    <p>
+      計算機會把每個分類的月消費乘以 12，再乘以該分類回饋率。年度淨價值等於年度回饋加首刷禮，再扣掉年費。
+    </p>
+    <p>
+      判斷會把這個淨價值和免年費 1% 卡比較。打平月消費則依照你目前的消費類別比例，估算年費卡需要多少月消費才會勝出。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'zh';
+    const ids = [
+      'annual-fee',
+      'welcome-bonus',
+      'category-one-spend',
+      'category-one-rate',
+      'category-two-spend',
+      'category-two-rate',
+      'category-three-spend',
+      'category-three-rate',
+    ];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('cashback-result');
+    const annualCashback = byId<HTMLElement>('annual-cashback');
+    const netValue = byId<HTMLElement>('net-value');
+    const baseline = byId<HTMLElement>('baseline');
+    const breakEven = byId<HTMLElement>('break-even');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function update(): void {
+      const fee = Math.max(0, value('annual-fee'));
+      const bonus = Math.max(0, value('welcome-bonus'));
+      const spends = [
+        Math.max(0, value('category-one-spend')),
+        Math.max(0, value('category-two-spend')),
+        Math.max(0, value('category-three-spend')),
+      ];
+      const rates = [
+        Math.max(0, value('category-one-rate')) / 100,
+        Math.max(0, value('category-two-rate')) / 100,
+        Math.max(0, value('category-three-rate')) / 100,
+      ];
+      const monthlySpend = spends.reduce((sum, spend) => sum + spend, 0);
+      const grossCashback = spends.reduce((sum, spend, index) => sum + spend * 12 * rates[index], 0);
+      const baselineValue = monthlySpend * 12 * 0.01;
+      const net = grossCashback + bonus - fee;
+      const incremental = net - baselineValue;
+      const weightedRate = monthlySpend > 0 ? grossCashback / (monthlySpend * 12) : rates.reduce((sum, rate) => sum + rate, 0) / rates.length;
+      const rateEdge = weightedRate - 0.01;
+      const needed = bonus >= fee ? 0 : rateEdge > 0 ? (fee - bonus) / rateEdge / 12 : Number.POSITIVE_INFINITY;
+
+      annualCashback.textContent = formatCurrency(grossCashback, locale);
+      netValue.textContent = formatCurrency(net, locale);
+      baseline.textContent = formatCurrency(baselineValue, locale);
+      breakEven.textContent = Number.isFinite(needed) ? `${formatCurrency(needed, locale)}/月` : '無法打平';
+
+      if (incremental > 0) {
+        verdict.textContent = `值得考慮：這張卡今年比免年費 1% 卡多 ${formatCurrency(incremental, locale)}。`;
+      } else {
+        verdict.textContent = `目前不划算：免年費 1% 卡今年多 ${formatCurrency(Math.abs(incremental), locale)}。`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `cashback-breakeven:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

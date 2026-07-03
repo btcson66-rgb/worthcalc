@@ -1,0 +1,282 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'EV vs Gas Car TCO Calculator';
+const description = 'EV vs gas cost calculator for purchase price, subsidy, energy, maintenance, break-even year, and total cost of ownership.';
+const faq = [
+  {
+    question: 'What does EV vs gas total cost of ownership include?',
+    answer: 'This model includes purchase price after subsidy, monthly driving distance, fuel or electricity, maintenance, and years owned. Insurance, financing, taxes, and resale value are not included.',
+  },
+  {
+    question: 'How do I enter EV efficiency?',
+    answer: 'Use kWh per 100 km. If your car reports miles per kWh, divide 100 by miles per kWh and then divide by 1.609 to estimate kWh per 100 km.',
+  },
+  {
+    question: 'How is gas cost converted from mpg?',
+    answer: 'The calculator converts mpg to kilometers per gallon, then divides gas price per gallon by that distance to get fuel cost per kilometer.',
+  },
+  {
+    question: 'What does break-even year mean?',
+    answer: 'It is the ownership year when operating savings recover the higher upfront EV price. If the EV is cheaper upfront, break-even is immediate.',
+  },
+  {
+    question: 'Is an electric car worth it if the break-even year is later than I will own it?',
+    answer: 'Usually not on cost alone. You may still choose it for emissions, driving feel, or convenience, but this calculator focuses on money.',
+  },
+];
+const related = [
+  { title: 'Commute Cost Calculator', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'Installment True APR Calculator', href: localizedPath(locale, '/tools/installment-true-apr') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This EV vs gas cost calculator compares the total cost of ownership for an electric car and a gasoline car. It highlights whether lower charging and maintenance costs are enough to offset a higher purchase price.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="ev-inputs">
+      <h2 id="ev-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="ev-price">EV purchase price</label>
+          <input id="ev-price" type="number" inputmode="decimal" min="0" step="500" value="38000" />
+        </div>
+        <div class="field">
+          <label for="gas-price">Gas car purchase price</label>
+          <input id="gas-price" type="number" inputmode="decimal" min="0" step="500" value="30000" />
+        </div>
+        <div class="field">
+          <label for="subsidy">EV subsidy or rebate</label>
+          <input id="subsidy" type="number" inputmode="decimal" min="0" step="500" value="7500" />
+        </div>
+        <div class="field">
+          <label for="km-month">Kilometers driven per month</label>
+          <input id="km-month" type="number" inputmode="decimal" min="0" step="50" value="1200" />
+        </div>
+        <div class="field">
+          <label for="kwh-cost">Electricity cost per kWh</label>
+          <input id="kwh-cost" type="number" inputmode="decimal" min="0" step="0.01" value="0.16" />
+        </div>
+        <div class="field">
+          <label for="ev-efficiency">EV efficiency (kWh/100 km)</label>
+          <input id="ev-efficiency" type="number" inputmode="decimal" min="0" step="0.1" value="18" />
+        </div>
+        <div class="field">
+          <label for="gas-cost">Gas price per gallon</label>
+          <input id="gas-cost" type="number" inputmode="decimal" min="0" step="0.01" value="3.8" />
+        </div>
+        <div class="field">
+          <label for="mpg">Gas car efficiency (mpg)</label>
+          <input id="mpg" type="number" inputmode="decimal" min="1" step="0.1" value="30" />
+        </div>
+        <div class="field">
+          <label for="ev-maintenance">EV maintenance per year</label>
+          <input id="ev-maintenance" type="number" inputmode="decimal" min="0" step="50" value="500" />
+        </div>
+        <div class="field">
+          <label for="gas-maintenance">Gas maintenance per year</label>
+          <input id="gas-maintenance" type="number" inputmode="decimal" min="0" step="50" value="900" />
+        </div>
+        <div class="field">
+          <label for="years">Years of ownership</label>
+          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="ev-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="ev-result" class="verdict">Enter your driving assumptions to compare total cost.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>EV total cost</span><strong id="ev-total">$0</strong></p>
+        <p class="metric"><span>Gas total cost</span><strong id="gas-total">$0</strong></p>
+        <p class="metric"><span>Break-even year</span><strong id="break-even">No break-even</strong></p>
+        <p class="metric"><span>EV cost per km</span><strong id="ev-per-km">$0</strong></p>
+        <p class="metric"><span>Gas cost per km</span><strong id="gas-per-km">$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="ev-how">
+    <h2 id="ev-how">How it works</h2>
+    <p>
+      EV total cost is purchase price minus subsidy, plus electricity and maintenance over the ownership period. Gas total cost is purchase price plus fuel and maintenance. The lower total cost wins.
+    </p>
+    <p>
+      Break-even compares the upfront price gap with annual operating savings. The model is intentionally simple, so add resale value, insurance, financing, or taxes separately if they matter for your decision.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'en';
+    const inputs = [
+      'ev-price',
+      'gas-price',
+      'subsidy',
+      'km-month',
+      'kwh-cost',
+      'ev-efficiency',
+      'gas-cost',
+      'mpg',
+      'ev-maintenance',
+      'gas-maintenance',
+      'years',
+    ].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('ev-result');
+    const evTotal = byId<HTMLElement>('ev-total');
+    const gasTotal = byId<HTMLElement>('gas-total');
+    const breakEven = byId<HTMLElement>('break-even');
+    const evPerKm = byId<HTMLElement>('ev-per-km');
+    const gasPerKm = byId<HTMLElement>('gas-per-km');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const input = byId<HTMLInputElement>(id);
+      const parsed = Number(input.value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function moneyPerKm(amount: number): string {
+      return `${formatCurrency(amount, locale)}/km`;
+    }
+
+    function update(): void {
+      const evPrice = Math.max(0, value('ev-price'));
+      const gasPrice = Math.max(0, value('gas-price'));
+      const subsidy = Math.max(0, value('subsidy'));
+      const kmMonth = Math.max(0, value('km-month'));
+      const years = Math.max(1, value('years'));
+      const evNetPrice = Math.max(0, evPrice - subsidy);
+      const evEnergyMonthly = kmMonth * (Math.max(0, value('ev-efficiency')) / 100) * Math.max(0, value('kwh-cost'));
+      const gasKmPerGallon = Math.max(1, value('mpg')) * 1.60934;
+      const gasFuelMonthly = kmMonth * (Math.max(0, value('gas-cost')) / gasKmPerGallon);
+      const evOperatingAnnual = evEnergyMonthly * 12 + Math.max(0, value('ev-maintenance'));
+      const gasOperatingAnnual = gasFuelMonthly * 12 + Math.max(0, value('gas-maintenance'));
+      const evTotalCost = evNetPrice + evOperatingAnnual * years;
+      const gasTotalCost = gasPrice + gasOperatingAnnual * years;
+      const totalKm = Math.max(1, kmMonth * 12 * years);
+      const annualSavings = gasOperatingAnnual - evOperatingAnnual;
+      const upfrontGap = evNetPrice - gasPrice;
+      const breakEvenYears = upfrontGap <= 0 ? 0 : annualSavings > 0 ? upfrontGap / annualSavings : Number.POSITIVE_INFINITY;
+
+      evTotal.textContent = formatCurrency(evTotalCost, locale);
+      gasTotal.textContent = formatCurrency(gasTotalCost, locale);
+      evPerKm.textContent = moneyPerKm(evTotalCost / totalKm);
+      gasPerKm.textContent = moneyPerKm(gasTotalCost / totalKm);
+      breakEven.textContent = Number.isFinite(breakEvenYears)
+        ? breakEvenYears === 0
+          ? 'Immediate'
+          : `${breakEvenYears.toFixed(1)} years`
+        : 'No break-even';
+
+      if (evTotalCost < gasTotalCost) {
+        verdict.textContent = `Worth it on cost: the EV saves ${formatCurrency(gasTotalCost - evTotalCost, locale)} over ${years.toFixed(0)} years.`;
+      } else {
+        verdict.textContent = `Gas is cheaper on cost: it saves ${formatCurrency(evTotalCost - gasTotalCost, locale)} over ${years.toFixed(0)} years.`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `ev-vs-gas:${input.id}`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

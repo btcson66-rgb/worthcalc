@@ -1,0 +1,280 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '租屋 vs 買房計算機';
+const description = '租屋 vs 買房計算機，比較房貸、租金成長、房價增值、頭期款投資報酬與持有年限。';
+const faq = [
+  {
+    question: '這個租屋買房計算機包含哪些項目？',
+    answer: '包含頭期款、房貸付款、每年 1.5% 的簡化持有成本、房價增值、租金成長，以及頭期款如果拿去投資的收益。',
+  },
+  {
+    question: '買房淨成本是什麼？',
+    answer: '買房淨成本是頭期款、房貸付款和持有成本，扣掉期末賣房時累積的權益。',
+  },
+  {
+    question: '為什麼租屋情境要算頭期款投資？',
+    answer: '租屋時頭期款沒有被鎖進房子，可以拿去投資。工具會把這筆投資收益從租屋總成本中扣除。',
+  },
+  {
+    question: '有包含稅費、管理費、裝潢或買賣成本嗎？',
+    answer: '沒有逐項輸入。每年 1.5% 持有成本只是簡化假設，如果你的實際成本更高或更低，請解讀時自行調整。',
+  },
+  {
+    question: '打平年代表什麼？',
+    answer: '打平年是買房淨成本第一次低於租屋淨成本的年份。如果超過你的持有年限，代表此模型下租屋較划算。',
+  },
+];
+const related = [
+  { title: '分期付款真實 APR 計算機', href: localizedPath(locale, '/tools/installment-true-apr') },
+  { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: '電動機車 vs 油車計算機', href: localizedPath(locale, '/tools/ev-vs-gas') },
+  { title: '租屋買房思考指南', href: localizedPath(locale, '/rent-vs-buy-guide') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個租屋 vs 買房計算機用簡化模型，幫你比較同一間房選擇租或買的成本差異。調整房貸利率、租金成長、房價增值和持有年限，就能看出哪個假設最影響結果。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="rent-buy-inputs">
+      <h2 id="rent-buy-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="home-price">房屋總價</label>
+          <input id="home-price" type="number" inputmode="decimal" min="0" step="100000" value="15000000" />
+        </div>
+        <div class="field">
+          <label for="down-payment">頭期款比例 (%)</label>
+          <input id="down-payment" type="number" inputmode="decimal" min="0" max="100" step="1" value="20" />
+        </div>
+        <div class="field">
+          <label for="mortgage-rate">房貸利率 (%)</label>
+          <input id="mortgage-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2.2" />
+        </div>
+        <div class="field">
+          <label for="loan-years">貸款年限</label>
+          <input id="loan-years" type="number" inputmode="numeric" min="1" step="1" value="30" />
+        </div>
+        <div class="field">
+          <label for="monthly-rent">同等房屋月租</label>
+          <input id="monthly-rent" type="number" inputmode="decimal" min="0" step="1000" value="35000" />
+        </div>
+        <div class="field">
+          <label for="rent-growth">租金年成長 (%)</label>
+          <input id="rent-growth" type="number" inputmode="decimal" step="0.1" value="2" />
+        </div>
+        <div class="field">
+          <label for="appreciation">房價年增值 (%)</label>
+          <input id="appreciation" type="number" inputmode="decimal" step="0.1" value="2" />
+        </div>
+        <div class="field">
+          <label for="investment-return">頭期款投資年報酬 (%)</label>
+          <input id="investment-return" type="number" inputmode="decimal" step="0.1" value="4" />
+        </div>
+        <div class="field">
+          <label for="holding-years">持有年限</label>
+          <input id="holding-years" type="number" inputmode="numeric" min="1" step="1" value="10" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="rent-buy-result">
+      <p class="eyebrow">判斷</p>
+      <p id="rent-buy-result" class="verdict">輸入住房假設後會比較租屋與買房。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>買房淨成本</span><strong id="buy-cost">NT$0</strong></p>
+        <p class="metric"><span>租屋淨成本</span><strong id="rent-cost">NT$0</strong></p>
+        <p class="metric"><span>每月房貸</span><strong id="mortgage-payment">NT$0</strong></p>
+        <p class="metric"><span>打平年</span><strong id="crossover">無</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="rent-buy-how">
+    <h2 id="rent-buy-how">計算方式</h2>
+    <p>
+      買房成本是頭期款、房貸付款和每年 1.5% 的簡化持有成本，扣掉期末房屋權益。期末權益是增值後房價減掉剩餘房貸。
+    </p>
+    <p>
+      租屋成本是加入租金成長後的總租金，再扣掉頭期款如果拿去投資能產生的收益。這是簡化模型，不是完整稅務或交易成本試算。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { compoundValue, formatCurrency, monthlyPayment, remainingLoanBalance } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'zh';
+    const ownerCostRate = 0.015;
+    const inputs = [
+      'home-price',
+      'down-payment',
+      'mortgage-rate',
+      'loan-years',
+      'monthly-rent',
+      'rent-growth',
+      'appreciation',
+      'investment-return',
+      'holding-years',
+    ].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('rent-buy-result');
+    const buyCost = byId<HTMLElement>('buy-cost');
+    const rentCost = byId<HTMLElement>('rent-cost');
+    const mortgagePaymentOutput = byId<HTMLElement>('mortgage-payment');
+    const crossover = byId<HTMLElement>('crossover');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function rentPaid(monthlyRent: number, growthPct: number, years: number): number {
+      let total = 0;
+      for (let year = 0; year < years; year += 1) {
+        total += monthlyRent * 12 * (1 + growthPct / 100) ** year;
+      }
+      return total;
+    }
+
+    function modeledCosts(years: number): { buy: number; rent: number; payment: number } {
+      const price = Math.max(0, value('home-price'));
+      const down = price * (Math.min(100, Math.max(0, value('down-payment'))) / 100);
+      const loan = Math.max(0, price - down);
+      const loanYears = Math.max(1, Math.round(value('loan-years')));
+      const mortgageRate = Math.max(0, value('mortgage-rate'));
+      const payment = monthlyPayment(loan, mortgageRate, loanYears);
+      const paidMonths = Math.min(years * 12, loanYears * 12);
+      const balance = remainingLoanBalance(loan, mortgageRate, loanYears, paidMonths);
+      const homeValue = price * (1 + value('appreciation') / 100) ** years;
+      const equity = Math.max(0, homeValue - balance);
+      const ownerCosts = price * ownerCostRate * years;
+      const buy = down + payment * paidMonths + ownerCosts - equity;
+      const rent = rentPaid(Math.max(0, value('monthly-rent')), value('rent-growth'), years) -
+        (compoundValue(down, value('investment-return'), years) - down);
+      return { buy, rent, payment };
+    }
+
+    function update(): void {
+      const years = Math.max(1, Math.round(value('holding-years')));
+      const costs = modeledCosts(years);
+      let crossoverYear = 0;
+      for (let year = 1; year <= years; year += 1) {
+        const yearCosts = modeledCosts(year);
+        if (yearCosts.buy <= yearCosts.rent) {
+          crossoverYear = year;
+          break;
+        }
+      }
+
+      buyCost.textContent = formatCurrency(costs.buy, locale);
+      rentCost.textContent = formatCurrency(costs.rent, locale);
+      mortgagePaymentOutput.textContent = formatCurrency(costs.payment, locale);
+      crossover.textContent = crossoverYear > 0 ? `第 ${crossoverYear} 年` : '持有期間內無';
+
+      if (costs.buy < costs.rent) {
+        verdict.textContent = `在這個簡化模型中，買房 ${years} 年約省 ${formatCurrency(costs.rent - costs.buy, locale)}。`;
+      } else {
+        verdict.textContent = `在這個簡化模型中，租屋 ${years} 年約省 ${formatCurrency(costs.buy - costs.rent, locale)}。`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `rent-vs-buy:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

@@ -1,0 +1,304 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Commute Cost Calculator';
+const description = 'Commute cost calculator for car, transit pass, rideshare, and bike costs with optional time-cost comparison.';
+const faq = [
+  {
+    question: 'What commute modes can I compare?',
+    answer: 'The calculator compares car, transit pass, rideshare, and bike. Each mode has a different cost model so you can compare realistic monthly totals.',
+  },
+  {
+    question: 'How is car commute cost calculated?',
+    answer: 'Car cost uses round-trip distance, workdays per month, cost per kilometer, parking, and tolls. Cost per kilometer can include fuel, maintenance, depreciation, or your own estimate.',
+  },
+  {
+    question: 'How does optional time cost work?',
+    answer: 'If you enter an hourly wage, the calculator adds commute time value to each mode. Set hourly wage to 0 if you want direct cash cost only.',
+  },
+  {
+    question: 'Can I use this for hybrid work?',
+    answer: 'Yes. Enter only the workdays you actually commute in a typical month.',
+  },
+  {
+    question: 'Should I include parking at home?',
+    answer: 'Include only costs that change because of commuting. If you pay for parking regardless of commute mode, leave it out.',
+  },
+];
+const related = [
+  { title: 'EV vs Gas Car TCO Calculator', href: localizedPath(locale, '/tools/ev-vs-gas') },
+  { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This commute cost calculator compares car, transit, rideshare, and bike commuting on a monthly and yearly basis. Add an hourly wage if commute time itself should count in the decision.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="commute-inputs">
+      <h2 id="commute-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="distance">Distance one-way (km)</label>
+          <input id="distance" type="number" inputmode="decimal" min="0" step="1" value="15" />
+        </div>
+        <div class="field">
+          <label for="workdays">Workdays per month</label>
+          <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="22" />
+        </div>
+        <div class="field">
+          <label for="car-cost">Car cost per km</label>
+          <input id="car-cost" type="number" inputmode="decimal" min="0" step="0.01" value="0.67" />
+        </div>
+        <div class="field">
+          <label for="transit-pass">Transit pass per month</label>
+          <input id="transit-pass" type="number" inputmode="decimal" min="0" step="5" value="120" />
+        </div>
+        <div class="field">
+          <label for="rideshare">Rideshare one-way fare</label>
+          <input id="rideshare" type="number" inputmode="decimal" min="0" step="1" value="18" />
+        </div>
+        <div class="field">
+          <label for="bike-cost">Bike monthly cost</label>
+          <input id="bike-cost" type="number" inputmode="decimal" min="0" step="5" value="20" />
+        </div>
+        <div class="field">
+          <label for="parking">Parking per month</label>
+          <input id="parking" type="number" inputmode="decimal" min="0" step="10" value="180" />
+        </div>
+        <div class="field">
+          <label for="tolls">Tolls per month</label>
+          <input id="tolls" type="number" inputmode="decimal" min="0" step="5" value="40" />
+        </div>
+        <div class="field">
+          <label for="hourly-wage">Hourly wage for time cost</label>
+          <input id="hourly-wage" type="number" inputmode="decimal" min="0" step="1" value="30" />
+        </div>
+        <div class="field">
+          <label for="car-minutes">Car minutes one-way</label>
+          <input id="car-minutes" type="number" inputmode="numeric" min="0" step="1" value="35" />
+        </div>
+        <div class="field">
+          <label for="transit-minutes">Transit minutes one-way</label>
+          <input id="transit-minutes" type="number" inputmode="numeric" min="0" step="1" value="45" />
+        </div>
+        <div class="field">
+          <label for="rideshare-minutes">Rideshare minutes one-way</label>
+          <input id="rideshare-minutes" type="number" inputmode="numeric" min="0" step="1" value="35" />
+        </div>
+        <div class="field">
+          <label for="bike-minutes">Bike minutes one-way</label>
+          <input id="bike-minutes" type="number" inputmode="numeric" min="0" step="1" value="50" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="commute-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="commute-result" class="verdict">Enter commute assumptions to compare modes.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Cheapest mode</span><strong id="cheapest">None</strong></p>
+        <p class="metric"><span>Car monthly</span><strong id="car-total">$0</strong></p>
+        <p class="metric"><span>Transit monthly</span><strong id="transit-total">$0</strong></p>
+        <p class="metric"><span>Rideshare monthly</span><strong id="rideshare-total">$0</strong></p>
+        <p class="metric"><span>Bike monthly</span><strong id="bike-total">$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="commute-how">
+    <h2 id="commute-how">How it works</h2>
+    <p>
+      Car cost uses round-trip distance, workdays, cost per kilometer, parking, and tolls. Transit uses the pass price, rideshare uses two one-way fares per workday, and bike uses your monthly bike cost.
+    </p>
+    <p>
+      If hourly wage is above zero, each mode also includes round-trip commute time multiplied by workdays and hourly wage. The cheapest mode is based on direct cost plus optional time cost.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    interface ModeCost {
+      name: string;
+      direct: number;
+      time: number;
+      total: number;
+    }
+
+    const locale = 'en';
+    const ids = [
+      'distance',
+      'workdays',
+      'car-cost',
+      'transit-pass',
+      'rideshare',
+      'bike-cost',
+      'parking',
+      'tolls',
+      'hourly-wage',
+      'car-minutes',
+      'transit-minutes',
+      'rideshare-minutes',
+      'bike-minutes',
+    ];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('commute-result');
+    const cheapest = byId<HTMLElement>('cheapest');
+    const carTotal = byId<HTMLElement>('car-total');
+    const transitTotal = byId<HTMLElement>('transit-total');
+    const rideshareTotal = byId<HTMLElement>('rideshare-total');
+    const bikeTotal = byId<HTMLElement>('bike-total');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function timeCost(minutesOneWay: number, workdays: number, wage: number): number {
+      return wage > 0 ? (Math.max(0, minutesOneWay) * 2 * workdays * wage) / 60 : 0;
+    }
+
+    function update(): void {
+      const distance = Math.max(0, value('distance'));
+      const workdays = Math.max(0, value('workdays'));
+      const wage = Math.max(0, value('hourly-wage'));
+      const modes: ModeCost[] = [
+        {
+          name: 'Car',
+          direct: distance * 2 * workdays * Math.max(0, value('car-cost')) + Math.max(0, value('parking')) + Math.max(0, value('tolls')),
+          time: timeCost(value('car-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: 'Transit',
+          direct: Math.max(0, value('transit-pass')),
+          time: timeCost(value('transit-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: 'Rideshare',
+          direct: Math.max(0, value('rideshare')) * 2 * workdays,
+          time: timeCost(value('rideshare-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: 'Bike',
+          direct: Math.max(0, value('bike-cost')),
+          time: timeCost(value('bike-minutes'), workdays, wage),
+          total: 0,
+        },
+      ].map((mode) => ({ ...mode, total: mode.direct + mode.time }));
+      const winner = modes.reduce((best, mode) => (mode.total < best.total ? mode : best));
+      const highest = modes.reduce((max, mode) => Math.max(max, mode.total), 0);
+
+      cheapest.textContent = `${winner.name} (${formatCurrency(winner.total, locale)}/mo)`;
+      carTotal.textContent = formatCurrency(modes[0].total, locale);
+      transitTotal.textContent = formatCurrency(modes[1].total, locale);
+      rideshareTotal.textContent = formatCurrency(modes[2].total, locale);
+      bikeTotal.textContent = formatCurrency(modes[3].total, locale);
+      verdict.textContent = `${winner.name} is cheapest at ${formatCurrency(winner.total, locale)} per month, saving up to ${formatCurrency(highest - winner.total, locale)} versus the priciest mode.`;
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `commute-cost:${input.id}`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

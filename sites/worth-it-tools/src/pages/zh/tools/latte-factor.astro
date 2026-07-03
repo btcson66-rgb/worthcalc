@@ -1,0 +1,223 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '拿鐵因子日常習慣成本計算機';
+const description = '拿鐵因子計算機，估算每天咖啡、飲料或小習慣一年花多少，以及改變後的未來價值。';
+const faq = [
+  {
+    question: '什麼是拿鐵因子？',
+    answer: '拿鐵因子是指小額但重複的消費，累積後可能變成很大的年度支出。這個工具只呈現數字，不批判你的習慣。',
+  },
+  {
+    question: '這代表我不能買咖啡嗎？',
+    answer: '不是。重點是知道成本。如果這個習慣帶來價值，也符合你的預算，它仍然可能值得。',
+  },
+  {
+    question: '未來價值怎麼算？',
+    answer: '計算機把改用替代方案省下的金額視為每月投入，依你輸入的年報酬率做月複利估算。',
+  },
+  {
+    question: '替代成本要填什麼？',
+    answer: '請填你實際會改成的選項，例如自己泡咖啡、便利商店飲品，或更便宜的點心。',
+  },
+  {
+    question: '可以算咖啡以外的習慣嗎？',
+    answer: '可以。外送費、手搖飲、零食、通勤小支出，只要是重複消費都能套用。',
+  },
+];
+const related = [
+  { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個拿鐵因子計算機會把每天咖啡、手搖飲或零食小習慣換算成年支出、長期成本和可能的未來價值。它不是要你取消所有享受，而是讓你用數字決定值不值得。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="latte-inputs">
+      <h2 id="latte-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="habit-cost">每次習慣花費</label>
+          <input id="habit-cost" type="number" inputmode="decimal" min="0" step="5" value="120" />
+        </div>
+        <div class="field">
+          <label for="times-week">每週次數</label>
+          <input id="times-week" type="number" inputmode="decimal" min="0" step="1" value="5" />
+        </div>
+        <div class="field">
+          <label for="years">年數</label>
+          <input id="years" type="number" inputmode="numeric" min="1" step="1" value="10" />
+        </div>
+        <div class="field">
+          <label for="alternative-cost">替代方案每次成本</label>
+          <input id="alternative-cost" type="number" inputmode="decimal" min="0" step="5" value="35" />
+        </div>
+        <div class="field">
+          <label for="return-rate">投資年報酬率 (%)</label>
+          <input id="return-rate" type="number" inputmode="decimal" step="0.1" value="5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="latte-result">
+      <p class="eyebrow">判斷</p>
+      <p id="latte-result" class="verdict">輸入習慣後會顯示長期成本。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>每年習慣支出</span><strong id="yearly-spend">NT$0</strong></p>
+        <p class="metric"><span>期間總支出</span><strong id="total-spend">NT$0</strong></p>
+        <p class="metric"><span>相對替代方案每年可省</span><strong id="yearly-savings">NT$0</strong></p>
+        <p class="metric"><span>改存投資的未來價值</span><strong id="future-value">NT$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="latte-how">
+    <h2 id="latte-how">計算方式</h2>
+    <p>
+      年支出等於每次花費乘以每週次數，再乘以 52 週。省下金額會用原本習慣和替代方案的差額計算。未來價值則把省下金額當作每月投入，依年報酬率做月複利估算。
+    </p>
+    <p>
+      判斷會用正向方式呈現：它讓你知道這個習慣花多少、改變後能釋放多少金額，但不假設所有小享受都該被刪除。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency, futureValue } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'zh';
+    const inputs = ['habit-cost', 'times-week', 'years', 'alternative-cost', 'return-rate'].map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('latte-result');
+    const yearlySpend = byId<HTMLElement>('yearly-spend');
+    const totalSpend = byId<HTMLElement>('total-spend');
+    const yearlySavingsOutput = byId<HTMLElement>('yearly-savings');
+    const futureValueOutput = byId<HTMLElement>('future-value');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function update(): void {
+      const cost = Math.max(0, value('habit-cost'));
+      const alternative = Math.max(0, value('alternative-cost'));
+      const times = Math.max(0, value('times-week'));
+      const years = Math.max(1, value('years'));
+      const yearly = cost * times * 52;
+      const yearlySavings = Math.max(0, (cost - alternative) * times * 52);
+      const future = futureValue(yearlySavings / 12, value('return-rate'), years);
+
+      yearlySpend.textContent = formatCurrency(yearly, locale);
+      totalSpend.textContent = formatCurrency(yearly * years, locale);
+      yearlySavingsOutput.textContent = formatCurrency(yearlySavings, locale);
+      futureValueOutput.textContent = formatCurrency(future, locale);
+
+      if (yearlySavings > 0) {
+        verdict.textContent = `改用替代方案每年可釋放 ${formatCurrency(yearlySavings, locale)}，若投入投資，${years.toFixed(0)} 年後約 ${formatCurrency(future, locale)}。`;
+      } else {
+        verdict.textContent = `這個習慣已經不比替代方案貴，單看金錢不一定需要改。`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `latte-factor:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

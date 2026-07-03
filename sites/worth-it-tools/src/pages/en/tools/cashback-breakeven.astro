@@ -1,0 +1,259 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Cashback Break-even Calculator';
+const description = 'Is annual fee credit card worth it calculator for cashback break-even, welcome bonus, and no-fee 1% baseline comparison.';
+const faq = [
+  {
+    question: 'How do I know if an annual fee credit card is worth it?',
+    answer: 'Compare net annual value after cashback, welcome bonus, and annual fee against a no-fee 1% baseline card. If the annual-fee card wins, it can be worth it.',
+  },
+  {
+    question: 'What is cashback break-even monthly spend?',
+    answer: 'It is the monthly spend needed for the card rewards to cover the annual fee and beat the 1% no-fee baseline, using your current category mix.',
+  },
+  {
+    question: 'Should I include a welcome bonus?',
+    answer: 'Include it if you are confident you can earn it without extra spending. For long-term value, rerun the calculator with the bonus set to 0.',
+  },
+  {
+    question: 'Why compare against a 1% no-fee card?',
+    answer: 'Because a no-fee card is the opportunity cost. An annual-fee card should beat a simple free baseline, not just have positive rewards.',
+  },
+  {
+    question: 'Does this include points transfer value?',
+    answer: 'No. This calculator treats rewards as cashback percentages. If points are worth more or less to you, convert them into an effective cashback rate.',
+  },
+];
+const related = [
+  { title: 'Installment True APR Calculator', href: localizedPath(locale, '/tools/installment-true-apr') },
+  { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: 'Costco Membership Calculator', href: localizedPath(locale, '/tools/costco-membership') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    This is annual fee credit card worth it calculator compares category cashback, welcome bonus, annual fee, and a no-fee 1% card. Use it before upgrading to see the monthly spending needed to break even.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="cashback-inputs">
+      <h2 id="cashback-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="annual-fee">Annual fee</label>
+          <input id="annual-fee" type="number" inputmode="decimal" min="0" step="1" value="95" />
+        </div>
+        <div class="field">
+          <label for="welcome-bonus">Welcome bonus value</label>
+          <input id="welcome-bonus" type="number" inputmode="decimal" min="0" step="25" value="200" />
+        </div>
+        <div class="field">
+          <label for="category-one-spend">Groceries monthly spend</label>
+          <input id="category-one-spend" type="number" inputmode="decimal" min="0" step="25" value="500" />
+        </div>
+        <div class="field">
+          <label for="category-one-rate">Groceries cashback (%)</label>
+          <input id="category-one-rate" type="number" inputmode="decimal" min="0" step="0.1" value="3" />
+        </div>
+        <div class="field">
+          <label for="category-two-spend">Dining monthly spend</label>
+          <input id="category-two-spend" type="number" inputmode="decimal" min="0" step="25" value="250" />
+        </div>
+        <div class="field">
+          <label for="category-two-rate">Dining cashback (%)</label>
+          <input id="category-two-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
+        </div>
+        <div class="field">
+          <label for="category-three-spend">Other monthly spend</label>
+          <input id="category-three-spend" type="number" inputmode="decimal" min="0" step="25" value="500" />
+        </div>
+        <div class="field">
+          <label for="category-three-rate">Other cashback (%)</label>
+          <input id="category-three-rate" type="number" inputmode="decimal" min="0" step="0.1" value="1.5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="cashback-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="cashback-result" class="verdict">Enter spending and cashback rates to compare cards.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Annual cashback</span><strong id="annual-cashback">$0</strong></p>
+        <p class="metric"><span>Net annual value</span><strong id="net-value">$0</strong></p>
+        <p class="metric"><span>No-fee 1% baseline</span><strong id="baseline">$0</strong></p>
+        <p class="metric"><span>Break-even monthly spend</span><strong id="break-even">$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="cashback-how">
+    <h2 id="cashback-how">How it works</h2>
+    <p>
+      The calculator multiplies monthly spend in each category by 12 and by that category cashback rate. Net annual value is annual cashback plus welcome bonus minus the annual fee.
+    </p>
+    <p>
+      The verdict compares that net value with a no-fee 1% baseline card. Break-even monthly spend uses your current category mix to estimate how much spending is needed before the annual-fee card pulls ahead.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'en';
+    const ids = [
+      'annual-fee',
+      'welcome-bonus',
+      'category-one-spend',
+      'category-one-rate',
+      'category-two-spend',
+      'category-two-rate',
+      'category-three-spend',
+      'category-three-rate',
+    ];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('cashback-result');
+    const annualCashback = byId<HTMLElement>('annual-cashback');
+    const netValue = byId<HTMLElement>('net-value');
+    const baseline = byId<HTMLElement>('baseline');
+    const breakEven = byId<HTMLElement>('break-even');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function update(): void {
+      const fee = Math.max(0, value('annual-fee'));
+      const bonus = Math.max(0, value('welcome-bonus'));
+      const spends = [
+        Math.max(0, value('category-one-spend')),
+        Math.max(0, value('category-two-spend')),
+        Math.max(0, value('category-three-spend')),
+      ];
+      const rates = [
+        Math.max(0, value('category-one-rate')) / 100,
+        Math.max(0, value('category-two-rate')) / 100,
+        Math.max(0, value('category-three-rate')) / 100,
+      ];
+      const monthlySpend = spends.reduce((sum, spend) => sum + spend, 0);
+      const grossCashback = spends.reduce((sum, spend, index) => sum + spend * 12 * rates[index], 0);
+      const baselineValue = monthlySpend * 12 * 0.01;
+      const net = grossCashback + bonus - fee;
+      const incremental = net - baselineValue;
+      const weightedRate = monthlySpend > 0 ? grossCashback / (monthlySpend * 12) : rates.reduce((sum, rate) => sum + rate, 0) / rates.length;
+      const rateEdge = weightedRate - 0.01;
+      const needed = bonus >= fee ? 0 : rateEdge > 0 ? (fee - bonus) / rateEdge / 12 : Number.POSITIVE_INFINITY;
+
+      annualCashback.textContent = formatCurrency(grossCashback, locale);
+      netValue.textContent = formatCurrency(net, locale);
+      baseline.textContent = formatCurrency(baselineValue, locale);
+      breakEven.textContent = Number.isFinite(needed) ? `${formatCurrency(needed, locale)}/month` : 'Not reachable';
+
+      if (incremental > 0) {
+        verdict.textContent = `Worth it: this card beats a no-fee 1% card by ${formatCurrency(incremental, locale)} this year.`;
+      } else {
+        verdict.textContent = `Not worth it yet: a no-fee 1% card is ahead by ${formatCurrency(Math.abs(incremental), locale)} this year.`;
+      }
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `cashback-breakeven:${input.id}`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

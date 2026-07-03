@@ -1,0 +1,303 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '通勤成本計算機';
+const description = '通勤成本計算機，比較開車、大眾運輸、Uber 或計程車、自行車的每月與每年成本。';
+const faq = [
+  {
+    question: '可以比較哪些通勤方式？',
+    answer: '可以比較開車、大眾運輸或 TPASS、Uber 或計程車，以及自行車。每種方式使用不同成本模型。',
+  },
+  {
+    question: '開車通勤成本怎麼算？',
+    answer: '開車會使用來回距離、每月上班天數、每公里成本、停車費和過路費。每公里成本可包含油錢、保養和折舊。',
+  },
+  {
+    question: '時間成本是什麼？',
+    answer: '如果填入時薪，工具會把通勤時間換算成金額加入比較。若只想看現金支出，時薪填 0。',
+  },
+  {
+    question: '混合辦公可以用嗎？',
+    answer: '可以。每月上班天數只填實際需要通勤的天數即可。',
+  },
+  {
+    question: '停車費都要算進去嗎？',
+    answer: '只建議填因通勤而增加的停車費。如果不管怎麼通勤都要付，就不要算進比較。',
+  },
+];
+const related = [
+  { title: '電動機車 vs 油車計算機', href: localizedPath(locale, '/tools/ev-vs-gas') },
+  { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個通勤成本計算機會比較開車、TPASS 或大眾運輸、Uber 或計程車、自行車的每月與每年支出。你也可以加入時間成本，看看省錢和省時間哪一個更值得。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="commute-inputs">
+      <h2 id="commute-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="distance">單程距離 (km)</label>
+          <input id="distance" type="number" inputmode="decimal" min="0" step="1" value="12" />
+        </div>
+        <div class="field">
+          <label for="workdays">每月通勤天數</label>
+          <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="22" />
+        </div>
+        <div class="field">
+          <label for="car-cost">開車每公里成本</label>
+          <input id="car-cost" type="number" inputmode="decimal" min="0" step="0.1" value="8" />
+        </div>
+        <div class="field">
+          <label for="transit-pass">大眾運輸月票</label>
+          <input id="transit-pass" type="number" inputmode="decimal" min="0" step="50" value="1200" />
+        </div>
+        <div class="field">
+          <label for="rideshare">Uber 或計程車單程</label>
+          <input id="rideshare" type="number" inputmode="decimal" min="0" step="10" value="250" />
+        </div>
+        <div class="field">
+          <label for="bike-cost">自行車每月成本</label>
+          <input id="bike-cost" type="number" inputmode="decimal" min="0" step="50" value="300" />
+        </div>
+        <div class="field">
+          <label for="parking">每月停車費</label>
+          <input id="parking" type="number" inputmode="decimal" min="0" step="100" value="2000" />
+        </div>
+        <div class="field">
+          <label for="tolls">每月過路費</label>
+          <input id="tolls" type="number" inputmode="decimal" min="0" step="50" value="0" />
+        </div>
+        <div class="field">
+          <label for="hourly-wage">時間成本時薪</label>
+          <input id="hourly-wage" type="number" inputmode="decimal" min="0" step="10" value="250" />
+        </div>
+        <div class="field">
+          <label for="car-minutes">開車單程分鐘</label>
+          <input id="car-minutes" type="number" inputmode="numeric" min="0" step="1" value="35" />
+        </div>
+        <div class="field">
+          <label for="transit-minutes">大眾運輸單程分鐘</label>
+          <input id="transit-minutes" type="number" inputmode="numeric" min="0" step="1" value="45" />
+        </div>
+        <div class="field">
+          <label for="rideshare-minutes">計程車單程分鐘</label>
+          <input id="rideshare-minutes" type="number" inputmode="numeric" min="0" step="1" value="35" />
+        </div>
+        <div class="field">
+          <label for="bike-minutes">自行車單程分鐘</label>
+          <input id="bike-minutes" type="number" inputmode="numeric" min="0" step="1" value="50" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="commute-result">
+      <p class="eyebrow">判斷</p>
+      <p id="commute-result" class="verdict">輸入通勤假設後會比較各方式。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>最低成本方式</span><strong id="cheapest">無</strong></p>
+        <p class="metric"><span>開車每月</span><strong id="car-total">NT$0</strong></p>
+        <p class="metric"><span>大眾運輸每月</span><strong id="transit-total">NT$0</strong></p>
+        <p class="metric"><span>計程車每月</span><strong id="rideshare-total">NT$0</strong></p>
+        <p class="metric"><span>自行車每月</span><strong id="bike-total">NT$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="commute-how">
+    <h2 id="commute-how">計算方式</h2>
+    <p>
+      開車用來回距離、通勤天數、每公里成本、停車費和過路費計算。大眾運輸用月票金額，計程車用每天兩趟單程車資，自行車用每月維護或折舊成本。
+    </p>
+    <p>
+      若時薪大於 0，每種方式都會加入來回通勤時間乘以天數和時薪。最低成本方式會用現金支出加上選填的時間成本比較。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    interface ModeCost {
+      name: string;
+      direct: number;
+      time: number;
+      total: number;
+    }
+
+    const locale = 'zh';
+    const ids = [
+      'distance',
+      'workdays',
+      'car-cost',
+      'transit-pass',
+      'rideshare',
+      'bike-cost',
+      'parking',
+      'tolls',
+      'hourly-wage',
+      'car-minutes',
+      'transit-minutes',
+      'rideshare-minutes',
+      'bike-minutes',
+    ];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const verdict = byId<HTMLElement>('commute-result');
+    const cheapest = byId<HTMLElement>('cheapest');
+    const carTotal = byId<HTMLElement>('car-total');
+    const transitTotal = byId<HTMLElement>('transit-total');
+    const rideshareTotal = byId<HTMLElement>('rideshare-total');
+    const bikeTotal = byId<HTMLElement>('bike-total');
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function timeCost(minutesOneWay: number, workdays: number, wage: number): number {
+      return wage > 0 ? (Math.max(0, minutesOneWay) * 2 * workdays * wage) / 60 : 0;
+    }
+
+    function update(): void {
+      const distance = Math.max(0, value('distance'));
+      const workdays = Math.max(0, value('workdays'));
+      const wage = Math.max(0, value('hourly-wage'));
+      const modes: ModeCost[] = [
+        {
+          name: '開車',
+          direct: distance * 2 * workdays * Math.max(0, value('car-cost')) + Math.max(0, value('parking')) + Math.max(0, value('tolls')),
+          time: timeCost(value('car-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: '大眾運輸',
+          direct: Math.max(0, value('transit-pass')),
+          time: timeCost(value('transit-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: 'Uber/計程車',
+          direct: Math.max(0, value('rideshare')) * 2 * workdays,
+          time: timeCost(value('rideshare-minutes'), workdays, wage),
+          total: 0,
+        },
+        {
+          name: '自行車',
+          direct: Math.max(0, value('bike-cost')),
+          time: timeCost(value('bike-minutes'), workdays, wage),
+          total: 0,
+        },
+      ].map((mode) => ({ ...mode, total: mode.direct + mode.time }));
+      const winner = modes.reduce((best, mode) => (mode.total < best.total ? mode : best));
+      const highest = modes.reduce((max, mode) => Math.max(max, mode.total), 0);
+
+      cheapest.textContent = `${winner.name} (${formatCurrency(winner.total, locale)}/月)`;
+      carTotal.textContent = formatCurrency(modes[0].total, locale);
+      transitTotal.textContent = formatCurrency(modes[1].total, locale);
+      rideshareTotal.textContent = formatCurrency(modes[2].total, locale);
+      bikeTotal.textContent = formatCurrency(modes[3].total, locale);
+      verdict.textContent = `${winner.name}成本最低，每月約 ${formatCurrency(winner.total, locale)}，比最貴方式最多省 ${formatCurrency(highest - winner.total, locale)}。`;
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `commute-cost:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

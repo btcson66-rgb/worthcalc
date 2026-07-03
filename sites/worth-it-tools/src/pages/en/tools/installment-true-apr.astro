@@ -1,0 +1,257 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'Installment True APR Calculator';
+const description = 'Installment plan true APR calculator for BNPL real interest rate and 0% installment hidden cost checks.';
+const faq = [
+  {
+    question: 'Why is a 3% handling fee not a 3% APR?',
+    answer: 'APR is based on how much principal is outstanding over time. With monthly installments, you repay principal each month, so a flat 3% fee over 12 months can work out near 5.6% APR.',
+  },
+  {
+    question: 'What cash price should I enter?',
+    answer: 'Use the price you would pay today without financing. The calculator treats that as the amount you are effectively borrowing through the installment plan.',
+  },
+  {
+    question: 'Should I enter payment per installment or total with fee?',
+    answer: 'Either works. If payment per installment is filled in, the calculator uses it. If it is blank, it divides the total amount paid by the number of installments.',
+  },
+  {
+    question: 'Does this BNPL real interest rate include missed payment fees?',
+    answer: 'No. Add only known upfront or handling fees. Late fees, penalty interest, and lost discounts can make the real cost higher.',
+  },
+  {
+    question: 'What acceptable APR should I use?',
+    answer: 'Use the rate you would be comfortable paying for short-term borrowing. The default 10% is a simple warning threshold, not financial advice.',
+  },
+];
+const related = [
+  { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'The truth about 0% installments', href: localizedPath(locale, '/zero-interest-installments-truth') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    Use this installment plan true APR calculator to turn a flat handling fee or 0% installment offer into a real annualized borrowing cost. It helps you compare BNPL real interest rate offers with a simple APR threshold before you commit.
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="installment-inputs">
+      <h2 id="installment-inputs">Inputs</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="cash-price">Cash price</label>
+          <input id="cash-price" type="number" inputmode="decimal" min="0" step="100" value="10000" />
+          <p class="helper">The pay-now price without financing.</p>
+        </div>
+        <div class="field">
+          <label for="installments">Number of installments</label>
+          <input id="installments" type="number" inputmode="numeric" min="1" step="1" value="12" />
+          <p class="helper">Monthly payments in the plan.</p>
+        </div>
+        <div class="field">
+          <label for="payment">Payment per installment</label>
+          <input id="payment" type="number" inputmode="decimal" min="0" step="1" placeholder="Optional" />
+          <p class="helper">Used first when filled in.</p>
+        </div>
+        <div class="field">
+          <label for="total-paid">Total amount paid</label>
+          <input id="total-paid" type="number" inputmode="decimal" min="0" step="100" value="10300" />
+          <p class="helper">Used when payment per installment is blank.</p>
+        </div>
+        <div class="field">
+          <label for="upfront-fee">Upfront fee</label>
+          <input id="upfront-fee" type="number" inputmode="decimal" min="0" step="1" value="0" />
+          <p class="helper">Any fee paid today outside the monthly payments.</p>
+        </div>
+        <div class="field">
+          <label for="acceptable-apr">Acceptable APR (%)</label>
+          <input id="acceptable-apr" type="number" inputmode="decimal" min="0" step="0.1" value="10" />
+          <p class="helper">Your personal cutoff for this purchase.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="installment-result">
+      <p class="eyebrow">Verdict</p>
+      <p id="installment-result" class="verdict">Enter a plan to see the true APR.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>True APR</span><strong id="apr">0.0%</strong></p>
+        <p class="metric"><span>Total financing cost</span><strong id="interest">$0</strong></p>
+        <p class="metric"><span>Monthly payment used</span><strong id="monthly-payment">$0</strong></p>
+        <p class="metric"><span>Total paid</span><strong id="total-cost">$0</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="installment-how">
+    <h2 id="installment-how">How it works</h2>
+    <p>
+      The calculator treats the cash price as money you receive today, then treats each installment and upfront fee as repayments. It solves the monthly internal rate of return and annualizes that rate to show the true APR.
+    </p>
+    <p>
+      This is why a flat fee is usually more expensive than it looks: the balance falls every month, but the fee is charged on the original cash price.
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { aprFromMonthlyRate, formatCurrency, formatPercent, irrMonthly } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    const locale = 'en';
+    const cashPrice = byId<HTMLInputElement>('cash-price');
+    const installments = byId<HTMLInputElement>('installments');
+    const payment = byId<HTMLInputElement>('payment');
+    const totalPaid = byId<HTMLInputElement>('total-paid');
+    const upfrontFee = byId<HTMLInputElement>('upfront-fee');
+    const acceptableApr = byId<HTMLInputElement>('acceptable-apr');
+    const verdict = byId<HTMLElement>('installment-result');
+    const aprOutput = byId<HTMLElement>('apr');
+    const interestOutput = byId<HTMLElement>('interest');
+    const monthlyPaymentOutput = byId<HTMLElement>('monthly-payment');
+    const totalCostOutput = byId<HTMLElement>('total-cost');
+    const fields = [cashPrice, installments, payment, totalPaid, upfrontFee, acceptableApr];
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function readNumber(input: HTMLInputElement): number {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function update(): void {
+      const price = Math.max(0, readNumber(cashPrice));
+      const count = Math.max(1, Math.round(readNumber(installments)));
+      const directPayment = Math.max(0, readNumber(payment));
+      const total = Math.max(0, readNumber(totalPaid));
+      const upfront = Math.max(0, readNumber(upfrontFee));
+      const threshold = Math.max(0, readNumber(acceptableApr));
+      const paymentAmount = directPayment > 0 ? directPayment : total / count;
+      const fullPaid = paymentAmount * count + upfront;
+      const financingCost = fullPaid - price;
+      const cashflows = [price - upfront, ...Array.from({ length: count }, () => -paymentAmount)];
+      const monthlyRate = irrMonthly(cashflows);
+      const apr = aprFromMonthlyRate(monthlyRate);
+
+      monthlyPaymentOutput.textContent = formatCurrency(paymentAmount, locale);
+      totalCostOutput.textContent = formatCurrency(fullPaid, locale);
+      interestOutput.textContent = formatCurrency(financingCost, locale);
+      aprOutput.textContent = Number.isFinite(apr) ? formatPercent(apr) : '0.0%';
+
+      if (price <= 0 || paymentAmount <= 0 || !Number.isFinite(apr)) {
+        verdict.textContent = 'Enter a valid cash price and payment plan to calculate the true APR.';
+        return;
+      }
+
+      if (apr <= threshold) {
+        verdict.textContent = `Worth it if you need installments: true APR is ${formatPercent(apr)}, below your ${formatPercent(threshold)} cutoff.`;
+      } else {
+        verdict.textContent = `Not worth it at this price: true APR is ${formatPercent(apr)}, above your ${formatPercent(threshold)} cutoff.`;
+      }
+    }
+
+    fields.forEach((field) => {
+      bindPersistentField(field, `installment-true-apr:${field.id}`);
+      field.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

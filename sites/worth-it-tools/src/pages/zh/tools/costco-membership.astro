@@ -1,0 +1,285 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = 'Costco 會員值不值得計算機';
+const description = 'Costco 會員值不值得計算機，估算金星、商業、尊榮會員的月消費打平點與年度淨效益。';
+const faq = [
+  {
+    question: 'Costco 會員打平點怎麼算？',
+    answer: '計算機用年費除以預估省下比例和回饋率。以年費 NT$1,350、假設省 15% 來看，月消費約 NT$750 就接近打平。',
+  },
+  {
+    question: '尊榮會員一定比較划算嗎？',
+    answer: '不一定。尊榮會員要有足夠消費，2% 回饋才有機會抵過較高年費。工具會用同一個月消費比較各等級。',
+  },
+  {
+    question: '假設省下比例要填多少？',
+    answer: '請用你常買商品相對一般通路的真實差價。預設 15% 是估算，不代表每樣商品都比較便宜。',
+  },
+  {
+    question: '加油、餐飲或其他服務可以算進去嗎？',
+    answer: '只有在它們是你的正常消費，且符合你設定的省錢或回饋假設時才建議算入。',
+  },
+  {
+    question: '這會完全符合 Costco 官方規則嗎？',
+    answer: '不會。這是規劃工具，實際年費、回饋上限、排除項目和會員條款仍以官方公告為準。',
+  },
+];
+const related = [
+  { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
+  { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
+  { title: '量販會員的數學', href: localizedPath(locale, '/costco-math') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
+  <p class="intro">
+    這個 Costco 會員值不值得計算機會把年費、每月消費、預估價差和尊榮 2% 回饋放在一起算。辦卡或升級前，先看你需要多少月消費才真的回本。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="costco-inputs">
+      <h2 id="costco-inputs">輸入資料</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="tier">會員等級</label>
+          <select id="tier">
+            <option value="gold">金星會員 - NT$1,350/年</option>
+            <option value="business">商業會員 - NT$1,150/年</option>
+            <option value="executive">尊榮會員 - NT$3,000/年</option>
+          </select>
+          <p class="helper">選擇你正在評估的會員方案。</p>
+        </div>
+        <div class="field">
+          <label for="monthly-spend">每月 Costco 消費</label>
+          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="100" value="8000" />
+          <p class="helper">請填你合理會在 Costco 花的金額。</p>
+        </div>
+        <div class="field">
+          <label for="savings-rate">相對一般通路省下比例 (%)</label>
+          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
+          <p class="helper">可自行調整的價差假設。</p>
+        </div>
+        <div class="field">
+          <label for="reward-rate">尊榮會員回饋 (%)</label>
+          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
+          <p class="helper">尊榮會員比較時使用，年回饋上限 NT$10,000。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="costco-result">
+      <p class="eyebrow">判斷</p>
+      <p id="costco-result" class="verdict">輸入月消費後會顯示會員是否回本。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>打平月消費</span><strong id="break-even">NT$0/月</strong></p>
+        <p class="metric"><span>年度淨效益</span><strong id="net-benefit">NT$0</strong></p>
+        <p class="metric"><span>預估回饋</span><strong id="reward">NT$0</strong></p>
+        <p class="metric"><span>建議等級</span><strong id="recommended-tier">金星會員</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="costco-how">
+    <h2 id="costco-how">計算方式</h2>
+    <p>
+      年度省下金額等於每月消費乘以 12，再乘上你設定的省下比例。尊榮會員另外計入回饋率，並套用 NT$10,000 年回饋上限。年度淨效益是省下金額加回饋，再扣掉年費。
+    </p>
+    <p>
+      打平月消費就是讓年度淨效益等於 0 的消費額。如果你常買的品項在 Costco 沒有比較便宜，請把省下比例調低。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .helper,
+    .explanation {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .helper {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .verdict {
+      margin: 0.25rem 0 1rem;
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .metric span {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        align-items: start;
+      }
+
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField, getItem, setItem } from '../../../lib/storage';
+
+    type TierKey = 'gold' | 'business' | 'executive';
+    interface Tier {
+      key: TierKey;
+      name: string;
+      fee: number;
+    }
+
+    const locale = 'zh';
+    const rewardCap = 10000;
+    const tiers: Record<TierKey, Tier> = {
+      gold: { key: 'gold', name: '金星會員', fee: 1350 },
+      business: { key: 'business', name: '商業會員', fee: 1150 },
+      executive: { key: 'executive', name: '尊榮會員', fee: 3000 },
+    };
+    const tier = byId<HTMLSelectElement>('tier');
+    const monthlySpend = byId<HTMLInputElement>('monthly-spend');
+    const savingsRate = byId<HTMLInputElement>('savings-rate');
+    const rewardRate = byId<HTMLInputElement>('reward-rate');
+    const verdict = byId<HTMLElement>('costco-result');
+    const breakEven = byId<HTMLElement>('break-even');
+    const netBenefit = byId<HTMLElement>('net-benefit');
+    const reward = byId<HTMLElement>('reward');
+    const recommendedTier = byId<HTMLElement>('recommended-tier');
+    const fields = [monthlySpend, savingsRate, rewardRate];
+    const tierStorageKey = 'costco-membership:tier:zh';
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function readNumber(input: HTMLInputElement): number {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function tierRewardRate(selectedTier: Tier): number {
+      return selectedTier.key === 'executive' ? Math.max(0, readNumber(rewardRate)) / 100 : 0;
+    }
+
+    function netFor(monthly: number, selectedTier: Tier): { net: number; rewardValue: number } {
+      const annualSpend = Math.max(0, monthly) * 12;
+      const savings = annualSpend * (Math.max(0, readNumber(savingsRate)) / 100);
+      const rewardValue = Math.min(annualSpend * tierRewardRate(selectedTier), rewardCap);
+      return { net: savings + rewardValue - selectedTier.fee, rewardValue };
+    }
+
+    function breakEvenSpend(selectedTier: Tier): number {
+      if (netFor(0, selectedTier).net >= 0) return 0;
+      let upper = 1000;
+      for (let index = 0; index < 40 && netFor(upper, selectedTier).net < 0; index += 1) {
+        upper *= 2;
+      }
+      let lower = 0;
+      for (let index = 0; index < 80; index += 1) {
+        const middle = (lower + upper) / 2;
+        if (netFor(middle, selectedTier).net >= 0) upper = middle;
+        else lower = middle;
+      }
+      return upper;
+    }
+
+    function update(): void {
+      const selectedTier = tiers[tier.value as TierKey] ?? tiers.gold;
+      const spend = Math.max(0, readNumber(monthlySpend));
+      const result = netFor(spend, selectedTier);
+      const recommended = Object.values(tiers).reduce((best, candidate) =>
+        netFor(spend, candidate).net > netFor(spend, best).net ? candidate : best,
+      );
+      const needed = breakEvenSpend(selectedTier);
+
+      breakEven.textContent = `${formatCurrency(needed, locale)}/月`;
+      netBenefit.textContent = formatCurrency(result.net, locale);
+      reward.textContent = formatCurrency(result.rewardValue, locale);
+      recommendedTier.textContent = recommended.name;
+
+      if (result.net >= 0) {
+        verdict.textContent = `值得考慮：估計年度淨效益約 ${formatCurrency(result.net, locale)}。`;
+      } else {
+        verdict.textContent = `目前不太划算：在這些假設下，每月約需 ${formatCurrency(needed, locale)} 才回本。`;
+      }
+    }
+
+    const savedTier = getItem<TierKey>(tierStorageKey, 'gold');
+    if (tiers[savedTier]) tier.value = savedTier;
+    tier.addEventListener('change', () => {
+      setItem(tierStorageKey, tier.value);
+      update();
+    });
+
+    fields.forEach((field) => {
+      bindPersistentField(field, `costco-membership:${field.id}:zh`);
+      field.addEventListener('input', update);
+    });
+    update();
+  </script>
+</ToolLayout>

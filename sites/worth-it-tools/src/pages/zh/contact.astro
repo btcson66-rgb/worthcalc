@@ -1,25 +1,38 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { localizedPath } from '../../i18n/utils';
 
 const locale = 'zh';
 ---
 
-<!-- [Customize this page for your site] -->
 <ArticleLayout
-  title="聯絡我們"
-  description="提供意見回饋、修正請求與合作洽詢的聯絡資訊。"
+  title="聯絡 WorthCalc"
+  description="計算機錯誤回報、數字修正、功能建議，或合作洽詢，都可以與 WorthCalc 團隊聯絡。"
   locale={locale}
-  updated="2026-06-28"
+  updated="2026-07-03"
 >
   <p>
-    這個靜態網站範本不包含後端聯絡表單。為了讓網站維持簡單且容易部署，
-    建議直接公開聯絡信箱。
+    WorthCalc 是一個小型、獨立營運的網站，所以我們把聯絡方式保持簡單：
+    直接寄信給我們，不需要填寫表單。
   </p>
   <p>
-    Email: hello@example.com
+    Email：<a href="mailto:hello@example.com">hello@example.com</a>
   </p>
   <p>
-    你可以使用這個信箱接收意見回饋、錯誤回報、內容修正請求與合作洽詢。
-    發布前請替換成真實的客服或商務信箱。
+    以下情況都歡迎來信：
+  </p>
+  <ul>
+    <li>你覺得某個計算機的結果算錯了——告訴我們你輸入的數字與預期結果，我們會確認。</li>
+    <li>某個預設數值（例如會員年費或利率）看起來過時了。</li>
+    <li>你有新的「值不值得」計算機想法。</li>
+    <li>你在手機或電腦上發現錯誤連結或版面顯示問題。</li>
+    <li>你對廣告合作或其他合作方式有興趣。</li>
+  </ul>
+  <p>
+    每一封信我們都會閱讀，但因為團隊人力有限，無法保證每封信都能回覆。
+    想了解本站運作方式，可參考
+    <a href={localizedPath(locale, '/about')}>關於本站</a>頁面；
+    想了解我們如何處理資料，可參考
+    <a href={localizedPath(locale, '/privacy')}>隱私權政策</a>。
   </p>
 </ArticleLayout>

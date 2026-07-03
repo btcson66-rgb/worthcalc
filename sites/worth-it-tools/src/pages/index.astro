@@ -1,16 +1,38 @@
+---
+// Root "/" entry page. Astro's i18n auto-redirect is disabled
+// (redirectToDefaultLocale: false) so this page is served at the root URL that
+// Google crawls. It carries the GA tag (and GSC verification meta) so GA4/GSC
+// install detection succeeds, then forwards visitors to the default locale.
+import { GA_ID, GSC_VERIFICATION } from '../consts';
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content="0; url=/en/" />
+    {GA_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        </script>
+      </>
+    )}
+    {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
+    <meta http-equiv="refresh" content="1; url=/en/" />
     <link rel="canonical" href="/en/" />
     <title>Continue to the site</title>
   </head>
   <body>
     <p><a href="/en/">Continue to the site</a></p>
     <script is:inline>
-      location.replace('/en/');
+      setTimeout(function () {
+        location.replace('/en/');
+      }, 800);
     </script>
   </body>
 </html>

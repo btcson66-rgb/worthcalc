@@ -16,6 +16,11 @@ export default defineConfig({
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: true,
+      // Don't let Astro auto-generate the "/" → "/en/" redirect stub (it is
+      // noindex and carries no GA tag). We serve our own src/pages/index.astro
+      // instead, which includes the GA tag so GA4/GSC detection works on the
+      // root URL that Google actually crawls.
+      redirectToDefaultLocale: false,
     },
   },
   trailingSlash: 'ignore',

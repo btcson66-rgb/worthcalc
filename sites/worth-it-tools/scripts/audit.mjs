@@ -10,7 +10,7 @@
  */
 
 import { existsSync, readdirSync, statSync, readFileSync } from 'node:fs';
-import { join, resolve, relative, sep } from 'node:path';
+import { join, resolve } from 'node:path';
 
 const siteRoot = resolve(process.argv[2] || '.');
 const distDir = join(siteRoot, 'dist');

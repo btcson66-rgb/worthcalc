@@ -36,6 +36,7 @@ jobs:
           SITE_URL: https://worthcalc.win
           PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
           PUBLIC_ADSENSE_CLIENT: ${{ vars.WORTHCALC_ADSENSE_CLIENT }}
+          PUBLIC_GSC_VERIFICATION: ${{ vars.WORTHCALC_GSC_VERIFICATION }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: sites/worth-it-tools/dist

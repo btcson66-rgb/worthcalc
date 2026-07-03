@@ -1,6 +1,7 @@
 ---
 import type { SeoInput } from '../lib/seo';
 import { resolveSeo } from '../lib/seo';
+import { GSC_VERIFICATION } from '../consts';
 
 interface Props extends SeoInput {
   jsonLd?: object[];
@@ -12,6 +13,7 @@ const seo = resolveSeo(seoInput);
 
 <title>{seo.fullTitle}</title>
 <meta name="description" content={seo.description} />
+{GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 <link rel="canonical" href={seo.canonical} />
 <meta name="robots" content={seo.robots} />
 {seo.alternates.map((alternate) => (

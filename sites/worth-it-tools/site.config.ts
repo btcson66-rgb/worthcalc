@@ -66,13 +66,13 @@ const config: SiteConfig = {
   siteDescription: "Free money-decision calculators - find out if it's actually worth it. 值不值得？用數字幫你判斷。",
   defaultLocale: 'en',
   locales: ['en', 'zh'],
-  baseUrl: 'https://example.com',
+  baseUrl: 'https://worthcalc.win',
   ga4Id: '',
   adsenseClientId: '',
   contactEmail: 'hello@example.com',
   sitemapEnabled: true,
   adsEnabled: true,
-  launchStatus: 'draft',
+  launchStatus: 'live',
 
   pages: ['index', 'about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'],
   tools: [

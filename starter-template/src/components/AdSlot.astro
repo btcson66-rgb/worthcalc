@@ -14,7 +14,7 @@ const t = useTranslations(locale);
 const adLabel = t('ad.placeholder');
 ---
 
-{ADSENSE_CLIENT ? (
+{ADSENSE_CLIENT && (
   <div class="ad-slot" role="complementary" aria-label={adLabel}>
     {label && <span class="ad-label">{adLabel}</span>}
     <ins
@@ -40,9 +40,5 @@ const adLabel = t('ad.placeholder');
         window.adsbygoogle.push({});
       })();
     </script>
-  </div>
-) : (
-  <div class="ad-slot" role="complementary" aria-label={adLabel}>
-    <span class="ad-label">{adLabel}</span>
   </div>
 )}

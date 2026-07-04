@@ -44,11 +44,20 @@ function absolute(base: string, path: string): string {
   return `${base}${path.startsWith('/') ? '' : '/'}${path}`;
 }
 
+function pagePath(pathname: string): string {
+  if (!pathname || pathname === '/') return '/';
+  return pathname.endsWith('/') ? pathname : `${pathname}/`;
+}
+
+function localizedPagePath(locale: Locale, logical: string): string {
+  return logical ? `/${locale}/${logical}/` : `/${locale}/`;
+}
+
 /** Resolve raw SEO input into everything the <head> needs. */
 export function resolveSeo(input: SeoInput): ResolvedSeo {
   const base = origin(input);
   const fullTitle = input.title ? `${input.title} | ${SITE.name}` : SITE.name;
-  const canonical = absolute(base, input.url.pathname);
+  const canonical = absolute(base, pagePath(input.url.pathname));
   const ogImage = absolute(base, input.image ?? SITE.defaultOgImage);
   const type = input.type ?? 'website';
   const robots = input.noindex
@@ -61,11 +70,11 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const logical = segments.join('/');
   const alternates = LOCALES.map((loc) => ({
     hreflang: LOCALE_HREFLANG[loc],
-    href: absolute(base, `/${loc}${logical ? `/${logical}` : ''}`),
+    href: absolute(base, localizedPagePath(loc, logical)),
   }));
   alternates.push({
     hreflang: 'x-default',
-    href: absolute(base, `/${LOCALES[0]}${logical ? `/${logical}` : ''}`),
+    href: absolute(base, logical ? localizedPagePath(LOCALES[0], logical) : '/'),
   });
 
   const openGraph: Record<string, string> = {

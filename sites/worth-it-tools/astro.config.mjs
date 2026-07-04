@@ -4,22 +4,20 @@ import sitemap from '@astrojs/sitemap';
 
 // The canonical production URL. Override per-site via the SITE_URL env var.
 // MUST be an absolute origin (no trailing path) for sitemap + canonical URLs.
-const SITE_URL = process.env.SITE_URL || 'https://example.com';
+const SITE_URL = process.env.SITE_URL || 'https://worthcalc.win';
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
   // Bilingual routing. Both locales are prefixed (/en/, /zh/) for clean
-  // hreflang + sitemap. The root "/" redirects to the default locale.
+  // hreflang + sitemap. The root "/" is the x-default homepage.
   i18n: {
     locales: ['en', 'zh'],
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: true,
-      // Don't let Astro auto-generate the "/" → "/en/" redirect stub (it is
-      // noindex and carries no GA tag). We serve our own src/pages/index.astro
-      // instead, which includes the GA tag so GA4/GSC detection works on the
-      // root URL that Google actually crawls.
+      // Don't let Astro auto-generate a root redirect. We serve our own
+      // src/pages/index.astro so crawlers and GA/GSC checks see the real page.
       redirectToDefaultLocale: false,
     },
   },

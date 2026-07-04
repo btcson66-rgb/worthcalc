@@ -1,0 +1,44 @@
+---
+import type { Locale } from '../consts';
+import { localizedPath } from '../i18n/utils';
+import { homeContent } from '../lib/home';
+import FAQ from './FAQ.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+---
+
+<section class="hero">
+  <span class="hero__eyebrow">💸 {content.eyebrow}</span>
+  <h1>{content.heading}<span class="accent">{content.accent}</span>{content.headingSuffix}</h1>
+  <p>{content.intro}</p>
+  <ul class="hero__badges">
+    {content.badges.map((badge) => <li>{badge}</li>)}
+  </ul>
+</section>
+
+<section id="tools">
+  <h2>{content.toolsHeading}</h2>
+  <p class="section-lead">{content.toolsLead}</p>
+  <div class="grid">
+    {content.tools.map((tool) => (
+      <article class="card">
+        <span class="card__icon" aria-hidden="true">{tool.icon}</span>
+        <h3><a href={localizedPath(locale, tool.path)}>{tool.title}</a></h3>
+        <p>{tool.description}</p>
+        <span class="card__cta">{content.toolsCta}</span>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="seo-copy" aria-labelledby="home-seo-heading">
+  <h2 id="home-seo-heading">{content.seoHeading}</h2>
+  {content.seoParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+</section>
+
+<FAQ items={content.faq} heading={content.faqHeading} />

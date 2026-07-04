@@ -69,7 +69,7 @@ const config: SiteConfig = {
   baseUrl: 'https://worthcalc.win',
   ga4Id: '',
   adsenseClientId: '',
-  contactEmail: 'hello@example.com',
+  contactEmail: 'btcson66@gmail.com',
   sitemapEnabled: true,
   adsEnabled: true,
   launchStatus: 'live',

@@ -5,7 +5,7 @@
 
 export const SITE = {
   /** Internal default; the production origin comes from `Astro.site` (SITE_URL). */
-  url: 'https://example.com',
+  url: 'https://worthcalc.win',
   /** Brand name, appended to page titles. */
   name: 'WorthCalc',
   /** Twitter / X handle for Open Graph (optional, include the @). */

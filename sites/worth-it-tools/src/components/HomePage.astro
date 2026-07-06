@@ -3,6 +3,7 @@ import type { Locale } from '../consts';
 import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
 import FAQ from './FAQ.astro';
+import NewsletterSignup from './NewsletterSignup.astro';
 
 interface Props {
   locale: Locale;
@@ -42,3 +43,5 @@ const content = homeContent[locale];
 </section>
 
 <FAQ items={content.faq} heading={content.faqHeading} />
+
+{locale === 'en' && <NewsletterSignup id="home-newsletter-signup" />}

@@ -6,6 +6,7 @@ import { localizedPath, useTranslations } from '../i18n/utils';
 import AdSlot from '../components/AdSlot.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import FAQ from '../components/FAQ.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 import RelatedLinks from '../components/RelatedLinks.astro';
 import BaseLayout from './BaseLayout.astro';
 
@@ -65,6 +66,7 @@ const jsonLd = [
   <section class="tool">
     <slot />
   </section>
+  {locale === 'en' && <NewsletterSignup id="tool-newsletter-signup" />}
   <p class="privacy-note">{t('tool.privacyNote')}</p>
   <FAQ items={faq} />
   <RelatedLinks links={related} />

@@ -1,0 +1,179 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = 'newsletter-signup' } = Astro.props;
+const statusId = `${id}-status`;
+---
+
+<section class="newsletter-signup" aria-labelledby={id}>
+  <div class="newsletter-signup__copy">
+    <p class="newsletter-signup__eyebrow">WorthCalc updates</p>
+    <h2 id={id}>Get the financial decision checklist + new calculator alerts</h2>
+    <p>
+      One concise email when the checklist is ready, plus occasional alerts for new calculators.
+      No popups, no account, unsubscribe anytime.
+    </p>
+  </div>
+
+  <form
+    class="newsletter-signup__form"
+    action="https://roomfeng.win/api/newsletter"
+    method="post"
+    data-newsletter-form
+  >
+    <input type="hidden" name="site" value="worthcalc" />
+    <label class="newsletter-signup__label" for={`${id}-email`}>Email address</label>
+    <div class="newsletter-signup__row">
+      <input
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        placeholder="you@example.com"
+        required
+      />
+      <button type="submit">Subscribe</button>
+    </div>
+    <label class="newsletter-signup__trap" aria-hidden="true">
+      Website
+      <input name="website" tabindex="-1" autocomplete="off" />
+    </label>
+    <p id={statusId} class="newsletter-signup__status" aria-live="polite" data-newsletter-status></p>
+  </form>
+</section>
+
+<script>
+  const endpoint = 'https://roomfeng.win/api/newsletter';
+
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]').forEach((form) => {
+    if (form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const status = form.querySelector<HTMLElement>('[data-newsletter-status]');
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!status || !button) return;
+
+      status.textContent = 'Sending...';
+      status.classList.remove('is-error', 'is-success');
+      button.disabled = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          credentials: 'omit',
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.ok !== true) {
+          throw new Error(typeof result.message === 'string' ? result.message : 'signup_failed');
+        }
+
+        form.reset();
+        status.textContent = 'Thanks. Please check your inbox when the first update is ready.';
+        status.classList.add('is-success');
+      } catch {
+        status.textContent = 'We could not subscribe you right now. Please try again later.';
+        status.classList.add('is-error');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .newsletter-signup {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .newsletter-signup__copy {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .newsletter-signup__eyebrow,
+  .newsletter-signup__copy h2,
+  .newsletter-signup__copy p,
+  .newsletter-signup__status {
+    margin: 0;
+  }
+
+  .newsletter-signup__eyebrow {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .newsletter-signup__copy h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  .newsletter-signup__copy p,
+  .newsletter-signup__status {
+    color: var(--color-muted);
+    font-size: 0.94rem;
+  }
+
+  .newsletter-signup__form {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .newsletter-signup__label {
+    font-weight: 650;
+  }
+
+  .newsletter-signup__row {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .newsletter-signup__trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .newsletter-signup__status.is-success {
+    color: var(--positive);
+  }
+
+  .newsletter-signup__status.is-error {
+    color: var(--negative);
+  }
+
+  .newsletter-signup button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  @media (min-width: 760px) {
+    .newsletter-signup {
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+      align-items: center;
+    }
+
+    .newsletter-signup__row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+  }
+</style>

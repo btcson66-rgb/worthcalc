@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../consts';
 import type { BreadcrumbItem, FaqItem } from '../lib/seo';
+import { getCalculatorReview } from '../lib/calculatorReview';
 import { softwareAppJsonLd } from '../lib/seo';
 import { localizedPath, useTranslations } from '../i18n/utils';
 import AdSlot from '../components/AdSlot.astro';
@@ -50,6 +51,25 @@ const jsonLd = [
     site: Astro.site,
   }),
 ];
+const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+const review = getCalculatorReview(slug, locale);
+const reviewLabels = locale === 'zh'
+  ? {
+      methodology: '計算方法',
+      assumptions: '主要假設',
+      example: '範例計算',
+      limitations: '限制',
+      lastUpdated: '最後更新',
+      disclaimer: '估算免責聲明',
+    }
+  : {
+      methodology: 'Methodology',
+      assumptions: 'Assumptions',
+      example: 'Example calculation',
+      limitations: 'Limitations',
+      lastUpdated: 'Last updated',
+      disclaimer: 'Estimate disclaimer',
+    };
 ---
 
 <BaseLayout
@@ -66,9 +86,68 @@ const jsonLd = [
   <section class="tool">
     <slot />
   </section>
+  {review && (
+    <section class="calculator-review" aria-labelledby="calculator-review-heading">
+      <h2 id="calculator-review-heading">{reviewLabels.methodology}</h2>
+      <p>{review.methodology}</p>
+
+      <h2>{reviewLabels.assumptions}</h2>
+      <ul>
+        {review.assumptions.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>{reviewLabels.example}</h2>
+      <p>{review.example}</p>
+
+      <h2>{reviewLabels.limitations}</h2>
+      <ul>
+        {review.limitations.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <p class="last-updated">
+        <strong>{reviewLabels.lastUpdated}:</strong> {review.lastUpdated}
+      </p>
+      <p class="estimate-disclaimer">
+        <strong>{reviewLabels.disclaimer}:</strong> {review.disclaimer}
+      </p>
+    </section>
+  )}
   {locale === 'en' && <NewsletterSignup id="tool-newsletter-signup" />}
   <p class="privacy-note">{t('tool.privacyNote')}</p>
   <FAQ items={faq} />
   <RelatedLinks links={related} />
   <AdSlot />
 </BaseLayout>
+
+<style>
+  .calculator-review {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+    margin-block: 1.5rem;
+    padding: 1rem;
+  }
+
+  .calculator-review h2 {
+    margin-top: 1.2rem;
+  }
+
+  .calculator-review h2:first-child {
+    margin-top: 0;
+  }
+
+  .calculator-review ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .calculator-review li + li {
+    margin-top: 0.4rem;
+  }
+
+  .last-updated,
+  .estimate-disclaimer {
+    color: var(--color-muted);
+  }
+</style>

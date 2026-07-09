@@ -9,14 +9,29 @@ interface Props {
 const { targetId, filename = 'export.txt' } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+const gateLabels = JSON.stringify({
+  title: t('gate.title'),
+  desc: t('gate.desc'),
+  emailPlaceholder: t('gate.emailPlaceholder'),
+  submit: t('gate.submit'),
+  sending: t('gate.sending'),
+  sentEmail: t('gate.sentEmail'),
+  sentLocal: t('gate.sentLocal'),
+  invalidEmail: t('gate.invalidEmail'),
+  privacyNote: t('gate.privacyNote'),
+  changeEmail: t('gate.changeEmail'),
+});
 ---
 
 <div
   class="export-actions"
+  data-export-actions
   data-target-id={targetId}
   data-filename={filename}
   data-copy-label={t('export.copy')}
   data-copied-label={t('export.copied')}
+  data-gate-labels={gateLabels}
 >
   <button type="button" data-action="copy">{t('export.copy')}</button>
   <button type="button" data-action="txt">{t('export.txt')}</button>
@@ -24,32 +39,36 @@ const t = useTranslations(locale);
   <button type="button" data-action="clear">{t('export.clear')}</button>
 </div>
 
-<script is:inline>
-  (function () {
-    var script = document.currentScript;
-    var root = script && script.previousElementSibling;
-    if (!root) return;
+<script>
+  import { requestGatedDownload } from '../lib/downloadGate';
 
-    var targetId = root.getAttribute('data-target-id') || '';
-    var filename = root.getAttribute('data-filename') || 'export.txt';
-    var copyLabel = root.getAttribute('data-copy-label') || 'Copy';
-    var copiedLabel = root.getAttribute('data-copied-label') || 'Copied!';
+  document.querySelectorAll<HTMLElement>('[data-export-actions]').forEach((root) => {
+    const targetId = root.getAttribute('data-target-id') || '';
+    const filename = root.getAttribute('data-filename') || 'export.txt';
+    const copyLabel = root.getAttribute('data-copy-label') || 'Copy';
+    const copiedLabel = root.getAttribute('data-copied-label') || 'Copied!';
+
+    let gateLabels = null;
+    try {
+      gateLabels = JSON.parse(root.getAttribute('data-gate-labels') || 'null');
+    } catch {
+      gateLabels = null;
+    }
 
     function target() {
       return document.getElementById(targetId);
     }
 
     function content() {
-      var el = target();
+      const el = target();
       if (!el) return '';
-      if ('value' in el) return el.value || '';
+      if ('value' in el) return (el as HTMLInputElement).value || '';
       return el.textContent || '';
     }
 
-    function download(name, type, value) {
-      var blob = new Blob([value], { type: type });
-      var url = URL.createObjectURL(blob);
-      var link = document.createElement('a');
+    function localDownload(name: string, blob: Blob) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
       link.href = url;
       link.download = name;
       document.body.appendChild(link);
@@ -58,48 +77,69 @@ const t = useTranslations(locale);
       URL.revokeObjectURL(url);
     }
 
-    function jsonFilename(name) {
+    function gatedDownload(name: string, blob: Blob) {
+      if (!gateLabels) {
+        localDownload(name, blob);
+        return;
+      }
+
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const tool = segments[segments.length - 1] || 'calculator';
+
+      requestGatedDownload({
+        tool,
+        labels: gateLabels,
+        anchor: root,
+        getFile: () => ({ blob, filename: name }),
+        fallback: () => localDownload(name, blob),
+      });
+    }
+
+    function jsonFilename(name: string) {
       return name.endsWith('.txt') ? name.slice(0, -4) + '.json' : 'export.json';
     }
 
-    root.addEventListener('click', function (event) {
-      var clicked = event.target;
-      if (!clicked || !clicked.closest) return;
+    root.addEventListener('click', (event) => {
+      const clicked = event.target;
+      if (!(clicked instanceof Element)) return;
 
-      var button = clicked.closest('button[data-action]');
+      const button = clicked.closest('button[data-action]');
       if (!button) return;
 
-      var action = button.getAttribute('data-action');
-      var value = content();
+      const action = button.getAttribute('data-action');
+      const value = content();
 
       if (action === 'copy') {
         if (!navigator.clipboard) return;
-        navigator.clipboard.writeText(value).then(function () {
+        void navigator.clipboard.writeText(value).then(() => {
           button.textContent = copiedLabel;
-          window.setTimeout(function () {
+          window.setTimeout(() => {
             button.textContent = copyLabel;
           }, 1400);
         });
       }
 
       if (action === 'txt') {
-        download(filename || 'export.txt', 'text/plain;charset=utf-8', value);
+        gatedDownload(filename || 'export.txt', new Blob([value], { type: 'text/plain;charset=utf-8' }));
       }
 
       if (action === 'json') {
-        download(jsonFilename(filename), 'application/json;charset=utf-8', JSON.stringify({ content: value }, null, 2));
+        gatedDownload(
+          jsonFilename(filename),
+          new Blob([JSON.stringify({ content: value }, null, 2)], { type: 'application/json;charset=utf-8' }),
+        );
       }
 
       if (action === 'clear') {
-        var el = target();
+        const el = target();
         if (!el) return;
         if ('value' in el) {
-          el.value = '';
+          (el as HTMLInputElement).value = '';
         } else {
           el.textContent = '';
         }
         el.dispatchEvent(new Event('input', { bubbles: true }));
       }
     });
-  })();
+  });
 </script>

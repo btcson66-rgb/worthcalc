@@ -50,3 +50,17 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Waits a moment so the fresh deployment serves the key file, then
+      # submits every sitemap URL to IndexNow (Bing/Yandex/Seznam/Naver).
+      - run: sleep 60 && node sites/worth-it-tools/scripts/submit-indexnow.mjs
+        env:
+          INDEXNOW_KEY: a0971145939fb4fcb7b5ff0e736761fc

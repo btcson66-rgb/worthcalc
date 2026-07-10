@@ -24,6 +24,9 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: {
     format: 'directory',
+    // Inline all stylesheets: removes the render-blocking CSS request
+    // (Lighthouse mobile flagged /_astro/*.css as render-blocking).
+    inlineStylesheets: 'always',
   },
   integrations: [
     sitemap({

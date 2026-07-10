@@ -1,0 +1,89 @@
+---
+import type { Locale } from '../consts';
+import { getAffiliateProducts } from '../data/affiliateProducts';
+
+interface Props {
+  toolSlug: string;
+  locale: Locale;
+}
+
+const { toolSlug, locale } = Astro.props;
+const products = getAffiliateProducts(toolSlug);
+const heading = locale === 'zh' ? '相關好物推薦' : 'Recommended products';
+const cta = locale === 'zh' ? '前往查看 →' : 'View product →';
+const disclosure =
+  locale === 'zh'
+    ? '本區塊含聯盟行銷連結，透過連結購買我們可能獲得分潤，不影響您的價格。'
+    : 'This section contains affiliate links. We may earn a commission at no extra cost to you.';
+---
+
+{
+  products.length > 0 && (
+    <section class="affiliate-recs" aria-label={heading}>
+      <h2>{heading}</h2>
+      <div class="affiliate-grid">
+        {products.map((product) => (
+          <a
+            class="affiliate-card"
+            href={product.url}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+          >
+            <strong>{product.name}</strong>
+            <span class="affiliate-note">{product.note}</span>
+            <span class="affiliate-meta">
+              {product.price}｜{product.shop}
+            </span>
+            <span class="affiliate-cta">{cta}</span>
+          </a>
+        ))}
+      </div>
+      <p class="affiliate-disclosure">{disclosure}</p>
+    </section>
+  )
+}
+
+<style>
+  .affiliate-recs {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+    margin-block: 1.5rem;
+    padding: 1rem;
+  }
+
+  .affiliate-grid {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  .affiliate-card {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+
+  .affiliate-card:hover {
+    border-color: var(--color-accent, currentColor);
+  }
+
+  .affiliate-note,
+  .affiliate-meta,
+  .affiliate-disclosure {
+    color: var(--color-muted);
+  }
+
+  .affiliate-disclosure {
+    margin: 0.8rem 0 0;
+    font-size: 0.85em;
+  }
+
+  .affiliate-cta {
+    font-weight: 600;
+  }
+</style>

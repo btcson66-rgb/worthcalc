@@ -1,8 +1,13 @@
 ---
-import { SITE } from '../consts';
+import { LOCALES, SITE, type Locale } from '../consts';
 import { getLocaleFromUrl, localizedPath, useTranslations } from '../i18n/utils';
 import LanguageSwitch from './LanguageSwitch.astro';
 
+interface Props {
+  locales?: Locale[];
+}
+
+const { locales = [...LOCALES] } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 ---
@@ -30,7 +35,7 @@ const t = useTranslations(locale);
         <a href={localizedPath(locale, '/about')}>{t('nav.about')}</a>
         <a href={localizedPath(locale, '/contact')}>{t('nav.contact')}</a>
       </nav>
-      <LanguageSwitch />
+      <LanguageSwitch locales={locales} />
     </div>
   </div>
 </header>

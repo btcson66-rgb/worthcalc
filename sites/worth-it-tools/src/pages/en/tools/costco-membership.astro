@@ -3,8 +3,8 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
-const title = 'Costco Membership Calculator';
-const description = 'Is Costco membership worth it calculator with Gold Star, Executive, savings rate, and break-even monthly spend.';
+const title = 'Is Costco Worth It? Membership Calculator';
+const description = 'At the calculator\'s 15% savings assumption, Gold Star breaks even near $434/year and Executive near $765/year. Compare tiers with your own spending.';
 const faq = [
   {
     question: 'How is the Costco membership break-even calculated?',
@@ -32,12 +32,14 @@ const related = [
   { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
   { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
   { title: 'The math of warehouse memberships', href: localizedPath(locale, '/costco-math') },
+  { title: 'Is Costco Executive worth it?', href: localizedPath(locale, '/is-costco-executive-membership-worth-it') },
 ];
 ---
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
   <p class="intro">
-    This is Costco membership worth it calculator compares your annual fee, estimated store savings, and Executive rewards. Use it to see the monthly spend needed to break even before you sign up or upgrade.
+    <strong>At the calculator's default 15% savings assumption, Gold Star breaks even at about $434 a year ($36 a month) of Costco spending.</strong>
+    Executive breaks even against no membership near $765 a year when the 2% reward is included, but it only beats Gold Star at about $3,250 in eligible annual spending. Change the assumptions below to test your own prices, purchases, and reward eligibility.
   </p>
 
   <div class="calculator-grid">

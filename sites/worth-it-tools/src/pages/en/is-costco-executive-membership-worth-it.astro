@@ -1,0 +1,152 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'How much do I need to spend for Costco Executive to be worth it?',
+    answer:
+      'Using the $65 difference between a $130 Executive fee and a $65 Gold Star fee, the 2% reward must apply to about $3,250 of annual eligible spending: $65 divided by 0.02. That is about $271 per month. Verify current fees and reward eligibility before upgrading.',
+  },
+  {
+    question: 'Does $3,250 make Executive free?',
+    answer:
+      'No. At $3,250 of eligible spending, the estimated $65 reward only recovers the extra $65 paid to upgrade from Gold Star. The underlying $65 membership cost must still be justified by store savings or other value you actually use.',
+  },
+  {
+    question: 'Does every Costco purchase earn the 2% reward?',
+    answer:
+      'Do not assume so. Reward rules, excluded categories, caps, taxes, fees, and timing can affect eligible spending. Use only purchases you reasonably expect to qualify and check Costco\'s current terms for the authoritative rules.',
+  },
+  {
+    question: 'Is Costco Executive worth it for one person?',
+    answer:
+      'Household size is less important than eligible annual spending. A single shopper below about $3,250 a year will generally earn less than the $65 upgrade difference from the 2% reward alone, while a high-spending single shopper can cross the threshold.',
+  },
+  {
+    question: 'Can a small business justify an Executive membership?',
+    answer:
+      'Possibly. Repeated eligible purchases can make the threshold easier to reach, but only net spending that remains after returns should be counted. Separate business convenience from the reward math and confirm that the categories you buy qualify.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Is a Costco Executive Membership Worth It? A Complete Breakdown"
+  description="Costco Executive is worth more than Gold Star at about $3,250 in eligible annual spend: the $65 upgrade difference divided by the 2% reward."
+  locale={locale}
+  alternateLocales={[locale]}
+  updated="2026-07-13"
+>
+  <p>
+    <strong>Short answer: Costco Executive is mathematically better than Gold Star once you have about $3,250 in eligible annual spending, or roughly $271 per month.</strong>
+    That threshold follows directly from a $65 upgrade difference divided by a 2% reward. It is not a promise that every purchase qualifies, and it does not prove that either membership is worthwhile for you. For a personalized result, use the
+    <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership calculator</a>
+    to enter your monthly spend, expected price savings, and reward rate.
+  </p>
+
+  <h2>Gold Star vs. Executive at a glance</h2>
+  <p>
+    The calculator models Gold Star at $65 per year and Executive at $130 per year. Both tiers provide the basic ability to shop at Costco. In the model, Executive adds a 2% reward on eligible spending. Because the base shopping access is shared, the clean upgrade decision compares only two incremental numbers: the extra $65 annual fee and the reward produced by eligible purchases.
+  </p>
+  <p>
+    That distinction matters. Asking whether a Costco membership is worth it is different from asking whether Executive is worth more than Gold Star. The first question compares the full membership fee with savings you receive relative to your normal stores. The second compares the extra Executive fee with the extra reward. Mixing the two questions can make an upgrade look better than it really is.
+  </p>
+  <ul>
+    <li><strong>Gold Star:</strong> $65 annual fee in the calculator; no 2% Executive reward.</li>
+    <li><strong>Executive:</strong> $130 annual fee in the calculator; modeled with a 2% reward on eligible spending.</li>
+    <li><strong>Upgrade difference:</strong> $130 minus $65 equals $65 per year.</li>
+  </ul>
+  <p>
+    Fees and program terms can change. Treat those values as the inputs used for this analysis, then verify current prices, eligible categories, exclusions, reward timing, and caps with Costco before purchasing or renewing.
+  </p>
+
+  <h2>The 2% reward break-even calculation</h2>
+  <p>
+    The break-even formula is straightforward: divide the additional annual fee by the reward rate. Written out, it is <strong>$65 / 0.02 = $3,250</strong> in eligible annual spending. Dividing by 12 gives about <strong>$270.83 per month</strong>, which is reasonably rounded to $271.
+  </p>
+  <p>
+    At exactly $3,250 of eligible spending, a 2% reward is $65. That estimated reward offsets the extra $65 paid for Executive, leaving you economically even with Gold Star on the upgrade itself. At $4,000 of eligible spending, the reward is $80, so Executive is ahead by $15 before considering any differences not captured in this simple model. At $6,000, the reward is $120, putting Executive $55 ahead of Gold Star on reward minus upgrade fee.
+  </p>
+  <ul>
+    <li>$2,000 eligible spend x 2% = $40 reward; Executive trails Gold Star by $25.</li>
+    <li>$3,250 eligible spend x 2% = $65 reward; the upgrade breaks even.</li>
+    <li>$4,000 eligible spend x 2% = $80 reward; Executive leads by $15.</li>
+    <li>$6,000 eligible spend x 2% = $120 reward; Executive leads by $55.</li>
+  </ul>
+  <p>
+    The margin above the threshold is more useful than the threshold alone. If your estimate is $3,300, a small amount of ineligible spending or a return can erase the projected advantage. If your conservative eligible-spend estimate is far above $3,250, the decision is more robust.
+  </p>
+
+  <h2>Why total Costco spending is not always eligible spending</h2>
+  <p>
+    The formula works only when its spending input is honest. Your card statement or warehouse receipts may include taxes, fees, returns, or categories that do not earn the reward under current program rules. Do not multiply every dollar connected to a Costco trip by 2% without checking eligibility. Use the portion you reasonably expect to qualify after likely returns.
+  </p>
+  <p>
+    Timing also matters near renewal. A household can spend $3,250 over a calendar year but have a different amount fall within its membership reward period. Rather than trying to engineer a result to the dollar, estimate a normal full year and add a safety margin. The official membership terms are the source of truth; this article explains the arithmetic, not program administration.
+  </p>
+
+  <h2>Do not confuse the upgrade break-even with the membership break-even</h2>
+  <p>
+    The $3,250 threshold answers one narrow question: when does the 2% reward recover the extra $65 for Executive? It does not recover the entire $130 Executive fee by itself. A 2% reward would need $6,500 of eligible spending to equal $130, but that is usually the wrong comparison because Gold Star already costs $65 and provides the underlying membership access.
+  </p>
+  <p>
+    To decide whether membership access itself pays off, estimate how much Costco saves you compared with purchases you would otherwise make. At the calculator's editable 15% default savings assumption, Gold Star breaks even at about $433.33 per year: $65 divided by 0.15. Rounded conservatively, that is about $434 annually or $36 monthly. Executive versus no membership combines the assumed 15% store savings and 2% reward, producing $130 divided by 0.17, or about $764.71 annually. Rounded up, that is about $765 per year or $64 per month.
+  </p>
+  <p>
+    Those membership break-even figures are scenarios, not claims that Costco is always 15% cheaper. If your comparable basket is only 5% cheaper, Gold Star would require $1,300 of annual spending to recover a $65 fee. If bulk waste or impulse purchases consume the price difference, your real savings rate can be zero or negative. Use the
+    <a href={localizedPath(locale, '/tools/costco-membership')}>calculator with your own savings assumption</a>
+    instead of treating the default as a fact.
+  </p>
+
+  <h2>Scenario 1: a single shopper</h2>
+  <p>
+    Consider a single shopper who spends $150 per month on eligible Costco purchases. Annual eligible spend is $1,800, and 2% of that is $36. Against the $65 upgrade difference, Executive is behind Gold Star by $29. The person may still justify Gold Star through genuine price savings, convenient fuel stops, or products they already buy, but the reward alone does not support upgrading.
+  </p>
+  <p>
+    A single person can still cross the Executive threshold. Household size is only a rough proxy for spending. Someone buying recurring staples, optical products, or supplies that qualify under current rules could spend more than a larger household. The disciplined approach is to review a representative year of purchases, remove questionable categories, and calculate 2% of the remainder.
+  </p>
+
+  <h2>Scenario 2: a family</h2>
+  <p>
+    Suppose a family expects $400 per month of eligible spending. That is $4,800 per year and an estimated $96 reward. Subtract the $65 upgrade difference and Executive is ahead by $31. This is a positive result, but it is not so large that the family should ignore waste, returns, or eligibility.
+  </p>
+  <p>
+    Families often have more opportunities to use bulk quantities before they spoil, but that is not guaranteed. Buying a larger package only saves money if it replaces a purchase the household would have made elsewhere and the product is actually used. The reward should never be a reason to spend an extra dollar: at 2%, spending $100 more produces only $2 of reward while still costing $98 net.
+  </p>
+
+  <h2>Scenario 3: a small business</h2>
+  <p>
+    A small business buying $800 per month of eligible supplies would have $9,600 of annual eligible spend. At 2%, the estimated reward is $192. After the $65 upgrade difference, Executive is ahead by $127. That is a clearer mathematical margin, assuming those purchases qualify and remain after returns.
+  </p>
+  <p>
+    Business owners should keep the reward decision separate from tax treatment and bookkeeping. This calculator does not determine deductibility, substantiation, or how a reward should be recorded. Those questions depend on facts and applicable tax rules; use proper records and consult a qualified professional when needed.
+  </p>
+
+  <h2>Five checks before you upgrade</h2>
+  <ol>
+    <li><strong>Use eligible net spending.</strong> Exclude purchases that do not qualify and subtract expected returns.</li>
+    <li><strong>Use a full, normal year.</strong> Do not annualize an unusually expensive holiday month or one-time purchase without adjustment.</li>
+    <li><strong>Demand a margin of safety.</strong> A forecast barely above $3,250 is effectively a tie because spending and rules can change.</li>
+    <li><strong>Ignore reward-driven spending.</strong> Buying more to earn 2% makes you poorer unless the purchase was already needed and competitively priced.</li>
+    <li><strong>Verify current terms.</strong> Confirm fees, reward percentage, eligible categories, exclusions, cap, and redemption rules directly with Costco.</li>
+  </ol>
+
+  <h2>A practical decision rule</h2>
+  <p>
+    Choose Gold Star when your conservative estimate of eligible annual spending is below $3,250 and no separate Executive benefit has measurable value to you. Consider Executive when that estimate is comfortably above $3,250. If you are close, the expected difference is small: at $3,500 of eligible spending, the reward is $70, only $5 more than the upgrade difference. Convenience and uncertainty matter more than a projected five-dollar edge.
+  </p>
+  <p>
+    Finally, calculate the membership and the upgrade as two separate decisions. First ask whether realistic store savings recover at least the base fee. Then ask whether the 2% reward recovers the extra Executive fee. The
+    <a href={localizedPath(locale, '/tools/costco-membership')}>free Costco membership calculator</a>
+    performs both comparisons with your spending and assumptions, entirely in your browser.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This breakdown is an educational estimate, not financial or tax advice. The fees and 2% rate shown are calculator inputs used for transparent mathematical examples. Verify current Costco pricing and official reward terms before making a membership decision.
+  </p>
+</ArticleLayout>

@@ -18,6 +18,7 @@ interface Props {
   image?: string;
   type?: SeoInput['type'];
   noindex?: boolean;
+  alternateLocales?: Locale[];
   jsonLd?: object[];
 }
 
@@ -30,6 +31,7 @@ const {
   image,
   type,
   noindex,
+  alternateLocales,
   jsonLd = [],
 } = Astro.props;
 ---
@@ -46,12 +48,13 @@ const {
       image={image}
       type={type}
       noindex={noindex}
+      alternateLocales={alternateLocales}
       jsonLd={jsonLd}
     />
     <GoogleAnalytics />
   </head>
   <body>
-    <Header />
+    <Header locales={alternateLocales} />
     <main class="container">
       <slot />
     </main>

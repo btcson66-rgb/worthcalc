@@ -4,7 +4,7 @@ import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
 const title = 'Commute Cost Calculator';
-const description = 'Commute cost calculator for car, transit pass, rideshare, and bike costs with optional time-cost comparison.';
+const description = 'A 30-mile round-trip over 20 workdays is about $450/month at a $0.75/mile planning rate, before parking and tolls. Compare your commute options.';
 const faq = [
   {
     question: 'What commute modes can I compare?',
@@ -30,14 +30,26 @@ const faq = [
 const related = [
   { title: 'EV vs Gas Car TCO Calculator', href: localizedPath(locale, '/tools/ev-vs-gas') },
   { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'Costco Membership Calculator', href: localizedPath(locale, '/tools/costco-membership') },
   { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
 ];
 ---
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related}>
   <p class="intro">
-    This commute cost calculator compares car, transit, rideshare, and bike commuting on a monthly and yearly basis. Add an hourly wage if commute time itself should count in the decision.
+    <strong>A 30-mile round-trip commute over 20 workdays is roughly $450 a month at a $0.75-per-mile planning rate, before parking and tolls.</strong>
+    Use this commute cost calculator to replace that example with your distance and compare car, transit, rideshare, and bike costs, including optional time value.
   </p>
+
+  <section class="quick-answer" aria-labelledby="us-commute-estimate">
+    <h2 id="us-commute-estimate">A practical U.S. driving-cost estimate</h2>
+    <p>
+      For a quick U.S. estimate, use roughly <strong>$0.70 to $0.80 per mile</strong> (about <strong>$0.44 to $0.50 per kilometer</strong>) as an all-in planning range for a typical car. That range is meant to account broadly for fuel, maintenance, tires, depreciation, insurance, and registration; it is a reference estimate, not a precise national average or a quote for your vehicle.
+    </p>
+    <p>
+      Your incremental commute cost may be lower if you already own and insure the car, while a newer or more expensive vehicle may cost more. Add parking and tolls separately, and use your actual ownership records whenever possible.
+    </p>
+  </section>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="commute-inputs">
@@ -119,10 +131,14 @@ const related = [
     <p>
       If hourly wage is above zero, each mode also includes round-trip commute time multiplied by workdays and hourly wage. The cheapest mode is based on direct cost plus optional time cost.
     </p>
+    <p>
+      If a warehouse stop or discounted fuel is part of your route, test the fee and realistic savings separately with the <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership break-even calculator</a> instead of treating every advertised discount as commute savings.
+    </p>
   </section>
 
   <style>
     .intro,
+    .quick-answer,
     .explanation {
       color: var(--color-muted);
     }
@@ -136,6 +152,7 @@ const related = [
 
     .input-panel,
     .result-panel,
+    .quick-answer,
     .explanation {
       border: 1px solid var(--color-border);
       border-radius: var(--radius);

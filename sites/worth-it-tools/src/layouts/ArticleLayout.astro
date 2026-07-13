@@ -13,9 +13,10 @@ interface Props {
   updated?: string;
   breadcrumb?: BreadcrumbItem[];
   noindex?: boolean;
+  alternateLocales?: Locale[];
 }
 
-const { title, description, locale, updated, breadcrumb, noindex } = Astro.props;
+const { title, description, locale, updated, breadcrumb, noindex, alternateLocales } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedPath(locale, '/') },
@@ -29,6 +30,7 @@ const crumbs = breadcrumb ?? [
   locale={locale}
   type="article"
   noindex={noindex}
+  alternateLocales={alternateLocales}
 >
   <Breadcrumb items={crumbs} />
   <article class="prose">

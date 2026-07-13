@@ -17,6 +17,8 @@ export interface SeoInput {
   type?: 'website' | 'article';
   /** When true, emit a noindex robots directive. */
   noindex?: boolean;
+  /** Locales that have an equivalent page. Defaults to every site locale. */
+  alternateLocales?: Locale[];
 }
 
 export interface ResolvedSeo {
@@ -68,13 +70,14 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const segments = input.url.pathname.split('/').filter(Boolean);
   if ((LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
-  const alternates = LOCALES.map((loc) => ({
+  const alternateLocales = input.alternateLocales ?? [...LOCALES];
+  const alternates = alternateLocales.map((loc) => ({
     hreflang: LOCALE_HREFLANG[loc],
     href: absolute(base, localizedPagePath(loc, logical)),
   }));
   alternates.push({
     hreflang: 'x-default',
-    href: absolute(base, logical ? localizedPagePath(LOCALES[0], logical) : '/'),
+    href: absolute(base, logical ? localizedPagePath(alternateLocales[0] ?? input.locale, logical) : '/'),
   });
 
   const openGraph: Record<string, string> = {

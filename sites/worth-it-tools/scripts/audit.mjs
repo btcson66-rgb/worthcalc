@@ -66,6 +66,15 @@ const homepageCandidates = ['index.html', 'en/index.html', 'zh/index.html'];
 const hasHomepage = homepageCandidates.some((p) => existsSync(join(distDir, p)));
 check('Homepage exists', hasHomepage);
 
+const notFoundPath = join(distDir, '404.html');
+const hasNotFound = existsSync(notFoundPath);
+check('Custom 404 page exists', hasNotFound);
+if (hasNotFound) {
+  const notFound = readFileSync(notFoundPath, 'utf8');
+  check('404 page is noindex', /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(notFound));
+  check('404 page does not load ads', !/pagead2\.googlesyndication|adsbygoogle|data-ad-slot/i.test(notFound));
+}
+
 // ── 2. Legal pages ──────────────────────────────────────────────────────────
 
 const legalPages = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];

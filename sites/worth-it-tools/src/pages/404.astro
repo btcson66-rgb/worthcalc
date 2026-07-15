@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page Not Found';
+const description = 'This WorthCalc page could not be found. Return to the calculator directory or open a practical money decision calculator.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale="en"
+  noindex={true}
+  alternateLocales={[]}
+>
+  <article class="not-found">
+    <p class="eyebrow">404 error</p>
+    <h1>We could not find that page</h1>
+    <p>
+      The address may be outdated, incomplete, or mistyped. No calculation was
+      performed and no financial conclusion should be drawn from this error
+      page. Use one of the verified routes below to continue.
+    </p>
+
+    <div class="actions" aria-label="Recovery links">
+      <a class="button button--primary" href="/en/">Browse all calculators</a>
+      <a class="button" href="/">Return to WorthCalc</a>
+    </div>
+
+    <section aria-labelledby="popular-tools">
+      <h2 id="popular-tools">Useful starting points</h2>
+      <ul>
+        <li><a href="/en/tools/costco-membership/">Costco membership break-even calculator</a></li>
+        <li><a href="/en/tools/commute-cost/">Commute cost comparison</a></li>
+        <li><a href="/en/tools/subscription-audit/">Subscription cost audit</a></li>
+        <li><a href="/en/about/">How WorthCalc builds and reviews calculators</a></li>
+      </ul>
+      <p>
+        WorthCalc provides estimates for education and planning. Replace sample
+        values with your own current bills, quotes, and contract terms, then
+        confirm important decisions with the relevant provider or a qualified
+        professional.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .not-found {
+    max-width: 46rem;
+    margin: 3rem auto 5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    margin-top: 0.35rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0 2rem;
+  }
+</style>

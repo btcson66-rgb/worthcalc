@@ -105,6 +105,8 @@ let pagesWithoutInternalLinks = 0;
 let thinPages = 0;
 let hasGa4 = false;
 let hasAdsPlaceholder = false;
+let calculatorPages = 0;
+let calculatorPagesWithoutReview = 0;
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
@@ -133,6 +135,18 @@ for (const file of htmlFiles) {
 
   // AdSense placeholder check
   if (html.includes('ad-slot') || html.includes('adsbygoogle')) hasAdsPlaceholder = true;
+
+  const relativePath = file.slice(distDir.length).replaceAll('\\', '/');
+  if (/\/(?:en|zh)\/tools\/[^/]+\/index\.html$/.test(relativePath)) {
+    calculatorPages++;
+    const hasReview =
+      html.includes('class="calculator-review"') &&
+      html.includes('class="last-updated"') &&
+      html.includes('class="estimate-disclaimer"') &&
+      (html.includes('Methodology') || html.includes('計算方法')) &&
+      (html.includes('Limitations') || html.includes('限制'));
+    if (!hasReview) calculatorPagesWithoutReview++;
+  }
 }
 
 check('Every page has <title>', pagesWithoutTitle === 0, pagesWithoutTitle > 0 ? `${pagesWithoutTitle} missing` : '');
@@ -143,6 +157,11 @@ check('Pages have internal links (≥2)', pagesWithoutInternalLinks === 0, pages
 check('No thin pages (<200 chars body)', thinPages === 0, thinPages > 0 ? `${thinPages} thin pages` : '');
 check('GA4 gtag mechanism present', hasGa4 || 'warn', hasGa4 ? '' : 'GA4 not injected (PUBLIC_GA_ID may be empty)');
 check('AdSense placeholder present', hasAdsPlaceholder);
+check(
+  'Calculator methodology disclosure',
+  calculatorPages > 0 && calculatorPagesWithoutReview === 0,
+  `${calculatorPages} tool pages checked${calculatorPagesWithoutReview > 0 ? `; ${calculatorPagesWithoutReview} missing review details` : ''}`,
+);
 
 // ── 13–15. Project files ────────────────────────────────────────────────────
 

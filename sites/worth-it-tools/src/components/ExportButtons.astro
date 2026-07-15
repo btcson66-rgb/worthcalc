@@ -40,7 +40,7 @@ const gateLabels = JSON.stringify({
 </div>
 
 <script>
-  import { requestGatedDownload } from '../lib/downloadGate';
+  import { requestGatedDownload, type GateLabels } from '../lib/downloadGate';
 
   document.querySelectorAll<HTMLElement>('[data-export-actions]').forEach((root) => {
     const targetId = root.getAttribute('data-target-id') || '';
@@ -48,7 +48,7 @@ const gateLabels = JSON.stringify({
     const copyLabel = root.getAttribute('data-copy-label') || 'Copy';
     const copiedLabel = root.getAttribute('data-copied-label') || 'Copied!';
 
-    let gateLabels = null;
+    let gateLabels: GateLabels | null = null;
     try {
       gateLabels = JSON.parse(root.getAttribute('data-gate-labels') || 'null');
     } catch {

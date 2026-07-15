@@ -80,7 +80,7 @@ See `license-audit.md`. Before shipping each of the 5 sites, run `npm ls --all` 
 
 ## i18n
 
-Routes are locale-prefixed: `/en` for English and `/zh` for Traditional Chinese. Internal links should use `localizedPath(locale, '/route')`.
+Content routes are locale-prefixed: `/en/...` for English and `/zh/...` for Traditional Chinese. The substantive root page `/` is the canonical English and x-default homepage; `/en/` is kept only as a compatibility URL and canonicalizes to `/`. Internal links should use `localizedPath(locale, '/route')`.
 
 To add a language, add the locale to `LOCALES` and the locale maps in `src/consts.ts`, add UI strings in `src/i18n/ui.ts`, then create matching `src/pages/<locale>/` pages.
 

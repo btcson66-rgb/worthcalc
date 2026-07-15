@@ -20,11 +20,12 @@ export function useTranslations(locale: Locale) {
 /**
  * Build a locale-prefixed, absolute (site-relative) path.
  * `localizedPath('zh', '/tools/word-counter')` -> '/zh/tools/word-counter'
- * `localizedPath('en', '/')` -> '/en'
+ * `localizedPath('en', '/')` -> '/'
  */
 export function localizedPath(locale: Locale, path = '/'): string {
   const clean = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
-  return clean === '' ? `/${locale}` : `/${locale}${clean}`;
+  if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}`;
+  return `/${locale}${clean}`;
 }
 
 /**
@@ -34,11 +35,10 @@ export function localizedPath(locale: Locale, path = '/'): string {
 export function switchLocalePath(url: URL, target: Locale): string {
   const segments = url.pathname.split('/').filter(Boolean);
   if ((LOCALES as string[]).includes(segments[0])) {
-    segments[0] = target;
-  } else {
-    segments.unshift(target);
+    segments.shift();
   }
-  return `/${segments.join('/')}`;
+  if (segments.length === 0) return target === DEFAULT_LOCALE ? '/' : `/${target}`;
+  return `/${[target, ...segments].join('/')}`;
 }
 
 /** Strip the locale prefix to get the logical route, e.g. '/zh/about' -> '/about'. */

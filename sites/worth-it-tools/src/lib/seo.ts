@@ -52,6 +52,7 @@ function pagePath(pathname: string): string {
 }
 
 function localizedPagePath(locale: Locale, logical: string): string {
+  if (!logical && locale === 'en') return '/';
   return logical ? `/${locale}/${logical}/` : `/${locale}/`;
 }
 
@@ -59,7 +60,9 @@ function localizedPagePath(locale: Locale, logical: string): string {
 export function resolveSeo(input: SeoInput): ResolvedSeo {
   const base = origin(input);
   const fullTitle = input.title ? `${input.title} | ${SITE.name}` : SITE.name;
-  const canonical = absolute(base, pagePath(input.url.pathname));
+  const currentPath = pagePath(input.url.pathname);
+  const canonicalPath = input.locale === 'en' && currentPath === '/en/' ? '/' : currentPath;
+  const canonical = absolute(base, canonicalPath);
   const ogImage = absolute(base, input.image ?? SITE.defaultOgImage);
   const type = input.type ?? 'website';
   const robots = input.noindex

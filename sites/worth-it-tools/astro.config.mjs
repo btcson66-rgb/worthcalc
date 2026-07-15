@@ -9,8 +9,8 @@ const SITE_URL = process.env.SITE_URL || 'https://worthcalc.win';
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  // Bilingual routing. Both locales are prefixed (/en/, /zh/) for clean
-  // hreflang + sitemap. The root "/" is the x-default homepage.
+  // Bilingual routing. Content routes are prefixed (/en/, /zh/), while the
+  // substantive root page is both the English and x-default homepage.
   i18n: {
     locales: ['en', 'zh'],
     defaultLocale: 'en',
@@ -30,13 +30,9 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en',
-          zh: 'zh',
-        },
-      },
+      // /en/ remains available for old links, but / is the canonical English
+      // homepage. Hreflang is emitted in each page head by src/lib/seo.ts.
+      filter: (page) => page !== `${SITE_URL}/en/`,
     }),
   ],
 });

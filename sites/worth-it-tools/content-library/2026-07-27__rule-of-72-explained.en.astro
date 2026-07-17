@@ -1,0 +1,120 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is the Rule of 72?',
+    answer:
+      'A mental-math shortcut: 72 ÷ annual return (%) ≈ years for money to double. At 6%, 72 ÷ 6 = 12 years; at 8%, 9 years. It also runs backward: 72 ÷ target years ≈ the return required. It approximates the compound-interest formula and is most accurate in the 4–12% range.',
+  },
+  {
+    question: 'Why 72 specifically?',
+    answer:
+      'The exact answer comes from logarithms: doubling time = ln(2) ÷ ln(1+r) ≈ 0.693 ÷ r, so the "true" constant is nearer 69.3. But 72 divides cleanly by 2, 3, 4, 6, 8, 9, and 12 — effortless mental math — and in the common return range it actually corrects the approximation error. Pure pragmatism won.',
+  },
+  {
+    question: 'Can the Rule of 72 be applied to inflation?',
+    answer:
+      'Yes — its most visceral use: 72 ÷ inflation rate ≈ years for prices to double (purchasing power to halve). At 3% inflation, prices double in 24 years — the same cash buys half as much. It is the most intuitive proof that holding only cash is not risk-free.',
+  },
+  {
+    question: 'When does the Rule of 72 break down?',
+    answer:
+      'Three cases: rates outside 4–12% (above 20% it overstates doubling time — use 78; at 1–2% use 70 or 69.3); volatile year-to-year returns (the rule assumes steady compounding); and recurring contributions — it only handles a single lump sum, so monthly investing needs the full future-value formula or a calculator.',
+  },
+  {
+    question: 'What happens after the first doubling?',
+    answer:
+      'Doublings chain: on a 12-year doubling schedule, 24 years gives 4×, 36 years gives 8× — and each doubling period adds as much in absolute terms as all previous periods combined. That is the mathematical spine of "compounding\'s second half is the main event," and of why starting early dominates.',
+  },
+];
+---
+
+<ArticleLayout
+  title="The Rule of 72: Compound Interest in One Line of Mental Math (and Where It Fails)"
+  description="72 ÷ return ≈ doubling years: 6% doubles in twelve years; 3% inflation doubles prices in twenty-four. Origin, three directions of use (growth, inflation, fees), and the boundaries where it breaks."
+  locale={locale}
+  updated="2026-07-27"
+>
+  <p>
+    <strong>Direct answer: the Rule of 72 says 72 divided by an annual
+    rate (%) approximately equals the years needed for money to
+    double.</strong> 6% → 12 years; 8% → 9 years. It runs in reverse too:
+    doubling in 10 years requires about 7.2% annually. It is the fastest
+    road into compound interest — including what it illuminates and what
+    it can&rsquo;t.
+  </p>
+
+  <h2>Where it comes from: the civilian edition of the compound formula</h2>
+  <p>
+    Exact doubling time solves (1+r)^t = 2, giving t = ln 2 ÷ ln(1+r) ≈
+    0.693 ÷ r. It should be the &ldquo;Rule of 69.3&rdquo; — but 72 wins
+    on merit: <strong>it divides cleanly by 2, 3, 4, 6, 8, 9, and
+    12</strong>, and across the everyday 4–12% range it happens to offset
+    the approximation error, beating 69.3 on accuracy. Reality check: at
+    6%, the exact doubling time is 11.90 years; the rule says 12 — under
+    1% off.
+  </p>
+
+  <h2>Three directions of the same formula</h2>
+  <ol>
+    <li>
+      <strong>Growth (the hopeful direction).</strong> At an assumed 5%
+      annual return, 72 ÷ 5 ≈ 14.4 years to double. Note
+      <em>assumed</em>: the rate is an input, not a promise — the rule
+      translates numbers, it doesn&rsquo;t predict markets. Its best use
+      is fast comparison: &ldquo;how different are 4% and 7%,
+      really?&rdquo; Doubling in 18 years versus 10.3 makes the gap
+      three-dimensional.
+    </li>
+    <li>
+      <strong>Inflation (the merciless direction).</strong> 72 ÷ inflation
+      rate ≈ years until purchasing power halves. At 2%, 36 years; at 3%,
+      24. The complete version of &ldquo;cash in savings is safest&rdquo;
+      is &ldquo;trading a yearly slice of purchasing power for zero
+      volatility&rdquo; — a legitimate choice, once the price tag is
+      visible.
+    </li>
+    <li>
+      <strong>Fees (the invisible direction).</strong> A 1.5% annual fee
+      is a permanent −1.5% to your rate. Through the rule: 7% doubles in
+      10.3 years; 5.5% after fees needs 13.1 — the same money runs almost
+      three years slower. Fees are compounding in reverse, which is why
+      they cost more than intuition suggests.
+    </li>
+  </ol>
+
+  <h2>The boundaries: when not to use it</h2>
+  <ul>
+    <li><strong>Extreme rates:</strong> above ~20% the rule overstates doubling time (72 becomes 78 by convention); at 1–2%, 70 or 69.3 fits better. In the everyday 3–12% band, 72 is at home.</li>
+    <li><strong>Volatile returns:</strong> the rule assumes steady annual compounding. Real market returns wobble — treat the rule as a sketch of the average scenario, never a route map.</li>
+    <li><strong>Recurring contributions:</strong> the rule handles one lump sum only. Monthly-contribution growth needs the full future-value formula — which is exactly what the <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>&rsquo;s future-value field computes.</li>
+  </ul>
+
+  <h2>The second half is the main event: doublings of doublings</h2>
+  <p>
+    The rule&rsquo;s most valuable corollary is chained doubling: on a
+    12-year schedule, 24 years yields 4×, 36 years 8× — and the third
+    12-year stretch adds as much in absolute dollars as the first 24
+    years combined. That is the mathematical body of &ldquo;starting
+    early wins,&rdquo; the reason
+    <a href={localizedPath(locale, '/latte-factor-honest-math')}>latte-factor totals</a>
+    feel counterintuitively large, and the reason
+    <a href={localizedPath(locale, '/opportunity-cost-everyday')}>opportunity cost</a>
+    weighs so heavily in long-horizon decisions: inside compounding, time
+    is not a linear resource — it is an exponential one.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general mathematics education, not investment advice;
+    all rates are illustrative assumptions, not predictions or guarantees.
+    Investing involves risk — evaluate decisions yourself or consult
+    licensed professionals. All calculators on this site run locally in
+    your browser; nothing you enter is uploaded to any server.
+  </p>
+</ArticleLayout>

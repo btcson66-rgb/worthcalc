@@ -1,0 +1,108 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Is bulk always cheaper?',
+    answer:
+      'On shelf-tag unit price, almost always. On effective unit cost — total price ÷ the amount you actually use — often not. Throw away 30% and a bulk pack that looked 20% cheaper is now more expensive than the small one. Perishables are where this flips most often.',
+  },
+  {
+    question: 'How do I estimate my waste rate?',
+    answer:
+      'Look at how the last purchase of the same item ended: finished it = 0%; tossed about a third = 33%. With no history, use conservative category baselines — household food-waste studies put fresh produce loss around 20–40%, while dry goods run near zero. An honest waste rate matters more than a precise unit price.',
+  },
+  {
+    question: 'Do storage and tied-up cash count as costs?',
+    answer:
+      'Yes, though usually as minor lines: opportunity cost of prepaid consumption (negligible for small sums), storage space (real money in a small apartment), and the behavioral one — visible stock accelerates consumption — which is the most underrated of the three.',
+  },
+  {
+    question: 'Which items are actually good bulk buys?',
+    answer:
+      'Three conditions together: no meaningful expiry (paper goods, detergent, canned food), stable predictable consumption, and a unit-price gap of at least 15–20%. Missing one condition, do the math; missing two, buy small.',
+  },
+  {
+    question: 'How does this connect to warehouse-club membership fees?',
+    answer:
+      'The fee is an entry cost spread over a year of savings — and those savings must be computed on waste-adjusted effective prices, not shelf prices. Both layers have to clear for the membership to pay; see the Costco math article and calculator.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Is Buying in Bulk Actually Cheaper? Price the Part You Throw Away"
+  description="The big jug is 25% cheaper per ounce — but you only finish two-thirds. Effective unit cost, honest waste rates, what belongs in bulk, and what is destined for the trash."
+  locale={locale}
+  updated="2026-07-19"
+>
+  <p>
+    The classic shelf moment: the small bottle is $6, the double-size jug is
+    $9.50 — 21% cheaper per ounce, so the rational shopper grabs the jug.
+    Three months later, a third of it expires and the jug goes in the trash.
+    The error was baked in at the shelf: <strong>the tag prices what you
+    buy; your wallet pays for what you use</strong>. Here is the math that
+    separates the two.
+  </p>
+
+  <h2>Effective unit cost: one formula fixes the decision</h2>
+  <p>
+    <strong>effective unit cost = total price ÷ (quantity × finish rate)</strong>
+  </p>
+  <p>
+    The jug: $9.50 for 64 oz is $0.148/oz on the tag. But if history says
+    you finish 65% of jumbo sizes: 9.50 ÷ 41.6 oz = <strong>$0.228/oz</strong> —
+    more than the small bottle&rsquo;s $0.188 (6 ÷ 32). A 21% shelf saving
+    became a 21% real loss, and the pivot was the finish rate.
+  </p>
+  <p>
+    The breakeven version: <strong>minimum finish rate = bulk unit price ÷
+    small unit price</strong>. Here: 0.148 ÷ 0.188 = 79%. Ask yourself,
+    &ldquo;am I 80% sure I&rsquo;ll finish this?&rdquo; — if the answer
+    hesitates, take the small one.
+  </p>
+
+  <h2>Estimating your waste rate honestly</h2>
+  <ul>
+    <li><strong>With history:</strong> how did the last identical purchase end? Finished = 0%; tossed a third = 33%. Your own history for the same item is the best predictor available.</li>
+    <li><strong>Without history:</strong> conservative category baselines — dry goods and paper products ≈ 0–5%; frozen food ≈ 10–20% (freezer burn, oblivion); fresh produce and bread ≈ 20–40%, the magnitude household food-waste research consistently finds. Two purchases of tracking will calibrate your real number.</li>
+    <li><strong>For dated items, add a time check:</strong> weekly usage × shelf life ≥ package size, or the waste is scheduled at checkout. Using 3 oz a week with a 6-month shelf life caps you at 78 oz — the gallon jug is a planned donation to the drain.</li>
+  </ul>
+
+  <h2>Three costs hiding beyond waste</h2>
+  <ol>
+    <li><strong>Storage rent.</strong> Stockpiles occupy square feet you pay for. In a small city apartment, the &ldquo;warehousing fee&rdquo; on three months of paper towels quietly eats part of the discount. Tight-space households: this line is not a joke.</li>
+    <li><strong>Prepaid consumption.</strong> Buying three months ahead is an interest-free loan to the store. One item, trivial; every category stockpiled at once, a real float.</li>
+    <li><strong>The abundance effect.</strong> The more stock is visible, the more casually it gets used — bigger pours of detergent, faster-vanishing snack boxes. Consumer research finds larger packages reliably accelerate consumption, which erodes the unit-price edge directly. For anything that eats itself (snacks, soda), bulk is often a double loss: more spent, more consumed.</li>
+  </ol>
+
+  <h2>The sorting rule</h2>
+  <ul>
+    <li><strong>Buy bulk without thinking:</strong> no expiry + stable usage + gap ≥15%. Toilet paper, detergent, trash bags, canned goods — the warehouse store&rsquo;s genuine sweet zone.</li>
+    <li><strong>Compute first:</strong> long-dated items (rice, oil, frozen) — run the time check and the finish-rate breakeven.</li>
+    <li><strong>Default small:</strong> fresh food, bread, first-time products, and everything that gets eaten because it&rsquo;s there. Capture the discount with repeat small purchases and sale timing instead.</li>
+  </ul>
+  <p>
+    One level up from effective unit cost sits the membership question: does
+    an annual fee amortize across your waste-adjusted savings? See
+    <a href={localizedPath(locale, '/costco-math')}>the Costco membership math</a>
+    or run the
+    <a href={localizedPath(locale, '/tools/costco-membership')}>membership calculator</a>.
+    And for the repeat-purchase half of everyday shopping math, the
+    <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>
+    covers the other side.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general consumer math, not a recommendation of any
+    store, brand, or product; waste-rate figures are research-magnitude
+    baselines — your own consumption record is the real number. All
+    calculators on this site run locally in your browser; nothing you enter
+    is uploaded to any server.
+  </p>
+</ArticleLayout>

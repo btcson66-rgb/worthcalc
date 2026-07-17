@@ -1,0 +1,113 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Is padding my cart for free shipping ever worth it?',
+    answer:
+      'One test: is the filler item something you were going to buy anyway? Yes → you merely bought it early, and the shipping saved is pure gain. No → you spent $12 to avoid a $6 fee, a $6 loss. Free-shipping thresholds are engineered to produce the second behavior, and platform basket data shows they work superbly.',
+  },
+  {
+    question: 'I\'m just a few dollars short — what\'s the rule?',
+    answer:
+      'Compare the gap to the fee. $3 short of the threshold with $7 shipping → adding any $3+ item you\'ll actually use is a win. $20 short with $6 shipping → pay the shipping, unless that $20 item was already on your list.',
+  },
+  {
+    question: 'Are the "add-on deals" at checkout worth browsing?',
+    answer:
+      'The add-on zone is a curated shelf of high-margin small goods with high never-used odds. Same rule: only take what\'s already on your list. The healthier system is a standing household restock list (detergent, toothpaste, batteries) — fill gaps from that list and you can never lose.',
+  },
+  {
+    question: 'How do I evaluate paid free-shipping memberships?',
+    answer:
+      'Annual fee ÷ your yearly order count vs the average shipping fee. Heavy users (10+ orders a month) almost always win; one-or-two-orders-a-month users usually don\'t — and remember the fee changes behavior ("I\'m paying for it, better order more"), an off-the-books cost of its own.',
+  },
+  {
+    question: 'What\'s the psychological trap in threshold chasing?',
+    answer:
+      'The brain files shipping as a pure loss — money that buys "nothing" — and loss aversion makes us pay $12 in goods to dodge a $6 loss. Reframe shipping as a delivery service fee and the aversion fades; the decision returns to arithmetic.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Is Chasing Free Shipping Worth It? Threshold Psychology and the One Rule That Never Loses"
+  description="Spending $12 extra to dodge a $6 shipping fee = a $6 loss — yet the brain files shipping as pure loss, so everyone does it. The loss-aversion mechanics, the gap-vs-fee test, and the restock-list method."
+  locale={locale}
+  updated="2026-07-24"
+>
+  <p>
+    Cart: $43. Red banner: &ldquo;Add $7 for FREE shipping!&rdquo; Ten
+    minutes of browsing later you&rsquo;ve added a $12 phone stand.
+    Congratulations: you spent $12 to avoid a $6 fee — <strong>a net
+    $6 loss</strong> — and it felt like winning. Here&rsquo;s why it
+    works on everyone, and how to make cart-padding actually pay.
+  </p>
+
+  <h2>Why shipping fees feel so hateful: loss aversion</h2>
+  <p>
+    Behavioral economics is blunt about it: money spent on goods buys
+    something; money spent on shipping buys &ldquo;nothing&rdquo; — the
+    brain files it as <strong>pure loss</strong>, and losses hurt roughly
+    twice as much as equal gains please. So &ldquo;spend $12 more on a
+    thing&rdquo; (feels like acquiring) beats &ldquo;pay $6
+    shipping&rdquo; (feels like losing), even though the first is
+    objectively $6 worse. The free-shipping threshold is a precision
+    harvest of this bias — it is not a discount but a
+    <strong>basket-size pricing instrument</strong>, which is why the
+    threshold always sits just above the average order value.
+  </p>
+
+  <h2>The one test</h2>
+  <p>
+    <strong>Is the filler item on your were-going-to-buy-anyway list?</strong>
+  </p>
+  <ul>
+    <li><strong>Yes →</strong> padding = buying early; the shipping saved is pure gain, whatever the gap.</li>
+    <li><strong>No →</strong> compare gap vs fee. $12 extra to save $6 = $6 loss; $3 extra (for something marginally useful) to save $7 = roughly break-even. <strong>Items bought only to cross the line count at full price</strong> — &ldquo;it&rsquo;s only $12&rdquo; is the line the threshold\'s designers wrote for you.</li>
+  </ul>
+
+  <h2>The never-lose method: the restock list</h2>
+  <p>
+    Make &ldquo;going to buy anyway&rdquo; always available: keep a
+    standing <strong>household restock list</strong> — detergent,
+    toothpaste, batteries, trash bags — items that are inevitable,
+    non-expiring, and price-stable. Whenever a gap appears, fill it from
+    the list: free shipping secured, necessity acquired, zero decision
+    fatigue. The list doubles as the safe zone from
+    <a href={localizedPath(locale, '/bulk-buying-waste-math')}>the bulk-buying math</a> —
+    the same items that survive the waste-rate test.
+  </p>
+
+  <h2>Three advanced cases</h2>
+  <ol>
+    <li><strong>Paid shipping memberships:</strong> annual fee ÷ yearly orders vs average shipping fee. Heavy users clear it easily; light users rarely do — and the fee itself reshapes behavior (&ldquo;I&rsquo;m paying, so I should order more&rdquo;), a cost that never shows on a statement. The general membership math lives in <a href={localizedPath(locale, '/costco-math')}>the Costco fee analysis</a>.</li>
+    <li><strong>Spend-more-save-more stacking:</strong> &ldquo;$10 off $100&rdquo; is the same machine with a bigger lever. Same test applies: list items make it a real discount; desire items make it an upsell.</li>
+    <li><strong>Two orders vs one padded order:</strong> price the full cost of every non-list filler item into the comparison — two orders at $6 shipping each often beats one padded order. Shipping is not a defeat; it is a service.</li>
+  </ol>
+
+  <h2>The reframe that ends the game</h2>
+  <p>
+    Final move: rename shipping from &ldquo;loss&rdquo; to
+    <strong>&ldquo;delivery service fee&rdquo;</strong> — a person drives
+    the thing to your door, which was never free. In
+    <a href={localizedPath(locale, '/price-in-work-hours')}>work-hours terms</a>:
+    a $6 fee at a true $21/hour wage is 17 minutes; fetching it yourself
+    rarely costs less than 17 minutes. Swap the frame and the
+    loss-aversion clench releases — paying shipping and chasing the
+    threshold finally compete on the same math, which is exactly what the
+    threshold was designed to prevent.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general consumer psychology and math, not a
+    recommendation of any platform or plan. All calculators on this site
+    run locally in your browser; nothing you enter is uploaded to any
+    server.
+  </p>
+</ArticleLayout>

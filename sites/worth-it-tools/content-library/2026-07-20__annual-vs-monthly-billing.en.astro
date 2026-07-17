@@ -1,0 +1,123 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'How big is the typical annual discount?',
+    answer:
+      'The common shapes: "two months free" ≈ 17%, or a flat 15–20% off. Convert to an effective monthly rate to compare: $10/month vs $100/year = $8.33 effective, a 17% cut. Anything under 15% rarely justifies giving up the freedom to cancel anytime.',
+  },
+  {
+    question: 'What is the real risk of paying annually?',
+    answer:
+      'Prepaying is a bet that you will still use the service in month 12. Subscription usage decays fast — plenty of people quietly stop by month 3, and the remaining 9 months are pure loss. The discount must be weighed against your realistic odds of using the full year.',
+  },
+  {
+    question: 'When should I switch to annual?',
+    answer:
+      'All three together: you have already paid monthly for 3+ consecutive months (proof of real usage), the discount is ≥15%, and you have read the refund policy. Meet all three and annual is free money; for any brand-new service, month-to-month first, always.',
+  },
+  {
+    question: 'What about annual auto-renewal?',
+    answer:
+      'An annual renewal surfaces once a year — the easiest charge in the world to forget. Set a calendar reminder 7 days before the renewal date at the moment you subscribe, and use that day to ask "how much did I actually use this year?" before letting it renew.',
+  },
+  {
+    question: 'Does this apply to team or family plans?',
+    answer:
+      'Even more — seats × annual price raises the stakes on both the discount and the decay risk. Add one layer first: active users ÷ paid seats. Under 80%, cut seats before discussing annual billing.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Annual or Monthly Billing? The Breakeven Math on Subscription Discounts"
+  description="'Save 17% with annual billing' fully translated: 'prepay and bet you'll still be using this in month 12.' Effective monthly rate, usage odds, refund terms — three steps to the real answer."
+  locale={locale}
+  updated="2026-07-20"
+>
+  <p>
+    Every checkout page has the moment: $10 a month, and next to it a
+    bright badge — &ldquo;$100/year, save $20!&rdquo; The saving is real.
+    The full sentence is: <strong>&ldquo;$100 up front, and a bet that
+    you&rsquo;re still using this twelve months from now.&rdquo;</strong>
+    Here are the odds, computed.
+  </p>
+
+  <h2>Step one: the effective monthly rate</h2>
+  <p>
+    Annual price ÷ 12. $100 ÷ 12 = $8.33 against $10 monthly — a 17% cut,
+    and that&rsquo;s the <em>ceiling</em> payoff, earned only if you use
+    all twelve months. Market norms: &ldquo;two months free&rdquo; = 17%,
+    20% off flat, 15% off flat. <strong>Below 15%, skip annual
+    outright</strong> — that discount doesn&rsquo;t buy back your right to
+    walk away next month.
+  </p>
+
+  <h2>Step two: multiply by your usage odds — the actual decider</h2>
+  <p>
+    Annual billing loses exactly one way: you stop using it mid-term.
+    Quit at month 6 and the real cost is $100 ÷ 6 = <strong>$16.67 a
+    month</strong> — 67% more than monthly. As a formula:
+  </p>
+  <p>
+    <strong>expected monthly cost = annual price ÷ months you will actually use</strong>
+  </p>
+  <ul>
+    <li>Use 12 months → $8.33/mo (win 17%)</li>
+    <li>Use 10 months → $10/mo (break even)</li>
+    <li>Use 6 months → $16.67/mo (lose 67%)</li>
+  </ul>
+  <p>
+    Breakeven here is 10 months, so the only question is: how confident are
+    you of clearing it? The honest evidence is your own history —
+    <strong>how many consecutive months have you already paid for
+    this?</strong> Three or more: annual is a strong bet. Signed up last
+    week: your odds are a coin flip dressed as optimism. Monthly first.
+  </p>
+
+  <h2>Step three: read the refund policy — it converts the bet into insurance</h2>
+  <p>
+    Annual isn&rsquo;t always all-or-nothing. Three policy tiers:
+    <strong>prorated refunds</strong> (best — annual risk mostly
+    evaporates); <strong>refund minus fees / unused full months
+    only</strong> (acceptable); <strong>no refunds</strong> (the most
+    common — the odds math above applies at full force). Thirty seconds
+    finding the refund page is routinely worth three figures.
+  </p>
+
+  <h2>Zoom out: annual billing inside your subscription portfolio</h2>
+  <p>
+    Beyond any single service, annual billing&rsquo;s stealth cost is
+    visibility: a monthly charge reminds you twelve times a year that
+    you&rsquo;re paying; an annual one surfaces once — which makes it the
+    favorite hiding place of
+    <a href={localizedPath(locale, '/subscription-creep')}>subscription creep</a>.
+    Countermeasures: every annual renewal goes into one calendar (reminder
+    7 days ahead), and every half-yearly
+    <a href={localizedPath(locale, '/tools/subscription-audit')}>subscription audit</a>
+    divides annual fees back to monthly so they compete with everything
+    else. And since annual charges are large single transactions, the
+    rewards-card question rides along — see
+    <a href={localizedPath(locale, '/annual-fee-card-breakeven')}>the annual-fee card breakeven</a>.
+  </p>
+
+  <h2>The decision table</h2>
+  <ul>
+    <li><strong>3+ months of monthly history + discount ≥15% →</strong> switch to annual, set the renewal reminder.</li>
+    <li><strong>New service →</strong> monthly, no exceptions, until month 3. The few dollars of first-purchase annual discount you forgo is cheap tuition for confirming the need is real.</li>
+    <li><strong>Discount &lt;15%, or no-refund policy with middling confidence →</strong> stay monthly. Flexibility is not a consolation prize; it is the product.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general consumer math, not a recommendation of any
+    service or plan; actual prices and refund terms are governed by each
+    provider&rsquo;s published policy. All calculators on this site run
+    locally in your browser; nothing you enter is uploaded to any server.
+  </p>
+</ArticleLayout>

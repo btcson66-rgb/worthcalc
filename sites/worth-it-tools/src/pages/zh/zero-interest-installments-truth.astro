@@ -1,6 +1,9 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { installmentGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'zh';
@@ -34,10 +37,11 @@ const faq = [
 ---
 
 <ArticleLayout
-  title="「0 利率分期」的真相：手續費其實是幾 % 利率？"
-  description="分期 0 利率不等於免費。搞懂為什麼 3% 手續費換算年利率接近 6%，並用計算機算出你的分期真實利率。"
+  title="0 利率分期真的零利率嗎？分期手續費年利率怎麼算"
+  description="用現金價、手續費、付款時點與 IRR 反推 0 利率分期的估算有效年率，含 12 期完整算例、敏感度表與官方來源。"
   locale={locale}
-  updated="2026-07-03"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
     「0 利率，輕鬆 12 期！」不管是信用卡分期、手機空機分期，還是購物網站的
@@ -53,6 +57,8 @@ const faq = [
     <a href={localizedPath(locale, '/tools/installment-true-apr')}>分期付款真實 APR 計算機</a>，
     全程在你的瀏覽器執行，馬上告訴你真實年利率是多少。
   </p>
+
+  <DecisionGuide content={installmentGuides.zh} />
 
   <h2>隱藏成本藏在哪裡</h2>
   <p>「0 利率分期」讓你多花錢的方式，主要有三種：</p>
@@ -97,10 +103,9 @@ const faq = [
   <p>
     先買後付讓事情更複雜。分 3 期、4 期的小額方案，對消費者常常真的是
     零費用，因為費用由店家吸收。那陷阱在哪？三個地方：一是遲繳違約金
-    相對小額帳單非常高；二是較長期的 BNPL 借款方案其實有收利息，年利率
-    可能到 20% 以上；三是心理效果——把 3,600 元的東西包裝成「今天只要
+    相對小額帳單非常高；二是較長期的 BNPL 借款方案可能另收利息；三是心理效果——把 3,600 元的東西包裝成「今天只要
     900」，你會不知不覺買更多。你實際感受到的
-    <strong>BNPL 真實利率</strong>，幾乎完全取決於你有沒有遲繳過。
+    <strong>BNPL 真實成本</strong>，要依合約、付款時間、帳戶費用與是否遲繳分開計算；不要把違約情境混進正常付款的基本情境。
   </p>
 
   <h2>判斷流程：五個步驟</h2>
@@ -109,7 +114,7 @@ const faq = [
     <li>把分期要付的錢全部加總：每一期的金額，加上所有手續費。</li>
     <li>把數字丟進<a href={localizedPath(locale, '/tools/installment-true-apr')}>計算機</a>，算出真實年利率。</li>
     <li>跟你的替代選項比較——現金放著的利息或投資報酬，或是可以先還掉的其他債務利率。</li>
-    <li>最後才做決定。真實利率低於你的資金報酬率，分期沒問題；「0 利率」算出來是 12%，那就只是穿了戲服的高利貸款。</li>
+    <li>最後才做決定。比較利率之外也要看負擔能力；就算真的零費用，同時疊加太多筆月付，仍可能讓緊急預備金失去空間。</li>
   </ol>
 
   <h2>更大的模式：小額固定支出的疊加</h2>

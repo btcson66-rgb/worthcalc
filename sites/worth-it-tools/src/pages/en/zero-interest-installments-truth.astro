@@ -1,6 +1,9 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { installmentGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
@@ -34,10 +37,11 @@ const faq = [
 ---
 
 <ArticleLayout
-  title="The Truth About 0% Installment Plans"
-  description="That 0% installment plan may hide a real interest rate. Learn why a 3% handling fee is closer to 6% APR, and check your plan's true cost."
+  title="How to Calculate the Real APR of a 0% Installment Plan"
+  description="Calculate the estimated annual rate behind a 0% installment plan using cash price, fees, payment timing, IRR and a worked 12-month example."
   locale={locale}
-  updated="2026-07-03"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
     "0% interest, 12 easy payments." It sounds like free money — and retailers,
@@ -55,6 +59,8 @@ const faq = [
     — it runs entirely in your browser and gives you the real annual rate
     instantly.
   </p>
+
+  <DecisionGuide content={installmentGuides.en} />
 
   <h2>Where the hidden cost hides</h2>
   <p>
@@ -112,11 +118,12 @@ const faq = [
     often genuinely free to the customer — the merchant pays the BNPL provider
     a cut instead. So where is the catch? Three places: late fees that are
     huge relative to small balances, longer BNPL financing plans that do
-    charge interest (sometimes 20-36% APR), and the well-documented tendency
+    charge interest, and the tendency
     to spend more when a $120 purchase is framed as "$30 today." The
     <strong>BNPL real interest rate</strong> you personally experience depends
-    almost entirely on whether you ever pay late — one late fee on a $60
-    purchase can exceed any credit card's annualized cost.
+    on the exact contract, payment timing, account charges, and whether you pay
+    late. Keep penalty costs outside the on-time base case, then test them as a
+    separate downside scenario.
   </p>
 
   <h2>How to decide: a simple framework</h2>
@@ -125,7 +132,7 @@ const faq = [
     <li>Add up everything you will actually pay on the plan: all installments plus all fees.</li>
     <li>Run the numbers through the <a href={localizedPath(locale, '/tools/installment-true-apr')}>calculator</a> to get the true APR.</li>
     <li>Compare it against your alternatives — what your savings earn, or the rate on other debt you could pay down instead.</li>
-    <li>Only then decide. A true APR under what your money earns elsewhere is fine; a "0%" plan that solves to 12% is just an expensive loan in a costume.</li>
+    <li>Only then decide. Compare like with like, but also check affordability: even a genuinely free plan is unsafe if several monthly commitments leave no room for an emergency.</li>
   </ol>
 
   <h2>The bigger pattern: small recurring costs add up</h2>

@@ -5,11 +5,24 @@ const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const failures = [];
-const nativeMarkers = {
-  es: ['movimientos bancarios', 'permanencia', '12,99 €'],
-  fr: ['relevés bancaires', 'préavis', '13,99 €'],
-  de: ['Kontoauszug', 'Kündigungsfrist', '11,99 €'],
-};
+const editorialRoutes = [
+  {
+    slug: 'subscription-creep',
+    nativeMarkers: {
+      es: ['movimientos bancarios', 'permanencia', '12,99 €'],
+      fr: ['relevés bancaires', 'préavis', '13,99 €'],
+      de: ['Kontoauszug', 'Kündigungsfrist', '11,99 €'],
+    },
+  },
+  {
+    slug: 'zero-interest-installments-truth',
+    nativeMarkers: {
+      es: ['precio al contado', 'comisión de apertura', '5,63 %'],
+      fr: ['prix comptant', 'frais de dossier', '5,63 %'],
+      de: ['Barpreis', 'Rahmenkredit', '5,63 %'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -20,37 +33,42 @@ function read(relativePath) {
   return readFileSync(file, 'utf8');
 }
 
-for (const locale of locales) {
-  const html = read(`${locale}/subscription-creep/index.html`);
-  if (!html) continue;
+for (const article of editorialRoutes) {
+  for (const locale of locales) {
+    const html = read(`${locale}/${article.slug}/index.html`);
+    if (!html) continue;
 
-  for (const hreflang of hreflangs) {
-    if (!html.includes(`hreflang="${hreflang}"`)) {
-      failures.push(`/${locale}/subscription-creep/ missing hreflang=${hreflang}`);
+    for (const hreflang of hreflangs) {
+      if (!html.includes(`hreflang="${hreflang}"`)) {
+        failures.push(`/${locale}/${article.slug}/ missing hreflang=${hreflang}`);
+      }
     }
-  }
 
-  for (const marker of ['class="direct-answer"', '<table', 'class="source-list"', 'class="last-verified"']) {
-    if (!html.includes(marker)) failures.push(`/${locale}/subscription-creep/ missing ${marker}`);
-  }
-
-  for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
-    if (!html.includes(`"@type":"${schemaType}"`)) {
-      failures.push(`/${locale}/subscription-creep/ missing ${schemaType} schema`);
+    for (const marker of ['class="direct-answer"', '<table', 'class="source-list"', 'class="last-verified"']) {
+      if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing ${marker}`);
     }
-  }
 
-  if (nativeMarkers[locale]) {
-    for (const marker of nativeMarkers[locale]) {
-      if (!html.includes(marker)) failures.push(`/${locale}/subscription-creep/ missing native-market marker: ${marker}`);
+    for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
+      if (!html.includes(`"@type":"${schemaType}"`)) {
+        failures.push(`/${locale}/${article.slug}/ missing ${schemaType} schema`);
+      }
+    }
+
+    const markers = article.nativeMarkers[locale];
+    if (markers) {
+      for (const marker of markers) {
+        if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing native-market marker: ${marker}`);
+      }
     }
   }
 }
 
 const sitemap = read('sitemap-0.xml');
-for (const locale of ['es', 'fr', 'de']) {
-  const url = `https://worthcalc.win/${locale}/subscription-creep/`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+for (const article of editorialRoutes) {
+  for (const locale of ['es', 'fr', 'de']) {
+    const url = `https://worthcalc.win/${locale}/${article.slug}/`;
+    if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  }
 }
 
 for (const [locale, slug] of [
@@ -71,4 +89,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 5 subscription variants, 3 new routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 2 complete five-locale topics, 6 added routes, 4 enriched high-value tools.');

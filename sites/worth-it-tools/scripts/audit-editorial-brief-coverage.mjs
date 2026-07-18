@@ -36,13 +36,14 @@ const briefRoutes = [
   { id: '21', slug: 'upgrade-your-phone-or-keep-it' },
   { id: '22', slug: 'energy-efficient-appliance-payback' },
   { id: '23', slug: 'cost-per-use-expensive-item' },
+  { id: '24', slug: 'bulk-buying-vs-small-packages' },
 ];
 
 const releaseFloor = {
-  html: 150,
-  editorial: 118,
-  alignedVariants: 115,
-  compliantVariants: 115,
+  html: 153,
+  editorial: 121,
+  alignedVariants: 118,
+  compliantVariants: 118,
   completeTopics: 23,
 };
 

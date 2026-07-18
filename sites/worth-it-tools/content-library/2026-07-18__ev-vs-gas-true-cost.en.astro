@@ -1,0 +1,118 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Is an EV actually cheaper than a gas car?',
+    answer:
+      'It depends mostly on your annual mileage and electricity source. Per-mile energy costs favor the EV (especially with home charging), and maintenance almost always does — but the purchase premium and resale uncertainty can erase both. Total cost of ownership (TCO) adds all five pieces; only the total answers the question.',
+  },
+  {
+    question: 'What is TCO (total cost of ownership)?',
+    answer:
+      'Every cost of owning the vehicle spread over your holding period: purchase price (after incentives) + energy + maintenance + insurance and fees − resale value. Comparing only "charging is cheaper than gas" skips the purchase gap and resale — which can flip the conclusion entirely.',
+  },
+  {
+    question: 'How do I compare charging cost with gas fairly?',
+    answer:
+      'Reduce both to cost per mile. Home charging: kWh price × consumption (miles/kWh varies by model). Public fast charging can cost two to three times home rates — a mostly-fast-charging EV loses much of its energy advantage. Gas: price per gallon ÷ mpg. Then multiply both by your real annual mileage.',
+  },
+  {
+    question: 'Should battery degradation be counted?',
+    answer:
+      'Count it inside resale value rather than as a separate line: batteries with strong warranties rarely need out-of-pocket replacement during a typical holding period, but buyer uncertainty about battery health is a real drag on used-EV prices. A conservative resale estimate covers it.',
+  },
+  {
+    question: 'Can I use the numbers in this article directly?',
+    answer:
+      'No — fuel prices, electricity rates, and incentives vary by region and change constantly. The figures here are placeholders that demonstrate the method. Run your own mileage and local rates through the EV vs gas calculator for your answer.',
+  },
+];
+---
+
+<ArticleLayout
+  title="EV vs Gas: The Total Cost of Ownership Math — Not Just Fuel vs Charging"
+  description="'Charging costs less than gas' is one-fifth of the answer. The five-part TCO method — purchase gap, energy, maintenance, fees, resale — where annual mileage decides the winner. Free calculator included."
+  locale={locale}
+  updated="2026-07-18"
+>
+  <p>
+    The EV camp says &ldquo;never buy gas again.&rdquo; The gas camp says
+    &ldquo;the sticker premium takes a decade to earn back.&rdquo; Both are
+    computing one line of a five-line problem. The full comparison is TCO —
+    total cost of ownership: every dollar the vehicle costs you, spread over
+    the years you keep it. This article walks the method; bring your own
+    numbers to the free
+    <a href={localizedPath(locale, '/tools/ev-vs-gas')}>EV vs gas calculator</a>.
+  </p>
+
+  <h2>The five TCO lines — skip one and the answer can flip</h2>
+  <ol>
+    <li><strong>Purchase gap after incentives.</strong> EVs usually carry a sticker premium, but federal/local incentives (changing yearly, varying by region and model eligibility) close part of it. Compare what you would actually pay, not MSRPs.</li>
+    <li><strong>Energy.</strong> Gas versus charging — where the charging <em>mix</em> matters: home charging is the cheap case; frequent public fast charging can run two to three times the home rate and erode most of the advantage.</li>
+    <li><strong>Maintenance.</strong> The most underrated EV edge: no oil changes, spark plugs, or exhaust work, and regenerative braking stretches brake life. Annual maintenance often runs a third to half of a comparable gas car&rsquo;s.</li>
+    <li><strong>Insurance and fees.</strong> EV insurance can run somewhat higher (repair costs); meanwhile some regions charge EV road fees to replace gas taxes. Small lines, but they belong in the total.</li>
+    <li><strong>Resale value.</strong> Gas cars have mature, predictable depreciation curves. Used-EV prices swing more — battery-health uncertainty and rapid new-model iteration both push down. Estimate conservatively.</li>
+  </ol>
+
+  <h2>The decider: annual mileage</h2>
+  <p>
+    Every EV advantage — cheaper energy per mile, cheaper maintenance per
+    mile — scales with miles driven, while the purchase premium is fixed.
+    Illustrative math (placeholder rates; substitute your own): if the EV
+    saves $0.08 per mile on energy and maintenance combined, a $6,000
+    effective purchase premium needs 75,000 miles to break even.
+  </p>
+  <ul>
+    <li>Drive 6,000 miles/year → breakeven in ~12.5 years — likely never during your ownership.</li>
+    <li>Drive 12,000 miles/year → ~6 years — plausible if you hold long.</li>
+    <li>Drive 20,000 miles/year → under 4 years — the EV wins comfortably.</li>
+  </ul>
+  <p>
+    That is why &ldquo;are EVs cheaper?&rdquo; has no universal answer:
+    <strong>the premium is a fixed cost, the savings are per-mile</strong>.
+    Estimate your real annual mileage from the odometer, not from optimism,
+    before anything else.
+  </p>
+
+  <h2>A worked five-year example</h2>
+  <p>
+    Placeholder scenario: 12,000 miles/year, five-year hold. Gas car at
+    $28,000; EV at $34,000 after incentives.
+  </p>
+  <ul>
+    <li>Energy: gas at $0.12/mile × 60,000 = $7,200; EV (mostly home charging) at $0.045/mile × 60,000 = $2,700</li>
+    <li>Maintenance: gas $700/year × 5 = $3,500; EV $300/year × 5 = $1,500</li>
+    <li>Resale: gas returns $11,000; EV returns $12,500 (conservative)</li>
+  </ul>
+  <p>
+    Five-year totals: gas 28,000 + 7,200 + 3,500 − 11,000 =
+    <strong>$27,700</strong>; EV 34,000 + 2,700 + 1,500 − 12,500 =
+    <strong>$25,700</strong> — a $2,000 EV win <em>in this scenario</em>.
+    Halve the mileage or shift charging to public fast chargers and the
+    result flips. <strong>Parameters decide, not camps</strong> — which is
+    the whole point of running the
+    <a href={localizedPath(locale, '/tools/ev-vs-gas')}>calculator</a>
+    with your own numbers.
+  </p>
+
+  <h2>Three non-financial factors the math can&rsquo;t carry</h2>
+  <ul>
+    <li><strong>Charging access.</strong> A driveway outlet changes everything; street parking with no home charging quietly moves you onto expensive public rates and adds errand time — and time has a price too; see <a href={localizedPath(locale, '/commute-true-cost')}>the true cost of commuting</a>.</li>
+    <li><strong>Policy drift.</strong> Incentives, EV fees, and electricity tariffs all move. Treating today&rsquo;s subsidy as permanent is the classic optimism error.</li>
+    <li><strong>Life changes.</strong> TCO assumes your mileage and holding period stay put. A job move rewrites the parameters — estimating the holding period conservatively makes the conclusion sturdier.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the EV vs gas calculator runs entirely in your browser —
+    nothing you enter is uploaded to any server. All figures in this article
+    are illustrative placeholders, not a recommendation of any vehicle,
+    plan, or purchase; actual prices, incentives, and rates are set by
+    official sources. This is not financial advice.
+  </p>
+</ArticleLayout>

@@ -1,0 +1,109 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is work-hours pricing?',
+    answer:
+      'Divide any price by your true hourly wage to restate it as hours of your working life: $300 headphones at a true $18/hour = 17 hours = two working days. Dollars are abstract; hours are not — the conversion moves the yardstick back onto your own life.',
+  },
+  {
+    question: 'How does true hourly wage differ from nominal?',
+    answer:
+      'Nominal = salary ÷ contracted hours. True wage subtracts what the job quietly takes: commute time, unpaid overtime, and work-driven spending (commuting costs, lunches out, work wardrobe). A $60k salary at $28.80 nominal often lands near $22 true once a 45-minute-each-way commute enters. Prices computed against the true wage get "more expensive" — that is the honest version.',
+  },
+  {
+    question: 'Won\'t this make me afraid to buy anything?',
+    answer:
+      'It cuts both ways: some conversions come out "two hours — take it," others "forty hours — wait." It eliminates purchases that happened only because the number looked small, and keeps the ones you still want knowing the cost — which you then enjoy more, not less.',
+  },
+  {
+    question: 'How do couples or families use it?',
+    answer:
+      'Use a combined true wage for shared expenses, or each partner\'s own for split ones. It shines in family conversations: "this TV is a day and a half of work from each of us" lands better than "$800 is a lot."',
+  },
+  {
+    question: 'How is this different from the latte factor?',
+    answer:
+      'The latte factor totals repeated small spending over years; work-hours pricing prices a single purchase in the moment. Complementary: audit habits with the former, audit single buys with the latter — one governs the flow, the other the ticket.',
+  },
+];
+---
+
+<ArticleLayout
+  title="How Many Hours of You Does It Cost? Work-Hours Pricing and Your True Wage"
+  description="$300 headphones = two working days at a true $18/hour. First compute the true wage (nominal minus commute and hidden work costs), then restate prices in hours — switching the unit of spending from dollars to your life."
+  locale={locale}
+  updated="2026-07-23"
+>
+  <p>
+    &ldquo;Is $300 expensive?&rdquo; — unanswerable, because a dollar
+    weighs differently for everyone. Rephrase and it answers itself:
+    <strong>&ldquo;would you work two days for this?&rdquo;</strong>
+    That is work-hours pricing: translating prices into your own time.
+    But first the exchange rate has to be right — your true hourly wage.
+  </p>
+
+  <h2>Step one: compute the true wage (most people overrate theirs by ~20%)</h2>
+  <p>
+    Nominal wage = salary ÷ contracted hours. But the job takes more than
+    the contracted hours:
+  </p>
+  <ul>
+    <li><strong>Commute time</strong> — 45 minutes each way is 33 extra hours a month given to the job (the full costing lives in <a href={localizedPath(locale, '/commute-true-cost')}>the true cost of commuting</a>).</li>
+    <li><strong>Unpaid overtime and on-call</strong> — your actual average clock-out, not the contract&rsquo;s.</li>
+    <li><strong>Work-driven spending</strong> — commuting costs, lunch-out premiums, work wardrobe: subtract from the numerator.</li>
+  </ul>
+  <p>
+    <strong>true wage = (salary − work-driven costs) ÷ (contracted hours +
+    commute + real overtime)</strong>
+  </p>
+  <p>
+    Example: $5,000/month, nominal $28.40. Subtract 33 commute hours, 10
+    overtime hours, $300 of work-driven costs: true wage = 4,700 ÷ 219 ≈
+    <strong>$21.50</strong> — 24% below nominal. The first computation
+    stings a little; it is also the real rate at which you trade with the
+    world.
+  </p>
+
+  <h2>Step two: restate prices as hours</h2>
+  <ul>
+    <li>A $6 latte = 17 minutes</li>
+    <li>A $95 dinner out = half a working day</li>
+    <li>$300 headphones = two working days</li>
+    <li>A $1,200 phone = a month and a half of work... after taxes, closer to two</li>
+  </ul>
+  <p>
+    Notice the shift: <strong>the benchmark moves from &ldquo;what the
+    seller charges&rdquo; to &ldquo;what your life trades.&rdquo;</strong>
+    In the &ldquo;save $100 off list price&rdquo; frame you compare
+    against the sticker; in the &ldquo;one and a half days of work&rdquo;
+    frame you compare against your own hours — which is the thing you
+    actually spend.
+  </p>
+
+  <h2>Three purchases it catches best</h2>
+  <ol>
+    <li><strong>Too-small-to-think purchases:</strong> sums that never trigger deliberation — restated as &ldquo;an hour of me,&rdquo; many self-sort into &ldquo;not worth it.&rdquo; Complementary to the <a href={localizedPath(locale, '/latte-factor-honest-math')}>latte factor</a>: that audits the recurring flow, this audits the single ticket.</li>
+    <li><strong>Upgrade deltas:</strong> the gap between good-enough and flagship reads clearest in hours — &ldquo;$400 more for the top trim&rdquo; = &ldquo;three more days at work,&rdquo; and the worth-it question turns concrete instantly.</li>
+    <li><strong>Emotional big buys:</strong> restated as &ldquo;two months of work,&rdquo; impulses cool for 24 hours on their own — not forbidden, just translated.</li>
+  </ol>
+
+  <h2>Two boundary rules</h2>
+  <ul>
+    <li><strong>Not a guilt engine.</strong> The tool makes costs visible; it does not make all spending shameful. Whatever you still want after the conversion, buy happily — you are now the most clear-eyed buyer in the store.</li>
+    <li><strong>The rate runs both directions.</strong> Spending money to buy time back — dishwasher, delivery, outsourcing — is judged by the same wage: when an hour saved costs less than your true wage, the trade is rational. Work-hours pricing is an exchange rate, not a spending ban.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is a general decision framework, not financial advice;
+    salary and hour figures are illustrative. All calculators on this site
+    run locally in your browser; nothing you enter is uploaded to any
+    server.
+  </p>
+</ArticleLayout>

@@ -1,0 +1,114 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is the definition of opportunity cost?',
+    answer:
+      'Opportunity cost = the value of the next-best alternative you give up when making a choice. Two precision points: count only the single next-best option (not the sum of everything foregone), and note that it never appears on any bill — which is why it is the most ignored cost and why bookkeeping-cheap decisions are often truly expensive.',
+  },
+  {
+    question: 'How does opportunity cost differ from what I actually pay?',
+    answer:
+      'Actual spending (accounting cost) is visible cash flow; opportunity cost is the invisible "could have had but gave up." True economic cost is the sum of both. Free things have zero accounting cost and often the highest opportunity cost — queueing three hours for a free giveaway is the classic case.',
+  },
+  {
+    question: 'How do I value my time for these calculations?',
+    answer:
+      'Use your self-set buy-back price — what you would genuinely pay to reclaim one hour — typically 25–50% of your wage, not the full wage, since saved time mostly becomes rest rather than paid work. Priced this way, queueing, deal-hunting, and DIY frequently flip from "worth it" to "not."',
+  },
+  {
+    question: 'Why can finding the cheapest price still be a losing trade?',
+    answer:
+      'Spending 2 hours to save $8 sells your time at $4/hour. At a $10/hour self-price, that "saving" nets −$12. The rational stop-loss for comparison shopping: expected savings ÷ your hourly price = the maximum time worth spending.',
+  },
+  {
+    question: 'Doesn\'t this make every small decision exhausting?',
+    answer:
+      'Set a thinking threshold: decisions worth less than half an hour of your time price get decided by preference, no analysis. Reserve opportunity-cost thinking for large or recurring decisions — housing, commuting, subscriptions — which is itself the concept correctly applied to your attention.',
+  },
+];
+---
+
+<ArticleLayout
+  title="What Is Opportunity Cost? Five Everyday Examples of the Most Important Invisible Bill"
+  description="Opportunity cost = the value of the next-best option you gave up — never on the receipt, always deciding whether a deal was actually good. Queues, deal-hunting, annual billing, DIY, overtime: five examples that build the muscle."
+  locale={locale}
+  updated="2026-07-25"
+>
+  <p>
+    <strong>Direct answer: opportunity cost is the value of the next-best
+    alternative you give up when you choose something.</strong> It appears
+    on no invoice and no statement, yet every decision pays it. Five
+    everyday examples below install the concept as intuition — it is the
+    engine running quietly inside every calculator on this site.
+  </p>
+
+  <h2>The core idea: receipts record what you paid, never what you passed up</h2>
+  <p>
+    A $5 coffee has a $5 accounting cost — everyone sees it. Opportunity
+    cost asks the other question: <strong>what was the best alternative
+    use of that $5 and those 15 minutes?</strong> Note the definition&rsquo;s
+    precision: only the <em>next-best</em> option counts, not the sum of
+    every road not taken — you forfeit one best path, not all paths.
+  </p>
+
+  <h2>Five everyday examples</h2>
+  <ol>
+    <li>
+      <strong>Queueing for a freebie.</strong> Giveaway worth $12, queue
+      2.5 hours. Accounting cost: zero. Opportunity cost: 2.5 hours&rsquo;
+      next-best use. At a $10/hour self-price you spent $25 of time on $12
+      of goods — a loss before the line even moved. &ldquo;Free&rdquo; is
+      opportunity cost&rsquo;s favorite hiding place.
+    </li>
+    <li>
+      <strong>Hunting a slightly better price.</strong> Two hours across
+      three platforms to save $8 sells your time at $4/hour. The fix is a
+      pre-set stop-loss: target savings ÷ your hourly price = maximum
+      minutes worth spending. Saving $8 justifies 48 minutes at most; then
+      order.
+    </li>
+    <li>
+      <strong>The annual-billing discount.</strong> Prepaying $100 to save
+      $17 removes $100 from your account early and locks the exit. The
+      opportunity cost is the money&rsquo;s alternative uses plus the
+      freedom to quit — precisely what
+      <a href={localizedPath(locale, '/annual-vs-monthly-billing')}>the annual-vs-monthly analysis</a>
+      prices out.
+    </li>
+    <li>
+      <strong>DIY to save a fee.</strong> Assembling the furniture yourself
+      saves $20 and costs 3 hours plus one bout of frustration — a losing
+      trade at a $10/hour time price. Unless you enjoy assembling: then
+      the fun goes on the benefit side. Opportunity-cost analysis always
+      credits joy as revenue.
+    </li>
+    <li>
+      <strong>Overtime pay vs the evening.</strong> Two extra hours earn
+      $50; the opportunity cost is that evening&rsquo;s exercise, family,
+      rest. No universal answer exists, but the universal question does:
+      &ldquo;what did the $50 buy away from me?&rdquo; Most people&rsquo;s
+      first honest answer differs from their habitual choice.
+    </li>
+  </ol>
+
+  <h2>Three working rules</h2>
+  <ul>
+    <li><strong>Price your time once,</strong> at 25–50% of your wage (method in <a href={localizedPath(locale, '/price-in-work-hours')}>work-hours pricing</a>), and settle every time-containing decision with it.</li>
+    <li><strong>Interrogate free things first:</strong> zero accounting cost correlates with maximum opportunity cost — free seminars, free queues, free-shipping cart padding (see <a href={localizedPath(locale, '/free-shipping-threshold')}>the free-shipping math</a>).</li>
+    <li><strong>Set a thinking threshold</strong> against analysis paralysis: below half an hour of time value, decide by preference. Save the framework for large and recurring decisions — commutes, housing, subscription portfolios — where it earns its keep.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general economics education, not financial advice;
+    time prices are illustrative assumptions. All calculators on this site
+    run locally in your browser; nothing you enter is uploaded to any
+    server.
+  </p>
+</ArticleLayout>

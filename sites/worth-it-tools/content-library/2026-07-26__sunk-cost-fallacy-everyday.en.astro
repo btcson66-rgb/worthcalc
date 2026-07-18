@@ -1,0 +1,130 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is the definition of the sunk cost fallacy?',
+    answer:
+      'A sunk cost is anything already spent that no choice can recover — money, time, effort. The fallacy is letting those unrecoverable outlays steer what you do next, like finishing a bad movie "because the ticket is paid." Rational decisions weigh only future costs and benefits; the sunk portion is mathematically irrelevant to every remaining option.',
+  },
+  {
+    question: 'Why do people fall for it?',
+    answer:
+      'Three drivers: loss aversion (admitting the loss hurts more than continuing), self-justification (quitting means the past you chose wrong), and waste aversion (abandoning something paid-for feels sinful). Knowing the drivers doesn\'t grant immunity, but it lets you name which one is pushing you in the moment.',
+  },
+  {
+    question: 'How do I quickly test whether I\'m stuck in a sunk cost?',
+    answer:
+      'The zero-reset test: imagine you are meeting this choice for the first time — no ticket bought, no hours invested. Would you start it today? Yes → continuing is rational. No → the only thing holding you is the past, which offers no refunds. Ten seconds; works on subscriptions, courses, projects, and possessions.',
+  },
+  {
+    question: 'How is this different from healthy persistence?',
+    answer:
+      'Check which direction the reasons point. Persistence cites the future ("three more months earns the license" — a concrete coming benefit); sunk cost cites the past ("I\'ve already put in two years"). Cross out every past-tense reason and see whether the remaining future-tense ones still carry the decision.',
+  },
+  {
+    question: 'Are there exceptions where sunk costs should count?',
+    answer:
+      'Strictly none — spent money stays spent. Two near-exceptions: reputational commitment (quitting mid-promise damages relationships — but that\'s a future cost, not a sunk one), and deliberately using prepayment to bind yourself to the gym or the course — weaponizing the fallacy as a commitment device, which is fine when you know that\'s what you\'re doing.',
+  },
+];
+---
+
+<ArticleLayout
+  title="What Is the Sunk Cost Fallacy? How 'But I Already Paid' Makes Losses Grow"
+  description="Sunk costs are unrecoverable; the fallacy is letting them hijack what you do next. The movie ticket, the buffet, the losing position, the two-year course — four scenes plus a ten-second zero-reset test."
+  locale={locale}
+  updated="2026-07-26"
+>
+  <p>
+    <strong>Direct answer: a sunk cost is anything already spent that no
+    future action can recover; the sunk cost fallacy is letting that
+    unrecoverable past steer the choices still open — when rational
+    decisions should weigh only future costs and benefits.</strong>
+    Obvious on paper, and yet it may be daily life&rsquo;s most expensive
+    thinking error, because it specializes in advising you to double down
+    exactly when you are already losing.
+  </p>
+
+  <h2>The core idea: paid money has no vote on the next step</h2>
+  <p>
+    Thirty minutes into a movie, verdict certain: it&rsquo;s bad. The $15
+    ticket is paid and non-refundable. The live options: (A) sit through
+    90 more minutes, (B) leave and reclaim them. Notice:
+    <strong>the $15 is gone under both options</strong> — it is sunk, and
+    mathematically irrelevant to the choice. The only live variable is
+    the 90 minutes. Yet most people pick A, &ldquo;because the
+    ticket&rsquo;s paid&rdquo; — spending 90 real minutes to honor 15
+    unrecoverable dollars. That is the fallacy&rsquo;s complete anatomy:
+    <strong>because we lost, we add more.</strong>
+  </p>
+
+  <h2>Four everyday scenes</h2>
+  <ol>
+    <li>
+      <strong>&ldquo;Getting my money&rsquo;s worth&rdquo; at the
+      buffet.</strong> The $40 entry is paid; every plate from here costs
+      zero. The correct way to &ldquo;break even&rdquo; is eating until
+      satisfied, not until stuffed — each forced plate isn&rsquo;t
+      reclaiming the ticket, it&rsquo;s paying the sunk $40 a second time
+      in discomfort.
+    </li>
+    <li>
+      <strong>The unused membership.</strong> &ldquo;The annual fee is
+      paid, wasting it would be a shame&rdquo; — the fee is sunk; the live
+      question is whether each future visit is worth your future time.
+      Regret retains no value; it only retains the charge. The audit
+      method lives in <a href={localizedPath(locale, '/subscription-creep')}>subscription creep</a>.
+    </li>
+    <li>
+      <strong>&ldquo;If I sell now the loss becomes real.&rdquo;</strong>
+      The paper loss is already real. Whether to hold should be decided by
+      &ldquo;where is this money best placed today,&rdquo; independent of
+      your entry price. This is the fallacy&rsquo;s most expensive arena —
+      and this paragraph explains a bias only; it is not investment
+      advice.
+    </li>
+    <li>
+      <strong>The two-year course, the half-done project.</strong>
+      &ldquo;I&rsquo;ve put in so much already&rdquo; — the two years are
+      sunk. Zero-reset test: choosing fresh today, would you start this?
+      Yes → continue (the reason lives in the future). No → the fastest
+      stop-loss is now: year three isn&rsquo;t sunk yet, and it is the
+      only thing still savable.
+    </li>
+  </ol>
+
+  <h2>The ten-second tool: the zero-reset test</h2>
+  <p>
+    Facing any &ldquo;but I already…&rdquo; hesitation, ask:
+    <strong>&ldquo;If I were meeting this choice for the first time — no
+    money paid, no time invested — would I start it today?&rdquo;</strong>
+    Yes → carry on; your reasons point forward. No → the only thing
+    keeping you is the past, and the past issues no refunds. The
+    test&rsquo;s power is physical: it deletes the sunk term from the
+    equation, leaving only future terms — which is where
+    <a href={localizedPath(locale, '/opportunity-cost-everyday')}>opportunity cost</a>
+    takes over: every day you stay is a day of the next-best alternative
+    foregone.
+  </p>
+
+  <h2>Why knowing isn&rsquo;t immunity: the three pushers</h2>
+  <ul>
+    <li><strong>Loss aversion:</strong> leaving converts the paper loss into an acknowledged one — acute pain; staying lets you keep pretending it hasn&rsquo;t happened.</li>
+    <li><strong>Self-justification:</strong> quitting indicts your past self&rsquo;s judgment; continuing protects the past self — funded by the future one.</li>
+    <li><strong>Waste aversion:</strong> we were raised not to waste. But the real waste isn&rsquo;t walking out — it&rsquo;s appending good time to a bad choice. The reversal worth memorizing: <strong>a stop-loss isn&rsquo;t waste completed; it&rsquo;s waste stopped.</strong></li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general behavioral-economics education, not financial
+    or investment advice; investment passages describe a cognitive bias
+    only — consult licensed professionals for actual decisions. All
+    calculators on this site run locally in your browser; nothing you
+    enter is uploaded to any server.
+  </p>
+</ArticleLayout>

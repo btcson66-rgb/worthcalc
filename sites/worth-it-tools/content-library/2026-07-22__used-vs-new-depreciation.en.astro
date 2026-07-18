@@ -1,0 +1,108 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'How much does buying used actually save?',
+    answer:
+      'It depends on the category\'s depreciation curve: electronics drop 30–50% in year one, furniture resells for a third or less of retail, cars lose roughly 20% in year one. The common law: the first owner absorbs the steepest depreciation — the used buyer picks up after the cliff.',
+  },
+  {
+    question: 'What is cost per year of use?',
+    answer:
+      '(purchase price − expected resale price) ÷ years of ownership. A $900 new phone kept 3 years with $300 residual = $200/year; the same model used at $550, kept 2 years, resold at $250 = $150/year. Compare on this number — comparing sticker prices alone misleads.',
+  },
+  {
+    question: 'What should never be bought used?',
+    answer:
+      'Safety and hygiene risks: helmets and child car seats (invisible structural damage), mattresses (hygiene and collapsed support), and aging lithium-battery devices where battery health can\'t be verified. Also check whether warranties transfer — some brands tie service to the original purchase.',
+  },
+  {
+    question: 'How do I find real used prices?',
+    answer:
+      'Look at sold prices, not asking prices: auction platforms\' completed listings, marketplace sold histories. Asking prices run 10–20% above what actually clears. Note the price distribution too — an outlier bargain usually has a reason.',
+  },
+  {
+    question: 'Is it cheaper to resell every few years or run things into the ground?',
+    answer:
+      'Depends on the curve\'s shape: the flat middle (years 2–4) has the lowest holding cost, so "replace every 2–3 years while residual value remains" and "use until dead" often land surprisingly close per year. The genuinely expensive habit is replacing in year one — you keep absorbing the steepest segment.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Used or New? Let the Depreciation Curve Price Your Cost Per Year"
+  description="New products depreciate hardest in year one: electronics lose 30–50%, furniture resells at a third. Cost per year = (price − resale) ÷ years — run this formula and many 'buy new' instincts flip. Includes the never-buy-used list."
+  locale={locale}
+  updated="2026-07-22"
+>
+  <p>
+    &ldquo;For a little more you get it brand new — why buy someone&rsquo;s
+    castoff?&rdquo; The sentence works equally well reversed: &ldquo;for
+    that much less you get it nearly new — why pay the unboxing
+    premium?&rdquo; Both feel right because both use the wrong unit. The
+    right unit is <strong>cost per year of use</strong>.
+  </p>
+
+  <h2>The core formula</h2>
+  <p>
+    <strong>cost per year = (purchase price − expected resale) ÷ years held</strong>
+  </p>
+  <p>
+    You never consume the whole machine — you consume a slice of its life,
+    and the buy-sell gap is that slice&rsquo;s price. Example: a new phone
+    at $900, kept three years, residual $300 → $200/year. The same model
+    one year old at $550, kept two years, resold at $250 →
+    <strong>$150/year — 25% cheaper per year, with 39% less capital
+    deployed</strong>. That is the real duel; &ldquo;$900 vs $550&rdquo;
+    or &ldquo;new vs used&rdquo; alone is just sentiment.
+  </p>
+
+  <h2>The depreciation curve: why the first owner always pays most</h2>
+  <ul>
+    <li><strong>Electronics:</strong> −30–50% in year one (each new release reprices the old), flattening in years two and three.</li>
+    <li><strong>Furniture:</strong> halves at the store door and commonly resells below a third — bulky, costly to ship, non-standard. Which also makes used furniture the deepest-discount category in the entire market.</li>
+    <li><strong>Cars:</strong> −15–20% in year one, then roughly −10% a year, decaying — the 2–3-year-old &ldquo;nearly new&rdquo; car sits exactly where the curve turns flat.</li>
+    <li><strong>Slow depreciators:</strong> professional tools, high-end camera lenses, some instruments barely fall — buying new costs little there, and used offers little.</li>
+  </ul>
+  <p>
+    One sentence: <strong>the first owner absorbs the cliff; the used buyer
+    boards on the plateau</strong>. Buying used isn&rsquo;t scavenging —
+    it&rsquo;s letting someone else pay the unboxing fee.
+  </p>
+
+  <h2>Three used-price haircuts: not every discount is a win</h2>
+  <ol>
+    <li><strong>Remaining life.</strong> Mechanical and battery products have finite lifespans. 40% cheaper with only 40% of life left saves nothing per year — for anything lithium-powered, demand battery health or cycle counts; unverifiable means walk away from that unit.</li>
+    <li><strong>Warranty reset.</strong> New comes with a warranty and consumer-law protection; used is usually as-is. Price the self-carried repair risk — roughly, add the expected repair value (see <a href={localizedPath(locale, '/extended-warranty-math')}>the extended-warranty math</a>) to the used total.</li>
+    <li><strong>Inspection overhead.</strong> Meetups, function tests, provenance checks cost time and risk. The cheaper the item, the larger this fixed cost looms — for low-priced goods, buy new; the inspection time outprices the discount.</li>
+  </ol>
+
+  <h2>The four-question flow</h2>
+  <ol>
+    <li>Is year-one depreciation steep in this category? (steep → used advantage is real)</li>
+    <li>Does the item hide a lifespan black box? (battery, motor → require data or skip the unit)</li>
+    <li>Is the sold-price gap ≥ 25%? (below that, the new item&rsquo;s warranty and zero risk usually win)</li>
+    <li>Does used still win on cost per year? (yes → buy used; tie → buy new and pocket the time)</li>
+  </ol>
+  <p>
+    Scale the residual-value thinking up and you get vehicle math —
+    resale is one of the five lines in
+    <a href={localizedPath(locale, '/ev-vs-gas-true-cost')}>the EV vs gas TCO</a> —
+    and for the other axis of &ldquo;is this worth it,&rdquo; there&rsquo;s
+    <a href={localizedPath(locale, '/commute-true-cost')}>pricing things in your time</a>.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general consumer math, not a recommendation of any
+    product or marketplace; depreciation figures are magnitude-level market
+    observations. Verify provenance and transact safely when buying used.
+    All calculators on this site run locally in your browser; nothing you
+    enter is uploaded to any server.
+  </p>
+</ArticleLayout>

@@ -1,0 +1,127 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'Are extended warranties worth it?',
+    answer:
+      'Judge by expected value: warranty price vs (failure probability × average repair cost). Most consumer electronics fail in the single digits of percent during the extension window, while the warranty is priced at 10–20% of the product — so most extended warranties lose on expectation. That is also why they carry some of retail\'s fattest margins. Exceptions below.',
+  },
+  {
+    question: 'Where do I get failure rates?',
+    answer:
+      'Exact numbers are hard; magnitudes are not. Consumer-organization reliability surveys put most appliances and electronics at roughly 5–15% failure in years 2–5, with wide category spread — laptops and robot vacuums high, TVs and audio low. Start with 10% as a baseline and adjust by category; it beats the salesperson\'s "these break all the time."',
+  },
+  {
+    question: 'When does the warranty actually make sense?',
+    answer:
+      'Three cases: products whose repair cost approaches replacement price (flagship phone screens, thin-laptop boards); high-failure categories (anything with motors, water paths, or moving parts); and equipment you cannot afford to have down — where you\'re buying certainty, not expected value, which is a legitimate preference.',
+  },
+  {
+    question: 'Can my credit card replace a paid warranty?',
+    answer:
+      'Many cards automatically extend the manufacturer\'s warranty (commonly by one year) — check yours before paying anything; it is the easiest free layer to claim. Mind the fine print: per-item caps, registration requirements, and keep the full receipt.',
+  },
+  {
+    question: 'What is the self-insurance fund approach?',
+    answer:
+      'Every time you decline a warranty, move that exact amount into a dedicated account. Since warranties lose on expectation, the account outgrows your repair bills over time — you become the insurer and keep the margin. Requirements: actually transfer the money, and be able to absorb one early large repair.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Is the Extended Warranty Worth It? The Expected-Value Math and Three Real Exceptions"
+  description="Extended warranties cost 10–20% of the product; most electronics fail under 10% of the time in the window. The expectation says no — except for three cases: can't-afford-to-repair, breaks-often, can't-afford-downtime."
+  locale={locale}
+  updated="2026-07-21"
+>
+  <p>
+    The checkout ritual: &ldquo;Add two years of protection for $79?&rdquo;
+    You get three seconds. This article pre-computes those three seconds —
+    one expected-value formula, plus the three exceptions the formula
+    can&rsquo;t see.
+  </p>
+
+  <h2>The formula: a warranty is a lottery ticket in reverse</h2>
+  <p>
+    <strong>expected value = failure probability in the window × average
+    repair cost</strong>. Worth buying only when that exceeds the warranty
+    price.
+  </p>
+  <p>
+    Example: an $800 laptop, two-year extension for $120. Category failure
+    rate in the window ≈ 12%, average repair ≈ $300: EV = 0.12 × 300 =
+    <strong>$36</strong>. You&rsquo;re paying $120 for $36 of expected
+    payout — 30 cents on the dollar. Not a fluke: extended warranties are
+    among retail&rsquo;s highest-margin products, and the sales pitch&rsquo;s
+    enthusiasm correlates precisely with that margin.
+  </p>
+
+  <h2>The mental-math screens</h2>
+  <ul>
+    <li><strong>Warranty ÷ product price &gt; 15% →</strong> near-certain loss; decline.</li>
+    <li><strong>Repair cost ÷ product price &lt; 30% →</strong> you can absorb the repair; no insurance needed.</li>
+    <li><strong>Check the start date:</strong> &ldquo;two-year extension&rdquo; often counts from purchase and overlaps the manufacturer&rsquo;s first year — the real added coverage may be just one year. Ask.</li>
+  </ul>
+
+  <h2>Three exceptions where buying is rational</h2>
+  <ol>
+    <li>
+      <strong>Repair ≈ replacement.</strong> Flagship phone screens and
+      thin-laptop logic boards run 50–70% of the product&rsquo;s price per
+      incident. There, &ldquo;failure&rdquo; means &ldquo;rebuy,&rdquo; and
+      rerunning the formula with the true repair figure can flip the sign.
+    </li>
+    <li>
+      <strong>High-failure categories.</strong> Motors, water paths, moving
+      parts — robot vacuums, washers, espresso machines — fail markedly
+      more than solid-state electronics. At 20%+ failure rates, the same
+      formula produces a different answer.
+    </li>
+    <li>
+      <strong>Downtime you can&rsquo;t afford.</strong> The machine you earn
+      with, or an elderly parent&rsquo;s air conditioner: here you&rsquo;re
+      buying next-day-repair certainty, not expected value. Paying a premium
+      for certainty is a legitimate risk preference — as long as you know
+      that&rsquo;s the product.
+    </li>
+  </ol>
+
+  <h2>Two free layers before you pay</h2>
+  <p>
+    <strong>Your credit card first:</strong> many cards silently extend
+    manufacturer warranties by a year — check the benefits page, keep the
+    receipt. <strong>Then consumer law:</strong> statutory warranty rights
+    plus the standard manufacturer year mean the paid extension often only
+    truly covers years two and three. Shrink the formula&rsquo;s window to
+    that real interval and the expected value shrinks with it.
+  </p>
+
+  <h2>The systematic answer: self-insure</h2>
+  <p>
+    The elegant version flips the role: <strong>every declined warranty
+    sends that exact amount into a dedicated fund</strong>. Because
+    warranties lose on expectation, the fund outgrows your actual repair
+    bills over time — you become the insurance company and keep the
+    margin. It&rsquo;s the
+    <a href={localizedPath(locale, '/latte-factor-honest-math')}>latte factor</a>
+    run in reverse: repeated small savings only count when automated. Two
+    conditions: actually move the money, and be able to survive one big
+    repair early in the fund&rsquo;s life.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general consumer math, not a recommendation of any
+    warranty, insurance product, or purchase; failure rates are
+    magnitude-level estimates from public reliability surveys — actual
+    terms are governed by each vendor and your local consumer law. All
+    calculators on this site run locally in your browser; nothing you
+    enter is uploaded to any server.
+  </p>
+</ArticleLayout>

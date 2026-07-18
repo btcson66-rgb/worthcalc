@@ -33,13 +33,14 @@ const briefRoutes = [
   { id: '18', slug: 'work-from-home-vs-commuting-hidden-costs' },
   { id: '19', slug: 'repair-or-replace-decision-formula' },
   { id: '20', slug: 'is-an-extended-warranty-worth-it' },
+  { id: '21', slug: 'upgrade-your-phone-or-keep-it' },
 ];
 
 const releaseFloor = {
-  html: 135,
-  editorial: 103,
-  alignedVariants: 100,
-  compliantVariants: 100,
+  html: 138,
+  editorial: 106,
+  alignedVariants: 103,
+  compliantVariants: 103,
   completeTopics: 20,
 };
 

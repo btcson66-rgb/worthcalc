@@ -3,11 +3,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import RentBuyBreakevenCalculator from '../../components/RentBuyBreakevenCalculator.astro';
-import type { Locale } from '../../consts';
+import { LOCALES } from '../../consts';
 import { rentBuyBreakevenGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -43,6 +43,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿El año de equilibrio recomienda comprar?', answer: 'No. Es un cruce de costes simplificado. Cuota asumible, ahorro de emergencia, tipo variable, derramas, fiscalidad y cambios laborales requieren análisis adicional.' },
     ],
   },
+  fr: {
+    title: 'Combien d’années faut-il rester pour que l’achat devienne plus avantageux que la location ?',
+    description: 'Calculez la première année d’équilibre avec capital restant dû, frais d’acquisition et revente, entretien, loyer, valeur et coût d’opportunité.',
+    faq: [
+      { question: 'Faut-il toujours rester huit ans pour rentabiliser un achat ?', answer: 'Non. Huit ans est une règle approximative, pas un calcul. Le taux, les frais d’acquisition et de revente, les travaux, le loyer comparable, l’évolution du prix et le rendement de l’apport déplacent l’équilibre.' },
+      { question: 'Pourquoi soustraire le capital restant dû à la revente ?', answer: 'Le prêt doit être remboursé avec le prix de vente. Le capital déjà amorti n’est pas perdu : il se traduit par une dette plus faible et donc un produit net supérieur, si le prix de vente le permet.' },
+      { question: 'La résidence principale est-elle toujours exonérée de plus-value ?', answer: 'Service-Public indique une exonération de la plus-value pour l’habitation habituelle et effective vendue comme résidence principale. Les autres situations et conditions diffèrent ; le modèle ne détermine pas automatiquement votre fiscalité.' },
+      { question: 'Que faire si aucun équilibre n’apparaît ?', answer: 'Conservez “non atteint” pour l’horizon choisi. Ne prolongez pas artificiellement la durée et n’augmentez pas la hausse du prix pour obtenir un gagnant.' },
+      { question: 'L’année d’équilibre signifie-t-elle qu’il faut acheter ?', answer: 'Non. Elle décrit un croisement de coûts. Capacité de remboursement, épargne de sécurité, mobilité, copropriété, travaux et besoins de logement restent des décisions séparées.' },
+    ],
+  },
+  de: {
+    title: 'Wie lange müssen Sie bleiben, damit Kaufen günstiger als Mieten werden kann?',
+    description: 'Berechnen Sie das erste Break-even-Jahr mit Restschuld, Kauf- und Verkaufskosten, Hausgeld, Instandhaltung, Miete, Wertentwicklung und Eigenkapitalrendite.',
+    faq: [
+      { question: 'Ist Kaufen nach zehn Jahren immer günstiger als Mieten?', answer: 'Nein. Zehn Jahre sind keine finanzielle Garantie. Zins, Kaufnebenkosten, Vorfälligkeitsentschädigung, Hausgeld, Sanierung, Vergleichsmiete, Wertentwicklung und Eigenkapitalrendite können den Punkt verschieben oder verhindern.' },
+      { question: 'Warum wird beim Verkauf die Restschuld abgezogen?', answer: 'Das offene Darlehen wird aus dem Erlös zurückgezahlt. Bereits getilgtes Kapital ist nicht verloren; es zeigt sich in einer niedrigeren Restschuld und damit höherem Nettoerlös.' },
+      { question: 'Bedeutet die Zehnjahresfrist automatisch Steuerfreiheit?', answer: 'Nein. § 23 EStG enthält eine Zehnjahresregel für bestimmte private Grundstücksgeschäfte und Ausnahmen für Eigennutzung. Anschaffungsdatum, Nutzung und Einzelfall müssen steuerlich geprüft werden.' },
+      { question: 'Was bedeutet kein Break-even innerhalb von 30 Jahren?', answer: 'Nur, dass die eingegebenen Annahmen innerhalb dieses Horizonts keinen niedrigeren Kaufkostenwert erzeugen. Ändern Sie die Prognose nicht nur, um einen Schnittpunkt zu erzwingen.' },
+      { question: 'Ist das Break-even-Jahr eine Kaufempfehlung?', answer: 'Nein. Leistbare Rate, Zinsbindung, Anschlussfinanzierung, Rücklagen, Mobilität und Objektzustand müssen unabhängig geprüft werden.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -67,10 +89,24 @@ const calculators = {
       heading: 'Calculadora del año de equilibrio entre comprar y alquilar', intro: 'Se simula una venta al final de cada año y se muestra el primer cruce. Sustituye impuestos, escritura, FEIN, comunidad, mantenimiento y alquiler por datos reales.', purchasePrice: 'Precio de compra de la vivienda', downPayment: 'Entrada', annualRate: 'TIN hipotecario (%)', termYears: 'Plazo de la hipoteca (años)', buyingCosts: 'Impuestos y gastos iniciales de compraventa e hipoteca', annualOwnerCosts: 'IBI, seguro, comunidad y mantenimiento al año', sellingCostRate: 'Coste de venta sobre valor futuro (%)', appreciationRate: 'Cambio anual del precio (%)', monthlyRent: 'Alquiler mensual comparable', rentGrowthRate: 'Subida anual del alquiler (%)', opportunityRate: 'Rentabilidad del efectivo inicial (%)', maxYears: 'Máximo de años analizados', breakEvenYear: 'Primer año de equilibrio', ownerCost: 'Coste neto de compra en ese año', renterCost: 'Coste neto de alquiler en ese año', ownerAdvantage: 'Ventaja modelizada de compra', monthlyPayment: 'Cuota hipotecaria estimada', remainingBalance: 'Capital pendiente en ese año', yearUnit: 'años', noBreakEven: 'No alcanzado', verdictFound: 'Comprar queda por debajo por primera vez en', verdictMissing: 'No se encuentra cruce dentro de', privacy: 'Los datos permanecen en el navegador. Tipo constante, venta a fin de año e inversión solo del efectivo inicial son simplificaciones; no es asesoramiento financiero, hipotecario, fiscal, jurídico o inmobiliario.',
     },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { purchasePrice: 280000, downPayment: 56000, annualRate: 3.5, termYears: 25, buyingCosts: 22000, annualOwnerCosts: 3500, sellingCostRate: 5, appreciationRate: 1.2, monthlyRent: 1100, rentGrowthRate: 1.5, opportunityRate: 3.5, maxYears: 30 },
+    copy: {
+      heading: 'Calculateur de l’année d’équilibre entre achat et location', intro: 'Le calcul simule une revente à la fin de chaque année. Remplacez acte, prêt, taxe foncière, copropriété, travaux et loyer par des données propres au logement.', purchasePrice: 'Prix d’achat du logement', downPayment: 'Apport', annualRate: 'Taux nominal du crédit (%)', termYears: 'Durée du crédit (années)', buyingCosts: 'Frais d’acquisition et de financement initiaux', annualOwnerCosts: 'Taxe, assurance, copropriété et entretien par an', sellingCostRate: 'Frais de revente sur valeur future (%)', appreciationRate: 'Évolution annuelle du prix (%)', monthlyRent: 'Loyer mensuel comparable', rentGrowthRate: 'Hausse annuelle du loyer (%)', opportunityRate: 'Rendement des fonds initiaux (%)', maxYears: 'Nombre maximal d’années testées', breakEvenYear: 'Première année d’équilibre', ownerCost: 'Coût net d’achat à cette date', renterCost: 'Coût locatif net à cette date', ownerAdvantage: 'Avantage modélisé de l’achat', monthlyPayment: 'Mensualité de crédit estimée', remainingBalance: 'Capital restant dû à cette date', yearUnit: 'ans', noBreakEven: 'Non atteint', verdictFound: 'L’achat passe sous la location pour la première fois après', verdictMissing: 'Aucun croisement trouvé dans', privacy: 'Les saisies restent dans le navigateur. Taux constant, vente en fin d’année et placement limité aux fonds initiaux simplifient la réalité ; aucun conseil financier, fiscal, juridique ou immobilier.',
+    },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { purchasePrice: 350000, downPayment: 70000, annualRate: 3.5, termYears: 30, buyingCosts: 35000, annualOwnerCosts: 4500, sellingCostRate: 4.5, appreciationRate: 1, monthlyRent: 1200, rentGrowthRate: 2, opportunityRate: 4, maxYears: 30 },
+    copy: {
+      heading: 'Rechner für das Break-even-Jahr von Mieten und Kaufen', intro: 'Für jedes Jahresende wird ein Verkauf simuliert. Ersetzen Sie Kaufvertrag, Darlehensplan, Hausgeld, Instandhaltung und Vergleichsmiete durch konkrete Werte.', purchasePrice: 'Kaufpreis der Immobilie', downPayment: 'Eigenkapital für den Kaufpreis', annualRate: 'Sollzins des Darlehens (%)', termYears: 'Darlehenslaufzeit (Jahre)', buyingCosts: 'Kaufneben- und Finanzierungskosten', annualOwnerCosts: 'Grundsteuer, Hausgeld, Versicherung und Instandhaltung pro Jahr', sellingCostRate: 'Verkaufskosten vom künftigen Wert (%)', appreciationRate: 'Jährliche Wertentwicklung (%)', monthlyRent: 'Vergleichbare monatliche Kaltmiete', rentGrowthRate: 'Jährliche Mietsteigerung (%)', opportunityRate: 'Rendite des Anfangskapitals (%)', maxYears: 'Maximal geprüfte Jahre', breakEvenYear: 'Erstes Break-even-Jahr', ownerCost: 'Netto-Kaufkosten in diesem Jahr', renterCost: 'Nettomietkosten in diesem Jahr', ownerAdvantage: 'Modellierter Kostenvorteil des Kaufs', monthlyPayment: 'Geschätzte Darlehensrate', remainingBalance: 'Restschuld in diesem Jahr', yearUnit: 'Jahre', noBreakEven: 'Nicht erreicht', verdictFound: 'Kaufen liegt erstmals unter Mieten nach', verdictMissing: 'Kein Break-even innerhalb von', privacy: 'Eingaben bleiben im Browser. Konstanter Zins, Verkauf zum Jahresende und nur das Anfangskapital als Anlage sind Vereinfachungen; keine Finanzierungs-, Steuer-, Rechts- oder Immobilienberatung.',
+    },
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as Locale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+  return LOCALES.map((locale) => ({ params: { locale }, props: { locale } }));
 }
 
 const { locale } = Astro.props as { locale: EditorialLocale };
@@ -80,7 +116,7 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing rent-buy break-even guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
   {locale === 'en' && <>
     <p>A five-year rule cannot know your closing cash, mortgage balance, repair history or likely sale cost. The practical question is conditional: if you sell at the end of year one, two, three and so on, when does the net owner cost first fall below the net cost of the comparable rental?</p>
     <p>The CFPB explicitly connects rent-versus-buy tradeoffs to how long you expect to stay and warns that calculators must assume future home-price growth. A useful result therefore names the assumptions and can honestly return “not reached.”</p>
@@ -151,6 +187,54 @@ if (!guide) throw new Error(`Missing rent-buy break-even guide for ${locale}`);
     <p>En el escenario base el primer cruce aparece en el año 9. Subir el coste de venta del 5% al 7% mantiene el año, pero deja solo 69 € de margen: redondeos, una reparación o un mes vacío lo eliminan. El resultado debe mostrar tanto el año como la diferencia.</p>
     <p>Con precio estable, el cruce se desplaza al año 17; con alquiler de 1.200 €, al año 6. Prueba caídas, estabilidad y subida moderada, además de varios tipos y costes. Si tu permanencia realista termina antes, la respuesta financiera del modelo es que comprar no alcanza el equilibrio dentro de tu horizonte.</p>
     <p class="privacy-note">Modelo educativo general, sin recomendación personalizada. Confirma FEIN, FiAE, escritura, impuestos, capital pendiente, comunidad, seguro y costes de venta con documentos y profesionales cualificados. Los datos permanecen en el navegador.</p>
+  </>}
+
+  {locale === 'fr' && <>
+    <p>Une règle de huit ans ne connaît ni le décompte de votre notaire, ni le capital restant dû, ni les travaux de copropriété, ni le prix auquel le logement pourrait être revendu. La bonne question consiste à simuler une sortie en année 1, 2, 3 et suivantes, puis à repérer le premier coût net inférieur à celui d’un logement loué comparable.</p>
+    <p>Le résultat peut être « non atteint ». Une calculatrice utile ne transforme pas une hypothèse de hausse du prix en promesse et ne prolonge pas la durée uniquement pour faire gagner l’achat.</p>
+    <DecisionGuide content={guide} />
+    <RentBuyBreakevenCalculator locale={locale} {...calculator} />
+
+    <h2>Partir du produit net de revente, pas du prix affiché</h2>
+    <p>À chaque année, estimez la valeur du logement, retirez agence, diagnostics, concessions, déménagement et autres frais de sortie, puis le capital restant dû. Le résultat est le montant net récupérable. Le capital déjà remboursé n’est pas une charge définitivement perdue : il diminue la dette et augmente l’équité récupérée si la valeur du bien le permet.</p>
+    <p>Utilisez le tableau d’amortissement de l’offre de prêt. Assurance emprunteur, différé, modularité, remboursement supplémentaire et changement de taux modifient le solde. En cas de remboursement anticipé, l’ANIL rappelle que l’établissement doit communiquer gratuitement le montant des pénalités ; saisissez le montant propre au contrat.</p>
+
+    <h2>Résidence principale et durée ne sont pas la même question</h2>
+    <p>Service-Public indique que la plus-value de l’habitation habituelle et effective vendue comme résidence principale est exonérée. Cela ne crée pas une durée universelle de rentabilité. Un logement mis en location, une résidence secondaire, un départ avant la vente ou une autre situation peuvent suivre des règles différentes.</p>
+    <p>Conservez un poste fiscal distinct et faites confirmer l’exonération ou l’imposition par le notaire. Le modèle regroupe les coûts de sortie en pourcentage pour la sensibilité ; il ne détermine ni statut d’occupation, ni abattement, ni prélèvements sociaux.</p>
+
+    <h2>Frais d’acquisition, copropriété et travaux déplacent le croisement</h2>
+    <p>L’acte, le plan de financement et le décompte du notaire remplacent un pourcentage générique. Ajoutez droits et émoluments, garantie, assurance, honoraires et dépenses nécessaires sans compter deux fois un coût déjà financé. Côté location, gardez seulement les charges propres au locataire.</p>
+    <p>Taxe foncière, assurance propriétaire, charges non récupérables, fonds travaux et travaux votés sont des coûts de détention. Une moyenne annuelle ne suffit pas pour un ravalement ou une rénovation énergétique proche : exécutez un scénario avec le calendrier probable de la dépense.</p>
+
+    <h2>Une année d’équilibre doit être accompagnée de sa marge</h2>
+    <p>Le scénario central croise en année 10 avec environ 4 517 € d’avance. Prix stable : année 18. Frais de revente à 7% : année 11. Loyer comparable à 1 300 € : année 7. Ces écarts montrent pourquoi le titre ne peut pas recevoir une réponse nationale unique.</p>
+    <p>Si un changement raisonnable déplace le point au-delà de votre durée de vie prévue dans le logement, le résultat financier est fragile. Stabilité, possibilité de travaux, mobilité et sécurité d’occupation peuvent rester décisives, mais elles doivent être comparées séparément au montant de l’écart.</p>
+    <p class="privacy-note">Estimation pédagogique générale, sans conseil personnalisé. Vérifiez acte, offre de prêt, taxe foncière, copropriété, diagnostics, fiscalité et frais de sortie auprès de professionnels qualifiés. Les données restent dans le navigateur.</p>
+  </>}
+
+  {locale === 'de' && <>
+    <p>„Mindestens zehn Jahre halten“ vermischt eine steuerliche Frist mit einer Kostenrechnung. Kaufnebenkosten, Zinsbindung, Restschuld, nicht umlagefähiges Hausgeld, Sanierung und Vorfälligkeitsentschädigung unterscheiden sich je Objekt und Vertrag. Das Break-even-Jahr muss deshalb aus den eigenen Zahlungsströmen entstehen.</p>
+    <p>Die Berechnung simuliert einen Verkauf nach jedem vollen Jahr. Wird der Schnittpunkt innerhalb der realistischen Haltedauer nicht erreicht, bleibt genau das die Antwort; eine höhere Wertsteigerung darf nicht nur zur Ergebnissteuerung eingetragen werden.</p>
+    <DecisionGuide content={guide} />
+    <RentBuyBreakevenCalculator locale={locale} {...calculator} />
+
+    <h2>Restschuld und Nettoverkaufserlös bestimmen den Ausstieg</h2>
+    <p>Vom künftigen Immobilienwert werden Makler, Verkaufsabwicklung, mögliche Reparaturen und anschließend die Restschuld abgezogen. Tilgung ist dadurch nicht doppelt als Verlust erfasst: Sie senkt die Restschuld. Zinsen und Eigentümerkosten werden hingegen nicht beim Verkauf zurückgezahlt.</p>
+    <p>Verwenden Sie Tilgungsplan und Zinsbindung des Angebots. Endet die Zinsbindung vor dem geplanten Verkauf, braucht die Anschlussfinanzierung einen eigenen Zinspfad. Bei vorzeitiger Ablösung kann eine Vorfälligkeitsentschädigung entstehen; die Verbraucherzentrale empfiehlt, die konkrete Berechnung prüfen zu lassen.</p>
+
+    <h2>Die Zehnjahresregel ist kein automatisches Finanz-Break-even</h2>
+    <p>§ 23 EStG erfasst bestimmte private Grundstücksveräußerungen innerhalb von zehn Jahren und nennt Ausnahmen für ausschließliche Eigennutzung oder Nutzung im Verkaufsjahr und den beiden vorangegangenen Jahren. Anschaffungszeitpunkt, Vermietung und individuelle Nutzung müssen steuerlich eingeordnet werden.</p>
+    <p>Ein steuerfreier Verkauf kann trotzdem höhere Netto-Kaufkosten als Mieten haben; ein früher steuerpflichtiger Verkauf kann das Ergebnis zusätzlich verschlechtern. Der Rechner berechnet keine Steuer. Erfassen Sie einen bestätigten Betrag im Ausstiegsszenario.</p>
+
+    <h2>Kaufnebenkosten und WEG-Risiken mit Unterlagen belegen</h2>
+    <p>Grunderwerbsteuer, Notar, Grundbuch, Makler und Finanzierungsentgelte gehören zum Anfangskapital. Bei Wohnungseigentum kommen nicht umlagefähiges Hausgeld, Erhaltungsrücklage und Sonderumlagen hinzu. Wirtschaftsplan, Jahresabrechnung, Beschlusssammlung und Sanierungsplan sind wertvoller als eine pauschale Prozentzahl.</p>
+    <p>Die Deutsche Bundesbank veröffentlicht Effektivzinssätze nach Zinsbindungsfristen als Marktstatistik. Für die Entscheidung zählt trotzdem das persönliche Angebot: Marktwerte sind weder garantierter Sollzins noch Prognose für die Anschlussfinanzierung.</p>
+
+    <h2>Ein später Schnittpunkt braucht ein realistisches Lebensszenario</h2>
+    <p>Im Basisfall erscheint der erste Break-even erst im Jahr 19 und hat nur 1 737 € Abstand. Bei stabilem Immobilienwert gibt es innerhalb von 30 Jahren keinen Schnittpunkt; bei 2,75% Sollzins liegt er im Jahr 15, bei 7% Verkaufskosten im Jahr 21.</p>
+    <p>Wer beruflich oder familiär wahrscheinlich früher umzieht, sollte den späteren Schnittpunkt nicht als Kaufargument verwenden. Planungssicherheit, Gestaltungsfreiheit und Schutz vor Mietsteigerungen können Nutzen stiften, während Liquidität, Reparaturrisiko und geringere Mobilität dagegenstehen. Diese Werte bleiben neben der Finanzrechnung sichtbar.</p>
+    <p class="privacy-note">Allgemeines Bildungsmodell, keine persönliche Finanzierungs-, Steuer-, Rechts- oder Immobilienberatung. Prüfen Sie Darlehen, Vertrag, Steuer, WEG-Unterlagen, Rücklagen und Verkaufskosten mit qualifizierten Stellen. Eingaben bleiben im Browser.</p>
   </>}
 
   <FAQ items={article.faq} />

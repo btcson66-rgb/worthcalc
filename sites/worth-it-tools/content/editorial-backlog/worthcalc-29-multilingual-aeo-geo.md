@@ -169,13 +169,22 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：90 HTML、58 編輯內容頁、55／145 任務對應與完整版本、11／29 五語完成主題。
 - 發布證據：PR #34 已合併為 `23f1f88`，GitHub Pages run `29655723129` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、計算器、sitemap 與德文正式頁 390px 互動回歸 PASS。
 
-## 2026-07-19 第十九批（第 12 題 A 段，準備發布）
+## 2026-07-19 第十九批（第 12 題 A 段，已發布）
 
 - 題目 12「買房住幾年才可能比租屋划算」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 不建立空殼頁。
 - 新增頁內逐年損益計算器，不另增公開路由；逐年攤還房貸、估算賣出淨回收、買入與持有成本、累計租金及前期現金機會報酬，回傳第一個買房淨成本不高於租屋的年份，也允許誠實顯示測試期內未交叉。
 - 原生差異：EN 以 Loan Estimate／Closing Disclosure、cash to close 與出售成本處理「五年法則」；繁中區分六年自住房地租稅條件與真正財務回本，納入契稅、房地合一稅、土地增值稅與實價登錄口徑；ES 分開 compraventa 與 formalización hipotecaria，納入 FEIN／FiAE、ITP 或 IVA／AJD、capital pendiente 及 reembolso anticipado。
 - 基準算例分別在 EN 第 7 年、zh-TW 第 9 年、ES 第 9 年首次交叉；房價持平時分別延後至第 16 年、30 年內未交叉、第 17 年，直接呈現假設敏感度而非市場預測。
 - 本批建置目標：93 HTML、61 編輯內容頁、58／145 任務對應與完整版本、11／29 五語完成主題（第 12 題為 3／5）。
+- 發布證據：PR #35 已合併為 `9c0e377`，GitHub Pages run `29656279230` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self＋x-default hreflang、schema、計算器與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap；繁中正式頁 390px 未交叉互動回歸 PASS。
+
+## 2026-07-19 第二十批（第 12 題 B 段，準備發布）
+
+- 新增 FR／DE 兩個完整原生頁，使第 12 題成為五語群組；同步把前三語從自身語言 hreflang 切換為五語＋x-default。
+- FR 使用 durée de détention、capital restant dû、frais d’acquisition、copropriété、indemnité de remboursement anticipé 與 résidence principale plus-value，基準第 10 年交叉，房價持平延至第 18 年。
+- DE 使用 Haltedauer、Restschuld、Kaufnebenkosten、nicht umlagefähiges Hausgeld、Vorfälligkeitsentschädigung、Zinsbindung 與 § 23 EStG；基準第 19 年才交叉，房價持平時 30 年內不交叉。
+- 兩語均使用不同買價、頭期、利率、費用、租金與機會報酬接入逐年損益計算器；來源採 ANIL／Service-Public、Verbraucherzentrale、Bundesministerium der Justiz 與 Deutsche Bundesbank。
+- 本批建置目標：95 HTML、63 編輯內容頁、60／145 任務對應與完整版本、12／29 五語完成主題。
 
 ## 待執行主題
 
@@ -192,7 +201,7 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |
 | 10 | Cards & Rewards | Cashback caps and real reward rate | phase-18 complete; deployed |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; deployed |
-| 12 | Housing & Commuting | Rent-vs-buy break-even year | phase-19 EN/zh-TW/ES ready; FR/DE pending |
+| 12 | Housing & Commuting | Rent-vs-buy break-even year | phase-20 five-locale ready; release pending |
 | 13 | Transport & Vehicle Ownership | EV vs gas total cost | backlog |
 | 14 | Transport & Vehicle Ownership | Home vs public EV charging | backlog |
 | 15 | Transport & Vehicle Ownership | New vs used car | backlog |

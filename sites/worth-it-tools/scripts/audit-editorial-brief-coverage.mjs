@@ -30,13 +30,14 @@ const briefRoutes = [
   { id: '15', slug: 'new-vs-used-car-total-cost' },
   { id: '16', slug: 'car-lease-vs-buy-total-cost' },
   { id: '17', slug: 'full-commute-cost-including-time' },
+  { id: '18', slug: 'work-from-home-vs-commuting-hidden-costs' },
 ];
 
 const releaseFloor = {
-  html: 120,
-  editorial: 88,
-  alignedVariants: 85,
-  compliantVariants: 85,
+  html: 123,
+  editorial: 91,
+  alignedVariants: 88,
+  compliantVariants: 88,
   completeTopics: 17,
 };
 

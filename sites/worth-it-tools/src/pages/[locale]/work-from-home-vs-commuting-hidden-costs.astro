@@ -1,0 +1,124 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import WfhCommuteCalculator from '../../components/WfhCommuteCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { wfhCommuteGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Work from home vs commuting: compare the hidden monthly costs',
+    description: 'Compare remote, office and hybrid work from commute, meals, home energy, equipment, fixed costs, reimbursements and optional commute time.',
+    faq: [
+      { question: 'Is working from home always cheaper?', answer: 'No. It often removes commute and office-day costs, but may add heating or cooling, electricity, equipment, internet upgrades and coworking. Compare only incremental costs and reimbursements.' },
+      { question: 'Should I include my full internet bill?', answer: 'Usually not if you would pay for the same plan anyway. Include only a required upgrade, work-only line or incremental usage that changes the bill.' },
+      { question: 'Can an employee claim the US home office deduction?', answer: 'The IRS says employees are not eligible for the home office deduction. Self-employed people face separate exclusive-and-regular-use rules. Do not count an assumed tax saving as monthly cash.' },
+      { question: 'How should hybrid work be calculated?', answer: 'Count actual home and office days, apply each daily cost to its days, then add fixed costs that remain in the month. A parking pass or internet upgrade may not fall with fewer days.' },
+      { question: 'Is commute time worth my hourly wage?', answer: 'Not automatically. Keep hours visible, use zero for cash-only comparison and add a personal value only as a sensitivity scenario.' },
+    ],
+  },
+  zh: {
+    title: '在家工作還是通勤？比較每月隱藏成本',
+    description: '用實際居家與進公司天數，比較交通、餐食、住家電費、設備攤提、固定費、公司補助與選擇性通勤時間。',
+    faq: [
+      { question: '在家工作一定比較省嗎？', answer: '不一定。通勤、外食可能下降，但冷氣、照明、設備、網路升級或共用工作空間可能增加。只比較真的因工作模式改變的增量。' },
+      { question: '家裡整張電費都算工作成本嗎？', answer: '不應。用同季節、相近居住狀況的帳單或插座電表估算增量；台電採級距與夏月計價，不能把總帳單除以度數後當成固定單價。' },
+      { question: '公司一定要補助居家設備嗎？', answer: '應先看勞動契約、工作規則與實際安排。勞動部居家工作參考指引要求合理風險評估並提及必要設備，但個人可領金額不能由計算器自行推定。' },
+      { question: '混合辦公怎麼算？', answer: '用當月實際居家日與進公司日，分別乘每日增量，再加仍然存在的固定費。月票、停車位、網路升級不一定隨天數等比例下降。' },
+      { question: '省下通勤時間等於多賺薪水嗎？', answer: '不是。除非那段時間確實轉成有薪工作。先以 0 元保留現金結果，再測休息、照顧或接案對你個人的時間價值。' },
+    ],
+  },
+  es: {
+    title: 'Teletrabajo o desplazamiento: comparar los costes mensuales ocultos',
+    description: 'Compara teletrabajo, oficina y modalidad híbrida con transporte, comida, energía doméstica, equipo, gastos fijos, compensación y tiempo opcional.',
+    faq: [
+      { question: '¿El teletrabajo siempre cuesta menos?', answer: 'No. Reduce trayectos y algunos gastos de oficina, pero puede añadir climatización, electricidad, equipo, conexión o espacio de trabajo. Cuenta solo incrementos reales y compensación.' },
+      { question: '¿La empresa debe compensar gastos de teletrabajo en España?', answer: 'La Ley 10/2021 establece dotación y mantenimiento de medios y que el trabajo a distancia regular sea sufragado o compensado; convenio y acuerdo concretan el mecanismo. Introduce solo lo pactado y cobrado.' },
+      { question: '¿Incluyo toda la factura de internet?', answer: 'No si pagarías el mismo plan. Incluye una mejora obligatoria, segunda línea o importe incremental atribuible al trabajo.' },
+      { question: '¿Cómo calculo una semana híbrida?', answer: 'Pasa la semana a días reales del mes. Multiplica cada coste diario por días de casa u oficina y añade abonos, equipo o conexión que sigan siendo fijos.' },
+      { question: '¿El tiempo ahorrado vale mi sueldo por hora?', answer: 'No automáticamente. Usa cero para el presupuesto y un valor personal solo como sensibilidad, sin presentarlo como salario ganado.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { workdays: 20, homeDays: 12, homeEnergy: 2.5, homeMeals: 6, homeOther: 1, homeFixed: 60, homeReimbursement: 0, officeCommute: 18, officeMeals: 14, officeOther: 3, officeFixed: 160, officeReimbursement: 0, commuteMinutes: 60, timeValue: 10 },
+    copy: { heading: 'Remote, office and hybrid monthly cost calculator', intro: 'Enter incremental costs for one normal month. Baseline rent, internet and meals you would buy either way should not be counted twice.', workdays: 'Paid workdays in the month', homeDays: 'Days worked at home', homeEnergy: 'Extra home energy per day', homeMeals: 'Home workday food per day', homeOther: 'Other home cost per day', homeFixed: 'Home-work fixed cost/month', homeReimbursement: 'Home-work reimbursement/month', officeCommute: 'Commute cash per office day', officeMeals: 'Office-day food premium', officeOther: 'Other office cost per day', officeFixed: 'Office fixed costs/month', officeReimbursement: 'Commute/office reimbursement', commuteMinutes: 'Round-trip minutes per office day', timeValue: 'Optional personal time value/hour', allHome: 'All-home monthly cash', allOffice: 'All-office monthly cash', hybridCash: 'Chosen hybrid cash', commuteHours: 'Hybrid commute hours', hybridFull: 'Hybrid cash + optional time', officePremium: 'All-office minus all-home', verdictHome: 'All-home costs less by', verdictOffice: 'All-office costs less by', privacy: 'Educational estimate. Inputs stay in the browser. Verify bills, policy, agreement and tax treatment.' },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { workdays: 22, homeDays: 14, homeEnergy: 35, homeMeals: 90, homeOther: 15, homeFixed: 400, homeReimbursement: 0, officeCommute: 180, officeMeals: 150, officeOther: 20, officeFixed: 1200, officeReimbursement: 0, commuteMinutes: 70, timeValue: 150 },
+    copy: { heading: '居家、進公司與混合辦公月成本計算器', intro: '只填因工作模式改變的增量。原本就會支付的房租、網路與餐食不要重複列入。', workdays: '當月工作日', homeDays: '實際居家工作日', homeEnergy: '每個居家日增量電費', homeMeals: '居家工作日餐食', homeOther: '每個居家日其他成本', homeFixed: '每月居家固定成本', homeReimbursement: '每月居家實領補助', officeCommute: '每個進公司日通勤現金', officeMeals: '進公司日餐食增量', officeOther: '每個進公司日其他成本', officeFixed: '每月進公司固定成本', officeReimbursement: '每月通勤／辦公補助', commuteMinutes: '每個進公司日來回分鐘', timeValue: '選擇性每小時時間價值', allHome: '全居家每月現金', allOffice: '全進公司每月現金', hybridCash: '選定混合模式現金', commuteHours: '混合模式通勤時數', hybridFull: '混合現金＋選擇性時間', officePremium: '全進公司減全居家', verdictHome: '全居家較省', verdictOffice: '全進公司較省', privacy: '一般教育試算，輸入只留在瀏覽器。請查核帳單、公司制度、契約與適用稅務。' },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { workdays: 20, homeDays: 12, homeEnergy: 2, homeMeals: 5, homeOther: 1, homeFixed: 35, homeReimbursement: 25, officeCommute: 6, officeMeals: 12, officeOther: 2, officeFixed: 45, officeReimbursement: 0, commuteMinutes: 70, timeValue: 8 },
+    copy: { heading: 'Calculadora mensual de teletrabajo, oficina e híbrido', intro: 'Introduce incrementos de un mes normal. No dupliques alquiler, internet o comida que pagarías en cualquier modalidad.', workdays: 'Días laborables del mes', homeDays: 'Días reales de teletrabajo', homeEnergy: 'Energía extra por día en casa', homeMeals: 'Comida por día en casa', homeOther: 'Otros gastos diarios en casa', homeFixed: 'Gasto fijo mensual en casa', homeReimbursement: 'Compensación mensual de teletrabajo', officeCommute: 'Transporte por día presencial', officeMeals: 'Sobrecoste de comida presencial', officeOther: 'Otros gastos por día presencial', officeFixed: 'Gastos fijos de oficina/mes', officeReimbursement: 'Reembolso de transporte/oficina', commuteMinutes: 'Minutos ida y vuelta por día', timeValue: 'Valor personal opcional por hora', allHome: 'Caja mensual todo teletrabajo', allOffice: 'Caja mensual toda oficina', hybridCash: 'Caja de la modalidad híbrida', commuteHours: 'Horas de trayecto híbrido', hybridFull: 'Caja híbrida + tiempo opcional', officePremium: 'Toda oficina menos teletrabajo', verdictHome: 'Todo teletrabajo cuesta menos por', verdictOffice: 'Toda oficina cuesta menos por', privacy: 'Estimación educativa; datos en el navegador. Verifica facturas, convenio, acuerdo y fiscalidad.' },
+  },
+};
+
+export function getStaticPaths() {
+  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = wfhCommuteGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>Remote work can remove a large commute without making the home free. The fair comparison uses incremental cash: extra HVAC and equipment at home versus transport, parking, meals and office-only purchases, then subtracts reimbursements actually received.</p>
+    <p>Hybrid work needs its own line because fixed costs can survive on both sides. A parking pass and upgraded internet can remain even when each is used only part of the month.</p>
+    <DecisionGuide content={guide} />
+    <WfhCommuteCalculator locale={locale} {...calculator} />
+    <h2>Use the counterfactual bill, not the entire household</h2>
+    <p>Rent, base internet and ordinary groceries usually continue under either arrangement. Count only the upgrade or usage that would disappear if the job returned to the office. Metered electricity and seasonal bill comparisons are stronger than a generic remote-work allowance.</p>
+    <h2>Keep employee tax treatment outside the base case</h2>
+    <p>The IRS says employees cannot claim the federal home office deduction. A self-employed person may face exclusive-and-regular-use tests, but that is a different decision. The calculator therefore accepts cash reimbursement, not an invented tax benefit.</p>
+    <h2>Office days have variable and fixed costs</h2>
+    <p>Daily commute, lunch premium, coffee and incidental purchases vary with attendance. Parking permits, transit passes, wardrobe care and a second car may be monthly. Record what actually changes when office days move from five to two.</p>
+    <h2>Time remains a separate sensitivity</h2>
+    <p>The base example shows $610 less cash for all-home than all-office. For 8 hybrid office days, 8 commute hours at $10/hour add an optional $80 to the $614 hybrid cash total. That is a preference value, not wage income.</p>
+    <p class="privacy-note">General education only, not employment, tax, energy, housing or financial advice.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>在家工作省下通勤，不代表家裡沒有成本；進公司有交通與外食，也不代表整筆車貸或整張月票都因工作而生。最可重複的做法是比較「工作模式改變時，哪一筆現金真的跟著改變」。</p>
+    <p>混合辦公要另外算，因為網路升級、停車月租或月票可能同時保留，不能用三天居家就直接把全居家節省乘 3/5。</p>
+    <DecisionGuide content={guide} />
+    <WfhCommuteCalculator locale={locale} {...calculator} />
+    <h2>住家電費用增量，不用整張帳單</h2>
+    <p>台電住宅用電有級距與夏月差異；冷氣所在級距可能比筆電耗電更影響結果。用同季節帳單、智慧插座或設備瓦數×小時估算，再以真正邊際電價換算。不要把全家冰箱、熱水器與晚間用電都算到工作。</p>
+    <h2>設備與職安先看公司安排</h2>
+    <p>勞動部「居家工作職業安全衛生參考指引」提到雇主應在合理可行範圍提供必要設備或讓工作者攜回設備，並做工作環境風險評估。這不等於每位工作者都有固定現金補助；計算時只扣已核定、實際領到的金額。</p>
+    <h2>餐食只算差額</h2>
+    <p>人不論在哪都要吃飯，因此應比較居家餐食與進公司餐食的差額，不是把公司附近午餐全額視為額外損失。若公司供餐、加班餐或餐費補助，則以實際自付為準。</p>
+    <h2>把月票、停車與時間留下來</h2>
+    <p>算例全居家 NT$3,480、全進公司 NT$8,900，相差 NT$5,420；14 天居家、8 天進公司時，現金是 NT$6,360。70 分鐘×8 天為 9.3 小時，自訂 NT$150/小時後完整情境 NT$7,760，但不代表薪資增加。</p>
+    <p class="privacy-note">一般教育用途，不是勞動、稅務、電價、住宅或財務建議。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>En España, comparar teletrabajo y presencialidad no consiste en trasladar todo el alquiler y la conexión al empleo. Se cuentan los importes incrementales: climatización, electricidad, mejora de internet o equipo en casa frente a transporte, comida y gastos presenciales.</p>
+    <p>La modalidad híbrida puede mantener gastos fijos en ambos lugares; por eso necesita un cálculo mensual propio.</p>
+    <DecisionGuide content={guide} />
+    <WfhCommuteCalculator locale={locale} {...calculator} />
+    <h2>El acuerdo de trabajo a distancia cambia el coste neto</h2>
+    <p>La Ley 10/2021 reconoce dotación y mantenimiento de medios y exige sufragar o compensar gastos del trabajo a distancia regular. El convenio o acuerdo concreta el mecanismo. No uses una cifra genérica nacional: introduce la compensación que figure y se cobre.</p>
+    <h2>Separa consumo adicional y gasto habitual</h2>
+    <p>Una tarifa de internet que no cambia vale cero de incremento. Para electricidad, compara periodos semejantes o mide ordenador y climatización; el precio marginal de la factura puede diferir del promedio. Amortiza solo equipo que pagues tú y necesites para trabajar.</p>
+    <h2>Comida y transporte se calculan por presencia real</h2>
+    <p>Cuenta el sobrecoste de comer fuera, no toda la alimentación. En transporte, usa billetes o coste incremental del coche y conserva abonos fijos por separado. Restar días teóricos sin revisar festivos, vacaciones y viajes produce una falsa precisión.</p>
+    <h2>Ejemplo híbrido con compensación</h2>
+    <p>Con los valores del ejemplo, todo teletrabajo cuesta 170 € y toda oficina 445 €: 275 € de diferencia. Doce días en casa y ocho presenciales dan 311 € de caja; 9,3 horas de trayecto a 8 €/hora elevan el escenario opcional a 385,67 €.</p>
+    <p class="privacy-note">Información educativa; no es asesoramiento laboral, fiscal, energético, inmobiliario o financiero.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

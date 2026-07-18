@@ -35,13 +35,14 @@ const briefRoutes = [
   { id: '20', slug: 'is-an-extended-warranty-worth-it' },
   { id: '21', slug: 'upgrade-your-phone-or-keep-it' },
   { id: '22', slug: 'energy-efficient-appliance-payback' },
+  { id: '23', slug: 'cost-per-use-expensive-item' },
 ];
 
 const releaseFloor = {
-  html: 145,
-  editorial: 113,
-  alignedVariants: 110,
-  compliantVariants: 110,
+  html: 148,
+  editorial: 116,
+  alignedVariants: 113,
+  compliantVariants: 113,
   completeTopics: 22,
 };
 

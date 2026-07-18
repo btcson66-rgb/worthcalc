@@ -212,17 +212,18 @@ const editorialRoutes = [
       de: ['38,19 €', 'zweijährigen Vertrag', 'data-phone-keep-upgrade-calculator'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
-    slug: 'energy-efficient-appliance-payback', locales: ['en', 'zh', 'es'],
+    slug: 'energy-efficient-appliance-payback',
     nativeMarkers: {
       en: ['$27', 'EnergyGuide', 'data-mode="appliance"'],
       zh: ['NT$525', '能源署', 'data-mode="appliance"'],
       es: ['27,50 €', 'A–G', 'data-mode="appliance"'],
+      fr: ['27,50 €', '100 cycles', 'data-mode="appliance"'],
+      de: ['46,20 €', 'tatsächlichen Verbrauch', 'data-mode="appliance"'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -331,4 +332,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 21 complete five-locale topics, 100 added routes, 4 enriched high-value tools, 14 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 22 complete five-locale topics, 102 added routes, 4 enriched high-value tools, 14 embedded decision calculators.');

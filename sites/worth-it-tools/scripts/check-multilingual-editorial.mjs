@@ -43,6 +43,16 @@ const editorialRoutes = [
     },
   },
   {
+    slug: 'monthly-vs-annual-subscription',
+    nativeMarkers: {
+      en: ['probability break-even', '$144', 'renewal notice'],
+      zh: ['9.6 個月', 'NT$3,120', '刪除 APP'],
+      es: ['9,23 meses', '133,25 €', 'artículo 62'],
+      fr: ['résiliation en trois clics', '132,66 €', 'reconduction tacite'],
+      de: ['Kündigungsbutton', '140,29 €', 'Mindestlaufzeit'],
+    },
+  },
+  {
     slug: 'annual-fee-card-breakeven',
     nativeMarkers: {
       en: ['incremental reward rate', 'no-fee alternative', '$6,333.33'],
@@ -63,17 +73,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [
-  {
-    slug: 'monthly-vs-annual-subscription',
-    locales: ['en', 'zh', 'es'],
-    nativeMarkers: {
-      en: ['probability break-even', '$144', 'renewal notice'],
-      zh: ['9.6 個月', 'NT$3,120', '刪除 APP'],
-      es: ['9,23 meses', '133,25 €', 'artículo 62'],
-    },
-  },
-];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -182,4 +182,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 6 complete five-locale topics, 25 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 7 complete five-locale topics, 27 added routes, 4 enriched high-value tools.');

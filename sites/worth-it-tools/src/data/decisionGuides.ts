@@ -513,7 +513,7 @@ export const monthlyAnnualGuides: Partial<Record<Locale, DecisionGuideContent>> 
   },
 };
 
-export const paidMembershipGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'paid-membership-break-even-method',
     labels: labels.en,
@@ -574,6 +574,48 @@ export const paidMembershipGuides: Partial<Record<Locale, DecisionGuideContent>>
     sources: [
       { label: 'BOE — Ley General de Consumidores y Usuarios, artículo 62', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a62' },
       { label: 'Centro Europeo del Consumidor en España — renovación y cancelación online', href: 'https://portal-cec.consumo.gob.es/sites/default/files/boletines/pdfs/BOLETIN_NOTICIAS_ABRIL_2026_0.pdf' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'paid-membership-break-even-method',
+    labels: labels.fr,
+    directAnswer: 'Une adhésion payante est rentable seulement si les avantages supplémentaires sur des achats déjà prévus dépassent la cotisation nette. Retirez de la cotisation uniquement les crédits certains, calculez le gain par achat admissible puis appliquez le plafond. Avec 89 € de cotisation, 15 € d’avantage certain, 8 € par usage et 12 usages au maximum, la cotisation nette est de 74 € et il faut 10 usages. Une probabilité de 65% d’atteindre 12 usages et de 35% de rester à cinq ne laisse que 2,40 € de valeur nette attendue.',
+    inputs: ['Cotisation TTC réellement prélevée à la prochaine échéance', 'Bons ou services que vous utiliseriez même sans modifier vos habitudes', 'Écart de prix, frais évités ou récompense supplémentaire par achat admissible', 'Montant minimum, exclusions, activation, date d’expiration et plafond annuel', 'Trajet, livraison, pourboire, gaspillage ou achat ajouté pour débloquer l’avantage', 'Nombre bas, central et haut d’usages déjà prévus'],
+    formula: 'Cotisation nette = cotisation − avantages certains. Gain net par usage admissible = économie supplémentaire + récompense supplémentaire − coût induit. Gain du scénario = min(usages admissibles × gain net, plafond). Usages d’équilibre = arrondi supérieur(cotisation nette ÷ gain net), sauf si le plafond reste inférieur à la cotisation nette.',
+    workedExample: 'La cotisation annuelle est de 89 € et comprend 15 € que vous utiliseriez avec certitude : la cotisation nette vaut 74 €. Chaque achat admissible déjà prévu apporte 8 € de gain, dans la limite de 12 usages ou 96 €. Le seuil est ceil(74 ÷ 8) = 10 usages. Cinq usages font perdre 34 € et 12 usages font gagner 22 €. Avec 65% de probabilité de 12 usages et 35% de cinq, le gain attendu atteint 76,40 €, soit seulement 2,40 € au-dessus de la cotisation nette.',
+    sensitivity: [
+      { scenario: 'Usage faible', input: '5 usages × 8 €', result: '40 € de gain ; perte nette de 34 €' },
+      { scenario: 'Seuil minimal', input: '10 usages × 8 €', result: '80 € de gain ; valeur nette de 6 €' },
+      { scenario: 'Plafond atteint', input: '12 usages ou plus', result: '96 € de gain ; valeur nette maximale de 22 €' },
+      { scenario: 'Pondéré par probabilité', input: '65% à 12 usages ; 35% à 5', result: '76,40 € attendus ; valeur nette de 2,40 €' },
+    ],
+    cta: { label: 'Tester vos hypothèses dans le calculateur anglais', href: '/en/tools/costco-membership' },
+    limitations: ['Un bon non utilisé ou une prestation que vous n’auriez pas achetée ne vaut pas son prix facial dans ce calcul.', 'Comparez avec la meilleure offre gratuite ou sans adhésion et retranchez les achats ajoutés uniquement pour franchir un seuil.', 'Préavis, durée d’engagement, suspension, résiliation anticipée et remboursement dépendent du contrat ; une résiliation en ligne ne supprime pas automatiquement les sommes dues.'],
+    sources: [
+      { label: 'DGCCRF — l’adhésion à une salle de sport ou de remise en forme', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/ladhesion-une-salle-de-sport-ou-de-remise-en-forme' },
+      { label: 'DGCCRF — résilier ses contrats conclus sur internet', href: 'https://www.economie.gouv.fr/dgccrf/actualites-dgccrf/resilier-ses-contrats-conclus-sur-internet-est-desormais-plus-facile' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'paid-membership-break-even-method',
+    labels: labels.de,
+    directAnswer: 'Eine kostenpflichtige Mitgliedschaft lohnt sich erst, wenn der zusätzliche Vorteil aus ohnehin geplanten Nutzungen den Nettobeitrag übersteigt. Ziehen Sie nur sicher genutzte Guthaben ab, berechnen Sie den Nettovorteil je berechtigter Nutzung und beachten Sie jede Obergrenze. Bei 99 € Beitrag, 15 € sicherem Guthaben, 8,50 € Vorteil je Nutzung und maximal 12 Nutzungen beträgt der Nettobeitrag 84 €; der Gleichstand liegt bei 10 Nutzungen. 75% Wahrscheinlichkeit für 12 Nutzungen und 25% für vier ergeben nur 1,00 € erwarteten Nettovorteil.',
+    inputs: ['Tatsächlicher Mitgliedsbeitrag bei der nächsten Verlängerung', 'Guthaben oder Leistungen, die Sie ohne Verhaltensänderung sicher nutzen', 'Zusätzliche Ersparnis oder Belohnung je berechtigter Nutzung gegenüber der besten kostenlosen Alternative', 'Mindestumsatz, Ausschlüsse, Aktivierung, Verfall und jährliche Obergrenze', 'Zusätzliche Fahrt, Versand, Servicegebühr, Verschwendung oder Mehrkauf', 'Niedrige, mittlere und hohe Zahl ohnehin geplanter Nutzungen'],
+    formula: 'Nettobeitrag = Mitgliedsbeitrag − sicher genutzte Vorteile. Nettovorteil je berechtigter Nutzung = zusätzliche Ersparnis + Zusatzbonus − Mehrkosten. Szenariovorteil = min(Nutzungen × Nettovorteil, Obergrenze). Nutzungen bis zum Gleichstand = aufrunden(Nettobeitrag ÷ Nettovorteil), sofern die Obergrenze den Nettobeitrag überhaupt deckt.',
+    workedExample: 'Der Jahresbeitrag beträgt 99 €. Ein Guthaben von 15 € wird sicher genutzt, daher bleiben 84 € Nettobeitrag. Jede ohnehin geplante berechtigte Nutzung bringt 8,50 € zusätzlich, höchstens 12 Nutzungen oder 102 €. Aufrunden(84 ÷ 8,50) ergibt 10 Nutzungen. Vier Nutzungen verlieren 50 €, zwölf bringen 18 €. Bei 75% Wahrscheinlichkeit für zwölf Nutzungen und 25% für vier beträgt der erwartete Vorteil 85 € und der erwartete Nettowert nur 1,00 €.',
+    sensitivity: [
+      { scenario: 'Geringe Nutzung', input: '4 Nutzungen × 8,50 €', result: '34 € Vorteil; 50 € Nettoverlust' },
+      { scenario: 'Erster positiver Wert', input: '10 Nutzungen × 8,50 €', result: '85 € Vorteil; 1 € Nettowert' },
+      { scenario: 'Obergrenze erreicht', input: '12 Nutzungen oder mehr', result: '102 € Vorteil; maximal 18 € Nettowert' },
+      { scenario: 'Wahrscheinlichkeitsgewichtet', input: '75% bei 12 Nutzungen; 25% bei 4', result: '85 € erwartet; 1,00 € Nettowert' },
+    ],
+    cta: { label: 'Eigene Annahmen im englischen Rechner prüfen', href: '/en/tools/costco-membership' },
+    limitations: ['Ein Gutschein oder Zusatzdienst ist nicht zum Nennwert anzusetzen, wenn Sie ihn sonst nicht gekauft oder genutzt hätten.', 'Vergleichen Sie mit der besten kostenlosen Alternative und ziehen Sie Käufe ab, die nur wegen Mindestumsatz oder Bonus entstehen.', 'Mindestlaufzeit, Kündigungsfrist, Preisänderung, Erstattung und Sonderkündigung richten sich nach Vertrag und Einzelfall; der Kündigungsbutton ist kein pauschaler Anspruch auf Rückzahlung.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Fitness-Studios: Was in Verträgen erlaubt ist', href: 'https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/fitnessstudios-was-in-vertraegen-nicht-erlaubt-ist-21641' },
+      { label: 'Verbraucherzentrale — Kündigungsbutton und langfristige Verträge', href: 'https://www.verbraucherzentrale.de/digi-tools/kuendigungsbutton-101692' },
     ],
     lastVerified: '2026-07-19',
   },

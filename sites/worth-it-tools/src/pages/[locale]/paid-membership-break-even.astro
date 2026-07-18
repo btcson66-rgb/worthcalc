@@ -2,11 +2,11 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES, type Locale } from '../../consts';
 import { paidMembershipGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'How to calculate whether a paid membership is worth it',
@@ -41,10 +41,32 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Qué reviso antes de la renovación automática?', answer: 'La nueva cuota, ventajas, exclusiones, topes y procedimiento de baja. Guarda la confirmación si cancelas.' },
     ],
   },
+  fr: {
+    title: 'Adhésion payante : combien d’utilisations pour la rentabiliser ?',
+    description: 'Calculez le seuil de rentabilité d’une adhésion avec cotisation nette, achats admissibles, plafond, coûts induits et probabilité d’usage.',
+    faq: [
+      { question: 'Combien d’utilisations faut-il pour rentabiliser une adhésion ?', answer: 'Divisez la cotisation nette par le gain net d’un usage admissible et arrondissez au nombre entier supérieur. Vérifiez ensuite que le plafond annuel permet réellement d’atteindre ce seuil.' },
+      { question: 'Puis-je déduire tous les bons offerts de la cotisation ?', answer: 'Non. Déduisez seulement la valeur que vous auriez dépensée de toute façon. Un bon qui déclenche un achat inutile ou expire sans être utilisé ne vaut pas son montant facial.' },
+      { question: 'Une remise membre est-elle toujours une économie ?', answer: 'Seulement pour un achat déjà prévu et par rapport à la meilleure offre accessible sans adhésion. Retirez le minimum de commande, le trajet, la livraison et tout achat ajouté.' },
+      { question: 'Que se passe-t-il si les avantages sont plafonnés ?', answer: 'Calculez le gain maximal avant le seuil. Si le plafond reste inférieur à la cotisation nette, aucune fréquence d’utilisation ne peut rentabiliser l’adhésion avec cet avantage seul.' },
+      { question: 'La résiliation en ligne annule-t-elle la durée d’engagement ?', answer: 'Non. La fonctionnalité facilite la démarche mais ne supprime pas le préavis, la période minimale ou une indemnité prévue et applicable. Vérifiez la date d’effet et conservez la confirmation.' },
+    ],
+  },
+  de: {
+    title: 'Kostenpflichtige Mitgliedschaft: Ab wann lohnt sich der Beitrag?',
+    description: 'Berechnen Sie die nötigen Nutzungen aus Nettobeitrag, Zusatzvorteil, Obergrenze, Mehrkosten und realistischer Nutzungswahrscheinlichkeit.',
+    faq: [
+      { question: 'Wie viele Nutzungen machen eine Mitgliedschaft rentabel?', answer: 'Teilen Sie den Nettobeitrag durch den Nettovorteil je berechtigter Nutzung und runden Sie auf. Prüfen Sie danach, ob die jährliche Obergrenze den Beitrag überhaupt decken kann.' },
+      { question: 'Darf ich jedes enthaltene Guthaben vom Beitrag abziehen?', answer: 'Nein. Ziehen Sie nur den Betrag ab, den Sie ohne die Mitgliedschaft sicher ausgegeben hätten. Ein ungenutzter Gutschein oder ein dadurch ausgelöster Mehrkauf ist keine volle Ersparnis.' },
+      { question: 'Zählt eine Ersparnis gegenüber dem Normalpreis vollständig?', answer: 'Nur wenn der Normalpreis die beste realistische Alternative ist. Ein kostenloses Programm, ein anderer Händler oder eine Aktion für alle kann den zusätzlichen Mitgliedsvorteil deutlich verkleinern.' },
+      { question: 'Welche Rolle spielen Standort und Öffnungszeiten?', answer: 'Bei Fitness- und Vor-Ort-Mitgliedschaften bestimmen Erreichbarkeit, Öffnungszeiten und tatsächlich geplante Besuche die Nutzungszahl. Ein rechnerischer Rabatt hilft nicht, wenn die Leistung praktisch selten erreichbar ist.' },
+      { question: 'Beendet der Kündigungsbutton den Vertrag sofort?', answer: 'Nicht automatisch. Maßgeblich sind wirksame Mindestlaufzeit, Kündigungsfrist und bestätigtes Vertragsende. Der Button erleichtert die Erklärung, ist aber kein pauschaler Erstattungsanspruch.' },
+    ],
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+  return LOCALES.map((locale) => ({ params: { locale }, props: { locale } }));
 }
 const { locale } = Astro.props as { locale: EditorialLocale };
 const article = articles[locale];
@@ -52,7 +74,7 @@ const guide = paidMembershipGuides[locale];
 if (!guide) throw new Error(`Missing paid membership guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}>
   {locale === 'en' && <>
     <p>A membership badge does not create savings. The comparison starts with the free or nonmember option you would otherwise choose. Count only eligible purchases already in your plan, value only benefits you will actually use, and subtract the extra costs the membership encourages.</p>
     <DecisionGuide content={guide} />
@@ -85,6 +107,32 @@ if (!guide) throw new Error(`Missing paid membership guide for ${locale}`);
     <h2>Un margen esperado pequeño exige prudencia</h2>
     <p>La mezcla de escenarios deja solo 2,15 € de valor esperado. Una compra extra elimina el supuesto ahorro. Prueba tus cifras en la <a href="/en/tools/costco-membership/">calculadora disponible en inglés</a> y revisa renovación y baja; el artículo 62 español exige que los servicios continuados indiquen el procedimiento para terminar el contrato.</p>
     <p class="privacy-note">La página organiza costes generales y no recomienda una membresía concreta ni resuelve derechos contractuales individuales.</p>
+  </>}
+  {locale === 'fr' && <>
+    <p>Une carte de membre ne crée pas une économie à elle seule. La bonne référence est l’offre gratuite, le tarif sans adhésion ou le ticket à l’unité que vous choisiriez réellement. Comptez uniquement les achats ou visites déjà prévus et retranchez les dépenses provoquées par les seuils.</p>
+    <DecisionGuide content={guide} />
+    <h2>Transformez chaque avantage annoncé en gain incrémental</h2>
+    <p>Une remise de 8 € n’ajoute pas 8 € de valeur si une promotion ouverte à tous économise déjà 3 €. Le gain membre n’est alors que de 5 €, avant trajet, livraison ou achat complémentaire. Un bon de 15 € vaut moins si vous devez dépenser 40 € sur un produit que vous n’aviez pas prévu.</p>
+    <h2>Testez le plafond avant de calculer le seuil</h2>
+    <p>Dans l’exemple, 12 usages à 8 € donnent un maximum de 96 €, supérieur à la cotisation nette de 74 € : le dixième usage passe le seuil. Si le plafond était de 70 €, aucune utilisation supplémentaire ne pourrait rendre la carte rentable.</p>
+    <h2>Un gain attendu de 2,40 € ne protège pas contre une faible utilisation</h2>
+    <p>Le scénario pondéré est légèrement positif, mais cinq usages entraînent encore une perte de 34 €. Pour une salle, vérifiez le trajet, les horaires et faites une séance d’essai ; pour une carte d’achat, utilisez votre historique de commandes plutôt qu’une intention. La DGCCRF recommande de lire le contrat d’adhésion et les restrictions avant de s’engager.</p>
+    <h2>Séparez rentabilité, reconduction tacite et résiliation</h2>
+    <p>Une fonctionnalité de résiliation en ligne facilite la notification mais ne supprime pas le préavis ou la durée minimale. Notez la prochaine échéance, le dernier jour pour refuser la reconduction tacite et la date d’effet confirmée. Testez vos chiffres dans le <a href="/en/tools/costco-membership/">calculateur de rentabilité disponible en anglais</a> avant de renouveler.</p>
+    <p class="privacy-note">Cette estimation organise des coûts de consommation généraux ; elle ne recommande aucune adhésion et ne détermine pas les droits de résiliation ou de remboursement d’un contrat précis.</p>
+  </>}
+  {locale === 'de' && <>
+    <p>Ein Mitgliedsausweis spart noch kein Geld. Vergleichen Sie mit der kostenlosen Stufe, dem Preis ohne Mitgliedschaft oder dem Einzelticket, das Sie tatsächlich wählen würden. Nur ohnehin geplante Käufe oder Besuche zählen; Mehrkäufe für Mindestumsatz oder Bonuspunkte sind Kosten.</p>
+    <DecisionGuide content={guide} />
+    <h2>Rechnen Sie mit Zusatzvorteil statt Werberabatt</h2>
+    <p>Spart ein kostenloses Kundenkonto bereits 3 € und die kostenpflichtige Stufe 8,50 €, beträgt der zusätzliche Vorteil höchstens 5,50 €. Fahrtkosten, Versand, Servicegebühren und ungenutzte Großpackungen reduzieren ihn weiter. Jede Vorteilskategorie sollte nur einmal gezählt werden.</p>
+    <h2>Die Obergrenze entscheidet, ob Gleichstand möglich ist</h2>
+    <p>Zwölf berechtigte Nutzungen ergeben im Beispiel höchstens 102 €. Damit kann der Nettobeitrag von 84 € ab der zehnten Nutzung gedeckt werden. Läge die Obergrenze unter 84 €, wäre der Beitrag über diesen Vorteil nie zurückverdient – unabhängig von der Besuchszahl.</p>
+    <h2>Praktische Nutzbarkeit gehört in die Rechnung</h2>
+    <p>Der wahrscheinlichkeitsgewichtete Nettowert beträgt nur 1,00 €. Bei einer Fitnessmitgliedschaft können Entfernung, Öffnungszeiten und tatsächliche Trainingsroutine wichtiger sein als der Monatsrabatt. Die Verbraucherzentrale empfiehlt, Erreichbarkeit, Zeiten und Mitgliedsbeiträge vor der Unterschrift zu prüfen; ein Probetraining liefert bessere Nutzungsdaten als ein Vorsatz.</p>
+    <h2>Beitrag, Mindestlaufzeit und Kündigung getrennt prüfen</h2>
+    <p>Eine erfolgreiche Online-Erklärung über den Kündigungsbutton ist nicht automatisch eine sofortige Vertragsbeendigung oder Erstattung. Speichern Sie Bestätigung, Enddatum und letzten Beitrag. Prüfen Sie die eigenen Werte im <a href="/en/tools/costco-membership/">englischsprachigen Mitgliedschaftsrechner</a>, bevor eine automatische Verlängerung beginnt.</p>
+    <p class="privacy-note">Die Seite ist ein allgemeines Verbrauchskostenmodell. Sie bewertet weder einen bestimmten Anbieter noch die Wirksamkeit einzelner Vertragsklauseln oder Erstattungsansprüche.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

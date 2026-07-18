@@ -1,0 +1,126 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import GymCostCalculator from '../../components/GymCostCalculator.astro';
+import type { Locale } from '../../consts';
+import { gymCostGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Gym membership cost per visit: how often do you need to go?',
+    description: 'Calculate real gym cost per visit from joining fees, monthly dues, service charges, missed months, attendance, and an equivalent drop-in price.',
+    faq: [
+      { question: 'How do I calculate gym membership cost per visit?', answer: 'Add the joining fee and every unavoidable charge during the contract, then divide by visits you will actually make. Paid months with no attendance stay in the numerator and reduce total visits.' },
+      { question: 'How many times a month should I go to make a gym membership worth it?', answer: 'Divide total membership cost by the drop-in price and by the number of months you will actively attend, then round up. The worked example needs four visits in each of ten active months.' },
+      { question: 'Should the enrollment fee count in cost per visit?', answer: 'Yes. Count joining, enrollment, key-card, annual facility, and mandatory service fees. Excluding one-time charges makes the first contract look artificially cheap.' },
+      { question: 'How should I count vacation or busy months?', answer: 'Estimate how many paid months will have zero visits and remove them from active months. If the contract guarantees a free freeze, change the paid months or total cost only by the documented amount.' },
+      { question: 'Is a drop-in pass always the right comparison?', answer: 'Only if access is comparable. Adjust for classes, pool, childcare, lockers, parking, locations, and booking restrictions, or compare with the community facility or class pack you would really buy.' },
+    ],
+  },
+  zh: {
+    title: '健身房會員每次成本怎麼算？一個月要去幾次才划算',
+    description: '把入會費、月費、設施費、缺席月份、實際到館次數與單次替代價放進同一個健身房回本計算。',
+    faq: [
+      { question: '健身房單次成本怎麼算？', answer: '把入會費、整段契約月費與所有必要費用相加，再除以真正會到館的總次數；有繳費但沒去的月份仍要算成本。' },
+      { question: '一個月去幾次健身房才划算？', answer: '用會員總成本除以單次票價格，再除以有效月份並無條件進位。本頁算例在十個有效月份中，每月至少要去四次。' },
+      { question: '首月優惠或免入會費要怎麼算？', answer: '用本次契約真正會付的金額；優惠結束後若續約價不同，要另做續約情境。不要拿已經結束的首月價降低未來一年成本。' },
+      { question: '請假或暫停會員期間要算月費嗎？', answer: '依書面契約處理。若確認停權期間免繳且效期順延，可調整成本與月份；只有口頭承諾時不要先假設一定免繳。' },
+      { question: '教練課費用要算進會員單次成本嗎？', answer: '若教練課是你為同一運動計畫必買的必要費用就列入；可自由選擇且單獨定價時應分開分析，避免把會籍與教練課混成一個數字。' },
+    ],
+  },
+  es: {
+    title: 'Coste por visita al gimnasio: cuántas veces debes ir para que compense',
+    description: 'Calcula el coste real por visita con matrícula, cuota, mantenimiento, meses sin uso, asistencia y una entrada suelta comparable.',
+    faq: [
+      { question: '¿Cómo calculo el coste por visita de un gimnasio?', answer: 'Suma matrícula y todos los pagos obligatorios de la permanencia y divide entre visitas reales. Los meses cobrados sin asistencia aumentan el coste y no añaden visitas.' },
+      { question: '¿Cuántas veces al mes tengo que ir para amortizar la cuota?', answer: 'Divide el coste total entre el precio de la entrada suelta y entre los meses activos, y redondea hacia arriba. El ejemplo necesita cuatro visitas en cada uno de once meses activos.' },
+      { question: '¿La matrícula debe incluirse aunque se pague una sola vez?', answer: 'Sí. Matrícula, tarjeta de acceso, mantenimiento y otros cargos obligatorios forman parte del coste del primer contrato. Para una renovación sin matrícula, crea un escenario separado.' },
+      { question: '¿Cómo incluyo un mes de vacaciones?', answer: 'Si pagarás la cuota y no irás, cuenta el mes como perdido. Si el contrato garantiza una pausa gratuita, ajusta los meses o el coste según esa condición concreta.' },
+      { question: '¿Es mejor pagar mensualmente o un abono anual?', answer: 'Depende de permanencia, pago anticipado, baja y asistencia. Calcula cada opción con sus cargos reales y prueba meses sin uso; la periodicidad de pago no siempre coincide con la duración contractual.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { joiningFee: 49, monthlyFee: 45, serviceFee: 5, contractMonths: 12, missedMonths: 2, visitsPerActiveMonth: 5, dropInCost: 18 },
+    copy: {
+      heading: 'Gym cost-per-visit calculator', intro: 'Use contract charges and realistic attendance—not the advertised monthly fee.', joiningFee: 'Joining or enrollment fee', monthlyFee: 'Monthly dues', serviceFee: 'Mandatory monthly service fee', contractMonths: 'Paid contract months', missedMonths: 'Paid months with no visits', visitsPerActiveMonth: 'Visits per active month', dropInCost: 'Equivalent drop-in price', totalCost: 'Total membership cost', totalVisits: 'Expected visits', costPerVisit: 'Effective cost per visit', breakEvenVisits: 'Break-even visits', activeMonthSuffix: 'per active month', positive: 'Membership is cheaper by', negative: 'Drop-in visits are cheaper by', tie: 'Both options cost about the same.', noVisits: 'With no planned visits, the full membership cost is unused.', privacy: 'Your inputs stay in this browser. The result compares costs and does not interpret cancellation or refund rights.',
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { joiningFee: 1200, monthlyFee: 1288, serviceFee: 100, contractMonths: 12, missedMonths: 2, visitsPerActiveMonth: 6, dropInCost: 450 },
+    copy: {
+      heading: '健身房單次成本與回本計算機', intro: '請填整段契約會付的費用與真正能到館的次數，不只看廣告月費。', joiningFee: '入會／建檔／門禁卡費', monthlyFee: '每月會費', serviceFee: '每月必要設施或管理費', contractMonths: '契約付款月數', missedMonths: '繳費但完全沒去的月份', visitsPerActiveMonth: '每個有效月份到館次數', dropInCost: '同等單次票價格', totalCost: '會員總成本', totalVisits: '預計總到館次數', costPerVisit: '實際單次成本', breakEvenVisits: '最低回本次數', activeMonthSuffix: '／每個有效月份', positive: '會員方案少付', negative: '單次票方案少付', tie: '兩種方案成本大致相同。', noVisits: '沒有預計到館次數時，整筆會員費都是未使用成本。', privacy: '輸入只在瀏覽器內計算。本工具比較費用，不判定個別契約的請假、終止或退費權利。',
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { joiningFee: 35, monthlyFee: 29.9, serviceFee: 2, contractMonths: 12, missedMonths: 1, visitsPerActiveMonth: 4, dropInCost: 12 },
+    copy: {
+      heading: 'Calculadora de coste por visita al gimnasio', intro: 'Introduce todos los cargos de la permanencia y una asistencia realista, no solo la cuota anunciada.', joiningFee: 'Matrícula o alta', monthlyFee: 'Cuota mensual', serviceFee: 'Servicio mensual obligatorio', contractMonths: 'Meses pagados por contrato', missedMonths: 'Meses pagados sin visitas', visitsPerActiveMonth: 'Visitas por mes activo', dropInCost: 'Precio de una entrada equivalente', totalCost: 'Coste total de la membresía', totalVisits: 'Visitas previstas', costPerVisit: 'Coste efectivo por visita', breakEvenVisits: 'Visitas de equilibrio', activeMonthSuffix: 'por mes activo', positive: 'La membresía cuesta menos por', negative: 'Las entradas cuestan menos por', tie: 'Las dos opciones cuestan aproximadamente lo mismo.', noVisits: 'Sin visitas previstas, todo el coste de la membresía queda sin uso.', privacy: 'Los datos se calculan en este navegador. El resultado compara costes y no interpreta derechos de baja o devolución.',
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = gymCostGuides[locale];
+const calculator = calculators[locale];
+if (!guide) throw new Error(`Missing gym cost guide for ${locale}`);
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>A $45 gym does not cost $45 per month when enrollment, facility charges, and paid absences are part of the contract. The decision unit is the visit you will actually make. Count every unavoidable payment, estimate zero-visit months before signing, and compare the result with the drop-in or community option you would genuinely use.</p>
+    <DecisionGuide content={guide} />
+    <GymCostCalculator locale={locale} {...calculator} />
+    <h2>Missed months change both sides of the equation</h2>
+    <p>A paid month with no attendance still increases total cost and also removes visits. In the example, two missed months leave ten active months; at five visits each, cost per visit is $12.98. If attendance falls to twice a month, the same contract costs $32.45 per visit and $18 drop-ins become $289 cheaper.</p>
+    <h2>Compare equivalent access, not just two prices</h2>
+    <p>A full membership may include classes, pool, childcare, lockers, parking, or multiple locations. A drop-in may include only the gym floor. Price these differences only when you expect to use them. A “free” class that never fits your schedule is not worth its advertised price.</p>
+    <h2>Separate the first contract from renewal</h2>
+    <p>The joining fee belongs in the first-term calculation. If renewal has no enrollment fee, calculate a second term separately using the renewal price and a fresh attendance estimate. Do not let last year’s sunk cost justify another year.</p>
+    <h2>Record cancellation terms before the first workout</h2>
+    <p>FTC consumer advice warns that auto-renewing gym subscriptions continue charging until properly cancelled. Save the contract, notice deadline, permitted cancellation method, and confirmation. A difficult cancellation process does not make unused months disappear from the cost-per-visit result.</p>
+    <p class="privacy-note">This page compares general consumer costs. It does not recommend a fitness plan, value health outcomes, or determine contract and refund rights.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>「月費 NT$1,288」不等於每月只花 NT$1,288。入會費、門禁卡、設施維護費與明知會缺席的月份，都會提高真正的單次成本。先用自己能到館的時段估次數，再和運動中心單次票或課程套票比較。</p>
+    <DecisionGuide content={guide} />
+    <GymCostCalculator locale={locale} {...calculator} />
+    <h2>缺席月份會同時增加成本、減少次數</h2>
+    <p>綁約 12 個月但其中 2 個月完全沒去，仍要用整段付款除以其餘 10 個月的到館次數。本頁算例每月 6 次時單次 NT$297.60；若只剩每月 2 次，同一張會籍變成每次 NT$892.80，反而比 NT$450 單次票多 NT$8,856。</p>
+    <h2>會籍與教練課要分開看</h2>
+    <p>場館會籍可能只提供器材，教練課、團課、置物櫃、停車與毛巾另計。只有為同一計畫必付的費用才合併；可自由購買的教練課另做單堂成本，避免業者把兩份契約包在一起後看不出哪一項不划算。</p>
+    <h2>台灣契約要先看費用、期間與請假</h2>
+    <p>現行健身中心定型化契約規範涵蓋費用種類、付款方式、服務內容、契約終止、會籍暫停與履約保障。簽約前要拿到書面內容；只有條款明確保障的免繳或順延，才能從缺席月份成本中扣除。</p>
+    <h2>第一期與續約期不要混算</h2>
+    <p>入會費只發生在第一期時，續約可另建一個沒有入會費的情境；但續約價、設施費或方案內容也可能改變。過去已付費用是沉沒成本，續約判斷只看下一期會付多少、實際會去幾次。</p>
+    <p class="privacy-note">本頁只做一般消費成本比較，不提供運動處方，也不判定個別契約的請假、終止或退費結果。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>Una cuota de 29,90 € no es el coste mensual completo si existen matrícula, mantenimiento y meses de permanencia sin asistencia. La unidad útil es la visita real. Suma todos los cargos inevitables, descuenta los meses en que sabes que no irás y compara con la entrada o instalación municipal que utilizarías de verdad.</p>
+    <DecisionGuide content={guide} />
+    <GymCostCalculator locale={locale} {...calculator} />
+    <h2>Un mes sin gimnasio perjudica dos veces</h2>
+    <p>La cuota sigue en el coste total y ese mes no aporta visitas. En el ejemplo, un mes perdido deja 11 meses activos y 44 visitas, a 9,50 € cada una. Si la asistencia baja a dos veces al mes, el coste sube a 18,99 € por visita y las entradas de 12 € cuestan 153,80 € menos.</p>
+    <h2>Compara servicios realmente equivalentes</h2>
+    <p>Clases, piscina, aparcamiento, taquilla y acceso a varias sedes pueden cambiar la comparación. No asignes valor facial a extras que no usarás. Si tu alternativa es un polideportivo municipal o un bono de diez sesiones, usa ese precio y sus condiciones, no una entrada suelta elegida para favorecer la membresía.</p>
+    <h2>Matrícula, permanencia y pago anticipado son decisiones distintas</h2>
+    <p>La matrícula afecta sobre todo al primer contrato. La permanencia determina cuántos meses debes incluir aunque dejes de ir. El pago anual añade riesgo de dinero adelantado. El Portal del Consumidor de la Comunidad de Madrid recomienda revisar baja, modalidad de pago, extras y penalización antes de firmar.</p>
+    <h2>Conserva contrato y prueba de la baja</h2>
+    <p>Consumo Responde aconseja que el procedimiento de baja figure en el contrato y que la solicitud quede documentada. Devolver un recibo no acredita por sí solo una baja. Para el cálculo, usa la fecha efectiva confirmada y no una fecha de cancelación que todavía no ha sido aceptada.</p>
+    <p class="privacy-note">La página compara costes generales de consumo. No prescribe ejercicio ni determina la validez de permanencias, penalizaciones o devoluciones concretas.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

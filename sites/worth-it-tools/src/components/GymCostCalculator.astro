@@ -1,0 +1,232 @@
+---
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  joiningFee: string;
+  monthlyFee: string;
+  serviceFee: string;
+  contractMonths: string;
+  missedMonths: string;
+  visitsPerActiveMonth: string;
+  dropInCost: string;
+  totalCost: string;
+  totalVisits: string;
+  costPerVisit: string;
+  breakEvenVisits: string;
+  activeMonthSuffix: string;
+  positive: string;
+  negative: string;
+  tie: string;
+  noVisits: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: 'en' | 'zh' | 'es';
+  currency: 'USD' | 'TWD' | 'EUR';
+  defaults: {
+    joiningFee: number;
+    monthlyFee: number;
+    serviceFee: number;
+    contractMonths: number;
+    missedMonths: number;
+    visitsPerActiveMonth: number;
+    dropInCost: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const numberLocale = locale === 'zh' ? 'zh-TW' : locale === 'es' ? 'es-ES' : 'en-US';
+---
+
+<section
+  id="gym-cost-calculator"
+  class="gym-calc"
+  data-gym-calculator
+  data-locale={numberLocale}
+  data-currency={currency}
+  data-positive={copy.positive}
+  data-negative={copy.negative}
+  data-tie={copy.tie}
+  data-no-visits={copy.noVisits}
+  data-active-month-suffix={copy.activeMonthSuffix}
+  aria-labelledby="gym-calculator-heading"
+>
+  <header>
+    <h2 id="gym-calculator-heading">{copy.heading}</h2>
+    <p>{copy.intro}</p>
+  </header>
+
+  <div class="gym-calc-grid">
+    <div class="gym-calc-inputs">
+      <label>
+        <span>{copy.joiningFee}</span>
+        <input data-field="joiningFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.joiningFee} />
+      </label>
+      <label>
+        <span>{copy.monthlyFee}</span>
+        <input data-field="monthlyFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.monthlyFee} />
+      </label>
+      <label>
+        <span>{copy.serviceFee}</span>
+        <input data-field="serviceFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.serviceFee} />
+      </label>
+      <label>
+        <span>{copy.contractMonths}</span>
+        <input data-field="contractMonths" type="number" inputmode="numeric" min="1" max="120" step="1" value={defaults.contractMonths} />
+      </label>
+      <label>
+        <span>{copy.missedMonths}</span>
+        <input data-field="missedMonths" type="number" inputmode="numeric" min="0" max="120" step="1" value={defaults.missedMonths} />
+      </label>
+      <label>
+        <span>{copy.visitsPerActiveMonth}</span>
+        <input data-field="visitsPerActiveMonth" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.visitsPerActiveMonth} />
+      </label>
+      <label>
+        <span>{copy.dropInCost}</span>
+        <input data-field="dropInCost" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.dropInCost} />
+      </label>
+    </div>
+
+    <div class="gym-calc-results" aria-live="polite">
+      <p class="gym-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.totalCost}</dt><dd data-output="totalCost">—</dd></div>
+        <div><dt>{copy.totalVisits}</dt><dd data-output="totalVisits">—</dd></div>
+        <div><dt>{copy.costPerVisit}</dt><dd data-output="costPerVisit">—</dd></div>
+        <div><dt>{copy.breakEvenVisits}</dt><dd data-output="breakEvenVisits">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="gym-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-gym-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 2 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+    const formatMoney = (amount: number) => currency === 'TWD' ? `NT$${twdFormatter.format(amount)}` : currencyFormatter.format(amount);
+    const formatNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+
+    function calculate() {
+      const joiningFee = value('joiningFee');
+      const monthlyFee = value('monthlyFee');
+      const serviceFee = value('serviceFee');
+      const contractMonths = Math.max(1, Math.round(value('contractMonths')));
+      const missedMonths = Math.min(contractMonths, Math.round(value('missedMonths')));
+      const visitsPerActiveMonth = value('visitsPerActiveMonth');
+      const dropInCost = value('dropInCost');
+      const activeMonths = Math.max(0, contractMonths - missedMonths);
+      const totalVisits = activeMonths * visitsPerActiveMonth;
+      const totalCost = joiningFee + contractMonths * (monthlyFee + serviceFee);
+      const alternativeCost = totalVisits * dropInCost;
+      const difference = alternativeCost - totalCost;
+      const costPerVisit = totalVisits > 0 ? totalCost / totalVisits : 0;
+      const breakEven = activeMonths > 0 && dropInCost > 0 ? Math.ceil(totalCost / (dropInCost * activeMonths)) : 0;
+
+      output('totalCost').textContent = formatMoney(totalCost);
+      output('totalVisits').textContent = formatNumber.format(totalVisits);
+      output('costPerVisit').textContent = totalVisits > 0 ? formatMoney(costPerVisit) : '—';
+      output('breakEvenVisits').textContent = breakEven > 0 ? `${formatNumber.format(breakEven)} ${root.dataset.activeMonthSuffix || ''}`.trim() : '—';
+
+      if (totalVisits <= 0) output('verdict').textContent = root.dataset.noVisits || '';
+      else if (Math.abs(difference) < 0.01) output('verdict').textContent = root.dataset.tie || '';
+      else if (difference > 0) output('verdict').textContent = `${root.dataset.positive || ''} ${formatMoney(difference)}`.trim();
+      else output('verdict').textContent = `${root.dataset.negative || ''} ${formatMoney(Math.abs(difference))}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .gym-calc {
+    margin: 2rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .gym-calc header p,
+  .gym-calc-note {
+    color: var(--color-muted);
+  }
+
+  .gym-calc-grid,
+  .gym-calc-inputs,
+  .gym-calc-results dl {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .gym-calc-inputs label span {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 650;
+  }
+
+  .gym-calc-results {
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    padding: 1rem;
+  }
+
+  .gym-verdict {
+    margin-top: 0;
+    font-size: 1.15rem;
+    font-weight: 750;
+  }
+
+  .gym-calc-results dl,
+  .gym-calc-results dd {
+    margin: 0;
+  }
+
+  .gym-calc-results dl div {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .gym-calc-results dt {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .gym-calc-results dd {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .gym-calc-note {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 760px) {
+    .gym-calc-grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(270px, 0.8fr);
+      align-items: start;
+    }
+
+    .gym-calc-inputs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gym-calc-results {
+      position: sticky;
+      top: 1rem;
+    }
+  }
+</style>

@@ -1,6 +1,9 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { subscriptionGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
@@ -37,7 +40,8 @@ const faq = [
   title="Subscription Creep: How Much Are You Really Paying?"
   description="Streaming, cloud, apps, memberships — find every recurring charge and see the real monthly, yearly, and 5-year total with a free subscription cost calculator."
   locale={locale}
-  updated="2026-07-03"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
     Quick: how much are you spending on subscriptions each month? If you just
@@ -49,6 +53,8 @@ const faq = [
     number in minutes with a free
     <a href={localizedPath(locale, '/tools/subscription-audit')}>subscription cost calculator</a>.
   </p>
+
+  <DecisionGuide content={subscriptionGuides.en} />
 
   <h2>Why subscription creep happens to everyone</h2>
   <p>

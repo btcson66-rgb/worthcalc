@@ -1,4 +1,4 @@
-import type { Locale } from '../consts';
+import type { CoreLocale } from '../consts';
 import type { FaqItem } from './seo';
 
 interface HomeTool {
@@ -27,7 +27,7 @@ interface HomeContent {
   faq: FaqItem[];
 }
 
-export const homeContent: Record<Locale, HomeContent> = {
+export const homeContent: Record<CoreLocale, HomeContent> = {
   en: {
     title: "Free Calculators That Tell You If It's Worth It",
     description:

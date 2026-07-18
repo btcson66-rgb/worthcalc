@@ -1,0 +1,186 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import { LOCALES, type Locale } from '../../consts';
+import { subscriptionGuides } from '../../data/decisionGuides';
+import { localizedCorePath } from '../../i18n/utils';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'es' | 'fr' | 'de';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  es: {
+    title: 'Auditoría de suscripciones: calcula tu gasto anual real',
+    description: 'Localiza todos tus pagos recurrentes, pásalos a coste anual y calcula el coste por uso. Método, ejemplo, tabla de sensibilidad y auditoría gratuita.',
+    faq: [
+      { question: '¿Cuántos meses de movimientos debo revisar?', answer: 'Revisa doce meses completos. Una cuota anual puede aparecer una sola vez y desaparecer si miras únicamente los últimos dos o tres meses.' },
+      { question: '¿Desinstalar una aplicación cancela la suscripción?', answer: 'No necesariamente. Google Play indica expresamente que desinstalar una app no cancela la suscripción. Debes entrar en la cuenta con la que contrataste el servicio y detener la renovación.' },
+      { question: '¿Cómo comparo un plan mensual con uno anual?', answer: 'Compara el coste esperado, no solo el descuento. Multiplica el precio mensual por los meses que realmente prevés usarlo y añade el riesgo de no poder recuperar la parte no utilizada del plan anual.' },
+      { question: '¿Qué hago con una suscripción incluida en un paquete?', answer: 'Asigna al servicio solo el coste incremental del paquete. Si pagarías el paquete aunque ese servicio desapareciera, su coste marginal puede ser cero; si el servicio te obliga a subir de nivel, usa la diferencia de precio.' },
+      { question: '¿La auditoría es asesoramiento financiero o legal?', answer: 'No. Es una forma de ordenar importes y uso. Comprueba permanencias, preavisos, reembolsos y condiciones con el proveedor antes de cancelar.' },
+    ],
+  },
+  fr: {
+    title: 'Audit des abonnements : calculez votre coût annuel réel',
+    description: 'Repérez chaque prélèvement, convertissez-le en coût annuel et mesurez le coût par usage. Méthode, exemple, tableau de sensibilité et outil gratuit.',
+    faq: [
+      { question: 'Combien de mois de relevés faut-il examiner ?', answer: 'Douze mois complets. Un abonnement annuel ne laisse qu’une ligne par an ; un contrôle limité aux derniers mois peut donc le manquer.' },
+      { question: 'Supprimer une application suffit-il à arrêter le paiement ?', answer: 'Non. La suppression de l’application et la résiliation sont deux actions distinctes. Ouvrez le compte utilisé lors de l’achat et vérifiez que le renouvellement est bien désactivé.' },
+      { question: 'Comment comparer paiement mensuel et paiement annuel ?', answer: 'Comparez le coût attendu sur votre durée d’usage probable. Une remise annuelle n’est avantageuse que si vous utilisez le service assez longtemps et acceptez le risque de payer des mois inutilisés.' },
+      { question: 'Comment traiter un service inclus dans une offre groupée ?', answer: 'Retenez son coût supplémentaire réel. Si vous conserveriez l’offre même sans ce service, son coût marginal peut être nul ; si sa présence vous impose une formule supérieure, utilisez l’écart de prix.' },
+      { question: 'Cet audit remplace-t-il un conseil juridique ?', answer: 'Non. Il organise les montants et l’usage. Vérifiez la durée d’engagement, le préavis et les modalités de remboursement auprès du fournisseur.' },
+    ],
+  },
+  de: {
+    title: 'Abo-Check: So berechnen Sie Ihre echten Jahreskosten',
+    description: 'Finden Sie alle laufenden Zahlungen, rechnen Sie sie aufs Jahr hoch und ermitteln Sie die Kosten je Nutzung – mit Formel, Beispiel und Sensitivitätstabelle.',
+    faq: [
+      { question: 'Wie viele Monate sollte ich prüfen?', answer: 'Prüfen Sie volle zwölf Monate. Jahresabos erscheinen nur einmal und bleiben unsichtbar, wenn Sie lediglich die letzten Wochen oder Monate betrachten.' },
+      { question: 'Beendet das Löschen einer App auch das Abo?', answer: 'Nein. App löschen und Abo kündigen sind getrennte Vorgänge. Melden Sie sich in dem Konto an, über das der Vertrag abgeschlossen wurde, und stoppen Sie dort die Verlängerung.' },
+      { question: 'Wie vergleiche ich Monats- und Jahreszahlung?', answer: 'Vergleichen Sie die erwarteten Kosten für Ihre wahrscheinliche Nutzungsdauer. Der Jahresrabatt lohnt sich nur, wenn Sie den Dienst lange genug nutzen und das Risiko ungenutzter Monate akzeptieren.' },
+      { question: 'Wie behandle ich Abos in einem Paket?', answer: 'Setzen Sie nur die zusätzlichen Kosten des enthaltenen Dienstes an. Würden Sie das Paket ohnehin behalten, können die Grenzkosten null sein; zwingt der Dienst Sie in einen teureren Tarif, zählt die Preisdifferenz.' },
+      { question: 'Ist der Abo-Check Rechts- oder Finanzberatung?', answer: 'Nein. Er strukturiert Preise und Nutzung. Prüfen Sie Laufzeit, Kündigungsfrist und Erstattungsregeln beim Anbieter, bevor Sie handeln.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = subscriptionGuides[locale];
+const englishTool = localizedCorePath(locale, '/tools/subscription-audit');
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
+>
+  {locale === 'es' && (
+    <>
+      <p>
+        Una auditoría de suscripciones no empieza intentando recordar lo que pagas. Empieza en los movimientos del banco. Plataformas de vídeo, almacenamiento, software, gimnasio, prensa, reparto y servicios contratados desde el móvil suelen repartirse entre varias tarjetas y cuentas. El objetivo es reunirlos en una sola lista, convertir cada frecuencia de cobro a un año y decidir con datos qué merece la próxima renovación.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Dónde buscar para no dejar pagos fuera</h2>
+      <p>
+        Descarga o consulta doce meses completos de movimientos. Busca el nombre comercial, pero también el descriptor de cobro: a veces la línea muestra la empresa matriz o la pasarela de pago. Revisa por separado App Store, Google Play, PayPal, la factura del móvil y las tarjetas virtuales. Si compartes gastos en casa, pregunta antes de dar por terminada la lista: un plan familiar puede cobrarse en la cuenta de otra persona.
+      </p>
+      <p>
+        Apunta seis datos por servicio: nombre, precio, frecuencia, próxima fecha de cobro, cuenta utilizada y uso real. Añade una columna para permanencia o preaviso. No des por hecho que borrar una aplicación detiene el pago; confirma la cancelación en el canal donde se contrató.
+      </p>
+
+      <h2>Normaliza el precio antes de comparar</h2>
+      <p>
+        “Solo 6,99 € al mes” y “69,99 € al año” no son cifras comparables hasta llevarlas al mismo periodo. El coste anual convierte el goteo mensual en una cifra visible. El coste por uso añade la otra mitad de la decisión: un servicio caro usado a diario puede salir mejor que uno barato abierto dos veces al mes.
+      </p>
+      <p>
+        Para paquetes, evita repartir el precio de forma arbitraria. Pregunta cuánto bajaría la factura si prescindieras de ese servicio. Esa diferencia es su coste incremental. También separa los descuentos temporales: para decidir si continúas, utiliza el precio de la próxima renovación.
+      </p>
+
+      <h2>Una regla práctica para mensual frente a anual</h2>
+      <p>
+        Calcula cuántos meses de uso hacen que la opción anual iguale a la mensual. Si un plan cuesta 12 € al mes o 108 € al año, el punto de equilibrio es 108 ÷ 12 = 9 meses. Si existe una posibilidad razonable de dejarlo antes del noveno mes y no hay reembolso, la tarifa mensual compra flexibilidad. El descuento anual no es ahorro si obliga a pagar tiempo que no usarás.
+      </p>
+
+      <h2>Termina la auditoría con una acción concreta</h2>
+      <p>
+        Clasifica cada línea como mantener, bajar de plan, pausar o cancelar. Pon una fecha, no una intención: cancela ahora lo que ya no utilizas y crea un recordatorio antes de la próxima renovación para los casos dudosos. Puedes ordenar las cifras con la <a href={englishTool}>calculadora de auditoría de suscripciones disponible en inglés</a>; los datos se procesan en el navegador.
+      </p>
+      <p class="privacy-note">Los importes son estimaciones para organizar decisiones de consumo. Las condiciones de baja, permanencia y devolución dependen del contrato y del país.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        Un audit d’abonnements ne commence pas par un effort de mémoire, mais par les relevés. Vidéo, musique, stockage, logiciels, presse, sport ou livraison peuvent être répartis entre plusieurs cartes, un compte PayPal et la facture mobile. L’objectif est de réunir chaque prélèvement, de le convertir en coût annuel et de décider si la prochaine échéance mérite réellement d’être payée.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Retrouver tous les prélèvements récurrents</h2>
+      <p>
+        Parcourez douze mois complets de relevés bancaires. Recherchez le nom du service, mais aussi celui de l’éditeur ou de l’intermédiaire de paiement. Consultez ensuite les abonnements Apple et Google Play, PayPal, l’opérateur mobile et, le cas échéant, les comptes des autres membres du foyer. Un abonnement familial peut être utilisé par tous tout en étant facturé à une seule personne.
+      </p>
+      <p>
+        Pour chaque ligne, notez le prix, la périodicité, la prochaine échéance, le moyen de paiement, la durée d’engagement et l’usage mensuel. Conservez la preuve de résiliation. Supprimer une application de son téléphone ne suffit pas à arrêter son renouvellement.
+      </p>
+
+      <h2>Comparer des montants réellement comparables</h2>
+      <p>
+        Une mensualité et un paiement annuel ne disent pas la même chose. Ramenez-les d’abord à douze mois, puis calculez un coût par usage. Ce second chiffre évite de supprimer mécaniquement le service le plus cher : une plateforme à 15 € utilisée tous les jours peut coûter moins par séance qu’une application à 5 € ouverte deux fois par mois.
+      </p>
+      <p>
+        Pour une offre groupée, utilisez le coût marginal. Si le retrait d’un service ne réduit pas le prix du forfait que vous garderiez de toute façon, son coût supplémentaire est nul. En revanche, si ce service impose une formule premium, l’écart avec la formule inférieure est son vrai coût.
+      </p>
+
+      <h2>Mensuel ou annuel : mesurez le risque d’inutilisation</h2>
+      <p>
+        Avec 13 € par mois ou 117 € par an, l’offre annuelle rejoint l’offre mensuelle après 9 mois. Si vous pensez arrêter plus tôt et qu’aucun remboursement n’est prévu, la mensualité peut être plus rationnelle malgré son tarif facial supérieur. Le bon calcul combine remise et durée d’usage probable.
+      </p>
+
+      <h2>Transformer le tableau en décisions</h2>
+      <p>
+        Attribuez à chaque service une action : conserver, réduire, suspendre ou résilier. Traitez immédiatement les abonnements oubliés ; pour les autres, programmez un rappel avant l’échéance. Le <a href={englishTool}>calculateur d’abonnements en anglais</a> permet de normaliser les périodes, le coût par usage et le total sur cinq ans sans envoyer vos montants à un serveur WorthCalc.
+      </p>
+      <p class="privacy-note">Cette méthode fournit une estimation de consommation. Les droits de résiliation, préavis et remboursements dépendent du contrat et de la réglementation applicable.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        Ein vollständiger Abo-Check beginnt nicht im Gedächtnis, sondern auf dem Kontoauszug. Streaming, Cloud-Speicher, Software, Nachrichten, Fitness und Lieferdienste verteilen sich häufig auf mehrere Karten, PayPal und Mobilfunkrechnungen. Erst eine gemeinsame Liste zeigt, wie viel pro Jahr abfließt und welcher Dienst die nächste Verlängerung tatsächlich verdient.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Alle laufenden Zahlungen finden</h2>
+      <p>
+        Prüfen Sie zwölf vollständige Monate. Suchen Sie nicht nur nach dem Produktnamen, sondern auch nach Anbieter, Konzern oder Zahlungsdienstleister, der im Umsatztext auftaucht. Öffnen Sie zusätzlich die Abo-Verwaltung von Apple und Google Play, PayPal, Mobilfunkkonten sowie gemeinsam genutzte Familienkonten. Ein Jahresabo wäre in einem kürzeren Prüfzeitraum leicht unsichtbar.
+      </p>
+      <p>
+        Erfassen Sie Preis, Abrechnungsrhythmus, nächstes Verlängerungsdatum, Zahlungsmittel, Mindestlaufzeit und reale Nutzung. Bewahren Sie eine Kündigungsbestätigung auf. Das Löschen einer App beendet den Vertrag nicht automatisch.
+      </p>
+
+      <h2>Monat, Quartal und Jahr vergleichbar machen</h2>
+      <p>
+        Rechnen Sie zunächst alles auf zwölf Monate hoch. Danach teilen Sie die Kosten durch tatsächliche Nutzungen oder Stunden. Der Preis je Nutzung verhindert vorschnelle Entscheidungen: Ein teurer, täglich genutzter Dienst kann wirtschaftlicher sein als ein billiges Abo, das kaum geöffnet wird.
+      </p>
+      <p>
+        Bei Bündeln zählt die Preisdifferenz. Würden Sie Internet- oder Mobilfunktarif auch ohne den enthaltenen Dienst behalten, entstehen für diesen Dienst möglicherweise keine zusätzlichen Kosten. Müssen Sie dafür in eine höhere Tarifstufe wechseln, ist genau dieser Aufpreis relevant.
+      </p>
+
+      <h2>Jahresrabatt gegen Flexibilität rechnen</h2>
+      <p>
+        Kostet ein Dienst 10 € pro Monat oder 90 € pro Jahr, liegt der rechnerische Gleichstand nach 9 Monaten. Wer voraussichtlich früher kündigt und keine anteilige Erstattung erhält, fährt mit der Monatszahlung trotz höherem Listenpreis günstiger. Ein Rabatt ist nur dann eine Ersparnis, wenn die bezahlte Laufzeit genutzt wird.
+      </p>
+
+      <h2>Aus der Liste einen festen Ablauf machen</h2>
+      <p>
+        Ordnen Sie jedes Abo einer Handlung zu: behalten, Tarif senken, pausieren oder kündigen. Erledigen Sie vergessene Verträge sofort und setzen Sie für Grenzfälle einen Termin vor der nächsten Verlängerung. Der <a href={englishTool}>englische Abo-Rechner</a> normalisiert Zahlungsrhythmen, Nutzungskosten und Fünfjahressumme direkt im Browser.
+      </p>
+      <p class="privacy-note">Die Rechnung ist eine allgemeine Verbraucherkosten-Schätzung. Kündigungsfristen, Erstattungen und Vertragsrechte müssen im jeweiligen Vertrag geprüft werden.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

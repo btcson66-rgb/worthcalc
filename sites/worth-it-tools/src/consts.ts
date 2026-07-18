@@ -14,21 +14,31 @@ export const SITE = {
   defaultOgImage: '/og-default.png',
 } as const;
 
-export type Locale = 'en' | 'zh';
+export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+export type CoreLocale = 'en' | 'zh';
 
-export const LOCALES: Locale[] = ['en', 'zh'];
+/** Every locale with at least one completed, indexable route. */
+export const LOCALES: Locale[] = ['en', 'zh', 'es', 'fr', 'de'];
+/** Locales with a complete homepage, legal pages, and calculator catalogue. */
+export const CORE_LOCALES: CoreLocale[] = ['en', 'zh'];
 export const DEFAULT_LOCALE: Locale = 'en';
 
 /** Human-readable language names for the language switcher. */
 export const LOCALE_LABELS: Record<Locale, string> = {
   en: 'English',
   zh: '中文',
+  es: 'Español',
+  fr: 'Français',
+  de: 'Deutsch',
 };
 
 /** BCP-47 codes for the <html lang> attribute and hreflang. */
 export const LOCALE_HREFLANG: Record<Locale, string> = {
   en: 'en',
   zh: 'zh-Hant',
+  es: 'es',
+  fr: 'fr',
+  de: 'de',
 };
 
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';

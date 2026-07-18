@@ -1,6 +1,6 @@
 ---
 import { SITE } from '../consts';
-import { getLocaleFromUrl, localizedPath, useTranslations } from '../i18n/utils';
+import { getLocaleFromUrl, localizedCorePath, useTranslations } from '../i18n/utils';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
@@ -13,12 +13,12 @@ const year = new Date().getFullYear();
     <section aria-labelledby="footer-legal-heading">
       <h2 id="footer-legal-heading">{t('footer.legal')}</h2>
       <nav class="footer-links" aria-label={t('footer.legal')}>
-        <a href={localizedPath(locale, '/about')}>{t('footer.about')}</a>
-        <a href={localizedPath(locale, '/privacy')}>{t('footer.privacy')}</a>
-        <a href={localizedPath(locale, '/terms')}>{t('footer.terms')}</a>
-        <a href={localizedPath(locale, '/contact')}>{t('footer.contact')}</a>
-        <a href={localizedPath(locale, '/disclaimer')}>{t('footer.disclaimer')}</a>
-        <a href={localizedPath(locale, '/changelog')}>{t('footer.changelog')}</a>
+        <a href={localizedCorePath(locale, '/about')}>{t('footer.about')}</a>
+        <a href={localizedCorePath(locale, '/privacy')}>{t('footer.privacy')}</a>
+        <a href={localizedCorePath(locale, '/terms')}>{t('footer.terms')}</a>
+        <a href={localizedCorePath(locale, '/contact')}>{t('footer.contact')}</a>
+        <a href={localizedCorePath(locale, '/disclaimer')}>{t('footer.disclaimer')}</a>
+        <a href={localizedCorePath(locale, '/changelog')}>{t('footer.changelog')}</a>
       </nav>
     </section>
     <p class="footer-site-stats" data-site-stats="worthcalc.win" data-lang={locale} hidden data-nosnippet></p>
@@ -41,9 +41,15 @@ const year = new Date().getFullYear();
         var s = data.sites[el.getAttribute('data-site-stats')];
         if (!s || !(s.pageviews >= MIN_PAGEVIEWS)) return;
         var fmt = function (n) { return Number(n).toLocaleString('en-US'); };
-        el.textContent = el.getAttribute('data-lang') === 'en'
-          ? fmt(s.pageviews) + ' total views · ' + fmt(s.users) + ' users and counting'
-          : '累積瀏覽 ' + fmt(s.pageviews) + ' 次 · 累積使用者 ' + fmt(s.users) + ' 位';
+        var lang = el.getAttribute('data-lang');
+        var labels = {
+          en: fmt(s.pageviews) + ' total views · ' + fmt(s.users) + ' users and counting',
+          zh: '累積瀏覽 ' + fmt(s.pageviews) + ' 次 · 累積使用者 ' + fmt(s.users) + ' 位',
+          es: fmt(s.pageviews) + ' visitas · ' + fmt(s.users) + ' usuarios',
+          fr: fmt(s.pageviews) + ' vues · ' + fmt(s.users) + ' utilisateurs',
+          de: fmt(s.pageviews) + ' Aufrufe · ' + fmt(s.users) + ' Nutzer',
+        };
+        el.textContent = labels[lang] || labels.en;
         el.hidden = false;
       })
       .catch(function () {});

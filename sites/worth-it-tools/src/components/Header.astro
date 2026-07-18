@@ -1,6 +1,6 @@
 ---
 import { LOCALES, SITE, type Locale } from '../consts';
-import { getLocaleFromUrl, localizedPath, useTranslations } from '../i18n/utils';
+import { getLocaleFromUrl, localizedCorePath, useTranslations } from '../i18n/utils';
 import LanguageSwitch from './LanguageSwitch.astro';
 
 interface Props {
@@ -14,7 +14,7 @@ const t = useTranslations(locale);
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href={localizedPath(locale, '/')} aria-label={SITE.name}>
+    <a class="brand" href={localizedCorePath(locale, '/')} aria-label={SITE.name}>
       <svg class="brand__mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="brandMark" x1="0" y1="0" x2="1" y2="1">
@@ -30,10 +30,10 @@ const t = useTranslations(locale);
     </a>
     <div class="site-header__actions">
       <nav class="primary-nav" aria-label="Primary">
-        <a href={localizedPath(locale, '/')}>{t('nav.home')}</a>
-        <a href={`${localizedPath(locale, '/')}#tools`}>{t('nav.tools')}</a>
-        <a href={localizedPath(locale, '/about')}>{t('nav.about')}</a>
-        <a href={localizedPath(locale, '/contact')}>{t('nav.contact')}</a>
+        <a href={localizedCorePath(locale, '/')}>{t('nav.home')}</a>
+        <a href={`${localizedCorePath(locale, '/')}#tools`}>{t('nav.tools')}</a>
+        <a href={localizedCorePath(locale, '/about')}>{t('nav.about')}</a>
+        <a href={localizedCorePath(locale, '/contact')}>{t('nav.contact')}</a>
       </nav>
       <LanguageSwitch locales={locales} />
     </div>

@@ -1,4 +1,4 @@
-import { SITE, LOCALE_HREFLANG, LOCALES, type Locale } from '../consts';
+import { CORE_LOCALES, SITE, LOCALE_HREFLANG, LOCALES, type Locale } from '../consts';
 
 export interface SeoInput {
   /** Page title without the brand suffix. */
@@ -17,7 +17,7 @@ export interface SeoInput {
   type?: 'website' | 'article';
   /** When true, emit a noindex robots directive. */
   noindex?: boolean;
-  /** Locales that have an equivalent page. Defaults to every site locale. */
+  /** Locales that have an equivalent page. Defaults to complete site locales. */
   alternateLocales?: Locale[];
 }
 
@@ -73,7 +73,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const segments = input.url.pathname.split('/').filter(Boolean);
   if ((LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
-  const alternateLocales = input.alternateLocales ?? [...LOCALES];
+  const alternateLocales = input.alternateLocales ?? [...CORE_LOCALES];
   const alternates = alternateLocales.map((loc) => ({
     hreflang: LOCALE_HREFLANG[loc],
     href: absolute(base, localizedPagePath(loc, logical)),
@@ -179,5 +179,28 @@ export function softwareAppJsonLd(opts: {
     operatingSystem: 'Any',
     inLanguage: LOCALE_HREFLANG[opts.locale],
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  };
+}
+
+/** Build a schema.org Article object for editorial pages. */
+export function articleJsonLd(opts: {
+  headline: string;
+  description: string;
+  url: string;
+  locale: Locale;
+  dateModified?: string;
+  site?: URL;
+}): object {
+  const base = (opts.site?.origin ?? SITE.url).replace(/\/$/, '');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: opts.headline,
+    description: opts.description,
+    mainEntityOfPage: absolute(base, pagePath(opts.url)),
+    inLanguage: LOCALE_HREFLANG[opts.locale],
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    author: { '@type': 'Organization', name: SITE.name },
+    publisher: { '@type': 'Organization', name: SITE.name },
   };
 }

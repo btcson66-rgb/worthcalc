@@ -13,8 +13,9 @@
     "lint": "eslint . --ext .js,.mjs,.ts,.astro",
     "lint:fix": "eslint . --ext .js,.mjs,.ts,.astro --fix",
     "check:links": "node scripts/check-links.mjs",
+    "check:multilingual": "node scripts/check-multilingual-editorial.mjs",
     "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",
-    "verify": "npm run build && npm run typecheck && npm run lint && npm run check:links"
+    "verify": "npm run build && npm run typecheck && npm run lint && npm run check:links && npm run check:multilingual"
   },
   "dependencies": {
     "astro": "^5.6.1",

@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import type { Locale } from '../consts';
-import { LOCALE_HREFLANG } from '../consts';
+import { CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
 import type { SeoInput } from '../lib/seo';
 import { getLocaleFromUrl } from '../i18n/utils';
 import SEO from '../components/SEO.astro';
@@ -34,6 +34,7 @@ const {
   alternateLocales,
   jsonLd = [],
 } = Astro.props;
+const resolvedAlternateLocales = alternateLocales ?? [...CORE_LOCALES];
 ---
 
 <!doctype html>
@@ -48,13 +49,13 @@ const {
       image={image}
       type={type}
       noindex={noindex}
-      alternateLocales={alternateLocales}
+      alternateLocales={resolvedAlternateLocales}
       jsonLd={jsonLd}
     />
     <GoogleAnalytics />
   </head>
   <body>
-    <Header locales={alternateLocales} />
+    <Header locales={resolvedAlternateLocales} />
     <main class="container">
       <slot />
     </main>

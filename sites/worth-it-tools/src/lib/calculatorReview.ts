@@ -9,7 +9,7 @@ interface ReviewDetails {
   disclaimer: string;
 }
 
-type ReviewMap = Record<string, Record<Locale, ReviewDetails>>;
+type ReviewMap = Record<string, Partial<Record<Locale, ReviewDetails>>>;
 
 const financialDisclaimer = {
   en: 'This tool provides estimates only. It is not financial advice. Results depend on the numbers you enter and the simplified assumptions listed here.',
@@ -313,5 +313,5 @@ const reviews: ReviewMap = {
 };
 
 export function getCalculatorReview(slug: string, locale: Locale): ReviewDetails | undefined {
-  return reviews[slug]?.[locale];
+  return reviews[slug]?.[locale] ?? reviews[slug]?.en;
 }

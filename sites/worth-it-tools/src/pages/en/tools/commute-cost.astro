@@ -1,10 +1,14 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import DecisionGuide from '../../../components/DecisionGuide.astro';
+import { commuteGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
-const title = 'Commute Cost Calculator';
-const description = 'A 30-mile round-trip over 20 workdays is about $450/month at a $0.75/mile planning rate, before parking and tolls. Compare your commute options.';
+const decisionGuide = commuteGuides.en;
+if (!decisionGuide) throw new Error('Missing English commute guide');
+const title = 'Commute Cost Calculator: Monthly Cost Including Time';
+const description = 'Calculate monthly and yearly commute cost for car, transit, rideshare, or bike. Include fuel, parking, tolls, depreciation, and optional time value.';
 const faq = [
   {
     question: 'What commute modes can I compare?',
@@ -135,6 +139,8 @@ const related = [
       If a warehouse stop or discounted fuel is part of your route, test the fee and realistic savings separately with the <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership break-even calculator</a> instead of treating every advertised discount as commute savings.
     </p>
   </section>
+
+  <DecisionGuide content={decisionGuide} />
 
   <style>
     .intro,

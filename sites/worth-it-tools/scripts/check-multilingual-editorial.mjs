@@ -202,18 +202,18 @@ const editorialRoutes = [
       de: ['238,75 €', 'Zeitwert', 'data-extended-warranty-calculator'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
     slug: 'upgrade-your-phone-or-keep-it',
-    locales: ['en', 'zh', 'es'],
     nativeMarkers: {
       en: ['$69.69', 'bill credits', 'data-phone-keep-upgrade-calculator'],
       zh: ['NT$1,293.4', 'IMEI', 'data-phone-keep-upgrade-calculator'],
       es: ['37,08 €', 'tres años', 'data-phone-keep-upgrade-calculator'],
+      fr: ['43,06 €', 'effacement superficiel', 'data-phone-keep-upgrade-calculator'],
+      de: ['38,19 €', 'zweijährigen Vertrag', 'data-phone-keep-upgrade-calculator'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -322,4 +322,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 20 complete five-locale topics, 95 added routes, 4 enriched high-value tools, 13 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 21 complete five-locale topics, 97 added routes, 4 enriched high-value tools, 13 embedded decision calculators.');

@@ -621,6 +621,53 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+const carLeaseBuyGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
+  fr: {
+    id: 'car-lease-buy-total-cost-method',
+    labels: labels.fr,
+    directAnswer: 'En France, comparez LOA, LLD et achat sur la même durée et avec le même kilométrage. La restitution d’une location comprend premier loyer non récupérable, loyers, assurance et entretien non inclus, kilomètres supplémentaires et frais de fin ; l’achat comprend prix livré, intérêts, assurance et entretien, moins la revente. Dans cet exemple de 36 mois, la location coûte 22 270 € et l’achat environ 20 626 €, soit 1 644 € de moins pour l’achat. Si la revente baisse de 23 500 € à 19 500 €, la location devient environ 2 356 € moins chère.',
+    inputs: ['Identifier LOA avec option, LLD sans option contractuelle ou crédit automobile', 'Premier loyer majoré, apport non récupérable, dépôt de garantie restituable, loyers TTC et durée', 'Forfait kilométrique annuel ou total, trajet réaliste et prix de chaque kilomètre supplémentaire', 'Assurance au nom du locataire, franchise, entretien, pneus, assistance et services réellement inclus', 'Usure, remise en état, retard, accessoires, restitution et indemnité de résiliation anticipée', 'Prix de l’option LOA et valeur de marché indépendante au même mois, kilométrage et état', 'Achat : prix livré, frais, apport, TAEG ou taux modélisé, durée et produits obligatoires', 'Achat : assurance, entretien, pneus et valeur de revente prudente à 36/48/60 mois'],
+    formula: 'Coût location avec restitution = premier loyer/apport non récupérable + loyer × mois + assurance/entretien non inclus + max(km prévus − forfait, 0) × tarif supplémentaire + frais de restitution estimés. Coût achat = prix livré + intérêts courus sur la même durée + assurance/entretien − revente. Écart d’option = valeur de marché estimée − prix de l’option ; il reste séparé du scénario de restitution.',
+    workedExample: 'Sur 36 mois, la LOA/LLD demande 2 500 € au départ et 420 €/mois. L’assurance non incluse coûte 900 €/an, l’entretien est inclus, le forfait est 12 000km/an contre 15 000 prévus à 0,15 €/km, et la restitution est provisionnée à 600 €. Total : 22 270 €, dont 1 350 € de kilomètres. L’achat coûte 34 000 € plus 1 800 € de frais, avec 7 000 € d’apport, 5,8% sur 60 mois, 900 € d’assurance et 650 € d’entretien annuels, puis 23 500 € de revente. Les intérêts courus sont d’environ 3 676 € et le coût de 20 626 € ; l’achat est environ 1 644 € moins cher et le capital restant dû est proche de 12 528 €.',
+    sensitivity: [
+      { scenario: 'Kilométrage dans le forfait', input: '12 000km/an au lieu de 15 000', result: 'Location 20 920 € ; achat encore moins cher d’environ 294 €' },
+      { scenario: 'Revente achat plus faible', input: 'Revente de 23 500 € à 19 500 €', result: 'Achat environ 24 626 € ; location moins chère d’environ 2 356 €' },
+      { scenario: 'Loyer supérieur', input: '520 €/mois au lieu de 420 €', result: 'Location 25 870 € ; achat moins cher d’environ 5 244 €' },
+      { scenario: 'Option supérieure au marché', input: 'Option 22 000 € ; marché estimé 20 500 €', result: 'Option 1 500 € au-dessus du marché ; restitution à comparer séparément' },
+    ],
+    cta: { label: 'Comparer votre offre LOA/LLD et votre financement achat', href: '#car-lease-buy-calculator' },
+    limitations: ['La LOA prévoit une option d’achat fixée au contrat ; la LLD n’en prévoit pas. Une proposition commerciale de rachat en fin de LLD n’est pas la même garantie.', 'Le premier loyer majoré est généralement un coût non récupérable. Un dépôt de garantie remboursé intégralement immobilise de la trésorerie mais ne doit pas être compté comme dépense finale.', 'Le loyer peut ne pas inclure assurance, entretien, pneus ou franchise. La DGCCRF recommande de comparer les conditions, assurances, garanties et prestations annexes avant signature.', 'Une rétractation LOA dans le délai applicable n’est pas une résiliation libre en cours de contrat. Testez séparément l’indemnité écrite si votre durée de détention est incertaine.', 'Estimation pédagogique ; elle ne recommande ni LOA, LLD, achat, crédit, assurance, fiscalité ni véhicule.'],
+    sources: [
+      { label: 'DGCCRF — règles de la location avec option d’achat automobile', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/location-avec-option-dachat-loa-dun-vehicule-quelles-sont-les-regles-connaitre' },
+      { label: 'Ministère de l’Économie — LOA, LLD, option, assurance et entretien', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/quest-ce-que-la-location-et-lachat' },
+      { label: 'DGCCRF 2026 — forfait kilométrique, état contradictoire et restitution', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/location-de-vehicule-la-reglementation-applicable' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'car-lease-buy-total-cost-method',
+    labels: labels.de,
+    directAnswer: 'In Deutschland müssen Kilometerleasing, Restwertleasing und Autokauf getrennt verglichen werden. Beim Rückgabefall zählen Sonderzahlung, Raten, nicht enthaltene Versicherung/Wartung, Mehrkilometer und Rückgabeminderwert; beim Kauf zählen Endpreis, bisherige Zinsen und laufende Kosten abzüglich Verkaufserlös. Im 36-Monats-Beispiel kostet Leasing 24.940 € und Kaufen rund 21.158 €, also 3.782 € weniger. Sinkt der Verkaufserlös von 27.000 € auf 23.000 €, wird Leasing dagegen rund 218 € günstiger.',
+    inputs: ['Vertragstyp: Kilometerleasing, Restwertleasing oder Fahrzeugkauf mit Ratenkredit', 'Leasing-Sonderzahlung, monatliche Bruttorate, Laufzeit sowie einmalige Bereitstellungs- oder Überführungskosten', 'Vereinbarte Jahres-/Gesamtkilometer, echte Fahrleistung, Mehrkilometersatz und Minderkilometervergütung', 'Versicherung, Selbstbeteiligung, Wartung, Reifen, Kfz-Steuer und Mobilitätsleistungen laut Vertrag', 'Rückgabestandard, übermäßige Abnutzung, Minderwert, fehlende Teile und vorzeitige Vertragsbeendigung', 'Kaufoption oder kalkulierter Restwert und unabhängiger Marktwert am selben Termin', 'Kauf-Endpreis, Nebenkosten, Anzahlung, effektiver Jahreszins, Laufzeit und Schlussrate', 'Versicherung, Wartung und vorsichtiger Kauf-Verkaufserlös bei gleichem Alter und Kilometerstand'],
+    formula: 'Leasingkosten bei Rückgabe = Sonderzahlung + Rate × Monate + nicht enthaltene Versicherung/Wartung + max(tatsächliche − vereinbarte Kilometer, 0) × Mehrkilometersatz + erwartete Rückgabekosten. Kaufkosten = Endpreis + bis zum Vergleich aufgelaufene Zinsen + Versicherung/Wartung − Verkaufserlös. Optionsdifferenz = erwarteter Marktwert − vertraglicher Kaufpreis; sie wird separat gezeigt und nicht vom Rückgabefall abgezogen.',
+    workedExample: '36 Monate Kilometerleasing: 3.000 € Sonderzahlung, 390 €/Monat, 1.000 € Versicherung und 500 € Wartung pro Jahr. Vereinbart sind 10.000km/Jahr, erwartet 15.000km zu 0,18 €/Mehrkilometer; 700 € Rückgabeminderwert werden angesetzt. Ergebnis: 24.940 €, davon 2.700 € Mehrkilometer. Der Kauf kostet 38.000 € plus 1.200 € Nebenkosten, nach 8.000 € Anzahlung finanziert zu 5,2% über 60 Monate. Mit 1.100 € Versicherung, 700 € Wartung und 27.000 € Verkaufserlös entstehen rund 3.558 € Zinsen und 21.158 € Haltekosten; Kaufen ist 3.782 € günstiger, bei etwa 13.458 € Restschuld.',
+    sensitivity: [
+      { scenario: 'Keine Mehrkilometer', input: '10.000km/Jahr statt 15.000', result: 'Leasing 22.240 € ; Kauf noch rund 1.082 € günstiger' },
+      { scenario: 'Schwacher Verkaufserlös', input: 'Verkauf sinkt von 27.000 € auf 23.000 €', result: 'Kauf rund 25.158 € ; Leasing rund 218 € günstiger' },
+      { scenario: 'Höhere Leasingrate', input: '490 €/Monat statt 390 €', result: 'Leasing 28.540 € ; Kauf rund 7.382 € günstiger' },
+      { scenario: 'Kaufoption über Marktwert', input: 'Option 25.000 € ; Marktwert 23.500 €', result: 'Option 1.500 € über Schätzung ; Rückgabe separat bewerten' },
+    ],
+    cta: { label: 'Eigenen Leasingvertrag und Kaufkredit vergleichen', href: '#car-lease-buy-calculator' },
+    limitations: ['Der Rechner bildet Kilometerleasing mit Rückgabe ab. Bei Restwertleasing muss eine mögliche Differenz zwischen kalkuliertem und tatsächlichem Restwert als zusätzliches Szenario erfasst werden.', 'Minderkilometer führen nur nach Vertragsregel zu einer Gutschrift. Prüfe Satz, Freigrenze und Deckelung; der Rechner rechnet vorsichtig keine automatische Erstattung.', 'Normale Gebrauchsspuren sind nicht dasselbe wie übermäßige Abnutzung. Der verlangte Minderwert ist auch nicht automatisch identisch mit vollständigen Reparaturkosten.', 'Der effektive Jahreszins ist für Kreditvergleiche aussagekräftiger als eine kleine Rate; freiwillige Zusatzprodukte können trotzdem außerhalb der Kennzahl weitere Kosten erzeugen.', 'Unverbindliche Lernrechnung, keine Leasing-, Kredit-, Fahrzeug-, Versicherungs-, Steuer- oder Rechtsberatung.'],
+    sources: [
+      { label: 'ADAC 2026 — Kilometerleasing, Restwertleasing und Mehrkilometer', href: 'https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/finanzierung-leasing/leasing/' },
+      { label: 'ADAC — Rückgabe, Gebrauchsspuren, Minderwert und Restwertrisiko', href: 'https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/finanzierung-leasing/fahrzeugrueckgabe/' },
+      { label: 'Verbraucherzentrale — Kreditangebote über effektiven Jahreszins vergleichen', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/kredite-und-darlehen-auch-beim-geldleihen-laesst-sich-sparen-10409' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 const newUsedCarGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
   fr: {
     id: 'new-used-car-tco-method',
@@ -1908,3 +1955,5 @@ export const carLeaseBuyGuides: Partial<Record<Locale, DecisionGuideContent>> = 
     lastVerified: '2026-07-19',
   },
 };
+
+Object.assign(carLeaseBuyGuides, carLeaseBuyGuideAdditions);

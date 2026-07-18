@@ -32,11 +32,11 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 113,
-  editorial: 81,
-  alignedVariants: 78,
-  compliantVariants: 78,
-  completeTopics: 15,
+  html: 115,
+  editorial: 83,
+  alignedVariants: 80,
+  compliantVariants: 80,
+  completeTopics: 16,
 };
 
 function walkHtml(dir) {

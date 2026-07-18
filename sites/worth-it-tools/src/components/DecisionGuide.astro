@@ -1,0 +1,129 @@
+---
+import type { DecisionGuideContent } from '../types/decisionGuide';
+
+interface Props {
+  content: DecisionGuideContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="decision-guide" id={content.id} aria-labelledby={`${content.id}-answer`}>
+  <div class="direct-answer">
+    <h2 id={`${content.id}-answer`}>{content.labels.directAnswer}</h2>
+    <p>{content.directAnswer}</p>
+  </div>
+
+  <h2>{content.labels.inputs}</h2>
+  <ul>
+    {content.inputs.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <h2>{content.labels.formula}</h2>
+  <p class="formula"><code>{content.formula}</code></p>
+
+  <h2>{content.labels.workedExample}</h2>
+  <p>{content.workedExample}</p>
+
+  <h2>{content.labels.sensitivity}</h2>
+  <div class="table-wrap" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{content.labels.scenario}</th>
+          <th scope="col">{content.labels.changedInput}</th>
+          <th scope="col">{content.labels.result}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {content.sensitivity.map((row) => (
+          <tr>
+            <th scope="row">{row.scenario}</th>
+            <td>{row.input}</td>
+            <td>{row.result}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {content.cta && <p class="guide-cta"><a href={content.cta.href}>{content.cta.label}</a></p>}
+
+  <h2>{content.labels.limitations}</h2>
+  <ul>
+    {content.limitations.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <h2>{content.labels.sources}</h2>
+  <ul class="source-list">
+    {content.sources.map((source) => (
+      <li><a href={source.href} rel="noopener">{source.label}</a></li>
+    ))}
+  </ul>
+  <p class="last-verified"><strong>{content.labels.lastVerified}:</strong> <time datetime={content.lastVerified}>{content.lastVerified}</time></p>
+</section>
+
+<style>
+  .decision-guide {
+    margin-block: 2rem;
+  }
+
+  .direct-answer {
+    border-left: 0.3rem solid var(--color-accent);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: 1rem 1.1rem;
+  }
+
+  .direct-answer h2,
+  .direct-answer p {
+    margin: 0;
+  }
+
+  .direct-answer p {
+    margin-top: 0.5rem;
+    font-size: 1.06rem;
+  }
+
+  .formula code {
+    display: block;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--color-border);
+    padding: 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  thead th {
+    background: var(--color-surface);
+  }
+
+  .guide-cta a {
+    display: inline-block;
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: white;
+    font-weight: 700;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+  }
+
+  .last-verified {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+</style>

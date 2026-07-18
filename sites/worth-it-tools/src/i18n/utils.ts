@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, LOCALES, type Locale } from '../consts';
+import { CORE_LOCALES, DEFAULT_LOCALE, LOCALES, type Locale } from '../consts';
 import { ui, type UIKey } from './ui';
 
 /** Extract the active locale from a URL pathname (/en/..., /zh/...). */
@@ -26,6 +26,16 @@ export function localizedPath(locale: Locale, path = '/'): string {
   const clean = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
   if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}`;
   return `/${locale}${clean}`;
+}
+
+/**
+ * Link to a route that currently exists only in the complete EN/ZH shells.
+ * Editorial-only locales deliberately fall back to English instead of
+ * emitting broken /es, /fr, or /de navigation links.
+ */
+export function localizedCorePath(locale: Locale, path = '/'): string {
+  const coreLocale = (CORE_LOCALES as readonly string[]).includes(locale) ? locale : DEFAULT_LOCALE;
+  return localizedPath(coreLocale, path);
 }
 
 /**

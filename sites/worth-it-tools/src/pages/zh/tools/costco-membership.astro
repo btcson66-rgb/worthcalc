@@ -1,9 +1,13 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import DecisionGuide from '../../../components/DecisionGuide.astro';
+import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'zh';
-const title = 'Costco 會員值不值得計算機';
+const decisionGuide = costcoGuides.zh;
+if (!decisionGuide) throw new Error('Missing Traditional Chinese membership guide');
+const title = 'Costco 會員回本計算機：金星與尊榮哪個划算？';
 const description = 'Costco 會員值不值得計算機，估算金星、商業、尊榮會員的月消費打平點與年度淨效益。';
 const faq = [
   {
@@ -92,6 +96,8 @@ const related = [
       打平月消費就是讓年度淨效益等於 0 的消費額。如果你常買的品項在 Costco 沒有比較便宜，請把省下比例調低。
     </p>
   </section>
+
+  <DecisionGuide content={decisionGuide} />
 
   <style>
     .intro,

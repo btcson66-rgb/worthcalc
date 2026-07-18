@@ -1,6 +1,9 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { subscriptionGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'zh';
@@ -37,7 +40,8 @@ const faq = [
   title="訂閱通膨：你一年到底花了多少錢？"
   description="Netflix、Spotify、iCloud、健身 App⋯⋯把所有訂閱花費一次算清楚，看每月、一年、五年的真實總額。附免費訂閱花費計算機。"
   locale={locale}
-  updated="2026-07-03"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
     快問快答：你每個月花多少錢在訂閱上？如果你剛剛心裡冒出一個數字，
@@ -48,6 +52,8 @@ const faq = [
     <a href={localizedPath(locale, '/tools/subscription-audit')}>訂閱支出健檢計算機</a>，
     幾分鐘內看到真實總額。
   </p>
+
+  <DecisionGuide content={subscriptionGuides.zh} />
 
   <h2>為什麼每個人都會遇到訂閱通膨</h2>
   <p>

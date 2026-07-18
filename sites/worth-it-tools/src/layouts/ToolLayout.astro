@@ -3,7 +3,7 @@ import type { Locale } from '../consts';
 import type { BreadcrumbItem, FaqItem } from '../lib/seo';
 import { getCalculatorReview } from '../lib/calculatorReview';
 import { softwareAppJsonLd } from '../lib/seo';
-import { localizedPath, useTranslations } from '../i18n/utils';
+import { localizedCorePath, useTranslations } from '../i18n/utils';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateRecs from '../components/AffiliateRecs.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
@@ -26,6 +26,7 @@ interface Props {
   faq?: FaqItem[];
   related?: RelatedLink[];
   noindex?: boolean;
+  alternateLocales?: Locale[];
 }
 
 const {
@@ -37,10 +38,11 @@ const {
   faq = [],
   related = [],
   noindex,
+  alternateLocales,
 } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
-  { name: t('breadcrumb.home'), url: localizedPath(locale, '/') },
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: tool.name, url: Astro.url.pathname },
 ];
 const jsonLd = [
@@ -54,23 +56,48 @@ const jsonLd = [
 ];
 const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
 const review = getCalculatorReview(slug, locale);
-const reviewLabels = locale === 'zh'
-  ? {
+const reviewLabels = {
+  en: {
+    methodology: 'Methodology',
+    assumptions: 'Assumptions',
+    example: 'Example calculation',
+    limitations: 'Limitations',
+    lastUpdated: 'Last updated',
+    disclaimer: 'Estimate disclaimer',
+  },
+  zh: {
       methodology: '計算方法',
       assumptions: '主要假設',
       example: '範例計算',
       limitations: '限制',
       lastUpdated: '最後更新',
       disclaimer: '估算免責聲明',
-    }
-  : {
-      methodology: 'Methodology',
-      assumptions: 'Assumptions',
-      example: 'Example calculation',
-      limitations: 'Limitations',
-      lastUpdated: 'Last updated',
-      disclaimer: 'Estimate disclaimer',
-    };
+  },
+  es: {
+    methodology: 'Método de cálculo',
+    assumptions: 'Supuestos principales',
+    example: 'Ejemplo',
+    limitations: 'Limitaciones',
+    lastUpdated: 'Última actualización',
+    disclaimer: 'Aviso sobre la estimación',
+  },
+  fr: {
+    methodology: 'Méthode de calcul',
+    assumptions: 'Hypothèses principales',
+    example: 'Exemple',
+    limitations: 'Limites',
+    lastUpdated: 'Dernière mise à jour',
+    disclaimer: 'Avertissement',
+  },
+  de: {
+    methodology: 'Berechnungsmethode',
+    assumptions: 'Wichtige Annahmen',
+    example: 'Beispielrechnung',
+    limitations: 'Einschränkungen',
+    lastUpdated: 'Zuletzt aktualisiert',
+    disclaimer: 'Hinweis zur Schätzung',
+  },
+}[locale];
 ---
 
 <BaseLayout
@@ -79,6 +106,7 @@ const reviewLabels = locale === 'zh'
   locale={locale}
   type="website"
   noindex={noindex}
+  alternateLocales={alternateLocales}
   jsonLd={jsonLd}
 >
   <Breadcrumb items={crumbs} />

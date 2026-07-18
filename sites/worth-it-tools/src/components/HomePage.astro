@@ -1,12 +1,12 @@
 ---
-import type { Locale } from '../consts';
+import type { CoreLocale } from '../consts';
 import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
 import FAQ from './FAQ.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
 
 interface Props {
-  locale: Locale;
+  locale: CoreLocale;
 }
 
 const { locale } = Astro.props;

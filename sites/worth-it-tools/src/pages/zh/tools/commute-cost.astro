@@ -1,9 +1,13 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import DecisionGuide from '../../../components/DecisionGuide.astro';
+import { commuteGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'zh';
-const title = '通勤成本計算機';
+const decisionGuide = commuteGuides.zh;
+if (!decisionGuide) throw new Error('Missing Traditional Chinese commute guide');
+const title = '通勤費計算機：每月油錢、停車與時間成本';
 const description = '通勤成本計算機，比較開車、大眾運輸、Uber 或計程車、自行車的每月與每年成本。';
 const faq = [
   {
@@ -120,6 +124,8 @@ const related = [
       若時薪大於 0，每種方式都會加入來回通勤時間乘以天數和時薪。最低成本方式會用現金支出加上選填的時間成本比較。
     </p>
   </section>
+
+  <DecisionGuide content={decisionGuide} />
 
   <style>
     .intro,

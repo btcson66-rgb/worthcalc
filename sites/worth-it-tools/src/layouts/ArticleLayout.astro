@@ -1,7 +1,8 @@
 ---
 import type { Locale } from '../consts';
 import type { BreadcrumbItem } from '../lib/seo';
-import { localizedPath, useTranslations } from '../i18n/utils';
+import { localizedCorePath, useTranslations } from '../i18n/utils';
+import { articleJsonLd } from '../lib/seo';
 import AdSlot from '../components/AdSlot.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import BaseLayout from './BaseLayout.astro';
@@ -19,7 +20,7 @@ interface Props {
 const { title, description, locale, updated, breadcrumb, noindex, alternateLocales } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
-  { name: t('breadcrumb.home'), url: localizedPath(locale, '/') },
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: title, url: Astro.url.pathname },
 ];
 ---
@@ -31,6 +32,7 @@ const crumbs = breadcrumb ?? [
   type="article"
   noindex={noindex}
   alternateLocales={alternateLocales}
+  jsonLd={[articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated, site: Astro.site })]}
 >
   <Breadcrumb items={crumbs} />
   <article class="prose">

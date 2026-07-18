@@ -233,7 +233,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'bulk-buying-vs-small-packages',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$5.06', 'FoodKeeper', 'data-mode="bulk"'],
+      zh: ['NT$125', '食藥署', 'data-mode="bulk"'],
+      es: ['5 €/unidad', 'AESAN', 'data-mode="bulk"'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -342,4 +352,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 23 complete five-locale topics, 107 added routes, 4 enriched high-value tools, 15 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 23 complete five-locale topics, topic 24 at 3/5, 110 added routes, 4 enriched high-value tools, 18 embedded decision calculators.');

@@ -43,21 +43,21 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
     const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
     const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
     const calculate = () => {
-      let first = 0, second = 0, third = 0, positive = false, secondIsNumber = false, thirdIsPercent = false;
+      let first = 0, second = 0, third = 0, positive = false;
       switch (root.dataset.mode) {
         case 'appliance': {
           const premium = Math.max(0, value('efficientPrice') - value('standardPrice') - value('rebate'));
           first = Math.max(0, value('energyDifference') * value('usesPerYear') * value('electricityRate'));
           second = first ? premium / first : Infinity;
           third = first * value('lifeYears') - premium;
-          positive = second <= value('lifeYears'); secondIsNumber = true; break;
+          positive = second <= value('lifeYears'); break;
         }
         case 'costPerUse': {
           const net = value('purchase') + value('maintenance') + value('consumables') - value('resale');
           first = net / Math.max(1, value('expectedUses'));
           second = net / Math.max(1, value('actualUses'));
           third = value('alternativePerUse') ? net / value('alternativePerUse') : Infinity;
-          positive = second <= value('alternativePerUse'); secondIsNumber = false; break;
+          positive = second <= value('alternativePerUse'); break;
         }
         case 'bulk': {
           const smallUnit = value('smallPrice') / Math.max(.0001, value('smallQty') * (1 - Math.min(99.9, value('smallWaste')) / 100));
@@ -76,7 +76,7 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
           first = (value('initial') + value('uses') * perUse) / Math.max(1, value('uses'));
           second = value('disposablePerUse');
           third = value('disposablePerUse') > perUse ? value('initial') / (value('disposablePerUse') - perUse) : Infinity;
-          positive = first < second; secondIsNumber = false; break;
+          positive = first < second; break;
         }
         case 'pricePerWear': {
           first = (value('purchase') + value('carePerWear') * value('wears') - value('resale')) / Math.max(1, value('wears'));
@@ -88,13 +88,13 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
           const hours = value('paidHours') + value('unpaidHours') + value('commuteHours');
           first = (value('takeHomePay') - value('workCosts')) / Math.max(1, hours);
           second = value('grossPay') / Math.max(1, value('paidHours'));
-          third = hours; positive = first >= second * .8; secondIsNumber = false; break;
+          third = hours; positive = first >= second * .8; break;
         }
         case 'raiseInflation': {
           first = value('oldPay') * (1 + value('raiseRate') / 100);
           second = ((1 + value('raiseRate') / 100) / (1 + value('inflationRate') / 100) - 1) * 100;
           third = first / (1 + value('inflationRate') / 100);
-          positive = second >= 0; thirdIsPercent = true; break;
+          positive = second >= 0; break;
         }
       }
       out('output1').textContent = money(first);

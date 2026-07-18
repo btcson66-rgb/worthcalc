@@ -1,0 +1,94 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: { planPrice: number; failureProbability: number; approvalProbability: number; repairCost: number; deductible: number; claimCost: number; payoutCap: number };
+  copy: Record<'heading' | 'intro' | 'planPrice' | 'failureProbability' | 'approvalProbability' | 'repairCost' | 'deductible' | 'claimCost' | 'payoutCap' | 'selfFundExpected' | 'planExpected' | 'expectedPayout' | 'netValue' | 'breakEvenProbability' | 'verdictPlan' | 'verdictSelf' | 'privacy', string>;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+---
+
+<section id="extended-warranty-calculator" class="warranty-calc" data-extended-warranty-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-plan={copy.verdictPlan} data-verdict-self={copy.verdictSelf}>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="calc-grid">
+    <div class="inputs">
+      <label><span>{copy.planPrice}</span><input data-field="planPrice" type="number" min="0" step="1" value={defaults.planPrice} /></label>
+      <label><span>{copy.failureProbability}</span><input data-field="failureProbability" type="number" min="0" max="100" step="1" value={defaults.failureProbability} /></label>
+      <label><span>{copy.approvalProbability}</span><input data-field="approvalProbability" type="number" min="0" max="100" step="1" value={defaults.approvalProbability} /></label>
+      <label><span>{copy.repairCost}</span><input data-field="repairCost" type="number" min="0" step="1" value={defaults.repairCost} /></label>
+      <label><span>{copy.deductible}</span><input data-field="deductible" type="number" min="0" step="1" value={defaults.deductible} /></label>
+      <label><span>{copy.claimCost}</span><input data-field="claimCost" type="number" min="0" step="1" value={defaults.claimCost} /></label>
+      <label class="wide"><span>{copy.payoutCap}</span><input data-field="payoutCap" type="number" min="0" step="1" value={defaults.payoutCap} /></label>
+    </div>
+    <div class="results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.selfFundExpected}</dt><dd data-output="selfFundExpected">—</dd></div>
+        <div><dt>{copy.planExpected}</dt><dd data-output="planExpected">—</dd></div>
+        <div><dt>{copy.expectedPayout}</dt><dd data-output="expectedPayout">—</dd></div>
+        <div><dt>{copy.netValue}</dt><dd data-output="netValue">—</dd></div>
+        <div><dt>{copy.breakEvenProbability}</dt><dd data-output="breakEvenProbability">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-extended-warranty-calculator]')) {
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
+    const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+    const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
+    const calculate = () => {
+      const failure = Math.min(100, value('failureProbability')) / 100;
+      const approval = Math.min(100, value('approvalProbability')) / 100;
+      const repair = value('repairCost');
+      const deductible = value('deductible');
+      const claimCost = value('claimCost');
+      const payout = Math.min(value('payoutCap'), Math.max(0, repair - deductible));
+      const approvedConsumerCost = Math.max(0, repair - payout) + claimCost;
+      const selfFundExpected = failure * repair;
+      const planExpected = value('planPrice') + failure * (approval * approvedConsumerCost + (1 - approval) * repair);
+      const expectedPayout = failure * approval * payout;
+      const netValue = selfFundExpected - planExpected;
+      const savingsPerFailure = approval * Math.max(0, payout - claimCost);
+      const breakEven = savingsPerFailure ? value('planPrice') / savingsPerFailure * 100 : Infinity;
+      const planWins = netValue >= 0;
+      out('selfFundExpected').textContent = money(selfFundExpected);
+      out('planExpected').textContent = money(planExpected);
+      out('expectedPayout').textContent = money(expectedPayout);
+      out('netValue').textContent = money(netValue);
+      out('breakEvenProbability').textContent = Number.isFinite(breakEven) ? `${number.format(breakEven)}%` : '—';
+      out('verdict').textContent = `${planWins ? root.dataset.verdictPlan : root.dataset.verdictSelf} ${money(Math.abs(netValue))}`.trim();
+    };
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .warranty-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .warranty-calc h2 { margin-top: 0; }
+  .calc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+  .inputs .wide { grid-column: 1 / -1; }
+  .inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
+  .inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
+  .results .verdict { margin-top: 0; font-weight: 800; }
+  .results dl { margin: 0; }
+  .results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
+  .results dt { font-weight: 600; }
+  .results dd { margin: 0; text-align: right; font-weight: 750; }
+  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
+  @media (max-width: 760px) { .warranty-calc { padding: 1rem; } .calc-grid, .inputs { grid-template-columns: 1fr; } .inputs .wide { grid-column: auto; } .inputs label span { min-height: 0; } }
+</style>

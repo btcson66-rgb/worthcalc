@@ -32,13 +32,14 @@ const briefRoutes = [
   { id: '17', slug: 'full-commute-cost-including-time' },
   { id: '18', slug: 'work-from-home-vs-commuting-hidden-costs' },
   { id: '19', slug: 'repair-or-replace-decision-formula' },
+  { id: '20', slug: 'is-an-extended-warranty-worth-it' },
 ];
 
 const releaseFloor = {
-  html: 130,
-  editorial: 98,
-  alignedVariants: 95,
-  compliantVariants: 95,
+  html: 133,
+  editorial: 101,
+  alignedVariants: 98,
+  compliantVariants: 98,
   completeTopics: 19,
 };
 

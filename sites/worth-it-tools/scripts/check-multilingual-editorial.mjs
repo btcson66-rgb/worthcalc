@@ -194,6 +194,15 @@ const editorialRoutes = [
   },
 ];
 const partialEditorialRoutes = [];
+partialEditorialRoutes.push({
+  slug: 'is-an-extended-warranty-worth-it',
+  locales: ['en', 'zh', 'es'],
+  nativeMarkers: {
+    en: ['$249', 'manufacturer warranty', 'data-extended-warranty-calculator'],
+    zh: ['NT$5,182.5', '獨立擔保', 'data-extended-warranty-calculator'],
+    es: ['188 €', 'tres años', 'data-extended-warranty-calculator'],
+  },
+});
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -302,4 +311,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 19 complete five-locale topics, 87 added routes, 4 enriched high-value tools, 11 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 19 complete five-locale topics, 90 added routes, 4 enriched high-value tools, 12 embedded decision calculators.');

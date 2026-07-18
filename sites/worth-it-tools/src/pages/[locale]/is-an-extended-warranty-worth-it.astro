@@ -1,0 +1,97 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import ExtendedWarrantyCalculator from '../../components/ExtendedWarrantyCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { extendedWarrantyGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Is an extended warranty worth it? Compare price, failure risk, and repair cost',
+    description: 'Calculate expected cost using your failure scenario, exclusions, claim approval, deductible, fees and payout cap without inventing a product failure rate.',
+    faq: [
+      { question: 'What failure probability should I use?', answer: 'Use documented model history if available; otherwise run deliberately wide low, base and high scenarios. The calculator does not claim to know the failure rate of your product.' },
+      { question: 'Is an extended warranty the same as the manufacturer warranty?', answer: 'No. A paid service contract or extended warranty can be administered by another company and may overlap the original warranty. Compare start dates, covered failures and responsible provider.' },
+      { question: 'How should exclusions be modeled?', answer: 'Convert the contract’s exclusions, maintenance rules and claim history into a cautious approval scenario. Also run a denial-heavy case rather than assuming every failure is covered.' },
+      { question: 'Does a deductible apply once or every repair?', answer: 'The contract decides. Some charge per claim, visit, item or repair. Model the actual wording and create a multi-claim scenario if more than one deductible can apply.' },
+      { question: 'Can a negative expected value plan still be useful?', answer: 'It can smooth a large repair bill for someone with limited cash, but that is risk transfer, not positive expected value. Compare it with saving the premium in a repair fund.' },
+    ],
+  },
+  zh: {
+    title: '延長保固值得買嗎？比較價格、故障機率與維修費',
+    description: '由你輸入故障情境、除外後核准率、自負額、申請成本與給付上限，算延長保固期望成本，不捏造產品故障率。',
+    faq: [
+      { question: '故障機率要填多少？', answer: '有可信型號紀錄就用可追溯資料；沒有時做保守低／中／高情境。計算器不會假裝知道你的產品故障率。' },
+      { question: '延長保固等於原廠保固嗎？', answer: '不一定。付費方案可能是服務契約，履約者也可能不是製造商；要比生效日、保障範圍、除外與真正負責的公司。' },
+      { question: '除外條款怎麼放進計算？', answer: '把耗材、人損、未保養、特定零件與文件限制反映在核准率，並另跑「多數申請被拒」情境，不預設故障就全賠。' },
+      { question: '自負額只付一次嗎？', answer: '看契約是每次申請、每趟、每件還是每個零件。若可能多次收取，就要用多次維修情境，不能只算一次。' },
+      { question: '期望值負數還能買嗎？', answer: '若無法承受一次大額維修，可能願意付費換現金流穩定；但這是風險轉移，不代表數學期望值轉正。也可比較把保費存入維修準備金。' },
+    ],
+  },
+  es: {
+    title: '¿Merece la pena una garantía ampliada? Precio, riesgo de avería y reparación',
+    description: 'Calcula coste esperado con tu escenario de avería, exclusiones, aceptación, franquicia, gastos y límites sin inventar una tasa del producto.',
+    faq: [
+      { question: '¿Qué probabilidad de avería debo usar?', answer: 'Usa historial documentado del modelo si existe; si no, prueba escenarios bajo, central y alto muy separados. La calculadora no afirma conocer la tasa de tu producto.' },
+      { question: '¿La garantía comercial sustituye a la garantía legal?', answer: 'No. En España la protección comercial adicional puede mejorar, pero nunca reducir ni sustituir, la garantía legal mínima. No pagues por cobertura duplicada.' },
+      { question: '¿Cómo se modelan las exclusiones?', answer: 'Refleja desgaste, accidente, mantenimiento, piezas y documentación en una probabilidad prudente de aceptación. Prueba también un escenario con muchas denegaciones.' },
+      { question: '¿La franquicia se paga una sola vez?', answer: 'Depende del contrato: puede ser por reclamación, visita, aparato o reparación. Si admite varios cobros, crea un escenario de varias averías.' },
+      { question: '¿Puede interesar con valor esperado negativo?', answer: 'Puede proteger liquidez ante una factura grande, pero es transferencia de riesgo, no ganancia esperada. Compara con reservar el precio del plan.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: { currency: 'USD' as const, defaults: { planPrice: 199, failureProbability: 25, approvalProbability: 80, repairCost: 600, deductible: 75, claimCost: 25, payoutCap: 1000 }, copy: { heading: 'Extended warranty expected-cost calculator', intro: 'Enter your own low/base/high failure and approval scenarios. No product failure rate is supplied.', planPrice: 'Plan price', failureProbability: 'Failure probability during covered period (%)', approvalProbability: 'Claim approval after exclusions (%)', repairCost: 'Representative repair cost', deductible: 'Deductible', claimCost: 'Shipping/diagnosis/claim costs', payoutCap: 'Per-claim payout cap', selfFundExpected: 'Expected cost if self-funded', planExpected: 'Expected total cost with plan', expectedPayout: 'Expected plan payout', netValue: 'Plan net expected value', breakEvenProbability: 'Break-even failure probability', verdictPlan: 'Plan is lower in expected cost by', verdictSelf: 'Self-funding is lower in expected cost by', privacy: 'Educational scenario, not a product failure prediction or coverage determination. Read the actual contract.' } },
+  zh: { currency: 'TWD' as const, defaults: { planPrice: 3990, failureProbability: 30, approvalProbability: 75, repairCost: 12000, deductible: 1000, claimCost: 300, payoutCap: 15000 }, copy: { heading: '延長保固期望成本計算器', intro: '故障與核准率由你做低／中／高情境；系統不提供假精準產品故障率。', planPrice: '方案完整價格', failureProbability: '保障期間故障機率（%）', approvalProbability: '扣除除外後核准率（%）', repairCost: '代表性維修金額', deductible: '自負額', claimCost: '檢測／寄送／申請成本', payoutCap: '單次給付上限', selfFundExpected: '自行準備維修金期望成本', planExpected: '買方案期望總成本', expectedPayout: '方案期望給付', netValue: '方案淨期望值', breakEvenProbability: '損益故障機率', verdictPlan: '買方案期望成本較低', verdictSelf: '自行準備期望成本較低', privacy: '一般教育情境，不預測產品故障或認定理賠。請讀實際契約。' } },
+  es: { currency: 'EUR' as const, defaults: { planPrice: 149, failureProbability: 25, approvalProbability: 80, repairCost: 500, deductible: 50, claimCost: 20, payoutCap: 1000 }, copy: { heading: 'Calculadora de coste esperado de garantía ampliada', intro: 'Introduce escenarios propios de avería y aceptación. No se proporciona una tasa inventada del producto.', planPrice: 'Precio total del plan', failureProbability: 'Probabilidad de avería cubierta (%)', approvalProbability: 'Aceptación tras exclusiones (%)', repairCost: 'Reparación representativa', deductible: 'Franquicia', claimCost: 'Diagnóstico/envío/reclamación', payoutCap: 'Límite por reclamación', selfFundExpected: 'Coste esperado sin plan', planExpected: 'Coste total esperado con plan', expectedPayout: 'Pago esperado del plan', netValue: 'Valor esperado neto del plan', breakEvenProbability: 'Avería de equilibrio', verdictPlan: 'El plan tiene menor coste esperado por', verdictSelf: 'Autofinanciar tiene menor coste esperado por', privacy: 'Escenario educativo; no predice averías ni resuelve cobertura. Lee el contrato real.' } },
+};
+
+export function getStaticPaths() { return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = extendedWarrantyGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>An extended warranty is not automatically “peace of mind for pennies.” Its price must be compared with the probability-weighted repair cost it actually removes after exclusions, deductibles, claim friction and payout limits.</p>
+    <DecisionGuide content={guide} />
+    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
+    <h2>Remove overlap before estimating failure risk</h2>
+    <p>Count only failures during months when the paid plan adds coverage beyond the manufacturer warranty, retailer obligations, card benefits or insurance. A contract starting today but duplicating the first year has less unique exposure than its headline term suggests.</p>
+    <h2>Translate exclusions into an approval scenario</h2>
+    <p>Read covered parts, wear, accidental damage, maintenance, preauthorization, service-network and documentation clauses. “Bumper to bumper” or “comprehensive” is not the formula; approved dollars are.</p>
+    <h2>Separate expected value from affordability</h2>
+    <p>A negative expected value plan can still cap a bill for someone without an emergency fund. Compare that benefit with saving the premium, a smaller deductible, and the provider’s ability to perform years later.</p>
+    <p class="privacy-note">General education only, not insurance, warranty, legal, product-safety or financial advice.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>延長保固不是把「方案價格」直接對「最貴維修」；要比的是在真正新增保障期間內，扣完除外、自負額、申請成本、上限與拒絕風險後，方案實際移轉多少期望支出。</p>
+    <DecisionGuide content={guide} />
+    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
+    <h2>先確認是誰承諾、何時開始</h2>
+    <p>行政院消保處說明，業者提出的品質保證是獨立擔保，應依保證內容負責。付費延長方案的履約者可能不同；要記錄原廠、零售商、第三方、生效日與重疊月數。</p>
+    <h2>除外不能只藏在備註</h2>
+    <p>耗材、人為損壞、泡水、未定期保養、指定維修點、事前授權、發票與序號都可能影響核准。把它們轉成保守核准率，再用 30%、60%、90% 之類的情境測試，而非宣稱一定理賠。</p>
+    <h2>分期購買方案要加融資成本</h2>
+    <p>若方案跟商品一起分期，實際價格不是標價。也要查終止退費、轉售能否移轉、每次自負額與累計上限；把保費另存維修準備金當比較組。</p>
+    <p class="privacy-note">一般教育用途，不是保險、保固、法律、產品安全或財務建議。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>Una garantía ampliada no se compara con la reparación más cara imaginable, sino con el coste que probablemente evita durante el periodo realmente adicional, después de exclusiones, franquicia, trámites y límites.</p>
+    <DecisionGuide content={guide} />
+    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
+    <h2>No pagues por sustituir la garantía legal</h2>
+    <p>En España, los bienes nuevos tienen con carácter general tres años de garantía legal. La garantía comercial adicional puede mejorar esa protección, pero nunca reducirla ni sustituirla. Aísla los meses y averías que añade de verdad.</p>
+    <h2>El documento y la publicidad obligan al garante</h2>
+    <p>Identifica garante, bien cubierto, duración, territorio, procedimiento y ventajas adicionales. Si el contrato exige taller, autorización, mantenimiento o documentación, refleja el riesgo de denegación en vez de usar aceptación del 100%.</p>
+    <h2>Compara con un fondo de reparación</h2>
+    <p>Reservar los 149 € mantiene flexibilidad para una batería, pantalla o avería excluida. La garantía puede proteger liquidez, pero deben valorarse también desistimiento, cancelación, transferencia y solvencia del garante.</p>
+    <p class="privacy-note">Información educativa; no es asesoramiento de seguro, garantía, jurídico, de seguridad o financiero.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

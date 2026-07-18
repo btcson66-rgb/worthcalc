@@ -1478,7 +1478,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
-export const evGasTcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const evGasTcoGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'ev-gas-total-cost-method',
     labels: labels.en,
@@ -1545,6 +1545,52 @@ export const evGasTcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
       { label: 'DGT — vehículos que tienen derecho al distintivo Cero Emisiones', href: 'https://www-pro.dgt.es/nuestros-servicios/tu-vehiculo/tus-vehiculos/distintivo-ambiental/etiqueta-cero/' },
       { label: 'DGT — kWh/100 km como medida de consumo del coche eléctrico', href: 'https://revista.dgt.es/es/motor/reportajes/2025/1219-N276-diccionario-coche-electrico.shtml' },
       { label: 'IDAE — convocatorias MOVES III 2025 gestionadas por comunidades autónomas', href: 'https://www.idae.es/ayudas-y-financiacion/para-movilidad-y-vehiculos/moves-iii-2025/convocatorias-de-las-comunidades-autonomas' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'ev-gas-total-cost-method',
+    labels: labels.fr,
+    directAnswer: 'Une voiture électrique n’est moins chère que si son coût complet sur votre durée de détention est inférieur. Comparez deux modèles réellement équivalents et additionnez prix TTC, prime CEE effectivement inscrite au devis, borne, financement, recharge ou carburant, assurance, entretien, certificat d’immatriculation et malus éventuel, puis retranchez la revente. Dans l’exemple sur cinq ans, l’électrique coûte 29 096 € et la thermique 31 571 €, soit 2 475 € d’écart, mais une recharge à 0,45 €/kWh inverse presque le résultat.',
+    inputs: ['Deux devis TTC et clés en main pour des véhicules de gabarit, autonomie utile et équipement comparables', 'Montant exact du Coup de pouce CEE avancé et visible sur le devis ou la facture ; sinon zéro', 'Borne, raccordement, financement, certificat d’immatriculation et malus non déjà compris', 'Kilométrage annuel réel et nombre d’années de détention', 'Prix pondéré du kWh entre domicile, copropriété, travail, abonnement et recharge rapide', 'Consommation en kWh/100 km, pertes de recharge et L/100 km dans un usage comparable', 'Devis d’assurance, entretien, pneumatiques et taxes propres à chaque véhicule', 'Valeur de revente prudente au même âge et au même kilométrage'],
+    formula: 'TCO électrique = prix TTC − prime confirmée + coûts initiaux + années × (électricité + assurance + entretien + taxes annuelles) − revente. TCO thermique = prix TTC + coûts initiaux + années × (carburant + assurance + entretien + taxes annuelles) − revente. Électricité/an = km × kWh/100 km ÷ 100 × (1 + pertes) × €/kWh. Carburant/an = km × L/100 km ÷ 100 × €/L.',
+    workedExample: 'L’électrique est affichée 38 000 € et la thermique 29 500 €, sans prime supposée. Les coûts initiaux sont de 1 800 € et 1 200 €. Sur cinq ans et 13 000 km/an, 17 kWh/100 km, 10% de pertes et 0,23 €/kWh donnent 559 € d’électricité par an ; 6,3 L/100 km à 1,80 €/L donnent 1 474 € de carburant. Après assurance, entretien et reventes de 20 000 € et 14 000 €, les coûts complets atteignent 29 096 € et 31 571 € : l’électrique est 2 475 € moins chère.',
+    sensitivity: [
+      { scenario: 'Scénario central', input: '0,23 €/kWh ; 1,80 €/L ; 13 000 km/an', result: 'Électrique 29 096 € ; avantage 2 475 €' },
+      { scenario: 'Recharge publique dominante', input: 'Prix pondéré de 0,45 €/kWh', result: 'Électrique 31 770 € ; thermique moins chère de 199 €' },
+      { scenario: 'Carburant plus cher', input: 'Essence à 2,10 €/L', result: 'Thermique 32 800 € ; électrique moins chère de 3 704 €' },
+      { scenario: 'Prime confirmée', input: '3 000 € inscrits au devis et conservés', result: 'Électrique 26 096 € ; avantage 5 475 €' },
+      { scenario: 'Revente électrique plus faible', input: 'Revente ramenée à 16 000 €', result: 'Électrique 33 096 € ; thermique moins chère de 1 525 €' },
+    ],
+    cta: { label: 'Comparer vos devis et tarifs dans le calculateur complet', href: '#ev-gas-tco-calculator' },
+    limitations: ['Depuis juillet 2025, le soutien aux voitures particulières électriques passe par le Coup de pouce CEE et dépend notamment du véhicule, du score environnemental, du prix, de la masse et du ménage. Utilisez le montant contractuel, pas un plafond lu dans un article.', 'Le malus CO2 et le malus masse dépendent du véhicule et de la date de première immatriculation. Le certificat d’immatriculation doit être calculé pour le dossier exact.', 'Une valeur WLTP ou Car Labelling ne reproduit pas toujours autoroute, froid, charge ou recharge publique. Remplacez-la par des factures et consommations observées dès que possible.', 'La valeur de revente, l’assurance et l’accès à une borne peuvent dominer l’économie d’énergie. Le modèle ne recommande ni véhicule, ni crédit, ni régime fiscal.'],
+    sources: [
+      { label: 'Ministère de la Transition écologique — maintien en 2026 du Coup de pouce pour voitures électriques', href: 'https://www.ecologie.gouv.fr/presse/bonus-ecologique-gouvernement-poursuit-soutien-lachat-voitures-particulieres-100-electriques' },
+      { label: 'ADEME Car Labelling — comparaison consommation et coût énergie des véhicules neufs', href: 'https://carlabelling.ademe.fr/recherche/comparateur?idToCompare=1' },
+      { label: 'Service-Public — malus CO2, malus masse et exemptions', href: 'https://www.service-public.fr/particuliers/actualites/A17079?lang=fr' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'ev-gas-total-cost-method',
+    labels: labels.de,
+    directAnswer: 'Ein E-Auto ist erst dann günstiger, wenn seine Gesamtkosten über Ihre tatsächliche Haltedauer niedriger sind. Vergleichen Sie gleichwertige Fahrzeuge mit Barpreis, tatsächlich bewilligter Förderung, Wallbox, Finanzierung, Strom oder Benzin, Versicherung, Wartung, Kfz-Steuer und Restwert. Im Fünfjahresbeispiel kostet das E-Auto 34.552 € und der Verbrenner 35.431 €; der Vorsprung von 879 € verschwindet bei teurem Ladestrom oder niedrigerem Restwert.',
+    inputs: ['Verbindliche Endpreise für zwei in Größe, Ausstattung und Nutzwert vergleichbare Fahrzeuge', 'Nur die nach dem Förderportal bestätigte Kaufprämie; bei offener Einkommens-, Familien- oder Fahrzeugprüfung zunächst null', 'Wallbox, Elektroinstallation, Zulassung, Finanzierung und weitere einmalige Kosten', 'Reale Jahresfahrleistung und geplante Haltedauer', 'Gewichteter Arbeitspreis für Hausstrom, separaten Autostromtarif, Arbeitgeber und öffentliches Schnellladen', 'kWh/100 km einschließlich Ladeverlusten sowie L/100 km im gleichen Fahrprofil', 'Versicherungsangebote, Wartung, Reifen und jährliche Kfz-Steuer für beide Fahrzeuge', 'Vorsichtige Restwerte bei identischem Alter und Kilometerstand'],
+    formula: 'E-Auto-TCO = Kaufpreis − bestätigte Förderung + Anfangskosten + Jahre × (Strom + Versicherung + Wartung + jährliche Steuer) − Restwert. Verbrenner-TCO = Kaufpreis + Anfangskosten + Jahre × (Kraftstoff + Versicherung + Wartung + jährliche Steuer) − Restwert. Strom/Jahr = km × kWh/100 km ÷ 100 × (1 + Ladeverlust) × €/kWh. Kraftstoff/Jahr = km × L/100 km ÷ 100 × €/L.',
+    workedExample: 'Das E-Auto kostet 44.000 €, der Verbrenner 33.000 €; eine noch nicht bestätigte Prämie wird mit null angesetzt. Einmalige Kosten betragen 1.800 € und 1.000 €. Bei fünf Jahren, 15.000 km jährlich, 18 kWh/100 km, 10% Ladeverlust und 0,32 €/kWh entstehen 950 € Stromkosten im Jahr. 6,5 L/100 km zu 1,75 €/L ergeben 1.706 € Kraftstoff. Mit Versicherung, Wartung, Steuer und Restwerten von 23.000 € und 16.000 € liegen die TCO bei 34.552 € und 35.431 €: Das E-Auto liegt 879 € vorn.',
+    sensitivity: [
+      { scenario: 'Basisfall', input: '0,32 €/kWh; 1,75 €/L; 15.000 km/Jahr', result: 'E-Auto 34.552 €; Vorteil 879 €' },
+      { scenario: 'Teurer Ladestrom', input: 'Gewichteter Strompreis 0,50 €/kWh', result: 'E-Auto 37.225 €; Verbrenner 1.794 € günstiger' },
+      { scenario: 'Teureres Benzin', input: 'Benzinpreis 2,00 €/L', result: 'Verbrenner 36.650 €; E-Auto 2.098 € günstiger' },
+      { scenario: 'Bewilligte Förderung', input: '3.000 € Kaufprämie tatsächlich bewilligt', result: 'E-Auto 31.552 €; Vorteil 3.879 €' },
+      { scenario: 'Niedriger E-Auto-Restwert', input: 'Restwert nur 18.000 €', result: 'E-Auto 39.552 €; Verbrenner 4.121 € günstiger' },
+    ],
+    cta: { label: 'Eigene Angebote und Tarife im vollständigen TCO-Rechner prüfen', href: '#ev-gas-tco-calculator' },
+    limitations: ['Das im Mai 2026 gestartete Förderprogramm staffelt den Zuschuss nach Fahrzeug, Einkommen und Familiengröße. Tragen Sie den Bescheid ein; der Maximalbetrag von 6.000 € ist kein Standardrabatt.', 'Reine Elektrofahrzeuge mit Erstzulassung bis Ende 2030 können bis zu zehn Jahre, längstens bis Ende 2035, von der Kfz-Steuer befreit sein. Plug-in-Hybride sind anders zu behandeln.', 'Haushaltsstrom, Autostromtarif, Grundpreis, Blockierentgelt und Schnellladen müssen nach realem kWh-Anteil gewichtet werden. Ein einzelner Werbepreis reicht nicht.', 'Restwert, Versicherung und Haltedauer können einen kleinen Betriebskostenvorteil umkehren. Die Rechnung ist keine Kauf-, Förder-, Steuer- oder Finanzierungsberatung.'],
+    sources: [
+      { label: 'Bundesregierung — E-Auto-Förderprogramm 2026 mit einkommens- und familienabhängiger Prämie', href: 'https://www.bundesregierung.de/breg-de/aktuelles/e-auto-kauffoerderung-2403088' },
+      { label: 'Bundesregierung — Kfz-Steuerbefreiung für Erstzulassungen bis Ende 2030', href: 'https://www.bundesregierung.de/breg-de/schwerpunkte/wirksam-regieren/e-autos-steuerfrei-2389328' },
+      { label: 'Bundesregierung — gesetzliche Neuregelungen ab Januar 2026', href: 'https://www.bundesregierung.de/breg-de/aktuelles/gesetzliche-neuregelungen-januar-2026-2399838' },
     ],
     lastVerified: '2026-07-19',
   },

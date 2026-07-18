@@ -122,18 +122,18 @@ const editorialRoutes = [
       de: ['210.948 €', 'Jahr 19', 'Vorfälligkeitsentschädigung', 'data-rent-buy-breakeven-calculator'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
     slug: 'ev-vs-gas-total-cost',
-    locales: ['en', 'zh', 'es'],
     nativeMarkers: {
       en: ['$39,864', 'out-the-door', 'data-ev-gas-tco-calculator'],
       zh: ['NT$1,107,644', '汽車燃料使用費', 'data-ev-gas-tco-calculator'],
       es: ['29.776 €', 'MOVES', 'data-ev-gas-tco-calculator'],
+      fr: ['29 096 €', 'Coup de pouce', 'data-ev-gas-tco-calculator'],
+      de: ['34.552 €', 'Kfz-Steuerbefreiung', 'data-ev-gas-tco-calculator'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -242,4 +242,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 12 complete five-locale topics, 55 added routes, 4 enriched high-value tools, 5 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 13 complete five-locale topics, 57 added routes, 4 enriched high-value tools, 5 embedded decision calculators.');

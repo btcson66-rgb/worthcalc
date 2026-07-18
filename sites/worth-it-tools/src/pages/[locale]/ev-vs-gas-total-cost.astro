@@ -3,10 +3,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import EVGasTcoCalculator from '../../components/EVGasTcoCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
 import { evGasTcoGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -42,6 +43,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Es fiable el valor de reventa a cinco años?', answer: 'Es una hipótesis, no una cotización garantizada. Comprueba precios del modelo y kilometraje comparables y prueba un escenario de reventa baja antes de aceptar una ventaja pequeña.' },
     ],
   },
+  fr: {
+    title: 'Voiture électrique ou thermique : comparer le coût total de possession',
+    description: 'Comparez prix TTC, prime confirmée, borne, recharge ou carburant, assurance, entretien, malus, décote et revente sur la même durée.',
+    faq: [
+      { question: 'Que comprend le coût total de possession d’une voiture ?', answer: 'Il comprend le prix TTC, la prime réellement acquise, la borne et le financement, l’énergie, l’assurance, l’entretien, l’immatriculation et les taxes, moins la revente au terme de la même durée.' },
+      { question: 'Puis-je déduire automatiquement la prime maximale pour une électrique ?', answer: 'Non. Depuis juillet 2025, le Coup de pouce financé par les CEE dépend notamment du véhicule, du score environnemental, du prix, de la masse et du ménage. Utilisez le montant figurant sur le devis ou la facture.' },
+      { question: 'Le malus d’une thermique doit-il être inclus ?', answer: 'Oui, s’il s’applique au véhicule et à sa date d’immatriculation. Ajoutez le coût exact du certificat d’immatriculation, du malus CO2 et du malus masse une seule fois dans les frais initiaux.' },
+      { question: 'Comment mélanger recharge à domicile et borne rapide ?', answer: 'Pondérez le prix du kWh selon la part réelle d’énergie fournie par chaque canal, ajoutez les abonnements pertinents et les pertes de recharge, puis testez un scénario où la recharge rapide augmente.' },
+      { question: 'Une TCO plus faible suffit-elle pour choisir ?', answer: 'Non. Autonomie, accès à une borne, usage autoroutier, assurance, garantie, sécurité et financement restent des critères séparés, surtout si l’écart calculé est faible.' },
+    ],
+  },
+  de: {
+    title: 'E-Auto oder Verbrenner: So vergleichen Sie die Gesamtkosten',
+    description: 'Vergleichen Sie Endpreis, bestätigte Förderung, Wallbox, Strom oder Benzin, Versicherung, Wartung, Kfz-Steuer, Wertverlust und Restwert.',
+    faq: [
+      { question: 'Welche Kosten gehören in den Vergleich E-Auto gegen Verbrenner?', answer: 'Endpreis, tatsächlich bewilligte Förderung, Wallbox und Finanzierung, Energie, Versicherung, Wartung, Reifen, Kfz-Steuer und Restwert müssen für dieselbe Haltedauer erfasst werden.' },
+      { question: 'Kann ich pauschal 6.000 Euro E-Auto-Prämie abziehen?', answer: 'Nein. Das 2026 gestartete Programm staffelt den Betrag nach Fahrzeug, Einkommen und Familiengröße. Bis zur bestätigten Bewilligung gehört im Basisfall null in die Rechnung.' },
+      { question: 'Wie lange gilt die Kfz-Steuerbefreiung?', answer: 'Reine Elektrofahrzeuge mit Erstzulassung bis Ende 2030 können bis zu zehn Jahre, längstens bis Ende 2035, befreit sein. Erstzulassung und Fahrzeugart müssen konkret geprüft werden.' },
+      { question: 'Wie berechne ich gemischte Ladekosten?', answer: 'Gewichten Sie Haushalts- oder Autostrom, Arbeitgeberladen und öffentliches AC/DC-Laden nach dem realen kWh-Anteil. Grund- und Blockierentgelte gehören hinzu, wenn sie durch das Fahrzeug entstehen.' },
+      { question: 'Warum ist der Restwert so wichtig?', answer: 'Der Wertverlust ist häufig größer als die Energiekostendifferenz. Ein um einige Tausend Euro niedrigerer Restwert kann einen kleinen Stromkostenvorteil vollständig umkehren.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -75,10 +98,30 @@ const calculators = {
       evPurchasePrice: 'Precio final del eléctrico', gasPurchasePrice: 'Precio final del gasolina', evIncentive: 'Ayuda confirmada para el eléctrico', evOneTimeCosts: 'Cargador, financiación y costes iniciales EV', gasOneTimeCosts: 'Financiación y costes iniciales gasolina', ownershipYears: 'Años de propiedad', annualDistance: 'Kilómetros al año', electricityRate: 'Precio ponderado (€/kWh)', evEfficiency: 'Consumo EV (kWh/100 km)', chargingLoss: 'Pérdidas de carga (%)', fuelPrice: 'Precio gasolina (€/L)', gasEfficiency: 'Consumo gasolina (L/100 km)', evInsurance: 'Seguro EV al año', gasInsurance: 'Seguro gasolina al año', evMaintenance: 'Mantenimiento EV al año', gasMaintenance: 'Mantenimiento gasolina al año', evTaxes: 'Impuestos y tasas EV al año', gasTaxes: 'Impuestos y tasas gasolina al año', evResale: 'Reventa EV al final del plazo', gasResale: 'Reventa gasolina al final del plazo', evTotal: 'Coste total EV', gasTotal: 'Coste total gasolina', difference: 'Diferencia de coste', evEnergy: 'Electricidad al año', gasEnergy: 'Gasolina al año', evDepreciation: 'Depreciación neta EV', gasDepreciation: 'Depreciación gasolina', evPerDistance: 'Coste EV por km', gasPerDistance: 'Coste gasolina por km', evWins: 'El eléctrico tiene menor coste total por', gasWins: 'El gasolina tiene menor coste total por', tie: 'Los dos costes totales estimados son iguales.', privacy: 'Estimación educativa, no recomendación de compra, fiscal o financiera. Los datos quedan en el navegador; verifica factura, ayuda, seguro, impuestos y reventa.'
     },
   },
+  fr: {
+    currency: 'EUR' as const,
+    fuelMode: 'l100km' as const,
+    distanceUnit: 'km' as const,
+    defaults: { evPurchasePrice: 38000, gasPurchasePrice: 29500, evIncentive: 0, evOneTimeCosts: 1800, gasOneTimeCosts: 1200, ownershipYears: 5, annualDistance: 13000, electricityRate: 0.23, evEfficiency: 17, chargingLoss: 10, fuelPrice: 1.8, gasEfficiency: 6.3, evInsurance: 950, gasInsurance: 800, evMaintenance: 350, gasMaintenance: 700, evTaxes: 0, gasTaxes: 0, evResale: 20000, gasResale: 14000 },
+    copy: {
+      heading: 'Calculateur complet électrique contre thermique', intro: 'Remplacez les exemples par deux devis comparables, votre recharge et les frais du certificat. Aucune prime n’est déduite par défaut.',
+      evPurchasePrice: 'Prix TTC électrique', gasPurchasePrice: 'Prix TTC thermique', evIncentive: 'Prime CEE confirmée', evOneTimeCosts: 'Borne, financement et frais initiaux VE', gasOneTimeCosts: 'Immatriculation, malus, financement thermique', ownershipYears: 'Années de détention', annualDistance: 'Kilomètres par an', electricityRate: 'Prix pondéré (€/kWh)', evEfficiency: 'Consommation VE (kWh/100 km)', chargingLoss: 'Pertes de recharge (%)', fuelPrice: 'Prix du carburant (€/L)', gasEfficiency: 'Consommation thermique (L/100 km)', evInsurance: 'Assurance VE par an', gasInsurance: 'Assurance thermique par an', evMaintenance: 'Entretien VE par an', gasMaintenance: 'Entretien thermique par an', evTaxes: 'Taxes annuelles VE', gasTaxes: 'Taxes annuelles thermique', evResale: 'Revente VE en fin de période', gasResale: 'Revente thermique en fin de période', evTotal: 'Coût complet VE', gasTotal: 'Coût complet thermique', difference: 'Écart de coût', evEnergy: 'Électricité par an', gasEnergy: 'Carburant par an', evDepreciation: 'Décote nette VE', gasDepreciation: 'Décote thermique', evPerDistance: 'Coût VE par km', gasPerDistance: 'Coût thermique par km', evWins: 'L’électrique a le coût complet le plus bas de', gasWins: 'La thermique a le coût complet le plus bas de', tie: 'Les deux coûts complets estimés sont identiques.', privacy: 'Estimation pédagogique, sans recommandation d’achat, de crédit ou de fiscalité. Vérifiez devis, prime, immatriculation, assurance, tarif et revente.'
+    },
+  },
+  de: {
+    currency: 'EUR' as const,
+    fuelMode: 'l100km' as const,
+    distanceUnit: 'km' as const,
+    defaults: { evPurchasePrice: 44000, gasPurchasePrice: 33000, evIncentive: 0, evOneTimeCosts: 1800, gasOneTimeCosts: 1000, ownershipYears: 5, annualDistance: 15000, electricityRate: 0.32, evEfficiency: 18, chargingLoss: 10, fuelPrice: 1.75, gasEfficiency: 6.5, evInsurance: 1000, gasInsurance: 850, evMaintenance: 400, gasMaintenance: 750, evTaxes: 0, gasTaxes: 180, evResale: 23000, gasResale: 16000 },
+    copy: {
+      heading: 'Vollständiger TCO-Rechner für E-Auto und Verbrenner', intro: 'Ersetzen Sie die Beispielwerte durch vergleichbare Endpreise, Tarife und Bescheide. Eine noch nicht bewilligte Förderung bleibt null.',
+      evPurchasePrice: 'E-Auto-Endpreis', gasPurchasePrice: 'Verbrenner-Endpreis', evIncentive: 'Bewilligte E-Auto-Förderung', evOneTimeCosts: 'Wallbox, Finanzierung und E-Auto-Anfangskosten', gasOneTimeCosts: 'Finanzierung und Verbrenner-Anfangskosten', ownershipYears: 'Haltedauer in Jahren', annualDistance: 'Kilometer pro Jahr', electricityRate: 'Gewichteter Strompreis (€/kWh)', evEfficiency: 'E-Auto-Verbrauch (kWh/100 km)', chargingLoss: 'Ladeverlust (%)', fuelPrice: 'Benzinpreis (€/L)', gasEfficiency: 'Verbrauch Verbrenner (L/100 km)', evInsurance: 'E-Auto-Versicherung pro Jahr', gasInsurance: 'Verbrenner-Versicherung pro Jahr', evMaintenance: 'E-Auto-Wartung pro Jahr', gasMaintenance: 'Verbrenner-Wartung pro Jahr', evTaxes: 'E-Auto-Steuer pro Jahr', gasTaxes: 'Verbrenner-Steuer pro Jahr', evResale: 'E-Auto-Restwert am Ende', gasResale: 'Verbrenner-Restwert am Ende', evTotal: 'E-Auto-Gesamtkosten', gasTotal: 'Verbrenner-Gesamtkosten', difference: 'Kostendifferenz', evEnergy: 'Strom pro Jahr', gasEnergy: 'Benzin pro Jahr', evDepreciation: 'Netto-Wertverlust E-Auto', gasDepreciation: 'Wertverlust Verbrenner', evPerDistance: 'E-Auto-Kosten pro km', gasPerDistance: 'Verbrenner-Kosten pro km', evWins: 'Das E-Auto hat niedrigere Gesamtkosten um', gasWins: 'Der Verbrenner hat niedrigere Gesamtkosten um', tie: 'Die geschätzten Gesamtkosten sind gleich.', privacy: 'Allgemeine Lernrechnung, keine Kauf-, Förder-, Steuer- oder Finanzierungsberatung. Prüfen Sie Angebot, Bescheid, Versicherung, Steuer, Tarif und Restwert.'
+    },
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale } }));
+  return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as EditorialLocale;
@@ -87,7 +130,7 @@ const guide = evGasTcoGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
   {locale === 'en' && <>
     <p>Start with a harder comparison than “electric versus gasoline”: choose two vehicles that can perform the same job. A larger premium EV and a smaller economy hatchback do not reveal a powertrain saving. Match body style, seats, cargo, safety equipment, expected reliability and the options you would actually buy.</p>
     <p>Total cost of ownership is a holding-period cash-flow test. It does not assume that lower energy cost will recover any purchase premium, and it does not count a headline credit until the buyer has verified eligibility.</p>
@@ -155,6 +198,46 @@ const calculator = calculators[locale];
     <h2>La reventa convierte una ventaja aparente en una prueba de riesgo</h2>
     <p>Compara precios observados del mismo modelo, año y kilometraje, y prueba un valor inferior. Reducir la reventa del eléctrico de 20.000 € a 16.000 € cambia el ejemplo a una ventaja de 2.436 € para el gasolina.</p>
     <p class="privacy-note">Estimación educativa general; no recomienda coche, financiación, ayuda ni tratamiento fiscal. Comprueba convocatoria, factura, póliza, ordenanza, tarifa y reventa antes de comprometerte.</p>
+  </>}
+
+  {locale === 'fr' && <>
+    <p>Comparer seulement 3 € d’électricité aux 100 km avec un plein ne suffit pas. Le prix TTC, la prime réellement portée au contrat, la borne, l’assurance, le malus éventuel, la décote et la revente peuvent peser davantage que cinq années d’énergie.</p>
+    <p>La comparaison doit opposer deux voitures substituables : même gabarit, places, équipement, autonomie utile et usage autoroutier. Une grande électrique neuve face à une petite thermique d’occasion ne mesure pas le coût de la motorisation.</p>
+    <DecisionGuide content={guide} />
+    <EVGasTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Le Coup de pouce 2026 doit apparaître sur le devis</h2>
+    <p>Depuis juillet 2025, le soutien à l’achat d’une voiture particulière électrique repose sur le dispositif CEE. Le ministère a annoncé la continuité du cadre en 2026, avec des critères de score environnemental, prix, masse, batterie et situation du ménage. Le montant est généralement avancé par le professionnel et doit figurer sur le devis, le contrat de location ou la facture.</p>
+    <p>Le calculateur part donc de zéro. Ajoutez uniquement la prime contractuelle, puis conservez un scénario sans aide si l’éligibilité, la livraison ou le versement restent incertains. Un loyer mensuel de leasing social ne se compare pas directement à un prix d’achat : il faut traiter durée, premier loyer, kilométrage, restitution et option d’achat dans une analyse de location distincte.</p>
+
+    <h2>Certificat d’immatriculation et malus appartiennent au prix de départ</h2>
+    <p>Le malus CO2 et le malus masse sont payés lors de l’immatriculation s’ils s’appliquent. Service-Public indique les exemptions des véhicules électriques ou hydrogène, mais le coût du certificat dépend toujours du dossier. Utilisez le simulateur officiel ou le montant du professionnel et ne le comptez qu’une fois.</p>
+    <p>Assurance et entretien doivent venir de devis séparés. Pneumatiques, révisions, freins, franchise et garantie batterie ne disparaissent pas avec le moteur thermique. Le prix Car Labelling fournit une référence d’homologation ; vos factures restent préférables pour l’usage réel.</p>
+
+    <h2>Une recharge mixte peut annuler l’avantage d’usage</h2>
+    <p>Pondérez domicile, copropriété, travail, abonnement et recharge rapide par kWh, puis ajoutez pertes et frais fixes causés par la voiture. Dans l’exemple, 0,23 €/kWh donne 2 475 € d’avance à l’électrique ; à 0,45 €/kWh, la thermique devient moins chère d’environ 199 €.</p>
+    <p>La valeur de revente complète la décote. Un scénario où l’électrique ne vaut plus que 16 000 € après cinq ans fait gagner la thermique de 1 525 €. Une réponse AEO honnête doit donc publier durée, kilométrage, tarif et revente avec le verdict.</p>
+    <p class="privacy-note">Estimation pédagogique générale, sans recommandation d’achat, de financement, de prime ou de fiscalité. Vérifiez devis, facture, certificat, tarif, assurance et marché de l’occasion.</p>
+  </>}
+
+  {locale === 'de' && <>
+    <p>Niedrigere Stromkosten allein machen ein E-Auto nicht wirtschaftlicher. Kaufpreis, bewilligte Förderung, Wallbox, Versicherung, Kfz-Steuer, Wertverlust und Restwert müssen für dieselbe Haltedauer und zwei wirklich vergleichbare Fahrzeuge berechnet werden.</p>
+    <p>Der Rechner setzt die Förderung im Basisfall auf null. So bleibt sichtbar, ob das Fahrzeug auch ohne einen noch ungeprüften Zuschuss trägt.</p>
+    <DecisionGuide content={guide} />
+    <EVGasTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Die neue Kaufprämie ist kein pauschaler Rabatt</h2>
+    <p>Die Bundesregierung startete im Mai 2026 ein Förderprogramm für neu zugelassene E-Autos, Plug-in-Hybride und Fahrzeuge mit Range Extender. Für Privatpersonen liegt die Förderung je nach Fahrzeug, Einkommen und Familiengröße zwischen 1.500 € und 6.000 €. Maßgeblich sind Antrag und Bewilligung, nicht der Höchstbetrag einer Überschrift.</p>
+    <p>Tragen Sie einen Zuschuss erst ein, wenn die konkrete Zulassung und der Haushalt die Bedingungen erfüllen. Leasing benötigt außerdem eine eigene Zahlungsreihe aus Sonderzahlung, Monatsraten, Laufzeit, Kilometergrenze, Rückgabe und Kaufoption.</p>
+
+    <h2>Kfz-Steuerbefreiung und Verbrennersteuer getrennt erfassen</h2>
+    <p>Für reine Elektrofahrzeuge mit Erstzulassung bis zum 31. Dezember 2030 wurde die Steuerbefreiung verlängert: bis zu zehn Jahre, höchstens bis Ende 2035. Diese Regel gilt nicht pauschal für jede Hybridform. Setzen Sie das E-Auto im passenden Zeitraum auf null und den Verbrenner mit dem tatsächlichen Steuerbescheid an.</p>
+    <p>Versicherung, Wartung und Reifen benötigen modellspezifische Angebote. Ein fehlender Ölwechsel ist keine Nullwartung; Gewicht, Reifendimension, Reparaturweg, Selbstbeteiligung und Ersatzteilpreise können das Ergebnis verändern.</p>
+
+    <h2>Hausstrom und Schnellladen brauchen einen gewichteten Tarif</h2>
+    <p>Berechnen Sie den Arbeitspreis nach kWh-Anteilen aus Haushaltsstrom, Autostromtarif, Arbeitgeber und öffentlichem AC/DC-Laden. Grundpreis oder Blockierentgelt wird nur aufgenommen, wenn es durch das Fahrzeug zusätzlich entsteht. Im Beispiel dreht ein gewichteter Preis von 0,50 €/kWh den 879-€-Vorsprung des E-Autos in einen 1.794-€-Vorteil des Verbrenners.</p>
+    <p>Der Restwert ist noch empfindlicher: 18.000 € statt 23.000 € beim E-Auto machen den Verbrenner 4.121 € günstiger. Dokumentieren Sie deshalb mindestens Basis-, teurer-Strom- und niedriger-Restwert-Szenario.</p>
+    <p class="privacy-note">Allgemeine Lernrechnung, keine Kauf-, Förder-, Steuer- oder Finanzierungsberatung. Prüfen Sie Angebot, Förderbescheid, Steuer, Versicherung, Tarif und Restwert vor Vertragsabschluss.</p>
   </>}
 
   <FAQ items={article.faq} />

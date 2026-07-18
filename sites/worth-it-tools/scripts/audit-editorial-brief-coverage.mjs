@@ -24,13 +24,14 @@ const briefRoutes = [
   { id: '09', slug: 'annual-fee-card-breakeven' },
   { id: '10', slug: 'cashback-caps-real-reward-rate' },
   { id: '11', slug: 'rent-vs-buy-guide' },
+  { id: '12', slug: 'rent-vs-buy-breakeven-year' },
 ];
 
 const releaseFloor = {
-  html: 90,
-  editorial: 58,
-  alignedVariants: 55,
-  compliantVariants: 55,
+  html: 93,
+  editorial: 61,
+  alignedVariants: 58,
+  compliantVariants: 58,
   completeTopics: 11,
 };
 

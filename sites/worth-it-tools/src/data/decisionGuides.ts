@@ -1156,6 +1156,79 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const rentBuyBreakevenGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'rent-buy-breakeven-year-method',
+    labels: labels.en,
+    directAnswer: 'There is no universal number of years before buying beats renting. The break-even year is the first planned sale year when the owner’s net cost—including purchase cash, mortgage payments, owner costs and selling costs, less net sale proceeds—is no higher than cumulative rent after the renter’s assumed return on cash kept invested. In the transparent example below, buying first moves below renting in year 7. With zero appreciation it moves to year 16, which is why “stay five years” is not a safe rule.',
+    inputs: ['Price and rent for homes that offer the same location, space and condition', 'Down payment, buying costs, mortgage amount, rate, term and monthly payment', 'Annual property tax, insurance, association dues and necessary maintenance', 'Selling costs, mortgage balance and any prepayment charge at each possible exit year', 'Annual home-price change and rent growth tested as ranges rather than forecasts', 'After-cost opportunity return on the down payment and purchase cash', 'Maximum realistic holding period; do not extend the horizon just to force a crossover'],
+    formula: 'For each year N: owner net cost = down payment + buying costs + mortgage payments through N + owner carrying costs − [home value at N × (1 − selling-cost rate) − remaining mortgage]. Renter net cost = rent paid through N − investment gain on upfront cash. The break-even year is the smallest N for which owner net cost ≤ renter net cost.',
+    workedExample: 'A $400,000 home uses $80,000 down, $12,000 buying costs and a $320,000 30-year mortgage at 6.5%. Owner costs are $6,000 a year, selling costs 5%, appreciation 2%, comparable rent $2,200 a month growing 3%, and the upfront $92,000 has a 5% opportunity return. The mortgage payment is about $2,023. Buying remains about $819 higher after year 6, then reaches an estimated $156,731 net cost in year 7 versus $164,836 for renting: the first modeled crossover, by about $8,104.',
+    sensitivity: [
+      { scenario: 'Base case', input: '6.5% mortgage; 2% appreciation; 5% selling cost', result: 'First crossover in year 7' },
+      { scenario: 'No appreciation', input: '0% instead of 2%; other inputs unchanged', result: 'First crossover moves to year 16' },
+      { scenario: 'Lower mortgage rate', input: '5.5% instead of 6.5%', result: 'First crossover moves to year 5' },
+      { scenario: 'Higher selling cost', input: '7% instead of 5%', result: 'First crossover moves to year 8' },
+      { scenario: 'Higher comparable rent', input: '$2,500 instead of $2,200 a month', result: 'First crossover moves to year 5' },
+    ],
+    cta: { label: 'Run a fuller rent-versus-buy scenario', href: '/en/tools/rent-vs-buy' },
+    limitations: ['The crossover is a property of the inputs, not a forecast or a recommendation to buy in that year.', 'The simplified calculator holds the mortgage rate constant, invests only the upfront cash, and does not model monthly cash-flow differences, taxes, deductions, mortgage insurance, renovations or capital-gains treatment.', 'Use the Loan Estimate and Closing Disclosure, local tax and insurance quotes, inspection findings, actual comparable rent and a sale-cost estimate. Model liquidity, job mobility and repair risk separately.', 'A crossover within the horizon does not prove that the purchase is affordable. Budget reserves and underwriting remain separate questions.'],
+    sources: [
+      { label: 'Consumer Financial Protection Bureau — length of stay and rent-versus-buy assumptions', href: 'https://www.consumerfinance.gov/owning-a-home/prepare/consider-whether-its-the-right-time-for-you-to-buy/' },
+      { label: 'Consumer Financial Protection Bureau — Closing Disclosure and cash to close', href: 'https://www.consumerfinance.gov/owning-a-home/closing-disclosure/' },
+      { label: 'Consumer Financial Protection Bureau — taxes, insurance, repairs and other owner costs', href: 'https://www.consumerfinance.gov/consumer-tools/mortgages/ready-to-buy-a-home/' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'rent-buy-breakeven-year-method',
+    labels: labels.zh,
+    directAnswer: '買房不是住滿固定五年或六年就一定比租屋划算。損益年分是第一個「在該年出售時，買房淨成本不高於租屋淨成本」的年份；買房端要扣掉清償房貸後的淨售屋款，租屋端則扣除頭期款與買入成本保留投資的報酬。以下透明算例到第 9 年才首次交叉；若房價零成長，30 年內都沒有交叉。台灣自住房地連續持有、設籍並居住滿 6 年的租稅門檻會改變出售稅負，但「滿 6 年」本身不是財務回本保證。',
+    inputs: ['同區域、同坪數、屋齡、車位與屋況的成交總價及實際租金', '頭期款、契稅／印花稅／代書／仲介等買入現金，及核貸金額、利率與年限', '每年房屋稅、地價稅、管理費、保險與必要修繕', '預計出售年份的房貸餘額、仲介／代書／規費及可能的房地合一稅與土地增值稅', '房價年變動與租金年增率，至少測試下跌、持平與溫和成長', '頭期款與買入現金若未支出的稅後機會報酬', '實際可能自住的最長年限，不為了讓買房勝出而任意延長'],
+    formula: '逐年計算 N：買房淨成本 = 頭期款 + 買入成本 + 截至 N 年的房貸月付 + 屋主持有成本 −［第 N 年房價 ×（1 − 賣出成本率）− 房貸餘額］；租屋淨成本 = 截至 N 年累計租金 − 前期現金的投資增值。最小且買房淨成本 ≤ 租屋淨成本的 N，就是模型損益年分。',
+    workedExample: '示範總價 NT$15,000,000、頭期款 NT$3,000,000、買入成本 NT$450,000、貸款 30 年利率 2.2%，房貸月付約 NT$45,564。屋主持有成本每年 NT$200,000、出售成本 4%、房價年增 1.5%；可比月租 NT$38,000、年增 2%，前期 NT$3,450,000 的機會報酬 4%。第 8 年買房仍高於租屋；第 9 年買房淨成本約 NT$2,894,592，租屋約 NT$2,987,685，首次低約 NT$93,093。這是公式示範，不是房價或利率預測。',
+    sensitivity: [
+      { scenario: '基準情境', input: '利率 2.2%、房價年增 1.5%、出售成本 4%', result: '第 9 年首次交叉' },
+      { scenario: '房價持平', input: '0% 取代 1.5%', result: '30 年內未交叉' },
+      { scenario: '核貸利率較低', input: '1.8% 取代 2.2%', result: '第 7 年首次交叉' },
+      { scenario: '出售成本較高', input: '6% 取代 4%', result: '第 11 年首次交叉' },
+      { scenario: '可比租金較高', input: 'NT$45,000 取代 NT$38,000', result: '第 6 年首次交叉' },
+    ],
+    cta: { label: '用完整租屋買房計算機檢查同一組假設', href: '/zh/tools/rent-vs-buy' },
+    limitations: ['模型損益年分不是房價、租金、利率或投資報酬預測，也不是叫你在該年買進或賣出。', '頁內計算器把出售稅費合併為成本率，沒有自動判定戶籍、自住、出租、取得日期、房地合一稅、土地增值稅、重購退稅或個別免稅額；必須用實際稅務資料替換。', '寬限期、變動利率、提前清償費、裝潢、重大修繕及每月現金流差額投資未完整建模。', '即使模型交叉，頭期款、緊急預備金、工作穩定與貸款負擔仍需分開判斷；本頁不提供購屋、投資、貸款、稅務或法律建議。'],
+    sources: [
+      { label: '我的 E 政府 — 2026 自住房地購買、持有、出售稅務整理', href: 'https://www.gov.tw/News_Content_26_597183' },
+      { label: '財政部 — 房地合一稅個人制度與可列成本費用', href: 'https://www.mof.gov.tw/houseandland%20/multiplehtml/de144e74630c4ac59f2d84a068c889c9' },
+      { label: '內政部 — 不動產交易實價查詢服務網', href: 'https://lvr.land.moi.gov.tw/jsp/index.jsp' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'rent-buy-breakeven-year-method',
+    labels: labels.es,
+    directAnswer: 'No existe un número universal de años para que comprar gane a alquilar. El año de equilibrio es la primera fecha de venta en la que el coste neto de compra —entrada, gastos, cuotas, costes del propietario y salida menos el efectivo neto recuperado— no supera el alquiler acumulado después de reconocer la rentabilidad del dinero inicial que conserva el inquilino. En el ejemplo transparente, el cruce aparece en el año 9; con precio estable se desplaza al 17.',
+    inputs: ['Precio y alquiler de dos viviendas comparables por zona, superficie, estado y servicios', 'Entrada, gastos e impuestos de compraventa, importe hipotecario, TIN, plazo y cuota', 'IBI, seguro, comunidad no recuperable, mantenimiento y derramas probables', 'Coste de venta, capital pendiente y posible compensación por reembolso anticipado en cada fecha de salida', 'Revalorización y subida del alquiler probadas como rangos, no como pronósticos', 'Rentabilidad neta alternativa sobre la entrada y los gastos iniciales', 'Permanencia máxima realista; no ampliar el horizonte solo para obtener un cruce'],
+    formula: 'Para cada año N: coste neto de compra = entrada + gastos de compra + cuotas pagadas hasta N + costes del propietario − [valor de la vivienda en N × (1 − coste de venta) − capital pendiente]. Coste neto de alquiler = rentas pagadas hasta N − ganancia de la inversión del efectivo inicial. El equilibrio es el menor N con coste de compra ≤ coste de alquiler.',
+    workedExample: 'Vivienda de 240.000 €, entrada de 48.000 €, 24.000 € de gastos, hipoteca de 192.000 € a 30 años al 3,25% y cuota aproximada de 836 €. Se añaden 3.000 € anuales de propietario, venta al 5%, revalorización del 1,5%, alquiler comparable de 1.000 € con subida del 2% y rentabilidad alternativa del 4% sobre 72.000 €. En el año 9, comprar alcanza un coste neto estimado de 81.020 € frente a 86.577 € de alquilar: primer cruce, por unos 5.557 €. No es una previsión del euríbor ni del mercado.',
+    sensitivity: [
+      { scenario: 'Caso base', input: 'TIN 3,25%; revalorización 1,5%; venta 5%', result: 'Primer cruce en el año 9' },
+      { scenario: 'Precio estable', input: '0% en lugar de 1,5%', result: 'Primer cruce en el año 17' },
+      { scenario: 'Tipo menor', input: '2,5% en lugar de 3,25%', result: 'Primer cruce en el año 7' },
+      { scenario: 'Venta más cara', input: '7% en lugar de 5%', result: 'El cruce sigue en el año 9, pero con solo 69 € de margen' },
+      { scenario: 'Alquiler comparable mayor', input: '1.200 € en lugar de 1.000 € al mes', result: 'Primer cruce en el año 6' },
+    ],
+    cta: { label: 'Abrir el comparador completo y probar más supuestos', href: '/en/tools/rent-vs-buy' },
+    limitations: ['El cruce pertenece al escenario y no recomienda comprar, vender ni contratar una hipoteca en ese año.', 'La calculadora mantiene el tipo constante, invierte solo el efectivo inicial y simplifica impuestos, deducciones, seguros, reformas, derramas y fiscalidad de la venta.', 'ITP o IVA y AJD, notaría, registro, tasación, agencia y condiciones de amortización dependen de comunidad autónoma, vivienda y contrato. Use FEIN, FiAE, escritura, recibos y presupuesto de salida.', 'Que comprar cruce antes no demuestra que la cuota sea asumible ni que exista liquidez para averías o cambios laborales.'],
+    sources: [
+      { label: 'Banco de España — cuota, capital e intereses de la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Cuota_hipotecaria.html' },
+      { label: 'Banco de España — gastos asociados a la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html' },
+      { label: 'Consejo General del Notariado — gastos de compraventa e impuestos', href: 'https://www.notariado.org/comprar-una-vivienda/' },
+      { label: 'Banco de España — compensación por reembolso anticipado', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/comisiones/comisionesproduc/compensacion-o-comision-por-reembolso-o-amortizacion-anticipada-total-o-parcial.html?producto=%2Fwebcb%2FServiciosProductosBancarios%2FFinanciacion%2FHipotecas' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const costcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   en: {
     id: 'membership-break-even-method',

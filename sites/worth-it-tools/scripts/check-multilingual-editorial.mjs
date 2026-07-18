@@ -113,7 +113,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'rent-vs-buy-breakeven-year',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$156,731', 'year 7', 'Closing Disclosure', 'data-rent-buy-breakeven-calculator'],
+      zh: ['NT$2,894,592', '第 9 年', '房地合一稅', 'data-rent-buy-breakeven-calculator'],
+      es: ['81.020 €', 'año 9', 'FEIN', 'data-rent-buy-breakeven-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -222,4 +232,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 11 complete five-locale topics, 47 added routes, 4 enriched high-value tools, 3 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 11 complete five-locale topics, 50 added routes, 4 enriched high-value tools, 4 embedded decision calculators.');

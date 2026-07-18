@@ -133,7 +133,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'home-vs-public-ev-charging-cost',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$1,118', 'marginal home electricity', 'data-ev-charging-cost-calculator'],
+      zh: ['NT$16,001', '公設電', 'data-ev-charging-cost-calculator'],
+      es: ['880 €', 'mapa REVE', 'data-ev-charging-cost-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -242,4 +252,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 13 complete five-locale topics, 57 added routes, 4 enriched high-value tools, 5 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 13 complete five-locale topics, 60 added routes, 4 enriched high-value tools, 6 embedded decision calculators.');

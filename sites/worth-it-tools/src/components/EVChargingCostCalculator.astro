@@ -1,0 +1,221 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  annualDistance: string;
+  efficiency: string;
+  chargingLoss: string;
+  homeShare: string;
+  publicAcShare: string;
+  publicDcShare: string;
+  homeRate: string;
+  publicAcRate: string;
+  publicDcRate: string;
+  monthlyMembership: string;
+  annualSessionFees: string;
+  annualCost: string;
+  costPerDistance: string;
+  effectiveRate: string;
+  batteryEnergy: string;
+  gridEnergy: string;
+  homeOnlyCost: string;
+  publicPremium: string;
+  mixSummary: string;
+  normalizedMix: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  distanceUnit: 'mi' | 'km';
+  defaults: {
+    annualDistance: number;
+    efficiency: number;
+    chargingLoss: number;
+    homeShare: number;
+    publicAcShare: number;
+    publicDcShare: number;
+    homeRate: number;
+    publicAcRate: number;
+    publicDcRate: number;
+    monthlyMembership: number;
+    annualSessionFees: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, distanceUnit, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = {
+  en: 'en-US',
+  zh: 'zh-TW',
+  es: 'es-ES',
+};
+---
+
+<section
+  id="ev-charging-cost-calculator"
+  class="charging-calc"
+  data-ev-charging-cost-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-distance-unit={distanceUnit}
+  data-mix-summary={copy.mixSummary}
+  data-normalized-mix={copy.normalizedMix}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+
+  <div class="charging-calc-grid">
+    <div class="charging-calc-inputs">
+      <label><span>{copy.annualDistance}</span><input data-field="annualDistance" type="number" inputmode="decimal" min="0" step="100" value={defaults.annualDistance} /></label>
+      <label><span>{copy.efficiency}</span><input data-field="efficiency" type="number" inputmode="decimal" min="0" step="0.1" value={defaults.efficiency} /></label>
+      <label><span>{copy.chargingLoss}</span><input data-field="chargingLoss" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.chargingLoss} /></label>
+      <label><span>{copy.homeShare}</span><input data-field="homeShare" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.homeShare} /></label>
+      <label><span>{copy.publicAcShare}</span><input data-field="publicAcShare" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.publicAcShare} /></label>
+      <label><span>{copy.publicDcShare}</span><input data-field="publicDcShare" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.publicDcShare} /></label>
+      <label><span>{copy.homeRate}</span><input data-field="homeRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.homeRate} /></label>
+      <label><span>{copy.publicAcRate}</span><input data-field="publicAcRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.publicAcRate} /></label>
+      <label><span>{copy.publicDcRate}</span><input data-field="publicDcRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.publicDcRate} /></label>
+      <label><span>{copy.monthlyMembership}</span><input data-field="monthlyMembership" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.monthlyMembership} /></label>
+      <label><span>{copy.annualSessionFees}</span><input data-field="annualSessionFees" type="number" inputmode="decimal" min="0" step="1" value={defaults.annualSessionFees} /></label>
+    </div>
+
+    <div class="charging-calc-results" aria-live="polite">
+      <p class="charging-mix" data-output="mix"></p>
+      <dl>
+        <div><dt>{copy.annualCost}</dt><dd data-output="annualCost">—</dd></div>
+        <div><dt>{copy.costPerDistance}</dt><dd data-output="costPerDistance">—</dd></div>
+        <div><dt>{copy.effectiveRate}</dt><dd data-output="effectiveRate">—</dd></div>
+        <div><dt>{copy.batteryEnergy}</dt><dd data-output="batteryEnergy">—</dd></div>
+        <div><dt>{copy.gridEnergy}</dt><dd data-output="gridEnergy">—</dd></div>
+        <div><dt>{copy.homeOnlyCost}</dt><dd data-output="homeOnlyCost">—</dd></div>
+        <div><dt>{copy.publicPremium}</dt><dd data-output="publicPremium">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="charging-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-ev-charging-cost-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const distanceUnit = root.dataset.distanceUnit || 'km';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 2 });
+    const unitCurrencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 3, maximumFractionDigits: 3 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const twdUnitFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const numberFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+    const rateFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 3 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+    const formatUnitMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdUnitFormatter.format(Math.abs(amount))}`
+      : unitCurrencyFormatter.format(amount);
+
+    function calculate() {
+      const annualDistance = Math.max(0, value('annualDistance'));
+      const efficiency = Math.max(0, value('efficiency'));
+      const chargingLoss = Math.max(0, value('chargingLoss')) / 100;
+      const shares = [Math.max(0, value('homeShare')), Math.max(0, value('publicAcShare')), Math.max(0, value('publicDcShare'))];
+      const shareTotal = shares.reduce((sum, share) => sum + share, 0);
+      const normalizedShares = shareTotal > 0 ? shares.map((share) => share / shareTotal) : [0, 0, 0];
+      const rates = [Math.max(0, value('homeRate')), Math.max(0, value('publicAcRate')), Math.max(0, value('publicDcRate'))];
+      const weightedRate = normalizedShares.reduce((sum, share, index) => sum + share * rates[index], 0);
+      const batteryEnergy = annualDistance * efficiency / 100;
+      const gridEnergy = batteryEnergy * (1 + chargingLoss);
+      const fixedFees = Math.max(0, value('monthlyMembership')) * 12 + Math.max(0, value('annualSessionFees'));
+      const annualCost = gridEnergy * weightedRate + fixedFees;
+      const homeOnlyCost = gridEnergy * rates[0];
+      const publicPremium = annualCost - homeOnlyCost;
+
+      output('annualCost').textContent = formatMoney(annualCost);
+      output('costPerDistance').textContent = `${formatUnitMoney(annualDistance > 0 ? annualCost / annualDistance : 0)} / ${distanceUnit}`;
+      output('effectiveRate').textContent = `${formatUnitMoney(weightedRate)} / kWh`;
+      output('batteryEnergy').textContent = `${numberFormatter.format(batteryEnergy)} kWh`;
+      output('gridEnergy').textContent = `${numberFormatter.format(gridEnergy)} kWh`;
+      output('homeOnlyCost').textContent = formatMoney(homeOnlyCost);
+      output('publicPremium').textContent = formatMoney(publicPremium);
+      const summary = `${root.dataset.mixSummary || ''} ${normalizedShares.map((share) => `${rateFormatter.format(share * 100)}%`).join(' / ')}`.trim();
+      output('mix').textContent = Math.abs(shareTotal - 100) > 0.001 ? `${summary} — ${root.dataset.normalizedMix || ''}` : summary;
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .charging-calc {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+  .charging-calc h2 { margin-top: 0; }
+  .charging-calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .charging-calc-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+  .charging-calc-inputs label,
+  .charging-calc-results dl { margin: 0; }
+  .charging-calc-inputs label span {
+    display: block;
+    min-height: 2.9rem;
+    margin-bottom: 0.35rem;
+    font-weight: 650;
+  }
+  .charging-calc-inputs input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.55rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+  }
+  .charging-calc-results {
+    align-self: start;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    background: var(--color-bg);
+  }
+  .charging-mix { margin-top: 0; font-weight: 700; }
+  .charging-calc-results dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .charging-calc-results dt { font-weight: 600; }
+  .charging-calc-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .charging-calc-note { margin-bottom: 0; color: var(--color-text-muted); font-size: 0.92rem; }
+  @media (max-width: 760px) {
+    .charging-calc { padding: 1rem; }
+    .charging-calc-grid,
+    .charging-calc-inputs { grid-template-columns: 1fr; }
+    .charging-calc-inputs label span { min-height: 0; }
+  }
+</style>

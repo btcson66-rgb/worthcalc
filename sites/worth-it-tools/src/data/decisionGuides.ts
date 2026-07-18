@@ -1241,3 +1241,73 @@ export const commuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     lastVerified: '2026-07-18',
   },
 };
+
+export const cashbackCapsGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'cashback-caps-real-rate-method',
+    labels: labels.en,
+    directAnswer: 'A 5% category is not a 5% return on the whole card bill. Apply the headline rate only to category spend inside the stated cap, use the fallback rate above the cap, add rewards from other eligible purchases, and divide by all spending you are evaluating. With $2,100 in a 5% category capped at $1,500, $1,400 of other spend at 1.5%, and $250 excluded, rewards are $102: 2.91% of eligible purchases but only 2.72% of the $3,750 statement.',
+    inputs: ['Analysis period that matches the cap: statement month, calendar quarter, or cardmember year', 'Spend that will actually code in the bonus category', 'Headline category rate and whether activation or enrollment is required', 'Eligible-spend cap or reward-dollar cap, converted to the same basis', 'Fallback rate after the cap is reached', 'Other eligible purchases and their earn rate', 'Excluded transactions, returns, credits, and any redemption haircut'],
+    formula: 'Let B = category spend, C = eligible category-spend cap, rb = bonus rate, rf = fallback rate, O = other eligible spend, ro = other rate, and X = excluded spend. Rewards = min(B,C) × rb + max(B−C,0) × rf + O × ro. Eligible weighted rate = rewards ÷ (B+O). Whole-bill effective rate = rewards ÷ (B+O+X).',
+    workedExample: 'During one quarter, category spend is $2,100. The card pays 5% on the first $1,500 and 1% after that. Other eligible purchases are $1,400 at 1.5%, while $250 is excluded. Rewards are $75 + $6 + $21 = $102. The eligible weighted rate is $102 ÷ $3,500 = 2.91%; the statement-wide rate is $102 ÷ $3,750 = 2.72%. Applying 5% to all $2,100 would overstate category rewards by $24.',
+    sensitivity: [
+      { scenario: 'Below the category cap', input: '$900 category; $1,400 other; $250 excluded', result: '$66 rewards; 2.59% whole-bill rate' },
+      { scenario: 'Exactly at the cap', input: '$1,500 category; other inputs unchanged', result: '$96 rewards; 3.05% whole-bill rate' },
+      { scenario: 'Base example', input: '$2,100 category; $600 earns only 1%', result: '$102 rewards; 2.72% whole-bill rate' },
+      { scenario: 'Heavy spend above cap', input: '$3,000 category; other inputs unchanged', result: '$111 rewards; 2.39% whole-bill rate' },
+    ],
+    cta: { label: 'Compare the reward value with the card fee', href: '/en/tools/cashback-breakeven' },
+    limitations: ['Merchant category coding is controlled by the payment network and acquirer, not by the name you see on the storefront. Confirm posted transactions instead of assuming every purchase qualifies.', 'A cap stated as reward dollars must be divided by the incremental or stated reward rate specified in the terms before it can be treated as a spend cap.', 'Returns, statement credits, account status, activation deadlines, redemption minimums, point devaluation, and program changes can reduce realized value.', 'Paying interest, late fees, or buying more to chase a category can erase rewards. This model measures rewards, not affordability, credit risk, or tax treatment.'],
+    sources: [
+      { label: 'CFPB — credit-card rewards program circular', href: 'https://www.consumerfinance.gov/compliance/circulars/consumer-financial-protection-circular-2024-07-design-marketing-and-administration-of-credit-card-rewards-programs/' },
+      { label: 'CFPB — credit-card agreement database', href: 'https://www.consumerfinance.gov/credit-cards/agreements/' },
+      { label: 'CFPB — when card terms and reward benefits may change', href: 'https://www.consumerfinance.gov/ask-cfpb/can-my-credit-card-company-change-the-terms-of-my-account-en-70/' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'cashback-caps-real-rate-method',
+    labels: labels.zh,
+    directAnswer: '標示 3% 不代表整期帳單都回饋 3%。先把指定消費切成「上限內 3%」和「超過後 1%」，再加其他一般消費，最後把零回饋項目也放回整期分母。本頁算例指定消費 NT$12,000、3% 上限只認 NT$7,500、超出回到 1%，另有一般消費 NT$8,000 與排除消費 NT$3,000；實拿 NT$350，合格消費加權回饋率 1.75%，整期帳單真正回饋率只有 1.52%。',
+    inputs: ['上限週期是每期、每月、每季、活動期間或年度', '真正會被銀行系統認列的指定消費金額', '總回饋率與其中的基本／加碼回饋率', '回饋上限是點數、刷卡金，還是可套用的消費額', '超過上限後回到多少基本回饋', '其他一般消費及其回饋率', '稅費、學費、超商、儲值、分期或銀行公告的其他排除項目'],
+    formula: '設 B 為指定消費、C 為可套用加碼的消費上限、rb 為上限內總回饋率、rf 為超限後回饋率、O 為其他一般消費、ro 為一般回饋率、X 為零回饋消費。總回饋 = min(B,C) × rb + max(B−C,0) × rf + O × ro；合格消費加權率 = 總回饋 ÷ (B+O)；整期真正回饋率 = 總回饋 ÷ (B+O+X)。',
+    workedExample: '同一期有 NT$12,000 網路指定消費，總回饋 3%，但加碼部分的上限換算後只有前 NT$7,500 可用，超出回到 1%；其他一般消費 NT$8,000 回饋 1%，另有 NT$3,000 為排除項目。總回饋 = 7,500 × 3% + 4,500 × 1% + 8,000 × 1% = NT$350。用 NT$20,000 合格消費算是 1.75%，但對 NT$23,000 整期帳單只有 1.52%；直接拿 3% 乘全部指定消費會多算 NT$90。',
+    sensitivity: [
+      { scenario: '指定消費未達上限', input: '指定 NT$5,000；其他與排除不變', result: '回饋 NT$230；整期真正回饋率 1.44%' },
+      { scenario: '剛好用滿上限', input: '指定 NT$7,500；其他與排除不變', result: '回饋 NT$305；整期真正回饋率 1.65%' },
+      { scenario: '本頁基準', input: '指定 NT$12,000；其中 NT$4,500 回到 1%', result: '回饋 NT$350；整期真正回饋率 1.52%' },
+      { scenario: '大量超過上限', input: '指定 NT$20,000；其他與排除不變', result: '回饋 NT$430；整期真正回饋率 1.39%' },
+    ],
+    cta: { label: '把實際回饋價值和年費一起比較', href: '/zh/tools/cashback-breakeven' },
+    limitations: ['「指定通路」可能依商店請款名稱、MCC、支付路徑或授權／入帳日判斷；看到品牌名稱不等於銀行一定認列。', '若公告寫的是「加碼回饋上限 NT$150」，要先確認基本回饋是否另計，再用加碼率換算消費上限，不能把 NT$150 當成可刷金額。', '正附卡合併、逐筆四捨五入、登錄名額、退貨扣回、點數效期與兌換比例都可能使實拿不同。', '循環利息、違約金或為湊回饋增加的支出不屬收益；本模型不提供辦卡、借款、稅務或信用建議。'],
+    sources: [
+      { label: '金融監督管理委員會銀行局 — 信用卡業務機構管理辦法第 19 條', href: 'https://law.banking.gov.tw/chi/FLAW/FLAWDOC01.aspx?lno=19&lsid=FL006433' },
+      { label: '玉山銀行 — 2026 U Bear 網路消費加碼上限與基本回饋', href: 'https://event.esunbank.com.tw/credit/ubear/index.html' },
+      { label: '玉山銀行 — 信用卡一般消費排除項目公告', href: 'https://event.esunbank.com.tw/credit/notice/index.html' },
+      { label: '國泰世華銀行 — CUBE 指定消費、一般回饋與排除條件', href: 'https://www.cathaybk.com.tw/cathaybk/promo/event/credit-card/product/CUBE_rights/index.html?Type=11&open=true' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'cashback-caps-real-rate-method',
+    labels: labels.es,
+    directAnswer: 'Un 5% de cashback no equivale a recuperar el 5% de todo el extracto. Hay que separar el gasto de la categoría dentro y fuera del límite, sumar el resto de compras elegibles y volver a incluir las operaciones excluidas en el denominador total. Con 850 € en una categoría al 5% limitada a 500 €, 650 € de otras compras al 1% y 100 € sin devolución, el cashback es 33,25 €: 2,22% del gasto elegible y 2,08% del extracto de 1.600 €.',
+    inputs: ['Periodo exacto del límite: mes de liquidación, trimestre natural, promoción o año', 'Compras que el emisor clasificará realmente en la categoría bonificada', 'Porcentaje anunciado y requisitos de activación o adhesión', 'Tope expresado en euros de compra o en euros de cashback', 'Porcentaje aplicable después de agotar el tope', 'Resto de compras elegibles y su porcentaje', 'Operaciones excluidas, devoluciones, comisiones y posible pérdida al canjear puntos'],
+    formula: 'Sea B el gasto de categoría, C su tope elegible, rb el porcentaje bonificado, rf el porcentaje posterior, O otras compras elegibles, ro su porcentaje y X las operaciones excluidas. Cashback = min(B,C) × rb + max(B−C,0) × rf + O × ro. Tasa ponderada elegible = cashback ÷ (B+O). Tasa efectiva del extracto = cashback ÷ (B+O+X).',
+    workedExample: 'En un periodo hay 850 € de gasto en una categoría al 5%, pero solo los primeros 500 € reciben ese porcentaje y el exceso vuelve al 0,5%. Otras compras elegibles suman 650 € al 1% y 100 € no generan devolución. El cashback es 25 € + 1,75 € + 6,50 € = 33,25 €. Supone 2,22% sobre 1.500 € elegibles y 2,08% sobre el extracto de 1.600 €. Multiplicar 850 € por 5% sobrestimaría la categoría en 15,75 €.',
+    sensitivity: [
+      { scenario: 'Por debajo del tope', input: '300 € en categoría; resto sin cambios', result: '21,50 €; tasa efectiva del extracto 2,05%' },
+      { scenario: 'Justo en el tope', input: '500 € en categoría; resto sin cambios', result: '31,50 €; tasa efectiva del extracto 2,52%' },
+      { scenario: 'Ejemplo base', input: '850 € en categoría; 350 € vuelven al 0,5%', result: '33,25 €; tasa efectiva del extracto 2,08%' },
+      { scenario: 'Mucho gasto fuera del tope', input: '1.400 € en categoría; resto sin cambios', result: '36 €; tasa efectiva del extracto 1,67%' },
+    ],
+    cta: { label: 'Comparar el valor del cashback con la cuota de la tarjeta', href: '/en/tools/cashback-breakeven' },
+    limitations: ['El nombre comercial no garantiza la categoría: la clasificación depende de los datos de la operación y de las reglas del emisor.', 'Si el tope está expresado como cashback máximo, hay que convertirlo con el porcentaje que indiquen las bases; no es el mismo dato que un límite de gasto.', 'Adhesión, fechas de contabilización, devoluciones, mínimos de canje, comisiones, cambios del programa y forma de pago pueden alterar el valor cobrado.', 'Los intereses de pago aplazado pueden superar el cashback. La página no recomienda una tarjeta ni evalúa solvencia, financiación, fiscalidad o idoneidad personal.'],
+    sources: [
+      { label: 'Banco de España — tipos de tarjeta y coste del crédito', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/tarjetas/guia-textual/tipos-de-tarjeta/' },
+      { label: 'BBVA España — cómo funciona el cashback y qué límites revisar', href: 'https://www.bbva.es/finanzas-vistazo/ef/tarjetas/que-es-cashback-como-funciona-en-tarjetas-de-credito.html' },
+      { label: 'Openbank — porcentaje y límite de cashback en las condiciones', href: 'https://www.openbank.es/open-to-learn/tarjetas-con-cashback' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};

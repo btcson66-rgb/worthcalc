@@ -22,14 +22,15 @@ const briefRoutes = [
   { id: '07', slug: 'gym-membership-cost-per-visit' },
   { id: '08', slug: 'delivery-membership-break-even' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
+  { id: '10', slug: 'cashback-caps-real-reward-rate' },
   { id: '11', slug: 'rent-vs-buy-guide' },
 ];
 
 const releaseFloor = {
-  html: 85,
-  editorial: 53,
-  alignedVariants: 50,
-  compliantVariants: 50,
+  html: 88,
+  editorial: 56,
+  alignedVariants: 53,
+  compliantVariants: 53,
   completeTopics: 10,
 };
 

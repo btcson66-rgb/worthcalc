@@ -25,13 +25,14 @@ const briefRoutes = [
   { id: '10', slug: 'cashback-caps-real-reward-rate' },
   { id: '11', slug: 'rent-vs-buy-guide' },
   { id: '12', slug: 'rent-vs-buy-breakeven-year' },
+  { id: '13', slug: 'ev-vs-gas-total-cost' },
 ];
 
 const releaseFloor = {
-  html: 95,
-  editorial: 63,
-  alignedVariants: 60,
-  compliantVariants: 60,
+  html: 98,
+  editorial: 66,
+  alignedVariants: 63,
+  compliantVariants: 63,
   completeTopics: 12,
 };
 

@@ -1,0 +1,161 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import EVGasTcoCalculator from '../../components/EVGasTcoCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { evGasTcoGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'EV vs gas car: how to compare total cost of ownership',
+    description: 'Compare an EV and gas car using out-the-door price, charging or fuel, insurance, maintenance, taxes, depreciation and resale over your actual ownership period.',
+    faq: [
+      { question: 'What costs belong in an EV versus gas total cost comparison?', answer: 'Include each vehicle’s all-in purchase price, confirmed incentives, one-time setup and financing costs, energy, insurance, maintenance, recurring taxes and fees, and resale proceeds at the same ownership year.' },
+      { question: 'Should I assume an EV tax credit in the base case?', answer: 'Only if the exact vehicle, purchase, income and use satisfy current rules and you expect to keep the benefit. Otherwise enter zero and show eligibility as a separate scenario.' },
+      { question: 'How should public charging be included?', answer: 'Use a blended electricity rate: home kWh times its share, workplace or subscription charging times its share, and public fast charging times its share. Add charging losses before multiplying by the rate.' },
+      { question: 'Is depreciation the purchase price minus resale value?', answer: 'In this cash TCO model, yes: net purchase price minus expected sale proceeds. Charger installation and other one-time expenses remain separate because they may not be recovered in the vehicle sale.' },
+      { question: 'Does the lower five-year TCO prove which car I should buy?', answer: 'No. It is a cost estimate. Charging access, range, reliability, safety, utility, emissions and financing risk must still be evaluated, especially when the modeled difference is small.' },
+    ],
+  },
+  zh: {
+    title: '電動車和油車怎麼比較五年總持有成本',
+    description: '用實際成交價、家充建置、電費或油錢、保險、保養、牌照稅、汽車燃料使用費、折舊與轉售價比較電動車和油車五年成本。',
+    faq: [
+      { question: '電動車免牌照稅就一定比較省嗎？', answer: '不一定。地方政府可依法決定免徵期間，且省下的年度稅費可能小於購車價差、保費差或轉售價差。應用車籍地和實際車款重新計算。' },
+      { question: '電動車現在要繳汽車燃料使用費嗎？', answer: '現行汽車燃料使用費徵收及分配辦法把電動汽車列為免徵車輛；購車前仍應查核當時法規與是否已有道路養護費制度調整。' },
+      { question: '社區充電費怎麼填？', answer: '把家用、社區管理加價、公司與公共快充依預計度數占比加權，並加入充電損耗。只有住宅電價會低估大量快充者的成本。' },
+      { question: '為什麼轉售價對結果影響很大？', answer: '五年持有的折舊通常是最大成本之一。若電動車與油車的轉售差估錯數十萬元，可能遠大於五年能源差額，所以必須測試保守轉售情境。' },
+      { question: '五年總成本較低就代表該買那台車嗎？', answer: '不是。總成本不判斷家中能否裝充電樁、長途需求、空間、安全、電池保固或貸款負擔；差額很小時更不應把試算當成保證。' },
+    ],
+  },
+  es: {
+    title: 'Coche eléctrico o gasolina: cómo comparar el coste total de propiedad',
+    description: 'Compara precio final, ayuda confirmada, recarga o combustible, seguro, mantenimiento, impuestos, depreciación y reventa durante el mismo plazo.',
+    faq: [
+      { question: '¿Qué incluye el coste total de propiedad de un coche?', answer: 'Incluye precio final, ayuda realmente aplicable, instalación o financiación inicial, energía, seguro, mantenimiento, impuestos y tasas recurrentes, menos el valor de reventa al final del mismo plazo.' },
+      { question: '¿Puedo restar automáticamente la ayuda MOVES?', answer: 'No. La gestión y disponibilidad dependen de la convocatoria de la comunidad autónoma, y puede existir efecto fiscal. Usa cero hasta confirmar solicitud, elegibilidad, concesión e importe neto.' },
+      { question: '¿La etiqueta Cero garantiza una bonificación del IVTM?', answer: 'No. La etiqueta identifica la categoría ambiental, pero las bonificaciones fiscales, de estacionamiento o acceso dependen de la norma municipal vigente.' },
+      { question: '¿Cómo mezclo carga doméstica y carga rápida?', answer: 'Calcula un precio ponderado por kWh con el porcentaje real de energía de cada canal y añade pérdidas. No uses solo la tarifa doméstica si dependes habitualmente de carga pública.' },
+      { question: '¿Es fiable el valor de reventa a cinco años?', answer: 'Es una hipótesis, no una cotización garantizada. Comprueba precios del modelo y kilometraje comparables y prueba un escenario de reventa baja antes de aceptar una ventaja pequeña.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    fuelMode: 'mpg' as const,
+    distanceUnit: 'mi' as const,
+    defaults: { evPurchasePrice: 42000, gasPurchasePrice: 34000, evIncentive: 0, evOneTimeCosts: 1800, gasOneTimeCosts: 1000, ownershipYears: 5, annualDistance: 12000, electricityRate: 0.18, evEfficiency: 30, chargingLoss: 10, fuelPrice: 3.5, gasEfficiency: 30, evInsurance: 2100, gasInsurance: 1900, evMaintenance: 550, gasMaintenance: 900, evTaxes: 250, gasTaxes: 250, evResale: 22000, gasResale: 17000 },
+    copy: {
+      heading: 'EV vs gas full ownership-cost calculator', intro: 'Replace every sample value with two current, comparable quotes. No incentive is assumed by default.',
+      evPurchasePrice: 'EV out-the-door price', gasPurchasePrice: 'Gas car out-the-door price', evIncentive: 'Confirmed EV incentive', evOneTimeCosts: 'EV charger, finance and other one-time costs', gasOneTimeCosts: 'Gas car finance and other one-time costs', ownershipYears: 'Ownership years', annualDistance: 'Annual miles', electricityRate: 'Blended electricity price ($/kWh)', evEfficiency: 'EV efficiency (kWh/100 mi)', chargingLoss: 'Charging loss (%)', fuelPrice: 'Gasoline price ($/gal)', gasEfficiency: 'Gas efficiency (mpg)', evInsurance: 'EV insurance per year', gasInsurance: 'Gas insurance per year', evMaintenance: 'EV maintenance per year', gasMaintenance: 'Gas maintenance per year', evTaxes: 'EV taxes and fees per year', gasTaxes: 'Gas taxes and fees per year', evResale: 'EV resale after holding period', gasResale: 'Gas resale after holding period', evTotal: 'EV total cost', gasTotal: 'Gas total cost', difference: 'Cost difference', evEnergy: 'EV energy per year', gasEnergy: 'Gasoline per year', evDepreciation: 'EV net depreciation', gasDepreciation: 'Gas depreciation', evPerDistance: 'EV cost per mile', gasPerDistance: 'Gas cost per mile', evWins: 'EV total cost is lower by', gasWins: 'Gas total cost is lower by', tie: 'The two modeled total costs are equal.', privacy: 'Educational estimate only. Inputs stay in your browser. Verify vehicle quotes, incentives, tax rules, insurance and resale independently.'
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    fuelMode: 'l100km' as const,
+    distanceUnit: 'km' as const,
+    defaults: { evPurchasePrice: 1650000, gasPurchasePrice: 1250000, evIncentive: 0, evOneTimeCosts: 60000, gasOneTimeCosts: 20000, ownershipYears: 5, annualDistance: 15000, electricityRate: 3.5, evEfficiency: 16.5, chargingLoss: 10, fuelPrice: 31, gasEfficiency: 6.8, evInsurance: 30000, gasInsurance: 26000, evMaintenance: 10000, gasMaintenance: 22000, evTaxes: 0, gasTaxes: 11920, evResale: 850000, gasResale: 650000 },
+    copy: {
+      heading: '電動車 vs 油車完整持有成本計算器', intro: '請換成同級車的成交單、保單、實際里程與車籍地稅費；預設不先扣任何尚未核准的補助。',
+      evPurchasePrice: '電動車含領牌成交價', gasPurchasePrice: '油車含領牌成交價', evIncentive: '已確認可取得的電動車補助', evOneTimeCosts: '電動車家充、貸款等一次成本', gasOneTimeCosts: '油車貸款等一次成本', ownershipYears: '預計持有年數', annualDistance: '每年行駛公里', electricityRate: '加權電價（NT$/kWh）', evEfficiency: '電動車效率（kWh/100km）', chargingLoss: '充電損耗（%）', fuelPrice: '汽油價格（NT$/L）', gasEfficiency: '油耗（L/100km）', evInsurance: '電動車每年保險', gasInsurance: '油車每年保險', evMaintenance: '電動車每年保養', gasMaintenance: '油車每年保養', evTaxes: '電動車每年牌照與道路稅費', gasTaxes: '油車每年牌照與燃料使用費', evResale: '持有期末電動車轉售價', gasResale: '持有期末油車轉售價', evTotal: '電動車總成本', gasTotal: '油車總成本', difference: '總成本差額', evEnergy: '電動車每年電費', gasEnergy: '油車每年油錢', evDepreciation: '電動車淨折舊', gasDepreciation: '油車淨折舊', evPerDistance: '電動車每公里總成本', gasPerDistance: '油車每公里總成本', evWins: '電動車總成本較低，差額', gasWins: '油車總成本較低，差額', tie: '兩台車的估算總成本相同。', privacy: '一般教育試算，不是購車、稅務或融資建議。輸入留在瀏覽器；請另行確認成交單、保單、車籍地稅費與轉售行情。'
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    fuelMode: 'l100km' as const,
+    distanceUnit: 'km' as const,
+    defaults: { evPurchasePrice: 38000, gasPurchasePrice: 29000, evIncentive: 0, evOneTimeCosts: 1800, gasOneTimeCosts: 1000, ownershipYears: 5, annualDistance: 15000, electricityRate: 0.23, evEfficiency: 17, chargingLoss: 10, fuelPrice: 1.6, gasEfficiency: 6.2, evInsurance: 900, gasInsurance: 750, evMaintenance: 350, gasMaintenance: 650, evTaxes: 100, gasTaxes: 180, evResale: 20000, gasResale: 14000 },
+    copy: {
+      heading: 'Calculadora completa de coste eléctrico frente a gasolina', intro: 'Sustituye los ejemplos por dos presupuestos comparables, tus tarifas y la convocatoria de tu comunidad. La ayuda parte de cero.',
+      evPurchasePrice: 'Precio final del eléctrico', gasPurchasePrice: 'Precio final del gasolina', evIncentive: 'Ayuda confirmada para el eléctrico', evOneTimeCosts: 'Cargador, financiación y costes iniciales EV', gasOneTimeCosts: 'Financiación y costes iniciales gasolina', ownershipYears: 'Años de propiedad', annualDistance: 'Kilómetros al año', electricityRate: 'Precio ponderado (€/kWh)', evEfficiency: 'Consumo EV (kWh/100 km)', chargingLoss: 'Pérdidas de carga (%)', fuelPrice: 'Precio gasolina (€/L)', gasEfficiency: 'Consumo gasolina (L/100 km)', evInsurance: 'Seguro EV al año', gasInsurance: 'Seguro gasolina al año', evMaintenance: 'Mantenimiento EV al año', gasMaintenance: 'Mantenimiento gasolina al año', evTaxes: 'Impuestos y tasas EV al año', gasTaxes: 'Impuestos y tasas gasolina al año', evResale: 'Reventa EV al final del plazo', gasResale: 'Reventa gasolina al final del plazo', evTotal: 'Coste total EV', gasTotal: 'Coste total gasolina', difference: 'Diferencia de coste', evEnergy: 'Electricidad al año', gasEnergy: 'Gasolina al año', evDepreciation: 'Depreciación neta EV', gasDepreciation: 'Depreciación gasolina', evPerDistance: 'Coste EV por km', gasPerDistance: 'Coste gasolina por km', evWins: 'El eléctrico tiene menor coste total por', gasWins: 'El gasolina tiene menor coste total por', tie: 'Los dos costes totales estimados son iguales.', privacy: 'Estimación educativa, no recomendación de compra, fiscal o financiera. Los datos quedan en el navegador; verifica factura, ayuda, seguro, impuestos y reventa.'
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = evGasTcoGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>Start with a harder comparison than “electric versus gasoline”: choose two vehicles that can perform the same job. A larger premium EV and a smaller economy hatchback do not reveal a powertrain saving. Match body style, seats, cargo, safety equipment, expected reliability and the options you would actually buy.</p>
+    <p>Total cost of ownership is a holding-period cash-flow test. It does not assume that lower energy cost will recover any purchase premium, and it does not count a headline credit until the buyer has verified eligibility.</p>
+    <DecisionGuide content={guide} />
+    <EVGasTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Use out-the-door prices and keep incentives auditable</h2>
+    <p>Get written out-the-door quotes on the same date. Include destination, dealer add-ons, sales tax and registration once. If financing differs, compare total interest and mandatory products separately; a lower monthly payment is not a lower vehicle price.</p>
+    <p>Federal, state and utility incentives can change by delivery date, vehicle, battery sourcing, income and use. Enter zero in the base case unless the exact transaction qualifies. A second scenario can show the benefit without hiding the no-credit result.</p>
+
+    <h2>Energy cost needs your location and charging mix</h2>
+    <p>The Department of Energy’s vehicle calculator asks for driving and local fuel assumptions because a national average cannot represent a specific household. Use annual miles from odometer or route history. For the EV, blend the marginal household rate, workplace charging, subscriptions and paid DC fast charging by expected kWh share, then add charging losses.</p>
+    <p>For the gas car, use the fuel grade required by the manual and realistic mpg for the same city/highway mix. Test hot or cold weather, towing and high-speed driving separately when those conditions materially change efficiency.</p>
+
+    <h2>Depreciation, insurance and taxes can exceed fuel savings</h2>
+    <p>Subtract resale proceeds at the same age and mileage. Do not compare a five-year EV resale estimate with a seven-year gas estimate. Use several current wholesale or retail references and run a downside case; the base example’s $386 advantage is too small to survive a modest resale miss.</p>
+    <p>Request insurance quotes by VIN or exact trim. Maintenance should include scheduled work, tires and expected wear, not a claim that an EV needs no service. Registration and property taxes can depend on state, weight, value or powertrain, so enter the actual jurisdiction’s amount.</p>
+
+    <h2>Read the margin, not only the winner</h2>
+    <p>A result that flips when electricity moves from $0.18 to $0.30/kWh is conditional, not universal. Record the selected holding period, energy prices and resale assumptions with the verdict so an answer engine can quote the conditions rather than repeat “EVs are cheaper.”</p>
+    <p class="privacy-note">General educational estimate only. This page does not recommend a vehicle, loan, tax treatment or incentive claim. Confirm current contracts and official rules before buying.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>台灣常見比較只拿「每公里電費」對「每公里油錢」，卻漏掉購車價差、社區充電施工、保費、輪胎、牌照稅、汽車燃料使用費與轉售價。正確問題不是哪種動力一定省，而是兩台同級、能滿足相同需求的車，在你真正會持有的五年內誰的淨現金成本較低。</p>
+    <p>本頁預設不先扣補助，也不把免稅當永久承諾；所有地方與車款條件都由使用者輸入。</p>
+    <DecisionGuide content={guide} />
+    <EVGasTcoCalculator locale={locale} {...calculator} />
+
+    <h2>成交價要同口徑，補助未核准就填零</h2>
+    <p>拿兩張同日、含選配與領牌費用的正式報價比較。貸款利息、設定費或綁定商品若未含在成交價，放在一次性成本；不要同時把分期總額與利息再加一次。</p>
+    <p>縣市、車種、報廢條件或申請期間可能影響補助。若只有新聞金額、尚未核准或可能超出預算，基本情境先填 0，再另跑「確定取得」情境，避免把未收到的錢當現金。</p>
+
+    <h2>牌照稅與燃料使用費必須分開</h2>
+    <p>財政部法規授權地方政府把完全以電能驅動車輛的使用牌照稅免徵期限延長到民國 119 年底；是否免徵仍依車籍地公告。現行交通部規定則把電動汽車列為免徵汽車燃料使用費。兩者不是同一筆費用，也不代表未來道路費制永遠不變。</p>
+    <p>算例中的油車年度 NT$11,920 只是 1.8L 級距的示範組合，實際要依排氣量、車種、使用日數與最新費額查詢；電動車則依車籍地、馬達馬力與當期優惠核對。</p>
+
+    <h2>家充、社區與快充應做加權電價</h2>
+    <p>家中有車位不等於能立刻裝樁。把管委會審查、電力增設、拉線、充電設備與可能的管理加價放進前期或電價。若每月有一部分靠公共快充，依實際度數占比加權，不能全用最低住宅級距。</p>
+    <p>里程用過去一年保養紀錄或通勤路線估算。算例在 15,000km 時油車略低，但提高到 25,000km 後，能源差額擴大，電動車反而低約 NT$43,694；這是里程條件的結果，不是全台結論。</p>
+
+    <h2>五年轉售價要比能源價更保守</h2>
+    <p>同車型、年份、里程、電池保固與事故紀錄才有可比性。電動車五年轉售若從 NT$850,000 降到 NT$750,000，算例會改為油車低約 NT$129,944，遠大於五年油電差。</p>
+    <p class="privacy-note">本頁為一般教育試算，不是購車、貸款、稅務或補助申請建議。請以正式成交單、保單、車籍地公告、電費帳單與可查證的中古行情更新輸入。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>La etiqueta Cero, una ayuda anunciada o un consumo bajo no responden por sí solos si compensa comprar un eléctrico. La comparación útil enfrenta dos turismos del mismo segmento y equipamiento durante el número de años y kilómetros que realmente prevés conservarlos.</p>
+    <p>El coste total de propiedad resta la reventa y mantiene visibles precio, instalación, energía, seguro, mantenimiento e impuestos. Así puede devolver una ventaja pequeña, una desventaja o un empate sin convertir la electrificación en una promesa comercial.</p>
+    <DecisionGuide content={guide} />
+    <EVGasTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Precio llave en mano y MOVES no son la misma cifra</h2>
+    <p>Pide presupuestos escritos con IVA, transporte, extras, matriculación y descuento del concesionario. La página del IDAE muestra que las convocatorias MOVES III 2025 se gestionan por comunidades autónomas y que en 2026 varias ampliaron crédito; eso no significa que cualquier comprador pueda descontar automáticamente una cuantía nacional.</p>
+    <p>Introduce solo la ayuda concedida o razonablemente confirmada y considera su tratamiento fiscal. Si existe espera, agotamiento de presupuesto o condición de achatarramiento, conserva un escenario sin ayuda. La cuota mensual tampoco sustituye al precio: añade el coste total de financiación de cada oferta.</p>
+
+    <h2>Etiqueta Cero e impuestos locales se comprueban por municipio</h2>
+    <p>La DGT incluye los BEV y otras categorías definidas dentro del distintivo Cero Emisiones. El distintivo puede ser relevante para acceso o medidas municipales, pero no fija una bonificación uniforme del IVTM, aparcamiento o peajes. Introduce el recibo o la ordenanza vigente, no una ventaja leída para otra ciudad.</p>
+    <p>Seguro y mantenimiento también necesitan dos presupuestos. Separa revisiones, neumáticos y desgaste; no asignar cambios de aceite al eléctrico no equivale a mantenimiento cero.</p>
+
+    <h2>El precio ponderado de la recarga evita una falsa ventaja</h2>
+    <p>La DGT explica el consumo eléctrico en kWh/100 km, equivalente funcional a los litros/100 km. Multiplica ese consumo por kilómetros, pérdidas y un precio ponderado: hogar, garaje comunitario, trabajo, suscripción y carga rápida según la proporción real de energía.</p>
+    <p>En el caso base, 0,23 €/kWh deja al eléctrico 1.564 € por debajo. A 0,40 €/kWh, el resultado cambia y el gasolina queda 820 € por debajo. La respuesta correcta siempre debe publicar la tarifa y el reparto de carga usados.</p>
+
+    <h2>La reventa convierte una ventaja aparente en una prueba de riesgo</h2>
+    <p>Compara precios observados del mismo modelo, año y kilometraje, y prueba un valor inferior. Reducir la reventa del eléctrico de 20.000 € a 16.000 € cambia el ejemplo a una ventaja de 2.436 € para el gasolina.</p>
+    <p class="privacy-note">Estimación educativa general; no recomienda coche, financiación, ayuda ni tratamiento fiscal. Comprueba convocatoria, factura, póliza, ordenanza, tarifa y reventa antes de comprometerte.</p>
+  </>}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

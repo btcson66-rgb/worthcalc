@@ -1,0 +1,248 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { upfrontFeeGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  en: {
+    title: 'How upfront fees change the true cost of financing',
+    description: 'Compare loans with the same monthly payment by using net proceeds, origination fees, total cash cost, and a cash-flow-based estimated annual rate.',
+    faq: [
+      { question: 'Can two loans have the same monthly payment but different costs?', answer: 'Yes. A fee deducted or paid at origination reduces the cash you can use even if the payment and term remain identical. Compare net proceeds, all required outflows, and official APR—not the payment alone.' },
+      { question: 'Should I subtract an origination fee from the loan amount?', answer: 'Subtract it when it is withheld from proceeds or paid at the same time from your own cash. If it is added to principal instead, use the larger financed balance and its actual payment schedule. Never count the fee twice.' },
+      { question: 'Why does a short loan make an upfront fee look more expensive?', answer: 'The entire fee is paid at the start while the borrowed balance falls quickly. Recovering the same fee over fewer months generally creates a higher cash-flow rate than spreading it over a longer term.' },
+      { question: 'Is WorthCalc’s effective annual rate the legal APR?', answer: 'No. It is an educational cash-flow estimate. The lender’s disclosure and applicable law determine which charges, dates, assumptions, and tolerances enter the official APR.' },
+      { question: 'What should I compare before accepting a loan?', answer: 'Compare net funds received, payment amount and term, total payments, every mandatory fee or product, official APR, prepayment terms, late-payment consequences, rate changes, and whether the payment fits your full budget.' },
+    ],
+  },
+  zh: {
+    title: '開辦費與手續費如何拉高分期真實成本',
+    description: '用實拿金額、開辦費、總還款與現金流年率比較月付相同的貸款，避免只看廣告利率或每期金額。',
+    faq: [
+      { question: '月付一樣，貸款成本還會不同嗎？', answer: '會。若其中一個方案在撥款時扣開辦費、帳管費或必要費用，你真正拿到的錢比較少，卻仍支付相同月付與期數，現金流成本就比較高。' },
+      { question: '開辦費要從本金扣除嗎？', answer: '看實際收費方式。從撥款扣除或撥款日另付，就降低當天可用資金；若費用加進貸款本金，則用加費後本金與實際月付重建現金流。不要重複計算。' },
+      { question: '總費用年百分率和廣告利率有什麼不同？', answer: '廣告利率可能只描述利息；總費用年百分率依規則把應納入的利率與相關費用換算成年百分率。台灣金管會要求消費者信用貸款契約揭露個案的總費用年百分率。' },
+      { question: '提前還款可以把開辦費拿回來嗎？', answer: '不一定。開辦費通常在簽約時發生，是否退還及是否另有提前清償費用，要看契約。比較預計提前清償情境時，應使用當時剩餘本金與所有實際費用。' },
+      { question: '申貸前至少要比較哪些數字？', answer: '核貸額、實際入帳、開辦與帳管費、期數、每期金額、總還款、總費用年百分率、利率調整、提前清償、遲繳與強制搭售條件都要一起看。' },
+    ],
+  },
+  es: {
+    title: 'Cómo afectan las comisiones iniciales al coste real de la financiación',
+    description: 'Compara préstamos con la misma cuota mediante efectivo neto, comisión de apertura, coste total y tasa anual estimada basada en todos los flujos.',
+    faq: [
+      { question: '¿Dos préstamos con la misma cuota pueden tener distinto coste?', answer: 'Sí. Una comisión pagada al formalizar reduce el dinero neto disponible aunque capital nominal, plazo y cuota parezcan iguales. Compara efectivo neto, pagos obligatorios y TAE.' },
+      { question: '¿Qué es la comisión de apertura?', answer: 'El Banco de España explica que remunera las gestiones administrativas necesarias para formalizar el préstamo y que puede expresarse como porcentaje, a veces con un mínimo. Debe incluirse según las condiciones y reglas aplicables.' },
+      { question: '¿La TAE incluye las comisiones?', answer: 'La TAE tiene en cuenta los gastos y comisiones asociados, a diferencia del TIN, pero el resultado depende de qué costes sean obligatorios y de las hipótesis de la oferta. Revisa el documento precontractual.' },
+      { question: '¿Debo sumar la comisión al coste si ya se descontó del préstamo?', answer: 'No dos veces. Si se retiene del desembolso, reduce el efectivo neto recibido. Si se paga aparte al firmar, se registra como salida inicial. Si se financia, aparece en el principal y las cuotas.' },
+      { question: '¿Una cuota más baja significa que una oferta es mejor?', answer: 'No necesariamente. Puede deberse a un plazo mayor, una comisión inicial, un pago final o productos vinculados. Compara TAE, total adeudado, calendario, cancelación anticipada y coste de seguros o cuentas exigidos.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = upfrontFeeGuides[locale];
+if (!guide) throw new Error(`Missing upfront fee guide for ${locale}`);
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={[locale as Locale]}
+>
+  {locale === 'en' && (
+    <>
+      <p>
+        A monthly payment answers a budgeting question, not a price question. Two offers can both say “$450 for 24 months” while one deposits $10,000 and the other withholds $500 before the money reaches you. The second offer finances less usable cash for the same repayment schedule. Treating those offers as equal hides a material part of the borrowing cost.
+      </p>
+      <p>
+        The practical comparison starts with net proceeds: the amount available for the purchase, repair, or bill after every mandatory day-one charge. Then place the payment schedule on a timeline. This produces a transparent cash-flow estimate that can be checked against the lender’s official APR and disclosure rather than used as a substitute for them.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Start with usable cash, not the number printed as “loan amount”</h2>
+      <p>
+        Read how each charge is collected. An origination fee may be deducted from proceeds, paid from your bank account at closing, or included in the financed balance. CFPB materials list origination and documentation charges among common personal installment loan fees. For mortgages, the Loan Estimate and Closing Disclosure identify origination charges, but other types of credit may use different forms.
+      </p>
+      <p>
+        Suppose the contract amount is $10,000. If a 5% fee is withheld, only $9,500 can pay the intended expense. If the fee is paid separately, the loan may deposit $10,000, but $500 immediately leaves another account; the net day-one position is still $9,500. If the fee is added to principal, do not subtract it at day zero—use the resulting balance and actual payment schedule instead.
+      </p>
+
+      <h2>Same payment does not mean the same financing</h2>
+      <p>
+        Compare offers in a short table with contract amount, net proceeds, upfront cash, payment, number of payments, total outflow, official APR, and early-payoff terms. If payment and term are identical, the offer with lower net proceeds is economically more expensive. If terms differ, total payments alone are also inadequate because time changes the value of each dollar.
+      </p>
+      <p>
+        A useful cash-flow rate solves for the discount rate that makes net funds received equal to the present value of required payments. The calculation recognizes that the full fee affects the transaction immediately while principal is repaid over time. That is why a 5% upfront fee does not simply add five percentage points to a quoted rate, and why the effect is often sharper on a short loan.
+      </p>
+
+      <h2>Separate mandatory, optional, and contingency charges</h2>
+      <p>
+        Include a charge in the base comparison when it is required to obtain the stated offer. Common labels include origination, application, underwriting, processing, documentation, administration, and mandatory account or insurance costs. Names can vary, so compare the total and the condition attached to each item rather than assuming two differently named lines are unrelated.
+      </p>
+      <p>
+        Keep truly optional insurance or services in a second scenario. Keep late fees, returned-payment charges, and default costs in a stress scenario because they do not arise under normal performance. This separation prevents an unrealistic worst case from obscuring the advertised offer while still showing the consequence if the payment plan fails.
+      </p>
+
+      <h2>Use APR as a disclosure, and the cash-flow model as an audit trail</h2>
+      <p>
+        The official APR is designed for comparison, but a hand calculation can differ because law determines included charges, timing conventions, tolerances, and special product rules. Use the lender’s APR when comparing regulated disclosures. Use the WorthCalc result to expose the assumptions: net proceeds, payment dates, and every charge you entered.
+      </p>
+      <p>
+        If your result and the disclosure are far apart, do not choose whichever number looks cheaper. Reconcile the difference. Check whether a fee is optional, whether the first payment is immediate, whether proceeds were reduced, whether a charge was financed, and whether the rate changes. Ask the lender to explain the figures in writing before signing.
+      </p>
+
+      <h2>Test fee size, term, and early payoff separately</h2>
+      <p>
+        Change one assumption at a time. First hold the $450 payment and 24-month term constant while varying the fee, as in the table above. Next test the same net proceeds over a shorter and longer term. Finally model the month you realistically expect to repay: include payments through that date, the payoff amount, any permitted prepayment charge, and no imaginary refund of a nonrefundable origination fee.
+      </p>
+      <p>
+        A longer term may lower the monthly burden while increasing total interest. A shorter term can make a fixed fee a larger annualized cost. Neither result proves affordability. Add the proposed payment to rent or mortgage, other debts, insurance, utilities, and a buffer for income changes before accepting the obligation.
+      </p>
+
+      <p>
+        For a purchase advertised as “0%,” also read the <a href="/en/zero-interest-installments-truth/">0% installment cash-flow guide</a>. It uses the cash price as the amount financed when a pay-now discount or installment markup replaces a conventional loan fee.
+      </p>
+      <p class="privacy-note">General educational estimate, not individualized credit, legal, or tax advice. Confirm fees, APR, proceeds, and dates in the lender’s current documents. WorthCalc calculations remain in your browser.</p>
+    </>
+  )}
+
+  {locale === 'zh' && (
+    <>
+      <p>
+        「每月只要繳 NT$9,000」只能回答現金流壓力，不能回答貸款到底多貴。兩個方案的核貸額、月付與期數可能完全相同，其中一個卻在撥款時收開辦費、信用查詢費或帳管費。借款人拿到的可用資金變少，仍照原本金還款，真實成本自然上升。
+      </p>
+      <p>
+        台灣比較信貸或分期時，先對照「核貸額」與「實際入帳」，再把簽約日必要付款放在時間軸上。金管會規範消費者信用交易廣告的總費用年百分率，並要求消費者信用貸款契約揭露個案數字；自己的現金流估算應用來核對條件，不應冒充銀行的正式揭露。
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>先把核貸額、撥款與實拿金額分開</h2>
+      <p>
+        申請書上寫 NT$300,000，不代表帳戶最後能留下 NT$300,000。逐項確認開辦手續費、帳管費、信用查詢或徵信費，以及為取得該利率必須購買的商品。銀行公會定期彙整各銀行消費者信用貸款手續費，可用來找出應向業務確認的欄位，但真正適用的金額仍以你的契約與核准條件為準。
+      </p>
+      <p>
+        若費用直接從撥款扣除，就用扣除後的入帳金額作為可用資金；若全額入帳後同日另外扣款，就記一筆當日現金流出；若銀行把費用加進本金，則用加費後的實際本金與攤還表。三種方式只選符合契約的一種，否則會把同一筆費用算兩次。
+      </p>
+
+      <h2>相同月付的兩個方案，至少比較七欄</h2>
+      <p>
+        建立表格列出核貸額、實際入帳、當日自付費用、每期金額、期數、總還款與總費用年百分率。相同月付與期數下，實拿較少的一案成本較高；若期數不同，不能只比較總還款，也要看每一筆付款發生時間及利率是否會調整。
+      </p>
+      <p>
+        任務書算例中的 NT$10,000 開辦費，讓可用資金從 NT$300,000 降到 NT$290,000；月付仍為 36 期各 NT$9,000。名目上只差 NT$10,000，現金流反推的估算有效年率卻從約 5.18% 升到 7.60%。短期貸款尤其敏感，因為費用在第一天發生，但本金很快被還掉。
+      </p>
+
+      <h2>哪些費用放進基本情境，哪些另外測試</h2>
+      <p>
+        取得貸款與廣告條件所必須支付的費用，應放進基本情境。可自由選擇、拒絕後不影響核貸與利率的保險或服務，可以另做「有購買」版本；如果拒絕後利率上升，就比較「低利率加服務成本」與「較高利率但無服務」兩套完整現金流，不能只拿利率互比。
+      </p>
+      <p>
+        遲繳違約金、催收與未依約費用放在壓力情境，不和正常還款成本混在一起。這些後果仍然重要，簽約前要看清楚，但把所有違約成本預先塞進單一估算，會讓使用者無法辨認正常方案本身的價格。
+      </p>
+
+      <h2>總費用年百分率是正式比較欄位，不等於任何自算年率</h2>
+      <p>
+        金管會的計算標準以內部報酬率法處理撥款、分期還款與應納入費用，也列出不納入的項目。金融機構的個案揭露還會註明計算基準日，以及實際借款期間或利率調整可能造成的變化。因此 WorthCalc 顯示的是按你輸入現金流得到的教育估算，不是對契約合法性的判斷。
+      </p>
+      <p>
+        若自算結果和契約差很多，先核對第一期日期、費用是否已從撥款扣除、費用是否加進本金、利率是否分段，以及保險是否真的強制。請銀行用書面說明差異，不要自行挑一個較低的數字當答案。
+      </p>
+
+      <h2>提前清償與短期借款要另外重算</h2>
+      <p>
+        預計一年後還清三年信貸時，不應直接使用「持有到期」的總成本。改用前十二期付款、當時剩餘本金、契約允許的提前清償費用，以及不會退回的前置費用。固定開辦費在很短的實際借款期間內攤提，年化影響可能比完整三年更大。
+      </p>
+      <p>
+        最後再做負擔能力檢查：把新月付與房租或房貸、信用卡分期、保險、生活費及緊急預備金一起看。較低的估算年率不代表應該借，也不代表每月現金流承受得住。
+      </p>
+
+      <p>
+        若費用是藏在「現金價與分期價不同」而非獨立貸款欄位，可搭配閱讀<a href="/zh/zero-interest-installments-truth/">0 利率分期真實年率指南</a>，以今天可成交的現金價建立本金。
+      </p>
+      <p class="privacy-note">一般教育估算，不是個人化授信、法律或稅務建議。請以銀行最新契約、撥款明細與總費用年百分率為準；WorthCalc 輸入資料留在瀏覽器中。</p>
+    </>
+  )}
+
+  {locale === 'es' && (
+    <>
+      <p>
+        La cuota responde a «¿qué sale de mi cuenta cada mes?», pero no a «¿cuánto dinero financio realmente?». Dos ofertas pueden mostrar 360 € durante 24 meses y entregar importes netos distintos porque una cobra comisión de apertura al formalizar. Compararlas solo por mensualidad convierte un coste cierto en invisible.
+      </p>
+      <p>
+        En España, la comparación útil parte del efectivo neto que queda para la compra o necesidad y reconstruye todos los pagos obligatorios. El Banco de España distingue TIN y TAE: la TAE incorpora gastos y comisiones asociados y sirve para comparar ofertas. El cálculo de WorthCalc explica los flujos introducidos, pero no reemplaza la TAE comunicada por la entidad.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Del capital nominal al efectivo neto disponible</h2>
+      <p>
+        La comisión de apertura remunera, según el Banco de España, las gestiones necesarias para formalizar el préstamo y puede ser un porcentaje con un importe mínimo. Revisa también estudio, intermediación, cuenta, tarjeta, seguro y cualquier producto necesario para conseguir el tipo anunciado. No presupongas que una línea es opcional: comprueba qué ocurre con la aprobación y el precio si la rechazas.
+      </p>
+      <p>
+        Si la entidad descuenta 320 € de un préstamo nominal de 8.000 €, el efectivo útil es 7.680 €. Si abona 8.000 € y cobra 320 € por separado el mismo día, la posición neta también es 7.680 €. Si financia la comisión, utiliza el capital mayor y las cuotas resultantes. Son tres tratamientos alternativos; sumar más de uno duplicaría el gasto.
+      </p>
+
+      <h2>Por qué la misma cuota esconde una TAE diferente</h2>
+      <p>
+        Crea una tabla con capital nominal, dinero neto, pago inicial, cuota, número de cuotas, total adeudado, TIN, TAE y cancelación anticipada. En el ejemplo, ambas ofertas devuelven 8.640 €. Sin comisión se financian 8.000 € netos; con comisión del 4% solo se aprovechan 7.680 €. La diferencia eleva el coste de caja de 640 € a 960 €.
+      </p>
+      <p>
+        La tasa basada en flujos descuenta cada mensualidad hasta el momento inicial. Reconoce que la comisión se soporta desde la firma, cuando todavía no ha transcurrido tiempo, mientras el capital disminuye con cada cuota. Por eso no basta con sumar cuatro puntos a un TIN ni dividir la comisión por el capital sin considerar plazo y calendario.
+      </p>
+
+      <h2>Obligatorio, vinculado u opcional: tres escenarios distintos</h2>
+      <p>
+        Introduce en el caso base todo gasto necesario para obtener la oferta. Si una cuenta o un seguro bonifica el tipo pero puede rechazarse, calcula dos alternativas completas: préstamo bonificado más coste del producto y préstamo sin vinculación con su tipo real. Una prima anual o una cuenta con comisión periódica no se comporta igual que un pago único de apertura.
+      </p>
+      <p>
+        Las comisiones por impago y otros incumplimientos pertenecen a un escenario de estrés, no al calendario normal. Léelas antes de contratar y comprueba qué sucede si falla un cobro, pero no las mezcles con el precio normal hasta impedir que dos ofertas sean comparables.
+      </p>
+
+      <h2>Contrasta la estimación con la TAE y la información precontractual</h2>
+      <p>
+        El simulador oficial del Banco de España calcula una TAE teórica a partir de importe, plazo, interés, comisiones y otros gastos, y distingue costes iniciales y periódicos. También advierte de que puede diferir de la TAE ofertada si existen condiciones o hipótesis adicionales. Esa advertencia es importante: una hoja de cálculo no decide por sí sola qué exige la normativa.
+      </p>
+      <p>
+        Si aparecen diferencias grandes, revisa fecha de la primera cuota, gastos financiados, pagos periódicos, carencia, variación del tipo y productos vinculados. Pide a la entidad que identifique los flujos de la TAE por escrito. No elijas automáticamente el resultado más bajo ni compares una oferta fija con otra variable como si compartieran el mismo riesgo.
+      </p>
+
+      <h2>Prueba comisión, plazo y cancelación anticipada</h2>
+      <p>
+        La tabla de sensibilidad mantiene 24 cuotas de 360 € y cambia solo la comisión. Después conviene fijar el efectivo neto y ensayar plazos distintos: alargar reduce la cuota, pero puede aumentar intereses; acortar concentra el efecto anual de una comisión inicial. Para una cancelación prevista, suma cuotas pagadas, capital pendiente, coste de cancelación aplicable y comisiones iniciales no recuperables.
+      </p>
+      <p>
+        Termina con un presupuesto, no con una tasa. Añade la nueva cuota a alquiler o hipoteca, otras deudas, suministros, seguros y un margen para gastos imprevistos. Una oferta puede tener la TAE más baja y seguir siendo inadecuada para tu liquidez mensual.
+      </p>
+
+      <p>
+        Si el coste aparece como diferencia entre precio al contado y aplazado, consulta también la <a href="/es/zero-interest-installments-truth/">guía sobre compras a plazos sin intereses</a>. En ese caso el precio al contado sustituye al desembolso neto como punto de partida.
+      </p>
+      <p class="privacy-note">Estimación educativa general, no asesoramiento crediticio, jurídico o fiscal individual. Confirma TAE, comisiones, fechas y productos vinculados en la documentación vigente. WorthCalc procesa los datos en el navegador.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

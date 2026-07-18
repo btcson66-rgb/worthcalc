@@ -177,6 +177,75 @@ export const installmentGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const upfrontFeeGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'upfront-fee-financing-cost-method',
+    labels: labels.en,
+    directAnswer: 'An upfront fee raises the cost of financing even when the monthly payment does not change. Compare the payment schedule with the cash you can actually use after required charges. On a $10,000, 24-payment offer at $450 per month, no fee means $10,000 of usable funds and an estimated effective annual rate of 7.76%. A 5% fee deducted at funding leaves $9,500 but keeps the same $450 payment, lifting the estimate to 13.39%.',
+    inputs: ['Contract or financed amount before fees', 'Every origination, documentation, administration, insurance, or account charge required to obtain the offer', 'Whether each charge is deducted from proceeds, paid separately at signing, or added to principal', 'Exact amount and due date of every payment', 'Optional charges and late fees, kept outside the normal-payment case', 'The lender’s official APR and disclosure, used as the legal comparison figure'],
+    formula: 'Usable funds = amount advanced − charges deducted or paid at funding. Solve monthly r: usable funds = Σ(post-funding payment_t ÷ (1 + r)^t). Estimated effective annual rate = ((1 + r)^12 − 1) × 100. Cash cost = post-funding payments − usable funds; equivalently, all outflows including a separately paid fee − gross advance.',
+    workedExample: 'Offer A advances $10,000 and requires 24 payments of $450, for $10,800 total. With no fee, full-term cash cost is $800 and the estimated effective annual rate is 7.76%. Offer B shows the same amount and the same $450 payment but deducts a $500 origination fee. You can use only $9,500, still repay $10,800, and therefore bear $1,300 of cash cost; the estimated annual rate rises to 13.39%.',
+    sensitivity: [
+      { scenario: 'No upfront fee', input: '$10,000 usable; 24 × $450', result: '$800 cost; about 7.76% annually' },
+      { scenario: '3% deducted fee', input: '$9,700 usable; 24 × $450', result: '$1,100 cost; about 11.06% annually' },
+      { scenario: '5% deducted fee', input: '$9,500 usable; 24 × $450', result: '$1,300 cost; about 13.39% annually' },
+      { scenario: '7.5% deducted fee', input: '$9,250 usable; 24 × $450', result: '$1,550 cost; about 16.47% annually' },
+    ],
+    cta: { label: 'Calculate the rate from your net proceeds and payment schedule', href: '/en/tools/installment-true-apr' },
+    limitations: ['This cash-flow estimate is educational and is not a legal APR calculation. Applicable rules decide which charges enter the finance charge, how dates are treated, and which tolerances apply.', 'Do not subtract a fee twice. If it is withheld from proceeds, reduce usable funds; if you receive the full amount and pay the fee separately, record the separate day-zero outflow instead.', 'Offers with different terms, collateral, variable rates, balloon payments, prepayment rules, or mandatory ancillary products require more than a one-line payment comparison. Affordability and approval risk are separate questions.'],
+    sources: [
+      { label: 'CFPB — fees on personal installment loans', href: 'https://www.consumerfinance.gov/ask-cfpb/do-personal-installment-loans-have-fees-en-2120/' },
+      { label: 'CFPB — mortgage costs paid upfront or over time', href: 'https://www.consumerfinance.gov/ask-cfpb/what-costs-come-with-taking-out-a-mortgage-en-153/' },
+      { label: 'CFPB — what an origination fee pays for and where it is disclosed', href: 'https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-origination-services-what-is-an-origination-fee-en-155/' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'upfront-fee-financing-cost-method',
+    labels: labels.zh,
+    directAnswer: '開辦費不會因為月付相同就消失；應比較扣除簽約當下必要費用後，真正可運用的資金。貸款名目 NT$300,000、36 期每期 NT$9,000 時，零開辦費的估算有效年率約 5.18%；若撥款時另付 NT$10,000、實際只留下 NT$290,000 可用，月付仍相同，估算有效年率會升到約 7.60%。',
+    inputs: ['契約上的核貸與實際撥款金額', '開辦費、帳管費、信用查詢費、徵信費及取得貸款必要的其他費用', '費用是在撥款中扣除、簽約日另付，或被加進本金', '每期金額、總期數與第一期扣款日', '可自由選擇的保險或服務，以及遲繳費用，和正常履約情境分開', '銀行契約與廣告正式揭露的總費用年百分率'],
+    formula: '實際可用資金 = 撥款金額 − 撥款日扣除或同日支付的必要費用。解出月利率 r：實際可用資金 = Σ（撥款後第 t 期付款 ÷ (1 + r)^t）。估算有效年率 = ((1 + r)^12 − 1) × 100；現金成本 = 撥款後總還款 − 實際可用資金，等同「包含同日另付費用的全部流出 − 原始撥款」。',
+    workedExample: '方案 A 核貸並可用 NT$300,000，36 期各 NT$9,000，總還款 NT$324,000；全期現金成本 NT$24,000，估算有效年率約 5.18%。方案 B 的核貸額與月付完全相同，但撥款時支付 NT$10,000 開辦及必要費用，只留下 NT$290,000 可用；全期現金成本變成 NT$34,000，估算有效年率約 7.60%。',
+    sensitivity: [
+      { scenario: '無前置費用', input: '可用 NT$300,000；36 × NT$9,000', result: '成本 NT$24,000；估算年率約 5.18%' },
+      { scenario: '費用 NT$5,000', input: '可用 NT$295,000；月付不變', result: '成本 NT$29,000；估算年率約 6.37%' },
+      { scenario: '費用 NT$10,000', input: '可用 NT$290,000；月付不變', result: '成本 NT$34,000；估算年率約 7.60%' },
+      { scenario: '費用 NT$15,000', input: '可用 NT$285,000；月付不變', result: '成本 NT$39,000；估算年率約 8.87%' },
+    ],
+    cta: { label: '輸入實拿金額與期款，反推自己的估算年率', href: '/zh/tools/installment-true-apr' },
+    limitations: ['這是現金流教育估算，不取代銀行依法揭露的總費用年百分率。正式口徑對納入費用、付款日期、基準日與變動條件有明確規則。', '費用只能計一次：若銀行從撥款扣除，就降低實際可用資金；若全額撥款後在同日另付，則記為同日現金流出，不要兩邊都扣。', '利率調整、寬限期、提前清償、綁約、保證人或擔保品等條件也會改變風險；月付負擔能力仍需單獨檢查。'],
+    sources: [
+      { label: '金管會 — 消費者信用貸款手續費應合理、公開、透明', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001273' },
+      { label: '金管會 — 消費者信用交易總費用與年百分率計算標準', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL036733' },
+      { label: '中華民國銀行公會 — 銀行消費者信用貸款手續費彙整', href: 'https://www.ba.org.tw/upload/ConsumerCredit/fe7dfcc4-fd5c-48cb-bb3f-bfc16c6b0abe/%E9%8A%80%E8%A1%8C%E4%BF%A1%E7%94%A8%E8%B2%B8%E6%AC%BE%E6%89%8B%E7%BA%8C%E8%B2%BB%E5%BD%99%E6%95%B4%E8%A1%A8.pdf' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'upfront-fee-financing-cost-method',
+    labels: labels.es,
+    directAnswer: 'Una comisión inicial encarece la financiación aunque la cuota no cambie. Compara las mensualidades con el dinero neto realmente disponible tras la comisión de apertura y los gastos obligatorios. En un préstamo de 8.000 € a 24 cuotas de 360 €, sin comisión la tasa anual efectiva estimada es 7,76%; con una comisión del 4% pagada al formalizar, quedan 7.680 € útiles y la estimación sube al 12,21%.',
+    inputs: ['Capital nominal y cantidad neta que recibes', 'Comisión de apertura y otros gastos exigidos para estudio, concesión o formalización', 'Forma de cobro: descontados del desembolso, pagados al firmar o financiados', 'Importe, número y fecha de las cuotas', 'Seguros, cuentas o servicios opcionales, separados de los obligatorios', 'TIN, TAE y documento precontractual de cada oferta'],
+    formula: 'Efectivo neto = capital desembolsado − comisiones y gastos pagados al formalizar. Halla r: efectivo neto = Σ(cuota posterior_t ÷ (1 + r)^t). Tasa anual efectiva estimada = ((1 + r)^12 − 1) × 100. Coste de caja = cuotas posteriores − efectivo neto; equivale a todos los pagos, incluida la comisión inicial separada, menos el desembolso bruto.',
+    workedExample: 'La oferta A entrega 8.000 € y exige 24 cuotas de 360 €: se devuelven 8.640 €, el coste de caja es 640 € y la tasa anual efectiva estimada es 7,76%. La oferta B mantiene capital, plazo y cuota, pero cobra una comisión de apertura del 4%, 320 €, al formalizar. Solo quedan 7.680 € para el objetivo, se siguen pagando 8.640 €, el coste sube a 960 € y la tasa estimada a 12,21%.',
+    sensitivity: [
+      { scenario: 'Sin comisión inicial', input: '8.000 € netos; 24 × 360 €', result: '640 € de coste; 7,76% anual estimado' },
+      { scenario: 'Comisión del 2%', input: '7.840 € netos; cuota igual', result: '800 € de coste; 9,93% anual estimado' },
+      { scenario: 'Comisión del 4%', input: '7.680 € netos; cuota igual', result: '960 € de coste; 12,21% anual estimado' },
+      { scenario: 'Comisión del 6%', input: '7.520 € netos; cuota igual', result: '1.120 € de coste; 14,60% anual estimado' },
+    ],
+    cta: { label: 'Calcular los flujos en la herramienta de cuotas', href: '/en/tools/installment-true-apr' },
+    limitations: ['La equivalencia de flujos es educativa y puede diferir de la TAE legal si la oferta incorpora fechas, gastos, productos vinculados o hipótesis distintas. La TAE comunicada por la entidad es la referencia regulada.', 'No cuentes dos veces la comisión. Si se descuenta del desembolso, reduce el efectivo neto; si recibes todo el capital y pagas aparte al firmar, registra ese pago inicial.', 'Dos ofertas con la misma cuota pueden diferir en plazo, tipo variable, amortización anticipada, seguros y consecuencias del impago. La cuota tampoco demuestra por sí sola que el préstamo sea asumible.'],
+    sources: [
+      { label: 'Banco de España — comisión de apertura de un préstamo', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/comisiones/comisionesproduc/comision-de-apertura-de-un-prestamo.html' },
+      { label: 'Banco de España — TAE de un préstamo o financiación', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/tiposinteres/guia-textual/latae/tae_prestamo.html' },
+      { label: 'Banco de España — simulador de TAE con gastos iniciales y periódicos', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo_tae_prestamo_personal.html' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

@@ -6,7 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import { commuteFullCostGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -42,6 +42,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿El kilometraje por trabajo convierte el trayecto habitual en deducible?', answer: 'No necesariamente. Desplazamientos profesionales y trayecto domicilio-centro habitual tienen reglas distintas; comprueba empresa y Agencia Tributaria.' },
     ],
   },
+  fr: {
+    title: 'Comment calculer le coût complet des trajets domicile-travail, temps compris',
+    description: 'Calculez énergie, abonnement, stationnement, entretien, dépréciation et temps facultatif en tenant compte de la prise en charge employeur.',
+    faq: [
+      { question: 'Quels frais inclure dans un trajet domicile-travail ?', answer: 'Énergie, entretien, pneus, dépréciation liée aux kilomètres, abonnement ou billets, stationnement, péages et frais fixes, puis la prise en charge employeur. Le temps reste séparé.' },
+      { question: 'L’employeur rembourse-t-il les transports publics ?', answer: 'Dans le privé, Service-Public indique une prise en charge obligatoire d’au moins 50% des abonnements éligibles sur le trajet le plus court. Les tickets à l’unité ne suivent pas cette règle.' },
+      { question: 'Puis-je utiliser le barème kilométrique comme coût réel ?', answer: 'Il peut structurer un calcul fiscal de frais réels, mais il inclut déjà dépréciation, entretien, pneus, carburant et assurance. Ne rajoutez pas ces postes et ne le confondez pas avec un remboursement.' },
+      { question: 'Le temps de trajet vaut-il mon salaire horaire ?', answer: 'Pas automatiquement. Une heure économisée n’est pas toujours vendable comme travail. Conservez le coût monétaire, affichez les heures puis testez un montant personnel.' },
+      { question: 'Comment traiter un abonnement avec télétravail ?', answer: 'Le coût mensuel net peut rester fixe malgré moins de jours. Comparez coût par jour, billets alternatifs et règles de remboursement sur le même mois.' },
+    ],
+  },
+  de: {
+    title: 'So berechnen Sie die vollständigen Pendelkosten einschließlich Zeit',
+    description: 'Berechne Energie, Ticket, Parken, Wartung, Wertverlust und optionalen Zeitwert; Pendlerpauschale und tatsächliche Kosten bleiben getrennt.',
+    faq: [
+      { question: 'Welche Kosten gehören zum Pendeln?', answer: 'Energie, Wartung, Reifen, kilometerbedingter Wertverlust, Ticket, Parken, Maut und Fixkosten abzüglich Zuschuss. Zeit wird separat gezeigt.' },
+      { question: 'Sind 38 Cent Entfernungspauschale mein Autokostenpreis?', answer: 'Nein. 2026 gelten 0,38 € je Entfernungskilometer als Werbungskostenansatz. Tatsächlich gefahren wird meist hin und zurück, und die steuerliche Wirkung ist keine Erstattung in gleicher Höhe.' },
+      { question: 'Was kostet das Deutschlandticket 2026?', answer: 'Die Bundesregierung nennt seit Januar 2026 monatlich 63 €. Ergänzende Fernverkehrs-, Park- oder erste/letzte-Meile-Kosten und Jobticket-Zuschüsse sind separat.' },
+      { question: 'Darf ich Kreditrate und Wertverlust addieren?', answer: 'Nicht vollständig. Tilgung wird Fahrzeugwert. Nutze entweder konsistent Gesamtautokosten oder einzelne Positionen mit Wertverlust, ohne doppelte Erfassung.' },
+      { question: 'Ist Pendelzeit gleich entgangener Stundenlohn?', answer: 'Nein. Setze für eine reine Budgetansicht 0 € und teste einen persönlichen Wert. Nutzbare Zugzeit und belastende Autofahrt können unterschiedlich bewertet werden.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -60,10 +82,20 @@ const calculators = {
     defaults: { days: 20, roundTripDistance: 0, energyPerDistance: 0, maintenancePerDistance: 0, depreciationPerDistance: 0, farePerDay: 0, parkingTollsPerDay: 0, fixedMonthly: 54.6, reimbursement: 0, minutesPerDay: 70, timeValue: 8 },
     copy: { heading: 'Calculadora de coste monetario y tiempo del trayecto', intro: 'Usa un mes típico. Pon el tiempo a cero para ver solo caja; no se iguala automáticamente al salario.', days: 'Días presenciales al mes', roundTripDistance: 'Distancia ida y vuelta', energyPerDistance: 'Energía por km', maintenancePerDistance: 'Mantenimiento/neumáticos por km', depreciationPerDistance: 'Depreciación por km', farePerDay: 'Billetes/otros transportes al día', parkingTollsPerDay: 'Aparcamiento y peajes al día', fixedMonthly: 'Abono y costes fijos mensuales', reimbursement: 'Reembolso mensual de empresa', minutesPerDay: 'Minutos puerta a puerta al día', timeValue: 'Valor personal opcional (€/hora)', cashCost: 'Coste monetario mensual', timeHours: 'Horas de trayecto/mes', timeCost: 'Coste temporal opcional', fullCost: 'Coste completo opcional', perDay: 'Coste completo por día', distanceCost: 'Coste por distancia', otherCash: 'Otros pagos tras reembolso', verdict: 'Coste completo opcional del trayecto:', privacy: 'Estimación educativa; datos en el navegador. Verifica ruta, facturas, reembolso y fiscalidad.', distanceSuffix: 'km' },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { days: 20, roundTripDistance: 0, energyPerDistance: 0, maintenancePerDistance: 0, depreciationPerDistance: 0, farePerDay: 0, parkingTollsPerDay: 0, fixedMonthly: 90, reimbursement: 45, minutesPerDay: 70, timeValue: 10 },
+    copy: { heading: 'Calculateur du coût monétaire et du temps de trajet', intro: 'Utilisez un mois type. Mettez le temps à zéro pour le budget seul ; il ne vaut pas automatiquement votre salaire.', days: 'Jours de présence par mois', roundTripDistance: 'Distance aller-retour', energyPerDistance: 'Énergie par km', maintenancePerDistance: 'Entretien/pneus par km', depreciationPerDistance: 'Dépréciation par km', farePerDay: 'Billets/autres modes par jour', parkingTollsPerDay: 'Stationnement et péages/jour', fixedMonthly: 'Abonnement et frais fixes/mois', reimbursement: 'Prise en charge employeur/mois', minutesPerDay: 'Minutes porte à porte/jour', timeValue: 'Valeur personnelle facultative (€/h)', cashCost: 'Coût monétaire mensuel', timeHours: 'Heures de trajet/mois', timeCost: 'Coût temporel facultatif', fullCost: 'Coût complet facultatif', perDay: 'Coût complet par jour', distanceCost: 'Coût lié à la distance', otherCash: 'Autres paiements après remboursement', verdict: 'Coût complet facultatif des trajets :', privacy: 'Estimation pédagogique, données dans le navigateur. Vérifiez trajet, justificatifs, remboursement et fiscalité.', distanceSuffix: 'km' },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { days: 20, roundTripDistance: 40, energyPerDistance: 0.10, maintenancePerDistance: 0.09, depreciationPerDistance: 0.25, farePerDay: 0, parkingTollsPerDay: 0, fixedMonthly: 140, reimbursement: 0, minutesPerDay: 60, timeValue: 12 },
+    copy: { heading: 'Rechner für Pendel-Geld- und Zeitkosten', intro: 'Nutze einen typischen Monat. Zeitwert 0 zeigt nur das Budget; Stunden werden nie automatisch zum Lohn bewertet.', days: 'Präsenztage pro Monat', roundTripDistance: 'Hin- und Rückweg', energyPerDistance: 'Energiekosten je km', maintenancePerDistance: 'Wartung/Reifen je km', depreciationPerDistance: 'Wertverlust je km', farePerDay: 'Ticket/weitere Verkehrsmittel je Tag', parkingTollsPerDay: 'Parken und Maut je Tag', fixedMonthly: 'Ticket/Fixkosten pro Monat', reimbursement: 'Arbeitgeberzuschuss pro Monat', minutesPerDay: 'Tür-zu-Tür-Minuten pro Tag', timeValue: 'Optionaler persönlicher Zeitwert (€/h)', cashCost: 'Monatliche Geldkosten', timeHours: 'Pendelstunden/Monat', timeCost: 'Optionale Zeitkosten', fullCost: 'Optionale Gesamtkosten', perDay: 'Gesamtkosten je Präsenztag', distanceCost: 'Distanzabhängige Kosten', otherCash: 'Sonstige Kosten nach Zuschuss', verdict: 'Optionale vollständige Pendelkosten:', privacy: 'Unverbindliche Lernrechnung; Eingaben bleiben im Browser. Strecke, Belege, Zuschuss und Steuerfall prüfen.', distanceSuffix: 'km' },
+  },
 };
 
 export function getStaticPaths() {
-  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+  return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as EditorialLocale;
@@ -72,7 +104,7 @@ const guide = commuteFullCostGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'en' && <>
     <p>A cheap-looking commute can be expensive once a parking pass, tires, repairs, depreciation and door-to-door time are visible. The useful answer has two totals: money that leaves your budget and an optional generalized cost that adds your own value of time.</p>
     <p>Keep those totals separate. Calling every commute hour “lost salary” creates false precision when the hour could not actually have been sold as paid work.</p>
@@ -123,6 +155,38 @@ const calculator = calculators[locale];
     <p>Esperas, paseo y transbordos cuentan. Valorar el tiempo a cero ofrece el presupuesto puro; valores personales bajos y altos ayudan a comparar comodidad y flexibilidad. Leer en el tren no equivale a conducir en atasco, aunque duren igual.</p>
     <p>Los gastos de locomoción de un desplazamiento profesional no convierten automáticamente el trayecto habitual en deducible. Comprueba siempre el caso real.</p>
     <p class="privacy-note">Información educativa; no es asesoramiento laboral, fiscal, de vivienda, vehículo o transporte.</p>
+  </>}
+
+  {locale === 'fr' && <>
+    <p>En France, le coût domicile-travail dépend du mode mais aussi de règles locales : remboursement d’un abonnement, choix entre déduction forfaitaire et frais réels, kilométrage admis et justificatifs. Ces règles ne remplacent pas le budget réel ; elles forment une couche distincte.</p>
+    <p>Le calcul conserve donc trois résultats : euros payés, heures de trajet et coût complet facultatif.</p>
+    <DecisionGuide content={guide} />
+    <CommuteFullCostCalculator locale={locale} {...calculator} />
+    <h2>Déduisez la prise en charge avant de comparer l’abonnement</h2>
+    <p>Pour un salarié du privé, les abonnements éligibles de métro, bus, tram, train ou location publique de vélo sont pris en charge à au moins 50% sur la base prévue ; les tickets à l’unité ne le sont pas de la même façon. Le cas à 90 € retient donc 45 € réellement supportés.</p>
+    <h2>Le barème fiscal n’est pas une facture automobile</h2>
+    <p>Le barème kilométrique 2026 comprend déjà dépréciation, réparations, entretien, pneus, carburant et assurance. L’ajouter à ces mêmes factures doublerait le coût. Stationnement, péages et intérêts proratisés suivent encore leurs propres conditions.</p>
+    <h2>Le télétravail change le coût par trajet</h2>
+    <p>Dix jours de présence divisent les heures mais pas forcément l’abonnement net. Dans l’exemple, le coût complet par jour passe de 13,92 € à 16,17 €. Comparez un titre fixe, des billets et le remboursement sur le même mois.</p>
+    <h2>Une heure de train n’est pas une heure de salaire perdue</h2>
+    <p>La valeur dépend de ce que vous pouvez faire et de votre préférence. Affichez 0 € pour la trésorerie, puis 6 €, 10 € ou une autre valeur pour tester le confort. Ne présentez pas ce scénario comme une baisse de salaire.</p>
+    <p class="privacy-note">Estimation pédagogique, pas un conseil fiscal, professionnel, immobilier ou de transport.</p>
+  </>}
+
+  {locale === 'de' && <>
+    <p>Beim deutschen Arbeitsweg werden reale Ausgaben oft mit der Entfernungspauschale verwechselt. 38 Cent je Entfernungskilometer sind 2026 ein steuerlicher Werbungskostenansatz, nicht der Preis des Autos und nicht automatisch 38 Cent Auszahlung.</p>
+    <p>Deshalb zeigt der Rechner zunächst Fahrzeug- oder Ticketkosten und Zeit; Steuerwirkungen bleiben außerhalb.</p>
+    <DecisionGuide content={guide} />
+    <CommuteFullCostCalculator locale={locale} {...calculator} />
+    <h2>Hin- und Rückweg für Kosten, einfache Entfernung für die Pauschale</h2>
+    <p>Für Energie und Verschleiß fährt das Beispiel täglich 40km. Die Entfernungspauschale würde dagegen mit der einfachen Entfernung und Präsenztagen arbeiten. Wer beide Größen gleichsetzt, halbiert oder verdoppelt schnell den falschen Betrag.</p>
+    <h2>Autokosten bestehen aus vier Blöcken</h2>
+    <p>ADAC-Berechnungen trennen Fixkosten, Betrieb, Werkstatt/Reifen und Wertverlust. Das Beispiel verwendet 0,44 €/km aus Energie, Wartung und Wertverlust plus 140 € Fixkosten. Nutzt du einen geprüften Gesamtwert, setze die Einzelwerte nicht zusätzlich an.</p>
+    <h2>Deutschlandticket und Jobticket separat rechnen</h2>
+    <p>Das Deutschlandticket kostet seit Januar 2026 63 €. Fernverkehr, Park-and-ride oder erste/letzte Meile können hinzukommen; ein Arbeitgeberzuschuss wird erst abgezogen, wenn er tatsächlich gewährt wird.</p>
+    <h2>Zeitwert bleibt eine persönliche Sensitivität</h2>
+    <p>Die 20 Pendelstunden werden im Budget nicht versteckt. Mit 0 €/h bleibt der Geldbetrag 492 €; mit 12 €/h steigt der Vergleichswert auf 732 €. Das ist keine Lohn- oder Steuerrechnung.</p>
+    <p class="privacy-note">Unverbindliche Lernrechnung, keine Steuer-, Arbeits-, Wohn- oder Verkehrsmittelberatung.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

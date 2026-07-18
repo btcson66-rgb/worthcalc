@@ -2,11 +2,11 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES, type Locale } from '../../consts';
 import { upfrontFeeGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 interface ArticleCopy {
   title: string;
@@ -48,10 +48,32 @@ const articles: Record<EditorialLocale, ArticleCopy> = {
       { question: '¿Una cuota más baja significa que una oferta es mejor?', answer: 'No necesariamente. Puede deberse a un plazo mayor, una comisión inicial, un pago final o productos vinculados. Compara TAE, total adeudado, calendario, cancelación anticipada y coste de seguros o cuentas exigidos.' },
     ],
   },
+  fr: {
+    title: 'Comment les frais initiaux augmentent le coût réel d’un financement',
+    description: 'Comparez deux crédits à mensualité identique avec somme nette, frais de dossier, coût total, TAEG et taux annuel estimé à partir des flux.',
+    faq: [
+      { question: 'Deux crédits avec la même mensualité peuvent-ils avoir un coût différent ?', answer: 'Oui. Des frais retenus ou payés lors du déblocage réduisent la somme nette disponible, même si la durée et la mensualité restent identiques. Comparez somme nette, montant total dû et TAEG.' },
+      { question: 'Quels frais sont intégrés au TAEG ?', answer: 'Les sources officielles françaises citent notamment intérêts, frais de dossier et d’intermédiaire, assurance et garantie obligatoires ainsi que certains frais de compte imposés. Vérifiez la fiche propre à l’offre.' },
+      { question: 'Comment traiter des frais de dossier payés au départ ?', answer: 'S’ils sont retenus, réduisez la somme nette; s’ils sont payés séparément le jour du déblocage, inscrivez une sortie initiale; s’ils sont financés, utilisez le capital et les échéances augmentés. Ne les comptez pas deux fois.' },
+      { question: 'Le taux calculé par WorthCalc est-il le TAEG légal ?', answer: 'Non. Il s’agit d’une équivalence pédagogique des flux saisis. Le prêteur et les règles applicables déterminent le TAEG officiel, ses coûts inclus, ses dates et ses hypothèses.' },
+      { question: 'Une mensualité plus faible indique-t-elle le crédit le moins cher ?', answer: 'Pas forcément. Elle peut provenir d’une durée plus longue, d’un différé, de frais initiaux ou d’un paiement final. Comparez aussi coût total, TAEG, produits imposés et remboursement anticipé.' },
+    ],
+  },
+  de: {
+    title: 'Wie einmalige Gebühren die tatsächlichen Finanzierungskosten verändern',
+    description: 'Vergleichen Sie Kredite mit gleicher Rate anhand von Auszahlungsbetrag, einmaligen Zusatzkosten, Gesamtbetrag und zahlungsstrombasiertem Jahreszins.',
+    faq: [
+      { question: 'Können Kredite mit gleicher Monatsrate unterschiedlich teuer sein?', answer: 'Ja. Wird bei gleichem Ratenplan weniger ausgezahlt oder entsteht eine einmalige notwendige Zusatzbelastung, finanzieren Sie weniger nutzbares Geld. Vergleichen Sie Auszahlung, Gesamtbetrag und effektiven Jahreszins.' },
+      { question: 'Was zeigt der effektive Jahreszins?', answer: 'Er soll Kreditkosten und tatsächlichen Auszahlungsbetrag in einer vergleichbaren Jahresangabe zusammenführen. Prüfen Sie trotzdem Sonderkosten, die bei einer freiwilligen Zusatzleistung nicht in der Pflichtangabe enthalten sein können.' },
+      { question: 'Wie behandle ich ein Disagio oder Anfangskosten?', answer: 'Ein Einbehalt verringert den Auszahlungsbetrag; eine separate Zahlung ist ein Anfangsabfluss; mitfinanzierte Kosten erhöhen den Darlehensbetrag und die Raten. Wählen Sie die Vertragsvariante und zählen Sie nichts doppelt.' },
+      { question: 'Darf eine Bank eine Bearbeitungsgebühr verlangen?', answer: 'Bei Verbraucherdarlehen sind zusätzliche pauschale Bearbeitungsgebühren nicht beliebig zulässig. Die Bundesbank weist daneben auf mögliche Disagien und andere Kreditkosten hin. Prüfen Sie Vertrag und Rechtsgrundlage.' },
+      { question: 'Gehört eine Restschuldversicherung in den Vergleich?', answer: 'Ja, wenn sie abgeschlossen wird. Ist sie Voraussetzung, muss ihr Preis nach Verbraucherinformationen im Effektivzins berücksichtigt werden; freiwillige Policen können außerhalb liegen und sind deshalb als eigener Zahlungsstrom zu prüfen.' },
+    ],
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+  return (['en', 'zh', 'es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
     params: { locale },
     props: { locale },
   }));
@@ -68,7 +90,7 @@ if (!guide) throw new Error(`Missing upfront fee guide for ${locale}`);
   description={article.description}
   locale={locale as Locale}
   updated="2026-07-18"
-  alternateLocales={[locale as Locale]}
+  alternateLocales={LOCALES}
 >
   {locale === 'en' && (
     <>
@@ -241,6 +263,122 @@ if (!guide) throw new Error(`Missing upfront fee guide for ${locale}`);
         Si el coste aparece como diferencia entre precio al contado y aplazado, consulta también la <a href="/es/zero-interest-installments-truth/">guía sobre compras a plazos sin intereses</a>. En ese caso el precio al contado sustituye al desembolso neto como punto de partida.
       </p>
       <p class="privacy-note">Estimación educativa general, no asesoramiento crediticio, jurídico o fiscal individual. Confirma TAE, comisiones, fechas y productos vinculados en la documentación vigente. WorthCalc procesa los datos en el navegador.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        La mensualité mesure la sortie régulière du budget, pas le prix complet du crédit. Deux offres peuvent demander 360 € pendant 36 mois, mais l’une verser 12 000 € et l’autre retenir 480 € de frais de dossier. Dans la seconde, vous disposez de moins d’argent pour le même échéancier : la différence doit apparaître dans le coût et le taux, pas rester cachée dans une ligne payée à la souscription.
+      </p>
+      <p>
+        En France, le TAEG constitue le repère réglementé de comparaison. Les sources officielles y intègrent les frais nécessaires pour obtenir le crédit ou les conditions annoncées. Une reconstitution des flux reste utile pour vérifier la somme nette, comprendre l’écart entre deux offres et poser les bonnes questions au prêteur, mais elle ne remplace jamais le TAEG du contrat.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Passer du montant du crédit à la somme réellement disponible</h2>
+      <p>
+        Relevez le montant nominal, le déblocage sur votre compte et chaque paiement du jour de signature. Frais de dossier, courtage, assurance obligatoire, garantie ou compte imposé peuvent modifier le coût. Si 480 € sont retenus sur 12 000 €, la somme utile est 11 520 €. Si les 12 000 € sont versés puis que vous payez 480 € séparément le même jour, la position nette est identique.
+      </p>
+      <p>
+        Lorsque les frais sont ajoutés au capital, le traitement change : utilisez le capital augmenté et les mensualités du tableau d’amortissement. Ne soustrayez pas simultanément ces frais de la somme reçue. Une seule dépense enregistrée deux fois gonflerait artificiellement le taux calculé.
+      </p>
+
+      <h2>Comparer la même mensualité avec une grille complète</h2>
+      <p>
+        Alignez montant nominal, somme nette, sortie initiale, mensualité, nombre d’échéances, montant total dû, TAEG et conditions de remboursement anticipé. Si durée et mensualité sont identiques, une somme nette plus faible signifie un financement plus cher. Si la durée change, le total seul ne suffit plus car le calendrier des paiements influe sur le taux effectif.
+      </p>
+      <p>
+        Dans l’exemple, les deux offres totalisent 12 960 € de mensualités. Sans frais, ces paiements financent 12 000 € nets; avec 480 € retenus, ils ne financent que 11 520 €. Le coût de trésorerie passe de 960 € à 1 440 € et l’estimation annuelle de 5,18% à 8,10%, sans aucune modification de la mensualité affichée.
+      </p>
+
+      <h2>Distinguer frais imposés, produits facultatifs et incidents</h2>
+      <p>
+        Le ministère de l’Économie indique que le TAEG comprend notamment intérêts, frais de dossier, intermédiaires nécessaires, assurance et garanties obligatoires, ainsi que certains frais de compte imposés. Si une assurance ou un service peut être refusé mais que le taux augmente, comparez deux ensembles complets : taux bonifié plus produit et taux non bonifié sans produit.
+      </p>
+      <p>
+        Les pénalités de retard et frais d’incident appartiennent à un scénario de difficulté, pas au remboursement normal. Ils doivent être lus avant de signer, tout comme le délai de rétractation et les règles d’un remboursement anticipé, mais les mélanger à l’offre standard empêcherait une comparaison propre.
+      </p>
+
+      <h2>Réconcilier le calcul avec le TAEG et la fiche précontractuelle</h2>
+      <p>
+        La fiche doit présenter durée, nombre et calendrier des remboursements, montant total dû, coût précis des frais et TAEG. Utilisez ces données au lieu d’un exemple publicitaire. Le taux WorthCalc est obtenu à partir des flux saisis; le TAEG officiel suit le Code de la consommation et peut traiter certains coûts ou dates selon des règles que la formule pédagogique ne détermine pas.
+      </p>
+      <p>
+        Si l’écart est important, vérifiez la date de première échéance, un différé, les frais financés, l’assurance, le compte exigé et un éventuel taux variable. Demandez une explication écrite. Il serait trompeur de retenir automatiquement le chiffre le plus faible ou de comparer une offre fixe et une offre variable sans scénario de hausse.
+      </p>
+
+      <h2>Tester le montant des frais, la durée et la sortie anticipée</h2>
+      <p>
+        La table ci-dessus garde 36 mensualités de 360 € et ne modifie que les frais initiaux. Faites ensuite l’inverse : gardez la somme nette nécessaire et testez plusieurs durées. Une durée longue peut réduire la mensualité tout en augmentant les intérêts; une durée courte concentre le poids annuel d’un frais payé dès le départ.
+      </p>
+      <p>
+        Pour une sortie anticipée prévue, additionnez les échéances réellement payées, le capital restant dû, l’indemnité éventuellement applicable et les frais initiaux non remboursés. Terminez par la capacité budgétaire : loyer ou crédit immobilier, autres dettes, charges fixes et marge de sécurité. Le meilleur TAEG ne rend pas une mensualité soutenable par magie.
+      </p>
+
+      <p>
+        Si le coût se cache plutôt dans un écart entre prix comptant et prix fractionné, consultez aussi le <a href="/fr/zero-interest-installments-truth/">guide du paiement en plusieurs fois sans intérêts</a>, qui utilise le prix comptant comme somme financée.
+      </p>
+      <p class="privacy-note">Estimation pédagogique générale, sans conseil individuel en crédit, droit ou fiscalité. Vérifiez TAEG, frais, dates et produits imposés dans les documents actuels. WorthCalc traite les données dans votre navigateur.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        Eine Monatsrate beantwortet die Frage nach der laufenden Belastung, nicht nach dem vollständigen Kreditpreis. Zwei Angebote können 48 Monate lang 350 € verlangen, aber unterschiedlich viel auszahlen. Werden zu Beginn 600 € einbehalten oder separat fällig, stehen statt 15.000 € nur 14.400 € zur Verfügung. Die identische Rate finanziert dann weniger nutzbares Geld.
+      </p>
+      <p>
+        Für den deutschen Vergleich ist der effektive Jahreszins die zentrale Pflichtangabe. Die Bundesbank erklärt ausdrücklich, dass eine geringere Auszahlung oder zusätzliche Kosten einen Kredit verteuern und der Effektivzins Angebote vergleichbar machen soll. Eine eigene Zahlungsstromrechnung legt die Eingaben offen, ersetzt aber weder Vertrag noch rechtliche Prüfung der Angabe.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Nennbetrag, Auszahlung und nutzbaren Betrag trennen</h2>
+      <p>
+        Schreiben Sie nicht nur „Kredit 15.000 €“ auf. Erfassen Sie Vertragsbetrag, tatsächliche Gutschrift und jede Zahlung bei Abschluss. Ein Disagio verringert den Auszahlungsbetrag. Separat gezahlte notwendige Vermittlungs- oder Zusatzkosten sind ein Anfangsabfluss. Mitfinanzierte Kosten erhöhen dagegen den Darlehensbetrag und meist auch Zinsen und Gesamtbetrag.
+      </p>
+      <p>
+        Bei Verbraucherdarlehen darf eine Bank nicht beliebige zusätzliche pauschale Bearbeitungsgebühren verlangen. Das bedeutet jedoch nicht, dass jedes Angebot ohne weitere Kosten ist. Prüfen Sie Disagio, Vermittlung, freiwillige Versicherungen, Kontobedingungen und Händlerfinanzierung anhand des konkreten Vertrags und der Rechtsgrundlage.
+      </p>
+
+      <h2>Gleiche Rate mit vollständigen Angebotsdaten vergleichen</h2>
+      <p>
+        Die Vergleichstabelle braucht Nennbetrag, Auszahlung, Anfangszahlung, Rate, Laufzeit, Gesamtbetrag, effektiven Jahreszins und vorzeitige Rückzahlung. Bei gleicher Rate und Laufzeit ist ein niedrigerer nutzbarer Betrag teurer. Bei unterschiedlichen Laufzeiten reicht auch der Gesamtbetrag nicht aus, weil ein Euro heute und eine Rate in vier Jahren zeitlich verschieden sind.
+      </p>
+      <p>
+        Im Beispiel fließen in beiden Fällen 16.800 € zurück. Ohne Anfangskosten werden 15.000 € genutzt; mit 600 € Kosten nur 14.400 €. Die Geldkosten steigen von 1.800 € auf 2.400 €, die zahlungsstrombasierte Jahresschätzung von 5,82% auf 8,05%. Die Werberate bleibt dabei unverändert.
+      </p>
+
+      <h2>Restschuldversicherung als eigenen Zahlungsstrom prüfen</h2>
+      <p>
+        Eine Restschuldversicherung wird häufig als Einmalprämie finanziert. Dann wächst der Kreditbetrag, und auf die Prämie können zusätzlich Zinsen anfallen. Ist der Abschluss zwingende Voraussetzung, muss der Preis nach Verbraucherinformationen im effektiven Jahreszins berücksichtigt werden. Bei einer freiwilligen Police kann er außerhalb der Pflichtangabe liegen und darf deshalb im eigenen Gesamtvergleich nicht verschwinden.
+      </p>
+      <p>
+        Seit 2025 dürfen Kredit und Restschuldversicherung nicht mehr zeitgleich abgeschlossen werden; die Verbraucherzentrale weist dennoch auf Kosten, Ausschlüsse und Wartezeiten hin. Vergleichen Sie den Kredit zunächst ohne Police und prüfen Sie anschließend, welchen konkreten Schutz eine separate Versicherung zu welchem Preis bietet. Verzugs- und Mahnkosten bleiben ein eigenes Stressszenario.
+      </p>
+
+      <h2>Effektivzins und eigene Rechnung müssen erklärbar zusammenpassen</h2>
+      <p>
+        Der Sollzins ist nur der Preis des geliehenen Kapitals. Der Effektivzins berücksichtigt Auszahlungsbetrag, Laufzeit, Termine und einzubeziehende Kreditkosten. WorthCalc löst denselben wirtschaftlichen Grundgedanken mit Ihren Eingaben, kann aber nicht entscheiden, welche Position nach Preisangabenrecht in die offizielle Pflichtangabe gehört.
+      </p>
+      <p>
+        Bei großer Abweichung prüfen Sie die erste Fälligkeit, ein Disagio, finanzierte Zusatzprodukte, variable Konditionen, Schlussrate und Auszahlungstag. Sonderkosten außerhalb des ausgewiesenen Effektivzinses gehören in eine zweite vollständige Rechnung. Lassen Sie sich die Angebotswerte schriftlich erklären, bevor Sie unterschreiben.
+      </p>
+
+      <h2>Anfangskosten, Laufzeit und Sondertilgung getrennt testen</h2>
+      <p>
+        Die Sensitivitätstabelle hält 48 Raten zu 350 € konstant und verändert nur die einmaligen Kosten. Danach sollten Sie bei gleichem benötigten Auszahlungsbetrag kürzere und längere Laufzeiten rechnen. Eine längere Laufzeit senkt die Rate, kann aber die Zinskosten erhöhen; eine kurze Laufzeit macht eine sofortige Pauschale im Jahresvergleich besonders schwer.
+      </p>
+      <p>
+        Wenn eine frühe Ablösung geplant ist, verwenden Sie nur die bis dahin gezahlten Raten, die Restschuld, mögliche Vorfälligkeitskosten und nicht erstattete Anfangskosten. Prüfen Sie anschließend die Haushaltsbelastung mit Miete, anderen Krediten, Versicherungen, Lebenshaltung und Reserve. Ein niedriger Effektivzins allein beweist keine Tragbarkeit.
+      </p>
+
+      <p>
+        Steckt der Preisunterschied in Barpreis und Ratenpreis eines Einkaufs, hilft zusätzlich der <a href="/de/zero-interest-installments-truth/">Leitfaden zur tatsächlichen 0%-Finanzierung</a>. Dort ist der verfügbare Barpreis der wirtschaftliche Ausgangsbetrag.
+      </p>
+      <p class="privacy-note">Allgemeine Lernrechnung, keine individuelle Kredit-, Rechts- oder Steuerberatung. Prüfen Sie Auszahlung, Effektivzins, Kosten und Termine im aktuellen Vertrag. WorthCalc verarbeitet Eingaben lokal im Browser.</p>
     </>
   )}
 

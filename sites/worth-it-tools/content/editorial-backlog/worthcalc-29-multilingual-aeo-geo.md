@@ -43,20 +43,29 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批完成後稽核口徑：55 HTML、23 編輯內容頁、20／145 任務對應版本、20／145 完整版本、4／29 五語完成主題。
 - 發布證據：PR #20 已合併為 `f40c36f`，GitHub Pages run `29650106423` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、hreflang、schema、市場算例與 sitemap 線上查核 PASS。
 
-## 2026-07-18 第五批（第 02 題 A 段，待發布）
+## 2026-07-18 第五批（第 02 題 A 段，已發布）
 
 - 題目 02「前置費用與融資成本」先完成 EN／zh-TW／ES 三個原生頁，正好用滿本批 3 個公開頁上限；FR／DE 留到下一批，五語對等內容全部完成後才開完整互相 hreflang。
 - 核心模型：以實際可用資金而非名目貸款額為起點，依費用從撥款扣除、同日另付或加入本金的實際方式建現金流；比較月付與期數相同但 upfront fee 不同的全期現金成本與估算有效年率。
 - 原生差異：EN 使用 net proceeds、origination／documentation fee 與 CFPB disclosure；繁中使用實際入帳、開辦／帳管／徵信費及金管會總費用年百分率；ES 使用 comisión de apertura、TIN／TAE 與 Banco de España 的初期／週期費用模型。
 - 三語均提供不同幣值完整算例與四列敏感度，明確區分教育現金流估算和法定 APR／總費用年百分率／TAE。
-- 本批建置目標：58 HTML、26 編輯內容頁、23／145 任務對應版本、23／145 完整版本、4／29 五語完成主題（第 02 題為 3／5，下一批完成）。
+- 本批建置結果：58 HTML、26 編輯內容頁、23／145 任務對應版本、23／145 完整版本、4／29 五語完成主題（第 02 題為 3／5）。
+- 發布證據：PR #21 已合併為 `0c3d171`，GitHub Pages run `29650613641` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self hreflang、schema、市場算例與 sitemap 線上查核 PASS。
+
+## 2026-07-18 第六批（第 02 題 B 段，待發布）
+
+- 新增 FR／DE 兩個完整原生頁，使第 02 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
+- FR 以 somme nette、frais de dossier、TAEG、fiche précontractuelle 與法國必要費用口徑說明；完整算例為 `12 000 €`、36 × `360 €`、`480 €` 初期費用使估算年率 `5,18% → 8,10%`。
+- DE 以 Auszahlungsbetrag、Disagio、effektiver Jahreszins、Restschuldversicherung 與消費貸款費用合法性說明；完整算例為 `15.000 €`、48 × `350 €`、`600 €` 初期費用使估算年率 `5,82% → 8,05%`。
+- 來源採法國經濟部／Service-Public、德國 Bundesbank／Verbraucherzentrale；不引用市場平均利率替使用者下結論。
+- 本批建置目標：60 HTML、28 編輯內容頁、25／145 任務對應與完整版本、5／29 五語完成主題。
 
 ## 待執行主題
 
 | ID | Cluster | Topic | Status |
 |---:|---|---|---|
 | 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; deployed |
-| 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-5A EN/ZH/ES ready; FR/DE next batch |
+| 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-6 five-locale complete; release pending |
 | 03 | Borrowing & True Cost | BNPL vs credit-card installments | backlog |
 | 04 | Subscriptions & Memberships | Monthly vs annual subscription | backlog |
 | 05 | Subscriptions & Memberships | Subscription audit and annual cost | phase-1 complete |

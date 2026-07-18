@@ -244,6 +244,50 @@ export const upfrontFeeGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     ],
     lastVerified: '2026-07-18',
   },
+  fr: {
+    id: 'upfront-fee-financing-cost-method',
+    labels: labels.fr,
+    directAnswer: 'Des frais payés au départ augmentent le coût du financement même si la mensualité reste identique. Comparez l’échéancier à la somme nette réellement disponible après les frais obligatoires. Pour un crédit nominal de 12 000 € remboursé par 36 mensualités de 360 €, l’estimation annuelle est de 5,18% sans frais; avec 480 € de frais initiaux, seuls 11 520 € restent disponibles et l’estimation monte à 8,10%.',
+    inputs: ['Montant nominal du crédit et somme nette mise à disposition', 'Frais de dossier, courtage, garantie, assurance ou compte imposés pour obtenir l’offre', 'Mode de paiement de chaque coût : retenu, payé à la signature ou financé', 'Montant, nombre et date des échéances', 'Services facultatifs et frais d’incident, séparés du remboursement normal', 'TAEG, montant total dû et fiche d’information précontractuelle'],
+    formula: 'Somme nette = montant débloqué − frais payés ou retenus à la mise à disposition. Résoudre r : somme nette = Σ(mensualité ultérieure_t ÷ (1 + r)^t). Taux annuel effectif estimé = ((1 + r)^12 − 1) × 100. Coût de trésorerie = échéances ultérieures − somme nette; résultat équivalent à toutes les sorties, frais initiaux séparés compris, moins le déblocage brut.',
+    workedExample: 'L’offre A débloque 12 000 € et prévoit 36 mensualités de 360 €, soit 12 960 € remboursés. Sans frais, le coût de trésorerie est de 960 € et le taux annuel effectif estimé de 5,18%. L’offre B conserve montant, durée et mensualité, mais prélève 480 € de frais de dossier à la souscription. La somme utile tombe à 11 520 €, le coût atteint 1 440 € et l’estimation annuelle 8,10%.',
+    sensitivity: [
+      { scenario: 'Aucun frais initial', input: '12 000 € nets; 36 × 360 €', result: '960 € de coût; environ 5,18% par an' },
+      { scenario: 'Frais de 240 €', input: '11 760 € nets; mensualité identique', result: '1 200 € de coût; environ 6,61% par an' },
+      { scenario: 'Frais de 480 €', input: '11 520 € nets; mensualité identique', result: '1 440 € de coût; environ 8,10% par an' },
+      { scenario: 'Frais de 720 €', input: '11 280 € nets; mensualité identique', result: '1 680 € de coût; environ 9,65% par an' },
+    ],
+    cta: { label: 'Tester la somme nette et l’échéancier dans le calculateur', href: '/en/tools/installment-true-apr' },
+    limitations: ['Cette équivalence de flux est pédagogique et ne remplace pas le TAEG légal. Les règles applicables déterminent les frais, dates, assurances et hypothèses qui doivent être intégrés.', 'Ne comptez pas deux fois un frais : s’il est retenu sur le déblocage, réduisez la somme nette; s’il est payé séparément le même jour, inscrivez une sortie initiale; s’il est financé, utilisez le capital et l’échéancier augmentés.', 'Deux offres diffèrent aussi par le taux variable, le remboursement anticipé, les garanties, les produits accessoires et les incidents. La capacité de remboursement reste une analyse distincte.'],
+    sources: [
+      { label: 'Ministère de l’Économie — composition et rôle du TAEG', href: 'https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/credit-quoi-correspond-le-taux-annuel-effectif-global-taeg' },
+      { label: 'Service-Public — obligations de la banque pour un crédit à la consommation', href: 'https://www.service-public.fr/particuliers/vosdroits/F2440' },
+      { label: 'Ministère de l’Économie — fonctionnement du crédit à la consommation', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/tout-savoir-sur-le-credit-la-consommation' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'upfront-fee-financing-cost-method',
+    labels: labels.de,
+    directAnswer: 'Einmalige Kosten verteuern einen Kredit auch bei unveränderter Monatsrate. Vergleichen Sie die Raten mit dem Betrag, der nach Abzug aller notwendigen Anfangskosten tatsächlich verfügbar ist. Bei 15.000 € und 48 Raten zu 350 € ergibt sich ohne Anfangskosten ein geschätzter effektiver Jahreszins von 5,82%. Bleiben wegen 600 € einmaliger Zusatzkosten nur 14.400 € nutzbar, steigt die Schätzung auf 8,05%.',
+    inputs: ['Nennbetrag, Auszahlungsbetrag und tatsächlich nutzbarer Betrag', 'Disagio sowie notwendige Vermittlungs-, Konto-, Versicherungs- oder sonstige Zusatzkosten', 'Zahlungsart: vom Auszahlungsbetrag einbehalten, separat zu Beginn bezahlt oder mitfinanziert', 'Höhe, Anzahl und Fälligkeit aller Raten', 'Freiwillige Restschuldversicherung und Verzugsfolgen getrennt vom Normalfall', 'Effektiver Jahreszins, Gesamtbetrag und vorvertragliche Informationen des Anbieters'],
+    formula: 'Nutzbarer Betrag = Bruttoauszahlung − bei Auszahlung einbehaltene oder gezahlte Kosten. r lösen: nutzbarer Betrag = Σ(spätere Rate_t ÷ (1 + r)^t). Geschätzter effektiver Jahreszins = ((1 + r)^12 − 1) × 100. Geldkosten = spätere Raten − nutzbarer Betrag; gleichwertig: sämtliche Auszahlungen einschließlich separat gezahlter Anfangskosten − Bruttoauszahlung.',
+    workedExample: 'Angebot A zahlt 15.000 € aus und verlangt 48 Raten zu 350 €, insgesamt 16.800 €. Ohne Anfangskosten betragen die Geldkosten 1.800 € und der geschätzte effektive Jahreszins 5,82%. Angebot B hat dieselbe Rate und Laufzeit, lässt wegen 600 € einmaliger Zusatzkosten aber nur 14.400 € nutzbar. Die Geldkosten steigen auf 2.400 € und die Jahresschätzung auf 8,05%.',
+    sensitivity: [
+      { scenario: 'Keine Anfangskosten', input: '15.000 € nutzbar; 48 × 350 €', result: '1.800 € Kosten; rund 5,82% pro Jahr' },
+      { scenario: '300 € Anfangskosten', input: '14.700 € nutzbar; Rate gleich', result: '2.100 € Kosten; rund 6,91% pro Jahr' },
+      { scenario: '600 € Anfangskosten', input: '14.400 € nutzbar; Rate gleich', result: '2.400 € Kosten; rund 8,05% pro Jahr' },
+      { scenario: '900 € Anfangskosten', input: '14.100 € nutzbar; Rate gleich', result: '2.700 € Kosten; rund 9,24% pro Jahr' },
+    ],
+    cta: { label: 'Auszahlungsbetrag und Ratenplan im Rechner prüfen', href: '/en/tools/installment-true-apr' },
+    limitations: ['Die Zahlungsstromrechnung ist eine Lernschätzung und keine rechtliche Berechnung der Pflichtangabe. Maßgeblich sind Vertrag, Preisangabenrecht und der ausgewiesene effektive Jahreszins.', 'Kosten nur einmal erfassen: Bei Einbehalt verringert sich die Auszahlung, bei separater Zahlung entsteht ein Anfangsabfluss, bei Finanzierung erhöhen sich Darlehensbetrag und Ratenplan.', 'Bei Verbraucherdarlehen sind nicht beliebige Bearbeitungsgebühren zulässig. Prüfen Sie die Rechtsgrundlage. Freiwillige Restschuldversicherungen und andere Sonderkosten können außerhalb des ausgewiesenen Effektivzinses liegen und benötigen einen getrennten Vergleich.'],
+    sources: [
+      { label: 'Deutsche Bundesbank — effektiver Jahreszins, geringere Auszahlung und Gebühren', href: 'https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012' },
+      { label: 'Verbraucherzentrale — Kredite nach Effektivzins und Sonderkosten vergleichen', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/kredite-und-darlehen-auch-beim-geldleihen-laesst-sich-sparen-10409' },
+      { label: 'Verbraucherzentrale — Kosten und Grenzen von Restschuldversicherungen', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/restschuldversicherungen-sind-teuer-und-leisten-nur-wenig-32448' },
+    ],
+    lastVerified: '2026-07-18',
+  },
 };
 
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {

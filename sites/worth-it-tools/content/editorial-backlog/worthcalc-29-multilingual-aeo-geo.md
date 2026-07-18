@@ -89,13 +89,21 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：68 HTML、36 編輯內容頁、33／145 任務對應與完整版本、6／29 五語完成主題（第 04 題為 3／5）。
 - 發布證據：PR #25 已合併為 `82cff28`，GitHub Pages run `29652210900` 的 build、deploy、IndexNow 成功；三語 HTTP 200、canonical、self＋x-default hreflang、schema、市場算例與 sitemap 線上查核 PASS，FR／DE 404 且不在 sitemap。
 
-## 2026-07-18 第十批（第 04 題 B 段，待發布）
+## 2026-07-18 第十批（第 04 題 B 段，已發布）
 
 - 新增 FR／DE 兩個完整原生頁，使第 04 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
 - FR 使用 `reconduction tacite`、`préavis` 與 `résiliation en trois clics`，並區分月繳頻率、承諾期間與已付款期間退費；算例為 14,99 €／月和 119,92 €／年，65% 全年使用時月繳期望 132,66 €。
 - DE 使用 `Mindestlaufzeit`、`Kündigungsfrist`、自動延長與 `Kündigungsbutton`，並說明付款頻率不等於可隨時解約；算例為 12,99 €／月和 129,90 €／年，80% 全年使用時月繳期望 140,29 €。
 - 來源採法國經濟部／DGCCRF 與德國 Verbraucherzentrale；法規文字只作當地取消流程背景，退款仍以個別契約與適用權利為準。
 - 本批建置目標：70 HTML、38 編輯內容頁、35／145 任務對應與完整版本、7／29 五語完成主題。
+- 發布證據：PR #26 已合併為 `ca540f7`，GitHub Pages run `29652547197` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、市場算例與 sitemap 線上查核 PASS。
+
+## 2026-07-19 第十一批（第 06 題 A 段，待發布）
+
+- 題目 06「付費會員回本」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 未建立空殼頁。
+- 核心模型以淨年費除以每次增量利益，並先套用回饋上限；只計入原本就會消費及確定可用權益，再用低／高使用機率檢查不確定性。
+- 原生差異：EN 使用 eligible use／benefit cap；繁中處理回饋門檻、湊單與自動續約揭露；ES 使用 pedido elegible／tope 與 artículo 62 終止程序。
+- 本批建置目標：73 HTML、41 編輯內容頁、38／145 任務對應與完整版本、7／29 五語完成主題（第 06 題為 3／5）。
 
 ## 待執行主題
 
@@ -104,9 +112,9 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; deployed |
 | 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-6 complete; deployed |
 | 03 | Borrowing & True Cost | BNPL vs credit-card installments | phase-8 complete; deployed |
-| 04 | Subscriptions & Memberships | Monthly vs annual subscription | phase-10 five-locale complete; release pending |
+| 04 | Subscriptions & Memberships | Monthly vs annual subscription | phase-10 complete; deployed |
 | 05 | Subscriptions & Memberships | Subscription audit and annual cost | phase-1 complete |
-| 06 | Subscriptions & Memberships | Paid membership break-even | backlog; EN/ZH Costco calculator enriched |
+| 06 | Subscriptions & Memberships | Paid membership break-even | phase-11 three-locale complete; release pending |
 | 07 | Subscriptions & Memberships | Gym cost per visit | backlog |
 | 08 | Subscriptions & Memberships | Delivery membership break-even | backlog |
 | 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |

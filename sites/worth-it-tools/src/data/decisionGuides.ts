@@ -513,6 +513,72 @@ export const monthlyAnnualGuides: Partial<Record<Locale, DecisionGuideContent>> 
   },
 };
 
+export const paidMembershipGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'paid-membership-break-even-method',
+    labels: labels.en,
+    directAnswer: 'A paid membership is worth its fee only when benefits from purchases you would make anyway exceed the net annual fee. Subtract only credits you are certain to use, then divide by the net benefit per eligible use and apply every cap. With a $96 fee, $12 of certain credits, $7 saved per eligible use, and a 15-use benefit cap, the net fee is $84 and break-even is 12 uses. A 70% chance of 15 uses and 30% chance of six produces only $2.10 of expected annual value.',
+    inputs: ['Annual or monthly membership fee at the next renewal', 'Credits or benefits you would use without changing behavior', 'Price savings, waived fee, or incremental reward per eligible use', 'Minimum purchase, exclusions, enrollment, expiration, and benefit cap', 'Extra travel, tips, service charges, waste, or overspending caused by membership', 'Low, base, and high counts of purchases you would make anyway'],
+    formula: 'Net fee = membership fee − certain credits. Net benefit per eligible use = price/fee savings + incremental reward − extra cost. Scenario benefit = min(eligible uses × net benefit per use, benefit cap). Break-even uses = ceil(net fee ÷ net benefit per use), unless the cap is below the net fee.',
+    workedExample: 'A membership costs $96 a year and includes a $12 credit you would certainly use, so the net fee is $84. Each otherwise-planned eligible use saves $7, capped at 15 uses or $105. Break-even is ceil($84 ÷ $7) = 12 uses. Six uses lose $42; 15 uses gain $21. If there is a 70% chance of 15 uses and a 30% chance of six, expected benefit is 0.70 × $105 + 0.30 × $42 = $86.10, only $2.10 above the net fee.',
+    sensitivity: [
+      { scenario: 'Low use', input: '6 eligible uses × $7', result: '$42 benefit; membership loses $42' },
+      { scenario: 'Break-even', input: '12 eligible uses × $7', result: '$84 benefit; exactly covers net fee' },
+      { scenario: 'Benefit cap reached', input: '15 or more eligible uses', result: '$105 benefit; maximum $21 net value' },
+      { scenario: 'Probability-weighted', input: '70% at cap; 30% at 6 uses', result: '$86.10 expected benefit; $2.10 expected net value' },
+    ],
+    cta: { label: 'Test your membership assumptions', href: '/en/tools/costco-membership' },
+    limitations: ['A coupon, lounge visit, or credit is not worth face value if you would not otherwise buy or use it.', 'Count only incremental benefits versus the best free or nonmember alternative, and exclude spending added merely to reach a threshold.', 'Auto-renewal, cancellation, refund, household sharing, taxes, and changing terms can alter the result; verify the current agreement.'],
+    sources: [
+      { label: 'FTC Consumer Advice — auto-renewals and negative-option subscriptions', href: 'https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions' },
+      { label: 'FTC Consumer Advice — paid membership cancellation warning', href: 'https://consumer.ftc.gov/consumer-alerts/2025/08/la-fitness-made-it-difficult-people-cancel-gym-memberships-ftc-says' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'paid-membership-break-even-method',
+    labels: labels.zh,
+    directAnswer: '付費會員只有在「原本就會發生的消費」所帶來的實際優惠超過淨年費時才回本。先扣除確定會用的權益，再用每次合格消費的淨利益計算，最後套用回饋上限。年費 NT$1,500、確定可用權益 NT$300、每次淨省 NT$110、最多 15 次時，淨年費 NT$1,200，至少需 11 次；若 60% 機率用 15 次、40% 機率只用 6 次，期望淨價值僅 NT$54。',
+    inputs: ['下一次續約真正會收的年費或月費', '不用改變消費也確定能用完的折價券、點數或服務', '每次合格消費的價差、免運、折抵或增額回饋', '最低消費、排除項目、登錄、期限與回饋上限', '為使用會員增加的交通、服務費、浪費或湊單', '原本就會發生的保守、基準與高使用次數'],
+    formula: '淨年費 = 會員費 − 確定可用權益。每次淨利益 = 實際價差／免除費用／增額回饋 − 額外成本。情境利益 = min（合格次數 × 每次淨利益，年度回饋上限）。最低回本次數 = 無條件進位（淨年費 ÷ 每次淨利益）；若上限低於淨年費，永遠無法靠該權益回本。',
+    workedExample: '會員年費 NT$1,500，其中 NT$300 權益是原本就會用的，因此淨年費 NT$1,200。每次合格消費淨省 NT$110，最多計 15 次或 NT$1,650。最低回本次數為 1,200 ÷ 110 無條件進位 = 11 次。6 次會少 NT$540，15 次多 NT$450；若 60% 機率 15 次、40% 機率 6 次，期望利益 NT$1,254，扣除淨年費只剩 NT$54。',
+    sensitivity: [
+      { scenario: '低使用', input: '6 次 × NT$110', result: '利益 NT$660；比淨年費少 NT$540' },
+      { scenario: '最低回本', input: '11 次 × NT$110', result: '利益 NT$1,210；淨值 NT$10' },
+      { scenario: '達回饋上限', input: '15 次以上', result: '利益上限 NT$1,650；最大淨值 NT$450' },
+      { scenario: '機率加權', input: '60% 為 15 次、40% 為 6 次', result: '期望利益 NT$1,254；期望淨值 NT$54' },
+    ],
+    cta: { label: '用自己的數字重算會員回本', href: '/zh/tools/costco-membership' },
+    limitations: ['本來不會使用的券、贈品或服務不能用面額全數抵年費。', '只能計算相對免費方案或非會員通路多出的利益；為湊門檻增加的支出不是回饋。', '自動續約、家庭共享、退費、稅費與權益調整依契約而異，續約前要重新查核。'],
+    sources: [
+      { label: '行政院消費者保護會 — 電子商務消費者保護綱領', href: 'https://cpc.ey.gov.tw/Page/960E744883E6A75D' },
+      { label: '行政院消費者保護會 — 如何取消免費或已訂閱的 APP', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'paid-membership-break-even-method',
+    labels: labels.es,
+    directAnswer: 'Una membresía de pago compensa solo cuando el beneficio incremental de compras que harías igualmente supera la cuota neta. Resta únicamente créditos seguros, calcula el ahorro por pedido elegible y aplica el tope. Con una cuota de 72 €, 12 € de ventajas ciertas, 5,50 € por uso y un máximo de 14 usos, la cuota neta es 60 € y hacen falta 11 usos. Un 70% de probabilidad de llegar a 14 y un 30% de quedarse en cinco deja solo 2,15 € de valor neto esperado.',
+    inputs: ['Cuota real de la próxima renovación', 'Créditos o servicios que usarías sin cambiar hábitos', 'Ahorro, envío evitado o recompensa incremental por uso elegible', 'Pedido mínimo, exclusiones, activación, caducidad y tope', 'Desplazamiento, propina, recargo, desperdicio o compra extra inducida', 'Número bajo, central y alto de usos que ya pensabas realizar'],
+    formula: 'Cuota neta = cuota − créditos ciertos. Beneficio neto por uso elegible = ahorro + recompensa incremental − coste adicional. Beneficio del escenario = min(usos elegibles × beneficio por uso, tope). Usos de equilibrio = redondear hacia arriba(cuota neta ÷ beneficio por uso), salvo que el tope no cubra la cuota.',
+    workedExample: 'La membresía cuesta 72 € y ofrece 12 € que utilizarías con seguridad: cuota neta 60 €. Cada pedido elegible que ya ibas a hacer ahorra 5,50 €, con máximo de 14 usos o 77 €. El equilibrio es ceil(60 ÷ 5,50) = 11 usos. Cinco usos pierden 32,50 € y 14 ganan 17 €. Con 70% de probabilidad de 14 usos y 30% de cinco, el beneficio esperado es 62,15 € y el valor neto apenas 2,15 €.',
+    sensitivity: [
+      { scenario: 'Uso bajo', input: '5 usos × 5,50 €', result: '27,50 € de beneficio; pérdida de 32,50 €' },
+      { scenario: 'Equilibrio mínimo', input: '11 usos × 5,50 €', result: '60,50 € de beneficio; valor neto 0,50 €' },
+      { scenario: 'Tope alcanzado', input: '14 usos o más', result: '77 € de beneficio; valor neto máximo 17 €' },
+      { scenario: 'Ponderado por probabilidad', input: '70% con 14 usos; 30% con 5', result: '62,15 € esperados; valor neto 2,15 €' },
+    ],
+    cta: { label: 'Probar supuestos en la calculadora inglesa', href: '/en/tools/costco-membership' },
+    limitations: ['No valores al 100% una ventaja que no comprarías por separado.', 'Compara con la mejor alternativa gratuita o sin membresía y descuenta compras añadidas solo para alcanzar mínimos.', 'Renovación, baja, reembolso, uso familiar e impuestos dependen del contrato; comprueba las condiciones vigentes.'],
+    sources: [
+      { label: 'BOE — Ley General de Consumidores y Usuarios, artículo 62', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a62' },
+      { label: 'Centro Europeo del Consumidor en España — renovación y cancelación online', href: 'https://portal-cec.consumo.gob.es/sites/default/files/boletines/pdfs/BOLETIN_NOTICIAS_ABRIL_2026_0.pdf' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

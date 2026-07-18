@@ -18,15 +18,16 @@ const briefRoutes = [
   { id: '03', slug: 'bnpl-vs-credit-card-installments' },
   { id: '04', slug: 'monthly-vs-annual-subscription' },
   { id: '05', slug: 'subscription-creep' },
+  { id: '06', slug: 'paid-membership-break-even' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
   { id: '11', slug: 'rent-vs-buy-guide' },
 ];
 
 const releaseFloor = {
-  html: 70,
-  editorial: 38,
-  alignedVariants: 35,
-  compliantVariants: 35,
+  html: 73,
+  editorial: 41,
+  alignedVariants: 38,
+  compliantVariants: 38,
   completeTopics: 7,
 };
 

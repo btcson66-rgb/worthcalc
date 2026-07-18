@@ -1,0 +1,58 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { appliancePaybackGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: { title: 'Energy-efficient appliance payback: price premium, kWh savings, and break-even', description: 'Calculate appliance payback from purchase-price difference, kWh per use, annual frequency, marginal electricity rate, rebate and holding life.', faq: [
+    { question: 'Should I use kWh per cycle or annual kWh?', answer: 'Either works if both models use the same unit. For annual kWh difference, set uses per year to one. Never mix per-cycle and annual labels.' },
+    { question: 'Which electricity price belongs in the formula?', answer: 'Use the price of the kWh likely saved, including time or tier effects that apply. Run a range when a single marginal rate cannot be isolated.' },
+    { question: 'Does a better efficiency class guarantee payback?', answer: 'No. Payback also depends on price premium, frequency, rate, incentive and holding life. Compare equal capacity and performance.' },
+    { question: 'Can I include water or maintenance savings?', answer: 'Yes, but add each as an explicit annual cash-flow scenario. Do not hide assumptions inside the electricity input.' },
+    { question: 'What if annual saving is zero?', answer: 'There is no energy-only payback. The calculator shows no finite payback; choose based on price, function or separately documented benefits.' },
+  ] },
+  zh: { title: '節能家電多久回本？用價差、耗電、使用頻率與電價試算', description: '用節能家電淨價差、每次耗電差、年使用次數、台電邊際電價、補助與持有年數計算回本。', faq: [
+    { question: '應填每次耗電還是年耗電？', answer: '兩者皆可，但兩台必須同單位。同為年耗電差時，每年次數填 1；不可拿單次標示直接減年耗電。' },
+    { question: '電價要填帳單平均嗎？', answer: '應估省下那一度的邊際價格；台電有季節與級距，無法精確拆出時用低、中、高電價跑情境。' },
+    { question: '一級能效一定回本嗎？', answer: '不一定。還要看淨價差、容量、使用頻率、電價、補助與持有期，且比較功能與測試基準必須相近。' },
+    { question: '水費或維修差額能加入嗎？', answer: '可以，但應另列每年現金流，不要把水量、耗材或未知維修成本混進每度電價。' },
+    { question: '年節電為零怎麼辦？', answer: '表示沒有能源成本回本年；應依價格、功能或另有證據的效益判斷。' },
+  ] },
+  es: { title: 'Amortización de un electrodoméstico eficiente: sobreprecio, kWh y punto de equilibrio', description: 'Calcula amortización con diferencia de precio, kWh por uso, frecuencia anual, precio marginal de la luz, ayuda y vida útil.', faq: [
+    { question: '¿Uso kWh por ciclo o kWh anuales?', answer: 'Cualquiera si ambos modelos comparten unidad. Con diferencia anual, introduce un uso al año. No mezcles ciclo y año.' },
+    { question: '¿Qué precio de la electricidad introduzco?', answer: 'El coste marginal del kWh que se ahorraría, con periodos y componentes aplicables. Usa un rango si la factura no permite aislarlo.' },
+    { question: '¿Una clase mejor garantiza amortización?', answer: 'No. También importan sobreprecio, usos, tarifa, ayuda y años de tenencia, comparando capacidad y programa equivalentes.' },
+    { question: '¿Puedo añadir ahorro de agua?', answer: 'Sí, como flujo anual explícito en un escenario separado. No lo conviertas en un precio ficticio del kWh.' },
+    { question: '¿Qué ocurre si no hay ahorro anual?', answer: 'No existe amortización energética finita. La decisión dependerá de precio, función u otros beneficios documentados.' },
+  ] },
+};
+const commonFields = {
+  en: [
+    { key: 'standardPrice', label: 'Standard model out-the-door price' }, { key: 'efficientPrice', label: 'Efficient model out-the-door price' }, { key: 'rebate', label: 'Eligible rebate actually received' }, { key: 'energyDifference', label: 'kWh saved per use', step: .01 }, { key: 'usesPerYear', label: 'Uses per year' }, { key: 'electricityRate', label: 'Marginal electricity price per kWh', step: .01 }, { key: 'lifeYears', label: 'Years you expect to keep it' },
+  ],
+  zh: [
+    { key: 'standardPrice', label: '一般機種完整實付價' }, { key: 'efficientPrice', label: '節能機種完整實付價' }, { key: 'rebate', label: '真正可領補助' }, { key: 'energyDifference', label: '每次節省度數（kWh）', step: .01 }, { key: 'usesPerYear', label: '每年使用次數' }, { key: 'electricityRate', label: '每度邊際電價', step: .1 }, { key: 'lifeYears', label: '預計持有年數' },
+  ],
+  es: [
+    { key: 'standardPrice', label: 'Precio final del modelo estándar' }, { key: 'efficientPrice', label: 'Precio final del modelo eficiente' }, { key: 'rebate', label: 'Ayuda realmente elegible' }, { key: 'energyDifference', label: 'kWh ahorrados por uso', step: .01 }, { key: 'usesPerYear', label: 'Usos al año' }, { key: 'electricityRate', label: 'Precio marginal por kWh', step: .01 }, { key: 'lifeYears', label: 'Años de tenencia previstos' },
+  ],
+};
+const calculators = {
+  en: { currency: 'USD' as const, defaults: { standardPrice: 700, efficientPrice: 1000, rebate: 50, energyDifference: .6, usesPerYear: 250, electricityRate: .18, lifeYears: 10 }, fields: commonFields.en, copy: { heading: 'Appliance energy-payback calculator', intro: 'Use two comparable labels and the rate for the kWh you would actually save.', output1: 'Annual energy saving', output2: 'Simple payback', output3: 'Net saving over holding life', verdictPositive: 'The energy premium pays back within the stated life.', verdictNegative: 'The energy premium does not pay back within the stated life.', unit: 'years', privacy: 'Energy-only planning model. Verify label units, incentive eligibility, rate and comparable capacity.' } },
+  zh: { currency: 'TWD' as const, defaults: { standardPrice: 18000, efficientPrice: 24000, rebate: 2000, energyDifference: .6, usesPerYear: 250, electricityRate: 3.5, lifeYears: 10 }, fields: commonFields.zh, copy: { heading: '節能家電回本計算器', intro: '使用同基準能源標示與真正會省下那一度的邊際電價。', output1: '每年節電金額', output2: '簡單回本年數', output3: '持有期淨節省', verdictPositive: '節能價差可在預計持有期內回本。', verdictNegative: '節能價差無法在預計持有期內回本。', unit: '年', privacy: '僅計能源現金流；請確認標示單位、補助資格、級距電價與容量相當。' } },
+  es: { currency: 'EUR' as const, defaults: { standardPrice: 600, efficientPrice: 800, rebate: 0, energyDifference: .5, usesPerYear: 220, electricityRate: .25, lifeYears: 10 }, fields: commonFields.es, copy: { heading: 'Calculadora de amortización energética', intro: 'Compara etiquetas equivalentes y el precio del kWh que realmente ahorrarías.', output1: 'Ahorro energético anual', output2: 'Amortización simple', output3: 'Ahorro neto durante la tenencia', verdictPositive: 'El sobreprecio se amortiza dentro de la vida indicada.', verdictNegative: 'El sobreprecio no se amortiza dentro de la vida indicada.', unit: 'años', privacy: 'Modelo solo de energía. Verifica unidades, ayuda, tarifa, capacidad y programa comparables.' } },
+};
+export function getStaticPaths() { return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale]; const guide = appliancePaybackGuides[locale]!; const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <><p>The efficiency badge is an input, not the answer. Convert the label difference into annual cash, subtract only a real incentive, and test whether the premium returns before you stop owning the appliance.</p><DecisionGuide content={guide} /><DecisionMathCalculator id="appliance-payback-calculator" mode="appliance" locale={locale} {...calculator} /><h2>Match the label basis before subtracting</h2><p>Compare the same capacity and program. If both labels report annual kWh, use their annual difference and one use per year. If both report kWh per cycle, multiply by your cycles. Do not mix them.</p><h2>Use marginal energy cost and a conservative life</h2><p>DOE notes that actual operating cost depends on utility rates and use. Run lower and higher rates, then test the years you realistically expect to keep the machine rather than an assumed maximum life.</p><p class="privacy-note">General education only, not financial, tax, utility, engineering or product-safety advice.</p></>}
+  {locale === 'zh' && <><p>能源效率等級不是回本答案。先把同容量、同測試基準的耗電差換成年節省，再確認補助仍有效，最後看淨價差能否在你真正持有期間收回。</p><DecisionGuide content={guide} /><DecisionMathCalculator id="appliance-payback-calculator" mode="appliance" locale={locale} {...calculator} /><h2>先確認型號、單位與有效日期</h2><p>經濟部能源署登錄資料包含型號、效率與年耗電量。比較時必須是容量、功能與測試基準相近的機種；過期證書或已廢止補助不能當成今天現金。</p><h2>台電級距要用邊際情境</h2><p>節省一度電不一定等於帳單平均單價。依家庭落點與季節跑低、中、高電價，再測試較短持有期，避免用十年節省替一台可能六年就搬走或汰換的設備背書。</p><p class="privacy-note">一般教育資訊，不是財務、稅務、公用事業、工程或產品安全建議。</p></>}
+  {locale === 'es' && <><p>La letra de eficiencia no responde por sí sola si conviene pagar más. Convierte la diferencia de etiqueta en euros anuales con tus ciclos y tarifa, y exige que el sobreprecio vuelva antes de dejar de usar el aparato.</p><DecisionGuide content={guide} /><DecisionMathCalculator id="appliance-payback-calculator" mode="appliance" locale={locale} {...calculator} /><h2>Compara A–G, capacidad y programa</h2><p>El IDAE explica que la etiqueta incluye consumo y, según el producto, agua, capacidad, ruido o duración. Dos letras distintas no bastan si también cambian tamaño y prestaciones.</p><h2>La tarifa y la ayuda son escenarios, no constantes</h2><p>Usa el precio marginal por periodo del contrato y verifica la ayuda en fecha, territorio y modelo. Si el aparato se conservará seis años, no justifiques el precio con ahorros de diez.</p><p class="privacy-note">Información general; no es asesoramiento financiero, fiscal, energético, técnico o de seguridad.</p></>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

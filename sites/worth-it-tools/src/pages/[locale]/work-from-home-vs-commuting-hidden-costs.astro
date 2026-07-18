@@ -6,7 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import { wfhCommuteGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -42,6 +42,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿El tiempo ahorrado vale mi sueldo por hora?', answer: 'No automáticamente. Usa cero para el presupuesto y un valor personal solo como sensibilidad, sin presentarlo como salario ganado.' },
     ],
   },
+  fr: {
+    title: 'Télétravail ou trajets quotidiens : comparer les coûts mensuels cachés',
+    description: 'Comparez télétravail, présence et mode hybride avec énergie, repas, équipement, abonnement, indemnités réellement versées et temps facultatif.',
+    faq: [
+      { question: 'Le télétravail coûte-t-il toujours moins cher ?', answer: 'Non. Il évite des trajets et certains repas mais ajoute chauffage, électricité, connexion, équipement ou espace. Comparez uniquement les coûts supplémentaires et les remboursements réels.' },
+      { question: 'Quel forfait télétravail utiliser en France en 2026 ?', answer: 'L’Urssaf publie des limites d’exonération, pas une somme automatiquement due à chaque salarié. Sans accord collectif, elle indique 2,70 € par jour dans la limite de 59,40 € par mois ; utilisez seulement le montant prévu et versé.' },
+      { question: 'Puis-je compter toute la facture internet ?', answer: 'Non si l’abonnement serait identique sans télétravail. Comptez une hausse de débit nécessaire, une ligne dédiée ou la quote-part réellement remboursée.' },
+      { question: 'Comment calculer un rythme hybride ?', answer: 'Appliquez les coûts journaliers aux jours réels, puis ajoutez les abonnements et équipements qui restent fixes. Le remboursement transport et l’indemnité télétravail doivent être saisis séparément.' },
+      { question: 'Le temps gagné vaut-il mon salaire horaire ?', answer: 'Pas automatiquement. Gardez 0 € pour la trésorerie et testez une valeur personnelle séparée, sans la présenter comme un revenu.' },
+    ],
+  },
+  de: {
+    title: 'Homeoffice oder Pendeln: Versteckte monatliche Kosten vergleichen',
+    description: 'Vergleiche Homeoffice, Büro und Hybridmodell mit Energie, Essen, Ausstattung, Ticket, Zuschüssen und optionaler Pendelzeit.',
+    faq: [
+      { question: 'Ist Homeoffice immer günstiger?', answer: 'Nein. Pendel- und Bürokosten sinken, dafür können Heizung, Strom, Internet, Ausstattung oder Coworking steigen. Entscheidend sind Mehrkosten und tatsächliche Zuschüsse.' },
+      { question: 'Bekomme ich 6 € Homeoffice-Pauschale pro Tag ausgezahlt?', answer: 'Nein. Die Tagespauschale ist bei erfüllten Voraussetzungen ein steuerlicher Abzugsbetrag von 6 € je Tag, höchstens 1.260 € im Jahr. Steuerwirkung und Auszahlung sind nicht gleich.' },
+      { question: 'Soll die gesamte Internetrechnung zählen?', answer: 'Nur wenn sie wegen der Arbeit vollständig zusätzlich entsteht. Meist zählt eine notwendige Tarifstufe, eine separate Leitung oder der selbst getragene Mehrbetrag.' },
+      { question: 'Wie wird hybrides Arbeiten gerechnet?', answer: 'Tageskosten werden den echten Homeoffice- und Bürotagen zugeordnet. Deutschlandticket, Parkplatz, Internetupgrade und Ausstattung können als Fixkosten gleichzeitig bestehen bleiben.' },
+      { question: 'Ist gesparte Pendelzeit gleich Stundenlohn?', answer: 'Nein. Für die reine Haushaltsrechnung bleibt der Zeitwert null; ein persönlicher Wert ist nur eine Sensitivität und kein zusätzlicher Lohn.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -60,10 +82,20 @@ const calculators = {
     defaults: { workdays: 20, homeDays: 12, homeEnergy: 2, homeMeals: 5, homeOther: 1, homeFixed: 35, homeReimbursement: 25, officeCommute: 6, officeMeals: 12, officeOther: 2, officeFixed: 45, officeReimbursement: 0, commuteMinutes: 70, timeValue: 8 },
     copy: { heading: 'Calculadora mensual de teletrabajo, oficina e híbrido', intro: 'Introduce incrementos de un mes normal. No dupliques alquiler, internet o comida que pagarías en cualquier modalidad.', workdays: 'Días laborables del mes', homeDays: 'Días reales de teletrabajo', homeEnergy: 'Energía extra por día en casa', homeMeals: 'Comida por día en casa', homeOther: 'Otros gastos diarios en casa', homeFixed: 'Gasto fijo mensual en casa', homeReimbursement: 'Compensación mensual de teletrabajo', officeCommute: 'Transporte por día presencial', officeMeals: 'Sobrecoste de comida presencial', officeOther: 'Otros gastos por día presencial', officeFixed: 'Gastos fijos de oficina/mes', officeReimbursement: 'Reembolso de transporte/oficina', commuteMinutes: 'Minutos ida y vuelta por día', timeValue: 'Valor personal opcional por hora', allHome: 'Caja mensual todo teletrabajo', allOffice: 'Caja mensual toda oficina', hybridCash: 'Caja de la modalidad híbrida', commuteHours: 'Horas de trayecto híbrido', hybridFull: 'Caja híbrida + tiempo opcional', officePremium: 'Toda oficina menos teletrabajo', verdictHome: 'Todo teletrabajo cuesta menos por', verdictOffice: 'Toda oficina cuesta menos por', privacy: 'Estimación educativa; datos en el navegador. Verifica facturas, convenio, acuerdo y fiscalidad.' },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { workdays: 20, homeDays: 12, homeEnergy: 2.5, homeMeals: 5, homeOther: 1, homeFixed: 40, homeReimbursement: 32.4, officeCommute: 0, officeMeals: 8, officeOther: 2, officeFixed: 90, officeReimbursement: 45, commuteMinutes: 70, timeValue: 10 },
+    copy: { heading: 'Calculateur mensuel télétravail, présence et hybride', intro: 'Saisissez les coûts supplémentaires d’un mois normal. Loyer, internet et alimentation de base ne doivent pas être comptés deux fois.', workdays: 'Jours travaillés dans le mois', homeDays: 'Jours réels de télétravail', homeEnergy: 'Énergie supplémentaire/jour à domicile', homeMeals: 'Repas d’un jour à domicile', homeOther: 'Autres frais/jour à domicile', homeFixed: 'Frais fixes télétravail/mois', homeReimbursement: 'Indemnité télétravail versée/mois', officeCommute: 'Trajet variable/jour de présence', officeMeals: 'Surcoût repas/jour de présence', officeOther: 'Autres frais/jour de présence', officeFixed: 'Abonnements/frais fixes présence', officeReimbursement: 'Prise en charge transport/bureau', commuteMinutes: 'Minutes aller-retour/jour de présence', timeValue: 'Valeur personnelle facultative/heure', allHome: 'Trésorerie tout télétravail', allOffice: 'Trésorerie toute présence', hybridCash: 'Trésorerie du mode hybride', commuteHours: 'Heures de trajet hybride', hybridFull: 'Hybride + temps facultatif', officePremium: 'Présence moins télétravail', verdictHome: 'Le télétravail coûte moins de', verdictOffice: 'La présence coûte moins de', privacy: 'Estimation pédagogique, données dans le navigateur. Vérifiez justificatifs, accord, convention et fiscalité.' },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { workdays: 20, homeDays: 12, homeEnergy: 3, homeMeals: 5, homeOther: 1, homeFixed: 40, homeReimbursement: 0, officeCommute: 0, officeMeals: 10, officeOther: 2, officeFixed: 63, officeReimbursement: 0, commuteMinutes: 60, timeValue: 12 },
+    copy: { heading: 'Monatsrechner für Homeoffice, Büro und Hybrid', intro: 'Nur zusätzliche Kosten eines normalen Monats eintragen. Miete, Grundinternet und ohnehin nötige Mahlzeiten nicht doppelt zählen.', workdays: 'Arbeitstage im Monat', homeDays: 'Tatsächliche Homeoffice-Tage', homeEnergy: 'Zusätzliche Energie je Heimtag', homeMeals: 'Essen je Heimtag', homeOther: 'Weitere Kosten je Heimtag', homeFixed: 'Homeoffice-Fixkosten/Monat', homeReimbursement: 'Ausgezahlter Homeoffice-Zuschuss', officeCommute: 'Variable Fahrtkosten je Bürotag', officeMeals: 'Mehrkosten Essen je Bürotag', officeOther: 'Weitere Kosten je Bürotag', officeFixed: 'Ticket/Büro-Fixkosten pro Monat', officeReimbursement: 'Fahrt-/Bürozuschuss pro Monat', commuteMinutes: 'Hin- und Rückweg-Minuten je Bürotag', timeValue: 'Optionaler persönlicher Zeitwert/Stunde', allHome: 'Nur Homeoffice Geldkosten', allOffice: 'Nur Büro Geldkosten', hybridCash: 'Gewähltes Hybridmodell Geldkosten', commuteHours: 'Pendelstunden Hybridmodell', hybridFull: 'Hybrid + optionaler Zeitwert', officePremium: 'Büro minus Homeoffice', verdictHome: 'Homeoffice kostet weniger um', verdictOffice: 'Büro kostet weniger um', privacy: 'Unverbindliche Lernrechnung; Eingaben bleiben im Browser. Belege, Vereinbarung, Zuschüsse und Steuerfall prüfen.' },
+  },
 };
 
 export function getStaticPaths() {
-  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+  return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as EditorialLocale;
@@ -72,7 +104,7 @@ const guide = wfhCommuteGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'en' && <>
     <p>Remote work can remove a large commute without making the home free. The fair comparison uses incremental cash: extra HVAC and equipment at home versus transport, parking, meals and office-only purchases, then subtracts reimbursements actually received.</p>
     <p>Hybrid work needs its own line because fixed costs can survive on both sides. A parking pass and upgraded internet can remain even when each is used only part of the month.</p>
@@ -119,6 +151,38 @@ const calculator = calculators[locale];
     <h2>Ejemplo híbrido con compensación</h2>
     <p>Con los valores del ejemplo, todo teletrabajo cuesta 170 € y toda oficina 445 €: 275 € de diferencia. Doce días en casa y ocho presenciales dan 311 € de caja; 9,3 horas de trayecto a 8 €/hora elevan el escenario opcional a 385,67 €.</p>
     <p class="privacy-note">Información educativa; no es asesoramiento laboral, fiscal, energético, inmobiliario o financiero.</p>
+  </>}
+
+  {locale === 'fr' && <>
+    <p>En France, le coût net du télétravail dépend des dépenses réellement supplémentaires, de l’accord applicable et des remboursements versés. Le plafond social publié par l’Urssaf n’est ni une dépense automatique du salarié ni une indemnité garantie.</p>
+    <p>Le mode hybride doit conserver séparément l’abonnement de transport, sa prise en charge, les frais fixes à domicile et l’indemnité télétravail.</p>
+    <DecisionGuide content={guide} />
+    <WfhCommuteCalculator locale={locale} {...calculator} />
+    <h2>L’indemnité Urssaf est une limite d’exonération</h2>
+    <p>Pour 2026, l’Urssaf indique, hors accord collectif, 2,70 € par jour de télétravail dans la limite de 59,40 € par mois ; un accord collectif permet d’autres limites publiées. Cela ne remplace pas la convention, l’accord ou les justificatifs. Le calcul déduit uniquement 32,40 € effectivement versés pour douze jours.</p>
+    <h2>Transport public : coût brut et prise en charge restent visibles</h2>
+    <p>L’exemple conserve un abonnement de 90 € et une prise en charge de 45 €. Cette structure évite de présenter 45 € comme le prix facial et permet de tester un autre remboursement. Les tickets, le vélo, la voiture et le forfait mobilités durables suivent leurs propres conditions.</p>
+    <h2>Énergie, internet et matériel sont des suppléments</h2>
+    <p>Une facture d’électricité complète ne devient pas professionnelle. Mesurez chauffage, écran et ordinateur supplémentaires, puis ajoutez seulement l’augmentation d’abonnement internet ou le matériel payé par le salarié et non remboursé.</p>
+    <h2>Le double fixe peut rendre l’hybride moins intuitif</h2>
+    <p>Dans l’exemple, tout télétravail coûte 177,60 € et toute présence 245 €, soit 67,40 € de différence. Douze jours à domicile et huit au bureau coûtent 234,60 € en trésorerie ; 9,3 heures à 10 €/h portent le scénario facultatif à 327,93 €.</p>
+    <p class="privacy-note">Estimation pédagogique, pas un conseil social, fiscal, professionnel, énergétique ou financier.</p>
+  </>}
+
+  {locale === 'de' && <>
+    <p>In Deutschland werden beim Homeoffice häufig drei Dinge vermischt: echte Haushaltsausgaben, ein Arbeitgeberzuschuss und die steuerliche Tagespauschale. Nur die ersten beiden verändern unmittelbar das Monatsbudget; ein Steuerabzug ist keine gleich hohe Auszahlung.</p>
+    <p>Beim Hybridmodell können Deutschlandticket und Homeoffice-Ausstattung gleichzeitig als Fixkosten bestehen.</p>
+    <DecisionGuide content={guide} />
+    <WfhCommuteCalculator locale={locale} {...calculator} />
+    <h2>6 € Tagespauschale sind kein Tagesgeld</h2>
+    <p>Das BMF nennt 6 € je qualifiziertem Kalendertag, höchstens 1.260 € im Jahr. Das ist ein Abzugsbetrag; die tatsächliche Steuerwirkung hängt vom gesamten Steuerfall ab. Deshalb bleibt der Rechner bei Geldflüssen und trägt keine pauschalen 6 € als Erstattung ein.</p>
+    <h2>Mobile Arbeit und Telearbeitsplatz unterscheiden</h2>
+    <p>Das BMAS beschreibt mobile Arbeit als Tätigkeit außerhalb der Betriebsstätte und einen vereinbarten Homeoffice-Ort als mögliche Ausgestaltung. Arbeitsschutzpflichten gelten auch zuhause; die konkrete Ausstattung und Kostentragung gehört in Vereinbarung, Tarif- oder Betriebsregelung.</p>
+    <h2>Deutschlandticket ist ein monatlicher Fixblock</h2>
+    <p>Im Beispiel kostet das Ticket 2026 63 € und bleibt auch bei acht Bürotagen vollständig bestehen. Einzelkarten könnten günstiger sein, regionale Strecken oder Fernverkehr können aber zusätzliche Kosten erzeugen. Ein Jobticket-Zuschuss wird nur bei tatsächlicher Gewährung abgezogen.</p>
+    <h2>Hybrid kann wegen doppelter Fixkosten teurer sein</h2>
+    <p>Nur Homeoffice kostet im Beispiel 220 €, nur Büro 303 €, also 83 € mehr. Zwölf Heim- und acht Bürotage kosten wegen beider Fixblöcke 307 €; acht Pendelstunden zu 12 €/h erhöhen den optionalen Vergleichswert auf 403 €.</p>
+    <p class="privacy-note">Unverbindliche Lernrechnung, keine Arbeits-, Steuer-, Energie- oder Finanzberatung.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

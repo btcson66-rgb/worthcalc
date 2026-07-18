@@ -172,18 +172,18 @@ const editorialRoutes = [
       de: ['732 €', 'Entfernungspauschale', 'data-commute-full-cost-calculator'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
     slug: 'work-from-home-vs-commuting-hidden-costs',
-    locales: ['en', 'zh', 'es'],
     nativeMarkers: {
       en: ['$610', 'home office deduction', 'data-wfh-commute-calculator'],
       zh: ['NT$5,420', '居家工作職業安全衛生參考指引', 'data-wfh-commute-calculator'],
       es: ['275 €', 'Ley 10/2021', 'data-wfh-commute-calculator'],
+      fr: ['67,40 €', '2,70 €', 'data-wfh-commute-calculator'],
+      de: ['303 €', 'Tagespauschale', 'data-wfh-commute-calculator'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -292,4 +292,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 17 complete five-locale topics, 80 added routes, 4 enriched high-value tools, 10 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 18 complete five-locale topics, 82 added routes, 4 enriched high-value tools, 10 embedded decision calculators.');

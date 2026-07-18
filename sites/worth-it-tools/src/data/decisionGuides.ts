@@ -1156,7 +1156,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
-export const rentBuyBreakevenGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'rent-buy-breakeven-year-method',
     labels: labels.en,
@@ -1224,6 +1224,53 @@ export const rentBuyBreakevenGuides: Partial<Record<Locale, DecisionGuideContent
       { label: 'Banco de España — gastos asociados a la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html' },
       { label: 'Consejo General del Notariado — gastos de compraventa e impuestos', href: 'https://www.notariado.org/comprar-una-vivienda/' },
       { label: 'Banco de España — compensación por reembolso anticipado', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/comisiones/comisionesproduc/compensacion-o-comision-por-reembolso-o-amortizacion-anticipada-total-o-parcial.html?producto=%2Fwebcb%2FServiciosProductosBancarios%2FFinanciacion%2FHipotecas' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'rent-buy-breakeven-year-method',
+    labels: labels.fr,
+    directAnswer: 'Il n’existe pas de durée nationale après laquelle acheter devient automatiquement plus avantageux que louer. L’année d’équilibre est la première date de revente où le coût net de l’achat — apport, frais, mensualités, charges de propriétaire et sortie, moins le produit net récupéré — ne dépasse plus le coût locatif après rendement du capital initial conservé. Dans le scénario transparent, le croisement arrive en année 10 ; avec un prix stable, il recule à l’année 18.',
+    inputs: ['Prix et loyer de deux logements réellement comparables par quartier, surface, état et performance', 'Apport, frais d’acquisition, montant emprunté, taux, TAEG, assurance et durée', 'Taxe foncière, charges non récupérables, assurance propriétaire, entretien et travaux votés', 'Capital restant dû, diagnostics, agence, indemnité de remboursement anticipé et frais de revente à chaque date', 'Évolution du prix et du loyer testée en baisse, stabilité et hausse modérée', 'Rendement net alternatif sur l’apport et les frais initiaux', 'Durée maximale de détention compatible avec le projet de vie, sans prolonger pour forcer un résultat'],
+    formula: 'Pour chaque année N : coût net d’achat = apport + frais d’acquisition + mensualités payées jusqu’à N + coûts de propriétaire − [valeur du logement à N × (1 − taux de frais de revente) − capital restant dû]. Coût locatif net = loyers cumulés − gain du placement des fonds initiaux. L’équilibre est le plus petit N tel que coût d’achat ≤ coût locatif.',
+    workedExample: 'Logement de 280 000 €, apport de 56 000 €, frais initiaux de 22 000 €, crédit de 224 000 € sur 25 ans à 3,5% et mensualité d’environ 1 121 €. S’ajoutent 3 500 € par an, revente à 5%, hausse du prix de 1,2%, loyer comparable de 1 100 € progressant de 1,5% et rendement alternatif de 3,5% sur 78 000 €. En année 10, le coût d’achat atteint environ 104 732 € contre 109 249 € pour la location : premier croisement, avec 4 517 € d’écart. Ce n’est pas une prévision immobilière.',
+    sensitivity: [
+      { scenario: 'Scénario central', input: 'Crédit 3,5%; prix +1,2%; revente 5%', result: 'Premier croisement en année 10' },
+      { scenario: 'Prix stable', input: '0% au lieu de +1,2%', result: 'Premier croisement en année 18' },
+      { scenario: 'Taux plus bas', input: '2,75% au lieu de 3,5%', result: 'Premier croisement en année 8' },
+      { scenario: 'Revente plus coûteuse', input: '7% au lieu de 5%', result: 'Premier croisement en année 11' },
+      { scenario: 'Loyer comparable plus élevé', input: '1 300 € au lieu de 1 100 €', result: 'Premier croisement en année 7' },
+    ],
+    cta: { label: 'Ouvrir le comparateur complet et tester les hypothèses', href: '/en/tools/rent-vs-buy' },
+    limitations: ['L’année de croisement appartient au scénario et ne conseille ni achat, ni vente, ni crédit à cette date.', 'Le calcul maintient le taux constant, place seulement les fonds initiaux et simplifie assurance emprunteur, fiscalité, travaux irréguliers, vacance et différences mensuelles de trésorerie.', 'Résidence principale, autre logement, ancien, neuf, département, copropriété et situation du vendeur modifient frais et fiscalité. Utilisez acte, décompte du notaire, offre de prêt, taxe foncière et documents de copropriété.', 'Un croisement ne prouve pas la capacité de remboursement ni la présence d’une épargne de sécurité.'],
+    sources: [
+      { label: 'ANIL — frais annexes liés à l’achat et au statut de propriétaire', href: 'https://www.anil.org/votre-besoin/acheter/financement/frais-annexes/' },
+      { label: 'ANIL — contrat de crédit et indemnité de remboursement anticipé', href: 'https://www.anil.org/votre-besoin/acheter/financement/contrat-de-credit-immobilier/' },
+      { label: 'Service-Public.fr — plus-value immobilière et résidence principale', href: 'https://www.service-public.fr/particuliers/vosdroits/F10864?lang=fr' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'rent-buy-breakeven-year-method',
+    labels: labels.de,
+    directAnswer: 'Es gibt keine allgemeine Haltedauer, ab der Kaufen günstiger als Mieten ist. Das Break-even-Jahr ist der erste angenommene Verkaufszeitpunkt, an dem die Netto-Kaufkosten — Eigenkapital, Nebenkosten, Raten, Eigentümerkosten und Verkauf abzüglich Nettoerlös — die Nettomietkosten nach Ertrag des nicht eingesetzten Anfangskapitals nicht mehr übersteigen. Im transparenten Beispiel liegt dieser Punkt erst im Jahr 19; bei unverändertem Immobilienwert wird er innerhalb von 30 Jahren nicht erreicht.',
+    inputs: ['Kaufpreis und Kaltmiete wirklich vergleichbarer Objekte nach Lage, Fläche, Zustand und Energie', 'Eigenkapital, Kaufnebenkosten, Darlehen, Sollzins, effektiver Jahreszins, Laufzeit und Zinsbindung', 'Grundsteuer, nicht umlagefähiges Hausgeld, Versicherung, Instandhaltung und bekannte Sonderumlagen', 'Restschuld, Makler, Grundbuchlöschung, Vorfälligkeitsentschädigung und sonstige Verkaufskosten je Ausstiegsjahr', 'Wertentwicklung und Mietsteigerung als Bandbreiten statt Prognosen', 'Alternative Nettorendite auf Eigenkapital und Kaufnebenkosten', 'Realistische maximale Haltedauer; den Zeitraum nicht verlängern, nur damit Kaufen gewinnt'],
+    formula: 'Für jedes Jahr N: Netto-Kaufkosten = Eigenkapital + Kaufnebenkosten + bis N gezahlte Kreditraten + Eigentümerkosten − [Immobilienwert in N × (1 − Verkaufskostensatz) − Restschuld]. Nettomietkosten = kumulierte Miete − Anlagegewinn des Anfangskapitals. Break-even ist das kleinste N mit Kaufkosten ≤ Mietkosten.',
+    workedExample: 'Kaufpreis 350.000 €, Eigenkapital 70.000 €, Kaufnebenkosten 35.000 €, Darlehen 280.000 € über 30 Jahre zu 3,5% und Rate rund 1.257 €. Jährlich fallen 4.500 € Eigentümerkosten an; Verkauf 4,5%, Wertentwicklung 1%, Kaltmiete 1.200 € mit 2% Steigerung und Alternativrendite 4% auf 105.000 €. Erst im Jahr 19 liegen geschätzte Kaufkosten von 210.948 € unter Mietkosten von 212.685 €, ein schmaler Abstand von 1.737 €. Das ist keine Marktprognose.',
+    sensitivity: [
+      { scenario: 'Basisfall', input: 'Zins 3,5%; Wert +1%; Verkauf 4,5%', result: 'Erster Break-even im Jahr 19' },
+      { scenario: 'Stabiler Immobilienwert', input: '0% statt +1%', result: 'Innerhalb von 30 Jahren kein Break-even' },
+      { scenario: 'Niedrigerer Sollzins', input: '2,75% statt 3,5%', result: 'Erster Break-even im Jahr 15' },
+      { scenario: 'Höhere Verkaufskosten', input: '7% statt 4,5%', result: 'Erster Break-even im Jahr 21' },
+      { scenario: 'Höhere Vergleichsmiete', input: '1.500 € statt 1.200 €', result: 'Erster Break-even im Jahr 11' },
+    ],
+    cta: { label: 'Vollständigen Vergleich öffnen und Annahmen testen', href: '/en/tools/rent-vs-buy' },
+    limitations: ['Das Break-even-Jahr ist ein Szenarioergebnis und keine Empfehlung zum Kauf, Verkauf oder Abschluss einer Finanzierung.', 'Der Rechner hält den Zins konstant, investiert nur das Anfangskapital und vereinfacht Anschlussfinanzierung, Steuern, Sanierungen, Sonderumlagen und monatliche Zahlungsdifferenzen.', 'Grunderwerbsteuer, Maklervertrag, Eigennutzung, Vermietung, Anschaffungsdatum und § 23 EStG können die Steuer- und Kostenlage verändern. Verwenden Sie Vertrag, Steuerberatung, Darlehensplan und WEG-Unterlagen.', 'Ein Kosten-Break-even beweist weder Tragbarkeit der Rate noch ausreichende Liquiditätsreserve.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Vorfälligkeitsentschädigung beim Immobilienverkauf', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/baufinanzierung-vorzeitig-abloesen-ohne-extrakosten-aus-dem-baukredit-12773' },
+      { label: 'Bundesministerium der Justiz — § 23 EStG private Grundstücksveräußerung', href: 'https://www.gesetze-im-internet.de/estg/__23.html' },
+      { label: 'Deutsche Bundesbank — Wohnungsbaukredite und Zinsbindungsfristen', href: 'https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen/wohnungsbaukredite-an-private-haushalte-hypothekarkredite-auf-wohngrundstuecke-615036' },
+      { label: 'Verbraucherzentrale — Modelle und Planung der Immobilienfinanzierung', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/immobilienfinanzierung-diese-modelle-gibt-es-und-das-sollten-sie-beachten-5801' },
     ],
     lastVerified: '2026-07-19',
   },

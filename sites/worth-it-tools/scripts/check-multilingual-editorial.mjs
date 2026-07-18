@@ -103,7 +103,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'cashback-caps-real-reward-rate',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$102', '2.72%', 'Merchant coding', 'data-cashback-caps-calculator'],
+      zh: ['NT$350', '1.52%', '一般消費', 'data-cashback-caps-calculator'],
+      es: ['33,25 €', '2,08%', 'operaciones excluidas', 'data-cashback-caps-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -212,4 +222,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 10 complete five-locale topics, 42 added routes, 4 enriched high-value tools, 2 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 10 complete five-locale topics, 45 added routes, 4 enriched high-value tools, 3 embedded decision calculators.');

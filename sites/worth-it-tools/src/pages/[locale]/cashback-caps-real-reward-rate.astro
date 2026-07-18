@@ -1,0 +1,127 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import CashbackCapsCalculator from '../../components/CashbackCapsCalculator.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { cashbackCapsGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Cashback caps and bonus categories: calculate your real reward rate',
+    description: 'Calculate a real cash-back rate after category caps, fallback rates, excluded purchases, returns, activation rules, and mixed spending.',
+    faq: [
+      { question: 'How do I calculate my real cash-back rate?', answer: 'Apply each reward rate only to the spend that qualifies for it, add the resulting rewards, then divide by the spending basis you want to measure. Show both eligible-spend and whole-statement rates so excluded purchases stay visible.' },
+      { question: 'What happens after I reach a cash-back category cap?', answer: 'The category may fall to a base rate, stop earning, or follow another rule in the card terms. Split spend at the cap instead of applying the headline rate to the whole period.' },
+      { question: 'How do I turn a $75 reward cap into a spending cap?', answer: 'Use the rate named in the terms. If $75 is the maximum total reward at 5%, the corresponding spend is $75 ÷ 0.05 = $1,500. If $75 covers only the extra 4% above a 1% base rate, the cap would be $75 ÷ 0.04 = $1,875.' },
+      { question: 'Should excluded purchases be in the reward-rate denominator?', answer: 'Yes for a whole-statement rate, because the charges used card capacity but earned no reward. Keep a second eligible-only rate if you want to diagnose the program separately.' },
+      { question: 'Do points count at one cent each?', answer: 'Only if the redemption you will actually use provides that value. Multiply earned points by the realizable value per point after minimums, transfer ratios, or redemption restrictions.' },
+    ],
+  },
+  zh: {
+    title: '信用卡回饋上限怎麼算？找出真正回饋率',
+    description: '把加碼回饋、每期上限、超限基本回饋、一般消費、排除項目與點數價值拆開，算出整期帳單真正回饋率。',
+    faq: [
+      { question: '信用卡真正回饋率怎麼算？', answer: '把每一段符合資格的消費乘上各自回饋率後加總，再除以整期實際刷卡金額。若排除項目沒有回饋，也要留在整期分母；另外可列一個只看合格消費的加權率。' },
+      { question: '加碼回饋上限 NT$150 等於能刷 NT$150 嗎？', answer: '不是。若 NT$150 是加碼 2% 的回饋上限，可套用加碼的消費額是 150 ÷ 2% = NT$7,500；基本 1% 是否另計仍要看公告。' },
+      { question: '超過回饋上限後還有基本回饋嗎？', answer: '不一定。有些方案超限後回到基本回饋，有些停止回饋，也可能改採其他資格。請用當期權益頁和實際入帳驗證，不能自行假設。' },
+      { question: '超商、繳費或儲值要放進分母嗎？', answer: '若你要看整期帳單真正回饋率，就要放進分母並設為零回饋；若只想檢查加碼方案，也可同時顯示合格消費加權率，但不能拿它冒充整張卡的回饋率。' },
+      { question: '逐筆四捨五入會影響結果嗎？', answer: '會。小額交易若逐筆計點，理論百分比和實際入點可能有差；最終應以帳單或點數明細回填，而不是只用月總額乘回饋率。' },
+    ],
+  },
+  es: {
+    title: 'Límites de reembolso y categorías: cómo calcular la rentabilidad real de una tarjeta',
+    description: 'Calcula el cashback real después de topes, categorías, porcentaje posterior, compras excluidas, devoluciones y valor de canje.',
+    faq: [
+      { question: '¿Cómo se calcula el porcentaje real de cashback?', answer: 'Multiplica cada tramo de gasto por el porcentaje que le corresponde, suma todas las devoluciones y divide entre el gasto total analizado. Conviene mostrar una tasa sobre compras elegibles y otra sobre todo el extracto.' },
+      { question: '¿Qué ocurre cuando se alcanza el límite de una categoría?', answer: 'El exceso puede pasar a un porcentaje base, dejar de generar cashback o seguir otra regla. Las bases de la tarjeta o promoción determinan el tratamiento; el porcentaje principal no se aplica automáticamente a todo.' },
+      { question: '¿Cómo convierto un tope de 25 € de cashback en gasto elegible?', answer: 'Divide 25 € entre el porcentaje al que se refiere el tope. Al 5% son 500 € de gasto; si el límite solo afecta al 4% adicional sobre un 1% base, serían 625 €.' },
+      { question: '¿Las operaciones excluidas entran en la tasa efectiva?', answer: 'Sí cuando se mide todo el extracto, porque fueron cargos sin devolución. Puede mostrarse además una tasa elegible para entender el programa sin ocultar el resultado total.' },
+      { question: '¿Debo restar intereses y comisiones al cashback?', answer: 'Para valorar el beneficio neto de la tarjeta, sí. Esta página muestra primero el rendimiento bruto de las compras; los intereses de pago aplazado, la cuota y otras comisiones se comparan aparte y pueden superar la devolución.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { bonusSpend: 2100, bonusRate: 5, bonusSpendCap: 1500, fallbackRate: 1, otherSpend: 1400, otherRate: 1.5, excludedSpend: 250 },
+    copy: {
+      heading: 'Cash-back cap and real-rate calculator', intro: 'Use one cap period. Enter the category rate as a percentage and the spend cap in currency.', bonusSpend: 'Spend in the bonus category', bonusRate: 'Headline category rate (%)', bonusSpendCap: 'Category spend receiving the headline rate', fallbackRate: 'Rate after the cap (%)', otherSpend: 'Other eligible spend', otherRate: 'Rate on other eligible spend (%)', excludedSpend: 'Excluded or zero-reward spend', cappedBonusSpend: 'Category spend at headline rate', aboveCapSpend: 'Category spend above cap', totalRewards: 'Total rewards', eligibleRate: 'Weighted rate on eligible spend', wholeBillRate: 'Effective rate on the whole bill', headlineShortfall: 'Reward lost versus applying headline rate to all category spend', verdictPrefix: 'Your whole-bill effective reward rate is', privacy: 'Inputs remain in this browser. Confirm category coding, activation, cap period, returns, redemption value, and current terms with the issuer.',
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { bonusSpend: 12000, bonusRate: 3, bonusSpendCap: 7500, fallbackRate: 1, otherSpend: 8000, otherRate: 1, excludedSpend: 3000 },
+    copy: {
+      heading: '信用卡回饋上限與真正回饋率計算機', intro: '請用同一個帳單週期；百分比填回饋率，金額上限要先確認是「可回饋消費額」而非回饋點數。', bonusSpend: '本期指定加碼消費', bonusRate: '上限內總回饋率（%）', bonusSpendCap: '可套用總回饋率的消費上限', fallbackRate: '超過上限後回饋率（%）', otherSpend: '其他一般消費', otherRate: '一般消費回饋率（%）', excludedSpend: '排除或零回饋消費', cappedBonusSpend: '套用加碼總回饋的消費', aboveCapSpend: '超過上限的指定消費', totalRewards: '本期總回饋', eligibleRate: '合格消費加權回饋率', wholeBillRate: '整期帳單真正回饋率', headlineShortfall: '相對把標示回饋套滿全部指定消費少拿', verdictPrefix: '這期帳單的真正回饋率是', privacy: '輸入只留在瀏覽器。請用當期銀行權益、請款分類、登錄狀態、退貨扣回與實際點數明細核對。',
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { bonusSpend: 850, bonusRate: 5, bonusSpendCap: 500, fallbackRate: 0.5, otherSpend: 650, otherRate: 1, excludedSpend: 100 },
+    copy: {
+      heading: 'Calculadora de límites y cashback efectivo', intro: 'Usa un solo periodo de liquidación. Introduce porcentajes y convierte cualquier tope de cashback en un límite de gasto cuando sea necesario.', bonusSpend: 'Gasto en la categoría bonificada', bonusRate: 'Porcentaje anunciado de la categoría (%)', bonusSpendCap: 'Gasto que recibe el porcentaje anunciado', fallbackRate: 'Porcentaje después del tope (%)', otherSpend: 'Otras compras elegibles', otherRate: 'Porcentaje de otras compras (%)', excludedSpend: 'Operaciones excluidas o sin devolución', cappedBonusSpend: 'Gasto de categoría al porcentaje anunciado', aboveCapSpend: 'Gasto de categoría por encima del tope', totalRewards: 'Cashback total', eligibleRate: 'Tasa ponderada sobre gasto elegible', wholeBillRate: 'Tasa efectiva de todo el extracto', headlineShortfall: 'Diferencia frente a aplicar el porcentaje anunciado a toda la categoría', verdictPrefix: 'La tasa efectiva de todo el extracto es', privacy: 'Los datos permanecen en este navegador. Verifica clasificación, adhesión, periodo, devoluciones, canje y condiciones vigentes con la entidad.',
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as Locale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = cashbackCapsGuides[locale];
+const calculator = calculators[locale];
+if (!guide) throw new Error(`Missing cashback caps guide for ${locale}`);
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>A category headline describes one slice of spend, not the return on the card. The useful number is a weighted rate that follows the cap, fallback rate, excluded transactions, and the redemption value you can actually receive. Calculate inside one statement month or quarter so the cap and the spending use the same clock.</p>
+    <DecisionGuide content={guide} />
+    <CashbackCapsCalculator locale={locale} {...calculator} />
+    <h2>First identify whether the cap limits spend or rewards</h2>
+    <p>“5% on up to $1,500 in purchases” is already a spend cap. “Earn up to $75 cash back” requires another step: $75 divided by 5% equals $1,500 only when the $75 limit applies to the full 5%. If the fine print caps only the incremental 4% above a 1% base, $75 divided by 4% would instead permit $1,875. Record the wording, not just the banner.</p>
+    <h2>Merchant coding decides the category after the purchase posts</h2>
+    <p>A restaurant inside a hotel, grocery order through a marketplace, or wallet-funded purchase may post under a code that does not match the storefront description. Build the first estimate from planned categories, then replace it with the posted reward detail. Activation, offer enrollment, and cardmember-year dates are separate eligibility checks.</p>
+    <h2>Use two denominators to avoid a flattering answer</h2>
+    <p>The eligible rate of 2.91% explains how the reward engine treated $3,500 of qualifying purchases. The whole-bill rate of 2.72% explains what the card returned against every dollar charged in this example, including $250 that earned zero. Both are useful; showing only the higher one hides excluded spending.</p>
+    <h2>Rewards are gross value before financing cost</h2>
+    <p>The $102 result is not a reason to revolve a balance or move purchases forward. Interest, late fees, an annual fee, a redemption haircut, or extra consumption can exceed the reward. The CFPB also notes that program conditions and redemption values can affect whether promised value is realized, so archive the terms used for the calculation.</p>
+    <p class="privacy-note">This is a general reward-math model, not a recommendation, application decision, credit offer, tax opinion, or promise that a transaction will qualify.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>信用卡廣告上的「最高 3%」通常只是某一段指定消費，不是整期帳單的答案。台灣常見條件還包括每期或每月上限、正附卡歸戶、登錄、支付路徑、請款日、逐筆計點與一般消費排除項目。先把每段拆開，再用實際帳單分母重算。</p>
+    <DecisionGuide content={guide} />
+    <CashbackCapsCalculator locale={locale} {...calculator} />
+    <h2>回饋上限要先還原成可刷金額</h2>
+    <p>若權益寫「網路消費加碼 2%，每期加碼上限 NT$150」，可吃到加碼的消費額是 NT$150 ÷ 2% = NT$7,500；上限內若另有 1% 基本回饋，總回饋才是 3%。超過 NT$7,500 後是否還有基本 1%，要看同一份公告，不能把「加碼上限」誤讀成全部回饋停止。</p>
+    <h2>一般消費認定比店名更重要</h2>
+    <p>銀行可能依 MCC、收單商店名稱、第三方支付、授權日或入帳日判斷。便利商店、公用事業費、稅費、學費、儲值、分期、投資或其他公告項目，也可能不算一般消費。最實用的流程是先估算，再用點數明細把每筆分類校正。</p>
+    <h2>合格回饋率和整期真正回饋率要並列</h2>
+    <p>算例中 NT$350 除以 NT$20,000 合格消費是 1.75%，但把 NT$3,000 零回饋項目放回帳單後，只剩 1.52%。前者用來檢查權益方案，後者用來回答「這張卡對我整期刷卡到底回多少」；兩個分母不可混用。</p>
+    <h2>逐筆計點、退貨與點數價值要用實拿修正</h2>
+    <p>若每筆四捨五入到整點，小額交易加總不一定等於月消費乘百分比；退貨也可能扣回先前點數。小樹點、e point 或其他點數只有在你真的能用 1 點折 NT$1 時才按等值計算，否則要乘上自己的可實現兌換價值。</p>
+    <p class="privacy-note">本頁只提供一般回饋計算，不推薦辦卡、不評估信用、借款、循環利息、稅務或個別交易資格。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>El porcentaje grande de una promoción describe un tramo, no la rentabilidad de toda la tarjeta. En España conviene separar la categoría, el tope, las compras que vuelven al porcentaje base, las operaciones excluidas y el posible coste de pagar a crédito. El cálculo debe usar el mismo mes, trimestre o periodo que indiquen las condiciones.</p>
+    <DecisionGuide content={guide} />
+    <CashbackCapsCalculator locale={locale} {...calculator} />
+    <h2>Un tope de cashback y un tope de compras no son lo mismo</h2>
+    <p>Si las bases dicen “5% sobre los primeros 500 €”, la conversión ya está hecha. Si dicen “máximo 25 € de cashback”, 25 € ÷ 5% da 500 € solo cuando el límite afecta al porcentaje completo. Cuando se limita únicamente la bonificación adicional, hay que dividir por ese tramo adicional y conservar por separado el porcentaje base.</p>
+    <h2>La categoría se confirma en la operación contabilizada</h2>
+    <p>Un restaurante dentro de un hotel, una compra realizada a través de un agregador o un pago con un intermediario puede no clasificarse como esperabas. También pueden existir adhesión previa, fechas de contabilización y comercios participantes. Guarda las bases y contrasta la primera liquidación antes de proyectar doce meses.</p>
+    <h2>La tasa del extracto evita esconder operaciones sin devolución</h2>
+    <p>Los 33,25 € del ejemplo equivalen al 2,22% de las compras elegibles, pero al 2,08% de los 1.600 € cargados. La primera tasa sirve para auditar la mecánica del programa; la segunda responde cuánto recuperaste por cada euro que pasó por la tarjeta. Mostrar ambas evita presentar una cifra optimista.</p>
+    <h2>Cashback no compensa automáticamente el pago aplazado</h2>
+    <p>El Banco de España recuerda que una tarjeta de crédito sigue siendo financiación cuando no se paga el total. La devolución bruta debe compararse después con cuota, intereses y comisiones. Comprar más para alcanzar un límite también empeora el resultado: el gasto adicional no se convierte en ahorro porque devuelva una pequeña parte.</p>
+    <p class="privacy-note">Esta página ofrece un modelo general de cálculo. No recomienda una tarjeta, no evalúa solvencia y no garantiza clasificación, devolución, fiscalidad ni condiciones futuras.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

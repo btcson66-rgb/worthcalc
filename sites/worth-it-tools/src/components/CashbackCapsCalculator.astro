@@ -1,0 +1,258 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  bonusSpend: string;
+  bonusRate: string;
+  bonusSpendCap: string;
+  fallbackRate: string;
+  otherSpend: string;
+  otherRate: string;
+  excludedSpend: string;
+  cappedBonusSpend: string;
+  aboveCapSpend: string;
+  totalRewards: string;
+  eligibleRate: string;
+  wholeBillRate: string;
+  headlineShortfall: string;
+  verdictPrefix: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    bonusSpend: number;
+    bonusRate: number;
+    bonusSpendCap: number;
+    fallbackRate: number;
+    otherSpend: number;
+    otherRate: number;
+    excludedSpend: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = {
+  en: 'en-US',
+  zh: 'zh-TW',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+};
+---
+
+<section
+  class="cashback-calc"
+  data-cashback-caps-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-verdict-prefix={copy.verdictPrefix}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+
+  <div class="cashback-calc-grid">
+    <div class="cashback-calc-inputs">
+      <label>
+        <span>{copy.bonusSpend}</span>
+        <input data-field="bonusSpend" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.bonusSpend} />
+      </label>
+      <label>
+        <span>{copy.bonusRate}</span>
+        <input data-field="bonusRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.bonusRate} />
+      </label>
+      <label>
+        <span>{copy.bonusSpendCap}</span>
+        <input data-field="bonusSpendCap" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.bonusSpendCap} />
+      </label>
+      <label>
+        <span>{copy.fallbackRate}</span>
+        <input data-field="fallbackRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.fallbackRate} />
+      </label>
+      <label>
+        <span>{copy.otherSpend}</span>
+        <input data-field="otherSpend" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.otherSpend} />
+      </label>
+      <label>
+        <span>{copy.otherRate}</span>
+        <input data-field="otherRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.otherRate} />
+      </label>
+      <label>
+        <span>{copy.excludedSpend}</span>
+        <input data-field="excludedSpend" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.excludedSpend} />
+      </label>
+    </div>
+
+    <div class="cashback-calc-results" aria-live="polite">
+      <p class="cashback-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.cappedBonusSpend}</dt><dd data-output="cappedBonusSpend">—</dd></div>
+        <div><dt>{copy.aboveCapSpend}</dt><dd data-output="aboveCapSpend">—</dd></div>
+        <div><dt>{copy.totalRewards}</dt><dd data-output="totalRewards">—</dd></div>
+        <div><dt>{copy.eligibleRate}</dt><dd data-output="eligibleRate">—</dd></div>
+        <div><dt>{copy.wholeBillRate}</dt><dd data-output="wholeBillRate">—</dd></div>
+        <div><dt>{copy.headlineShortfall}</dt><dd data-output="headlineShortfall">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="cashback-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-cashback-caps-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 2 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+    const percentFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+    const formatPercent = (amount: number) => `${percentFormatter.format(amount)}%`;
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+
+    function calculate() {
+      const bonusSpend = value('bonusSpend');
+      const bonusRate = value('bonusRate') / 100;
+      const bonusSpendCap = value('bonusSpendCap');
+      const fallbackRate = value('fallbackRate') / 100;
+      const otherSpend = value('otherSpend');
+      const otherRate = value('otherRate') / 100;
+      const excludedSpend = value('excludedSpend');
+      const cappedBonusSpend = Math.min(bonusSpend, bonusSpendCap);
+      const aboveCapSpend = Math.max(0, bonusSpend - bonusSpendCap);
+      const bonusRewards = cappedBonusSpend * bonusRate + aboveCapSpend * fallbackRate;
+      const totalRewards = bonusRewards + otherSpend * otherRate;
+      const eligibleSpend = bonusSpend + otherSpend;
+      const wholeBillSpend = eligibleSpend + excludedSpend;
+      const eligibleRate = eligibleSpend > 0 ? totalRewards / eligibleSpend * 100 : 0;
+      const wholeBillRate = wholeBillSpend > 0 ? totalRewards / wholeBillSpend * 100 : 0;
+      const headlineShortfall = Math.max(0, bonusSpend * bonusRate - bonusRewards);
+
+      output('cappedBonusSpend').textContent = formatMoney(cappedBonusSpend);
+      output('aboveCapSpend').textContent = formatMoney(aboveCapSpend);
+      output('totalRewards').textContent = formatMoney(totalRewards);
+      output('eligibleRate').textContent = formatPercent(eligibleRate);
+      output('wholeBillRate').textContent = formatPercent(wholeBillRate);
+      output('headlineShortfall').textContent = formatMoney(headlineShortfall);
+      output('verdict').textContent = `${root.dataset.verdictPrefix || ''} ${formatPercent(wholeBillRate)}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .cashback-calc {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cashback-calc h2 {
+    margin-top: 0;
+  }
+
+  .cashback-calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(17rem, 0.9fr);
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .cashback-calc-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .cashback-calc-inputs label,
+  .cashback-calc-results dl {
+    margin: 0;
+  }
+
+  .cashback-calc-inputs label span {
+    display: block;
+    min-height: 2.9rem;
+    margin-bottom: 0.35rem;
+    font-weight: 650;
+  }
+
+  .cashback-calc-inputs input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.55rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .cashback-calc-results {
+    align-self: start;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    background: var(--color-surface-2);
+  }
+
+  .cashback-verdict {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: 750;
+  }
+
+  .cashback-calc-results dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cashback-calc-results dt,
+  .cashback-calc-results dd {
+    overflow-wrap: anywhere;
+  }
+
+  .cashback-calc-results dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .cashback-calc-note {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 760px) {
+    .cashback-calc {
+      padding: 1rem;
+    }
+
+    .cashback-calc-grid,
+    .cashback-calc-inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .cashback-calc-inputs label span {
+      min-height: 0;
+    }
+  }
+</style>

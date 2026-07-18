@@ -1,0 +1,90 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { paidMembershipGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'How to calculate whether a paid membership is worth it',
+    description: 'Calculate membership break-even uses from the net fee, eligible savings, reward caps, extra costs, and uncertain future use.',
+    faq: [
+      { question: 'How many uses make a paid membership worth it?', answer: 'Divide the net fee by the net benefit per eligible use and round up. Then confirm the benefit cap is high enough to cover the fee.' },
+      { question: 'Should I subtract every included credit from the fee?', answer: 'No. Subtract only credits you would use without buying extra things or changing behavior. An unused $20 coupon is worth $0 in the decision.' },
+      { question: 'Do rewards count as savings?', answer: 'Only the incremental reward versus the best free alternative, after exclusions and caps. Spending added to earn a reward is a cost, not a benefit.' },
+      { question: 'How do I handle uncertain use?', answer: 'Calculate low, base, and high-use outcomes, then probability-weight them. Keep the low-use loss visible even when expected value is positive.' },
+      { question: 'Does auto-renewal change break-even?', answer: 'Yes. Use the next renewal fee and current benefits, not last year’s offer. Record the cancellation date and save confirmation if the membership no longer clears the threshold.' },
+    ],
+  },
+  zh: {
+    title: '付費會員要用幾次才回本？會員回本計算方法',
+    description: '用淨年費、每次合格優惠、回饋上限、額外成本與使用機率，算出付費會員最低回本次數。',
+    faq: [
+      { question: '付費會員回本次數怎麼算？', answer: '用淨年費除以每次淨利益後無條件進位，再確認年度回饋上限足以蓋過淨年費。' },
+      { question: '會員送的折價券都能抵年費嗎？', answer: '不能。只有本來就會使用、而且不需額外消費的權益才能按實際價值扣除；不用的券價值是零。' },
+      { question: '為湊免運多買商品算回饋嗎？', answer: '不算。原本不會發生的湊單、浪費、交通與服務費都要從會員利益扣掉。' },
+      { question: '回饋有上限時怎麼算？', answer: '每個情境的利益不得超過上限；若最大利益仍低於淨年費，就不可能只靠該項權益回本。' },
+      { question: '會員自動續約前要檢查什麼？', answer: '重新確認下一期費用、權益、門檻、取消方式與自己過去一年的實際使用，不沿用加入時的宣傳數字。' },
+    ],
+  },
+  es: {
+    title: 'Cómo calcular cuándo compensa una membresía de pago',
+    description: 'Calcula usos de equilibrio con cuota neta, ahorro por pedido elegible, topes, costes añadidos e incertidumbre.',
+    faq: [
+      { question: '¿Cuántos usos necesito para amortizar una membresía?', answer: 'Divide la cuota neta entre el beneficio neto por uso y redondea hacia arriba. Comprueba después que el tope permite alcanzar esa cifra.' },
+      { question: '¿Debo valorar todos los cupones por su importe facial?', answer: 'No. Un cupón que no utilizarías sin la membresía vale cero; uno que obliga a gastar más vale como máximo el ahorro neto real.' },
+      { question: '¿El envío gratis cuenta como ahorro?', answer: 'Solo si el pedido ya estaba previsto, habría pagado envío y no aparecen pedido mínimo, recargo o propina adicional que reduzcan la ventaja.' },
+      { question: '¿Cómo trato un número de usos incierto?', answer: 'Calcula escenarios bajo, central y alto y pondera sus probabilidades. No ocultes la pérdida del escenario bajo.' },
+      { question: '¿Qué reviso antes de la renovación automática?', answer: 'La nueva cuota, ventajas, exclusiones, topes y procedimiento de baja. Guarda la confirmación si cancelas.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = paidMembershipGuides[locale];
+if (!guide) throw new Error(`Missing paid membership guide for ${locale}`);
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>A membership badge does not create savings. The comparison starts with the free or nonmember option you would otherwise choose. Count only eligible purchases already in your plan, value only benefits you will actually use, and subtract the extra costs the membership encourages.</p>
+    <DecisionGuide content={guide} />
+    <h2>Use the incremental benefit, not the advertised discount</h2>
+    <p>If members save $7 but a free account already saves $3, the paid membership adds only $4. A minimum order, longer trip, tip, service charge, or wasted bulk purchase reduces that figure. Treat each benefit category separately so the same purchase is not counted twice.</p>
+    <h2>A benefit cap can make break-even impossible</h2>
+    <p>Before dividing, calculate the maximum annual benefit. If the net fee is $84 but capped benefits cannot exceed $70, no number of visits will repay the membership. In the worked example, the benefit cap is $105, so 12 eligible uses can cover the $84 net fee.</p>
+    <h2>Expected value is not the same as a safe decision</h2>
+    <p>The probability-weighted example produces only $2.10 of expected value. That thin margin can disappear after one changed trip or missed benefit. Test assumptions in the <a href="/en/tools/costco-membership/">membership break-even calculator</a>, then check the renewal fee and cancellation terms. FTC guidance also recommends reviewing renewal prices and keeping cancellation records.</p>
+    <p class="privacy-note">This is a general consumer-cost estimate, not a valuation of a particular membership or legal interpretation of its contract.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>付費會員不是「有用到就值得」，而是相對免費方案或非會員通路多省的金額，能不能補回年費。只計算原本就會消費的項目；為了湊免運、回饋或大包裝而多買，不能算成會員帶來的收益。</p>
+    <DecisionGuide content={guide} />
+    <h2>先把宣傳權益改成實際價值</h2>
+    <p>面額 NT$300 的券，如果本來只會買 NT$150 的商品，實際價值最多 NT$150；若不用會員就不會購買，價值可能是零。一般折扣、會員增額回饋與免運也要和最佳免費替代方案相比，避免重複計算。</p>
+    <h2>回饋上限可能讓會員永遠無法回本</h2>
+    <p>先算所有權益一年最多能帶來多少利益。若淨年費 NT$1,200，但回饋上限只有 NT$1,000，就算使用再多次也無法靠該權益回本。本頁算例的上限是 NT$1,650，因此第 11 次才跨過門檻。</p>
+    <h2>期望值很薄時，保留不續約選項</h2>
+    <p>60% 高使用與 40% 低使用的期望淨值只有 NT$54，一次湊單或少用一次就可能翻負。用<a href="/zh/tools/costco-membership/">會員回本計算機</a>測試自己的次數；續約前依行政院消保會提醒確認期限、費用、扣款週期與取消方式。</p>
+    <p class="privacy-note">這是一般消費成本估算，不代表特定會員方案的推薦，也不判定個別契約退費權利。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>Una tarjeta de socio no genera ahorro por sí sola. La referencia correcta es la mejor opción gratuita o sin membresía que utilizarías. Cuenta únicamente pedidos ya previstos, valora beneficios realmente aprovechables y resta compras o recargos inducidos.</p>
+    <DecisionGuide content={guide} />
+    <h2>Compara beneficio incremental, no descuento publicitario</h2>
+    <p>Si una promoción para todos ya ahorra 2 € y la membresía eleva el ahorro a 5,50 €, la ventaja incremental puede ser solo 3,50 €. Pedido mínimo, desplazamiento, propina, servicio o desperdicio reducen todavía más el beneficio del pedido elegible.</p>
+    <h2>El tope puede impedir amortizar la cuota</h2>
+    <p>Calcula primero el beneficio anual máximo. Si la cuota neta supera el tope, más usos no solucionan el problema. En el ejemplo, 11 usos cubren 60 € y 14 alcanzan el máximo de 77 €.</p>
+    <h2>Un margen esperado pequeño exige prudencia</h2>
+    <p>La mezcla de escenarios deja solo 2,15 € de valor esperado. Una compra extra elimina el supuesto ahorro. Prueba tus cifras en la <a href="/en/tools/costco-membership/">calculadora disponible en inglés</a> y revisa renovación y baja; el artículo 62 español exige que los servicios continuados indiquen el procedimiento para terminar el contrato.</p>
+    <p class="privacy-note">La página organiza costes generales y no recomienda una membresía concreta ni resuelve derechos contractuales individuales.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

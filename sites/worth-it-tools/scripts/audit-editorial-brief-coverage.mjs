@@ -14,16 +14,17 @@ const requiredMarkers = [
 
 const briefRoutes = [
   { id: '01', slug: 'zero-interest-installments-truth' },
+  { id: '02', slug: 'upfront-fees-financing-cost' },
   { id: '05', slug: 'subscription-creep' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
   { id: '11', slug: 'rent-vs-buy-guide' },
 ];
 
 const releaseFloor = {
-  html: 55,
-  editorial: 23,
-  alignedVariants: 20,
-  compliantVariants: 20,
+  html: 58,
+  editorial: 26,
+  alignedVariants: 23,
+  compliantVariants: 23,
   completeTopics: 4,
 };
 

@@ -44,6 +44,18 @@ const editorialRoutes = [
   },
 ];
 
+const partialEditorialRoutes = [
+  {
+    slug: 'upfront-fees-financing-cost',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['net proceeds', 'origination fee', '$1,300'],
+      zh: ['實際入帳', '總費用年百分率', 'NT$34,000'],
+      es: ['comisión de apertura', '7.680 €', '12,21%'],
+    },
+  },
+];
+
 function read(relativePath) {
   const file = join(dist, relativePath);
   if (!existsSync(file)) {
@@ -83,9 +95,46 @@ for (const article of editorialRoutes) {
   }
 }
 
+for (const article of partialEditorialRoutes) {
+  for (const locale of article.locales) {
+    const html = read(`${locale}/${article.slug}/index.html`);
+    if (!html) continue;
+
+    const selfHreflang = locale === 'zh' ? 'zh-Hant' : locale;
+    for (const hreflang of [selfHreflang, 'x-default']) {
+      if (!html.includes(`hreflang="${hreflang}"`)) {
+        failures.push(`/${locale}/${article.slug}/ missing hreflang=${hreflang}`);
+      }
+    }
+    for (const other of hreflangs.filter((value) => ![selfHreflang, 'x-default'].includes(value))) {
+      if (html.includes(`hreflang="${other}"`)) {
+        failures.push(`/${locale}/${article.slug}/ exposes incomplete hreflang=${other}`);
+      }
+    }
+
+    for (const marker of ['class="direct-answer"', '<table', 'class="source-list"', 'class="last-verified"']) {
+      if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing ${marker}`);
+    }
+    for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
+      if (!html.includes(`"@type":"${schemaType}"`)) {
+        failures.push(`/${locale}/${article.slug}/ missing ${schemaType} schema`);
+      }
+    }
+    for (const marker of article.nativeMarkers[locale]) {
+      if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing native-market marker: ${marker}`);
+    }
+  }
+}
+
 const sitemap = read('sitemap-0.xml');
 for (const article of editorialRoutes) {
   for (const locale of ['es', 'fr', 'de']) {
+    const url = `https://worthcalc.win/${locale}/${article.slug}/`;
+    if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  }
+}
+for (const article of partialEditorialRoutes) {
+  for (const locale of article.locales) {
     const url = `https://worthcalc.win/${locale}/${article.slug}/`;
     if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
   }
@@ -109,4 +158,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 4 complete five-locale topics, 12 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 4 complete five-locale topics, 1 three-locale topic in progress, 15 added routes, 4 enriched high-value tools.');

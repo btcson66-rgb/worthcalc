@@ -404,6 +404,73 @@ export const bnplCardGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   },
 };
 
+export const monthlyAnnualGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'monthly-annual-subscription-method',
+    labels: labels.en,
+    directAnswer: 'Annual billing saves money only when you keep the service past its break-even month or the probability-weighted monthly cost is higher than the non-refundable annual price. At $15 monthly or $120 annually, eight paid months cost the same and the annual plan starts saving in month nine. If there is a 30% chance you stop after month four and a 70% chance you use all year, expected monthly billing is $144, so annual billing saves an expected $24—but it still loses $60 in the early-exit outcome.',
+    inputs: ['Current monthly price after any trial or promotion', 'Annual price including tax and mandatory fees', 'Months you realistically expect to use the service', 'Probability of keeping it for the full year and a plausible early-cancel month', 'Prorated refund, pause, downgrade, or transfer terms', 'Renewal date, renewal price, cancellation method, and proof to retain'],
+    formula: 'Simple break-even months = annual price ÷ monthly price. Expected monthly cost = p(full year) × 12M + (1 − p) × kM. Non-refundable annual cost = A. Full-year probability needed for annual to win = (A − kM) ÷ (12M − kM).',
+    workedExample: 'A service is $15 a month or $120 for a non-refundable year. Simple break-even is $120 ÷ $15 = 8 months, so annual billing saves only from month nine. Suppose there is a 70% chance of using all 12 months and a 30% chance of cancelling after four. Expected monthly cost is 0.70 × $180 + 0.30 × $60 = $144. The annual plan costs $120 and saves $24 in expectation, but if the four-month outcome happens, monthly billing would have saved $60.',
+    sensitivity: [
+      { scenario: 'High early-cancel risk', input: '30% full year; otherwise stop after month 4', result: 'Expected monthly $96; monthly saves $24' },
+      { scenario: 'Probability break-even', input: '50% full year; otherwise stop after month 4', result: 'Expected monthly $120; tie with annual' },
+      { scenario: 'Base estimate', input: '70% full year; otherwise stop after month 4', result: 'Expected monthly $144; annual saves $24' },
+      { scenario: 'Certain full-year use', input: '12 monthly payments', result: 'Monthly $180; annual saves $60' },
+    ],
+    cta: { label: 'Add the plan to your subscription audit', href: '/en/tools/subscription-audit' },
+    limitations: ['The probability model is a decision aid, not a forecast. Use a range if you cannot estimate retention confidently.', 'A monthly option may still have a minimum term, notice period, or price increase; annual plans may have prorated refunds. Use the actual contract.', 'Do not count an annual discount as savings if prepaying strains essential cash or if the service would be cheaper to pause and restart seasonally.'],
+    sources: [
+      { label: 'FTC Consumer Advice — free trials, auto-renewals, and negative-option subscriptions', href: 'https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions' },
+      { label: 'Google Play Help — cancel, pause, or change a subscription', href: 'https://support.google.com/googleplay/answer/7018481?hl=en' },
+      { label: 'Apple Support — cancel a subscription', href: 'https://support.apple.com/en-us/118428' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'monthly-annual-subscription-method',
+    labels: labels.zh,
+    directAnswer: '年繳不是看到折扣就一定省。先算年費等於幾個月月費，再把提前不用、不能按比例退款與一次付清的風險算進去。月費 NT$300、年費 NT$2,880 時，打平點是 9.6 個月，至少用到第 10 個月年繳才開始低於月繳。若有 80% 機率用滿一年、20% 機率第 4 個月停用，月繳期望成本為 NT$3,120，年繳期望省 NT$240；但真的第 4 個月停用時，月繳會少花 NT$1,680。',
+    inputs: ['優惠期結束後的真正月費', '含稅與必要費用的年繳總額', '實際可能使用的月份，不用「希望會用」代替', '用滿一年機率與合理的提早停用月份', '能否按比例退費、暫停、降級或轉移', '下次扣款日、續約價、取消路徑與成功證明'],
+    formula: '單純打平月數 = 年繳總額 ÷ 月費。月繳期望成本 = 用滿一年機率 p × 12M + (1 − p) × 提早停用月 k × M。不可退年繳成本 = A。年繳勝出的全年使用機率門檻 = (A − kM) ÷ (12M − kM)。',
+    workedExample: '服務月費 NT$300，年繳 NT$2,880 且不按比例退費。單純打平是 2,880 ÷ 300 = 9.6 個月，所以用到第 10 個月才省。若 80% 機率用滿 12 個月、20% 機率第 4 個月停用，月繳期望成本 = 0.8 × NT$3,600 + 0.2 × NT$1,200 = NT$3,120，年繳期望省 NT$240；但提早停用情境下，月繳只付 NT$1,200。',
+    sensitivity: [
+      { scenario: '停用風險較高', input: '50% 用滿一年，否則第 4 個月停用', result: '月繳期望 NT$2,400；比年繳少 NT$480' },
+      { scenario: '機率打平', input: '70% 用滿一年，否則第 4 個月停用', result: '月繳期望 NT$2,880；和年繳相同' },
+      { scenario: '基準估計', input: '80% 用滿一年，否則第 4 個月停用', result: '月繳期望 NT$3,120；年繳省 NT$240' },
+      { scenario: '確定使用一年', input: '月繳 12 次', result: '月繳 NT$3,600；年繳省 NT$720' },
+    ],
+    cta: { label: '把方案加入訂閱支出健檢', href: '/zh/tools/subscription-audit' },
+    limitations: ['機率是決策用假設，不是預測；不確定時要同時測試保守與樂觀情境。', '月繳可能仍有最低期間，年繳也可能允許部分退費；請以實際契約和平台畫面為準。', '若一次付年費會壓縮生活費或緊急預備金，就算期望成本較低，也不代表現金流適合。'],
+    sources: [
+      { label: '行政院消費者保護會 — 電子商務消費者保護綱領', href: 'https://cpc.ey.gov.tw/Page/960E744883E6A75D' },
+      { label: '行政院消費者保護會 — 如何取消免費贈送或已訂閱的 APP', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'monthly-annual-subscription-method',
+    labels: labels.es,
+    directAnswer: 'Pagar un año por adelantado compensa cuando mantienes el servicio más allá del mes de equilibrio o cuando el coste mensual esperado supera el precio anual no reembolsable. Con 13 € al mes o 120 € al año, el equilibrio está en 9,23 meses: el ahorro empieza con el décimo pago mensual. Si hay un 75% de probabilidad de usar los 12 meses y un 25% de cancelar tras cinco, el mensual cuesta 133,25 € en expectativa y el anual ahorra 13,25 €; pero en la salida temprana el mensual habría ahorrado 55 €.',
+    inputs: ['Precio mensual real después de promociones', 'Precio anual final con impuestos y cargos obligatorios', 'Meses de uso que realmente prevés', 'Probabilidad de seguir todo el año y mes razonable de baja anticipada', 'Reembolso proporcional, pausa, cambio de plan o cesión', 'Fecha y precio de renovación, canal de baja y justificante'],
+    formula: 'Meses de equilibrio = precio anual ÷ precio mensual. Coste mensual esperado = p(año completo) × 12M + (1 − p) × kM. Coste anual sin reembolso = A. Probabilidad mínima de año completo para que gane el anual = (A − kM) ÷ (12M − kM).',
+    workedExample: 'Una plataforma cuesta 13 € al mes o 120 € por un año no reembolsable. El equilibrio simple es 120 ÷ 13 = 9,23 meses. Con un 75% de probabilidad de mantenerla 12 meses y un 25% de cancelarla después del quinto, el mensual esperado es 0,75 × 156 € + 0,25 × 65 € = 133,25 €. El anual ahorra 13,25 € en expectativa, aunque perdería frente al mensual por 55 € si ocurre la baja del mes cinco.',
+    sensitivity: [
+      { scenario: 'Riesgo alto de baja', input: '40% año completo; si no, baja tras mes 5', result: 'Mensual esperado 101,40 €; ahorra 18,60 €' },
+      { scenario: 'Probabilidad de equilibrio', input: '60,4% año completo; si no, baja tras mes 5', result: 'Mensual esperado ≈ 120 €; empate' },
+      { scenario: 'Estimación base', input: '75% año completo; si no, baja tras mes 5', result: 'Mensual esperado 133,25 €; anual ahorra 13,25 €' },
+      { scenario: 'Uso seguro de un año', input: '12 mensualidades', result: 'Mensual 156 €; anual ahorra 36 €' },
+    ],
+    cta: { label: 'Añadir el plan a la auditoría en inglés', href: '/en/tools/subscription-audit' },
+    limitations: ['La probabilidad organiza la incertidumbre, pero no predice tu conducta. Prueba varios meses de baja y varios niveles de confianza.', 'Una tarifa mensual puede incluir permanencia o preaviso, y una anual puede devolver parte del importe. Aplica el contrato concreto.', 'El ahorro esperado no compensa una renovación que no puedes pagar ni el coste de adelantar dinero necesario para gastos básicos.'],
+    sources: [
+      { label: 'BOE — Ley General para la Defensa de los Consumidores y Usuarios, artículo 62', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a62' },
+      { label: 'Centro Europeo del Consumidor en España — renovaciones y cancelación de suscripciones online', href: 'https://portal-cec.consumo.gob.es/es/comunicacion/noticias/2021/recomendaciones-del-centro-europeo-del-consumidor-en-espana-cecespana' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

@@ -63,7 +63,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'monthly-vs-annual-subscription',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['probability break-even', '$144', 'renewal notice'],
+      zh: ['9.6 個月', 'NT$3,120', '刪除 APP'],
+      es: ['9,23 meses', '133,25 €', 'artículo 62'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -172,4 +182,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 6 complete five-locale topics, 22 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 6 complete five-locale topics, 25 added routes, 4 enriched high-value tools.');

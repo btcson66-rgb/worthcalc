@@ -6,7 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import { repairReplaceGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'Repair or replace: a practical decision formula for appliances, phones, and cars',
@@ -41,22 +41,46 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Sirve para un coche?', answer: 'Como primera comparación, pero añade seguridad, inmovilización, seguro, financiación, valor de reventa y el estado del resto del vehículo.' },
     ],
   },
+  fr: {
+    title: 'Réparer ou remplacer : la formule de décision pour électroménager, téléphone et voiture',
+    description: 'Comparez devis net, durée gagnée, risque de nouvelle panne, énergie et coût du remplacement avec garantie, bonus réparation et indice de réparabilité.',
+    faq: [
+      { question: 'À partir de quel pourcentage faut-il remplacer ?', answer: 'Il n’existe pas de pourcentage universel. Le ratio devis/remplacement n’est qu’un filtre : durée gagnée, récidive, énergie, sécurité, pièces et coût net déterminent le résultat.' },
+      { question: 'Le bonus réparation doit-il être soustrait ?', answer: 'Seulement si le produit et la panne sont éligibles, hors garantie, auprès d’un réparateur QualiRépar, et si la réduction apparaît sur la facture. Comparez le montant réellement restant à payer.' },
+      { question: 'Que change la garantie légale de conformité ?', answer: 'Pendant sa période applicable, demandez d’abord au vendeur la réparation ou le remplacement sans frais. Une réparation choisie dans ce cadre prolonge la garantie initiale de six mois.' },
+      { question: 'Comment estimer une nouvelle panne ?', answer: 'Utilisez des scénarios bas, central et haut fondés sur le diagnostic, l’âge et l’historique. Ne transformez pas une moyenne internet en probabilité précise pour votre modèle.' },
+      { question: 'La formule convient-elle à une voiture ?', answer: 'Comme premier filtre seulement. Ajoutez sécurité, immobilisation, crédit, assurance, revente et état des autres organes avant de décider.' },
+    ],
+  },
+  de: {
+    title: 'Reparieren oder ersetzen: Entscheidungsformel für Haushaltsgerät, Handy und Auto',
+    description: 'Vergleichen Sie Kostenvoranschlag, Zusatzlebensdauer, Folgerisiko, Energie und Nettoersatz statt einer pauschalen Prozentregel.',
+    faq: [
+      { question: 'Ab welchem Prozentsatz sollte man neu kaufen?', answer: 'Es gibt keinen allgemeinen Prozentsatz. Das Preisverhältnis ist nur ein Filter; Zusatzlebensdauer, Wiederholungsfehler, Energie, Sicherheit, Teile und Nettoersatz entscheiden.' },
+      { question: 'Was gilt während der Gewährleistung?', answer: 'Wenden Sie sich zuerst an den Verkäufer und verlangen Sie Nacherfüllung. Transport, Arbeit und Material trägt grundsätzlich der Händler; Gewährleistung ist nicht dasselbe wie eine freiwillige Garantie.' },
+      { question: 'Darf ein Kostenvoranschlag überschritten werden?', answer: 'Ein Kostenvoranschlag ist nicht automatisch ein Festpreis. Das Umweltbundesamt weist auf mögliche begründete Überschreitungen hin; vereinbaren Sie für Kostensicherheit einen Festpreis und klären Sie Diagnose- und Anfahrtskosten.' },
+      { question: 'Wie schätze ich einen Folgefehler?', answer: 'Setzen Sie niedrige, mittlere und hohe Szenarien aus Diagnose, Alter und Reparaturhistorie. Eine allgemeine Internetquote ist keine Modellstatistik.' },
+      { question: 'Gilt die Formel auch fürs Auto?', answer: 'Nur als erste Rechnung. Sicherheit, Ausfall, Kredit, Versicherung, Restwert und der Zustand weiterer Baugruppen müssen separat hinein.' },
+    ],
+  },
 };
 
 const calculators = {
   en: { currency: 'USD' as const, defaults: { repairQuote: 250, repairMonths: 36, recurrenceProbability: 20, recurrenceCost: 300, extraEnergyMonthly: 3, replacementPrice: 1200, replacementFees: 100, currentValue: 50, replacementMonths: 96 }, copy: { heading: 'Repair versus replacement life-extension calculator', intro: 'Compare monthly equivalents over each option’s expected useful months. Use quote-based scenarios; no failure rate is assumed for you.', repairQuote: 'Repair quote still to be paid', repairMonths: 'Expected useful months after repair', recurrenceProbability: 'Chance of repeat failure (%)', recurrenceCost: 'Cost if failure recurs', extraEnergyMonthly: 'Old item extra energy/month', replacementPrice: 'Replacement purchase price', replacementFees: 'Delivery, setup, tax or transfer', currentValue: 'Trade-in/resale value now', replacementMonths: 'Expected useful months of replacement', repairExpected: 'Expected repair-path cost', repairMonthly: 'Repair cost per useful month', replacementNet: 'Net replacement cost', replacementMonthly: 'Replacement cost per useful month', repairRatio: 'Quote / net replacement', breakEvenQuote: 'Maximum break-even repair quote', verdictRepair: 'Repair is lower per useful month by', verdictReplace: 'Replacement is lower per useful month by', privacy: 'Educational estimate. Safety, warranty, diagnosis, downtime and financing can override the arithmetic.' } },
   zh: { currency: 'TWD' as const, defaults: { repairQuote: 6000, repairMonths: 30, recurrenceProbability: 25, recurrenceCost: 5000, extraEnergyMonthly: 100, replacementPrice: 32000, replacementFees: 1000, currentValue: 1000, replacementMonths: 84 }, copy: { heading: '維修延命 vs 換新每月成本計算器', intro: '依兩個方案各自預期可用月數換算；故障機率必須由你用診斷與情境輸入，系統不會捏造。', repairQuote: '尚未支付的維修報價', repairMonths: '修後預期可用月數', recurrenceProbability: '再故障機率（%）', recurrenceCost: '再故障可能支出', extraEnergyMonthly: '舊機每月多耗能源', replacementPrice: '換新品成交價', replacementFees: '運送／安裝／稅費／過戶', currentValue: '舊品目前折抵／轉售', replacementMonths: '新品預期可用月數', repairExpected: '維修路徑期望成本', repairMonthly: '維修每個可用月成本', replacementNet: '換新淨成本', replacementMonthly: '換新每個可用月成本', repairRatio: '報價占換新淨成本', breakEvenQuote: '維修報價損益上限', verdictRepair: '維修每個可用月較省', verdictReplace: '換新每個可用月較省', privacy: '一般教育試算。安全、保固、診斷、停用損失與融資可能優先於算術。' } },
   es: { currency: 'EUR' as const, defaults: { repairQuote: 180, repairMonths: 30, recurrenceProbability: 20, recurrenceCost: 180, extraEnergyMonthly: 2.5, replacementPrice: 850, replacementFees: 40, currentValue: 30, replacementMonths: 84 }, copy: { heading: 'Calculadora de prolongar la vida o sustituir', intro: 'Compara equivalentes mensuales según la vida útil esperada. Introduce escenarios de avería basados en diagnóstico; no se inventa una tasa.', repairQuote: 'Presupuesto de reparación pendiente', repairMonths: 'Meses útiles esperados tras reparar', recurrenceProbability: 'Probabilidad de recaída (%)', recurrenceCost: 'Coste si reaparece la avería', extraEnergyMonthly: 'Energía extra del equipo viejo/mes', replacementPrice: 'Precio de sustitución', replacementFees: 'Entrega, instalación, impuestos o trámites', currentValue: 'Valor de venta o entrega actual', replacementMonths: 'Meses útiles esperados del sustituto', repairExpected: 'Coste esperado del camino reparar', repairMonthly: 'Reparar por mes útil', replacementNet: 'Coste neto de sustituir', replacementMonthly: 'Sustituir por mes útil', repairRatio: 'Presupuesto / sustitución neta', breakEvenQuote: 'Presupuesto máximo de equilibrio', verdictRepair: 'Reparar cuesta menos por mes útil en', verdictReplace: 'Sustituir cuesta menos por mes útil en', privacy: 'Estimación educativa. Seguridad, garantía, diagnóstico, inmovilización y financiación pueden prevalecer.' } },
+  fr: { currency: 'EUR' as const, defaults: { repairQuote: 220, repairMonths: 30, recurrenceProbability: 15, recurrenceCost: 200, extraEnergyMonthly: 3, replacementPrice: 950, replacementFees: 50, currentValue: 40, replacementMonths: 84 }, copy: { heading: 'Calculateur de prolongation par réparation ou remplacement', intro: 'Comparez le coût par mois utile avec vos devis et scénarios. Aucun taux de panne propre au modèle n’est inventé.', repairQuote: 'Devis net restant à payer', repairMonths: 'Mois fiables ajoutés par la réparation', recurrenceProbability: 'Risque de nouvelle panne (%)', recurrenceCost: 'Coût si la panne revient', extraEnergyMonthly: 'Surcoût énergie de l’ancien/mois', replacementPrice: 'Prix du remplacement', replacementFees: 'Livraison, installation, taxes ou formalités', currentValue: 'Reprise ou revente actuelle', replacementMonths: 'Mois utiles attendus du remplaçant', repairExpected: 'Coût attendu du parcours réparation', repairMonthly: 'Réparer par mois utile', replacementNet: 'Coût net du remplacement', replacementMonthly: 'Remplacer par mois utile', repairRatio: 'Devis / remplacement net', breakEvenQuote: 'Devis maximal d’équilibre', verdictRepair: 'Réparer coûte moins par mois utile de', verdictReplace: 'Remplacer coûte moins par mois utile de', privacy: 'Estimation pédagogique. Sécurité, garantie, diagnostic, immobilisation et financement peuvent primer.' } },
+  de: { currency: 'EUR' as const, defaults: { repairQuote: 240, repairMonths: 30, recurrenceProbability: 20, recurrenceCost: 240, extraEnergyMonthly: 4, replacementPrice: 1100, replacementFees: 60, currentValue: 40, replacementMonths: 84 }, copy: { heading: 'Reparatur-oder-Ersatz-Lebensdauerrechner', intro: 'Vergleichen Sie Kosten je Nutzungsmonat mit eigenen Angeboten und Szenarien. Eine modellgenaue Ausfallrate wird nicht erfunden.', repairQuote: 'Noch zu zahlender Reparaturpreis', repairMonths: 'Verlässliche Zusatzmonate nach Reparatur', recurrenceProbability: 'Wiederholungsrisiko (%)', recurrenceCost: 'Kosten bei erneutem Fehler', extraEnergyMonthly: 'Mehrenergie des Altgeräts/Monat', replacementPrice: 'Kaufpreis Ersatz', replacementFees: 'Lieferung, Einbau, Steuer oder Übertragung', currentValue: 'Ankauf oder Wiederverkauf heute', replacementMonths: 'Erwartete Nutzungsmonate des Ersatzes', repairExpected: 'Erwartete Kosten Reparaturpfad', repairMonthly: 'Reparatur je Nutzungsmonat', replacementNet: 'Nettoersatzkosten', replacementMonthly: 'Ersatz je Nutzungsmonat', repairRatio: 'Reparaturpreis / Nettoersatz', breakEvenQuote: 'Kostendeckender Reparaturpreis', verdictRepair: 'Reparatur kostet je Nutzungsmonat weniger um', verdictReplace: 'Ersatz kostet je Nutzungsmonat weniger um', privacy: 'Bildungsorientierte Schätzung. Sicherheit, Gewährleistung, Diagnose, Ausfall und Finanzierung können vorgehen.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = repairReplaceGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'en' && <>
     <p>The familiar “repair if it costs less than half of new” rule leaves out the most important variable: how many reliable months the repair actually buys. A $250 repair can be poor if it buys six months and excellent if it buys three years.</p>
     <DecisionGuide content={guide} />
@@ -98,6 +122,34 @@ const calculator = calculators[locale];
     <h2>Repuestos y derecho a reparar cambian la viabilidad</h2>
     <p>España amplió a diez años la disponibilidad mínima de repuestos tras dejar de fabricarse determinados bienes. Las nuevas reglas europeas de reparación se aplican mediante transposición nacional desde el 31 de julio de 2026; comprueba producto y fecha.</p>
     <p class="privacy-note">Información educativa; no es asesoramiento de seguridad, vehículo, garantía, fiscal o financiero.</p>
+  </>}
+  {locale === 'fr' && <>
+    <p>La règle « au-delà de la moitié du neuf, remplacez » ignore le nombre de mois fiables réellement achetés par la réparation. En France, il faut aussi vérifier la garantie légale, le bonus QualiRépar et l’indice de réparabilité avant de comparer les montants.</p>
+    <DecisionGuide content={guide} />
+    <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>Commencez par la garantie, pas par le calcul</h2>
+    <p>Dans le cadre de la garantie légale de conformité, la réparation ou le remplacement doit intervenir sans frais et, en principe, dans les 30 jours. Une réparation choisie prolonge la garantie initiale de six mois. Un coût pris en charge par le vendeur ne doit pas devenir une dépense dans le calculateur.</p>
+    <h2>Le bonus réparation réduit uniquement une facture éligible</h2>
+    <p>Le bonus concerne des produits hors garantie réparés par un professionnel labellisé QualiRépar, sous conditions. Saisissez le montant net seulement lorsque la réduction est confirmée sur le devis ou la facture ; sinon conservez le prix brut et testez le bonus en scénario.</p>
+    <h2>L’indice aide à estimer la suite, sans promettre une durée</h2>
+    <p>L’indice de réparabilité renseigne notamment sur la documentation, le démontage, les pièces et leur prix. Il aide à challenger les mois ajoutés et la disponibilité future, mais ne transforme pas une note en garantie de durée de vie.</p>
+    <h2>Comparez des produits et services équivalents</h2>
+    <p>Ajoutez livraison, installation, reprise réelle et énergie à usage identique. Pour une voiture, séparez financement, immobilisation et sécurité ; pour un téléphone, migration des données, batterie et durée des mises à jour.</p>
+    <p class="privacy-note">Information générale, pas un avis de sécurité, de garantie, automobile, fiscal ou financier.</p>
+  </>}
+  {locale === 'de' && <>
+    <p>Die Faustregel „ab der Hälfte des Neupreises ersetzen“ übersieht, wie viele verlässliche Monate die Reparatur kauft. In Deutschland gehören Gewährleistung, Kostenvoranschlag, Ersatzteile, Software und Ausfallzeit vor die Prozentzahl.</p>
+    <DecisionGuide content={guide} />
+    <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>Gewährleistung und Garantie sauber trennen</h2>
+    <p>Bei einem Mangel innerhalb der gesetzlichen Gewährleistung ist der Verkäufer der erste Ansprechpartner. Nacherfüllung durch Reparatur oder Ersatz ist grundsätzlich kostenfrei; eine freiwillige Herstellergarantie hat eigene Bedingungen. Bezahlen Sie nicht selbst und tragen Sie den Betrag nicht als Reparaturkosten ein, bevor der Anspruch geprüft ist.</p>
+    <h2>Kostenvoranschlag, Diagnose und Festpreis klären</h2>
+    <p>Fragen Sie nach Fehlerursache, Teilen, Arbeit, Anfahrt, Diagnosekosten, Abweichungsregel und Reparaturgewährleistung. Ein schriftlich vereinbarter Festpreis macht das Basisszenario belastbarer; sonst braucht die Sensitivität auch einen höheren Rechnungsbetrag.</p>
+    <h2>Das neue Recht auf Reparatur ist kein pauschaler Zuschuss</h2>
+    <p>Der Bundesrat billigte am 10. Juli 2026 das Umsetzungsgesetz: Herstellerpflichten, angemessene Teilepreise und eine längere Gewährleistung nach Reparatur sollen Reparaturen erleichtern. Prüfen Sie Inkrafttreten, Produktgruppe und Anspruch im Einzelfall; der Rechner setzt weder Erstattung noch Rabatt automatisch an.</p>
+    <h2>Energie und Restwert nur vergleichbar ansetzen</h2>
+    <p>Nutzen Sie Verbrauch bei gleicher Nutzung und Ihren aktuellen Tarif. Ziehen Sie nur ein echtes Ankaufangebot ab. Beim Auto gehören Kredit, Versicherung, Standzeit und andere alternde Komponenten in eigene Szenarien.</p>
+    <p class="privacy-note">Allgemeine Bildung, keine Sicherheits-, Gewährleistungs-, Kfz-, Steuer- oder Finanzberatung.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

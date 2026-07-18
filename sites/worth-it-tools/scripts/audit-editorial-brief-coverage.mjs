@@ -28,13 +28,14 @@ const briefRoutes = [
   { id: '13', slug: 'ev-vs-gas-total-cost' },
   { id: '14', slug: 'home-vs-public-ev-charging-cost' },
   { id: '15', slug: 'new-vs-used-car-total-cost' },
+  { id: '16', slug: 'car-lease-vs-buy-total-cost' },
 ];
 
 const releaseFloor = {
-  html: 110,
-  editorial: 78,
-  alignedVariants: 75,
-  compliantVariants: 75,
+  html: 113,
+  editorial: 81,
+  alignedVariants: 78,
+  compliantVariants: 78,
   completeTopics: 15,
 };
 

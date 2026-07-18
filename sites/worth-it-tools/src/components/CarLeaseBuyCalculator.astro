@@ -1,0 +1,183 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface CalculatorCopy {
+  heading: string; intro: string; months: string; leaseUpfront: string; leaseMonthly: string;
+  leaseInsuranceAnnual: string; leaseMaintenanceAnnual: string; allowedAnnualDistance: string;
+  plannedAnnualDistance: string; excessFee: string; leaseEndFees: string; leaseOptionPrice: string;
+  expectedLeaseMarketValue: string; buyPrice: string; buyFees: string; buyDown: string; buyApr: string;
+  buyTerm: string; buyInsuranceAnnual: string; buyMaintenanceAnnual: string; buyResale: string;
+  leaseTotal: string; buyTotal: string; difference: string; excessDistance: string; mileageCharge: string;
+  leasePayments: string; leaseRunning: string; buyInterest: string; buyDepreciation: string;
+  buyRunning: string; buyBalance: string; buyMonthly: string; buyoutGap: string; distanceSuffix: string;
+  leaseWins: string; buyWins: string; tie: string; privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    months: number; leaseUpfront: number; leaseMonthly: number; leaseInsuranceAnnual: number;
+    leaseMaintenanceAnnual: number; allowedAnnualDistance: number; plannedAnnualDistance: number;
+    excessFee: number; leaseEndFees: number; leaseOptionPrice: number; expectedLeaseMarketValue: number;
+    buyPrice: number; buyFees: number; buyDown: number; buyApr: number; buyTerm: number;
+    buyInsuranceAnnual: number; buyMaintenanceAnnual: number; buyResale: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES' };
+---
+
+<section
+  id="car-lease-buy-calculator"
+  class="lease-buy-calc"
+  data-car-lease-buy-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-distance-suffix={copy.distanceSuffix}
+  data-lease-wins={copy.leaseWins}
+  data-buy-wins={copy.buyWins}
+  data-tie={copy.tie}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="lease-buy-grid">
+    <div class="lease-buy-inputs">
+      <label class="wide"><span>{copy.months}</span><input data-field="months" type="number" inputmode="numeric" min="12" max="120" step="1" value={defaults.months} /></label>
+      <label><span>{copy.leaseUpfront}</span><input data-field="leaseUpfront" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseUpfront} /></label>
+      <label><span>{copy.leaseMonthly}</span><input data-field="leaseMonthly" type="number" inputmode="decimal" min="0" step="10" value={defaults.leaseMonthly} /></label>
+      <label><span>{copy.leaseInsuranceAnnual}</span><input data-field="leaseInsuranceAnnual" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseInsuranceAnnual} /></label>
+      <label><span>{copy.leaseMaintenanceAnnual}</span><input data-field="leaseMaintenanceAnnual" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseMaintenanceAnnual} /></label>
+      <label><span>{copy.allowedAnnualDistance}</span><input data-field="allowedAnnualDistance" type="number" inputmode="decimal" min="0" step="500" value={defaults.allowedAnnualDistance} /></label>
+      <label><span>{copy.plannedAnnualDistance}</span><input data-field="plannedAnnualDistance" type="number" inputmode="decimal" min="0" step="500" value={defaults.plannedAnnualDistance} /></label>
+      <label><span>{copy.excessFee}</span><input data-field="excessFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.excessFee} /></label>
+      <label><span>{copy.leaseEndFees}</span><input data-field="leaseEndFees" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseEndFees} /></label>
+      <label><span>{copy.leaseOptionPrice}</span><input data-field="leaseOptionPrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseOptionPrice} /></label>
+      <label><span>{copy.expectedLeaseMarketValue}</span><input data-field="expectedLeaseMarketValue" type="number" inputmode="decimal" min="0" step="100" value={defaults.expectedLeaseMarketValue} /></label>
+      <label><span>{copy.buyPrice}</span><input data-field="buyPrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyPrice} /></label>
+      <label><span>{copy.buyFees}</span><input data-field="buyFees" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyFees} /></label>
+      <label><span>{copy.buyDown}</span><input data-field="buyDown" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyDown} /></label>
+      <label><span>{copy.buyApr}</span><input data-field="buyApr" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.buyApr} /></label>
+      <label><span>{copy.buyTerm}</span><input data-field="buyTerm" type="number" inputmode="numeric" min="1" max="120" step="1" value={defaults.buyTerm} /></label>
+      <label><span>{copy.buyInsuranceAnnual}</span><input data-field="buyInsuranceAnnual" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyInsuranceAnnual} /></label>
+      <label><span>{copy.buyMaintenanceAnnual}</span><input data-field="buyMaintenanceAnnual" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyMaintenanceAnnual} /></label>
+      <label><span>{copy.buyResale}</span><input data-field="buyResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyResale} /></label>
+    </div>
+    <div class="lease-buy-results" aria-live="polite">
+      <p class="lease-buy-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.leaseTotal}</dt><dd data-output="leaseTotal">—</dd></div>
+        <div><dt>{copy.buyTotal}</dt><dd data-output="buyTotal">—</dd></div>
+        <div><dt>{copy.difference}</dt><dd data-output="difference">—</dd></div>
+        <div><dt>{copy.excessDistance}</dt><dd data-output="excessDistance">—</dd></div>
+        <div><dt>{copy.mileageCharge}</dt><dd data-output="mileageCharge">—</dd></div>
+        <div><dt>{copy.leasePayments}</dt><dd data-output="leasePayments">—</dd></div>
+        <div><dt>{copy.leaseRunning}</dt><dd data-output="leaseRunning">—</dd></div>
+        <div><dt>{copy.buyInterest}</dt><dd data-output="buyInterest">—</dd></div>
+        <div><dt>{copy.buyDepreciation}</dt><dd data-output="buyDepreciation">—</dd></div>
+        <div><dt>{copy.buyRunning}</dt><dd data-output="buyRunning">—</dd></div>
+        <div><dt>{copy.buyBalance}</dt><dd data-output="buyBalance">—</dd></div>
+        <div><dt>{copy.buyMonthly}</dt><dd data-output="buyMonthly">—</dd></div>
+        <div><dt>{copy.buyoutGap}</dt><dd data-output="buyoutGap">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="lease-buy-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-car-lease-buy-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const moneyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 });
+    const numberFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : moneyFormatter.format(amount);
+
+    function loan(principal: number, apr: number, term: number, holdingMonths: number) {
+      const months = Math.min(120, Math.max(1, Math.round(term)));
+      const paidMonths = Math.min(months, Math.max(0, holdingMonths));
+      if (principal <= 0) return { payment: 0, balance: 0, interest: 0 };
+      const rate = Math.max(0, apr) / 1200;
+      const payment = rate === 0 ? principal / months : principal * rate * (1 + rate) ** months / ((1 + rate) ** months - 1);
+      const balance = paidMonths >= months ? 0 : rate === 0
+        ? principal * (1 - paidMonths / months)
+        : principal * (1 + rate) ** paidMonths - payment * (((1 + rate) ** paidMonths - 1) / rate);
+      const principalPaid = principal - Math.max(0, balance);
+      return { payment, balance: Math.max(0, balance), interest: payment * paidMonths - principalPaid };
+    }
+
+    function calculate() {
+      const months = Math.min(120, Math.max(12, Math.round(value('months'))));
+      const years = months / 12;
+      const plannedDistance = Math.max(0, value('plannedAnnualDistance')) * years;
+      const allowedDistance = Math.max(0, value('allowedAnnualDistance')) * years;
+      const excessDistance = Math.max(0, plannedDistance - allowedDistance);
+      const mileageCharge = excessDistance * Math.max(0, value('excessFee'));
+      const leasePayments = Math.max(0, value('leaseUpfront')) + Math.max(0, value('leaseMonthly')) * months;
+      const leaseRunning = (Math.max(0, value('leaseInsuranceAnnual')) + Math.max(0, value('leaseMaintenanceAnnual'))) * years;
+      const leaseTotal = leasePayments + leaseRunning + mileageCharge + Math.max(0, value('leaseEndFees'));
+
+      const buyPrice = Math.max(0, value('buyPrice'));
+      const buyFees = Math.max(0, value('buyFees'));
+      const buyDown = Math.min(buyPrice + buyFees, Math.max(0, value('buyDown')));
+      const buyLoan = loan(buyPrice + buyFees - buyDown, value('buyApr'), value('buyTerm'), months);
+      const buyRunning = (Math.max(0, value('buyInsuranceAnnual')) + Math.max(0, value('buyMaintenanceAnnual'))) * years;
+      const buyResale = Math.max(0, value('buyResale'));
+      const buyTotal = buyPrice + buyFees + buyLoan.interest + buyRunning - buyResale;
+      const buyoutGap = Math.max(0, value('expectedLeaseMarketValue')) - Math.max(0, value('leaseOptionPrice'));
+      const difference = Math.abs(leaseTotal - buyTotal);
+
+      output('leaseTotal').textContent = formatMoney(leaseTotal);
+      output('buyTotal').textContent = formatMoney(buyTotal);
+      output('difference').textContent = formatMoney(difference);
+      output('excessDistance').textContent = `${numberFormatter.format(excessDistance)} ${root.dataset.distanceSuffix || ''}`.trim();
+      output('mileageCharge').textContent = formatMoney(mileageCharge);
+      output('leasePayments').textContent = formatMoney(leasePayments);
+      output('leaseRunning').textContent = formatMoney(leaseRunning);
+      output('buyInterest').textContent = formatMoney(buyLoan.interest);
+      output('buyDepreciation').textContent = formatMoney(buyPrice - buyResale);
+      output('buyRunning').textContent = formatMoney(buyRunning);
+      output('buyBalance').textContent = formatMoney(buyLoan.balance);
+      output('buyMonthly').textContent = formatMoney(buyLoan.payment);
+      output('buyoutGap').textContent = formatMoney(buyoutGap);
+      output('verdict').textContent = difference < 0.5
+        ? root.dataset.tie || ''
+        : `${leaseTotal < buyTotal ? root.dataset.leaseWins : root.dataset.buyWins} ${formatMoney(difference)}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .lease-buy-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .lease-buy-calc h2 { margin-top: 0; }
+  .lease-buy-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.7fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .lease-buy-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .lease-buy-inputs .wide { grid-column: 1 / -1; }
+  .lease-buy-inputs label span { display: block; min-height: 2.9rem; margin-bottom: 0.35rem; font-weight: 650; }
+  .lease-buy-inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem 0.75rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .lease-buy-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
+  .lease-buy-verdict { margin-top: 0; font-weight: 800; }
+  .lease-buy-results dl { margin: 0; }
+  .lease-buy-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--color-border); }
+  .lease-buy-results dt { font-weight: 600; }
+  .lease-buy-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .lease-buy-note { margin-bottom: 0; color: var(--color-text-muted); font-size: 0.92rem; }
+  @media (max-width: 760px) {
+    .lease-buy-calc { padding: 1rem; }
+    .lease-buy-grid, .lease-buy-inputs { grid-template-columns: 1fr; }
+    .lease-buy-inputs .wide { grid-column: auto; }
+    .lease-buy-inputs label span { min-height: 0; }
+  }
+</style>

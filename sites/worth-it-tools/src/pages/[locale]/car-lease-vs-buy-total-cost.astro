@@ -1,0 +1,158 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import CarLeaseBuyCalculator from '../../components/CarLeaseBuyCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { carLeaseBuyGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Lease vs buy a car: compare total cost, mileage, and resale risk',
+    description: 'Compare a car lease return with buying over the same months, including due-at-signing cash, mileage limits, end fees, loan interest, resale and residual risk.',
+    faq: [
+      { question: 'Is leasing cheaper because the monthly payment is lower?', answer: 'Not necessarily. A lease payment covers expected depreciation, rent charge, taxes and fees but usually does not build ownership. Compare total due at signing, all payments, nonincluded costs, mileage and return fees with purchase cost minus resale.' },
+      { question: 'How do mileage limits change lease cost?', answer: 'Multiply miles above the contractual allowance over the full term by the stated per-mile charge. Unused miles may have no value unless the contract provides a credit; purchased-car resale should also reflect its actual mileage.' },
+      { question: 'Who takes residual-value risk in a lease?', answer: 'In a typical closed-end return lease, the lessor generally bears ordinary market-value risk, while the lessee remains responsible for contractual mileage, wear and end fees. Open-end leases can allocate more residual liability to the lessee.' },
+      { question: 'Should I include a lease purchase option in the return cost?', answer: 'No. First compare returning the lease with selling a purchased car. Show the option price against expected market value separately; add it only in a distinct buyout scenario.' },
+      { question: 'What if I may end the lease early?', answer: 'Do not assume you can return the car and stop paying. Obtain the early-termination formula and run it as a separate downside because the charge can be large.' },
+    ],
+  },
+  zh: {
+    title: '租賃還是買車？總成本、里程限制與轉售風險怎麼算',
+    description: '用相同期間比較汽車長租／租賃與買車，納入簽約金、月租、保險保養、超里程、還車費、貸款利息、轉售與買回價。',
+    faq: [
+      { question: '長租月租比車貸月付低就比較省嗎？', answer: '不一定。月租之外可能有簽約金、未含保險保養、超里程、車損、提前終止與還車費；車貸月付則包含償還本金。必須比較同期間淨成本。' },
+      { question: '台灣長租、租賃和以租代購是一樣的嗎？', answer: '不一定。是否在期末取得所有權、是否有約定買回價、誰負擔稅費保險與維修，都以書面契約為準，不能只看方案名稱。' },
+      { question: '沒用完的里程會退錢嗎？', answer: '只有契約明列才有。計算器對未用完里程不給預設收益；超出里程則依全期超額乘每公里費率。' },
+      { question: '保證金要算長租成本嗎？', answer: '若依約可完整返還，保證金是占用資金而不是成本；若可能因車損或其他條款被抵扣，應把合理扣款放進預估還車費情境。' },
+      { question: '租期末買回價怎麼判斷？', answer: '把書面買回價和當時同車型、里程、車況的市場估值比較。買回價高於市場並不代表已付月租應追回，應把還車與買回當兩個方案。' },
+    ],
+  },
+  es: {
+    title: 'Renting, leasing o compra: cómo comparar coste total, kilometraje y valor residual',
+    description: 'Compara renting, leasing y compra durante los mismos meses con cuota, servicios, kilómetros, devolución, intereses, reventa, opción y valor residual.',
+    faq: [
+      { question: '¿Renting y leasing de coche son lo mismo en España?', answer: 'No necesariamente. Banco de España describe el renting como alquiler de servicios sin opción contractual de compra y el leasing financiero como cesión con intereses, gastos y una opción que suele representar el valor residual.' },
+      { question: '¿La cuota de renting incluye todos los gastos?', answer: 'Depende del contrato. Puede incluir seguro, mantenimiento, impuestos, reparaciones o neumáticos, pero hay que revisar franquicia, exclusiones, kilómetros, sustitución, cancelación y devolución.' },
+      { question: '¿Cómo calculo el exceso de kilómetros?', answer: 'Resta los kilómetros totales incluidos a los previstos durante todo el contrato y multiplica solo el exceso por la tarifa. Ajusta también la reventa de compra si su kilometraje será mayor.' },
+      { question: '¿El renting elimina el riesgo de valor residual?', answer: 'Al devolverlo, el usuario evita normalmente vender el coche, pero conserva los riesgos contractuales de kilometraje, daños y cancelación. Si existe opción de compra, compara su precio con el mercado por separado.' },
+      { question: '¿Puedo cancelar el renting sin pagar el resto?', answer: 'No debe suponerse. El contenido e indemnización dependen del contrato y pueden ser elevados. Pide la fórmula por escrito antes de firmar y prueba un escenario de salida anticipada.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { months: 36, leaseUpfront: 3000, leaseMonthly: 475, leaseInsuranceAnnual: 1800, leaseMaintenanceAnnual: 300, allowedAnnualDistance: 10000, plannedAnnualDistance: 12000, excessFee: 0.25, leaseEndFees: 750, leaseOptionPrice: 24000, expectedLeaseMarketValue: 22500, buyPrice: 40000, buyFees: 3500, buyDown: 7000, buyApr: 6.5, buyTerm: 60, buyInsuranceAnnual: 1900, buyMaintenanceAnnual: 700, buyResale: 28000 },
+    copy: {
+      heading: 'Car lease-return vs buy cost calculator', intro: 'Enter the signed lease disclosure and a comparable out-the-door purchase quote. The lease result assumes return; the option-to-market gap is shown separately.',
+      months: 'Comparison / lease term (months)', leaseUpfront: 'Lease cash due at signing', leaseMonthly: 'Lease monthly payment', leaseInsuranceAnnual: 'Lease insurance not included ($/year)', leaseMaintenanceAnnual: 'Lease maintenance/tires not included ($/year)', allowedAnnualDistance: 'Lease allowance (miles/year)', plannedAnnualDistance: 'Expected driving (miles/year)', excessFee: 'Excess mileage charge ($/mile)', leaseEndFees: 'Expected disposition, wear and return fees', leaseOptionPrice: 'Lease purchase-option price', expectedLeaseMarketValue: 'Expected lease-end market value', buyPrice: 'Purchase vehicle price', buyFees: 'Purchase taxes and fees', buyDown: 'Purchase down payment', buyApr: 'Purchase loan APR (%)', buyTerm: 'Purchase loan term (months)', buyInsuranceAnnual: 'Purchase insurance ($/year)', buyMaintenanceAnnual: 'Purchase maintenance/tires ($/year)', buyResale: 'Purchase resale at comparison month', leaseTotal: 'Lease-return total cost', buyTotal: 'Purchase holding cost', difference: 'Cost difference', excessDistance: 'Total excess mileage', mileageCharge: 'Excess-mile charge', leasePayments: 'Lease upfront plus payments', leaseRunning: 'Lease insurance/maintenance', buyInterest: 'Purchase interest accrued', buyDepreciation: 'Purchase price minus resale', buyRunning: 'Purchase insurance/maintenance', buyBalance: 'Purchase loan balance at comparison', buyMonthly: 'Purchase monthly payment', buyoutGap: 'Market value minus lease option', distanceSuffix: 'mi', leaseWins: 'Lease return has lower modeled cost by', buyWins: 'Buying has lower modeled cost by', tie: 'The modeled costs are equal.', privacy: 'Educational estimate. Inputs stay in your browser. Verify the signed lease, mileage, insurance, return standard, purchase loan and resale independently.'
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { months: 36, leaseUpfront: 100000, leaseMonthly: 18000, leaseInsuranceAnnual: 30000, leaseMaintenanceAnnual: 0, allowedAnnualDistance: 15000, plannedAnnualDistance: 18000, excessFee: 5, leaseEndFees: 30000, leaseOptionPrice: 850000, expectedLeaseMarketValue: 800000, buyPrice: 1350000, buyFees: 40000, buyDown: 300000, buyApr: 3.2, buyTerm: 60, buyInsuranceAnnual: 30000, buyMaintenanceAnnual: 25000, buyResale: 900000 },
+    copy: {
+      heading: '汽車長租／租賃 vs 買車總成本計算器', intro: '請輸入書面長租契約與同級買車成交單。長租結果假設期滿還車；買回價和市場估值只另外顯示差額。',
+      months: '比較／租賃期間（月）', leaseUpfront: '長租簽約前期款', leaseMonthly: '長租每月租金', leaseInsuranceAnnual: '租金未含保險（NT$/年）', leaseMaintenanceAnnual: '租金未含保養輪胎（NT$/年）', allowedAnnualDistance: '每年約定里程（km）', plannedAnnualDistance: '每年預計里程（km）', excessFee: '超里程費（NT$/km）', leaseEndFees: '預估還車、車損與期末費', leaseOptionPrice: '契約租期末買回價', expectedLeaseMarketValue: '預估租期末市場價', buyPrice: '買車成交價', buyFees: '買車領牌與規費', buyDown: '買車頭期款', buyApr: '買車貸款年利率（%）', buyTerm: '買車貸款期數（月）', buyInsuranceAnnual: '買車保險（NT$/年）', buyMaintenanceAnnual: '買車保養輪胎（NT$/年）', buyResale: '比較期末買車轉售價', leaseTotal: '長租期滿還車總成本', buyTotal: '買車持有成本', difference: '成本差額', excessDistance: '全期超出里程', mileageCharge: '超里程費', leasePayments: '簽約款加全部月租', leaseRunning: '長租未含保險／保養', buyInterest: '買車持有期間利息', buyDepreciation: '買車成交價減轉售', buyRunning: '買車保險／保養', buyBalance: '比較期末貸款餘額', buyMonthly: '買車月付', buyoutGap: '市場價減契約買回價', distanceSuffix: 'km', leaseWins: '長租還車估算成本較低，差額', buyWins: '買車估算成本較低，差額', tie: '兩種方案的估算成本相同。', privacy: '一般教育試算，輸入只留在瀏覽器。請查核長租契約、里程、保險、還車標準、買車貸款與轉售。'
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { months: 36, leaseUpfront: 0, leaseMonthly: 550, leaseInsuranceAnnual: 0, leaseMaintenanceAnnual: 0, allowedAnnualDistance: 15000, plannedAnnualDistance: 20000, excessFee: 0.12, leaseEndFees: 500, leaseOptionPrice: 21000, expectedLeaseMarketValue: 19000, buyPrice: 32000, buyFees: 2000, buyDown: 6000, buyApr: 7, buyTerm: 60, buyInsuranceAnnual: 800, buyMaintenanceAnnual: 600, buyResale: 22000 },
+    copy: {
+      heading: 'Calculadora renting o compra', intro: 'Introduce un contrato real y una oferta final comparable. El renting supone devolución; la diferencia entre opción y mercado se muestra aparte.',
+      months: 'Periodo de comparación/contrato (meses)', leaseUpfront: 'Pago inicial no recuperable renting', leaseMonthly: 'Cuota mensual renting con IVA', leaseInsuranceAnnual: 'Seguro no incluido (€/año)', leaseMaintenanceAnnual: 'Mantenimiento/neumáticos no incluidos (€/año)', allowedAnnualDistance: 'Kilómetros incluidos al año', plannedAnnualDistance: 'Kilómetros previstos al año', excessFee: 'Precio por km adicional', leaseEndFees: 'Daños, devolución y cargos finales previstos', leaseOptionPrice: 'Opción/precio final si existe', expectedLeaseMarketValue: 'Mercado estimado al final', buyPrice: 'Precio del coche comprado', buyFees: 'Gastos e impuestos de compra', buyDown: 'Entrada de compra', buyApr: 'Tipo/TAE modelada compra (%)', buyTerm: 'Plazo de compra (meses)', buyInsuranceAnnual: 'Seguro compra (€/año)', buyMaintenanceAnnual: 'Mantenimiento/neumáticos compra (€/año)', buyResale: 'Reventa de compra al final', leaseTotal: 'Coste total al devolver renting', buyTotal: 'Coste de tenencia compra', difference: 'Diferencia de coste', excessDistance: 'Exceso total de kilómetros', mileageCharge: 'Cargo por exceso', leasePayments: 'Inicial más cuotas', leaseRunning: 'Seguro/mantenimiento renting', buyInterest: 'Intereses compra devengados', buyDepreciation: 'Precio compra menos reventa', buyRunning: 'Seguro/mantenimiento compra', buyBalance: 'Deuda de compra al final', buyMonthly: 'Cuota mensual compra', buyoutGap: 'Mercado menos opción final', distanceSuffix: 'km', leaseWins: 'Devolver el renting tiene menor coste por', buyWins: 'Comprar tiene menor coste por', tie: 'Los costes modelados son iguales.', privacy: 'Estimación educativa; datos en el navegador. Verifica contrato, IVA, kilómetros, servicios, devolución, préstamo y reventa.'
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = carLeaseBuyGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>“Lease or buy?” is often answered with two monthly payments that do not represent the same thing. A purchase payment includes principal that may become equity; a lease payment mainly covers expected depreciation, a rent charge, taxes and fees for a fixed term and mileage.</p>
+    <p>The fair comparison ends on the same month, uses the same driving, and states what happens then: return the lease and pay contractual charges, or sell the purchased vehicle and use the proceeds to clear any remaining loan.</p>
+    <DecisionGuide content={guide} />
+    <CarLeaseBuyCalculator locale={locale} {...calculator} />
+
+    <h2>Build the lease cost from its disclosure, not the advertisement</h2>
+    <p>Regulation M requires consumer-lease disclosures for payment schedules, early termination and purchase options within its coverage. Copy the actual amount due at signing, monthly schedule, acquisition and disposition terms, taxes and fees. Do not count the first monthly payment twice if it is already included in due-at-signing cash.</p>
+    <p>Then list insurance, maintenance, tires and registration only when the lease payment does not include them. A lower payment that requires a large nonrefundable capitalized-cost reduction is not automatically a lower total cost.</p>
+
+    <h2>Mileage is a priced option, not a footnote</h2>
+    <p>The CFPB notes that many leases limit driving to 10,000–15,000 miles a year and charge for excess mileage and wear. Multiply the full expected excess by the contractual per-mile rate. The base example’s 2,000 excess miles each year cost $1,500 over 36 months.</p>
+    <p>Driving fewer miles reduces that charge but may not create a credit. For the purchase case, higher mileage usually lowers resale instead; revise the resale input so the same driving appears on both sides.</p>
+
+    <h2>Separate return, buyout and early-termination decisions</h2>
+    <p>The calculator’s lease total assumes you return the car. It compares the stated $24,000 purchase option with a $22,500 market estimate only as a separate −$1,500 gap. Buying out above market is not justified merely because prior lease payments are sunk.</p>
+    <p>Early termination is a different downside. CFPB warns that it can be very expensive and that a lessee cannot simply stop payments. If job, family or mileage uncertainty makes early exit plausible, obtain the formula and add that charge to a separate scenario.</p>
+
+    <h2>A $108 difference is not a universal winner</h2>
+    <p>The base lease is $28,650 versus about $28,542 to buy: functionally a tie. Staying at 10,000 miles makes the lease about $1,392 cheaper; driving 15,000 makes buying about $2,358 cheaper before revising resale. A $3,000 purchase-resale miss makes leasing about $2,892 cheaper.</p>
+    <p>Use real insurance quotes, comparable trim and all required products. If the question becomes new versus used or different powertrains, continue in the <a href="/en/new-vs-used-car-total-cost/">new-versus-used holding-cost guide</a> rather than attributing vehicle differences to the payment structure.</p>
+    <p class="privacy-note">General educational estimate, not a lease, loan, vehicle, insurance, tax or legal recommendation. Verify the signed documents before committing.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>台灣廣告裡的「月租」和「車貸月付」不是同一個概念。車貸月付含償還本金，期末可能有車輛淨值；長租月租是固定期間的使用權，常搭配里程、保險、保養、車況與還車條款。只比月付會把最重要的期末差異藏掉。</p>
+    <p>本頁用相同 36 個月、相同里程比較「租滿後還車」與「買車後轉售」，並把貸款餘額、超里程及買回價差公開。</p>
+    <DecisionGuide content={guide} />
+    <CarLeaseBuyCalculator locale={locale} {...calculator} />
+
+    <h2>先確認契約到底是長租、租賃還是以租代購</h2>
+    <p>方案名稱不決定所有權。書面契約要明確回答：車主是誰、租期多久、期末是否有買回權、買回價如何決定、提前終止怎麼算，以及保證金能否完整返還。若沒有約定期末取得所有權，就不能把每月租金當成繳車款。</p>
+    <p>交通部小客車租賃定型化契約範本會記載租金、保險、里程、出車車況與還車等事項。長期方案仍要逐項核對保養、輪胎、稅費、代車、保險種類與自負額，不因業務說「全包」就全部填 0。</p>
+
+    <h2>里程按全期算，還車車況要有可驗證標準</h2>
+    <p>本文長租每年 15,000km、預計 18,000km，三年共超出 9,000km；每公里 NT$5 就是 NT$45,000。若契約是全期總里程，應直接用總額，不要錯套每年重置。</p>
+    <p>交車與還車都應保留車況圖、照片、里程與配件。正常耗損、可歸責車損、修理期間費用與保險理賠差額的認定方式會影響期末支出，應以契約和實際查驗文件為準。</p>
+
+    <h2>買回價和市場價分開，避免沉沒成本誤判</h2>
+    <p>基準情境的契約買回價 NT$850,000，高於預估市場價 NT$800,000。這不代表一定不能買回，但過去已付租金是使用成本，不應成為「不買就浪費」的理由。先比較還車費，再比較買回後的所有權價值。</p>
+    <p>買車端則要用相同 36 個月、18,000km 年里程估轉售。計算器顯示約 NT$457,001 的貸款餘額，不是再加一次成本，而是售車款必須先清償。</p>
+
+    <h2>本例買車省 NT$182,415，但轉售一變就翻轉</h2>
+    <p>基準長租約 NT$913,000，買車約 NT$730,585。若買車三年轉售從 NT$900,000 降到 NT$700,000，買車成本變約 NT$930,585，長租反而低 NT$17,585。這正是「轉售風險由誰承擔」的金額。</p>
+    <p>若你真正比較的是新車和中古車，而非取得方式，請改用<a href="/zh/new-vs-used-car-total-cost/">新車／中古車持有成本</a>，避免把車況差誤算成租買差。</p>
+    <p class="privacy-note">一般教育試算，不是租賃、購車、貸款、保險、稅務或法律建議。簽約前請逐條確認書面契約。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>En España, renting, leasing financiero, multiopción y préstamo no deberían mezclarse bajo una sola cuota. Banco de España describe el renting como alquiler de larga duración con servicios y sin opción de compra contractual, mientras que el leasing suele incorporar una opción cuyo último pago representa el valor residual.</p>
+    <p>La comparación útil fija el mismo mes y kilometraje: devolver el renting con todos sus cargos o vender el coche comprado y cancelar la deuda pendiente.</p>
+    <DecisionGuide content={guide} />
+    <CarLeaseBuyCalculator locale={locale} {...calculator} />
+
+    <h2>Comprueba qué incluye de verdad la cuota con IVA</h2>
+    <p>Seguro, mantenimiento, IVTM, reparaciones y neumáticos suelen ser parte del renting, pero no existe una lista universal. Revisa franquicia, desgaste, asistencia, vehículo de sustitución, talleres, neumáticos y exclusiones. Si un servicio no está incluido, introdúcelo como coste anual.</p>
+    <p>Una fianza recuperable no es gasto si se devuelve íntegra, aunque inmoviliza liquidez. Una entrada o primera cuota no recuperable sí forma parte del coste; evita duplicarla si ya está dentro del primer cargo.</p>
+
+    <h2>El kilometraje y la cancelación pueden cambiar el resultado</h2>
+    <p>El caso prevé 20.000km/año frente a 15.000 incluidos. Los 15.000km de exceso del contrato completo a 0,12 €/km añaden 1.800 €. OCU ha observado que las ofertas pueden variar mucho y recomienda revisar kilometraje, penalizaciones y opción de compra.</p>
+    <p>La cancelación anticipada se rige por el contrato de renting y puede ser elevada. No la promedies como si fuera segura; si existe posibilidad real de salida, crea un escenario separado con la indemnización escrita.</p>
+
+    <h2>Valor residual no significa lo mismo en renting y leasing</h2>
+    <p>En un leasing financiero, la opción suele relacionarse con el valor residual. En renting, Banco de España indica que no se contempla contractualmente la opción, aunque algunas compañías puedan ofrecer después una compra a mercado. Por eso la calculadora muestra 21.000 € de opción frente a 19.000 € de mercado sin descontar esa diferencia del coste de devolución.</p>
+    <p>En la compra, la reventa sí reduce el coste y el usuario soporta su variación. Mantén edad, mes y kilómetros idénticos para que el riesgo residual sea comparable.</p>
+
+    <h2>Comprar gana por 1.557 € solo con la reventa publicada</h2>
+    <p>El renting base cuesta 22.100 € y la compra unos 20.543 €, con 12.383 € de deuda aún pendiente. Sin exceso de kilómetros, el renting baja a 20.300 € y supera por poco a la compra; si la reventa comprada cae a 18.000 €, el renting queda 2.443 € por debajo.</p>
+    <p>Si además cambian tipo de vehículo, estado o tecnología, usa el <a href="/es/new-vs-used-car-total-cost/">comparador de coche nuevo o usado</a> antes de atribuir toda la diferencia al renting.</p>
+    <p class="privacy-note">Estimación educativa general; no recomienda renting, leasing, préstamo, vehículo ni fiscalidad. Comprueba contrato, servicios, IVA, devolución y financiación.</p>
+  </>}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

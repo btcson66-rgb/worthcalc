@@ -621,6 +621,53 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+const commuteFullCostGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
+  fr: {
+    id: 'commute-full-cost-method',
+    labels: labels.fr,
+    directAnswer: 'Le coût domicile-travail additionne énergie, entretien, dépréciation, abonnement ou billets, stationnement, péages et frais fixes, puis retranche la prise en charge employeur. Le temps reste une ligne distincte et ne vaut pas automatiquement le salaire. Dans cet exemple, un abonnement de 90 € remboursé à 50% laisse 45 € de coût monétaire. Vingt jours à 70 minutes représentent 23,3 heures ; avec une valeur personnelle de 10 €/h, le coût complet facultatif est de 278,33 €, soit 13,92 € par jour.',
+    inputs: ['Jours réellement travaillés sur site dans le mois', 'Kilomètres aller-retour si voiture, moto ou trajet mixte', 'Énergie, entretien, pneus et dépréciation par kilomètre sans double compte', 'Abonnement hebdomadaire/mensuel/annuel ou billets, mais pas les deux pour les mêmes trajets', 'Stationnement, péages, correspondances et frais fixes', 'Prise en charge employeur apparaissant réellement sur la paie', 'Temps porte à porte avec marche, attente, correspondance et recherche de place', 'Valeur personnelle facultative du temps, avec un scénario à 0 €'],
+    formula: 'Coût monétaire mensuel = jours × [distance aller-retour × (énergie + entretien + dépréciation par km) + billets journaliers + stationnement/péages] + frais fixes − remboursement. Heures = jours × minutes aller-retour ÷ 60. Coût complet facultatif = coût monétaire + heures × valeur personnelle du temps.',
+    workedExample: 'Un abonnement coûte 90 €/mois et l’employeur privé en rembourse 50%, soit 45 € restant à charge. Il n’y a pas de billet quotidien ni de coût automobile. Vingt jours à 70 minutes porte à porte représentent 23,3 heures. Avec une valeur choisie de 10 €/heure, le temps vaut 233,33 € dans ce scénario et le coût complet atteint 278,33 €, soit 13,92 € par jour de présence.',
+    sensitivity: [
+      { scenario: 'Budget seulement', input: 'Temps valorisé à 0 €/h', result: '45 €/mois ; 23,3 heures restent affichées' },
+      { scenario: 'Dix jours sur site', input: '10 jours avec le même abonnement', result: '161,67 € complets ; 16,17 € par jour à cause du coût fixe' },
+      { scenario: 'Sans remboursement', input: 'Prise en charge employeur 0 €', result: '323,33 € complets' },
+      { scenario: 'Temps à 6 €/h', input: 'Valeur personnelle réduite', result: '185 € complets' },
+    ],
+    cta: { label: 'Calculer le coût monétaire et temporel de vos trajets', href: '#commute-full-cost-calculator' },
+    limitations: ['La prise en charge obligatoire du privé concerne les abonnements de transport public ou de location publique de vélo, pas les tickets à l’unité ; vérifiez temps partiel, justificatif et convention.', 'Le barème kilométrique fiscal 2026 inclut dépréciation, entretien, pneus, carburant et assurance. Il ne faut pas lui ajouter une seconde fois ces mêmes dépenses.', 'Le remboursement ou une déduction fiscale n’est pas une baisse euro pour euro du coût : l’effet dépend de la règle et de la situation.', 'La valeur du temps sert à comparer des options ; lecture dans le train, conduite et attente peuvent avoir des valeurs différentes.'],
+    sources: [
+      { label: 'Service-Public — prise en charge de 50% des abonnements domicile-travail du privé', href: 'https://www.service-public.fr/particuliers/vosdroits/F19846?null=' },
+      { label: 'Ministère de l’Économie 2026 — barème kilométrique et coûts inclus', href: 'https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mon-impot-sur-le-revenu/impot-sur-le-revenu-tout-savoir-sur-le-bareme-des-frais-kilometriques' },
+      { label: 'Service-Public — prise en charge des transports des agents publics', href: 'https://www.service-public.fr/particuliers/vosdroits/F12163' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'commute-full-cost-method',
+    labels: labels.de,
+    directAnswer: 'Vollständige Pendelkosten bestehen aus Energie, Wartung, kilometerbedingtem Wertverlust, Fahrkarten, Parken, Maut und Fixkosten abzüglich Arbeitgeberzuschuss. Pendelzeit wird getrennt ausgewiesen und nicht automatisch mit dem Stundenlohn bewertet. Im Beispiel mit 20 Tagen und 40km täglicher Hin- und Rückfahrt entstehen 492 € Geldkosten. Zwanzig Stunden zu einem selbst gewählten Wert von 12 €/h ergeben 240 € Zeitkosten und 732 € optionale Gesamtkosten, also 36,60 € je Präsenztag.',
+    inputs: ['Tatsächliche Präsenztage pro Monat', 'Hin- und Rückweg in Kilometern; Entfernungspauschale nutzt dagegen nur Entfernungskilometer', 'Energiepreis und realer Verbrauch pro Kilometer', 'Wartung, Reifen und Reparaturrücklage pro Kilometer', 'Kilometerbedingter Wertverlust ohne doppelte Kreditrate', 'ÖPNV-Ticket, Parken, Maut und monatliche Fixkosten', 'Tatsächlich erhaltener Jobticket- oder Fahrtkostenzuschuss', 'Tür-zu-Tür-Zeit inklusive Fußweg, Warten, Umstieg und Parkplatzsuche', 'Optionaler persönlicher Stundenwert einschließlich 0-€-Ansicht'],
+    formula: 'Monatliche Geldkosten = Tage × [Hin-/Rückweg × (Energie + Wartung + Wertverlust je km) + Tagesfahrpreis + Parken/Maut] + monatliche Fixkosten − Zuschuss. Pendelstunden = Tage × Minuten pro Tag ÷ 60. Optionale Gesamtkosten = Geldkosten + Stunden × persönlicher Zeitwert.',
+    workedExample: '20 Präsenztage, 40km Hin- und Rückweg. Energie 0,10 €/km, Wartung/Reifen 0,09 € und kilometerbedingter Wertverlust 0,25 € ergeben 352 € Distanzkosten. 140 € Fixkosten führen zu 492 € Geldkosten. 60 Minuten täglich sind 20 Stunden; bei selbst gewählten 12 €/h kommen 240 € hinzu. Gesamt: 732 €, also 36,60 € pro Tag.',
+    sensitivity: [
+      { scenario: 'Nur Geld betrachten', input: 'Zeitwert 0 €/h', result: '492 €/Monat; 20 Stunden bleiben sichtbar' },
+      { scenario: 'Zehn Präsenztage', input: '10 statt 20 Tage', result: '436 € komplett; 43,60 € pro Tag wegen Fixkosten' },
+      { scenario: 'Niedrigerer Wertverlust', input: '0,10 statt 0,25 €/km', result: '612 € komplett; 120 € weniger' },
+      { scenario: 'Deutschlandticket statt Auto', input: '63 € Ticket, 0 Fahrzeugkosten, 70 Min/Tag', result: '343 € komplett bei 12 €/h; Zuschuss noch nicht abgezogen' },
+    ],
+    cta: { label: 'Eigene Pendel-Geld- und Zeitkosten berechnen', href: '#commute-full-cost-calculator' },
+    limitations: ['Die Entfernungspauschale beträgt 2026 0,38 € je Entfernungskilometer ab dem ersten Kilometer. Sie ist Werbungskostenansatz, nicht tatsächlicher Preis je gefahrenem Kilometer und keine direkte Erstattung.', 'Das Deutschlandticket kostet seit Januar 2026 63 €. Regional-, Fernverkehr, erste/letzte Meile und Arbeitgeberzuschüsse können den realen Betrag verändern.', 'ADAC-Autokosten umfassen Fix-, Betriebs-, Werkstatt- und Wertverlustkosten. Wer einen Gesamtwert je Kilometer nutzt, darf diese Positionen nicht erneut addieren.', 'Zeitwert ist eine persönliche Szenarioannahme. Er ist nicht automatisch Lohn, Steuerabzug oder entgangenes Einkommen.'],
+    sources: [
+      { label: 'Bundesfinanzministerium — Entfernungspauschale 2026: 38 Cent ab erstem Kilometer', href: 'https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/das-aendert-sich-2026.html' },
+      { label: 'Bundesregierung — Deutschlandticket seit Januar 2026 für 63 €', href: 'https://www.bundesregierung.de/breg-de/aktuelles/deutschlandticket-2134074' },
+      { label: 'ADAC 2026 — Autokosten aus Fixkosten, Betrieb, Werkstatt und Wertverlust', href: 'https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/autokosten/uebersicht/' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 const carLeaseBuyGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
   fr: {
     id: 'car-lease-buy-total-cost-method',
@@ -2026,3 +2073,5 @@ export const commuteFullCostGuides: Partial<Record<Locale, DecisionGuideContent>
     lastVerified: '2026-07-19',
   },
 };
+
+Object.assign(commuteFullCostGuides, commuteFullCostGuideAdditions);

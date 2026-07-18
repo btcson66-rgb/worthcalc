@@ -6,7 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import { phoneUpgradeGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'Upgrade your phone or keep it? Compare repair, trade-in, and monthly cost',
@@ -41,22 +41,46 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Qué hago antes de entregar el móvil?', answer: 'Haz copia de lo necesario, cierra y desvincula cuentas, retira SIM y almacenamiento, restaura el dispositivo, comprueba el borrado y conserva prueba de entrega o envío.' },
     ],
   },
+  fr: {
+    title: 'Changer de téléphone ou le garder ? Réparation, reprise, forfait et coût mensuel',
+    description: 'Comparez réparation et changement avec durée restante, reprise, écart de forfait, détention, revente et transfert des données.',
+    faq: [
+      { question: 'Faut-il comparer le prix ou le coût mensuel ?', answer: 'Les deux. Le prix TTC révèle l’engagement d’achat ; le coût appareil normalisé, ajouté au forfait comparable, permet de confronter des durées de détention différentes.' },
+      { question: 'Quelle durée restante après réparation ?', answer: 'Prenez une hypothèse prudente fondée sur la batterie, le diagnostic, les mises à jour et votre usage, puis testez une durée plus courte et plus longue.' },
+      { question: 'Une reprise conditionnelle vaut-elle du comptant ?', answer: 'Pas toujours. Une valeur révisable ou versée sous condition de forfait doit être réduite du risque de contrôle, de résiliation et de perte des avantages futurs.' },
+      { question: 'Comment compter le transfert des données ?', answer: 'Ajoutez configuration payante, stockage, accessoires et valeur facultative du temps de sauvegarde, authentification et remise en service. Testez aussi une valeur temps nulle.' },
+      { question: 'Que faire avant de céder le téléphone ?', answer: 'Sauvegardez, déconnectez les comptes et appareils, retirez SIM et stockage, suivez la procédure d’effacement adaptée puis vérifiez le résultat et gardez la preuve de remise.' },
+    ],
+  },
+  de: {
+    title: 'Smartphone upgraden oder behalten? Reparatur, Ankauf, Tarif und Monatskosten',
+    description: 'Vergleichen Sie Reparatur und Wechsel mit Restnutzung, Ankauf, Tarifdifferenz, Haltedauer, Restwert und Datenumzug.',
+    faq: [
+      { question: 'Soll ich Kaufpreis oder Monatskosten vergleichen?', answer: 'Beides. Der Gesamtpreis zeigt die Kaufverpflichtung; normierte Gerätekosten plus vergleichbarer Tarif machen unterschiedliche Haltedauern vergleichbar.' },
+      { question: 'Welche Restnutzungsdauer nach Reparatur?', answer: 'Nutzen Sie eine vorsichtige Annahme aus Akkuzustand, Diagnose, Updates und tatsächlicher Belastung. Rechnen Sie zusätzlich eine kürzere und längere Variante.' },
+      { question: 'Ist ein laufzeitgebundener Ankauf wie Bargeld?', answer: 'Nicht unbedingt. Bei Tarifbindung oder monatlicher Gutschrift zählt nur der Vorteil, der auch bei realistischer Vertragsdauer und möglichem Wechsel erhalten bleibt.' },
+      { question: 'Wo gehören Datenumzugskosten hin?', answer: 'Erfassen Sie bezahlte Einrichtung, Speicher, Zubehör und einen freiwilligen Zeitwert für Backup, Zwei-Faktor-Zugänge und Apps. Rechnen Sie auch mit Zeitwert null.' },
+      { question: 'Was ist vor der Abgabe zu tun?', answer: 'Daten sichern, Konten und Geräte trennen, SIM und Speicher entfernen, die passende sichere Löschmethode anwenden, Ergebnis prüfen und Übergabenachweis behalten.' },
+    ],
+  },
 };
 
 const calculators = {
   en: { currency: 'USD' as const, defaults: { repairCost: 200, remainingMonths: 18, currentResaleLater: 50, tradeInNow: 250, newPhonePrice: 999, upgradeFees: 50, transferCost: 30, currentPlanMonthly: 45, newPlanMonthly: 55, newHoldingMonths: 36, newResaleLater: 300 }, copy: { heading: 'Phone keep-or-upgrade monthly-cost calculator', intro: 'Normalize different holding periods, then compare device cost and like-for-like service plans.', repairCost: 'Repair and diagnosis now', remainingMonths: 'Usable months after repair', currentResaleLater: 'Current phone resale after keeping', tradeInNow: 'Guaranteed trade-in now', newPhonePrice: 'New phone out-the-door price', upgradeFees: 'Activation/accessory/upgrade fees', transferCost: 'Data transfer and setup cost', currentPlanMonthly: 'Current service plan per month', newPlanMonthly: 'New service plan per month', newHoldingMonths: 'Months you will keep the new phone', newResaleLater: 'New phone resale at end', keepDeviceMonthly: 'Keep: device cost/month', upgradeDeviceMonthly: 'Upgrade: device cost/month', keepFullMonthly: 'Keep: full cost/month', upgradeFullMonthly: 'Upgrade: full cost/month', breakEvenTradeIn: 'Trade-in needed to break even', verdictKeep: 'Keeping is lower per month by', verdictUpgrade: 'Upgrading is lower per month by', privacy: 'Planning model only. It does not predict failure, trade-in inspection, bill credits or security-support dates.' } },
   zh: { currency: 'TWD' as const, defaults: { repairCost: 4500, remainingMonths: 18, currentResaleLater: 1000, tradeInNow: 6000, newPhonePrice: 30000, upgradeFees: 1000, transferCost: 800, currentPlanMonthly: 599, newPlanMonthly: 799, newHoldingMonths: 36, newResaleLater: 8000 }, copy: { heading: '手機續用或換機每月成本計算器', intro: '先把不同持有期換算成設備月成本，再加入同一基礎的資費比較。', repairCost: '現在維修與檢測費', remainingMonths: '維修後可用月數', currentResaleLater: '續用後舊機殘值', tradeInNow: '現在確定折抵額', newPhonePrice: '新機完整實付價', upgradeFees: '啟用／配件／換機費', transferCost: '資料移轉與設定成本', currentPlanMonthly: '現行每月資費', newPlanMonthly: '換機後每月資費', newHoldingMonths: '新機預計持有月數', newResaleLater: '新機期末殘值', keepDeviceMonthly: '續用：設備月成本', upgradeDeviceMonthly: '換機：設備月成本', keepFullMonthly: '續用：完整月成本', upgradeFullMonthly: '換機：完整月成本', breakEvenTradeIn: '損益所需折抵額', verdictKeep: '續用每月較少', verdictUpgrade: '換機每月較少', privacy: '僅供情境規劃；不預測故障、折抵檢測、分月回饋或安全更新終止日。' } },
   es: { currency: 'EUR' as const, defaults: { repairCost: 160, remainingMonths: 18, currentResaleLater: 40, tradeInNow: 200, newPhonePrice: 800, upgradeFees: 30, transferCost: 25, currentPlanMonthly: 20, newPlanMonthly: 25, newHoldingMonths: 36, newResaleLater: 220 }, copy: { heading: 'Calculadora mensual para conservar o cambiar de móvil', intro: 'Normaliza periodos de uso distintos y compara dispositivo más tarifas equivalentes.', repairCost: 'Reparación y diagnóstico ahora', remainingMonths: 'Meses útiles tras reparar', currentResaleLater: 'Reventa del móvil actual después', tradeInNow: 'Recompra garantizada hoy', newPhonePrice: 'Precio final del móvil nuevo', upgradeFees: 'Activación/accesorios/cambio', transferCost: 'Migración y configuración', currentPlanMonthly: 'Tarifa actual por mes', newPlanMonthly: 'Tarifa nueva por mes', newHoldingMonths: 'Meses de uso del móvil nuevo', newResaleLater: 'Reventa final del móvil nuevo', keepDeviceMonthly: 'Conservar: dispositivo/mes', upgradeDeviceMonthly: 'Cambiar: dispositivo/mes', keepFullMonthly: 'Conservar: total/mes', upgradeFullMonthly: 'Cambiar: total/mes', breakEvenTradeIn: 'Recompra necesaria para equilibrio', verdictKeep: 'Conservar cuesta menos al mes por', verdictUpgrade: 'Cambiar cuesta menos al mes por', privacy: 'Modelo de planificación. No predice averías, inspección, abonos ni fin de actualizaciones.' } },
+  fr: { currency: 'EUR' as const, defaults: { repairCost: 180, remainingMonths: 18, currentResaleLater: 50, tradeInNow: 250, newPhonePrice: 900, upgradeFees: 40, transferCost: 30, currentPlanMonthly: 20, newPlanMonthly: 30, newHoldingMonths: 36, newResaleLater: 250 }, copy: { heading: 'Calculateur mensuel : garder ou changer de téléphone', intro: 'Normalisez les durées puis comparez appareil et forfaits sur la même base.', repairCost: 'Réparation et diagnostic maintenant', remainingMonths: 'Mois utiles après réparation', currentResaleLater: 'Revente de l’ancien après conservation', tradeInNow: 'Reprise garantie aujourd’hui', newPhonePrice: 'Prix TTC du nouveau téléphone', upgradeFees: 'Activation/accessoires/changement', transferCost: 'Migration et configuration', currentPlanMonthly: 'Forfait actuel par mois', newPlanMonthly: 'Nouveau forfait par mois', newHoldingMonths: 'Mois de détention du nouveau', newResaleLater: 'Revente finale du nouveau', keepDeviceMonthly: 'Garder : appareil/mois', upgradeDeviceMonthly: 'Changer : appareil/mois', keepFullMonthly: 'Garder : total/mois', upgradeFullMonthly: 'Changer : total/mois', breakEvenTradeIn: 'Reprise nécessaire à l’équilibre', verdictKeep: 'Garder coûte moins par mois de', verdictUpgrade: 'Changer coûte moins par mois de', privacy: 'Modèle de planification. Il ne prédit ni panne, ni contrôle de reprise, ni fin des mises à jour.' } },
+  de: { currency: 'EUR' as const, defaults: { repairCost: 220, remainingMonths: 18, currentResaleLater: 60, tradeInNow: 220, newPhonePrice: 850, upgradeFees: 40, transferCost: 25, currentPlanMonthly: 15, newPlanMonthly: 25, newHoldingMonths: 36, newResaleLater: 220 }, copy: { heading: 'Monatsrechner: Smartphone behalten oder wechseln', intro: 'Normieren Sie Haltedauern und vergleichen Sie Gerät plus gleichartige Tarife.', repairCost: 'Reparatur und Diagnose heute', remainingMonths: 'Nutzbare Monate nach Reparatur', currentResaleLater: 'Altgerätewert nach dem Behalten', tradeInNow: 'Garantierter Ankauf heute', newPhonePrice: 'Gesamtpreis des neuen Smartphones', upgradeFees: 'Aktivierung/Zubehör/Wechsel', transferCost: 'Datenumzug und Einrichtung', currentPlanMonthly: 'Heutiger Tarif pro Monat', newPlanMonthly: 'Neuer Tarif pro Monat', newHoldingMonths: 'Haltedauer des neuen Geräts', newResaleLater: 'Späterer Restwert des neuen Geräts', keepDeviceMonthly: 'Behalten: Gerät/Monat', upgradeDeviceMonthly: 'Wechsel: Gerät/Monat', keepFullMonthly: 'Behalten: gesamt/Monat', upgradeFullMonthly: 'Wechsel: gesamt/Monat', breakEvenTradeIn: 'Ankauf für den Gleichstand', verdictKeep: 'Behalten ist monatlich günstiger um', verdictUpgrade: 'Wechsel ist monatlich günstiger um', privacy: 'Planungsmodell. Keine Ausfall-, Ankauf-, Gutschrift- oder Update-Prognose.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = phoneUpgradeGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'en' && <>
     <p>A “free upgrade” can cost more than keeping a repaired phone once the required plan, lost credits, fees and setup are counted. Compare the device economics separately, then add the service plan difference.</p>
     <DecisionGuide content={guide} />
@@ -92,6 +116,30 @@ const calculator = calculators[locale];
     <h2>Entrega el móvil sin entregar tus datos</h2>
     <p>La AEPD e INCIBE recomiendan realizar copia, desvincular cuentas, restaurar el dispositivo y comprobar el borrado antes de venderlo. Conserva justificante de entrega, estado e IMEI hasta el abono definitivo.</p>
     <p class="privacy-note">Información general; no es asesoramiento financiero, jurídico, fiscal, de seguridad, telecomunicaciones, reparación o producto.</p>
+  </>}
+  {locale === 'fr' && <>
+    <p>Une reprise élevée n’est pas automatiquement une bonne affaire si elle impose un forfait plus cher, un versement conditionnel ou la perte d’avantages en cas de départ. Séparez le téléphone, le forfait et les coûts de transfert.</p>
+    <DecisionGuide content={guide} />
+    <PhoneKeepUpgradeCalculator locale={locale} {...calculator} />
+    <h2>Faites jouer la garantie avant de payer</h2>
+    <p>La garantie légale de conformité peut permettre réparation ou remplacement sans facturer une réparation privée. Pour un appareil reconditionné, la DGCCRF rappelle également une garantie de deux ans et l’importance de la capacité minimale de batterie, des tests et de l’état réel.</p>
+    <h2>Réduisez la reprise à sa valeur certaine</h2>
+    <p>Notez la valeur après contrôle, la date limite, le moyen de versement, le forfait exigé et ce qui disparaît en cas de résiliation. Une promesse conditionnelle n’est pas du comptant ; un crédit restant dû n’est pas une remise.</p>
+    <h2>Ne déléguez pas aveuglément l’effacement</h2>
+    <p>La DGCCRF a relevé des procédures superficielles présentées à tort comme un effacement réel. Sauvegardez, déconnectez les comptes, retirez les cartes, suivez la méthode propre à l’appareil et vérifiez avant la remise.</p>
+    <p class="privacy-note">Information générale, pas un conseil financier, juridique, fiscal, de cybersécurité, télécom, réparation ou sécurité produit.</p>
+  </>}
+  {locale === 'de' && <>
+    <p>Ein hoher Ankauf macht den Wechsel nicht automatisch günstig, wenn dafür ein teurerer Zweijahresvertrag, laufende Gutschriften oder verlorene Vorteile bei Kündigung nötig sind. Rechnen Sie Gerät, Tarif und Datenumzug getrennt.</p>
+    <DecisionGuide content={guide} />
+    <PhoneKeepUpgradeCalculator locale={locale} {...calculator} />
+    <h2>Zuerst Gewährleistung gegen den Verkäufer prüfen</h2>
+    <p>Bei einem Mangel bestehen grundsätzlich zwei Jahre Gewährleistungsrechte. Die Verbraucherzentrale erläutert, dass Transport, Arbeit und Material der Nacherfüllung nicht dem Käufer berechnet werden dürfen. Eine solche Reparatur gehört mit null Euro in die Sensitivität.</p>
+    <h2>Tarifbindung ist Teil des Gerätepreises</h2>
+    <p>Subventionierte Smartphones werden laut Verbraucherzentrale häufig mit einem zweijährigen Vertrag verbunden. Vergleichen Sie Datenvolumen, Grundpreis, Anschlussgebühr, Preis nach Rabatt, noch offene Rate und verlorene Gutschriften bis zum frühesten realistischen Wechsel.</p>
+    <h2>Daten vor Ankauf oder Recycling selbst schützen</h2>
+    <p>Verbraucherzentrale und BSI empfehlen sichere Löschung vor Verkauf oder Rückgabe. Einfaches Löschen oder ein ungeprüfter Werksreset kann je nach Gerät nicht genügen; Konten, externe Speicher und gerätespezifische Verschlüsselungs- und Löschhinweise gehören zum Ablauf.</p>
+    <p class="privacy-note">Allgemeine Bildung, keine Finanz-, Rechts-, Steuer-, IT-Sicherheits-, Telekom-, Reparatur- oder Produktsicherheitsberatung.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

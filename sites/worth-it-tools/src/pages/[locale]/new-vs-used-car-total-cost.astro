@@ -1,0 +1,155 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import NewUsedCarTcoCalculator from '../../components/NewUsedCarTcoCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { newUsedCarGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'New vs used car: compare depreciation, repairs, financing, and resale',
+    description: 'Compare new and used car total cost over the same holding period, including fees, loan interest, repair risk, resale value and remaining balance at sale.',
+    faq: [
+      { question: 'Is buying a used car always cheaper than buying new?', answer: 'No. A lower purchase price can be offset by a higher APR, repairs, a short remaining warranty or weak resale. Compare both vehicles over the same holding period and test a major-repair scenario.' },
+      { question: 'Why does the calculator show the loan balance at sale separately?', answer: 'If you sell before the loan ends, sale proceeds must first pay the outstanding balance. The balance is not a second ownership cost, but it changes how much cash you receive and whether the sale can close without bringing money.' },
+      { question: 'How should I estimate used-car repair risk?', answer: 'Use the exact model, mileage, service records and an independent pre-purchase inspection. Enter an annual repair budget plus one plausible major repair and test both its probability-weighted value and the full downside.' },
+      { question: 'Does a vehicle-history report replace a mechanic inspection?', answer: 'No. The FTC says history information is not a substitute for an independent inspection. Check title and mileage history, open recalls, warranty terms and the physical vehicle.' },
+      { question: 'Should I compare car loans by monthly payment?', answer: 'Not by monthly payment alone. Compare APR, amount financed, finance charge, total payments, term, required add-ons and the balance that will remain at your planned sale date.' },
+    ],
+  },
+  zh: {
+    title: '新車還是中古車？折舊、維修、貸款與轉售怎麼比較',
+    description: '以相同持有年限比較新車和中古車成交價、規費、貸款利息、維修風險、轉售價與賣車時未清償餘額。',
+    faq: [
+      { question: '中古車車價低就一定比較省嗎？', answer: '不一定。中古車可能有較高貸款利率、耗材與維修支出，也可能因事故、里程或車況影響轉售。要用相同持有年限比較完整成本。' },
+      { question: '中古車重大維修機率要怎麼填？', answer: '這不是精準預測，而是壓力測試。依車型通病、里程、保養紀錄、第三方檢查與技師估價設定，並同時看期望值和完整維修真的發生的結果。' },
+      { question: '監理里程紀錄可以證明沒有調表嗎？', answer: '它是重要核對線索，但不是完整保證。仍要比對定型化契約揭露、保養工單、車況報告、儀表與實車磨耗是否一致。' },
+      { question: '為什麼賣車時貸款餘額要另外看？', answer: '持有成本已計入期間內利息；未清償本金不是再一次成本，但售車款必須先拿去清償，會影響能否順利過戶以及實際拿回多少現金。' },
+      { question: '新車和中古車貸款可以只比月付金嗎？', answer: '不可以。期數拉長可壓低月付卻增加總利息。應比較頭期、利率或總費用年百分率、費用、總付款及預計賣車時餘額。' },
+    ],
+  },
+  es: {
+    title: 'Coche nuevo o usado: comparar depreciación, reparaciones, financiación y reventa',
+    description: 'Compara coche nuevo y usado con el mismo plazo: precio y gastos, intereses, averías, reventa y deuda pendiente cuando se vende.',
+    faq: [
+      { question: '¿Un coche de segunda mano siempre sale más barato?', answer: 'No. El menor precio puede quedar anulado por una financiación más cara, reparaciones, menor garantía o peor reventa. Hay que comparar el mismo plazo y un escenario de avería grave.' },
+      { question: '¿Qué debo comprobar en el informe DGT?', answer: 'Titularidad, cargas, reserva de dominio, historial ITV y kilometraje disponible, incidencias y llamadas a revisión. Confirma además contrato, impuestos, transferencia e inspección mecánica.' },
+      { question: '¿La deuda pendiente se suma otra vez al coste total?', answer: 'No. El principal ya forma parte del precio; el cálculo añade solo el interés devengado. La deuda pendiente se muestra porque debe cancelarse con la venta y puede superar el precio obtenido.' },
+      { question: '¿Cómo estimo una avería grave del usado?', answer: 'Parte del modelo exacto, kilómetros, mantenimiento e inspección independiente. Introduce una reparación plausible y compara tanto su valor ponderado como el supuesto en que se paga completa.' },
+      { question: '¿Basta con comparar las cuotas mensuales?', answer: 'No. Compara entrada, comisión, tipo o TAE, cuotas, pago final, coste total y deuda en la fecha prevista de venta. Una cuota menor puede esconder un plazo o pago final mayor.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { holdingYears: 5, newPrice: 36000, usedPrice: 24000, newFees: 3000, usedFees: 2500, newDown: 6000, usedDown: 6000, newApr: 4.9, usedApr: 8.5, newTerm: 60, usedTerm: 60, newAnnualRepairs: 500, usedAnnualRepairs: 1200, usedMajorRepair: 5000, usedMajorProbability: 30, newResale: 19000, usedResale: 12000 },
+    copy: {
+      heading: 'New vs used car holding-cost calculator', intro: 'Enter two real out-the-door offers. The expected used-car result probability-weights one major repair; the downside result assumes you pay it in full.',
+      holdingYears: 'Holding period (years)', newPrice: 'New-car price', usedPrice: 'Used-car price', newFees: 'New taxes and fees', usedFees: 'Used taxes and fees', newDown: 'New down payment', usedDown: 'Used down payment', newApr: 'New loan APR (%)', usedApr: 'Used loan APR (%)', newTerm: 'New loan term (months)', usedTerm: 'Used loan term (months)', newAnnualRepairs: 'New repairs/maintenance per year', usedAnnualRepairs: 'Used repairs/maintenance per year', usedMajorRepair: 'Plausible major used repair', usedMajorProbability: 'Major-repair scenario probability (%)', newResale: 'New-car resale after holding period', usedResale: 'Used-car resale after holding period', newTco: 'New-car holding cost', usedTco: 'Used expected holding cost', difference: 'Expected cost difference', newInterest: 'New interest during holding', usedInterest: 'Used interest during holding', newDepreciation: 'New price minus resale', usedDepreciation: 'Used price minus resale', newRepairs: 'New routine repairs', usedExpectedRepairs: 'Used expected repairs', usedDownside: 'Used cost if major repair occurs', newBalance: 'New loan balance at sale', usedBalance: 'Used loan balance at sale', newMonthly: 'New monthly payment', usedMonthly: 'Used monthly payment', newWins: 'New car has lower expected cost by', usedWins: 'Used car has lower expected cost by', tie: 'The expected holding costs are equal.', privacy: 'Educational estimate. Inputs stay in your browser. Verify price, loan, warranty, vehicle history, inspection, repair and resale independently.'
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { holdingYears: 5, newPrice: 1050000, usedPrice: 550000, newFees: 30000, usedFees: 35000, newDown: 250000, usedDown: 200000, newApr: 2.88, usedApr: 6.5, newTerm: 60, usedTerm: 60, newAnnualRepairs: 15000, usedAnnualRepairs: 45000, usedMajorRepair: 150000, usedMajorProbability: 30, newResale: 600000, usedResale: 300000 },
+    copy: {
+      heading: '新車／中古車持有成本計算器', intro: '請輸入兩份真實成交與貸款資料。中古車期望成本以機率加權一項重大維修；下行情境則假設完整支出真的發生。',
+      holdingYears: '預計持有年數', newPrice: '新車成交價', usedPrice: '中古車成交價', newFees: '新車領牌與手續費', usedFees: '中古車過戶、稅費與手續費', newDown: '新車頭期款', usedDown: '中古車頭期款', newApr: '新車貸款年利率（%）', usedApr: '中古車貸款年利率（%）', newTerm: '新車貸款期數（月）', usedTerm: '中古車貸款期數（月）', newAnnualRepairs: '新車每年保養維修', usedAnnualRepairs: '中古車每年保養維修', usedMajorRepair: '中古車一項重大維修金額', usedMajorProbability: '重大維修情境機率（%）', newResale: '持有期末新車轉售價', usedResale: '持有期末中古車轉售價', newTco: '新車持有總成本', usedTco: '中古車期望總成本', difference: '期望成本差額', newInterest: '新車持有期間利息', usedInterest: '中古車持有期間利息', newDepreciation: '新車成交價減轉售', usedDepreciation: '中古車成交價減轉售', newRepairs: '新車例行維修', usedExpectedRepairs: '中古車期望維修', usedDownside: '重大維修發生時中古車成本', newBalance: '賣車時新車貸款餘額', usedBalance: '賣車時中古車貸款餘額', newMonthly: '新車月付', usedMonthly: '中古車月付', newWins: '新車期望成本較低，差額', usedWins: '中古車期望成本較低，差額', tie: '兩者期望持有成本相同。', privacy: '一般教育試算，輸入只留在瀏覽器。請自行確認成交、貸款、契約揭露、車況檢查、維修與轉售。'
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { holdingYears: 5, newPrice: 32000, usedPrice: 19000, newFees: 1500, usedFees: 1800, newDown: 6000, usedDown: 5000, newApr: 5.5, usedApr: 8.5, newTerm: 60, usedTerm: 60, newAnnualRepairs: 600, usedAnnualRepairs: 1200, usedMajorRepair: 4000, usedMajorProbability: 30, newResale: 17000, usedResale: 9000 },
+    copy: {
+      heading: 'Calculadora de coste: coche nuevo o usado', intro: 'Introduce dos ofertas finales. El resultado esperado pondera una avería grave; el escenario adverso supone que se paga completa.',
+      holdingYears: 'Años de tenencia', newPrice: 'Precio del nuevo', usedPrice: 'Precio del usado', newFees: 'Gastos e impuestos del nuevo', usedFees: 'Transferencia, impuestos y gastos del usado', newDown: 'Entrada del nuevo', usedDown: 'Entrada del usado', newApr: 'Tipo/TAE modelada del nuevo (%)', usedApr: 'Tipo/TAE modelada del usado (%)', newTerm: 'Plazo nuevo (meses)', usedTerm: 'Plazo usado (meses)', newAnnualRepairs: 'Mantenimiento/reparación nuevo al año', usedAnnualRepairs: 'Mantenimiento/reparación usado al año', usedMajorRepair: 'Avería grave plausible del usado', usedMajorProbability: 'Probabilidad de escenario (%)', newResale: 'Reventa del nuevo al final', usedResale: 'Reventa del usado al final', newTco: 'Coste del nuevo', usedTco: 'Coste esperado del usado', difference: 'Diferencia esperada', newInterest: 'Interés nuevo durante tenencia', usedInterest: 'Interés usado durante tenencia', newDepreciation: 'Precio nuevo menos reventa', usedDepreciation: 'Precio usado menos reventa', newRepairs: 'Reparaciones ordinarias nuevo', usedExpectedRepairs: 'Reparaciones esperadas usado', usedDownside: 'Coste usado si ocurre la avería', newBalance: 'Deuda nuevo al vender', usedBalance: 'Deuda usado al vender', newMonthly: 'Cuota mensual nuevo', usedMonthly: 'Cuota mensual usado', newWins: 'El nuevo tiene menor coste esperado por', usedWins: 'El usado tiene menor coste esperado por', tie: 'Los costes esperados son iguales.', privacy: 'Estimación educativa; los datos quedan en el navegador. Verifica precio, financiación, contrato, informe, inspección, reparación y reventa.'
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = newUsedCarGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>The useful new-versus-used question is not which category has the lower sticker price. It is which exact vehicle leaves you with the lower cost and manageable risk over the years you will actually keep it. A five-year answer can reverse at year three because depreciation, loan payoff and repair exposure do not move at the same speed.</p>
+    <p>This model therefore avoids a single market-average verdict. It compares two written offers, accrues interest only while you own each car, and publishes both an expected used-car repair case and the full-repair downside.</p>
+    <DecisionGuide content={guide} />
+    <NewUsedCarTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Start with out-the-door price and a financing worksheet</h2>
+    <p>Ask each seller for the complete out-the-door price. Then compare the loan’s APR, amount financed, finance charge, total of payments and required products. The CFPB warns that an affordable-looking monthly payment can come from a longer term and higher total cost. Enter the actual down payment and term so the calculator can also show the payoff still due if you sell early.</p>
+    <p>Down payment changes financing and liquidity, but it does not make the car economically cheaper: the purchase price is still paid. That is why the TCO formula counts price once and adds only interest, while the monthly payment remains a cash-flow output.</p>
+
+    <h2>Used-car due diligence changes the repair scenario</h2>
+    <p>The FTC Buyers Guide states whether a dealer offers a warranty or sells the vehicle as is. Read it alongside the written contract, obtain a vehicle-history report, check open recalls and pay for an independent pre-purchase inspection. A history report can reveal recorded title, mileage or damage events but cannot see a current leak, worn suspension or intermittent electrical fault.</p>
+    <p>Turn the inspection into numbers: scheduled work due during the holding period, an annual wear budget and one plausible major repair. Do not claim that every used car has a 30% failure probability; 30% is only the editable stress assumption in this example.</p>
+
+    <h2>Resale and holding period can flip a narrow result</h2>
+    <p>The base result differs by only $39, so it is a tie for practical decision-making. Lowering used-car resale by $3,000 makes the new car about $2,961 cheaper; paying the full major repair makes it about $3,461 cheaper. Conversely, a 5.5% used-car loan makes the used option about $1,780 cheaper.</p>
+    <p>For a three-year exit, obtain resale quotes for the age and mileage you expect and inspect the loan balance. A positive resale value does not mean positive cash back if the payoff is higher. Test the holding period you can realistically commit to, not the longest period that makes one offer look good.</p>
+
+    <h2>Add costs that differ between the two exact cars</h2>
+    <p>If insurance, fuel economy, registration or taxes differ materially, add those differences in a full <a href="/en/ev-vs-gas-total-cost/">vehicle total-cost comparison</a>. Common costs can be omitted only when the candidates truly share them. Reliability, crash safety, utility and warranty coverage remain decision criteria even when they do not fit a single dollar estimate.</p>
+    <p class="privacy-note">General educational estimate, not a vehicle, loan, legal or safety recommendation. Verify documents, condition, recalls, insurance and payoff before signing.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>台灣消費者在搜尋「新車還是中古車」時，常把新車前幾年折舊大、所以中古車一定划算當成結論。但中古車的貸款利率、過戶費、待修耗材、重大事故揭露與轉售折價，可能把車價優勢吃掉；短期轉售時，未清償貸款也會直接影響能否順利賣車。</p>
+    <p>因此本頁不用單一市場平均替你決定，而是要求兩份成交資料、相同持有期、各自利率與轉售價，再把重大維修的期望值和完整發生情境分開。</p>
+    <DecisionGuide content={guide} />
+    <NewUsedCarTcoCalculator locale={locale} {...calculator} />
+
+    <h2>先把定型化契約與車況揭露變成數字</h2>
+    <p>行政院公告的中古汽車買賣定型化契約會處理里程、原用途、重大事故、權利狀態等應記載事項。逐欄確認，不接受只由業務口頭保證；任何保固、修復承諾與退換條件都應寫進契約或附件。</p>
+    <p>交通部公路局的檢驗里程紀錄可協助核對里程軌跡，但仍要比對保養工單、車身與內裝磨耗、底盤及電腦診斷。找獨立技師檢查後，把近期輪胎、煞車、電瓶、油水、正時系統或變速箱風險轉成年度預算與重大維修情境。</p>
+
+    <h2>貸款不要只看「月付多少」</h2>
+    <p>新車低利可能搭配指定保險或費用，中古車融資則可能利率較高。請從正式資料確認頭期、貸款本金、利率或總費用年百分率、期數與全部費用。相同月付可由更長期數換來，總利息不一定比較少。</p>
+    <p>若預計三年換車但貸款五年，計算器會顯示第 36 期後仍欠多少。這筆餘額不是再加一次成本，而是售車款必須優先清償的本金；若轉售價低於餘額，就要另外拿現金結清。</p>
+
+    <h2>本案例只差 NT$4,790，不能宣稱誰一定贏</h2>
+    <p>五年基本情境中新車約 NT$617,188，中古車期望成本約 NT$621,978，差距不到一萬元。只要中古車年度維修從 NT$45,000 降到 NT$30,000，中古車就約低 NT$70,210；反過來，重大維修完整發生時新車約低 NT$109,790。</p>
+    <p>這種接近的結果應視為「由車況、利率和轉售決定」，不是拿新車或中古車標籤下結論。把技師報價、實際貸款與保守收購價帶回計算器，並測試比預期早兩年賣車。</p>
+
+    <h2>兩台車不同的油電、稅費與保險仍要補上</h2>
+    <p>如果候選車的排氣量、動力、油耗、保費或牌照燃料費不同，應把差額放入<a href="/zh/ev-vs-gas-total-cost/">完整車輛持有成本</a>再比較。契約與試算也不能取代召回查核、試駕及安全評估。</p>
+    <p class="privacy-note">一般教育試算，不是購車、融資、法律或安全建議。簽約前請確認權利狀態、契約揭露、車況、貸款、保險與過戶程序。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>En España, comparar coche nuevo y usado exige algo más que restar dos anuncios. El precio financiado puede diferir del precio al contado, el usado puede tener cargas o reserva de dominio y una venta al tercer año puede dejar préstamo pendiente. La respuesta útil pertenece a dos coches concretos y al plazo real del comprador.</p>
+    <p>La calculadora no usa una depreciación media como veredicto. Suma gastos e intereses de cada oferta, permite valorar una avería del usado y muestra aparte el supuesto en que esa avería se paga completa.</p>
+    <DecisionGuide content={guide} />
+    <NewUsedCarTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Informe DGT, contrato e inspección antes de calcular</h2>
+    <p>La DGT recomienda comprobar que el vehículo sea transferible y consultar su informe. Revisa titularidad, cargas, reserva de dominio, ITV, kilometraje disponible, incidencias y llamadas a revisión. Una reserva de dominio vinculada a una financiación anterior puede bloquear el cambio de titularidad hasta su cancelación.</p>
+    <p>El informe no ve el estado mecánico actual. Encarga una inspección independiente, pide facturas de mantenimiento y deja por escrito precio, kilometraje, defectos, garantía y reparto de trámites. Después convierte las reparaciones próximas y una avería plausible en entradas del modelo.</p>
+
+    <h2>Compara el precio al contado con el coste total financiado</h2>
+    <p>El Banco de España aconseja mirar entrada, comisión de apertura, cuotas, cuota final y TAE o coste total, no solo el reclamo mensual. Introduce los gastos que realmente financia cada operación: alargar el plazo reduce la cuota, pero suele aumentar intereses y deuda pendiente cuando quieras vender.</p>
+    <p>El comprador del usado debe contemplar también transferencia, tasa, ITP cuando corresponda y situación de la ITV. Usa importes de tu comunidad y operación, no el 1.800 € del ejemplo como cifra nacional.</p>
+
+    <h2>Una ventaja de 867 € no resiste cualquier avería o reventa</h2>
+    <p>En el caso base, el nuevo cuesta unos 23.517 € y el usado 22.650 € durante cinco años. Si la reparación de 4.000 € ocurre completa, el usado sube a unos 25.450 €; si su reventa pierde 2.000 €, también pasa a ser más caro que el nuevo.</p>
+    <p>Al vender en el tercer año con los valores indicados, el nuevo queda en unos 15.122 € frente a 15.601 € del usado y ambos conservan deuda. Por eso el horizonte debe coincidir con el plan real, y cada resultado debe publicarse junto a su reventa y financiación.</p>
+
+    <h2>Añade seguro, IVTM y energía cuando sean distintos</h2>
+    <p>Si los dos candidatos cambian de potencia, combustible, etiqueta o municipio, añade seguro, IVTM, combustible o recarga y otras diferencias en el <a href="/es/ev-vs-gas-total-cost/">comparador completo de coste de vehículo</a>. El coste más bajo tampoco sustituye fiabilidad, seguridad, utilidad ni garantía.</p>
+    <p class="privacy-note">Estimación educativa general; no recomienda vehículo, crédito ni compraventa. Verifica informe, contrato, inspección, cargas, impuestos, financiación y seguro antes de pagar.</p>
+  </>}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

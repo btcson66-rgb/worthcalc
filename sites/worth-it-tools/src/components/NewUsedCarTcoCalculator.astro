@@ -1,0 +1,227 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  holdingYears: string;
+  newPrice: string;
+  usedPrice: string;
+  newFees: string;
+  usedFees: string;
+  newDown: string;
+  usedDown: string;
+  newApr: string;
+  usedApr: string;
+  newTerm: string;
+  usedTerm: string;
+  newAnnualRepairs: string;
+  usedAnnualRepairs: string;
+  usedMajorRepair: string;
+  usedMajorProbability: string;
+  newResale: string;
+  usedResale: string;
+  newTco: string;
+  usedTco: string;
+  difference: string;
+  newInterest: string;
+  usedInterest: string;
+  newDepreciation: string;
+  usedDepreciation: string;
+  newRepairs: string;
+  usedExpectedRepairs: string;
+  usedDownside: string;
+  newBalance: string;
+  usedBalance: string;
+  newMonthly: string;
+  usedMonthly: string;
+  newWins: string;
+  usedWins: string;
+  tie: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    holdingYears: number;
+    newPrice: number;
+    usedPrice: number;
+    newFees: number;
+    usedFees: number;
+    newDown: number;
+    usedDown: number;
+    newApr: number;
+    usedApr: number;
+    newTerm: number;
+    usedTerm: number;
+    newAnnualRepairs: number;
+    usedAnnualRepairs: number;
+    usedMajorRepair: number;
+    usedMajorProbability: number;
+    newResale: number;
+    usedResale: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES' };
+---
+
+<section
+  id="new-used-car-tco-calculator"
+  class="car-tco-calc"
+  data-new-used-car-tco-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-new-wins={copy.newWins}
+  data-used-wins={copy.usedWins}
+  data-tie={copy.tie}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="car-tco-grid">
+    <div class="car-tco-inputs">
+      <label class="wide"><span>{copy.holdingYears}</span><input data-field="holdingYears" type="number" inputmode="numeric" min="1" max="15" step="1" value={defaults.holdingYears} /></label>
+      <label><span>{copy.newPrice}</span><input data-field="newPrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.newPrice} /></label>
+      <label><span>{copy.usedPrice}</span><input data-field="usedPrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedPrice} /></label>
+      <label><span>{copy.newFees}</span><input data-field="newFees" type="number" inputmode="decimal" min="0" step="100" value={defaults.newFees} /></label>
+      <label><span>{copy.usedFees}</span><input data-field="usedFees" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedFees} /></label>
+      <label><span>{copy.newDown}</span><input data-field="newDown" type="number" inputmode="decimal" min="0" step="100" value={defaults.newDown} /></label>
+      <label><span>{copy.usedDown}</span><input data-field="usedDown" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedDown} /></label>
+      <label><span>{copy.newApr}</span><input data-field="newApr" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.newApr} /></label>
+      <label><span>{copy.usedApr}</span><input data-field="usedApr" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.usedApr} /></label>
+      <label><span>{copy.newTerm}</span><input data-field="newTerm" type="number" inputmode="numeric" min="1" max="120" step="1" value={defaults.newTerm} /></label>
+      <label><span>{copy.usedTerm}</span><input data-field="usedTerm" type="number" inputmode="numeric" min="1" max="120" step="1" value={defaults.usedTerm} /></label>
+      <label><span>{copy.newAnnualRepairs}</span><input data-field="newAnnualRepairs" type="number" inputmode="decimal" min="0" step="100" value={defaults.newAnnualRepairs} /></label>
+      <label><span>{copy.usedAnnualRepairs}</span><input data-field="usedAnnualRepairs" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedAnnualRepairs} /></label>
+      <label><span>{copy.usedMajorRepair}</span><input data-field="usedMajorRepair" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedMajorRepair} /></label>
+      <label><span>{copy.usedMajorProbability}</span><input data-field="usedMajorProbability" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.usedMajorProbability} /></label>
+      <label><span>{copy.newResale}</span><input data-field="newResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.newResale} /></label>
+      <label><span>{copy.usedResale}</span><input data-field="usedResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.usedResale} /></label>
+    </div>
+    <div class="car-tco-results" aria-live="polite">
+      <p class="car-tco-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.newTco}</dt><dd data-output="newTco">—</dd></div>
+        <div><dt>{copy.usedTco}</dt><dd data-output="usedTco">—</dd></div>
+        <div><dt>{copy.difference}</dt><dd data-output="difference">—</dd></div>
+        <div><dt>{copy.newInterest}</dt><dd data-output="newInterest">—</dd></div>
+        <div><dt>{copy.usedInterest}</dt><dd data-output="usedInterest">—</dd></div>
+        <div><dt>{copy.newDepreciation}</dt><dd data-output="newDepreciation">—</dd></div>
+        <div><dt>{copy.usedDepreciation}</dt><dd data-output="usedDepreciation">—</dd></div>
+        <div><dt>{copy.newRepairs}</dt><dd data-output="newRepairs">—</dd></div>
+        <div><dt>{copy.usedExpectedRepairs}</dt><dd data-output="usedExpectedRepairs">—</dd></div>
+        <div><dt>{copy.usedDownside}</dt><dd data-output="usedDownside">—</dd></div>
+        <div><dt>{copy.newBalance}</dt><dd data-output="newBalance">—</dd></div>
+        <div><dt>{copy.usedBalance}</dt><dd data-output="usedBalance">—</dd></div>
+        <div><dt>{copy.newMonthly}</dt><dd data-output="newMonthly">—</dd></div>
+        <div><dt>{copy.usedMonthly}</dt><dd data-output="usedMonthly">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="car-tco-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-new-used-car-tco-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+
+    function loan(principal: number, apr: number, term: number, holdingMonths: number) {
+      const months = Math.min(Math.max(1, Math.round(term)), 120);
+      const paidMonths = Math.min(months, Math.max(0, holdingMonths));
+      if (principal <= 0) return { payment: 0, balance: 0, interest: 0 };
+      const monthlyRate = Math.max(0, apr) / 1200;
+      const payment = monthlyRate === 0
+        ? principal / months
+        : principal * monthlyRate * (1 + monthlyRate) ** months / ((1 + monthlyRate) ** months - 1);
+      const balance = paidMonths >= months
+        ? 0
+        : monthlyRate === 0
+          ? principal * (1 - paidMonths / months)
+          : principal * (1 + monthlyRate) ** paidMonths - payment * (((1 + monthlyRate) ** paidMonths - 1) / monthlyRate);
+      const principalPaid = principal - Math.max(0, balance);
+      return { payment, balance: Math.max(0, balance), interest: payment * paidMonths - principalPaid };
+    }
+
+    function calculate() {
+      const holdingYears = Math.min(15, Math.max(1, Math.round(value('holdingYears'))));
+      const holdingMonths = holdingYears * 12;
+      const newPrice = Math.max(0, value('newPrice'));
+      const usedPrice = Math.max(0, value('usedPrice'));
+      const newFees = Math.max(0, value('newFees'));
+      const usedFees = Math.max(0, value('usedFees'));
+      const newDown = Math.min(newPrice + newFees, Math.max(0, value('newDown')));
+      const usedDown = Math.min(usedPrice + usedFees, Math.max(0, value('usedDown')));
+      const newLoan = loan(newPrice + newFees - newDown, value('newApr'), value('newTerm'), holdingMonths);
+      const usedLoan = loan(usedPrice + usedFees - usedDown, value('usedApr'), value('usedTerm'), holdingMonths);
+      const newResale = Math.max(0, value('newResale'));
+      const usedResale = Math.max(0, value('usedResale'));
+      const newRepairs = Math.max(0, value('newAnnualRepairs')) * holdingYears;
+      const usedScheduledRepairs = Math.max(0, value('usedAnnualRepairs')) * holdingYears;
+      const usedMajorRepair = Math.max(0, value('usedMajorRepair'));
+      const usedMajorProbability = Math.min(100, Math.max(0, value('usedMajorProbability'))) / 100;
+      const usedExpectedRepairs = usedScheduledRepairs + usedMajorRepair * usedMajorProbability;
+      const newTco = newPrice + newFees + newLoan.interest + newRepairs - newResale;
+      const usedTco = usedPrice + usedFees + usedLoan.interest + usedExpectedRepairs - usedResale;
+      const usedDownside = usedPrice + usedFees + usedLoan.interest + usedScheduledRepairs + usedMajorRepair - usedResale;
+      const difference = Math.abs(newTco - usedTco);
+
+      output('newTco').textContent = formatMoney(newTco);
+      output('usedTco').textContent = formatMoney(usedTco);
+      output('difference').textContent = formatMoney(difference);
+      output('newInterest').textContent = formatMoney(newLoan.interest);
+      output('usedInterest').textContent = formatMoney(usedLoan.interest);
+      output('newDepreciation').textContent = formatMoney(newPrice - newResale);
+      output('usedDepreciation').textContent = formatMoney(usedPrice - usedResale);
+      output('newRepairs').textContent = formatMoney(newRepairs);
+      output('usedExpectedRepairs').textContent = formatMoney(usedExpectedRepairs);
+      output('usedDownside').textContent = formatMoney(usedDownside);
+      output('newBalance').textContent = formatMoney(newLoan.balance);
+      output('usedBalance').textContent = formatMoney(usedLoan.balance);
+      output('newMonthly').textContent = formatMoney(newLoan.payment);
+      output('usedMonthly').textContent = formatMoney(usedLoan.payment);
+      output('verdict').textContent = difference < 0.5
+        ? root.dataset.tie || ''
+        : `${newTco < usedTco ? root.dataset.newWins : root.dataset.usedWins} ${formatMoney(difference)}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .car-tco-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .car-tco-calc h2 { margin-top: 0; }
+  .car-tco-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.7fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .car-tco-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .car-tco-inputs .wide { grid-column: 1 / -1; }
+  .car-tco-inputs label span { display: block; min-height: 2.9rem; margin-bottom: 0.35rem; font-weight: 650; }
+  .car-tco-inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem 0.75rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .car-tco-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
+  .car-tco-verdict { margin-top: 0; font-weight: 800; }
+  .car-tco-results dl { margin: 0; }
+  .car-tco-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--color-border); }
+  .car-tco-results dt { font-weight: 600; }
+  .car-tco-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .car-tco-note { margin-bottom: 0; color: var(--color-text-muted); font-size: 0.92rem; }
+  @media (max-width: 760px) {
+    .car-tco-calc { padding: 1rem; }
+    .car-tco-grid, .car-tco-inputs { grid-template-columns: 1fr; }
+    .car-tco-inputs .wide { grid-column: auto; }
+    .car-tco-inputs label span { min-height: 0; }
+  }
+</style>

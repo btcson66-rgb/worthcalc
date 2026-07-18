@@ -357,6 +357,51 @@ export const bnplCardGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     ],
     lastVerified: '2026-07-18',
   },
+  fr: {
+    id: 'bnpl-card-comparison-method',
+    labels: labels.fr,
+    directAnswer: 'Un paiement fractionné n’est pas automatiquement moins cher qu’un étalement par carte. Comparez le prix comptant, toutes les échéances, la charge des 30 prochains jours et un incident de paiement. Dans cet exemple à 720 €, le 3 × 240 € sans frais totalise 720 €, tandis que six mensualités carte de 124 € totalisent 744 €. Le premier coûte 24 € de moins normalement, mais peut prélever 480 € en 30 jours si la première échéance est immédiate.',
+    inputs: ['Prix comptant TTC et réduction perdue en choisissant le financement', 'Premier débit, montant de chaque échéance et dates exactes', 'Intérêts, frais de fractionnement, cotisation de carte et service obligatoire', 'Frais de défaillance, intérêts de retard, rejet de prélèvement et recouvrement prévus au contrat', 'Procédure de rétractation ou retour et maintien éventuel des échéances', 'Tous les autres paiements fractionnés et crédits renouvelables dus dans les 30 jours'],
+    formula: 'Coût normal = frais obligatoires initiaux + Σ(échéances) − prix comptant. Charge à 30 jours = Σ(tous les débits BNPL et carte dus dans les 30 prochains jours). Coût de tension = coût normal + frais contractuels de défaillance + intérêts de retard + frais bancaires saisis par l’utilisateur.',
+    workedExample: 'Un achat coûte 720 €. Le paiement fractionné prévoit 240 € aujourd’hui puis deux échéances de 240 €, soit 720 € sans incident. L’option carte prévoit six mensualités de 124 €, soit 744 € et 24 € de coût. Si la deuxième échéance du 3 fois tombe dans les 30 jours, 480 € sortent pendant le premier mois. Avec 18 € de frais de défaillance et 12 € de frais bancaires saisis uniquement à titre d’exemple, le paiement fractionné atteint 750 €, soit 6 € de plus que la carte.',
+    sensitivity: [
+      { scenario: '3 fois sans incident', input: '3 × 240 €; première échéance immédiate', result: '720 € au total; jusqu’à 480 € en 30 jours' },
+      { scenario: 'Carte en six mensualités', input: '6 × 124 €', result: '744 € au total; 24 € de coût' },
+      { scenario: 'Un frais de défaillance', input: 'Saisie illustrative de 18 €', result: '738 € au total; encore 6 € sous la carte' },
+      { scenario: 'Défaillance et frais bancaires', input: 'Saisies illustratives de 18 € + 12 €', result: '750 € au total; 6 € au-dessus de la carte' },
+    ],
+    cta: { label: 'Tester un échéancier mensuel dans le calculateur', href: '/en/tools/installment-true-apr' },
+    limitations: ['Les montants de 18 € et 12 € sont des entrées pédagogiques, pas des frais moyens ni des plafonds juridiques. Remplacez-les par le contrat et la brochure tarifaire de votre banque.', 'Au 18 juillet 2026, le ministère français annonce que l’extension des règles du crédit à la consommation aux paiements fractionnés et crédits de moins de trois mois s’appliquera aux nouvelles offres à partir du 20 novembre 2026. Ne transposez pas ce régime futur à un contrat signé avant cette date.', 'Débit différé, paiement fractionné, crédit amortissable et crédit renouvelable ne sont pas équivalents. Un faible prélèvement de crédit renouvelable peut cacher une durée et un coût élevés.', 'La rétractation d’un achat à distance n’arrête pas nécessairement le financement de façon instantanée. Suivez les procédures du vendeur et du prêteur et conservez la provision tant que l’annulation n’est pas confirmée.'],
+    sources: [
+      { label: 'Ministère de l’Économie — extension des règles aux paiements fractionnés le 20 novembre 2026', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/tout-savoir-sur-le-credit-la-consommation' },
+      { label: 'DGCCRF — transparence des frais de défaillance des paiements fractionnés', href: 'https://www.economie.gouv.fr/dgccrf/laction-de-la-dgccrf/les-enquetes/banques-et-etablissements-de-credit-bilan-des-enquetes-de' },
+      { label: 'Ministère de l’Économie — rétractation d’une vente à distance', href: 'https://www.economie.gouv.fr/particuliers/mes-droits-conso/bien-consommer/vente-distance-tout-savoir-sur-votre-droit-de-retractation' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'bnpl-card-comparison-method',
+    labels: labels.de,
+    directAnswer: 'Ein Zahlungsaufschub ist nicht automatisch günstiger als die Teilzahlung einer Kreditkarte. Vergleichen Sie Barpreis, sämtliche Fälligkeiten, die Belastung der nächsten 30 Tage und einen Zahlungsverzug. Im Beispiel kostet „in 30 Tagen zahlen“ für einen 900-€-Kauf bei pünktlicher Zahlung 900 €. Sechs Kartenraten zu 155 € kosten 930 €. Der Aufschub spart 30 €, verlangt aber den gesamten Kaufpreis am Tag 30 statt 155 € pro Monat.',
+    inputs: ['Barpreis und verlorener Sofortrabatt', 'Fälliger Betrag heute, am Tag 30 und an jedem späteren Termin', 'Sollzins, Ratengebühr, Kartengebühr und verpflichtende Zusatzleistung', 'Vertragskosten bei Verzug, Mahnung, Rücklastschrift, Inkasso oder Umwandlung in eine Ratenfinanzierung', 'Ablauf bei Widerruf, Retoure und strittiger Forderung', 'Alle weiteren Rechnungskäufe, BNPL-Fälligkeiten, Kartenraten und Dispokosten im selben Monat'],
+    formula: 'Normale Finanzierungskosten = verpflichtende Anfangskosten + Σ(Fälligkeiten) − Barpreis. 30-Tage-Belastung = Σ(aller BNPL- und Kartenfälligkeiten der nächsten 30 Tage). Stresskosten = normale Finanzierungskosten + vertragliche Verzugsfolgen + eingegebene Bankkosten + eingegebene Zinsen.',
+    workedExample: 'Der Barpreis beträgt 900 €. Ein BNPL-Angebot zieht bei pünktlicher Zahlung einmalig 900 € am Tag 30 ein. Eine echte Karten-Teilzahlung verlangt sechs Monatsraten zu 155 €, insgesamt 930 € und damit 30 € mehr. Dafür beträgt die normale erste Monatsrate nur 155 €. Werden für den BNPL-Stressfall rein beispielhaft 15 € vertragliche Zusatzkosten und 20 € Bank- oder Dispokosten eingegeben, steigt der Gesamtbetrag auf 935 € und liegt 5 € über der Kartenvariante.',
+    sensitivity: [
+      { scenario: 'Zahlungsaufschub pünktlich', input: '900 € vollständig am Tag 30', result: '900 € gesamt; 900 € 30-Tage-Belastung' },
+      { scenario: 'Kreditkarten-Teilzahlung', input: '6 × 155 € monatlich', result: '930 € gesamt; 30 € Finanzierungskosten' },
+      { scenario: 'Eine BNPL-Zusatzbelastung', input: 'Beispielhafte Eingabe 15 €', result: '915 € gesamt; noch 15 € unter der Karte' },
+      { scenario: 'Zusatz- und Bankkosten', input: 'Beispielhafte Eingaben 15 € + 20 €', result: '935 € gesamt; 5 € über der Karte' },
+    ],
+    cta: { label: 'Einen festen Monatsratenplan im Rechner prüfen', href: '/en/tools/installment-true-apr' },
+    limitations: ['15 € und 20 € sind Rechenbeispiele, keine Marktmittelwerte und keine Aussage zur rechtlichen Zulässigkeit. Verwenden Sie ausschließlich Vertrag, Mahninformation und aktuelles Preisverzeichnis.', 'Am 18. Juli 2026 nimmt § 491 BGB unter anderem Beträge unter 200 € sowie Rückzahlung binnen drei Monaten bei nur geringen Kosten aus dem allgemeinen Verbraucherdarlehensbegriff aus. Die Bundesregierung berichtet, dass die neuen Regeln künftig auch Kleinkredite, zinsfreie Kredite, kurze Laufzeiten und BNPL einbeziehen; die unionsrechtliche Anwendung ist für den 20. November 2026 vorgesehen.', 'Eine Charge Card mit monatlichem Komplettausgleich ist keine Kreditkarte mit Teilzahlungsfunktion. Prüfen Sie, ob eine feste Laufzeit existiert oder eine revolvierende Restschuld verzinst wird.', 'Der günstigere Preis hilft nicht, wenn 900 € am Tag 30 fehlen. Das Modell bewertet weder Bonität noch Kaufnotwendigkeit und ersetzt keine Schuldnerberatung.'],
+    sources: [
+      { label: 'Verbraucherzentrale — BNPL als Zahlungsaufschub und Risiko laufender Fälligkeiten', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/jetzt-kaufen-spaeter-bezahlen-entspannt-in-die-schuldenfalle-mit-buy-now-pay-later-102366' },
+      { label: 'Bundesregierung — neue Verbraucherkreditregeln für BNPL und kurze Kredite', href: 'https://www.bundesregierung.de/breg-de/aktuelles/schutz-kreditvertraege-2382528' },
+      { label: 'Bundesministerium der Justiz — aktueller § 491 BGB', href: 'https://www.gesetze-im-internet.de/bgb/__491.html' },
+      { label: 'BaFin-Kontenvergleich — Kreditkarte mit Voll- oder Ratenzahlung', href: 'https://kontenvergleich.bafin.de/de-simple/glossar/kredit-karte' },
+    ],
+    lastVerified: '2026-07-18',
+  },
 };
 
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {

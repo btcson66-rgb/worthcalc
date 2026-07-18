@@ -729,7 +729,7 @@ export const gymCostGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
-export const deliveryMembershipGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const deliveryMembershipGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'delivery-membership-break-even-method',
     labels: labels.en,
@@ -790,6 +790,48 @@ export const deliveryMembershipGuides: Partial<Record<Locale, DecisionGuideConte
     sources: [
       { label: 'BOE — Ley General para la Defensa de los Consumidores y Usuarios, artículo 62', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a62' },
       { label: 'Uber — condiciones de Uber One para España', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=spain&lang=es' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'delivery-membership-break-even-method',
+    labels: labels.fr,
+    directAnswer: 'Un abonnement de livraison devient rentable lorsque l’économie des commandes déjà prévues dépasse la cotisation après retrait des commandes non éligibles, des frais de service et des achats ajoutés pour atteindre le minimum. Avec 59,99 € par an, trois mois sans commande et deux commandes pendant chacun des neuf mois actifs, 18 commandes éligibles économisent chacune 3,49 € de livraison et 0,70 € de service, mais exigent 0,50 € d’achat ajouté : le gain net est 3,69 € par commande, 66,42 € avant cotisation et 6,43 € après. Le seuil est de 17 commandes éligibles.',
+    inputs: ['Cotisation réellement prélevée à la prochaine reconduction', 'Mois pendant lesquels aucune livraison n’est raisonnablement prévue', 'Commandes déjà prévues pour chaque mois actif', 'Part des commandes auprès de restaurants éligibles et au-dessus du minimum', 'Écart de frais de livraison pour le même panier', 'Écart de frais de service au même moment', 'Achat ajouté uniquement pour atteindre le montant minimum'],
+    formula: 'Mois actifs = 12 − mois sans commande. Commandes prévues = mois actifs × commandes par mois. Commandes éligibles = commandes prévues × taux d’éligibilité. Gain net par commande = écart de livraison + écart de service − achat ajouté. Gain annuel = commandes éligibles × gain net par commande. Valeur annuelle nette = gain annuel − cotisation. Seuil = arrondi supérieur(cotisation ÷ gain net par commande éligible).',
+    workedExample: 'La cotisation annuelle est de 59,99 €. Vous prévoyez trois mois sans commande et deux commandes pendant chacun des neuf mois actifs : 18 commandes, toutes éligibles. Le panier membre économise 3,49 € de livraison et 0,70 € de service, mais nécessite 0,50 € d’achat ajouté ; le gain net est donc 3,69 €. Le gain annuel est 18 × 3,69 € = 66,42 €, soit 6,43 € après la cotisation. Le seuil est ceil(59,99 ÷ 3,69) = 17 commandes éligibles.',
+    sensitivity: [
+      { scenario: 'Une commande par mois actif', input: '9 commandes × 3,69 €', result: '33,21 € de gain ; il manque 26,78 €' },
+      { scenario: 'Première fréquence rentable', input: '17 commandes × 3,69 €', result: '62,73 € de gain ; économie nette de 2,74 €' },
+      { scenario: 'Usage prévu', input: '18 commandes × 3,69 €', result: '66,42 € de gain ; économie nette de 6,43 €' },
+      { scenario: 'Six commandes non éligibles', input: '12 commandes éligibles sur 18', result: '44,28 € de gain ; il manque 15,71 €' },
+    ],
+    cta: { label: 'Calculer le seuil de votre abonnement de livraison', href: '#delivery-membership-calculator' },
+    limitations: ['Comparez le même restaurant, panier, adresse et horaire. Prix des plats, taxes, petite commande, distance, forte demande, promotions et disponibilité peuvent changer hors abonnement.', 'Le pourboire n’est pas une économie si vous versez le même montant sans abonnement. Comptez seulement l’écart causé par la formule.', 'Restaurants éligibles, montant minimum, frais, essai, reconduction, résiliation et remboursement dépendent des conditions en vigueur ; vérifiez le panier et le contrat.'],
+    sources: [
+      { label: 'DGCCRF — contrat, reconduction tacite et résiliation en ligne', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/le-contrat-un-accord-entre-des-parties-bien-informees-au-prealable' },
+      { label: 'Uber — conditions Uber One pour la France', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=france&lang=fr' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'delivery-membership-break-even-method',
+    labels: labels.de,
+    directAnswer: 'Eine Liefermitgliedschaft lohnt sich erst, wenn die Einsparungen ohnehin geplanter Bestellungen den Beitrag nach Mindestbestellwert, nicht teilnehmenden Restaurants, Servicegebühren und Zusatzkäufen übersteigen. Bei 49,99 € Jahresbeitrag, zwei Monaten ohne Bestellung und zwei Bestellungen in jedem der zehn aktiven Monate sind 80 % oder 16 Bestellungen teilnahmeberechtigt. Spart jede davon 3,49 € Liefergebühr und 0,50 € Servicegebühr ohne Zusatzkauf, entstehen 63,84 € Vorteil und 13,85 € Nettowert. Benötigt werden mindestens 13 teilnahmeberechtigte Bestellungen.',
+    inputs: ['Beitrag bei der nächsten Verlängerung', 'Monate ohne realistisch geplante Lieferbestellung', 'Ohnehin geplante Bestellungen je aktivem Monat', 'Anteil bei teilnehmenden Restaurants oberhalb des Mindestbestellwerts', 'Unterschied der Liefergebühr beim identischen Warenkorb', 'Unterschied der Servicegebühr zur selben Zeit', 'Zusatzkauf nur zum Erreichen des Mindestbestellwerts'],
+    formula: 'Aktive Monate = 12 − Monate ohne Bestellung. Geplante Bestellungen = aktive Monate × Bestellungen pro Monat. Teilnahmeberechtigte Bestellungen = geplante Bestellungen × Berechtigungsquote. Nettoersparnis je Bestellung = Liefergebühr-Differenz + Servicegebühr-Differenz − Zusatzkauf. Jahresvorteil = berechtigte Bestellungen × Nettoersparnis. Jahresnettowert = Jahresvorteil − Beitrag. Mindestbestellungen = aufrunden(Beitrag ÷ Nettoersparnis je berechtigter Bestellung).',
+    workedExample: 'Der Jahresbeitrag beträgt 49,99 €. Zwei Monate bleiben ohne Bestellung; in den übrigen zehn Monaten planen Sie je zwei Bestellungen, insgesamt 20. 80 % beziehungsweise 16 Bestellungen erfüllen Restaurant und Mindestbestellwert. Die gleiche Bestellung spart 3,49 € Liefergebühr und 0,50 € Servicegebühr, ohne Zusatzkauf: 3,99 € je Bestellung. Der Jahresvorteil beträgt 16 × 3,99 € = 63,84 €, der Nettowert 13,85 €. Die Schwelle liegt bei ceil(49,99 ÷ 3,99) = 13 Bestellungen.',
+    sensitivity: [
+      { scenario: 'Geringe Nutzung', input: '1 Bestellung × 10 Monate × 80 %', result: '8 Bestellungen; 31,92 € Vorteil; es fehlen 18,07 €' },
+      { scenario: 'Erste rentable Bestellzahl', input: '13 berechtigte Bestellungen × 3,99 €', result: '51,87 € Vorteil; 1,88 € Nettowert' },
+      { scenario: 'Geplante Nutzung', input: '16 berechtigte Bestellungen × 3,99 €', result: '63,84 € Vorteil; 13,85 € Nettowert' },
+      { scenario: 'Nur die Hälfte erfüllt den Mindestwert', input: '10 berechtigte von 20 Bestellungen', result: '39,90 € Vorteil; es fehlen 10,09 €' },
+    ],
+    cta: { label: 'Eigene Liefermitgliedschaft berechnen', href: '#delivery-membership-calculator' },
+    limitations: ['Vergleichen Sie dasselbe Restaurant, denselben Warenkorb, dieselbe Adresse und Uhrzeit. Menüpreis, Steuer, Kleinbestell-, Distanz- oder Spitzenzuschlag, Rabatt und Verfügbarkeit können sich unabhängig ändern.', 'Trinkgeld ist keine Mitgliedschaftsersparnis, wenn Sie es ohne Mitgliedschaft ebenso zahlen würden.', 'Teilnehmende Restaurants, Mindestbestellwert, Gebühren, Probezeit, Verlängerung, Kündigung und Erstattung richten sich nach den aktuellen Bedingungen.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Kündigungsbutton und langfristige Verträge', href: 'https://www.verbraucherzentrale.de/digi-tools/kuendigungsbutton-101692' },
+      { label: 'Uber — Uber One Mitgliedschaftsbedingungen für Deutschland', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=germany&lang=de' },
     ],
     lastVerified: '2026-07-19',
   },

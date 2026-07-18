@@ -3,11 +3,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DeliveryMembershipCalculator from '../../components/DeliveryMembershipCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES, type Locale } from '../../consts';
 import { deliveryMembershipGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'When is a delivery membership worth the annual fee?',
@@ -42,6 +42,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Una promoción pública cuenta como ventaja de la membresía?', answer: 'No si también está disponible sin pagar la membresía. Cuenta solo la diferencia incremental que aparece en la misma cesta por tener el plan.' },
     ],
   },
+  fr: {
+    title: 'À partir de combien de commandes un abonnement de livraison devient-il rentable ?',
+    description: 'Calculez le seuil avec cotisation, mois sans commande, restaurants éligibles, montant minimum, livraison, service et achat ajouté.',
+    faq: [
+      { question: 'Combien de commandes faut-il pour rentabiliser un abonnement de livraison ?', answer: 'Divisez la cotisation par le gain net d’une commande éligible et arrondissez au nombre supérieur. L’exemple demande 17 commandes éligibles pour couvrir 59,99 €.' },
+      { question: 'La livraison offerte supprime-t-elle tous les frais ?', answer: 'Non. Frais de service, petite commande, distance, forte demande, taxes et pourboire peuvent rester. Comparez le total final du même panier au même moment.' },
+      { question: 'Comment intégrer un montant minimum de commande ?', answer: 'Comptez seulement les commandes qui l’atteindraient sans achat inutile. Si vous ajoutez un produit uniquement pour bénéficier de l’avantage, retirez ce montant du gain par commande.' },
+      { question: 'Que faire des mois sans commande ?', answer: 'Retirez-les des mois actifs. Un forfait annuel non remboursé ne diminue pas pendant un voyage, une période de cuisine maison ou un déménagement hors zone.' },
+      { question: 'La résiliation en ligne met-elle fin immédiatement à la cotisation ?', answer: 'Pas toujours. Elle facilite la notification mais ne supprime pas automatiquement une période ou un préavis applicable. Utilisez la date d’effet confirmée dans le calcul.' },
+    ],
+  },
+  de: {
+    title: 'Ab wann lohnt sich eine Liefermitgliedschaft?',
+    description: 'Berechnen Sie die Gewinnschwelle aus Beitrag, Monaten ohne Bestellung, teilnehmenden Restaurants, Mindestbestellwert und Gebühren.',
+    faq: [
+      { question: 'Wie viele Bestellungen brauche ich, damit sich eine Liefermitgliedschaft lohnt?', answer: 'Teilen Sie den Beitrag durch die Nettoersparnis einer teilnahmeberechtigten Bestellung und runden Sie auf. Im Beispiel decken 13 Bestellungen den Jahresbeitrag von 49,99 €.' },
+      { question: 'Bedeutet kostenlose Lieferung, dass keine Gebühren bleiben?', answer: 'Nein. Service-, Kleinbestell-, Distanz- oder Spitzenzuschlag, Steuern und Trinkgeld können bleiben. Vergleichen Sie die Endsumme desselben Warenkorbs.' },
+      { question: 'Wie berücksichtige ich den Mindestbestellwert?', answer: 'Setzen Sie eine realistische Berechtigungsquote an. Produkte, die Sie nur zum Erreichen des Mindestwerts hinzufügen, mindern die Ersparnis je Bestellung.' },
+      { question: 'Zählen Monate ohne Bestellungen?', answer: 'Ja. Ziehen Sie diese von zwölf Monaten ab, weil der Jahresbeitrag trotz Urlaub, Kochen zu Hause oder Umzug gleich bleibt, sofern keine Erstattung bestätigt ist.' },
+      { question: 'Beendet der Kündigungsbutton die Mitgliedschaft sofort?', answer: 'Nicht zwingend. Er erleichtert die elektronische Erklärung, ändert aber nicht automatisch eine wirksame Laufzeit oder Frist. Rechnen Sie bis zum bestätigten Enddatum.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -66,10 +88,24 @@ const calculators = {
       heading: 'Calculadora de equilibrio de la membresía de entrega', intro: 'Compara la misma cesta con y sin membresía y cuenta solo pedidos que ya estaban previstos.', membershipFee: 'Cuota anual de la membresía', unusedMonths: 'Meses sin pedidos a domicilio', ordersPerActiveMonth: 'Pedidos previstos por mes activo', eligibleOrderRate: 'Pedidos que cumplen restaurante y cesta mínima (%)', deliveryFeeDifference: 'Ahorro de envío por pedido elegible', serviceFeeDifference: 'Ahorro de servicio por pedido elegible', extraSpendPerEligibleOrder: 'Compra añadida para alcanzar el mínimo', plannedOrders: 'Pedidos anuales previstos', eligibleOrders: 'Pedidos anuales elegibles', savingPerEligibleOrder: 'Ahorro neto por pedido elegible', grossSavings: 'Beneficio anual antes de la cuota', netValue: 'Valor anual neto después de la cuota', breakEvenOrders: 'Pedidos elegibles de equilibrio', positive: 'La membresía ahorra', negative: 'A la membresía le faltan', tie: 'La membresía está en el punto de equilibrio.', impossible: 'El ahorro por pedido es cero o negativo; con estos datos la membresía no puede amortizarse.', orderSuffix: 'pedidos elegibles', privacy: 'Los datos permanecen en este navegador. La calculadora compara costes y no garantiza elegibilidad, precios futuros, baja o devolución.',
     },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { membershipFee: 59.99, unusedMonths: 3, ordersPerActiveMonth: 2, eligibleOrderRate: 100, deliveryFeeDifference: 3.49, serviceFeeDifference: 0.7, extraSpendPerEligibleOrder: 0.5 },
+    copy: {
+      heading: 'Calculateur de rentabilité d’un abonnement de livraison', intro: 'Comparez le même panier avec et sans abonnement et ne comptez que les commandes déjà prévues.', membershipFee: 'Cotisation annuelle', unusedMonths: 'Mois sans commande livrée', ordersPerActiveMonth: 'Commandes prévues par mois actif', eligibleOrderRate: 'Commandes respectant restaurant et minimum (%)', deliveryFeeDifference: 'Économie de livraison par commande éligible', serviceFeeDifference: 'Économie de service par commande éligible', extraSpendPerEligibleOrder: 'Achat ajouté pour atteindre le minimum', plannedOrders: 'Commandes annuelles prévues', eligibleOrders: 'Commandes annuelles éligibles', savingPerEligibleOrder: 'Gain net par commande éligible', grossSavings: 'Gain annuel avant cotisation', netValue: 'Valeur annuelle nette après cotisation', breakEvenOrders: 'Commandes éligibles au seuil', positive: 'L’abonnement économise', negative: 'Il manque encore', tie: 'L’abonnement atteint exactement son seuil.', impossible: 'Le gain par commande est nul ou négatif : l’abonnement ne peut pas être rentabilisé avec ces données.', orderSuffix: 'commandes éligibles', privacy: 'Les données restent dans votre navigateur. Le calcul compare des coûts sans garantir éligibilité, prix futurs, résiliation ou remboursement.',
+    },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { membershipFee: 49.99, unusedMonths: 2, ordersPerActiveMonth: 2, eligibleOrderRate: 80, deliveryFeeDifference: 3.49, serviceFeeDifference: 0.5, extraSpendPerEligibleOrder: 0 },
+    copy: {
+      heading: 'Rechner für Liefermitgliedschaften', intro: 'Vergleichen Sie denselben Warenkorb mit und ohne Mitgliedschaft und zählen Sie nur ohnehin geplante Bestellungen.', membershipFee: 'Jahresbeitrag der Mitgliedschaft', unusedMonths: 'Monate ohne Lieferbestellung', ordersPerActiveMonth: 'Geplante Bestellungen je aktivem Monat', eligibleOrderRate: 'Bestellungen bei teilnehmenden Restaurants über Mindestwert (%)', deliveryFeeDifference: 'Ersparte Liefergebühr je berechtigter Bestellung', serviceFeeDifference: 'Ersparte Servicegebühr je berechtigter Bestellung', extraSpendPerEligibleOrder: 'Zusatzkauf zum Erreichen des Mindestwerts', plannedOrders: 'Geplante Jahresbestellungen', eligibleOrders: 'Teilnahmeberechtigte Jahresbestellungen', savingPerEligibleOrder: 'Nettoersparnis je berechtigter Bestellung', grossSavings: 'Jahresvorteil vor Mitgliedsbeitrag', netValue: 'Jahresnettowert nach Beitrag', breakEvenOrders: 'Berechtigte Mindestbestellungen', positive: 'Die Mitgliedschaft spart', negative: 'Der Mitgliedschaft fehlen', tie: 'Die Mitgliedschaft erreicht genau den Gleichstand.', impossible: 'Die Ersparnis je Bestellung ist null oder negativ; mit diesen Angaben ist kein Gleichstand möglich.', orderSuffix: 'berechtigte Bestellungen', privacy: 'Ihre Eingaben bleiben im Browser. Der Rechner vergleicht Kosten und garantiert weder Berechtigung noch künftige Preise, Kündigung oder Erstattung.',
+    },
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+  return LOCALES.map((locale) => ({ params: { locale }, props: { locale } }));
 }
 
 const { locale } = Astro.props as { locale: EditorialLocale };
@@ -79,7 +115,7 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}>
   {locale === 'en' && <>
     <p>“Free delivery” is not the number to divide into the annual fee. A plan can leave service fees, small-order charges, distance fees, taxes, menu-price differences, and tips untouched. Start with orders you would place anyway, then compare the final member and nonmember checkout for the same restaurant, basket, address, and time.</p>
     <DecisionGuide content={guide} />
@@ -121,6 +157,34 @@ if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
     <h2>Revisa renovación y baja con las condiciones vigentes</h2>
     <p>El artículo 62 de la ley española exige que los contratos continuados informen del procedimiento para ponerles fin. Para el cálculo cuenta la próxima cuota, las reglas actuales y la fecha de baja confirmada. Una prueba promocional permite observar cestas, pero no demuestra el ahorro de todo el año.</p>
     <p class="privacy-note">La página compara costes generales de consumo. No recomienda una plataforma ni determina elegibilidad, baja, devolución, seguridad alimentaria o tratamiento fiscal.</p>
+  </>}
+  {locale === 'fr' && <>
+    <p>« Livraison offerte » ne signifie pas que le panier ne comporte plus de frais. Service, petite commande, distance, forte demande, taxes, différence de prix des plats et pourboire peuvent rester. Le bon test compare le même restaurant, le même panier, la même adresse et le même horaire avec et sans abonnement.</p>
+    <DecisionGuide content={guide} />
+    <DeliveryMembershipCalculator locale={locale} {...calculator} />
+    <h2>Le montant minimum détermine les commandes réellement éligibles</h2>
+    <p>Dans l’exemple, les 18 commandes respectent les conditions, mais 0,50 € est ajouté à chacune pour atteindre le minimum. Ce complément réduit le gain par commande de 4,19 € à 3,69 €. Si six commandes deviennent non éligibles, le gain annuel tombe à 44,28 € et il manque 15,71 € pour couvrir la cotisation.</p>
+    <h2>Les frais de service se vérifient panier par panier</h2>
+    <p>Un avantage sur la livraison ne prouve pas une réduction des autres lignes. Relevez la différence finale de deux paniers équivalents. Les 3,49 € de livraison et 0,70 € de service sont des hypothèses modifiables, pas une moyenne de marché ni une promesse valable pour tous les restaurants.</p>
+    <h2>Les mois sans commande corrigent une fréquence trop optimiste</h2>
+    <p>Voyage, cuisine à domicile, déménagement ou sortie de la zone de service peuvent créer des mois sans usage. L’exemple garde neuf mois actifs. Multiplier mécaniquement deux commandes par douze ajouterait six commandes inexistantes et masquerait la faible marge de 6,43 €.</p>
+    <h2>Recalculer avant la reconduction tacite</h2>
+    <p>La DGCCRF rappelle l’importance du prix, de la durée, des conditions de résiliation et de la confirmation contractuelle. Pour le calcul, utilisez la prochaine cotisation et les règles actuelles. Une fonctionnalité de résiliation en ligne facilite la demande sans garantir une fin immédiate ni un remboursement.</p>
+    <p class="privacy-note">Cette page compare des coûts de consommation courante. Elle ne recommande pas une plateforme et ne tranche pas l’éligibilité, la résiliation, le remboursement, la sécurité alimentaire ou la fiscalité.</p>
+  </>}
+  {locale === 'de' && <>
+    <p>„Kostenlose Lieferung“ bedeutet nicht automatisch eine gebührenfreie Bestellung. Service-, Kleinbestell-, Distanz- oder Spitzenzuschlag, Steuern, unterschiedliche Menüpreise und Trinkgeld können bleiben. Vergleichen Sie dasselbe Restaurant, denselben Warenkorb, dieselbe Adresse und Uhrzeit mit und ohne Mitgliedschaft.</p>
+    <DecisionGuide content={guide} />
+    <DeliveryMembershipCalculator locale={locale} {...calculator} />
+    <h2>Der Mindestbestellwert wird als Berechtigungsquote sichtbar</h2>
+    <p>Von 20 geplanten Bestellungen erfüllen im Beispiel nur 80 % Restaurant und Mindestwert, also 16. Sinkt die Quote auf 50 %, bleiben zehn Bestellungen und der Vorteil beträgt nur 39,90 €; zum Jahresbeitrag fehlen 10,09 €. Ein Produkt nur zum Erreichen des Mindestwerts wird als Zusatzkauf abgezogen.</p>
+    <h2>Servicegebühren nicht aus der Werbeaussage ableiten</h2>
+    <p>Die Liefergebühr kann entfallen, obwohl andere Gebühren unverändert bleiben. Erfassen Sie die Differenz zweier identischer Checkouts. 3,49 € Liefer- und 0,50 € Serviceersparnis im Beispiel sind frei änderbare Eingaben, keine behaupteten Durchschnittswerte.</p>
+    <h2>Monate ohne Bestellung gehören in die Jahresrechnung</h2>
+    <p>Urlaub, Kochen zu Hause, ein Umzug oder eine geänderte Lieferzone können die Nutzung auf zehn Monate begrenzen. Zwei Bestellungen je aktivem Monat ergeben dann 20 statt 24. Der Jahresbeitrag bleibt ohne bestätigte Erstattung trotzdem vollständig im Modell.</p>
+    <h2>Vor Verlängerung Beitrag und Kündigungsdatum prüfen</h2>
+    <p>Der Kündigungsbutton erleichtert die elektronische Erklärung, ersetzt aber nicht die Prüfung von Laufzeit, Frist und bestätigtem Enddatum. Rechnen Sie mit dem nächsten Beitrag und den aktuellen Teilnahmebedingungen. Eine Probephase belegt nur beobachtete Warenkörbe, nicht automatisch ein ganzes Nutzungsjahr.</p>
+    <p class="privacy-note">Diese Seite vergleicht allgemeine Verbraucherkosten. Sie empfiehlt keinen Lieferdienst und entscheidet nicht über Teilnahme, Kündigung, Erstattung, Lebensmittelsicherheit oder Steuern.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

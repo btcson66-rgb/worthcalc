@@ -2,11 +2,11 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES, type Locale } from '../../consts';
 import { monthlyAnnualGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 interface ArticleCopy {
   title: string;
@@ -48,10 +48,32 @@ const articles: Record<EditorialLocale, ArticleCopy> = {
       { question: '¿Qué precio uso si el primer año está rebajado?', answer: 'Para decidir hoy usa el precio que pagarás en este periodo; para decidir la renovación crea otra fila con el precio posterior. Guarda un recordatorio antes de que termine la promoción.' },
     ],
   },
+  fr: {
+    title: 'Abonnement mensuel ou annuel : quand le paiement annuel est-il rentable ?',
+    description: 'Calculez le mois d’équilibre, le risque de résiliation, le coût attendu, la reconduction tacite et l’effort de trésorerie avant de payer un an.',
+    faq: [
+      { question: 'Comment calculer le seuil de rentabilité d’un abonnement annuel ?', answer: 'Divisez le prix annuel TTC par la mensualité normale. Un résultat de 8 signifie que les deux formules sont à égalité après huit prélèvements et que l’annuel commence à économiser à partir du neuvième.' },
+      { question: 'Paiement mensuel signifie-t-il résiliation possible chaque mois ?', answer: 'Non. La périodicité du paiement et la durée d’engagement sont deux clauses différentes. Vérifiez la durée minimale, le préavis et la date d’effet de la résiliation.' },
+      { question: 'Puis-je résilier un abonnement en ligne en trois clics ?', answer: 'Depuis le 1er juin 2023, lorsqu’un professionnel permet la souscription électronique, il doit proposer une fonctionnalité gratuite, directe et permanente de résiliation en ligne. Les conditions de préavis ou d’engagement du contrat restent applicables.' },
+      { question: 'Que faut-il vérifier avant une reconduction tacite ?', answer: 'Contrôlez le nouveau prix, la date d’échéance, le délai d’opposition et la procédure. Conservez l’avis reçu et la confirmation de résiliation ; ne supposez pas que l’absence d’usage arrête le renouvellement.' },
+      { question: 'Une résiliation anticipée déclenche-t-elle un remboursement au prorata ?', answer: 'Pas automatiquement. N’intégrez un remboursement que s’il est prévu par le contrat ou par un droit applicable à votre situation. Distinguez toujours arrêt du renouvellement et remboursement de la période déjà payée.' },
+    ],
+  },
+  de: {
+    title: 'Monats- oder Jahresabo: Wann lohnt sich die jährliche Zahlung?',
+    description: 'Berechnen Sie Gleichstandsmonat, Kündigungsrisiko, Erwartungskosten, Mindestlaufzeit und Liquidität, bevor Sie ein Jahresabo vorauszahlen.',
+    faq: [
+      { question: 'Wie berechne ich, ab wann ein Jahresabo günstiger ist?', answer: 'Teilen Sie den vollständigen Jahrespreis durch den regulären Monatspreis. Ergibt sich 10, sind beide nach zehn Monatsbeiträgen gleich teuer; das Jahresabo spart erst ab Monat elf.' },
+      { question: 'Kann ich ein monatlich abgerechnetes Abo jeden Monat kündigen?', answer: 'Nicht zwingend. Abrechnung, Mindestvertragslaufzeit, Kündigungsfrist und Verlängerung sind getrennte Vertragsangaben. Ein monatlicher Einzug kann zu einem länger gebundenen Vertrag gehören.' },
+      { question: 'Wann muss ein Kündigungsbutton vorhanden sein?', answer: 'Für viele online abschließbare Dauerschuldverhältnisse muss seit Juli 2022 ein leicht erreichbarer Kündigungsbutton angeboten werden. Es gibt Ausnahmen, etwa bei bestimmten Finanzdienstleistungen; prüfen Sie den konkreten Vertrag.' },
+      { question: 'Wie funktionieren automatische Verlängerungen nach der Mindestlaufzeit?', answer: 'Bei vielen seit März 2022 geschlossenen Verbraucherverträgen darf eine stillschweigende Verlängerung nur unbefristet erfolgen und muss mit höchstens einem Monat Frist kündbar sein. Sonderregeln und Ausnahmen bleiben möglich.' },
+      { question: 'Bekomme ich bei früher Kündigung einen Teil des Jahrespreises zurück?', answer: 'Das folgt nicht allein aus der Kündigung. Prüfen Sie Erstattung, Vertragsende und bereits bezahlte Leistungsperiode getrennt. Rechnen Sie nur mit einer zugesicherten oder rechtlich belegten Rückzahlung.' },
+    ],
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+  return (['en', 'zh', 'es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
     params: { locale },
     props: { locale },
   }));
@@ -68,7 +90,7 @@ if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
   description={article.description}
   locale={locale as Locale}
   updated="2026-07-18"
-  alternateLocales={[locale]}
+  alternateLocales={LOCALES}
 >
   {locale === 'en' && (
     <>
@@ -199,6 +221,98 @@ if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
         Un pago de 120 € hoy puede ser menor que doce cuotas, pero coincide con alquiler, seguros y otras renovaciones. Si adelantar el dinero reduce el colchón para gastos esenciales, la flexibilidad mensual tiene un valor real. Puedes incluir ambos escenarios en la <a href="/en/tools/subscription-audit/">auditoría de suscripciones disponible en inglés</a> y compararlos con el resto de cargos del año.
       </p>
       <p class="privacy-note">El cálculo ordena costes de consumo generales. No decide derechos de desistimiento, reembolso, permanencia, impuestos ni la validez de una cláusula concreta.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        « Deux mois offerts » compare deux tarifs, pas deux risques. Le paiement annuel échange douze mois de souplesse contre un prélèvement immédiat. Il devient intéressant seulement si la durée d’usage dépasse le point d’équilibre, si une pause saisonnière n’est pas plus adaptée et si l’argent avancé ne manque pas ailleurs.
+      </p>
+      <p>
+        Commencez par le nombre de mois nécessaires pour égaler le prix annuel. Ajoutez ensuite une probabilité d’usage sur douze mois et une date réaliste de résiliation précoce. Enfin, gardez le scénario défavorable visible : un abonnement peut être moins cher en moyenne tout en coûtant beaucoup plus si votre besoin disparaît rapidement.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Huit mois à égalité, économie à partir du neuvième</h2>
+      <p>
+        À 14,99 € par mois et 119,92 € par an, huit prélèvements totalisent exactement 119,92 €. L’annuel ne crée donc aucun gain pendant les huit premiers mois ; il devient inférieur lors du neuvième. Pour une formation de trois mois ou un logiciel limité à une mission, le mensuel coûte 44,97 € et évite de bloquer 74,95 € supplémentaires.
+      </p>
+      <p>
+        Calculez avec le tarif qui suivra la période d’essai. Si la première année bénéficie d’une promotion puis se reconduit à un autre prix, faites deux calculs. L’ancien rabais n’abaisse pas le prochain prélèvement.
+      </p>
+
+      <h2>Le seuil de probabilité rend l’incertitude vérifiable</h2>
+      <p>
+        Dans l’exemple, deux issues sont possibles : douze mois d’usage ou une résiliation après le troisième mois. Il faut environ 55,6 % de chances de rester un an pour que l’annuel soit inférieur en espérance. Avec l’hypothèse de 65 %, le mensuel atteint 132,66 € en moyenne et l’annuel économise 12,74 €.
+      </p>
+      <p>
+        Ce seuil n’est pas une statistique de marché. Appuyez-vous sur votre propre historique : avez-vous conservé des services comparables, l’usage dépend-il d’une saison, un employeur peut-il fournir la licence, ou une offre familiale risque-t-elle de remplacer l’abonnement ? Testez plusieurs dates plutôt que de choisir une probabilité flatteuse.
+      </p>
+
+      <h2>Mensualisation, engagement et reconduction tacite sont distincts</h2>
+      <p>
+        Une facturation mensuelle n’autorise pas nécessairement une sortie chaque mois. Relevez la durée minimale, le préavis, la date d’effet et les éventuels frais. Pour les contrats de services concernés par les règles de reconduction tacite, le professionnel doit informer le consommateur de la période permettant de refuser le renouvellement ; conservez cet avis et vérifiez le prix annoncé.
+      </p>
+      <p>
+        La résiliation en trois clics est une modalité pratique, pas une suppression de l’engagement. Depuis le 1er juin 2023, un professionnel qui permet de souscrire électroniquement doit mettre à disposition une fonctionnalité gratuite, directe et permanente de résiliation en ligne. Il doit confirmer la réception puis indiquer la date et les effets de la résiliation.
+      </p>
+
+      <h2>Ne confondez pas fin du renouvellement et remboursement</h2>
+      <p>
+        Résilier peut empêcher la prochaine reconduction sans restituer la période annuelle déjà payée. Ajoutez un remboursement au modèle uniquement s’il est prévu par le contrat ou fondé sur un droit applicable. Une promesse informelle du service client n’est pas un montant certain.
+      </p>
+      <p>
+        Même avec un gain attendu, payer 119,92 € aujourd’hui réduit la trésorerie disponible. Placez les deux options dans l’<a href="/en/tools/subscription-audit/">audit d’abonnements en anglais</a> avec les assurances, impôts et autres échéances annuelles pour éviter une concentration de prélèvements.
+      </p>
+      <p class="privacy-note">Ce modèle estime un coût de consommation général. Il ne détermine ni la validité d’une clause, ni un droit de remboursement, ni la date juridique de fin d’un contrat.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        „Zwei Monate gratis“ ist zunächst nur ein Preisabstand. Beim Jahresabo werden zwölf Monate Entscheidungsfreiheit zu einer sofortigen Zahlung. Es lohnt sich nur, wenn die Nutzung über den Gleichstandsmonat hinaus wahrscheinlich ist, keine saisonale Pause sinnvoller wäre und die Vorauszahlung nicht die Rücklage für notwendige Ausgaben schwächt.
+      </p>
+      <p>
+        Berechnen Sie zuerst den einfachen Gleichstand. Danach gewichten Sie ein volles Nutzungsjahr und einen plausiblen frühen Ausstieg. Zeigen Sie zusätzlich den Verlust im frühen Szenario: Ein Jahresabo kann im Durchschnitt günstiger sein und dennoch deutlich schlechter ausfallen, sobald Projekt, Arbeitsplatz oder Haushaltsbedarf sich ändern.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Zehn Monatsbeiträge sind noch keine Ersparnis</h2>
+      <p>
+        Bei 12,99 € monatlich und 129,90 € jährlich kosten zehn Monate genau so viel wie das Jahr. Erst der elfte Monatsbeitrag macht die Monatsoption teurer. Wer den Dienst nur sechs Monate für ein Vorhaben benötigt, zahlt monatlich 77,94 € und hält 51,96 € mehr verfügbar.
+      </p>
+      <p>
+        Verwenden Sie den regulären Preis nach Probezeit und Einführungsrabatt. Steigt die nächste Jahresverlängerung, braucht sie eine eigene Rechnung. Ein günstiges erstes Jahr beweist nicht, dass das zweite Jahr ebenfalls sinnvoll ist.
+      </p>
+
+      <h2>Die Jahreswahrscheinlichkeit muss etwa zwei Drittel überschreiten</h2>
+      <p>
+        Das Beispiel kennt zwei Ergebnisse: Nutzung über zwölf Monate oder Kündigung nach Monat sechs. Unter diesen Annahmen liegt der Erwartungs-Gleichstand bei rund 66,7 % Wahrscheinlichkeit für das volle Jahr. Bei 80 % betragen die gewichteten Monatskosten 140,29 € und das Jahresabo spart 10,39 €.
+      </p>
+      <p>
+        Die Prozentzahl stammt nicht aus einer allgemeinen Abo-Statistik. Leiten Sie sie aus Ihrem Verhalten ab: Wie lange hielten ähnliche Dienste, ist die Nutzung saisonal, kann ein Familien- oder Arbeitgeberzugang den Vertrag ersetzen, und benötigen Sie genau diese Tarifstufe? Prüfen Sie mehrere Kündigungsmonate.
+      </p>
+
+      <h2>Monatliche Abbuchung ist nicht monatliche Kündbarkeit</h2>
+      <p>
+        Lesen Sie Mindestlaufzeit, Kündigungsfrist und automatische Verlängerung getrennt. Für viele seit März 2022 neu geschlossene Verbraucherverträge darf eine stillschweigende Verlängerung nach der Anfangslaufzeit nur unbefristet erfolgen und muss mit höchstens einem Monat Frist kündbar sein. Für einzelne Vertragsarten und ältere Verträge können andere Regeln gelten.
+      </p>
+      <p>
+        Seit Juli 2022 ist für viele online abschließbare Dauerschuldverhältnisse außerdem ein leicht erreichbarer Kündigungsbutton vorgeschrieben. Der Prozess soll zu einer elektronischen Bestätigung führen. Fehlt der Button, bedeutet das nicht, dass Sie einfach jede Zahlung ignorieren sollten; sichern Sie Nachweise und prüfen Sie die konkrete Rechtsfolge oder Beratung.
+      </p>
+
+      <h2>Vertragsende und Erstattung getrennt rechnen</h2>
+      <p>
+        Eine Kündigung stoppt häufig die nächste Verlängerung, erstattet aber nicht automatisch die bereits bezahlte Jahresperiode. Ziehen Sie nur eine vertraglich zugesicherte oder rechtlich belegte Erstattung ab. Pause, Tarifwechsel und Übertragung können eigene Alternativen sein.
+      </p>
+      <p>
+        Tragen Sie beide Varianten in den <a href="/en/tools/subscription-audit/">englischen Abo-Rechner</a> ein und betrachten Sie alle Jahreszahlungen zusammen. Eine kleine rechnerische Ersparnis rechtfertigt keine Vorauszahlung, wenn gleichzeitig Versicherungen, Nebenkosten oder andere wichtige Fälligkeiten anstehen.
+      </p>
+      <p class="privacy-note">Die Rechnung ist eine allgemeine Verbrauchskosten-Schätzung. Sie entscheidet weder über Kündigungswirksamkeit noch über Erstattungs-, Steuer- oder Vertragsrechte.</p>
     </>
   )}
 

@@ -469,6 +469,48 @@ export const monthlyAnnualGuides: Partial<Record<Locale, DecisionGuideContent>> 
     ],
     lastVerified: '2026-07-18',
   },
+  fr: {
+    id: 'monthly-annual-subscription-method',
+    labels: labels.fr,
+    directAnswer: 'Le paiement annuel devient moins cher si vous gardez le service au-delà du mois d’équilibre ou si le coût mensuel pondéré par le risque dépasse le forfait annuel non remboursable. À 14,99 € par mois ou 119,92 € par an, huit prélèvements égalent le forfait et l’économie commence au neuvième. Avec 65 % de chances de rester douze mois et 35 % de résilier après trois mois, le mensuel coûte 132,66 € en moyenne : l’annuel économise 12,74 €, mais perd 74,95 € si la sortie précoce se réalise.',
+    inputs: ['Tarif mensuel réel après la promotion', 'Montant annuel TTC avec les frais obligatoires', 'Durée d’usage probable du service', 'Probabilité de rester douze mois et mois plausible de résiliation anticipée', 'Remboursement au prorata, suspension, changement de formule ou cession', 'Date et prix de reconduction tacite, préavis, procédure et confirmation de résiliation'],
+    formula: 'Mois d’équilibre = prix annuel ÷ tarif mensuel. Coût mensuel attendu = p(année complète) × 12M + (1 − p) × kM. Coût annuel sans remboursement = A. Probabilité minimale d’une année complète pour que l’annuel gagne = (A − kM) ÷ (12M − kM).',
+    workedExample: 'Un service coûte 14,99 € par mois ou 119,92 € pour un an non remboursable. Le point d’équilibre est exactement 8 mois. Si la probabilité de rester un an est de 65 % et celle de résilier après trois mois de 35 %, le coût mensuel attendu est 0,65 × 179,88 € + 0,35 × 44,97 € = 132,66 €. Le forfait annuel économise 12,74 € en moyenne, mais le mensuel économiserait 74,95 € en cas de résiliation au troisième mois.',
+    sensitivity: [
+      { scenario: 'Risque de résiliation élevé', input: '40 % année complète ; sinon arrêt après mois 3', result: 'Mensuel attendu 98,93 € ; économie de 20,99 €' },
+      { scenario: 'Seuil de probabilité', input: '55,6 % année complète ; sinon arrêt après mois 3', result: 'Mensuel attendu ≈ 119,92 € ; égalité' },
+      { scenario: 'Estimation centrale', input: '65 % année complète ; sinon arrêt après mois 3', result: 'Mensuel attendu 132,66 € ; annuel inférieur de 12,74 €' },
+      { scenario: 'Usage certain pendant un an', input: '12 mensualités', result: 'Mensuel 179,88 € ; annuel inférieur de 59,96 €' },
+    ],
+    cta: { label: 'Ajouter le forfait à l’audit en anglais', href: '/en/tools/subscription-audit' },
+    limitations: ['La probabilité structure l’incertitude sans prédire votre comportement. Testez plusieurs dates de résiliation.', 'Mensualisation, durée d’engagement, préavis, reconduction tacite et remboursement sont des clauses distinctes ; utilisez le contrat réel.', 'Une économie moyenne ne justifie pas de réduire l’argent disponible pour le logement, les factures ou les imprévus.'],
+    sources: [
+      { label: 'Ministère de l’Économie — résiliation en trois clics et vente à distance', href: 'https://www.economie.gouv.fr/particuliers/mes-droits-conso/bien-consommer/vente-distance-tout-savoir-sur-votre-droit-de-retractation' },
+      { label: 'DGCCRF — contrat, reconduction tacite et résiliation en ligne', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/le-contrat-un-accord-entre-des-parties-bien-informees-au-prealable' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'monthly-annual-subscription-method',
+    labels: labels.de,
+    directAnswer: 'Ein Jahresabo spart nur, wenn Sie den Dienst länger als bis zum Kosten-Gleichstand nutzen oder die gewichteten Monatskosten über dem nicht erstattbaren Jahrespreis liegen. Bei 12,99 € monatlich oder 129,90 € jährlich entsprechen zehn Monatsbeiträge dem Jahrespreis; ab Monat elf spart das Jahresabo. Bei 80 % Wahrscheinlichkeit für zwölf Monate und 20 % für eine Kündigung nach Monat sechs kostet die Monatsoption erwartet 140,29 €. Das Jahresabo spart 10,39 €, verliert im frühen Ausstieg aber 51,96 €.',
+    inputs: ['Regulärer Monatspreis nach Aktionen', 'Jahrespreis einschließlich Pflichtentgelten', 'Realistische Nutzungsdauer', 'Wahrscheinlichkeit für zwölf Monate und plausibler früher Kündigungsmonat', 'Anteilige Erstattung, Pause, Tarifwechsel oder Übertragbarkeit', 'Mindestlaufzeit, Kündigungsfrist, Verlängerung, Kündigungsbutton und Bestätigung'],
+    formula: 'Einfache Gleichstandsmonate = Jahrespreis ÷ Monatspreis. Erwartete Monatskosten = p(volles Jahr) × 12M + (1 − p) × kM. Nicht erstattbarer Jahrespreis = A. Nötige Jahreswahrscheinlichkeit = (A − kM) ÷ (12M − kM).',
+    workedExample: 'Ein Dienst kostet 12,99 € im Monat oder 129,90 € für ein nicht erstattbares Jahr. Der einfache Gleichstand liegt bei 10 Monaten. Bei 80 % Wahrscheinlichkeit für zwölf Monate und 20 % für eine Kündigung nach sechs Monaten betragen die erwarteten Monatskosten 0,80 × 155,88 € + 0,20 × 77,94 € = 140,29 €. Das Jahresabo spart erwartet 10,39 €; tritt der Sechsmonatsfall ein, wäre die Monatsoption 51,96 € günstiger.',
+    sensitivity: [
+      { scenario: 'Höheres Kündigungsrisiko', input: '50 % volles Jahr; sonst Ende nach Monat 6', result: 'Monatsoption erwartet 116,91 €; spart 12,99 €' },
+      { scenario: 'Wahrscheinlichkeits-Gleichstand', input: '66,7 % volles Jahr; sonst Ende nach Monat 6', result: 'Monatsoption erwartet rund 129,90 €; Gleichstand' },
+      { scenario: 'Basisannahme', input: '80 % volles Jahr; sonst Ende nach Monat 6', result: 'Monatsoption erwartet 140,29 €; Jahresabo spart 10,39 €' },
+      { scenario: 'Sichere Jahresnutzung', input: '12 Monatsbeiträge', result: 'Monatsoption 155,88 €; Jahresabo spart 25,98 €' },
+    ],
+    cta: { label: 'Abo im englischen Rechner erfassen', href: '/en/tools/subscription-audit' },
+    limitations: ['Die Wahrscheinlichkeit ist eine Entscheidungshilfe, keine Vorhersage. Prüfen Sie mehrere Kündigungsmonate.', 'Abrechnungsrhythmus, Mindestlaufzeit, Kündigungsfrist und automatische Verlängerung sind nicht dasselbe; maßgeblich ist der konkrete Vertrag.', 'Ein kleiner Erwartungsvorteil rechtfertigt keine Vorauszahlung aus Geld, das für notwendige Ausgaben oder Rücklagen gebraucht wird.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Kündigungsbutton und Schutz bei langfristigen Verträgen', href: 'https://www.verbraucherzentrale.de/digi-tools/kuendigungsbutton-101692' },
+      { label: 'Verbraucherzentrale — Gesetz für fairere Verträge', href: 'https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gesetz-fuer-fairere-vertraege-mehr-schutz-bei-kosten-und-laufzeiten-55274' },
+    ],
+    lastVerified: '2026-07-18',
+  },
 };
 
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {

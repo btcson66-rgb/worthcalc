@@ -1,0 +1,299 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+type FuelMode = 'mpg' | 'l100km';
+
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  evPurchasePrice: string;
+  gasPurchasePrice: string;
+  evIncentive: string;
+  evOneTimeCosts: string;
+  gasOneTimeCosts: string;
+  ownershipYears: string;
+  annualDistance: string;
+  electricityRate: string;
+  evEfficiency: string;
+  chargingLoss: string;
+  fuelPrice: string;
+  gasEfficiency: string;
+  evInsurance: string;
+  gasInsurance: string;
+  evMaintenance: string;
+  gasMaintenance: string;
+  evTaxes: string;
+  gasTaxes: string;
+  evResale: string;
+  gasResale: string;
+  evTotal: string;
+  gasTotal: string;
+  difference: string;
+  evEnergy: string;
+  gasEnergy: string;
+  evDepreciation: string;
+  gasDepreciation: string;
+  evPerDistance: string;
+  gasPerDistance: string;
+  evWins: string;
+  gasWins: string;
+  tie: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  fuelMode: FuelMode;
+  distanceUnit: 'mi' | 'km';
+  defaults: {
+    evPurchasePrice: number;
+    gasPurchasePrice: number;
+    evIncentive: number;
+    evOneTimeCosts: number;
+    gasOneTimeCosts: number;
+    ownershipYears: number;
+    annualDistance: number;
+    electricityRate: number;
+    evEfficiency: number;
+    chargingLoss: number;
+    fuelPrice: number;
+    gasEfficiency: number;
+    evInsurance: number;
+    gasInsurance: number;
+    evMaintenance: number;
+    gasMaintenance: number;
+    evTaxes: number;
+    gasTaxes: number;
+    evResale: number;
+    gasResale: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, fuelMode, distanceUnit, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = {
+  en: 'en-US',
+  zh: 'zh-TW',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+};
+---
+
+<section
+  id="ev-gas-tco-calculator"
+  class="tco-calc"
+  data-ev-gas-tco-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-fuel-mode={fuelMode}
+  data-distance-unit={distanceUnit}
+  data-ev-wins={copy.evWins}
+  data-gas-wins={copy.gasWins}
+  data-tie={copy.tie}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+
+  <div class="tco-calc-grid">
+    <div class="tco-calc-inputs">
+      <label><span>{copy.evPurchasePrice}</span><input data-field="evPurchasePrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.evPurchasePrice} /></label>
+      <label><span>{copy.gasPurchasePrice}</span><input data-field="gasPurchasePrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.gasPurchasePrice} /></label>
+      <label><span>{copy.evIncentive}</span><input data-field="evIncentive" type="number" inputmode="decimal" min="0" step="100" value={defaults.evIncentive} /></label>
+      <label><span>{copy.ownershipYears}</span><input data-field="ownershipYears" type="number" inputmode="numeric" min="1" max="20" step="1" value={defaults.ownershipYears} /></label>
+      <label><span>{copy.evOneTimeCosts}</span><input data-field="evOneTimeCosts" type="number" inputmode="decimal" min="0" step="100" value={defaults.evOneTimeCosts} /></label>
+      <label><span>{copy.gasOneTimeCosts}</span><input data-field="gasOneTimeCosts" type="number" inputmode="decimal" min="0" step="100" value={defaults.gasOneTimeCosts} /></label>
+      <label><span>{copy.annualDistance}</span><input data-field="annualDistance" type="number" inputmode="decimal" min="0" step="100" value={defaults.annualDistance} /></label>
+      <label><span>{copy.chargingLoss}</span><input data-field="chargingLoss" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.chargingLoss} /></label>
+      <label><span>{copy.electricityRate}</span><input data-field="electricityRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.electricityRate} /></label>
+      <label><span>{copy.evEfficiency}</span><input data-field="evEfficiency" type="number" inputmode="decimal" min="0" step="0.1" value={defaults.evEfficiency} /></label>
+      <label><span>{copy.fuelPrice}</span><input data-field="fuelPrice" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.fuelPrice} /></label>
+      <label><span>{copy.gasEfficiency}</span><input data-field="gasEfficiency" type="number" inputmode="decimal" min="0.1" step="0.1" value={defaults.gasEfficiency} /></label>
+      <label><span>{copy.evInsurance}</span><input data-field="evInsurance" type="number" inputmode="decimal" min="0" step="10" value={defaults.evInsurance} /></label>
+      <label><span>{copy.gasInsurance}</span><input data-field="gasInsurance" type="number" inputmode="decimal" min="0" step="10" value={defaults.gasInsurance} /></label>
+      <label><span>{copy.evMaintenance}</span><input data-field="evMaintenance" type="number" inputmode="decimal" min="0" step="10" value={defaults.evMaintenance} /></label>
+      <label><span>{copy.gasMaintenance}</span><input data-field="gasMaintenance" type="number" inputmode="decimal" min="0" step="10" value={defaults.gasMaintenance} /></label>
+      <label><span>{copy.evTaxes}</span><input data-field="evTaxes" type="number" inputmode="decimal" min="0" step="10" value={defaults.evTaxes} /></label>
+      <label><span>{copy.gasTaxes}</span><input data-field="gasTaxes" type="number" inputmode="decimal" min="0" step="10" value={defaults.gasTaxes} /></label>
+      <label><span>{copy.evResale}</span><input data-field="evResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.evResale} /></label>
+      <label><span>{copy.gasResale}</span><input data-field="gasResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.gasResale} /></label>
+    </div>
+
+    <div class="tco-calc-results" aria-live="polite">
+      <p class="tco-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.evTotal}</dt><dd data-output="evTotal">—</dd></div>
+        <div><dt>{copy.gasTotal}</dt><dd data-output="gasTotal">—</dd></div>
+        <div><dt>{copy.difference}</dt><dd data-output="difference">—</dd></div>
+        <div><dt>{copy.evEnergy}</dt><dd data-output="evEnergy">—</dd></div>
+        <div><dt>{copy.gasEnergy}</dt><dd data-output="gasEnergy">—</dd></div>
+        <div><dt>{copy.evDepreciation}</dt><dd data-output="evDepreciation">—</dd></div>
+        <div><dt>{copy.gasDepreciation}</dt><dd data-output="gasDepreciation">—</dd></div>
+        <div><dt>{copy.evPerDistance}</dt><dd data-output="evPerDistance">—</dd></div>
+        <div><dt>{copy.gasPerDistance}</dt><dd data-output="gasPerDistance">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="tco-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-ev-gas-tco-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const fuelMode = root.dataset.fuelMode || 'l100km';
+    const distanceUnit = root.dataset.distanceUnit || 'km';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 });
+    const unitCurrencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const twdUnitFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+    const formatUnitMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdUnitFormatter.format(Math.abs(amount))}`
+      : unitCurrencyFormatter.format(amount);
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+
+    function calculate() {
+      const evPurchasePrice = Math.max(0, value('evPurchasePrice'));
+      const gasPurchasePrice = Math.max(0, value('gasPurchasePrice'));
+      const evIncentive = Math.min(evPurchasePrice, Math.max(0, value('evIncentive')));
+      const evOneTimeCosts = Math.max(0, value('evOneTimeCosts'));
+      const gasOneTimeCosts = Math.max(0, value('gasOneTimeCosts'));
+      const ownershipYears = Math.min(20, Math.max(1, Math.round(value('ownershipYears'))));
+      const annualDistance = Math.max(0, value('annualDistance'));
+      const electricityRate = Math.max(0, value('electricityRate'));
+      const evEfficiency = Math.max(0, value('evEfficiency'));
+      const chargingLoss = Math.max(0, value('chargingLoss')) / 100;
+      const fuelPrice = Math.max(0, value('fuelPrice'));
+      const gasEfficiency = Math.max(0.1, value('gasEfficiency'));
+      const evResale = Math.max(0, value('evResale'));
+      const gasResale = Math.max(0, value('gasResale'));
+      const evNetPurchase = evPurchasePrice - evIncentive;
+      const evEnergyAnnual = annualDistance * (evEfficiency / 100) * (1 + chargingLoss) * electricityRate;
+      const gasEnergyAnnual = fuelMode === 'mpg'
+        ? annualDistance / gasEfficiency * fuelPrice
+        : annualDistance * (gasEfficiency / 100) * fuelPrice;
+      const evAnnualOther = Math.max(0, value('evInsurance')) + Math.max(0, value('evMaintenance')) + Math.max(0, value('evTaxes'));
+      const gasAnnualOther = Math.max(0, value('gasInsurance')) + Math.max(0, value('gasMaintenance')) + Math.max(0, value('gasTaxes'));
+      const evDepreciation = evNetPurchase - evResale;
+      const gasDepreciation = gasPurchasePrice - gasResale;
+      const evTotal = evNetPurchase + evOneTimeCosts + ownershipYears * (evEnergyAnnual + evAnnualOther) - evResale;
+      const gasTotal = gasPurchasePrice + gasOneTimeCosts + ownershipYears * (gasEnergyAnnual + gasAnnualOther) - gasResale;
+      const difference = Math.abs(evTotal - gasTotal);
+      const totalDistance = Math.max(1, annualDistance * ownershipYears);
+
+      output('evTotal').textContent = formatMoney(evTotal);
+      output('gasTotal').textContent = formatMoney(gasTotal);
+      output('difference').textContent = formatMoney(difference);
+      output('evEnergy').textContent = formatMoney(evEnergyAnnual);
+      output('gasEnergy').textContent = formatMoney(gasEnergyAnnual);
+      output('evDepreciation').textContent = formatMoney(evDepreciation);
+      output('gasDepreciation').textContent = formatMoney(gasDepreciation);
+      output('evPerDistance').textContent = `${formatUnitMoney(evTotal / totalDistance)} / ${distanceUnit}`;
+      output('gasPerDistance').textContent = `${formatUnitMoney(gasTotal / totalDistance)} / ${distanceUnit}`;
+      output('verdict').textContent = Math.abs(evTotal - gasTotal) < 0.005
+        ? root.dataset.tie || ''
+        : `${evTotal < gasTotal ? root.dataset.evWins : root.dataset.gasWins} ${formatMoney(difference)}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .tco-calc {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .tco-calc h2 { margin-top: 0; }
+
+  .tco-calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .tco-calc-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .tco-calc-inputs label,
+  .tco-calc-results dl { margin: 0; }
+
+  .tco-calc-inputs label span {
+    display: block;
+    min-height: 2.9rem;
+    margin-bottom: 0.35rem;
+    font-weight: 650;
+  }
+
+  .tco-calc-inputs input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.55rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .tco-calc-results {
+    align-self: start;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    background: var(--color-surface-2);
+  }
+
+  .tco-verdict {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: 750;
+  }
+
+  .tco-calc-results dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tco-calc-results dt,
+  .tco-calc-results dd { overflow-wrap: anywhere; }
+
+  .tco-calc-results dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .tco-calc-note {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 760px) {
+    .tco-calc { padding: 1rem; }
+    .tco-calc-grid,
+    .tco-calc-inputs { grid-template-columns: 1fr; }
+    .tco-calc-inputs label span { min-height: 0; }
+  }
+</style>

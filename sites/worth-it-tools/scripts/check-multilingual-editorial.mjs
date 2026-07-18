@@ -123,7 +123,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'ev-vs-gas-total-cost',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$39,864', 'out-the-door', 'data-ev-gas-tco-calculator'],
+      zh: ['NT$1,107,644', '汽車燃料使用費', 'data-ev-gas-tco-calculator'],
+      es: ['29.776 €', 'MOVES', 'data-ev-gas-tco-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -232,4 +242,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 12 complete five-locale topics, 52 added routes, 4 enriched high-value tools, 4 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 12 complete five-locale topics, 55 added routes, 4 enriched high-value tools, 5 embedded decision calculators.');

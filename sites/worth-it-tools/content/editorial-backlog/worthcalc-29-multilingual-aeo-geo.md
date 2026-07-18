@@ -178,13 +178,22 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：93 HTML、61 編輯內容頁、58／145 任務對應與完整版本、11／29 五語完成主題（第 12 題為 3／5）。
 - 發布證據：PR #35 已合併為 `9c0e377`，GitHub Pages run `29656279230` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self＋x-default hreflang、schema、計算器與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap；繁中正式頁 390px 未交叉互動回歸 PASS。
 
-## 2026-07-19 第二十批（第 12 題 B 段，準備發布）
+## 2026-07-19 第二十批（第 12 題 B 段，已發布）
 
 - 新增 FR／DE 兩個完整原生頁，使第 12 題成為五語群組；同步把前三語從自身語言 hreflang 切換為五語＋x-default。
 - FR 使用 durée de détention、capital restant dû、frais d’acquisition、copropriété、indemnité de remboursement anticipé 與 résidence principale plus-value，基準第 10 年交叉，房價持平延至第 18 年。
 - DE 使用 Haltedauer、Restschuld、Kaufnebenkosten、nicht umlagefähiges Hausgeld、Vorfälligkeitsentschädigung、Zinsbindung 與 § 23 EStG；基準第 19 年才交叉，房價持平時 30 年內不交叉。
 - 兩語均使用不同買價、頭期、利率、費用、租金與機會報酬接入逐年損益計算器；來源採 ANIL／Service-Public、Verbraucherzentrale、Bundesministerium der Justiz 與 Deutsche Bundesbank。
 - 本批建置目標：95 HTML、63 編輯內容頁、60／145 任務對應與完整版本、12／29 五語完成主題。
+- 發布證據：PR #36 已合併為 `1802f92`，GitHub Pages run `29656686245` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、計算器、sitemap 與德文正式頁 390px 未交叉互動回歸 PASS。
+
+## 2026-07-19 第二十一批（第 13 題 A 段，準備發布）
+
+- 題目 13「電動車與油車總持有成本」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 不建立空殼頁。
+- 新增頁內完整 TCO 計算器，不另增公開路由；同時納入兩車含稅成交價、已確認補助、充電建置／貸款等前期成本、年里程、充電損耗、能源、個別保險與保養、年度稅費及持有期末轉售價。
+- EN 採 out-the-door、DOE 在地能源輸入、聯邦／州／公用事業誘因資格與 VIN 保險報價語境；繁中分開使用牌照稅與汽車燃料使用費，按車籍地免稅、家充／社區／快充加權及中古行情處理；ES 分開 llave en mano、自治區 MOVES 申請與稅務效果、DGT Cero 及市政府 IVTM。
+- 基準算例：EN 五年 EV $39,864、油車 $40,250；zh-TW EV NT$1,107,644、油車 NT$1,077,700；ES EV 29,776€、油車 31,340€。三者差額都透過能源、里程與轉售敏感度呈現，不宣稱單一動力必勝。
+- 本批建置目標：98 HTML、66 編輯內容頁、63／145 任務對應與完整版本、12／29 五語完成主題（第 13 題為 3／5）。
 
 ## 待執行主題
 
@@ -201,8 +210,8 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |
 | 10 | Cards & Rewards | Cashback caps and real reward rate | phase-18 complete; deployed |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; deployed |
-| 12 | Housing & Commuting | Rent-vs-buy break-even year | phase-20 five-locale ready; release pending |
-| 13 | Transport & Vehicle Ownership | EV vs gas total cost | backlog |
+| 12 | Housing & Commuting | Rent-vs-buy break-even year | phase-20 complete; deployed |
+| 13 | Transport & Vehicle Ownership | EV vs gas total cost | phase-21 EN/zh-TW/ES ready; FR/DE pending |
 | 14 | Transport & Vehicle Ownership | Home vs public EV charging | backlog |
 | 15 | Transport & Vehicle Ownership | New vs used car | backlog |
 | 16 | Transport & Vehicle Ownership | Lease vs buy a car | backlog |

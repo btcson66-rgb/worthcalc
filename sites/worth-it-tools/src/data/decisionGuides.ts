@@ -1242,7 +1242,7 @@ export const commuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   },
 };
 
-export const cashbackCapsGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'cashback-caps-real-rate-method',
     labels: labels.en,
@@ -1307,6 +1307,52 @@ export const cashbackCapsGuides: Partial<Record<Locale, DecisionGuideContent>> =
       { label: 'Banco de España — tipos de tarjeta y coste del crédito', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/tarjetas/guia-textual/tipos-de-tarjeta/' },
       { label: 'BBVA España — cómo funciona el cashback y qué límites revisar', href: 'https://www.bbva.es/finanzas-vistazo/ef/tarjetas/que-es-cashback-como-funciona-en-tarjetas-de-credito.html' },
       { label: 'Openbank — porcentaje y límite de cashback en las condiciones', href: 'https://www.openbank.es/open-to-learn/tarjetas-con-cashback' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'cashback-caps-real-rate-method',
+    labels: labels.fr,
+    directAnswer: 'Un cashback de 4 % n’est pas un rendement de 4 % sur tout le relevé. Appliquez le taux annoncé uniquement aux dépenses éligibles sous plafond, le taux résiduel au-delà, puis réintégrez les opérations exclues dans le dénominateur global. Avec 900 € dans une offre à 4 % plafonnée à 600 €, 700 € d’autres achats à 0,8 % et 150 € sans remboursement, le crédit total atteint 31,10 € : 1,94 % des dépenses éligibles mais 1,78 % du relevé de 1 750 €.',
+    inputs: ['Période exacte : mois civil, relevé, durée de l’offre ou année de cotisation', 'Carte enregistrée et dépenses réellement éligibles chez les enseignes participantes', 'Taux annoncé et inscription préalable éventuelle', 'Plafond exprimé en achats ou en euros de remboursement', 'Taux résiduel après épuisement du plafond', 'Autres achats récompensés et leur taux', 'Intermédiaires de paiement, retours, annulations, frais et opérations sans crédit'],
+    formula: 'Soit B la dépense de catégorie, C son plafond éligible, rb le taux annoncé, rf le taux résiduel, O les autres achats éligibles, ro leur taux et X les opérations exclues. Remboursement = min(B,C) × rb + max(B−C,0) × rf + O × ro. Taux pondéré éligible = remboursement ÷ (B+O). Taux effectif du relevé = remboursement ÷ (B+O+X).',
+    workedExample: 'Sur une période, 900 € sont dépensés dans une catégorie à 4 %, mais seuls les premiers 600 € bénéficient de ce taux et le surplus revient à 0,5 %. Les autres achats éligibles atteignent 700 € à 0,8 %, tandis que 150 € ne donnent aucun crédit. Le remboursement vaut 24 € + 1,50 € + 5,60 € = 31,10 €. Il représente 1,94 % des 1 600 € éligibles et 1,78 % du relevé de 1 750 €. Appliquer 4 % aux 900 € surestimerait la catégorie de 10,50 €.',
+    sensitivity: [
+      { scenario: 'Sous le plafond', input: '400 € dans la catégorie ; autres données identiques', result: '21,60 € ; taux effectif du relevé 1,73 %' },
+      { scenario: 'Plafond exactement atteint', input: '600 € dans la catégorie ; autres données identiques', result: '29,60 € ; taux effectif du relevé 2,04 %' },
+      { scenario: 'Scénario central', input: '900 € dans la catégorie ; 300 € à 0,5 %', result: '31,10 € ; taux effectif du relevé 1,78 %' },
+      { scenario: 'Dépense élevée hors plafond', input: '1 500 € dans la catégorie ; autres données identiques', result: '34,10 € ; taux effectif du relevé 1,45 %' },
+    ],
+    cta: { label: 'Comparer le remboursement réel à la cotisation de la carte', href: '/en/tools/cashback-breakeven' },
+    limitations: ['En France, « cash back » peut aussi désigner un retrait d’espèces chez un commerçant. Ici, il s’agit uniquement d’un remboursement ou crédit de fidélité après achat.', 'L’inscription à l’offre, la carte précise, l’enseigne, le canal de paiement, la période et le montant minimum doivent tous correspondre aux conditions.', 'Une transaction via un tiers, retournée, annulée ou remboursée peut être exclue ou entraîner la reprise du crédit. Le délai d’affichage n’est pas un rendement supplémentaire.', 'Cotisation, intérêts, frais et achats provoqués pour atteindre un seuil peuvent dépasser le remboursement. Ce modèle ne recommande aucune carte et ne fournit pas de conseil de crédit ou fiscal.'],
+    sources: [
+      { label: 'Banque de France — distinguer retrait d’espèces cashback et programme de fidélité', href: 'https://www.banque-france.fr/fr/strategie-monetaire/moyens-de-paiement/politique-nationale-gestion-especes/accessibilit%C3%A9' },
+      { label: 'American Express France — conditions générales Amex Offers', href: 'https://www.americanexpress.com/fr/legal/amex-offers-terms.html' },
+      { label: 'American Express France — fonctionnement des offres de remboursement', href: 'https://www.americanexpress.com/fr/benefices/vos-offres/amex-offers.html' },
+      { label: 'Ministère de l’Économie — frais bancaires et cotisation de carte', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/tout-savoir-sur-les-frais-bancaires' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'cashback-caps-real-rate-method',
+    labels: labels.de,
+    directAnswer: 'Ein beworbener Cashback-Satz von 3 % gilt nicht automatisch für die gesamte Kartenabrechnung. Teilen Sie den Umsatz in den Anteil bis zur Bonusgrenze, den Anteil mit Basissatz und ausgeschlossene Zahlungen. Bei 1.200 € Bonusumsatz zu 3 % bis 800 €, danach 0,5 %, weiteren 900 € zu 0,75 % und 200 € ohne Vergütung entstehen 32,75 €: 1,56 % der berechtigten Umsätze, aber nur 1,42 % der 2.300-€-Abrechnung.',
+    inputs: ['Abrechnungs-, Kalender-, Aktions- oder Kartenjahr, zu dem die Grenze gehört', 'Tatsächlich berechtigte Umsätze in der Bonuskategorie', 'Beworbener Satz sowie notwendige Aktivierung oder Anmeldung', 'Umsatzgrenze oder maximaler Euro-/Punktebonus und die richtige Umrechnung', 'Vergütung oberhalb der Grenze', 'Sonstige berechtigte Umsätze und deren Satz', 'Ausgeschlossene Umsätze, Stornos, Retouren, Entgelte und Einlösewert von Punkten'],
+    formula: 'B = Bonusumsatz, C = berechtigte Umsatzgrenze, rb = Bonussatz, rf = Satz oberhalb der Grenze, O = sonstiger berechtigter Umsatz, ro = dessen Satz, X = ausgeschlossener Umsatz. Vergütung = min(B,C) × rb + max(B−C,0) × rf + O × ro. Gewichteter berechtigter Satz = Vergütung ÷ (B+O). Effektiver Abrechnungssatz = Vergütung ÷ (B+O+X).',
+    workedExample: 'Im Abrechnungszeitraum fallen 1.200 € in einer 3-%-Kategorie an. Nur 800 € erhalten 3 %, die übrigen 400 € noch 0,5 %. Weitere 900 € werden mit 0,75 % vergütet; 200 € sind ausgeschlossen. Ergebnis: 24 € + 2 € + 6,75 € = 32,75 €. Das sind 1,56 % von 2.100 € berechtigten Umsätzen und 1,42 % der gesamten 2.300 €. Die pauschale Rechnung 1.200 € × 3 % wäre um 10 € zu hoch.',
+    sensitivity: [
+      { scenario: 'Unter der Bonusgrenze', input: '500 € Bonusumsatz; sonst unverändert', result: '21,75 €; effektiver Abrechnungssatz 1,36 %' },
+      { scenario: 'Grenze genau erreicht', input: '800 € Bonusumsatz; sonst unverändert', result: '30,75 €; effektiver Abrechnungssatz 1,62 %' },
+      { scenario: 'Basisbeispiel', input: '1.200 € Bonusumsatz; 400 € nur zu 0,5 %', result: '32,75 €; effektiver Abrechnungssatz 1,42 %' },
+      { scenario: 'Hoher Umsatz über Grenze', input: '2.000 € Bonusumsatz; sonst unverändert', result: '36,75 €; effektiver Abrechnungssatz 1,19 %' },
+    ],
+    cta: { label: 'Realen Bonus mit dem Kartenentgelt vergleichen', href: '/en/tools/cashback-breakeven' },
+    limitations: ['Cashback, PAYBACK Punkte, Membership Rewards und einmalige Gutschriften haben unterschiedliche Einlösewerte und Bedingungen. Rechnen Sie nur den Wert der tatsächlich genutzten Einlösung.', 'Akzeptanzpartner, Händlereinstufung, Aktivierung, Aktionszeitraum und registrierte Karte entscheiden über die Berechtigung; Tankstellen oder andere Umsätze können ausdrücklich ausgeschlossen sein.', 'Retouren und Stornos beseitigen häufig den Bonus. Rundung, Zusatzkarten, Mindestumsatz und verzögerte Gutschrift können die Abrechnung verändern.', 'Jahresentgelt, Fremdwährungsentgelt, Sollzinsen oder Mehrkonsum können den Bonus übersteigen. Die Rechnung ist keine Karten-, Kredit-, Steuer- oder Anlageberatung.'],
+    sources: [
+      { label: 'BaFin — neutraler Kontenvergleich mit Kreditkartenentgelten', href: 'https://kontenvergleich.bafin.de/de' },
+      { label: 'American Express Deutschland — Cashback, qualifizierte Käufe und Retouren', href: 'https://www.americanexpress.com/de-de/amexcited/amexplained/wie-funktioniert-cashback-14147' },
+      { label: 'American Express Deutschland — PAYBACK Punkte, Satz und Tankstellenausschluss', href: 'https://www.americanexpress.com/de-de/kreditkarte/payback-karte/' },
+      { label: 'American Express Deutschland — Kartenentgelte und Rückzahlung', href: 'https://www.americanexpress.com/de-de/kreditkarten/kreditkarten-ratgeber/was-kostet-eine-kreditkarte/' },
     ],
     lastVerified: '2026-07-19',
   },

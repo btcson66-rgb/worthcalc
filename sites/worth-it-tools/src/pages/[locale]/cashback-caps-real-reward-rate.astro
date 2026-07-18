@@ -3,11 +3,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import CashbackCapsCalculator from '../../components/CashbackCapsCalculator.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES } from '../../consts';
 import { cashbackCapsGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -43,6 +43,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Debo restar intereses y comisiones al cashback?', answer: 'Para valorar el beneficio neto de la tarjeta, sí. Esta página muestra primero el rendimiento bruto de las compras; los intereses de pago aplazado, la cuota y otras comisiones se comparan aparte y pueden superar la devolución.' },
     ],
   },
+  fr: {
+    title: 'Plafonds de cashback et catégories : calculer le taux de récompense réel',
+    description: 'Calculez le remboursement réel après plafond, taux résiduel, inscription, dépenses exclues, retours, frais et valeur des points.',
+    faq: [
+      { question: 'Comment calculer le taux réel d’un cashback ?', answer: 'Appliquez chaque taux au seul montant éligible, additionnez les crédits puis divisez par les dépenses analysées. Affichez un taux sur achats éligibles et un taux sur tout le relevé, opérations sans remboursement comprises.' },
+      { question: 'Comment convertir un plafond de 24 € de remboursement en plafond d’achat ?', answer: 'Si les 24 € correspondent au taux total de 4 %, le plafond d’achat est 24 € ÷ 4 % = 600 €. Si le plafond ne porte que sur un bonus additionnel, utilisez ce taux additionnel et conservez le taux de base séparément.' },
+      { question: 'Un paiement via PayPal ou un intermédiaire est-il éligible ?', answer: 'Pas automatiquement. Certaines conditions excluent les achats réalisés via un tiers ou lorsque l’enseigne ne peut pas être identifiée. Vérifiez le canal autorisé dans l’offre enregistrée.' },
+      { question: 'Le cash back de cette page est-il un retrait d’espèces en magasin ?', answer: 'Non. En France, le même terme peut désigner un retrait d’espèces associé à un achat. Ici, cashback signifie uniquement remboursement, crédit sur compte-carte ou valeur de fidélité après achat.' },
+      { question: 'Que devient le remboursement après un retour ?', answer: 'Une transaction retournée, annulée ou remboursée peut cesser d’être éligible et le crédit déjà versé peut être repris. Utilisez le montant net après retours.' },
+    ],
+  },
+  de: {
+    title: 'Cashback-Limits und Bonuskategorien: So berechnen Sie die tatsächliche Rückvergütung',
+    description: 'Berechnen Sie den echten Cashback-Satz nach Bonusgrenze, Basissatz, Ausschlüssen, Retouren, Kartenentgelt und Punktewert.',
+    faq: [
+      { question: 'Wie berechne ich den tatsächlichen Cashback-Satz?', answer: 'Multiplizieren Sie jeden Umsatzabschnitt mit dem dort geltenden Satz, addieren Sie die Vergütung und teilen Sie durch den betrachteten Gesamtumsatz. Berechtigten und vollständigen Abrechnungssatz getrennt ausweisen.' },
+      { question: 'Wie wird ein Bonuslimit von 24 € in eine Umsatzgrenze umgerechnet?', answer: 'Bezieht sich der Höchstbonus auf den gesamten Satz von 3 %, sind 24 € ÷ 3 % = 800 € Umsatz begünstigt. Bezieht er sich nur auf einen Zusatzbonus, muss durch diesen Zusatzsatz geteilt werden.' },
+      { question: 'Sind PAYBACK Punkte dasselbe wie Cashback?', answer: 'Nein. Punkte müssen mit dem Wert der Einlösung bewertet werden, die Sie tatsächlich nutzen. Ein nomineller Punkt ist nicht automatisch ein Eurocent und kann anderen Ausschlüssen unterliegen.' },
+      { question: 'Zählen Tankstellen und andere ausgeschlossene Umsätze in den Nenner?', answer: 'Für den effektiven Satz der gesamten Abrechnung ja, mit null Vergütung. Für die separate Programmkontrolle können Sie zusätzlich nur berechtigte Umsätze betrachten.' },
+      { question: 'Müssen Kartenentgelt und Zinsen abgezogen werden?', answer: 'Für den Nettovorteil der Karte ja. Der Rechner zeigt zunächst die Bruttovergütung aus Umsätzen; Jahresentgelt, Fremdwährungsentgelt und mögliche Sollzinsen werden anschließend separat gegengerechnet.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -67,10 +89,24 @@ const calculators = {
       heading: 'Calculadora de límites y cashback efectivo', intro: 'Usa un solo periodo de liquidación. Introduce porcentajes y convierte cualquier tope de cashback en un límite de gasto cuando sea necesario.', bonusSpend: 'Gasto en la categoría bonificada', bonusRate: 'Porcentaje anunciado de la categoría (%)', bonusSpendCap: 'Gasto que recibe el porcentaje anunciado', fallbackRate: 'Porcentaje después del tope (%)', otherSpend: 'Otras compras elegibles', otherRate: 'Porcentaje de otras compras (%)', excludedSpend: 'Operaciones excluidas o sin devolución', cappedBonusSpend: 'Gasto de categoría al porcentaje anunciado', aboveCapSpend: 'Gasto de categoría por encima del tope', totalRewards: 'Cashback total', eligibleRate: 'Tasa ponderada sobre gasto elegible', wholeBillRate: 'Tasa efectiva de todo el extracto', headlineShortfall: 'Diferencia frente a aplicar el porcentaje anunciado a toda la categoría', verdictPrefix: 'La tasa efectiva de todo el extracto es', privacy: 'Los datos permanecen en este navegador. Verifica clasificación, adhesión, periodo, devoluciones, canje y condiciones vigentes con la entidad.',
     },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { bonusSpend: 900, bonusRate: 4, bonusSpendCap: 600, fallbackRate: 0.5, otherSpend: 700, otherRate: 0.8, excludedSpend: 150 },
+    copy: {
+      heading: 'Calculateur de plafond et de taux de remboursement réel', intro: 'Utilisez une seule période. Saisissez les taux en pourcentage et convertissez d’abord tout plafond de crédit en plafond d’achat.', bonusSpend: 'Dépenses dans la catégorie remboursée', bonusRate: 'Taux annoncé de la catégorie (%)', bonusSpendCap: 'Dépenses bénéficiant du taux annoncé', fallbackRate: 'Taux au-delà du plafond (%)', otherSpend: 'Autres dépenses éligibles', otherRate: 'Taux des autres dépenses (%)', excludedSpend: 'Opérations exclues ou sans crédit', cappedBonusSpend: 'Dépenses de catégorie au taux annoncé', aboveCapSpend: 'Dépenses de catégorie hors plafond', totalRewards: 'Remboursement total', eligibleRate: 'Taux pondéré sur dépenses éligibles', wholeBillRate: 'Taux effectif de tout le relevé', headlineShortfall: 'Écart face au taux annoncé appliqué à toute la catégorie', verdictPrefix: 'Le taux effectif de tout le relevé est de', privacy: 'Les données restent dans votre navigateur. Vérifiez l’inscription, la carte, l’enseigne, le canal, la période, les retours et les conditions en vigueur.',
+    },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { bonusSpend: 1200, bonusRate: 3, bonusSpendCap: 800, fallbackRate: 0.5, otherSpend: 900, otherRate: 0.75, excludedSpend: 200 },
+    copy: {
+      heading: 'Rechner für Cashback-Grenzen und effektive Vergütung', intro: 'Verwenden Sie einen Abrechnungszeitraum. Prozentsätze und die in Umsatz umgerechnete Bonusgrenze getrennt eingeben.', bonusSpend: 'Umsatz in der Bonuskategorie', bonusRate: 'Beworbener Kategoriesatz (%)', bonusSpendCap: 'Umsatz zum beworbenen Satz', fallbackRate: 'Satz oberhalb der Grenze (%)', otherSpend: 'Sonstiger berechtigter Umsatz', otherRate: 'Satz für sonstigen Umsatz (%)', excludedSpend: 'Ausgeschlossener Umsatz ohne Vergütung', cappedBonusSpend: 'Bonusumsatz zum beworbenen Satz', aboveCapSpend: 'Bonusumsatz oberhalb der Grenze', totalRewards: 'Gesamte Vergütung', eligibleRate: 'Gewichteter Satz berechtigter Umsätze', wholeBillRate: 'Effektiver Satz der ganzen Abrechnung', headlineShortfall: 'Differenz zur Anwendung des Werbesatzes auf den gesamten Bonusumsatz', verdictPrefix: 'Der effektive Vergütungssatz der Abrechnung beträgt', privacy: 'Ihre Eingaben bleiben im Browser. Prüfen Sie Aktivierung, Händler, Zeitraum, Ausschlüsse, Retouren, Punktewert und aktuelle Bedingungen.',
+    },
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as Locale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+  return LOCALES.map((locale) => ({ params: { locale }, props: { locale } }));
 }
 
 const { locale } = Astro.props as { locale: EditorialLocale };
@@ -80,7 +116,7 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing cashback caps guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
   {locale === 'en' && <>
     <p>A category headline describes one slice of spend, not the return on the card. The useful number is a weighted rate that follows the cap, fallback rate, excluded transactions, and the redemption value you can actually receive. Calculate inside one statement month or quarter so the cap and the spending use the same clock.</p>
     <DecisionGuide content={guide} />
@@ -122,6 +158,34 @@ if (!guide) throw new Error(`Missing cashback caps guide for ${locale}`);
     <h2>Cashback no compensa automáticamente el pago aplazado</h2>
     <p>El Banco de España recuerda que una tarjeta de crédito sigue siendo financiación cuando no se paga el total. La devolución bruta debe compararse después con cuota, intereses y comisiones. Comprar más para alcanzar un límite también empeora el resultado: el gasto adicional no se convierte en ahorro porque devuelva una pequeña parte.</p>
     <p class="privacy-note">Esta página ofrece un modelo general de cálculo. No recomienda una tarjeta, no evalúa solvencia y no garantiza clasificación, devolución, fiscalidad ni condiciones futuras.</p>
+  </>}
+  {locale === 'fr' && <>
+    <p>En France, le mot cashback est ambigu : il peut désigner un retrait d’espèces chez un commerçant ou un remboursement de fidélité. Cette page traite uniquement du second. Une offre de remboursement dépend souvent d’une inscription, d’une carte précise, d’une enseigne, d’un seuil, d’une période et d’exclusions ; le grand pourcentage ne suffit donc pas.</p>
+    <DecisionGuide content={guide} />
+    <CashbackCapsCalculator locale={locale} {...calculator} />
+    <h2>Transformer le plafond de crédit en plafond de dépenses</h2>
+    <p>« 4 % sur les 600 premiers euros » donne directement le plafond. « Jusqu’à 24 € remboursés » demande 24 € ÷ 4 % = 600 € seulement si le crédit maximal porte sur les 4 % complets. S’il limite un bonus additionnel au-dessus d’un taux de base, divisez par le taux additionnel et gardez le taux de base dans une ligne distincte.</p>
+    <h2>L’inscription et le canal de paiement font partie du calcul</h2>
+    <p>Les conditions Amex Offers illustrent une logique fréquente : carte enregistrée, période définie et dépense éligible. Un achat via un intermédiaire de paiement, une carte différente ou un corner de grand magasin peut ne pas être reconnu. Le premier relevé réel doit donc remplacer la classification prévue avant toute projection annuelle.</p>
+    <h2>Deux dénominateurs montrent deux réalités</h2>
+    <p>Les 31,10 € du scénario représentent 1,94 % des 1 600 € éligibles, mais seulement 1,78 % du relevé de 1 750 €. Le premier taux audite la mécanique de l’offre ; le second répond à la question du rendement de toutes les sommes passées sur la carte, y compris les 150 € sans crédit.</p>
+    <h2>Retours, délai de crédit et cotisation réduisent la valeur</h2>
+    <p>Une opération annulée ou remboursée peut perdre son éligibilité et entraîner la reprise du crédit. Un délai de comptabilisation ne crée pas de valeur supplémentaire. Comparez ensuite le remboursement brut à la cotisation et aux frais ; dépenser davantage uniquement pour atteindre un seuil reste une dépense, pas une économie.</p>
+    <p class="privacy-note">Ce modèle général ne recommande aucune carte et ne garantit ni l’éligibilité, ni le remboursement, ni la fiscalité, ni les conditions futures.</p>
+  </>}
+  {locale === 'de' && <>
+    <p>In Deutschland werden Cashback, PAYBACK Punkte, Membership Rewards und einmalige Startgutschriften oft gemeinsam als Vorteil wahrgenommen, obwohl Satz, Einlösewert und Ausschlüsse verschieden sind. Für die tatsächliche Rückvergütung wird jeder Umsatzabschnitt separat berechnet und anschließend auf die gesamte Kartenabrechnung bezogen.</p>
+    <DecisionGuide content={guide} />
+    <CashbackCapsCalculator locale={locale} {...calculator} />
+    <h2>Euro-Bonus und Umsatzgrenze nicht verwechseln</h2>
+    <p>„3 % auf die ersten 800 €“ nennt die Umsatzgrenze direkt. „Maximal 24 € Bonus“ entspricht nur dann 800 €, wenn sich der Höchstbetrag auf den vollständigen 3-%-Satz bezieht. Deckt er lediglich einen Zusatzbonus ab, muss durch diesen Zusatzsatz geteilt und eine mögliche Grundvergütung separat gerechnet werden.</p>
+    <h2>Punkte brauchen einen realisierbaren Euro-Wert</h2>
+    <p>Die PAYBACK American Express Seite zeigt zugleich eine feste Sammelrate und einen ausdrücklichen Ausschluss für Tankstellenumsätze. Für die Rechnung wird deshalb nicht jeder Kartenumsatz als berechtigt behandelt. Punkte werden außerdem mit dem Wert der Einlösung angesetzt, die Sie wirklich verwenden, nicht mit einer pauschalen Wunschbewertung.</p>
+    <h2>Der Abrechnungssatz macht Ausschlüsse sichtbar</h2>
+    <p>32,75 € entsprechen 1,56 % der 2.100 € berechtigten Umsätze, aber 1,42 % der gesamten 2.300-€-Abrechnung. Der erste Satz prüft das Bonusprogramm; der zweite zeigt die Rückvergütung je tatsächlich belastetem Euro. Nur den höheren Wert zu nennen, würde 200 € ohne Vergütung ausblenden.</p>
+    <h2>Kartenentgelt und Rückzahlung bleiben getrennte Risiken</h2>
+    <p>BaFin stellt Kartenentgelte im neutralen Kontenvergleich separat dar. Ziehen Sie Jahresentgelt, Fremdwährungsentgelt und mögliche Sollzinsen nach der Bruttovergütung ab. Ein höherer Umsatz oberhalb der Bonusgrenze kann den effektiven Satz senken; mehr auszugeben ist deshalb kein Weg, einen kleinen Bonus in Ersparnis zu verwandeln.</p>
+    <p class="privacy-note">Die Seite ist ein allgemeines Rechenmodell und keine Karten-, Kredit-, Steuer- oder Anlageberatung. Händlerzuordnung und künftige Bedingungen werden nicht garantiert.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

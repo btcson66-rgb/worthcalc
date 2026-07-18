@@ -621,6 +621,72 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const gymCostGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'gym-cost-per-visit-method',
+    labels: labels.en,
+    directAnswer: 'Gym cost per visit equals every unavoidable contract charge divided by the visits you will actually make. Include the joining fee, all monthly dues, mandatory service fees, and paid months you expect to miss. With a $49 joining fee, $45 monthly dues, a $5 monthly service fee, a 12-month term, two missed months, and five visits in each active month, total cost is $649 for 50 visits, or $12.98 per visit. Against an equivalent $18 drop-in visit, the membership needs at least four visits per active month and saves $251 in this scenario.',
+    inputs: ['One-time joining, enrollment, or access-card fee', 'Monthly dues after any introductory price', 'Mandatory maintenance, facility, or service fee', 'Number of months you must pay under the contract', 'Paid months you realistically expect not to use', 'Visits per month during the remaining active months', 'Price of a genuinely equivalent drop-in, class pack, or community facility visit'],
+    formula: 'Total membership cost = joining fee + contract months × (monthly dues + mandatory service fee). Active months = contract months − paid missed months. Total visits = active months × visits per active month. Cost per visit = total membership cost ÷ total visits. Break-even visits per active month = ceil(total membership cost ÷ (drop-in price × active months)).',
+    workedExample: 'A gym charges $49 to join, $45 per month, and a mandatory $5 monthly facility fee for 12 months. You expect two paid months with no visits and five visits in each of the other ten months. Total cost is $49 + 12 × $50 = $649. Fifty visits cost $12.98 each. Equivalent $18 drop-ins would cost $900, so membership saves $251. Break-even is ceil($649 ÷ ($18 × 10)) = 4 visits in each active month.',
+    sensitivity: [
+      { scenario: 'Low attendance', input: '2 visits × 10 active months', result: '20 visits; $32.45 each; drop-ins save $289' },
+      { scenario: 'First winning frequency', input: '4 visits × 10 active months', result: '40 visits; $16.23 each; membership saves $71' },
+      { scenario: 'Planned attendance', input: '5 visits × 10 active months', result: '50 visits; $12.98 each; membership saves $251' },
+      { scenario: 'No missed months', input: '5 visits × 12 months', result: '60 visits; $10.82 each; membership saves $431' },
+    ],
+    cta: { label: 'Calculate your real gym cost per visit', href: '#gym-cost-calculator' },
+    limitations: ['Compare equivalent access: a drop-in may exclude classes, pool, childcare, lockers, or multiple locations that a membership includes.', 'Do not treat exercise or health benefits as cash savings. This calculation compares payment options for the same intended activity.', 'Cancellation, freezing, relocation, injury, renewal, and fee-change rights depend on the contract and applicable law; count only documented refunds or pauses.'],
+    sources: [
+      { label: 'FTC Consumer Advice — gym membership cancellation warning', href: 'https://consumer.ftc.gov/consumer-alerts/2025/08/la-fitness-made-it-difficult-people-cancel-gym-memberships-ftc-says' },
+      { label: 'FTC Consumer Advice — auto-renewals and negative-option subscriptions', href: 'https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'gym-cost-per-visit-method',
+    labels: labels.zh,
+    directAnswer: '健身房單次成本要把入會費、整段契約月費、必要設施費與「有繳費但沒去」的月份全部算進去，再除以實際到館次數。入會費 NT$1,200、月費 NT$1,288、每月設施費 NT$100、綁約 12 個月、其中 2 個月沒去，其餘每月 6 次時，總成本 NT$17,856、共 60 次，單次 NT$297.60。若同等單次票 NT$450，每個有效月份至少要去 4 次；此情境比單次票少 NT$9,144。',
+    inputs: ['入會、建檔、門禁卡等一次性必要費用', '優惠期結束後真正會扣的月費', '每月必要設施、清潔或管理費', '契約要求付款的總月數', '預計仍會扣款但完全不去的月份', '其餘有效月份每月實際可到館次數', '內容相近的單次票、運動中心或課程套票單價'],
+    formula: '會員總成本 = 入會費 + 契約月數 ×（月費 + 每月必要費）。有效月份 = 契約月數 − 繳費但未使用月份。總到館次數 = 有效月份 × 每月次數。單次成本 = 會員總成本 ÷ 總到館次數。每個有效月份最低回本次數 = 無條件進位〔會員總成本 ÷（單次替代價 × 有效月份）〕。',
+    workedExample: '入會費 NT$1,200，月費 NT$1,288，另有每月 NT$100 設施費，契約共 12 個月。預估有 2 個月完全沒去，其餘 10 個月每月 6 次。總成本為 1,200 + 12 × 1,388 = NT$17,856；60 次的單次成本為 NT$297.60。同等單次票若為 NT$450，60 次需 NT$27,000，會員少 NT$9,144。最低回本是 17,856 ÷（450 × 10）無條件進位 = 每個有效月份 4 次。',
+    sensitivity: [
+      { scenario: '低出席', input: '2 次 × 10 個有效月份', result: '20 次；每次 NT$892.80；單次票少 NT$8,856' },
+      { scenario: '剛跨過門檻', input: '4 次 × 10 個有效月份', result: '40 次；每次 NT$446.40；會員少 NT$144' },
+      { scenario: '預計出席', input: '6 次 × 10 個有效月份', result: '60 次；每次 NT$297.60；會員少 NT$9,144' },
+      { scenario: '全年無缺席月', input: '6 次 × 12 個月', result: '72 次；每次 NT$248；會員少 NT$14,544' },
+    ],
+    cta: { label: '用自己的費用與出席次數計算', href: '#gym-cost-calculator' },
+    limitations: ['單次票與會員包含的團課、泳池、置物櫃、停車或跨店權限可能不同，必須比較相近服務。', '運動與健康效益不是現金回饋；本頁只比較相同運動計畫的付款方式。', '請假、暫停、移轉、終止、退費與手續費依契約及適用規範而定，只把書面確定的金額放入計算。'],
+    sources: [
+      { label: '行政院 — 健身中心定型化契約應記載及不得記載事項', href: 'https://www.ey.gov.tw/Page/DFB720D019CCCB0A/a8a9e88e-6f7a-49bc-a4d7-d990a1d9840d' },
+      { label: '教育部體育署 — 健身中心暨健身教練服務契約修法重點 Q&A', href: 'https://www.moe.gov.tw/News_Content.aspx?Create=1&n=9E7AC85F1954DDA8&s=589C069641CD2DB2' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'gym-cost-per-visit-method',
+    labels: labels.es,
+    directAnswer: 'El coste por visita al gimnasio es todo lo que debes pagar durante la permanencia dividido entre las visitas reales. Incluye matrícula, cuotas mensuales, servicios obligatorios y meses pagados sin uso. Con 35 € de matrícula, 29,90 € al mes, 2 € mensuales de mantenimiento, 12 meses, uno sin asistir y cuatro visitas en cada mes activo, el coste total es 417,80 € para 44 visitas: 9,50 € por visita. Frente a una entrada equivalente de 12 €, necesitas al menos cuatro visitas por mes activo y ahorras 110,20 € en este escenario.',
+    inputs: ['Matrícula, alta, tarjeta de acceso u otro pago inicial obligatorio', 'Cuota mensual real después de la promoción', 'Mantenimiento, taquilla o servicio mensual obligatorio', 'Meses que debes pagar por contrato o permanencia', 'Meses pagados en los que prevés no asistir', 'Visitas realistas por cada mes activo', 'Precio de una entrada, bono o instalación municipal con acceso comparable'],
+    formula: 'Coste total = matrícula + meses de contrato × (cuota mensual + servicio obligatorio). Meses activos = meses de contrato − meses pagados sin uso. Visitas totales = meses activos × visitas por mes. Coste por visita = coste total ÷ visitas totales. Visitas mínimas por mes activo = redondear hacia arriba[coste total ÷ (entrada suelta × meses activos)].',
+    workedExample: 'La matrícula cuesta 35 €, la cuota mensual 29,90 € y el mantenimiento obligatorio 2 € durante 12 meses. Prevés un mes sin asistir y cuatro visitas en cada uno de los 11 meses activos. El total es 35 + 12 × 31,90 = 417,80 €. Las 44 visitas cuestan 9,50 € cada una. A 12 € por entrada suelta pagarías 528 €, por lo que la membresía ahorra 110,20 €. El equilibrio es ceil(417,80 ÷ (12 × 11)) = 4 visitas por mes activo.',
+    sensitivity: [
+      { scenario: 'Asistencia baja', input: '2 visitas × 11 meses activos', result: '22 visitas; 18,99 € cada una; entradas ahorran 153,80 €' },
+      { scenario: 'Cerca del equilibrio', input: '3 visitas × 11 meses activos', result: '33 visitas; 12,66 € cada una; entradas ahorran 21,80 €' },
+      { scenario: 'Asistencia prevista', input: '4 visitas × 11 meses activos', result: '44 visitas; 9,50 € cada una; membresía ahorra 110,20 €' },
+      { scenario: 'Sin meses perdidos', input: '4 visitas × 12 meses', result: '48 visitas; 8,70 € cada una; membresía ahorra 158,20 €' },
+    ],
+    cta: { label: 'Calcular el coste real de tu gimnasio', href: '#gym-cost-calculator' },
+    limitations: ['Compara accesos equivalentes: clases, piscina, taquilla, aparcamiento y sedes pueden estar incluidos solo en una opción.', 'No conviertas los beneficios de salud en ahorro monetario. El cálculo compara cómo pagar una actividad que ya has decidido realizar.', 'Baja, permanencia, suspensión, cierre, cambio de precio y devolución dependen del contrato; incluye solo importes documentados.'],
+    sources: [
+      { label: 'Comunidad de Madrid — gimnasios: ponerse en forma con garantías', href: 'https://www.comunidad.madrid/consumo/gimnasios-ponerse-forma-garantias' },
+      { label: 'Consumo Responde — derechos de las personas consumidoras en gimnasios', href: 'https://www.consumoresponde.es/art%C3%ADculos/derechos-personas-consumidoras-practica-deporte-ocio-gimnasios' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

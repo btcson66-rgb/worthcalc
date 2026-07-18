@@ -83,7 +83,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'gym-membership-cost-per-visit',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$12.98', '$251', 'paid months with no visits'],
+      zh: ['NT$297.60', 'NT$9,144', '健身中心定型化契約'],
+      es: ['9,50 €', '110,20 €', 'matrícula'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -192,4 +202,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 8 complete five-locale topics, 32 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 8 complete five-locale topics, 35 added routes, 4 enriched high-value tools, 1 embedded gym calculator.');

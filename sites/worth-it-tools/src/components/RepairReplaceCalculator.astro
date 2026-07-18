@@ -45,7 +45,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 
 <script>
   for (const root of document.querySelectorAll<HTMLElement>('[data-repair-replace-calculator]')) {
-    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: 0 });
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
     const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
     const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;

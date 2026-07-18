@@ -2,11 +2,11 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
-import type { Locale } from '../../consts';
+import { LOCALES, type Locale } from '../../consts';
 import { bnplCardGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 interface ArticleCopy {
   title: string;
@@ -48,10 +48,32 @@ const articles: Record<EditorialLocale, ArticleCopy> = {
       { question: '¿Qué ocurre si devuelvo la compra?', answer: 'Depende de la relación entre comercio, financiador y emisor. Confirma quién cancela el crédito, si las cuotas siguen durante la reclamación, el plazo de abono y qué comisiones no se reembolsan.' },
     ],
   },
+  fr: {
+    title: 'Paiement fractionné ou carte de crédit : comparez coût, calendrier et impayé',
+    description: 'Comparez paiement en plusieurs fois et carte avec coût total, charge à 30 jours, défaillance, rétractation et changement réglementaire français de novembre 2026.',
+    faq: [
+      { question: 'Un paiement en 3 fois sans frais coûte-t-il toujours moins cher ?', answer: 'Seulement si le total des échéances égale bien le prix comptant et si aucun incident ne survient. Vérifiez aussi la charge des 30 prochains jours : deux échéances rapprochées peuvent peser plus qu’une mensualité de carte.' },
+      { question: 'Le paiement fractionné est-il un crédit à la consommation en France ?', answer: 'La réponse dépend du contrat et de la date. Au 18 juillet 2026, le ministère annonce une extension aux paiements fractionnés et crédits de moins de trois mois pour les nouvelles offres à partir du 20 novembre 2026.' },
+      { question: 'Pourquoi distinguer carte à débit différé et crédit renouvelable ?', answer: 'Le débit différé règle généralement le total à une date; le crédit renouvelable laisse une dette reconstituable avec intérêts. Une petite mensualité renouvelable ne garantit ni faible coût ni date de fin proche.' },
+      { question: 'Quels frais tester en cas d’impayé ?', answer: 'Utilisez seulement les frais, intérêts de retard, rejet et recouvrement indiqués dans votre contrat et votre brochure bancaire. La DGCCRF a relevé des problèmes de transparence sur ces frais dans les paiements fractionnés.' },
+      { question: 'Une rétractation de l’achat arrête-t-elle immédiatement les échéances ?', answer: 'Pas nécessairement dans les systèmes du vendeur et du prêteur. Exercez la rétractation selon la procédure, informez le financeur, conservez les preuves et prévoyez les débits jusqu’à confirmation de l’annulation.' },
+    ],
+  },
+  de: {
+    title: 'Buy now, pay later oder Kreditkartenraten: Kosten und Fälligkeiten vergleichen',
+    description: 'Vergleichen Sie Zahlungsaufschub und Kreditkarten-Teilzahlung nach Gesamtbetrag, 30-Tage-Belastung, Verzug, Retoure und deutschem Rechtsstand 2026.',
+    faq: [
+      { question: 'Ist „in 30 Tagen zahlen“ günstiger als Kreditkartenraten?', answer: 'Bei pünktlicher, gebührenfreier Zahlung kann der Gesamtbetrag niedriger sein. Der ganze Kaufpreis wird jedoch kurzfristig fällig. Vergleichen Sie deshalb Gesamtbetrag und 30-Tage-Belastung getrennt.' },
+      { question: 'Ist Buy now, pay later in Deutschland ein Kredit?', answer: 'Wirtschaftlich entsteht ein Zahlungsaufschub; die rechtliche Einordnung hängt vom Modell ab. Der aktuelle § 491 BGB kennt Ausnahmen. Neue Regeln sollen ab 20. November 2026 auch kurze, kleine, zinsfreie und BNPL-Kredite stärker einbeziehen.' },
+      { question: 'Hat jede deutsche Kreditkarte eine Ratenzahlung?', answer: 'Nein. Viele Karten rechnen monatlich vollständig ab. Nur eine echte Teilzahlungsfunktion lässt einen verzinsten Restbetrag stehen. Prüfen Sie Rate, Sollzins, effektiven Jahreszins und feste oder offene Laufzeit.' },
+      { question: 'Welche Folgen hat eine verpasste BNPL-Fälligkeit?', answer: 'Je nach Vertrag können Zusatzkosten, Mahnung, Rücklastschrift, Inkasso oder eine teurere Anschlussfinanzierung folgen. Verwenden Sie die konkreten Unterlagen statt eines angenommenen Durchschnitts.' },
+      { question: 'Soll ich bei einer Retoure die Lastschrift zurückholen?', answer: 'Nicht ohne abgestimmtes Verfahren. Melden Sie die Retoure beim Händler und Zahlungsdienst, prüfen Sie offene Fälligkeiten und lassen Sie sich Stundung oder Korrektur bestätigen, damit kein zusätzlicher Verzug entsteht.' },
+    ],
+  },
 };
 
 export function getStaticPaths() {
-  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+  return (['en', 'zh', 'es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
     params: { locale },
     props: { locale },
   }));
@@ -68,7 +90,7 @@ if (!guide) throw new Error(`Missing BNPL vs card guide for ${locale}`);
   description={article.description}
   locale={locale as Locale}
   updated="2026-07-18"
-  alternateLocales={[locale]}
+  alternateLocales={LOCALES}
 >
   {locale === 'en' && (
     <>
@@ -229,6 +251,132 @@ if (!guide) throw new Error(`Missing BNPL vs card guide for ${locale}`);
       </p>
       <p>
         Usa una regla final sencilla: compra solo si pagarías el precio al contado, elimina las opciones que rompan el presupuesto de 30 días y compara después coste normal, un impago, fecha final y proceso de devolución. Para una oferta al 0 %, revisa también la <a href="/es/zero-interest-installments-truth/">guía del coste real de las cuotas sin intereses</a>.
+      </p>
+
+      <FAQ items={article.faq} />
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        Au moment du paiement, « 3 fois sans frais », « paiement différé » et « mensualités carte » semblent répondre au même besoin. Pourtant, ils ne placent ni les mêmes sommes ni les mêmes risques aux mêmes dates. La bonne comparaison part du prix comptant, reconstruit chaque débit et teste ensuite un seul incident documenté.
+      </p>
+      <p>
+        Le coût total ne suffit pas. Un 3 fois peut être moins cher mais prélever deux tiers du prix avant le deuxième salaire. Une carte peut réduire la charge immédiate tout en ajoutant des frais ou en ouvrant un crédit renouvelable sans date de fin courte. Il faut donc lire à la fois la somme finale et le calendrier des 30 jours.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Distinguez paiement fractionné, débit différé et crédit renouvelable</h2>
+      <p>
+        Un paiement fractionné fixe normalement plusieurs échéances pour un achat identifié. Une carte à débit différé reporte le règlement du total à la date d’arrêté. Un crédit renouvelable permet au contraire de rembourser une partie, de reconstituer une réserve et de laisser un solde porter intérêt. Le mot « carte » ne dit pas lequel de ces mécanismes vous signez.
+      </p>
+      <p>
+        Exigez le nombre d’échéances, leurs dates, le total dû et, lorsqu’il s’applique, le TAEG. Si une faible mensualité peut être modifiée ou prolonger le remboursement, calculez le capital réellement amorti chaque mois. Une échéance supportable ne prouve pas que le crédit est court ni peu coûteux.
+      </p>
+
+      <h2>Utilisez le droit en vigueur à la date du contrat</h2>
+      <p>
+        La date compte en France en 2026. Le ministère de l’Économie indique qu’à partir du 20 novembre 2026 les nouvelles règles du crédit à la consommation s’étendront notamment aux mini-crédits, paiements fractionnés et crédits de moins de trois mois. Les nouvelles offres signées à compter de cette date devront suivre ce régime renforcé.
+      </p>
+      <p>
+        Cette évolution future ne doit pas être présentée comme déjà applicable le 18 juillet 2026. Pour une offre actuelle, identifiez le prêteur, la durée et la qualification donnée dans les documents. Pour une offre après le 20 novembre, vérifiez les nouvelles informations précontractuelles et les protections effectivement remises, sans vous contenter d’un ancien écran commercial.
+      </p>
+
+      <h2>Calculez la charge des 30 prochains jours</h2>
+      <p>
+        Dans l’exemple, le 3 × 240 € conserve le prix de 720 €, alors que la carte atteint 744 €. Mais une première échéance immédiate suivie d’une deuxième avant le jour 30 mobilise 480 €. La carte ne demande que 124 € pendant un cycle mensuel. L’offre la moins chère est donc aussi la plus exigeante à court terme.
+      </p>
+      <p>
+        Ajoutez à cette fenêtre le loyer, l’énergie, les assurances, les abonnements et chaque autre paiement fractionné. Si le solde après échéances ne protège plus les dépenses essentielles et un imprévu, l’achat n’est pas compatible avec le budget, même sans intérêts.
+      </p>
+
+      <h2>Testez la défaillance avec les frais du contrat</h2>
+      <p>
+        Les contrôles de la DGCCRF sur paiements fractionnés et mini-crédits ont notamment relevé un manque de transparence des frais en cas de défaillance. Cela rend indispensable la copie des montants réels : frais contractuels, intérêts de retard, rejet bancaire, recouvrement et éventuelle exigibilité du solde.
+      </p>
+      <p>
+        Les 18 € et 12 € du tableau ne décrivent aucun opérateur. Ils montrent seulement qu’une marge normale de 24 € peut disparaître après un incident. Si les documents ne permettent pas de chiffrer clairement le scénario, demandez une réponse écrite ou choisissez une solution plus lisible.
+      </p>
+
+      <h2>Reliez la rétractation de l’achat et l’annulation du financement</h2>
+      <p>
+        Pour de nombreux achats à distance, le consommateur dispose d’un délai de rétractation, sous réserve des exceptions. Mais le retour chez le vendeur et la correction du calendrier par le financeur peuvent être deux opérations techniques. Signalez la demande aux deux parties et vérifiez si un prélèvement reste programmé.
+      </p>
+      <p>
+        Conservez l’accusé de rétractation, la preuve d’expédition, la confirmation du remboursement et l’état des échéances. Ne créez pas un impayé en bloquant un prélèvement sans suivre la procédure. Le coût du litige se mesure aussi au temps de remboursement et à la trésorerie immobilisée.
+      </p>
+
+      <h2>Décidez dans le bon ordre</h2>
+      <p>
+        Demandez d’abord si l’achat vaut 720 € au comptant. Éliminez ensuite les calendriers qui cassent la marge de sécurité des 30 jours. Comparez enfin coût normal, défaillance documentée, date de fin, interlocuteur en cas de retour et protections du contrat à sa date de signature.
+      </p>
+      <p>
+        Si l’offre affiche 0 %, contrôlez aussi le prix comptant et tous les frais avec le <a href="/fr/zero-interest-installments-truth/">guide du vrai coût d’un paiement à 0 %</a>. Un taux nul ne corrige ni un prix majoré ni un budget trop serré.
+      </p>
+
+      <FAQ items={article.faq} />
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        „Jetzt kaufen, später bezahlen“ verschiebt eine Rechnung; eine Kreditkarten-Teilzahlung verteilt sie. Beides kann am Checkout bequem wirken, belastet das Konto aber völlig unterschiedlich. In Deutschland muss zusätzlich geklärt werden, ob die Karte monatlich vollständig abrechnet, eine echte Teilzahlung zulässt oder ein separater Ratenkredit entsteht.
+      </p>
+      <p>
+        Ein belastbarer Vergleich zeigt drei Zahlen: Gesamtbetrag, sämtliche Fälligkeiten der nächsten 30 Tage und Kosten nach einem konkret eingegebenen Verzug. So wird sichtbar, warum ein kostenloser Zahlungsaufschub preislich gewinnt und trotzdem am Tag 30 die riskantere Kontobelastung erzeugen kann.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Trennen Sie Rechnungskauf, Ratenkauf und Kreditkarten-Teilzahlung</h2>
+      <p>
+        Beim Zahlungsaufschub bezahlt der Dienstleister zunächst den Shop und fordert den Betrag später, häufig nach 30 Tagen. Ein Ratenkauf teilt die Forderung in feste Monatsbeträge und kann Zinsen enthalten. Eine Charge Card zieht die Monatsabrechnung vollständig ein; nur eine Karte mit Teilzahlungsfunktion lässt einen verzinsten Restbetrag weiterlaufen.
+      </p>
+      <p>
+        Fragen Sie deshalb nicht nur nach der „Monatsrate“. Notieren Sie Barpreis, Anfangszahlung, jede Fälligkeit, Sollzins, effektiven Jahreszins, Gesamtbetrag und festes Enddatum. Wenn die Rate frei wählbar ist und der Rest Kreditrahmen bleibt, darf sie nicht wie ein sechsmonatiger Ratenplan gerechnet werden.
+      </p>
+
+      <h2>Beachten Sie den Rechtsstand im Übergangsjahr 2026</h2>
+      <p>
+        Der aktuell veröffentlichte § 491 BGB nimmt unter anderem Nettodarlehensbeträge unter 200 € sowie Rückzahlung binnen drei Monaten bei nur geringen Kosten aus dem Begriff des Allgemein-Verbraucherdarlehens aus. Diese Einordnung ist für Verträge vor dem neuen Anwendungszeitpunkt relevant und darf nicht durch eine pauschale BNPL-Aussage ersetzt werden.
+      </p>
+      <p>
+        Die Bundesregierung berichtet zugleich, dass die neuen Regeln Kleinkredite, zins- und gebührenfreie Kredite, Laufzeiten bis drei Monate und BNPL künftig in die Schutzvorschriften einbeziehen. Die EU-Vorgabe sieht die Anwendung ab 20. November 2026 vor. Prüfen Sie daher Vertragsdatum und tatsächlich geltende Unterlagen, statt zukünftige Rechte vorwegzunehmen.
+      </p>
+
+      <h2>Gesamtpreis und 30-Tage-Belastung beantworten verschiedene Fragen</h2>
+      <p>
+        Im Beispiel kostet der Aufschub bei pünktlicher Zahlung 900 €, die Karten-Teilzahlung 930 €. Der Preisvorteil von 30 € ändert nichts daran, dass am Tag 30 die vollen 900 € bereitstehen müssen. Die Karte verlangt zunächst 155 €, hält die Verpflichtung dafür sechs Monate offen.
+      </p>
+      <p>
+        Legen Sie alle BNPL-Forderungen, Kartenraten, Lastschriften, Miete und Versicherungen auf dieselbe Monatsansicht. Die Verbraucherzentrale warnt besonders vor dem Verlust des Überblicks über laufende Fälligkeiten. Eine einzelne kostenlose Rechnung kann in Kombination mit mehreren anderen zur Deckungslücke führen.
+      </p>
+
+      <h2>Verzugskosten gehören in eine eigene Stresszeile</h2>
+      <p>
+        Wird das Zahlungsziel verpasst, können je nach Vertrag Zusatzkosten, Mahnung, Rücklastschrift, Inkasso oder der Wechsel in eine kostenpflichtige Finanzierung folgen. Auch Dispozinsen können entstehen, wenn das Konto den Einzug nur durch Überziehung deckt. Jede Position braucht einen konkreten Beleg.
+      </p>
+      <p>
+        Die Beispielwerte 15 € und 20 € sind keine Aussage über übliche oder zulässige Gebühren. Sie zeigen den Kipppunkt: 35 € Zusatzbelastung machen aus dem 30-€-Vorteil einen 5-€-Nachteil. Fehlt im Vertrag eine verständliche Zahl, ist das selbst ein Vergleichsnachteil.
+      </p>
+
+      <h2>Eine Retoure löscht die Forderung nicht automatisch im selben Moment</h2>
+      <p>
+        Melden Sie eine Rücksendung beim Händler und beim Zahlungsdienst. Prüfen Sie, ob eine Fälligkeit pausiert, wann der Händler den Betrag gutschreibt und wie eine Teilretoure auf Raten verteilt wird. Die Verbraucherzentrale rät, Schwierigkeiten direkt im vorgesehenen Verfahren zu melden statt eine angebundene Lastschrift einfach zurückzubuchen.
+      </p>
+      <p>
+        Dokumentieren Sie Rücksendung, Kommunikation und aktuellen Forderungsstand. Bis eine Stundung oder Korrektur bestätigt ist, muss der mögliche Einzug in der Liquiditätsplanung stehen. Sonst kann aus einem Warenproblem zusätzlich ein Zahlungsverzug werden.
+      </p>
+
+      <h2>Wählen Sie erst nach der Kaufentscheidung die Finanzierung</h2>
+      <p>
+        Würden Sie den Artikel nicht für 900 € bar kaufen, macht ein späteres Zahlungsdatum ihn nicht wertvoller. Wenn der Kauf notwendig ist, verwerfen Sie alle Modelle, deren 30-Tage-Belastung den Puffer aufbraucht. Vergleichen Sie danach normalen Gesamtbetrag, Stresskosten, Enddatum und Retourenablauf.
+      </p>
+      <p>
+        Eine beworbene Null-Prozent-Variante sollte zusätzlich mit dem <a href="/de/zero-interest-installments-truth/">Leitfaden zum tatsächlichen Preis einer 0%-Finanzierung</a> geprüft werden. Barpreisaufschlag, Zusatzkarte oder spätere Rahmenkreditnutzung können den scheinbaren Vorteil verändern.
       </p>
 
       <FAQ items={article.faq} />

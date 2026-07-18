@@ -33,6 +33,16 @@ const editorialRoutes = [
     },
   },
   {
+    slug: 'bnpl-vs-credit-card-installments',
+    nativeMarkers: {
+      en: ['pay-in-four', '$650', 'withdrew the 2024 BNPL interpretive rule'],
+      zh: ['應收債權', 'NT$12,500', '非金融特許業務'],
+      es: ['pago revolving', '498 €', 'Banco de España'],
+      fr: ['paiement fractionné', '20 novembre 2026', '750 €'],
+      de: ['Zahlungsaufschub', '20. November 2026', '935 €'],
+    },
+  },
+  {
     slug: 'annual-fee-card-breakeven',
     nativeMarkers: {
       en: ['incremental reward rate', 'no-fee alternative', '$6,333.33'],
@@ -53,17 +63,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [
-  {
-    slug: 'bnpl-vs-credit-card-installments',
-    locales: ['en', 'zh', 'es'],
-    nativeMarkers: {
-      en: ['pay-in-four', '$650', 'withdrew the 2024 BNPL interpretive rule'],
-      zh: ['應收債權', 'NT$12,500', '非金融特許業務'],
-      es: ['pago revolving', '498 €', 'Banco de España'],
-    },
-  },
-];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -172,4 +172,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 5 complete five-locale topics, topic #03 at 3/5, 20 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 6 complete five-locale topics, 22 added routes, 4 enriched high-value tools.');

@@ -1,0 +1,132 @@
+---
+type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type Mode = 'appliance' | 'costPerUse' | 'bulk' | 'meal' | 'reusable' | 'pricePerWear' | 'hourlyWage' | 'raiseInflation';
+interface Field { key: string; label: string; min?: number; max?: number; step?: number; }
+interface Props {
+  id: string;
+  mode: Mode;
+  locale: Locale;
+  currency: 'USD' | 'TWD' | 'EUR';
+  defaults: Record<string, number>;
+  fields: Field[];
+  copy: { heading: string; intro: string; output1: string; output2: string; output3: string; verdictPositive: string; verdictNegative: string; unit?: string; privacy: string };
+}
+const { id, mode, locale, currency, defaults, fields, copy } = Astro.props;
+const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+---
+
+<section id={id} class="decision-math" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''}>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="calc-grid">
+    <div class="inputs">
+      {fields.map((field) => <label><span>{field.label}</span><input data-field={field.key} type="number" min={field.min ?? 0} max={field.max} step={field.step ?? 1} value={defaults[field.key]} /></label>)}
+    </div>
+    <div class="results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.output1}</dt><dd data-output="output1">—</dd></div>
+        <div><dt>{copy.output2}</dt><dd data-output="output2">—</dd></div>
+        <div><dt>{copy.output3}</dt><dd data-output="output3">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-decision-math]')) {
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
+    const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 2 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`);
+    const value = (name: string) => Math.max(0, Number(field(name)?.value) || 0);
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
+    const calculate = () => {
+      let first = 0, second = 0, third = 0, positive = false, secondIsNumber = false, thirdIsPercent = false;
+      switch (root.dataset.mode) {
+        case 'appliance': {
+          const premium = Math.max(0, value('efficientPrice') - value('standardPrice') - value('rebate'));
+          first = Math.max(0, value('energyDifference') * value('usesPerYear') * value('electricityRate'));
+          second = first ? premium / first : Infinity;
+          third = first * value('lifeYears') - premium;
+          positive = second <= value('lifeYears'); secondIsNumber = true; break;
+        }
+        case 'costPerUse': {
+          const net = value('purchase') + value('maintenance') + value('consumables') - value('resale');
+          first = net / Math.max(1, value('expectedUses'));
+          second = net / Math.max(1, value('actualUses'));
+          third = value('alternativePerUse') ? net / value('alternativePerUse') : Infinity;
+          positive = second <= value('alternativePerUse'); secondIsNumber = false; break;
+        }
+        case 'bulk': {
+          const smallUnit = value('smallPrice') / Math.max(.0001, value('smallQty') * (1 - Math.min(99.9, value('smallWaste')) / 100));
+          const bulkUsable = Math.max(.0001, value('bulkQty') * (1 - Math.min(99.9, value('bulkWaste')) / 100));
+          const bulkTotal = value('bulkPrice') + value('membership') + value('shipping') + value('storage');
+          first = smallUnit; second = bulkTotal / bulkUsable; third = (smallUnit - second) * bulkUsable;
+          positive = second < first; break;
+        }
+        case 'meal': {
+          first = (value('ingredients') * (1 + value('waste') / 100) + value('batchExtras') + value('homeTimeHours') * value('timeValue')) / Math.max(1, value('servings'));
+          second = (value('takeoutFood') + value('delivery') + value('tip') + value('transport') + value('takeoutTimeHours') * value('timeValue')) / Math.max(1, value('takeoutServings'));
+          third = (second - first) * value('mealsPerMonth'); positive = first < second; break;
+        }
+        case 'reusable': {
+          const perUse = value('cleaning') + value('consumables');
+          first = (value('initial') + value('uses') * perUse) / Math.max(1, value('uses'));
+          second = value('disposablePerUse');
+          third = value('disposablePerUse') > perUse ? value('initial') / (value('disposablePerUse') - perUse) : Infinity;
+          positive = first < second; secondIsNumber = false; break;
+        }
+        case 'pricePerWear': {
+          first = (value('purchase') + value('carePerWear') * value('wears') - value('resale')) / Math.max(1, value('wears'));
+          second = value('alternativePricePerWear');
+          third = value('alternativePricePerWear') > value('carePerWear') ? Math.max(0, value('purchase') - value('resale')) / (value('alternativePricePerWear') - value('carePerWear')) : Infinity;
+          positive = first < second; break;
+        }
+        case 'hourlyWage': {
+          const hours = value('paidHours') + value('unpaidHours') + value('commuteHours');
+          first = (value('takeHomePay') - value('workCosts')) / Math.max(1, hours);
+          second = value('grossPay') / Math.max(1, value('paidHours'));
+          third = hours; positive = first >= second * .8; secondIsNumber = false; break;
+        }
+        case 'raiseInflation': {
+          first = value('oldPay') * (1 + value('raiseRate') / 100);
+          second = ((1 + value('raiseRate') / 100) / (1 + value('inflationRate') / 100) - 1) * 100;
+          third = first / (1 + value('inflationRate') / 100);
+          positive = second >= 0; thirdIsPercent = true; break;
+        }
+      }
+      out('output1').textContent = money(first);
+      if (root.dataset.mode === 'appliance') out('output2').textContent = Number.isFinite(second) ? `${number.format(second)} ${root.dataset.unit}`.trim() : '—';
+      else if (['costPerUse', 'reusable', 'pricePerWear'].includes(root.dataset.mode || '')) out('output2').textContent = money(second);
+      else if (root.dataset.mode === 'raiseInflation') out('output2').textContent = `${number.format(second)}%`;
+      else if (root.dataset.mode === 'hourlyWage') out('output2').textContent = money(second);
+      else out('output2').textContent = money(second);
+      if (['costPerUse', 'reusable', 'pricePerWear'].includes(root.dataset.mode || '')) out('output3').textContent = Number.isFinite(third) ? number.format(third) : '—';
+      else if (root.dataset.mode === 'hourlyWage') out('output3').textContent = number.format(third);
+      else if (root.dataset.mode === 'raiseInflation') out('output3').textContent = money(third);
+      else out('output3').textContent = money(third);
+      out('verdict').textContent = positive ? root.dataset.positive || '' : root.dataset.negative || '';
+    };
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .decision-math { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .decision-math h2 { margin-top: 0; }
+  .calc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+  .inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
+  .inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
+  .results .verdict { margin-top: 0; font-weight: 800; }
+  .results dl { margin: 0; }
+  .results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
+  .results dt { font-weight: 600; }
+  .results dd { margin: 0; text-align: right; font-weight: 750; }
+  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
+  @media (max-width: 760px) { .decision-math { padding: 1rem; } .calc-grid, .inputs { grid-template-columns: 1fr; } .inputs label span { min-height: 0; } }
+</style>

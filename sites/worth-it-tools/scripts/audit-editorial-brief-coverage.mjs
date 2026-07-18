@@ -34,13 +34,14 @@ const briefRoutes = [
   { id: '19', slug: 'repair-or-replace-decision-formula' },
   { id: '20', slug: 'is-an-extended-warranty-worth-it' },
   { id: '21', slug: 'upgrade-your-phone-or-keep-it' },
+  { id: '22', slug: 'energy-efficient-appliance-payback' },
 ];
 
 const releaseFloor = {
-  html: 140,
-  editorial: 108,
-  alignedVariants: 105,
-  compliantVariants: 105,
+  html: 143,
+  editorial: 111,
+  alignedVariants: 108,
+  compliantVariants: 108,
   completeTopics: 21,
 };
 

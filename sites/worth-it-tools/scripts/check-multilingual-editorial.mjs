@@ -32,6 +32,16 @@ const editorialRoutes = [
       de: ['Preis- und Leistungsverzeichnis', 'kostenlosen Alternative', '9.600 €'],
     },
   },
+  {
+    slug: 'rent-vs-buy-guide',
+    nativeMarkers: {
+      en: ['Loan Estimate', '$148,779', 'holding period'],
+      zh: ['實價登錄', 'NT$3,647,764', '寬限期'],
+      es: ['FEIN', 'FiAE', '95.170 €'],
+      fr: ['fonds travaux', 'TAEG', '117 962 €'],
+      de: ['Kaltmiete', 'Zinsbindung', '198.880 €'],
+    },
+  },
 ];
 
 function read(relativePath) {
@@ -99,4 +109,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 3 complete five-locale topics, 9 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 4 complete five-locale topics, 12 added routes, 4 enriched high-value tools.');

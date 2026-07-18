@@ -1,150 +1,149 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { rentBuyAssumptionGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
+const guide = rentBuyAssumptionGuides.en;
 const faq = [
   {
-    question: 'Is renting always throwing money away?',
-    answer:
-      'No — this is the most persistent myth in the debate. Rent buys you housing, the same way mortgage interest, property tax, insurance, and maintenance buy the owner housing. Only the principal portion of a mortgage payment builds equity. A renter who invests the down payment they did not spend can end up wealthier than an owner in many scenarios.',
+    question: 'What assumptions change a rent-versus-buy result the most?',
+    answer: 'Holding period, mortgage rate, purchase and sale costs, maintenance, comparable rent, home-price change, and the return on upfront cash usually have the largest effect. Test them as ranges rather than treating one estimate as certain.',
   },
   {
-    question: 'What is the 5% rule for rent vs buy?',
-    answer:
-      'A popular shortcut: multiply the home price by roughly 5% (covering property tax, maintenance, and the cost of capital tied up in the home) and divide by 12. If comparable rent is below that monthly figure, renting is likely cheaper; above it, buying gains the edge. It is a rough screen, not a decision — a proper calculator with your actual rates is better.',
+    question: 'Should I compare rent with the full mortgage payment?',
+    answer: 'No. Mortgage principal becomes equity, while interest is a cost. But ownership also adds taxes, insurance, association dues, maintenance, and transaction costs. Compare net costs or ending net worth, not two monthly bills.',
   },
   {
-    question: 'How many years do I need to stay for buying to win?',
-    answer:
-      'Buying carries heavy one-time costs — closing costs, agent fees, moving — that need years of equity growth to recoup. In many markets the crossover lands somewhere around five to seven years, but it swings widely with mortgage rates, appreciation, and rent growth. The calculator shows the crossover year for your specific inputs.',
+    question: 'How do I choose a comparable rent?',
+    answer: 'Use a home you could realistically rent with similar location, usable space, condition, parking, school access, and commute. Comparing a starter apartment with a larger house makes the financial model answer a housing-upgrade question instead.',
   },
   {
-    question: 'Does a rent vs buy calculator account for investing my down payment?',
-    answer:
-      'Ours does, and it is often the deciding variable. A down payment locked in a house cannot compound in an index fund. The calculator applies your chosen investment return to the down payment a renter keeps, so the comparison is owner equity versus renter portfolio — not owner equity versus nothing.',
+    question: 'Should home appreciation be included?',
+    answer: 'Yes, as a sensitivity input rather than a promise. Run at least a flat-price case, a conservative growth case, and a downside case. Selling costs apply to the future sale price and can absorb part of the gain.',
   },
   {
-    question: 'Should I buy because rents keep rising?',
-    answer:
-      'Rising rent is a real cost of renting and the calculator models annual rent growth. But it cuts both ways: owners face rising property taxes, insurance, and maintenance. Set a realistic rent-growth rate for your city and let the numbers speak rather than extrapolating this year’s increase forever.',
+    question: 'Does the WorthCalc tool include every homeownership cost?',
+    answer: 'No. The current tool uses a simplified owner-cost allowance and an invested-down-payment model. Replace the article example with actual Loan Estimate, tax, insurance, association, repair, and transaction figures before making a high-stakes decision.',
   },
 ];
 ---
 
 <ArticleLayout
-  title="Rent or Buy? How to Actually Think About It"
-  description="A clear framework for the rent vs buy decision: what each side really costs, why the down payment's investment return matters, and a free rent vs buy calculator."
+  title="Rent vs Buy: The Assumptions That Actually Change the Answer"
+  description="Compare renting and buying with holding period, mortgage interest, closing and selling costs, maintenance, rent growth, appreciation, and down-payment opportunity cost."
   locale={locale}
-  updated="2026-07-03"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
-    Few money questions carry as much emotional freight as "should I rent or
-    buy?" One camp insists rent is money down the drain; the other warns
-    about being house-poor forever. Both camps argue with slogans. This
-    guide replaces the slogans with a framework you can actually compute —
-    and pairs it with a free
-    <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent vs buy calculator</a>
-    that runs the whole comparison in your browser.
+    A rent-versus-buy calculator is not an oracle. It is a cash-flow model whose
+    answer depends on a few uncertain inputs. Comparing $2,200 rent with a $2,023
+    principal-and-interest payment leaves out closing, taxes, insurance, repairs,
+    selling costs, equity, and the return the renter could earn on cash not used
+    at closing. The monthly-payment shortcut can be wrong in either direction.
+  </p>
+  <p>
+    The useful question is not &ldquo;does buying always win?&rdquo; It is
+    &ldquo;which assumptions make the answer change, and is my result stable
+    across a reasonable range?&rdquo; The framework below exposes those inputs,
+    then lets you test them in the
+    <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent-versus-buy calculator</a>.
   </p>
 
-  <h2>The core insight: compare total costs, not payments</h2>
+  <DecisionGuide content={guide} />
+
+  <h2>Start with the same housing service on both sides</h2>
   <p>
-    The naive comparison — monthly rent versus monthly mortgage payment — is
-    wrong in both directions. It overstates the cost of buying, because part
-    of each mortgage payment is principal, which is money you keep as
-    equity. And it understates the cost of buying, because owners also pay
-    property tax, insurance, maintenance, and closing costs that renters
-    never see. The honest comparison is:
+    A $400,000 house and a $1,500 studio are not substitutes. Match location,
+    usable square footage, condition, parking, schools, commute, pets, and the
+    number of years the space can meet your needs. If buying gives you an extra
+    bedroom or a shorter commute, show that as a deliberate lifestyle upgrade
+    instead of hiding it inside a &ldquo;buy versus rent&rdquo; result.
   </p>
-  <ul>
-    <li>
-      <strong>Cost of owning</strong> = mortgage interest + taxes +
-      insurance + maintenance + transaction costs − equity built −
-      appreciation gained.
-    </li>
-    <li>
-      <strong>Cost of renting</strong> = rent (growing each year) −
-      investment returns earned on the down payment you never spent.
-    </li>
-  </ul>
   <p>
-    That last term surprises people the most. A 20% down payment on a
-    $400,000 home is $80,000. In the buying scenario it sits inside the
-    walls; in the renting scenario it can compound in a diversified
-    portfolio for the entire holding period. Over ten years, that
-    opportunity cost is frequently the largest single number in the whole
-    comparison — which is why our
-    <a href={localizedPath(locale, '/tools/rent-vs-buy')}>calculator</a>
-    treats the invested down payment as a first-class input rather than a
-    footnote.
+    Use recent listings and signed-market evidence where available, but do not
+    turn a citywide median into the rent for one property. Add renter-paid
+    utilities, insurance, parking, and move costs only when they differ from the
+    ownership case. The model should compare the same service, not two unrelated
+    budgets.
   </p>
 
-  <h2>The variables that actually move the answer</h2>
-  <ol>
-    <li>
-      <strong>Mortgage rate.</strong> The single biggest lever. At low rates
-      buying is heavily favored; at high rates the interest burden can
-      exceed rent on an equivalent home for years.
-    </li>
-    <li>
-      <strong>Holding period.</strong> Buying has large fixed entry and exit
-      costs. Stay two years and they crush you; stay fifteen and they
-      amortize into noise. The calculator reports the crossover year — the
-      point where buying overtakes renting for your inputs.
-    </li>
-    <li>
-      <strong>Home appreciation vs. investment return.</strong> If your
-      market appreciates faster than your portfolio grows, leverage makes
-      buying powerful. If the reverse holds, the renter's compounding
-      portfolio wins. Be suspicious of anyone who claims to know either
-      number in advance — test a range.
-    </li>
-    <li>
-      <strong>Rent growth.</strong> The renter's main long-term risk.
-      Fast-rising rents erode the renting advantage year by year.
-    </li>
-    <li>
-      <strong>Price-to-rent ratio.</strong> If a home costs $500,000 but
-      rents for $1,800, renting that home is buying the same housing for
-      less. High ratios favor renting; low ratios favor buying.
-    </li>
-  </ol>
-
-  <h2>What the spreadsheet cannot see</h2>
+  <h2>Separate mortgage principal from the cost of borrowing</h2>
   <p>
-    Numbers first, but not numbers only. Owning delivers stability — no
-    landlord can end your lease — plus the freedom to renovate, and a form
-    of forced savings that works even for undisciplined savers. Renting
-    delivers mobility for career moves, immunity from surprise repair
-    bills, and the option to change neighborhoods as life changes. None of
-    these appear in the calculator's verdict; all of them deserve a seat at
-    the table. The right move is to compute the financial gap first, then
-    ask whether the lifestyle differences are worth that gap — in either
-    direction.
+    Principal reduces the loan balance and becomes equity; interest is the price
+    of borrowing. In the first years of a long fixed-rate loan, a large share of
+    each payment can be interest, so use an amortization schedule rather than
+    multiplying one monthly payment by the holding period. If you expect to sell
+    after five years, only the first 60 payments and the remaining balance at
+    month 60 belong in the calculation.
+  </p>
+  <p>
+    The Consumer Financial Protection Bureau's Loan Estimate separates loan
+    amount, rate, projected payment, closing costs, taxes, insurance, and cash to
+    close. Those quoted figures are better inputs than a generic percentage.
+    Mortgage insurance, points, lender credits, association dues, and prepaid
+    escrow also need explicit treatment when they apply.
   </p>
 
-  <h2>A sensible workflow</h2>
-  <ol>
-    <li>Gather real numbers: a realistic purchase price, current mortgage rates, and the actual rent for a comparable home — not a smaller one.</li>
-    <li>Run the <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent vs buy calculator</a> with honest assumptions and note the verdict and crossover year.</li>
-    <li>Stress-test it: nudge appreciation down, rates up, and your holding period shorter. If the verdict survives, it is robust; if it flips, you are in coin-toss territory and lifestyle should decide.</li>
-    <li>Remember location costs beyond the home itself — a cheaper house with a brutal commute may lose the total-cost war. Our <a href={localizedPath(locale, '/tools/commute-cost')}>commute cost calculator</a> puts a monthly number on that trade-off.</li>
-  </ol>
+  <h2>Transaction costs make the holding period a first-order input</h2>
   <p>
-    And if buying means financing furniture and appliances on "easy monthly
-    payments," read
-    <a href={localizedPath(locale, '/zero-interest-installments-truth')}>the truth about 0% installment plans</a>
-    before you sign anything.
+    Buying and later selling create costs that rent does not: lender and title
+    services, transfer charges, inspections, moving, and a possible selling
+    commission or concession. They occur near the beginning and end, so a short
+    holding period gives them little time to be offset by principal repayment or
+    appreciation. There is no universal &ldquo;five-year rule&rdquo;; calculate the
+    actual costs for years three, five, eight, and any likely move date.
+  </p>
+  <p>
+    Maintenance also arrives unevenly. A smooth annual allowance is useful for
+    sensitivity, but roofs, systems, and special assessments do not appear as
+    tidy monthly bills. Review the property's age, inspection, association
+    reserves, known capital projects, and insurance exclusions. Keep renovations
+    chosen for taste separate from repairs needed to preserve the property.
+  </p>
+
+  <h2>Test opportunity cost and appreciation without pretending to forecast</h2>
+  <p>
+    The renter keeps the down payment and purchase costs liquid. The relevant
+    return is not a guaranteed stock-market number; it is the after-tax return on
+    the risk level and portfolio you would actually hold. Run a low, middle, and
+    high case. If the cash would otherwise sit in a checking account, do not give
+    it an equity-market return merely to favor renting.
+  </p>
+  <p>
+    Treat home appreciation the same way. Test flat, positive, and negative
+    scenarios, then deduct selling costs from the future price. Leverage magnifies
+    gains and losses; it does not make appreciation certain. The best result is a
+    range showing which variable drives the decision, not a single dollar verdict
+    with false precision.
+  </p>
+
+  <h2>Turn sensitivity into a decision rule</h2>
+  <p>
+    Write down the conditions under which buying wins—for example, staying at
+    least eight years and receiving a quoted rate below a chosen threshold. Then
+    ask whether those conditions are within your control. A job move, family
+    change, refinance assumption, or major repair can matter more than a small
+    modeled advantage.
+  </p>
+  <p>
+    When every reasonable scenario favors one side, the financial signal is
+    useful. When the result flips, compare liquidity, mobility, renovation
+    freedom, housing stability, and risk tolerance against the size of the gap.
+    Add location effects separately with the
+    <a href={localizedPath(locale, '/tools/commute-cost')}>commute cost calculator</a>,
+    rather than assuming the cheaper home also has the same travel cost.
   </p>
 
   <FAQ items={faq} />
 
   <p class="privacy-note">
-    Privacy note: the rent vs buy calculator runs entirely in your browser —
-    home prices, income figures, and rates you enter are never sent to a
-    server. Results are simplified estimates for general information, not
-    financial, investment, or real-estate advice.
+    WorthCalc processes inputs locally in your browser. This is a simplified,
+    general educational model—not mortgage, investment, tax, legal, or real-estate
+    advice. Verify current documents and local rules with qualified professionals.
   </p>
 </ArticleLayout>

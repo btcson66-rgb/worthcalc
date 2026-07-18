@@ -1,0 +1,211 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import { LOCALES, type Locale } from '../../consts';
+import { rentBuyAssumptionGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'es' | 'fr' | 'de';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  es: {
+    title: 'Alquilar o comprar: los datos que realmente cambian el resultado',
+    description: 'Compara alquiler y compra con permanencia, intereses, impuestos, comunidad, mantenimiento, gastos de operación, subida del alquiler y coste de oportunidad.',
+    faq: [
+      { question: '¿Qué datos cambian más el resultado entre alquilar y comprar?', answer: 'Los años de permanencia, el tipo hipotecario, los gastos de compra y venta, el mantenimiento, el alquiler comparable, la revalorización y el rendimiento alternativo de la entrada. Prueba intervalos, no una sola previsión.' },
+      { question: '¿Debo comparar el alquiler con toda la cuota hipotecaria?', answer: 'No. La amortización de capital crea patrimonio y los intereses son coste, pero comprar añade impuestos, seguro, comunidad, mantenimiento y gastos de transacción. Compara coste neto o patrimonio final.' },
+      { question: '¿Qué gastos de hipoteca paga el comprador en España?', answer: 'El reparto depende de la operación y de la normativa vigente. El Banco de España indica que el cliente paga la tasación y, si procede, la comisión de apertura; revisa FEIN, FiAE, impuestos y gastos propios de la compraventa.' },
+      { question: '¿Cómo trato una hipoteca variable?', answer: 'No prolongues el tipo inicial durante décadas. Usa el documento con escenarios de cuotas, prueba tipos superiores y comprueba que el presupuesto resiste antes de comparar patrimonio.' },
+      { question: '¿El ejemplo predice el precio de la vivienda?', answer: 'No. Todos los porcentajes son datos de demostración. Repite el cálculo con precio estable, caída y crecimiento moderado, junto con tus ofertas y costes reales.' },
+    ],
+  },
+  fr: {
+    title: 'Louer ou acheter : les données qui changent réellement le résultat',
+    description: 'Comparez location et achat avec durée, intérêts, frais d’acquisition et revente, copropriété, entretien, hausse du loyer et coût d’opportunité.',
+    faq: [
+      { question: 'Quelles hypothèses influencent le plus louer ou acheter ?', answer: 'La durée de détention, le taux et l’assurance du crédit, les frais d’acquisition et de revente, la copropriété, les travaux, le loyer comparable, l’évolution du prix et le rendement de l’apport.' },
+      { question: 'Faut-il comparer le loyer à toute la mensualité ?', answer: 'Non. Le capital remboursé augmente la valeur nette, tandis que les intérêts sont un coût. Il faut ajouter taxe foncière, assurance, charges non récupérables, entretien, travaux et frais de transaction.' },
+      { question: 'Quels frais faut-il relever avant d’acheter ?', answer: 'Utilisez le décompte du notaire, le TAEG, l’assurance emprunteur, la garantie, les honoraires éventuels, la taxe foncière et les documents de copropriété. Ne remplacez pas ces montants par un pourcentage national.' },
+      { question: 'Comment intégrer les travaux de copropriété ?', answer: 'Ajoutez les travaux déjà votés et testez une provision pour les travaux probables à partir des procès-verbaux, du fonds travaux et du plan pluriannuel. Une moyenne annuelle ne suffit pas toujours.' },
+      { question: 'Le résultat est-il une prévision immobilière ?', answer: 'Non. Le scénario illustre la méthode. Testez baisse, stabilité et hausse du prix ainsi que plusieurs taux et durées; une conclusion qui s’inverse reste fragile.' },
+    ],
+  },
+  de: {
+    title: 'Mieten oder Kaufen: Welche Annahmen das Ergebnis wirklich verändern',
+    description: 'Vergleichen Sie Mieten und Kaufen mit Haltedauer, Zinsen, Kaufnebenkosten, Hausgeld, Instandhaltung, Mietsteigerung und Eigenkapitalrendite.',
+    faq: [
+      { question: 'Welche Annahmen verändern Mieten oder Kaufen am stärksten?', answer: 'Haltedauer, Sollzins, Kauf- und Verkaufskosten, nicht umlagefähiges Hausgeld, Instandhaltung, Vergleichsmiete, Wertentwicklung und die alternative Rendite des Eigenkapitals.' },
+      { question: 'Darf ich Kaltmiete und volle Kreditrate vergleichen?', answer: 'Nein. Tilgung baut Eigenkapital auf, Zinsen sind Kosten. Zusätzlich gehören Grundsteuer, Versicherung, Hausgeld, Instandhaltung und Transaktionskosten in den Kauf-Fall; die Mietseite braucht vergleichbare Mieterkosten.' },
+      { question: 'Welche Kaufnebenkosten muss ich erfassen?', answer: 'Verwenden Sie die konkreten Beträge für Grunderwerbsteuer, Notar, Grundbuch, Makler und Finanzierung. Die Höhe hängt von Bundesland, Vertrag und Objekt ab; ein pauschaler Wert kann die Entscheidung drehen.' },
+      { question: 'Wie berücksichtige ich die Anschlussfinanzierung?', answer: 'Lassen Sie den heutigen Sollzins nur bis zum Ende der Zinsbindung gelten und testen Sie danach höhere und niedrigere Anschlusszinsen. Prüfen Sie zugleich Restschuld und tragbare Rate.' },
+      { question: 'Ist das Rechenbeispiel eine Preisprognose?', answer: 'Nein. Es zeigt Cashflows mit frei gewählten Annahmen. Testen Sie fallende, stabile und steigende Preise sowie mehrere Renditen und Haltedauern.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = rentBuyAssumptionGuides[locale];
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
+>
+  {locale === 'es' && (
+    <>
+      <p>
+        Comparar 1.000 € de alquiler con una cuota hipotecaria de 836 € no demuestra que comprar sea más barato. Parte de la cuota amortiza capital, pero el propietario añade impuestos, comunidad, seguro, mantenimiento y costes de entrada y salida. El inquilino conserva la entrada, aunque soporta subidas de renta y posibles mudanzas. La comparación correcta reconstruye ambos flujos durante el mismo número de años.
+      </p>
+      <p>
+        En España, la FEIN, la FiAE y la tasación aportan datos que una calculadora genérica no puede adivinar. La decisión útil no es un veredicto nacional, sino una tabla que explica con qué tipo, permanencia, costes y evolución del precio cambia el resultado para dos viviendas equivalentes.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Compara la misma vivienda, no dos niveles de vida</h2>
+      <p>
+        Busca un alquiler con zona, superficie útil, estado, ascensor, garaje y eficiencia similares al inmueble que comprarías. Si la compra añade una habitación o reduce el trayecto al trabajo, esa mejora puede justificar un coste mayor, pero debe aparecer como elección de vivienda y no como supuesta rentabilidad financiera.
+      </p>
+      <p>
+        Utiliza anuncios recientes con cautela y, cuando sea posible, contratos o referencias públicas de transacciones. Separa renta de suministros y gastos que pagarías en ambos casos. Una media provincial no sustituye el precio de un piso concreto ni incorpora sus derramas o estado de conservación.
+      </p>
+
+      <h2>De la FEIN al coste de compra y de salida</h2>
+      <p>
+        Anota importe, TIN, TAE, plazo, cuota, comisión, productos vinculados, tasación y condiciones de amortización anticipada. En un préstamo variable, usa también los escenarios de cuotas: mantener el tipo inicial durante toda la vida del crédito infravalora el riesgo. Calcula intereses y saldo pendiente hasta el año en que podrías vender.
+      </p>
+      <p>
+        La compraventa tiene costes distintos de los gastos de formalización de la hipoteca. ITP o IVA y AJD, notaría, registro, gestoría, agencia y venta dependen de comunidad autónoma, vivienda y contrato. El Banco de España explica el reparto hipotecario; para el modelo debes añadir además todos los costes propios de adquirir y transmitir el inmueble.
+      </p>
+
+      <h2>Comunidad, IBI y mantenimiento no son una nota al pie</h2>
+      <p>
+        Revisa actas, derramas aprobadas, fondos de la comunidad, ITE o IEE cuando corresponda, seguro e historial de reparaciones. Un porcentaje anual facilita la sensibilidad, pero una fachada o un ascensor pueden concentrar años de gasto en un solo ejercicio. Distingue reparación necesaria de reforma voluntaria por preferencias personales.
+      </p>
+      <p>
+        En alquiler, incluye las cantidades que realmente paga el inquilino y excluye las que seguirían existiendo al comprar. La comparación debe mantener iguales aparcamiento, energía y desplazamiento. Si comprar obliga a vivir más lejos, el transporte es otro coste y no debe ocultarse dentro del precio de la vivienda.
+      </p>
+
+      <h2>Prueba tipos, permanencia y precio como intervalos</h2>
+      <p>
+        Ejecuta primero precio estable, después una subida moderada y una caída. Haz lo mismo con el rendimiento de la entrada: usa una inversión que realmente mantendrías, después de costes e impuestos, no la mejor rentabilidad histórica disponible. Añade venta sobre el valor futuro para no contar toda la revalorización como patrimonio líquido.
+      </p>
+      <p>
+        Resume el resultado como condición: «comprar queda por debajo solo si permanezco al menos siete años y el tipo no supera X». Si un pequeño cambio invierte la ventaja, el modelo no autoriza una respuesta tajante. Liquidez, estabilidad, movilidad y tolerancia a reparaciones pueden decidir cuando la diferencia financiera es estrecha.
+      </p>
+      <p class="privacy-note">Modelo educativo general. Confirma FEIN, FiAE, impuestos, contratos y costes actuales con la entidad y profesionales cualificados. Los datos introducidos en WorthCalc permanecen en el navegador.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        Comparer un loyer de 1 100 € à une mensualité de 1 121 € ne répond pas à la question. Une partie de la mensualité rembourse le capital, mais le propriétaire supporte aussi frais d’acquisition, taxe foncière, assurance, copropriété, entretien et revente. Le locataire conserve son apport, tout en assumant l’évolution du loyer et le risque de déménagement.
+      </p>
+      <p>
+        En France, le décompte du notaire, le TAEG, l’assurance emprunteur et les documents de copropriété donnent des données propres au bien. Le but n’est pas de produire une règle nationale, mais d’identifier la durée, le taux, les travaux et l’évolution du prix qui font basculer votre scénario.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Comparer deux logements réellement équivalents</h2>
+      <p>
+        Alignez quartier, surface habitable, état, stationnement, étage, performance énergétique et temps de trajet. Si l’achat offre une pièce ou une stabilité supplémentaires, valorisez ce choix séparément. Opposer un petit logement loué à une maison achetée mélange décision patrimoniale et montée en gamme.
+      </p>
+      <p>
+        Utilisez les loyers observables pour un bien comparable et distinguez loyer, charges récupérables, assurance et services. Côté achat, ne retirez pas automatiquement toutes les charges de copropriété : une partie reste propre au propriétaire, avec le fonds travaux et les dépenses votées.
+      </p>
+
+      <h2>Du TAEG au capital restant dû à la date de revente</h2>
+      <p>
+        Relevez apport, taux, TAEG, assurance, garantie, durée et échéancier. La mensualité totale sert au budget; pour le coût économique, séparez intérêts et capital remboursé. À la date de sortie envisagée, calculez le capital restant dû au lieu de supposer que toutes les mensualités sont perdues.
+      </p>
+      <p>
+        Ajoutez ensuite droits de mutation et émoluments, honoraires éventuels, diagnostics et frais de revente. Les montants diffèrent entre ancien et neuf, selon le département et la transaction. Les simulateurs de Service-Public et de l’ANIL sont de meilleurs points de départ qu’un pourcentage copié d’un article générique.
+      </p>
+
+      <h2>Lire la copropriété avant de choisir un forfait d’entretien</h2>
+      <p>
+        Consultez procès-verbaux d’assemblée générale, appels de fonds, fonds travaux, plan pluriannuel et travaux votés. Une moyenne de 1 % par an ne décrit pas un ravalement ou une rénovation énergétique proche. Séparez aussi les travaux nécessaires des aménagements de confort que vous choisiriez librement.
+      </p>
+      <p>
+        Taxe foncière, assurance habitation propriétaire et charges non récupérables varient localement. Utilisez le dernier avis et les documents du vendeur. En location, conservez uniquement les coûts propres au locataire afin de ne pas compter deux fois eau, chauffage ou stationnement présents dans les deux scénarios.
+      </p>
+
+      <h2>Transformer les incertitudes en analyse de sensibilité</h2>
+      <p>
+        Testez prix en baisse, stable et en hausse, plusieurs taux et des durées de quatre, huit ou douze ans selon vos projets. Pour l’apport non dépensé, choisissez un rendement compatible avec votre vrai placement et votre fiscalité. Une rentabilité théorique élevée n’est pas une économie certaine.
+      </p>
+      <p>
+        Formulez enfin une condition : «l’achat devient inférieur si je reste au moins huit ans et si les travaux restent sous tel montant». Si des hypothèses raisonnables donnent des gagnants différents, la décision financière est fragile; mobilité, stabilité, liquidité et liberté de travaux doivent alors être comparées au montant de l’écart.
+      </p>
+      <p class="privacy-note">Estimation pédagogique générale. Vérifiez TAEG, acte, fiscalité, copropriété et devis avec la banque, le notaire, l’ADIL et les professionnels concernés. Les données restent dans votre navigateur.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        1.200 € Kaltmiete gegen 1.257 € Kreditrate ist kein vollständiger Vergleich. Tilgung erhöht das Eigenkapital, Zinsen sind Kosten; Eigentümer tragen zusätzlich Kaufnebenkosten, Grundsteuer, nicht umlagefähiges Hausgeld, Versicherung, Instandhaltung und Verkauf. Mieter behalten ihr Anfangskapital, tragen aber Mietsteigerungen und Umzugsrisiken.
+      </p>
+      <p>
+        In Deutschland entscheiden Bundesland, Maklervertrag, WEG-Unterlagen, Zinsbindung und Objektzustand stärker als eine bundesweite Faustregel. Eine belastbare Rechnung zeigt deshalb, bei welcher Haltedauer, welchem Anschlusszins und welchem Instandhaltungsbedarf das Ergebnis kippt.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Vergleichsmiete für dasselbe Wohnniveau ermitteln</h2>
+      <p>
+        Gleichen Sie Lage, Wohnfläche, Zustand, Stellplatz, Energieeffizienz und Arbeitsweg ab. Wer eine größere Immobilie kauft als mietet, bewertet zugleich mehr Wohnraum. Dieser Mehrwert kann sinnvoll sein, darf aber nicht als Renditevorteil der Eigentumsform erscheinen.
+      </p>
+      <p>
+        Trennen Sie Kaltmiete, umlagefähige Nebenkosten und Kosten, die in beiden Fällen anfallen. Beim Hausgeld gehört nur der nicht umlagefähige Anteil samt Zuführung zur Erhaltungsrücklage auf die Eigentümerseite. So werden Heizung oder Wasser nicht doppelt gezählt.
+      </p>
+
+      <h2>Zinsbindung, Tilgung und Restschuld getrennt modellieren</h2>
+      <p>
+        Erfassen Sie Sollzins, effektiven Jahreszins, anfängliche Tilgung, Zinsbindung, Sondertilgungen und Entgelte aus dem konkreten Angebot. Für die Haushaltsbelastung zählt die volle Rate; als Kosten zählt der Zins. Zum geplanten Verkaufszeitpunkt wird die Restschuld vom Erlös abgezogen.
+      </p>
+      <p>
+        Endet die Zinsbindung vor der Haltedauer, rechnen Sie nicht still mit dem heutigen Zins weiter. Testen Sie eine Anschlussfinanzierung mit niedrigerem, gleichem und höherem Satz. Eine tragbare Anfangsrate kann sich bei hoher Restschuld deutlich verändern.
+      </p>
+
+      <h2>Kaufnebenkosten und WEG-Risiken konkret erfassen</h2>
+      <p>
+        Grunderwerbsteuer, Notar, Grundbuch und Makler hängen von Bundesland und Vertrag ab. Spätere Verkaufskosten, Umzug und mögliche Vorfälligkeitskosten gehören an das Ende des Szenarios. Verwenden Sie Angebote und Vertragsentwürfe statt eines einheitlichen Prozentsatzes.
+      </p>
+      <p>
+        Bei einer Eigentumswohnung sind Wirtschaftsplan, Jahresabrechnung, Beschlusssammlung, Rücklage und geplante Sanierungen zentral. Dach, Fassade oder Heizung verteilen sich nicht gleichmäßig über jedes Jahr. Freiwillige Modernisierung für den eigenen Geschmack bleibt getrennt von notwendiger Instandhaltung.
+      </p>
+
+      <h2>Wertentwicklung und Eigenkapitalrendite als Spanne testen</h2>
+      <p>
+        Rechnen Sie mindestens mit fallendem, stabilem und steigendem Immobilienwert. Ziehen Sie Verkaufskosten vom künftigen Erlös ab. Für das Eigenkapital des Mieters verwenden Sie nur eine Anlage, die Sie mit passendem Risiko tatsächlich halten würden; historische Höchstrenditen sind keine sichere Alternative.
+      </p>
+      <p>
+        Schreiben Sie das Ergebnis als Bedingung: «Kaufen liegt nur unter Mieten, wenn ich zehn Jahre bleibe und die Instandhaltung X nicht überschreitet». Kippt die Rechnung bei kleinen Änderungen, gibt es keinen robusten finanziellen Sieger. Dann sind Liquidität, Mobilität, Planungssicherheit und Gestaltungsfreiheit bewusst gegen die Kostenspanne abzuwägen.
+      </p>
+      <p class="privacy-note">Allgemeines Bildungsmodell. Prüfen Sie Kreditangebot, Steuern, WEG-Unterlagen, Verträge und Kosten mit qualifizierten Stellen. WorthCalc verarbeitet Eingaben lokal im Browser.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

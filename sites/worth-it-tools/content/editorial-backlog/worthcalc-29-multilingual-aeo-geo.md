@@ -32,6 +32,15 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 原生差異：繁中處理一般消費、登錄、刷滿免年費與回饋上限；西班牙處理 `comisión de emisión o mantenimiento` 與 Banco de España 比較資料；法國處理 `cotisation annuelle`、標準化費用文件與官方費率比較器；德國處理 `Jahresgebühr`、BaFin Kontenvergleich 與卡片額外費用。
 - 五語均使用各自幣值與不同完整算例，來源採 CFPB、台灣金管會、西班牙央行、法國經濟部、BaFin／Verbraucherzentrale 等官方或公共消費者資料。
 - 本批完成後稽核口徑：52 HTML、20 編輯內容頁、17／145 任務對應版本、15／145 完整版本、3／29 五語完成主題。
+- 發布證據：PR #19 已合併為 `5387c21`，GitHub Pages run `29649591177` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、hreflang、schema、市場算例與 sitemap 線上查核 PASS。
+
+## 2026-07-18 第四批
+
+- 題目 11「租屋或買房的關鍵假設」：EN、zh-TW 既有頁移除無來源的單一市場口號，補成完整情境模型；新增 ES、FR、DE 三個原生版本，正好用滿本批 3 個公開頁上限。
+- 核心模型：以同等房屋與明確持有期，比較房貸利息、買賣成本、持有稅費／保險／管理／維護、租金成長、房價變動及前期資金機會成本；結果只以條件與敏感度呈現，不預測房價或推薦買／租。
+- 原生差異：繁中使用實價登錄、契稅／房屋稅／地價稅、寬限期與社區修繕；西班牙使用 FEIN／FiAE、TAE、tasación 與依自治區變動的交易稅費；法國使用 TAEG、frais d’acquisition、taxe foncière、fonds travaux 與 copropriété；德國使用 Kaltmiete、Kaufnebenkosten、nicht umlagefähiges Hausgeld、Zinsbindung 與 Anschlussfinanzierung。
+- 五語均提供不同幣值與持有期的完整算例，且以 4 列敏感度證明利率、持有期或房價假設稍變即可翻盤；來源採 CFPB、台灣內政部／財政部、Banco de España、ANIL／Service-Public、Verbraucherzentrale／BaFin。
+- 本批完成後稽核口徑：55 HTML、23 編輯內容頁、20／145 任務對應版本、20／145 完整版本、4／29 五語完成主題。
 
 ## 待執行主題
 
@@ -45,9 +54,9 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 06 | Subscriptions & Memberships | Paid membership break-even | backlog; EN/ZH Costco calculator enriched |
 | 07 | Subscriptions & Memberships | Gym cost per visit | backlog |
 | 08 | Subscriptions & Memberships | Delivery membership break-even | backlog |
-| 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; release pending |
+| 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |
 | 10 | Cards & Rewards | Cashback caps and real reward rate | backlog |
-| 11 | Housing & Commuting | Rent-vs-buy assumptions | backlog |
+| 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; release pending |
 | 12 | Housing & Commuting | Rent-vs-buy break-even year | backlog |
 | 13 | Transport & Vehicle Ownership | EV vs gas total cost | backlog |
 | 14 | Transport & Vehicle Ownership | Home vs public EV charging | backlog |

@@ -388,6 +388,114 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
+  en: {
+    id: 'rent-buy-assumptions-method',
+    labels: labels.en,
+    directAnswer: 'Rent versus buy is usually decided by a small set of assumptions, not by rent versus the mortgage payment alone. Use the same home, a defined holding period, mortgage interest rather than total principal-and-interest, purchase and sale costs, owner maintenance and taxes, rent growth, home appreciation, and the foregone return on upfront cash. If a modest change flips the result, the honest answer is that the financial choice is not robust.',
+    inputs: ['Price and rent for genuinely comparable homes in the same area', 'Expected holding period and mortgage term', 'Down payment, quoted mortgage rate, and lender fees', 'Purchase, sale, tax, insurance, association, and maintenance costs', 'Annual rent growth and renter costs that are not included in rent', 'Home appreciation and the return assumed on cash kept by the renter'],
+    formula: 'Owner net cost over N years ≈ purchase costs + mortgage interest paid + owner taxes/insurance/maintenance + selling costs − home appreciation gain + foregone investment gain on upfront cash; renter net cost ≈ cumulative rent and renter costs',
+    workedExample: 'Illustrative five-year case: a $400,000 home, $80,000 down, $12,000 purchase costs, a $320,000 30-year mortgage at 6.5%, $6,000 a year of owner costs, 2% appreciation, 5% selling costs, and 5% opportunity return. Mortgage interest is about $100,912; appreciation gain $41,632; selling cost $22,082; foregone gain on $92,000 upfront cash $25,418. Estimated owner net cost is $148,779. Rent starting at $2,200 a month and growing 3% totals about $140,161, so renting is lower by about $8,618 in this scenario—not a prediction.',
+    sensitivity: [
+      { scenario: 'Base case', input: '5 years; 6.5% mortgage; 2% appreciation', result: 'Rent lower by about $8,618' },
+      { scenario: 'Shorter stay', input: '3 years; other inputs unchanged', result: 'Rent lower by about $20,992' },
+      { scenario: 'Lower mortgage rate', input: '5.5% instead of 6.5%', result: 'Buy lower by about $7,405' },
+      { scenario: 'No appreciation', input: '0% instead of 2%', result: 'Rent lower by about $48,169' },
+    ],
+    cta: { label: 'Stress-test your own rent-versus-buy assumptions', href: '/en/tools/rent-vs-buy' },
+    limitations: ['The worked example is a transparent scenario, not a forecast of mortgage rates, rent, investment returns, taxes, or home prices.', 'Tax treatment, mortgage insurance, renovations, utilities, deductions, capital-gains rules, and monthly cash-flow investing vary by household and jurisdiction.', 'Use actual Loan Estimates, local taxes, insurance quotes, maintenance history, and comparable rent. The current calculator uses a simplified owner-cost allowance and does not replace professional financial, tax, legal, or real-estate advice.'],
+    sources: [
+      { label: 'Consumer Financial Protection Bureau — Loan Estimate explainer', href: 'https://www.consumerfinance.gov/owning-a-home/loan-estimate/' },
+      { label: 'Consumer Financial Protection Bureau — all costs of buying a home', href: 'https://www.consumerfinance.gov/owning-a-home/what-are-all-costs-buying-home/' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'rent-buy-assumptions-method',
+    labels: labels.zh,
+    directAnswer: '租屋或買房不能只比月租與房貸月付。要用同區域、同坪數與屋況的房子，設定預計持有年限，再分開計算房貸利息、買賣交易成本、房屋稅與地價稅、管理修繕、租金成長、房價變動，以及頭期款沒有投資的機會成本。只要利率或房價漲幅稍微調整就翻盤，結論就應該是「結果不穩健」，不是硬選一邊。',
+    inputs: ['內政部實價登錄中可比較的成交總價與租金，不混用不同屋齡、坪數或車位', '預計自住年限、貸款年限與可能出售時間', '頭期款、實際核貸利率、寬限期與貸款費用', '契稅、代書、仲介、房屋稅、地價稅、管理與修繕', '租金、管理費負擔、租金年增率與搬家成本', '房價年變動與租屋時保留資金的機會報酬率'],
+    formula: '買房 N 年淨成本 ≈ 買入成本 + 累計房貸利息 + 持有稅費／保險／管理／修繕 + 賣出成本 − 房價增值 + 頭期款等前期資金的放棄報酬；租屋 N 年淨成本 ≈ 累計租金與租屋方負擔費用',
+    workedExample: '示範七年情境：總價 NT$15,000,000、頭期款 NT$3,000,000、買入成本 NT$450,000，貸款 30 年、利率 2.2%，屋主持有成本每年 NT$200,000，房價年增 1.5%，出售成本為售價 4%，前期資金機會報酬 4%。七年房貸利息約 NT$1,689,567，增值約 NT$1,647,674，出售成本約 NT$665,907，放棄報酬約 NT$1,089,965，估算買房淨成本 NT$3,647,764。月租 NT$38,000、年增 2% 的累計租金約 NT$3,390,033；本情境租屋低約 NT$257,731，不代表未來價格。',
+    sensitivity: [
+      { scenario: '基準情境', input: '持有 7 年、利率 2.2%、房價年增 1.5%', result: '租屋低約 NT$257,731' },
+      { scenario: '持有期縮短', input: '只住 4 年，其餘不變', result: '租屋低約 NT$678,795' },
+      { scenario: '核貸利率較低', input: '1.8% 取代 2.2%', result: '買房低約 NT$56,980' },
+      { scenario: '房價不變', input: '房價年變動 0%', result: '租屋低約 NT$1,839,498' },
+    ],
+    cta: { label: '用自己的房價、租金與年限做壓力測試', href: '/zh/tools/rent-vs-buy' },
+    limitations: ['所有數字都是公開公式的示範輸入，不是對台灣房價、租金、利率或投資報酬的預測。', '自住稅率、契稅、房地合一稅、仲介費、裝潢、車位、管理費與修繕因個案不同；應以契約、稅單與報價替換示範值。', '目前計算機用簡化屋主持有成本，未完整處理寬限期、變動利率、稅務與每月差額投資；結果不是購屋、投資、貸款、稅務或法律建議。'],
+    sources: [
+      { label: '內政部 — 不動產交易實價查詢服務網', href: 'https://lvr.land.moi.gov.tw/jsp/index.jsp' },
+      { label: '財政部稅務入口網 — 房屋稅問答', href: 'https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/local/house-tax?page=1&size=10' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'rent-buy-assumptions-method',
+    labels: labels.es,
+    directAnswer: 'Alquilar o comprar no se decide comparando el alquiler con la cuota hipotecaria. Compara viviendas equivalentes y fija primero cuántos años permanecerás. Después separa intereses, gastos de compra y venta, impuestos, comunidad, seguro y mantenimiento; añade el crecimiento del alquiler, la revalorización y el rendimiento que renuncias a obtener sobre la entrada. Si un cambio pequeño altera el resultado, no hay un ganador financiero robusto.',
+    inputs: ['Precio y alquiler de viviendas realmente comparables por zona, tamaño y estado', 'Años de permanencia y plazo de la hipoteca', 'Entrada, TIN, TAE, comisión de apertura y coste de tasación', 'Impuestos de compra, registro, notaría, venta y otros gastos según el caso', 'IBI, comunidad, seguro, mantenimiento y derramas previsibles', 'Crecimiento del alquiler, revalorización y rentabilidad alternativa de la entrada'],
+    formula: 'Coste neto de comprar en N años ≈ gastos de compra + intereses + impuestos/seguro/comunidad/mantenimiento + gastos de venta − revalorización + rentabilidad renunciada sobre el efectivo inicial; coste de alquilar ≈ alquileres y gastos del inquilino acumulados',
+    workedExample: 'Caso ilustrativo a siete años: vivienda de 240.000 €, entrada de 48.000 €, 24.000 € de gastos de compra, hipoteca a 30 años al 3,25 %, 3.000 € anuales de costes del propietario, revalorización del 1,5 %, venta al 5 % y rentabilidad alternativa del 4 %. Los intereses suman unos 40.467 €, la revalorización 26.363 €, la venta 13.318 € y la rentabilidad renunciada 22.747 €; coste neto estimado de compra: 95.170 €. Un alquiler inicial de 1.000 € con subida del 2 % suma 89.211 €; alquilar queda 5.958 € por debajo en este supuesto, no como previsión.',
+    sensitivity: [
+      { scenario: 'Caso base', input: '7 años; hipoteca 3,25%; revalorización 1,5%', result: 'Alquilar cuesta unos 5.958 € menos' },
+      { scenario: 'Estancia más corta', input: '4 años; resto igual', result: 'Alquilar cuesta unos 20.734 € menos' },
+      { scenario: 'Tipo hipotecario menor', input: '2,5% en lugar de 3,25%', result: 'Comprar cuesta unos 3.668 € menos' },
+      { scenario: 'Precio sin revalorización', input: '0% en lugar de 1,5%', result: 'Alquilar cuesta unos 31.003 € menos' },
+    ],
+    cta: { label: 'Abrir la calculadora en inglés y probar escenarios', href: '/en/tools/rent-vs-buy' },
+    limitations: ['Los porcentajes del ejemplo son entradas transparentes, no una predicción del euríbor, del precio de la vivienda, del alquiler ni de una inversión.', 'ITP o IVA, AJD, tasación, registro, notaría, comisión, IBI, comunidad y fiscalidad de la venta dependen de la vivienda, la comunidad autónoma y el contrato.', 'La herramienta actual simplifica costes del propietario y no sustituye la FEIN, la FiAE, una oferta vinculante ni asesoramiento financiero, fiscal, jurídico o inmobiliario.'],
+    sources: [
+      { label: 'Banco de España — gastos asociados a la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html' },
+      { label: 'Banco de España — contratación e información de la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Contratacion_de_la_hipoteca.html' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  fr: {
+    id: 'rent-buy-assumptions-method',
+    labels: labels.fr,
+    directAnswer: 'Louer ou acheter ne se résume pas à comparer le loyer à la mensualité. Utilisez deux logements comparables et une durée de détention explicite, puis distinguez intérêts, frais d’acquisition et de revente, taxe foncière, copropriété, assurance et entretien. Ajoutez l’évolution du loyer, celle du prix et le rendement abandonné sur l’apport. Si une hypothèse raisonnable inverse le résultat, la décision financière reste fragile.',
+    inputs: ['Prix et loyer de logements comparables par emplacement, surface et état', 'Durée de détention prévue et durée du crédit', 'Apport, taux, TAEG, assurance emprunteur et frais de garantie', 'Droits de mutation, émoluments, agence, diagnostics et frais de revente', 'Taxe foncière, copropriété, assurance, entretien et travaux votés', 'Hausse du loyer, évolution du prix et rendement alternatif de l’apport'],
+    formula: 'Coût net d’achat sur N ans ≈ frais d’acquisition + intérêts + taxes/assurances/copropriété/entretien + frais de revente − gain de valeur + rendement abandonné sur les fonds initiaux ; coût locatif ≈ loyers et charges propres au locataire cumulés',
+    workedExample: 'Scénario illustratif sur huit ans : logement à 280 000 €, apport de 56 000 €, frais d’acquisition de 22 000 €, crédit sur 25 ans à 3,5 %, coûts de propriétaire de 3 500 € par an, hausse de valeur de 1,2 %, revente à 5 % et rendement alternatif de 3,5 %. Les intérêts atteignent environ 55 885 €, le gain de valeur 28 036 €, la revente 15 402 € et le rendement abandonné 24 711 €; coût net d’achat estimé 117 962 €. Un loyer de 1 100 € progressant de 1,5 % totalise 111 313 € : la location est inférieure d’environ 6 648 € dans ce scénario, sans valeur prédictive.',
+    sensitivity: [
+      { scenario: 'Scénario central', input: '8 ans; crédit 3,5%; hausse du prix 1,2%', result: 'Location inférieure d’environ 6 648 €' },
+      { scenario: 'Détention plus courte', input: '4 ans; autres données identiques', result: 'Location inférieure d’environ 24 256 €' },
+      { scenario: 'Taux plus bas', input: '2,75% au lieu de 3,5%', result: 'Achat inférieur d’environ 5 803 €' },
+      { scenario: 'Prix stable', input: '0% au lieu de 1,2%', result: 'Location inférieure d’environ 33 283 €' },
+    ],
+    cta: { label: 'Ouvrir le calculateur en anglais et tester les hypothèses', href: '/en/tools/rent-vs-buy' },
+    limitations: ['Les taux et évolutions du scénario sont des entrées de démonstration, pas des prévisions de crédit, de loyers, de prix ou de placement.', 'Ancien, neuf, département, copropriété, PTZ, assurance, travaux, fiscalité et résidence principale modifient les frais; utilisez les actes, devis et appels de charges réels.', 'Le calculateur actuel simplifie les coûts du propriétaire et ne remplace ni une simulation de TAEG, ni le notaire, l’ADIL, ni un conseil financier, fiscal, juridique ou immobilier.'],
+    sources: [
+      { label: 'ANIL — frais annexes pour devenir propriétaire', href: 'https://www.anil.org/votre-besoin/acheter/financement/frais-annexes/' },
+      { label: 'Service-Public.fr — crédit immobilier et simulateurs officiels', href: 'https://www.service-public.fr/particuliers/vosdroits/F34966/2?idFicheParent=F10871' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'rent-buy-assumptions-method',
+    labels: labels.de,
+    directAnswer: 'Mieten oder Kaufen lässt sich nicht durch Kaltmiete gegen Kreditrate entscheiden. Vergleichen Sie gleichwertige Wohnungen, legen Sie die Haltedauer fest und trennen Sie Zinsen von Tilgung. Hinzu kommen Kauf- und Verkaufskosten, Grundsteuer, Hausgeld, Versicherung und Instandhaltung sowie Mietsteigerung, Wertentwicklung und entgangene Rendite des Eigenkapitals. Kippt das Ergebnis bei einer kleinen Änderung, ist es finanziell nicht robust.',
+    inputs: ['Kaufpreis und Miete vergleichbarer Objekte nach Lage, Größe und Zustand', 'Geplante Haltedauer, Kreditlaufzeit und Zinsbindung', 'Eigenkapital, Sollzins, effektiver Jahreszins und Finanzierungsentgelte', 'Grunderwerbsteuer, Notar, Grundbuch, Makler und spätere Verkaufskosten', 'Nicht umlagefähiges Hausgeld, Grundsteuer, Versicherung und Instandhaltung', 'Mietsteigerung, Wertentwicklung und alternative Rendite des Eigenkapitals'],
+    formula: 'Netto-Kaufkosten nach N Jahren ≈ Kaufnebenkosten + Kreditzinsen + Steuern/Versicherung/Hausgeld/Instandhaltung + Verkaufskosten − Wertzuwachs + entgangener Ertrag des Anfangskapitals; Nettomietkosten ≈ kumulierte Miete und Mieterkosten',
+    workedExample: 'Beispiel über zehn Jahre: 350.000 € Kaufpreis, 70.000 € Eigenkapital, 35.000 € Kaufnebenkosten, 30-jähriges Darlehen zu 3,5 %, 4.500 € Eigentümerkosten pro Jahr, 1 % Wertzuwachs, 4,5 % Verkaufskosten und 4 % Alternativrendite. Zinsen rund 87.674 €, Wertzuwachs 36.618 €, Verkauf 17.398 € und entgangener Ertrag 50.426 € ergeben geschätzte Netto-Kaufkosten von 198.880 €. Eine Miete von 1.200 € mit 2 % Steigerung summiert sich auf 157.676 €; Mieten liegt im Szenario rund 41.204 € niedriger. Das ist keine Prognose.',
+    sensitivity: [
+      { scenario: 'Basisfall', input: '10 Jahre; Zins 3,5%; Wertzuwachs 1%', result: 'Mieten rund 41.204 € niedriger' },
+      { scenario: 'Kürzere Haltedauer', input: '5 Jahre; sonst unverändert', result: 'Mieten rund 50.602 € niedriger' },
+      { scenario: 'Niedrigerer Zins', input: '2,75% statt 3,5%', result: 'Mieten rund 21.534 € niedriger' },
+      { scenario: 'Kein Wertzuwachs', input: '0% statt 1%', result: 'Mieten rund 76.174 € niedriger' },
+    ],
+    cta: { label: 'Englischen Rechner öffnen und Annahmen testen', href: '/en/tools/rent-vs-buy' },
+    limitations: ['Alle Prozentsätze sind transparente Beispielwerte und keine Vorhersage für Bauzinsen, Mieten, Immobilienpreise oder Kapitalanlagen.', 'Bundesland, Maklervertrag, Objektart, WEG-Unterlagen, Sanierungsbedarf, Zinsbindung, Anschlussfinanzierung und Steuern verändern die Kosten.', 'Der aktuelle Rechner fasst Eigentümerkosten vereinfacht zusammen. Er ersetzt weder Kreditangebot und Haushaltsrechnung noch Finanzierungs-, Steuer-, Rechts- oder Immobilienberatung.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Modelle und Planung der Immobilienfinanzierung', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/immobilienfinanzierung-diese-modelle-gibt-es-und-das-sollten-sie-beachten-5801' },
+      { label: 'BaFin — Immobilienfinanzierung richtig kalkulieren', href: 'https://www.bafin.de/SharedDocs/Videos/DE/video_wiw_2022_immobilienfinanzierung_1.html' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const costcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   en: {
     id: 'membership-break-even-method',

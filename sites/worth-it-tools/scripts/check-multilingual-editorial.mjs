@@ -222,15 +222,18 @@ const editorialRoutes = [
       de: ['46,20 €', 'tatsächlichen Verbrauch', 'data-mode="appliance"'],
     },
   },
-];
-const partialEditorialRoutes = [{
-  slug: 'cost-per-use-expensive-item', locales: ['en', 'zh', 'es'],
-  nativeMarkers: {
-    en: ['$11/use', 'sunk', 'data-mode="costPerUse"'],
-    zh: ['NT$285', '沉沒成本', 'data-mode="costPerUse"'],
-    es: ['10 €/uso', 'tres años', 'data-mode="costPerUse"'],
+  {
+    slug: 'cost-per-use-expensive-item',
+    nativeMarkers: {
+      en: ['$11/use', 'sunk', 'data-mode="costPerUse"'],
+      zh: ['NT$285', '沉沒成本', 'data-mode="costPerUse"'],
+      es: ['10 €/uso', 'tres años', 'data-mode="costPerUse"'],
+      fr: ['11,67 €/usage', 'indice de durabilité', 'data-mode="costPerUse"'],
+      de: ['9,50 €', 'Besitzaufwand', 'data-mode="costPerUse"'],
+    },
   },
-}];
+];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -339,4 +342,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 22 complete five-locale topics, 105 added routes, 4 enriched high-value tools, 15 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 23 complete five-locale topics, 107 added routes, 4 enriched high-value tools, 15 embedded decision calculators.');

@@ -31,13 +31,14 @@ const briefRoutes = [
   { id: '16', slug: 'car-lease-vs-buy-total-cost' },
   { id: '17', slug: 'full-commute-cost-including-time' },
   { id: '18', slug: 'work-from-home-vs-commuting-hidden-costs' },
+  { id: '19', slug: 'repair-or-replace-decision-formula' },
 ];
 
 const releaseFloor = {
-  html: 125,
-  editorial: 93,
-  alignedVariants: 90,
-  compliantVariants: 90,
+  html: 128,
+  editorial: 96,
+  alignedVariants: 93,
+  compliantVariants: 93,
   completeTopics: 18,
 };
 

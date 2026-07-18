@@ -1,0 +1,103 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import RepairReplaceCalculator from '../../components/RepairReplaceCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { repairReplaceGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Repair or replace: a practical decision formula for appliances, phones, and cars',
+    description: 'Compare a repair quote with expected remaining life, recurrence risk, energy difference and net replacement cost without relying on a universal percentage rule.',
+    faq: [
+      { question: 'What percentage of replacement cost makes a repair worthwhile?', answer: 'There is no universal percentage. The repair quote ratio is only a screen; remaining life, repeat-failure risk, energy difference, safety, parts and net replacement cost decide the outcome.' },
+      { question: 'How do I include the chance of another failure?', answer: 'Use your own low, base and high probability. Multiply probability by the future repair cost and add that expected amount to the current repair path.' },
+      { question: 'Should a diagnostic fee be included?', answer: 'Include it only if it is still avoidable or credited differently between choices. A fee already paid and unrecoverable is a sunk cost and should not change the forward decision.' },
+      { question: 'Can the formula be used for a car?', answer: 'As a first screen, yes, but cars also need downtime, safety, financing, insurance, resale and multiple systems. Use a written inspection and quotes before deciding.' },
+      { question: 'Does warranty coverage change the result?', answer: 'Yes. Read the written warranty first. A covered repair may reduce the repair quote, while a service contract is separate and may have exclusions or deductibles.' },
+    ],
+  },
+  zh: {
+    title: '維修還是換新？家電、手機與車輛的實用判斷公式',
+    description: '用維修報價、修後剩餘壽命、故障再發、能源差與換新淨成本判斷，不套用「超過幾成就換」的萬用口訣。',
+    faq: [
+      { question: '維修超過新品幾成就該換？', answer: '沒有適用所有產品的固定比例。比例只能初篩，還要看修後能用多久、再故障、耗能、安全、零件和換新淨成本。' },
+      { question: '再故障機率怎麼算？', answer: '不要查不到就假裝有精準統計。依技師診斷、同部位維修紀錄與機齡設定低／中／高機率，再乘未來可能支出。' },
+      { question: '檢測費要算嗎？', answer: '已支付且不論選哪個方案都拿不回來的檢測費是沉沒成本；尚未支付、可折抵維修或換新不同的部分才影響往後決策。' },
+      { question: '手機送修前要注意什麼？', answer: '先備份、移除敏感資料並確認保固、檢測費、報價與換件同意。行政院消保處提醒，收費維修應先報價並取得同意。' },
+      { question: '車輛也能用同一公式嗎？', answer: '可初篩，但安全、停駛損失、保險、貸款餘額、殘值與其他老化零件要另外評估，不能只看單次維修。' },
+    ],
+  },
+  es: {
+    title: 'Reparar o sustituir: una fórmula práctica para electrodomésticos, móviles y coches',
+    description: 'Compara presupuesto, vida restante, recaída, energía y coste neto de sustitución sin aplicar una regla porcentual universal.',
+    faq: [
+      { question: '¿A partir de qué porcentaje conviene sustituir?', answer: 'No hay un porcentaje universal. La relación entre reparación y sustitución solo filtra; importan vida restante, reincidencia, energía, seguridad, repuestos y coste neto.' },
+      { question: '¿Cómo incluyo otra avería posible?', answer: 'Define probabilidades baja, base y alta con el diagnóstico disponible. Multiplica la probabilidad por el coste futuro y súmalo al camino de reparar.' },
+      { question: '¿La garantía legal cambia la decisión?', answer: 'Sí. En España, los bienes nuevos tienen con carácter general tres años de garantía legal y la falta de conformidad puede dar derecho a reparación o sustitución. Revisa fecha y condiciones antes de pagar.' },
+      { question: '¿Se incluyen los gastos de diagnóstico?', answer: 'Solo si aún son evitables o se abonan de forma distinta. Lo ya pagado y no recuperable es coste hundido.' },
+      { question: '¿Sirve para un coche?', answer: 'Como primera comparación, pero añade seguridad, inmovilización, seguro, financiación, valor de reventa y el estado del resto del vehículo.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: { currency: 'USD' as const, defaults: { repairQuote: 250, repairMonths: 36, recurrenceProbability: 20, recurrenceCost: 300, extraEnergyMonthly: 3, replacementPrice: 1200, replacementFees: 100, currentValue: 50, replacementMonths: 96 }, copy: { heading: 'Repair versus replacement life-extension calculator', intro: 'Compare monthly equivalents over each option’s expected useful months. Use quote-based scenarios; no failure rate is assumed for you.', repairQuote: 'Repair quote still to be paid', repairMonths: 'Expected useful months after repair', recurrenceProbability: 'Chance of repeat failure (%)', recurrenceCost: 'Cost if failure recurs', extraEnergyMonthly: 'Old item extra energy/month', replacementPrice: 'Replacement purchase price', replacementFees: 'Delivery, setup, tax or transfer', currentValue: 'Trade-in/resale value now', replacementMonths: 'Expected useful months of replacement', repairExpected: 'Expected repair-path cost', repairMonthly: 'Repair cost per useful month', replacementNet: 'Net replacement cost', replacementMonthly: 'Replacement cost per useful month', repairRatio: 'Quote / net replacement', breakEvenQuote: 'Maximum break-even repair quote', verdictRepair: 'Repair is lower per useful month by', verdictReplace: 'Replacement is lower per useful month by', privacy: 'Educational estimate. Safety, warranty, diagnosis, downtime and financing can override the arithmetic.' } },
+  zh: { currency: 'TWD' as const, defaults: { repairQuote: 6000, repairMonths: 30, recurrenceProbability: 25, recurrenceCost: 5000, extraEnergyMonthly: 100, replacementPrice: 32000, replacementFees: 1000, currentValue: 1000, replacementMonths: 84 }, copy: { heading: '維修延命 vs 換新每月成本計算器', intro: '依兩個方案各自預期可用月數換算；故障機率必須由你用診斷與情境輸入，系統不會捏造。', repairQuote: '尚未支付的維修報價', repairMonths: '修後預期可用月數', recurrenceProbability: '再故障機率（%）', recurrenceCost: '再故障可能支出', extraEnergyMonthly: '舊機每月多耗能源', replacementPrice: '換新品成交價', replacementFees: '運送／安裝／稅費／過戶', currentValue: '舊品目前折抵／轉售', replacementMonths: '新品預期可用月數', repairExpected: '維修路徑期望成本', repairMonthly: '維修每個可用月成本', replacementNet: '換新淨成本', replacementMonthly: '換新每個可用月成本', repairRatio: '報價占換新淨成本', breakEvenQuote: '維修報價損益上限', verdictRepair: '維修每個可用月較省', verdictReplace: '換新每個可用月較省', privacy: '一般教育試算。安全、保固、診斷、停用損失與融資可能優先於算術。' } },
+  es: { currency: 'EUR' as const, defaults: { repairQuote: 180, repairMonths: 30, recurrenceProbability: 20, recurrenceCost: 180, extraEnergyMonthly: 2.5, replacementPrice: 850, replacementFees: 40, currentValue: 30, replacementMonths: 84 }, copy: { heading: 'Calculadora de prolongar la vida o sustituir', intro: 'Compara equivalentes mensuales según la vida útil esperada. Introduce escenarios de avería basados en diagnóstico; no se inventa una tasa.', repairQuote: 'Presupuesto de reparación pendiente', repairMonths: 'Meses útiles esperados tras reparar', recurrenceProbability: 'Probabilidad de recaída (%)', recurrenceCost: 'Coste si reaparece la avería', extraEnergyMonthly: 'Energía extra del equipo viejo/mes', replacementPrice: 'Precio de sustitución', replacementFees: 'Entrega, instalación, impuestos o trámites', currentValue: 'Valor de venta o entrega actual', replacementMonths: 'Meses útiles esperados del sustituto', repairExpected: 'Coste esperado del camino reparar', repairMonthly: 'Reparar por mes útil', replacementNet: 'Coste neto de sustituir', replacementMonthly: 'Sustituir por mes útil', repairRatio: 'Presupuesto / sustitución neta', breakEvenQuote: 'Presupuesto máximo de equilibrio', verdictRepair: 'Reparar cuesta menos por mes útil en', verdictReplace: 'Sustituir cuesta menos por mes útil en', privacy: 'Estimación educativa. Seguridad, garantía, diagnóstico, inmovilización y financiación pueden prevalecer.' } },
+};
+
+export function getStaticPaths() { return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = repairReplaceGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>The familiar “repair if it costs less than half of new” rule leaves out the most important variable: how many reliable months the repair actually buys. A $250 repair can be poor if it buys six months and excellent if it buys three years.</p>
+    <DecisionGuide content={guide} />
+    <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>Get a written diagnosis before assigning recurrence risk</h2>
+    <p>Ask which component failed, whether the quote is capped, what labor and parts are warranted, and whether related wear was inspected. Use a low/base/high recurrence scenario instead of a web-wide average that does not match the model or failure.</p>
+    <h2>Compare net replacement, not the sticker</h2>
+    <p>Add delivery, setup, tax, data transfer or registration and subtract only a real trade-in or resale offer. Financing cost and downtime belong in additional scenarios. A car also needs remaining loan balance and resale treatment.</p>
+    <h2>Energy difference is monthly and incremental</h2>
+    <p>Use measured consumption and your current marginal rate. For a phone the difference may be negligible; for an old refrigerator, HVAC system or inefficient vehicle it can change the break-even quote.</p>
+    <h2>Safety and warranty can override the result</h2>
+    <p>Check recalls and the written warranty before authorizing work. Do not repair a safety-critical product based only on low monthly cost, and do not pay for a repair that the seller or manufacturer must cover.</p>
+    <p class="privacy-note">General education only, not product-safety, vehicle, legal, tax or financial advice.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>「維修超過新品五成就換」不是通用答案。同一筆 NT$6,000，若只延長半年很貴，若能穩定使用 30 個月則可能合理；真正要比的是每個可靠使用月。</p>
+    <DecisionGuide content={guide} />
+    <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>先拿書面報價，再估再故障</h2>
+    <p>報價要寫故障部位、零件、工資、檢測費、修後保固與未包含項目。行政院消保處的手機送修提醒也指出，收費維修應先報價並取得同意。沒有型號與診斷證據時，應做低／中／高情境，不填假精準機率。</p>
+    <h2>換新成本要扣真實折抵，也要加必要費用</h2>
+    <p>家電可能有運送、安裝與舊機處理；手機有資料移轉與配件；汽車有過戶、保險差額、貸款餘額與停駛。只有可實現的折抵或售價才能扣除。</p>
+    <h2>耗能差用帳單與標示</h2>
+    <p>把舊品多出的每月能源費乘修後月份。若同級新品功能、容量不同，先調整到相同使用量；不要用廣告宣稱直接當成帳單節省。</p>
+    <h2>保固與安全先於成本</h2>
+    <p>電器買賣定型化契約要求中文保證書與維修服務資訊。若仍在保固或有安全疑慮，先走正式處理與召回查核，不用計算器合理化自費或冒險使用。</p>
+    <p class="privacy-note">一般教育用途，不是產品安全、車輛、法律、稅務或財務建議。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>La regla “si supera la mitad, sustituye” ignora los meses fiables que compra la reparación. El presupuesto debe convertirse en coste por vida extendida y compararse con el coste neto por mes del sustituto.</p>
+    <DecisionGuide content={guide} />
+    <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>Comprueba primero la garantía legal</h2>
+    <p>En España, los bienes nuevos tienen con carácter general tres años de garantía legal desde 2022. Una falta de conformidad puede dar derecho a reparación o sustitución. No introduzcas como gasto un trabajo que debe asumir el vendedor.</p>
+    <h2>El presupuesto debe ser trazable</h2>
+    <p>Para aparatos domésticos, la normativa de servicios técnicos exige presupuesto, identificación de piezas y garantía de la reparación. Pregunta por causa, piezas, mano de obra, plazo y cobertura antes de asignar recaída.</p>
+    <h2>La sustitución incluye más que el precio</h2>
+    <p>Añade entrega, instalación, migración de datos o trámites y resta solo una oferta real por el equipo actual. Para coche, incorpora inmovilización, financiación, seguro y reventa en escenarios separados.</p>
+    <h2>Repuestos y derecho a reparar cambian la viabilidad</h2>
+    <p>España amplió a diez años la disponibilidad mínima de repuestos tras dejar de fabricarse determinados bienes. Las nuevas reglas europeas de reparación se aplican mediante transposición nacional desde el 31 de julio de 2026; comprueba producto y fecha.</p>
+    <p class="privacy-note">Información educativa; no es asesoramiento de seguridad, vehículo, garantía, fiscal o financiero.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

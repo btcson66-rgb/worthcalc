@@ -184,6 +184,15 @@ const editorialRoutes = [
   },
 ];
 const partialEditorialRoutes = [];
+partialEditorialRoutes.push({
+  slug: 'repair-or-replace-decision-formula',
+  locales: ['en', 'zh', 'es'],
+  nativeMarkers: {
+    en: ['$301', 'CPSC', 'data-repair-replace-calculator'],
+    zh: ['NT$7,179', '手機送修', 'data-repair-replace-calculator'],
+    es: ['196 €', 'tres años', 'data-repair-replace-calculator'],
+  },
+});
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -292,4 +301,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 18 complete five-locale topics, 82 added routes, 4 enriched high-value tools, 10 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 18 complete five-locale topics, 85 added routes, 4 enriched high-value tools, 11 embedded decision calculators.');

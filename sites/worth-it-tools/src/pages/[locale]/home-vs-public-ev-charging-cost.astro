@@ -1,0 +1,161 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import EVChargingCostCalculator from '../../components/EVChargingCostCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { evChargingCostGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'Home charging vs public charging: what does an EV really cost per mile?',
+    description: 'Calculate EV charging cost per mile from home, public AC and DC fast-charging rates, charging losses, kWh share, subscriptions and session fees.',
+    faq: [
+      { question: 'How do I calculate EV charging cost per mile?', answer: 'Multiply miles by kWh per 100 miles, add charging loss, then multiply grid kWh by a rate weighted across home, public AC and DC charging. Add memberships and session or idle fees, then divide the annual total by annual miles.' },
+      { question: 'Should I use the EV dashboard consumption or electricity from the wall?', answer: 'Dashboard consumption usually represents energy used by the vehicle, while the bill or charger records energy delivered. If you start with dashboard kWh per 100 miles, add charging loss; if you already measured wall-to-wheel consumption, do not add it again.' },
+      { question: 'Is DC fast charging always more expensive than charging at home?', answer: 'It is normally priced higher, but the answer depends on the exact utility tariff, network, plan, location and fees. Compare the prices that apply to your account rather than a national average.' },
+      { question: 'Do charging subscriptions reduce cost per mile?', answer: 'Only if the per-kWh or session savings across your paid usage exceed the monthly fee. Include the fee for every paid month, including months with little public charging.' },
+      { question: 'Does this calculation include buying and installing a home charger?', answer: 'No. It estimates annual charging energy and directly attributable recurring fees. Add equipment, electrical work and financing separately when comparing total vehicle ownership cost.' },
+    ],
+  },
+  zh: {
+    title: '家用充電和公共快充差多少？電動車每公里成本怎麼算',
+    description: '用台電帳單、公共 AC／DC 快充費率、充電損耗、度數占比、會員月費與占位費，算出電動車每公里真正充電成本。',
+    faq: [
+      { question: '電動車每公里電費怎麼算？', answer: '先用年里程乘以每 100 公里耗電，再加上充電損耗；接著依家充、公共 AC 與 DC 快充的實際充電度數占比加權電價，加入會員、啟動、停車與占位費後，除以年公里。' },
+      { question: '車機顯示的 kWh/100km 可以直接乘電價嗎？', answer: '通常不行。車機多半顯示行駛端耗電，台電或充電業者帳單則是電網供電量，中間還有充電損耗。如果你已用電表度數除以公里，就不要再加一次損耗。' },
+      { question: '家用充電一定比公共快充便宜嗎？', answer: '常見情況是家充較低，但仍取決於住宅級距、夏月或時間電價、社區加價，以及公共業者的會員方案。必須用自己的帳單與場站付款畫面查核。' },
+      { question: '公共快充只要計算每度電價嗎？', answer: '不一定。部分場站還有啟動費、計時費、停車費、會員月費或充滿後占位費；這些都應按一年實付金額加入。' },
+      { question: '家用充電樁工程費有算在每公里成本裡嗎？', answer: '本頁只算充電能源與經常性費用。充電樁、拉線、電力增設及社區工程應在比較電動車總持有成本時另外納入。' },
+    ],
+  },
+  es: {
+    title: 'Carga en casa o pública: cuánto cuesta realmente recorrer un kilómetro en coche eléctrico',
+    description: 'Calcula el coste real de recarga por km con tarifa doméstica, AC y DC pública, pérdidas, reparto de kWh, abonos y gastos de sesión u ocupación.',
+    faq: [
+      { question: '¿Cómo se calcula el coste de recarga de un coche eléctrico por kilómetro?', answer: 'Multiplica los kilómetros por el consumo en kWh/100 km, añade las pérdidas y aplica un precio ponderado por el porcentaje de energía de casa, AC pública y DC rápida. Suma cuotas y cargos de sesión, y divide el total anual por los kilómetros.' },
+      { question: '¿Uso el consumo del coche o los kWh del contador?', answer: 'Si usas el consumo mostrado por el coche, añade la pérdida entre red y batería. Si ya has dividido los kWh medidos en el contador o cargador entre los kilómetros, esa pérdida ya está incluida y no debe duplicarse.' },
+      { question: '¿La carga rápida siempre cuesta más que cargar en casa?', answer: 'Suele tener un precio superior, pero depende del contrato doméstico, operador, potencia, alta, itinerancia y método de pago. La comparación válida usa los precios aplicables a tu cuenta.' },
+      { question: '¿Merece la pena un abono mensual de recarga?', answer: 'Solo cuando el ahorro por kWh o sesión durante los meses contratados supera la cuota total. Incluye también los meses en los que casi no utilizas la red.' },
+      { question: '¿La calculadora incluye instalar un punto de carga en el garaje?', answer: 'No. Calcula energía y gastos recurrentes de recarga. La compra, obra, legalización y financiación del punto deben añadirse al coste total del vehículo.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    distanceUnit: 'mi' as const,
+    defaults: { annualDistance: 12000, efficiency: 30, chargingLoss: 10, homeShare: 70, publicAcShare: 10, publicDcShare: 20, homeRate: 0.16, publicAcRate: 0.30, publicDcRate: 0.55, monthlyMembership: 10, annualSessionFees: 0 },
+    copy: {
+      heading: 'EV charging cost-per-mile calculator',
+      intro: 'Replace the examples with the rate that applies to your bill and account. Shares refer to delivered kWh, in home / public AC / public DC order.',
+      annualDistance: 'Annual driving (miles)', efficiency: 'Vehicle use (kWh/100 mi)', chargingLoss: 'Charging loss (%)', homeShare: 'Home share of kWh (%)', publicAcShare: 'Public AC share (%)', publicDcShare: 'DC fast-charge share (%)', homeRate: 'Home electricity ($/kWh)', publicAcRate: 'Public AC ($/kWh)', publicDcRate: 'Public DC ($/kWh)', monthlyMembership: 'Charging membership ($/month)', annualSessionFees: 'Session, parking and idle fees ($/year)', annualCost: 'Annual charging cost', costPerDistance: 'Charging cost per mile', effectiveRate: 'Weighted energy price', batteryEnergy: 'Energy reaching battery', gridEnergy: 'Energy billed by grid/networks', homeOnlyCost: 'Home-only energy benchmark', publicPremium: 'Extra versus home-only benchmark', mixSummary: 'Normalized home / AC / DC mix:', normalizedMix: 'entered shares were normalized to 100%', privacy: 'Educational estimate only. It does not quote a utility or charging network and excludes home-equipment installation. Verify current tariffs and station fees before charging.'
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    distanceUnit: 'km' as const,
+    defaults: { annualDistance: 15000, efficiency: 16.5, chargingLoss: 10, homeShare: 75, publicAcShare: 10, publicDcShare: 15, homeRate: 3.2, publicAcRate: 8, publicDcRate: 12, monthlyMembership: 199, annualSessionFees: 0 },
+    copy: {
+      heading: '電動車家充／公共快充每公里成本計算器',
+      intro: '請換成台電帳單、社區與充電業者實際費率。占比依序為家充／公共 AC／DC 快充的「充電度數」，不是充電次數。',
+      annualDistance: '每年行駛公里', efficiency: '車輛耗電（kWh/100km）', chargingLoss: '充電損耗（%）', homeShare: '家充度數占比（%）', publicAcShare: '公共 AC 度數占比（%）', publicDcShare: 'DC 快充度數占比（%）', homeRate: '家充電價（NT$/度）', publicAcRate: '公共 AC（NT$/度）', publicDcRate: 'DC 快充（NT$/度）', monthlyMembership: '充電會員月費（NT$/月）', annualSessionFees: '啟動、停車與占位費（NT$/年）', annualCost: '一年充電總成本', costPerDistance: '每公里充電成本', effectiveRate: '加權能源單價', batteryEnergy: '實際進入電池電量', gridEnergy: '電表／充電網路計費電量', homeOnlyCost: '全部家充能源基準', publicPremium: '相較全部家充多付', mixSummary: '正規化家充／AC／DC 占比：', normalizedMix: '輸入占比已按比例換算為 100%', privacy: '一般教育試算，不代表台電或任何充電業者報價，也不含家充工程。充電前請查核最新帳單、APP 與場站費率。'
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    distanceUnit: 'km' as const,
+    defaults: { annualDistance: 15000, efficiency: 17, chargingLoss: 10, homeShare: 70, publicAcShare: 10, publicDcShare: 20, homeRate: 0.18, publicAcRate: 0.35, publicDcRate: 0.55, monthlyMembership: 9.99, annualSessionFees: 0 },
+    copy: {
+      heading: 'Calculadora del coste de recarga por kilómetro',
+      intro: 'Sustituye los ejemplos por tu factura y la tarifa aplicable a tu cuenta. Los porcentajes son kWh de casa / AC pública / DC rápida.',
+      annualDistance: 'Kilómetros al año', efficiency: 'Consumo (kWh/100 km)', chargingLoss: 'Pérdidas de recarga (%)', homeShare: 'Parte de kWh en casa (%)', publicAcShare: 'Parte en AC pública (%)', publicDcShare: 'Parte en DC rápida (%)', homeRate: 'Electricidad doméstica (€/kWh)', publicAcRate: 'AC pública (€/kWh)', publicDcRate: 'DC rápida (€/kWh)', monthlyMembership: 'Abono de recarga (€/mes)', annualSessionFees: 'Inicio, aparcamiento y ocupación (€/año)', annualCost: 'Coste anual de recarga', costPerDistance: 'Coste de recarga por km', effectiveRate: 'Precio energético ponderado', batteryEnergy: 'Energía que recibe la batería', gridEnergy: 'Energía facturada por red/operadores', homeOnlyCost: 'Referencia solo en casa', publicPremium: 'Extra frente a cargar solo en casa', mixSummary: 'Reparto normalizado casa / AC / DC:', normalizedMix: 'los porcentajes se han normalizado al 100%', privacy: 'Estimación educativa; no cotiza una comercializadora ni un operador y excluye la instalación doméstica. Comprueba contrato, app y cargador antes de pagar.'
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = evChargingCostGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>“How much does an EV cost per mile?” has no defensible answer until the charging mix is known. A driver who can charge overnight at home and a renter who relies on highway DC stations can own the same car yet pay very different energy costs.</p>
+    <p>The useful unit is the price of one mile under a stated mix: vehicle efficiency, charging loss, kWh share by channel and every fee caused by charging. The calculator keeps those assumptions visible so a search or answer engine can quote the conditions with the result.</p>
+    <DecisionGuide content={guide} />
+    <EVChargingCostCalculator locale={locale} {...calculator} />
+
+    <h2>Use marginal home electricity cost, not an average bill</h2>
+    <p>The Department of Energy’s home-charging guidance identifies electricity price and vehicle efficiency as the core cost-per-mile inputs. Read the utility tariff and determine which additional kWh the vehicle will occupy: off-peak time-of-use, a higher consumption tier or a separate EV plan. Taxes or riders that increase with kWh belong in the rate; the fixed household charge usually does not unless the EV causes it.</p>
+    <p>Do not use a promotional “from” rate without its hours, season, demand terms and enrollment cost. A smart-charging schedule can move energy to a lower period, but only if the car is actually connected then.</p>
+
+    <h2>Weight public charging by kWh, not by visits</h2>
+    <p>A ten-minute DC stop may deliver more energy than several workplace sessions. Export session history when possible and divide annual kWh among home, public AC and DC fast charging. DOE notes that drivers normally pay more at public stations—especially DC fast chargers—than at home, but the exact account price still controls.</p>
+    <p>Record membership, connection, parking and idle charges separately. A $10 monthly plan adds $120 even before one kWh is delivered; compare that fee with the discount it actually earns over paid public energy.</p>
+
+    <h2>Keep battery consumption and charging loss on different sides of the meter</h2>
+    <p>Rated or dashboard kWh/100 miles commonly describes energy the vehicle uses. The electricity bill measures energy drawn. Cable, power electronics, battery temperature management and standby use create a gap, so this model adds a loss rate once. If your own wall-meter calculation already includes that gap, set loss to zero.</p>
+    <p>The base result of $0.093 per mile is not a U.S. average. It is the output of the published $0.16 / $0.30 / $0.55 rates and 70% / 10% / 20% mix. Change any of them before comparing the result with gasoline or a reimbursement rate.</p>
+
+    <h2>Move the charging result into total vehicle cost</h2>
+    <p>Energy cost is only one line of ownership. Add charger installation, purchase price, insurance, maintenance, taxes and resale in the <a href="/en/ev-vs-gas-total-cost/">EV versus gas total-cost guide</a>. A cheap mile does not automatically recover a large purchase premium.</p>
+    <p class="privacy-note">General educational estimate only. It is not a utility quote, charging-network offer, vehicle recommendation or reimbursement rule.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>搜尋「電動車一公里多少錢」時，最容易看到的錯誤是直接用車機耗電乘上台電平均電價。這會漏掉電表到電池之間的損耗，也會把公共快充、會員月費、停車與占位成本全部藏起來。</p>
+    <p>真正可比較的答案必須同時公開里程、kWh/100km、損耗，以及家充／公共 AC／DC 快充的度數占比。住家可裝樁與長途大量快充的車主，即使開同一車款，每公里成本也不會相同。</p>
+    <DecisionGuide content={guide} />
+    <EVChargingCostCalculator locale={locale} {...calculator} />
+
+    <h2>家充要看新增用電落在哪個電價，不是全戶平均</h2>
+    <p>台電設有住宅用電與電動車充換電設施等不同電價資料；實際適用方式取決於申請、電表、契約容量與充電時段。一般住宅還可能因夏月、用電級距或時間電價改變新增一度電的成本。請從帳單與契約抓「因車增加的每度成本」，不要把全戶基本費都算給車，也不要只用新聞裡的全國平均。</p>
+    <p>集合住宅還要確認管委會是否使用公設電、另收管理費或服務加價，以及充電樁電表能否獨立計量。這些是台灣家充試算比單純翻譯國外文章更重要的欄位。</p>
+
+    <h2>公共快充費率可能同時按度、按時與按占位收費</h2>
+    <p>交通部的公共充電資料標準已涵蓋固定每度、尖離峰、計時及分級功率等費率樣態；管理辦法也要求公共停車場提供充電費率資訊。但規範資料格式不等於全台統一價格，營運商、場站、會員、漫遊與付款方式仍可能不同。</p>
+    <p>試算時先看 APP 或場站付款確認畫面，再把一年內的啟動、停車及充滿後占位費加總。不要只比較「每度 12 元」，卻漏掉停車一小時或月費。</p>
+
+    <h2>占比要按充入幾度電，不是去了幾次</h2>
+    <p>一次高速公路快充可能補進 45 度，數次商場慢充合計卻不到 20 度。最準確的方法是匯出充電紀錄，以各通路 kWh 除以全年總充電 kWh；還沒有車時，則用平日可家充的里程與長途里程拆分，再做高快充占比情境。</p>
+    <p>下方基本情境的 NT$1.07/km 是以明列的假設算出，不是台灣平均。把 DC 快充占比從 15% 提高到 30% 後，每公里約 NT$1.31；這正是應該在買車前壓力測試的差異。</p>
+
+    <h2>把充電成本帶回整台車的五年帳</h2>
+    <p>每公里電費低只代表能源支出，不代表電動車總成本低。家充工程、成交價、保險、牌照稅、保養與轉售仍要放進<a href="/zh/ev-vs-gas-total-cost/">電動車和油車五年總持有成本</a>一起比較。</p>
+    <p class="privacy-note">一般教育試算，不是台電、管委會或充電業者報價，也不是購車建議。費率與場站條款會變動，付款前請再次查核。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>Preguntar cuánto cuesta cargar un coche eléctrico en España no basta: un garaje con contrato nocturno y un conductor que depende de carga rápida en autovía no compran el mismo kWh. El coste útil es €/km bajo un reparto de carga declarado.</p>
+    <p>El cálculo separa consumo del vehículo, pérdidas de recarga, precio doméstico, AC pública, DC rápida, abonos y cargos de ocupación. Así evita convertir una tarifa promocional en una respuesta universal.</p>
+    <DecisionGuide content={guide} />
+    <EVChargingCostCalculator locale={locale} {...calculator} />
+
+    <h2>En casa cuenta el precio marginal de tu contrato y horario</h2>
+    <p>Consulta la factura completa y el horario en el que realmente estará conectado el coche. El término variable, impuestos y cargos que crecen con los kWh pertenecen al cálculo; el término fijo de toda la vivienda solo se añade si la recarga obliga a contratar más potencia o un servicio adicional.</p>
+    <p>En garaje comunitario hay que revisar contador, reparto, gestión y posibles costes comunes. Una tarifa valle sirve como hipótesis únicamente si el vehículo puede concentrar la carga en ese periodo.</p>
+
+    <h2>AC urbana y DC de carretera no son un único precio público</h2>
+    <p>La guía IDAE/FEMP/AEDIVE distingue carga doméstica de 3,7–7,4 kW, carga rápida de 50 kW y opciones superiores en autovía. Más potencia reduce el tiempo, pero el precio final puede incorporar energía, inicio, tiempo u ocupación y cambia por operador, abono, itinerancia o pago ad hoc.</p>
+    <p>El mapa REVE muestra, cuando está disponible, precio por energía, tiempo, potencia, ocupación y método de pago. Úsalo para localizar opciones y confirma el importe en la app o terminal antes de iniciar la sesión.</p>
+
+    <h2>La cuota mensual necesita su propio punto de equilibrio</h2>
+    <p>Un abono de 9,99 € añade 119,88 € al año. Para justificarlo, multiplica el descuento frente al precio sin abono por los kWh públicos que realmente pagarás. Si el ahorro no supera 119,88 €, la cuota aumenta el coste por kilómetro aunque cada kWh anunciado sea menor.</p>
+    <p>La CNMC ha estudiado precios y competencia de la recarga pública; sus promedios sirven para entender el mercado, no para sustituir el precio de una estación concreta. El caso base de 0,059 €/km depende de las tarifas y del reparto publicados en esta página.</p>
+
+    <h2>Integra la recarga en el coste total del coche</h2>
+    <p>El resultado no incluye comprar e instalar el punto doméstico. Añádelo junto con precio, seguro, mantenimiento, IVTM y reventa en la guía de <a href="/es/ev-vs-gas-total-cost/">coste total del coche eléctrico frente al gasolina</a>.</p>
+    <p class="privacy-note">Estimación educativa general; no es una oferta de electricidad, recarga, compra ni financiación. Comprueba contrato y precio del punto antes de pagar.</p>
+  </>}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

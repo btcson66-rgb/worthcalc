@@ -63,6 +63,16 @@ const editorialRoutes = [
     },
   },
   {
+    slug: 'gym-membership-cost-per-visit',
+    nativeMarkers: {
+      en: ['$12.98', '$251', 'paid months with no visits', 'data-gym-calculator'],
+      zh: ['NT$297.60', 'NT$9,144', '健身中心定型化契約', 'data-gym-calculator'],
+      es: ['9,50 €', '110,20 €', 'matrícula', 'data-gym-calculator'],
+      fr: ['9,48 €', '76 €', 'reconduction tacite', 'data-gym-calculator'],
+      de: ['12,88 €', '49,40 €', 'Mindestlaufzeit', 'data-gym-calculator'],
+    },
+  },
+  {
     slug: 'annual-fee-card-breakeven',
     nativeMarkers: {
       en: ['incremental reward rate', 'no-fee alternative', '$6,333.33'],
@@ -83,17 +93,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [
-  {
-    slug: 'gym-membership-cost-per-visit',
-    locales: ['en', 'zh', 'es'],
-    nativeMarkers: {
-      en: ['$12.98', '$251', 'paid months with no visits'],
-      zh: ['NT$297.60', 'NT$9,144', '健身中心定型化契約'],
-      es: ['9,50 €', '110,20 €', 'matrícula'],
-    },
-  },
-];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -202,4 +202,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 8 complete five-locale topics, 35 added routes, 4 enriched high-value tools, 1 embedded gym calculator.');
+console.log('Multilingual editorial check passed: 9 complete five-locale topics, 37 added routes, 4 enriched high-value tools, 1 embedded gym calculator.');

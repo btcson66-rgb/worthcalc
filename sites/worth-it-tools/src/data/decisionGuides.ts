@@ -621,6 +621,55 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+const evChargingCostGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
+  fr: {
+    id: 'ev-home-public-charging-cost-method',
+    labels: labels.fr,
+    directAnswer: 'Le vrai coût de recharge par kilomètre dépend de la part de kWh prise à domicile, sur borne AC et en recharge rapide DC. Il faut ajouter les pertes entre compteur et batterie, pondérer chaque prix par l’énergie délivrée, puis compter abonnement, lancement de session, stationnement et occupation. Dans l’exemple, un mix 75% domicile / 10% AC / 15% rapide coûte environ 821 € par an, soit 0,063 €/km ; la même distance chargée uniquement à domicile et sans abonnement coûte environ 486 €, soit 0,037 €/km.',
+    inputs: ['Kilométrage annuel tiré du compteur ou des trajets réels', 'Consommation du véhicule en kWh/100 km dans les conditions prévues', 'Pertes entre le compteur et la batterie, sans les compter deux fois', 'Part des kWh—et non du nombre de sessions—à domicile, en AC publique et en DC rapide', 'Prix marginal TTC du kWh domestique dans la plage réellement utilisée', 'Tarif applicable à la borne selon paiement à l’acte, badge, abonnement et itinérance', 'Abonnement mensuel souscrit uniquement pour la recharge', 'Frais annuels de session, de stationnement et d’occupation après recharge'],
+    formula: 'kWh batterie/an = km/an × kWh/100 km ÷ 100. kWh facturés/an = kWh batterie × (1 + pertes). Prix pondéré = part domicile × prix domicile + part AC × prix AC + part DC × prix DC. Coût annuel = kWh facturés × prix pondéré + 12 × abonnement mensuel + frais annuels de session/occupation. Coût/km = coût annuel ÷ km annuels.',
+    workedExample: 'À 13 000 km/an et 17 kWh/100 km, la batterie reçoit 2 210 kWh ; avec 10% de pertes, 2 431 kWh sont facturés. Le mix 75% domicile à 0,20 €/kWh, 10% AC à 0,35 € et 15% DC à 0,59 € donne 0,2735 €/kWh pondéré. Avec un badge à 12,99 €/mois, la recharge coûte 820,76 €/an ou 0,063 €/km. Tout charger à domicile sans badge coûterait 486,20 €/an.',
+    sensitivity: [
+      { scenario: 'Référence domicile', input: '100% domicile à 0,20 €/kWh ; sans abonnement', result: '486 €/an ; 0,037 €/km' },
+      { scenario: 'Mix central', input: '75% domicile, 10% AC, 15% DC ; 12,99 €/mois', result: '821 €/an ; 0,063 €/km' },
+      { scenario: 'Davantage de recharge rapide', input: '60% domicile, 10% AC, 30% DC', result: '963 €/an ; 0,074 €/km' },
+      { scenario: 'Électricité domestique plus chère', input: 'Domicile à 0,30 €/kWh', result: '1 003 €/an ; 0,077 €/km' },
+      { scenario: 'Badge résilié', input: 'Même mix ; abonnement ramené à zéro', result: '665 €/an ; 0,051 €/km' },
+    ],
+    cta: { label: 'Calculer votre coût pondéré de recharge par kilomètre', href: '#ev-charging-cost-calculator' },
+    limitations: ['Les tarifs de l’exemple sont des hypothèses modifiables, pas une moyenne française. Offre d’électricité, heures creuses, copropriété, opérateur, badge, itinérance et borne déterminent le prix réel.', 'Le Gouvernement distingue tarification au kWh, au temps ou à la session. Vérifiez l’écran, l’application et les conditions de stationnement avant chaque recharge payante.', 'Achat et pose de la borne, raccordement et éventuelle hausse de puissance ne sont pas amortis ici. Ajoutez-les au coût total de possession du véhicule.', 'WLTP et consommation réelle divergent selon vitesse, froid, relief, charge, chauffage et préconditionnement. Utilisez les kWh du compteur et les kilomètres observés dès que possible.'],
+    sources: [
+      { label: 'Ministère de l’Économie — borne pilotable, heures creuses et tarification au kWh, au temps ou à la session', href: 'https://www.economie.gouv.fr/actualites/les-bornes-de-recharge-se-deploient-sur-le-territoire' },
+      { label: 'Ministère de la Transition écologique — affichage du tarif au kWh et paiement par carte sur les grands axes', href: 'https://www.ecologie.gouv.fr/presse/plan-electrification-bornes-tous-grands-trajets-dici-2035' },
+      { label: 'Ministère de l’Économie — comprendre abonnement et prix du kWh du contrat d’électricité', href: 'https://www.economie.gouv.fr/particuliers/faire-des-economies-denergie/tout-comprendre-votre-abonnement-de-gaz-et-delectricite' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'ev-home-public-charging-cost-method',
+    labels: labels.de,
+    directAnswer: 'Die Ladekosten pro Kilometer hängen vom kWh-Anteil zu Hause, an öffentlichen AC-Punkten und am DC-Schnelllader ab. Rechnen Sie Ladeverluste zwischen Zähler und Batterie hinzu, gewichten Sie jeden Arbeitspreis nach geladener Energie und addieren Sie Grundpreis, Ladekartenabo und Blockier- oder Parkentgelt. Im Beispiel kostet ein Mix aus 70% Zuhause / 10% AC / 20% DC etwa 1.311 € im Jahr beziehungsweise 0,087 €/km; ausschließliches Laden zu Hause ohne Abo kostet etwa 891 € oder 0,059 €/km.',
+    inputs: ['Jahreskilometer aus Kilometerstand oder echten Strecken', 'Verbrauch des Fahrzeugs in kWh/100 km im eigenen Fahrprofil', 'Ladeverlust zwischen Stromzähler und Batterie, ohne Doppelzählung', 'kWh-Anteil zu Hause, an öffentlichem AC und am DC-Schnelllader—nicht Anzahl der Ladevorgänge', 'Zusätzlicher Haushalts- oder Autostrom-Arbeitspreis in der tatsächlich genutzten Zeit', 'Preis für Ad-hoc-Laden, Ladekarte, App oder Roaming am konkreten Ladepunkt', 'Monatlicher Grundpreis des nur fürs Laden genutzten Tarifs oder Abos', 'Jährliche Start-, Park- und Blockierentgelte'],
+    formula: 'Batterie-kWh/Jahr = km/Jahr × kWh/100 km ÷ 100. Abgerechnete kWh/Jahr = Batterie-kWh × (1 + Ladeverlust). Gewichteter Preis = Zuhause-Anteil × Hauspreis + AC-Anteil × AC-Preis + DC-Anteil × DC-Preis. Jahreskosten = abgerechnete kWh × gewichteter Preis + 12 × Monatsgrundpreis + jährliche Start-/Blockierentgelte. Kosten/km = Jahreskosten ÷ Jahreskilometer.',
+    workedExample: 'Bei 15.000 km und 18 kWh/100 km braucht die Batterie 2.700 kWh; 10% Ladeverlust ergeben 2.970 abgerechnete kWh. 70% zu Hause zu 0,30 €/kWh, 10% AC zu 0,45 € und 20% DC zu 0,69 € ergeben 0,393 €/kWh. Mit 11,99 € Monatsabo entstehen 1.311,09 €/Jahr oder 0,087 €/km. Nur zu Hause und ohne Abo wären es 891 €/Jahr.',
+    sensitivity: [
+      { scenario: 'Nur zu Hause', input: '100% Hausstrom zu 0,30 €/kWh; kein Abo', result: '891 €/Jahr; 0,059 €/km' },
+      { scenario: 'Basismix', input: '70% Zuhause, 10% AC, 20% DC; 11,99 €/Monat', result: '1.311 €/Jahr; 0,087 €/km' },
+      { scenario: 'Viel Schnellladen', input: '50% Zuhause, 10% AC, 40% DC', result: '1.543 €/Jahr; 0,103 €/km' },
+      { scenario: 'Teurerer Hausstrom', input: 'Hauspreis steigt auf 0,40 €/kWh', result: '1.519 €/Jahr; 0,101 €/km' },
+      { scenario: 'Abo gekündigt', input: 'Gleicher Mix; Monatsgrundpreis null', result: '1.167 €/Jahr; 0,078 €/km' },
+    ],
+    cta: { label: 'Eigene Ladepreise und kWh-Anteile pro Kilometer berechnen', href: '#ev-charging-cost-calculator' },
+    limitations: ['Die Beispielpreise sind editierbare Annahmen, kein Deutschlanddurchschnitt. Haushaltsvertrag, Autostromtarif, Betreiber, Ladeleistung, Ladekarte, Roaming und Ad-hoc-Zahlung ändern den Preis.', 'Öffentliche Ad-hoc-Preise pro kWh und mögliche Grundpreise müssen vor Ladebeginn sichtbar sein. Zusätzliche Park- oder Blockierentgelte sind trotzdem gesondert zu prüfen.', 'Wallbox, Elektroinstallation, Anmeldung und mögliche Leistungs- oder Grundpreiserhöhung werden hier nicht abgeschrieben. Sie gehören in die Gesamtkostenrechnung.', 'WLTP-Verbrauch kann bei Autobahn, Kälte, Steigung, Beladung, Heizung und Vorkonditionierung abweichen. Ersetzen Sie ihn später durch gemessene Zähler-kWh pro Kilometer.'],
+    sources: [
+      { label: 'Bundesnetzagentur — Ad-hoc-Preise, Grundpreis und Wettbewerb an öffentlichen Ladesäulen', href: 'https://www.bundesnetzagentur.de/DE/Vportal/Energie/E_Mobilitaet/start.html' },
+      { label: 'Bundesnetzagentur — Ladesäulenregister, Normal- und Schnellladepunkte', href: 'https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/E-Mobilitaet/artikel.html' },
+      { label: 'Bundeswirtschaftsministerium — Bestandteile des Haushaltsstrompreises und Tarifwechsel', href: 'https://www.bundeswirtschaftsministerium.de/Redaktion/DE/FAQ/Energiepreise/strompreis-15.html' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const gymCostGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'gym-cost-per-visit-method',
@@ -1597,6 +1646,7 @@ export const evGasTcoGuides: Record<Locale, DecisionGuideContent> = {
 };
 
 export const evChargingCostGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  ...evChargingCostGuideAdditions,
   en: {
     id: 'ev-home-public-charging-cost-method',
     labels: labels.en,

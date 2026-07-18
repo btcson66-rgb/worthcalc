@@ -1,0 +1,104 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    workdays: number; homeDays: number; homeEnergy: number; homeMeals: number; homeOther: number;
+    homeFixed: number; homeReimbursement: number; officeCommute: number; officeMeals: number;
+    officeOther: number; officeFixed: number; officeReimbursement: number; commuteMinutes: number; timeValue: number;
+  };
+  copy: Record<'heading' | 'intro' | 'workdays' | 'homeDays' | 'homeEnergy' | 'homeMeals' | 'homeOther' | 'homeFixed' | 'homeReimbursement' | 'officeCommute' | 'officeMeals' | 'officeOther' | 'officeFixed' | 'officeReimbursement' | 'commuteMinutes' | 'timeValue' | 'allHome' | 'allOffice' | 'hybridCash' | 'commuteHours' | 'hybridFull' | 'officePremium' | 'verdictHome' | 'verdictOffice' | 'privacy', string>;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+---
+
+<section id="wfh-commute-calculator" class="wfh-calc" data-wfh-commute-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-home={copy.verdictHome} data-verdict-office={copy.verdictOffice}>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="calc-grid">
+    <div class="inputs">
+      <label><span>{copy.workdays}</span><input data-field="workdays" type="number" min="0" max="31" step="1" value={defaults.workdays} /></label>
+      <label><span>{copy.homeDays}</span><input data-field="homeDays" type="number" min="0" max="31" step="1" value={defaults.homeDays} /></label>
+      <label><span>{copy.homeEnergy}</span><input data-field="homeEnergy" type="number" min="0" step="0.1" value={defaults.homeEnergy} /></label>
+      <label><span>{copy.homeMeals}</span><input data-field="homeMeals" type="number" min="0" step="0.1" value={defaults.homeMeals} /></label>
+      <label><span>{copy.homeOther}</span><input data-field="homeOther" type="number" min="0" step="0.1" value={defaults.homeOther} /></label>
+      <label><span>{copy.homeFixed}</span><input data-field="homeFixed" type="number" min="0" step="1" value={defaults.homeFixed} /></label>
+      <label><span>{copy.homeReimbursement}</span><input data-field="homeReimbursement" type="number" min="0" step="1" value={defaults.homeReimbursement} /></label>
+      <label><span>{copy.officeCommute}</span><input data-field="officeCommute" type="number" min="0" step="0.1" value={defaults.officeCommute} /></label>
+      <label><span>{copy.officeMeals}</span><input data-field="officeMeals" type="number" min="0" step="0.1" value={defaults.officeMeals} /></label>
+      <label><span>{copy.officeOther}</span><input data-field="officeOther" type="number" min="0" step="0.1" value={defaults.officeOther} /></label>
+      <label><span>{copy.officeFixed}</span><input data-field="officeFixed" type="number" min="0" step="1" value={defaults.officeFixed} /></label>
+      <label><span>{copy.officeReimbursement}</span><input data-field="officeReimbursement" type="number" min="0" step="1" value={defaults.officeReimbursement} /></label>
+      <label><span>{copy.commuteMinutes}</span><input data-field="commuteMinutes" type="number" min="0" step="5" value={defaults.commuteMinutes} /></label>
+      <label><span>{copy.timeValue}</span><input data-field="timeValue" type="number" min="0" step="1" value={defaults.timeValue} /></label>
+    </div>
+    <div class="results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.allHome}</dt><dd data-output="allHome">—</dd></div>
+        <div><dt>{copy.allOffice}</dt><dd data-output="allOffice">—</dd></div>
+        <div><dt>{copy.hybridCash}</dt><dd data-output="hybridCash">—</dd></div>
+        <div><dt>{copy.commuteHours}</dt><dd data-output="commuteHours">—</dd></div>
+        <div><dt>{copy.hybridFull}</dt><dd data-output="hybridFull">—</dd></div>
+        <div><dt>{copy.officePremium}</dt><dd data-output="officePremium">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-wfh-commute-calculator]')) {
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: 0 });
+    const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+    const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
+
+    const calculate = () => {
+      const workdays = value('workdays');
+      const homeDays = Math.min(workdays, value('homeDays'));
+      const officeDays = Math.max(0, workdays - homeDays);
+      const homeDaily = value('homeEnergy') + value('homeMeals') + value('homeOther');
+      const officeDaily = value('officeCommute') + value('officeMeals') + value('officeOther');
+      const allHome = Math.max(0, workdays * homeDaily + value('homeFixed') - value('homeReimbursement'));
+      const allOffice = Math.max(0, workdays * officeDaily + value('officeFixed') - value('officeReimbursement'));
+      const hybridCash = Math.max(0, homeDays * homeDaily + officeDays * officeDaily + value('homeFixed') + value('officeFixed') - value('homeReimbursement') - value('officeReimbursement'));
+      const commuteHours = officeDays * value('commuteMinutes') / 60;
+      const hybridFull = hybridCash + commuteHours * value('timeValue');
+      const officePremium = allOffice - allHome;
+      out('allHome').textContent = money(allHome);
+      out('allOffice').textContent = money(allOffice);
+      out('hybridCash').textContent = money(hybridCash);
+      out('commuteHours').textContent = number.format(commuteHours);
+      out('hybridFull').textContent = money(hybridFull);
+      out('officePremium').textContent = money(officePremium);
+      out('verdict').textContent = `${officePremium >= 0 ? root.dataset.verdictHome : root.dataset.verdictOffice} ${money(Math.abs(officePremium))}`.trim();
+    };
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .wfh-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .wfh-calc h2 { margin-top: 0; }
+  .calc-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(18rem, .65fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+  .inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
+  .inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
+  .results .verdict { margin-top: 0; font-weight: 800; }
+  .results dl { margin: 0; }
+  .results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
+  .results dt { font-weight: 600; }
+  .results dd { margin: 0; text-align: right; font-weight: 750; }
+  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
+  @media (max-width: 760px) { .wfh-calc { padding: 1rem; } .calc-grid, .inputs { grid-template-columns: 1fr; } .inputs label span { min-height: 0; } }
+</style>

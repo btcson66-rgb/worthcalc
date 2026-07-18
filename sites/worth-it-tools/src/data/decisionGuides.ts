@@ -2075,3 +2075,74 @@ export const commuteFullCostGuides: Partial<Record<Locale, DecisionGuideContent>
 };
 
 Object.assign(commuteFullCostGuides, commuteFullCostGuideAdditions);
+
+export const wfhCommuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'wfh-commute-hidden-cost-method',
+    labels: labels.en,
+    directAnswer: 'Work from home is cheaper only when removed commute and office-day costs exceed additional home energy, food, equipment, connectivity and space after reimbursements. Compare incremental costs, not entire household bills. In this example, all-home cash is $250 per month and all-office cash is $860, so home is $610 lower. A 12-home/8-office hybrid costs $614 cash plus an optional $80 for eight commute hours.',
+    inputs: ['Actual paid workdays and home-work days in one normal month', 'Incremental heating, cooling, lighting and equipment electricity per home day', 'Home-day meals compared with what you would eat anyway', 'Work-only internet upgrade, coworking, supplies and equipment amortization', 'Employer home-office reimbursement actually received', 'Door-to-door commute cash, office meal premium and office-only incidentals per day', 'Parking pass, transit pass, wardrobe care or other monthly office fixed cost', 'Employer commute or office reimbursement actually received', 'Round-trip commute minutes and an optional personal time value, including zero'],
+    formula: 'All-home cash = workdays × (home energy + home food + home daily other) + home fixed costs − home reimbursement. All-office cash = workdays × (commute + office food premium + office daily other) + office fixed costs − office reimbursement. Hybrid cash applies each daily block to its actual days and adds fixed costs that remain. Optional full hybrid cost = hybrid cash + office days × commute hours/day × personal time value.',
+    workedExample: 'For 20 workdays, home costs are $2.50 energy, $6 food and $1 other per day plus $60 fixed: $250 all-home. Office costs are $18 commute, $14 food and $3 other per day plus $160 fixed: $860 all-office. With 12 home days and eight office days, both fixed blocks remain, so hybrid cash is $614. Eight hours of commute at a chosen $10/hour make the optional hybrid comparison $694.',
+    sensitivity: [
+      { scenario: 'Cash only', input: 'Time value $0/hour', result: 'Hybrid remains $614; eight hours remain visible' },
+      { scenario: 'No office parking pass', input: 'Office fixed cost falls from $160 to $0', result: 'All-office $700; hybrid $454' },
+      { scenario: 'High home HVAC month', input: 'Home energy rises from $2.50 to $7/day', result: 'All-home $340; hybrid $668 cash' },
+      { scenario: 'Two office days instead of eight', input: '18 home days, two office days', result: 'Hybrid cash $387; optional full $407' },
+    ],
+    cta: { label: 'Compare your remote, office and hybrid month', href: '#wfh-commute-calculator' },
+    limitations: ['Only incremental costs belong in the comparison. Baseline rent, internet and meals should not be assigned entirely to work unless the alternative removes them.', 'The IRS says employees are not eligible for the federal home office deduction. Self-employment, state rules and employer accountable plans need separate review.', 'Reimbursements, benefits and labor rules depend on employer and location. Enter cash actually received rather than an assumed entitlement.', 'Time value is a personal sensitivity, not guaranteed earnings.'],
+    sources: [
+      { label: 'IRS — employees are not eligible for the home office deduction', href: 'https://www.irs.gov/newsroom/how-small-business-owners-can-deduct-their-home-office-from-their-taxes' },
+      { label: 'IRS Publication 15-B (2026) — qualified transportation benefits', href: 'https://www.irs.gov/publications/p15b' },
+      { label: 'US Department of Energy — computer energy and power management', href: 'https://www.energy.gov/cmei/femp/purchasing-energy-efficient-computers' },
+      { label: 'US DOT — travel-time valuation requires scenario assumptions', href: 'https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-valuation-travel-time-economic' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'wfh-commute-hidden-cost-method',
+    labels: labels.zh,
+    directAnswer: '在家工作是否較省，要看省下的交通、停車、進公司餐食差額與時間，是否大於新增的冷暖氣、照明、網路升級、設備與空間成本，再扣實領補助。不要把整張家庭帳單歸給工作。此算例全居家每月 NT$3,480，全進公司 NT$8,900，居家少 NT$5,420；14 天居家、8 天進公司的混合現金為 NT$6,360，另有 9.3 小時通勤。',
+    inputs: ['一個正常月份的工作日、居家日與實際進公司日', '居家工作新增的冷氣、照明、電腦與螢幕用電', '居家餐食與原本就會吃的餐食差額', '工作才需要的網路升級、耗材、設備攤提或共用工作空間', '公司核定且真正入帳的居家補助', '每個進公司日的交通、停車、通行與餐食差額', '月票、停車月租、服裝整理等不隨天數消失的固定費', '公司真正支付的通勤、供餐或辦公補助', '每日門到門來回分鐘與可設為 0 的個人時間價值'],
+    formula: '全居家現金 = 工作日 ×（居家能源＋居家餐食＋其他每日增量）＋居家固定費 − 居家補助。全進公司現金 = 工作日 ×（通勤＋餐食增量＋其他每日成本）＋進公司固定費 − 辦公補助。混合現金依各自實際天數計算，再加仍存在的固定費。選擇性完整成本 = 混合現金＋進公司日 × 每日通勤小時 × 自訂時間價值。',
+    workedExample: '22 個工作日，居家每日能源 NT$35、餐食 NT$90、其他 NT$15，固定費 NT$400，全居家為 NT$3,480。進公司每日交通 NT$180、餐食差額 NT$150、其他 NT$20，固定費 NT$1,200，全進公司 NT$8,900。14 天居家與 8 天進公司時兩邊固定費仍在，混合現金 NT$6,360；70 分鐘×8 天為 9.3 小時，以 NT$150/小時計算的選擇性完整成本為 NT$7,760。',
+    sensitivity: [
+      { scenario: '只看現金', input: '時間價值 NT$0', result: '混合成本 NT$6,360，9.3 小時仍顯示' },
+      { scenario: '取消停車月租', input: '進公司固定費 NT$1,200 改 0', result: '全進公司 NT$7,700；混合 NT$5,160' },
+      { scenario: '夏月冷氣增加', input: '居家能源每日 NT$35 改 NT$90', result: '全居家 NT$4,690；混合 NT$7,130' },
+      { scenario: '每月只進公司 2 天', input: '居家 20 天、進公司 2 天', result: '混合現金 NT$5,100；選擇性完整 NT$5,450' },
+    ],
+    cta: { label: '用自己的居家、進公司與混合天數試算', href: '#wfh-commute-calculator' },
+    limitations: ['台電電價有級距、季節與帳期，請用增量用電與真正邊際價格，不要把平均家庭帳單全部列入。', '勞動部居家工作職業安全衛生參考指引說明設備與風險管理方向，但不替個別契約創造固定補助金額。', '月票、停車位或網路方案可能在混合辦公仍完整收費，必須依能否取消或降級判斷。', '時間情境不是保證收入，也不是加班費或工資計算。'],
+    sources: [
+      { label: '勞動部 — 居家工作職業安全衛生參考指引', href: 'https://laws.mol.gov.tw/FLAW/PrintFLAWDOC01.aspx?flno=3&id=FL096766' },
+      { label: '台電 — 住宅夏月與級距電價說明', href: 'https://hc1.taipower.com.tw/2289/2363/2388/2389/10732/normalPost' },
+      { label: '台電 — 各類電價表及計算範例', href: 'https://hc2.taipower.com.tw/2289/2406/2437/51029/46920/50398/normalPost' },
+      { label: '交通部運輸研究所 — 通勤與行車成本分類', href: 'https://www.iot.gov.tw/zh_tw/archive/pub/reports/-59902021' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'wfh-commute-hidden-cost-method',
+    labels: labels.es,
+    directAnswer: 'El teletrabajo sale más barato cuando transporte, comida presencial y otros gastos evitados superan energía, equipo, conexión y espacio adicionales después de la compensación. Compara incrementos, no facturas domésticas completas. En el ejemplo, todo teletrabajo cuesta 170 € al mes y toda oficina 445 €, una diferencia de 275 €. Doce días en casa y ocho presenciales producen 311 € de caja y 385,67 € al añadir un valor temporal opcional.',
+    inputs: ['Días laborables, días reales de teletrabajo y presencia del mes', 'Climatización, luz, ordenador y pantalla adicionales por día en casa', 'Comida en casa comparada con el gasto que existiría de todos modos', 'Mejora de internet, material, amortización de equipo o coworking pagado por la persona', 'Compensación de teletrabajo pactada y efectivamente cobrada', 'Transporte, aparcamiento, peaje y sobrecoste de comida por día presencial', 'Abono, aparcamiento u otros pagos mensuales que sobreviven en modalidad híbrida', 'Reembolso de transporte o beneficios de comida realmente recibidos', 'Minutos puerta a puerta y valor personal opcional del tiempo, incluido cero'],
+    formula: 'Caja todo teletrabajo = días × (energía + comida + otros variables en casa) + fijos de casa − compensación. Caja toda oficina = días × (transporte + sobrecoste de comida + otros presenciales) + fijos de oficina − reembolso. El híbrido aplica cada bloque a sus días y mantiene los fijos que no puedan cancelarse. Coste completo opcional = caja híbrida + días presenciales × horas de trayecto × valor personal.',
+    workedExample: 'Con 20 días, trabajar siempre en casa suma 2 € de energía, 5 € de comida y 1 € de otros gastos diarios, 35 € fijos y 25 € de compensación: 170 €. La oficina suma 6 € de transporte, 12 € de comida, 2 € de otros y 45 € fijos: 445 €. Doce días en casa y ocho en oficina cuestan 311 € de caja. El trayecto suma 9,3 horas; a 8 €/hora, el total opcional es 385,67 €.',
+    sensitivity: [
+      { scenario: 'Solo caja', input: 'Valor temporal 0 €/hora', result: 'Híbrido 311 €; 9,3 horas siguen visibles' },
+      { scenario: 'Sin compensación', input: 'Compensación 25 € pasa a 0 €', result: 'Todo teletrabajo 195 €; híbrido 336 €' },
+      { scenario: 'Climatización alta', input: 'Energía en casa 2 € pasa a 6 €/día', result: 'Todo teletrabajo 250 €; híbrido 359 €' },
+      { scenario: 'Solo dos días presenciales', input: '18 días en casa y dos en oficina', result: 'Híbrido 206 €; completo opcional 224,67 €' },
+    ],
+    cta: { label: 'Comparar tu mes de teletrabajo, oficina e híbrido', href: '#wfh-commute-calculator' },
+    limitations: ['La Ley 10/2021 deja al convenio o acuerdo el mecanismo concreto de compensación. No existe una cantidad universal que deba inventarse en la calculadora.', 'Incluye solo consumo, conexión y equipo incrementales. Alquiler, internet base y comida habitual no desaparecen automáticamente al volver a la oficina.', 'Abonos y contratos mensuales pueden permanecer aunque bajen los días presenciales.', 'El valor del tiempo es una sensibilidad personal, no salario garantizado.'],
+    sources: [
+      { label: 'BOE — Ley 10/2021 de trabajo a distancia, artículos 11 y 12', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2021-11472' },
+      { label: 'IDAE — metodología para costes de movilidad', href: 'https://www.idae.es/movilidad-sostenible/metodologia-de-calculadoras-de-costes' },
+      { label: 'IDAE — guía práctica de la energía para consumo doméstico', href: 'https://www.idae.es/uploads/documentos/documentos_11406_Guia_Practica_Energia_3ed_A2010_509f8287.pdf' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};

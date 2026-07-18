@@ -15,16 +15,17 @@ const requiredMarkers = [
 const briefRoutes = [
   { id: '01', slug: 'zero-interest-installments-truth' },
   { id: '02', slug: 'upfront-fees-financing-cost' },
+  { id: '03', slug: 'bnpl-vs-credit-card-installments' },
   { id: '05', slug: 'subscription-creep' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
   { id: '11', slug: 'rent-vs-buy-guide' },
 ];
 
 const releaseFloor = {
-  html: 60,
-  editorial: 28,
-  alignedVariants: 25,
-  compliantVariants: 25,
+  html: 63,
+  editorial: 31,
+  alignedVariants: 28,
+  compliantVariants: 28,
   completeTopics: 5,
 };
 

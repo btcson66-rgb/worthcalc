@@ -290,6 +290,75 @@ export const upfrontFeeGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   },
 };
 
+export const bnplCardGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'bnpl-card-comparison-method',
+    labels: labels.en,
+    directAnswer: 'BNPL is not automatically cheaper than a credit-card installment plan. Compare the cash price, every scheduled payment, mandatory fees, the amount due in the next 30 days, and one missed-payment scenario. In this illustrative $600 purchase, four $150 BNPL payments cost $600 when paid on time, while six card installments of $104 cost $624. BNPL saves $24 in the base case but requires $300 by day 14 when the first payment is due at checkout.',
+    inputs: ['Cash price and any discount lost by choosing financing', 'Payment due today, every later amount, and the exact cadence—weekly, biweekly, or monthly', 'Interest, installment fee, card fee, and every mandatory account or payment-method charge', 'Late fee, returned-payment or overdraft risk, default interest, collections, and account-blocking terms', 'Refund and dispute process, including whether scheduled debits continue during a return', 'All other BNPL and card payments due in the same 30-day window'],
+    formula: 'Normal financing cost = mandatory upfront charges + Σ(scheduled payments) − cash price. 30-day payment load = Σ(all payments due in the next 30 days). Stress cost = normal financing cost + one contract late fee + one bank overdraft/NSF fee + any default interest entered by the user.',
+    workedExample: 'A $600 purchase offers pay-in-four at $150 today and $150 every two weeks, or six monthly card installments of $104. On-time BNPL totals $600 and has $0 financing cost; the card plan totals $624 and costs $24. The trade-off is timing: BNPL takes $300 by day 14 and the full $600 by day 42, while the card plan spreads payments across six statement cycles. If the shopper enters an illustrative $15 BNPL late fee plus a $35 bank overdraft fee, BNPL rises to $650—$26 more than the card plan.',
+    sensitivity: [
+      { scenario: 'BNPL paid on time', input: '4 × $150; first payment today', result: '$600 total; $0 financing cost; $300 due by day 14' },
+      { scenario: 'Card installment plan', input: '6 × $104 monthly', result: '$624 total; $24 financing cost' },
+      { scenario: 'One BNPL late fee', input: 'User enters an illustrative $15 contract fee', result: '$615 total; still $9 below the card plan' },
+      { scenario: 'Late fee plus overdraft', input: 'Illustrative $15 + $35 entered by user', result: '$650 total; $26 above the card plan' },
+    ],
+    cta: { label: 'Calculate the annualized cost of a regular installment schedule', href: '/en/tools/installment-true-apr' },
+    limitations: ['The fee amounts in the stress rows are user-entered illustrations, not market averages. Replace them with the provider agreement and your bank’s current fee schedule.', 'Pay-in-four products, longer-term BNPL loans, card installments, revolving balances, and deferred-interest promotions have different economics. Model the exact product rather than the checkout label.', 'The CFPB withdrew its 2024 BNPL interpretive rule on May 12, 2025. Do not assume a BNPL purchase has the same federal protections as a credit card; check the current contract and applicable law.', 'A lower financing cost does not make the purchase affordable. The comparison excludes the value of rewards unless they are certain, uncapped, and earned without carrying a balance.'],
+    sources: [
+      { label: 'CFPB — BNPL fees, overdraft risk, collections, and credit reporting', href: 'https://www.consumerfinance.gov/ask-cfpb/do-buy-now-pay-later-bnpl-loans-have-fees-en-2118/' },
+      { label: 'CFPB — 2025 study of pay-in-four use and other unsecured debt', href: 'https://www.consumerfinance.gov/data-research/research-reports/consumer-use-of-buy-now-pay-later-and-other-unsecured-debt/' },
+      { label: 'CFPB — 2024 BNPL interpretive rule withdrawal notice', href: 'https://www.consumerfinance.gov/compliance/compliance-resources/consumer-cards-resources/buy-now-pay-later-bnpl-products/' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'bnpl-card-comparison-method',
+    labels: labels.zh,
+    directAnswer: '先買後付不一定比信用卡分期便宜。要同時比較商品現金價、全部期款、30 天內實際扣款壓力，以及一次遲繳後的契約成本。這個 NT$12,000 示範中，BNPL 4 期各 NT$3,000、正常履約總付 NT$12,000；信用卡 6 期各 NT$2,050、總付 NT$12,300。BNPL 基本情境少 NT$300，但若第一期當場扣款、第二期在 30 天內到期，短期要先準備 NT$6,000。',
+    inputs: ['商品一次付清價格，以及選分期會失去的折扣或回饋', '簽約當下、每一期的金額與確切扣款日', '利息、分期手續費、帳管費及綁定付款工具的必要費用', '違約金、遲延利息、催收、停用服務與銀行扣款失敗成本', '退貨、取消與爭議期間是否仍會繼續扣款', '同一月份其他信用卡分期、BNPL 與固定支出'],
+    formula: '正常融資成本 = 簽約必要費用 + Σ（全部期款）− 商品現金價。30 天扣款壓力 = 未來 30 天內所有信用卡與 BNPL 到期金額合計。壓力情境成本 = 正常融資成本 + 契約違約金 + 遲延利息 + 使用者輸入的扣款失敗相關費用。',
+    workedExample: '商品現金價 NT$12,000。BNPL 方案為簽約日先付 NT$3,000，再依契約付三期 NT$3,000，正常總額 NT$12,000；信用卡方案為 6 期各 NT$2,050，總額 NT$12,300。正常履約時 BNPL 少付 NT$300，但第一期若當場扣、下一期在 30 天內到期，當月先流出 NT$6,000。若把契約中的一次 NT$300 違約金作為示範輸入，兩者總額相同；再輸入 NT$200 遲延利息，BNPL 變成 NT$12,500，反而多 NT$200。',
+    sensitivity: [
+      { scenario: 'BNPL 正常履約', input: '4 × NT$3,000；首期當場付', result: '總付 NT$12,000；30 天內可能付 NT$6,000' },
+      { scenario: '信用卡分 6 期', input: '6 × NT$2,050', result: '總付 NT$12,300；正常每期 NT$2,050' },
+      { scenario: 'BNPL 一次違約金', input: '示範輸入 NT$300', result: '總付 NT$12,300；與信用卡方案相同' },
+      { scenario: '違約金加遲延利息', input: '示範輸入 NT$300 + NT$200', result: '總付 NT$12,500；比信用卡多 NT$200' },
+    ],
+    cta: { label: '把自己的期款輸入分期年率工具', href: '/zh/tools/installment-true-apr' },
+    limitations: ['壓力情境的 NT$300 與 NT$200 只示範計算方式，不是市場平均。必須改填契約所載違約金、遲延利息與實際扣款規則。', '台灣金管會 2025 年提醒，BNPL 是應收債權轉讓後的分期服務，非金融特許業務，但本質仍是借貸並可能產生違約金、遲延利息及其他費用。不要把它當成單純付款按鈕。', '信用卡分期、循環信用與帳單一次付清是不同還款方式；若分期後未繳足當期應繳，必須另外依契約處理循環利息或違約後果。', '較低總額不等於負擔得起。回饋、點數或迎新禮只有在確定取得、不為了湊門檻多消費且不產生利息時才適合另列。'],
+    sources: [
+      { label: '金融監督管理委員會銀行局 — 2025 年先買後付（BNPL）提醒', href: 'https://www.banking.gov.tw/ch/home.jsp?dataserno=202501200001&dtable=News&id=540&mcustomize=news_view.jsp&parentpath=0%2C524%2C539' },
+      { label: '金融監督管理委員會 — 信用卡分期付款服務作業規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL000237&media=print' },
+      { label: '金融監督管理委員會 — 信用卡定型化契約應記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'bnpl-card-comparison-method',
+    labels: labels.es,
+    directAnswer: 'El BNPL no es siempre más barato que fraccionar la compra con tarjeta. Compara precio al contado, suma de cuotas, calendario de los próximos 30 días y un escenario de impago. En este ejemplo de 480 €, el BNPL en cuatro pagos de 120 € cuesta 480 € si se paga puntualmente; seis cuotas de tarjeta de 82 € suman 492 €. El BNPL ahorra 12 € en el caso normal, pero puede exigir 240 € dentro del primer mes si la primera cuota se carga al comprar.',
+    inputs: ['Precio al contado y descuento que se pierde al financiar', 'Cuota inicial, importe de las demás cuotas y fechas exactas', 'Intereses, comisión de fraccionamiento, mantenimiento y cualquier servicio obligatorio', 'Interés de demora, comisión por impago, recobro y consecuencias contractuales', 'Proceso de devolución y si los cargos siguen mientras se resuelve la compra', 'Resto de cuotas BNPL y de tarjeta que vencen durante el mismo mes'],
+    formula: 'Coste normal = gastos iniciales obligatorios + Σ(cuotas) − precio al contado. Carga de 30 días = Σ(todos los vencimientos de tarjeta y BNPL durante los próximos 30 días). Coste de tensión = coste normal + comisión de impago + interés de demora + otros cargos contractuales introducidos por el usuario.',
+    workedExample: 'Una compra cuesta 480 €. La oferta BNPL exige 120 € al contratar y tres pagos de 120 €, por lo que totaliza 480 € sin incidencia. La tarjeta permite seis cuotas mensuales de 82 €, 492 € en total y 12 € de coste. Si la segunda cuota BNPL vence dentro de 30 días, el primer mes absorbe 240 €. Con una comisión de impago ilustrativa de 10 €, BNPL suma 490 €; si el usuario añade 8 € de interés de demora, llega a 498 € y supera en 6 € a la tarjeta.',
+    sensitivity: [
+      { scenario: 'BNPL sin incidencias', input: '4 × 120 €; primera cuota al comprar', result: '480 € en total; hasta 240 € el primer mes' },
+      { scenario: 'Tarjeta en seis cuotas', input: '6 × 82 € mensuales', result: '492 € en total; 12 € de coste' },
+      { scenario: 'Una comisión BNPL', input: 'Entrada ilustrativa de 10 €', result: '490 € en total; 2 € menos que la tarjeta' },
+      { scenario: 'Comisión más demora', input: 'Entradas ilustrativas de 10 € + 8 €', result: '498 € en total; 6 € más que la tarjeta' },
+    ],
+    cta: { label: 'Calcular un calendario mensual en la herramienta de cuotas', href: '/en/tools/installment-true-apr' },
+    limitations: ['Los 10 € y 8 € del escenario de tensión son entradas ilustrativas, no tarifas medias. Sustitúyelos por la información precontractual y el contrato de cada oferta.', 'Banco de España explica que un BNPL puede tener o no intereses y comisiones, y que el impago puede añadir demora y comisiones. La modalidad concreta importa más que el nombre comercial.', 'Pago total a fin de mes, pago fraccionado por compra y crédito revolving son modalidades distintas de tarjeta. No uses la cuota flexible de un revolving como si tuviera una fecha final garantizada.', 'El cálculo no valora protección de compra, reclamaciones ni rapidez del reembolso. Revisa quién concede el crédito, a quién reclamar y qué ocurre con las cuotas durante una devolución.'],
+    sources: [
+      { label: 'Banco de España — funcionamiento y riesgos del «compra ahora y paga después»', href: 'https://clientebancario.bde.es/pcb/es/blog/la-proliferacion-de-la-nueva-tendencia-de-pago-%E2%80%9Cbuy-now--pay-later%E2%80%9D.html' },
+      { label: 'Banco de España — modalidades de pago de una tarjeta de crédito', href: 'https://clientebancario.bde.es/pcb/es/blog/pago-aplazado-tarjetas-credito.html' },
+      { label: 'Banco de España — simulador del coste financiero de una compra a plazos', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo-del-coste-financiero.html' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

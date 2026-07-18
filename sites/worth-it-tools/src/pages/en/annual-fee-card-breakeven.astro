@@ -1,151 +1,134 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
+import { LOCALES } from '../../consts';
+import { annualFeeGuides } from '../../data/decisionGuides';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
+const guide = annualFeeGuides.en;
 const faq = [
   {
-    question: 'How do I calculate the breakeven for an annual-fee credit card?',
-    answer:
-      'Work out when the extra rewards beat the fee: (fee card’s rate − 1%) × annual spending ≥ annual fee. With a $95 fee and a 2-percentage-point edge, you need $4,750 a year (about $400 a month) just to break even — below that, the fee card is costing you money.',
+    question: 'How much do I need to spend to offset a credit card annual fee?',
+    answer: 'Divide the net annual fee by the extra reward rate over the no-fee card you would actually use. A $95 fee and a 1.5-percentage-point advantage require $6,333.33 of eligible annual spending, not $3,166.67 based on the headline 3% rate.',
   },
   {
-    question: 'Why compare against a 1% no-fee card instead of no card at all?',
-    answer:
-      'Because a no-annual-fee cashback card is available to almost everyone — it is your opportunity cost. The fee card’s real opponent was never "zero rewards"; it is the 1% you could get for free. Use the wrong baseline and every "worth it" you compute is fake.',
+    question: 'Should I subtract travel credits or other card benefits from the fee?',
+    answer: 'Subtract only repeatable benefits you would otherwise buy and are highly likely to use before they expire. A $100 credit is not worth $100 to you if it changes your behavior, requires a marked-up booking channel, or routinely goes unused.',
   },
   {
-    question: 'Should the welcome bonus count?',
-    answer:
-      'For year one, yes — provided you can earn it without spending money you wouldn’t have spent anyway. When deciding whether to renew, set the bonus to zero and recompute. The bonus is a one-time filter; the fee bills every single year.',
+    question: 'Does a welcome bonus make an annual-fee card worth it?',
+    answer: 'It can change the first-year result, but it does not make the renewal profitable. Run two calculations: one with a realistically earned welcome bonus for year one, then another with the bonus set to zero for every renewal year.',
   },
   {
-    question: 'How do I handle cards with rewards caps?',
-    answer:
-      'Convert the cap into an effective rate: "5% on dining" capped at $20 per month means everything above $400 of monthly dining earns nothing. Compute what you would actually receive over a year and divide by what you actually spend — that number is often far below the advertised one.',
+    question: 'What if cashback is capped?',
+    answer: 'Calculate the maximum extra reward before looking for a spending threshold. If the annual fee is $95 but the incremental cashback cannot exceed $90, no amount of spending can create a spending-only break-even point.',
   },
   {
-    question: 'Does this math work for points and miles cards?',
-    answer:
-      'Yes, once you convert points to cash value — at the redemption rate you will realistically use, not the aspirational best-case rate in the marketing material. Valuing points at the theoretical maximum is the most common way people overrate fee cards.',
+    question: 'Do rewards still matter if I carry a balance?',
+    answer: 'The break-even model assumes the statement balance is paid in full. Interest and late fees can exceed an entire year of rewards, so compare borrowing cost separately and do not use rewards to justify carrying debt.',
   },
 ];
 ---
 
 <ArticleLayout
-  title="Is an Annual-Fee Credit Card Worth It? The Breakeven Math"
-  description="3% cashback sounds like double your 1.2% card — until the $95 fee enters the math. The breakeven formula, the rewards-cap trap, the welcome-bonus filter, plus a free calculator."
+  title="Credit Card Annual Fee Break-Even: How Much Spending Covers the Fee?"
+  description="Calculate the eligible spending needed to offset a credit card annual fee using incremental rewards, real benefit value, reward caps, and a no-fee baseline."
   locale={locale}
-  updated="2026-07-17"
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
 >
   <p>
-    &ldquo;This card earns 3% — yours only earns 1.2%.&rdquo; Sounds like a
-    no-brainer upgrade, until you add one fact: the 3% card charges a $95
-    annual fee. That single line turns &ldquo;switch now&rdquo; into
-    &ldquo;it depends&rdquo; — and the &ldquo;depends&rdquo; is precisely
-    computable. This article unpacks the breakeven math, and at any point you
-    can drop your own numbers into the free
-    <a href={localizedPath(locale, '/tools/cashback-breakeven')}>cashback breakeven calculator</a>
-    and get your answer in a minute.
+    A card that earns 3% does not create a full 3% advantage if the card already
+    in your wallet earns 1.5% with no annual fee. The economically relevant gain
+    is the extra 1.5 percentage points. That distinction is why many quick
+    &ldquo;rewards cover the fee&rdquo; calculations produce a threshold that is
+    far too low.
+  </p>
+  <p>
+    This guide gives a renewal-ready method: compare the fee card with the
+    realistic no-fee alternative, count only eligible purchases you already
+    plan to make, and test whether caps make break-even impossible. You can then
+    replace the example with your numbers in the free
+    <a href={localizedPath(locale, '/tools/cashback-breakeven')}>credit card reward break-even calculator</a>.
   </p>
 
-  <h2>Pick the right baseline: your opponent is the free 1%</h2>
+  <DecisionGuide content={guide} />
+
+  <h2>Use the no-fee card as the opportunity-cost baseline</h2>
   <p>
-    The usual test is &ldquo;do the rewards cover the fee?&rdquo; — 3% on
-    $3,200 of yearly spending earns $96, which covers a $95 fee, so it feels
-    like a wash. The error is the baseline: this math assumes that without the
-    fee card, your rewards are zero.
+    Suppose a $95 card earns 3% and you spend $4,000. Its gross rewards are
+    $120, apparently $25 more than the fee. But a no-fee card earning 1.5%
+    would have returned $60 on the same purchases. The fee card creates only
+    $60 of incremental value, so it is still $35 behind. The correct comparison
+    is card versus card, not card versus zero rewards.
   </p>
   <p>
-    In reality, no-annual-fee cards paying a flat 1%–2% are everywhere, with
-    no hoops. So the honest equation asks whether the <strong>extra</strong>
-    rewards cover the fee:
-  </p>
-  <p>
-    <strong>(fee card rate − no-fee card rate) × annual spending ≥ annual fee</strong>
-  </p>
-  <p>
-    Rerun the example: (3% − 1%) × $3,200 = $64 against a $95 fee —
-    the card that looked like a wash actually loses $31 a year. Wrong
-    baseline, opposite answer.
+    Build a weighted rate when categories differ. If groceries earn 3%, travel
+    earns 2%, and everything else earns 1%, apply those rates to your own
+    expected mix. Do the same for the alternative card, then compare the two
+    annual totals. A headline bonus category that represents a small share of
+    your budget should not become the assumed rate for every purchase.
   </p>
 
-  <h2>The breakeven spend: a threshold you can do in your head</h2>
-  <p>Flip the formula to get the minimum spending that justifies the fee:</p>
+  <h2>Value statement credits at what they replace, not face value</h2>
   <p>
-    <strong>breakeven annual spend = annual fee ÷ rate advantage</strong>
+    A recurring benefit can reduce the net fee, but only if it replaces a cost
+    you would otherwise incur. A $120 annual credit delivered as $10 each month
+    is not automatically worth $120: missed months expire, a required portal
+    may charge more, and an eligible merchant may not be one you normally use.
+    If you expect to use eight $10 credits without changing behavior, enter
+    $80, not the advertised $120.
   </p>
-  <ul>
-    <li>$95 fee, 2-point advantage → $4,750/year (about $400/month)</li>
-    <li>$250 fee, 2-point advantage → $12,500/year (about $1,050/month)</li>
-    <li>$250 fee, 1-point advantage → $25,000/year (about $2,100/month)</li>
-  </ul>
   <p>
-    Note the third row: when the fee rises and the rate edge shrinks, the
-    threshold deteriorates multiplicatively. Premium cards typically pay their
-    headline rate only in bonus categories while everything else earns about
-    1% — so your true rate advantage is a weighted average across your actual
-    spending mix. If that’s tedious by hand, the
-    <a href={localizedPath(locale, '/tools/cashback-breakeven')}>calculator</a>
-    takes category-by-category inputs.
+    Keep uncertain perks in a separate upside scenario. Airport lounge access,
+    insurance, upgrades, and points transfers can be useful, but assigning them
+    retail prices you would never pay turns the calculation into marketing.
+    Start with cash rewards and certain credits; add optional benefits one at a
+    time so the decision remains explainable.
   </p>
 
-  <h2>The two big overestimates: caps and welcome bonuses</h2>
+  <h2>Check the reward cap before calculating a threshold</h2>
   <p>
-    <strong>Rewards caps are where advertised and actual part ways.</strong>
-    &ldquo;5% on dining&rdquo; with a footnote — &ldquo;rewards capped at $20
-    per month&rdquo; — means every dining dollar past $400 a month earns
-    nothing. If you spend $1,000 a month on dining: $20 received ÷ $1,000
-    spent = an effective 2%, not 5%. Converting every category’s cap into
-    an effective rate, then weighting, is the only honest way to score a
-    high-rate card.
+    A cap can remove the break-even point entirely. If the card offers 3% on up
+    to $3,000 of annual spending and the alternative earns 1.5%, the maximum
+    incremental reward in that category is $45. A $95 fee cannot be covered by
+    that category alone. Spending past $3,000 does not help unless another
+    uncapped category still earns more than the alternative.
   </p>
   <p>
-    <strong>The welcome bonus is a year-one filter.</strong> A $200 bonus
-    makes the first year look great; the fee bills every year after. Count
-    the bonus when deciding whether to apply — then set it to zero when the
-    renewal notice arrives. Plenty of cards win year one and quietly lose
-    every year after; renewal is the real decision point.
+    Also check merchant exclusions, redemption minimums, expiration, and whether
+    the reward is cash or a restricted credit. The Consumer Financial
+    Protection Bureau publishes card-plan comparison data, but the issuer's
+    current pricing and rewards terms govern your account. Recheck the terms at
+    renewal because fees, caps, and categories can change.
   </p>
 
-  <h2>Three verdicts — find your row</h2>
-  <ul>
-    <li>
-      <strong>Spending comfortably above breakeven →</strong> the fee card
-      works mathematically. One check remains: are the bonus categories places
-      you already spend? Dollars spent <em>to earn</em> rewards are negative
-      rewards.
-    </li>
-    <li>
-      <strong>Spending near breakeven →</strong> the winnings are small and
-      the overhead is real — caps, category rules, and yearly thresholds all
-      need watching. The no-fee 1% requires zero attention; price your
-      attention honestly.
-    </li>
-    <li>
-      <strong>Spending clearly below breakeven →</strong> take the no-fee
-      card. For low spenders the fee card is a pure loss, no matter how
-      pretty the advertised percentage.
-    </li>
-  </ul>
+  <h2>Run first-year and renewal math separately</h2>
   <p>
-    The same &ldquo;right baseline, then breakeven&rdquo; reasoning applies to
-    every yearly-billed membership:
-    <a href={localizedPath(locale, '/costco-math')}>the Costco membership math</a>
-    is the identical problem type, and &ldquo;0% installments with a
-    processing fee&rdquo; is the same question wearing a disguise — see
-    <a href={localizedPath(locale, '/zero-interest-installments-truth')}>the truth about 0% installments</a>.
+    A welcome bonus belongs only in the first-year column. Count it when the
+    spending requirement fits purchases already in your budget and you can pay
+    the statement in full. For year two, set the bonus to zero, use the new
+    annual fee, and remove credits that expired or became harder to use. A card
+    can be attractive for one year and uneconomic to renew; those are different
+    decisions.
+  </p>
+  <p>
+    Finally, compare the potential annual gain with the attention required. If
+    the expected advantage is $12 after tracking quarterly categories and
+    monthly credits, a simple no-fee card may be the more robust choice even
+    though the spreadsheet shows a small positive number. For the same
+    opportunity-cost logic applied to a store membership, see the
+    <a href={localizedPath(locale, '/costco-math')}>Costco membership break-even guide</a>.
   </p>
 
   <FAQ items={faq} />
 
   <p class="privacy-note">
-    Privacy note: the cashback breakeven calculator runs entirely in your
-    browser — the spending figures you enter are never uploaded to any
-    server. This article and the calculator provide general mathematical
-    estimates only and do not constitute a recommendation of any financial
-    product or financial advice; actual fees and reward rules are governed by
-    each issuer’s published terms.
+    WorthCalc runs the calculator locally in your browser and does not upload
+    your spending figures. This article is a general mathematical framework,
+    not a credit card recommendation or financial advice. Confirm current fees,
+    rewards, taxes, and account terms with the issuer.
   </p>
 </ArticleLayout>

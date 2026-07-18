@@ -280,6 +280,114 @@ export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
+  en: {
+    id: 'annual-fee-break-even-method',
+    labels: labels.en,
+    directAnswer: 'A rewards card with an annual fee breaks even only when the rewards above your realistic no-fee alternative cover the net fee. Divide the annual fee, after subtracting benefits you will certainly use, by the incremental reward rate. A $95 card earning 3% versus a 1.5% no-fee card needs about $6,333 of eligible annual spend; using 3% alone would understate the threshold by half.',
+    inputs: ['Annual fee at renewal, including any authorized-user fee', 'Reward rate on purchases you already make and that actually qualify', 'Reward rate of the no-fee card you would otherwise use', 'Cash value of repeatable benefits you are certain to use', 'Category and annual reward caps, exclusions, and expiration rules', 'Interest, foreign-transaction, and redemption fees kept outside the reward calculation'],
+    formula: 'Net annual fee = annual fee − guaranteed repeatable benefit value; incremental reward rate = fee-card rate − no-fee alternative rate; break-even eligible spend = net annual fee ÷ incremental reward rate',
+    workedExample: 'A card costs $95 a year and earns 3% on eligible purchases. Your no-fee alternative earns 1.5%, so the incremental rate is 1.5 percentage points. With no guaranteed benefit value, break-even spend is $95 ÷ 0.015 = $6,333.33 a year, or about $527.78 a month. If the extra rewards are capped at $90, spending alone can never recover the full $95 fee.',
+    sensitivity: [
+      { scenario: 'Lower fee', input: '$75 fee; 1.5-point incremental rate', result: '$5,000 eligible spend' },
+      { scenario: 'Base case', input: '$95 fee; 1.5-point incremental rate', result: '$6,333.33 eligible spend' },
+      { scenario: 'Smaller rate edge', input: '$95 fee; 1-point incremental rate', result: '$9,500 eligible spend' },
+      { scenario: 'Reward cap below fee', input: 'Extra rewards capped at $90', result: 'No spending-only break-even; at least $5 of certain benefits is still needed' },
+    ],
+    cta: { label: 'Calculate your own card break-even point', href: '/en/tools/cashback-breakeven' },
+    limitations: ['Do not count a one-time welcome bonus when deciding whether to renew. For the first year, include it only if the spending requirement fits purchases you already planned.', 'Point and mile values depend on the redemption you will actually make; do not use a promotional best-case valuation.', 'Paying interest or changing spending to chase rewards can overwhelm the result. This calculation assumes statement balances are paid in full and does not recommend a card.'],
+    sources: [
+      { label: 'Consumer Financial Protection Bureau — Terms of Credit Card Plans survey and comparison data', href: 'https://www.consumerfinance.gov/data-research/credit-card-data/terms-credit-card-plans-survey/' },
+      { label: 'Consumer Financial Protection Bureau — How to find the best credit card', href: 'https://files.consumerfinance.gov/f/documents/cfpb_adult-fin-ed_how-to-find-the-best-credit-card.pdf' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'annual-fee-break-even-method',
+    labels: labels.zh,
+    directAnswer: '有年費信用卡是否回本，不能只拿總回饋和年費相比，而要看它比「你原本會用的免年費卡」多賺多少。先扣掉確定會用到、可重複取得的權益，再用淨年費除以增量回饋率。年費 NT$3,000、回饋 3%，若免年費替代卡也有 1%，真正門檻是 NT$3,000 ÷ 2% = NT$150,000 合格年消費。',
+    inputs: ['續卡時真正會收的主卡、附卡年費', '原本就會發生且符合回饋資格的消費', '有年費卡與免年費替代卡的實際回饋率', '確定會使用、每年可重複取得的權益價值', '一般消費定義、指定通路、登錄、每月或年度回饋上限', '循環利息、海外交易、兌換與逾期費用，另列不藏在回饋裡'],
+    formula: '淨年費 = 年費 − 確定使用的可重複權益價值；增量回饋率 = 年費卡回饋率 − 免年費替代卡回饋率；回本年消費 = 淨年費 ÷ 增量回饋率',
+    workedExample: '年費 NT$3,000，合格消費回饋 3%，免年費替代卡回饋 1%，增量回饋率是 2 個百分點。若沒有可確定折抵的權益，回本門檻是 NT$3,000 ÷ 0.02 = NT$150,000／年，約 NT$12,500／月。若額外回饋全年最多只有 NT$2,400，無論刷多少都無法只靠回饋補足年費。',
+    sensitivity: [
+      { scenario: '年費較低', input: '年費 NT$2,000、增量回饋 2%', result: '合格年消費 NT$100,000' },
+      { scenario: '基準情境', input: '年費 NT$3,000、增量回饋 2%', result: '合格年消費 NT$150,000' },
+      { scenario: '增量回饋縮小', input: '年費 NT$3,000、增量回饋 1%', result: '合格年消費 NT$300,000' },
+      { scenario: '回饋上限低於年費', input: '額外回饋上限 NT$2,400', result: '只靠刷卡無法回本；仍差 NT$600 的確定權益' },
+    ],
+    cta: { label: '用自己的年費與回饋率計算', href: '/zh/tools/cashback-breakeven' },
+    limitations: ['續卡決策不要把一次性首刷禮算進去；新卡第一年也只計入不需額外消費就能達成的確定價值。', '點數與哩程要用自己真正能兌換的價值，不用廣告中的最高理論價。', '本計算假設每期全額繳清；循環利息、預借現金或為了回饋多花錢，可能立即吃掉所有回饋。內容不是信用卡推薦或財務建議。'],
+    sources: [
+      { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+      { label: '金融監督管理委員會 — 信用卡費用與利率揭露規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FE057261&media=print' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'annual-fee-break-even-method',
+    labels: labels.es,
+    directAnswer: 'Una tarjeta con cuota anual compensa solo cuando la recompensa adicional frente a una alternativa sin cuota cubre el coste neto. Divide la cuota, descontando únicamente ventajas recurrentes que usarás de verdad, entre la diferencia de cashback. Con 60 € de cuota, un 1,5 % y una alternativa gratuita del 0,5 %, hacen falta 6.000 € de gasto elegible al año.',
+    inputs: ['Cuota de emisión o mantenimiento que pagarás en la renovación', 'Cashback real de las compras habituales y elegibles', 'Rentabilidad de la alternativa sin cuota que usarías', 'Valor de ventajas recurrentes que aprovecharás con certeza', 'Topes mensuales o anuales, comercios excluidos y condiciones de abono', 'Intereses por pago aplazado, cambio de divisa y otras comisiones, por separado'],
+    formula: 'Cuota neta = cuota anual − ventajas recurrentes seguras; recompensa incremental = cashback con cuota − cashback sin cuota; gasto de equilibrio = cuota neta ÷ recompensa incremental',
+    workedExample: 'La tarjeta cuesta 60 € al año y devuelve el 1,5 %; una alternativa sin cuota devuelve el 0,5 %. La diferencia es 1 punto porcentual. Sin ventajas seguras, necesitas 60 € ÷ 0,01 = 6.000 € de gasto elegible anual, unos 500 € al mes. Si la devolución adicional tiene un tope de 50 €, el gasto no puede cubrir por sí solo la cuota.',
+    sensitivity: [
+      { scenario: 'Cuota menor', input: '45 €; diferencia de 1 punto', result: '4.500 € de gasto elegible' },
+      { scenario: 'Caso base', input: '60 €; diferencia de 1 punto', result: '6.000 € de gasto elegible' },
+      { scenario: 'Ventaja reducida', input: '60 €; diferencia de 0,5 puntos', result: '12.000 € de gasto elegible' },
+      { scenario: 'Tope inferior a la cuota', input: 'Cashback adicional máximo de 50 €', result: 'No se alcanza el equilibrio solo con gasto; faltan 10 € de ventajas seguras' },
+    ],
+    cta: { label: 'Abrir la calculadora en inglés', href: '/en/tools/cashback-breakeven' },
+    limitations: ['No uses el regalo de bienvenida para decidir una renovación. En el primer año, inclúyelo solo si cumples el gasto con compras ya previstas.', 'Los puntos, millas, seguros y accesos deben valorarse según el uso real, no según el precio publicitario.', 'La fórmula supone pago total a fin de mes. Los intereses del pago aplazado y el gasto creado para perseguir recompensas pueden anular el resultado.'],
+    sources: [
+      { label: 'Banco de España — comisión por emisión y mantenimiento de tarjetas', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/comisiones/comisionesproduc/comision_emision_tenencia_tarjeta.html' },
+      { label: 'Banco de España — comparadores y simuladores bancarios', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/actualidadeducac/educacion-financiera/comparadores-y-simuladores/' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  fr: {
+    id: 'annual-fee-break-even-method',
+    labels: labels.fr,
+    directAnswer: 'Une carte avec cotisation annuelle devient rentable seulement si son gain supplémentaire par rapport à une carte sans cotisation couvre le coût net. Divisez la cotisation, après déduction des avantages récurrents réellement utilisés, par l’écart de cashback. Avec 54 € de cotisation, 1,5 % de cashback contre 0,5 % sans cotisation, le seuil est de 5 400 € de dépenses éligibles par an.',
+    inputs: ['Cotisation de carte réellement facturée au prochain renouvellement', 'Taux obtenu sur vos dépenses habituelles et éligibles', 'Taux de la carte sans cotisation que vous utiliseriez sinon', 'Valeur des avantages récurrents dont l’usage est certain', 'Plafonds de cashback, catégories exclues et modalités de versement', 'Agios, frais en devises, retraits et frais de compte, affichés séparément'],
+    formula: 'Cotisation nette = cotisation annuelle − avantages récurrents certains ; taux supplémentaire = taux de la carte payante − taux de l’alternative gratuite ; seuil de dépenses = cotisation nette ÷ taux supplémentaire',
+    workedExample: 'Une carte coûte 54 € par an et verse 1,5 % de cashback, contre 0,5 % pour l’alternative sans cotisation. L’écart est de 1 point. Sans avantage certain, le seuil vaut 54 € ÷ 0,01 = 5 400 € par an, soit 450 € par mois. Si le gain supplémentaire est plafonné à 45 €, les dépenses seules ne couvrent jamais la cotisation.',
+    sensitivity: [
+      { scenario: 'Cotisation réduite', input: '36 €; écart de 1 point', result: '3 600 € de dépenses éligibles' },
+      { scenario: 'Cas de référence', input: '54 €; écart de 1 point', result: '5 400 € de dépenses éligibles' },
+      { scenario: 'Écart plus faible', input: '54 €; écart de 0,5 point', result: '10 800 € de dépenses éligibles' },
+      { scenario: 'Plafond sous la cotisation', input: 'Gain supplémentaire plafonné à 45 €', result: 'Pas de seuil par les dépenses seules; 9 € d’avantages certains restent nécessaires' },
+    ],
+    cta: { label: 'Ouvrir le calculateur en anglais', href: '/en/tools/cashback-breakeven' },
+    limitations: ['La prime de bienvenue ne sert pas à décider du renouvellement. Pour la première année, ne la comptez que si la condition de dépenses correspond à des achats déjà prévus.', 'Valorisez miles, points, assurances et salons selon votre usage probable, pas selon une valeur maximale publicitaire.', 'Le calcul suppose le paiement intégral du relevé. Les agios et les achats déclenchés pour obtenir une récompense peuvent dépasser le cashback.'],
+    sources: [
+      { label: 'Ministère de l’Économie — tout savoir sur les frais bancaires', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/tout-savoir-sur-les-frais-bancaires' },
+      { label: 'Ministère de l’Économie — comparateur public des tarifs bancaires', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/comparez-gratuitement-et-simplement' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'annual-fee-break-even-method',
+    labels: labels.de,
+    directAnswer: 'Eine Kreditkarte mit Jahresgebühr lohnt sich rechnerisch erst, wenn der Mehrertrag gegenüber einer realistischen kostenlosen Alternative die Nettogebühr deckt. Teilen Sie die Jahresgebühr nach Abzug sicher genutzter, wiederkehrender Leistungen durch den zusätzlichen Cashback-Satz. Bei 72 € Gebühr, 1 % Cashback und 0,25 % bei der kostenlosen Alternative liegt der Schwellenumsatz bei 9.600 € pro Jahr.',
+    inputs: ['Jahresgebühr und mögliche Gebühr für Zusatzkarten bei der nächsten Verlängerung', 'Tatsächlicher Cashback für ohnehin geplante, berechtigte Umsätze', 'Vergütung der gebührenfreien Alternative', 'Wert wiederkehrender Leistungen, die Sie sicher nutzen', 'Umsatzgrenzen, Kategorien, Ausschlüsse und Verfallsregeln', 'Sollzinsen, Fremdwährungs-, Bargeld- und Kontogebühren separat'],
+    formula: 'Nettogebühr = Jahresgebühr − sicher genutzte wiederkehrende Leistungen; Mehrvergütung = Cashback der Gebührenkarte − Cashback der kostenlosen Alternative; Schwellenumsatz = Nettogebühr ÷ Mehrvergütung',
+    workedExample: 'Die Karte kostet 72 € im Jahr und vergütet 1 %, die kostenlose Alternative 0,25 %. Der Mehrertrag beträgt 0,75 Prozentpunkte. Ohne sicher nutzbare Zusatzleistung ergibt sich 72 € ÷ 0,0075 = 9.600 € berechtigter Jahresumsatz, also 800 € im Monat. Ist der zusätzliche Cashback auf 60 € gedeckelt, reicht Umsatz allein nie für die Jahresgebühr.',
+    sensitivity: [
+      { scenario: 'Niedrigere Gebühr', input: '48 €; 0,75 Prozentpunkte Mehrvergütung', result: '6.400 € berechtigter Umsatz' },
+      { scenario: 'Basisfall', input: '72 €; 0,75 Prozentpunkte Mehrvergütung', result: '9.600 € berechtigter Umsatz' },
+      { scenario: 'Kleinerer Vorteil', input: '72 €; 0,5 Prozentpunkte Mehrvergütung', result: '14.400 € berechtigter Umsatz' },
+      { scenario: 'Deckel unter Gebühr', input: 'Zusätzlicher Cashback maximal 60 €', result: 'Kein reiner Umsatz-Break-even; 12 € sichere Leistungen fehlen' },
+    ],
+    cta: { label: 'Englischen Rechner öffnen', href: '/en/tools/cashback-breakeven' },
+    limitations: ['Ein einmaliger Willkommensbonus gehört nicht in die Verlängerungsrechnung. Im ersten Jahr zählt er nur, wenn der Mindestumsatz ohne Zusatzkäufe erreicht wird.', 'Punkte, Meilen, Versicherungen und Loungezugang sind nur so viel wert, wie Sie tatsächlich nutzen würden.', 'Die Rechnung setzt vollständigen Rechnungsausgleich voraus. Teilzahlungszinsen oder zusätzliche Ausgaben für Bonusziele können den gesamten Vorteil übersteigen.'],
+    sources: [
+      { label: 'BaFin — neutraler Kontenvergleich mit Kreditkartenentgelten', href: 'https://kontenvergleich.bafin.de/de' },
+      { label: 'Verbraucherzentrale — Unterschiede zwischen Kredit- und Debitkarte', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/kreditkarte-oder-debitkarte-das-sind-die-unterschiede-65038' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const costcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   en: {
     id: 'membership-break-even-method',

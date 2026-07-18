@@ -729,6 +729,72 @@ export const gymCostGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+export const deliveryMembershipGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'delivery-membership-break-even-method',
+    labels: labels.en,
+    directAnswer: 'A delivery membership is worth its annual fee only when savings on orders you already planned exceed the fee after minimum-order failures, service-fee differences, and extra spending. With a $96 annual fee, three unused months, two planned orders in each of nine active months, $4.99 of delivery-fee savings and $1.50 of service-fee savings on every eligible order, 18 eligible orders save $116.82 before the fee and $20.82 after it. Break-even is ceil($96 ÷ $6.49) = 15 eligible orders.',
+    inputs: ['Annual or monthly membership fee at the next renewal', 'Months when you realistically expect no delivery orders', 'Orders already planned in each remaining active month', 'Share of those orders that meet the minimum basket and use an eligible merchant', 'Nonmember delivery charge minus member delivery charge for the same basket', 'Nonmember service fee minus member service fee at the same checkout', 'Extra food or other spend added only to reach the member minimum'],
+    formula: 'Active months = 12 − unused months. Planned orders = active months × orders per active month. Eligible orders = planned orders × eligible-order rate. Net saving per eligible order = delivery-fee difference + service-fee difference − extra spend to reach the minimum. Annual benefit = eligible orders × net saving per eligible order. Net annual value = annual benefit − membership fee. Break-even eligible orders = ceil(membership fee ÷ net saving per eligible order).',
+    workedExample: 'A membership costs $96 a year. You expect no orders in three months and two orders in each of the other nine, for 18 planned orders. All 18 are from eligible merchants and already exceed the minimum. The same checkout shows $4.99 less delivery fee and $1.50 less service fee, so each eligible order saves $6.49. Annual benefit is 18 × $6.49 = $116.82; after the fee, net value is $20.82. Break-even is 15 eligible orders.',
+    sensitivity: [
+      { scenario: 'One order per active month', input: '9 eligible orders × $6.49', result: '$58.41 benefit; membership loses $37.59' },
+      { scenario: 'First winning order count', input: '15 eligible orders × $6.49', result: '$97.35 benefit; membership saves $1.35' },
+      { scenario: 'Planned use', input: '18 eligible orders × $6.49', result: '$116.82 benefit; membership saves $20.82' },
+      { scenario: 'Six orders miss the minimum', input: '12 eligible of 18 planned orders', result: '$77.88 benefit; membership loses $18.12' },
+    ],
+    cta: { label: 'Calculate your delivery-membership break-even', href: '#delivery-membership-calculator' },
+    limitations: ['Use a same-restaurant, same-basket, same-time checkout comparison. Menu prices, taxes, small-order charges, distance, peak pricing, promotions, and availability can change independently of membership.', 'Tips are not membership savings when you would tip the same amount without membership. Count only the fee difference caused by the plan.', 'Eligible merchants, basket minimums, fee formulas, trials, renewals, cancellation, and refunds vary by provider and can change. Verify the current terms and your checkout before subscribing.'],
+    sources: [
+      { label: 'FTC Consumer Advice — free trials, auto-renewals, and negative-option subscriptions', href: 'https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions' },
+      { label: 'Uber — Uber One membership terms for the United States', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=united-states&lang=en' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'delivery-membership-break-even-method',
+    labels: labels.zh,
+    directAnswer: '外送會員只有在「本來就會下單、符合指定店家與最低消費」的訂單節省大於會費時才回本。年費 NT$1,199、兩個月完全不用、其餘十個月每月 3 單、其中 80% 合格時，共 24 筆合格訂單。若同一購物車每單少 NT$80 外送費與 NT$15 服務費，且不需多買湊門檻，每單淨省 NT$95、全年省 NT$2,280，扣會費後淨省 NT$1,081；最低需要 13 筆合格訂單。',
+    inputs: ['下一期真正會扣的年費或月費總額', '旅遊、返鄉、自己煮或公司供餐而完全不用外送的月份', '其餘月份本來就會下的訂單數', '同時符合指定店家、指定品項與最低消費的訂單比例', '同店同餐點在非會員與會員結帳畫面的外送費差', '同一結帳畫面的平台／服務費差額', '只為湊最低消費而多買、最後沒吃完或原本不會買的金額'],
+    formula: '有效月份 = 12 − 完全不用月份。預計訂單 = 有效月份 × 每月訂單數。合格訂單 = 預計訂單 × 合格比例。每筆合格訂單淨節省 = 外送費差 + 服務費差 − 湊門檻額外支出。全年利益 = 合格訂單 × 每單淨節省。年淨值 = 全年利益 − 會員費。最低回本合格訂單 = 無條件進位（會員費 ÷ 每單淨節省）。',
+    workedExample: '會員年費 NT$1,199，預計有兩個月完全不用；其餘十個月每月原本就會下 3 單，共 30 單。估計 80% 符合指定店家與最低消費，所以是 24 筆合格訂單。同一餐廳、同一購物車比較後，會員少 NT$80 外送費及 NT$15 服務費，且不用多買湊門檻；每單淨省 NT$95。全年利益 24 × 95 = NT$2,280，扣會費淨省 NT$1,081；回本為 1,199 ÷ 95 無條件進位 = 13 單。',
+    sensitivity: [
+      { scenario: '低頻使用', input: '每月 1 單 × 10 月 × 80% 合格', result: '8 筆；利益 NT$760；會員少回收 NT$439' },
+      { scenario: '合格比例下降', input: '30 單中只有 50% 合格', result: '15 筆；利益 NT$1,425；會員淨省 NT$226' },
+      { scenario: '預計使用', input: '30 單中 80% 合格', result: '24 筆；利益 NT$2,280；會員淨省 NT$1,081' },
+      { scenario: '每單多買 NT$25 湊門檻', input: '24 筆 × 每單淨省 NT$70', result: '利益 NT$1,680；會員淨省 NT$481' },
+    ],
+    cta: { label: '用自己的訂單與費用計算回本', href: '#delivery-membership-calculator' },
+    limitations: ['一定要用同一店家、同一餐點、同一時間的兩個結帳畫面比；餐點售價、尖峰、距離、小額訂單費、促銷與可配送狀態都可能另行變動。', '小費若有會員也會照付，就不是會員節省；不要把整筆小費重複算成免運利益。', '指定店家、最低消費、試用、續約、取消與退費依平台當下條款和個別訂單而定，請以結帳及會員頁面為準。'],
+    sources: [
+      { label: '行政院消費者保護會 — 如何取消免費贈送或已訂閱的 APP', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11' },
+      { label: 'Uber — 台灣 Uber One 會員條款', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=taiwan&lang=zh-tw' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'delivery-membership-break-even-method',
+    labels: labels.es,
+    directAnswer: 'Una membresía de entrega compensa cuando el ahorro de pedidos que ya ibas a hacer supera la cuota después de excluir restaurantes no elegibles, pedidos por debajo del mínimo, diferencias de tarifa de servicio y compras añadidas. Con una cuota anual de 49,99 €, cuatro meses sin pedidos, tres pedidos en cada uno de los ocho meses activos y un 75% de pedidos elegibles, hay 18 pedidos válidos. Si cada uno ahorra 2,49 € de envío y 0,80 € de servicio sin compra añadida, el beneficio es 59,22 € y el ahorro neto 9,23 €; el equilibrio está en 16 pedidos elegibles.',
+    inputs: ['Cuota real de la próxima renovación', 'Meses en los que razonablemente no pedirás a domicilio', 'Pedidos ya previstos por cada mes activo', 'Porcentaje que cumple restaurante participante, cesta mínima y demás requisitos', 'Diferencia de gastos de envío entre la misma cesta con y sin membresía', 'Diferencia de tarifa de servicio en ese mismo momento', 'Importe añadido solo para alcanzar el pedido mínimo'],
+    formula: 'Meses activos = 12 − meses sin uso. Pedidos previstos = meses activos × pedidos por mes. Pedidos elegibles = pedidos previstos × porcentaje elegible. Ahorro neto por pedido = diferencia de envío + diferencia de servicio − compra añadida. Beneficio anual = pedidos elegibles × ahorro por pedido. Valor neto = beneficio anual − cuota. Pedidos de equilibrio = redondear hacia arriba(cuota ÷ ahorro por pedido elegible).',
+    workedExample: 'La cuota anual es 49,99 €. Prevés cuatro meses sin pedir y tres pedidos en cada uno de los ocho meses activos: 24 pedidos. El 75% cumple restaurante y cesta mínima, es decir, 18 pedidos elegibles. La misma cesta muestra 2,49 € menos de envío y 0,80 € menos de servicio, sin añadir productos: 3,29 € por pedido. El beneficio es 18 × 3,29 € = 59,22 € y el valor neto 9,23 €. El equilibrio es ceil(49,99 ÷ 3,29) = 16 pedidos elegibles.',
+    sensitivity: [
+      { scenario: 'Uso bajo', input: '1 pedido × 8 meses × 75% elegible', result: '6 pedidos; 19,74 € de beneficio; faltan 30,25 €' },
+      { scenario: 'Primer número rentable', input: '16 pedidos elegibles × 3,29 €', result: '52,64 € de beneficio; ahorro neto 2,65 €' },
+      { scenario: 'Uso previsto', input: '18 pedidos elegibles × 3,29 €', result: '59,22 € de beneficio; ahorro neto 9,23 €' },
+      { scenario: 'Solo la mitad cumple el mínimo', input: '12 pedidos elegibles de 24', result: '39,48 € de beneficio; faltan 10,51 €' },
+    ],
+    cta: { label: 'Calcular el equilibrio de tu membresía', href: '#delivery-membership-calculator' },
+    limitations: ['Compara el mismo restaurante, cesta y momento. Precio del menú, impuestos, suplementos por pedido pequeño o distancia, alta demanda, promociones y disponibilidad pueden variar fuera de la membresía.', 'La propina no es ahorro si pagarías la misma con o sin membresía. Cuenta únicamente la diferencia causada por el plan.', 'Restaurantes participantes, pedido mínimo, tarifas, prueba, renovación, baja y devolución dependen de las condiciones vigentes del proveedor.'],
+    sources: [
+      { label: 'BOE — Ley General para la Defensa de los Consumidores y Usuarios, artículo 62', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a62' },
+      { label: 'Uber — condiciones de Uber One para España', href: 'https://www.uber.com/legal/en/document/?name=uber-one-membership-terms&country=spain&lang=es' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

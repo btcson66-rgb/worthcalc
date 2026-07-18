@@ -1,0 +1,126 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import DeliveryMembershipCalculator from '../../components/DeliveryMembershipCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { deliveryMembershipGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'When is a delivery membership worth the annual fee?',
+    description: 'Calculate delivery-membership break-even from eligible orders, fee differences, basket minimums, extra spend, and months with no use.',
+    faq: [
+      { question: 'How many orders make a delivery membership worth it?', answer: 'Divide the membership fee by the net saving on one eligible order and round up. The example needs 15 eligible orders because each saves $6.49 against a $96 fee.' },
+      { question: 'Does free delivery mean the whole delivery order is free of fees?', answer: 'No. Service, small-order, distance, regulatory, peak, taxes, and tips may remain. Compare the final checkout for the same basket with and without membership.' },
+      { question: 'How should I count a minimum-order requirement?', answer: 'Count only orders that would meet the minimum without buying unnecessary items. If you add food only to qualify, subtract that added spend or expected waste from the order saving.' },
+      { question: 'Should months with no orders count?', answer: 'Yes. The annual fee covers the entire year, so travel, cooking, moving, or seasonal no-order months reduce your order count without reducing a nonrefundable fee.' },
+      { question: 'Do promotions count as membership savings?', answer: 'Only the incremental discount unavailable to nonmembers on the same planned order. A public coupon or restaurant promotion belongs to both sides of the comparison.' },
+    ],
+  },
+  zh: {
+    title: '外送會員一年要用幾次才回本',
+    description: '用合格訂單、免運差額、服務費差、最低消費、湊單與完全不用月份，計算外送會員一年回本次數。',
+    faq: [
+      { question: '外送會員一年要訂幾次才回本？', answer: '用會員費除以每筆合格訂單淨節省後無條件進位。本頁算例年費 NT$1,199、每單淨省 NT$95，至少需要 13 筆合格訂單。' },
+      { question: '會員免運是不是等於完全沒有外送費用？', answer: '不是。服務費、小額訂單費、距離、尖峰、餐點差價、稅與小費都可能存在；一定要比較同店、同餐點、同時間的最終結帳金額。' },
+      { question: '最低消費沒達到要怎麼算？', answer: '未達門檻的訂單不要列為合格；若為了湊門檻多買，應把原本不會買或可能浪費的金額從每單節省扣掉。' },
+      { question: '旅遊或自己煮的月份要算嗎？', answer: '要。年費不會因當月沒下單自動減少，因此完全不用的月份要從有效月份扣除，避免拿理想化的 12 個月頻率算回本。' },
+      { question: '首月免費試用可以直接當成一年都划算嗎？', answer: '不行。試用只描述短期費用；決策要使用試用結束後的續約價、目前權益、取消路徑與你正常一年的下單習慣。' },
+    ],
+  },
+  es: {
+    title: 'Cuándo compensa una membresía de entrega a domicilio',
+    description: 'Calcula pedidos de equilibrio con cuota, meses sin uso, restaurantes elegibles, pedido mínimo, envío, servicio y compra añadida.',
+    faq: [
+      { question: '¿Cuántos pedidos necesito para amortizar una membresía de entrega?', answer: 'Divide la cuota entre el ahorro neto de un pedido elegible y redondea hacia arriba. El ejemplo necesita 16 pedidos elegibles para recuperar 49,99 €.' },
+      { question: '¿Envío gratis significa que no hay otras tarifas?', answer: 'No. Pueden quedar tarifa de servicio, suplemento por pedido pequeño o distancia, alta demanda, impuestos y propina. Compara el total final de la misma cesta.' },
+      { question: '¿Cómo incluyo el pedido mínimo?', answer: 'Aplica un porcentaje de pedidos que lo cumplirán sin cambiar tu compra. Si añades artículos solo para alcanzar el mínimo, resta ese importe del ahorro.' },
+      { question: '¿Qué hago con los meses en los que no pediré?', answer: 'Réstalos de los meses activos. Una cuota anual no reembolsada sigue costando lo mismo aunque pases varios meses de viaje, cocinando en casa o fuera de la zona de servicio.' },
+      { question: '¿Una promoción pública cuenta como ventaja de la membresía?', answer: 'No si también está disponible sin pagar la membresía. Cuenta solo la diferencia incremental que aparece en la misma cesta por tener el plan.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { membershipFee: 96, unusedMonths: 3, ordersPerActiveMonth: 2, eligibleOrderRate: 100, deliveryFeeDifference: 4.99, serviceFeeDifference: 1.5, extraSpendPerEligibleOrder: 0 },
+    copy: {
+      heading: 'Delivery-membership break-even calculator', intro: 'Use the same basket with and without membership. Count only orders you already planned.', membershipFee: 'Annual membership fee', unusedMonths: 'Months with no delivery orders', ordersPerActiveMonth: 'Planned orders per active month', eligibleOrderRate: 'Orders meeting merchant and basket rules (%)', deliveryFeeDifference: 'Delivery-fee saving per eligible order', serviceFeeDifference: 'Service-fee saving per eligible order', extraSpendPerEligibleOrder: 'Extra spend added to reach the minimum', plannedOrders: 'Planned annual orders', eligibleOrders: 'Eligible annual orders', savingPerEligibleOrder: 'Net saving per eligible order', grossSavings: 'Annual benefit before membership fee', netValue: 'Net annual value after fee', breakEvenOrders: 'Break-even eligible orders', positive: 'Membership is ahead by', negative: 'Membership is short by', tie: 'The membership is at break-even.', impossible: 'The order-level saving is zero or negative, so the membership cannot break even on these inputs.', orderSuffix: 'eligible orders', privacy: 'Inputs stay in this browser. This calculator compares checkout costs and does not promise eligibility, refunds, or future prices.',
+    },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { membershipFee: 1199, unusedMonths: 2, ordersPerActiveMonth: 3, eligibleOrderRate: 80, deliveryFeeDifference: 80, serviceFeeDifference: 15, extraSpendPerEligibleOrder: 0 },
+    copy: {
+      heading: '外送會員回本計算機', intro: '請比較同店、同餐點、同時間的會員與非會員結帳，且只算本來就會下的訂單。', membershipFee: '下一期會員年費', unusedMonths: '完全不會用外送的月份', ordersPerActiveMonth: '每個有效月份原本會下的訂單', eligibleOrderRate: '符合指定店家與最低消費比例（%）', deliveryFeeDifference: '每筆合格訂單外送費差額', serviceFeeDifference: '每筆合格訂單服務費差額', extraSpendPerEligibleOrder: '每筆只為湊門檻的額外支出', plannedOrders: '全年預計訂單', eligibleOrders: '全年合格訂單', savingPerEligibleOrder: '每筆合格訂單淨節省', grossSavings: '扣會費前全年利益', netValue: '扣會費後年淨值', breakEvenOrders: '最低回本合格訂單', positive: '會員方案淨省', negative: '會員方案還差', tie: '會員方案剛好回本。', impossible: '每筆合格訂單沒有淨節省，這組條件下無法靠下單回本。', orderSuffix: '筆合格訂單', privacy: '輸入只留在瀏覽器。本工具比較結帳成本，不保證店家資格、未來價格、取消或退費結果。',
+    },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { membershipFee: 49.99, unusedMonths: 4, ordersPerActiveMonth: 3, eligibleOrderRate: 75, deliveryFeeDifference: 2.49, serviceFeeDifference: 0.8, extraSpendPerEligibleOrder: 0 },
+    copy: {
+      heading: 'Calculadora de equilibrio de la membresía de entrega', intro: 'Compara la misma cesta con y sin membresía y cuenta solo pedidos que ya estaban previstos.', membershipFee: 'Cuota anual de la membresía', unusedMonths: 'Meses sin pedidos a domicilio', ordersPerActiveMonth: 'Pedidos previstos por mes activo', eligibleOrderRate: 'Pedidos que cumplen restaurante y cesta mínima (%)', deliveryFeeDifference: 'Ahorro de envío por pedido elegible', serviceFeeDifference: 'Ahorro de servicio por pedido elegible', extraSpendPerEligibleOrder: 'Compra añadida para alcanzar el mínimo', plannedOrders: 'Pedidos anuales previstos', eligibleOrders: 'Pedidos anuales elegibles', savingPerEligibleOrder: 'Ahorro neto por pedido elegible', grossSavings: 'Beneficio anual antes de la cuota', netValue: 'Valor anual neto después de la cuota', breakEvenOrders: 'Pedidos elegibles de equilibrio', positive: 'La membresía ahorra', negative: 'A la membresía le faltan', tie: 'La membresía está en el punto de equilibrio.', impossible: 'El ahorro por pedido es cero o negativo; con estos datos la membresía no puede amortizarse.', orderSuffix: 'pedidos elegibles', privacy: 'Los datos permanecen en este navegador. La calculadora compara costes y no garantiza elegibilidad, precios futuros, baja o devolución.',
+    },
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = deliveryMembershipGuides[locale];
+const calculator = calculators[locale];
+if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>“Free delivery” is not the number to divide into the annual fee. A plan can leave service fees, small-order charges, distance fees, taxes, menu-price differences, and tips untouched. Start with orders you would place anyway, then compare the final member and nonmember checkout for the same restaurant, basket, address, and time.</p>
+    <DecisionGuide content={guide} />
+    <DeliveryMembershipCalculator locale={locale} {...calculator} />
+    <h2>The minimum basket creates an eligibility rate</h2>
+    <p>If only 12 of 18 planned orders use participating merchants and meet the minimum, the other six do not recover the annual fee. Do not raise the basket just to turn an order green. Any food added only for qualification is a cost; if it is wasted, subtract its full amount from the order-level saving.</p>
+    <h2>Service-fee savings must come from a real checkout</h2>
+    <p>Do not assume the service fee disappears because delivery is waived. Record the two final fee lines from the same basket. In the example, $4.99 of delivery savings plus $1.50 of service savings gives $6.49 per eligible order. If the service fee is unchanged, the order saving falls and break-even moves later.</p>
+    <h2>Unused months expose optimistic annual math</h2>
+    <p>Travel, a move, cooking goals, employer meals, or leaving the service area can create months with no orders. The example uses only nine active months. Using 12 months because the plan lasts a year would invent six extra orders and make the membership look safer than your schedule supports.</p>
+    <h2>Recalculate at renewal, not from the trial headline</h2>
+    <p>Use the next renewal fee and current merchant, basket, and fee rules. FTC consumer guidance recommends checking auto-renewal terms and keeping cancellation records. A trial month can test checkout differences, but it cannot prove that the paid year will match your future order pattern.</p>
+    <p class="privacy-note">This page is a general consumer-cost comparison. It does not endorse a delivery platform or determine eligibility, cancellation, refund, food safety, or tax treatment.</p>
+  </>}
+  {locale === 'zh' && <>
+    <p>「會員免運」不等於整張外送單都免費。平台服務費、小額訂單費、距離或尖峰加價、餐點售價差、稅與小費都可能留下。先把同一家店、同一份餐點、同一時間的會員與非會員結帳畫面並排，再算真正由會員造成的差額。</p>
+    <DecisionGuide content={guide} />
+    <DeliveryMembershipCalculator locale={locale} {...calculator} />
+    <h2>最低消費不是小字，而是合格訂單比例</h2>
+    <p>預計 30 單不代表 30 單都能免運。本頁用 80% 合格率，只算 24 單；若實際只有一半符合指定店家與門檻，全年淨省會從 NT$1,081 降到 NT$226。為湊門檻多買的飲料、點心或吃不完餐點，必須從節省扣除。</p>
+    <h2>服務費要看結帳差額，不要用印象填</h2>
+    <p>同一筆訂單可能免外送費但仍收平台費，也可能因活動、距離或時段出現不同費用。最穩的做法是連續記錄幾次同店同籃的會員／非會員差額；本頁 NT$80 與 NT$15 都只是透明示範輸入，不是假裝成市場平均。</p>
+    <h2>返鄉、旅遊與自己煮會降低一年使用次數</h2>
+    <p>年費通常不會因某月沒下單就自動縮小，所以要先扣掉完全不用的月份。若你只有十個有效月份，每月三單就是 30 單，而不是把十二個月硬乘成 36 單。預計搬家或服務區改變時，也應加入保守情境。</p>
+    <h2>試用結束前確認續約價與取消證明</h2>
+    <p>行政院消費者保護會提醒，刪除 APP 不等於取消訂閱；應依平台路徑取消並保存成功畫面。續約前重新核對費用、指定店家、最低消費與退費條款，不把首月優惠沿用成整年假設。</p>
+    <p class="privacy-note">本頁只做一般消費成本比較，不推薦特定外送平台，也不判定店家資格、取消、退費、食品安全或稅務結果。</p>
+  </>}
+  {locale === 'es' && <>
+    <p>“Envío gratis” no equivale a una cesta sin cargos. Pueden seguir apareciendo tarifa de servicio, suplemento por pedido pequeño o distancia, alta demanda, impuestos, diferencias de precio del menú y propina. La comparación válida usa el mismo restaurante, cesta, dirección y momento con y sin membresía.</p>
+    <DecisionGuide content={guide} />
+    <DeliveryMembershipCalculator locale={locale} {...calculator} />
+    <h2>El pedido mínimo convierte el uso en un porcentaje elegible</h2>
+    <p>En el ejemplo hay 24 pedidos previstos, pero solo el 75% cumple restaurante y cesta mínima: 18 pedidos. Si solo 12 fueran elegibles, el beneficio bajaría a 39,48 € y no recuperaría la cuota. Los productos añadidos únicamente para superar el mínimo se restan, aunque el pedido obtenga envío gratis.</p>
+    <h2>La tarifa de servicio se mide en la misma pantalla</h2>
+    <p>No presupongas que desaparece junto con el envío. Anota el total y cada tarifa de dos cestas equivalentes. Los 2,49 € de envío y 0,80 € de servicio del ejemplo son entradas editables, no tarifas medias del mercado ni promesas de un proveedor.</p>
+    <h2>Los meses sin pedidos reducen el valor anual</h2>
+    <p>Viajes, cocina en casa, mudanza o quedar fuera de la zona de reparto pueden dejar meses sin uso. El ejemplo utiliza ocho meses activos. Multiplicar por doce solo porque la cuota es anual añadiría pedidos que no existen y escondería el riesgo de una cuota no recuperada.</p>
+    <h2>Revisa renovación y baja con las condiciones vigentes</h2>
+    <p>El artículo 62 de la ley española exige que los contratos continuados informen del procedimiento para ponerles fin. Para el cálculo cuenta la próxima cuota, las reglas actuales y la fecha de baja confirmada. Una prueba promocional permite observar cestas, pero no demuestra el ahorro de todo el año.</p>
+    <p class="privacy-note">La página compara costes generales de consumo. No recomienda una plataforma ni determina elegibilidad, baja, devolución, seguridad alimentaria o tratamiento fiscal.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

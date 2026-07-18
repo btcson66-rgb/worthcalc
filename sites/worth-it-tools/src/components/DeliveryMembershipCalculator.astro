@@ -1,0 +1,240 @@
+---
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  membershipFee: string;
+  unusedMonths: string;
+  ordersPerActiveMonth: string;
+  eligibleOrderRate: string;
+  deliveryFeeDifference: string;
+  serviceFeeDifference: string;
+  extraSpendPerEligibleOrder: string;
+  plannedOrders: string;
+  eligibleOrders: string;
+  savingPerEligibleOrder: string;
+  grossSavings: string;
+  netValue: string;
+  breakEvenOrders: string;
+  positive: string;
+  negative: string;
+  tie: string;
+  impossible: string;
+  orderSuffix: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: 'en' | 'zh' | 'es';
+  currency: 'USD' | 'TWD' | 'EUR';
+  defaults: {
+    membershipFee: number;
+    unusedMonths: number;
+    ordersPerActiveMonth: number;
+    eligibleOrderRate: number;
+    deliveryFeeDifference: number;
+    serviceFeeDifference: number;
+    extraSpendPerEligibleOrder: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const numberLocale = locale === 'zh' ? 'zh-TW' : locale === 'es' ? 'es-ES' : 'en-US';
+---
+
+<section
+  id="delivery-membership-calculator"
+  class="delivery-calc"
+  data-delivery-membership-calculator
+  data-locale={numberLocale}
+  data-currency={currency}
+  data-positive={copy.positive}
+  data-negative={copy.negative}
+  data-tie={copy.tie}
+  data-impossible={copy.impossible}
+  data-order-suffix={copy.orderSuffix}
+  aria-labelledby="delivery-calculator-heading"
+>
+  <header>
+    <h2 id="delivery-calculator-heading">{copy.heading}</h2>
+    <p>{copy.intro}</p>
+  </header>
+
+  <div class="delivery-calc-grid">
+    <div class="delivery-calc-inputs">
+      <label>
+        <span>{copy.membershipFee}</span>
+        <input data-field="membershipFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.membershipFee} />
+      </label>
+      <label>
+        <span>{copy.unusedMonths}</span>
+        <input data-field="unusedMonths" type="number" inputmode="numeric" min="0" max="12" step="1" value={defaults.unusedMonths} />
+      </label>
+      <label>
+        <span>{copy.ordersPerActiveMonth}</span>
+        <input data-field="ordersPerActiveMonth" type="number" inputmode="decimal" min="0" max="100" step="0.1" value={defaults.ordersPerActiveMonth} />
+      </label>
+      <label>
+        <span>{copy.eligibleOrderRate}</span>
+        <input data-field="eligibleOrderRate" type="number" inputmode="decimal" min="0" max="100" step="1" value={defaults.eligibleOrderRate} />
+      </label>
+      <label>
+        <span>{copy.deliveryFeeDifference}</span>
+        <input data-field="deliveryFeeDifference" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.deliveryFeeDifference} />
+      </label>
+      <label>
+        <span>{copy.serviceFeeDifference}</span>
+        <input data-field="serviceFeeDifference" type="number" inputmode="decimal" step="0.01" value={defaults.serviceFeeDifference} />
+      </label>
+      <label>
+        <span>{copy.extraSpendPerEligibleOrder}</span>
+        <input data-field="extraSpendPerEligibleOrder" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.extraSpendPerEligibleOrder} />
+      </label>
+    </div>
+
+    <div class="delivery-calc-results" aria-live="polite">
+      <p class="delivery-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.plannedOrders}</dt><dd data-output="plannedOrders">—</dd></div>
+        <div><dt>{copy.eligibleOrders}</dt><dd data-output="eligibleOrders">—</dd></div>
+        <div><dt>{copy.savingPerEligibleOrder}</dt><dd data-output="savingPerEligibleOrder">—</dd></div>
+        <div><dt>{copy.grossSavings}</dt><dd data-output="grossSavings">—</dd></div>
+        <div><dt>{copy.netValue}</dt><dd data-output="netValue">—</dd></div>
+        <div><dt>{copy.breakEvenOrders}</dt><dd data-output="breakEvenOrders">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="delivery-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-delivery-membership-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 2 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+    const formatNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+
+    function calculate() {
+      const membershipFee = Math.max(0, value('membershipFee'));
+      const unusedMonths = Math.min(12, Math.max(0, Math.round(value('unusedMonths'))));
+      const activeMonths = 12 - unusedMonths;
+      const ordersPerActiveMonth = Math.max(0, value('ordersPerActiveMonth'));
+      const eligibleOrderRate = Math.min(100, Math.max(0, value('eligibleOrderRate'))) / 100;
+      const deliveryFeeDifference = value('deliveryFeeDifference');
+      const serviceFeeDifference = value('serviceFeeDifference');
+      const extraSpend = Math.max(0, value('extraSpendPerEligibleOrder'));
+      const plannedOrders = activeMonths * ordersPerActiveMonth;
+      const eligibleOrders = plannedOrders * eligibleOrderRate;
+      const savingPerEligibleOrder = deliveryFeeDifference + serviceFeeDifference - extraSpend;
+      const grossSavings = eligibleOrders * savingPerEligibleOrder;
+      const netValue = grossSavings - membershipFee;
+      const breakEvenOrders = savingPerEligibleOrder > 0 ? Math.ceil(membershipFee / savingPerEligibleOrder) : 0;
+
+      output('plannedOrders').textContent = formatNumber.format(plannedOrders);
+      output('eligibleOrders').textContent = formatNumber.format(eligibleOrders);
+      output('savingPerEligibleOrder').textContent = formatMoney(savingPerEligibleOrder);
+      output('grossSavings').textContent = formatMoney(grossSavings);
+      output('netValue').textContent = formatMoney(netValue);
+      output('breakEvenOrders').textContent = breakEvenOrders > 0 ? `${formatNumber.format(breakEvenOrders)} ${root.dataset.orderSuffix || ''}`.trim() : '—';
+
+      if (savingPerEligibleOrder <= 0) output('verdict').textContent = root.dataset.impossible || '';
+      else if (Math.abs(netValue) < 0.01) output('verdict').textContent = root.dataset.tie || '';
+      else if (netValue > 0) output('verdict').textContent = `${root.dataset.positive || ''} ${formatMoney(netValue)}`.trim();
+      else output('verdict').textContent = `${root.dataset.negative || ''} ${formatMoney(Math.abs(netValue))}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .delivery-calc {
+    margin: 2rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .delivery-calc header p,
+  .delivery-calc-note {
+    color: var(--color-muted);
+  }
+
+  .delivery-calc-grid,
+  .delivery-calc-inputs,
+  .delivery-calc-results dl {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .delivery-calc-inputs label span {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 650;
+  }
+
+  .delivery-calc-results {
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    padding: 1rem;
+  }
+
+  .delivery-verdict {
+    margin-top: 0;
+    font-size: 1.15rem;
+    font-weight: 750;
+  }
+
+  .delivery-calc-results dl,
+  .delivery-calc-results dd {
+    margin: 0;
+  }
+
+  .delivery-calc-results dl div {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .delivery-calc-results dt {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .delivery-calc-results dd {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .delivery-calc-note {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 760px) {
+    .delivery-calc-grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(270px, 0.8fr);
+      align-items: start;
+    }
+
+    .delivery-calc-inputs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .delivery-calc-results {
+      position: sticky;
+      top: 1rem;
+    }
+  }
+</style>

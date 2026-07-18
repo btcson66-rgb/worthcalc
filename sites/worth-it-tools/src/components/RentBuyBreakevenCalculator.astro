@@ -1,0 +1,281 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface CalculatorCopy {
+  heading: string;
+  intro: string;
+  purchasePrice: string;
+  downPayment: string;
+  annualRate: string;
+  termYears: string;
+  buyingCosts: string;
+  annualOwnerCosts: string;
+  sellingCostRate: string;
+  appreciationRate: string;
+  monthlyRent: string;
+  rentGrowthRate: string;
+  opportunityRate: string;
+  maxYears: string;
+  breakEvenYear: string;
+  ownerCost: string;
+  renterCost: string;
+  ownerAdvantage: string;
+  monthlyPayment: string;
+  remainingBalance: string;
+  yearUnit: string;
+  noBreakEven: string;
+  verdictFound: string;
+  verdictMissing: string;
+  privacy: string;
+}
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    purchasePrice: number;
+    downPayment: number;
+    annualRate: number;
+    termYears: number;
+    buyingCosts: number;
+    annualOwnerCosts: number;
+    sellingCostRate: number;
+    appreciationRate: number;
+    monthlyRent: number;
+    rentGrowthRate: number;
+    opportunityRate: number;
+    maxYears: number;
+  };
+  copy: CalculatorCopy;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = {
+  en: 'en-US',
+  zh: 'zh-TW',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+};
+---
+
+<section
+  class="breakeven-calc"
+  data-rent-buy-breakeven-calculator
+  data-locale={localeTags[locale]}
+  data-currency={currency}
+  data-year-unit={copy.yearUnit}
+  data-no-break-even={copy.noBreakEven}
+  data-verdict-found={copy.verdictFound}
+  data-verdict-missing={copy.verdictMissing}
+>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+
+  <div class="breakeven-calc-grid">
+    <div class="breakeven-calc-inputs">
+      <label><span>{copy.purchasePrice}</span><input data-field="purchasePrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.purchasePrice} /></label>
+      <label><span>{copy.downPayment}</span><input data-field="downPayment" type="number" inputmode="decimal" min="0" step="100" value={defaults.downPayment} /></label>
+      <label><span>{copy.annualRate}</span><input data-field="annualRate" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.annualRate} /></label>
+      <label><span>{copy.termYears}</span><input data-field="termYears" type="number" inputmode="numeric" min="1" max="50" step="1" value={defaults.termYears} /></label>
+      <label><span>{copy.buyingCosts}</span><input data-field="buyingCosts" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyingCosts} /></label>
+      <label><span>{copy.annualOwnerCosts}</span><input data-field="annualOwnerCosts" type="number" inputmode="decimal" min="0" step="100" value={defaults.annualOwnerCosts} /></label>
+      <label><span>{copy.sellingCostRate}</span><input data-field="sellingCostRate" type="number" inputmode="decimal" min="0" step="0.1" value={defaults.sellingCostRate} /></label>
+      <label><span>{copy.appreciationRate}</span><input data-field="appreciationRate" type="number" inputmode="decimal" min="-20" step="0.1" value={defaults.appreciationRate} /></label>
+      <label><span>{copy.monthlyRent}</span><input data-field="monthlyRent" type="number" inputmode="decimal" min="0" step="10" value={defaults.monthlyRent} /></label>
+      <label><span>{copy.rentGrowthRate}</span><input data-field="rentGrowthRate" type="number" inputmode="decimal" min="-20" step="0.1" value={defaults.rentGrowthRate} /></label>
+      <label><span>{copy.opportunityRate}</span><input data-field="opportunityRate" type="number" inputmode="decimal" min="-20" step="0.1" value={defaults.opportunityRate} /></label>
+      <label><span>{copy.maxYears}</span><input data-field="maxYears" type="number" inputmode="numeric" min="1" max="50" step="1" value={defaults.maxYears} /></label>
+    </div>
+
+    <div class="breakeven-calc-results" aria-live="polite">
+      <p class="breakeven-verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.breakEvenYear}</dt><dd data-output="breakEvenYear">—</dd></div>
+        <div><dt>{copy.ownerCost}</dt><dd data-output="ownerCost">—</dd></div>
+        <div><dt>{copy.renterCost}</dt><dd data-output="renterCost">—</dd></div>
+        <div><dt>{copy.ownerAdvantage}</dt><dd data-output="ownerAdvantage">—</dd></div>
+        <div><dt>{copy.monthlyPayment}</dt><dd data-output="monthlyPayment">—</dd></div>
+        <div><dt>{copy.remainingBalance}</dt><dd data-output="remainingBalance">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <p class="breakeven-calc-note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-rent-buy-breakeven-calculator]')) {
+    const locale = root.dataset.locale || 'en-US';
+    const currency = root.dataset.currency || 'USD';
+    const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 });
+    const twdFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+    const formatMoney = (amount: number) => currency === 'TWD'
+      ? `${amount < 0 ? '-' : ''}NT$${twdFormatter.format(Math.abs(amount))}`
+      : currencyFormatter.format(amount);
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const output = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Number(field(name).value) || 0;
+
+    function calculate() {
+      const purchasePrice = Math.max(0, value('purchasePrice'));
+      const downPayment = Math.min(purchasePrice, Math.max(0, value('downPayment')));
+      const monthlyRate = Math.max(0, value('annualRate')) / 1200;
+      const termYears = Math.min(50, Math.max(1, Math.round(value('termYears'))));
+      const totalMonths = termYears * 12;
+      const buyingCosts = Math.max(0, value('buyingCosts'));
+      const annualOwnerCosts = Math.max(0, value('annualOwnerCosts'));
+      const sellingCostRate = Math.max(0, value('sellingCostRate')) / 100;
+      const appreciationRate = Math.max(-0.99, value('appreciationRate') / 100);
+      const monthlyRent = Math.max(0, value('monthlyRent'));
+      const rentGrowthRate = Math.max(-0.99, value('rentGrowthRate') / 100);
+      const opportunityRate = Math.max(-0.99, value('opportunityRate') / 100);
+      const maxYears = Math.min(50, Math.max(1, Math.round(value('maxYears'))));
+      const loan = Math.max(0, purchasePrice - downPayment);
+      const scheduledPayment = loan === 0
+        ? 0
+        : monthlyRate === 0
+          ? loan / totalMonths
+          : loan * monthlyRate / (1 - (1 + monthlyRate) ** -totalMonths);
+
+      let balance = loan;
+      let cumulativePayments = 0;
+      let annualRent = monthlyRent * 12;
+      let cumulativeRent = 0;
+      let elapsedMonths = 0;
+      let result: { year: number; ownerCost: number; renterCost: number; balance: number } | null = null;
+      let last: { year: number; ownerCost: number; renterCost: number; balance: number } | null = null;
+
+      for (let year = 1; year <= maxYears; year += 1) {
+        for (let month = 0; month < 12 && elapsedMonths < totalMonths && balance > 0; month += 1) {
+          const interest = balance * monthlyRate;
+          const actualPayment = Math.min(scheduledPayment, balance + interest);
+          balance = Math.max(0, balance - (actualPayment - interest));
+          cumulativePayments += actualPayment;
+          elapsedMonths += 1;
+        }
+
+        cumulativeRent += annualRent;
+        const homeValue = purchasePrice * (1 + appreciationRate) ** year;
+        const netSaleProceeds = homeValue * (1 - sellingCostRate) - balance;
+        const upfrontCash = downPayment + buyingCosts;
+        const ownerCost = upfrontCash + cumulativePayments + annualOwnerCosts * year - netSaleProceeds;
+        const investmentGain = upfrontCash * ((1 + opportunityRate) ** year - 1);
+        const renterCost = cumulativeRent - investmentGain;
+        last = { year, ownerCost, renterCost, balance };
+
+        if (!result && ownerCost <= renterCost) result = last;
+        if (result) break;
+        annualRent *= 1 + rentGrowthRate;
+      }
+
+      const shown = result || last!;
+      const advantage = shown.renterCost - shown.ownerCost;
+      const yearText = result ? `${shown.year} ${root.dataset.yearUnit || ''}`.trim() : root.dataset.noBreakEven || 'Not reached';
+      output('breakEvenYear').textContent = yearText;
+      output('ownerCost').textContent = formatMoney(shown.ownerCost);
+      output('renterCost').textContent = formatMoney(shown.renterCost);
+      output('ownerAdvantage').textContent = formatMoney(advantage);
+      output('monthlyPayment').textContent = formatMoney(scheduledPayment);
+      output('remainingBalance').textContent = formatMoney(shown.balance);
+      output('verdict').textContent = result
+        ? `${root.dataset.verdictFound || ''} ${yearText}`.trim()
+        : `${root.dataset.verdictMissing || ''} ${maxYears} ${root.dataset.yearUnit || ''}`.trim();
+    }
+
+    root.querySelectorAll<HTMLInputElement>('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .breakeven-calc {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .breakeven-calc h2 { margin-top: 0; }
+
+  .breakeven-calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .breakeven-calc-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .breakeven-calc-inputs label,
+  .breakeven-calc-results dl { margin: 0; }
+
+  .breakeven-calc-inputs label span {
+    display: block;
+    min-height: 2.9rem;
+    margin-bottom: 0.35rem;
+    font-weight: 650;
+  }
+
+  .breakeven-calc-inputs input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.55rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .breakeven-calc-results {
+    align-self: start;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    background: var(--color-surface-2);
+  }
+
+  .breakeven-verdict {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: 750;
+  }
+
+  .breakeven-calc-results dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .breakeven-calc-results dt,
+  .breakeven-calc-results dd { overflow-wrap: anywhere; }
+
+  .breakeven-calc-results dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .breakeven-calc-note {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 760px) {
+    .breakeven-calc { padding: 1rem; }
+    .breakeven-calc-grid,
+    .breakeven-calc-inputs { grid-template-columns: 1fr; }
+    .breakeven-calc-inputs label span { min-height: 0; }
+  }
+</style>

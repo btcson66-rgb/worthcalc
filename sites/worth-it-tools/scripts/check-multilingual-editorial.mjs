@@ -163,7 +163,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'full-commute-cost-including-time',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$732', 'IRS mileage', 'data-commute-full-cost-calculator'],
+      zh: ['NT$9,338', '中油牌價', 'data-commute-full-cost-calculator'],
+      es: ['241,27 €', 'IDAE', 'data-commute-full-cost-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -272,4 +282,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 16 complete five-locale topics, 72 added routes, 4 enriched high-value tools, 8 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 16 complete five-locale topics, topic 17 at 3/5, 75 added routes, 4 enriched high-value tools, 9 embedded decision calculators.');

@@ -1,0 +1,94 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: { repairCost: number; remainingMonths: number; currentResaleLater: number; tradeInNow: number; newPhonePrice: number; upgradeFees: number; transferCost: number; currentPlanMonthly: number; newPlanMonthly: number; newHoldingMonths: number; newResaleLater: number };
+  copy: Record<'heading' | 'intro' | 'repairCost' | 'remainingMonths' | 'currentResaleLater' | 'tradeInNow' | 'newPhonePrice' | 'upgradeFees' | 'transferCost' | 'currentPlanMonthly' | 'newPlanMonthly' | 'newHoldingMonths' | 'newResaleLater' | 'keepDeviceMonthly' | 'upgradeDeviceMonthly' | 'keepFullMonthly' | 'upgradeFullMonthly' | 'breakEvenTradeIn' | 'verdictKeep' | 'verdictUpgrade' | 'privacy', string>;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+---
+
+<section id="phone-keep-upgrade-calculator" class="phone-calc" data-phone-keep-upgrade-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-keep={copy.verdictKeep} data-verdict-upgrade={copy.verdictUpgrade}>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="calc-grid">
+    <div class="inputs">
+      <label><span>{copy.repairCost}</span><input data-field="repairCost" type="number" min="0" step="1" value={defaults.repairCost} /></label>
+      <label><span>{copy.remainingMonths}</span><input data-field="remainingMonths" type="number" min="1" step="1" value={defaults.remainingMonths} /></label>
+      <label><span>{copy.currentResaleLater}</span><input data-field="currentResaleLater" type="number" min="0" step="1" value={defaults.currentResaleLater} /></label>
+      <label><span>{copy.tradeInNow}</span><input data-field="tradeInNow" type="number" min="0" step="1" value={defaults.tradeInNow} /></label>
+      <label><span>{copy.newPhonePrice}</span><input data-field="newPhonePrice" type="number" min="0" step="1" value={defaults.newPhonePrice} /></label>
+      <label><span>{copy.upgradeFees}</span><input data-field="upgradeFees" type="number" min="0" step="1" value={defaults.upgradeFees} /></label>
+      <label><span>{copy.transferCost}</span><input data-field="transferCost" type="number" min="0" step="1" value={defaults.transferCost} /></label>
+      <label><span>{copy.currentPlanMonthly}</span><input data-field="currentPlanMonthly" type="number" min="0" step="0.01" value={defaults.currentPlanMonthly} /></label>
+      <label><span>{copy.newPlanMonthly}</span><input data-field="newPlanMonthly" type="number" min="0" step="0.01" value={defaults.newPlanMonthly} /></label>
+      <label><span>{copy.newHoldingMonths}</span><input data-field="newHoldingMonths" type="number" min="1" step="1" value={defaults.newHoldingMonths} /></label>
+      <label class="wide"><span>{copy.newResaleLater}</span><input data-field="newResaleLater" type="number" min="0" step="1" value={defaults.newResaleLater} /></label>
+    </div>
+    <div class="results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.keepDeviceMonthly}</dt><dd data-output="keepDeviceMonthly">—</dd></div>
+        <div><dt>{copy.upgradeDeviceMonthly}</dt><dd data-output="upgradeDeviceMonthly">—</dd></div>
+        <div><dt>{copy.keepFullMonthly}</dt><dd data-output="keepFullMonthly">—</dd></div>
+        <div><dt>{copy.upgradeFullMonthly}</dt><dd data-output="upgradeFullMonthly">—</dd></div>
+        <div><dt>{copy.breakEvenTradeIn}</dt><dd data-output="breakEvenTradeIn">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-phone-keep-upgrade-calculator]')) {
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
+    const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+    const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
+    const calculate = () => {
+      const remainingMonths = Math.max(1, value('remainingMonths'));
+      const newHoldingMonths = Math.max(1, value('newHoldingMonths'));
+      const keepDeviceMonthly = (value('repairCost') - value('currentResaleLater')) / remainingMonths;
+      const upgradeGross = value('newPhonePrice') + value('upgradeFees') + value('transferCost');
+      const upgradeDeviceMonthly = (upgradeGross - value('tradeInNow') - value('newResaleLater')) / newHoldingMonths;
+      const keepFullMonthly = keepDeviceMonthly + value('currentPlanMonthly');
+      const upgradeFullMonthly = upgradeDeviceMonthly + value('newPlanMonthly');
+      const breakEvenTradeIn = Math.max(0, upgradeGross - value('newResaleLater') - newHoldingMonths * (keepFullMonthly - value('newPlanMonthly')));
+      const keepWins = keepFullMonthly <= upgradeFullMonthly;
+      const difference = Math.abs(keepFullMonthly - upgradeFullMonthly);
+      out('keepDeviceMonthly').textContent = money(keepDeviceMonthly);
+      out('upgradeDeviceMonthly').textContent = money(upgradeDeviceMonthly);
+      out('keepFullMonthly').textContent = money(keepFullMonthly);
+      out('upgradeFullMonthly').textContent = money(upgradeFullMonthly);
+      out('breakEvenTradeIn').textContent = money(breakEvenTradeIn);
+      out('verdict').textContent = `${keepWins ? root.dataset.verdictKeep : root.dataset.verdictUpgrade} ${money(difference)}`.trim();
+    };
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .phone-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .phone-calc h2 { margin-top: 0; }
+  .calc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+  .inputs .wide { grid-column: 1 / -1; }
+  .inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
+  .inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
+  .results .verdict { margin-top: 0; font-weight: 800; }
+  .results dl { margin: 0; }
+  .results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
+  .results dt { font-weight: 600; }
+  .results dd { margin: 0; text-align: right; font-weight: 750; }
+  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
+  @media (max-width: 760px) { .phone-calc { padding: 1rem; } .calc-grid, .inputs { grid-template-columns: 1fr; } .inputs .wide { grid-column: auto; } .inputs label span { min-height: 0; } }
+</style>

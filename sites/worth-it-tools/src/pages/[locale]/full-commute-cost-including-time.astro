@@ -1,0 +1,128 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import CommuteFullCostCalculator from '../../components/CommuteFullCostCalculator.astro';
+import FAQ from '../../components/FAQ.astro';
+import { commuteFullCostGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
+  en: {
+    title: 'How to calculate the full cost of commuting, including your time',
+    description: 'Calculate monthly commute cost from energy, fares, parking, maintenance, depreciation and optional personal time value without treating time as salary.',
+    faq: [
+      { question: 'What costs should I include in a commute?', answer: 'Include energy or fares, parking, tolls, maintenance, tires, mileage-related depreciation, passes and commute-only fixed costs, then subtract reimbursements. Show time separately.' },
+      { question: 'Should commute time be valued at my hourly wage?', answer: 'Not automatically. Commute time is usually not paid work and cannot always be converted into earnings. Use zero for cash-only analysis or choose a personal value and test a range.' },
+      { question: 'Can I use the IRS mileage rate as my commuting cost?', answer: 'It can be a comparison point for eligible business travel, but it is not a universal personal-commute price or automatic deduction. Your route, vehicle, fixed costs and reimbursement can differ.' },
+      { question: 'How do I avoid double-counting car cost?', answer: 'Do not add both the full loan payment and full depreciation. Principal is converted into vehicle value. Use actual ownership allocation or mileage-related depreciation consistently.' },
+      { question: 'How should I compare transit and driving?', answer: 'Use the same office days and door-to-door time. Driving needs vehicle and parking costs; transit needs tickets or passes, transfers and reimbursements. Do not count a pass and single fares for the same rides.' },
+    ],
+  },
+  zh: {
+    title: '通勤不只油錢：如何把時間也算進每月通勤成本',
+    description: '用能源、票價、停車、保養、里程折舊與自訂時間價值計算每月通勤成本，不把時間直接等同薪資。',
+    faq: [
+      { question: '通勤成本要算哪些項目？', answer: '汽機車要算能源、保養輪胎、里程折舊、停車與通行；大眾運輸要算車票或月票、轉乘與接駁。再加固定費、扣公司補助，時間另外列。' },
+      { question: '通勤一小時就是損失一小時薪水嗎？', answer: '不是。除非你確實能把那一小時換成有薪工作，否則薪資不是自動正確的時間價值。可以先看時間價值為 0 的現金結果，再測低／高情境。' },
+      { question: '車貸月付可以直接算通勤成本嗎？', answer: '不宜把整筆月付又加完整折舊。月付含本金，本金會轉成車輛淨值。應只分攤通勤用途的持有成本或里程折舊。' },
+      { question: '月票和單次車資都要算嗎？', answer: '同一趟不要重複。若已買不限次月票，現金成本以月票加未涵蓋接駁為主；混合運具才把各段實付相加。' },
+      { question: '油價要用哪一天？', answer: '用最近加油帳單或中油查價並記錄日期。油價、油耗、塞車與冷氣使用都可能改變每公里成本。' },
+    ],
+  },
+  es: {
+    title: 'Cómo calcular el coste completo de ir al trabajo, incluido tu tiempo',
+    description: 'Suma energía, billetes, aparcamiento, mantenimiento, depreciación y tiempo opcional para comparar coche y transporte público sin equiparar tiempo y sueldo.',
+    faq: [
+      { question: '¿Qué gastos forman el coste del desplazamiento?', answer: 'Energía, mantenimiento, neumáticos, depreciación por kilómetros, billetes o abono, aparcamiento, peajes y costes fijos, menos reembolsos. El tiempo se muestra aparte.' },
+      { question: '¿Debo valorar el tiempo con mi salario por hora?', answer: 'No de forma automática. El trayecto no suele ser tiempo pagado ni cada hora ahorrada puede venderse como trabajo. Usa cero para caja y prueba un valor personal bajo y alto.' },
+      { question: '¿Puedo sumar cuota del coche y depreciación?', answer: 'No íntegramente. La cuota amortiza principal que se convierte en valor del vehículo. Usa una asignación coherente de propiedad o depreciación incremental, sin duplicarla.' },
+      { question: '¿Un abono mensual siempre sale mejor?', answer: 'Depende de los días presenciales y del reembolso. Divide su coste neto entre los viajes reales y compáralo con billetes y alternativas sobre el mismo mes.' },
+      { question: '¿El kilometraje por trabajo convierte el trayecto habitual en deducible?', answer: 'No necesariamente. Desplazamientos profesionales y trayecto domicilio-centro habitual tienen reglas distintas; comprueba empresa y Agencia Tributaria.' },
+    ],
+  },
+};
+
+const calculators = {
+  en: {
+    currency: 'USD' as const,
+    defaults: { days: 20, roundTripDistance: 30, energyPerDistance: 0.12, maintenancePerDistance: 0.10, depreciationPerDistance: 0.20, farePerDay: 0, parkingTollsPerDay: 8, fixedMonthly: 120, reimbursement: 0, minutesPerDay: 60, timeValue: 10 },
+    copy: { heading: 'Full commute cash and time calculator', intro: 'Use one typical month. Set time value to zero for a cash-only result; it is never assumed to equal your wage.', days: 'Office commute days per month', roundTripDistance: 'Round-trip distance', energyPerDistance: 'Energy cost per mile', maintenancePerDistance: 'Maintenance/tires per mile', depreciationPerDistance: 'Mileage depreciation per mile', farePerDay: 'Transit or other fare per day', parkingTollsPerDay: 'Parking and tolls per day', fixedMonthly: 'Commute fixed costs per month', reimbursement: 'Employer reimbursement per month', minutesPerDay: 'Door-to-door round-trip minutes/day', timeValue: 'Optional personal time value ($/hour)', cashCost: 'Monthly cash cost', timeHours: 'Commute hours/month', timeCost: 'Optional time cost', fullCost: 'Optional full monthly cost', perDay: 'Full cost per commute day', distanceCost: 'Distance-based vehicle cost', otherCash: 'Other cash after reimbursement', verdict: 'Optional full commute cost:', privacy: 'Educational estimate. Inputs stay in your browser. Verify route, bills, reimbursements and tax treatment.', distanceSuffix: 'mi' },
+  },
+  zh: {
+    currency: 'TWD' as const,
+    defaults: { days: 22, roundTripDistance: 24, energyPerDistance: 2.1, maintenancePerDistance: 1.4, depreciationPerDistance: 2.5, farePerDay: 0, parkingTollsPerDay: 60, fixedMonthly: 1000, reimbursement: 0, minutesPerDay: 70, timeValue: 150 },
+    copy: { heading: '每月通勤現金與時間成本計算器', intro: '以一個典型月份輸入；若只看現金，把時間價值設為 0。系統不會把時間自動等同薪資。', days: '每月實際通勤天數', roundTripDistance: '每日來回距離', energyPerDistance: '每公里能源成本', maintenancePerDistance: '每公里保養／輪胎', depreciationPerDistance: '每公里里程折舊', farePerDay: '每日車票／接駁費', parkingTollsPerDay: '每日停車／通行費', fixedMonthly: '每月固定通勤費', reimbursement: '公司每月實付補助', minutesPerDay: '每日門到門來回分鐘', timeValue: '選擇性時間價值（NT$/小時）', cashCost: '每月現金成本', timeHours: '每月通勤小時', timeCost: '選擇性時間成本', fullCost: '選擇性每月完整成本', perDay: '每個通勤日完整成本', distanceCost: '里程相關成本', otherCash: '補助後其他現金', verdict: '選擇性完整通勤成本：', privacy: '一般教育試算，輸入只留在瀏覽器。請用實際路線、帳單、補助與適用規定查核。', distanceSuffix: 'km' },
+  },
+  es: {
+    currency: 'EUR' as const,
+    defaults: { days: 20, roundTripDistance: 0, energyPerDistance: 0, maintenancePerDistance: 0, depreciationPerDistance: 0, farePerDay: 0, parkingTollsPerDay: 0, fixedMonthly: 54.6, reimbursement: 0, minutesPerDay: 70, timeValue: 8 },
+    copy: { heading: 'Calculadora de coste monetario y tiempo del trayecto', intro: 'Usa un mes típico. Pon el tiempo a cero para ver solo caja; no se iguala automáticamente al salario.', days: 'Días presenciales al mes', roundTripDistance: 'Distancia ida y vuelta', energyPerDistance: 'Energía por km', maintenancePerDistance: 'Mantenimiento/neumáticos por km', depreciationPerDistance: 'Depreciación por km', farePerDay: 'Billetes/otros transportes al día', parkingTollsPerDay: 'Aparcamiento y peajes al día', fixedMonthly: 'Abono y costes fijos mensuales', reimbursement: 'Reembolso mensual de empresa', minutesPerDay: 'Minutos puerta a puerta al día', timeValue: 'Valor personal opcional (€/hora)', cashCost: 'Coste monetario mensual', timeHours: 'Horas de trayecto/mes', timeCost: 'Coste temporal opcional', fullCost: 'Coste completo opcional', perDay: 'Coste completo por día', distanceCost: 'Coste por distancia', otherCash: 'Otros pagos tras reembolso', verdict: 'Coste completo opcional del trayecto:', privacy: 'Estimación educativa; datos en el navegador. Verifica ruta, facturas, reembolso y fiscalidad.', distanceSuffix: 'km' },
+  },
+};
+
+export function getStaticPaths() {
+  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const article = articles[locale];
+const guide = commuteFullCostGuides[locale]!;
+const calculator = calculators[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+  {locale === 'en' && <>
+    <p>A cheap-looking commute can be expensive once a parking pass, tires, repairs, depreciation and door-to-door time are visible. The useful answer has two totals: money that leaves your budget and an optional generalized cost that adds your own value of time.</p>
+    <p>Keep those totals separate. Calling every commute hour “lost salary” creates false precision when the hour could not actually have been sold as paid work.</p>
+    <DecisionGuide content={guide} />
+    <CommuteFullCostCalculator locale={locale} {...calculator} />
+    <h2>Start with actual office days and round-trip distance</h2>
+    <p>Use a calendar and route history. Hybrid schedules, holidays, field visits and irregular shifts make a default five-day week unreliable. Multiply the round trip—not the one-way distance—by the days that actually use that mode.</p>
+    <h2>Separate vehicle operation from ownership</h2>
+    <p>Fuel or charging is only the variable edge. Add a maintenance and tire reserve plus mileage-related depreciation. IRS mileage methods demonstrate that vehicle cost contains more than fuel, but their business rate is not a personal commuting price or automatic tax deduction.</p>
+    <p>If you allocate insurance, registration or a parking lease as monthly fixed cost, do not add them again per mile. Likewise, do not combine a full car payment with full depreciation.</p>
+    <h2>Transit needs pass economics and reimbursements</h2>
+    <p>For transit, set vehicle distance costs to zero and enter either the pass or daily fares. Add first/last-mile fares and subtract only reimbursement actually received. A fixed pass may lower monthly cash but raise cost per office day when hybrid work cuts usage.</p>
+    <h2>Time is a scenario, not a paycheck</h2>
+    <p>Door-to-door time includes walking, waiting, transfers and parking search. Start with $0/hour to preserve the cash result, then test a personal value. Comfortable transit that supports reading may deserve a different value from stressful driving.</p>
+    <p>For the next decision—whether those costs make home working cheaper—continue to the work-from-home comparison after both commute modes are measured.</p>
+    <p class="privacy-note">General education only, not tax, employment, housing, vehicle or financial advice.</p>
+  </>}
+
+  {locale === 'zh' && <>
+    <p>「一個月加幾次油」不是完整通勤成本。台灣常見的機車、汽車、捷運、公車與混合接駁，都同時包含現金與時間；只看其中一項，容易把住得遠或進公司天數增加的代價藏起來。</p>
+    <p>本頁把現金和時間分兩層。時間可填 0，也可用自己的低／高情境，避免把每小時薪資當成必然損失。</p>
+    <DecisionGuide content={guide} />
+    <CommuteFullCostCalculator locale={locale} {...calculator} />
+    <h2>用行事曆和門到門紀錄，不用想像中的平均</h2>
+    <p>先數最近一個正常月份真正進公司的天數，再記錄每日來回公里與分鐘。走到車站、等車、轉乘、找車位和塞車都屬門到門時間；臨時跨點則另外加實際路程。</p>
+    <h2>汽機車成本要把油耗以外的項目拆開</h2>
+    <p>中油牌價只是能源單價，還要搭配自己的每公里油耗。交通部運輸研究所的成本分類另含維修、停車、通行、稅捐、保險、折舊與利息。個人試算可把固定項目按通勤用途分攤，但不要把車貸本金和折舊重複相加。</p>
+    <h2>月票不一定隨混合辦公等比例變便宜</h2>
+    <p>已買月票時，同一段不要再加單次票；只加月票未涵蓋的接駁。混合辦公減少通勤日，月票現金可能不變，平均每次成本反而上升，因此應和單次票或其他方案在同一月份比較。</p>
+    <h2>時間價值要由生活選擇決定</h2>
+    <p>通勤省下的時間可能拿來休息、照顧家人、運動或接案，各自價值不同，也未必能變成薪資。最穩健的呈現是同時保留現金、時數與自訂時間情境。</p>
+    <p>若要進一步比較在家工作成本，下一題會加入家庭電費、設備、餐食與混合辦公，而不是把通勤成本直接當成全部節省。</p>
+    <p class="privacy-note">一般教育用途，不是工作、住所、運具、報稅或補助建議。</p>
+  </>}
+
+  {locale === 'es' && <>
+    <p>El coste del trayecto al trabajo no es solo combustible o billete. Un coche añade mantenimiento, seguro, aparcamiento y pérdida de valor; el transporte público añade abono, transbordos y tiempo de espera. Compararlos exige el mismo número de días y tiempo puerta a puerta.</p>
+    <p>La calculadora mantiene el dinero separado del valor opcional del tiempo para no convertir cada hora en sueldo perdido.</p>
+    <DecisionGuide content={guide} />
+    <CommuteFullCostCalculator locale={locale} {...calculator} />
+    <h2>Cuenta días presenciales, no semanas teóricas</h2>
+    <p>Usa calendario, rutas y recibos de un mes normal. Festivos, teletrabajo, vacaciones y visitas a otros centros cambian días y kilómetros. El IDAE separa correctamente propiedad del coche y movilidad alternativa, una buena estructura para no olvidar partidas.</p>
+    <h2>En coche, propiedad y uso no son la misma cosa</h2>
+    <p>Combustible o electricidad dependen de kilómetros. Seguro e impuesto suelen ser fijos; mantenimiento y depreciación mezclan uso y tiempo. Elige una asignación coherente y no sumes a la vez cuota completa, compra y depreciación completa.</p>
+    <h2>En transporte público, compara abono neto y billete</h2>
+    <p>Introduce el abono mensual o los billetes diarios, no ambos para el mismo trayecto. Resta solo reembolsos cobrados. Con pocos días presenciales, un abono fijo puede seguir siendo cómodo pero aumentar el coste por viaje.</p>
+    <h2>El tiempo admite cero y varios escenarios</h2>
+    <p>Esperas, paseo y transbordos cuentan. Valorar el tiempo a cero ofrece el presupuesto puro; valores personales bajos y altos ayudan a comparar comodidad y flexibilidad. Leer en el tren no equivale a conducir en atasco, aunque duren igual.</p>
+    <p>Los gastos de locomoción de un desplazamiento profesional no convierten automáticamente el trayecto habitual en deducible. Comprueba siempre el caso real.</p>
+    <p class="privacy-note">Información educativa; no es asesoramiento laboral, fiscal, de vivienda, vehículo o transporte.</p>
+  </>}
+  <FAQ items={article.faq} />
+</ArticleLayout>

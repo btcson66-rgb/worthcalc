@@ -1,0 +1,100 @@
+---
+type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CurrencyCode = 'USD' | 'TWD' | 'EUR';
+
+interface Props {
+  locale: CalculatorLocale;
+  currency: CurrencyCode;
+  defaults: {
+    days: number; roundTripDistance: number; energyPerDistance: number; maintenancePerDistance: number;
+    depreciationPerDistance: number; farePerDay: number; parkingTollsPerDay: number; fixedMonthly: number;
+    reimbursement: number; minutesPerDay: number; timeValue: number;
+  };
+  copy: Record<'heading' | 'intro' | 'days' | 'roundTripDistance' | 'energyPerDistance' | 'maintenancePerDistance' | 'depreciationPerDistance' | 'farePerDay' | 'parkingTollsPerDay' | 'fixedMonthly' | 'reimbursement' | 'minutesPerDay' | 'timeValue' | 'cashCost' | 'timeHours' | 'timeCost' | 'fullCost' | 'perDay' | 'distanceCost' | 'otherCash' | 'verdict' | 'privacy' | 'distanceSuffix', string>;
+}
+
+const { locale, currency, defaults, copy } = Astro.props;
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+---
+
+<section id="commute-full-cost-calculator" class="commute-calc" data-commute-full-cost-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict={copy.verdict}>
+  <h2>{copy.heading}</h2>
+  <p>{copy.intro}</p>
+  <div class="commute-grid">
+    <div class="commute-inputs">
+      <label><span>{copy.days}</span><input data-field="days" type="number" min="0" max="31" step="1" value={defaults.days} /></label>
+      <label><span>{copy.roundTripDistance} ({copy.distanceSuffix})</span><input data-field="roundTripDistance" type="number" min="0" step="1" value={defaults.roundTripDistance} /></label>
+      <label><span>{copy.energyPerDistance}</span><input data-field="energyPerDistance" type="number" min="0" step="0.01" value={defaults.energyPerDistance} /></label>
+      <label><span>{copy.maintenancePerDistance}</span><input data-field="maintenancePerDistance" type="number" min="0" step="0.01" value={defaults.maintenancePerDistance} /></label>
+      <label><span>{copy.depreciationPerDistance}</span><input data-field="depreciationPerDistance" type="number" min="0" step="0.01" value={defaults.depreciationPerDistance} /></label>
+      <label><span>{copy.farePerDay}</span><input data-field="farePerDay" type="number" min="0" step="0.1" value={defaults.farePerDay} /></label>
+      <label><span>{copy.parkingTollsPerDay}</span><input data-field="parkingTollsPerDay" type="number" min="0" step="0.1" value={defaults.parkingTollsPerDay} /></label>
+      <label><span>{copy.fixedMonthly}</span><input data-field="fixedMonthly" type="number" min="0" step="1" value={defaults.fixedMonthly} /></label>
+      <label><span>{copy.reimbursement}</span><input data-field="reimbursement" type="number" min="0" step="1" value={defaults.reimbursement} /></label>
+      <label><span>{copy.minutesPerDay}</span><input data-field="minutesPerDay" type="number" min="0" step="5" value={defaults.minutesPerDay} /></label>
+      <label class="wide"><span>{copy.timeValue}</span><input data-field="timeValue" type="number" min="0" step="1" value={defaults.timeValue} /></label>
+    </div>
+    <div class="commute-results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <dl>
+        <div><dt>{copy.cashCost}</dt><dd data-output="cashCost">—</dd></div>
+        <div><dt>{copy.timeHours}</dt><dd data-output="timeHours">—</dd></div>
+        <div><dt>{copy.timeCost}</dt><dd data-output="timeCost">—</dd></div>
+        <div><dt>{copy.fullCost}</dt><dd data-output="fullCost">—</dd></div>
+        <div><dt>{copy.perDay}</dt><dd data-output="perDay">—</dd></div>
+        <div><dt>{copy.distanceCost}</dt><dd data-output="distanceCost">—</dd></div>
+        <div><dt>{copy.otherCash}</dt><dd data-output="otherCash">—</dd></div>
+      </dl>
+    </div>
+  </div>
+  <p class="note">{copy.privacy}</p>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-commute-full-cost-calculator]')) {
+    const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: 0 });
+    const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-output="${name}"]`)!;
+    const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
+    const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
+
+    const calculate = () => {
+      const days = value('days');
+      const distanceCost = days * value('roundTripDistance') * (value('energyPerDistance') + value('maintenancePerDistance') + value('depreciationPerDistance'));
+      const otherCash = days * (value('farePerDay') + value('parkingTollsPerDay')) + value('fixedMonthly') - value('reimbursement');
+      const cashCost = Math.max(0, distanceCost + otherCash);
+      const timeHours = days * value('minutesPerDay') / 60;
+      const timeCost = timeHours * value('timeValue');
+      const fullCost = cashCost + timeCost;
+      out('cashCost').textContent = money(cashCost);
+      out('timeHours').textContent = number.format(timeHours);
+      out('timeCost').textContent = money(timeCost);
+      out('fullCost').textContent = money(fullCost);
+      out('perDay').textContent = money(days ? fullCost / days : 0);
+      out('distanceCost').textContent = money(distanceCost);
+      out('otherCash').textContent = money(otherCash);
+      out('verdict').textContent = `${root.dataset.verdict || ''} ${money(fullCost)}`.trim();
+    };
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  }
+</script>
+
+<style>
+  .commute-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .commute-calc h2 { margin-top: 0; }
+  .commute-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(18rem, .7fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .commute-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+  .commute-inputs .wide { grid-column: 1 / -1; }
+  .commute-inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
+  .commute-inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .commute-results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
+  .commute-results .verdict { margin-top: 0; font-weight: 800; }
+  .commute-results dl { margin: 0; }
+  .commute-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
+  .commute-results dt { font-weight: 600; }
+  .commute-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
+  @media (max-width: 760px) { .commute-calc { padding: 1rem; } .commute-grid, .commute-inputs { grid-template-columns: 1fr; } .commute-inputs .wide { grid-column: auto; } .commute-inputs label span { min-height: 0; } }
+</style>

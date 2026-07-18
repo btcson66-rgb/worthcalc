@@ -29,13 +29,14 @@ const briefRoutes = [
   { id: '14', slug: 'home-vs-public-ev-charging-cost' },
   { id: '15', slug: 'new-vs-used-car-total-cost' },
   { id: '16', slug: 'car-lease-vs-buy-total-cost' },
+  { id: '17', slug: 'full-commute-cost-including-time' },
 ];
 
 const releaseFloor = {
-  html: 115,
-  editorial: 83,
-  alignedVariants: 80,
-  compliantVariants: 80,
+  html: 118,
+  editorial: 86,
+  alignedVariants: 83,
+  compliantVariants: 83,
   completeTopics: 16,
 };
 

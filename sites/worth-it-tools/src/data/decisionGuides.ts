@@ -1957,3 +1957,72 @@ export const carLeaseBuyGuides: Partial<Record<Locale, DecisionGuideContent>> = 
 };
 
 Object.assign(carLeaseBuyGuides, carLeaseBuyGuideAdditions);
+
+export const commuteFullCostGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'commute-full-cost-method',
+    labels: labels.en,
+    directAnswer: 'A commute costs more than gas or a transit ticket. Add energy, maintenance, depreciation, fares, parking, tolls and monthly fixed costs, then subtract employer reimbursement. Show travel time separately and assign it a personal value only if useful; it is not automatically equal to your wage. In this 20-day driving example, cash cost is $532, 20 hours of travel valued at $10 per hour add $200, and the optional full monthly cost is $732, or $36.60 per commute day.',
+    inputs: ['Actual office days in a typical month, not a generic 22-day assumption', 'Round-trip miles from route history and days with detours or multiple sites', 'Fuel or electricity cost per mile using current price and observed efficiency', 'Maintenance, tires and repair reserve per mile', 'Depreciation attributable to additional mileage, kept separate from the loan payment', 'Transit fare or pass, parking, tolls and other daily or monthly charges', 'Employer transit, parking or mileage reimbursement actually received', 'Door-to-door minutes including walking, waiting, transfers and parking search', 'Optional personal value per hour, including a zero-value cash-only view'],
+    formula: 'Monthly cash cost = commute days × [round-trip distance × (energy + maintenance + depreciation per distance) + daily fare + parking/tolls] + monthly fixed commute costs − reimbursement. Monthly commute hours = days × round-trip minutes ÷ 60. Optional full cost = cash cost + commute hours × chosen personal time value.',
+    workedExample: 'Drive 20 days a month, 30 miles round trip. Energy is $0.12/mile, maintenance $0.10 and mileage-related depreciation $0.20; parking/tolls are $8/day and fixed insurance/registration allocated to the commute is $120/month. Distance cost is $252 and other cash cost $280, for $532 cash. Sixty minutes a day equals 20 hours; at a deliberately chosen $10/hour, time adds $200. Full cost is $732, or $36.60 per office day.',
+    sensitivity: [
+      { scenario: 'Cash-only view', input: 'Time value $0/hour', result: '$532/month; time remains 20 hours rather than disappearing' },
+      { scenario: 'Parking removed', input: '$0 instead of $8/day', result: '$572 full cost; $160 lower' },
+      { scenario: 'Ten office days', input: '10 instead of 20 days', result: '$426 full cost; fixed $120 makes per-day cost rise to $42.60' },
+      { scenario: 'Higher energy price', input: '$0.18 instead of $0.12 per mile', result: '$768 full cost; $36 higher' },
+    ],
+    cta: { label: 'Calculate your commute cash and time cost', href: '#commute-full-cost-calculator' },
+    limitations: ['The IRS business mileage rate is designed for eligible business use and reimbursement, not a universal estimate of a personal commute or an automatic commuter deduction.', 'Do not add a full loan payment and full depreciation: principal becomes vehicle value. Use mileage-related depreciation or a total ownership allocation, not both.', 'Time value is a preference or scenario input. Travel time is not automatically lost wages, and productive or enjoyable transit time may deserve a different value.', 'Remote-work, housing and tax decisions need separate analysis. This estimate does not recommend a home, job, route, vehicle or tax position.'],
+    sources: [
+      { label: 'IRS 2026 — standard mileage rate and included fixed/variable-cost study boundary', href: 'https://www.irs.gov/irb/2026-04_IRB' },
+      { label: 'IRS Publication 463 — commuting, actual vehicle expenses, parking and tolls', href: 'https://www.irs.gov/publications/p463' },
+      { label: 'U.S. DOT — travel-time valuation is an analytical range, not simply hourly pay', href: 'https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-valuation-travel-time-economic' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'commute-full-cost-method',
+    labels: labels.zh,
+    directAnswer: '每月通勤成本不只油錢。應把能源、保養輪胎、里程造成的折舊、車票、停車、通行與固定費用相加，再扣公司補助；通勤時間另外列出，只有在需要比較方案時才由你自行設定每小時價值，不能直接等同薪資。本例每月 22 天、每日來回 24km，現金成本 NT$5,488；25.7 小時若以每小時 NT$150 作情境，完整成本約 NT$9,338，平均每個通勤日 NT$424.5。',
+    inputs: ['實際每月進公司天數與臨時加班／跨點日數', '導航或里程表的每日來回公里，不用單程數字誤乘', '中油當期油價或充電實付價，以及自己車況的實際油耗／電耗', '每公里保養、輪胎與維修準備金', '因通勤里程增加而產生的折舊，不和車貸本金重複', '大眾運輸票價／月票、停車、國道通行與轉乘費', '公司實際補助，不能把尚未申請的制度先當收入', '門到門時間，含步行、等車、轉乘、塞車與找車位', '自行選擇的時間價值；同時保留填 0 的純現金結果'],
+    formula: '每月現金成本 = 通勤天數 ×［來回公里 ×（每公里能源＋保養＋折舊）＋每日票價＋停車／通行］＋每月固定通勤費 − 補助。每月通勤時數 = 天數 × 每日來回分鐘 ÷ 60。選擇性完整成本 = 現金成本＋通勤時數 × 自訂時間價值。',
+    workedExample: '每月 22 天、每日來回 24km。能源 NT$2.1/km、保養 NT$1.4/km、里程折舊 NT$2.5/km，停車 NT$60/天，另分攤固定費 NT$1,000。距離成本 NT$3,168，其他現金成本 NT$2,320，合計 NT$5,488。每日 70 分鐘等於每月約 25.7 小時；自訂 NT$150/小時時，時間情境 NT$3,850，完整成本 NT$9,338。',
+    sensitivity: [
+      { scenario: '只看現金', input: '時間價值設 NT$0', result: '每月 NT$5,488；25.7 小時仍另外顯示' },
+      { scenario: '不分攤里程折舊', input: '折舊從 NT$2.5/km 改為 0', result: '完整成本 NT$8,018；少 NT$1,320' },
+      { scenario: '混合辦公 15 天', input: '每月 15 個通勤日', result: '完整成本約 NT$6,685；固定費使每次成本不會等比例下降' },
+      { scenario: '公司補助月票', input: '每月補助 NT$1,200', result: '完整成本 NT$8,138' },
+    ],
+    cta: { label: '計算自己的通勤現金與時間成本', href: '#commute-full-cost-calculator' },
+    limitations: ['油價、電價、票價與停車費會變動，請用帳單與查價日資料，不把本頁算例當市場平均。', '車貸本金與折舊不能全額重複相加；若採完整持有成本分攤，就不要再另加同一段折舊。', '交通規劃的時間價值是方案比較參數，不代表每分鐘都能換成薪水；可用 0、低、基準三種情境。', '本頁不替你決定工作、住所、運具、報稅或補助資格。'],
+    sources: [
+      { label: '交通部運輸研究所 — 私人運具一般化成本含時間、油耗、停車與通行', href: 'https://www.iot.gov.tw/uploads/column_entry_file/file/6811deff085777d9c6ecec58/114-006-1477.pdf' },
+      { label: '交通部運輸研究所 — 行車成本含燃油、維修、停車、稅捐、保險與折舊', href: 'https://www.iot.gov.tw/zh_tw/archive/pub/reports/-59902021' },
+      { label: '台灣中油 — 當日汽柴油零售參考價格', href: 'https://www.cpc.com.tw/default.aspx' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'commute-full-cost-method',
+    labels: labels.es,
+    directAnswer: 'El coste de ir al trabajo reúne energía, mantenimiento, depreciación por uso, billetes, aparcamiento, peajes y abonos, menos reembolsos. El tiempo debe mostrarse aparte y solo monetizarse con un valor personal elegido; no equivale automáticamente al salario. En este ejemplo de transporte público, un abono de 54,60 € es todo el coste de caja mensual. Veinte días y 70 minutos diarios suman 23,3 horas; a 8 €/hora, el coste opcional completo es 241,27 €, unos 12,06 € por día presencial.',
+    inputs: ['Días presenciales reales del mes y viajes extraordinarios', 'Kilómetros de ida y vuelta para coche, moto, bici eléctrica o trayectos mixtos', 'Combustible/electricidad por kilómetro según consumo observado y precio fechado', 'Mantenimiento, neumáticos y depreciación incremental por distancia', 'Billete diario o abono, sin contar ambos para el mismo trayecto', 'Aparcamiento, peajes, transbordos y otros costes fijos', 'Reembolso de empresa realmente cobrado', 'Minutos puerta a puerta con espera, paseo, transbordo y búsqueda de aparcamiento', 'Valor personal opcional de una hora, incluido un escenario a cero'],
+    formula: 'Coste monetario mensual = días × [distancia ida/vuelta × (energía + mantenimiento + depreciación por km) + billete diario + aparcamiento/peajes] + costes fijos mensuales − reembolso. Horas = días × minutos diarios ÷ 60. Coste completo opcional = coste monetario + horas × valor personal del tiempo.',
+    workedExample: 'Una persona usa un abono mensual de 54,60 € durante 20 días presenciales. No añade billete diario ni costes de coche, por lo que el coste de caja es 54,60 €. El recorrido puerta a puerta dura 70 minutos al día: 23,3 horas al mes. Con un valor elegido de 8 €/hora, el tiempo representa 186,67 € y el coste completo 241,27 €, o 12,06 € por día.',
+    sensitivity: [
+      { scenario: 'Solo dinero', input: 'Valor del tiempo 0 €/hora', result: '54,60 €/mes; 23,3 horas siguen visibles' },
+      { scenario: 'Diez días presenciales', input: '10 días con el mismo abono', result: '147,93 € completos; 14,79 € por día por el coste fijo' },
+      { scenario: 'Billete por día', input: '2,50 €/día y sin abono', result: '236,67 € completos; 50 € de caja' },
+      { scenario: 'Reembolso de empresa', input: '30 €/mes', result: '211,27 € completos' },
+    ],
+    cta: { label: 'Calcular el coste monetario y temporal del trayecto', href: '#commute-full-cost-calculator' },
+    limitations: ['La metodología del IDAE separa propiedad del coche y movilidad alternativa; no dupliques compra/depreciación, seguro o mantenimiento.', 'Dietas y kilometraje de desplazamientos laborales no convierten automáticamente el trayecto domicilio–centro habitual en gasto reembolsable o deducible.', 'El valor del tiempo es una preferencia para comparar opciones. Poder leer o descansar durante el trayecto puede justificar otro valor, no un salario automático.', 'Estimación educativa; no recomienda empleo, vivienda, vehículo, abono ni tratamiento fiscal.'],
+    sources: [
+      { label: 'IDAE — metodología de coste total del coche y movilidad alternativa', href: 'https://www.idae.es/movilidad-sostenible/metodologia-de-calculadoras-de-costes' },
+      { label: 'IDAE — Planes de Transporte al Trabajo y cambio modal', href: 'https://www.idae.es/index.php/movilidad-sostenible/de-utilidad-infografias-anexos-descargables-de-la-guia-ptt-y-tabla-de-ahorros-por-cambio' },
+      { label: 'Agencia Tributaria — dietas y gastos de locomoción', href: 'https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c03-rendimientos-trabajo/rendimientos-trabajo-especie/dietas-asignaciones-gastos-viaje/gastos-locomocion.html' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};

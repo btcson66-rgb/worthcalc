@@ -124,13 +124,22 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置結果：78 HTML、46 編輯內容頁、43／145 任務對應與完整版本、8／29 五語完成主題（第 07 題為 3／5）。
 - 發布證據：PR #29 已合併為 `f0901f9`，GitHub Pages run `29653690835` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self＋x-default hreflang、schema、計算器與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap。
 
-## 2026-07-19 第十四批（第 07 題 B 段，準備發布）
+## 2026-07-19 第十四批（第 07 題 B 段，已發布）
 
 - 新增 FR／DE 兩個完整原生頁，使第 07 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
 - FR 使用 `coût par séance`、`frais d’inscription`、`mois sans fréquentation` 與 `reconduction tacite`；算例為 474 €、50 次、每次 9,48 €，對 11 € 單次票需每個有效月份 5 次。
 - DE 使用 `Kosten pro Besuch`、`Aufnahmegebühr`、`Servicepauschale`、`Mindestlaufzeit` 與 `Kündigungsbutton`；算例為 566,60 €、44 次、每次 12,88 €，對 14 € Tageskarte 需每個有效月份 4 次。
 - 法德均接入同一個頁內互動計算器但使用各自預設值與文案；來源採法國 DGCCRF 與德國 Verbraucherzentrale，取消程序不冒充即時終止或保證退費。
-- 本批建置目標：80 HTML、48 編輯內容頁、45／145 任務對應與完整版本、9／29 五語完成主題。
+- 本批建置結果：80 HTML、48 編輯內容頁、45／145 任務對應與完整版本、9／29 五語完成主題。
+- 發布證據：PR #30 已合併為 `31525fd`，GitHub Pages run `29654077317` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、計算器、市場算例與 sitemap 線上查核 PASS，DE 正式頁 390px 互動回歸 PASS。
+
+## 2026-07-19 第十五批（第 08 題 A 段，準備發布）
+
+- 題目 08「外送會員回本」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 不建立空殼頁。
+- 新增頁內外送會員回本計算器，不另增公開路由；輸入會費、未使用月份、每月訂單、合格比例、外送費差、服務費差與湊門檻額外支出，即時計算全年訂單、合格訂單、每單淨省、年利益、年淨值與回本訂單數。
+- 原生差異：EN 使用 same-basket checkout、minimum basket 與 $6.49 每單差額；繁中處理指定店家、最低消費、平台服務費及 NT$95 每單差額；ES 使用 pedido mínimo、restaurante participante、tarifa de servicio 與 3,29 € 每單差額。
+- 三語均把完全不用月份及不合格訂單從理想化年頻率扣除；來源採 FTC／行政院消保會／BOE 與平台當地條款，不把示範費用冒充市場平均。
+- 本批建置目標：83 HTML、51 編輯內容頁、48／145 任務對應與完整版本、9／29 五語完成主題（第 08 題為 3／5）。
 
 ## 待執行主題
 
@@ -142,8 +151,8 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 04 | Subscriptions & Memberships | Monthly vs annual subscription | phase-10 complete; deployed |
 | 05 | Subscriptions & Memberships | Subscription audit and annual cost | phase-1 complete |
 | 06 | Subscriptions & Memberships | Paid membership break-even | phase-12 complete; deployed |
-| 07 | Subscriptions & Memberships | Gym cost per visit | phase-14 five-locale complete; release pending |
-| 08 | Subscriptions & Memberships | Delivery membership break-even | backlog |
+| 07 | Subscriptions & Memberships | Gym cost per visit | phase-14 complete; deployed |
+| 08 | Subscriptions & Memberships | Delivery membership break-even | phase-15 three-locale complete; release pending |
 | 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |
 | 10 | Cards & Rewards | Cashback caps and real reward rate | backlog |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; deployed |

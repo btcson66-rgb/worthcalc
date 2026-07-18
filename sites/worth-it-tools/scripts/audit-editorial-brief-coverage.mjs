@@ -20,15 +20,16 @@ const briefRoutes = [
   { id: '05', slug: 'subscription-creep' },
   { id: '06', slug: 'paid-membership-break-even' },
   { id: '07', slug: 'gym-membership-cost-per-visit' },
+  { id: '08', slug: 'delivery-membership-break-even' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
   { id: '11', slug: 'rent-vs-buy-guide' },
 ];
 
 const releaseFloor = {
-  html: 80,
-  editorial: 48,
-  alignedVariants: 45,
-  compliantVariants: 45,
+  html: 83,
+  editorial: 51,
+  alignedVariants: 48,
+  compliantVariants: 48,
   completeTopics: 9,
 };
 

@@ -93,7 +93,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'delivery-membership-break-even',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$6.49', '$20.82', 'minimum basket', 'data-delivery-membership-calculator'],
+      zh: ['NT$95', 'NT$1,081', '最低消費', 'data-delivery-membership-calculator'],
+      es: ['3,29 €', '9,23 €', 'pedido mínimo', 'data-delivery-membership-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -202,4 +212,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 9 complete five-locale topics, 37 added routes, 4 enriched high-value tools, 1 embedded gym calculator.');
+console.log('Multilingual editorial check passed: 9 complete five-locale topics, 40 added routes, 4 enriched high-value tools, 2 embedded decision calculators.');

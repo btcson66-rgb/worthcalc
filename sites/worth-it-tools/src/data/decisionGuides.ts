@@ -621,7 +621,7 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
-export const gymCostGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+export const gymCostGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'gym-cost-per-visit-method',
     labels: labels.en,
@@ -682,6 +682,48 @@ export const gymCostGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     sources: [
       { label: 'Comunidad de Madrid — gimnasios: ponerse en forma con garantías', href: 'https://www.comunidad.madrid/consumo/gimnasios-ponerse-forma-garantias' },
       { label: 'Consumo Responde — derechos de las personas consumidoras en gimnasios', href: 'https://www.consumoresponde.es/art%C3%ADculos/derechos-personas-consumidoras-practica-deporte-ocio-gimnasios' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'gym-cost-per-visit-method',
+    labels: labels.fr,
+    directAnswer: 'Le coût par séance est la totalité des sommes dues pendant l’engagement divisée par les séances réellement effectuées. Comptez les 30 € de frais d’inscription, 34 € de mensualité, 3 € de frais de service mensuels, les douze mois payés et deux mois sans fréquentation. À cinq séances pendant chacun des dix mois actifs, l’abonnement coûte 474 € pour 50 séances, soit 9,48 € par séance. Face à une séance à l’unité comparable à 11 €, il faut au moins cinq séances par mois actif et l’abonnement économise 76 € dans ce scénario.',
+    inputs: ['Frais d’inscription, badge ou dossier obligatoires', 'Mensualité réellement facturée après la promotion', 'Frais mensuels obligatoires de service ou d’équipement', 'Nombre de mois dus pendant l’engagement', 'Mois payés pendant lesquels vous ne fréquenterez pas la salle', 'Séances réalistes pour chaque mois actif', 'Prix d’une séance à l’unité, d’une carte de séances ou d’un équipement municipal comparable'],
+    formula: 'Coût total = frais d’inscription + mois d’engagement × (mensualité + frais obligatoires). Mois actifs = mois payés − mois sans fréquentation. Nombre de séances = mois actifs × séances par mois actif. Coût par séance = coût total ÷ nombre de séances. Seuil mensuel = arrondi supérieur[coût total ÷ (prix à l’unité × mois actifs)].',
+    workedExample: 'L’inscription coûte 30 €, la mensualité 34 € et les frais de service obligatoires 3 € pendant douze mois. Vous prévoyez deux mois sans fréquentation et cinq séances pendant chacun des dix autres mois. Le total est 30 + 12 × 37 = 474 €. Cinquante séances reviennent à 9,48 € chacune. À 11 € la séance à l’unité, l’alternative coûterait 550 € : l’abonnement économise 76 €. Le seuil est ceil(474 ÷ (11 × 10)) = 5 séances par mois actif.',
+    sensitivity: [
+      { scenario: 'Fréquentation faible', input: '3 séances × 10 mois actifs', result: '30 séances ; 15,80 € chacune ; l’unité économise 144 €' },
+      { scenario: 'Juste sous le seuil', input: '4 séances × 10 mois actifs', result: '40 séances ; 11,85 € chacune ; l’unité économise 34 €' },
+      { scenario: 'Fréquentation prévue', input: '5 séances × 10 mois actifs', result: '50 séances ; 9,48 € chacune ; abonnement économise 76 €' },
+      { scenario: 'Aucun mois perdu', input: '5 séances × 12 mois', result: '60 séances ; 7,90 € chacune ; abonnement économise 186 €' },
+    ],
+    cta: { label: 'Calculer votre coût réel par séance', href: '#gym-cost-calculator' },
+    limitations: ['Comparez des accès équivalents : cours collectifs, piscine, casier, parking ou plusieurs clubs peuvent n’exister que dans une option.', 'Ne transformez pas les effets attendus sur la santé en économie monétaire. Le calcul compare uniquement deux façons de payer une activité déjà envisagée.', 'Préavis, reconduction tacite, suspension, déménagement, certificat médical, résiliation et remboursement dépendent du contrat et de la situation ; ne déduisez que les sommes confirmées par écrit.'],
+    sources: [
+      { label: 'DGCCRF — l’adhésion à une salle de sport ou de remise en forme', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/ladhesion-une-salle-de-sport-ou-de-remise-en-forme' },
+      { label: 'DGCCRF — résilier en ligne les contrats conclus sur internet', href: 'https://www.economie.gouv.fr/dgccrf/actualites-dgccrf/resilier-ses-contrats-conclus-sur-internet-est-desormais-plus-facile' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'gym-cost-per-visit-method',
+    labels: labels.de,
+    directAnswer: 'Die Kosten pro Besuch sind alle während der Vertragslaufzeit unvermeidbaren Zahlungen geteilt durch die tatsächlich erwarteten Besuche. Rechnen Sie Aufnahmegebühr, Monatsbeitrag, Servicepauschale und beitragspflichtige Monate ohne Training ein. Bei 29 € Aufnahmegebühr, 39,90 € Monatsbeitrag, 4,90 € monatlicher Servicepauschale, zwölf Monaten, einem Ausfallmonat und vier Besuchen in jedem der elf aktiven Monate kostet der Vertrag 566,60 € für 44 Besuche, also 12,88 € pro Besuch. Gegenüber einer vergleichbaren 14-€-Tageskarte sind mindestens vier Besuche je aktivem Monat nötig; der Vertrag spart in diesem Beispiel 49,40 €.',
+    inputs: ['Einmalige Aufnahme-, Verwaltungs- oder Karten-/Chipgebühr', 'Tatsächlicher Monatsbeitrag nach einer Startaktion', 'Verbindliche monatliche Service- oder Trainingspauschale', 'Beitragspflichtige Monate der Mindestlaufzeit', 'Bezahlte Monate ohne realistischen Studiobesuch', 'Tatsächliche Besuche in jedem verbleibenden aktiven Monat', 'Preis einer vergleichbaren Tageskarte, Zehnerkarte oder kommunalen Sportstätte'],
+    formula: 'Gesamtkosten = Aufnahmegebühr + Vertragsmonate × (Monatsbeitrag + Pflichtpauschale). Aktive Monate = Vertragsmonate − bezahlte Ausfallmonate. Gesamtbesuche = aktive Monate × Besuche je aktivem Monat. Kosten pro Besuch = Gesamtkosten ÷ Gesamtbesuche. Mindestbesuche je aktivem Monat = aufrunden[Gesamtkosten ÷ (Tageskartenpreis × aktive Monate)].',
+    workedExample: 'Die Aufnahme kostet 29 €, der Monatsbeitrag 39,90 € und die verpflichtende Servicepauschale 4,90 € für zwölf Monate. Ein Monat bleibt trotz Beitrag ohne Besuch; in den übrigen elf Monaten trainieren Sie viermal. Gesamtkosten: 29 + 12 × 44,80 = 566,60 €. 44 Besuche kosten 12,88 € pro Besuch. 44 Tageskarten zu 14 € kosten 616 €, der Vertrag spart 49,40 €. Die Schwelle ist ceil(566,60 ÷ (14 × 11)) = 4 Besuche je aktivem Monat.',
+    sensitivity: [
+      { scenario: 'Geringe Nutzung', input: '2 Besuche × 11 aktive Monate', result: '22 Besuche; 25,75 € je Besuch; Tageskarten sparen 258,60 €' },
+      { scenario: 'Unter der Schwelle', input: '3 Besuche × 11 aktive Monate', result: '33 Besuche; 17,17 € je Besuch; Tageskarten sparen 104,60 €' },
+      { scenario: 'Geplante Nutzung', input: '4 Besuche × 11 aktive Monate', result: '44 Besuche; 12,88 € je Besuch; Vertrag spart 49,40 €' },
+      { scenario: 'Kein Ausfallmonat', input: '4 Besuche × 12 Monate', result: '48 Besuche; 11,80 € je Besuch; Vertrag spart 105,40 €' },
+    ],
+    cta: { label: 'Eigene Studiokosten pro Besuch berechnen', href: '#gym-cost-calculator' },
+    limitations: ['Vergleichen Sie gleichwertige Leistungen: Kurse, Sauna, Schrank, Parkplatz oder mehrere Standorte können nur in einer Variante enthalten sein.', 'Setzen Sie gesundheitliche oder sportliche Effekte nicht als Geldersparnis an. Der Rechner vergleicht Zahlungsmodelle für dieselbe geplante Aktivität.', 'Mindestlaufzeit, Kündigungsfrist, Ruhezeit, Umzug, Krankheit, Preiserhöhung und Erstattung richten sich nach Vertrag und Einzelfall; rechnen Sie nur schriftlich bestätigte Gutschriften ab.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Fitnessstudios: Was in Verträgen nicht erlaubt ist', href: 'https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/fitnessstudios-was-in-vertraegen-nicht-erlaubt-ist-21641' },
+      { label: 'Verbraucherzentrale — Kündigungsbutton', href: 'https://www.verbraucherzentrale.de/digi-tools/kuendigungsbutton-101692' },
     ],
     lastVerified: '2026-07-19',
   },

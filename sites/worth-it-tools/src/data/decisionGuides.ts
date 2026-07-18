@@ -69,6 +69,114 @@ const labels: Record<Locale, DecisionGuideContent['labels']> = {
   },
 };
 
+export const installmentGuides: Record<Locale, DecisionGuideContent> = {
+  en: {
+    id: 'installment-apr-method',
+    labels: labels.en,
+    directAnswer: 'A plan advertised at 0% has a real borrowing cost whenever the installment price exceeds the cash price or a mandatory fee is added. Compare the cash price with every required payment, then solve the monthly cash-flow rate. A 3% fee spread across 12 equal end-of-month payments produces an estimated effective annual rate of about 5.63%, not 3%.',
+    inputs: ['Cash price available today, including any pay-now discount', 'Deposit or fee paid at signing', 'Amount and due date of every installment', 'Mandatory account, insurance, card, or service charges', 'Late-payment and post-promotional terms, kept outside the base case', 'The lender’s disclosed legal APR, TAE, TAEG, or effective annual rate'],
+    formula: 'Solve r where: 0 = cash price − upfront fees − Σ(payment_t ÷ (1 + r)^t); estimated effective annual rate = ((1 + r)^12 − 1) × 100',
+    workedExample: 'A product costs $1,200 now or 12 payments of $103. The plan collects $1,236, so the flat fee is $36 or 3% of the cash price. Solving $1,200 = Σ[$103 ÷ (1 + r)^t] for months 1–12 gives r ≈ 0.458% per month and an estimated effective annual rate of about 5.63%.',
+    sensitivity: [
+      { scenario: 'No fee', input: '12 × $100 on a $1,200 cash price', result: '0.00% estimated annual rate' },
+      { scenario: '3% fee, shorter term', input: '6 × $206', result: 'About 10.71% estimated annual rate' },
+      { scenario: '3% fee, base case', input: '12 × $103', result: 'About 5.63% estimated annual rate' },
+      { scenario: '3% fee, longer term', input: '24 × $51.50', result: 'About 2.89% estimated annual rate' },
+    ],
+    cta: { label: 'Calculate the rate from your own payment schedule', href: '/en/tools/installment-true-apr' },
+    limitations: ['This is a cash-flow estimate, not a lender disclosure or a legal APR determination. Statutory methods can specify which charges, dates, tolerances, taxes, or optional products count.', 'Irregular first payments, deferred periods, refunds, balloon payments, and changing rates require the exact dated cash flows.', 'A low rate does not make a purchase affordable. Check the total monthly commitments and the consequences of a missed payment before signing.'],
+    sources: [
+      { label: 'CFPB Regulation Z § 1026.22 — determination of APR', href: 'https://www.consumerfinance.gov/rules-policy/regulations/1026/22/' },
+      { label: 'CFPB — difference between interest rate and APR', href: 'https://www.consumerfinance.gov/ask-cfpb/what-is-the-difference-between-a-loan-interest-rate-and-the-apr-en-733/' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  zh: {
+    id: 'installment-apr-method',
+    labels: labels.zh,
+    directAnswer: '只要分期總價高於現金價，或另收必要手續費，「0 利率」就不等於零成本。先用今天可成交的現金價，對照簽約當下與每一期的必要付款，再用現金流反推月利率。現金價加收 3%、分 12 期月底繳，估算有效年率約 5.63%，不是 3%。',
+    inputs: ['今天可成交的現金價，包含付清可能取得的折扣', '簽約當下支付的頭期款、開辦費或固定手續費', '每一期金額、期數與真正扣款日', '強制搭售的帳戶、卡片、保險或服務費', '遲繳、優惠期結束與提前清償條款，先和基本情境分開', '發卡機構或融資方正式揭露的年利率與費用'],
+    formula: '解出月利率 r：0 = 現金價 − 前期費用 − Σ（第 t 期付款 ÷ (1 + r)^t）；估算有效年率 = ((1 + r)^12 − 1) × 100',
+    workedExample: '商品現金價 NT$36,000，分 12 期每期 NT$3,090，總付款 NT$37,080。表面多付 NT$1,080，等於現金價 3%；但本金逐月下降。解出 36,000 = 第 1 至 12 期付款的折現值後，月利率約 0.458%，估算有效年率約 5.63%。',
+    sensitivity: [
+      { scenario: '完全零費用', input: '12 期 × NT$3,000', result: '估算年率 0.00%' },
+      { scenario: '3% 費用、6 期', input: '6 期 × NT$6,180', result: '估算年率約 10.71%' },
+      { scenario: '3% 費用、12 期', input: '12 期 × NT$3,090', result: '估算年率約 5.63%' },
+      { scenario: '3% 費用、24 期', input: '24 期 × NT$1,545', result: '估算年率約 2.89%' },
+    ],
+    cta: { label: '用自己的分期金額反推估算年率', href: '/zh/tools/installment-true-apr' },
+    limitations: ['這是簡化現金流的估算，不是發卡機構的法定利率揭露。哪些費用應納入、日期、容許誤差與契約分類，仍以適用法規及正式契約為準。', '首期付款日不規則、先享後付、尾款、退款、變動利率或提前清償時，必須使用每一筆實際日期與金額。', '估算年率低不代表負擔得起；簽約前仍要合併檢查所有分期月付與遲繳後果。'],
+    sources: [
+      { label: '金融監督管理委員會 — 信用卡分期付款服務作業規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL000237&media=print' },
+      { label: '金融監督管理委員會 — 信用卡定型化契約應記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  es: {
+    id: 'installment-apr-method',
+    labels: labels.es,
+    directAnswer: 'Una compra a plazos anunciada al 0 % tiene coste financiero si el precio aplazado supera el precio al contado o exige una comisión. Compara ambos precios y lleva cada cuota a una línea temporal. Una comisión plana del 3 % repartida en 12 cuotas mensuales vencidas equivale, con este cálculo simplificado, a una tasa anual efectiva aproximada del 5,63 %.',
+    inputs: ['Precio al contado disponible hoy, incluido el descuento por pago inmediato', 'Entrada, comisión de apertura u otro gasto pagado al contratar', 'Importe y fecha de cada cuota', 'Seguros, tarjetas, cuentas o servicios accesorios obligatorios', 'Interés tras la promoción, demora y vencimiento anticipado, separados del caso base', 'TAE oficial y documento precontractual entregado por la entidad'],
+    formula: 'Halla r: 0 = precio al contado − gastos iniciales − Σ(cuota_t ÷ (1 + r)^t); tasa anual efectiva estimada = ((1 + r)^12 − 1) × 100',
+    workedExample: 'El precio al contado es 1.200 € y la oferta exige 12 cuotas de 103 €. Se pagan 1.236 €: 36 € más, un 3 % plano. Al descontar las cuotas de los meses 1 a 12, r es aproximadamente 0,458 % mensual y la tasa anual efectiva estimada es aproximadamente 5,63 %.',
+    sensitivity: [
+      { scenario: 'Sin comisión', input: '12 × 100 €', result: '0,00 % anual estimado' },
+      { scenario: '3 % en seis meses', input: '6 × 206 €', result: 'Aproximadamente 10,71 % anual' },
+      { scenario: '3 % en doce meses', input: '12 × 103 €', result: 'Aproximadamente 5,63 % anual' },
+      { scenario: '3 % en veinticuatro meses', input: '24 × 51,50 €', result: 'Aproximadamente 2,89 % anual' },
+    ],
+    cta: { label: 'Calcular tu calendario en la herramienta en inglés', href: '/en/tools/installment-true-apr' },
+    limitations: ['El resultado es una equivalencia de flujos, no la TAE legal de una oferta. La normativa determina qué comisiones, impuestos, fechas, productos accesorios y supuestos deben incluirse.', 'Una primera cuota inmediata, cuotas desiguales, carencia, pago final o tipo variable exigen introducir el calendario exacto.', 'Una tasa baja no demuestra que la compra sea asequible. Suma todas tus cuotas activas y revisa las consecuencias del impago.'],
+    sources: [
+      { label: 'Banco de España — simulador de coste financiero de una compra a plazos', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo-del-coste-financiero.html' },
+      { label: 'Banco de España — definición oficial de la TAE', href: 'https://www.bde.es/webbe/es/estadisticas/recursos/glosario/conceptos/tasa-anual-equivalente.html' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  fr: {
+    id: 'installment-apr-method',
+    labels: labels.fr,
+    directAnswer: 'Un paiement en plusieurs fois présenté à 0 % a un coût dès que le prix financé dépasse le prix comptant ou qu’un frais obligatoire s’ajoute. Comparez les deux prix et actualisez chaque échéance. Des frais forfaitaires de 3 % répartis sur 12 mensualités à terme échu donnent ici un taux annuel effectif estimé d’environ 5,63 %.',
+    inputs: ['Prix comptant réellement disponible aujourd’hui', 'Acompte, frais de dossier ou frais payés à la souscription', 'Montant et date de chaque échéance', 'Assurance, carte, compte ou service rendu obligatoire', 'Frais de retard et taux après promotion, séparés du scénario normal', 'TAEG et fiche précontractuelle remis par le prêteur'],
+    formula: 'Résoudre r : 0 = prix comptant − frais initiaux − Σ(échéance_t ÷ (1 + r)^t) ; taux annuel effectif estimé = ((1 + r)^12 − 1) × 100',
+    workedExample: 'Le prix comptant est de 900 € et le paiement fractionné prévoit 12 mensualités de 77,25 €. Le total atteint 927 €, soit 27 € ou 3 % de plus. L’actualisation des douze mensualités donne environ 0,458 % par mois et un taux annuel effectif estimé d’environ 5,63 %.',
+    sensitivity: [
+      { scenario: 'Sans frais', input: '12 × 75 €', result: '0,00 % annuel estimé' },
+      { scenario: '3 % sur six mois', input: '6 × 154,50 €', result: 'Environ 10,71 % par an' },
+      { scenario: '3 % sur douze mois', input: '12 × 77,25 €', result: 'Environ 5,63 % par an' },
+      { scenario: '3 % sur vingt-quatre mois', input: '24 × 38,625 €', result: 'Environ 2,89 % par an' },
+    ],
+    cta: { label: 'Tester votre échéancier dans le calculateur en anglais', href: '/en/tools/installment-true-apr' },
+    limitations: ['Le résultat est une estimation par flux, pas le TAEG légal de l’offre. Les règles applicables déterminent les frais, taxes, dates et services obligatoires à intégrer.', 'Un premier paiement immédiat, un différé, des échéances inégales, un ballon final ou un taux variable imposent un échéancier exact.', 'Un taux faible ne garantit pas la capacité de remboursement. Additionnez toutes les mensualités en cours et lisez les conséquences d’un incident.'],
+    sources: [
+      { label: 'Ministère de l’Économie — à quoi correspond le TAEG ?', href: 'https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/credit-quoi-correspond-le-taux-annuel-effectif-global-taeg' },
+      { label: 'Ministère de l’Économie — crédit à la consommation', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/tout-savoir-sur-le-credit-la-consommation' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+  de: {
+    id: 'installment-apr-method',
+    labels: labels.de,
+    directAnswer: 'Eine beworbene 0%-Finanzierung verursacht Finanzierungskosten, sobald der Ratenpreis über dem Barpreis liegt oder ein Pflichtentgelt hinzukommt. Stellen Sie alle Zahlungen auf einer Zeitachse dem Barpreis gegenüber. Ein pauschaler Aufschlag von 3 % über zwölf nachschüssige Monatsraten ergibt in dieser vereinfachten Rechnung rund 5,63 % effektiven Jahreszins.',
+    inputs: ['Heute tatsächlich verfügbarer Barpreis einschließlich Sofortrabatt', 'Anzahlung, Bearbeitungsentgelt oder Abschlusskosten', 'Betrag und Fälligkeit jeder Rate', 'Verpflichtende Versicherung, Karte, Konto- oder Zusatzleistung', 'Zins nach der Aktionsphase und Verzugsfolgen, getrennt vom Normalfall', 'Effektiver Jahreszins und Europäische Standardinformationen des Kreditgebers'],
+    formula: 'r lösen: 0 = Barpreis − Anfangskosten − Σ(Rate_t ÷ (1 + r)^t); geschätzter effektiver Jahreszins = ((1 + r)^12 − 1) × 100',
+    workedExample: 'Der Barpreis beträgt 2.400 €, angeboten werden zwölf Raten zu je 206 €. Insgesamt fließen 2.472 €, also 72 € beziehungsweise 3 % mehr. Die Abzinsung der Raten in den Monaten 1 bis 12 ergibt rund 0,458 % pro Monat und einen geschätzten effektiven Jahreszins von etwa 5,63 %.',
+    sensitivity: [
+      { scenario: 'Ohne Aufschlag', input: '12 × 200 €', result: '0,00 % geschätzter Jahreszins' },
+      { scenario: '3 % in sechs Monaten', input: '6 × 412 €', result: 'Rund 10,71 % pro Jahr' },
+      { scenario: '3 % in zwölf Monaten', input: '12 × 206 €', result: 'Rund 5,63 % pro Jahr' },
+      { scenario: '3 % in 24 Monaten', input: '24 × 103 €', result: 'Rund 2,89 % pro Jahr' },
+    ],
+    cta: { label: 'Eigenen Ratenplan im englischen Rechner prüfen', href: '/en/tools/installment-true-apr' },
+    limitations: ['Das Ergebnis ist eine Zahlungsstrom-Schätzung und keine rechtliche Berechnung der Pflichtangabe. Welche Kosten, Steuern, Termine und Nebenleistungen einzubeziehen sind, bestimmen die anwendbaren Regeln.', 'Sofort fällige erste Raten, Zahlpausen, ungleiche Raten, Schlussraten oder variable Zinsen benötigen den genauen Zahlungsplan.', 'Ein niedriger Zinssatz beweist keine Tragbarkeit. Addieren Sie alle laufenden Raten und prüfen Sie Verzug sowie einen eventuell gekoppelten Rahmenkredit.'],
+    sources: [
+      { label: 'Your Europe — Verbraucherkredite und effektiver Jahreszins', href: 'https://europa.eu/youreurope/citizens/consumers/financial-products-and-services/consumer-credits-and-loans/index_de.htm' },
+      { label: 'Verbraucherzentrale — Fallen bei Null-Prozent-Finanzierungen', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/nullprozentfinanzierungen-warum-sie-nicht-gratis-zu-haben-sind-102333' },
+    ],
+    lastVerified: '2026-07-18',
+  },
+};
+
 export const subscriptionGuides: Record<Locale, DecisionGuideContent> = {
   en: {
     id: 'subscription-audit-method',

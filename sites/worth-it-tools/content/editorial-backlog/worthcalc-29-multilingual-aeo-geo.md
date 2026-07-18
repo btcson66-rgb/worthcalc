@@ -17,11 +17,18 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 高價值既有頁：Costco membership 與 commute cost 的 EN／zh-TW 計算器補上 direct answer、input checklist、formula、worked example、sensitivity table、limitations、sources、last verified。
 - 選題證據：2026-W29 GSC 顯示 Costco 計算器 99 impressions／2 clicks／rank 10.1；commute-cost 兩種尾斜線 URL 合計 49 impressions、rank 約 33–34。
 
+## 2026-07-18 第二批（PR 待核准）
+
+- 題目 01「0% 分期的真實年率」：EN、zh-TW 舊頁補成完整 brief；新增 ES、FR、DE 三個原生版本，正好用滿本批 3 個公開頁上限。
+- 五語皆提供 IRR 現金流公式、3% 平面費率在 6／12／24 期的敏感度、法定 APR／TAE／TAEG 與估算值的邊界、官方或公共消費者來源。
+- 原生差異：西班牙處理 `precio al contado`、`comisión de apertura` 與 TAE；法國處理 `prix comptant`、`frais de dossier`、首期即付與 TAEG；德國處理 `Barpreis`、附帶 `Rahmenkredit` 與歐洲標準消費信貸資訊。
+- 本批完成後稽核口徑：49 HTML、17 編輯內容頁、14／145 任務對應版本、10／145 完整版本、2／29 五語完成主題。
+
 ## 待執行主題
 
 | ID | Cluster | Topic | Status |
 |---:|---|---|---|
-| 01 | Borrowing & True Cost | Real APR of a 0% installment plan | backlog |
+| 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; PR pending |
 | 02 | Borrowing & True Cost | Upfront fees and financing cost | backlog |
 | 03 | Borrowing & True Cost | BNPL vs credit-card installments | backlog |
 | 04 | Subscriptions & Memberships | Monthly vs annual subscription | backlog |

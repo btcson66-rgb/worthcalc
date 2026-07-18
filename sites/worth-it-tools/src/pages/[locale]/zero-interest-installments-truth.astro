@@ -1,0 +1,177 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import { LOCALES, type Locale } from '../../consts';
+import { installmentGuides } from '../../data/decisionGuides';
+import { localizedCorePath } from '../../i18n/utils';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'es' | 'fr' | 'de';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  es: {
+    title: 'Cómo calcular el coste real de una compra a plazos sin intereses',
+    description: 'Calcula la tasa anual estimada de una compra al 0 % con precio al contado, comisiones, fechas, IRR, ejemplo resuelto y tabla de sensibilidad.',
+    faq: [
+      { question: '¿Una compra a plazos al 0 % puede tener coste?', answer: 'Sí. Hay coste si el precio aplazado es superior al precio al contado, si existe una comisión obligatoria o si debes contratar un servicio accesorio. Si importes, fechas y precio son idénticos, el coste financiero del caso normal puede ser cero.' },
+      { question: '¿Por qué una comisión del 3 % puede equivaler a más del 3 % anual?', answer: 'Porque devuelves capital cada mes. La comisión se calcula sobre el precio completo, pero el saldo pendiente disminuye con cada cuota. En doce pagos mensuales vencidos, un 3 % plano da aproximadamente un 5,63 % anual efectivo con el calendario simplificado de este ejemplo.' },
+      { question: '¿Debo usar el precio de catálogo o el precio al contado?', answer: 'Usa el importe que realmente pagarías hoy sin financiar, incluido un descuento disponible y verificable. Comparar contra un precio de catálogo que nadie paga ocultaría parte del coste.' },
+      { question: '¿La tasa calculada por WorthCalc es la TAE legal?', answer: 'No necesariamente. Es una equivalencia matemática de los flujos introducidos. La TAE oficial sigue una definición normativa sobre gastos, fechas y supuestos; compárala con el documento de la entidad.' },
+      { question: '¿Qué cambia si la primera cuota se paga hoy?', answer: 'El dinero sale antes y el coste efectivo sube respecto a una primera cuota pagada dentro de un mes. Para planes de pago inmediato más tres cuotas, utiliza las fechas reales; no los trates como cuatro mensualidades vencidas.' },
+    ],
+  },
+  fr: {
+    title: 'Comment calculer le coût réel d’un paiement en plusieurs fois sans intérêts',
+    description: 'Estimez le taux annuel réel d’un paiement à 0 % avec prix comptant, frais, échéancier, IRR, exemple détaillé et analyse de sensibilité.',
+    faq: [
+      { question: 'Un paiement en plusieurs fois sans intérêts est-il toujours gratuit ?', answer: 'Non. Il n’est gratuit que si le prix financé égale le prix comptant, qu’aucun frais obligatoire ne s’ajoute et qu’aucune remise immédiate n’est perdue. Les pénalités relèvent d’un scénario distinct.' },
+      { question: 'Pourquoi 3 % de frais ne donnent-ils pas 3 % par an ?', answer: 'Les frais portent sur le montant initial alors que le capital restant diminue à chaque échéance. Avec douze mensualités à terme échu, un surcoût forfaitaire de 3 % correspond ici à environ 5,63 % par an.' },
+      { question: 'Quel prix faut-il retenir comme prix comptant ?', answer: 'Retenez le montant réellement payable aujourd’hui sans financement, remise immédiate comprise. Une promotion hypothétique ou négociable sans preuve ne doit pas être inventée.' },
+      { question: 'Le résultat est-il le TAEG du contrat ?', answer: 'Pas forcément. WorthCalc estime un taux à partir des flux saisis. Le TAEG légal obéit à des règles précises sur les frais obligatoires, les dates et les services accessoires ; la fiche du prêteur reste la référence réglementaire.' },
+      { question: 'Comment traiter un paiement en quatre fois avec prélèvement immédiat ?', answer: 'Placez le premier débit à la date d’achat, puis les trois autres à leurs dates réelles. Un premier paiement immédiat n’est pas équivalent à quatre mensualités commençant dans un mois.' },
+    ],
+  },
+  de: {
+    title: 'So berechnen Sie die tatsächlichen Kosten einer 0%-Finanzierung',
+    description: 'Berechnen Sie aus Barpreis, Gebühren und Ratenplan den geschätzten effektiven Jahreszins – mit IRR-Formel, Beispiel und Sensitivität.',
+    faq: [
+      { question: 'Ist eine 0%-Finanzierung wirklich kostenlos?', answer: 'Nur wenn Ratenpreis und Barpreis identisch sind, keine Pflichtkosten entstehen und kein verfügbarer Sofortrabatt verloren geht. Verzugs- oder Folgekosten gehören in ein separates Risikoszenario.' },
+      { question: 'Warum werden aus 3 % Aufschlag mehr als 3 % pro Jahr?', answer: 'Die Rate reduziert den offenen Betrag jeden Monat, der Aufschlag bezieht sich aber auf den vollen Ausgangspreis. Bei zwölf nachschüssigen Monatsraten ergibt das vereinfachte Beispiel rund 5,63 % effektiven Jahreszins.' },
+      { question: 'Welcher Barpreis gehört in die Rechnung?', answer: 'Verwenden Sie den heute tatsächlich angebotenen Preis ohne Finanzierung und ziehen Sie einen sicher verfügbaren Sofortrabatt ab. Ein unverbindlicher Listenpreis ist kein belastbarer Vergleich.' },
+      { question: 'Ist das Ergebnis der gesetzliche effektive Jahreszins?', answer: 'Nicht zwingend. WorthCalc berechnet eine Zahlungsstrom-Schätzung. Für die gesetzliche Pflichtangabe gelten definierte Kosten, Termine und Annahmen; maßgeblich sind die Unterlagen des Kreditgebers.' },
+      { question: 'Woran erkenne ich einen gekoppelten Rahmenkredit?', answer: 'Prüfen Sie, ob neben dem Ratenkauf eine Karte oder ein zusätzlicher Kreditrahmen eröffnet wird. Das 0%-Versprechen kann nur für den ursprünglichen Einkauf gelten, während weitere Verfügungen einen variablen Zins tragen.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = installmentGuides[locale];
+const englishTool = localizedCorePath(locale, '/tools/installment-true-apr');
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
+>
+  {locale === 'es' && (
+    <>
+      <p>
+        “Sin intereses” describe solo una parte del contrato. Para saber cuánto cuesta aplazar una compra en España, necesitas dos fotografías: el precio que podrías pagar hoy y el calendario completo de lo que saldrá de tu cuenta. Una comisión de apertura, la pérdida de un descuento al contado o un seguro obligatorio convierten una oferta con TIN del 0 % en una financiación con coste.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Empieza por el precio al contado comprobable</h2>
+      <p>
+        Guarda una captura o presupuesto del precio sin financiación. Si el comercio vende el mismo artículo por 1.150 € al contado y por 12 cuotas de 100 €, el importe financiado efectivo no es el precio de catálogo de 1.200 €, sino los 1.150 € que dejas de pagar hoy. La diferencia de 50 € forma parte del coste económico aunque no aparezca con la palabra “interés”.
+      </p>
+      <p>
+        Después separa lo obligatorio de lo opcional. Incluye una comisión, cuenta o seguro solo cuando sea condición para obtener la oferta. Mantén fuera del caso normal una penalización por demora, pero anótala en un escenario de riesgo para saber qué ocurre si una cuota no llega a tiempo.
+      </p>
+
+      <h2>La fecha de la primera cuota cambia el resultado</h2>
+      <p>
+        Muchos pagos fraccionados cargan una parte en el momento de comprar. Ese primer pago reduce desde el primer día el importe que realmente estás financiando. No modeles un “paga hoy y luego tres veces” como si las cuatro cuotas empezaran dentro de un mes: la tasa obtenida sería demasiado baja. La herramienta actual supone intervalos mensuales iguales; para un calendario irregular, calcula con las fechas exactas o contrasta el resultado con la entidad.
+      </p>
+
+      <h2>Tasa estimada y TAE no son sinónimos automáticos</h2>
+      <p>
+        El Banco de España distingue entre un cálculo teórico personalizable y la TAE definida por norma. La estimación de WorthCalc sirve para entender los flujos y detectar que una comisión plana no es una tasa anual. Antes de contratar, usa la TAE y la información precontractual oficial para comparar ofertas equivalentes.
+      </p>
+
+      <h2>Compara coste, plazo y capacidad de pago</h2>
+      <p>
+        Dos planes con el mismo sobrecoste total pueden tener tasas distintas si uno recupera el dinero mucho antes. Aun así, la tasa no responde a todo: suma las cuotas de tus otras compras, conserva margen para gastos imprevistos y evita aceptar una cuota pequeña si solo encubre un plazo innecesariamente largo. Puedes <a href={englishTool}>introducir el precio y las cuotas en el calculador en inglés</a>; los datos se procesan en tu navegador.
+      </p>
+      <p class="privacy-note">Resultado educativo y orientativo. No sustituye la TAE contractual, la evaluación de solvencia ni el asesoramiento financiero o jurídico.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        Un paiement fractionné “sans intérêts” peut être réellement gratuit, mais l’étiquette ne suffit pas. En France, partez du prix comptant disponible le jour de l’achat, puis reconstruisez chaque débit. Frais de dossier, écart de prix, carte imposée ou assurance obligatoire modifient le coût même lorsque le taux nominal affiché reste à zéro.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Comparer le prix comptant au prix fractionné</h2>
+      <p>
+        Demandez combien vous paieriez en une fois, aujourd’hui. Si un appareil coûte 880 € comptant mais 12 × 75 € avec le financement, le bon point de départ est 880 €, pas un ancien prix barré de 900 €. Les 20 € d’écart constituent déjà un coût du choix de paiement, avant tout autre frais.
+      </p>
+      <p>
+        Recensez ensuite uniquement les coûts nécessaires pour obtenir l’offre : frais de dossier, cotisation de carte ou assurance imposée. Une garantie facultative choisie pour une autre raison peut être affichée séparément afin de ne pas déformer la comparaison entre deux crédits.
+      </p>
+
+      <h2>Le “4 fois” commence souvent le jour de l’achat</h2>
+      <p>
+        Une échéance prélevée immédiatement n’est pas financée pendant un mois. Placez-la à la date zéro, puis utilisez les vraies dates des trois prélèvements suivants. Cette précision compte particulièrement pour les petits calendriers : quelques jours de différence ou un forfait fixe peuvent fortement modifier un taux annualisé, même si le surcoût en euros reste modeste.
+      </p>
+
+      <h2>Pourquoi conserver le TAEG du prêteur</h2>
+      <p>
+        Le calcul par IRR répond à la question “quel taux rend ces flux équivalents ?”. Le TAEG répond à une définition réglementaire du coût total et des frais à intégrer. Servez-vous de l’estimation pour contrôler l’ordre de grandeur et poser des questions, puis comparez les offres à partir de leurs TAEG et documents précontractuels officiels.
+      </p>
+
+      <h2>Un bon taux ne corrige pas un budget trop serré</h2>
+      <p>
+        Additionnez toutes les échéances déjà actives, pas seulement la nouvelle. Vérifiez aussi ce qui arrive en cas de rejet de prélèvement et après la période promotionnelle. Le <a href={englishTool}>calculateur en anglais</a> estime le taux d’un échéancier mensuel régulier sans envoyer vos montants au serveur ; les contrats irréguliers demandent un calcul daté plus précis.
+      </p>
+      <p class="privacy-note">Estimation pédagogique générale. Elle ne remplace ni le TAEG contractuel, ni l’étude de solvabilité, ni un conseil financier ou juridique.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        Bei einer 0%-Finanzierung entscheidet nicht die Werbezeile, sondern der Zahlungsplan. Stellen Sie dem heute verfügbaren Barpreis jede Rate und jedes Pflichtentgelt gegenüber. Ist beides identisch und gibt es keine Zusatzkosten, kann der normale Zahlungsfall tatsächlich zinsfrei sein. Ein höherer Ratenpreis oder ein gekoppeltes Produkt ändert die Rechnung.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Barpreis statt Monatsrate als Ausgangspunkt</h2>
+      <p>
+        Notieren Sie den Preis, den der Händler bei sofortiger Zahlung wirklich verlangt. Kostet ein Möbelstück bar 2.350 €, über die Finanzierung aber zwölfmal 200 €, beträgt der wirtschaftliche Aufschlag 50 € – auch wenn im Kreditvertrag kein Sollzins ausgewiesen ist. Eine unverbindliche Preisempfehlung ist nur dann ein sinnvoller Vergleich, wenn sie tatsächlich der Barpreis ist.
+      </p>
+      <p>
+        Erfassen Sie außerdem Pflichtkosten: Bearbeitungsentgelt, Kontoführung, Karte, Restschuldversicherung oder andere Nebenleistungen. Optionale Produkte sollten separat stehen. So bleibt sichtbar, welcher Betrag ausschließlich für den Zugang zur Finanzierung anfällt.
+      </p>
+
+      <h2>0 % für den Einkauf, anderer Zins für den Rahmen</h2>
+      <p>
+        Prüfen Sie, ob neben dem festen Ratenkredit eine Karte oder ein Rahmenkredit eröffnet wird. Der Aktionszins kann auf den ersten Einkauf und einen begrenzten Zeitraum beschränkt sein. Weitere Verfügungen, eine zu niedrige Mindestrate oder die Zeit nach der Aktion können anderen Bedingungen folgen. Rechnen Sie diese Zahlungsströme nicht stillschweigend als 0 % weiter.
+      </p>
+
+      <h2>Schätzung und gesetzliche Pflichtangabe trennen</h2>
+      <p>
+        Die IRR-Rechnung zeigt, welcher monatliche Zinssatz den Barpreis und die Raten rechnerisch ausgleicht. Der gesetzliche effektive Jahreszins folgt dagegen definierten Vorgaben zu Kosten und Annahmen. Nutzen Sie den Rechner für eine Plausibilitätsprüfung, vergleichen Sie Kreditangebote aber anhand ihrer offiziellen Europäischen Standardinformationen.
+      </p>
+
+      <h2>Ratenstapel vor dem Abschluss prüfen</h2>
+      <p>
+        Eine kleine Einzelrate wirkt harmlos, mehrere parallele Verträge können jedoch den verfügbaren Monatsbetrag binden. Addieren Sie alle laufenden Raten, prüfen Sie Fälligkeit und Verzugsfolgen und halten Sie einen Notfallpuffer frei. Im <a href={englishTool}>englischen Rechner</a> können Sie einen regelmäßigen Monatsplan lokal im Browser testen; unregelmäßige Termine benötigen eine genauere, datierte Rechnung.
+      </p>
+      <p class="privacy-note">Allgemeine Bildungsrechnung. Sie ersetzt weder die vertragliche Pflichtangabe noch Bonitätsprüfung, Finanz- oder Rechtsberatung.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

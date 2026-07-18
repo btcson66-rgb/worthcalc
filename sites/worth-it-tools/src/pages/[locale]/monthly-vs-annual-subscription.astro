@@ -1,0 +1,206 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { monthlyAnnualGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  en: {
+    title: 'Monthly vs annual subscription: when does annual billing save money?',
+    description: 'Calculate the break-even month, early-cancellation risk, expected cost, renewal price, and cash-flow trade-off before choosing monthly or annual billing.',
+    faq: [
+      { question: 'How do I calculate the break-even month for an annual subscription?', answer: 'Divide the full annual price by the monthly price. If the result is 8, the two plans tie after eight monthly payments and annual billing starts saving with the ninth payment, assuming no other fees or refunds.' },
+      { question: 'Should I choose annual billing if I expect to use the service all year?', answer: 'Usually only when that expectation is strong, the annual price is lower than 12 monthly payments, the renewal terms are clear, and prepaying does not weaken your cash buffer. Test an early-exit scenario before deciding.' },
+      { question: 'How do I include cancellation risk in the comparison?', answer: 'Assign a probability to full-year use and a plausible early-cancel month. Weight the monthly cost of each outcome, then compare the result with the non-refundable annual price. Also inspect the loss in the early-exit outcome.' },
+      { question: 'Does canceling an annual subscription produce a prorated refund?', answer: 'Not automatically. Refund, pause, downgrade, and transfer terms vary by provider and applicable law. Read the contract before paying and do not put a refund into the formula unless it is actually offered.' },
+      { question: 'What should I save after canceling an auto-renewing subscription?', answer: 'Keep the confirmation screen or email, the effective cancellation date, and the renewal terms. Continue checking card or bank statements for charges after the cancellation.' },
+    ],
+  },
+  zh: {
+    title: '訂閱月繳還是年繳？用使用月數與取消風險算出答案',
+    description: '用打平月數、提早停用機率、不可退費風險、續約價與現金流，比較台灣常見訂閱的月繳和年繳。',
+    faq: [
+      { question: '年繳折扣幾折才值得選？', answer: '折扣本身不是答案。先用年費除以月費找出打平月數，再確認你有多大機率用超過那個月份；若提前停用不能退費，折扣可能只是把未來支出提早收走。' },
+      { question: '年費除以月費不是整數怎麼看？', answer: '例如打平點是 9.6 個月，代表前 9 個月月繳較低，第 10 個月起年繳才低於累積月費。不要把 9.6 直接說成使用 9 個月就省。' },
+      { question: '刪除 APP 就等於取消訂閱嗎？', answer: '不是。行政院消費者保護處提醒，刪除 APP 不會自動停止訂閱；要進入原本訂閱的帳號或平台關閉自動續約，並確認取消成功。' },
+      { question: '免費試用後要用促銷價還是續約價計算？', answer: '用下一次真正會被扣的續約價。免費期與首期優惠已經是沉沒的促銷條件，不應拿來美化接下來一年的成本。' },
+      { question: '期望成本較低就一定要選年繳嗎？', answer: '不一定。若一次付清會壓縮生活費或緊急預備金，月繳的彈性本身有價值。期望成本與最壞情境現金流要一起看。' },
+    ],
+  },
+  es: {
+    title: 'Suscripción mensual o anual: cuándo compensa pagar por adelantado',
+    description: 'Calcula el mes de equilibrio, el riesgo de baja, el coste esperado, la renovación y la liquidez antes de elegir mensualidad o pago anual.',
+    faq: [
+      { question: '¿Cómo calculo cuándo compensa una suscripción anual?', answer: 'Divide el precio anual final entre la cuota mensual. Un resultado de 9,23 significa que el anual empieza a ahorrar al llegar a la décima mensualidad, no al noveno mes.' },
+      { question: '¿Cómo incluyo el riesgo de darme de baja?', answer: 'Compara al menos dos resultados: año completo y baja anticipada. Asigna una probabilidad a cada uno, calcula el coste mensual esperado y enfréntalo al pago anual que realmente sería reembolsable o no.' },
+      { question: '¿Puedo cancelar un servicio recurrente por la misma vía en que lo contraté?', answer: 'El artículo 62 de la ley española de consumidores establece que el derecho a poner fin a contratos de prestación continuada puede ejercerse en la misma forma en que se celebró y que el contrato debe indicar el procedimiento. Revisa cómo se aplica a tu servicio concreto.' },
+      { question: '¿Una baja anticipada devuelve la parte no usada del año?', answer: 'No debe darse por supuesto. Comprueba reembolso, permanencia, preaviso y excepciones antes de pagar. Introduce en el cálculo solo el importe cuya devolución esté respaldada por el contrato o por un derecho aplicable.' },
+      { question: '¿Qué precio uso si el primer año está rebajado?', answer: 'Para decidir hoy usa el precio que pagarás en este periodo; para decidir la renovación crea otra fila con el precio posterior. Guarda un recordatorio antes de que termine la promoción.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = monthlyAnnualGuides[locale];
+if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={[locale]}
+>
+  {locale === 'en' && (
+    <>
+      <p>
+        “Two months free” is a price comparison, not a decision. Annual billing moves twelve months of commitment into one charge. It is cheaper only if you keep the service long enough, cannot achieve the same result by pausing it seasonally, and do not lose more flexibility than the discount is worth.
+      </p>
+      <p>
+        Start with the break-even month, then add uncertainty. The simple division answers how long you must stay. A probability-weighted comparison answers whether the discount still survives a realistic early cancellation. Keep the bad outcome visible: an annual plan can have a lower expected cost while still wasting far more cash if your job, course, project, or household needs change.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Break-even months answer only the first question</h2>
+      <p>
+        At $15 monthly and $120 annually, eight monthly payments equal the annual charge. Month nine is where the annual option first saves money. If you need the service for a three-month project, the 33% full-year discount is irrelevant: monthly billing costs $45 and the non-refundable year costs $120.
+      </p>
+      <p>
+        Use the price after a free trial or introductory discount. If the annual offer renews at a higher amount, run a second comparison for renewal. A first-year bargain can turn into a poor second-year choice without changing a single feature.
+      </p>
+
+      <h2>Use probability break-even when your end date is uncertain</h2>
+      <p>
+        The worked example assumes either a full year or cancellation after month four. Under those two outcomes, annual billing needs at least a 50% chance of full-year use to have the lower expected cost. This is not a prediction. It is a threshold you can challenge: “Am I genuinely more likely than not to keep this through all twelve months?”
+      </p>
+      <p>
+        Add more outcomes when useful—a seasonal pause, an employer taking over the license, or a household member leaving a family plan. If the provider offers a guaranteed prorated refund, subtract only that documented amount from the annual cost in the relevant outcome.
+      </p>
+
+      <h2>Check cash flow and renewal separately from price</h2>
+      <p>
+        Paying $120 today may be cheaper than $15 each month, but it also removes $120 from the cash buffer now. Do not prepay a discretionary service with money needed for rent, food, debt minimums, or emergencies. A smaller monthly charge can be rational even when its full-year total is higher.
+      </p>
+      <p>
+        Before checkout, record the renewal date, renewal price, notice period, cancellation path, and refund terms. FTC consumer advice says to inspect renewal notices for price changes and keep checking statements after cancellation. Save proof instead of assuming a confirmation animation ended the billing relationship.
+      </p>
+
+      <h2>Choose by service type, not by discount banner</h2>
+      <p>
+        Stable infrastructure you have used for years—such as essential storage—may justify annual billing. Seasonal sports, short courses, dating apps, project software, and services duplicated through an employer or family bundle deserve a higher cancellation-risk estimate. The more uncertain the need, the more valuable monthly flexibility becomes.
+      </p>
+      <p>
+        Add both options to the <a href="/en/tools/subscription-audit/">subscription audit calculator</a> and compare the next twelve months alongside every other renewal. One annual plan may be affordable alone but collide with several other annual charges in the same week.
+      </p>
+      <p class="privacy-note">This is a general consumer-cost model. It does not determine contract rights, refunds, taxes, or whether a provider has complied with applicable subscription law.</p>
+    </>
+  )}
+
+  {locale === 'zh' && (
+    <>
+      <p>
+        「年繳等於送兩個月」只是在比較標價，沒有回答你會用多久。年繳把未來十二個月的選擇一次變成今天的扣款；只有使用時間跨過打平點，而且提早停用、不能退費與現金占用的風險都可接受時，折扣才是真的省。
+      </p>
+      <p>
+        正確順序是先算打平月數，再算不確定性。打平月數告訴你至少要留多久；期望成本則把「用滿一年」和「提早不用」放進同一個模型。最後還要看最壞情境，因為平均省 NT$240，不代表真的第 4 個月停用時不會後悔。
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>9.6 個月代表第 10 個月才開始省</h2>
+      <p>
+        月費 NT$300、年費 NT$2,880，單純打平是 9.6 個月。前 9 個月累積月費仍低於年費，第 10 次月繳後才反超。若只是三個月證照課、短期專案或旺季使用，年繳折扣再大，也可能比需要期間的月繳多付很多。
+      </p>
+      <p>
+        免費試用與首月優惠要和續約分開。做今天的選擇時，填下一期真正會扣的價格；若第一年優惠、第二年恢復原價，就建立兩個年度情境。不要把已經用完的免費期拿來降低未來成本。
+      </p>
+
+      <h2>用機率門檻檢查「我應該會一直用」</h2>
+      <p>
+        本頁算例假設只會出現兩種結果：用滿 12 個月，或第 4 個月停用。這時年繳要在「用滿一年機率至少 70%」才有較低期望成本。基準估計 80% 時，月繳期望成本是 NT$3,120，年繳期望省 NT$240；若你無法誠實地說機率超過 70%，月繳彈性可能比較便宜。
+      </p>
+      <p>
+        可按比例退費、可暫停、可降級或可轉移給家人，都會改變答案；只把契約明確保證的金額放進去。客服口頭說「通常可以處理」不等於可計入的退款。
+      </p>
+
+      <h2>自動續約要另外建立一個檢查點</h2>
+      <p>
+        行政院消費者保護會的電子商務綱領要求自動續約資訊應提示契約期限、收費金額、收款週期與取消方式。訂閱前先截圖保存下次扣款日和續約價，並在到期前留出處理時間。
+      </p>
+      <p>
+        刪除 APP 不代表取消訂閱。應回到當初付款的 Apple ID、Google 帳號或服務網站，關閉自動更新並保存成功畫面。取消後仍要檢查信用卡、電信帳單或行動支付是否繼續扣款。
+      </p>
+
+      <h2>現金流不適合時，便宜也不等於值得</h2>
+      <p>
+        年繳一次拿走 NT$2,880；月繳則保留當下現金。若同一個月還有保險、稅費、學費與其他年費續約，單項折扣可能造成整體現金不足。把方案放進<a href="/zh/tools/subscription-audit/">訂閱支出健檢計算機</a>，一起看未來一年所有定期扣款。
+      </p>
+      <p class="privacy-note">這是一般消費成本估算，不判定個別契約的解除、退費、稅務或法律效力；實際權利以適用法規、平台與契約為準。</p>
+    </>
+  )}
+
+  {locale === 'es' && (
+    <>
+      <p>
+        “Dos meses gratis” compara tarifas, no decisiones. El pago anual convierte doce meses de flexibilidad en un solo cargo. Solo ahorra si superas el mes de equilibrio, no te conviene pausar el servicio y el riesgo de pagar meses sin uso no borra el descuento.
+      </p>
+      <p>
+        Haz dos cuentas. La primera divide el precio anual final entre la cuota mensual. La segunda asigna probabilidades a seguir todo el año o darte de baja antes. Mira también el resultado desfavorable: una opción puede ser mejor en promedio y, aun así, inmovilizar mucho más dinero si cambian tu trabajo, estudios o necesidades familiares.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>9,23 meses significa que el ahorro empieza en la décima cuota</h2>
+      <p>
+        Con 13 € al mes y 120 € al año, nueve mensualidades suman 117 € y todavía cuestan menos que el plan anual. La décima eleva el mensual a 130 € y hace que el anual empiece a ganar. Para un curso de cuatro meses o una herramienta de campaña, pagar por adelantado no compensa aunque la publicidad destaque un 23% de descuento.
+      </p>
+      <p>
+        Usa el precio posterior al periodo gratuito. Si el primer año está rebajado y la renovación sube, analiza cada año por separado. El descuento ya disfrutado no reduce el importe que saldrá de la cuenta en la próxima fecha de cobro.
+      </p>
+
+      <h2>Convierte la incertidumbre en un umbral comprobable</h2>
+      <p>
+        El ejemplo plantea un año completo o una baja después del quinto mes. El anual necesita una probabilidad de uso completo de aproximadamente 60,4% para igualar el coste mensual esperado. Con una estimación del 75%, el mensual alcanza 133,25 € y el anual ahorra 13,25 €; si ocurre la baja temprana, el mensual habría ahorrado 55 €.
+      </p>
+      <p>
+        No existe una probabilidad “correcta” en Internet. Estímala según tu historial: cuánto duraron servicios parecidos, si el uso es estacional, si otra persona puede incluirte en un plan familiar y si el trabajo puede proporcionar la misma licencia. Prueba varios escenarios antes de pagar.
+      </p>
+
+      <h2>Revisa permanencia, preaviso y procedimiento de baja</h2>
+      <p>
+        No confundas periodicidad de cobro con duración contractual. Una cuota mensual puede tener permanencia; un pago anual puede o no admitir reembolso proporcional. El artículo 62 de la ley española de consumidores exige que los contratos de servicios continuados indiquen el procedimiento para ponerles fin y contempla hacerlo en la misma forma en que se contrataron, sin obstáculos desproporcionados.
+      </p>
+      <p>
+        Guarda las condiciones aceptadas, la fecha efectiva de baja y la confirmación. El Centro Europeo del Consumidor en España recomienda revisar expresamente la renovación automática y cancelarla con antelación suficiente. Si cambia el precio de renovación, vuelve a calcular: no renueves por inercia con cifras del año anterior.
+      </p>
+
+      <h2>El ahorro no debe vaciar tu liquidez</h2>
+      <p>
+        Un pago de 120 € hoy puede ser menor que doce cuotas, pero coincide con alquiler, seguros y otras renovaciones. Si adelantar el dinero reduce el colchón para gastos esenciales, la flexibilidad mensual tiene un valor real. Puedes incluir ambos escenarios en la <a href="/en/tools/subscription-audit/">auditoría de suscripciones disponible en inglés</a> y compararlos con el resto de cargos del año.
+      </p>
+      <p class="privacy-note">El cálculo ordena costes de consumo generales. No decide derechos de desistimiento, reembolso, permanencia, impuestos ni la validez de una cláusula concreta.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

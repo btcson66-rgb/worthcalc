@@ -70,7 +70,7 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：63 HTML、31 編輯內容頁、28／145 任務對應與完整版本、5／29 五語完成主題（第 03 題為 3／5）。
 - 發布證據：PR #23 已合併為 `827b511`，GitHub Pages run `29651399324` 的 build、deploy、IndexNow 成功；三語 HTTP 200、canonical、self＋x-default hreflang、schema、市場算例與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap。
 
-## 2026-07-18 第八批（第 03 題 B 段，待發布）
+## 2026-07-18 第八批（第 03 題 B 段，已發布）
 
 - 新增 FR／DE 兩個完整原生頁，使第 03 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
 - FR 以 `paiement fractionné`、`débit différé`、`crédit renouvelable` 與 2026-11-20 新規時間界線撰寫；算例為 720 € 的 3 × 240 € 與 6 × 124 €，同時比較 30 天內 480 € 的短期壓力。
@@ -78,6 +78,15 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 兩語均使用 2026-07-18 當下法律狀態，明確區分 2026-11-20 才適用的新保護規則，不把未生效制度寫成現行權利。
 - 來源採法國經濟部／DGCCRF、德國 Bundesregierung／BMJ／BaFin／Verbraucherzentrale；不引用市場平均費率替使用者下結論。
 - 本批建置目標：65 HTML、33 編輯內容頁、30／145 任務對應與完整版本、6／29 五語完成主題。
+- 發布證據：PR #24 已合併為 `fb57ba5`，GitHub Pages run `29651846181` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、市場算例與 sitemap 線上查核 PASS。
+
+## 2026-07-18 第九批（第 04 題 A 段，待發布）
+
+- 題目 04「月繳 vs 年繳訂閱」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 未建立空殼頁，完成前不發布其 hreflang。
+- 核心模型先算年費除以月費的打平月份，再以「用滿一年機率＋合理的提早停用月份」計算月繳期望成本；同時保留提早停用的最壞情境損失，不用折扣標語代替決策。
+- 原生差異：EN 使用 FTC renewal notice／price change／cancellation proof 消費語境；繁中使用行政院消保會自動續約資訊揭露與「刪除 APP 不等於取消」提醒；ES 使用 `permanencia`、`preaviso` 與消費者法 artículo 62 的終止程序。
+- 三語使用不同幣值、不同月費／年費與不同停用機率；不可按比例退費只在契約確認時才列入，不假設所有市場方案都相同。
+- 本批建置目標：68 HTML、36 編輯內容頁、33／145 任務對應與完整版本、6／29 五語完成主題（第 04 題為 3／5）。
 
 ## 待執行主題
 
@@ -85,8 +94,8 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 |---:|---|---|---|
 | 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; deployed |
 | 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-6 complete; deployed |
-| 03 | Borrowing & True Cost | BNPL vs credit-card installments | phase-8 five-locale complete; release pending |
-| 04 | Subscriptions & Memberships | Monthly vs annual subscription | backlog |
+| 03 | Borrowing & True Cost | BNPL vs credit-card installments | phase-8 complete; deployed |
+| 04 | Subscriptions & Memberships | Monthly vs annual subscription | phase-9 three-locale complete; release pending |
 | 05 | Subscriptions & Memberships | Subscription audit and annual cost | phase-1 complete |
 | 06 | Subscriptions & Memberships | Paid membership break-even | backlog; EN/ZH Costco calculator enriched |
 | 07 | Subscriptions & Memberships | Gym cost per visit | backlog |

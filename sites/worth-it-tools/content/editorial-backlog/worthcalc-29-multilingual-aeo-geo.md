@@ -151,13 +151,22 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：85 HTML、53 編輯內容頁、50／145 任務對應與完整版本、10／29 五語完成主題。
 - 發布證據：PR #32 已合併為 `b04ff20`，GitHub Pages run `29654788932` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、計算器、市場算例與 sitemap 線上查核 PASS，DE 正式頁 390px 互動回歸 PASS。
 
-## 2026-07-19 第十七批（第 10 題 A 段，準備發布）
+## 2026-07-19 第十七批（第 10 題 A 段，已發布）
 
 - 題目 10「回饋上限與真正回饋率」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 不建立空殼頁。
 - 新增頁內回饋上限計算器，不另增公開路由；把指定消費、上限內總回饋、超限回饋、其他合格消費與零回饋消費分段，即時計算總回饋、合格加權率、整期帳單真正回饋率與廣告標示差額。
 - 原生差異：EN 使用 quarterly cap／merchant coding 與 $1,500 類別上限；繁中處理加碼 NT$150 換算 NT$7,500、一般消費、正附卡歸戶、逐筆計點與排除項目；ES 使用 `tope de cashback`、`periodo de liquidación`、`operaciones excluidas` 與 500 € 分段算例。
 - 三語均使用不同幣值、不同回饋率、上限與排除金額；來源採 CFPB、金管會／銀行 2026 官方權益、Banco de España 與西班牙銀行官方說明，不把示範參數冒充市場平均。
 - 本批建置目標：88 HTML、56 編輯內容頁、53／145 任務對應與完整版本、10／29 五語完成主題（第 10 題為 3／5）。
+- 發布證據：PR #33 已合併為 `717aa9b`，GitHub Pages run `29655352466` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self＋x-default hreflang、schema、計算器與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap；繁中正式頁 390px 互動回歸 PASS。
+
+## 2026-07-19 第十八批（第 10 題 B 段，準備發布）
+
+- 新增 FR／DE 兩個完整原生頁，使第 10 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
+- FR 先區分法國 `cash back` 現金提領和本文的 `offre de remboursement`，再處理 inscription、carte enregistrée、dépense éligible、intermédiaire de paiement 與 retour；算例為 31,10 € 回饋、合格率 1,94%、整期 1,78%。
+- DE 區分 Cashback、PAYBACK Punkte、Membership Rewards 與一次性 Gutschrift，並處理 Aktivierung、Tankstellenumsätze、Punktewert、Kartenentgelt；算例為 32,75 €、合格率 1,56%、整期 1,42%。
+- 兩語均使用各自預設值接入回饋上限計算器；來源採 Banque de France／法國 Amex Offers 條款、BaFin／德國 Amex PAYBACK 與費用說明。
+- 本批建置目標：90 HTML、58 編輯內容頁、55／145 任務對應與完整版本、11／29 五語完成主題。
 
 ## 待執行主題
 
@@ -172,7 +181,7 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 07 | Subscriptions & Memberships | Gym cost per visit | phase-14 complete; deployed |
 | 08 | Subscriptions & Memberships | Delivery membership break-even | phase-16 complete; deployed |
 | 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; deployed |
-| 10 | Cards & Rewards | Cashback caps and real reward rate | phase-17 EN/zh-TW/ES ready; FR/DE pending |
+| 10 | Cards & Rewards | Cashback caps and real reward rate | phase-18 five-locale ready; release pending |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; deployed |
 | 12 | Housing & Commuting | Rent-vs-buy break-even year | backlog |
 | 13 | Transport & Vehicle Ownership | EV vs gas total cost | backlog |

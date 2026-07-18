@@ -5,6 +5,11 @@ const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const failures = [];
+const nativeMarkers = {
+  es: ['movimientos bancarios', 'permanencia', '12,99 €'],
+  fr: ['relevés bancaires', 'préavis', '13,99 €'],
+  de: ['Kontoauszug', 'Kündigungsfrist', '11,99 €'],
+};
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -32,6 +37,12 @@ for (const locale of locales) {
   for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
     if (!html.includes(`"@type":"${schemaType}"`)) {
       failures.push(`/${locale}/subscription-creep/ missing ${schemaType} schema`);
+    }
+  }
+
+  if (nativeMarkers[locale]) {
+    for (const marker of nativeMarkers[locale]) {
+      if (!html.includes(marker)) failures.push(`/${locale}/subscription-creep/ missing native-market marker: ${marker}`);
     }
   }
 }

@@ -52,21 +52,30 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置結果：58 HTML、26 編輯內容頁、23／145 任務對應版本、23／145 完整版本、4／29 五語完成主題（第 02 題為 3／5）。
 - 發布證據：PR #21 已合併為 `0c3d171`，GitHub Pages run `29650613641` 的 build、deploy、IndexNow 成功；EN／zh-TW／ES HTTP 200、canonical、self hreflang、schema、市場算例與 sitemap 線上查核 PASS。
 
-## 2026-07-18 第六批（第 02 題 B 段，待發布）
+## 2026-07-18 第六批（第 02 題 B 段，已發布）
 
 - 新增 FR／DE 兩個完整原生頁，使第 02 題成為五語群組；同步把 EN／zh-TW／ES 從自身語言 hreflang 切換為五語＋x-default。
 - FR 以 somme nette、frais de dossier、TAEG、fiche précontractuelle 與法國必要費用口徑說明；完整算例為 `12 000 €`、36 × `360 €`、`480 €` 初期費用使估算年率 `5,18% → 8,10%`。
 - DE 以 Auszahlungsbetrag、Disagio、effektiver Jahreszins、Restschuldversicherung 與消費貸款費用合法性說明；完整算例為 `15.000 €`、48 × `350 €`、`600 €` 初期費用使估算年率 `5,82% → 8,05%`。
 - 來源採法國經濟部／Service-Public、德國 Bundesbank／Verbraucherzentrale；不引用市場平均利率替使用者下結論。
 - 本批建置目標：60 HTML、28 編輯內容頁、25／145 任務對應與完整版本、5／29 五語完成主題。
+- 發布證據：PR #22 已合併為 `32c46e5`，GitHub Pages run `29650975026` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、市場算例與 sitemap 線上查核 PASS。
+
+## 2026-07-18 第七批（第 03 題 A 段，待發布）
+
+- 題目 03「先買後付 vs 信用卡分期」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 未建立空殼頁，完成前不發布其 hreflang。
+- 核心模型不是只比利率：同時計算正常總成本、未來 30 天扣款壓力與一次遲繳的壓力成本，另檢查退貨／爭議期間是否持續扣款。
+- 原生差異：EN 使用 pay-in-four、biweekly cadence、overdraft／NSF 與 CFPB 2024 規則於 2025 撤回的最新狀態；繁中使用應收債權轉讓、非金融特許業務、違約金／遲延利息與金管會 2025 提醒；ES 使用 `compra ahora y paga después`、`pago fraccionado`、`revolving` 與 Banco de España 的付款模式。
+- 三語使用不同幣值與不同時間表；壓力情境費用明確標示為使用者示範輸入，不冒充市場平均或實際方案費率。
+- 本批建置目標：63 HTML、31 編輯內容頁、28／145 任務對應與完整版本、5／29 五語完成主題（第 03 題為 3／5）。
 
 ## 待執行主題
 
 | ID | Cluster | Topic | Status |
 |---:|---|---|---|
 | 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; deployed |
-| 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-6 five-locale complete; release pending |
-| 03 | Borrowing & True Cost | BNPL vs credit-card installments | backlog |
+| 02 | Borrowing & True Cost | Upfront fees and financing cost | phase-6 complete; deployed |
+| 03 | Borrowing & True Cost | BNPL vs credit-card installments | phase-7 EN/zh-TW/ES complete; release pending |
 | 04 | Subscriptions & Memberships | Monthly vs annual subscription | backlog |
 | 05 | Subscriptions & Memberships | Subscription audit and annual cost | phase-1 complete |
 | 06 | Subscriptions & Memberships | Paid membership break-even | backlog; EN/ZH Costco calculator enriched |

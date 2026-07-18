@@ -1,0 +1,237 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../consts';
+import { bnplCardGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'en' | 'zh' | 'es';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  en: {
+    title: 'Buy now, pay later vs credit-card installments: compare total cost and timing',
+    description: 'Compare BNPL and card installments using total payments, the next 30 days of cash flow, late-fee stress, refunds, and current U.S. consumer guidance.',
+    faq: [
+      { question: 'Is buy now, pay later cheaper than a credit-card installment plan?', answer: 'Only if its full scheduled cost and realistic missed-payment scenario are lower for your exact offers. An interest-free BNPL plan can cost less on time but demand more cash in the first few weeks.' },
+      { question: 'What is the most important difference between pay-in-four and monthly card installments?', answer: 'Payment cadence. Pay-in-four commonly collects one payment at checkout and the rest over a short period, while a card plan may use monthly statement cycles. Compare dollars due by date, not just the number of installments.' },
+      { question: 'Can a zero-interest BNPL plan still charge fees?', answer: 'Yes. CFPB consumer guidance says many products may charge late fees, and an automatic debit can also trigger an overdraft or non-sufficient-funds fee at the consumer’s bank. Terms vary by provider.' },
+      { question: 'Does BNPL have the same dispute protection as a credit card?', answer: 'Do not assume so. The CFPB withdrew its 2024 BNPL interpretive rule in May 2025. Read the current provider agreement, applicable law, and the merchant’s return process before choosing.' },
+      { question: 'Should card rewards reduce the financing cost?', answer: 'Only include rewards that are certain, uncapped, and earned without paying interest or increasing spending. A reward does not rescue an unaffordable purchase or a balance that rolls into revolving credit.' },
+    ],
+  },
+  zh: {
+    title: '先買後付 vs 信用卡分期：用總成本與扣款時間比較',
+    description: '比較 BNPL 與信用卡分期的總付款、30 天現金壓力、違約金與遲延利息、退貨流程及台灣金管會最新提醒。',
+    faq: [
+      { question: '先買後付一定比信用卡分期便宜嗎？', answer: '不一定。正常履約可能零利息，但仍要看是否有手續費、首期何時扣、一次遲繳成本與同月其他分期。用完整契約金額比較，不看付款按鈕上的「0」。' },
+      { question: '台灣的 BNPL 算金融商品嗎？', answer: '金管會 2025 年說明，BNPL 是買賣衍生應收債權轉讓後的分期還款服務，非金融特許業務；但本質仍是借貸，可能有違約金、遲延利息及其他費用。' },
+      { question: '為什麼要另外算 30 天扣款壓力？', answer: '因為首期可能當場付款，下一期又很快到期。總額雖低，短期扣款可能高於月繳信用卡分期；若帳戶餘額不足，風險就出現在總成本之前。' },
+      { question: '信用卡分期和循環信用一樣嗎？', answer: '不一樣。信用卡單筆分期通常有約定期數與每期金額；循環信用則會依未清償餘額計息。若未按信用卡帳單繳足應繳款，仍須看契約如何處理利息與違約。' },
+      { question: '退貨時可以直接停止 BNPL 扣款嗎？', answer: '不要自行假設。先依商家與 BNPL 業者流程提出取消或爭議，確認退貨完成前期款是否照扣、退款退到哪裡，以及已收費用是否退還。' },
+    ],
+  },
+  es: {
+    title: 'BNPL frente a cuotas de tarjeta: compara coste total, calendario e impago',
+    description: 'Compara «compra ahora y paga después» y tarjeta por precio total, pagos de 30 días, demora, devoluciones y modalidades explicadas por Banco de España.',
+    faq: [
+      { question: '¿El BNPL es siempre más barato que fraccionar con tarjeta?', answer: 'No. Puede no cobrar intereses si se paga puntualmente, pero hay que sumar comisiones, calendario, impago y el resto de cuotas activas. La oferta concreta decide el resultado.' },
+      { question: '¿Qué riesgo tiene una primera cuota inmediata?', answer: 'Reduce el alivio real del aplazamiento. Si la primera cuota se carga al comprar y la segunda vence dentro del mismo mes, la salida inicial puede duplicar una cuota mensual de tarjeta.' },
+      { question: '¿Banco de España considera el BNPL un crédito?', answer: 'Su guía describe un crédito concedido al comprar para fraccionar y aplazar el pago. Puede tener o no intereses y comisiones; el impago puede añadir intereses de demora y comisiones.' },
+      { question: '¿Pago aplazado de tarjeta significa siempre cuotas fijas?', answer: 'No. Banco de España distingue pago total a fin de mes y pago aplazado revolving, además de modalidades por compra. Comprueba importe, tipo, comisión y fecha final antes de comparar.' },
+      { question: '¿Qué ocurre si devuelvo la compra?', answer: 'Depende de la relación entre comercio, financiador y emisor. Confirma quién cancela el crédito, si las cuotas siguen durante la reclamación, el plazo de abono y qué comisiones no se reembolsan.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['en', 'zh', 'es'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = bnplCardGuides[locale];
+if (!guide) throw new Error(`Missing BNPL vs card guide for ${locale}`);
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={[locale]}
+>
+  {locale === 'en' && (
+    <>
+      <p>
+        The checkout screen makes BNPL and a card installment plan look like two versions of the same promise: take the item now and split the bill. They can create very different cash-flow pressure. The useful comparison is not “four payments or six?” It is how much leaves your accounts, on which dates, under normal payment and after one realistic mistake.
+      </p>
+      <p>
+        Start from the cash price. Add all mandatory payments and fees, then map every due date across the next 30 days. A plan that costs $24 less in total can still be the riskier choice if half the purchase price is collected before the next paycheck. Conversely, a longer card plan can ease the first month while charging a higher total or exposing an unpaid balance to revolving interest.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Compare a dated payment calendar, not the marketing label</h2>
+      <p>
+        “Pay in four” generally describes short, zero-interest installments, but the exact first-payment and repayment cadence belong to the provider agreement. A card can offer full payment at the end of the statement cycle, fixed installments for one purchase, a promotional plan, or a revolving balance. Write each actual debit on a calendar before comparing them.
+      </p>
+      <p>
+        For the $600 example, the BNPL schedule takes $150 at checkout and another $150 on day 14. That means $300 has left the account before day 15. The six-payment card illustration takes $104 per monthly cycle. BNPL wins on on-time total cost; the card wins on near-term payment load. Neither advantage answers whether the item itself is worth $600.
+      </p>
+
+      <h2>Keep the normal case and missed-payment case separate</h2>
+      <p>
+        In the normal case, include only charges required when every payment arrives on time: installment interest, plan fees, mandatory card or account fees, and any cash discount lost. Then build a stress case using the late fee in the agreement, possible bank overdraft or NSF charge, default interest, and collections consequences. Do not insert an internet average—the provider and bank schedules are the relevant inputs.
+      </p>
+      <p>
+        CFPB consumer guidance notes that many BNPL products can charge late fees and that automatic repayment can also cause an overdraft or non-sufficient-funds fee. Missed payments may lead to account blocking, collection, and possible credit-report effects depending on reporting. A plan advertised with no interest therefore still needs a failure-cost row.
+      </p>
+
+      <h2>Audit every active plan in the same 30-day window</h2>
+      <p>
+        Checkout approval measures the transaction, not the combined burden of rent, utilities, card balances, and BNPL plans from other providers. CFPB’s 2025 research used matched records in part because BNPL obligations have historically been less visible in nationwide credit files. For a household decision, make the invisible schedule visible yourself.
+      </p>
+      <p>
+        List all payments due before the next two paydays. Include subscriptions and annual renewals that land in the same window. If the new plan consumes the cash buffer needed for essentials or an emergency, its nominally lower financing cost does not make it safer.
+      </p>
+
+      <h2>Returns and disputes can change the cash-flow result</h2>
+      <p>
+        A return involves the merchant and may also involve the BNPL provider or card issuer. Before choosing a plan, read who must receive the dispute, whether scheduled payments continue during investigation, how a partial refund is allocated, and whether a plan fee is refundable. Keep enough cash for scheduled debits until cancellation is confirmed in writing.
+      </p>
+      <p>
+        Regulatory claims also need a date. The CFPB states that it withdrew the 2024 BNPL interpretive rule on May 12, 2025. This guide therefore does not promise that BNPL carries identical federal protections to a conventional credit card. Contract terms, current law, and the facts of the purchase control.
+      </p>
+
+      <h2>Use a decision rule that survives checkout pressure</h2>
+      <p>
+        First ask whether you would buy the item at the cash price today. If not, financing does not repair the value decision. If yes, reject any offer whose first-30-day load breaks the budget buffer. Among the remaining offers, compare normal total cost, one-miss stress cost, refund process, and a clearly defined payoff date.
+      </p>
+      <p>
+        If a card offer advertises “0%,” run its exact cash price and payment schedule through the <a href="/en/zero-interest-installments-truth/">0% installment guide</a>. A lost cash discount or mandatory plan charge can create a real annualized cost even when the stated interest rate is zero.
+      </p>
+
+      <FAQ items={article.faq} />
+    </>
+  )}
+
+  {locale === 'zh' && (
+    <>
+      <p>
+        結帳頁把先買後付與信用卡分期都包裝成「把大筆金額拆小」，但真正差異在扣款時點、契約對象與遲繳後果。只比較每期數字，會忽略第一期可能立即扣款，也會漏掉同一月份已經存在的其他 BNPL 與信用卡分期。
+      </p>
+      <p>
+        實用做法是先寫下商品一次付清價格，再把未來 30 天所有到期金額排在日曆上。接著分成正常履約與一次遲繳兩個情境。這樣才能看出「總額少 NT$300」是否值得承擔「本月先付 NT$6,000」的現金壓力。
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>先買後付在台灣不是普通付款按鈕</h2>
+      <p>
+        金管會銀行局 2025 年提醒，BNPL 是商家把對消費者的應收債權轉讓給服務業者後，由業者評估財務信用並提供分期還款。它不是金融特許業務，契約關係依民法及約定處理；但服務本質仍是借貸，可能產生違約金、遲延利息及其他費用。
+      </p>
+      <p>
+        因此，不要只看「零利率」四個字。把總價款、期數、每期金額、首期日期、違約金、遲延利息、催收、提前清償與退貨流程全部抄進比較表。若業者沒有清楚說明，先不要按下確認。
+      </p>
+
+      <h2>信用卡要分清單筆分期、帳單分期與循環信用</h2>
+      <p>
+        信用卡可在交易時選單筆分期，也可能在帳單後申請分期；費率、手續費、入帳時間與回饋資格不一定相同。循環信用則是當期沒有繳清後，依契約對未清償餘額計息。不能拿「每月最低應繳」當成固定分期月付，也不能假設一定有結清日期。
+      </p>
+      <p>
+        比較時用銀行正式揭露的每期金額、總費用年百分率或相關費率、總付款與期數。若分期會失去現金折扣、紅利或通路優惠，把損失列成成本；若回饋有上限、需登錄或可能因退貨取消，就不要先當成現金扣除。
+      </p>
+
+      <h2>把 30 天內所有扣款加總</h2>
+      <p>
+        BNPL 的總成本可能低，但首期常在交易當下發生，第二期也可能在下一次薪水前到期。把新方案和房租、水電、訂閱、保費、既有卡費與其他 BNPL 一起排列。30 天內合計若吃掉緊急預備金，方案就不適合當下現金流。
+      </p>
+      <p>
+        這個檢查也能避免多平台分期被切碎後失真：單看每筆都是 NT$1,000 或 NT$3,000，加總後卻可能超過可支配所得。核准不等於負擔得起，零利率也不等於零風險。
+      </p>
+
+      <h2>退貨前不要自行停止扣款</h2>
+      <p>
+        商品退貨與融資取消可能是兩段流程。先確認由商家還是 BNPL 業者處理、退貨期間期款是否照扣、退款退到原付款工具或抵後續期款，以及違約金或手續費是否可退。取得書面或 App 狀態確認前，帳戶仍需保留足夠扣款金額。
+      </p>
+      <p>
+        信用卡也要依發卡銀行爭議與退款規則處理，不能因為已退貨就自行少繳帳單。若款項尚未沖回，先詢問銀行正確繳款方式，避免原本的商品爭議又變成信用違約。
+      </p>
+
+      <h2>用能抵抗結帳衝動的決策順序</h2>
+      <p>
+        第一問是：今天若只能一次付清，這件商品仍值得買嗎？若答案是否定，分期只是把「不值得」延後。若仍值得，再淘汰 30 天扣款壓力超出預算的方案，最後比較正常總成本、一次遲繳成本、退貨處理與確定結清日。
+      </p>
+      <p>
+        若信用卡分期標示 0 利率，請再用 <a href="/zh/zero-interest-installments-truth/">0 利率分期真實年率指南</a> 檢查現金價差與必要費用。相同總價、不同扣款時間，也需要分開檢查現金流。
+      </p>
+
+      <FAQ items={article.faq} />
+    </>
+  )}
+
+  {locale === 'es' && (
+    <>
+      <p>
+        «Compra ahora y paga después» y «pago fraccionado» parecen la misma solución en la pantalla de compra. No lo son necesariamente. Cambian el financiador, la primera fecha de cargo, la duración, las comisiones y el tratamiento del impago. La comparación útil convierte cada oferta en una lista de euros y fechas.
+      </p>
+      <p>
+        Parte del precio al contado, suma todos los pagos obligatorios y agrupa lo que vencerá durante los próximos 30 días. Después repite el cálculo con una sola incidencia realista. Así se ve si ahorrar 12 € en el caso normal compensa una salida de 240 € durante el primer mes o un contrato menos claro para devoluciones.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>El calendario pesa tanto como el coste total</h2>
+      <p>
+        Banco de España describe el BNPL como un crédito concedido al comprar para fraccionar y aplazar el pago. Puede existir en comercio físico u online y puede tener o no intereses y comisiones. La primera cuota puede cargarse al contratar; otras ofertas empiezan después. Solo la información precontractual permite saberlo.
+      </p>
+      <p>
+        En el ejemplo, el BNPL suma 480 € frente a 492 € de la tarjeta. Sin embargo, 120 € salen al comprar y otros 120 € pueden vencer dentro del primer mes. La tarjeta reduce esa carga inicial a 82 € por ciclo, pero prolonga la obligación seis meses. Compara ambos ejes: total pagado y velocidad de pago.
+      </p>
+
+      <h2>No confundas cuota fija con pago revolving</h2>
+      <p>
+        Las tarjetas de crédito pueden permitir pago total a fin de mes, fraccionamiento de una compra o pago aplazado revolving. Banco de España advierte que las denominaciones comerciales varían: «cuota flexible», «cuota fácil» o «tarifa plana» no explican por sí solas si existe una fecha final ni cuánto capital se amortiza.
+      </p>
+      <p>
+        Para una comparación cerrada necesitas número de cuotas, importe, TIN o tipo aplicado, TAE, comisiones y total adeudado. Si el saldo vuelve a formar parte del crédito disponible o la cuota puede mantenerse mientras se alarga el plazo, modela una deuda revolving, no seis cuotas fijas.
+      </p>
+
+      <h2>Calcula un impago sin inventar una tarifa media</h2>
+      <p>
+        Banco de España señala que el impago de BNPL puede añadir intereses de demora y comisiones. Copia los importes de la oferta concreta y prueba una incidencia. Haz lo mismo con la tarjeta: comisión, interés y efecto de no abonar la cantidad exigida. Mantén este estrés separado del coste normal para no mezclar una oferta barata con un caso de incumplimiento.
+      </p>
+      <p>
+        La tabla usa 10 € y 8 € solo para mostrar el punto de cambio: una pequeña incidencia puede borrar la ventaja de 12 €. No son precios medios ni una predicción. Sustitúyelos antes de decidir y comprueba si el contrato contempla recobro o vencimiento anticipado.
+      </p>
+
+      <h2>Suma todas las compras aplazadas del mes</h2>
+      <p>
+        El riesgo no aparece solo en una compra. Varias operaciones pequeñas pueden crear una falsa sensación de ahorro y comprometer ingresos futuros, un riesgo que también destaca Banco de España. Reúne en una sola tabla BNPL, tarjeta, alquiler, suministros, seguros y suscripciones que vencen antes de las próximas dos nóminas.
+      </p>
+      <p>
+        Si el nuevo calendario elimina el margen para alimentación, vivienda o una avería, descártalo aunque no cobre intereses. La aprobación automática no es un análisis completo de tu presupuesto y la cuota pequeña no reduce el precio del producto.
+      </p>
+
+      <h2>Revisa devolución, reclamación y cancelación del crédito</h2>
+      <p>
+        Antes de financiar, identifica comercio, prestamista y emisor de tarjeta. Pregunta quién cancela el crédito si devuelves el bien, si las cuotas siguen durante la reclamación, cómo se reparte un reembolso parcial y qué comisión no se devuelve. Guarda justificantes y no bloquees cargos por tu cuenta sin seguir el procedimiento contractual.
+      </p>
+      <p>
+        Usa una regla final sencilla: compra solo si pagarías el precio al contado, elimina las opciones que rompan el presupuesto de 30 días y compara después coste normal, un impago, fecha final y proceso de devolución. Para una oferta al 0 %, revisa también la <a href="/es/zero-interest-installments-truth/">guía del coste real de las cuotas sin intereses</a>.
+      </p>
+
+      <FAQ items={article.faq} />
+    </>
+  )}
+</ArticleLayout>

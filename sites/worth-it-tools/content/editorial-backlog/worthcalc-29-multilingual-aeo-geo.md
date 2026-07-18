@@ -17,18 +17,27 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 高價值既有頁：Costco membership 與 commute cost 的 EN／zh-TW 計算器補上 direct answer、input checklist、formula、worked example、sensitivity table、limitations、sources、last verified。
 - 選題證據：2026-W29 GSC 顯示 Costco 計算器 99 impressions／2 clicks／rank 10.1；commute-cost 兩種尾斜線 URL 合計 49 impressions、rank 約 33–34。
 
-## 2026-07-18 第二批（PR 待核准）
+## 2026-07-18 第二批（已發布）
 
 - 題目 01「0% 分期的真實年率」：EN、zh-TW 舊頁補成完整 brief；新增 ES、FR、DE 三個原生版本，正好用滿本批 3 個公開頁上限。
 - 五語皆提供 IRR 現金流公式、3% 平面費率在 6／12／24 期的敏感度、法定 APR／TAE／TAEG 與估算值的邊界、官方或公共消費者來源。
 - 原生差異：西班牙處理 `precio al contado`、`comisión de apertura` 與 TAE；法國處理 `prix comptant`、`frais de dossier`、首期即付與 TAEG；德國處理 `Barpreis`、附帶 `Rahmenkredit` 與歐洲標準消費信貸資訊。
 - 本批完成後稽核口徑：49 HTML、17 編輯內容頁、14／145 任務對應版本、10／145 完整版本、2／29 五語完成主題。
+- 發布證據：PR #18 已合併為 `644bb38`，GitHub Pages run `29649026707` 成功；五語頁、canonical、hreflang、sitemap 與 Article／FAQPage／BreadcrumbList 結構化資料均已線上查核。
+
+## 2026-07-18 第三批
+
+- 題目 09「信用卡年費回本」：EN、zh-TW 既有頁重寫成完整決策頁；新增 ES、FR、DE 三個原生版本，正好用滿本批 3 個公開頁上限。
+- 核心修正：不用廣告總回饋率，而以「淨年費 ÷ 相對免年費替代卡的增量回饋率」計算；另行處理回饋上限、確定可用權益、首年迎新禮、續卡與循環利息。
+- 原生差異：繁中處理一般消費、登錄、刷滿免年費與回饋上限；西班牙處理 `comisión de emisión o mantenimiento` 與 Banco de España 比較資料；法國處理 `cotisation annuelle`、標準化費用文件與官方費率比較器；德國處理 `Jahresgebühr`、BaFin Kontenvergleich 與卡片額外費用。
+- 五語均使用各自幣值與不同完整算例，來源採 CFPB、台灣金管會、西班牙央行、法國經濟部、BaFin／Verbraucherzentrale 等官方或公共消費者資料。
+- 本批完成後稽核口徑：52 HTML、20 編輯內容頁、17／145 任務對應版本、15／145 完整版本、3／29 五語完成主題。
 
 ## 待執行主題
 
 | ID | Cluster | Topic | Status |
 |---:|---|---|---|
-| 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; PR pending |
+| 01 | Borrowing & True Cost | Real APR of a 0% installment plan | phase-2 complete; deployed |
 | 02 | Borrowing & True Cost | Upfront fees and financing cost | backlog |
 | 03 | Borrowing & True Cost | BNPL vs credit-card installments | backlog |
 | 04 | Subscriptions & Memberships | Monthly vs annual subscription | backlog |
@@ -36,7 +45,7 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 06 | Subscriptions & Memberships | Paid membership break-even | backlog; EN/ZH Costco calculator enriched |
 | 07 | Subscriptions & Memberships | Gym cost per visit | backlog |
 | 08 | Subscriptions & Memberships | Delivery membership break-even | backlog |
-| 09 | Cards & Rewards | Credit-card annual-fee break-even | backlog |
+| 09 | Cards & Rewards | Credit-card annual-fee break-even | phase-3 complete; release pending |
 | 10 | Cards & Rewards | Cashback caps and real reward rate | backlog |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | backlog |
 | 12 | Housing & Commuting | Rent-vs-buy break-even year | backlog |

@@ -1,0 +1,202 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import DecisionGuide from '../../components/DecisionGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import { LOCALES, type Locale } from '../../consts';
+import { annualFeeGuides } from '../../data/decisionGuides';
+import type { FaqItem } from '../../lib/seo';
+
+type EditorialLocale = 'es' | 'fr' | 'de';
+
+interface ArticleCopy {
+  title: string;
+  description: string;
+  faq: FaqItem[];
+}
+
+const articles: Record<EditorialLocale, ArticleCopy> = {
+  es: {
+    title: 'Cuánto gastar para compensar la cuota anual de una tarjeta',
+    description: 'Calcula el gasto necesario para recuperar la cuota anual de una tarjeta con cashback incremental, topes, ventajas reales y una alternativa sin cuota.',
+    faq: [
+      { question: '¿Cómo calculo cuánto debo gastar para compensar la cuota anual?', answer: 'Divide la cuota neta entre la diferencia de recompensa frente a la tarjeta sin cuota que usarías. Una cuota de 60 € y una ventaja real de 1 punto porcentual exigen 6.000 € de gasto elegible al año.' },
+      { question: '¿Debo comparar el cashback con cero?', answer: 'No si tienes una alternativa gratuita que también devuelve dinero o puntos. Esa recompensa que dejarías de obtener es un coste de oportunidad y debe restarse del porcentaje de la tarjeta con cuota.' },
+      { question: '¿La bonificación de bienvenida cuenta para el punto de equilibrio?', answer: 'Solo en el cálculo del primer año y únicamente si alcanzas el mínimo con compras ya previstas. Para decidir la renovación, elimina por completo la bonificación.' },
+      { question: '¿Qué ocurre si el cashback tiene un máximo anual?', answer: 'Compara primero el cashback adicional máximo con la cuota neta. Si el tope es menor, no existe un gasto que permita recuperar la cuota solo con compras.' },
+      { question: '¿La fórmula sirve si pago la tarjeta a plazos?', answer: 'La fórmula presupone pago total sin intereses. Si aplazas el saldo, calcula por separado intereses y comisiones, porque pueden superar con facilidad la recompensa obtenida.' },
+    ],
+  },
+  fr: {
+    title: 'Quel montant dépenser pour amortir la cotisation annuelle d’une carte ?',
+    description: 'Calculez le seuil de dépenses d’une carte avec cotisation en comparant cashback supplémentaire, plafonds, avantages utilisés et carte gratuite.',
+    faq: [
+      { question: 'Comment calculer les dépenses nécessaires pour amortir une cotisation ?', answer: 'Divisez la cotisation nette par l’écart de récompense avec la carte sans cotisation que vous utiliseriez. Une cotisation de 54 € et un avantage de 1 point nécessitent 5 400 € de dépenses éligibles par an.' },
+      { question: 'Un cashback supérieur suffit-il à rendre la carte rentable ?', answer: 'Non. Il faut comparer le gain supplémentaire, les plafonds et les exclusions à la cotisation. Le taux publicitaire appliqué à toutes les dépenses surestime souvent le résultat.' },
+      { question: 'Puis-je déduire les assurances et l’accès aux salons ?', answer: 'Uniquement à hauteur de ce que vous auriez réellement payé pour une prestation équivalente et que vous êtes presque certain d’utiliser. Une valeur catalogue non utilisée ne réduit pas votre coût.' },
+      { question: 'Comment traiter une prime de bienvenue ?', answer: 'Ajoutez-la au scénario de première année si les achats étaient déjà prévus. Supprimez-la du calcul de renouvellement, car elle ne se répète pas alors que la cotisation revient.' },
+      { question: 'Le calcul reste-t-il valable avec un crédit renouvelable ?', answer: 'Le modèle suppose le règlement intégral du relevé. Les agios et frais du crédit doivent être calculés séparément et peuvent annuler plusieurs années de cashback.' },
+    ],
+  },
+  de: {
+    title: 'Wie viel Umsatz gleicht die Jahresgebühr einer Kreditkarte aus?',
+    description: 'Berechnen Sie den Schwellenumsatz einer Kreditkarte mit Jahresgebühr anhand von Mehr-Cashback, Deckelung, realem Leistungswert und kostenloser Alternative.',
+    faq: [
+      { question: 'Wie berechne ich den Umsatz für den Ausgleich der Jahresgebühr?', answer: 'Teilen Sie die Nettogebühr durch die zusätzliche Vergütung gegenüber der kostenlosen Alternative. Bei 72 € Gebühr und 0,75 Prozentpunkten Mehr-Cashback sind 9.600 € berechtigter Jahresumsatz nötig.' },
+      { question: 'Warum darf ich den vollen Cashback-Satz nicht verwenden?', answer: 'Weil eine gebührenfreie Karte ebenfalls vergüten kann. Für die Entscheidung zählt nur der Mehrertrag, den die kostenpflichtige Karte gegenüber der realistischen Alternative erzeugt.' },
+      { question: 'Zählt ein Willkommensbonus zum Break-even?', answer: 'Nur in einer getrennten Rechnung für das erste Jahr und nur ohne zusätzliche Käufe. Für die Verlängerung wird der einmalige Bonus auf null gesetzt.' },
+      { question: 'Was bedeutet eine Cashback-Deckelung für die Rechnung?', answer: 'Liegt der maximal mögliche Mehr-Cashback unter der Nettogebühr, gibt es keinen reinen Umsatz-Break-even. Mehr Ausgaben nach Erreichen der Grenze ändern das Ergebnis nicht.' },
+      { question: 'Gilt die Rechnung bei Teilzahlung?', answer: 'Sie setzt den vollständigen Ausgleich der Monatsabrechnung voraus. Sollzinsen und Gebühren einer Teilzahlung müssen separat berücksichtigt werden und können den Bonus deutlich übersteigen.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return (['es', 'fr', 'de'] as EditorialLocale[]).map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: EditorialLocale };
+const article = articles[locale];
+const guide = annualFeeGuides[locale];
+---
+
+<ArticleLayout
+  title={article.title}
+  description={article.description}
+  locale={locale as Locale}
+  updated="2026-07-18"
+  alternateLocales={LOCALES}
+>
+  {locale === 'es' && (
+    <>
+      <p>
+        La pregunta no es si el cashback bruto supera la cuota anual, sino cuánto valor añade la tarjeta frente a la opción sin cuota que realmente tendrías en la cartera. Si una tarjeta devuelve el 1,5 % y la alternativa gratuita el 0,5 %, cada 100 € de compra crean solo 1 € adicional. Usar el 1,5 % completo rebajaría artificialmente el gasto necesario para recuperar la comisión.
+      </p>
+      <p>
+        En España conviene partir de la comisión de emisión o mantenimiento que figura en el contrato y revisar el folleto de tarifas. El Banco de España recuerda que el mantenimiento suele cobrarse anualmente y ofrece herramientas para comparar comisiones. Después hay que añadir las condiciones particulares del programa de puntos o devolución, que pueden cambiar durante la renovación.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Compara dos tarjetas con el mismo patrón de gasto</h2>
+      <p>
+        No apliques el porcentaje destacado a todo el extracto. Separa alimentación, combustible, viajes y resto de compras según las categorías del programa. Excluye retiradas, transferencias, recargas u operaciones que las condiciones no consideren compras elegibles. Repite el cálculo con la tarjeta sin cuota y resta ambos resultados.
+      </p>
+      <p>
+        Por ejemplo, 4.000 € de gasto elegible al 1,5 % producen 60 €. La alternativa al 0,5 % habría generado 20 €, de modo que la mejora real es 40 €. Con una cuota de 60 €, todavía faltan 20 € para llegar al equilibrio aunque la recompensa bruta coincida con la comisión.
+      </p>
+
+      <h2>Convierte las ventajas en ahorro real, no en precio de catálogo</h2>
+      <p>
+        Un seguro de viaje, acceso a salas o descuento en alquiler de vehículos solo reduce la cuota neta si sustituye algo que ibas a pagar. Si nunca contratarías esa cobertura o el servicio exige reservar a un precio mayor, su valor personal puede ser cero. Anota primero las ventajas seguras y deja las ocasionales para un escenario optimista separado.
+      </p>
+      <p>
+        Haz también dos columnas: primer año y renovación. La promoción de bienvenida puede mejorar el primer año cuando el mínimo se alcanza con compras previstas y el saldo se paga por completo. En la renovación, esa promoción desaparece; usa la nueva cuota y únicamente las ventajas que se repiten.
+      </p>
+
+      <h2>Un tope de devolución puede eliminar el punto de equilibrio</h2>
+      <p>
+        Si la devolución adicional no puede superar 50 € y la cuota neta es 60 €, no existe una cifra de gasto que cierre la diferencia. Comprueba límites mensuales, campañas que requieren inscripción, fechas de caducidad y mínimos de canje. Cuando se alcanza el tope, cada euro posterior deja de acercarte al equilibrio.
+      </p>
+      <p>
+        Evita además crear compras para completar una promoción. Gastar 100 € innecesarios para recibir 5 € no es ahorrar 5 €, sino perder 95 €. La fórmula solo admite consumo que ya estaba previsto y que puedes pagar íntegramente al vencimiento.
+      </p>
+
+      <h2>La cuota y el coste del crédito son decisiones distintas</h2>
+      <p>
+        El análisis de recompensas presupone que no se generan intereses. Si eliges pago aplazado, compara la TAE, la cuota mensual, el plazo y el coste total por separado. Una tarjeta puede superar el umbral de cashback y seguir siendo cara como financiación. El resultado de WorthCalc es una estimación educativa, no una recomendación de producto.
+      </p>
+      <p class="privacy-note">Los importes introducidos en el calculador se procesan en el navegador. Confirma comisiones, exclusiones, límites e intereses en la documentación vigente de la entidad.</p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p>
+        Pour savoir si une carte avec cotisation est rentable, ne comparez pas la cotisation au cashback brut. Comparez-la au gain que vous n’auriez pas obtenu avec une carte sans cotisation. Une carte à 1,5 % face à une carte gratuite à 0,5 % n’ajoute qu’un point, soit 1 € pour 100 € de dépenses éligibles.
+      </p>
+      <p>
+        En France, commencez par la cotisation réellement facturée et le document d’information tarifaire de la banque. Le comparateur public des tarifs bancaires permet de confronter le prix des cartes, tandis que les règles de cashback, plafonds et exclusions restent celles de chaque établissement. Une brochure ancienne ne suffit pas pour décider d’un renouvellement.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Mesurer le gain supplémentaire sur vos dépenses habituelles</h2>
+      <p>
+        Répartissez les achats par catégorie au lieu d’appliquer le meilleur taux à tout le budget. Une offre à 3 % sur les transports et 0,5 % ailleurs doit être pondérée avec vos montants réels. Faites le même travail pour l’alternative sans cotisation, puis soustrayez les récompenses annuelles.
+      </p>
+      <p>
+        Avec 3 600 € de dépenses éligibles, une carte à 1,5 % verse 54 €. L’alternative à 0,5 % aurait versé 18 €. La carte payante n’a donc créé que 36 € de valeur supplémentaire : face à une cotisation de 54 €, elle reste déficitaire de 18 € malgré un cashback brut égal à la cotisation.
+      </p>
+
+      <h2>Ne déduire que les avantages qui remplacent une vraie dépense</h2>
+      <p>
+        Assurance voyage, accès aux salons, remise chez un partenaire ou crédit mensuel n’ont pas automatiquement leur valeur affichée. Retenez le prix que vous auriez accepté de payer pour un service équivalent. Une prestation jamais utilisée ou obtenue au prix d’une réservation plus chère ne réduit pas votre coût personnel.
+      </p>
+      <p>
+        Séparez la première année du renouvellement. Une prime de bienvenue entre dans le premier scénario lorsque son seuil correspond à des achats déjà programmés. Elle disparaît ensuite. Pour l’année suivante, reprenez la cotisation actualisée, les avantages récurrents et le barème de récompense en vigueur.
+      </p>
+
+      <h2>Tester les plafonds avant de chercher un seuil de dépenses</h2>
+      <p>
+        Un cashback supplémentaire plafonné à 45 € ne peut pas amortir seul une cotisation nette de 54 €. Vérifiez si le plafond est mensuel ou annuel, si une inscription est requise, si certains commerçants sont exclus et si les gains expirent. Après le plafond, augmenter les achats ne rapproche plus du seuil.
+      </p>
+      <p>
+        Le calcul exclut aussi toute dépense créée pour débloquer un bonus. Acheter un objet inutile de 80 € pour recevoir 4 € de cashback dégrade le budget de 76 €. Seules les dépenses déjà prévues et payables intégralement ont leur place dans le modèle de rentabilité.
+      </p>
+
+      <h2>Séparer la récompense du coût d’un crédit</h2>
+      <p>
+        Ce seuil suppose le règlement total du relevé. Si la carte utilise un crédit renouvelable ou un paiement fractionné, calculez le TAEG, les agios et la durée indépendamment. Une carte peut franchir le seuil de cashback tout en restant coûteuse comme moyen de financement. WorthCalc fournit un cadre pédagogique, pas un conseil financier personnalisé.
+      </p>
+      <p class="privacy-note">Les montants saisis dans le calculateur restent dans votre navigateur. Vérifiez la cotisation, les plafonds, les exclusions et les frais actuels auprès de l’établissement.</p>
+    </>
+  )}
+
+  {locale === 'de' && (
+    <>
+      <p>
+        Entscheidend ist nicht, ob der gesamte Cashback die Jahresgebühr erreicht. Entscheidend ist der Mehrertrag gegenüber der kostenlosen Karte, die Sie sonst verwenden würden. Vergütet die Gebührenkarte 1 % und die Alternative 0,25 %, entstehen je 100 € berechtigtem Umsatz nur 0,75 € zusätzlicher Wert.
+      </p>
+      <p>
+        Prüfen Sie in Deutschland zuerst das Preis- und Leistungsverzeichnis sowie die Gebühr bei der nächsten Verlängerung. Der neutrale BaFin-Kontenvergleich zeigt, ob Kreditkarten im Kontomodell enthalten sind oder ein zusätzliches Entgelt kosten. Bonusbedingungen, Deckelungen und Ausschlüsse müssen anschließend direkt beim Anbieter kontrolliert werden.
+      </p>
+
+      <DecisionGuide content={guide} />
+
+      <h2>Gebührenkarte und kostenlose Alternative gleich behandeln</h2>
+      <p>
+        Ordnen Sie Ihre ohnehin geplanten Ausgaben den tatsächlichen Bonuskategorien zu. Ein hoher Satz für Reisen darf nicht auf Lebensmittel, Miete oder ausgeschlossene Zahlungsarten übertragen werden. Berechnen Sie den Jahresertrag beider Karten mit genau demselben Warenkorb und bilden Sie erst danach die Differenz.
+      </p>
+      <p>
+        Bei 6.000 € berechtigtem Umsatz liefert die 1-%-Karte 60 €, die kostenlose 0,25-%-Alternative 15 €. Der Mehrwert beträgt somit 45 €. Trotz 60 € Brutto-Cashback fehlen bei 72 € Jahresgebühr noch 27 € zum Break-even. Der Vergleich mit null Vergütung hätte das Ergebnis fälschlich positiv dargestellt.
+      </p>
+
+      <h2>Versicherungen und Guthaben nur zum Nutzwert ansetzen</h2>
+      <p>
+        Reiseversicherung, Mietwagenstatus, Loungezugang oder monatliche Guthaben senken die Nettogebühr nur, wenn sie eine geplante Ausgabe ersetzen. Wer eine Leistung sonst nicht kaufen würde, spart durch ihren Kartenpreis nichts. Zeitlich enge oder an einen teureren Buchungsweg gebundene Guthaben sollten konservativ bewertet werden.
+      </p>
+      <p>
+        Führen Sie eine eigene Spalte für das erste Jahr. Ein Willkommensbonus darf dort stehen, wenn der Mindestumsatz ohne zusätzliche Käufe erreicht und die Abrechnung vollständig bezahlt wird. Für jede Verlängerung fällt der einmalige Bonus weg; Gebühr und wiederkehrende Leistungen werden neu geprüft.
+      </p>
+
+      <h2>Deckelung und Mindestumsatz können den Break-even verhindern</h2>
+      <p>
+        Ist der zusätzliche Cashback auf 60 € begrenzt, kann er eine Nettogebühr von 72 € niemals allein ausgleichen. Achten Sie auf monatliche statt jährliche Grenzen, Händlerkategorien, Aktivierungspflichten, Auszahlungsminimum und Punkteverfall. Nach Erreichen der Deckelung erzeugt weiterer Umsatz keinen zusätzlichen Ausgleich.
+      </p>
+      <p>
+        Ein Bonusziel rechtfertigt keine ungeplanten Käufe. 100 € auszugeben, um 5 € zurückzuerhalten, verbessert die Rechnung nicht. Der Schwellenumsatz umfasst nur Ausgaben, die ohnehin anfallen und am Monatsende vollständig bezahlt werden können.
+      </p>
+
+      <h2>Cashback-Rechnung und Kreditkosten getrennt prüfen</h2>
+      <p>
+        Der Break-even setzt vollständigen Rechnungsausgleich voraus. Bei Teilzahlung gehören Sollzins, Mindestrate und Laufzeit in eine gesonderte Kreditrechnung. Eine Karte kann genügend Cashback liefern und als Finanzierung trotzdem teuer sein. Die WorthCalc-Rechnung ist eine allgemeine Entscheidungshilfe und keine Produktempfehlung.
+      </p>
+      <p class="privacy-note">Eingegebene Beträge werden lokal im Browser verarbeitet. Prüfen Sie aktuelle Gebühren, Ausschlüsse, Grenzen und Zinsen in den Unterlagen des Anbieters.</p>
+    </>
+  )}
+
+  <FAQ items={article.faq} />
+</ArticleLayout>

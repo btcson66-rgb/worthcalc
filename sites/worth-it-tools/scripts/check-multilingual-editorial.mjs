@@ -22,6 +22,16 @@ const editorialRoutes = [
       de: ['Barpreis', 'Rahmenkredit', '5,63 %'],
     },
   },
+  {
+    slug: 'annual-fee-card-breakeven',
+    nativeMarkers: {
+      en: ['incremental reward rate', 'no-fee alternative', '$6,333.33'],
+      zh: ['一般消費', '免年費替代卡', 'NT$150,000'],
+      es: ['comisión de emisión', 'alternativa sin cuota', '6.000 €'],
+      fr: ['document d’information tarifaire', 'carte sans cotisation', '5 400 €'],
+      de: ['Preis- und Leistungsverzeichnis', 'kostenlosen Alternative', '9.600 €'],
+    },
+  },
 ];
 
 function read(relativePath) {
@@ -89,4 +99,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 2 complete five-locale topics, 6 added routes, 4 enriched high-value tools.');
+console.log('Multilingual editorial check passed: 3 complete five-locale topics, 9 added routes, 4 enriched high-value tools.');

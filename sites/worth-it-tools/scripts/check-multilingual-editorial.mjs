@@ -143,7 +143,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'new-vs-used-car-total-cost',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$26,774', 'Buyers Guide', 'data-new-used-car-tco-calculator'],
+      zh: ['NT$617,188', '定型化契約', 'data-new-used-car-tco-calculator'],
+      es: ['23.517 €', 'reserva de dominio', 'data-new-used-car-tco-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -252,4 +262,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 14 complete five-locale topics, 62 added routes, 4 enriched high-value tools, 6 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 14 complete five-locale topics, topic 15 at 3/5, 65 added routes, 4 enriched high-value tools, 7 embedded decision calculators.');

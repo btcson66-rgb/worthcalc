@@ -27,13 +27,14 @@ const briefRoutes = [
   { id: '12', slug: 'rent-vs-buy-breakeven-year' },
   { id: '13', slug: 'ev-vs-gas-total-cost' },
   { id: '14', slug: 'home-vs-public-ev-charging-cost' },
+  { id: '15', slug: 'new-vs-used-car-total-cost' },
 ];
 
 const releaseFloor = {
-  html: 105,
-  editorial: 73,
-  alignedVariants: 70,
-  compliantVariants: 70,
+  html: 108,
+  editorial: 76,
+  alignedVariants: 73,
+  compliantVariants: 73,
   completeTopics: 14,
 };
 

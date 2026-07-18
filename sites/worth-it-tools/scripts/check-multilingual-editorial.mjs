@@ -153,7 +153,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'car-lease-vs-buy-total-cost',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['$28,650', 'Regulation M', 'data-car-lease-buy-calculator'],
+      zh: ['NT$913,000', '定型化契約', 'data-car-lease-buy-calculator'],
+      es: ['22.100 €', 'Banco de España', 'data-car-lease-buy-calculator'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -262,4 +272,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 15 complete five-locale topics, 67 added routes, 4 enriched high-value tools, 7 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 15 complete five-locale topics, topic 16 at 3/5, 70 added routes, 4 enriched high-value tools, 8 embedded decision calculators.');

@@ -187,13 +187,22 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 - 本批建置目標：95 HTML、63 編輯內容頁、60／145 任務對應與完整版本、12／29 五語完成主題。
 - 發布證據：PR #36 已合併為 `1802f92`，GitHub Pages run `29656686245` 的 build、deploy、IndexNow 成功；五語 HTTP 200、canonical、6 組 hreflang、schema、計算器、sitemap 與德文正式頁 390px 未交叉互動回歸 PASS。
 
-## 2026-07-19 第二十一批（第 13 題 A 段，準備發布）
+## 2026-07-19 第二十一批（第 13 題 A 段，已發布）
 
 - 題目 13「電動車與油車總持有成本」先新增 EN／zh-TW／ES 三個原生頁，正好用滿單批 3 個公開頁上限；FR／DE 不建立空殼頁。
 - 新增頁內完整 TCO 計算器，不另增公開路由；同時納入兩車含稅成交價、已確認補助、充電建置／貸款等前期成本、年里程、充電損耗、能源、個別保險與保養、年度稅費及持有期末轉售價。
 - EN 採 out-the-door、DOE 在地能源輸入、聯邦／州／公用事業誘因資格與 VIN 保險報價語境；繁中分開使用牌照稅與汽車燃料使用費，按車籍地免稅、家充／社區／快充加權及中古行情處理；ES 分開 llave en mano、自治區 MOVES 申請與稅務效果、DGT Cero 及市政府 IVTM。
 - 基準算例：EN 五年 EV $39,864、油車 $40,250；zh-TW EV NT$1,107,644、油車 NT$1,077,700；ES EV 29,776€、油車 31,340€。三者差額都透過能源、里程與轉售敏感度呈現，不宣稱單一動力必勝。
 - 本批建置目標：98 HTML、66 編輯內容頁、63／145 任務對應與完整版本、12／29 五語完成主題（第 13 題為 3／5）。
+- 發布證據：PR #37 已合併為 `4c7fe4e`，GitHub Pages run `29657208137` 的 build、deploy、IndexNow 成功；三語 HTTP 200、canonical、self＋x-default hreflang、schema、計算器與 sitemap 線上查核 PASS，FR／DE 為 404 且不在 sitemap；繁中正式頁 390px 高里程翻轉回歸 PASS。
+
+## 2026-07-19 第二十二批（第 13 題 B 段，準備發布）
+
+- 新增 FR／DE 兩個完整原生頁，使第 13 題成為五語群組；同步把前三語由自身語言 hreflang 切換為五語＋x-default。
+- FR 依 2026 Coup de pouce CEE、devis／facture、score environnemental、certificat d’immatriculation、malus CO2／masse、Car Labelling 與 recharge pondérée 重寫，基準 EV 29,096€、thermique 31,571€。
+- DE 依 2026 年 1,500–6,000€ 收入／家庭級距新補助、Zulassung／Bewilligung、純電 Kfz-Steuerbefreiung 至最晚 2035、Autostromtarif／Schnellladen 與 Restwert 重寫，基準 E-Auto 34,552€、Verbrenner 35,431€。
+- 兩語均以 0 補助為基準，只有確認後才輸入；並各自使用不同車價、里程、能源、保險、保養、稅費與轉售參數，接入完整 TCO 計算器。
+- 本批建置目標：100 HTML、68 編輯內容頁、65／145 任務對應與完整版本、13／29 五語完成主題。
 
 ## 待執行主題
 
@@ -211,7 +220,7 @@ publication_rule: maximum 3 new public pages per optimization; no draft routes o
 | 10 | Cards & Rewards | Cashback caps and real reward rate | phase-18 complete; deployed |
 | 11 | Housing & Commuting | Rent-vs-buy assumptions | phase-4 complete; deployed |
 | 12 | Housing & Commuting | Rent-vs-buy break-even year | phase-20 complete; deployed |
-| 13 | Transport & Vehicle Ownership | EV vs gas total cost | phase-21 EN/zh-TW/ES ready; FR/DE pending |
+| 13 | Transport & Vehicle Ownership | EV vs gas total cost | phase-22 five-locale ready; release pending |
 | 14 | Transport & Vehicle Ownership | Home vs public EV charging | backlog |
 | 15 | Transport & Vehicle Ownership | New vs used car | backlog |
 | 16 | Transport & Vehicle Ownership | Lease vs buy a car | backlog |

@@ -73,6 +73,16 @@ const editorialRoutes = [
     },
   },
   {
+    slug: 'delivery-membership-break-even',
+    nativeMarkers: {
+      en: ['$6.49', '$20.82', 'minimum basket', 'data-delivery-membership-calculator'],
+      zh: ['NT$95', 'NT$1,081', '最低消費', 'data-delivery-membership-calculator'],
+      es: ['3,29 €', '9,23 €', 'pedido mínimo', 'data-delivery-membership-calculator'],
+      fr: ['3,69 €', '6,43 €', 'montant minimum', 'data-delivery-membership-calculator'],
+      de: ['3,99 €', '13,85 €', 'Mindestbestellwert', 'data-delivery-membership-calculator'],
+    },
+  },
+  {
     slug: 'annual-fee-card-breakeven',
     nativeMarkers: {
       en: ['incremental reward rate', 'no-fee alternative', '$6,333.33'],
@@ -93,17 +103,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [
-  {
-    slug: 'delivery-membership-break-even',
-    locales: ['en', 'zh', 'es'],
-    nativeMarkers: {
-      en: ['$6.49', '$20.82', 'minimum basket', 'data-delivery-membership-calculator'],
-      zh: ['NT$95', 'NT$1,081', '最低消費', 'data-delivery-membership-calculator'],
-      es: ['3,29 €', '9,23 €', 'pedido mínimo', 'data-delivery-membership-calculator'],
-    },
-  },
-];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -212,4 +212,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 9 complete five-locale topics, 40 added routes, 4 enriched high-value tools, 2 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 10 complete five-locale topics, 42 added routes, 4 enriched high-value tools, 2 embedded decision calculators.');

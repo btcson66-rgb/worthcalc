@@ -6,7 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import { newUsedCarGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es';
+type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
@@ -42,6 +42,28 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '¿Basta con comparar las cuotas mensuales?', answer: 'No. Compara entrada, comisión, tipo o TAE, cuotas, pago final, coste total y deuda en la fecha prevista de venta. Una cuota menor puede esconder un plazo o pago final mayor.' },
     ],
   },
+  fr: {
+    title: 'Voiture neuve ou d’occasion : comparer décote, réparations, crédit et revente',
+    description: 'Comparez neuve et occasion sur la même durée avec prix TTC, TAEG, intérêts, réparations, HistoVec, contrôle technique, revente et capital restant dû.',
+    faq: [
+      { question: 'Une voiture d’occasion est-elle toujours moins chère qu’une neuve ?', answer: 'Non. Son prix plus faible peut être absorbé par un TAEG supérieur, des réparations, une garantie différente ou une revente faible. Comparez la même durée et un scénario de grosse réparation.' },
+      { question: 'Que faut-il vérifier dans HistoVec ?', answer: 'Les changements de propriétaire, sinistres enregistrés, situation administrative, contrôles techniques et historique de kilométrage disponibles. Le vendeur partage le rapport ; il ne remplace pas un examen mécanique.' },
+      { question: 'Le contrôle technique suffit-il pour juger l’état de l’occasion ?', answer: 'Non. Pour un véhicule de plus de quatre ans, le procès-verbal récent informe sur des organes contrôlés, mais il ne constitue pas une expertise complète du moteur, de la boîte ou de toutes les pannes futures.' },
+      { question: 'Pourquoi afficher le capital restant dû à la revente ?', answer: 'Le prix de vente doit d’abord rembourser ce capital. Il n’est pas ajouté une seconde fois au coût, mais il détermine le cash récupéré et le risque de devoir apporter de l’argent.' },
+      { question: 'Mensualité ou TAEG : que faut-il comparer ?', answer: 'Comparez apport, TAEG, durée, frais imposés, assurance obligatoire, montant total dû et capital restant dû. Une mensualité faible peut cacher une durée ou une dernière échéance plus élevée.' },
+    ],
+  },
+  de: {
+    title: 'Neuwagen oder Gebrauchtwagen: Wertverlust, Reparaturen, Finanzierung und Restwert vergleichen',
+    description: 'Vergleichen Sie Neu- und Gebrauchtwagen über dieselbe Haltedauer: Endpreis, Effektivzins, Reparaturrisiko, Restwert und Restschuld beim Verkauf.',
+    faq: [
+      { question: 'Ist ein Gebrauchtwagen immer günstiger als ein Neuwagen?', answer: 'Nein. Höherer Effektivzins, Reparaturen, unterschiedliche Sachmängelhaftung oder ein niedriger Restwert können den Kaufpreisvorteil aufzehren. Rechnen Sie dieselbe Haltedauer und ein Reparatur-Negativszenario.' },
+      { question: 'Welche Unterlagen sollte ich beim Gebrauchtwagen prüfen?', answer: 'Kaufvertrag, Zulassungsbescheinigungen, HU-Berichte, Serviceheft und Rechnungen, Gesamtfahrleistung, bekannte Unfallschäden, Zahl der Halter und offene Rückrufe. Zusicherungen gehören schriftlich in den Vertrag.' },
+      { question: 'Ist eine frische Hauptuntersuchung ein vollständiger Gebrauchtwagencheck?', answer: 'Nein. Die HU prüft vorgeschriebene Punkte, ersetzt aber keine unabhängige Untersuchung aller kostenrelevanten Baugruppen und keine Probefahrt.' },
+      { question: 'Wird die Restschuld doppelt als Kosten gezählt?', answer: 'Nein. Der Kaufpreis enthält das finanzierte Kapital; als zusätzliche Kosten werden nur Zinsen erfasst. Die Restschuld wird separat gezeigt, weil sie beim Verkauf aus dem Erlös getilgt werden muss.' },
+      { question: 'Warum reicht die Monatsrate einer Autofinanzierung nicht?', answer: 'Eine kleine Rate kann durch lange Laufzeit oder hohe Ballonrate entstehen. Vergleichen Sie effektiven Jahreszins, Gesamtbetrag, Laufzeit, Schlussrate und Restschuld am geplanten Verkaufstag.' },
+    ],
+  },
 };
 
 const calculators = {
@@ -69,10 +91,26 @@ const calculators = {
       holdingYears: 'Años de tenencia', newPrice: 'Precio del nuevo', usedPrice: 'Precio del usado', newFees: 'Gastos e impuestos del nuevo', usedFees: 'Transferencia, impuestos y gastos del usado', newDown: 'Entrada del nuevo', usedDown: 'Entrada del usado', newApr: 'Tipo/TAE modelada del nuevo (%)', usedApr: 'Tipo/TAE modelada del usado (%)', newTerm: 'Plazo nuevo (meses)', usedTerm: 'Plazo usado (meses)', newAnnualRepairs: 'Mantenimiento/reparación nuevo al año', usedAnnualRepairs: 'Mantenimiento/reparación usado al año', usedMajorRepair: 'Avería grave plausible del usado', usedMajorProbability: 'Probabilidad de escenario (%)', newResale: 'Reventa del nuevo al final', usedResale: 'Reventa del usado al final', newTco: 'Coste del nuevo', usedTco: 'Coste esperado del usado', difference: 'Diferencia esperada', newInterest: 'Interés nuevo durante tenencia', usedInterest: 'Interés usado durante tenencia', newDepreciation: 'Precio nuevo menos reventa', usedDepreciation: 'Precio usado menos reventa', newRepairs: 'Reparaciones ordinarias nuevo', usedExpectedRepairs: 'Reparaciones esperadas usado', usedDownside: 'Coste usado si ocurre la avería', newBalance: 'Deuda nuevo al vender', usedBalance: 'Deuda usado al vender', newMonthly: 'Cuota mensual nuevo', usedMonthly: 'Cuota mensual usado', newWins: 'El nuevo tiene menor coste esperado por', usedWins: 'El usado tiene menor coste esperado por', tie: 'Los costes esperados son iguales.', privacy: 'Estimación educativa; los datos quedan en el navegador. Verifica precio, financiación, contrato, informe, inspección, reparación y reventa.'
     },
   },
+  fr: {
+    currency: 'EUR' as const,
+    defaults: { holdingYears: 5, newPrice: 34000, usedPrice: 21000, newFees: 1800, usedFees: 1400, newDown: 7000, usedDown: 5000, newApr: 5.2, usedApr: 7.2, newTerm: 60, usedTerm: 60, newAnnualRepairs: 700, usedAnnualRepairs: 1400, usedMajorRepair: 4500, usedMajorProbability: 25, newResale: 18000, usedResale: 10500 },
+    copy: {
+      heading: 'Calculateur de coût : voiture neuve ou d’occasion', intro: 'Saisissez deux devis TTC. Le coût espéré pondère une grosse réparation ; le scénario défavorable suppose qu’elle est payée intégralement.',
+      holdingYears: 'Durée de détention (années)', newPrice: 'Prix TTC de la neuve', usedPrice: 'Prix TTC de l’occasion', newFees: 'Frais de la neuve', usedFees: 'Carte grise et frais de l’occasion', newDown: 'Apport neuve', usedDown: 'Apport occasion', newApr: 'TAEG/taux modélisé neuve (%)', usedApr: 'TAEG/taux modélisé occasion (%)', newTerm: 'Durée crédit neuve (mois)', usedTerm: 'Durée crédit occasion (mois)', newAnnualRepairs: 'Entretien/réparations neuve par an', usedAnnualRepairs: 'Entretien/réparations occasion par an', usedMajorRepair: 'Grosse réparation plausible occasion', usedMajorProbability: 'Probabilité de scénario (%)', newResale: 'Revente neuve en fin de période', usedResale: 'Revente occasion en fin de période', newTco: 'Coût de détention neuve', usedTco: 'Coût espéré occasion', difference: 'Écart espéré', newInterest: 'Intérêts neuve pendant détention', usedInterest: 'Intérêts occasion pendant détention', newDepreciation: 'Prix neuve moins revente', usedDepreciation: 'Prix occasion moins revente', newRepairs: 'Entretien courant neuve', usedExpectedRepairs: 'Réparations espérées occasion', usedDownside: 'Coût occasion si grosse réparation', newBalance: 'Capital restant dû neuve', usedBalance: 'Capital restant dû occasion', newMonthly: 'Mensualité neuve', usedMonthly: 'Mensualité occasion', newWins: 'La neuve a le coût espéré le plus bas de', usedWins: 'L’occasion a le coût espéré le plus bas de', tie: 'Les coûts de détention espérés sont égaux.', privacy: 'Estimation pédagogique ; données conservées dans le navigateur. Vérifiez devis, crédit, HistoVec, contrôle, garanties, réparations et revente.'
+    },
+  },
+  de: {
+    currency: 'EUR' as const,
+    defaults: { holdingYears: 5, newPrice: 38000, usedPrice: 24000, newFees: 1200, usedFees: 1000, newDown: 8000, usedDown: 6000, newApr: 4.9, usedApr: 7.5, newTerm: 60, usedTerm: 60, newAnnualRepairs: 700, usedAnnualRepairs: 1500, usedMajorRepair: 5500, usedMajorProbability: 25, newResale: 21000, usedResale: 13000 },
+    copy: {
+      heading: 'Kostenrechner: Neuwagen oder Gebrauchtwagen', intro: 'Tragen Sie zwei verbindliche Endpreise ein. Der Erwartungsfall gewichtet eine Großreparatur; das Negativszenario setzt sie vollständig an.',
+      holdingYears: 'Haltedauer (Jahre)', newPrice: 'Neuwagen-Endpreis', usedPrice: 'Gebrauchtwagen-Endpreis', newFees: 'Neuwagen-Nebenkosten', usedFees: 'Gebrauchtwagen-Nebenkosten', newDown: 'Anzahlung Neuwagen', usedDown: 'Anzahlung Gebrauchtwagen', newApr: 'Effektiver/Modellzins Neuwagen (%)', usedApr: 'Effektiver/Modellzins gebraucht (%)', newTerm: 'Laufzeit Neuwagen (Monate)', usedTerm: 'Laufzeit gebraucht (Monate)', newAnnualRepairs: 'Wartung/Reparaturen Neuwagen pro Jahr', usedAnnualRepairs: 'Wartung/Reparaturen gebraucht pro Jahr', usedMajorRepair: 'Plausible Großreparatur gebraucht', usedMajorProbability: 'Szenariowahrscheinlichkeit (%)', newResale: 'Neuwagen-Restwert am Ende', usedResale: 'Gebraucht-Restwert am Ende', newTco: 'Neuwagen-Haltekosten', usedTco: 'Erwartete Gebraucht-Haltekosten', difference: 'Erwartete Kostendifferenz', newInterest: 'Neuwagen-Zinsen bis Verkauf', usedInterest: 'Gebraucht-Zinsen bis Verkauf', newDepreciation: 'Neupreis minus Restwert', usedDepreciation: 'Gebrauchtpreis minus Restwert', newRepairs: 'Laufende Neuwagen-Reparaturen', usedExpectedRepairs: 'Erwartete Gebraucht-Reparaturen', usedDownside: 'Gebraucht-Kosten bei Großreparatur', newBalance: 'Neuwagen-Restschuld beim Verkauf', usedBalance: 'Gebraucht-Restschuld beim Verkauf', newMonthly: 'Neuwagen-Monatsrate', usedMonthly: 'Gebraucht-Monatsrate', newWins: 'Der Neuwagen hat niedrigere erwartete Kosten um', usedWins: 'Der Gebrauchtwagen hat niedrigere erwartete Kosten um', tie: 'Die erwarteten Haltekosten sind gleich.', privacy: 'Allgemeine Lernrechnung; Eingaben bleiben im Browser. Prüfen Sie Endpreis, Finanzierung, Vertrag, HU, Historie, Reparaturen und Restwert.'
+    },
+  },
 };
 
 export function getStaticPaths() {
-  return ['en', 'zh', 'es'].map((locale) => ({ params: { locale } }));
+  return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as EditorialLocale;
@@ -81,7 +119,7 @@ const guide = newUsedCarGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={[locale]}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'en' && <>
     <p>The useful new-versus-used question is not which category has the lower sticker price. It is which exact vehicle leaves you with the lower cost and manageable risk over the years you will actually keep it. A five-year answer can reverse at year three because depreciation, loan payoff and repair exposure do not move at the same speed.</p>
     <p>This model therefore avoids a single market-average verdict. It compares two written offers, accrues interest only while you own each car, and publishes both an expected used-car repair case and the full-repair downside.</p>
@@ -149,6 +187,54 @@ const calculator = calculators[locale];
     <h2>Añade seguro, IVTM y energía cuando sean distintos</h2>
     <p>Si los dos candidatos cambian de potencia, combustible, etiqueta o municipio, añade seguro, IVTM, combustible o recarga y otras diferencias en el <a href="/es/ev-vs-gas-total-cost/">comparador completo de coste de vehículo</a>. El coste más bajo tampoco sustituye fiabilidad, seguridad, utilidad ni garantía.</p>
     <p class="privacy-note">Estimación educativa general; no recomienda vehículo, crédito ni compraventa. Verifica informe, contrato, inspección, cargas, impuestos, financiación y seguro antes de pagar.</p>
+  </>}
+
+  {locale === 'fr' && <>
+    <p>En France, « neuve ou occasion » ne se résume pas à une courbe moyenne de décote. Une occasion achetée à un professionnel, un véhicule vendu par un particulier et une neuve financée avec services imposés n’ont ni les mêmes documents, ni les mêmes protections, ni le même coût de crédit.</p>
+    <p>La comparaison défendable porte donc sur deux devis TTC, la durée pendant laquelle vous garderez réellement la voiture, le TAEG, les réparations observables et une revente prudente. Le calcul publie aussi le capital restant dû et le scénario où une grosse panne se réalise.</p>
+    <DecisionGuide content={guide} />
+    <NewUsedCarTcoCalculator locale={locale} {...calculator} />
+
+    <h2>HistoVec et contrôle technique avant le prix de l’occasion</h2>
+    <p>Demandez au vendeur de partager le rapport HistoVec : il peut regrouper changements de propriétaire, sinistres ayant déclenché une procédure d’expert, situation administrative, contrôles techniques et kilométrages enregistrés. Vérifiez aussi le certificat de situation administrative afin qu’un gage ou une opposition ne bloque pas le transfert.</p>
+    <p>La DGCCRF rappelle que, pour une voiture de plus de quatre ans, le procès-verbal de contrôle technique de moins de six mois doit être remis avant la vente. Ce contrôle éclaire des organes de sécurité précis, mais ne remplace ni essai routier, ni factures d’entretien, ni examen mécanique indépendant du moteur, de la boîte et des éléments coûteux.</p>
+
+    <h2>Garantie légale et garantie commerciale ne sont pas la même valeur</h2>
+    <p>Chez un vendeur professionnel, la garantie légale de conformité et celle des vices cachés existent indépendamment d’une garantie commerciale facultative. Pour un bien d’occasion, l’action en conformité se prescrit sur deux ans, avec une présomption d’antériorité du défaut pendant un an selon la fiche DGCCRF. Un achat entre particuliers relève d’un autre cadre, notamment pour les vices cachés.</p>
+    <p>Ne transformez pas ces droits en « zéro réparation » dans le calcul. Lisez ce qui est couvert, la procédure, les exclusions et l’immobilisation possible ; inscrivez un budget pour l’usure normale et une grosse réparation qui ne serait pas nécessairement prise en charge.</p>
+
+    <h2>Le TAEG et le montant total dû valent plus que la mensualité</h2>
+    <p>La fiche précontractuelle de crédit à la consommation doit notamment indiquer montant, durée, échéancier, coût des frais, TAEG et montant total dû. Le TAEG regroupe les frais imposés pour obtenir le crédit. Comparez donc les deux offres de financement séparément des deux prix de voiture.</p>
+    <p>Dans le cas central, l’occasion n’a que 1 872 € d’avance. Une réparation complète de 4 500 € la rend environ 1 503 € plus chère que la neuve ; une revente inférieure de 2 500 € suffit aussi à faire basculer le résultat. Cette marge doit être lue comme conditionnelle.</p>
+
+    <h2>À trois ans, regardez le cash récupérable après remboursement</h2>
+    <p>Avec les reventes de scénario, le coût atteint environ 16 184 € pour la neuve et 15 004 € pour l’occasion après trois ans. Mais il reste respectivement environ 12 423 € et 7 716 € de capital à rembourser. Demandez un décompte de remboursement anticipé avant d’utiliser le prix de revente comme argent disponible.</p>
+    <p>Si assurance, carburant, certificat d’immatriculation ou fiscalité diffèrent entre les modèles, ajoutez-les dans le <a href="/fr/ev-vs-gas-total-cost/">comparatif complet du coût de véhicule</a>.</p>
+    <p class="privacy-note">Estimation pédagogique générale, sans recommandation d’achat, de crédit, de garantie ou de recours. Vérifiez documents, contrat, état, financement, assurance et immatriculation.</p>
+  </>}
+
+  {locale === 'de' && <>
+    <p>In Deutschland entscheidet nicht die Faustregel „Neuwagen verliert im ersten Jahr am meisten“, sondern das konkrete Paar aus Endpreis, Finanzierung, Fahrzeugzustand, Haltedauer und Restwert. Besonders beim Gebrauchtwagen macht es einen Unterschied, ob Händler oder Privatperson verkauft und welche Eigenschaften schriftlich vereinbart werden.</p>
+    <p>Der Rechner verwendet deshalb keinen Marktmittelwert als Urteil. Er zeigt Zinsen nur für die tatsächliche Haltedauer, die Restschuld am Verkaufstag und neben dem Erwartungswert auch die volle Großreparatur.</p>
+    <DecisionGuide content={guide} />
+    <NewUsedCarTcoCalculator locale={locale} {...calculator} />
+
+    <h2>Gesamtfahrleistung, HU und Zusicherungen schriftlich prüfen</h2>
+    <p>Vergleichen Sie die Gesamtfahrleistung im Kaufvertrag mit HU-Berichten, Serviceheft und Rechnungen. Prüfen Sie Zulassungsbescheinigungen, Halter, bekannte Unfall- und Vorschäden, fällige Wartungen sowie offene Rückrufe. Eine frische Hauptuntersuchung ist hilfreich, aber keine vollständige Zustands- oder Kostenprognose.</p>
+    <p>Eine unabhängige Gebrauchtwagenuntersuchung übersetzt Reifen, Bremsen, Fahrwerk, Flüssigkeiten, Batterie, Antrieb und Elektronik in kurzfristige Ausgaben. Daraus entstehen die jährliche Reparaturannahme und eine plausible Großreparatur—nicht aus einer pauschalen Quote für alle Gebrauchtwagen.</p>
+
+    <h2>Sachmängelhaftung, Gewährleistung und Garantie auseinanderhalten</h2>
+    <p>Die Verbraucherzentrale weist darauf hin, dass ein gewerblicher Verkäufer die Sachmängelhaftung für Gebrauchtware regelmäßig auf ein Jahr verkürzen, aber nicht vollständig ausschließen kann. Privatverkäufer können sie weitgehender ausschließen; arglistig verschwiegene Mängel sind ein eigener Fall. Eine freiwillige Gebrauchtwagengarantie gilt zusätzlich und nur nach ihren Bedingungen.</p>
+    <p>Bekannte Abweichungen und Schäden müssen genau beschrieben werden. Kalkulieren Sie normale Abnutzung und nicht gedeckte Reparaturen dennoch selbst, statt den Begriff „Garantie“ als vollständige Kostenübernahme zu bewerten.</p>
+
+    <h2>Effektiver Jahreszins, Gesamtbetrag und Ballonrate vergleichen</h2>
+    <p>Eine niedrige Monatsrate kann aus langer Laufzeit oder hoher Schlussrate entstehen. Gerade eine Ballonfinanzierung kann am geplanten Verkaufstag eine Restschuld hinterlassen, die den Erlös weitgehend aufbraucht. Tragen Sie daher Anzahlung, effektiven Jahreszins, Laufzeit und Endpreis ein und vergleichen Sie zusätzlich Gesamtbetrag und Schlussrate aus dem Vertrag.</p>
+    <p>Im Basisfall ist der Gebrauchtwagen nur rund 1.023 € günstiger. Tritt die 5.500-€-Reparatur vollständig ein, kostet er etwa 28.843 € und liegt rund 3.102 € über dem Neuwagen. Ein um 3.000 € niedrigerer Gebraucht-Restwert dreht das Ergebnis ebenfalls.</p>
+
+    <h2>Restschuld ist kein zweiter Kaufpreis, aber ein Verkaufsrisiko</h2>
+    <p>Nach drei Jahren ergeben die veröffentlichten Werte rund 16.647 € Neuwagen- und 16.042 € Gebrauchtwagenkosten. Gleichzeitig stehen noch etwa 13.402 € beziehungsweise 8.461 € Kredit offen. Lassen Sie sich vor dem Verkauf eine Ablösesumme nennen und vergleichen Sie sie mit einem realen Ankaufangebot.</p>
+    <p>Unterschiede bei Versicherung, Kfz-Steuer und Energie gehören zusätzlich in den <a href="/de/ev-vs-gas-total-cost/">vollständigen Fahrzeug-TCO-Vergleich</a>.</p>
+    <p class="privacy-note">Allgemeine Lernrechnung, keine Kauf-, Kredit-, Rechts- oder Sicherheitsberatung. Prüfen Sie Vertrag, HU, Historie, Untersuchung, Finanzierung, Versicherung und Zulassung.</p>
   </>}
 
   <FAQ items={article.faq} />

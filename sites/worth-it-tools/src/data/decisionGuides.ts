@@ -621,6 +621,55 @@ export const paidMembershipGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+const newUsedCarGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
+  fr: {
+    id: 'new-used-car-tco-method',
+    labels: labels.fr,
+    directAnswer: 'Une occasion n’est pas automatiquement moins chère qu’une voiture neuve : comparez sur la même durée prix TTC et frais, intérêts courus, réparations et revente. Dans cet exemple sur cinq ans, la neuve coûte environ 25 268 € et l’occasion 23 396 €, soit 1 872 € de moins. Si la grosse réparation de 4 500 € se réalise entièrement au lieu de son espérance à 25%, l’occasion monte à environ 26 771 € et la neuve devient moins chère d’environ 1 503 €.',
+    inputs: ['Prix TTC clés en main et détail de chaque frais ou prestation annexe', 'Apport, TAEG, durée, montant total dû et assurance obligatoire de chaque crédit', 'Durée de détention réelle et capital restant dû à la date de revente', 'Entretien et réparations selon âge, kilométrage, factures et examen indépendant', 'Montant d’une grosse réparation plausible et probabilité de scénario pour l’occasion', 'Valeur de revente prudente au même âge et au même kilométrage', 'Rapport HistoVec, kilométrage, contrôle technique, situation administrative, garantie légale et commerciale'],
+    formula: 'Coût de détention = prix + frais + intérêts courus pendant la détention + entretien courant + (grosse réparation × probabilité pour le cas espéré) − revente. Le capital restant dû est affiché séparément car la vente doit d’abord le rembourser. Le scénario défavorable remplace l’espérance de réparation par son coût intégral.',
+    workedExample: 'Sur cinq ans, la neuve vaut 34 000 € plus 1 800 € de frais, avec 7 000 € d’apport, 5,2% sur 60 mois, 700 € d’entretien annuel et 18 000 € de revente. Les intérêts atteignent environ 3 968 € et le coût 25 268 €. L’occasion vaut 21 000 € plus 1 400 €, avec 5 000 € d’apport, 7,2%, 1 400 € annuels, 10 500 € de revente et 25% de risque d’une réparation de 4 500 €. Intérêts : 3 371 € ; coût espéré : 23 396 €, soit seulement 1 872 € de moins.',
+    sensitivity: [
+      { scenario: 'La grosse réparation se produit', input: '4 500 € complets au lieu de l’espérance de 1 125 €', result: 'Occasion environ 26 771 € ; neuve moins chère d’environ 1 503 €' },
+      { scenario: 'Revente au bout de trois ans', input: 'Neuve 25 000 € ; occasion 15 500 €', result: 'Neuve environ 16 184 € vs occasion 15 004 € ; capitaux restant dus 12 423 € et 7 716 €' },
+      { scenario: 'Revente de l’occasion plus faible', input: 'Valeur finale diminuée de 2 500 €', result: 'Occasion environ 25 896 € ; neuve moins chère d’environ 628 €' },
+      { scenario: 'Entretien occasion inférieur', input: '1 000 € par an au lieu de 1 400 €', result: 'Occasion environ 21 396 € ; avantage porté à environ 3 872 €' },
+    ],
+    cta: { label: 'Comparer vos deux devis et le risque de réparation', href: '#new-used-car-tco-calculator' },
+    limitations: ['La probabilité de réparation est un test de résistance, pas une prévision. Appuyez-la sur le modèle exact, l’historique, le kilométrage et un examen mécanique indépendant.', 'HistoVec et le contrôle technique renseignent l’historique administratif, le kilométrage enregistré et certains organes de sécurité ; ils ne remplacent pas une expertise mécanique complète.', 'L’achat auprès d’un professionnel et auprès d’un particulier n’ouvre pas les mêmes protections. Lisez les garanties légales applicables et la garantie commerciale sans les confondre.', 'Le TAEG doit intégrer les frais imposés pour obtenir le crédit. Utilisez la fiche précontractuelle et le montant total dû, pas le taux débiteur ou la mensualité seuls.', 'Ajoutez assurance, carburant, certificat d’immatriculation et fiscalité lorsqu’ils diffèrent. Cette page ne recommande ni véhicule, ni crédit, ni stratégie juridique.'],
+    sources: [
+      { label: 'DGCCRF — obligations du vendeur d’un véhicule d’occasion, mise à jour 2026', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/achat-dun-vehicule-doccasion-quelles-sont-les-obligations-du-vendeur' },
+      { label: 'Service-Public — HistoVec, kilométrage et contrôle technique', href: 'https://www.service-public.fr/particuliers/vosdroits/F2878?quot=' },
+      { label: 'DGCCRF — garantie légale de conformité et vices cachés', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/les-garanties-legales-de-conformite-et-contre-les-vices-caches' },
+      { label: 'Service-Public — crédit à la consommation, TAEG et montant total dû', href: 'https://www.service-public.fr/particuliers/vosdroits/F2440?ori=mcmga' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'new-used-car-tco-method',
+    labels: labels.de,
+    directAnswer: 'Ein Gebrauchtwagen ist nicht allein wegen des niedrigeren Kaufpreises günstiger. Vergleichen Sie für dieselbe Haltedauer Endpreis und Nebenkosten, aufgelaufene Kreditzinsen, Reparaturen und Restwert. Im Fünfjahresbeispiel kostet der Neuwagen rund 25.741 €, der Gebrauchtwagen 24.718 € und damit 1.023 € weniger. Tritt die angesetzte 5.500-€-Großreparatur vollständig ein, steigt der Gebrauchtwagen auf rund 28.843 €; dann ist der Neuwagen etwa 3.102 € günstiger.',
+    inputs: ['Verbindlicher Endpreis einschließlich Zulassung, Überführung und einzeln ausgewiesener Zusatzleistungen', 'Anzahlung, effektiver Jahreszins, Laufzeit, Gesamtbetrag und mögliche Ballonrate beider Finanzierungen', 'Geplante Haltedauer und Restschuld am vorgesehenen Verkaufstag', 'Wartungs- und Reparaturbudget nach Modell, Alter, Kilometerstand, Belegen und unabhängigem Check', 'Plausible Großreparatur und Szenariowahrscheinlichkeit beim Gebrauchten', 'Vorsichtiger Restwert bei identischem Verkaufszeitpunkt und Kilometerstand', 'Kaufvertrag, Gesamtfahrleistung, HU-Berichte, Servicebelege, Unfallschäden, Rückrufe, Sachmängelhaftung und Garantie'],
+    formula: 'Kosten während der Haltedauer = Kaufpreis + Nebenkosten + bis zum Verkauf aufgelaufene Zinsen + laufende Reparaturen + (Großreparatur × Wahrscheinlichkeit im Erwartungsfall) − Restwert. Die Restschuld wird separat gezeigt, weil der Verkaufserlös sie zuerst tilgen muss. Im Negativszenario wird der Erwartungswert durch die volle Großreparatur ersetzt.',
+    workedExample: 'Fünf Jahre: Neuwagen 38.000 € plus 1.200 €, 8.000 € Anzahlung, 4,9% über 60 Monate, 700 € Wartung pro Jahr und 21.000 € Restwert. Zinsen rund 4.041 €, Gesamtkosten 25.741 €. Gebrauchtwagen 24.000 € plus 1.000 €, 6.000 € Anzahlung, 7,5%, 1.500 € jährlich, 13.000 € Restwert sowie 25% für eine 5.500-€-Großreparatur. Zinsen rund 3.843 €, erwartete Kosten 24.718 €—nur 1.023 € weniger.',
+    sensitivity: [
+      { scenario: 'Großreparatur tritt ein', input: 'Volle 5.500 € statt 1.375 € Erwartungswert', result: 'Gebrauchtwagen rund 28.843 €; Neuwagen etwa 3.102 € günstiger' },
+      { scenario: 'Verkauf nach drei Jahren', input: 'Restwert neu 28.000 €, gebraucht 18.000 €', result: 'Neuwagen rund 16.647 € vs gebraucht 16.042 €; Restschulden 13.402 € und 8.461 €' },
+      { scenario: 'Gebraucht-Restwert 3.000 € niedriger', input: 'Restwert 10.000 €', result: 'Gebrauchtwagen rund 27.718 €; Neuwagen etwa 1.977 € günstiger' },
+      { scenario: 'Ballonfinanzierung', input: 'Niedrige Rate, aber hohe Schlussrate am Verkaufstag', result: 'Rate allein entscheidet nicht; Schlussrate als Restschuld und Gesamtbetrag prüfen' },
+    ],
+    cta: { label: 'Beide Angebote und Reparaturrisiko selbst vergleichen', href: '#new-used-car-tco-calculator' },
+    limitations: ['Die Reparaturwahrscheinlichkeit ist ein Szenario, keine Ausfallprognose. Leiten Sie sie aus Modell, Gesamtfahrleistung, HU-/Servicebelegen und einer unabhängigen Untersuchung ab.', 'Eine Hauptuntersuchung bestätigt nicht, dass alle Baugruppen mängelfrei sind. Unfallschäden, Zusicherungen und Gesamtfahrleistung gehören ausdrücklich in den Kaufvertrag.', 'Beim Händlerkauf kann die gesetzliche Sachmängelhaftung für Gebrauchtware regelmäßig auf ein Jahr verkürzt, aber nicht vollständig ausgeschlossen werden; beim Privatverkauf sind Ausschlüsse weiter möglich. Prüfen Sie den konkreten Vertrag.', 'Ein effektiver Jahreszins und der Gesamtbetrag sind aussagekräftiger als eine niedrige Monatsrate. Ballon- oder Schlussraten können beim geplanten Verkauf eine hohe Restschuld hinterlassen.', 'Versicherung, Kfz-Steuer und Energieunterschiede müssen ergänzt werden. Die Seite ist keine Kauf-, Kredit-, Rechts- oder Sicherheitsberatung.'],
+    sources: [
+      { label: 'Verbraucherzentrale — Kaufvertrag und Gewährleistung bei Gebrauchtwagen', href: 'https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/regeln-beim-kaufvertrag-das-muessen-sie-wissen-5032' },
+      { label: 'ADAC — Gebrauchtwagen-Checkliste, HU-Berichte und Gesamtfahrleistung', href: 'https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/gebrauchtwagenkauf/gebrauchtwagen-kaufen/' },
+      { label: 'ADAC — Sachmängelhaftung, Gewährleistung und Garantie', href: 'https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/gebrauchtwagenkauf/fahrzeugmaengel/' },
+      { label: 'Verbraucherzentrale — Autofinanzierung mit hoher Ballonrate', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/nullprozentfinanzierung-hintergruende-fallen-vor-und-nachteile-5853' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 const evChargingCostGuideAdditions: Partial<Record<Locale, DecisionGuideContent>> = {
   fr: {
     id: 'ev-home-public-charging-cost-method',
@@ -1719,6 +1768,7 @@ export const evChargingCostGuides: Partial<Record<Locale, DecisionGuideContent>>
 };
 
 export const newUsedCarGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  ...newUsedCarGuideAdditions,
   en: {
     id: 'new-used-car-tco-method',
     labels: labels.en,

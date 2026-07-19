@@ -2,7 +2,7 @@
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import LocalizedCoreCalculator from '../../../components/LocalizedCoreCalculator.astro';
 import { coreToolContent } from '../../../data/coreToolContent';
-import { evGasTcoGuides, installmentGuides, paidMembershipGuides, subscriptionGuides } from '../../../data/decisionGuides';
+import { evGasTcoGuides, installmentGuides, paidMembershipGuides, rentBuyBreakevenGuides, subscriptionGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import type { Locale } from '../../../consts';
@@ -10,7 +10,7 @@ import type { Locale } from '../../../consts';
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
 export function getStaticPaths() {
-  const released = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas'] as const;
+  const released = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy'] as const;
   return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((tool) => ({ params: { locale, tool } })),
   );
@@ -26,6 +26,8 @@ const guides = slug === 'subscription-audit'
     ? paidMembershipGuides
     : slug === 'ev-vs-gas'
       ? evGasTcoGuides
+      : slug === 'rent-vs-buy'
+        ? rentBuyBreakevenGuides
     : installmentGuides;
 const costcoSources = {
   es: { label: 'Costco España — cuota Gold Star y almacenes en España', href: 'https://www.costco.es/sobre-nosotros' },

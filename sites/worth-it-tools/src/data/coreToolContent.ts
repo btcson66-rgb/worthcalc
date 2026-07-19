@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription' | 'membership' | 'ev';
+  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy';
   title: string;
   description: string;
   intro: string;
@@ -189,6 +189,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Coche nuevo o usado: coste total', path: '/new-vs-used-car-total-cost' },
       ],
     },
+    'rent-vs-buy': {
+      kind: 'rent-buy', title: 'Calculadora de alquiler o compra de vivienda en España',
+      description: 'Compara alquiler acumulado con entrada, gastos de compra, hipoteca, costes de propietario y patrimonio neto recuperable al vender.',
+      intro: 'Compara el mismo horizonte y una vivienda razonablemente equivalente. La cuota hipotecaria no es todo el coste de comprar, pero tampoco debe tratarse toda como gasto: por eso el modelo resta solo el patrimonio neto que estimas recibir después de deuda y costes de venta.',
+      currency: 'EUR', numberLocale: 'es-ES', inputsHeading: 'Escenario de vivienda', verdictLabel: 'Menor coste neto en el horizonte',
+      initialVerdict: 'Introduce alquiler, compra, duración y patrimonio recuperable.', invalidVerdict: 'Alquiler, horizonte y precio de compra deben ser mayores que cero.',
+      favorableVerdict: 'Comprar cuesta {difference} menos en {years} años, si al final recuperas {equity} netos.',
+      unfavorableVerdict: 'Alquilar cuesta {difference} menos en {years} años con este escenario. Comprar necesitaría {parityEquity} de patrimonio neto final para igualar.',
+      fields: [
+        { id: 'monthly-rent', label: 'Alquiler mensual inicial', helper: 'Misma zona, tamaño y calidad que la compra.', value: 1100, min: 0, step: 10 },
+        { id: 'rent-growth', label: 'Crecimiento anual del alquiler (%)', helper: 'Hipótesis de escenario, no límite legal ni predicción.', value: 2, min: 0, step: 0.1 },
+        { id: 'home-price', label: 'Precio de compra', helper: 'Precio pactado de la vivienda.', value: 260000, min: 0, step: 1000 },
+        { id: 'down-payment', label: 'Entrada pagada', helper: 'Capital inmovilizado al inicio.', value: 52000, min: 0, step: 1000 },
+        { id: 'closing-costs', label: 'Impuestos y gastos iniciales', helper: 'Usa presupuesto según vivienda, comunidad y operación; no un porcentaje universal.', value: 26000, min: 0, step: 500 },
+        { id: 'mortgage-payment', label: 'Cuota hipotecaria mensual', helper: 'Incluye la cuota del escenario financiero elegido.', value: 950, min: 0, step: 10 },
+        { id: 'owner-costs', label: 'Otros costes mensuales de propietario', helper: 'IBI prorrateado, comunidad, seguro, mantenimiento y derramas previstas.', value: 250, min: 0, step: 10 },
+        { id: 'years', label: 'Años hasta mudanza o venta', helper: 'Horizonte que realmente puedes mantener.', value: 7, min: 1, step: 1 },
+        { id: 'ending-equity', label: 'Patrimonio neto recuperable al final', helper: 'Precio de venta conservador menos hipoteca pendiente, venta e impuestos aplicables.', value: 95000, min: 0, step: 1000 },
+      ],
+      metrics: [
+        { id: 'rent-total', label: 'Alquiler acumulado' }, { id: 'owner-net-cost', label: 'Coste neto de compra' },
+        { id: 'difference', label: 'Diferencia del escenario' }, { id: 'parity-equity', label: 'Patrimonio final necesario para igualar' },
+      ],
+      faq: [
+        { question: '¿Por qué se introduce el patrimonio neto final?', answer: 'Porque entrada y parte del principal pueden recuperarse al vender, pero no íntegramente. Usa venta neta de deuda, agencia, impuestos y otros costes, no el precio bruto esperado.' },
+        { question: '¿Incluye el coste de oportunidad de la entrada?', answer: 'No automáticamente. Compara aparte qué rendimiento neto y riesgo tendría ese dinero si alquilaras; evita asumir una rentabilidad garantizada.' },
+        { question: '¿Qué gastos de compra debo usar?', answer: 'Los estimados para tu inmueble y comunidad autónoma: impuestos dependen de vivienda nueva o usada y del caso; añade notaría, registro, gestoría y financiación cuando proceda.' },
+        { question: '¿Un resultado favorable recomienda comprar?', answer: 'No. Liquidez, estabilidad laboral, movilidad, riesgo de reparación y capacidad de soportar tipos o derramas pueden pesar más que una diferencia pequeña.' },
+      ],
+      related: [
+        { title: 'Guía de supuestos para alquilar o comprar', path: '/rent-vs-buy-guide' },
+        { title: 'Año de equilibrio de alquiler y compra', path: '/rent-vs-buy-breakeven-year' },
+        { title: 'Coste real de una hipoteca y gastos iniciales', path: '/upfront-fees-financing-cost' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -342,6 +377,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Voiture neuve ou d’occasion', path: '/new-vs-used-car-total-cost' },
       ],
     },
+    'rent-vs-buy': {
+      kind: 'rent-buy', title: 'Calculateur louer ou acheter un logement en France',
+      description: 'Comparez loyers cumulés, apport, frais d’acquisition, crédit, charges de propriétaire et capital net récupérable à la revente.',
+      intro: 'Comparez un logement et une durée cohérents. La mensualité de crédit n’est pas le coût complet d’achat, mais elle ne doit pas non plus être traitée entièrement comme perdue : le calcul retranche le capital net réellement récupérable après dette et frais de revente.',
+      currency: 'EUR', numberLocale: 'fr-FR', inputsHeading: 'Scénario de logement', verdictLabel: 'Coût net le plus faible',
+      initialVerdict: 'Saisissez loyer, achat, durée et capital récupérable.', invalidVerdict: 'Loyer, prix et durée doivent être supérieurs à zéro.',
+      favorableVerdict: 'Acheter coûte {difference} de moins sur {years} ans si vous récupérez {equity} nets à la fin.',
+      unfavorableVerdict: 'Louer coûte {difference} de moins sur {years} ans. Il faudrait {parityEquity} de capital net final pour que l’achat égale la location.',
+      fields: [
+        { id: 'monthly-rent', label: 'Loyer mensuel initial', helper: 'Même zone, surface et qualité que le bien acheté.', value: 1050, min: 0, step: 10 },
+        { id: 'rent-growth', label: 'Hausse annuelle du loyer (%)', helper: 'Hypothèse de scénario, pas plafond réglementaire.', value: 2, min: 0, step: 0.1 },
+        { id: 'home-price', label: 'Prix d’acquisition', helper: 'Prix convenu hors frais saisis séparément.', value: 280000, min: 0, step: 1000 },
+        { id: 'down-payment', label: 'Apport versé', helper: 'Capital immobilisé au départ.', value: 56000, min: 0, step: 1000 },
+        { id: 'closing-costs', label: 'Frais d’acquisition et de financement', helper: 'Utilisez une estimation liée au bien et au montage, pas un taux universel.', value: 22000, min: 0, step: 500 },
+        { id: 'mortgage-payment', label: 'Mensualité de crédit', helper: 'Mensualité du financement comparé.', value: 1100, min: 0, step: 10 },
+        { id: 'owner-costs', label: 'Autres coûts mensuels du propriétaire', helper: 'Taxe foncière proratisée, copropriété non récupérable, assurance et travaux.', value: 260, min: 0, step: 10 },
+        { id: 'years', label: 'Années avant déménagement ou vente', helper: 'Durée que vous pouvez réellement tenir.', value: 7, min: 1, step: 1 },
+        { id: 'ending-equity', label: 'Capital net récupérable à la fin', helper: 'Vente prudente moins crédit restant, agence, diagnostics, fiscalité et frais.', value: 110000, min: 0, step: 1000 },
+      ],
+      metrics: [
+        { id: 'rent-total', label: 'Loyers cumulés' }, { id: 'owner-net-cost', label: 'Coût net d’achat' },
+        { id: 'difference', label: 'Écart du scénario' }, { id: 'parity-equity', label: 'Capital final nécessaire pour égaler' },
+      ],
+      faq: [
+        { question: 'Pourquoi saisir un capital net final ?', answer: 'L’apport et le principal remboursé peuvent revenir à la vente, mais seulement après dette et frais. Saisissez un produit net prudent, pas le prix brut espéré.' },
+        { question: 'Le rendement possible de l’apport est-il inclus ?', answer: 'Non. Ajoutez un scénario séparé avec rendement net, frais, impôts et risque si vous envisagez d’investir l’apport en restant locataire.' },
+        { question: 'Quels frais d’achat retenir ?', answer: 'Demandez une estimation adaptée au neuf ou à l’ancien, au département et au financement. Droits, émoluments, garantie et dossier varient selon l’opération.' },
+        { question: 'Le calcul décide-t-il à ma place ?', answer: 'Non. Mobilité, emploi, trésorerie, travaux, copropriété et risque de taux peuvent dominer un petit avantage chiffré.' },
+      ],
+      related: [
+        { title: 'Guide des hypothèses louer ou acheter', path: '/rent-vs-buy-guide' },
+        { title: 'Année d’équilibre location-achat', path: '/rent-vs-buy-breakeven-year' },
+        { title: 'Effet des frais initiaux du financement', path: '/upfront-fees-financing-cost' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -493,6 +563,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Vollständiger Kostenvergleich Elektroauto und Benziner', path: '/ev-vs-gas-total-cost' },
         { title: 'Zuhause laden oder öffentliche Säule', path: '/home-vs-public-ev-charging-cost' },
         { title: 'Neuwagen oder Gebrauchtwagen', path: '/new-vs-used-car-total-cost' },
+      ],
+    },
+    'rent-vs-buy': {
+      kind: 'rent-buy', title: 'Mieten-oder-Kaufen-Rechner für Deutschland',
+      description: 'Kumulierte Miete mit Eigenkapital, Kaufnebenkosten, Kreditrate, Eigentümerkosten und Nettovermögen beim Verkauf vergleichen.',
+      intro: 'Vergleichen Sie eine ähnliche Wohnung über denselben realistischen Zeitraum. Die Kreditrate ist nicht der gesamte Eigentümerkostenblock, aber auch nicht vollständig verloren. Deshalb wird nur der geschätzte Nettoverkaufserlös nach Restschuld und Verkaufsaufwand abgezogen.',
+      currency: 'EUR', numberLocale: 'de-DE', inputsHeading: 'Wohnszenario', verdictLabel: 'Niedrigere Nettokosten',
+      initialVerdict: 'Miete, Kauf, Haltedauer und erwartetes Nettovermögen eintragen.', invalidVerdict: 'Miete, Kaufpreis und Haltedauer müssen größer als null sein.',
+      favorableVerdict: 'Kaufen kostet über {years} Jahre {difference} weniger, wenn am Ende {equity} netto zurückfließen.',
+      unfavorableVerdict: 'Mieten kostet über {years} Jahre {difference} weniger. Für Gleichstand bräuchte der Kauf {parityEquity} Nettovermögen am Ende.',
+      fields: [
+        { id: 'monthly-rent', label: 'Monatliche Anfangskaltmiete', helper: 'Mit vergleichbarer Lage, Größe und Qualität arbeiten.', value: 1200, min: 0, step: 10 },
+        { id: 'rent-growth', label: 'Jährliche Mietsteigerung (%)', helper: 'Szenario, keine rechtliche oder wirtschaftliche Prognose.', value: 2, min: 0, step: 0.1 },
+        { id: 'home-price', label: 'Kaufpreis', helper: 'Beurkundeter Preis ohne separat erfasste Nebenkosten.', value: 360000, min: 0, step: 1000 },
+        { id: 'down-payment', label: 'Eingesetztes Eigenkapital', helper: 'Zu Beginn gebundenes Kapital.', value: 72000, min: 0, step: 1000 },
+        { id: 'closing-costs', label: 'Kauf- und Finanzierungskosten', helper: 'Grunderwerbsteuer, Notar, Grundbuch, Makler und Finanzierung passend zum Fall.', value: 43000, min: 0, step: 500 },
+        { id: 'mortgage-payment', label: 'Monatliche Kreditrate', helper: 'Rate des konkreten Finanzierungsplans.', value: 1450, min: 0, step: 10 },
+        { id: 'owner-costs', label: 'Weitere Eigentümerkosten pro Monat', helper: 'Nicht umlagefähiges Hausgeld, Steuer, Versicherung, Instandhaltung und Sonderumlage.', value: 300, min: 0, step: 10 },
+        { id: 'years', label: 'Jahre bis Umzug oder Verkauf', helper: 'Realistisch durchhaltbare Dauer.', value: 8, min: 1, step: 1 },
+        { id: 'ending-equity', label: 'Nettovermögen am Ende', helper: 'Vorsichtiger Verkaufserlös abzüglich Restschuld, Verkaufskosten und möglicher Steuer.', value: 150000, min: 0, step: 1000 },
+      ],
+      metrics: [
+        { id: 'rent-total', label: 'Kumulierte Miete' }, { id: 'owner-net-cost', label: 'Nettokosten des Kaufs' },
+        { id: 'difference', label: 'Differenz im Szenario' }, { id: 'parity-equity', label: 'Benötigtes Endvermögen für Gleichstand' },
+      ],
+      faq: [
+        { question: 'Warum wird Endvermögen eingegeben?', answer: 'Eigenkapital und Tilgung können beim Verkauf zurückkommen, aber nur nach Restschuld und Kosten. Nutzen Sie einen vorsichtigen Nettoerlös statt des erwarteten Bruttoverkaufspreises.' },
+        { question: 'Sind entgangene Anlageerträge enthalten?', answer: 'Nein. Rechnen Sie für Mieten ein separates Anlageszenario mit Nettorendite, Kosten, Steuer und Risiko, statt eine sichere Rendite zu unterstellen.' },
+        { question: 'Welche Kaufnebenkosten gehören hinein?', answer: 'Die konkrete Grunderwerbsteuer des Bundeslands sowie Notar, Grundbuch, mögliche Makler- und Finanzierungskosten. Pauschalen können den Einzelfall verfehlen.' },
+        { question: 'Bedeutet ein positiver Kaufwert eine Empfehlung?', answer: 'Nein. Mobilität, Arbeitsplatz, Liquidität, Zinsbindung, Sanierung und WEG-Risiken können wichtiger sein als eine kleine Rechendifferenz.' },
+      ],
+      related: [
+        { title: 'Annahmen für Mieten oder Kaufen', path: '/rent-vs-buy-guide' },
+        { title: 'Break-even-Jahr von Miete und Kauf', path: '/rent-vs-buy-breakeven-year' },
+        { title: 'Anfangskosten einer Finanzierung', path: '/upfront-fees-financing-cost' },
       ],
     },
   },

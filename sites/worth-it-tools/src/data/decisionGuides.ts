@@ -2720,3 +2720,39 @@ export const trueHourlyWageGuides: Partial<Record<Locale, DecisionGuideContent>>
     sources: [{ label: 'BMAS 2026 — Arbeitszeitgesetz und Pflicht zur Erfassung geleisteter Arbeitszeit', href: 'https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Regelungen-zur-Arbeitszeit/regelungen-zur-arbeitszeit-art.html' }, { label: 'Bundesfinanzministerium 2026 — Entfernungspauschale ab dem ersten Kilometer', href: 'https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/das-aendert-sich-2026.html' }], lastVerified: '2026-07-19',
   },
 };
+
+export const raiseInflationGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'raise-inflation', labels: labels.en,
+    directAnswer: 'A raise beats inflation only when (1 + raise rate) ÷ (1 + inflation rate) − 1 is positive. A $70,000 salary with a 4% raise becomes $72,800, but with 5% inflation its real change is 1.04÷1.05−1 = −0.95%; the new salary buys about what $69,333.33 bought before. Subtracting 5% from 4% gives a useful shortcut, but the ratio is the exact compounded result.',
+    inputs: ['Old gross pay for one consistent annual, monthly or hourly period', 'Nominal raise percentage, excluding bonuses unless they recur', 'Official CPI change for the same start and end periods', 'Whether the CPI is annual average, year-over-year month or another index comparison', 'Base pay, hours and benefits that changed alongside the raise', 'Take-home impact if taxes, deductions or contributions changed', 'Personal spending categories that materially differ from the CPI basket'],
+    formula: 'New nominal pay = old pay × (1 + raise%). Exact real change = [(1 + raise%) ÷ (1 + inflation%) − 1] × 100. New pay in old-period dollars = new nominal pay ÷ (1 + inflation%).',
+    workedExample: '$70,000 × 1.04 = $72,800 nominal. Real change = (1.04÷1.05−1)×100 = −0.95%. Purchasing-power equivalent = $72,800÷1.05 = $69,333.33 in old-period dollars, so the raise did not preserve purchasing power in this scenario.',
+    sensitivity: [{ scenario: 'Raise equals inflation', input: '5% raise; 5% inflation', result: '0.00% real change; $70,000 old-dollar equivalent' }, { scenario: 'Raise 6%, inflation 5%', input: 'Raise becomes 6%', result: '+0.95% real; $70,666.67 equivalent' }, { scenario: 'Inflation only 3%', input: 'Inflation becomes 3%', result: '+0.97% real; $70,679.61 equivalent' }, { scenario: 'No raise, inflation 5%', input: 'Raise becomes 0%', result: '−4.76% real; $66,666.67 equivalent' }],
+    cta: { label: 'Compare your raise with matching CPI', href: '#raise-inflation-calculator' },
+    limitations: ['Use CPI observations with the same time boundary as the raise; do not mix a monthly change with an annual raise.', 'BLS annual calculator values use calendar-year averages, while the current year uses the latest monthly index, so record the exact method and retrieval date.', 'CPI describes an average urban consumer basket, not your personal cost-of-living change.', 'This gross-pay comparison excludes taxes, benefits, hours, bonuses and promotion risk unless you analyze them separately.'],
+    sources: [{ label: 'U.S. Bureau of Labor Statistics — CPI Inflation Calculator and period method', href: 'https://www.bls.gov/data/inflation_calculator_inside.htm' }, { label: 'BLS — mathematical calculations for CPI ratios and purchasing power', href: 'https://www.bls.gov/cpi/factsheets/cpi-math-calculations.pdf' }], lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'raise-inflation', labels: labels.zh,
+    directAnswer: '加薪是否追上通膨，要看精確實質變動＝（1＋加薪率）÷（1＋同期間 CPI 漲幅）－1。月薪 NT$60,000 加薪 3% 變 NT$61,800；若使用主計總處 2026 年 6 月 CPI 年增 2.60% 作為同期間情境，實質增加約 0.39%，新薪的舊期購買力約 NT$60,233.92。3%－2.6%=0.4% 只是近似值。',
+    inputs: ['加薪前同一口徑的月薪、年薪或時薪', '只算固定本薪的名目加薪率，非固定獎金另列', '與加薪起訖完全相同的官方 CPI 漲跌幅', '採全年平均、同月年增或任兩月指數比的明確口徑', '工時、津貼、勞健保、勞退與其他福利是否同時改變', '扣繳與自付額改變後的實領影響', '個人住房、交通、育兒等支出是否偏離平均 CPI 權重'],
+    formula: '新名目薪資＝舊薪×（1＋加薪率）。精確實質變動率＝[（1＋加薪率）÷（1＋通膨率）－1]×100。以舊期價格表示的新薪購買力＝新薪÷（1＋通膨率）。',
+    workedExample: 'NT$60,000×1.03＝NT$61,800。若同期間 CPI 漲 2.60%，實質變動＝（1.03÷1.026－1）×100＝+0.39%；舊期購買力＝NT$61,800÷1.026＝NT$60,233.92。例中加薪略高於平均物價，而不是多出完整 3%。',
+    sensitivity: [{ scenario: '加薪等於通膨', input: '加薪 2.6%；CPI 2.6%', result: '實質 0%；舊期購買力 NT$60,000' }, { scenario: '加薪只有 2%', input: '3% 改 2%', result: '實質 −0.58%；約 NT$59,649.12' }, { scenario: '通膨升到 4%', input: '2.6% 改 4%', result: '實質 −0.96%；約 NT$59,423.08' }, { scenario: '加薪 5%', input: '3% 改 5%', result: '實質 +2.34%；約 NT$61,403.51' }],
+    cta: { label: '用同期間 CPI 檢查加薪購買力', href: '#raise-inflation-calculator' },
+    limitations: ['2026 年 6 月 2.60% 只是有日期的年增情境；實算時請自行輸入與加薪期間一致的官方值。', '主計總處換算工具可比較任兩時點或全年平均，兩種口徑不可混用。', 'CPI 是一般家庭平均消費籃，不等於每個人的生活成本變化。', '本頁比較稅前固定薪資；實領、獎金、工時與福利要另做完整薪酬比較。'],
+    sources: [{ label: '中華民國統計資訊網 — CPI 任兩時點漲跌與購買力換算', href: 'https://www.stat.gov.tw/cpi2.aspx?n=4583' }, { label: '主計總處 — 2026 年 6 月 CPI 年增 2.60%，發布日 2026-07-07', href: 'https://www.stat.gov.tw/News.aspx?n=2668&sms=10980' }], lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'raise-inflation', labels: labels.es,
+    directAnswer: 'Una subida gana poder adquisitivo solo si (1 + subida) ÷ (1 + IPC) − 1 es positiva. Con 30.000 € brutos anuales y una subida del 3%, el nuevo salario es 30.900 €. Usando como escenario la tasa anual del IPC de España de junio de 2026, 3,2% publicada por el INE, el cambio real es 1,03÷1,032−1 = −0,19% y equivale a 29.941,86 € a precios anteriores.',
+    inputs: ['Salario bruto anterior por año, mes u hora con la misma unidad', 'Porcentaje nominal fijo de la subida', 'Variación oficial del IPC entre exactamente los mismos periodos', 'Si se usa tasa interanual, media anual o cálculo entre meses', 'Cambios de jornada, variable, bonus y beneficios', 'Cambio de líquido por IRPF y cotizaciones', 'Peso personal de vivienda, alimentos, transporte u otros gastos frente a la cesta media'],
+    formula: 'Nuevo salario nominal = salario anterior × (1 + subida%). Cambio real exacto = [(1 + subida%) ÷ (1 + IPC%) − 1] × 100. Salario nuevo a precios anteriores = nuevo nominal ÷ (1 + IPC%).',
+    workedExample: '30.000 €×1,03 = 30.900 €. Con IPC interanual de junio de 2026 del 3,2%, cambio real = (1,03÷1,032−1)×100 = −0,19%. Equivalente a precios anteriores = 30.900 €÷1,032 = 29.941,86 €. La subida nominal no conserva del todo el poder adquisitivo medio.',
+    sensitivity: [{ scenario: 'Subida igual al IPC', input: '3,2% y 3,2%', result: '0,00% real; equivalente 30.000 €' }, { scenario: 'Subida del 4%', input: '3% pasa a 4%', result: '+0,78% real; 30.232,56 € equivalentes' }, { scenario: 'IPC del 2%', input: '3,2% pasa a 2%', result: '+0,98% real; 30.294,12 € equivalentes' }, { scenario: 'Subida del 2%', input: '3% pasa a 2%', result: '−1,16% real; 29.651,16 € equivalentes' }],
+    cta: { label: 'Comparar subida e IPC del mismo periodo', href: '#raise-inflation-calculator' },
+    limitations: ['El 3,2% es un ejemplo fechado de junio de 2026; introduce el dato oficial que corresponda a tu periodo salarial.', 'La calculadora del INE permite elegir meses, media nacional, comunidad o provincia; no mezcles series distintas.', 'El IPC mide una cesta fija representativa y no es un índice individual del coste de vida.', 'Salario bruto no captura IRPF, cotizaciones, jornada, bonus ni beneficios.'],
+    sources: [{ label: 'INE — cálculo oficial de variaciones del IPC entre periodos', href: 'https://www.ine.es/varipc' }, { label: 'INE — IPC junio de 2026, tasa anual 3,2%, publicado 15-07-2026', href: 'https://www.ine.es/dyngs/Prensa/IPC0626.htm' }], lastVerified: '2026-07-19',
+  },
+};

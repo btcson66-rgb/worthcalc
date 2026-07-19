@@ -41,13 +41,14 @@ const briefRoutes = [
   { id: '26', slug: 'reusable-vs-disposable-break-even' },
   { id: '27', slug: 'price-per-wear-clothing-shoes' },
   { id: '28', slug: 'true-hourly-wage-after-commuting-work-expenses' },
+  { id: '29', slug: 'pay-raise-vs-inflation-purchasing-power' },
 ];
 
 const releaseFloor = {
-  html: 175,
-  editorial: 143,
-  alignedVariants: 140,
-  compliantVariants: 140,
+  html: 178,
+  editorial: 146,
+  alignedVariants: 143,
+  compliantVariants: 143,
   completeTopics: 28,
 };
 

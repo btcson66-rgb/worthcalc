@@ -45,10 +45,10 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 216,
+  html: 219,
   home: 3,
   legal: 30,
-  tool: 34,
+  tool: 37,
   editorial: 148,
   alignedVariants: 145,
   compliantVariants: 145,

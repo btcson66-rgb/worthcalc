@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute';
+    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -236,6 +236,32 @@ const config = {
       });
     }
 
+    function updateLatte(): void {
+      const itemCost = Math.max(0, read('item-cost'));
+      const timesPerWeek = Math.max(0, read('times-per-week'));
+      const years = Math.max(0, Math.round(read('years')));
+      const annualReturn = Math.max(-99, read('annual-return')) / 100;
+      const annualInflation = Math.max(-99, read('annual-inflation')) / 100;
+      const weeklyContribution = itemCost * timesPerWeek;
+      const weeks = years * 52;
+      const direct = weeklyContribution * weeks;
+      const weeklyReturn = (1 + annualReturn) ** (1 / 52) - 1;
+      const future = Math.abs(weeklyReturn) < 1e-12
+        ? direct
+        : weeklyContribution * (((1 + weeklyReturn) ** weeks - 1) / weeklyReturn);
+      const growth = future - direct;
+      const monthly = weeklyContribution * 52 / 12;
+      const realFuture = future / ((1 + annualInflation) ** years);
+
+      output('monthly-equivalent', money.format(monthly)); output('direct-spend', money.format(direct));
+      output('future-value', money.format(future)); output('growth', money.format(growth)); output('real-future', money.format(realFuture));
+      if (!verdict) return;
+      if (itemCost <= 0 || timesPerWeek <= 0 || years <= 0 || annualReturn <= -1 || annualInflation <= -1) { verdict.textContent = config.invalidVerdict; return; }
+      verdict.textContent = fill(annualReturn <= 0 ? config.favorableVerdict : config.unfavorableVerdict, {
+        monthly: money.format(monthly), direct: money.format(direct), years: String(years), rate: percent(annualReturn * 100), future: money.format(future), growth: money.format(growth),
+      });
+    }
+
     const update = config.kind === 'installment'
       ? updateInstallment
       : config.kind === 'subscription'
@@ -246,7 +272,9 @@ const config = {
             ? updateEv
             : config.kind === 'rent-buy'
               ? updateRentBuy
-              : updateCommute;
+              : config.kind === 'commute'
+                ? updateCommute
+                : updateLatte;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

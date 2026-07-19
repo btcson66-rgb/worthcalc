@@ -1,0 +1,100 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import WasteBreakEvenCalculator from '../../components/WasteBreakEvenCalculator.astro';
+import { localizedPath } from '../../i18n/utils';
+import type { FaqItem } from '../../lib/seo';
+
+type L = 'es' | 'fr' | 'de';
+const meta: Record<L, { title: string; description: string; faq: FaqItem[] }> = {
+  es: {
+    title: '¿Compensa comprar a granel? Calcula la merma máxima del formato grande',
+    description: 'Calcula cuánta merma admite un formato grande antes de ser más caro que el pequeño, con caducidad, consumo preferente, cuota y almacenaje.',
+    faq: [
+      { question: '¿Qué merma máxima puede tener el formato grande?', answer: 'Depende de su coste total y del coste por unidad realmente aprovechada del pequeño. El punto de equilibrio es 1 menos [coste grande ÷ cantidad grande ÷ coste útil pequeño].' },
+      { question: '¿Uso la fecha de caducidad o la de consumo preferente?', answer: 'No son equivalentes. AESAN indica que no debe consumirse un alimento pasada la caducidad; el consumo preferente se refiere a calidad bajo las condiciones indicadas. El cálculo nunca sustituye esa regla.' },
+      { question: '¿Cómo estimo la merma sin inventar un porcentaje?', answer: 'Pesa o cuenta lo comprado y lo descartado en dos o tres compras del mismo producto. Añade lo que queda inutilizable tras abrir y prueba un escenario peor que tu promedio.' },
+      { question: '¿Debo cargar toda la cuota de socio al producto?', answer: 'Solo si ese producto es la razón de pagar la cuota. Si la membresía existiría igualmente, usa solo el coste incremental atribuible o cero.' },
+      { question: '¿Es lo mismo que comparar el precio por kilo?', answer: 'No. El precio por kilo divide entre la cantidad envasada; el coste útil divide todos los costes entre la cantidad que de verdad consumirás.' },
+    ],
+  },
+  fr: {
+    title: 'Grand format : calculez la perte maximale avant qu’il ne coûte plus cher',
+    description: 'Calculez la perte que peut supporter un grand format face au petit, avec DLC, DDM, cotisation, livraison et stockage.',
+    faq: [
+      { question: 'Quelle perte maximale le grand format peut-il supporter ?', answer: 'Elle dépend du coût total du grand et du coût par unité réellement consommée du petit. Le seuil vaut 1 moins [coût grand ÷ quantité grande ÷ coût utile petit].' },
+      { question: 'Faut-il utiliser la DLC ou la DDM ?', answer: 'Elles n’ont pas le même sens. La DGCCRF rappelle que la DLC est impérative, tandis que la DDM concerne les qualités d’un produit intact et bien conservé. Le calcul ne remplace jamais ces règles.' },
+      { question: 'Comment mesurer les pertes du foyer ?', answer: 'Pesez ou comptez l’achat et ce qui est jeté sur plusieurs achats identiques, y compris après ouverture. Testez aussi un cas plus défavorable que la moyenne.' },
+      { question: 'Toute la cotisation doit-elle être ajoutée ?', answer: 'Seulement si cet achat provoque l’adhésion. Sinon, ajoutez la seule part supplémentaire cohérente ou zéro si elle est déjà inévitable.' },
+      { question: 'Pourquoi le prix au kilo ne suffit-il pas ?', answer: 'Il utilise la quantité vendue. Le coût utile ajoute les frais nécessaires et divise par la quantité réellement consommée.' },
+    ],
+  },
+  de: {
+    title: 'Großpackung: maximalen Verlust bis zum Break-even berechnen',
+    description: 'Berechnen Sie, wie viel Verlust eine Großpackung gegenüber klein verträgt – mit MHD, Verbrauchsdatum, Beitrag, Versand und Lagerung.',
+    faq: [
+      { question: 'Wie hoch darf der Verlust der Großpackung sein?', answer: 'Das hängt von ihren Gesamtkosten und den effektiven Kosten der kleinen Packung ab. Der Break-even-Verlust ist 1 minus [Großkosten ÷ Großmenge ÷ effektive Kleinkosten].' },
+      { question: 'Zählt MHD oder Verbrauchsdatum?', answer: 'Beides bedeutet nicht dasselbe. Die Verbraucherzentrale erläutert, dass ein MHD bei ungeöffneter, richtig gelagerter Ware anders einzuordnen ist; ein Verbrauchsdatum ist die strengere Grenze. Der Rechner ändert keine Sicherheitsregel.' },
+      { question: 'Wie lässt sich Haushaltsverlust messen?', answer: 'Bei mehreren identischen Käufen Kaufmenge und entsorgten Rest wiegen oder zählen, einschließlich Verlust nach Öffnung. Zusätzlich einen ungünstigeren Fall rechnen.' },
+      { question: 'Muss der gesamte Mitgliedsbeitrag hinein?', answer: 'Nur wenn dieser Einkauf die Mitgliedschaft auslöst. Andernfalls nur den konsistent zurechenbaren Mehrbetrag oder null ansetzen.' },
+      { question: 'Warum reicht der Grundpreis am Regal nicht?', answer: 'Er teilt durch die verkaufte Nennmenge. Effektive Kosten teilen alle nötigen Kosten durch die Menge, die tatsächlich genutzt wird.' },
+    ],
+  },
+};
+
+export function getStaticPaths() { return ['es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as L;
+const article = meta[locale];
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+  {locale === 'es' && <>
+    <p><strong>Respuesta corta:</strong> el formato grande solo compensa si el ahorro de etiqueta sobrevive a lo que no se usa. La pregunta accionable no es “¿cuánto tiro normalmente?”, sino “¿qué porcentaje máximo podría perder antes de pagar más que con el pequeño?”.</p>
+    <p>El coste útil del pequeño es <strong>precio ÷ (cantidad × porcentaje aprovechado)</strong>. El grande empata cuando su coste total por la cantidad que queda tras la merma iguala ese valor. El resultado es un umbral, no una predicción de consumo.</p>
+    <WasteBreakEvenCalculator locale={locale} />
+    <h2>Ejemplo reproducible en euros</h2>
+    <p>Un envase pequeño cuesta 4,80 € por una unidad y se aprovecha al 95 %: 5,05 € por unidad útil. Un lote de diez cuesta 36 € y suma 4 € entre cuota imputada y almacenaje. Para igualar 5,05 €, debe aprovecharse al menos el 79,2 % del lote; la merma máxima es aproximadamente 20,8 %. Con 20 % de merma el lote queda en 5 € por unidad útil; con 25 % sube a 5,33 € y pierde.</p>
+    <h2>Caducidad, consumo preferente y apertura</h2>
+    <p>AESAN distingue la fecha de caducidad, tras la que no debe consumirse el alimento, de la fecha de consumo preferente, vinculada a cualidades si se respetan conservación e integridad. Después de abrir, además, manda la indicación específica del envase. Use el horizonte más corto aplicable para estimar cuánto terminará realmente.</p>
+    <h2>Obtenga su tasa con dos compras, no con una media genérica</h2>
+    <ol><li>Anote cantidad neta al comprar.</li><li>Registre lo consumido y lo desechado, incluida la parte deteriorada tras abrir.</li><li>Repita con el mismo producto y tamaño.</li><li>Calcule merma = desechado ÷ comprado y pruebe también un caso cinco o diez puntos peor.</li></ol>
+    <p>Para una comparación más amplia entre formatos, unidades, envío y membresía, consulte <a href={localizedPath(locale, '/bulk-buying-vs-small-packages')}>la guía de formato grande frente a pequeño</a>.</p>
+    <h2>Fuentes</h2>
+    <ul class="source-list"><li><a href="https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/fechas_caducidad.htm" rel="noopener">AESAN — caducidad y consumo preferente</a></li><li><a href="https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/compra_segura.htm" rel="noopener">AESAN — compra segura, lista, fechas y cadena de frío</a></li></ul>
+  </>}
+  {locale === 'fr' && <>
+    <p><strong>Réponse courte :</strong> le grand format n’est avantageux que si son écart de prix résiste à la part non consommée. La bonne question est donc : « quelle perte maximale puis-je subir avant que le petit format ne redevienne moins cher ? »</p>
+    <p>Le coût utile du petit vaut <strong>prix ÷ (quantité × part consommée)</strong>. Le grand atteint l’équilibre lorsque son coût total, divisé par sa quantité après pertes, rejoint ce coût utile. C’est un seuil de décision, pas une promesse.</p>
+    <WasteBreakEvenCalculator locale={locale} />
+    <h2>Exemple reproductible en euros</h2>
+    <p>Le petit format coûte 4,50 € l’unité et 95 % sont consommés, soit 4,74 € par unité utile. Le lot de dix coûte 33 €, plus 4 € de cotisation imputée et de stockage. Il doit être consommé à au moins 78,1 % : la perte maximale est proche de 21,9 %. À 20 % de perte, son coût utile est 4,63 € ; à 25 %, il atteint 4,93 € et le petit gagne.</p>
+    <h2>DLC, DDM et délai après ouverture</h2>
+    <p>La DGCCRF précise que la DLC est impérative. La DDM concerne les qualités d’un produit intact et correctement conservé ; elle ne dispense pas d’examiner l’emballage. Après ouverture, la durée indiquée prend le relais. Retenez l’horizon applicable le plus court dans l’estimation.</p>
+    <h2>Mesurer au lieu d’emprunter un taux moyen</h2>
+    <ol><li>Notez ou pesez la quantité achetée.</li><li>Mesurez ce qui a été consommé et jeté, y compris après ouverture.</li><li>Répétez sur le même produit et le même format.</li><li>Calculez perte = jeté ÷ acheté, puis ajoutez cinq ou dix points pour le cas défavorable.</li></ol>
+    <p>Pour comparer aussi les unités, la livraison et l’adhésion, ouvrez <a href={localizedPath(locale, '/bulk-buying-vs-small-packages')}>le guide grand format ou petit format</a>.</p>
+    <h2>Sources</h2>
+    <ul class="source-list"><li><a href="https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/date-limite-de-consommation-et-date-de-durabilite-minimale-ce-que-vous-devez-savoir" rel="noopener">DGCCRF — DLC, DDM, emballage et ouverture</a></li><li><a href="https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix" rel="noopener">DGCCRF — prix TTC et frais supplémentaires</a></li></ul>
+  </>}
+  {locale === 'de' && <>
+    <p><strong>Kurzantwort:</strong> Eine Großpackung lohnt sich nur, wenn der Regalvorteil den nicht genutzten Anteil überlebt. Die prüfbare Frage lautet: „Wie viel Verlust darf entstehen, bevor klein je tatsächlich genutzter Einheit günstiger wird?“</p>
+    <p>Effektive Kleinkosten sind <strong>Preis ÷ (Menge × Nutzungsquote)</strong>. Groß erreicht den Break-even, wenn Gesamtkosten geteilt durch die nach Verlust nutzbare Menge denselben Wert ergeben. Das ist eine Schwelle, keine Verbrauchsprognose.</p>
+    <WasteBreakEvenCalculator locale={locale} />
+    <h2>Nachrechenbares Euro-Beispiel</h2>
+    <p>Klein kostet 4,60 € je Einheit und wird zu 95 % genutzt: 4,84 € je nutzbarer Einheit. Zehn Einheiten groß kosten 35 €, zuzüglich 4 € Beitrags- und Lageranteil. Mindestens 80,5 % müssen genutzt werden; der maximal verträgliche Verlust liegt bei rund 19,5 %. Bei 15 % Verlust kostet groß 4,59 €, bei 25 % dagegen 5,20 €.</p>
+    <h2>Verbrauchsdatum, MHD und geöffnete Packung</h2>
+    <p>Die Verbraucherzentrale trennt Mindesthaltbarkeitsdatum und Verbrauchsdatum. Das MHD bezieht sich auf ungeöffnete, richtig gelagerte Ware; das Verbrauchsdatum ist die strengere Grenze. Nach dem Öffnen gelten die Hinweise der Packung. Für die Nutzungsquote zählt der jeweils kürzeste relevante Zeitraum.</p>
+    <h2>Eigene Verlustrate aus zwei Käufen</h2>
+    <ol><li>Kaufmenge notieren oder wiegen.</li><li>Verbrauchten und entsorgten Rest einschließlich Verlust nach Öffnung erfassen.</li><li>Mit demselben Produkt und Format wiederholen.</li><li>Verlust = entsorgt ÷ gekauft berechnen und zusätzlich fünf bis zehn Punkte schlechter testen.</li></ol>
+    <p>Für den breiteren Vergleich mit Einheiten, Versand und Mitgliedschaft lesen Sie <a href={localizedPath(locale, '/bulk-buying-vs-small-packages')}>Großpackung oder kleine Packung</a>.</p>
+    <h2>Quellen</h2>
+    <ul class="source-list"><li><a href="https://www.verbraucherzentrale.de/wissen/lebensmittel/lebensmittelproduktion/lebensmittel-sicher-einkaufen-und-lagern-8336" rel="noopener">Verbraucherzentrale — nur lagerbare und rechtzeitig verbrauchbare Vorräte</a></li><li><a href="https://www.verbraucherzentrale.de/wissen/lebensmittel/gesund-ernaehren/mindesthaltbarkeitsdatum-mhd-ist-nicht-gleich-verbrauchsdatum-13452" rel="noopener">Verbraucherzentrale — MHD ist nicht Verbrauchsdatum</a></li></ul>
+  </>}
+  {locale === 'es' && <p class="last-verified"><strong>Última comprobación:</strong> <time datetime="2026-07-19">2026-07-19</time></p>}
+  {locale === 'fr' && <p class="last-verified"><strong>Dernière vérification :</strong> <time datetime="2026-07-19">2026-07-19</time></p>}
+  {locale === 'de' && <p class="last-verified"><strong>Zuletzt geprüft:</strong> <time datetime="2026-07-19">2026-07-19</time></p>}
+  <FAQ items={article.faq} />
+  {locale === 'es' && <p class="privacy-note">Información general de consumo; no es consejo alimentario, financiero ni de producto. Las entradas se quedan en el navegador.</p>}
+  {locale === 'fr' && <p class="privacy-note">Information générale de consommation, pas un conseil alimentaire, financier ou produit. Les saisies restent dans le navigateur.</p>}
+  {locale === 'de' && <p class="privacy-note">Allgemeine Verbraucherinformation; keine Lebensmittel-, Finanz- oder Produktberatung. Eingaben bleiben im Browser.</p>}
+</ArticleLayout>

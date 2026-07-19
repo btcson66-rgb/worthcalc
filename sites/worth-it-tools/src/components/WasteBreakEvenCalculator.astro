@@ -1,0 +1,104 @@
+---
+import type { Locale } from '../consts';
+
+interface Props { locale: Locale }
+
+const { locale } = Astro.props;
+const content = {
+  en: { currency: 'USD', heading: 'Bulk-buy waste break-even calculator', intro: 'Use the same unit on both sides. Finish rate means the share you realistically use before it is no longer usable.', smallPrice: 'Small-pack price', smallQty: 'Small-pack quantity', smallFinish: 'Small-pack finish rate (%)', bulkPrice: 'Bulk-pack price', bulkQty: 'Bulk-pack quantity', bulkFinish: 'Expected bulk finish rate (%)', extra: 'Bulk-only fees and storage', smallUnit: 'Small effective unit cost', bulkUnit: 'Bulk effective unit cost', maxWaste: 'Maximum bulk waste to break even', difference: 'Difference per usable unit', positive: 'At these inputs, bulk is cheaper per usable unit.', negative: 'At these inputs, the small pack is cheaper per usable unit.', noMargin: 'None—even zero bulk waste does not break even.', privacy: 'The model compares cost only. It cannot decide food safety or extend a package date.' },
+  zh: { currency: 'TWD', heading: '大包裝耗損打平計算機', intro: '兩邊請使用相同單位。「用完率」是你在不再適合使用前，實際可用完的比例。', smallPrice: '小包價格', smallQty: '小包數量', smallFinish: '小包用完率（%）', bulkPrice: '大包價格', bulkQty: '大包數量', bulkFinish: '預估大包用完率（%）', extra: '大包額外費用與保存成本', smallUnit: '小包有效單價', bulkUnit: '大包有效單價', maxWaste: '大包仍可打平的最高耗損率', difference: '每個可用單位差額', positive: '依目前輸入，大包每個可用單位較省。', negative: '依目前輸入，小包每個可用單位較省。', noMargin: '沒有；即使大包零耗損也無法打平。', privacy: '模型只比較成本，不能判斷食品安全，也不能延長包裝日期。' },
+  es: { currency: 'EUR', heading: 'Calculadora de merma máxima para que compense el formato grande', intro: 'Usa la misma unidad. El porcentaje aprovechado es lo que realmente consumirás respetando fecha, apertura y conservación.', smallPrice: 'Precio del formato pequeño', smallQty: 'Cantidad del formato pequeño', smallFinish: 'Porcentaje aprovechado del pequeño (%)', bulkPrice: 'Precio del formato grande', bulkQty: 'Cantidad del formato grande', bulkFinish: 'Porcentaje aprovechado previsto del grande (%)', extra: 'Cuota, envío y almacenaje exclusivos del grande', smallUnit: 'Coste útil del pequeño', bulkUnit: 'Coste útil del grande', maxWaste: 'Merma máxima del grande para empatar', difference: 'Diferencia por unidad aprovechada', positive: 'Con estos datos, el formato grande cuesta menos por unidad aprovechada.', negative: 'Con estos datos, el formato pequeño cuesta menos por unidad aprovechada.', noMargin: 'Ninguna: ni con merma cero compensa el formato grande.', privacy: 'El modelo solo compara costes. No decide seguridad alimentaria ni amplía una fecha del envase.' },
+  fr: { currency: 'EUR', heading: 'Calculateur de perte maximale pour rentabiliser le grand format', intro: 'Utilisez la même unité. Le taux consommé désigne la part réellement utilisée en respectant date, ouverture et conservation.', smallPrice: 'Prix du petit format', smallQty: 'Quantité du petit format', smallFinish: 'Part consommée du petit (%)', bulkPrice: 'Prix du grand format', bulkQty: 'Quantité du grand format', bulkFinish: 'Part consommée prévue du grand (%)', extra: 'Cotisation, livraison et stockage propres au grand', smallUnit: 'Coût utile du petit', bulkUnit: 'Coût utile du grand', maxWaste: 'Perte maximale du grand à l’équilibre', difference: 'Écart par unité consommée', positive: 'Avec ces données, le grand format coûte moins par unité consommée.', negative: 'Avec ces données, le petit format coûte moins par unité consommée.', noMargin: 'Aucune : même sans perte, le grand format ne s’équilibre pas.', privacy: 'Le modèle compare uniquement les coûts. Il ne juge pas la sécurité et ne prolonge aucune date.' },
+  de: { currency: 'EUR', heading: 'Rechner für den maximalen Großpackungs-Verlust', intro: 'Beide Seiten brauchen dieselbe Einheit. Nutzungsquote ist der Anteil, der bei Datum, Öffnung und richtiger Lagerung tatsächlich verbraucht wird.', smallPrice: 'Preis der kleinen Packung', smallQty: 'Menge der kleinen Packung', smallFinish: 'Nutzungsquote klein (%)', bulkPrice: 'Preis der Großpackung', bulkQty: 'Menge der Großpackung', bulkFinish: 'Erwartete Nutzungsquote groß (%)', extra: 'Nur groß anfallender Beitrag, Versand und Lagerkosten', smallUnit: 'Effektive Kosten klein', bulkUnit: 'Effektive Kosten groß', maxWaste: 'Maximaler Großverlust am Break-even', difference: 'Differenz je nutzbarer Einheit', positive: 'Mit diesen Eingaben ist die Großpackung je nutzbarer Einheit günstiger.', negative: 'Mit diesen Eingaben ist die kleine Packung je nutzbarer Einheit günstiger.', noMargin: 'Keiner: Selbst ohne Verlust erreicht die Großpackung den Break-even nicht.', privacy: 'Das Modell vergleicht nur Kosten. Es beurteilt keine Lebensmittelsicherheit und verlängert kein Datum.' },
+}[locale];
+
+const defaults = {
+  en: [6, 32, 100, 9.5, 64, 65, 0],
+  zh: [120, 1, 95, 900, 10, 80, 100],
+  es: [4.8, 1, 95, 36, 10, 80, 4],
+  fr: [4.5, 1, 95, 33, 10, 80, 4],
+  de: [4.6, 1, 95, 35, 10, 85, 4],
+}[locale];
+
+const fields = [
+  ['small-price', content.smallPrice, defaults[0], 0.01, 0, undefined],
+  ['small-qty', content.smallQty, defaults[1], 0.01, 0.01, undefined],
+  ['small-finish', content.smallFinish, defaults[2], 0.1, 0.1, 100],
+  ['bulk-price', content.bulkPrice, defaults[3], 0.01, 0, undefined],
+  ['bulk-qty', content.bulkQty, defaults[4], 0.01, 0.01, undefined],
+  ['bulk-finish', content.bulkFinish, defaults[5], 0.1, 0.1, 100],
+  ['extra', content.extra, defaults[6], 0.01, 0, undefined],
+] as const;
+---
+
+<section
+  class="waste-break-even"
+  data-waste-break-even
+  data-locale={locale === 'zh' ? 'zh-TW' : locale}
+  data-currency={content.currency}
+  data-positive={content.positive}
+  data-negative={content.negative}
+  data-no-margin={content.noMargin}
+  aria-labelledby="waste-break-even-heading"
+>
+  <h2 id="waste-break-even-heading">{content.heading}</h2>
+  <p>{content.intro}</p>
+  <div class="waste-fields">
+    {fields.map(([id, label, value, step, min, max]) => (
+      <label for={`waste-${id}`}>
+        <span>{label}</span>
+        <input id={`waste-${id}`} data-field={id} type="number" inputmode="decimal" value={value} step={step} min={min} max={max} />
+      </label>
+    ))}
+  </div>
+  <p class="waste-verdict" data-verdict aria-live="polite"></p>
+  <div class="waste-results">
+    <p><span>{content.smallUnit}</span><strong data-output="small-unit">—</strong></p>
+    <p><span>{content.bulkUnit}</span><strong data-output="bulk-unit">—</strong></p>
+    <p><span>{content.maxWaste}</span><strong data-output="max-waste">—</strong></p>
+    <p><span>{content.difference}</span><strong data-output="difference">—</strong></p>
+  </div>
+  <p class="privacy-note">{content.privacy}</p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-waste-break-even]').forEach((container) => {
+    const read = (id: string) => Number(container.querySelector<HTMLInputElement>(`[data-field="${id}"]`)?.value ?? 0);
+    const output = (id: string, value: string) => {
+      const node = container.querySelector<HTMLElement>(`[data-output="${id}"]`);
+      if (node) node.textContent = value;
+    };
+    const locale = container.dataset.locale ?? 'en';
+    const currency = container.dataset.currency ?? 'USD';
+    const money = new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const percent = new Intl.NumberFormat(locale, { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const update = () => {
+      const smallUsable = Math.max(0.000001, read('small-qty') * Math.max(0.001, read('small-finish') / 100));
+      const bulkUsable = Math.max(0.000001, read('bulk-qty') * Math.max(0.001, read('bulk-finish') / 100));
+      const smallUnit = Math.max(0, read('small-price')) / smallUsable;
+      const bulkTotal = Math.max(0, read('bulk-price')) + Math.max(0, read('extra'));
+      const bulkUnit = bulkTotal / bulkUsable;
+      const maxWaste = 1 - bulkTotal / Math.max(0.000001, read('bulk-qty') * smallUnit);
+      const difference = bulkUnit - smallUnit;
+      output('small-unit', money.format(smallUnit));
+      output('bulk-unit', money.format(bulkUnit));
+      output('max-waste', maxWaste < 0 ? (container.dataset.noMargin ?? '—') : percent.format(Math.min(0.999, maxWaste)));
+      output('difference', money.format(difference));
+      const verdict = container.querySelector<HTMLElement>('[data-verdict]');
+      if (verdict) verdict.textContent = difference <= 0 ? (container.dataset.positive ?? '') : (container.dataset.negative ?? '');
+    };
+    container.querySelectorAll('input').forEach((input) => input.addEventListener('input', update));
+    update();
+  });
+</script>
+
+<style>
+  .waste-break-even { margin-block: 2rem; padding: 1.2rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-2); }
+  .waste-break-even h2 { margin-top: 0; }
+  .waste-fields, .waste-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: .85rem; }
+  .waste-fields label { display: grid; gap: .35rem; font-weight: 700; }
+  .waste-fields input { width: 100%; min-width: 0; padding: .7rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text); font: inherit; }
+  .waste-verdict { padding: .8rem; border-left: .3rem solid var(--brand); background: var(--color-surface); font-weight: 700; }
+  .waste-results p { display: grid; gap: .35rem; margin: 0; padding: .8rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); }
+  .waste-results strong { overflow-wrap: anywhere; font-size: 1.05rem; }
+</style>

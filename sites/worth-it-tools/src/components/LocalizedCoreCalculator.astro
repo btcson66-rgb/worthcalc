@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment';
+    kind: 'installment' | 'subscription';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -123,7 +123,30 @@ const config = {
       });
     }
 
-    const update = config.kind === 'installment' ? updateInstallment : () => undefined;
+    function updateSubscription(): void {
+      const monthlyBills = Math.max(0, read('monthly-bills'));
+      const quarterly = Math.max(0, read('quarterly-renewals'));
+      const annual = Math.max(0, read('annual-renewals'));
+      const monthly = monthlyBills + quarterly / 3 + annual / 12;
+      const used = Math.max(0, read('used-monthly-cost'));
+      const reviewable = Math.max(0, monthly - used);
+
+      output('monthly-total', money.format(monthly));
+      output('yearly-total', money.format(monthly * 12));
+      output('five-year-total', money.format(monthly * 60));
+      output('reviewable', money.format(reviewable));
+      if (!verdict) return;
+      if (monthly <= 0) {
+        verdict.textContent = config.invalidVerdict;
+        return;
+      }
+      verdict.textContent = fill(reviewable <= 0.01 ? config.favorableVerdict : config.unfavorableVerdict, {
+        monthly: money.format(monthly),
+        reviewable: money.format(reviewable),
+      });
+    }
+
+    const update = config.kind === 'installment' ? updateInstallment : updateSubscription;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription' | 'membership';
+    kind: 'installment' | 'subscription' | 'membership' | 'ev';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -172,11 +172,38 @@ const config = {
       });
     }
 
+    function updateEv(): void {
+      const evPrice = Math.max(0, read('ev-price'));
+      const gasPrice = Math.max(0, read('gas-price'));
+      const subsidy = Math.max(0, read('subsidy'));
+      const monthlyKm = Math.max(0, read('monthly-km'));
+      const years = Math.max(1, read('years'));
+      const annualKm = monthlyKm * 12;
+      const evEnergy = annualKm * Math.max(0, read('ev-consumption')) / 100 * Math.max(0, read('electricity-price'));
+      const gasEnergy = annualKm * Math.max(0, read('gas-consumption')) / 100 * Math.max(0, read('fuel-price'));
+      const evAnnual = evEnergy + Math.max(0, read('ev-maintenance'));
+      const gasAnnual = gasEnergy + Math.max(0, read('gas-maintenance'));
+      const evTotal = Math.max(0, evPrice - subsidy) + evAnnual * years;
+      const gasTotal = gasPrice + gasAnnual * years;
+      const difference = Math.abs(evTotal - gasTotal);
+      const upfrontGap = Math.max(0, evPrice - subsidy - gasPrice);
+      const annualSavings = gasAnnual - evAnnual;
+      const breakEven = annualSavings > 0 ? upfrontGap / annualSavings : Number.POSITIVE_INFINITY;
+
+      output('ev-total', money.format(evTotal)); output('gas-total', money.format(gasTotal));
+      output('difference', money.format(difference)); output('break-even-years', Number.isFinite(breakEven) ? breakEven.toFixed(1) : '—');
+      if (!verdict) return;
+      if (evPrice <= 0 || gasPrice <= 0 || read('ev-consumption') <= 0 || read('gas-consumption') <= 0 || years <= 0) { verdict.textContent = config.invalidVerdict; return; }
+      verdict.textContent = fill(evTotal <= gasTotal ? config.favorableVerdict : config.unfavorableVerdict, { difference: money.format(difference), years: String(years) });
+    }
+
     const update = config.kind === 'installment'
       ? updateInstallment
       : config.kind === 'subscription'
         ? updateSubscription
-        : updateMembership;
+        : config.kind === 'membership'
+          ? updateMembership
+          : updateEv;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

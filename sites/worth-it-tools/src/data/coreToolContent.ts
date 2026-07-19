@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription' | 'membership';
+  kind: 'installment' | 'subscription' | 'membership' | 'ev';
   title: string;
   description: string;
   intro: string;
@@ -151,6 +151,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Auditoría de suscripciones y renovaciones', path: '/tools/subscription-audit' },
       ],
     },
+    'ev-vs-gas': {
+      kind: 'ev',
+      title: 'Calculadora de coste total: coche eléctrico o gasolina',
+      description: 'Compara precio neto, electricidad, combustible y mantenimiento de un coche eléctrico y uno de gasolina durante tu periodo real de uso.',
+      intro: 'No compares solo el precio del vehículo ni uses una ayuda que aún no tienes concedida. Introduce ofertas reales, kilómetros propios, consumo WLTP corregido con tu experiencia y precios marginales de recarga y combustible. El resultado es un escenario de coste, no una predicción de reventa.',
+      currency: 'EUR', numberLocale: 'es-ES', inputsHeading: 'Vehículos y uso previsto', verdictLabel: 'Menor coste en el periodo',
+      initialVerdict: 'Completa precios, kilometraje y energía para comparar.', invalidVerdict: 'Los precios, consumos y años deben ser mayores que cero.',
+      favorableVerdict: 'El eléctrico cuesta {difference} menos durante {years} años con estos supuestos.',
+      unfavorableVerdict: 'El gasolina cuesta {difference} menos durante {years} años con estos supuestos. Cambia kilometraje, energía o periodo para probar el punto de giro.',
+      fields: [
+        { id: 'ev-price', label: 'Precio llave en mano del eléctrico', helper: 'Oferta con impuestos y gastos, antes de ayuda confirmada.', value: 36000, min: 0, step: 100 },
+        { id: 'gas-price', label: 'Precio llave en mano del gasolina', helper: 'Vehículo comparable en tamaño, equipamiento y financiación.', value: 29000, min: 0, step: 100 },
+        { id: 'subsidy', label: 'Ayuda o descuento confirmado', helper: 'Pon cero si depende de aprobación, presupuesto o tributación incierta.', value: 4500, min: 0, step: 100 },
+        { id: 'monthly-km', label: 'Kilómetros al mes', helper: 'Usa historial real e incluye desplazamientos no laborales.', value: 1000, min: 0, step: 50 },
+        { id: 'years', label: 'Años de propiedad', helper: 'Mismo periodo para ambos vehículos.', value: 6, min: 1, step: 1 },
+        { id: 'electricity-price', label: 'Precio efectivo de electricidad (€/kWh)', helper: 'Mezcla real de casa, trabajo y recarga pública.', value: 0.25, min: 0, step: 0.01 },
+        { id: 'ev-consumption', label: 'Consumo eléctrico (kWh/100 km)', helper: 'Ajusta por clima, velocidad y pérdidas de carga.', value: 17, min: 0, step: 0.1 },
+        { id: 'fuel-price', label: 'Precio de gasolina (€/litro)', helper: 'Escenario propio, no una promesa de precio futuro.', value: 1.6, min: 0, step: 0.01 },
+        { id: 'gas-consumption', label: 'Consumo gasolina (l/100 km)', helper: 'Usa consumo realista, no solo ficha homologada.', value: 6.5, min: 0, step: 0.1 },
+        { id: 'ev-maintenance', label: 'Mantenimiento anual del eléctrico', helper: 'Neumáticos, revisiones y reparaciones previstas.', value: 350, min: 0, step: 10 },
+        { id: 'gas-maintenance', label: 'Mantenimiento anual del gasolina', helper: 'Misma cobertura de costes que en el eléctrico.', value: 650, min: 0, step: 10 },
+      ],
+      metrics: [
+        { id: 'ev-total', label: 'Coste total del eléctrico' }, { id: 'gas-total', label: 'Coste total del gasolina' },
+        { id: 'difference', label: 'Diferencia en el periodo' }, { id: 'break-even-years', label: 'Años estimados para recuperar la diferencia inicial' },
+      ],
+      faq: [
+        { question: '¿Debo incluir una ayuda pendiente?', answer: 'No como caso base. Usa cero hasta tener elegibilidad e importe razonablemente confirmados y crea después un escenario alternativo con la ayuda.' },
+        { question: '¿Qué precio de electricidad debo usar?', answer: 'El coste incremental realmente pagado por cada kWh según tu mezcla de recarga. Una tarifa doméstica no representa sesiones públicas rápidas y el coste solar tampoco es siempre cero.' },
+        { question: '¿Incluye seguro, financiación y reventa?', answer: 'No. Compáralos aparte con ofertas específicas. Añadir una reventa inventada daría una precisión falsa; si es decisiva, prueba varios valores netos documentados.' },
+        { question: '¿El año de equilibrio garantiza ahorro?', answer: 'No. Solo divide la diferencia inicial por el ahorro operativo anual del escenario. Averías, energía, kilometraje y venta futura pueden moverlo.' },
+      ],
+      related: [
+        { title: 'Guía completa de coste total eléctrico vs gasolina', path: '/ev-vs-gas-total-cost' },
+        { title: 'Recarga doméstica frente a pública', path: '/home-vs-public-ev-charging-cost' },
+        { title: 'Coche nuevo o usado: coste total', path: '/new-vs-used-car-total-cost' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -266,6 +304,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Audit des abonnements et renouvellements', path: '/tools/subscription-audit' },
       ],
     },
+    'ev-vs-gas': {
+      kind: 'ev',
+      title: 'Calculateur de coût total : voiture électrique ou essence',
+      description: 'Comparez prix net, recharge, carburant et entretien d’une voiture électrique et d’un modèle essence sur votre durée de détention.',
+      intro: 'Partez de devis comparables et d’une aide réellement acquise, puis utilisez votre kilométrage et votre mélange de recharge. En France, bonus, leasing, fiscalité et conditions évoluent : le calcul sépare donc l’aide saisie du prix et n’en fait pas un droit automatique.',
+      currency: 'EUR', numberLocale: 'fr-FR', inputsHeading: 'Véhicules et usage prévu', verdictLabel: 'Option la moins coûteuse',
+      initialVerdict: 'Complétez prix, kilométrage et énergie pour comparer.', invalidVerdict: 'Prix, consommations et durée doivent être supérieurs à zéro.',
+      favorableVerdict: 'L’électrique coûte {difference} de moins sur {years} ans selon ces hypothèses.',
+      unfavorableVerdict: 'L’essence coûte {difference} de moins sur {years} ans. Testez kilométrage, recharge et durée pour trouver le point de bascule.',
+      fields: [
+        { id: 'ev-price', label: 'Prix livré de l’électrique', helper: 'Devis TTC avant aide confirmée.', value: 35000, min: 0, step: 100 },
+        { id: 'gas-price', label: 'Prix livré de l’essence', helper: 'Modèle comparable en gabarit et équipement.', value: 28000, min: 0, step: 100 },
+        { id: 'subsidy', label: 'Aide ou remise confirmée', helper: 'Zéro si l’éligibilité ou le montant reste incertain.', value: 2000, min: 0, step: 100 },
+        { id: 'monthly-km', label: 'Kilomètres par mois', helper: 'Historique réel, trajets privés inclus.', value: 1100, min: 0, step: 50 },
+        { id: 'years', label: 'Années de détention', helper: 'Même durée pour les deux véhicules.', value: 6, min: 1, step: 1 },
+        { id: 'electricity-price', label: 'Coût effectif de recharge (€/kWh)', helper: 'Moyenne pondérée domicile, travail et bornes publiques.', value: 0.23, min: 0, step: 0.01 },
+        { id: 'ev-consumption', label: 'Consommation électrique (kWh/100 km)', helper: 'Incluez climat et pertes de recharge.', value: 17, min: 0, step: 0.1 },
+        { id: 'fuel-price', label: 'Prix de l’essence (€/litre)', helper: 'Hypothèse modifiable, pas prévision.', value: 1.75, min: 0, step: 0.01 },
+        { id: 'gas-consumption', label: 'Consommation essence (l/100 km)', helper: 'Retenez une consommation observée réaliste.', value: 6.5, min: 0, step: 0.1 },
+        { id: 'ev-maintenance', label: 'Entretien annuel de l’électrique', helper: 'Pneus, révisions et réparations prévues.', value: 350, min: 0, step: 10 },
+        { id: 'gas-maintenance', label: 'Entretien annuel de l’essence', helper: 'Même périmètre de dépenses.', value: 650, min: 0, step: 10 },
+      ],
+      metrics: [
+        { id: 'ev-total', label: 'Coût total électrique' }, { id: 'gas-total', label: 'Coût total essence' },
+        { id: 'difference', label: 'Écart sur la période' }, { id: 'break-even-years', label: 'Années estimées pour récupérer l’écart initial' },
+      ],
+      faq: [
+        { question: 'Faut-il compter un bonus non accordé ?', answer: 'Non dans le scénario central. Saisissez zéro tant que l’éligibilité, le budget et le montant ne sont pas suffisamment établis.' },
+        { question: 'Quel coût de recharge retenir ?', answer: 'Le prix marginal réellement payé selon votre part de recharge à domicile, au travail et sur bornes publiques, pertes comprises.' },
+        { question: 'Le calcul comprend-il assurance et financement ?', answer: 'Non. Ajoutez une comparaison séparée à partir de devis pour éviter d’appliquer un même coût à des profils ou véhicules différents.' },
+        { question: 'Pourquoi ne pas intégrer automatiquement la revente ?', answer: 'Une valeur unique à six ans donnerait une précision trompeuse. Testez plusieurs valeurs nettes documentées si la revente change la décision.' },
+      ],
+      related: [
+        { title: 'Guide du coût total électrique contre essence', path: '/ev-vs-gas-total-cost' },
+        { title: 'Recharge à domicile ou borne publique', path: '/home-vs-public-ev-charging-cost' },
+        { title: 'Voiture neuve ou d’occasion', path: '/new-vs-used-car-total-cost' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -379,6 +455,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Allgemeiner Break-even einer Mitgliedschaft', path: '/paid-membership-break-even' },
         { title: 'Großpackung oder kleine Packung', path: '/bulk-buying-vs-small-packages' },
         { title: 'Abo- und Verlängerungskosten prüfen', path: '/tools/subscription-audit' },
+      ],
+    },
+    'ev-vs-gas': {
+      kind: 'ev',
+      title: 'Gesamtkosten-Rechner: Elektroauto oder Benziner',
+      description: 'Kaufpreis, Strom, Kraftstoff und Wartung von Elektroauto und Benziner über Ihre tatsächliche Haltedauer vergleichen.',
+      intro: 'Vergleichen Sie lieferbare Fahrzeuge und tragen Sie nur bestätigte Förderung ein. Deutsche Haushalts-, Arbeits- und Schnellladetarife unterscheiden sich stark; bilden Sie deshalb Ihren eigenen Lademix ab. Versicherung, Finanzierung und Wiederverkauf bleiben bewusst separate Szenarien.',
+      currency: 'EUR', numberLocale: 'de-DE', inputsHeading: 'Fahrzeuge und geplante Nutzung', verdictLabel: 'Günstigere Option im Zeitraum',
+      initialVerdict: 'Preise, Fahrleistung und Energie eintragen.', invalidVerdict: 'Preise, Verbräuche und Haltedauer müssen größer als null sein.',
+      favorableVerdict: 'Das Elektroauto kostet unter diesen Annahmen über {years} Jahre {difference} weniger.',
+      unfavorableVerdict: 'Der Benziner kostet über {years} Jahre {difference} weniger. Fahrleistung, Ladekosten oder Haltedauer ändern den Umschlagpunkt.',
+      fields: [
+        { id: 'ev-price', label: 'Lieferpreis Elektroauto', helper: 'Vergleichbares Angebot vor bestätigter Förderung.', value: 38000, min: 0, step: 100 },
+        { id: 'gas-price', label: 'Lieferpreis Benziner', helper: 'Vergleichbare Größe und Ausstattung.', value: 30000, min: 0, step: 100 },
+        { id: 'subsidy', label: 'Bestätigte Förderung oder Nachlass', helper: 'Null verwenden, wenn Anspruch oder Betrag nicht gesichert ist.', value: 0, min: 0, step: 100 },
+        { id: 'monthly-km', label: 'Kilometer pro Monat', helper: 'Eigene Historie einschließlich Privatfahrten.', value: 1200, min: 0, step: 50 },
+        { id: 'years', label: 'Haltedauer in Jahren', helper: 'Für beide Fahrzeuge gleich.', value: 6, min: 1, step: 1 },
+        { id: 'electricity-price', label: 'Effektiver Ladestrompreis (€/kWh)', helper: 'Gewichteter Mix aus Zuhause, Arbeit und öffentlichem Laden.', value: 0.35, min: 0, step: 0.01 },
+        { id: 'ev-consumption', label: 'Stromverbrauch (kWh/100 km)', helper: 'Klima, Tempo und Ladeverluste berücksichtigen.', value: 18, min: 0, step: 0.1 },
+        { id: 'fuel-price', label: 'Benzinpreis (€/Liter)', helper: 'Eigenes Szenario, keine Preisprognose.', value: 1.75, min: 0, step: 0.01 },
+        { id: 'gas-consumption', label: 'Benzinverbrauch (l/100 km)', helper: 'Realistischen Praxisverbrauch nutzen.', value: 6.5, min: 0, step: 0.1 },
+        { id: 'ev-maintenance', label: 'Wartung Elektroauto pro Jahr', helper: 'Reifen, Inspektionen und erwartete Reparaturen.', value: 400, min: 0, step: 10 },
+        { id: 'gas-maintenance', label: 'Wartung Benziner pro Jahr', helper: 'Derselbe Kostenumfang.', value: 700, min: 0, step: 10 },
+      ],
+      metrics: [
+        { id: 'ev-total', label: 'Gesamtkosten Elektroauto' }, { id: 'gas-total', label: 'Gesamtkosten Benziner' },
+        { id: 'difference', label: 'Differenz im Zeitraum' }, { id: 'break-even-years', label: 'Geschätzte Jahre bis zum Ausgleich der Mehrkosten' },
+      ],
+      faq: [
+        { question: 'Soll eine mögliche Förderung eingetragen werden?', answer: 'Im Basisszenario nur, wenn Berechtigung und Betrag hinreichend bestätigt sind. Sonst null verwenden und ein separates Förder-Szenario rechnen.' },
+        { question: 'Welcher Strompreis ist richtig?', answer: 'Der tatsächlich zusätzliche kWh-Preis Ihres Lademixes. Ein Haushaltsvertrag bildet öffentliches Schnellladen nicht ab; eigene Photovoltaik ist ebenfalls nicht pauschal kostenlos.' },
+        { question: 'Sind Versicherung und Finanzierung enthalten?', answer: 'Nein. Vergleichen Sie konkrete Angebote separat, weil Fahrzeugwert, Fahrerprofil, Zins und Laufzeit unterschiedlich wirken.' },
+        { question: 'Was bedeutet der Break-even?', answer: 'Er teilt die anfänglichen Mehrkosten durch die geschätzte jährliche Betriebskostendifferenz. Er ist keine Garantie für Restwert, Energiepreis oder Reparaturen.' },
+      ],
+      related: [
+        { title: 'Vollständiger Kostenvergleich Elektroauto und Benziner', path: '/ev-vs-gas-total-cost' },
+        { title: 'Zuhause laden oder öffentliche Säule', path: '/home-vs-public-ev-charging-cost' },
+        { title: 'Neuwagen oder Gebrauchtwagen', path: '/new-vs-used-car-total-cost' },
       ],
     },
   },

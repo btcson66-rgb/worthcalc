@@ -282,18 +282,18 @@ const editorialRoutes = [
       de: ['11,60 € netto/h', 'BMAS', 'data-mode="hourlyWage"'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
     slug: 'pay-raise-vs-inflation-purchasing-power',
-    locales: ['en', 'zh', 'es'],
     nativeMarkers: {
       en: ['−0.95%', 'Bureau of Labor Statistics', 'data-mode="raiseInflation"'],
       zh: ['NT$60,233.92', '主計總處', 'data-mode="raiseInflation"'],
       es: ['29.941,86 €', 'INE', 'data-mode="raiseInflation"'],
+      fr: ['36 070,73 €', 'Insee', 'data-mode="raiseInflation"'],
+      de: ['47.859,24 €', 'Destatis', 'data-mode="raiseInflation"'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -402,4 +402,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 28 complete five-locale topics, 135 added routes, 4 enriched high-value tools, 33 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 29 complete five-locale topics, 137 added routes, 4 enriched high-value tools, 35 embedded decision calculators.');

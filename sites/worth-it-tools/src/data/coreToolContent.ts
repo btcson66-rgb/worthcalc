@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy';
+  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute';
   title: string;
   description: string;
   intro: string;
@@ -224,6 +224,43 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Coste real de una hipoteca y gastos iniciales', path: '/upfront-fees-financing-cost' },
       ],
     },
+    'commute-cost': {
+      kind: 'commute',
+      title: 'Calculadora del coste completo de ir al trabajo',
+      description: 'Suma abono, vehículo, aparcamiento y tiempo puerta a puerta para conocer el coste mensual y por día presencial de tu desplazamiento.',
+      intro: 'El trayecto no cuesta solo combustible o billete. Separa los euros que salen de tu bolsillo de las horas empleadas, resta únicamente reembolsos ya cobrados y evita contar a la vez abono y billete para el mismo viaje. El valor del tiempo es un escenario personal, no tu salario automático.',
+      currency: 'EUR', numberLocale: 'es-ES', inputsHeading: 'Costes y tiempo del trayecto', verdictLabel: 'Coste mensual del escenario',
+      initialVerdict: 'Introduce tus días presenciales, pagos y minutos puerta a puerta.', invalidVerdict: 'Los días presenciales y el tiempo del trayecto deben ser mayores que cero.',
+      favorableVerdict: 'El trayecto cuesta {cash} al mes y ocupa {hours} horas. Sin monetizar el tiempo, el coste completo sigue siendo {full}, o {perDay} por día presencial.',
+      unfavorableVerdict: 'El trayecto cuesta {cash} y ocupa {hours} horas. Tu valor temporal añade {timeCost}; el coste completo es {full}, o {perDay} por día presencial.',
+      fields: [
+        { id: 'commute-days', label: 'Días presenciales al mes', helper: 'Usa tu calendario real; no una media genérica.', value: 20, min: 1, step: 1 },
+        { id: 'roundtrip-km', label: 'Kilómetros de ida y vuelta por día', helper: 'Pon cero si todo el trayecto se cubre con abono o billete.', value: 0, min: 0, step: 1 },
+        { id: 'vehicle-cost-km', label: 'Coste completo del vehículo por km', helper: 'Energía, mantenimiento, neumáticos y depreciación incremental, sin duplicar la cuota del coche.', value: 0, min: 0, step: 0.01 },
+        { id: 'daily-fare', label: 'Billetes por día presencial', helper: 'Pon cero si ya usas un abono mensual para esos trayectos.', value: 0, min: 0, step: 0.1 },
+        { id: 'monthly-fixed', label: 'Abono y otros costes fijos mensuales', helper: 'Abono de transporte o costes del vehículo atribuibles al desplazamiento.', value: 54.6, min: 0, step: 0.1 },
+        { id: 'daily-parking-tolls', label: 'Aparcamiento y peajes por día', helper: 'Solo importes causados por acudir presencialmente.', value: 0, min: 0, step: 0.1 },
+        { id: 'reimbursement', label: 'Reembolso mensual de la empresa', helper: 'Resta solo lo realmente recibido para transporte o aparcamiento.', value: 0, min: 0, step: 1 },
+        { id: 'roundtrip-minutes', label: 'Minutos puerta a puerta por día', helper: 'Incluye paseo, espera, transbordos y búsqueda de aparcamiento.', value: 70, min: 1, step: 1 },
+        { id: 'time-value', label: 'Valor personal de una hora', helper: 'Escenario opcional; usa cero para ver únicamente el presupuesto.', value: 8, min: 0, step: 0.5 },
+      ],
+      metrics: [
+        { id: 'cash-cost', label: 'Coste monetario mensual' }, { id: 'commute-hours', label: 'Horas de trayecto al mes' },
+        { id: 'time-cost', label: 'Valor temporal opcional' }, { id: 'full-cost', label: 'Coste mensual completo' },
+        { id: 'cost-per-day', label: 'Coste completo por día' },
+      ],
+      faq: [
+        { question: '¿Qué debe incluir el coste del coche por kilómetro?', answer: 'Combustible o electricidad, mantenimiento, neumáticos y la depreciación atribuible al kilometraje. No sumes además toda la cuota del préstamo: principal y valor del vehículo no son el mismo gasto perdido.' },
+        { question: '¿El tiempo de viaje vale lo mismo que mi salario?', answer: 'No. El salario no convierte automáticamente cada minuto libre en ingreso. Usa cero para presupuesto y uno o varios valores personales para comparar rutas, teletrabajo o vivienda.' },
+        { question: '¿Puedo sumar el abono y los billetes diarios?', answer: 'Solo si ambos son necesarios y no pagan el mismo trayecto. Si el abono ya cubre todos los viajes, el billete diario debe quedar a cero.' },
+        { question: '¿El trayecto habitual es siempre deducible o reembolsable?', answer: 'No. Las dietas, el kilometraje laboral y el desplazamiento entre domicilio y centro habitual tienen reglas distintas. Esta calculadora estima coste personal y no determina fiscalidad ni derechos laborales.' },
+      ],
+      related: [
+        { title: 'Método completo para valorar el trayecto', path: '/full-commute-cost-including-time' },
+        { title: 'Teletrabajo frente a oficina: costes ocultos', path: '/work-from-home-vs-commuting-hidden-costs' },
+        { title: 'Salario por hora después de gastos y desplazamiento', path: '/true-hourly-wage-after-commuting-work-expenses' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -412,6 +449,43 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Effet des frais initiaux du financement', path: '/upfront-fees-financing-cost' },
       ],
     },
+    'commute-cost': {
+      kind: 'commute',
+      title: 'Calculateur du coût complet domicile-travail',
+      description: 'Additionnez abonnement, voiture, stationnement et temps porte à porte pour obtenir un coût mensuel et par jour de présence.',
+      intro: 'Un trajet ne se résume pas au carburant ou au ticket. Distinguez la dépense réellement payée du temps mobilisé, retranchez uniquement la prise en charge effectivement reçue et ne comptez pas deux fois abonnement et billets. La valeur horaire reste un choix de scénario, pas votre salaire imposé au temps de trajet.',
+      currency: 'EUR', numberLocale: 'fr-FR', inputsHeading: 'Dépenses et temps de trajet', verdictLabel: 'Coût mensuel du scénario',
+      initialVerdict: 'Renseignez jours sur site, dépenses et durée porte à porte.', invalidVerdict: 'Le nombre de jours sur site et la durée du trajet doivent être supérieurs à zéro.',
+      favorableVerdict: 'Le trajet coûte {cash} par mois et mobilise {hours} heures. Sans valoriser le temps, le coût complet reste {full}, soit {perDay} par jour de présence.',
+      unfavorableVerdict: 'Le trajet coûte {cash} et mobilise {hours} heures. Votre valeur du temps ajoute {timeCost} : coût complet {full}, soit {perDay} par jour de présence.',
+      fields: [
+        { id: 'commute-days', label: 'Jours sur site par mois', helper: 'Partez de votre planning réel, pas d’un mois type automatique.', value: 20, min: 1, step: 1 },
+        { id: 'roundtrip-km', label: 'Kilomètres aller-retour par jour', helper: 'Mettez zéro pour un trajet entièrement couvert par l’abonnement.', value: 0, min: 0, step: 1 },
+        { id: 'vehicle-cost-km', label: 'Coût complet du véhicule par km', helper: 'Énergie, entretien, pneus et dépréciation liée au kilométrage, sans doubler le crédit.', value: 0, min: 0, step: 0.01 },
+        { id: 'daily-fare', label: 'Billets par jour de présence', helper: 'Mettez zéro si l’abonnement couvre déjà ces déplacements.', value: 0, min: 0, step: 0.1 },
+        { id: 'monthly-fixed', label: 'Abonnement et frais fixes mensuels', helper: 'Abonnement transport ou frais fixes attribuables au trajet.', value: 90, min: 0, step: 1 },
+        { id: 'daily-parking-tolls', label: 'Stationnement et péages par jour', helper: 'Uniquement les sommes causées par la présence sur site.', value: 0, min: 0, step: 0.1 },
+        { id: 'reimbursement', label: 'Prise en charge mensuelle employeur', helper: 'Montant réellement remboursé, visible sur le bulletin ou justificatif.', value: 45, min: 0, step: 1 },
+        { id: 'roundtrip-minutes', label: 'Minutes porte à porte par jour', helper: 'Incluez marche, attente, correspondance et recherche de place.', value: 70, min: 1, step: 1 },
+        { id: 'time-value', label: 'Valeur personnelle d’une heure', helper: 'Scénario facultatif ; zéro conserve une lecture purement budgétaire.', value: 10, min: 0, step: 0.5 },
+      ],
+      metrics: [
+        { id: 'cash-cost', label: 'Coût monétaire mensuel' }, { id: 'commute-hours', label: 'Heures de trajet mensuelles' },
+        { id: 'time-cost', label: 'Valeur temporelle facultative' }, { id: 'full-cost', label: 'Coût mensuel complet' },
+        { id: 'cost-per-day', label: 'Coût complet par jour' },
+      ],
+      faq: [
+        { question: 'Que mettre dans le coût automobile au kilomètre ?', answer: 'Énergie, entretien, pneus et dépréciation supplémentaire liée au kilométrage. N’ajoutez pas aussi toute la mensualité du crédit : le remboursement du capital crée une valeur de véhicule.' },
+        { question: 'Le temps de trajet vaut-il mon salaire horaire ?', answer: 'Non. Chaque heure libérée ne devient pas automatiquement du revenu. Conservez un scénario à zéro et testez plusieurs valeurs personnelles pour comparer les options.' },
+        { question: 'Comment traiter la prise en charge de 50 % en France ?', answer: 'Saisissez le montant réellement pris en charge pour votre abonnement éligible. Ne supposez pas que toute dépense, tout billet ou tout usage automobile bénéficie du même régime.' },
+        { question: 'Faut-il cumuler abonnement et billets ?', answer: 'Seulement s’ils paient des portions différentes et nécessaires du trajet. Un billet déjà couvert par l’abonnement ne doit pas être ajouté une seconde fois.' },
+      ],
+      related: [
+        { title: 'Méthode complète du coût domicile-travail', path: '/full-commute-cost-including-time' },
+        { title: 'Télétravail ou bureau : coûts cachés', path: '/work-from-home-vs-commuting-hidden-costs' },
+        { title: 'Vrai taux horaire après trajet et frais', path: '/true-hourly-wage-after-commuting-work-expenses' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -598,6 +672,43 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Annahmen für Mieten oder Kaufen', path: '/rent-vs-buy-guide' },
         { title: 'Break-even-Jahr von Miete und Kauf', path: '/rent-vs-buy-breakeven-year' },
         { title: 'Anfangskosten einer Finanzierung', path: '/upfront-fees-financing-cost' },
+      ],
+    },
+    'commute-cost': {
+      kind: 'commute',
+      title: 'Pendelkosten-Rechner inklusive Zeit',
+      description: 'Ticket, Auto, Parken und Tür-zu-Tür-Zeit zu monatlichen Gesamtkosten und Kosten je Präsenztag zusammenführen.',
+      intro: 'Pendeln kostet mehr als Kraftstoff oder Fahrkarte. Trennen Sie echte Geldabflüsse von der gebundenen Zeit, ziehen Sie nur tatsächlich erhaltene Zuschüsse ab und vermeiden Sie doppelte Ansätze für Ticket, Kreditrate oder Wertverlust. Der Zeitwert ist ein persönliches Szenario und nicht automatisch Ihr Stundenlohn.',
+      currency: 'EUR', numberLocale: 'de-DE', inputsHeading: 'Pendelaufwand und Zeit', verdictLabel: 'Monatliche Szenariokosten',
+      initialVerdict: 'Präsenztage, Kosten und Tür-zu-Tür-Zeit eintragen.', invalidVerdict: 'Präsenztage und tägliche Pendelzeit müssen größer als null sein.',
+      favorableVerdict: 'Das Pendeln kostet {cash} im Monat und bindet {hours} Stunden. Ohne Zeitbewertung bleiben {full}, also {perDay} je Präsenztag.',
+      unfavorableVerdict: 'Das Pendeln kostet {cash} und bindet {hours} Stunden. Ihr Zeitansatz ergänzt {timeCost}; vollständig sind es {full} oder {perDay} je Präsenztag.',
+      fields: [
+        { id: 'commute-days', label: 'Präsenztage pro Monat', helper: 'Den tatsächlichen Arbeitskalender verwenden.', value: 20, min: 1, step: 1 },
+        { id: 'roundtrip-km', label: 'Hin- und Rückweg pro Tag (km)', helper: 'Beide Richtungen; nicht mit Entfernungskilometern der Steuer verwechseln.', value: 40, min: 0, step: 1 },
+        { id: 'vehicle-cost-km', label: 'Vollständige Fahrzeugkosten je km', helper: 'Energie, Wartung, Reifen und kilometerbedingter Wertverlust ohne doppelte Kreditrate.', value: 0.44, min: 0, step: 0.01 },
+        { id: 'daily-fare', label: 'Fahrkarten je Präsenztag', helper: 'Null setzen, wenn ein Monatsticket dieselben Fahrten deckt.', value: 0, min: 0, step: 0.1 },
+        { id: 'monthly-fixed', label: 'Monatsticket und monatliche Fixkosten', helper: 'Zum Pendeln gehörende Ticket-, Versicherungs- oder sonstige Fixkosten.', value: 140, min: 0, step: 1 },
+        { id: 'daily-parking-tolls', label: 'Parken und Maut je Tag', helper: 'Nur Kosten, die an Präsenztagen entstehen.', value: 0, min: 0, step: 0.1 },
+        { id: 'reimbursement', label: 'Monatlicher Arbeitgeberzuschuss', helper: 'Nur tatsächlich erhaltenes Jobticket- oder Fahrtkostengeld.', value: 0, min: 0, step: 1 },
+        { id: 'roundtrip-minutes', label: 'Tür-zu-Tür-Minuten je Tag', helper: 'Fußweg, Warten, Umstieg und Parkplatzsuche einbeziehen.', value: 60, min: 1, step: 1 },
+        { id: 'time-value', label: 'Persönlicher Wert einer Stunde', helper: 'Optional; null zeigt die reine Geldbetrachtung.', value: 12, min: 0, step: 0.5 },
+      ],
+      metrics: [
+        { id: 'cash-cost', label: 'Monatliche Geldkosten' }, { id: 'commute-hours', label: 'Pendelstunden pro Monat' },
+        { id: 'time-cost', label: 'Optionaler Zeitwert' }, { id: 'full-cost', label: 'Vollständige Monatskosten' },
+        { id: 'cost-per-day', label: 'Vollkosten je Präsenztag' },
+      ],
+      faq: [
+        { question: 'Was gehört in die Fahrzeugkosten je Kilometer?', answer: 'Energie, Wartung, Reifen und der zusätzliche Wertverlust durch Kilometer. Nicht zusätzlich die ganze Kreditrate ansetzen: Tilgung und Fahrzeugwert dürfen nicht als vollständiger Verlust doppelt zählen.' },
+        { question: 'Ist Pendelzeit automatisch so viel wert wie mein Stundenlohn?', answer: 'Nein. Freie Zeit lässt sich nicht automatisch in bezahlte Arbeit umwandeln. Nutzen Sie null für den Haushaltsblick und mehrere persönliche Zeitwerte für Varianten.' },
+        { question: 'Kann ich die Entfernungspauschale als Erstattung abziehen?', answer: 'Nein. Sie ist ein steuerlicher Werbungskostenansatz und keine Auszahlung Ihrer tatsächlichen Kosten. Ziehen Sie im Rechner nur einen wirklich erhaltenen Arbeitgeberzuschuss ab.' },
+        { question: 'Wie wird ein Deutschlandticket erfasst?', answer: 'Als monatlicher Fixbetrag, sofern es den betrachteten Weg abdeckt. Dann dieselben Fahrten nicht nochmals als Tagesfahrkarte ansetzen; den aktuellen Preis vor der Rechnung prüfen.' },
+      ],
+      related: [
+        { title: 'Vollständige Methode für Pendelkosten', path: '/full-commute-cost-including-time' },
+        { title: 'Homeoffice oder Pendeln: versteckte Kosten', path: '/work-from-home-vs-commuting-hidden-costs' },
+        { title: 'Tatsächlicher Stundenwert nach Arbeitskosten', path: '/true-hourly-wage-after-commuting-work-expenses' },
       ],
     },
   },

@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy';
+    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -77,6 +77,7 @@ const config = {
     );
     const verdict = container.querySelector<HTMLElement>('[data-verdict]');
     const money = new Intl.NumberFormat(config.numberLocale, { style: 'currency', currency: config.currency, maximumFractionDigits: 2 });
+    const decimal = new Intl.NumberFormat(config.numberLocale, { maximumFractionDigits: 1 });
 
     function read(id: string): number {
       const value = Number(fields.get(id)?.value ?? 0);
@@ -209,15 +210,43 @@ const config = {
       verdict.textContent = fill(ownerNet <= rentTotal ? config.favorableVerdict : config.unfavorableVerdict, { difference: money.format(difference), years: String(years), equity: money.format(equity), parityEquity: money.format(parityEquity) });
     }
 
+    function updateCommute(): void {
+      const days = Math.max(0, Math.round(read('commute-days')));
+      const distance = Math.max(0, read('roundtrip-km'));
+      const vehiclePerKm = Math.max(0, read('vehicle-cost-km'));
+      const dailyFare = Math.max(0, read('daily-fare'));
+      const monthlyFixed = Math.max(0, read('monthly-fixed'));
+      const dailyParkingTolls = Math.max(0, read('daily-parking-tolls'));
+      const reimbursement = Math.max(0, read('reimbursement'));
+      const minutes = Math.max(0, read('roundtrip-minutes'));
+      const timeValue = Math.max(0, read('time-value'));
+      const grossCash = days * (distance * vehiclePerKm + dailyFare + dailyParkingTolls) + monthlyFixed;
+      const cash = Math.max(0, grossCash - reimbursement);
+      const hours = days * minutes / 60;
+      const timeCost = hours * timeValue;
+      const full = cash + timeCost;
+      const perDay = days > 0 ? full / days : 0;
+
+      output('cash-cost', money.format(cash)); output('commute-hours', `${decimal.format(hours)} h`);
+      output('time-cost', money.format(timeCost)); output('full-cost', money.format(full)); output('cost-per-day', days > 0 ? money.format(perDay) : '—');
+      if (!verdict) return;
+      if (days <= 0 || minutes <= 0) { verdict.textContent = config.invalidVerdict; return; }
+      verdict.textContent = fill(timeValue <= 0 ? config.favorableVerdict : config.unfavorableVerdict, {
+        cash: money.format(cash), hours: decimal.format(hours), timeCost: money.format(timeCost), full: money.format(full), perDay: money.format(perDay),
+      });
+    }
+
     const update = config.kind === 'installment'
       ? updateInstallment
       : config.kind === 'subscription'
         ? updateSubscription
         : config.kind === 'membership'
           ? updateMembership
-          : config.kind === 'ev'
+        : config.kind === 'ev'
             ? updateEv
-            : updateRentBuy;
+            : config.kind === 'rent-buy'
+              ? updateRentBuy
+              : updateCommute;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

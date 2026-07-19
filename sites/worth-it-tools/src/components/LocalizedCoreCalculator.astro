@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription';
+    kind: 'installment' | 'subscription' | 'membership';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -146,7 +146,37 @@ const config = {
       });
     }
 
-    const update = config.kind === 'installment' ? updateInstallment : updateSubscription;
+    function updateMembership(): void {
+      const fee = Math.max(0, read('annual-fee'));
+      const monthlySpend = Math.max(0, read('monthly-spend'));
+      const annualSpend = monthlySpend * 12;
+      const rate = (Math.max(0, read('savings-rate')) + Math.max(0, read('reward-rate'))) / 100;
+      const extras = Math.max(0, read('extra-costs'));
+      const gross = annualSpend * rate;
+      const net = gross - fee - extras;
+      const breakEven = rate > 0 ? (fee + extras) / rate / 12 : Number.POSITIVE_INFINITY;
+
+      output('gross-benefit', money.format(gross));
+      output('net-benefit', money.format(net));
+      output('break-even', Number.isFinite(breakEven) ? money.format(breakEven) : '—');
+      output('annual-spend', money.format(annualSpend));
+      if (!verdict) return;
+      if (rate <= 0) {
+        verdict.textContent = config.invalidVerdict;
+        return;
+      }
+      verdict.textContent = fill(net >= 0 ? config.favorableVerdict : config.unfavorableVerdict, {
+        net: money.format(net),
+        loss: money.format(Math.abs(net)),
+        breakEven: money.format(breakEven),
+      });
+    }
+
+    const update = config.kind === 'installment'
+      ? updateInstallment
+      : config.kind === 'subscription'
+        ? updateSubscription
+        : updateMembership;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

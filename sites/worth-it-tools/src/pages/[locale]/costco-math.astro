@@ -1,0 +1,97 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import LocalizedCoreCalculator from '../../components/LocalizedCoreCalculator.astro';
+import { coreToolContent } from '../../data/coreToolContent';
+import { localizedPath } from '../../i18n/utils';
+import type { FaqItem } from '../../lib/seo';
+
+type L = 'es' | 'fr' | 'de';
+const meta: Record<L, { title: string; description: string; faq: FaqItem[] }> = {
+  es: {
+    title: '¿Compensa Costco España? Cuota, ahorro real y gasto de equilibrio',
+    description: 'Calcula si la cuota de Costco España se recupera con compras ya previstas, ahorro comprobado, desplazamiento, merma y costes anuales.',
+    faq: [
+      { question: '¿Cuánto hay que gastar para amortizar Costco España?', answer: 'No existe una cifra única. Divide cuota más costes extra entre doce veces tu ahorro porcentual real y cualquier recompensa incremental. Con 36,30 € de cuota, 24 € extra y 8 % de ahorro, el umbral ilustrativo es unos 62,81 € al mes.' },
+      { question: '¿Puedo suponer que todo es un 15 % más barato?', answer: 'No. Compara una cesta de productos equivalentes con tu alternativa real y calcula ahorro ponderado. Los formatos, marcas, promociones y cantidades útiles pueden cambiar el resultado.' },
+      { question: '¿Las compras no previstas cuentan como ahorro?', answer: 'No. Son un coste inducido. Exclúyelas del gasto elegible y, si son habituales, añádelas a los costes extra anuales.' },
+      { question: '¿Cómo trato la merma de formatos grandes?', answer: 'Usa cantidad realmente consumida. Reduce el ahorro o añade el valor esperado de lo desechado a costes extra; una unidad caducada no genera beneficio.' },
+      { question: '¿Un resultado positivo obliga a hacerse socio?', answer: 'No. Una diferencia pequeña puede no compensar distancia, tiempo, espacio, liquidez o menor variedad. Prueba un escenario desfavorable antes de decidir.' },
+    ],
+  },
+  fr: {
+    title: 'Costco France est-il rentable ? Cotisation, économies et seuil mensuel',
+    description: 'Calculez si l’adhésion Costco France couvre cotisation, trajet, pertes et achats ajoutés avec vos économies réellement observées.',
+    faq: [
+      { question: 'Combien faut-il dépenser pour amortir Costco France ?', answer: 'Le montant dépend du gain réel. Divisez cotisation plus surcoûts par douze fois le taux d’économie et de récompense. Avec 36 € de cotisation, 45 € de surcoûts et 7 % d’économie, le seuil illustratif est environ 96,43 € par mois.' },
+      { question: 'Peut-on appliquer 15 % d’économie à tout le panier ?', answer: 'Non. Comparez une sélection de produits réellement substituables chez votre magasin habituel et calculez un taux pondéré. Marque, conditionnement et promotion changent l’écart.' },
+      { question: 'Un achat imprévu est-il une économie ?', answer: 'Non. Excluez-le des achats prévus et, s’il se répète, ajoutez son coût annuel aux surcoûts de l’adhésion.' },
+      { question: 'Comment intégrer le gaspillage ?', answer: 'Comparez les quantités consommées. Réduisez l’économie ou ajoutez la valeur jetée aux surcoûts ; le prix au kilo ne suffit pas.' },
+      { question: 'Un bilan légèrement positif suffit-il ?', answer: 'Pas forcément. Distance, péage, temps, stockage et trésorerie peuvent dominer un faible avantage. Testez un cas défavorable.' },
+    ],
+  },
+  de: {
+    title: 'Lohnt sich Costco aus Deutschland? Mitgliedsbeitrag, Auslandsfahrt und Break-even',
+    description: 'Rechnen Sie ohne erfundene deutsche Costco-Filiale: Beitrag, ohnehin geplante Einkäufe, Auslandsfahrt, Verlust und echten Preisvorteil vergleichen.',
+    faq: [
+      { question: 'Gibt es Costco-Lagerhäuser in Deutschland?', answer: 'Der offizielle Costco-Bericht für das dritte Quartal 2026 nennt Deutschland nicht als Standortland. Prüfen Sie die aktuelle Standortsuche; diese Seite unterstellt keine deutsche Filiale.' },
+      { question: 'Wie berechne ich den Break-even bei einer Auslandsnutzung?', answer: 'Beitrag, Fahrt, Maut, Wechselkosten und Lagerverlust durch zwölfmal realen Preisvorteil plus vertragliche Vergütung teilen. Mit 36 € Beitrag, 120 € Zusatzkosten und 6 % Vorteil wären rund 216,67 € geplanter Monatsumsatz nötig.' },
+      { question: 'Darf ich ausländische Preise als deutschen Vorteil ansetzen?', answer: 'Nur gegenüber der Alternative, die Sie tatsächlich in Deutschland gekauft hätten, mit gleicher Ware, nutzbarer Menge, Steuer, Wechselkurs und Verfügbarkeit.' },
+      { question: 'Wie zählen ungeplante Käufe?', answer: 'Nicht als berechtigter Umsatz. Regelmäßige Zusatzkäufe sind Mitgliedschaftskosten und müssen den Nettowert senken.' },
+      { question: 'Wann ist das Ergebnis robust?', answer: 'Wenn es auch mit kleinerem Preisvorteil, höherer Fahrt und mehr Verlust klar positiv bleibt. Ein Grenzergebnis ist wirtschaftlich keine starke Begründung.' },
+    ],
+  },
+};
+
+export function getStaticPaths() { return ['es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as L;
+const article = meta[locale];
+const calculator = coreToolContent[locale]?.['costco-membership'];
+if (!calculator) throw new Error(`Missing membership calculator for ${locale}`);
+---
+
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+  {locale === 'es' && <>
+    <p><strong>Respuesta corta:</strong> Costco España compensa solo cuando el ahorro de compras que ya ibas a hacer supera cuota, desplazamiento, almacenaje, merma y compras inducidas. No hay un gasto universal porque el porcentaje de ahorro depende de tu cesta y de la tienda que sustituye.</p>
+    <h2>Fórmula de equilibrio</h2>
+    <p><strong>Gasto mensual de equilibrio = (cuota anual + costes extra anuales) ÷ [12 × (ahorro real % + recompensa incremental %)]</strong>. El gasto elegible excluye compras creadas por la membresía. Si haces una compra por verla en el pasillo, no “recupera” la cuota.</p>
+    <LocalizedCoreCalculator content={calculator} />
+    <h2>Ejemplo con el punto de partida de España</h2>
+    <p>Costco España publica 36,30 € IVA incluido para Gold Star. Añade 24 € de combustible, almacenamiento o merma y usa un ahorro medido de 8 %. El umbral es (36,30 + 24) ÷ (12 × 0,08) = 62,81 € al mes. Con 180 € mensuales previstos, el ahorro bruto es 172,80 € al año y el neto estimado 112,50 €. Si el ahorro real baja al 3 %, el umbral sube a 167,50 €: la conclusión ya es mucho más frágil.</p>
+    <h2>Mida una cesta repetible, no una impresión</h2>
+    <ol><li>Elija diez o veinte productos que compraría igualmente.</li><li>Compare misma marca o calidad, cantidad útil e impuestos con su tienda normal.</li><li>Pondere cada diferencia por el gasto real de ese producto.</li><li>Reste desplazamiento y la parte que caduca o no se usa.</li></ol>
+    <p>Para probar los formatos grandes por separado, use <a href={localizedPath(locale, '/bulk-buying-waste-math')}>la calculadora de merma máxima</a>.</p>
+    <h2>Fuentes</h2>
+    <ul class="source-list"><li><a href="https://www.costco.es/sobre-nosotros" rel="noopener">Costco España — cuota Gold Star y almacenes</a></li><li><a href="https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/fechas_caducidad.htm" rel="noopener">AESAN — caducidad y consumo preferente para valorar merma</a></li></ul>
+  </>}
+  {locale === 'fr' && <>
+    <p><strong>Réponse courte :</strong> Costco France est rentable lorsque les économies sur des achats déjà prévus dépassent la cotisation, le trajet, le stockage, les pertes et les achats déclenchés. Il n’existe pas de panier moyen magique : votre taux dépend des produits et du magasin réellement remplacé.</p>
+    <h2>Formule du seuil mensuel</h2>
+    <p><strong>Achats mensuels d’équilibre = (cotisation annuelle + surcoûts annuels) ÷ [12 × (économie réelle % + récompense supplémentaire %)]</strong>. Un achat ajouté pour « amortir la carte » est une dépense, pas un avantage.</p>
+    <LocalizedCoreCalculator content={calculator} />
+    <h2>Exemple avec le point de départ français</h2>
+    <p>Costco France affiche 36 € TTC pour douze mois d’adhésion Privilège. Ajoutez 45 € de trajet, stockage ou pertes et retenez 7 % d’économie mesurée. Le seuil vaut (36 + 45) ÷ (12 × 0,07) = 96,43 € par mois. Pour 160 € d’achats déjà prévus, l’économie brute est 134,40 € par an et le net 53,40 €. À 4 % d’économie, le seuil atteint 168,75 € : le même foyer passe en perte.</p>
+    <h2>Construire un panier comparable</h2>
+    <ol><li>Choisissez les produits achetés régulièrement.</li><li>Comparez qualité, marque, quantité réellement consommée et prix TTC.</li><li>Pondérez chaque écart par les quantités habituelles.</li><li>Retirez trajet, péage et valeur de ce qui est perdu.</li></ol>
+    <p>Pour isoler le risque des grands conditionnements, ouvrez <a href={localizedPath(locale, '/bulk-buying-waste-math')}>le calcul de perte maximale</a>.</p>
+    <h2>Sources</h2>
+    <ul class="source-list"><li><a href="https://www.costco.fr/faq_informations_adhesion" rel="noopener">Costco France — adhésion Privilège, cotisation et conditions</a></li><li><a href="https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/date-limite-de-consommation-et-date-de-durabilite-minimale-ce-que-vous-devez-savoir" rel="noopener">DGCCRF — DLC et DDM pour mesurer les pertes</a></li></ul>
+  </>}
+  {locale === 'de' && <>
+    <p><strong>Kurzantwort:</strong> Eine Rechnung für deutsche Nutzer muss damit beginnen, dass Costco 2026 kein deutsches Lagerhaus ausweist. Eine Auslandsmitgliedschaft oder ein anderer Einkaufsklub kann sich lohnen, aber nur wenn ohnehin geplante Einkäufe Fahrt, Maut, Beitrag, Lagerung und Verlust klar übersteigen.</p>
+    <h2>Break-even mit Auslandsfahrt</h2>
+    <p><strong>Monatlicher Break-even-Umsatz = (Jahresbeitrag + jährliche Zusatzkosten) ÷ [12 × (realer Preisvorteil % + zusätzliche Vergütung %)]</strong>. Zusätzliche Einkäufe wegen des Besuchs gehören nicht in den berechtigten Umsatz.</p>
+    <LocalizedCoreCalculator content={calculator} />
+    <h2>Nachrechenbares Grenzbeispiel</h2>
+    <p>Als neutrales Eingabebeispiel dienen 36 € Beitrag, 120 € für Auslandsfahrt und Lagerung sowie 6 % gemessener Preisvorteil. Der Break-even liegt bei (36 + 120) ÷ (12 × 0,06) = 216,67 € geplantem Monatsumsatz. Bei nur 120 € Umsatz entstehen 86,40 € Bruttovorteil, nach Kosten also 69,60 € Verlust. Selbst 10 % Vorteil würden rund 130 € Monatsumsatz erfordern.</p>
+    <h2>Grenzüberschreitend vollständig vergleichen</h2>
+    <ol><li>Nur Produkte ansetzen, die ohnehin gekauft würden.</li><li>Gleiche Ware, nutzbare Menge, Steuer und Wechselkurs vergleichen.</li><li>Fahrt, Maut, Parken und zusätzliche Kühlung vollständig erfassen.</li><li>Mit niedrigerem Preisvorteil und höherem Verlust erneut rechnen.</li></ol>
+    <p>Großpackungsverlust lässt sich separat mit dem <a href={localizedPath(locale, '/bulk-buying-waste-math')}>Verlust-Break-even-Rechner</a> prüfen.</p>
+    <h2>Quellen</h2>
+    <ul class="source-list"><li><a href="https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-Third-Quarter-and-Year-To-Date-Operating-Results-For-Fiscal-2026/default.aspx" rel="noopener">Costco — weltweite Standorte im Bericht zum dritten Quartal 2026</a></li><li><a href="https://www.verbraucherzentrale.de/wissen/lebensmittel/lebensmittelproduktion/lebensmittel-sicher-einkaufen-und-lagern-8336" rel="noopener">Verbraucherzentrale — Vorrat nur bei passender Lagerung und Verbrauch</a></li></ul>
+  </>}
+  <FAQ items={article.faq} />
+  {locale === 'es' && <p class="privacy-note">Estimación educativa, no recomendación de una tienda ni asesoramiento financiero. Entradas procesadas en el navegador.</p>}
+  {locale === 'fr' && <p class="privacy-note">Estimation pédagogique, sans recommandation d’enseigne ni conseil financier. Saisie traitée dans le navigateur.</p>}
+  {locale === 'de' && <p class="privacy-note">Unverbindliche Verbraucherrechnung, keine Händlerempfehlung oder Finanzberatung. Eingaben bleiben im Browser.</p>}
+</ArticleLayout>

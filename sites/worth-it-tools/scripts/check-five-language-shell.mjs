@@ -7,7 +7,7 @@ const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
 const releasedHomeLocales = [...locales];
-const releasedSupplemental = ['bulk-buying-waste-math'];
+const releasedSupplemental = ['bulk-buying-waste-math', 'costco-math'];
 const failures = [];
 
 function verify(path, kind) {
@@ -57,4 +57,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log(`Five-language shell check passed: ${releasedLegal.length}/6 legal slugs, ${releasedTools.length}/8 tool slugs, ${releasedHomeLocales.length}/5 localized homepages, ${releasedSupplemental.length} supplemental five-language route.`);
+console.log(`Five-language shell check passed: ${releasedLegal.length}/6 legal slugs, ${releasedTools.length}/8 tool slugs, ${releasedHomeLocales.length}/5 localized homepages, ${releasedSupplemental.length} supplemental five-language routes.`);

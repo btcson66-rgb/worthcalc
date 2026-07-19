@@ -6,7 +6,7 @@ import type { Locale } from '../../consts';
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
 export function getStaticPaths() {
-  const released = ['about', 'privacy'] as const;
+  const released = ['about', 'privacy', 'terms'] as const;
   return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((legal) => ({ params: { locale, legal } })),
   );

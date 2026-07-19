@@ -59,6 +59,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'Google — configuración de anuncios y personalización', href: 'https://adssettings.google.com/' },
       ],
     },
+    terms: {
+      title: 'Condiciones de uso de WorthCalc',
+      description: 'Reglas para utilizar gratis las calculadoras de WorthCalc, límites del resultado, usos no permitidos y derechos del consumidor que permanecen intactos.',
+      updated: '2026-07-19',
+      intro: ['Estas condiciones regulan el uso gratuito de WorthCalc. Al abrir una calculadora aceptas utilizarla de forma lícita y entender sus límites. No tienes que crear una cuenta ni pagar para ejecutar los cálculos publicados.'],
+      sections: [
+        { heading: 'Qué servicio recibes', paragraphs: ['WorthCalc ofrece fórmulas, ejemplos y guías generales para comparar costes, cuotas, tiempo y umbrales. El resultado se genera con los datos que introduces y los supuestos visibles; no es una oferta de crédito, una tasación, una promesa de ahorro ni asesoramiento financiero, fiscal o jurídico individual.'] },
+        { heading: 'Tu comprobación antes de decidir', paragraphs: ['Revisa unidades, periodo, impuestos, comisiones, moneda y condiciones del contrato real. Un precio, tipo, ayuda pública o regla legal puede cambiar después de la fecha indicada. Para una decisión con deuda, vivienda, inversión, seguros o consecuencias legales, contrasta la documentación vigente y recurre a una persona profesional cuando sea necesario.'] },
+        { heading: 'Uso permitido y usos que bloquearemos', paragraphs: ['Puedes usar y enlazar las calculadoras para fines personales, educativos o de evaluación interna. No puedes intentar alterar el servicio, evitar controles de seguridad, enviar tráfico automatizado que degrade la web, introducir código malicioso, presentar el contenido como una certificación oficial ni copiar de forma sustancial la marca, el diseño o el código para explotar un servicio confundible.'] },
+        { heading: 'Disponibilidad, errores y responsabilidad', paragraphs: ['Procuramos probar las fórmulas y corregir fallos reproducibles, pero un servicio gratuito puede cambiar, quedar temporalmente indisponible o contener errores. En la medida permitida por la ley aplicable, no respondemos de una decisión tomada sin verificar los datos y el contrato correspondiente. Nada de estas condiciones excluye una responsabilidad que la ley no permita limitar, ni reduce derechos imperativos de consumidores y usuarios.'] },
+        { heading: 'Propiedad, enlaces y publicidad', paragraphs: ['La marca WorthCalc, el diseño, los textos originales y el código pertenecen a su titular salvo indicación distinta. Los enlaces externos conducen a servicios con condiciones propias. La publicidad puede financiar la web, pero un anuncio no forma parte del resultado y no implica que WorthCalc recomiende al anunciante.'] },
+        { heading: 'Cambios y contacto', paragraphs: ['Podemos modificar estas condiciones para reflejar nuevas funciones, normas o riesgos. La fecha superior identifica la versión; un cambio material se publicará en esta página y solo regirá desde su entrada en vigor. Si una cláusula no pudiera aplicarse, las restantes seguirán vigentes en la medida permitida.'] },
+      ],
+      emailLabel: 'Consultas sobre estas condiciones',
+      sourcesHeading: 'Referencia española para interpretar tus derechos',
+      sources: [
+        { label: 'BOE — Ley General para la Defensa de los Consumidores y Usuarios, artículos 80 a 89', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555' },
+      ],
+    },
   },
   fr: {
     about: {
@@ -99,6 +118,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'Google — paramètres des annonces', href: 'https://adssettings.google.com/' },
       ],
     },
+    terms: {
+      title: 'Conditions d’utilisation de WorthCalc',
+      description: 'Conditions applicables aux calculateurs gratuits WorthCalc : portée des résultats, usages interdits, disponibilité et droits impératifs des consommateurs.',
+      updated: '2026-07-19',
+      intro: ['Les présentes conditions encadrent l’accès gratuit à WorthCalc. Utiliser un calculateur suppose un usage licite et la compréhension de ses limites. Aucun compte ni paiement n’est requis pour exécuter les outils publiés.'],
+      sections: [
+        { heading: 'Nature du service', paragraphs: ['WorthCalc fournit des formules, exemples et guides généraux pour comparer coûts, échéances, temps et seuils de rentabilité. Le résultat dépend de vos saisies et des hypothèses affichées ; il ne constitue ni une offre de crédit, ni une estimation contractuelle, ni une promesse d’économie, ni un conseil financier, fiscal ou juridique personnalisé.'] },
+        { heading: 'Vérifications qui vous reviennent', paragraphs: ['Contrôlez les unités, la période, les taxes, frais, devises et clauses de votre contrat. Un tarif, taux, dispositif public ou texte applicable peut évoluer après la date de vérification. Avant une décision portant sur une dette, un logement, un placement, une assurance ou un droit, consultez les documents à jour et un professionnel qualifié si la situation l’exige.'] },
+        { heading: 'Usages admis et comportements interdits', paragraphs: ['Vous pouvez utiliser et citer les outils à titre personnel, pédagogique ou pour une analyse interne. Il est interdit de perturber le service, contourner une mesure de sécurité, envoyer un trafic automatisé dégradant, injecter un code malveillant, présenter un résultat comme une certification officielle ou reprendre substantiellement la marque, l’interface ou le code afin d’exploiter un service créant une confusion.'] },
+        { heading: 'Disponibilité, erreur et responsabilité', paragraphs: ['Nous testons les formules et examinons les anomalies reproductibles, mais un service gratuit peut évoluer, être interrompu ou comporter une erreur. Dans les limites autorisées, WorthCalc ne répond pas d’une décision prise sans contrôle des données et du contrat pertinent. Aucune clause ne supprime une responsabilité qui ne peut légalement être exclue, ni les droits impératifs dont bénéficie un consommateur.'] },
+        { heading: 'Propriété, liens et publicité', paragraphs: ['La marque WorthCalc, le graphisme, les textes originaux et le code appartiennent à leur titulaire, sauf mention contraire. Les sites liés appliquent leurs propres conditions. Une publicité peut financer le site, mais elle est distincte du calcul et sa présence ne vaut pas recommandation de l’annonceur.'] },
+        { heading: 'Révision des conditions', paragraphs: ['Ces conditions peuvent être adaptées à une nouvelle fonction, une règle ou un risque. La date en tête indique la version ; une modification substantielle sera publiée ici et s’appliquera pour l’avenir. Si une stipulation est inapplicable, les autres restent valables dans la mesure permise.'] },
+      ],
+      emailLabel: 'Question relative aux conditions',
+      sourcesHeading: 'Repère français sur les clauses de consommation',
+      sources: [
+        { label: 'DGCCRF — clauses abusives, clarté et droits du consommateur', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/clauses-abusives-12-clauses-interdites-et-10-clauses-dont-il-faut-demontrer-la-legitimite' },
+      ],
+    },
   },
   de: {
     about: {
@@ -137,6 +175,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'BfDI — Betroffenenrechte nach der DSGVO', href: 'https://www.bfdi.bund.de/DE/Buerger/Basiswissen/Betroffenenrechte/BetroffenenRechte_node.html' },
         { label: 'Google — Datennutzung auf Websites und Apps von Partnern', href: 'https://policies.google.com/technologies/partner-sites?hl=de' },
         { label: 'Google — Einstellungen für Werbung', href: 'https://adssettings.google.com/' },
+      ],
+    },
+    terms: {
+      title: 'Nutzungsbedingungen für WorthCalc',
+      description: 'Regeln für die kostenlosen WorthCalc-Rechner: Aussagegrenzen, zulässige Nutzung, Verfügbarkeit, Haftung und zwingende Verbraucherrechte.',
+      updated: '2026-07-19',
+      intro: ['Diese Bedingungen gelten für die kostenlose Nutzung von WorthCalc. Wer einen Rechner aufruft, verpflichtet sich zu einer rechtmäßigen Nutzung und berücksichtigt die beschriebenen Grenzen. Für veröffentlichte Berechnungen sind weder Konto noch Zahlung erforderlich.'],
+      sections: [
+        { heading: 'Gegenstand des Angebots', paragraphs: ['WorthCalc stellt Formeln, Beispiele und allgemeine Leitfäden bereit, um Kosten, Raten, Zeitaufwand und Gewinnschwellen zu vergleichen. Das Ergebnis entsteht aus Ihren Eingaben und sichtbaren Annahmen. Es ist weder Kreditangebot noch verbindliche Bewertung, Sparzusage oder persönliche Finanz-, Steuer- beziehungsweise Rechtsberatung.'] },
+        { heading: 'Prüfung vor einer Entscheidung', paragraphs: ['Kontrollieren Sie Einheit, Zeitraum, Steuer, Gebühr, Währung und den vollständigen Vertrag. Preise, Zinssätze, Förderungen oder Vorschriften können sich nach dem angegebenen Prüfdatum ändern. Bei Schulden, Immobilien, Anlage, Versicherung oder Rechtsfolgen sind aktuelle Unterlagen und bei Bedarf qualifizierte Beratung heranzuziehen.'] },
+        { heading: 'Erlaubte und unzulässige Nutzung', paragraphs: ['Die Rechner dürfen privat, in der Bildung und für interne Vergleiche verwendet und verlinkt werden. Untersagt sind Eingriffe in den Betrieb, Umgehung von Schutzmaßnahmen, belastender automatisierter Abruf, Schadcode, die Darstellung eines Ergebnisses als amtliche Bescheinigung sowie die wesentliche Übernahme von Marke, Gestaltung oder Code für einen verwechslungsfähigen Dienst.'] },
+        { heading: 'Verfügbarkeit, Fehler und Haftungsgrenzen', paragraphs: ['Wir testen Formeln und untersuchen reproduzierbare Fehler. Ein kostenloser Dienst kann dennoch geändert, vorübergehend unterbrochen oder fehlerhaft sein. Soweit rechtlich zulässig, haftet WorthCalc nicht für eine Entscheidung, bei der Eingaben und maßgeblicher Vertrag ungeprüft blieben. Zwingende Haftung — insbesondere soweit sie nach § 309 BGB nicht ausgeschlossen werden darf — und unabdingbare Verbraucherrechte bleiben unberührt.'] },
+        { heading: 'Rechte an Inhalten, Links und Werbung', paragraphs: ['Marke, Gestaltung, Originaltexte und Code von WorthCalc stehen ihrem jeweiligen Rechteinhaber zu, soweit nichts anderes genannt ist. Verlinkte Angebote haben eigene Bedingungen. Werbung kann die Website finanzieren, ist jedoch vom Rechenergebnis getrennt und bedeutet keine Empfehlung des Werbetreibenden.'] },
+        { heading: 'Änderungen und Teilunwirksamkeit', paragraphs: ['Wir können die Bedingungen an neue Funktionen, Vorschriften oder Risiken anpassen. Das Datum oben kennzeichnet die Fassung; wesentliche Änderungen werden auf dieser Seite für die Zukunft veröffentlicht. Sollte eine Regel unwirksam sein, bleiben die übrigen Regeln im gesetzlich zulässigen Umfang bestehen.'] },
+      ],
+      emailLabel: 'Fragen zu den Nutzungsbedingungen',
+      sourcesHeading: 'Deutsche gesetzliche Einordnung',
+      sources: [
+        { label: 'Bundesministerium der Justiz — § 309 BGB, Klauselverbote und Haftungsgrenzen', href: 'https://www.gesetze-im-internet.de/bgb/__309.html' },
       ],
     },
   },

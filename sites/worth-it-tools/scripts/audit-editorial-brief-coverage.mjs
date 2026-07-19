@@ -45,7 +45,10 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 180,
+  html: 183,
+  home: 3,
+  legal: 15,
+  tool: 16,
   editorial: 148,
   alignedVariants: 145,
   compliantVariants: 145,
@@ -115,6 +118,9 @@ const classifiedPages = Object.values(counts).reduce((sum, count) => sum + count
 const regressed =
   classifiedPages !== htmlFiles.length ||
   htmlFiles.length < releaseFloor.html ||
+  counts.home < releaseFloor.home ||
+  counts.legal < releaseFloor.legal ||
+  counts.tool < releaseFloor.tool ||
   counts.editorial < releaseFloor.editorial ||
   alignedVariants < releaseFloor.alignedVariants ||
   compliantVariants < releaseFloor.compliantVariants ||

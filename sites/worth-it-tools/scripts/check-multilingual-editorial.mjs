@@ -283,7 +283,17 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [
+  {
+    slug: 'pay-raise-vs-inflation-purchasing-power',
+    locales: ['en', 'zh', 'es'],
+    nativeMarkers: {
+      en: ['−0.95%', 'Bureau of Labor Statistics', 'data-mode="raiseInflation"'],
+      zh: ['NT$60,233.92', '主計總處', 'data-mode="raiseInflation"'],
+      es: ['29.941,86 €', 'INE', 'data-mode="raiseInflation"'],
+    },
+  },
+];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -329,13 +339,13 @@ for (const article of partialEditorialRoutes) {
     const html = read(`${locale}/${article.slug}/index.html`);
     if (!html) continue;
 
-    const expectedHreflang = locale === 'zh' ? 'zh-Hant' : locale;
-    for (const hreflang of [expectedHreflang, 'x-default']) {
+    const expectedHreflangs = [...article.locales.map((item) => item === 'zh' ? 'zh-Hant' : item), 'x-default'];
+    for (const hreflang of expectedHreflangs) {
       if (!html.includes(`hreflang="${hreflang}"`)) {
         failures.push(`/${locale}/${article.slug}/ missing partial hreflang=${hreflang}`);
       }
     }
-    for (const absentHreflang of hreflangs.filter((item) => ![expectedHreflang, 'x-default'].includes(item))) {
+    for (const absentHreflang of hreflangs.filter((item) => !expectedHreflangs.includes(item))) {
       if (html.includes(`hreflang="${absentHreflang}"`)) {
         failures.push(`/${locale}/${article.slug}/ advertises incomplete hreflang=${absentHreflang}`);
       }
@@ -392,4 +402,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 28 complete five-locale topics, 132 added routes, 4 enriched high-value tools, 30 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 28 complete five-locale topics, 135 added routes, 4 enriched high-value tools, 33 embedded decision calculators.');

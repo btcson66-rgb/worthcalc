@@ -7,7 +7,7 @@ const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
 const releasedHomeLocales = [...locales];
-const releasedSupplemental = ['bulk-buying-waste-math', 'costco-math'];
+const releasedSupplemental = ['bulk-buying-waste-math', 'costco-math', 'is-costco-executive-membership-worth-it'];
 const failures = [];
 
 function verify(path, kind) {

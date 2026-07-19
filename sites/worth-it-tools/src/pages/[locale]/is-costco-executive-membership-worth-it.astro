@@ -4,7 +4,7 @@ import FAQ from '../../components/FAQ.astro';
 import MembershipUpgradeCalculator from '../../components/MembershipUpgradeCalculator.astro';
 import { localizedPath } from '../../i18n/utils';
 
-type L = 'zh' | 'es' | 'fr';
+type L = 'zh' | 'es' | 'fr' | 'de';
 
 const meta = {
   zh: {
@@ -37,14 +37,24 @@ const meta = {
       { question: 'Comment tester la rentabilité de l’adhésion Privilège ?', answer: 'Mesurez l’écart sur un panier réellement comparable, retirez pertes et achats supplémentaires, puis ajoutez trajet, péage et stockage. Le calculateur Costco France de WorthCalc sépare ces éléments au lieu de supposer un pourcentage d’économie universel.' },
     ],
   },
+  de: {
+    title: 'Gibt es Costco Executive in Deutschland? Standorte und 2%-Bonus 2026',
+    description: 'Klare Antwort zu Costco Executive Deutschland: keine deutschen Lagerhäuser im offiziellen Standortbericht, kein lokaler Executive-Tarif und keine falsche Euro-Umrechnung.',
+    faq: [
+      { question: 'Gibt es Costco-Filialen in Deutschland?', answer: 'In Costcos offiziellem Standortbericht vom Mai 2026 wird Deutschland nicht als Land mit einem Lagerhaus aufgeführt. Die Liste nennt unter anderem fünf Standorte in Spanien und drei in Frankreich. Prüfen Sie den aktuellen Standortfinder erneut, bevor Sie eine Reise planen.' },
+      { question: 'Kann man Costco Executive in Deutschland abschließen?', answer: 'Mangels deutschem Costco-Angebot gibt es derzeit auch keinen veröffentlichten deutschen Executive-Tarif mit 2%-Bonus. Eine US-Mitgliedschaft ist ein ausländischer Vertrag und darf nicht als lokal verfügbares deutsches Produkt beschrieben werden.' },
+      { question: 'Gilt die US-Schwelle von 3.250 Dollar in Deutschland?', answer: 'Nein. Sie entsteht aus 65 US-Dollar Mehrbeitrag geteilt durch 2% im US-Programm. Ohne deutschen Mehrbeitrag, lokalen Bonussatz und deutsche berechtigte Umsätze liefert eine Umrechnung in Euro nur Scheingenauigkeit.' },
+      { question: 'Wann kann sich eine Costco-Mitgliedschaft für Deutsche trotzdem lohnen?', answer: 'Nur bei einer realistischen Auslandsnutzung. Rechnen Sie Mitgliedsbeitrag, komplette Zusatzfahrt, Maut, Zeit, Lagerung und Verderb gegen den gemessenen Preisvorteil ohnehin geplanter Käufe. Eine Einkaufsreise, die erst durch den Bonus ausgelöst wird, ist kein Vorteil.' },
+    ],
+  },
 } satisfies Record<L, { title: string; description: string; faq: { question: string; answer: string }[] }>;
 
-export function getStaticPaths() { return (['zh', 'es', 'fr'] as const).map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return (['zh', 'es', 'fr', 'de'] as const).map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as L;
 const page = meta[locale];
 ---
 
-<ArticleLayout title={page.title} description={page.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr']}>
+<ArticleLayout title={page.title} description={page.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   {locale === 'zh' && (
     <>
       <p class="direct-answer"><strong>直接答案：</strong>以台灣好市多官網目前刊載年費計算，黑鑽卡比金星會員多 NT$1,650；名目 2% 的理論升級門檻是每年 NT$82,500、每月 NT$6,875 的<strong>合格未稅消費</strong>。加油站、餐飲部、會員費、稅額等不列入，所以發票總額要高於這條線才可能真正回本。</p>
@@ -126,6 +136,32 @@ const page = meta[locale];
     </>
   )}
 
+  {locale === 'de' && (
+    <>
+      <p class="direct-answer"><strong>Direkte Antwort:</strong> Costco führt Deutschland im offiziellen Standortbericht vom Mai 2026 nicht als Land mit einem Lagerhaus. Entsprechend gibt es keinen veröffentlichten deutschen Executive-Tarif mit 2%-Bonus. Die US-Schwelle von 3.250 Dollar ist deshalb keine deutsche Kaufempfehlung und darf nicht einfach in Euro umgerechnet werden.</p>
+
+      <h2>Der aktuelle Status für Deutschland</h2>
+      <table><thead><tr><th>Frage</th><th>Veröffentlichter Stand</th><th>Folge für die Rechnung</th></tr></thead><tbody><tr><td>Costco-Lagerhaus in Deutschland</td><td>Keines in der offiziellen Länderliste</td><td>Keine lokale Einkaufsbasis unterstellen</td></tr><tr><td>Executive Deutschland</td><td>Kein lokaler Tarif veröffentlicht</td><td>Keinen deutschen Beitrag oder 2%-Bonus erfinden</td></tr><tr><td>US Executive</td><td>Ausländischer Tarif mit eigenen Regeln</td><td>Nur nach tatsächlichem Vertrag und berechtigten Käufen rechnen</td></tr></tbody></table>
+      <p>Costco-Mitgliedskarten können internationale Zugangsrechte haben. Das schafft aber weder ein deutsches Lagerhaus noch einen deutschen Executive-Vertrag. Zugang, Bonusberechtigung und wirtschaftlicher Vorteil sind drei getrennte Fragen.</p>
+
+      <h2>Warum 3.250 Dollar keine deutsche Schwelle sind</h2>
+      <p class="formula"><strong>Upgrade-Schwelle = zusätzlicher Jahresbeitrag ÷ zusätzlicher Bonussatz.</strong></p>
+      <p>Im US-Modell ergeben 65 US-Dollar Mehrbeitrag geteilt durch 2% genau 3.250 US-Dollar berechtigten Jahresumsatz. Für Deutschland fehlen beide lokalen Eingaben: Es gibt weder einen veröffentlichten Executive-Mehrbeitrag in Euro noch einen deutschen 2%-Tarif. Eine Wechselkursumrechnung würde Währung, Vertrag, Steuerbehandlung und berechtigte Kauforte vermischen.</p>
+
+      <h2>Die sinnvolle Rechnung bei einer Auslandsfahrt</h2>
+      <p>Wer aus Deutschland zu einem Costco in einem anderen Land fährt, sollte den gesamten Zusatzaufwand ansetzen. Die <a href={localizedPath(locale, '/tools/costco-membership')}>deutsche Einkaufsklub-Rechnung</a> berücksichtigt Beitrag, geplanten Monatsumsatz, gemessenen Preisvorteil sowie Fahrt-, Maut-, Lager- und Verderbskosten. Für die Reise gilt:</p>
+      <ol><li>Nur ohnehin geplante und tatsächlich verbrauchte Waren zählen als Vergleichsbasis.</li><li>Hin- und Rückfahrt, Maut und zusätzlicher Zeitaufwand vollständig erfassen.</li><li>Preise derselben Marke, Packungsgröße und Mengeneinheit vergleichen.</li><li>Mit niedrigerem Preisvorteil und weniger Fahrten einen Belastungstest rechnen.</li></ol>
+      <p>Ist das Ergebnis nur knapp positiv, ist es praktisch ein Gleichstand. Wechselkurse, Sortimentsunterschiede, Rückgaben und eine zusätzliche Fahrt können den kleinen Vorteil aufzehren. Einen Bonus durch Mehrkäufe zu „erreichen“ lohnt nie: 100 Euro zusätzliche Ausgabe für 2 Euro Bonus lassen 98 Euro weniger übrig.</p>
+
+      <h2>Wann der Upgrade-Rechner künftig anwendbar wäre</h2>
+      <p>Erst wenn Costco einen deutschen Tarif mit veröffentlichtem Grundbeitrag, höherem Mitgliedsbeitrag, Bonussatz, Ausschlüssen und Abrechnungszeitraum anbietet, lässt sich eine lokale Schwelle berechnen. Dann werden ausschließlich der echte Mehrbeitrag und der Bonus auf berechtigte Nettokäufe verwendet. Bis dahin beantwortet die <a href={localizedPath(locale, '/costco-math')}>Costco-Deutschland-Kostenanalyse</a> die reale Frage besser als ein fiktiver Executive-Rechner.</p>
+
+      <h2>Quellen</h2>
+      <ul class="source-list"><li><a href="https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-Third-Quarter-and-Year-To-Date-Operating-Results-For-Fiscal-2026/default.aspx">Costco Wholesale—offizielle Standortzahlen im Bericht zum dritten Quartal 2026</a></li><li><a href="https://www.costco.com/f/-/executive-rewards">Costco USA—Executive-Beitrag, 2%-Bonus, Obergrenze und Ausschlüsse</a></li></ul>
+      <p class="last-verified"><small>Zuletzt geprüft am 19. Juli 2026. Standortnetz und Mitgliedschaftsangebote können sich ändern; vor einer Reise oder einem ausländischen Vertragsabschluss die aktuellen offiziellen Seiten prüfen.</small></p>
+    </>
+  )}
+
   <FAQ items={page.faq} />
-  <p class="privacy-note">{locale === 'zh' ? '隱私說明：計算機只在瀏覽器本機運算，不會傳送你輸入的會員消費。本文是教育用途估算，不是個人化財務、稅務或法律建議。' : locale === 'es' ? 'Privacidad: los cálculos de WorthCalc se ejecutan en su navegador. Esta guía educativa no sustituye las condiciones contractuales ni asesoramiento financiero, fiscal o jurídico.' : 'Confidentialité : les calculs WorthCalc restent dans votre navigateur. Ce guide pédagogique ne remplace ni les conditions contractuelles ni un conseil financier, fiscal ou juridique.'}</p>
+  <p class="privacy-note">{locale === 'zh' ? '隱私說明：計算機只在瀏覽器本機運算，不會傳送你輸入的會員消費。本文是教育用途估算，不是個人化財務、稅務或法律建議。' : locale === 'es' ? 'Privacidad: los cálculos de WorthCalc se ejecutan en su navegador. Esta guía educativa no sustituye las condiciones contractuales ni asesoramiento financiero, fiscal o jurídico.' : locale === 'fr' ? 'Confidentialité : les calculs WorthCalc restent dans votre navigateur. Ce guide pédagogique ne remplace ni les conditions contractuelles ni un conseil financier, fiscal ou juridique.' : 'Datenschutz: WorthCalc-Berechnungen laufen nur im Browser. Dieser Bildungsinhalt ersetzt weder Vertragsbedingungen noch individuelle Finanz-, Steuer- oder Rechtsberatung.'}</p>
 </ArticleLayout>

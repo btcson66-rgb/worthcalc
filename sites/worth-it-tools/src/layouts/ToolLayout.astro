@@ -27,6 +27,7 @@ interface Props {
   related?: RelatedLink[];
   noindex?: boolean;
   alternateLocales?: Locale[];
+  showReview?: boolean;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
   related = [],
   noindex,
   alternateLocales,
+  showReview = true,
 } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
@@ -115,7 +117,7 @@ const reviewLabels = {
   <section class="tool">
     <slot />
   </section>
-  {review && (
+  {showReview && review && (
     <section class="calculator-review" aria-labelledby="calculator-review-heading">
       <h2 id="calculator-review-heading">{reviewLabels.methodology}</h2>
       <p>{review.methodology}</p>

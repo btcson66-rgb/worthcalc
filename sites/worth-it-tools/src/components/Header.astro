@@ -1,6 +1,6 @@
 ---
 import { LOCALES, SITE, type Locale } from '../consts';
-import { getLocaleFromUrl, localizedCorePath, useTranslations } from '../i18n/utils';
+import { getLocaleFromUrl, localizedCorePath, localizedPath, useTranslations } from '../i18n/utils';
 import LanguageSwitch from './LanguageSwitch.astro';
 
 interface Props {
@@ -32,8 +32,8 @@ const t = useTranslations(locale);
       <nav class="primary-nav" aria-label="Primary">
         <a href={localizedCorePath(locale, '/')}>{t('nav.home')}</a>
         <a href={`${localizedCorePath(locale, '/')}#tools`}>{t('nav.tools')}</a>
-        <a href={localizedCorePath(locale, '/about')}>{t('nav.about')}</a>
-        <a href={localizedCorePath(locale, '/contact')}>{t('nav.contact')}</a>
+        <a href={localizedPath(locale, '/about')}>{t('nav.about')}</a>
+        <a href={localizedPath(locale, '/contact')}>{t('nav.contact')}</a>
       </nav>
       <LanguageSwitch locales={locales} />
     </div>

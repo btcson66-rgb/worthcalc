@@ -37,13 +37,14 @@ const briefRoutes = [
   { id: '22', slug: 'energy-efficient-appliance-payback' },
   { id: '23', slug: 'cost-per-use-expensive-item' },
   { id: '24', slug: 'bulk-buying-vs-small-packages' },
+  { id: '25', slug: 'meal-prep-vs-takeout-cost' },
 ];
 
 const releaseFloor = {
-  html: 155,
-  editorial: 123,
-  alignedVariants: 120,
-  compliantVariants: 120,
+  html: 158,
+  editorial: 126,
+  alignedVariants: 123,
+  compliantVariants: 123,
   completeTopics: 24,
 };
 

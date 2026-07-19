@@ -242,18 +242,18 @@ const editorialRoutes = [
       de: ['4,59 €', 'Verbrauchsdatum', 'data-mode="bulk"'],
     },
   },
-];
-const partialEditorialRoutes = [
   {
     slug: 'meal-prep-vs-takeout-cost',
-    locales: ['en', 'zh', 'es'],
     nativeMarkers: {
       en: ['$10.20', 'three to four days', 'data-mode="meal"'],
       zh: ['NT$212', '70°C', 'data-mode="meal"'],
       es: ['9,25 €', 'AESAN', 'data-mode="meal"'],
+      fr: ['10,40 €', '48 heures', 'data-mode="meal"'],
+      de: ['11,06 €', 'ungefähr zwei Tage', 'data-mode="meal"'],
     },
   },
 ];
+const partialEditorialRoutes = [];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -362,4 +362,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 24 complete five-locale topics, topic 25 at 3/5, 115 added routes, 4 enriched high-value tools, 23 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 25 complete five-locale topics, 117 added routes, 4 enriched high-value tools, 25 embedded decision calculators.');

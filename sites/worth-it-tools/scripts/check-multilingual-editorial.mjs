@@ -273,7 +273,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [{slug:'true-hourly-wage-after-commuting-work-expenses',locales:['en','zh','es'],nativeMarkers:{en:['$14.47/hour', 'Department of Labor', 'data-mode="hourlyWage"'],zh:['NT$247.37', '薪資單', 'data-mode="hourlyWage"'],es:['8,94 €/h', 'MITES', 'data-mode="hourlyWage"']}}];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -382,4 +382,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 27 complete five-locale topics, 127 added routes, 4 enriched high-value tools, 29 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 27 complete five-locale topics, topic 28 at 3/5, 130 added routes, 4 enriched high-value tools, 30 embedded decision calculators.');

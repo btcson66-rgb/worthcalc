@@ -1,6 +1,7 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
+import MembershipUpgradeCalculator from '../../components/MembershipUpgradeCalculator.astro';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
@@ -34,13 +35,13 @@ const faq = [
 ---
 
 <ArticleLayout
-  title="Is a Costco Executive Membership Worth It? A Complete Breakdown"
-  description="Costco Executive is worth more than Gold Star at about $3,250 in eligible annual spend: the $65 upgrade difference divided by the 2% reward."
+  title="Is Costco Executive Worth It in 2026? $3,250 Break-Even Math"
+  description="Costco Executive beats Gold Star at about $3,250 of eligible annual spend: verify the $65 upgrade, 2% exclusions, safety margin, and your own result."
   locale={locale}
-  alternateLocales={[locale]}
-  updated="2026-07-13"
+  alternateLocales={['en', 'zh', 'es', 'fr']}
+  updated="2026-07-19"
 >
-  <p>
+  <p class="direct-answer">
     <strong>Short answer: Costco Executive is mathematically better than Gold Star once you have about $3,250 in eligible annual spending, or roughly $271 per month.</strong>
     That threshold follows directly from a $65 upgrade difference divided by a 2% reward. It is not a promise that every purchase qualifies, and it does not prove that either membership is worthwhile for you. For a personalized result, use the
     <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership calculator</a>
@@ -62,6 +63,20 @@ const faq = [
   <p>
     Fees and program terms can change. Treat those values as the inputs used for this analysis, then verify current prices, eligible categories, exclusions, reward timing, and caps with Costco before purchasing or renewing.
   </p>
+
+  <MembershipUpgradeCalculator
+    locale="en-US"
+    currency="USD"
+    extraFee={65}
+    monthlySpend={300}
+    rewardRate={2}
+    copy={{
+      heading: 'Executive upgrade break-even calculator', intro: 'Use eligible net purchases only. Exclude returns, taxes, fees and categories the current Executive terms do not reward.',
+      extraFee: 'Annual upgrade difference', extraFeeHelp: 'Executive fee minus the base membership you would otherwise renew.', monthlySpend: 'Eligible monthly spend', monthlySpendHelp: 'A normal-year estimate after returns and exclusions.',
+      rewardRate: 'Incremental reward rate (%)', rewardRateHelp: 'The current published Executive rate is 2%; terms can change.', extraBenefits: 'Other measurable annual value', extraBenefitsHelp: 'Only include upgrade-only benefits you would otherwise pay for.',
+      verdictLabel: 'Upgrade result', annualReward: 'Estimated annual reward', netValue: 'Net after upgrade fee', breakEven: 'Eligible monthly break-even', favorable: 'The upgrade is ahead by {net} per year under these inputs. Confirm current eligibility and timing.', unfavorable: 'The upgrade is behind by {net} per year. It needs about {threshold} in eligible monthly spend to break even.',
+    }}
+  />
 
   <h2>The 2% reward break-even calculation</h2>
   <p>
@@ -93,10 +108,10 @@ const faq = [
     The $3,250 threshold answers one narrow question: when does the 2% reward recover the extra $65 for Executive? It does not recover the entire $130 Executive fee by itself. A 2% reward would need $6,500 of eligible spending to equal $130, but that is usually the wrong comparison because Gold Star already costs $65 and provides the underlying membership access.
   </p>
   <p>
-    To decide whether membership access itself pays off, estimate how much Costco saves you compared with purchases you would otherwise make. At the calculator's editable 15% default savings assumption, Gold Star breaks even at about $433.33 per year: $65 divided by 0.15. Rounded conservatively, that is about $434 annually or $36 monthly. Executive versus no membership combines the assumed 15% store savings and 2% reward, producing $130 divided by 0.17, or about $764.71 annually. Rounded up, that is about $765 per year or $64 per month.
+    To decide whether membership access itself pays off, estimate how much Costco saves you on a weighted, like-for-like basket of purchases you would make anyway. Let <em>s</em> be that measured savings rate and <em>C</em> the annual travel, storage and waste cost. The base membership's monthly break-even is <strong>($65 + C) ÷ (12 × s)</strong>. There is no honest store-wide percentage that applies to every household.
   </p>
   <p>
-    Those membership break-even figures are scenarios, not claims that Costco is always 15% cheaper. If your comparable basket is only 5% cheaper, Gold Star would require $1,300 of annual spending to recover a $65 fee. If bulk waste or impulse purchases consume the price difference, your real savings rate can be zero or negative. Use the
+    For example, if your comparable basket is 5% cheaper and there are no extra costs, Gold Star would require $1,300 of annual spending to recover a $65 fee. At 10%, that threshold is $650. If bulk waste or impulse purchases consume the price difference, your real savings rate can be zero or negative. Use the
     <a href={localizedPath(locale, '/tools/costco-membership')}>calculator with your own savings assumption</a>
     instead of treating the default as a fact.
   </p>
@@ -143,6 +158,13 @@ const faq = [
     <a href={localizedPath(locale, '/tools/costco-membership')}>free Costco membership calculator</a>
     performs both comparisons with your spending and assumptions, entirely in your browser.
   </p>
+
+  <h2>Official sources</h2>
+  <ul class="source-list">
+    <li><a href="https://www.costco.com/f/-/join-costco">Costco US — current Gold Star and Executive fees and benefits</a></li>
+    <li><a href="https://www.costco.com/f/-/executive-rewards">Costco US — Executive 2% reward, cap, calculation and exclusions</a></li>
+  </ul>
+  <p class="last-verified"><small>Official terms last checked July 19, 2026. Fees, benefits, caps, qualifying purchases and redemption rules can change; verify them before upgrading or renewing.</small></p>
 
   <FAQ items={faq} />
 

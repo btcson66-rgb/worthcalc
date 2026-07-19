@@ -1,0 +1,131 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import MembershipUpgradeCalculator from '../../components/MembershipUpgradeCalculator.astro';
+import { localizedPath } from '../../i18n/utils';
+
+type L = 'zh' | 'es' | 'fr';
+
+const meta = {
+  zh: {
+    title: '好市多黑鑽卡值得升級嗎？2026 回本門檻與 2% 排除項目',
+    description: '用台灣好市多現行年費與 2% 回饋規則計算黑鑽卡升級門檻，分清合格消費、稅額、加油站與餐飲部排除項目。',
+    faq: [
+      { question: '好市多黑鑽卡每月刷多少才回本？', answer: '以黑鑽卡 NT$3,000、金星會員 NT$1,350 計，升級差額 NT$1,650 除以名目 2%，理論上需要每年 NT$82,500、每月 NT$6,875 的合格未稅消費。因官方先扣除政府課稅，且加油站、餐飲部等不列入，信用卡或發票上的總消費門檻會更高。' },
+      { question: '加油與好市多餐飲部有 2% 黑鑽回饋嗎？', answer: '依台灣好市多目前 FAQ，加油站、西式餐飲部、會員費、政府課稅、停車費、部分服務費等不列入 2% 消費回饋。請用官方最新排除清單核對，不要把全部刷卡金額乘以 2%。' },
+      { question: '黑鑽卡 2% 回饋可以在線上或加油站折抵嗎？', answer: '官方 FAQ 說明回饋金只能在台灣好市多實體賣場結帳時使用，不能在台灣線上購物或加油站折抵；累積與使用是兩件不同的事。' },
+      { question: '剛好每月花 NT$6,875 就一定該升級嗎？', answer: '不建議只靠剛好打平的預測升級。退貨、排除品項、稅額與結算期間都會降低實際回饋，應以過去正常年度的合格淨消費計算並保留安全邊際。' },
+    ],
+  },
+  es: {
+    title: '¿Existe Costco Executive en España? Cuota, 2% y respuesta para 2026',
+    description: 'Respuesta directa sobre Costco Executive en España: planes locales publicados, por qué no aplica el umbral estadounidense de 3.250 $ y cómo evaluar la afiliación real.',
+    faq: [
+      { question: '¿Hay una membresía Costco Executive en España?', answer: 'La página oficial española consultada el 19 de julio de 2026 publica Gold Star por 36,30 € IVA incluido y Business por 30,25 € IVA incluido, pero no presenta una modalidad Executive local con recompensa del 2%. Compruebe la pantalla de alta antes de pagar por si la oferta cambia.' },
+      { question: '¿Las compras en Costco España generan el 2% de una Executive de Estados Unidos?', answer: 'Las condiciones oficiales estadounidenses de Executive consultadas incluyen las compras realizadas en España entre las que no se aplican a esa recompensa. Una tarjeta puede permitir acceso internacional sin convertir la compra española en gasto elegible para el 2% estadounidense.' },
+      { question: '¿Debo usar el umbral de 3.250 dólares en España?', answer: 'No para una afiliación española. Ese umbral compara 65 $ de sobrecuota y un 2% de recompensa del programa estadounidense. España publica otras cuotas y no publica esa mejora local; mezclar monedas, planes y reglas produciría una conclusión falsa.' },
+      { question: '¿Cómo sé si Gold Star España compensa?', answer: 'Compare una cesta equivalente con sus tiendas habituales, reste merma y compras no previstas, añada desplazamiento y divida cuota más costes extra por su ahorro medido. La calculadora local de WorthCalc permite modificar todos esos supuestos.' },
+    ],
+  },
+  fr: {
+    title: 'La carte Costco Executive existe-t-elle en France ? Réponse et calcul 2026',
+    description: 'Vérifiez l’offre Costco France, l’adhésion Privilège à 36 €, l’absence d’un palier Executive local publié et pourquoi le seuil américain ne s’applique pas.',
+    faq: [
+      { question: 'Costco propose-t-il une carte Executive en France ?', answer: 'L’offre officielle française vérifiée le 19 juillet 2026 publie notamment l’adhésion annuelle Membre Privilège à 36 € TTC, sans présenter un palier Executive français assorti d’une récompense de 2 %. Vérifiez toujours l’écran d’adhésion au moment de souscrire.' },
+      { question: 'Les achats en France comptent-ils pour le 2 % Executive américain ?', answer: 'Les règles officielles américaines consultées indiquent que les achats effectués en France ne s’appliquent pas à cette récompense Executive. L’accès international d’une carte ne signifie donc pas que chaque achat étranger est admissible au 2 %.' },
+      { question: 'Le seuil de 3 250 dollars est-il valable en France ?', answer: 'Non pour une adhésion française. Il résulte de 65 $ de surcotisation divisés par 2 % dans le programme américain. Sans surcotisation Executive locale et sans récompense locale publiée, recopier ce seuil en euros serait trompeur.' },
+      { question: 'Comment tester la rentabilité de l’adhésion Privilège ?', answer: 'Mesurez l’écart sur un panier réellement comparable, retirez pertes et achats supplémentaires, puis ajoutez trajet, péage et stockage. Le calculateur Costco France de WorthCalc sépare ces éléments au lieu de supposer un pourcentage d’économie universel.' },
+    ],
+  },
+} satisfies Record<L, { title: string; description: string; faq: { question: string; answer: string }[] }>;
+
+export function getStaticPaths() { return (['zh', 'es', 'fr'] as const).map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as L;
+const page = meta[locale];
+---
+
+<ArticleLayout title={page.title} description={page.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr']}>
+  {locale === 'zh' && (
+    <>
+      <p class="direct-answer"><strong>直接答案：</strong>以台灣好市多官網目前刊載年費計算，黑鑽卡比金星會員多 NT$1,650；名目 2% 的理論升級門檻是每年 NT$82,500、每月 NT$6,875 的<strong>合格未稅消費</strong>。加油站、餐飲部、會員費、稅額等不列入，所以發票總額要高於這條線才可能真正回本。</p>
+
+      <MembershipUpgradeCalculator
+        locale="zh-TW"
+        currency="TWD"
+        extraFee={1650}
+        monthlySpend={7000}
+        rewardRate={2}
+        copy={{
+          heading: '黑鑽卡升級回本計算機', intro: '只填可累積 2% 的未稅淨消費；不要把加油、餐飲部、會員費、退貨與官方排除項目算進去。',
+          extraFee: '每年升級差額', extraFeeHelp: '黑鑽卡年費減去你原本會續的基本會員年費。', monthlySpend: '每月合格未稅消費', monthlySpendHelp: '以正常年度估算，扣除退貨、政府課稅與官方排除項目。',
+          rewardRate: '增量回饋率（%）', rewardRateHelp: '目前名目回饋為 2%，條款可能調整。', extraBenefits: '其他可量化年價值', extraBenefitsHelp: '只有原本會付費使用、且能提出金額的升級專屬權益才填入。',
+          verdictLabel: '升級判斷', annualReward: '估計年度回饋', netValue: '扣除升級費後淨值', breakEven: '每月合格消費門檻', favorable: '依這組數字，升級一年多出 {net}；仍要確認結算期與最新排除項目。', unfavorable: '依這組數字，升級一年少 {net}；約需每月 {threshold} 合格消費才打平。',
+        }}
+      />
+
+      <h2>為什麼 NT$6,875 只是理論下限</h2>
+      <p>公式是「升級差額 ÷ 增量回饋率」。NT$1,650 ÷ 2% = NT$82,500，再除以 12 得 NT$6,875。但台灣好市多說明，2% 回饋要先扣除政府課稅；會員費、加油站、西式餐飲部、停車、運費與部分服務也被排除。因此請從 App 或消費紀錄整理真正合格的淨額，而不是拿聯名卡帳單總額直接乘 2%。</p>
+      <table>
+        <thead><tr><th>每月合格未稅消費</th><th>名目年回饋</th><th>扣除 NT$1,650 升級差額</th></tr></thead>
+        <tbody><tr><td>NT$5,000</td><td>NT$1,200</td><td>-NT$450</td></tr><tr><td>NT$6,875</td><td>NT$1,650</td><td>打平</td></tr><tr><td>NT$10,000</td><td>NT$2,400</td><td>+NT$750</td></tr></tbody>
+      </table>
+
+      <h2>先分開「會員值得」與「升級值得」</h2>
+      <p>金星會員本身值不值得，要比較年費、車程、耗損與相同商品在其他通路的實際價差；黑鑽卡值不值得，則只比較多付的年費與多得到的回饋。先用<a href={localizedPath(locale, '/costco-math')}>好市多會員數學指南</a>判斷基本會員，再用本頁計算升級，才能避免把同一份省錢效益算兩次。</p>
+
+      <h2>升級前的四項查核</h2>
+      <ol><li>用完整正常年度，不把家電或節慶採購直接年化。</li><li>扣掉退貨、稅額與官方排除品項，並對照你的回饋結算期間。</li><li>門檻附近視為打平；至少測一次消費少 20% 的情境。</li><li>不要為了 2% 多買：多花 NT$1,000 只多 NT$20 回饋，現金仍少 NT$980。</li></ol>
+
+      <h2>資料來源</h2>
+      <ul class="source-list"><li><a href="https://www.costco.com.tw/c/Business-Add-on-Renew/p/66">台灣好市多—金星與黑鑽卡方案、官網刊載年費</a></li><li><a href="https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership2">台灣好市多—2% 回饋算法、排除項目、結算與使用方式</a></li></ul>
+      <p class="last-verified"><small>最後查核：2026 年 7 月 19 日。費率、上限、結算期與排除項目可能調整，續卡或升級前請再看官方頁面。</small></p>
+    </>
+  )}
+
+  {locale === 'es' && (
+    <>
+      <p class="direct-answer"><strong>Respuesta directa:</strong> la oferta oficial de Costco España consultada el 19 de julio de 2026 muestra Gold Star por 36,30 € IVA incluido y Business por 30,25 € IVA incluido, pero no una modalidad Executive española con recompensa del 2 %. Por tanto, el umbral estadounidense de 3.250 $ no sirve para decidir una afiliación local.</p>
+
+      <h2>Qué publica Costco España ahora</h2>
+      <table><thead><tr><th>Modalidad publicada</th><th>Cuota anual</th><th>Uso indicado</th></tr></thead><tbody><tr><td>Gold Star</td><td>36,30 € IVA incluido</td><td>Uso individual; tarjeta adicional gratuita</td></tr><tr><td>Business</td><td>30,25 € IVA incluido</td><td>Negocios y empresas; requisitos aplicables</td></tr><tr><td>Executive con 2%</td><td>No publicada localmente</td><td>No inventar una cuota o recompensa española</td></tr></tbody></table>
+      <p>Business no es una «Executive barata»: responde a otra elegibilidad y finalidad. La decisión correcta compara el plan que realmente puede contratar con el valor que obtiene, no el nombre de una tarjeta de otro país.</p>
+
+      <h2>Por qué 3.250 dólares no se convierten a euros</h2>
+      <p class="formula"><strong>Umbral de una mejora = sobrecuota anual ÷ recompensa incremental.</strong></p>
+      <p>En Estados Unidos, 65 $ ÷ 2% produce 3.250 $ de gasto elegible. España no publica esa sobrecuota ni ese 2% local, por lo que cambiar el símbolo de dólar por euro no arregla el problema. Además, las condiciones estadounidenses de Executive indican que las compras efectuadas en España no se aplican a su recompensa del 2%. Acceso mundial y acumulación de recompensa son derechos distintos.</p>
+
+      <h2>La pregunta útil para un residente en España</h2>
+      <p>Pregunte si Gold Star recupera 36,30 € con compras que ya estaban previstas. Prepare una cesta ponderada con marcas, formatos y unidades comparables; reste desperdicio y compras impulsivas; añada combustible, peaje y almacenamiento. Después pruebe un ahorro menor. La <a href={localizedPath(locale, '/tools/costco-membership')}>calculadora Costco España</a> parte de la cuota local y deja editar todos esos factores.</p>
+      <ol><li>No cuente como ahorro una unidad que caduca o que no habría comprado.</li><li>No use precios promocionales de una sola visita como promedio anual.</li><li>Si vive lejos de uno de los cinco almacenes publicados, valore todo el desplazamiento.</li><li>Un resultado pequeño es un empate práctico: disponibilidad y tiempo pueden dominarlo.</li></ol>
+
+      <h2>Fuentes</h2>
+      <ul class="source-list"><li><a href="https://www.costco.es/sobre-nosotros">Costco España—modalidades Gold Star y Business, cuotas y almacenes</a></li><li><a href="https://customerservice.costco.com/app/answers/detail/a_id/1205/">Costco EE. UU.—condiciones Executive, recompensa y compras extranjeras no elegibles</a></li></ul>
+      <p class="last-verified"><small>Última comprobación: 19 de julio de 2026. Verifique la oferta y las condiciones visibles al contratar o renovar; esta página no afirma que una modalidad ausente hoy nunca pueda lanzarse.</small></p>
+    </>
+  )}
+
+  {locale === 'fr' && (
+    <>
+      <p class="direct-answer"><strong>Réponse directe :</strong> l’offre Costco France vérifiée le 19 juillet 2026 publie l’adhésion annuelle Membre Privilège à 36 € TTC, mais pas un palier Executive français avec récompense de 2 %. Le seuil américain de 3 250 $ ne doit donc ni être converti en euros ni présenté comme une règle française.</p>
+
+      <h2>Ce que l’offre française permet réellement de comparer</h2>
+      <table><thead><tr><th>Élément</th><th>Situation publiée</th><th>Conséquence</th></tr></thead><tbody><tr><td>Membre Privilège</td><td>36 € TTC par an</td><td>Tester la valeur de l’accès et des économies réelles</td></tr><tr><td>Adhésion professionnelle</td><td>Offre destinée aux achats professionnels</td><td>Ne pas la confondre avec une montée en gamme à 2%</td></tr><tr><td>Executive France</td><td>Palier local à 2% non publié</td><td>Aucune surcotisation locale à amortir</td></tr></tbody></table>
+      <p>Une carte valable dans plusieurs pays peut donner accès à un club sans reprendre chaque avantage du pays d’origine. Les conditions Executive américaines consultées excluent notamment les achats réalisés en France du calcul de leur récompense de 2 %.</p>
+
+      <h2>Pourquoi le calcul américain ne répond pas à la question française</h2>
+      <p class="formula"><strong>Seuil d’une montée en gamme = surcotisation annuelle ÷ taux de récompense supplémentaire.</strong></p>
+      <p>Le chiffre de 3 250 $ vient de 65 $ divisés par 2 % aux États-Unis. En France, ni cette surcotisation ni ce taux Executive local ne sont publiés. Convertir uniquement la devise fabriquerait une précision sans produit correspondant. Si une nouvelle formule apparaît un jour, reprenez sa vraie différence de cotisation, ses exclusions et sa période de calcul.</p>
+
+      <h2>Tester plutôt la rentabilité de l’adhésion Privilège</h2>
+      <p>Comparez un panier strictement équivalent avec les enseignes que vous auriez utilisées. Ajoutez carburant, péage, temps, stockage et pertes sur grands formats. La <a href={localizedPath(locale, '/tools/costco-membership')}>calculatrice Costco France</a> utilise la cotisation locale comme point de départ et permet de réduire le taux d’économie au lieu de supposer un avantage uniforme.</p>
+      <ol><li>Mesurez les prix à l’unité sur des produits réellement consommés.</li><li>Retirez retours, pertes et achats déclenchés par la visite.</li><li>Avec peu de clubs-entrepôts, chiffrez le déplacement complet.</li><li>Refaites le test avec une économie plus faible ; une petite marge n’est pas robuste.</li></ol>
+
+      <h2>Sources</h2>
+      <ul class="source-list"><li><a href="https://www.costco.fr/c/GOLDSTAR-PRIMARY-CARD/p/9999999">Costco France—adhésion annuelle Membre Privilège à 36 € TTC</a></li><li><a href="https://customerservice.costco.com/app/answers/detail/a_id/1205/">Costco États-Unis—conditions Executive, récompense et achats étrangers non admissibles</a></li></ul>
+      <p class="last-verified"><small>Dernière vérification : 19 juillet 2026. Contrôlez le tarif et les conditions affichés lors de l’adhésion ou du renouvellement ; l’absence constatée aujourd’hui n’exclut pas une future évolution de l’offre.</small></p>
+    </>
+  )}
+
+  <FAQ items={page.faq} />
+  <p class="privacy-note">{locale === 'zh' ? '隱私說明：計算機只在瀏覽器本機運算，不會傳送你輸入的會員消費。本文是教育用途估算，不是個人化財務、稅務或法律建議。' : locale === 'es' ? 'Privacidad: los cálculos de WorthCalc se ejecutan en su navegador. Esta guía educativa no sustituye las condiciones contractuales ni asesoramiento financiero, fiscal o jurídico.' : 'Confidentialité : les calculs WorthCalc restent dans votre navigateur. Ce guide pédagogique ne remplace ni les conditions contractuelles ni un conseil financier, fiscal ou juridique.'}</p>
+</ArticleLayout>

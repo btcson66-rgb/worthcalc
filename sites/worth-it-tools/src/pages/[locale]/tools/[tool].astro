@@ -2,7 +2,7 @@
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import LocalizedCoreCalculator from '../../../components/LocalizedCoreCalculator.astro';
 import { coreToolContent } from '../../../data/coreToolContent';
-import { installmentGuides } from '../../../data/decisionGuides';
+import { installmentGuides, subscriptionGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import type { Locale } from '../../../consts';
@@ -10,7 +10,7 @@ import type { Locale } from '../../../consts';
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
 export function getStaticPaths() {
-  const released = ['installment-true-apr'] as const;
+  const released = ['installment-true-apr', 'subscription-audit'] as const;
   return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((tool) => ({ params: { locale, tool } })),
   );
@@ -20,7 +20,8 @@ const locale = Astro.params.locale as EditorialLocale;
 const slug = Astro.params.tool!;
 const content = coreToolContent[locale]?.[slug];
 if (!content) throw new Error(`Missing core tool content for ${locale}/${slug}`);
-const guide = { ...installmentGuides[locale], cta: undefined };
+const guides = slug === 'subscription-audit' ? subscriptionGuides : installmentGuides;
+const guide = { ...guides[locale], cta: undefined };
 const related = content.related.map((item) => ({ title: item.title, href: localizedPath(locale, item.path) }));
 ---
 

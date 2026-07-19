@@ -9,9 +9,8 @@ const SITE_URL = process.env.SITE_URL || 'https://worthcalc.win';
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  // Five-language routing. English and Traditional Chinese have complete site
-  // shells; Spanish, French, and German are released article-by-article so a
-  // locale is never added to hreflang until its equivalent route is complete.
+  // Complete five-language routing. Every released core route has a native
+  // EN, Traditional Chinese, Spanish, French, and German equivalent.
   i18n: {
     locales: ['en', 'zh', 'es', 'fr', 'de'],
     defaultLocale: 'en',

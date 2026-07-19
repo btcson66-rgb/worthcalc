@@ -464,6 +464,89 @@ section#tools > h2 {
   margin-left: 0.2rem;
 }
 
+.home-method,
+.home-guides {
+  margin-top: 2.75rem;
+}
+
+.home-method > h2,
+.home-guides > h2 {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.35rem, 3.5vw, 1.8rem);
+}
+
+.home-method ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: decision-step;
+}
+
+.home-method li {
+  counter-increment: decision-step;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+}
+
+.home-method li::before {
+  content: counter(decision-step);
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-bottom: 0.65rem;
+  border-radius: 50%;
+  background: var(--brand);
+  color: white;
+  font-weight: 800;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 1rem;
+}
+
+.guide-card {
+  position: relative;
+  padding: 1.15rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.guide-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.guide-card h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.guide-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.guide-card p {
+  margin: 0.65rem 0;
+  color: var(--color-muted);
+}
+
+.guide-card span {
+  color: var(--brand-ink);
+  font-weight: 700;
+}
+
 /* Home SEO copy */
 .seo-copy {
   margin: 2.75rem 0 0;

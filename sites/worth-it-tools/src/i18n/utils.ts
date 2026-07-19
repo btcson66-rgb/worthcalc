@@ -29,9 +29,8 @@ export function localizedPath(locale: Locale, path = '/'): string {
 }
 
 /**
- * Link to a route that currently exists only in the complete EN/ZH shells.
- * Editorial-only locales deliberately fall back to English instead of
- * emitting broken /es, /fr, or /de navigation links.
+ * Link to a route in the complete five-language site shell. Keeping this
+ * helper central makes any future staged locale release explicit.
  */
 export function localizedCorePath(locale: Locale, path = '/'): string {
   const coreLocale = (CORE_LOCALES as readonly string[]).includes(locale) ? locale : DEFAULT_LOCALE;

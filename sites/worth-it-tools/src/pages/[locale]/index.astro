@@ -2,8 +2,13 @@
 import HomePage from '../../components/HomePage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { homeContent, homeJsonLd } from '../../lib/home';
+import type { CoreLocale } from '../../consts';
 
-const locale = 'zh';
+export function getStaticPaths() {
+  return ['es', 'fr', 'de'].map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as CoreLocale;
 const content = homeContent[locale];
 ---
 

@@ -45,9 +45,9 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 195,
+  html: 198,
   home: 3,
-  legal: 27,
+  legal: 30,
   tool: 16,
   editorial: 148,
   alignedVariants: 145,

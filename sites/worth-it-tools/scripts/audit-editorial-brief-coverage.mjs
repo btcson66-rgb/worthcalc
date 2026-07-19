@@ -39,13 +39,14 @@ const briefRoutes = [
   { id: '24', slug: 'bulk-buying-vs-small-packages' },
   { id: '25', slug: 'meal-prep-vs-takeout-cost' },
   { id: '26', slug: 'reusable-vs-disposable-break-even' },
+  { id: '27', slug: 'price-per-wear-clothing-shoes' },
 ];
 
 const releaseFloor = {
-  html: 165,
-  editorial: 133,
-  alignedVariants: 130,
-  compliantVariants: 130,
+  html: 168,
+  editorial: 136,
+  alignedVariants: 133,
+  compliantVariants: 133,
   completeTopics: 26,
 };
 

@@ -263,7 +263,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [{slug:'price-per-wear-clothing-shoes',locales:['en','zh','es'],nativeMarkers:{en:['$2.05', 'FTC', 'data-mode="pricePerWear"'],zh:['NT$70', '服飾標示基準', 'data-mode="pricePerWear"'],es:['1,85 €/uso', 'Consumo', 'data-mode="pricePerWear"']}}];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -372,4 +372,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 26 complete five-locale topics, 122 added routes, 4 enriched high-value tools, 28 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 26 complete five-locale topics, topic 27 at 3/5, 125 added routes, 4 enriched high-value tools, 29 embedded decision calculators.');

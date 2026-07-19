@@ -93,6 +93,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       ],
       emailLabel: 'Correo de contacto',
     },
+    disclaimer: {
+      title: 'Aviso legal sobre las estimaciones de WorthCalc',
+      description: 'Cómo interpretar las estimaciones, supuestos y fuentes de WorthCalc, y por qué una calculadora general no sustituye asesoramiento financiero, fiscal o jurídico.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc convierte datos introducidos por la persona usuaria en una estimación matemática. El resultado sirve para explorar escenarios, no para decidir por ti ni para describir con exactitud un producto, contrato o derecho concreto.'],
+      sections: [
+        { heading: 'Una estimación depende de tus datos', paragraphs: ['Cada cifra de salida cambia con precio, plazo, tasa, uso, inflación, impuestos, costes omitidos y redondeo. Los valores precargados explican la interfaz: no son una media española, una oferta disponible ni una predicción. Prueba escenarios prudente, central y adverso y conserva el desglose, no solo la cifra destacada.'] },
+        { heading: 'No es una recomendación personalizada', paragraphs: ['WorthCalc no conoce tus ingresos completos, deudas, colchón de emergencia, fiscalidad, experiencia, objetivos ni capacidad para asumir pérdidas. Por ello no recomienda comprar, vender, pedir crédito, alquilar, invertir, contratar o cancelar un producto. La CNMV distingue el asesoramiento de inversión porque una recomendación personalizada exige evaluar circunstancias y objetivos que este sitio no solicita.'] },
+        { heading: 'Verifica documento, fecha y jurisdicción', paragraphs: ['Una calculadora no sustituye la FINE, escritura, contrato, tarifa, documento de información clave, póliza, nómina o texto oficial aplicable. Tipos, ayudas, comisiones, impuestos y derechos pueden cambiar y variar por comunidad autónoma, proveedor o perfil. Comprueba la fecha de revisión y confirma por escrito los datos con la entidad o autoridad pertinente.'] },
+        { heading: 'Fuentes, errores y límites técnicos', paragraphs: ['Priorizamos fuentes oficiales y explicamos fórmulas, pero una fuente puede actualizarse, una página externa puede moverse o el código puede contener un error. El cálculo local tampoco verifica si has escrito un dato en la unidad correcta. Si detectas una diferencia reproducible, envía URL, entradas y resultado esperado; una corrección no convierte los resultados anteriores en garantía.'] },
+        { heading: 'Publicidad y enlaces separados del cálculo', paragraphs: ['Un anuncio, enlace o servicio de terceros no forma parte de la fórmula y no supone aprobación. El anunciante es responsable de su oferta; debes revisar identidad, autorización, costes y condiciones en documentación independiente. Nunca interpretes una posición visual junto al resultado como clasificación o recomendación de WorthCalc.'] },
+        { heading: 'Cuándo acudir a una persona profesional', paragraphs: ['Busca asesoramiento cualificado antes de una decisión importante sobre deuda, vivienda, inversión, jubilación, seguro, impuesto o derecho. En caso de fraude, dificultad de pago, vencimiento legal o emergencia, utiliza de inmediato los canales oficiales correspondientes. Este aviso no elimina derechos ni responsabilidades que la ley aplicable no permita excluir.'] },
+      ],
+      sourcesHeading: 'Referencia para distinguir información y asesoramiento',
+      sources: [
+        { label: 'CNMV — qué es el asesoramiento en materia de inversión', href: 'https://www.cnmv.es/portal/inversor/asesoramiento?lang=es' },
+        { label: 'CNMV — información que debe revisarse antes de decidir', href: 'https://www.cnmv.es/portal/inversor/decisiones-informarse?lang=es' },
+      ],
+    },
   },
   fr: {
     about: {
@@ -167,6 +186,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       ],
       emailLabel: 'Adresse de contact',
     },
+    disclaimer: {
+      title: 'Avertissement sur les estimations WorthCalc',
+      description: 'Comment lire les hypothèses, résultats et sources WorthCalc, et pourquoi un calculateur général ne remplace pas un conseil financier, fiscal ou juridique.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc transforme les données saisies par l’utilisateur en estimation mathématique. Le résultat aide à explorer des scénarios ; il ne décide pas à votre place et ne décrit pas exactement un produit, un contrat ou un droit particulier.'],
+      sections: [
+        { heading: 'Une estimation varie avec les entrées', paragraphs: ['Prix, durée, taux, fréquence d’usage, inflation, fiscalité, coûts oubliés et arrondis modifient la sortie. Les valeurs préremplies servent uniquement à comprendre l’interface : elles ne constituent ni une moyenne française, ni une offre disponible, ni une prévision. Comparez un scénario prudent, central et défavorable et relisez le détail.'] },
+        { heading: 'Aucune recommandation personnalisée', paragraphs: ['WorthCalc ne connaît pas l’ensemble de vos revenus, dettes, épargne de précaution, fiscalité, connaissances, objectifs ou capacité à supporter une perte. Il ne recommande donc pas d’acheter, vendre, emprunter, louer, placer, souscrire ou résilier. L’AMF rappelle qu’un véritable conseil en investissement examine la situation financière, les connaissances, l’objectif et la tolérance au risque du client.'] },
+        { heading: 'Document, date et règle applicable à contrôler', paragraphs: ['Un calculateur ne remplace pas une FISE, une offre de prêt, un bail, un devis, un document d’informations clés, une police, un avis fiscal ou un texte officiel. Taux, aides, frais et droits évoluent et peuvent dépendre du domicile, du fournisseur ou du profil. Vérifiez la date de révision et demandez les conditions actuelles par écrit.'] },
+        { heading: 'Sources et erreurs possibles', paragraphs: ['Nous privilégions les sources primaires et rendons les formules visibles. Une source peut néanmoins être modifiée, un lien externe déplacé ou le code comporter une erreur. Le navigateur ne sait pas non plus si une valeur a été saisie dans la mauvaise unité. Pour une anomalie, transmettez URL, entrées, résultat affiché et résultat attendu.'] },
+        { heading: 'Publicité et liens externes', paragraphs: ['Une annonce, un lien ou un service tiers reste séparé de la formule et ne vaut pas recommandation. L’annonceur répond de son offre ; vérifiez son identité, son éventuel agrément, les frais et les conditions au moyen de documents indépendants. La proximité visuelle avec un résultat ne constitue jamais un classement WorthCalc.'] },
+        { heading: 'Faire appel à un professionnel', paragraphs: ['Pour une dette, un logement, un placement, une retraite, une assurance, un impôt ou un droit important, consultez un professionnel qualifié. En présence d’une fraude, d’un impayé, d’un délai juridique ou d’une urgence, utilisez sans attendre les voies officielles. Cet avertissement ne supprime aucun droit ni aucune responsabilité qui ne peut légalement être écarté.'] },
+      ],
+      sourcesHeading: 'Références pour un conseil adapté',
+      sources: [
+        { label: 'AMF — obligations d’un conseiller en investissements financiers', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers' },
+        { label: 'AMF — vérifier frais, risques et documentation avant de décider', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/bien-suivre-ses-placements' },
+      ],
+    },
   },
   de: {
     about: {
@@ -240,6 +278,25 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { heading: 'Bearbeitung und Nachweis', paragraphs: ['Das Team ist klein. Relevante Nachrichten werden gelesen, eine individuelle Antwort oder feste Frist können wir nicht zusagen. Reproduzierbare Fehler und belegte Korrekturen haben Vorrang. Wesentliche Änderungen erhalten ein neues Prüfdatum oder einen Eintrag im Änderungsprotokoll.'] },
       ],
       emailLabel: 'Kontaktadresse',
+    },
+    disclaimer: {
+      title: 'Hinweis zu Ergebnissen und Grenzen von WorthCalc',
+      description: 'So sind Annahmen, Schätzwerte und Quellen zu verstehen und weshalb ein allgemeiner Rechner keine persönliche Finanz-, Steuer- oder Rechtsberatung ersetzt.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc verarbeitet eingegebene Zahlen zu einer mathematischen Schätzung. Das Ergebnis unterstützt einen Szenarienvergleich, entscheidet aber nicht für Sie und bildet weder Produkt, Vertrag noch individuellen Anspruch vollständig ab.'],
+      sections: [
+        { heading: 'Das Ergebnis folgt den Eingaben', paragraphs: ['Kaufpreis, Laufzeit, Zinssatz, Nutzung, Inflation, Steuer, fehlende Kosten und Rundung beeinflussen jede Ausgabe. Voreingestellte Werte erklären nur die Bedienung. Sie sind kein deutscher Marktdurchschnitt, kein verfügbares Angebot und keine Prognose. Vergleichen Sie einen vorsichtigen, mittleren und ungünstigen Fall und prüfen Sie den Rechenweg.'] },
+        { heading: 'Keine persönliche Empfehlung', paragraphs: ['WorthCalc kennt weder vollständiges Einkommen und Schulden noch Notgroschen, Steuerlage, Erfahrung, Ziele oder Verlusttragfähigkeit. Die Website empfiehlt daher keinen Kauf, Verkauf, Kredit, Mietvertrag, Anlageabschluss oder eine Kündigung. Eine regulierte Beratung muss persönliche Angaben und Geeignetheit berücksichtigen, die ein anonymer Rechner bewusst nicht erhebt.'] },
+        { heading: 'Vertrag, Datum und Rechtsraum prüfen', paragraphs: ['Der Rechner ersetzt kein Darlehensangebot, ESIS-Merkblatt, Exposé, Mietvertrag, Basisinformationsblatt, Versicherungsschein, Steuerbescheid oder Gesetz. Zinsen, Förderung, Gebühren, Steuern und Rechte ändern sich und hängen von Region, Anbieter und Person ab. Beachten Sie das Prüfdatum und lassen Sie aktuelle Bedingungen schriftlich bestätigen.'] },
+        { heading: 'Quellen und technische Fehlergrenzen', paragraphs: ['Wir bevorzugen amtliche Quellen und veröffentlichen Formeln. Dennoch kann eine Quelle aktualisiert, ein externer Link verschoben oder der Code fehlerhaft sein. Der Browser erkennt außerdem keine falsche Einheit in einer Eingabe. Melden Sie eine reproduzierbare Abweichung mit URL, Werten, angezeigtem und erwartetem Ergebnis.'] },
+        { heading: 'Werbung und externe Angebote', paragraphs: ['Anzeige, Verweis oder Drittangebot sind nicht Teil der Formel und keine Empfehlung. Der Anbieter verantwortet sein Angebot. Prüfen Sie Identität, Erlaubnis, Kosten, Risiken und Vertragsbedingungen anhand unabhängiger Unterlagen. Eine Anzeige neben einem Ergebnis bedeutet weder Rangfolge noch Billigung durch WorthCalc.'] },
+        { heading: 'Wann fachliche Hilfe nötig ist', paragraphs: ['Bei wesentlichen Entscheidungen zu Schulden, Immobilie, Anlage, Altersvorsorge, Versicherung, Steuer oder Recht ist qualifizierte Beratung sinnvoll. Bei Betrug, Zahlungsnot, Rechtsfrist oder Notfall wenden Sie sich sofort an die zuständige Stelle. Zwingende gesetzliche Rechte und nicht ausschließbare Haftung bleiben von diesem Hinweis unberührt.'] },
+      ],
+      sourcesHeading: 'Amtliche Einordnung von Information und Beratung',
+      sources: [
+        { label: 'BaFin — Prospekte und Informationsblätter vor einer Anlageentscheidung', href: 'https://www.bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Prospektpflicht/prospekte_artikel.html' },
+        { label: 'BaFin — Kosten, Risiken und Geeignetheit bei Publikumsfonds', href: 'https://bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Produkte/GeschlossenerPublikumsfonds/Geschlossener_Publikumsfonds_node.html' },
+      ],
     },
   },
 };

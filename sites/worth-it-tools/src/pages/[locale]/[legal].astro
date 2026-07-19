@@ -1,0 +1,30 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { legalContent } from '../../data/legalContent';
+import type { Locale } from '../../consts';
+
+type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
+
+export function getStaticPaths() {
+  const released = ['about'] as const;
+  return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
+    released.map((legal) => ({ params: { locale, legal } })),
+  );
+}
+
+const locale = Astro.params.locale as EditorialLocale;
+const slug = Astro.params.legal!;
+const content = legalContent[locale]?.[slug];
+if (!content) throw new Error(`Missing legal content for ${locale}/${slug}`);
+---
+<ArticleLayout title={content.title} description={content.description} locale={locale} updated={content.updated} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+  {content.intro.map((paragraph) => <p>{paragraph}</p>)}
+  {content.sections.map((section) => (
+    <section>
+      <h2>{section.heading}</h2>
+      {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+    </section>
+  ))}
+  {content.emailLabel && <p><strong>{content.emailLabel}:</strong> <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a></p>}
+</ArticleLayout>

@@ -253,7 +253,7 @@ const editorialRoutes = [
     },
   },
 ];
-const partialEditorialRoutes = [];
+const partialEditorialRoutes = [{slug:'reusable-vs-disposable-break-even',locales:['en','zh','es'],nativeMarkers:{en:['$0.45/use','FTC','data-mode="reusable"'],zh:['NT$11','環境部','data-mode="reusable"'],es:['0,38 €/uso','MITECO','data-mode="reusable"']}}];
 
 function read(relativePath) {
   const file = join(dist, relativePath);
@@ -362,4 +362,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 25 complete five-locale topics, 117 added routes, 4 enriched high-value tools, 25 embedded decision calculators.');
+console.log('Multilingual editorial check passed: 25 complete five-locale topics, topic 26 at 3/5, 120 added routes, 4 enriched high-value tools, 28 embedded decision calculators.');

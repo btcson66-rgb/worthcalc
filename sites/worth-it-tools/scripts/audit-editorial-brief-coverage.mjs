@@ -40,13 +40,14 @@ const briefRoutes = [
   { id: '25', slug: 'meal-prep-vs-takeout-cost' },
   { id: '26', slug: 'reusable-vs-disposable-break-even' },
   { id: '27', slug: 'price-per-wear-clothing-shoes' },
+  { id: '28', slug: 'true-hourly-wage-after-commuting-work-expenses' },
 ];
 
 const releaseFloor = {
-  html: 170,
-  editorial: 138,
-  alignedVariants: 135,
-  compliantVariants: 135,
+  html: 173,
+  editorial: 141,
+  alignedVariants: 138,
+  compliantVariants: 138,
   completeTopics: 27,
 };
 

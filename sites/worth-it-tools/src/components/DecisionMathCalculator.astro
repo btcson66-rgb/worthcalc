@@ -88,7 +88,7 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
           const hours = value('paidHours') + value('unpaidHours') + value('commuteHours');
           first = (value('takeHomePay') - value('workCosts')) / Math.max(1, hours);
           second = value('grossPay') / Math.max(1, value('paidHours'));
-          third = hours; positive = first >= second * .8; break;
+          third = hours; positive = first >= value('targetHourly'); break;
         }
         case 'raiseInflation': {
           first = value('oldPay') * (1 + value('raiseRate') / 100);

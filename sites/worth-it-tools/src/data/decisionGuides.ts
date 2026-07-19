@@ -2662,3 +2662,39 @@ export const pricePerWearGuides: Partial<Record<Locale, DecisionGuideContent>> =
     sources: [{ label: 'Umweltbundesamt — Kleidung lange tragen, reparieren und so selten wie nötig waschen', href: 'https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/haushalt-wohnen/bekleidung' }, { label: 'Umweltbundesamt — Langlebigkeit ist nicht einheitlich definiert; Nähte und Gewebefestigkeit prüfen', href: 'https://www.umweltbundesamt.de/themen/nachhaltige-bekleidung-mehr-fokus-auf-eine-lange' }], lastVerified: '2026-07-19',
   },
 };
+
+export const trueHourlyWageGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  en: {
+    id: 'true-hourly-wage', labels: labels.en,
+    directAnswer: 'True hourly wage for a personal job decision is (take-home pay − unreimbursed work costs) ÷ (paid hours + unpaid work time + commuting time). For the same month, $4,000 gross and 160 paid hours advertise $25/hour, but $3,100 take-home minus $350 of commuting, required supplies and incremental work meals over 190 committed hours equals $14.47/hour. This is not the FLSA regular rate and does not decide what time an employer must pay.',
+    inputs: ['Gross pay for one defined pay period', 'Actual take-home pay from the same paystub, not a generic tax estimate', 'Paid hours matching that pay period', 'Required pre-shift, post-shift, email, training or preparation time not already counted', 'Round-trip ordinary commute time for the same period', 'Unreimbursed transport, parking, tolls and required work travel', 'Required clothing, tools, licensing, phone or home-office cost after reimbursement', 'Incremental work-meal cost above what you would otherwise spend', 'A personal target hourly amount for the verdict'],
+    formula: 'True take-home hourly = (take-home pay − unreimbursed work costs) ÷ (paid hours + unpaid work hours + commute hours). Headline gross hourly = gross pay ÷ paid hours. Use the same pay period throughout.',
+    workedExample: 'Month: $4,000 gross ÷ 160 paid hours = $25 gross/hour. True: ($3,100 take-home − $350 costs) ÷ (160 paid + 10 unpaid + 20 commute) = $2,750 ÷ 190 = $14.47/hour. Against a personal $15 target, it falls short.',
+    sensitivity: [{ scenario: 'Commute only 5 hours', input: '20 becomes 5', result: '$15.71/hour; clears $15 target' }, { scenario: 'Costs reimbursed down to $100', input: '$350 becomes $100', result: '$15.79/hour' }, { scenario: 'Unpaid work 25 hours', input: '10 becomes 25', result: '$13.41/hour' }, { scenario: 'Take-home $3,350', input: '$3,100 becomes $3,350', result: '$15.79/hour' }],
+    cta: { label: 'Calculate true take-home hourly value', href: '#true-hourly-calculator' },
+    limitations: ['This personal opportunity-cost denominator is not a legal wage or overtime calculation.', 'DOL says ordinary home-to-work travel is generally not FLSA work time, while travel between job sites can be work time.', 'If off-the-clock activity may be compensable, record it separately and seek official or legal guidance rather than treating nonpayment as settled.', 'Subtract only costs caused by the job and not reimbursed; use incremental meal cost, not the full cost of eating.'],
+    sources: [{ label: 'U.S. Department of Labor Fact Sheet 22 — hours worked, off-the-clock activity and travel boundaries', href: 'https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked?lang=en' }, { label: 'IRS — gross pay is before deductions; net or take-home pay is after deductions', href: 'https://apps.irs.gov/app/understandingTaxes/hows/tax_tutorials/mod01/tt_mod01_03.jsp' }], lastVerified: '2026-07-19',
+  },
+  zh: {
+    id: 'true-hourly-wage', labels: labels.zh,
+    directAnswer: '個人求職比較用的真實時薪＝（同一期實領工資－未報銷工作成本）÷（有薪工時＋未納入工時的必要時間＋通勤時間）。月應發 NT$60,000、160 小時看似 NT$375／小時；同月實領 NT$52,000，扣 NT$5,000 通勤、必要用品與額外餐費，再除以 160＋8＋22＝190 小時，為 NT$247.37／小時。這不是勞基法加班或最低工資認定公式。',
+    inputs: ['同一計薪期間的應發工資總額', '同一期薪資單的實際發給金額', '該期已計薪工時', '交接、信件、著裝、訓練或準備等必要時間', '同期間每日往返通勤總時數', '未報銷交通、停車、過路與公務移動成本', '未報銷的制服、工具、證照、手機與設備', '因工作增加的餐費差額，而非整餐價格', '自己的最低可接受真實時薪目標'],
+    formula: '真實實領時薪＝（實際發給－未報銷工作成本）÷（有薪工時＋未計薪必要時間＋通勤）。表面稅前時薪＝應發工資÷有薪工時；所有數字必須是同一期。',
+    workedExample: '月應發 NT$60,000÷160＝NT$375／小時。真實值＝（NT$52,000－NT$5,000）÷（160＋8＋22）＝NT$47,000÷190＝NT$247.37／小時，低於個人目標 NT$250。',
+    sensitivity: [{ scenario: '通勤降到 10 小時', input: '22 改 10', result: 'NT$264.04／小時，超過目標' }, { scenario: '未報銷成本只剩 NT$2,000', input: 'NT$5,000 改 2,000', result: 'NT$263.16／小時' }, { scenario: '必要未計薪時間 20 小時', input: '8 改 20', result: 'NT$232.67／小時' }, { scenario: '實領 NT$55,000', input: 'NT$52,000 改 55,000', result: 'NT$263.16／小時' }],
+    cta: { label: '計算通勤與支出後真實時薪', href: '#true-hourly-calculator' },
+    limitations: ['這是個人時間與現金決策模型，不是法定工資、加班費或最低工資算法。', '勞動部把受雇主指揮監督、提供或等待提供勞務的時間定義為工作時間；疑似短付應另行保存證據。', '薪資單應區分議定總額、給付、扣除與實際發給；不要用網路平均扣除率代替本人數字。', '只扣工作造成且未獲報銷的增量支出，餐費只算相對平常吃飯多出的部分。'],
+    sources: [{ label: '勞動部 — 工作時間為受雇主指揮監督下提供或等待提供勞務的時間', href: 'https://www.mol.gov.tw/1607/28162/28166/28218/28226/30382/post' }, { label: '勞動部 — 薪資單須列工資總額、各給付、扣除與實際發給金額', href: 'https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post' }], lastVerified: '2026-07-19',
+  },
+  es: {
+    id: 'true-hourly-wage', labels: labels.es,
+    directAnswer: 'El salario real por hora para comparar empleos es (neto cobrado − gastos laborales no reembolsados) ÷ (horas pagadas + tiempo laboral no incluido + desplazamiento). En un mes, 2.400 € brutos y 160 horas muestran 15 €/h; 1.900 € netos menos 220 € de transporte, material y comida incremental, divididos entre 160+8+20=188 horas, dan 8,94 €/h. No es la tarifa jurídica ni resuelve qué tiempo debe pagarse.',
+    inputs: ['Devengos brutos de un periodo concreto', 'Líquido realmente cobrado en la nómina del mismo periodo', 'Horas pagadas que corresponden a esa nómina', 'Preparación, cierre, mensajes, formación o espera exigida no incluida', 'Horas totales de desplazamiento de casa al trabajo', 'Transporte, aparcamiento y viajes no reembolsados', 'Ropa, herramientas, colegiación, teléfono o equipo exigido y no reembolsado', 'Sobrecoste de comer por trabajar, no el coste íntegro de alimentarse', 'Objetivo personal neto por hora'],
+    formula: 'Neto real/hora = (líquido cobrado − gastos laborales no reembolsados) ÷ (horas pagadas + tiempo laboral no incluido + desplazamiento). Bruto anunciado/hora = bruto ÷ horas pagadas. Todo debe cubrir el mismo periodo.',
+    workedExample: 'Mes: 2.400 € brutos÷160 = 15 €/h brutos. Real: (1.900 €−220 €)÷(160+8+20) = 1.680÷188 = 8,94 €/h. Queda por debajo de un objetivo personal de 10 €/h.',
+    sensitivity: [{ scenario: 'Desplazamiento 10 horas', input: '20 pasa a 10', result: '9,44 €/h' }, { scenario: 'Gastos bajan a 80 € y trayecto a 10 h', input: '220 pasa a 80; 20 a 10', result: '10,22 €/h; supera objetivo' }, { scenario: 'Tiempo no incluido 20 horas', input: '8 pasa a 20', result: '8,40 €/h' }, { scenario: 'Neto cobrado 2.050 €', input: '1.900 pasa a 2.050', result: '9,73 €/h' }],
+    cta: { label: 'Calcular salario neto real por hora', href: '#true-hourly-calculator' },
+    limitations: ['Es una métrica personal de tiempo y caja, no un cálculo legal de salario, jornada u horas extra.', 'La guía de registro de jornada exige inicio y fin y recomienda reflejar pausas para no confundir todo el intervalo con trabajo efectivo.', 'Si una actividad obligatoria puede ser tiempo de trabajo, documéntala y consulta la norma o asesoramiento; no des por válida su falta de pago.', 'Resta solo gastos incrementales no reembolsados y usa el líquido real de la nómina.'],
+    sources: [{ label: 'Ministerio de Trabajo — guía oficial del registro de jornada, inicio, fin, pausas y trabajadores desplazados', href: 'https://www.mites.gob.es/ficheros/ministerio/GuiaRegistroJornada.pdf' }, { label: 'BOE — el recibo salarial separa percepciones y deducciones con claridad', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-1995-912&p=20141111&tn=3' }], lastVerified: '2026-07-19',
+  },
+};

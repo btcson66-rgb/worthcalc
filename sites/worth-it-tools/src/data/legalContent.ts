@@ -78,6 +78,21 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'BOE — Ley General para la Defensa de los Consumidores y Usuarios, artículos 80 a 89', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555' },
       ],
     },
+    contact: {
+      title: 'Contacto con WorthCalc: errores, fuentes y propuestas',
+      description: 'Cómo informar de un cálculo incorrecto, una fuente desactualizada, un problema móvil o una propuesta editorial o comercial a WorthCalc.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc es un proyecto independiente y atiende por correo, sin formulario ni cuenta de soporte. Leemos los mensajes relacionados con la exactitud de las calculadoras, la calidad editorial, la accesibilidad y las colaboraciones transparentes.'],
+      sections: [
+        { heading: 'Cómo enviar un error de cálculo reproducible', paragraphs: ['Indica la URL exacta, idioma, valores introducidos, resultado mostrado y resultado esperado. Añade moneda, periodo y si usaste coma o punto decimal. Una captura puede ayudar, pero copia también los números en texto para que podamos repetir la fórmula.'], items: ['Modelo y versión del navegador o sistema', 'Ancho aproximado de pantalla si el problema es visual', 'Pasos desde que abres la página hasta que aparece el fallo', 'Fuente oficial y fecha si señalas un dato desactualizado'] },
+        { heading: 'Protege tus datos al escribir', paragraphs: ['No envíes DNI, pasaporte, contraseña, dirección completa, número de tarjeta, cuenta bancaria, nómina ni contrato sin anonimizar. Para revisar la matemática normalmente bastan cifras ficticias con la misma estructura. Si el mensaje trata de una suscripción de correo, menciona únicamente la dirección que utilizaste y la acción solicitada.'] },
+        { heading: 'Ideas de calculadoras y mejoras', paragraphs: ['Una propuesta útil describe la decisión, quién la toma en España, los costes que suelen ocultarse, la fórmula posible y una fuente pública. Priorizamos problemas repetibles con variables editables; no creamos una página de marca para repetir una campaña ni publicamos una cifra comercial sin poder verificarla.'] },
+        { heading: 'Colaboraciones, publicidad y prensa', paragraphs: ['Identifica organización, objetivo, contraprestación y cualquier vínculo comercial. No aceptamos que una empresa compre el resultado de una calculadora, elimine una limitación relevante o convierta publicidad en recomendación editorial. Un contacto no garantiza respuesta, publicación ni acuerdo.'] },
+        { heading: 'Qué no ofrece este buzón', paragraphs: ['No es un servicio de asesoramiento personal, reclamaciones urgentes ni soporte de una entidad financiera. No podemos decidir si debes contratar un préstamo, comprar una vivienda o invertir. Si hay fraude, riesgo inmediato, vencimiento legal o disputa contractual, utiliza los canales oficiales y profesionales competentes de tu jurisdicción.'] },
+        { heading: 'Plazo y seguimiento', paragraphs: ['El equipo es pequeño: revisamos todos los mensajes pertinentes, pero no prometemos respuesta individual ni plazo fijo. Los errores reproducibles y las correcciones con fuente tienen prioridad. Si corregimos algo importante, actualizamos la fecha o el historial del sitio para que el cambio sea visible.'] },
+      ],
+      emailLabel: 'Correo de contacto',
+    },
   },
   fr: {
     about: {
@@ -137,6 +152,21 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'DGCCRF — clauses abusives, clarté et droits du consommateur', href: 'https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/clauses-abusives-12-clauses-interdites-et-10-clauses-dont-il-faut-demontrer-la-legitimite' },
       ],
     },
+    contact: {
+      title: 'Contacter WorthCalc : calcul, source ou proposition',
+      description: 'La méthode pour signaler un calcul erroné, une donnée obsolète, un défaut mobile ou proposer un sujet ou un partenariat à WorthCalc.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc est un site indépendant qui échange directement par e-mail, sans compte de support. Nous lisons les messages portant sur l’exactitude des calculs, les sources, l’accessibilité, la qualité éditoriale et les collaborations clairement identifiées.'],
+      sections: [
+        { heading: 'Rendre une anomalie reproductible', paragraphs: ['Précisez l’URL, la langue, chaque valeur saisie, le résultat affiché et celui attendu. Indiquez la devise, la période et le séparateur décimal. Une capture peut compléter le signalement, mais recopiez les nombres en texte afin que la formule puisse être rejouée.'], items: ['Navigateur, appareil et version si vous les connaissez', 'Largeur d’écran approximative pour un défaut d’affichage', 'Étapes entre l’ouverture de la page et l’erreur', 'Source publique et date lorsqu’une valeur semble dépassée'] },
+        { heading: 'Ne transmettez pas de données sensibles', paragraphs: ['N’envoyez ni pièce d’identité, mot de passe, adresse complète, carte bancaire, IBAN, bulletin de paie ou contrat non anonymisé. Des chiffres fictifs reproduisant la structure suffisent généralement à tester le calcul. Pour une inscription e-mail, limitez-vous à l’adresse utilisée et à l’action demandée.'] },
+        { heading: 'Suggérer un calculateur ou une amélioration', paragraphs: ['Une bonne proposition décrit la décision rencontrée en France, les coûts souvent oubliés, les variables modifiables, une formule possible et une source officielle. Nous privilégions les problèmes récurrents qui appellent une comparaison ; une page de marque ou une affirmation promotionnelle non vérifiable n’est pas un sujet éditorial.'] },
+        { heading: 'Presse, publicité et partenariat', paragraphs: ['Présentez l’organisation, l’objectif, la contrepartie et tout lien commercial. Un partenaire ne peut pas acheter le résultat d’un calculateur, masquer une limite importante ou transformer une annonce en avis éditorial. Un message n’emporte ni réponse garantie, ni publication, ni accord.'] },
+        { heading: 'Ce que cette adresse ne remplace pas', paragraphs: ['Cette boîte n’est ni un conseil financier personnalisé, ni un service d’urgence, ni le support d’une banque. Nous ne pouvons pas choisir à votre place un crédit, un logement ou un placement. En cas de fraude, d’échéance juridique, de litige contractuel ou de danger immédiat, contactez les services officiels ou un professionnel compétent.'] },
+        { heading: 'Traitement et suivi', paragraphs: ['L’équipe étant réduite, chaque message pertinent est lu sans délai de réponse garanti. Les erreurs reproductibles et corrections accompagnées d’une source sont prioritaires. Une correction importante est datée ou inscrite au journal des modifications afin de rester vérifiable.'] },
+      ],
+      emailLabel: 'Adresse de contact',
+    },
   },
   de: {
     about: {
@@ -195,6 +225,21 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       sources: [
         { label: 'Bundesministerium der Justiz — § 309 BGB, Klauselverbote und Haftungsgrenzen', href: 'https://www.gesetze-im-internet.de/bgb/__309.html' },
       ],
+    },
+    contact: {
+      title: 'WorthCalc kontaktieren: Rechenfehler, Quelle oder Vorschlag',
+      description: 'So melden Sie einen falschen Rechenweg, veraltete Daten, mobile Darstellungsfehler oder einen redaktionellen beziehungsweise geschäftlichen Vorschlag.',
+      updated: '2026-07-19',
+      intro: ['WorthCalc ist ein unabhängiges Projekt und beantwortet Anliegen direkt per E-Mail, ohne Supportkonto. Gelesen werden Hinweise zu Rechengenauigkeit, Quellen, Barrierearmut, redaktioneller Qualität und transparent gekennzeichneten Kooperationen.'],
+      sections: [
+        { heading: 'Einen Fehler nachvollziehbar melden', paragraphs: ['Nennen Sie genaue URL, Sprache, sämtliche Eingaben, angezeigtes und erwartetes Ergebnis. Ergänzen Sie Währung, Zeitraum und Dezimaltrennzeichen. Ein Bildschirmfoto kann helfen; schreiben Sie die Zahlen zusätzlich als Text, damit wir die Formel reproduzieren können.'], items: ['Browser, Gerät und Version, soweit bekannt', 'Ungefähre Bildschirmbreite bei einem Layoutfehler', 'Schritte vom Seitenaufruf bis zum Fehler', 'Amtliche Quelle und Datum bei einem veralteten Wert'] },
+        { heading: 'Persönliche Daten schützen', paragraphs: ['Senden Sie keine Ausweisnummer, Passwörter, vollständige Adresse, Karten- oder Kontonummer, Gehaltsabrechnung oder einen nicht anonymisierten Vertrag. Für einen Rechentest reichen meist erfundene Zahlen mit derselben Struktur. Bei einem Newsletter-Anliegen genügen die verwendete E-Mail-Adresse und die gewünschte Maßnahme.'] },
+        { heading: 'Neuen Rechner oder Verbesserung vorschlagen', paragraphs: ['Ein hilfreicher Vorschlag beschreibt eine in Deutschland wiederkehrende Entscheidung, übersehene Kosten, veränderbare Größen, eine mögliche Formel und eine öffentliche Quelle. Vorrang haben nachvollziehbare Vergleiche. Reine Markenseiten und ungeprüfte Werbeaussagen sind kein redaktionelles Thema.'] },
+        { heading: 'Presse, Werbung und Zusammenarbeit', paragraphs: ['Nennen Sie Organisation, Zweck, Gegenleistung und geschäftliche Verbindung. Niemand kann ein gewünschtes Rechenergebnis kaufen, eine wesentliche Einschränkung entfernen lassen oder Werbung als redaktionelle Empfehlung ausgeben. Eine Anfrage garantiert weder Antwort noch Veröffentlichung oder Vertrag.'] },
+        { heading: 'Wofür die Adresse nicht gedacht ist', paragraphs: ['Das Postfach ist keine persönliche Finanzberatung, Notfallstelle oder Bankhotline. Wir entscheiden nicht über Kredit, Immobilie oder Anlage einer einzelnen Person. Bei Betrug, akuter Gefahr, Rechtsfrist oder Vertragsstreit sind zuständige Behörden und qualifizierte Beratung vor Ort die richtigen Anlaufstellen.'] },
+        { heading: 'Bearbeitung und Nachweis', paragraphs: ['Das Team ist klein. Relevante Nachrichten werden gelesen, eine individuelle Antwort oder feste Frist können wir nicht zusagen. Reproduzierbare Fehler und belegte Korrekturen haben Vorrang. Wesentliche Änderungen erhalten ein neues Prüfdatum oder einen Eintrag im Änderungsprotokoll.'] },
+      ],
+      emailLabel: 'Kontaktadresse',
     },
   },
 };

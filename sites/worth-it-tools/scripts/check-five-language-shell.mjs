@@ -5,7 +5,7 @@ const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
-const releasedTools = ['installment-true-apr', 'subscription-audit'];
+const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership'];
 const releasedHomeLocales = [];
 const failures = [];
 

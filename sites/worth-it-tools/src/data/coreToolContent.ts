@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription';
+  kind: 'installment' | 'subscription' | 'membership';
   title: string;
   description: string;
   intro: string;
@@ -113,6 +113,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Punto de equilibrio de una membresía', path: '/paid-membership-break-even' },
       ],
     },
+    'costco-membership': {
+      kind: 'membership',
+      title: 'Calculadora de rentabilidad de la membresía Costco España',
+      description: 'Calcula si la cuota Gold Star de Costco España se recupera con ahorro real, gasto previsto y costes extra, sin contar compras impulsivas como beneficio.',
+      intro: 'Costco España publica cinco almacenes y una cuota Gold Star de 36,30 € IVA incluido. Usa esos datos solo como punto de partida: el ahorro debe compararse con la tienda donde comprarías los mismos productos, y solo sobre gasto que ya estaba previsto.',
+      currency: 'EUR',
+      numberLocale: 'es-ES',
+      inputsHeading: 'Supuestos de tu compra anual',
+      verdictLabel: 'Resultado neto anual',
+      initialVerdict: 'Introduce cuota, gasto normal y ahorro realista.',
+      invalidVerdict: 'El porcentaje conjunto de ahorro y recompensa debe ser mayor que cero para calcular el equilibrio.',
+      favorableVerdict: 'La membresía deja {net} netos al año con estos supuestos. El margen no justifica comprar más de lo previsto.',
+      unfavorableVerdict: 'La membresía pierde {loss} al año. Necesitarías unos {breakEven} al mes de gasto elegible para cubrir cuota y costes extra.',
+      fields: [
+        { id: 'annual-fee', label: 'Cuota anual con impuestos', helper: 'Precio de la próxima alta o renovación; 36,30 € es el valor oficial consultado.', value: 36.3, min: 0, step: 0.1 },
+        { id: 'monthly-spend', label: 'Gasto mensual que ya harías', helper: 'Excluye compras añadidas para “aprovechar” la tarjeta.', value: 180, min: 0, step: 10 },
+        { id: 'savings-rate', label: 'Ahorro real frente a tu alternativa (%)', helper: 'Compara misma marca, tamaño útil, desplazamiento y desperdicio.', value: 8, min: 0, step: 0.1 },
+        { id: 'reward-rate', label: 'Recompensa incremental elegible (%)', helper: 'Pon cero si tu modalidad no genera una recompensa adicional.', value: 0, min: 0, step: 0.1 },
+        { id: 'extra-costs', label: 'Costes extra anuales', helper: 'Combustible, peajes, almacenamiento y merma atribuibles a la membresía.', value: 24, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'gross-benefit', label: 'Ahorro y recompensa brutos' },
+        { id: 'net-benefit', label: 'Beneficio neto anual' },
+        { id: 'break-even', label: 'Gasto mensual de equilibrio' },
+        { id: 'annual-spend', label: 'Gasto elegible anual' },
+      ],
+      faq: [
+        { question: '¿Qué cuota usa esta calculadora en España?', answer: 'El ejemplo parte de 36,30 € IVA incluido para Gold Star, publicado por Costco España. Comprueba siempre el importe vigente al darte de alta o renovar.' },
+        { question: '¿Puedo usar un 15 % de ahorro para todo?', answer: 'Solo si tus comparaciones reales lo sostienen. Calcula por productos equivalentes y usa un escenario conservador; algunas referencias pueden ser más baratas y otras no.' },
+        { question: '¿Cómo trato el desperdicio de formatos grandes?', answer: 'Añade su coste previsto a “costes extra” o reduce el porcentaje de ahorro. No cuentes como ahorro una unidad que caduca, se tira o no habrías comprado.' },
+        { question: '¿Un resultado positivo significa que debo hacerme socio?', answer: 'No. Es una prueba de tus supuestos. Distancia, espacio, liquidez, disponibilidad y condiciones oficiales también pueden dominar una diferencia pequeña.' },
+      ],
+      related: [
+        { title: 'Fórmula general de equilibrio de una membresía', path: '/paid-membership-break-even' },
+        { title: 'Compra a granel frente a formatos pequeños', path: '/bulk-buying-vs-small-packages' },
+        { title: 'Auditoría de suscripciones y renovaciones', path: '/tools/subscription-audit' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -190,6 +228,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Seuil de rentabilité d’une adhésion payante', path: '/paid-membership-break-even' },
       ],
     },
+    'costco-membership': {
+      kind: 'membership',
+      title: 'Calculateur de rentabilité de l’adhésion Costco France',
+      description: 'Testez si la cotisation Costco France est couverte par vos économies réelles après trajet, gaspillage et achats non prévus.',
+      intro: 'Costco France affiche une adhésion Privilège à 36 € TTC par an et trois clubs-entrepôts en 2026. La proximité compte donc autant que le prix : comparez des produits équivalents et ajoutez le trajet, le stockage et les pertes avant de conclure.',
+      currency: 'EUR',
+      numberLocale: 'fr-FR',
+      inputsHeading: 'Hypothèses de vos achats',
+      verdictLabel: 'Bilan annuel',
+      initialVerdict: 'Saisissez cotisation, achats prévus et économie réaliste.',
+      invalidVerdict: 'Le taux cumulé d’économie et de récompense doit être supérieur à zéro.',
+      favorableVerdict: 'L’adhésion dégage {net} nets par an selon ces hypothèses. N’augmentez pas les achats pour préserver ce résultat.',
+      unfavorableVerdict: 'L’adhésion perd {loss} par an. Il faudrait environ {breakEven} d’achats admissibles par mois pour couvrir cotisation et surcoûts.',
+      fields: [
+        { id: 'annual-fee', label: 'Cotisation annuelle TTC', helper: '36 € correspond au tarif Privilège officiel consulté ; vérifiez la prochaine échéance.', value: 36, min: 0, step: 0.1 },
+        { id: 'monthly-spend', label: 'Achats mensuels déjà prévus', helper: 'Écartez tout achat ajouté uniquement pour amortir la carte.', value: 160, min: 0, step: 10 },
+        { id: 'savings-rate', label: 'Économie réelle face à votre alternative (%)', helper: 'Comparez qualité, quantité utile, prix TTC et disponibilité.', value: 7, min: 0, step: 0.1 },
+        { id: 'reward-rate', label: 'Récompense supplémentaire admissible (%)', helper: 'Indiquez zéro si votre formule ne prévoit pas de récompense incrémentale.', value: 0, min: 0, step: 0.1 },
+        { id: 'extra-costs', label: 'Surcoûts annuels', helper: 'Trajet, péage, stockage et pertes dus à cette adhésion.', value: 45, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'gross-benefit', label: 'Économie et récompense brutes' },
+        { id: 'net-benefit', label: 'Valeur nette annuelle' },
+        { id: 'break-even', label: 'Achats mensuels d’équilibre' },
+        { id: 'annual-spend', label: 'Achats admissibles annuels' },
+      ],
+      faq: [
+        { question: 'Quel tarif est utilisé pour Costco France ?', answer: 'Le scénario démarre à 36 € TTC pour douze mois de carte Privilège, valeur publiée par Costco France. Contrôlez le tarif et les conditions lors de l’adhésion ou du renouvellement.' },
+        { question: 'Comment mesurer l’économie réelle ?', answer: 'Comparez le même produit, la même quantité utile et le prix TTC chez l’alternative que vous auriez réellement choisie. Une remise supposée sur tout le panier surestime souvent le gain.' },
+        { question: 'Le déplacement peut-il annuler l’avantage ?', answer: 'Oui. Avec peu de clubs, carburant, péage et temps peuvent dépasser un faible écart de prix. Le calcul monétaire les place dans les surcoûts annuels.' },
+        { question: 'La garantie de remboursement rend-elle l’essai gratuit ?', answer: 'Ne l’assumez pas. Lisez les conditions officielles, la procédure et les limites applicables ; le calcul ne transforme pas une politique commerciale en droit automatique.' },
+      ],
+      related: [
+        { title: 'Seuil général d’une adhésion payante', path: '/paid-membership-break-even' },
+        { title: 'Grand format ou petits conditionnements', path: '/bulk-buying-vs-small-packages' },
+        { title: 'Audit des abonnements et renouvellements', path: '/tools/subscription-audit' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -265,6 +341,44 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Schleichend wachsende Abo-Kosten erkennen', path: '/subscription-creep' },
         { title: 'Monatsabo oder Jahreszahlung', path: '/monthly-vs-annual-subscription' },
         { title: 'Break-even einer kostenpflichtigen Mitgliedschaft', path: '/paid-membership-break-even' },
+      ],
+    },
+    'costco-membership': {
+      kind: 'membership',
+      title: 'Kosten-Rechner für Costco- und Einkaufsklub-Mitgliedschaften',
+      description: 'Prüfen Sie Mitgliedsbeitrag, ohnehin geplante Einkäufe, Preisvorteil und zusätzliche Fahrtkosten für einen Einkaufsklub.',
+      intro: 'Costco listet 2026 keine Lagerhäuser in Deutschland; fünf befinden sich in Spanien und drei in Frankreich. Für deutsche Nutzer ist der Rechner deshalb vor allem für Auslandsnutzung oder andere Einkaufsklubs sinnvoll. Setzen Sie Beitrag und Zusatzfahrt vollständig an, statt ausländische Vorteile als lokalen Standard zu behandeln.',
+      currency: 'EUR',
+      numberLocale: 'de-DE',
+      inputsHeading: 'Ihre realistische Nutzung',
+      verdictLabel: 'Jährlicher Nettowert',
+      initialVerdict: 'Beitrag, ohnehin geplanten Umsatz und realistischen Preisvorteil eintragen.',
+      invalidVerdict: 'Die Summe aus Preisvorteil und zusätzlicher Vergütung muss größer als null sein.',
+      favorableVerdict: 'Die Mitgliedschaft erzielt unter diesen Annahmen {net} Nettowert im Jahr. Zusätzliche Käufe würden die Rechnung verschlechtern.',
+      unfavorableVerdict: 'Die Mitgliedschaft verliert {loss} pro Jahr. Für den Gleichstand wären etwa {breakEven} berechtigter Monatsumsatz nötig.',
+      fields: [
+        { id: 'annual-fee', label: 'Jährlicher Mitgliedsbeitrag', helper: 'Tatsächlichen Beitrag des genutzten Landes oder Einkaufsklubs eintragen.', value: 36, min: 0, step: 0.1 },
+        { id: 'monthly-spend', label: 'Ohnehin geplanter Monatsumsatz', helper: 'Keine Käufe ansetzen, die erst durch die Mitgliedschaft entstehen.', value: 120, min: 0, step: 10 },
+        { id: 'savings-rate', label: 'Realer Preisvorteil zur Alternative (%)', helper: 'Gleiche Ware, nutzbare Menge, Steuer und Verfügbarkeit vergleichen.', value: 6, min: 0, step: 0.1 },
+        { id: 'reward-rate', label: 'Zusätzliche berechtigte Vergütung (%)', helper: 'Null eintragen, wenn der Vertrag keinen zusätzlichen Bonus vorsieht.', value: 0, min: 0, step: 0.1 },
+        { id: 'extra-costs', label: 'Zusatzkosten pro Jahr', helper: 'Auslandsfahrt, Maut, Lagerung und Verderb vollständig berücksichtigen.', value: 120, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'gross-benefit', label: 'Bruttoersparnis und Bonus' },
+        { id: 'net-benefit', label: 'Jährlicher Nettowert' },
+        { id: 'break-even', label: 'Monatsumsatz bis zum Gleichstand' },
+        { id: 'annual-spend', label: 'Berechtigter Jahresumsatz' },
+      ],
+      faq: [
+        { question: 'Gibt es Costco-Lagerhäuser in Deutschland?', answer: 'In der offiziellen Costco-Aufstellung vom Mai 2026 wird Deutschland nicht als Standortland genannt. Prüfen Sie die aktuelle Standortsuche; dieser Rechner unterstellt keine lokale Verfügbarkeit.' },
+        { question: 'Kann ich eine ausländische Mitgliedschaft eintragen?', answer: 'Ja, aber Beitrag, Wechselkurs, Entfernung, Maut und tatsächlich nutzbare Vorteile müssen zum Land und Vertrag passen. Ein ausländischer Preisvorteil ist kein deutscher Durchschnitt.' },
+        { question: 'Wie behandle ich Großpackungen?', answer: 'Verderb und ungenutzte Mengen gehören als Zusatzkosten in die Rechnung oder müssen den angenommenen Preisvorteil senken. Nur verbrauchte Einheiten erzeugen einen Vorteil.' },
+        { question: 'Was ist bei einem kleinen positiven Ergebnis zu tun?', answer: 'Mit einem ungünstigen Szenario erneut rechnen. Zeit, gebundenes Geld, Lagerplatz und Produktverfügbarkeit können einen kleinen rechnerischen Vorteil überwiegen.' },
+      ],
+      related: [
+        { title: 'Allgemeiner Break-even einer Mitgliedschaft', path: '/paid-membership-break-even' },
+        { title: 'Großpackung oder kleine Packung', path: '/bulk-buying-vs-small-packages' },
+        { title: 'Abo- und Verlängerungskosten prüfen', path: '/tools/subscription-audit' },
       ],
     },
   },

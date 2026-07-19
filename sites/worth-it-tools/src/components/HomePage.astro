@@ -37,6 +37,28 @@ const content = homeContent[locale];
   </div>
 </section>
 
+<section class="home-method" aria-labelledby="home-method-heading">
+  <h2 id="home-method-heading">{content.methodHeading}</h2>
+  <p class="section-lead">{content.methodLead}</p>
+  <ol>
+    {content.methodSteps.map((step) => <li>{step}</li>)}
+  </ol>
+</section>
+
+<section class="home-guides" aria-labelledby="home-guides-heading">
+  <h2 id="home-guides-heading">{content.guidesHeading}</h2>
+  <p class="section-lead">{content.guidesLead}</p>
+  <div class="guide-grid">
+    {content.guides.map((guide) => (
+      <article class="guide-card">
+        <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
+        <p>{guide.description}</p>
+        <span>{content.guidesCta} →</span>
+      </article>
+    ))}
+  </div>
+</section>
+
 <section class="seo-copy" aria-labelledby="home-seo-heading">
   <h2 id="home-seo-heading">{content.seoHeading}</h2>
   {content.seoParagraphs.map((paragraph) => <p>{paragraph}</p>)}

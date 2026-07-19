@@ -62,7 +62,7 @@ check('Built HTML pages', htmlFiles.length > 0, `${htmlFiles.length} pages`);
 
 // ── 1. Homepage ─────────────────────────────────────────────────────────────
 
-const homepageCandidates = ['index.html', 'en/index.html', 'zh/index.html'];
+const homepageCandidates = ['index.html', 'en/index.html', 'zh/index.html', 'es/index.html', 'fr/index.html', 'de/index.html'];
 const hasHomepage = homepageCandidates.some((p) => existsSync(join(distDir, p)));
 check('Homepage exists', hasHomepage);
 
@@ -123,26 +123,45 @@ const productionOrigin = 'https://worthcalc.win';
 const rootHomepagePath = join(distDir, 'index.html');
 const englishHomepagePath = join(distDir, 'en', 'index.html');
 const chineseHomepagePath = join(distDir, 'zh', 'index.html');
-const homepageFilesExist = [rootHomepagePath, englishHomepagePath, chineseHomepagePath].every(existsSync);
+const spanishHomepagePath = join(distDir, 'es', 'index.html');
+const frenchHomepagePath = join(distDir, 'fr', 'index.html');
+const germanHomepagePath = join(distDir, 'de', 'index.html');
+const homepageFilesExist = [rootHomepagePath, englishHomepagePath, chineseHomepagePath, spanishHomepagePath, frenchHomepagePath, germanHomepagePath].every(existsSync);
 check('Canonical homepage variants exist', homepageFilesExist);
 
 if (homepageFilesExist) {
   const rootHomepage = readFileSync(rootHomepagePath, 'utf8');
   const englishHomepage = readFileSync(englishHomepagePath, 'utf8');
   const chineseHomepage = readFileSync(chineseHomepagePath, 'utf8');
+  const spanishHomepage = readFileSync(spanishHomepagePath, 'utf8');
+  const frenchHomepage = readFileSync(frenchHomepagePath, 'utf8');
+  const germanHomepage = readFileSync(germanHomepagePath, 'utf8');
   const expectedRoot = `${productionOrigin}/`;
   const expectedChinese = `${productionOrigin}/zh/`;
+  const expectedSpanish = `${productionOrigin}/es/`;
+  const expectedFrench = `${productionOrigin}/fr/`;
+  const expectedGerman = `${productionOrigin}/de/`;
 
   check('Root homepage is self-canonical', canonicalHref(rootHomepage) === expectedRoot);
   check('/en/ consolidates its canonical to /', canonicalHref(englishHomepage) === expectedRoot);
   check('/zh/ remains self-canonical', canonicalHref(chineseHomepage) === expectedChinese);
+  check('/es/ remains self-canonical', canonicalHref(spanishHomepage) === expectedSpanish);
+  check('/fr/ remains self-canonical', canonicalHref(frenchHomepage) === expectedFrench);
+  check('/de/ remains self-canonical', canonicalHref(germanHomepage) === expectedGerman);
 
   for (const [label, html] of [
     ['Root homepage', rootHomepage],
     ['/en/ compatibility homepage', englishHomepage],
+    ['/zh/ homepage', chineseHomepage],
+    ['/es/ homepage', spanishHomepage],
+    ['/fr/ homepage', frenchHomepage],
+    ['/de/ homepage', germanHomepage],
   ]) {
     check(`${label} English hreflang targets /`, alternateHref(html, 'en') === expectedRoot);
     check(`${label} Chinese hreflang targets /zh/`, alternateHref(html, 'zh-Hant') === expectedChinese);
+    check(`${label} Spanish hreflang targets /es/`, alternateHref(html, 'es') === expectedSpanish);
+    check(`${label} French hreflang targets /fr/`, alternateHref(html, 'fr') === expectedFrench);
+    check(`${label} German hreflang targets /de/`, alternateHref(html, 'de') === expectedGerman);
     check(`${label} x-default targets /`, alternateHref(html, 'x-default') === expectedRoot);
   }
 
@@ -167,6 +186,9 @@ if (hasSitemap) {
   check('Sitemap includes canonical root homepage', sitemapXml.includes(`<loc>${productionOrigin}/</loc>`));
   check('Sitemap excludes compatibility /en/ homepage', !sitemapXml.includes(`<loc>${productionOrigin}/en/</loc>`));
   check('Sitemap includes /zh/ homepage', sitemapXml.includes(`<loc>${productionOrigin}/zh/</loc>`));
+  check('Sitemap includes /es/ homepage', sitemapXml.includes(`<loc>${productionOrigin}/es/</loc>`));
+  check('Sitemap includes /fr/ homepage', sitemapXml.includes(`<loc>${productionOrigin}/fr/</loc>`));
+  check('Sitemap includes /de/ homepage', sitemapXml.includes(`<loc>${productionOrigin}/de/</loc>`));
 }
 
 // ── 4. robots.txt ───────────────────────────────────────────────────────────

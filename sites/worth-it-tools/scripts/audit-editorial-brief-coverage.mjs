@@ -45,8 +45,8 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 224,
-  home: 3,
+  html: 227,
+  home: 6,
   legal: 30,
   tool: 40,
   editorial: 150,
@@ -77,7 +77,7 @@ const counts = { error: 0, home: 0, legal: 0, tool: 0, editorial: 0 };
 
 for (const path of paths) {
   if (path === '/404.html') counts.error += 1;
-  else if (path === '/' || /^\/(?:en|zh)\/$/.test(path)) counts.home += 1;
+  else if (path === '/' || /^\/(?:en|zh|es|fr|de)\/$/.test(path)) counts.home += 1;
   else if (/^\/(?:en|zh|es|fr|de)\/tools\//.test(path)) counts.tool += 1;
   else if (legalSlugs.has(path.split('/').filter(Boolean).at(-1))) counts.legal += 1;
   else counts.editorial += 1;

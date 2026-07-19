@@ -15,12 +15,12 @@ export const SITE = {
 } as const;
 
 export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
-export type CoreLocale = 'en' | 'zh';
+export type CoreLocale = Locale;
 
 /** Every locale with at least one completed, indexable route. */
 export const LOCALES: Locale[] = ['en', 'zh', 'es', 'fr', 'de'];
 /** Locales with a complete homepage, legal pages, and calculator catalogue. */
-export const CORE_LOCALES: CoreLocale[] = ['en', 'zh'];
+export const CORE_LOCALES: CoreLocale[] = ['en', 'zh', 'es', 'fr', 'de'];
 export const DEFAULT_LOCALE: Locale = 'en';
 
 /** Human-readable language names for the language switcher. */

@@ -6,7 +6,7 @@ const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
-const releasedHomeLocales = [];
+const releasedHomeLocales = [...locales];
 const failures = [];
 
 function verify(path, kind) {
@@ -40,6 +40,11 @@ for (const slug of releasedTools) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/tools/${slug}/`;
   if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
 }
+for (const locale of ['zh', 'es', 'fr', 'de']) {
+  const url = `https://worthcalc.win/${locale}/`;
+  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+}
+if (sitemap.includes('<loc>https://worthcalc.win/en/</loc>')) failures.push('Sitemap must exclude compatibility /en/ homepage');
 
 if (failures.length) {
   console.error(`Five-language shell check failed (${failures.length}):`);

@@ -1,12 +1,12 @@
 ---
 import HomePage from '../components/HomePage.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { homeContent } from '../lib/home';
+import { homeContent, homeJsonLd } from '../lib/home';
 
 const locale = 'en';
 const content = homeContent[locale];
 ---
 
-<BaseLayout title={content.title} description={content.description} locale={locale}>
+<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site)}>
   <HomePage locale={locale} />
 </BaseLayout>

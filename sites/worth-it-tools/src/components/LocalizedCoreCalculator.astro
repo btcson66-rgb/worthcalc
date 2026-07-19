@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription' | 'membership' | 'ev';
+    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -197,13 +197,27 @@ const config = {
       verdict.textContent = fill(evTotal <= gasTotal ? config.favorableVerdict : config.unfavorableVerdict, { difference: money.format(difference), years: String(years) });
     }
 
+    function updateRentBuy(): void {
+      const rent = Math.max(0, read('monthly-rent')); const growth = Math.max(0, read('rent-growth')) / 100;
+      const price = Math.max(0, read('home-price')); const down = Math.max(0, read('down-payment')); const closing = Math.max(0, read('closing-costs'));
+      const mortgage = Math.max(0, read('mortgage-payment')); const owner = Math.max(0, read('owner-costs')); const years = Math.max(1, Math.round(read('years'))); const equity = Math.max(0, read('ending-equity'));
+      const rentFactor = growth > 0 ? ((1 + growth) ** years - 1) / growth : years;
+      const rentTotal = rent * 12 * rentFactor; const ownerCash = down + closing + (mortgage + owner) * 12 * years;
+      const ownerNet = ownerCash - equity; const difference = Math.abs(ownerNet - rentTotal); const parityEquity = Math.max(0, ownerCash - rentTotal);
+      output('rent-total', money.format(rentTotal)); output('owner-net-cost', money.format(ownerNet)); output('difference', money.format(difference)); output('parity-equity', money.format(parityEquity));
+      if (!verdict) return; if (rent <= 0 || price <= 0 || years <= 0) { verdict.textContent = config.invalidVerdict; return; }
+      verdict.textContent = fill(ownerNet <= rentTotal ? config.favorableVerdict : config.unfavorableVerdict, { difference: money.format(difference), years: String(years), equity: money.format(equity), parityEquity: money.format(parityEquity) });
+    }
+
     const update = config.kind === 'installment'
       ? updateInstallment
       : config.kind === 'subscription'
         ? updateSubscription
         : config.kind === 'membership'
           ? updateMembership
-          : updateEv;
+          : config.kind === 'ev'
+            ? updateEv
+            : updateRentBuy;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

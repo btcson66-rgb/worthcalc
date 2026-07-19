@@ -57,7 +57,7 @@ const config = {
   import { aprFromMonthlyRate, irrMonthly } from '../lib/money';
 
   interface CalculatorConfig {
-    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte';
+    kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte' | 'cashback';
     currency: string;
     numberLocale: string;
     initialVerdict: string;
@@ -262,6 +262,35 @@ const config = {
       });
     }
 
+    function updateCashback(): void {
+      const fee = Math.max(0, read('annual-fee'));
+      const certainBenefits = Math.max(0, read('certain-benefits'));
+      const welcomeBonus = Math.max(0, read('welcome-bonus'));
+      const monthlySpend = Math.max(0, read('monthly-spend'));
+      const rewardRate = Math.max(0, read('reward-rate')) / 100;
+      const redemptionValue = Math.max(0, read('redemption-value')) / 100;
+      const baselineRate = Math.max(0, read('baseline-rate')) / 100;
+      const otherFees = Math.max(0, read('other-annual-fees'));
+      const annualSpend = monthlySpend * 12;
+      const effectiveRate = rewardRate * redemptionValue;
+      const annualReward = annualSpend * effectiveRate;
+      const baselineReward = annualSpend * baselineRate;
+      const renewalNet = annualReward + certainBenefits - fee - otherFees;
+      const renewalAdvantage = renewalNet - baselineReward;
+      const firstYearNet = renewalNet + welcomeBonus;
+      const incrementalRate = effectiveRate - baselineRate;
+      const netFixedCost = fee + otherFees - certainBenefits;
+      const breakEven = netFixedCost <= 0 ? 0 : incrementalRate > 0 ? netFixedCost / incrementalRate / 12 : Number.POSITIVE_INFINITY;
+
+      output('annual-reward', money.format(annualReward)); output('renewal-net', money.format(renewalNet));
+      output('baseline-reward', money.format(baselineReward)); output('renewal-advantage', money.format(renewalAdvantage));
+      output('first-year-net', money.format(firstYearNet)); output('break-even', Number.isFinite(breakEven) ? money.format(breakEven) : '—');
+      if (!verdict) return;
+      verdict.textContent = fill(renewalAdvantage >= 0 ? config.favorableVerdict : config.unfavorableVerdict, {
+        advantage: money.format(Math.max(0, renewalAdvantage)), renewal: money.format(renewalNet), loss: money.format(Math.abs(renewalAdvantage)), breakEven: Number.isFinite(breakEven) ? money.format(breakEven) : '—',
+      });
+    }
+
     const update = config.kind === 'installment'
       ? updateInstallment
       : config.kind === 'subscription'
@@ -274,7 +303,9 @@ const config = {
               ? updateRentBuy
               : config.kind === 'commute'
                 ? updateCommute
-                : updateLatte;
+                : config.kind === 'latte'
+                  ? updateLatte
+                  : updateCashback;
     fields.forEach((field) => field.addEventListener('input', update));
     update();
   });

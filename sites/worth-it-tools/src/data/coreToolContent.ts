@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte';
+  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte' | 'cashback';
   title: string;
   description: string;
   intro: string;
@@ -293,6 +293,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Auditar renovaciones mensuales y anuales', path: '/tools/subscription-audit' },
       ],
     },
+    'cashback-breakeven': {
+      kind: 'cashback', title: 'Calculadora de equilibrio de cashback y cuota de tarjeta',
+      description: 'Compara cashback efectivo, cuota, ventajas ciertas y una tarjeta sin cuota; separa primer año y renovación para no depender del regalo inicial.',
+      intro: 'Una tarjeta con cuota debe superar la alternativa gratuita que realmente usarías, no solo generar recompensas positivas. Introduce únicamente gasto ya previsto, convierte puntos a un valor de canje real y vuelve a calcular la renovación sin regalo de bienvenida. Si pagas intereses, añádelos: suelen dominar el cashback.',
+      currency: 'EUR', numberLocale: 'es-ES', inputsHeading: 'Tarjeta, alternativa y gasto elegible', verdictLabel: 'Ventaja frente a la tarjeta sin cuota',
+      initialVerdict: 'Introduce cuota, gasto y tasas efectivas para comparar.', invalidVerdict: 'Las tasas y el valor de canje deben ser cero o positivos.',
+      favorableVerdict: 'En renovación, la tarjeta con cuota iguala o supera la alternativa en {advantage}; su valor neto es {renewal}. El equilibrio es {breakEven} al mes sin contar el regalo.',
+      unfavorableVerdict: 'En renovación queda {loss} por debajo de la alternativa. El equilibrio sería {breakEven} al mes si la recompensa efectiva supera la tasa gratuita; el regalo solo cambia el primer año.',
+      fields: [
+        { id: 'annual-fee', label: 'Cuota anual de renovación', helper: 'Incluye emisión, mantenimiento o tarjetas adicionales que pagarás.', value: 60, min: 0, step: 1 },
+        { id: 'certain-benefits', label: 'Ventajas recurrentes de uso seguro', helper: 'Solo créditos o servicios que comprarías igualmente cada año.', value: 0, min: 0, step: 1 },
+        { id: 'welcome-bonus', label: 'Regalo de bienvenida del primer año', helper: 'Valor neto alcanzable sin compras añadidas; se excluye de la renovación.', value: 100, min: 0, step: 5 },
+        { id: 'monthly-spend', label: 'Gasto elegible previsto al mes', helper: 'Compras habituales después de excluir categorías, comercios y topes.', value: 500, min: 0, step: 10 },
+        { id: 'reward-rate', label: 'Cashback o recompensa anunciada (%)', helper: 'Tasa aplicable al gasto elegible introducido.', value: 1.5, min: 0, step: 0.1 },
+        { id: 'redemption-value', label: 'Valor real de canje (%)', helper: '100 para efectivo íntegro; menos si puntos o vales valen menos para ti.', value: 100, min: 0, step: 1 },
+        { id: 'baseline-rate', label: 'Cashback de la alternativa sin cuota (%)', helper: 'La tarjeta gratuita que de verdad podrías usar para las mismas compras.', value: 0.5, min: 0, step: 0.1 },
+        { id: 'other-annual-fees', label: 'Intereses y otros costes anuales', helper: 'Pago aplazado, divisa, retirada o cuenta vinculada atribuibles a la tarjeta.', value: 0, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'annual-reward', label: 'Recompensa anual efectiva' }, { id: 'renewal-net', label: 'Valor neto en renovación' },
+        { id: 'baseline-reward', label: 'Recompensa de la alternativa' }, { id: 'renewal-advantage', label: 'Ventaja de renovación' },
+        { id: 'first-year-net', label: 'Valor neto del primer año' }, { id: 'break-even', label: 'Gasto mensual de equilibrio' },
+      ],
+      faq: [
+        { question: '¿Por qué se compara con una tarjeta sin cuota?', answer: 'Porque es el coste de oportunidad. Si la opción gratuita ya devuelve parte del gasto, solo la diferencia de recompensa puede recuperar la cuota.' },
+        { question: '¿Debo contar el regalo de bienvenida?', answer: 'Solo para el primer año y si cumples el mínimo con compras previstas. Ponlo a cero al decidir una renovación o el resultado repetirá un beneficio que no vuelve.' },
+        { question: '¿Cómo trato topes y comercios excluidos?', answer: 'Introduce únicamente gasto elegible y reduce la tasa hasta la recompensa efectiva esperada. Si el tope limita la devolución antes del equilibrio, no existe un equilibrio solo por gastar más.' },
+        { question: '¿Puede compensar si pago el saldo a plazos?', answer: 'Normalmente los intereses pueden superar con rapidez la recompensa. Añade el coste anual real y compara también pagar totalmente; esta herramienta no recomienda crédito ni una tarjeta concreta.' },
+      ],
+      related: [
+        { title: 'Guía completa de equilibrio de una tarjeta con cuota', path: '/annual-fee-card-breakeven' },
+        { title: 'Cómo cambian los topes la recompensa real', path: '/cashback-caps-real-reward-rate' },
+        { title: 'Calcular el coste real del pago aplazado', path: '/tools/installment-true-apr' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -550,6 +585,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Auditer les renouvellements', path: '/tools/subscription-audit' },
       ],
     },
+    'cashback-breakeven': {
+      kind: 'cashback', title: 'Calculateur de seuil cashback et cotisation de carte',
+      description: 'Comparez cashback effectif, cotisation, avantages certains et carte sans cotisation, en séparant première année et renouvellement.',
+      intro: 'Une carte payante doit battre l’alternative gratuite que vous utiliseriez, pas seulement produire une récompense positive. Gardez uniquement les achats déjà prévus, valorisez les points selon le remboursement réellement accessible et retirez la prime de bienvenue du calcul de renouvellement. Les agios doivent rester visibles.',
+      currency: 'EUR', numberLocale: 'fr-FR', inputsHeading: 'Carte, alternative et dépenses éligibles', verdictLabel: 'Écart avec la carte sans cotisation',
+      initialVerdict: 'Renseignez cotisation, dépenses et taux effectifs.', invalidVerdict: 'Les taux et la valeur de conversion doivent être positifs ou nuls.',
+      favorableVerdict: 'Au renouvellement, la carte payante égale ou dépasse l’alternative de {advantage} ; sa valeur nette est {renewal}. Le seuil est {breakEven} par mois, sans la prime.',
+      unfavorableVerdict: 'Au renouvellement, elle reste {loss} sous l’alternative. Le seuil serait {breakEven} par mois si le taux effectif dépasse celui de la carte gratuite ; la prime ne vaut que la première année.',
+      fields: [
+        { id: 'annual-fee', label: 'Cotisation annuelle au renouvellement', helper: 'Ajoutez les cartes supplémentaires et frais récurrents certains.', value: 54, min: 0, step: 1 },
+        { id: 'certain-benefits', label: 'Avantages récurrents certainement utilisés', helper: 'Crédits ou services que vous auriez achetés de toute façon.', value: 0, min: 0, step: 1 },
+        { id: 'welcome-bonus', label: 'Prime de bienvenue la première année', helper: 'Valeur nette obtenue sans créer de dépenses ; exclue du renouvellement.', value: 80, min: 0, step: 5 },
+        { id: 'monthly-spend', label: 'Dépenses éligibles par mois', helper: 'Achats habituels après plafonds, exclusions et commerçants non éligibles.', value: 450, min: 0, step: 10 },
+        { id: 'reward-rate', label: 'Taux de cashback ou de récompense (%)', helper: 'Taux réellement applicable aux dépenses saisies.', value: 1.5, min: 0, step: 0.1 },
+        { id: 'redemption-value', label: 'Valeur réelle de conversion (%)', helper: '100 pour du numéraire intégral ; moins pour un bon ou des points moins utiles.', value: 100, min: 0, step: 1 },
+        { id: 'baseline-rate', label: 'Taux de la carte sans cotisation (%)', helper: 'Alternative gratuite disponible pour les mêmes achats.', value: 0.5, min: 0, step: 0.1 },
+        { id: 'other-annual-fees', label: 'Agios et autres frais annuels', helper: 'Paiement fractionné, devise, retrait ou compte lié attribuables à la carte.', value: 0, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'annual-reward', label: 'Récompense annuelle effective' }, { id: 'renewal-net', label: 'Valeur nette au renouvellement' },
+        { id: 'baseline-reward', label: 'Récompense de l’alternative' }, { id: 'renewal-advantage', label: 'Avantage au renouvellement' },
+        { id: 'first-year-net', label: 'Valeur nette première année' }, { id: 'break-even', label: 'Dépenses mensuelles au seuil' },
+      ],
+      faq: [
+        { question: 'Pourquoi comparer une carte sans cotisation ?', answer: 'Elle représente l’option abandonnée. Si elle rémunère déjà les mêmes achats, seule la différence de cashback peut amortir la cotisation.' },
+        { question: 'La prime de bienvenue compte-t-elle ?', answer: 'Uniquement la première année et sans achat supplémentaire. Remettez-la à zéro pour le renouvellement afin de ne pas répéter un gain unique.' },
+        { question: 'Comment intégrer plafonds et exclusions ?', answer: 'Ne saisissez que les dépenses éligibles et utilisez un taux effectif prudent. Si le plafond bloque le gain avant le seuil, davantage de dépenses ne rend pas la carte rentable.' },
+        { question: 'Que faire si je paie des agios ?', answer: 'Saisissez le coût annuel réel : il peut dépasser très vite le cashback. La calculatrice ne conseille ni crédit renouvelable, ni carte, ni mode de paiement.' },
+      ],
+      related: [
+        { title: 'Guide du seuil d’une carte avec cotisation', path: '/annual-fee-card-breakeven' },
+        { title: 'Plafonds et taux de récompense réel', path: '/cashback-caps-real-reward-rate' },
+        { title: 'Coût réel d’un paiement fractionné', path: '/tools/installment-true-apr' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -805,6 +875,41 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Schleichende Kosten kleiner Abos', path: '/subscription-creep' },
         { title: 'Kosten eines Gegenstands je Nutzung', path: '/cost-per-use-expensive-item' },
         { title: 'Verlängerungen und Abos prüfen', path: '/tools/subscription-audit' },
+      ],
+    },
+    'cashback-breakeven': {
+      kind: 'cashback', title: 'Cashback-Break-even-Rechner für Kreditkartengebühren',
+      description: 'Effektiven Cashback, Jahresgebühr, sichere Vorteile und eine kostenlose Karte vergleichen – getrennt für erstes Jahr und Verlängerung.',
+      intro: 'Eine Gebührenkarte muss die kostenlose Alternative schlagen, die Sie tatsächlich nutzen könnten. Erfassen Sie nur ohnehin geplante Umsätze, bewerten Sie Punkte nach der realen Einlösung und entfernen Sie den Willkommensbonus bei der Verlängerung. Teilzahlungszinsen und Fremdwährungsentgelte gehören als Kosten in die Rechnung.',
+      currency: 'EUR', numberLocale: 'de-DE', inputsHeading: 'Karte, Alternative und berechtigte Umsätze', verdictLabel: 'Abstand zur gebührenfreien Karte',
+      initialVerdict: 'Gebühr, Umsatz und effektive Vergütung eintragen.', invalidVerdict: 'Vergütungssätze und Einlösewert müssen mindestens null sein.',
+      favorableVerdict: 'Bei Verlängerung liegt die Gebührenkarte {advantage} vor oder gleichauf; ihr Nettowert ist {renewal}. Der Schwellenumsatz beträgt {breakEven} pro Monat ohne Bonus.',
+      unfavorableVerdict: 'Bei Verlängerung liegt sie {loss} hinter der Alternative. Der Schwellenumsatz wäre {breakEven} pro Monat, sofern die effektive Vergütung höher ist; der Bonus gilt nur im ersten Jahr.',
+      fields: [
+        { id: 'annual-fee', label: 'Jahresgebühr bei Verlängerung', helper: 'Auch sichere Zusatzkarten- oder Kontogebühren einbeziehen.', value: 72, min: 0, step: 1 },
+        { id: 'certain-benefits', label: 'Sicher genutzte wiederkehrende Vorteile', helper: 'Nur Leistungen, die Sie ohnehin jedes Jahr kaufen würden.', value: 0, min: 0, step: 1 },
+        { id: 'welcome-bonus', label: 'Willkommensbonus im ersten Jahr', helper: 'Netto ohne Zusatzkäufe; in der Verlängerung nicht ansetzen.', value: 100, min: 0, step: 5 },
+        { id: 'monthly-spend', label: 'Berechtigter Monatsumsatz', helper: 'Geplante Käufe nach Grenzen, Kategorien und Ausschlüssen.', value: 800, min: 0, step: 10 },
+        { id: 'reward-rate', label: 'Cashback- oder Vergütungssatz (%)', helper: 'Auf die erfassten Umsätze tatsächlich anwendbarer Satz.', value: 1, min: 0, step: 0.05 },
+        { id: 'redemption-value', label: 'Tatsächlicher Einlösewert (%)', helper: '100 bei vollem Geldwert; weniger bei unpassenden Punkten oder Gutscheinen.', value: 100, min: 0, step: 1 },
+        { id: 'baseline-rate', label: 'Vergütung der kostenlosen Alternative (%)', helper: 'Gebührenfreie Karte für dieselben Käufe.', value: 0.25, min: 0, step: 0.05 },
+        { id: 'other-annual-fees', label: 'Zinsen und weitere Jahreskosten', helper: 'Teilzahlung, Fremdwährung, Bargeld oder verknüpftes Konto.', value: 0, min: 0, step: 1 },
+      ],
+      metrics: [
+        { id: 'annual-reward', label: 'Effektive Jahresvergütung' }, { id: 'renewal-net', label: 'Nettowert bei Verlängerung' },
+        { id: 'baseline-reward', label: 'Vergütung der Alternative' }, { id: 'renewal-advantage', label: 'Vorteil bei Verlängerung' },
+        { id: 'first-year-net', label: 'Nettowert im ersten Jahr' }, { id: 'break-even', label: 'Monatlicher Schwellenumsatz' },
+      ],
+      faq: [
+        { question: 'Warum zählt die gebührenfreie Karte?', answer: 'Sie ist die reale Alternative. Wenn sie dieselben Käufe bereits vergütet, kann nur die Mehrvergütung die Jahresgebühr ausgleichen.' },
+        { question: 'Darf der Willkommensbonus eingerechnet werden?', answer: 'Nur im ersten Jahr und ohne zusätzliche Käufe. Für eine Verlängerung muss er null sein, damit ein einmaliger Vorteil nicht wiederholt wird.' },
+        { question: 'Wie werden Deckel und Ausschlüsse behandelt?', answer: 'Nur berechtigten Umsatz und einen vorsichtigen effektiven Satz eintragen. Wird der Cashback vor dem Break-even gedeckelt, hilft zusätzlicher Umsatz nicht.' },
+        { question: 'Was passiert bei Teilzahlung?', answer: 'Zinsen können den gesamten Cashback schnell übersteigen. Tragen Sie die realen Jahreskosten ein und vergleichen Sie vollständigen Rechnungsausgleich; dies ist keine Karten- oder Kreditberatung.' },
+      ],
+      related: [
+        { title: 'Vollständige Break-even-Methode für Jahresgebühren', path: '/annual-fee-card-breakeven' },
+        { title: 'Cashback-Grenzen und reale Vergütung', path: '/cashback-caps-real-reward-rate' },
+        { title: 'Effektive Kosten einer Ratenzahlung', path: '/tools/installment-true-apr' },
       ],
     },
   },

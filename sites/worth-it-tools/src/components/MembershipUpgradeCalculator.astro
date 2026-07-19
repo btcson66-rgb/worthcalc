@@ -1,0 +1,145 @@
+---
+interface Copy {
+  heading: string;
+  intro: string;
+  extraFee: string;
+  extraFeeHelp: string;
+  monthlySpend: string;
+  monthlySpendHelp: string;
+  rewardRate: string;
+  rewardRateHelp: string;
+  extraBenefits: string;
+  extraBenefitsHelp: string;
+  verdictLabel: string;
+  annualReward: string;
+  netValue: string;
+  breakEven: string;
+  favorable: string;
+  unfavorable: string;
+}
+
+interface Props {
+  locale: string;
+  currency: string;
+  extraFee: number;
+  monthlySpend: number;
+  rewardRate: number;
+  extraBenefits?: number;
+  copy: Copy;
+}
+
+const { locale, currency, extraFee, monthlySpend, rewardRate, extraBenefits = 0, copy } = Astro.props;
+---
+
+<section
+  class="upgrade-calculator"
+  data-upgrade-calculator
+  data-locale={locale}
+  data-currency={currency}
+  data-copy={JSON.stringify({ favorable: copy.favorable, unfavorable: copy.unfavorable })}
+  aria-labelledby="upgrade-calculator-title"
+>
+  <div class="calculator-heading">
+    <p class="eyebrow">WorthCalc</p>
+    <h2 id="upgrade-calculator-title">{copy.heading}</h2>
+    <p>{copy.intro}</p>
+  </div>
+
+  <div class="calculator-grid">
+    <div class="input-panel">
+      <label>
+        <span>{copy.extraFee}</span>
+        <input data-field="extra-fee" type="number" inputmode="decimal" min="0" step="0.01" value={extraFee} />
+        <small>{copy.extraFeeHelp}</small>
+      </label>
+      <label>
+        <span>{copy.monthlySpend}</span>
+        <input data-field="monthly-spend" type="number" inputmode="decimal" min="0" step="1" value={monthlySpend} />
+        <small>{copy.monthlySpendHelp}</small>
+      </label>
+      <label>
+        <span>{copy.rewardRate}</span>
+        <input data-field="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value={rewardRate} />
+        <small>{copy.rewardRateHelp}</small>
+      </label>
+      <label>
+        <span>{copy.extraBenefits}</span>
+        <input data-field="extra-benefits" type="number" inputmode="decimal" min="0" step="1" value={extraBenefits} />
+        <small>{copy.extraBenefitsHelp}</small>
+      </label>
+    </div>
+
+    <div class="result-panel" aria-live="polite">
+      <p class="eyebrow">{copy.verdictLabel}</p>
+      <p class="verdict" data-verdict></p>
+      <dl>
+        <div><dt>{copy.annualReward}</dt><dd data-output="annual-reward">—</dd></div>
+        <div><dt>{copy.netValue}</dt><dd data-output="net-value">—</dd></div>
+        <div><dt>{copy.breakEven}</dt><dd data-output="break-even">—</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<script>
+  const fill = (template: string, values: Record<string, string>) =>
+    Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template);
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-upgrade-calculator]')) {
+    const locale = root.dataset.locale ?? 'en-US';
+    const currency = root.dataset.currency ?? 'USD';
+    const copy = JSON.parse(root.dataset.copy ?? '{}') as { favorable: string; unfavorable: string };
+    const inputs = new Map(
+      [...root.querySelectorAll<HTMLInputElement>('[data-field]')].map((input) => [input.dataset.field ?? '', input]),
+    );
+    const money = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 2 });
+    const formatMoney = (value: number) => currency === 'TWD' ? money.format(value).replace('$', 'NT$') : money.format(value);
+    const read = (id: string) => Number.parseFloat(inputs.get(id)?.value ?? '0') || 0;
+    const write = (id: string, value: string) => {
+      const output = root.querySelector<HTMLElement>(`[data-output="${id}"]`);
+      if (output) output.textContent = value;
+    };
+    const calculate = () => {
+      const extraFee = Math.max(0, read('extra-fee'));
+      const monthlySpend = Math.max(0, read('monthly-spend'));
+      const rate = Math.max(0, read('reward-rate')) / 100;
+      const extraBenefits = Math.max(0, read('extra-benefits'));
+      const annualReward = monthlySpend * 12 * rate;
+      const net = annualReward + extraBenefits - extraFee;
+      const uncoveredFee = Math.max(0, extraFee - extraBenefits);
+      const threshold = rate > 0 ? uncoveredFee / rate / 12 : Number.POSITIVE_INFINITY;
+      const thresholdText = Number.isFinite(threshold) ? formatMoney(threshold) : '—';
+      write('annual-reward', formatMoney(annualReward));
+      write('net-value', formatMoney(net));
+      write('break-even', thresholdText);
+      const verdict = root.querySelector<HTMLElement>('[data-verdict]');
+      if (verdict) verdict.textContent = fill(net >= 0 ? copy.favorable : copy.unfavorable, {
+        net: formatMoney(Math.abs(net)),
+        threshold: thresholdText,
+      });
+    };
+    for (const input of inputs.values()) {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    }
+    calculate();
+  }
+</script>
+
+<style>
+  .upgrade-calculator { margin: 2rem 0; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--color-border); border-radius: 1.25rem; background: var(--color-surface); }
+  .calculator-heading h2 { margin: .2rem 0 .5rem; }
+  .eyebrow { margin: 0; color: var(--color-accent-strong); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .calculator-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 1rem; margin-top: 1rem; }
+  .input-panel, .result-panel { display: grid; gap: .85rem; }
+  label { display: grid; gap: .3rem; font-weight: 700; }
+  label small { color: var(--color-muted); font-weight: 400; line-height: 1.45; }
+  input { box-sizing: border-box; width: 100%; min-height: 2.75rem; padding: .65rem .75rem; border: 1px solid var(--color-border); border-radius: .65rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .result-panel { align-content: start; padding: 1rem; border-radius: .9rem; background: var(--color-bg); }
+  .verdict { margin: 0; font-weight: 750; line-height: 1.55; }
+  dl { display: grid; gap: .65rem; margin: 0; }
+  dl div { display: flex; justify-content: space-between; gap: 1rem; padding-top: .65rem; border-top: 1px solid var(--color-border); }
+  dt { color: var(--color-muted); }
+  dd { margin: 0; font-weight: 800; text-align: right; }
+  @media (max-width: 720px) { .calculator-grid { grid-template-columns: 1fr; } }
+</style>

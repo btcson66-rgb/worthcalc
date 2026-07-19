@@ -2076,6 +2076,69 @@ export const commuteFullCostGuides: Partial<Record<Locale, DecisionGuideContent>
 
 Object.assign(commuteFullCostGuides, commuteFullCostGuideAdditions);
 
+export const latteFactorGuides: Partial<Record<Locale, DecisionGuideContent>> = {
+  es: {
+    id: 'latte-factor-method', labels: labels.es,
+    directAnswer: 'El factor latte no demuestra que un café impida hacerse rico: convierte una compra repetida en escala presupuestaria y coste de oportunidad. Con 4,20 € cinco veces por semana, el gasto equivale a 91 € al mes y 10.920 € en diez años. Si cada importe se aportara realmente al final de la semana y obtuviera un 4% anual neto constante, el valor futuro matemático sería 13.366,13 €; 2.446,13 € serían crecimiento hipotético, no garantizado.',
+    inputs: ['Cargo real de la compra o hábito que se puede evitar', 'Frecuencia semanal observada durante varias semanas', 'Porcentaje que de verdad se transferirá a ahorro o inversión', 'Horizonte durante el que el cambio es sostenible', 'Rentabilidad anual neta de comisiones y fiscalidad aplicable', 'Escenarios a 0%, bajo, base y adverso en vez de un único pronóstico', 'Inflación de escenario para expresar el resultado en dinero de hoy', 'Fondo de emergencia, deuda cara y liquidez que deben evaluarse aparte'],
+    formula: 'Gasto mensual equivalente = precio × veces/semana × 52 ÷ 12. Aportaciones = precio × veces/semana × 52 × años. Tasa semanal = (1 + rentabilidad anual)^(1/52) − 1. Valor futuro de aportaciones al final de cada semana = aporte semanal × [(1 + tasa semanal)^(52×años) − 1] ÷ tasa semanal; con tasa 0, coincide con las aportaciones. Valor real = valor futuro ÷ (1 + inflación)^años.',
+    workedExample: '4,20 €×5×52÷12 = 91 € al mes. En diez años las aportaciones sumarían 10.920 €. Con 4% neto anual constante y depósitos semanales al final de cada periodo, valor futuro = 13.366,13 € y crecimiento = 2.446,13 €. Con inflación hipotética del 2%, ese saldo equivale a unos 10.964,88 € de hoy.',
+    sensitivity: [
+      { scenario: 'Sin rentabilidad', input: '4% pasa a 0%', result: '10.920 €; no se inventa crecimiento' },
+      { scenario: 'Escenario conservador', input: '4% pasa a 2%', result: '12.073,97 € antes de inflación' },
+      { scenario: 'Más rentabilidad y riesgo', input: '4% pasa a 6%', result: '14.812,74 €; no garantizado' },
+      { scenario: 'Plazo de 15 años', input: '10 pasa a 15 años; 4%', result: '22.291,81 € sobre 16.380 € aportados' },
+    ],
+    cta: { label: 'Calcular un gasto repetido real', href: '#latte-factor-calculator' },
+    limitations: ['El ahorro solo existe si el importe se transfiere; no comprar algo y gastar el dinero en otra categoría deja el patrimonio igual.', 'La rentabilidad constante suaviza pérdidas, secuencia de rendimientos y periodos sin aportar. No representa un depósito, fondo o cartera concretos.', 'Introduce una rentabilidad neta coherente con comisiones y fiscalidad; el resultado antes de inflación no es poder adquisitivo.', 'No uses una pequeña compra para ocultar el efecto de vivienda, ingresos, salud, cuidados, deuda o gastos esenciales. El objetivo es elegir, no culpabilizar.'],
+    sources: [
+      { label: 'Banco de España — capitalización compuesta y reinversión de intereses', href: 'https://clientebancario.bde.es/pcb/es/blog/sabes-que-es-el-tipo-de-interes-compuesto-.html' },
+      { label: 'CNMV — rentabilidad, riesgo, gastos y plazo antes de invertir', href: 'https://www.cnmv.es/portal/inversor/decisiones-informarse?lang=es' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  fr: {
+    id: 'latte-factor-method', labels: labels.fr,
+    directAnswer: 'Le facteur latte n’affirme pas qu’un café empêche de devenir riche : il mesure une répétition et son coût d’opportunité. À 4 € cinq fois par semaine, la dépense vaut 86,67 € par mois et 10 400 € sur dix ans. Si chaque somme était réellement versée en fin de semaine avec un rendement net constant de 4% par an, la valeur future mathématique atteindrait 12 729,64 € ; les 2 329,64 € d’écart restent un rendement hypothétique non garanti.',
+    inputs: ['Prix réellement payé pour l’habitude modifiable', 'Fréquence hebdomadaire observée', 'Part effectivement virée vers une épargne', 'Durée réaliste du changement', 'Rendement annuel net des frais et de la fiscalité applicable', 'Scénarios à 0%, faible, central et défavorable', 'Inflation de scénario pour ramener le résultat en euros actuels', 'Épargne de précaution, dettes coûteuses et besoin de liquidité traités à part'],
+    formula: 'Équivalent mensuel = prix × fois/semaine × 52 ÷ 12. Versements = prix × fois/semaine × 52 × années. Taux hebdomadaire = (1 + rendement annuel)^(1/52) − 1. Valeur future de versements de fin de semaine = versement hebdomadaire × [(1 + taux hebdomadaire)^(52×années) − 1] ÷ taux ; à 0%, valeur = versements. Valeur réelle = valeur future ÷ (1 + inflation)^années.',
+    workedExample: '4 €×5×52÷12 = 86,67 € par mois. Sur dix ans, 10 400 € seraient versés. À 4% net constant avec versement hebdomadaire en fin de période, valeur future 12 729,64 €, dont 2 329,64 € de croissance hypothétique. À 2% d’inflation supposée, cela représente environ 10 442,74 € d’aujourd’hui.',
+    sensitivity: [
+      { scenario: 'Aucun rendement', input: '4% devient 0%', result: '10 400 € ; aucune croissance supposée' },
+      { scenario: 'Rendement de 2%', input: '4% devient 2%', result: '11 499,02 € avant inflation' },
+      { scenario: 'Rendement de 6%', input: '4% devient 6%', result: '14 107,37 € non garantis' },
+      { scenario: 'Durée de 15 ans', input: '10 devient 15 ans ; 4%', result: '21 230,29 € sur 15 600 € versés' },
+    ],
+    cta: { label: 'Mesurer une dépense répétée réelle', href: '#latte-factor-calculator' },
+    limitations: ['La somme doit être réellement mise de côté : déplacer la dépense vers un autre achat ne crée pas d’épargne.', 'Un rendement constant masque baisses, ordre des performances et interruptions. Ce n’est la simulation d’aucun livret, fonds ou contrat précis.', 'Les livrets peuvent calculer les intérêts par quinzaine et les capitaliser selon leurs règles ; le versement hebdomadaire est une convention transparente.', 'Une petite dépense ne doit pas masquer logement, revenus, santé, famille, dettes ou besoins essentiels. Le calcul aide à choisir sans moraliser.'],
+    sources: [
+      { label: 'AMF — rendements et risques des placements financiers', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements' },
+      { label: 'Économie.gouv.fr 2026 — calcul et capitalisation des intérêts d’un livret bancaire', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/le-livret-depargne-bancaire-comment-ca-marche' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+  de: {
+    id: 'latte-factor-method', labels: labels.de,
+    directAnswer: 'Der Latte-Faktor behauptet nicht, Kaffee verhindere Vermögensaufbau. Er macht Wiederholung und Opportunitätskosten sichtbar. 4,50 € fünfmal pro Woche entsprechen 97,50 € im Monat und 11.700 € in zehn Jahren. Würde jeder Betrag tatsächlich am Wochenzeitpunkt eingezahlt und konstant 4% Nettorendite pro Jahr erzielt, läge der mathematische Zukunftswert bei 14.320,85 €; 2.620,85 € davon wären nicht garantierter Szenariozuwachs.',
+    inputs: ['Tatsächlicher Preis der veränderbaren Ausgabe', 'Über mehrere Wochen beobachtete Häufigkeit', 'Anteil, der wirklich gespart oder angelegt wird', 'Realistisch durchhaltbarer Zeitraum', 'Jährliche Nettorendite nach Kosten und gegebenenfalls Steuern', 'Null-, Niedrig-, Basis- und Verlustszenario statt einer Prognose', 'Inflationsannahme für die Umrechnung in heutige Kaufkraft', 'Notgroschen, teure Schulden und Liquiditätsbedarf außerhalb des Rechners'],
+    formula: 'Monatsgegenwert = Preis × Käufe/Woche × 52 ÷ 12. Einzahlungen = Preis × Käufe/Woche × 52 × Jahre. Wochenrendite = (1 + Jahresrendite)^(1/52) − 1. Zukunftswert nachschüssiger Wochenbeiträge = Wochenbeitrag × [(1 + Wochenrendite)^(52×Jahre) − 1] ÷ Wochenrendite; bei 0% entspricht er den Einzahlungen. Realwert = Zukunftswert ÷ (1 + Inflation)^Jahre.',
+    workedExample: '4,50 €×5×52÷12 = 97,50 € monatlich. In zehn Jahren werden 11.700 € eingezahlt. Bei konstant 4% netto und nachschüssigen Wochenbeiträgen beträgt der Zukunftswert 14.320,85 €, davon 2.620,85 € hypothetischer Zuwachs. Bei angenommen 2% Inflation entspricht der Saldo rund 11.748,08 € heutiger Kaufkraft.',
+    sensitivity: [
+      { scenario: 'Keine Rendite', input: '4% wird 0%', result: '11.700 €; kein erfundener Zuwachs' },
+      { scenario: 'Nur 2% Rendite', input: '4% wird 2%', result: '12.936,40 € vor Inflation' },
+      { scenario: '6% mit höherem Risiko', input: '4% wird 6%', result: '15.870,79 €; nicht garantiert' },
+      { scenario: '15 Jahre', input: '10 wird 15 Jahre; 4%', result: '23.884,08 € aus 17.550 € Einzahlungen' },
+    ],
+    cta: { label: 'Eine echte wiederkehrende Ausgabe berechnen', href: '#latte-factor-calculator' },
+    limitations: ['Ohne tatsächliche Umbuchung entsteht kein Vermögen; eine andere Ausgabe mit demselben Betrag ändert den Saldo nicht.', 'Konstante Rendite blendet Kursverluste, Reihenfolge, Pausen und Ausführung aus. Das Ergebnis bildet kein konkretes Konto, Wertpapier oder Produkt ab.', 'Kosten und gegebenenfalls Steuer mindern die Rendite. Hohe Renditeversprechen gehen typischerweise mit höherem Verlustrisiko einher.', 'Kleine Konsumausgaben dürfen die Wirkung von Wohnen, Einkommen, Gesundheit, Familie, Schulden und notwendigen Ausgaben nicht verdecken.'],
+    sources: [
+      { label: 'BaFin/BAGSO — Sparen und Geld anlegen: Rendite, Risiko und Zinseszins', href: 'https://www.bafin.de/SharedDocs/Downloads/DE/Broschuere/BAGSO/BaFin_BAGSO_Geld_anlegen.pdf?__blob=publicationFile&v=4' },
+      { label: 'Verbraucherzentrale, Stand Januar 2026 — Zinseszins, Inflation und Renditerisiko', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/geldanlage-und-inflation-wie-lege-ich-geld-bei-geringen-zinsen-an-11534' },
+    ],
+    lastVerified: '2026-07-19',
+  },
+};
+
 export const wfhCommuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   en: {
     id: 'wfh-commute-hidden-cost-method',

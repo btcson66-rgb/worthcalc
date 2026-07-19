@@ -16,7 +16,7 @@ export interface CalculatorMetric {
 }
 
 export interface LocalizedCoreToolContent {
-  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute';
+  kind: 'installment' | 'subscription' | 'membership' | 'ev' | 'rent-buy' | 'commute' | 'latte';
   title: string;
   description: string;
   intro: string;
@@ -261,6 +261,38 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Salario por hora después de gastos y desplazamiento', path: '/true-hourly-wage-after-commuting-work-expenses' },
       ],
     },
+    'latte-factor': {
+      kind: 'latte', title: 'Calculadora del factor latte y gastos pequeños repetidos',
+      description: 'Convierte café, delivery, tabaco, apps u otros gastos repetidos en coste mensual, total directo y valor futuro hipotético.',
+      intro: 'El «factor latte» es una escala, no un juicio sobre el café. Sustituye el ejemplo por un gasto que realmente quieras cambiar y recuerda: evitar una compra solo crea ahorro si transfieres ese importe. La rentabilidad introducida es una hipótesis neta de costes, nunca una promesa.',
+      currency: 'EUR', numberLocale: 'es-ES', inputsHeading: 'Hábito y escenario de ahorro', verdictLabel: 'Escala del gasto repetido',
+      initialVerdict: 'Introduce importe, frecuencia, plazo y rentabilidad hipotética.', invalidVerdict: 'El importe, la frecuencia y el plazo deben ser mayores que cero; la rentabilidad no puede ser −100 % o menor.',
+      favorableVerdict: 'El hábito equivale a {monthly} al mes y {direct} en {years} años. Con rentabilidad 0 %, el valor futuro coincide con las aportaciones.',
+      unfavorableVerdict: 'El hábito equivale a {monthly} al mes y {direct} de aportaciones. Con un {rate} neto hipotético serían {future}; {growth} proceden del escenario de rentabilidad, no están garantizados.',
+      fields: [
+        { id: 'item-cost', label: 'Coste de cada compra', helper: 'Usa el cargo real de café, comida, app o hábito que quieres revisar.', value: 4.2, min: 0, step: 0.1 },
+        { id: 'times-per-week', label: 'Compras por semana', helper: 'Media observada, no el máximo de una semana excepcional.', value: 5, min: 0, step: 0.5 },
+        { id: 'years', label: 'Años del escenario', helper: 'Plazo durante el que podrías mantener el cambio.', value: 10, min: 1, step: 1 },
+        { id: 'annual-return', label: 'Rentabilidad anual neta hipotética (%)', helper: 'Después de costes y, si procede, fiscalidad; prueba también 0 % y escenarios adversos.', value: 4, min: -99, step: 0.1 },
+        { id: 'annual-inflation', label: 'Inflación anual hipotética (%)', helper: 'Solo ajusta el valor futuro a euros de hoy; no es una previsión.', value: 2, min: -99, step: 0.1 },
+      ],
+      metrics: [
+        { id: 'monthly-equivalent', label: 'Gasto mensual equivalente' }, { id: 'direct-spend', label: 'Aportaciones o gasto directo' },
+        { id: 'future-value', label: 'Valor futuro hipotético' }, { id: 'growth', label: 'Crecimiento hipotético' },
+        { id: 'real-future', label: 'Valor futuro en euros de hoy' },
+      ],
+      faq: [
+        { question: '¿Dejar de comprar café me hará rico?', answer: 'No por sí solo. El cálculo muestra escala y coste de oportunidad. El dinero solo se acumula si se reserva o invierte de forma constante; ingresos, vivienda, deuda y grandes gastos suelen pesar mucho más.' },
+        { question: '¿Por qué no se garantiza la rentabilidad?', answer: 'La CNMV recuerda que todo producto de inversión tiene riesgo y que una mayor rentabilidad esperada exige asumir más riesgo. Introduce varios escenarios y revisa costes, liquidez y posibilidad de pérdida.' },
+        { question: '¿Cómo funciona el interés compuesto del ejemplo?', answer: 'Cada aportación semanal obtiene la rentabilidad de las semanas restantes y los rendimientos permanecen en el saldo. Banco de España explica que capital e intereses reinvertidos generan nuevos intereses; el resultado real dependerá del producto.' },
+        { question: '¿Debo invertir antes de tener fondo de emergencia?', answer: 'No es una regla universal. Separa primero dinero para imprevistos y deuda cara según tu situación. La calculadora no elige producto ni sustituye asesoramiento regulado.' },
+      ],
+      related: [
+        { title: 'Cómo crecen las suscripciones pequeñas', path: '/subscription-creep' },
+        { title: 'Coste real de un artículo por uso', path: '/cost-per-use-expensive-item' },
+        { title: 'Auditar renovaciones mensuales y anuales', path: '/tools/subscription-audit' },
+      ],
+    },
   },
   fr: {
     'installment-true-apr': {
@@ -486,6 +518,38 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Vrai taux horaire après trajet et frais', path: '/true-hourly-wage-after-commuting-work-expenses' },
       ],
     },
+    'latte-factor': {
+      kind: 'latte', title: 'Calculateur du facteur latte et des petites dépenses répétées',
+      description: 'Transformez café, livraison, tabac, applications ou autre habitude en budget mensuel, versements cumulés et valeur future hypothétique.',
+      intro: 'Le « facteur latte » sert à mesurer, pas à culpabiliser. Remplacez le café par une dépense que vous souhaitez réellement modifier : renoncer à l’achat ne produit une épargne que si la somme est mise de côté. Le rendement saisi est un scénario net de frais, jamais une garantie.',
+      currency: 'EUR', numberLocale: 'fr-FR', inputsHeading: 'Habitude et scénario d’épargne', verdictLabel: 'Ordre de grandeur de la dépense',
+      initialVerdict: 'Indiquez montant, fréquence, durée et rendement hypothétique.', invalidVerdict: 'Montant, fréquence et durée doivent être positifs ; le rendement doit rester supérieur à −100 %.',
+      favorableVerdict: 'L’habitude représente {monthly} par mois et {direct} sur {years} ans. À 0 % de rendement, la valeur future reste égale aux versements.',
+      unfavorableVerdict: 'L’habitude représente {monthly} par mois et {direct} de versements. Avec {rate} net hypothétique, ils atteindraient {future} ; {growth} viennent du scénario de rendement non garanti.',
+      fields: [
+        { id: 'item-cost', label: 'Prix de chaque achat', helper: 'Montant réel du café, repas, application ou habitude étudiée.', value: 4, min: 0, step: 0.1 },
+        { id: 'times-per-week', label: 'Achats par semaine', helper: 'Moyenne observée, pas le maximum d’une semaine atypique.', value: 5, min: 0, step: 0.5 },
+        { id: 'years', label: 'Durée du scénario (années)', helper: 'Période pendant laquelle le changement paraît tenable.', value: 10, min: 1, step: 1 },
+        { id: 'annual-return', label: 'Rendement annuel net hypothétique (%)', helper: 'Après frais et fiscalité éventuelle ; testez aussi 0 % et une baisse.', value: 4, min: -99, step: 0.1 },
+        { id: 'annual-inflation', label: 'Inflation annuelle hypothétique (%)', helper: 'Sert seulement à exprimer le résultat en euros d’aujourd’hui.', value: 2, min: -99, step: 0.1 },
+      ],
+      metrics: [
+        { id: 'monthly-equivalent', label: 'Dépense mensuelle équivalente' }, { id: 'direct-spend', label: 'Versements ou dépenses cumulés' },
+        { id: 'future-value', label: 'Valeur future hypothétique' }, { id: 'growth', label: 'Croissance hypothétique' },
+        { id: 'real-future', label: 'Valeur future en euros actuels' },
+      ],
+      faq: [
+        { question: 'Supprimer le café suffit-il pour devenir riche ?', answer: 'Non. Le calcul montre un ordre de grandeur et un coût d’opportunité. Il faut effectivement transférer la somme ; revenus, logement, dettes et gros achats ont souvent bien plus d’effet.' },
+        { question: 'Pourquoi le rendement n’est-il pas garanti ?', answer: 'L’AMF rappelle que rendement et risque sont indissociables et que même à long terme une perte reste possible. Testez plusieurs taux et examinez frais, disponibilité, fiscalité et risque du produit réel.' },
+        { question: 'Comment les versements sont-ils capitalisés ?', answer: 'Le modèle place chaque montant en fin de semaine puis réinvestit les gains au taux constant saisi. Les livrets français ont leurs propres dates de valeur et règles : le calcul n’imite donc aucun produit précis.' },
+        { question: 'Faut-il investir avant de constituer une épargne de précaution ?', answer: 'La calculatrice ne fixe pas cette priorité. Gardez les sommes nécessaires aux imprévus et évaluez les dettes coûteuses avant d’immobiliser une épargne risquée ou peu liquide.' },
+      ],
+      related: [
+        { title: 'Repérer la dérive des petits abonnements', path: '/subscription-creep' },
+        { title: 'Coût réel d’un objet par usage', path: '/cost-per-use-expensive-item' },
+        { title: 'Auditer les renouvellements', path: '/tools/subscription-audit' },
+      ],
+    },
   },
   de: {
     'installment-true-apr': {
@@ -709,6 +773,38 @@ export const coreToolContent: Partial<Record<EditorialLocale, Record<string, Loc
         { title: 'Vollständige Methode für Pendelkosten', path: '/full-commute-cost-including-time' },
         { title: 'Homeoffice oder Pendeln: versteckte Kosten', path: '/work-from-home-vs-commuting-hidden-costs' },
         { title: 'Tatsächlicher Stundenwert nach Arbeitskosten', path: '/true-hourly-wage-after-commuting-work-expenses' },
+      ],
+    },
+    'latte-factor': {
+      kind: 'latte', title: 'Latte-Faktor-Rechner für kleine wiederkehrende Ausgaben',
+      description: 'Kaffee, Lieferessen, Tabak, Apps oder andere Routinen in Monatsbetrag, direkte Summe und hypothetischen Zukunftswert umrechnen.',
+      intro: 'Der „Latte-Faktor“ ist eine Größenordnung und kein Vorwurf. Ersetzen Sie den Kaffee durch eine Ausgabe, die Sie tatsächlich ändern möchten. Ein ausgelassener Kauf wird erst zur Ersparnis, wenn der Betrag zurückgelegt wird; die eingegebene Nettorendite bleibt eine Annahme und kein Versprechen.',
+      currency: 'EUR', numberLocale: 'de-DE', inputsHeading: 'Gewohnheit und Sparszenario', verdictLabel: 'Größenordnung der Wiederholung',
+      initialVerdict: 'Betrag, Häufigkeit, Zeitraum und angenommene Rendite eintragen.', invalidVerdict: 'Betrag, Häufigkeit und Jahre müssen positiv sein; die Rendite muss über −100 % liegen.',
+      favorableVerdict: 'Die Gewohnheit entspricht {monthly} im Monat und {direct} in {years} Jahren. Bei 0 % Rendite entspricht der Zukunftswert genau den Einzahlungen.',
+      unfavorableVerdict: 'Die Gewohnheit entspricht {monthly} im Monat und {direct} Einzahlungen. Bei angenommenen {rate} netto würden daraus {future}; {growth} beruhen auf einer nicht garantierten Rendite.',
+      fields: [
+        { id: 'item-cost', label: 'Preis je Kauf', helper: 'Tatsächlicher Betrag für Kaffee, Essen, App oder die geprüfte Routine.', value: 4.5, min: 0, step: 0.1 },
+        { id: 'times-per-week', label: 'Käufe pro Woche', helper: 'Beobachteter Durchschnitt statt Spitzenwoche.', value: 5, min: 0, step: 0.5 },
+        { id: 'years', label: 'Szenario in Jahren', helper: 'Zeitraum, über den die Änderung realistisch durchzuhalten ist.', value: 10, min: 1, step: 1 },
+        { id: 'annual-return', label: 'Angenommene jährliche Nettorendite (%)', helper: 'Nach Kosten und gegebenenfalls Steuern; auch 0 % und Verlustszenarien prüfen.', value: 4, min: -99, step: 0.1 },
+        { id: 'annual-inflation', label: 'Angenommene jährliche Inflation (%)', helper: 'Rechnet nur in heutige Kaufkraft zurück und ist keine Prognose.', value: 2, min: -99, step: 0.1 },
+      ],
+      metrics: [
+        { id: 'monthly-equivalent', label: 'Monatlicher Gegenwert' }, { id: 'direct-spend', label: 'Einzahlungen oder direkte Ausgaben' },
+        { id: 'future-value', label: 'Hypothetischer Zukunftswert' }, { id: 'growth', label: 'Hypothetischer Zuwachs' },
+        { id: 'real-future', label: 'Zukunftswert in heutiger Kaufkraft' },
+      ],
+      faq: [
+        { question: 'Macht der Verzicht auf Kaffee automatisch vermögend?', answer: 'Nein. Die Rechnung zeigt Größenordnung und Opportunitätskosten. Ohne tatsächliche Überweisung entsteht kein Guthaben; Einkommen, Wohnen, Schulden und große Entscheidungen wirken meist stärker.' },
+        { question: 'Warum ist die Rendite nicht garantiert?', answer: 'BaFin und Verbraucherzentralen betonen den Zusammenhang von Renditechance und Risiko. Verwenden Sie mehrere Szenarien und prüfen Sie Kosten, Streuung, Verfügbarkeit und mögliche Verluste der realen Anlage.' },
+        { question: 'Wie berechnet der Rechner den Zinseszins?', answer: 'Jeder Wochenbetrag wird am Periodenende eingezahlt; Erträge bleiben investiert. Die Annahme einer konstanten Nettorendite vereinfacht reale Kursschwankungen, Kosten, Steuern und Ausführungszeitpunkte.' },
+        { question: 'Was kommt vor einem Sparplan?', answer: 'Die Priorität hängt von Notgroschen, teuren Schulden, Ziel, Zeitraum und Risikotragfähigkeit ab. Der Rechner wählt kein Produkt und ersetzt keine individuelle Beratung.' },
+      ],
+      related: [
+        { title: 'Schleichende Kosten kleiner Abos', path: '/subscription-creep' },
+        { title: 'Kosten eines Gegenstands je Nutzung', path: '/cost-per-use-expensive-item' },
+        { title: 'Verlängerungen und Abos prüfen', path: '/tools/subscription-audit' },
       ],
     },
   },

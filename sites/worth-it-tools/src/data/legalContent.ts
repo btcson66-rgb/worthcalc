@@ -112,6 +112,19 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'CNMV — información que debe revisarse antes de decidir', href: 'https://www.cnmv.es/portal/inversor/decisiones-informarse?lang=es' },
       ],
     },
+    changelog: {
+      title: 'Historial de cambios de WorthCalc',
+      description: 'Versiones, nuevas calculadoras, guías locales, controles de calidad y mejoras de transparencia publicadas en WorthCalc.',
+      updated: '2026-07-19',
+      intro: ['Este historial resume cambios visibles y verificables. No presenta el volumen de páginas como calidad por sí mismo: cada lote se publica con construcción estática, enlaces, estructura multilingüe y revisión móvil antes de incorporarse al sitio.'],
+      sections: [
+        { heading: 'v1.2 — base multilingüe de confianza (19 de julio de 2026)', paragraphs: ['Se incorporaron páginas propias en español, francés y alemán para explicar quién edita WorthCalc, privacidad, condiciones, contacto, límites del cálculo y este historial. El contenido se escribió para cada mercado y enlaza autoridades o fuentes locales cuando una afirmación depende de derechos o prácticas regionales.'], items: ['Canonical y seis variantes hreflang en cada conjunto publicado', 'BreadcrumbList y sitemap para las páginas públicas', 'Comprobación de contenido mínimo, enlaces internos y vista de 375 px', 'Ampliación de páginas inglesas y chinas que resultaban demasiado breves'] },
+        { heading: 'v1.1 — biblioteca de decisiones en cinco idiomas (18–19 de julio de 2026)', paragraphs: ['Se completaron 29 temas editoriales en inglés, chino tradicional, español, francés y alemán: 145 variantes. No son traducciones en bloque. Las páginas adaptan vocabulario, contratos, organismos, costes y ejemplos a cada mercado, exponen fórmula, supuestos, caso numérico, límites, preguntas frecuentes y fuentes.'], items: ['Financiación y pagos: TAE, TAEG, effektiver Jahreszins, BNPL y comisiones', 'Suscripciones, membresías, tarjetas y recompensas', 'Vivienda, coche, movilidad y coste del tiempo', 'Reparación, garantías, energía, consumo, alimentación y poder adquisitivo', '35 calculadoras de decisión integradas en las guías'] },
+        { heading: 'v1.0 — lanzamiento (julio de 2026)', paragraphs: ['WorthCalc se lanzó con ocho calculadoras gratuitas ejecutadas en el navegador: TAE real de cuotas, auditoría de suscripciones, membresía Costco, coche eléctrico frente a combustión, alquilar frente a comprar, coste de desplazamiento, gasto pequeño recurrente y umbral de una tarjeta con cuota. Las entradas se procesan localmente y no requieren cuenta.'] },
+        { heading: 'Cómo interpretar una versión', paragraphs: ['La versión agrupa una capacidad visible; una corrección menor puede actualizar fecha, fórmula, fuente, accesibilidad o metadatos sin cambiar el objetivo de la herramienta. Las cifras de tráfico o ingresos no se incluyen aquí salvo que procedan de una medición real y documentada. Para informar de una regresión, usa la página de contacto y aporta URL, valores y resultado esperado.'] },
+      ],
+      emailLabel: 'Correcciones del historial',
+    },
   },
   fr: {
     about: {
@@ -205,6 +218,19 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'AMF — vérifier frais, risques et documentation avant de décider', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/bien-suivre-ses-placements' },
       ],
     },
+    changelog: {
+      title: 'Journal des modifications de WorthCalc',
+      description: 'Versions, nouveaux calculateurs, guides locaux, contrôles qualité et améliorations de transparence publiés sur WorthCalc.',
+      updated: '2026-07-19',
+      intro: ['Ce journal décrit des changements publics et vérifiables. Un nombre de pages n’est pas présenté comme une preuve de qualité : chaque lot passe par la construction statique, le contrôle des liens, la structure multilingue et une vérification mobile avant publication.'],
+      sections: [
+        { heading: 'v1.2 — socle de confiance multilingue (19 juillet 2026)', paragraphs: ['Des pages propres à l’espagnol, au français et à l’allemand expliquent désormais l’éditeur, la confidentialité, les conditions, le contact, les limites des calculs et l’historique. Les textes suivent le contexte de chaque marché et citent des autorités locales lorsque les droits ou usages diffèrent.'], items: ['Canonical et six variantes hreflang pour chaque groupe publié', 'Fil d’Ariane BreadcrumbList et présence au sitemap', 'Seuil de contenu, liens internes et affichage à 375 px contrôlés', 'Renforcement des anciennes pages anglaises et chinoises trop courtes'] },
+        { heading: 'v1.1 — bibliothèque de décisions en cinq langues (18–19 juillet 2026)', paragraphs: ['Vingt-neuf sujets ont été achevés en anglais, chinois traditionnel, espagnol, français et allemand, soit 145 variantes. Il ne s’agit pas d’une traduction en série : vocabulaire, contrats, organismes, coûts et exemples sont adaptés. Chaque guide expose formule, hypothèses, exemple chiffré, limites, questions fréquentes et sources.'], items: ['Crédit, paiement fractionné, TAEG et frais initiaux', 'Abonnements, adhésions, cartes et plafonds de récompense', 'Logement, automobile, mobilité et valeur du temps', 'Réparation, garantie, énergie, consommation, alimentation et inflation', '35 calculateurs interactifs insérés dans les guides'] },
+        { heading: 'v1.0 — lancement (juillet 2026)', paragraphs: ['WorthCalc a ouvert avec huit outils gratuits exécutés dans le navigateur : coût réel des échéances, audit des abonnements, adhésion Costco, électrique contre thermique, louer contre acheter, coût du trajet, petite dépense récurrente et seuil d’une carte payante. Aucun compte n’est requis pour saisir les données.'] },
+        { heading: 'Lire ce journal', paragraphs: ['Une version regroupe une capacité visible. Une correction ciblée peut modifier formule, source, accessibilité, date ou métadonnées sans changer la finalité de l’outil. Aucun chiffre de trafic ou de revenu n’est ajouté sans mesure réelle documentée. Pour signaler une régression, envoyez l’URL, les entrées et le résultat attendu.'] },
+      ],
+      emailLabel: 'Correction du journal',
+    },
   },
   de: {
     about: {
@@ -297,6 +323,19 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
         { label: 'BaFin — Prospekte und Informationsblätter vor einer Anlageentscheidung', href: 'https://www.bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Prospektpflicht/prospekte_artikel.html' },
         { label: 'BaFin — Kosten, Risiken und Geeignetheit bei Publikumsfonds', href: 'https://bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Produkte/GeschlossenerPublikumsfonds/Geschlossener_Publikumsfonds_node.html' },
       ],
+    },
+    changelog: {
+      title: 'Änderungsprotokoll von WorthCalc',
+      description: 'Veröffentlichte Versionen, neue Rechner, lokale Leitfäden, Qualitätskontrollen und Transparenzverbesserungen bei WorthCalc.',
+      updated: '2026-07-19',
+      intro: ['Dieses Protokoll nennt öffentlich überprüfbare Änderungen. Eine Seitenzahl gilt nicht automatisch als Qualität: Vor der Veröffentlichung werden statischer Build, Links, mehrsprachige Struktur und mobile Darstellung jedes Pakets geprüft.'],
+      sections: [
+        { heading: 'v1.2 — mehrsprachige Vertrauensbasis (19. Juli 2026)', paragraphs: ['Eigene spanische, französische und deutsche Seiten erklären Betreiber, Datenschutz, Bedingungen, Kontakt, Rechengrenzen und Änderungen. Die Texte folgen dem jeweiligen Markt und verweisen bei regionalen Rechten oder Verfahren auf örtliche Behörden und Primärquellen.'], items: ['Canonical und sechs hreflang-Varianten je veröffentlichter Gruppe', 'BreadcrumbList und Aufnahme öffentlicher Seiten in die Sitemap', 'Mindestinhalt, interne Links und Ansicht bei 375 px geprüft', 'Zu kurze englische und chinesische Bestandsseiten erweitert'] },
+        { heading: 'v1.1 — Entscheidungssammlung in fünf Sprachen (18.–19. Juli 2026)', paragraphs: ['29 Themen wurden auf Englisch, traditionellem Chinesisch, Spanisch, Französisch und Deutsch abgeschlossen: 145 Varianten. Sie sind keine Serienübersetzung. Begriffe, Verträge, Behörden, Kosten und Beispiele passen zum Markt; jeder Leitfaden enthält Formel, Annahmen, Zahlenbeispiel, Grenzen, FAQ und Quellen.'], items: ['Finanzierung, Ratenkauf, effektiver Jahreszins und Abschlusskosten', 'Abonnements, Mitgliedschaften, Karten und Prämiengrenzen', 'Wohnen, Auto, Mobilität und Zeitkosten', 'Reparatur, Garantie, Energie, Konsum, Lebensmittel und Kaufkraft', '35 interaktive Entscheidungsrechner in den Leitfäden'] },
+        { heading: 'v1.0 — Start (Juli 2026)', paragraphs: ['WorthCalc startete mit acht kostenlosen Browser-Rechnern: tatsächlicher Ratenzins, Abo-Prüfung, Costco-Mitgliedschaft, Elektro- gegen Verbrennerauto, Mieten gegen Kaufen, Pendelkosten, wiederkehrende Kleinausgaben und Gewinnschwelle einer kostenpflichtigen Karte. Für Eingaben ist kein Konto nötig.'] },
+        { heading: 'Bedeutung einer Version', paragraphs: ['Eine Version bündelt eine sichtbare Fähigkeit. Eine kleine Korrektur kann Formel, Quelle, Barrierearmut, Datum oder Metadaten ändern, ohne den Zweck des Werkzeugs zu wechseln. Verkehrs- oder Umsatzwerte erscheinen nur bei realer, dokumentierter Messung. Eine Regression lässt sich mit URL, Eingaben und erwartetem Ergebnis melden.'] },
+      ],
+      emailLabel: 'Korrektur zum Änderungsprotokoll',
     },
   },
 };

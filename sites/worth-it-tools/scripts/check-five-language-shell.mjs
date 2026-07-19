@@ -4,7 +4,7 @@ import { join, resolve } from 'node:path';
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
-const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer'];
+const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = [];
 const releasedHomeLocales = [];
 const failures = [];

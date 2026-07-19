@@ -8,7 +8,7 @@ const faq = [
   {
     question: 'Is a Costco membership worth it for a single person?',
     answer:
-      'It can be, but the math is tighter. At roughly a $65 annual fee and around 15% typical savings versus regular stores, you need about $36 of warehouse spending a month to break even. Singles who buy gas, keep a pantry, or split bulk purchases with friends often clear that bar; occasional shoppers may not.',
+      'It can be, but household size alone does not decide it. Add the annual fee and any extra travel or waste cost, then divide by 12 times your measured savings rate. Compare the resulting monthly threshold with purchases you would genuinely make anyway.',
   },
   {
     question: 'How much do I need to spend for an Executive membership to break even?',
@@ -18,7 +18,7 @@ const faq = [
   {
     question: 'How much cheaper is Costco than a regular supermarket, really?',
     answer:
-      'It varies a lot by category. Per-unit savings are often strongest on staples, gas, and pharmacy items, and weaker or absent on promotional items at regular stores. Many estimates land somewhere around 15% on a comparable basket, which is why our calculator uses that as an editable default rather than a fixed truth.',
+      'There is no reliable store-wide percentage for every household. Build a weighted basket of products you actually buy, compare like-for-like unit prices against your usual stores, and include promotions, waste, travel and payment-card rewards. Use that measured rate in the calculator and test a lower-rate scenario.',
   },
   {
     question: 'Does the calculator account for buying more than I need?',
@@ -37,8 +37,8 @@ const faq = [
   title="The Math of Warehouse Club Memberships"
   description="Is a Costco membership worth it? Break-even spend for Gold Star and Executive tiers, the 2% reward math, and a free calculator to check your numbers."
   locale={locale}
-  alternateLocales={['en', 'zh']}
-  updated="2026-07-03"
+  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  updated="2026-07-19"
 >
   <p>
     A warehouse club membership is one of the cleanest "is it worth it"
@@ -53,24 +53,23 @@ const faq = [
   <h2>The basic model: fee versus savings</h2>
   <p>
     Strip away the food court and the free samples and a membership is a
-    simple trade. Suppose warehouse prices save you about 15% compared with
-    what you would pay at regular stores for the same basket (a common
-    estimate — and an assumption you can edit in the calculator). Then every
-    dollar you spend at the warehouse "earns back" about 15 cents. The
-    membership is worth it when those earned-back cents exceed the annual
-    fee.
+    simple trade. Let <em>F</em> be the annual fee, <em>C</em> any extra annual
+    travel or waste cost, and <em>s</em> your measured savings rate on a
+    like-for-like basket. The monthly break-even spend is
+    <strong>(F + C) ÷ (12 × s)</strong>. The savings rate is an input to prove,
+    not a universal warehouse-club fact.
   </p>
   <p>
-    With a Gold Star membership at approximately $65 per year, the break-even
-    is:
+    With a $65 annual fee and an independently measured 8% savings rate, the
+    illustrative threshold is:
   </p>
   <ul>
-    <li>$65 ÷ 15% ≈ <strong>$433 of warehouse spending per year</strong></li>
-    <li>That is roughly <strong>$36 a month</strong> — a single decent grocery run.</li>
+    <li>$65 ÷ 8% = <strong>$812.50 of comparable spending per year</strong></li>
+    <li>That is roughly <strong>$67.71 a month</strong>; at 4%, the threshold doubles.</li>
   </ul>
   <p>
-    That low bar explains why memberships work for most regular shoppers.
-    But "most" is not "you": if you live far from a warehouse, shop there
+    This is only a worked example. Your own comparable basket, travel cost and
+    spoilage determine the answer: if you live far from a warehouse, shop there
     three times a year, or find that bulk sizes go stale in your pantry, your
     effective savings rate is lower and the equation can flip. Run your own
     figures in the
@@ -108,13 +107,13 @@ const faq = [
     purchases, and an unplanned $40 item per trip can wipe out a month of
     per-unit savings. Neither effect shows up on a receipt as a line item,
     which is why the calculator lets you set a conservative savings
-    assumption instead of taking 15% on faith.
+    assumption instead of taking a generic savings rate on faith.
   </p>
 
   <h2>How to actually decide</h2>
   <ol>
     <li>Estimate your realistic monthly warehouse spend — groceries, gas, pharmacy, everything.</li>
-    <li>Pick an honest savings rate versus your normal stores (start at 15% and adjust).</li>
+    <li>Build a comparable basket to measure your savings rate, then test a lower-rate scenario.</li>
     <li>Enter both into the <a href={localizedPath(locale, '/tools/costco-membership')}>calculator</a> and read the verdict for each tier.</li>
     <li>If you are near the break-even line, the membership is roughly a wash — decide on convenience, not economics.</li>
   </ol>
@@ -126,6 +125,13 @@ const faq = [
     or at your credit card's annual fee with the
     <a href={localizedPath(locale, '/tools/cashback-breakeven')}>cashback break-even calculator</a>.
   </p>
+
+  <h2>Sources and assumptions</h2>
+  <ul>
+    <li><a href="https://www.costco.com/join-costco.html">Costco US — membership options and published fees</a></li>
+    <li><a href="https://customerservice.costco.com/app/answers/answer_view/a_id/1015127">Costco Customer Service — Executive 2% reward terms and exclusions</a></li>
+  </ul>
+  <p><small>Official terms last checked 19 July 2026. Prices, eligible purchases and reward limits can change; confirm the current local terms before joining.</small></p>
 
   <FAQ items={faq} />
 

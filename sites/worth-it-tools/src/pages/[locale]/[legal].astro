@@ -6,7 +6,7 @@ import type { Locale } from '../../consts';
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
 export function getStaticPaths() {
-  const released = ['about'] as const;
+  const released = ['about', 'privacy'] as const;
   return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((legal) => ({ params: { locale, legal } })),
   );
@@ -27,4 +27,10 @@ if (!content) throw new Error(`Missing legal content for ${locale}/${slug}`);
     </section>
   ))}
   {content.emailLabel && <p><strong>{content.emailLabel}:</strong> <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a></p>}
+  {content.sources && (
+    <section>
+      <h2>{content.sourcesHeading}</h2>
+      <ul>{content.sources.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}</ul>
+    </section>
+  )}
 </ArticleLayout>

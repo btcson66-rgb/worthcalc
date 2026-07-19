@@ -42,11 +42,11 @@ const briefRoutes = [
 ];
 
 const releaseFloor = {
-  html: 163,
-  editorial: 131,
-  alignedVariants: 128,
-  compliantVariants: 128,
-  completeTopics: 25,
+  html: 165,
+  editorial: 133,
+  alignedVariants: 130,
+  compliantVariants: 130,
+  completeTopics: 26,
 };
 
 function walkHtml(dir) {

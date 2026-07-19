@@ -5,7 +5,7 @@ const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
 const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
-const releasedTools = [];
+const releasedTools = ['installment-true-apr'];
 const releasedHomeLocales = [];
 const failures = [];
 
@@ -34,6 +34,10 @@ const sitemapFile = join(dist, 'sitemap-0.xml');
 const sitemap = existsSync(sitemapFile) ? readFileSync(sitemapFile, 'utf8') : '';
 for (const slug of releasedLegal) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/${slug}/`;
+  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+}
+for (const slug of releasedTools) for (const locale of locales) {
+  const url = `https://worthcalc.win/${locale}/tools/${slug}/`;
   if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
 }
 

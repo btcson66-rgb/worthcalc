@@ -178,7 +178,7 @@ export function softwareAppJsonLd(opts: {
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     inLanguage: LOCALE_HREFLANG[opts.locale],
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: opts.locale === 'zh' ? 'TWD' : opts.locale === 'en' ? 'USD' : 'EUR' },
   };
 }
 

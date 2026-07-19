@@ -10,6 +10,7 @@ const locale = 'en';
   description="Reach the WorthCalc team about calculator bugs, math corrections, feature requests, or partnership inquiries."
   locale={locale}
   updated="2026-07-03"
+  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
 >
   <p>
     WorthCalc is a small, independently run site, so we keep contact simple:
@@ -18,8 +19,13 @@ const locale = 'en';
   <p>
     Email: <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a>
   </p>
+  <h2>What to include in a calculator bug report</h2>
   <p>
-    Good reasons to write in:
+    Send the exact page URL, every value you entered, the displayed result,
+    and the result you expected. Include the currency, time period, decimal
+    separator, browser, and device if any of those may matter. A screenshot is
+    useful for a layout problem, but please copy the numbers into the email so
+    we can reproduce the formula instead of guessing from an image.
   </p>
   <ul>
     <li>You think a calculator's math is wrong — tell us the inputs you used and what result you expected, and we will check it.</li>
@@ -28,11 +34,50 @@ const locale = 'en';
     <li>You found a bug, broken link, or display issue on mobile or desktop.</li>
     <li>You're interested in advertising or a partnership.</li>
   </ul>
+
+  <h2>Keep personal and financial details out of email</h2>
+  <p>
+    Do not send passwords, government identification, a full address, card or
+    bank-account numbers, a pay stub, or an unredacted contract. A made-up set
+    of values with the same mathematical pattern is usually enough to test a
+    bug. For a newsletter request, provide only the email address used and the
+    action you want us to take.
+  </p>
+
+  <h2>Suggesting a useful new calculator</h2>
+  <p>
+    The strongest proposals describe a repeated money decision, the costs
+    people commonly miss, the inputs that should remain editable, a possible
+    formula, and a credible public source. We prioritize decisions that can be
+    tested with the reader's own numbers. A brand page that only repeats a
+    campaign or an unverifiable marketing statistic is not an editorial fit.
+  </p>
+
+  <h2>Partnerships, advertising, and press</h2>
+  <p>
+    Identify your organization, the purpose of the request, any compensation,
+    and every relevant commercial relationship. A sponsor cannot buy a
+    preferred calculator result, remove a material limitation, or present an
+    advertisement as an independent recommendation. Sending a proposal does
+    not guarantee a reply, publication, or agreement.
+  </p>
+
+  <h2>What this inbox cannot provide</h2>
+  <p>
+    This address is not personal financial advice, an emergency channel, or a
+    bank's customer-support desk. We cannot decide whether you should take a
+    loan, buy a home, or make an investment. For suspected fraud, a legal
+    deadline, a contract dispute, or immediate danger, contact the appropriate
+    authority or qualified professional where you live.
+  </p>
   <p>
     We read every message, though as a small team we can't guarantee a
     response to every one. For general questions about how the site works,
     see the <a href={localizedPath(locale, '/about')}>About page</a>, and for
     how we handle data, see our
     <a href={localizedPath(locale, '/privacy')}>Privacy Policy</a>.
+    Reproducible math errors and corrections supported by a primary source
+    receive priority; material fixes are dated or recorded in the site
+    changelog so readers can verify what changed.
   </p>
 </ArticleLayout>

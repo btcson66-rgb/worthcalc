@@ -1,6 +1,7 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
+import WasteBreakEvenCalculator from '../../components/WasteBreakEvenCalculator.astro';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
@@ -37,7 +38,7 @@ const faq = [
   title="Is Buying in Bulk Actually Cheaper? Price the Part You Throw Away"
   description="The big jug is 25% cheaper per ounce — but you only finish two-thirds. Effective unit cost, honest waste rates, what belongs in bulk, and what is destined for the trash."
   locale={locale}
-  alternateLocales={['en', 'zh']}
+  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
   updated="2026-07-19"
 >
   <p>
@@ -65,6 +66,8 @@ const faq = [
     &ldquo;am I 80% sure I&rsquo;ll finish this?&rdquo; — if the answer
     hesitates, take the small one.
   </p>
+
+  <WasteBreakEvenCalculator locale={locale} />
 
   <h2>Estimating your waste rate honestly</h2>
   <ul>
@@ -96,6 +99,13 @@ const faq = [
     <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>
     covers the other side.
   </p>
+
+  <h2>Sources and safety boundary</h2>
+  <ul class="source-list">
+    <li><a href="https://www.foodsafety.gov/keep-food-safe/foodkeeper-app" rel="noopener">FoodSafety.gov — FoodKeeper storage guidance by food and beverage</a></li>
+    <li><a href="https://www.foodsafety.gov/people-at-risk" rel="noopener">FoodSafety.gov — cold-storage and safe-shopping guidance</a></li>
+  </ul>
+  <p class="last-verified"><strong>Last verified:</strong> <time datetime="2026-07-19">2026-07-19</time></p>
 
   <FAQ items={faq} />
 

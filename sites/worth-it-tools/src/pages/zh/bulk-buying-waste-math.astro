@@ -1,6 +1,7 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
+import WasteBreakEvenCalculator from '../../components/WasteBreakEvenCalculator.astro';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'zh';
@@ -37,7 +38,7 @@ const faq = [
   title="大包裝真的便宜嗎？把「丟掉的那部分」算進去的有效單價"
   description="大罐帳面單價便宜 25%，但你只用得完三分之二——有效單價的算法、折損率怎麼估、什麼品項適合囤、什麼注定丟一半。"
   locale={locale}
-  alternateLocales={['en', 'zh']}
+  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
   updated="2026-07-19"
 >
   <p>
@@ -63,6 +64,8 @@ const faq = [
     = 大包裝單價 ÷ 小包裝單價</strong>。上例：0.19 ÷ 0.24 = 79%。
     自問「這罐我有八成把握用完嗎？」——答不出口就拿小罐。
   </p>
+
+  <WasteBreakEvenCalculator locale={locale} />
 
   <h2>折損率的誠實估法</h2>
   <ul>
@@ -93,6 +96,13 @@ const faq = [
     <a href={localizedPath(locale, '/tools/latte-factor')}>拿鐵因子計算機</a>的
     重複消費視角，就是完整的日常採買數學。
   </p>
+
+  <h2>來源與食品安全界線</h2>
+  <ul class="source-list">
+    <li><a href="https://www.fda.gov.tw/tc/PublishOtherEpaperContent.aspx?id=1601&r=943405802&tid=5487" rel="noopener">食藥署 2026 — 留意有效日期、依效期適量選購並按標示保存</a></li>
+    <li><a href="https://www.fda.gov.tw/tc/newsContent.aspx?cid=5049&id=23882" rel="noopener">食藥署 — 有效日期以特定儲存條件成立，並應檢查包裝完整</a></li>
+  </ul>
+  <p class="last-verified"><strong>最後查核：</strong> <time datetime="2026-07-19">2026-07-19</time></p>
 
   <FAQ items={faq} />
 

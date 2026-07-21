@@ -38,6 +38,7 @@ const faq = [
   description="延保定價通常是商品價 10-20%，而多數電子產品延保期故障率不到 10%——期望值上是虧的。但有三種情況該買：修不起的、常壞的、壞不起的。附計算流程。"
   locale={locale}
   updated="2026-07-21"
+  alternateLocales={['en', 'zh']}
 >
   <p>
     結帳前的固定戲碼：「加 1,990 延長兩年保固，要嗎？」
@@ -101,7 +102,7 @@ const faq = [
     最優雅的答案是把角色反過來：<strong>每次拒絕延保，就把那筆錢
     轉進固定帳戶</strong>。延保的期望值虧損長期會累積成你自己的
     維修基金——等於自己當保險公司，把高毛利留給自己。
-    這正是<a href={localizedPath(locale, '/latte-factor-honest-math')}>拿鐵因子</a>的
+    這正是<a href={localizedPath(locale, '/tools/latte-factor')}>拿鐵因子</a>的
     反向應用：小額重複的「省下」自動化存起來才算數。前提兩條：
     真的存（不自動化就會蒸發）、承受得起基金累積初期就遇上
     一次大維修的現金流。

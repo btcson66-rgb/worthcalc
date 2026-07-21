@@ -38,6 +38,7 @@ const faq = [
   description="Extended warranties cost 10–20% of the product; most electronics fail under 10% of the time in the window. The expectation says no — except for three cases: can't-afford-to-repair, breaks-often, can't-afford-downtime."
   locale={locale}
   updated="2026-07-21"
+  alternateLocales={['en', 'zh']}
 >
   <p>
     The checkout ritual: &ldquo;Add two years of protection for $79?&rdquo;
@@ -108,7 +109,7 @@ const faq = [
     warranties lose on expectation, the fund outgrows your actual repair
     bills over time — you become the insurance company and keep the
     margin. It&rsquo;s the
-    <a href={localizedPath(locale, '/latte-factor-honest-math')}>latte factor</a>
+    <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor</a>
     run in reverse: repeated small savings only count when automated. Two
     conditions: actually move the money, and be able to survive one big
     repair early in the fund&rsquo;s life.

@@ -1,7 +1,7 @@
 # WorthCalc Growth Pack v1 整合報告
 
 - 日期：2026-07-23（Asia/Taipei）
-- 狀態：`READY_FOR_PR_REVIEW`，尚未 push、尚未建立 PR、尚未合併或部署
+- 狀態：`DRAFT_PR_OPEN`，feature branch 已 push、Draft PR #93 已建立；尚未合併或部署
 - 範圍：成長包 Batch A + Batch B；Batch C 通膨工具維持封鎖
 
 ## 起始狀態
@@ -105,14 +105,15 @@
 
 ## Commit / PR / CI / Deployment
 
-- Commits：待建立。
-- PR：待建立；依公司規範，WorthCalc 不直接 push main。
-- CI / deployment / live HTTP：尚未發生，因此不得宣稱已上線。
-- 合併前需要使用者核准；合併後才能填入 PR、run ID 與 live 驗證結果。
+- Commit：`4cd13b249caea0645a182af8aaadeadb12c03a7e`（`feat(worthcalc): integrate growth pack v1`）。
+- Branch：`codex/worthcalc-growth-v1-20260723` 已 push。
+- Draft PR：[#93](https://github.com/btcson66-rgb/worthcalc/pull/93)，base `main`；依公司規範，WorthCalc 不直接 push main。
+- PR 建立時 GitHub 尚未回報 status checks；deployment / live HTTP 尚未發生，因此不得宣稱已上線。
+- 合併前需要使用者核准；合併後才能填入 CI run、部署 run 與 live 驗證結果。
 
 ## 未解風險
 
 1. Inflation Batch C 缺五地官方資料匯入、series metadata、retrieval date、checksum 與官方驗例，維持封鎖。
 2. `check:all-locales` 的兩個既有雙語頁需獨立任務決定補齊五語或正式標記為 partial locale。
 3. npm audit 的 5 個 high findings 需要獨立相依性風險評估，不應在此內容發布中盲目升級。
-4. 尚未 push/PR/CI/deploy/live check；本報告狀態只能是 `READY_FOR_PR_REVIEW`。
+4. Draft PR 已開啟，但尚未取得 CI 結果、未合併、未部署、未做 live check；本報告狀態只能是 `DRAFT_PR_OPEN`。

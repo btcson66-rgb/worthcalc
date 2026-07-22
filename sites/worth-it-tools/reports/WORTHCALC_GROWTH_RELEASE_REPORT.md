@@ -1,7 +1,7 @@
 # WorthCalc Growth Pack v1 整合報告
 
 - 日期：2026-07-23（Asia/Taipei）
-- 狀態：`DRAFT_PR_OPEN`，feature branch 已 push、Draft PR #93 已建立；尚未合併或部署
+- 狀態：`DEPLOYED_VERIFIED`，PR #93 已合併，GitHub Pages、IndexNow 與正式站驗證完成
 - 範圍：成長包 Batch A + Batch B；Batch C 通膨工具維持封鎖
 
 ## 起始狀態
@@ -105,15 +105,16 @@
 
 ## Commit / PR / CI / Deployment
 
-- Commit：`4cd13b249caea0645a182af8aaadeadb12c03a7e`（`feat(worthcalc): integrate growth pack v1`）。
-- Branch：`codex/worthcalc-growth-v1-20260723` 已 push。
-- Draft PR：[#93](https://github.com/btcson66-rgb/worthcalc/pull/93)，base `main`；依公司規範，WorthCalc 不直接 push main。
-- PR 建立時 GitHub 尚未回報 status checks；deployment / live HTTP 尚未發生，因此不得宣稱已上線。
-- 合併前需要使用者核准；合併後才能填入 CI run、部署 run 與 live 驗證結果。
+- Feature commit：`4cd13b249caea0645a182af8aaadeadb12c03a7e`；release-report commit：`f93477461665a7ef0418c61e8d4a49b93413bc6a`。
+- PR：[#93](https://github.com/btcson66-rgb/worthcalc/pull/93) 已於使用者核准後合併；merge commit `0d73310928efd57b45c90b48f10c9c5d62ad3835`。
+- GitHub Actions：[Deploy WorthCalc run 29958620380](https://github.com/btcson66-rgb/worthcalc/actions/runs/29958620380) 的 build、deploy、indexnow 全部成功。
+- 正式站：90／90 新公開 URL 為 HTTP 200，canonical、6 組 hreflang、單一 H1 與 sitemap 收錄正確；sitemap 共 329 URLs。
+- Inflation：五語工具與文章共 10 URLs 均為 404，且未進 sitemap。
+- Live browser：9 個英文工具完成「載入範例→計算」；五語房貸與繁中房屋負擔代表頁結果正常，320px／375px 無頁面溢位，零 console／page error。
 
 ## 未解風險
 
 1. Inflation Batch C 缺五地官方資料匯入、series metadata、retrieval date、checksum 與官方驗例，維持封鎖。
 2. `check:all-locales` 的兩個既有雙語頁需獨立任務決定補齊五語或正式標記為 partial locale。
 3. npm audit 的 5 個 high findings 需要獨立相依性風險評估，不應在此內容發布中盲目升級。
-4. Draft PR 已開啟，但尚未取得 CI 結果、未合併、未部署、未做 live check；本報告狀態只能是 `DRAFT_PR_OPEN`。
+4. GitHub Actions 對 Node.js 20 action runtime 顯示棄用警告，但 runner 已強制使用 Node.js 24，build／deploy／indexnow 均成功；應另案升級相關 action major version。

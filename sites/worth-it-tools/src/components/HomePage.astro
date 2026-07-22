@@ -2,6 +2,7 @@
 import type { CoreLocale } from '../consts';
 import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
+import { getCollection } from 'astro:content';
 import FAQ from './FAQ.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
 
@@ -11,6 +12,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const growthTools = (await getCollection('growthTools', ({ data }) => data.locale === locale && !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, locale));
+const growthHeading = {
+  en: 'More planning calculators', zh: '更多財務規劃試算', es: 'Más calculadoras de planificación', fr: 'Autres calculateurs de planification', de: 'Weitere Planungsrechner',
+}[locale];
 ---
 
 <section class="hero">
@@ -34,7 +40,16 @@ const content = homeContent[locale];
         <span class="card__cta">{content.toolsCta}</span>
       </article>
     ))}
+    {growthTools.map((entry) => (
+      <article class="card">
+        <span class="card__icon" aria-hidden="true">📊</span>
+        <h3><a href={localizedPath(locale, `/tools/${entry.data.toolSlug}`)}>{entry.data.title}</a></h3>
+        <p>{entry.data.description}</p>
+        <span class="card__cta">{content.toolsCta}</span>
+      </article>
+    ))}
   </div>
+  <p class="section-lead growth-tool-note"><strong>{growthHeading}:</strong> {growthTools.length}</p>
 </section>
 
 <section class="home-method" aria-labelledby="home-method-heading">

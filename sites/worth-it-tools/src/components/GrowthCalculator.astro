@@ -1,0 +1,326 @@
+---
+import type { Locale } from '../consts';
+import type { GrowthToolDefinition } from '../data/growthToolDefinitions';
+import { growthUiCopy } from '../data/growthToolDefinitions';
+
+interface Props {
+  locale: Locale;
+  definition: GrowthToolDefinition;
+}
+
+const { locale, definition } = Astro.props;
+const copy = growthUiCopy[locale];
+const basicFields = definition.fields.filter((field) => !field.advanced);
+const advancedFields = definition.fields.filter((field) => field.advanced);
+---
+
+<section class="growth-calculator" data-growth-calculator>
+  <script type="application/json" class="growth-config" is:inline set:html={JSON.stringify({ locale, definition, copy })} />
+  <p class="example-note">{copy.exampleNote}</p>
+
+  <form novalidate>
+    <fieldset>
+      <legend>{copy.basic}</legend>
+      <div class="growth-fields">
+        {basicFields.map((field) => (
+          <div class="growth-field" data-field-wrap={field.id}>
+            {field.type === 'checkbox' ? (
+              <label class="check-label"><input id={`growth-${field.id}`} data-field={field.id} type="checkbox" /> <span>{field.label}</span></label>
+            ) : (
+              <>
+                <label for={`growth-${field.id}`}>{field.label}</label>
+                {field.type === 'select' ? (
+                  <select id={`growth-${field.id}`} data-field={field.id}>
+                    {field.options?.map((option) => <option value={option.value}>{option.label}</option>)}
+                  </select>
+                ) : (
+                  <input id={`growth-${field.id}`} data-field={field.id} type="number" inputmode="decimal" min={field.min} max={field.max} step={field.step} />
+                )}
+              </>
+            )}
+            <p class="field-error" data-field-error={field.id} aria-live="polite"></p>
+          </div>
+        ))}
+      </div>
+    </fieldset>
+
+    {advancedFields.length > 0 && (
+      <details class="growth-advanced">
+        <summary>{copy.advanced}</summary>
+        <fieldset>
+          <legend class="sr-only">{copy.advanced}</legend>
+          <div class="growth-fields">
+            {advancedFields.map((field) => (
+              <div class="growth-field" data-field-wrap={field.id}>
+                {field.type === 'checkbox' ? (
+                  <label class="check-label"><input id={`growth-${field.id}`} data-field={field.id} type="checkbox" /> <span>{field.label}</span></label>
+                ) : (
+                  <>
+                    <label for={`growth-${field.id}`}>{field.label}</label>
+                    <input id={`growth-${field.id}`} data-field={field.id} type="number" inputmode="decimal" min={field.min} max={field.max} step={field.step} />
+                  </>
+                )}
+                <p class="field-error" data-field-error={field.id} aria-live="polite"></p>
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      </details>
+    )}
+
+    <div class="growth-actions">
+      <button type="button" class="primary" data-action="calculate">{copy.calculate}</button>
+      <button type="button" data-action="example">{copy.loadExample}</button>
+      <button type="reset" data-action="reset">{copy.reset}</button>
+    </div>
+  </form>
+
+  <section class="growth-results" aria-labelledby={`growth-results-${definition.slug}`} aria-live="polite">
+    <h2 id={`growth-results-${definition.slug}`}>{copy.results}</h2>
+    <p class="growth-status" data-status>{copy.ready}</p>
+    <div class="metric-grid">
+      {definition.metrics.map((metric) => <p class="metric"><span>{metric.label}</span><strong data-metric={metric.id}>—</strong></p>)}
+    </div>
+    <details>
+      <summary>{copy.assumptions}</summary>
+      <ul data-assumptions></ul>
+    </details>
+    <div class="growth-actions growth-export-actions">
+      <button type="button" data-action="copy">{copy.copy}</button>
+      <button type="button" data-action="csv">{copy.csv}</button>
+      <button type="button" data-action="print">{copy.print}</button>
+    </div>
+    {definition.schedule && (
+      <details class="growth-schedule" data-schedule-wrap hidden>
+        <summary>{copy.schedule}</summary>
+        <div class="table-scroll"><table><thead data-schedule-head></thead><tbody data-schedule-body></tbody></table></div>
+      </details>
+    )}
+  </section>
+</section>
+
+<script>
+  import { calculateMortgagePayoff } from '../lib/growthCalculators/mortgagePayoff';
+  import { calculateCreditCardPayoff } from '../lib/growthCalculators/creditCardPayoff';
+  import { calculateBudget } from '../lib/growthCalculators/budgetBuilder';
+  import { calculateDebtStrategy } from '../lib/growthCalculators/debtStrategy';
+  import { calculateCarAffordability } from '../lib/growthCalculators/carAffordability';
+  import { calculateSalaryConversion } from '../lib/growthCalculators/salaryConverter';
+  import { calculateDti } from '../lib/growthCalculators/dti';
+  import { calculateHomeAffordability } from '../lib/growthCalculators/homeAffordability';
+  import { calculateCompoundGrowth } from '../lib/growthCalculators/compoundGrowth';
+
+  type ClientConfig = {
+    locale: 'en' | 'zh' | 'es' | 'fr' | 'de';
+    definition: import('../data/growthToolDefinitions').GrowthToolDefinition;
+    copy: Record<string, string>;
+  };
+
+  const currencyByLocale = { en: 'USD', zh: 'TWD', es: 'EUR', fr: 'EUR', de: 'EUR' } as const;
+  const numberLocale = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' } as const;
+
+  document.querySelectorAll<HTMLElement>('[data-growth-calculator]').forEach((root) => {
+    const raw = root.querySelector<HTMLScriptElement>('.growth-config')?.textContent ?? '{}';
+    const config = JSON.parse(raw) as ClientConfig;
+    const form = root.querySelector<HTMLFormElement>('form')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const assumptions = root.querySelector<HTMLUListElement>('[data-assumptions]')!;
+    let csvRows: Array<Array<string | number>> = [];
+    let summary = '';
+
+    const field = (id: string) => root.querySelector<HTMLInputElement | HTMLSelectElement>(`[data-field="${id}"]`)!;
+    const number = (id: string) => Number((field(id) as HTMLInputElement).value);
+    const checked = (id: string) => (field(id) as HTMLInputElement).checked;
+    const text = (id: string) => field(id).value;
+    const money = (value: number) => new Intl.NumberFormat(numberLocale[config.locale], { style: 'currency', currency: currencyByLocale[config.locale], maximumFractionDigits: config.locale === 'zh' ? 0 : 2 }).format(value);
+    const numeric = (value: number, digits = 2) => new Intl.NumberFormat(numberLocale[config.locale], { maximumFractionDigits: digits }).format(value);
+    const track = (action: string) => {
+      const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+      if (typeof gtag === 'function') gtag('event', `calculator_${action}`, { tool_id: config.definition.slug, page_path: window.location.pathname });
+    };
+
+    function clearErrors() {
+      root.querySelectorAll<HTMLElement>('[data-field-wrap]').forEach((item) => item.classList.remove('has-error'));
+      root.querySelectorAll<HTMLElement>('[data-field-error]').forEach((item) => { item.textContent = ''; });
+    }
+
+    function validateFields(): boolean {
+      clearErrors();
+      let valid = true;
+      for (const definition of config.definition.fields) {
+        if (definition.type !== 'number') continue;
+        const input = field(definition.id) as HTMLInputElement;
+        const value = Number(input.value);
+        const optionalZero = ['scheduledPayment', 'housingBudget', 'threshold'].includes(definition.id);
+        if (!input.value.trim() || !Number.isFinite(value) || (!optionalZero && definition.min != null && value < definition.min) || (definition.max != null && value > definition.max)) {
+          valid = false;
+          root.querySelector<HTMLElement>(`[data-field-wrap="${definition.id}"]`)?.classList.add('has-error');
+          const message = root.querySelector<HTMLElement>(`[data-field-error="${definition.id}"]`);
+          if (message) message.textContent = config.copy.error;
+        }
+      }
+      return valid;
+    }
+
+    function calculate() {
+      if (!validateFields()) {
+        status.textContent = config.copy.error;
+        return;
+      }
+      const slug = config.definition.slug;
+      let metrics: Record<string, unknown> = {};
+      csvRows = [];
+      try {
+        if (slug === 'mortgage-payoff') {
+          const result = calculateMortgagePayoff({ balance:number('balance'), annualRatePercent:number('annualRate'), remainingMonths:Math.round(number('remainingMonths')), scheduledPayment:number('scheduledPayment') > 0 ? number('scheduledPayment') : undefined, extraMonthly:number('extraMonthly'), lumpSums:number('lumpAmount') > 0 ? [{ month:Math.round(number('lumpMonth')), amount:number('lumpAmount') }] : [] });
+          metrics = { scheduledPaymentOut:result.scheduledPayment, baselineMonths:result.baselineMonths, acceleratedMonths:result.acceleratedMonths, monthsSaved:result.monthsSaved, baselineInterest:result.baselineInterest, acceleratedInterest:result.acceleratedInterest, interestSaved:result.interestSaved };
+          csvRows = [['month','starting balance','interest','scheduled principal','extra principal','ending balance'], ...result.schedule.map((row) => [row.month,row.startingBalance,row.interest,row.scheduledPrincipal,row.extraPrincipal,row.endingBalance])];
+        } else if (slug === 'credit-card-payoff') {
+          const mode = text('mode') === 'minimum' ? 'minimumPayment' : text('mode') === 'target' ? 'targetMonths' : 'fixedPayment';
+          const result = calculateCreditCardPayoff({ balance:number('balance'), annualRatePercent:number('annualRate'), mode, monthlyPayment:number('monthlyPayment'), targetMonths:Math.round(number('targetMonths')), minimumPercent:number('minimumPercent'), minimumFloor:number('minimumFloor'), newMonthlyCharges:number('newCharges'), promotionalAnnualRatePercent:number('promoRate'), promotionalMonths:Math.round(number('promoMonths')) });
+          metrics = { requiredPayment:result.requiredMonthlyPayment, payoffMonths:result.payoffMonths, totalInterest:result.totalInterest, totalPayments:result.totalPayments, totalCharges:result.totalNewCharges, negativeAmortization:result.negativeAmortization };
+          csvRows = [['month','starting balance','new charges','interest','payment','ending balance'], ...result.schedule.map((row) => [row.month,row.startingBalance,row.charges,row.interest,row.payment,row.endingBalance])];
+        } else if (slug === 'budget-builder') {
+          const result = calculateBudget({ income:[{id:'income',name:'Income',amount:number('income'),frequency:'monthly',category:'other'}], expenses:[{id:'needs',name:'Needs',amount:number('needs'),frequency:'monthly',category:'needs'},{id:'wants',name:'Wants',amount:number('wants'),frequency:'monthly',category:'wants'},{id:'savings',name:'Savings',amount:number('savings'),frequency:'monthly',category:'savings'},{id:'debt',name:'Debt',amount:number('debtBudget'),frequency:'monthly',category:'debt'}] });
+          metrics = { monthlyIncome:result.monthlyIncome, monthlyExpenses:result.monthlyExpenses, monthlySurplus:result.monthlySurplus, annualSurplus:result.annualSurplus };
+          csvRows = [['category','monthly amount'],['income',result.monthlyIncome],['needs',result.categoryTotals.needs],['wants',result.categoryTotals.wants],['savings',result.categoryTotals.savings],['debt',result.categoryTotals.debt],['surplus',result.monthlySurplus]];
+          localStorage.setItem('worthcalc:budget-builder', JSON.stringify(Object.fromEntries(config.definition.fields.map((item) => [item.id, field(item.id).value]))));
+        } else if (slug === 'debt-strategy') {
+          const debts = [1,2,3].map((index) => ({ id:`debt${index}`, name:`Debt ${index}`, balance:number(`debt${index}Balance`), annualRatePercent:number(`debt${index}Rate`), minimumPayment:number(`debt${index}Min`) }));
+          const result = calculateDebtStrategy({ debts, extraMonthlyPayment:number('extraDebt'), strategy:text('strategy') as 'snowball'|'avalanche'|'custom', customOrder:['debt1','debt2','debt3'] });
+          metrics = { finalMonth:result.payoffMonths, totalInterest:result.totalInterest, totalPayments:result.totalPaid, remainingBalance:result.remainingBalance, firstPayoff:result.payoffOrder[0]?.name ?? config.copy.notReached };
+          csvRows = [['debt','payoff month'], ...result.payoffOrder.map((row) => [row.name,row.payoffMonth])];
+        } else if (slug === 'car-affordability') {
+          const result = calculateCarAffordability({ monthlyTakeHomeIncome:number('takeHome'), currentDebtPayments:number('currentDebt'), essentialLivingCosts:number('livingCosts'), monthlySavingsTarget:number('savingsTarget'), downPayment:number('downPayment'), tradeInNetValue:number('tradeIn'), annualRatePercent:number('annualRate'), termMonths:Math.round(number('termMonths')), taxesAndFees:number('taxesFees'), monthlyInsurance:number('insuranceMonthly'), monthlyFuelOrCharging:number('fuelMonthly'), monthlyMaintenance:number('maintenanceMonthly'), monthlyParkingAndTolls:number('parkingMonthly'), maxTransportationSharePercent:number('transportShare') });
+          metrics = { operatingCost:result.monthlyOperatingCost, affordablePayment:result.affordableMonthlyLoanPayment, financedPrincipal:result.maxFinancedPrincipal, vehiclePrice:result.maxVehiclePrice, totalShare:result.totalTransportationSharePercent };
+        } else if (slug === 'salary-converter') {
+          const result = calculateSalaryConversion({ ...(text('salaryMode') === 'hourly' ? { hourlyRate:number('hourly') } : { annualSalary:number('annual') }), hoursPerWeek:number('hoursWeek'), paidWeeksPerYear:number('paidWeeks'), unpaidLeaveWeeks:number('unpaidWeeks'), overtimeHoursPerWeek:number('overtimeHours'), overtimeMultiplier:number('overtimeMultiplier'), annualBonus:number('bonus'), annualCommission:number('commission'), salaryPaymentsPerYear:Math.round(number('paymentsYear')) });
+          metrics = { annualGross:result.annualGross, monthlyAverage:result.monthlyAverage, weeklyAverage:result.weeklyAverage, hourlyEquivalent:result.hourlyEquivalent, amountPerPayment:result.amountPerSalaryPayment, overtimePay:result.overtimePayPerYear };
+        } else if (slug === 'dti-calculator') {
+          const result = calculateDti({ grossMonthlyIncome:number('grossIncome'), housingPayment:number('housingPayment'), debts:[{id:'debt1',name:'Debt 1',monthlyPayment:number('otherDebt1')},{id:'debt2',name:'Debt 2',monthlyPayment:number('otherDebt2')}], excludedDebtIds:[checked('excludeDebt1')?'debt1':'',checked('excludeDebt2')?'debt2':''].filter(Boolean), illustrativeThresholdPercent:number('threshold') > 0 ? number('threshold') : undefined });
+          metrics = { frontEnd:result.frontEndPercent, backEnd:result.backEndPercent, includedDebt:result.includedDebtPayments, afterDebt:result.monthlyIncomeAfterDebtPayments, thresholdGap:result.thresholdGapPercentagePoints };
+        } else if (slug === 'home-affordability') {
+          const result = calculateHomeAffordability({ grossMonthlyIncome:number('grossIncome'), otherMonthlyDebtPayments:number('currentDebt'), maxDebtToIncomePercent:number('threshold'), optionalMonthlyHousingBudget:number('housingBudget') > 0 ? number('housingBudget') : undefined, downPayment:number('downPayment'), annualRatePercent:number('annualRate'), termMonths:Math.round(number('termYears')*12), annualPropertyTaxPercent:number('propertyTax'), annualHomeInsurance:number('homeInsurance'), monthlyAssociationFees:number('associationFees'), annualMaintenancePercent:number('maintenanceRate'), annualMortgageInsurancePercent:number('mortgageInsurance'), mortgageInsuranceLtvThresholdPercent:number('mortgageInsuranceThreshold'), closingCostPercent:number('closingRate'), fixedClosingCosts:number('fixedClosing') });
+          metrics = { maxHomePrice:result.maxHomePrice, loanAmount:result.loanAmount, monthlyLimit:result.monthlyHousingLimit, closingCosts:result.estimatedClosingCosts, cashNeeded:result.cashNeeded, housingTotal:result.breakdown.totalMonthlyHousing };
+        } else {
+          const result = calculateCompoundGrowth({ initialPrincipal:number('initialPrincipal'), monthlyContribution:number('monthlyContribution'), annualReturnPercent:number('returnRate'), annualFeePercent:number('feeRate'), annualInflationPercent:number('inflationRate'), years:number('years'), annualContributionGrowthPercent:number('contributionGrowth'), contributionTiming:text('contributionTiming') as 'beginning'|'end', targetAmount:number('targetAmount') > 0 ? number('targetAmount') : undefined });
+          metrics = { endingBalance:result.endingBalance, realBalance:result.realEndingBalance, totalContributions:result.totalContributions, growth:result.investmentGrowth, requiredContribution:result.requiredMonthlyContributionForTarget, targetReached:result.targetReached };
+          csvRows = [['year','ending balance','contributions','growth','real balance'], ...result.yearly.map((row) => [row.year,row.endingBalance,row.contributionsToDate,row.growthToDate,row.realBalance])];
+        }
+
+        for (const metric of config.definition.metrics) {
+          const output = root.querySelector<HTMLElement>(`[data-metric="${metric.id}"]`)!;
+          const value = metrics[metric.id];
+          if (value == null) output.textContent = config.copy.notReached;
+          else if (metric.format === 'currency') output.textContent = money(Number(value));
+          else if (metric.format === 'percent') output.textContent = `${numeric(Number(value))}%`;
+          else if (metric.format === 'months') output.textContent = `${numeric(Number(value),0)} ${config.copy.months}`;
+          else if (metric.format === 'boolean') output.textContent = value ? config.copy.yes : config.copy.no;
+          else output.textContent = String(value);
+        }
+        assumptions.innerHTML = '';
+        for (const item of config.definition.fields) {
+          const value = item.type === 'checkbox' ? (checked(item.id) ? config.copy.yes : config.copy.no) : field(item.id).value;
+          const li = document.createElement('li');
+          li.textContent = `${item.label}: ${value}`;
+          assumptions.append(li);
+        }
+        summary = [document.title, ...config.definition.metrics.map((metric) => `${metric.label}: ${root.querySelector<HTMLElement>(`[data-metric="${metric.id}"]`)?.textContent ?? ''}`)].join('\n');
+        renderSchedule();
+        status.textContent = config.copy.results;
+        track('success');
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : config.copy.error;
+        track('error');
+      }
+    }
+
+    function renderSchedule() {
+      const wrap = root.querySelector<HTMLElement>('[data-schedule-wrap]');
+      if (!wrap || csvRows.length < 2) return;
+      const head = root.querySelector<HTMLTableSectionElement>('[data-schedule-head]')!;
+      const body = root.querySelector<HTMLTableSectionElement>('[data-schedule-body]')!;
+      head.innerHTML = `<tr>${csvRows[0].map((cell) => `<th scope="col">${String(cell)}</th>`).join('')}</tr>`;
+      body.innerHTML = csvRows.slice(1, 121).map((row) => `<tr>${row.map((cell, index) => `<${index === 0 ? 'th scope="row"' : 'td'}>${typeof cell === 'number' ? numeric(cell) : String(cell)}</${index === 0 ? 'th' : 'td'}>`).join('')}</tr>`).join('');
+      wrap.hidden = false;
+    }
+
+    function loadExample() {
+      for (const item of config.definition.fields) {
+        const input = field(item.id);
+        if (item.type === 'checkbox') (input as HTMLInputElement).checked = Boolean(item.example);
+        else input.value = String(item.example);
+      }
+      clearErrors();
+      status.textContent = config.copy.ready;
+      track('example');
+    }
+
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', calculate);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', loadExample);
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        for (const item of config.definition.fields) {
+          const input = field(item.id);
+          if (item.type === 'checkbox') (input as HTMLInputElement).checked = false;
+          else input.value = '';
+        }
+        root.querySelectorAll<HTMLElement>('[data-metric]').forEach((item) => { item.textContent = '—'; });
+        assumptions.innerHTML = '';
+        clearErrors();
+        status.textContent = config.copy.ready;
+        if (config.definition.slug === 'budget-builder') localStorage.removeItem('worthcalc:budget-builder');
+        track('reset');
+      });
+    });
+    root.querySelector<HTMLButtonElement>('[data-action="copy"]')?.addEventListener('click', async (event) => {
+      if (!summary) return;
+      await navigator.clipboard.writeText(summary);
+      (event.currentTarget as HTMLButtonElement).textContent = config.copy.copied;
+      track('copy');
+    });
+    root.querySelector('[data-action="csv"]')?.addEventListener('click', () => {
+      if (!csvRows.length) return;
+      const quote = (value: string | number) => `"${String(value).replaceAll('"','""')}"`;
+      const blob = new Blob([csvRows.map((row) => row.map(quote).join(',')).join('\r\n')], { type:'text/csv;charset=utf-8' });
+      const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = `${config.definition.slug}.csv`; link.click(); URL.revokeObjectURL(link.href); track('export');
+    });
+    root.querySelector('[data-action="print"]')?.addEventListener('click', () => { track('print'); window.print(); });
+
+    if (config.definition.slug === 'budget-builder') {
+      const saved = localStorage.getItem('worthcalc:budget-builder');
+      if (saved) {
+        try { const values = JSON.parse(saved) as Record<string,string>; for (const [id,value] of Object.entries(values)) if (field(id)) field(id).value = value; } catch { localStorage.removeItem('worthcalc:budget-builder'); }
+      }
+    }
+  });
+</script>
+
+<style>
+  .growth-calculator { border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); padding: clamp(.85rem, 3vw, 1.25rem); }
+  .example-note { color: var(--color-muted); margin-top: 0; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { font-size: 1.15rem; font-weight: 750; margin-bottom: .8rem; }
+  .growth-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: .85rem; }
+  .growth-field { min-width: 0; }
+  .growth-field label { display: block; font-weight: 650; margin-bottom: .35rem; }
+  .growth-field input:not([type="checkbox"]), .growth-field select { width: 100%; min-height: 2.75rem; padding: .6rem .7rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-surface); color: var(--color-text); font: inherit; }
+  .growth-field input:focus-visible, .growth-field select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid color-mix(in oklab, var(--brand) 45%, transparent); outline-offset: 2px; }
+  .check-label { display: flex !important; align-items: center; gap: .55rem; min-height: 2.75rem; }
+  .check-label input { inline-size: 1.2rem; block-size: 1.2rem; }
+  .field-error { min-height: 1.1em; color: var(--negative); font-size: .82rem; margin: .25rem 0 0; }
+  .has-error input, .has-error select { border-color: var(--negative) !important; }
+  .growth-advanced { margin-top: 1rem; border-top: 1px solid var(--color-border); padding-top: .8rem; }
+  .growth-advanced > summary, .growth-results summary { cursor: pointer; font-weight: 700; padding: .35rem 0; }
+  .growth-advanced fieldset { padding-top: .8rem; }
+  .growth-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+  .growth-actions button { min-height: 2.65rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-surface-2); color: var(--color-text); padding: .55rem .85rem; font: inherit; font-weight: 650; cursor: pointer; }
+  .growth-actions .primary { background: var(--brand); border-color: var(--brand); color: white; }
+  .growth-results { border-top: 1px solid var(--color-border); margin-top: 1.25rem; padding-top: 1rem; }
+  .growth-status { color: var(--color-muted); }
+  .table-scroll { max-width: 100%; overflow-x: auto; margin-top: .75rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { border: 1px solid var(--color-border); padding: .45rem .55rem; text-align: end; white-space: nowrap; }
+  th:first-child { text-align: start; }
+  @media print { form, .growth-export-actions, .example-note { display: none !important; } .growth-calculator { border: 0; box-shadow: none; } }
+</style>

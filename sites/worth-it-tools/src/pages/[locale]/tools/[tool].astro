@@ -1,25 +1,38 @@
 ---
 import DecisionGuide from '../../../components/DecisionGuide.astro';
+import GrowthCalculator from '../../../components/GrowthCalculator.astro';
 import LocalizedCoreCalculator from '../../../components/LocalizedCoreCalculator.astro';
 import { coreToolContent } from '../../../data/coreToolContent';
+import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { annualFeeGuides, commuteFullCostGuides, evGasTcoGuides, installmentGuides, latteFactorGuides, paidMembershipGuides, rentBuyBreakevenGuides, subscriptionGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import type { Locale } from '../../../consts';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   const released = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'] as const;
-  return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
+  const existing = (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((tool) => ({ params: { locale, tool } })),
   );
+  const growth = (await getCollection('growthTools', ({ data }) => !data.draft)).map((entry) => ({
+    params: { locale: entry.data.locale, tool: entry.data.toolSlug },
+    props: { growthEntry: entry },
+  }));
+  return [...existing, ...growth];
 }
 
-const locale = Astro.params.locale as EditorialLocale;
+const locale = Astro.params.locale as Locale;
 const slug = Astro.params.tool!;
-const content = coreToolContent[locale]?.[slug];
-if (!content) throw new Error(`Missing core tool content for ${locale}/${slug}`);
+const growthEntry = Astro.props.growthEntry as CollectionEntry<'growthTools'> | undefined;
+const growth = Boolean(growthEntry);
+const growthRendered = growthEntry ? await render(growthEntry) : undefined;
+const GrowthContent = growthRendered?.Content;
+const content = !growth && (locale === 'es' || locale === 'fr' || locale === 'de') ? coreToolContent[locale]?.[slug] : undefined;
+if (!growth && !content) throw new Error(`Missing core tool content for ${locale}/${slug}`);
+const growthDefinition = growth ? getGrowthToolDefinition(locale, slug as GrowthToolSlug) : undefined;
 const guides = slug === 'subscription-audit'
   ? subscriptionGuides
   : slug === 'costco-membership'
@@ -40,26 +53,48 @@ const costcoSources = {
   fr: { label: 'Costco France — adhésion Privilège, cotisation et remboursement', href: 'https://www.costco.fr/faq_informations_adhesion' },
   de: { label: 'Costco — Standorte weltweit im Bericht zum dritten Quartal 2026', href: 'https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-Third-Quarter-and-Year-To-Date-Operating-Results-For-Fiscal-2026/default.aspx' },
 };
-const sourceGuide = guides[locale];
-if (!sourceGuide) throw new Error(`Missing decision guide for ${locale}/${slug}`);
-const guide = {
+const sourceGuide = !growth ? guides[locale as EditorialLocale] : undefined;
+if (!growth && !sourceGuide) throw new Error(`Missing decision guide for ${locale}/${slug}`);
+const guide = sourceGuide ? {
   ...sourceGuide,
   cta: undefined,
-  sources: slug === 'costco-membership' ? [costcoSources[locale], ...sourceGuide.sources] : sourceGuide.sources,
-};
-const related = content.related.map((item) => ({ title: item.title, href: localizedPath(locale, item.path) }));
+  sources: slug === 'costco-membership' ? [costcoSources[locale as EditorialLocale], ...sourceGuide.sources] : sourceGuide.sources,
+} : undefined;
+const related = content?.related.map((item) => ({ title: item.title, href: localizedPath(locale, item.path) })) ?? [];
+const growthReview = {
+  en: { heading: 'Methodology and Limitations', updated: 'Last updated', disclaimer: 'Estimate disclaimer', text: 'Educational scenario estimate only; verify current contracts, rates, taxes and official rules before acting.' },
+  zh: { heading: '計算方法與限制', updated: '最後更新', disclaimer: '估算免責聲明', text: '僅供一般教育與情境試算；行動前請核對最新契約、利率、稅費與官方規定。' },
+  es: { heading: 'Método y limitaciones', updated: 'Última actualización', disclaimer: 'Aviso sobre la estimación', text: 'Estimación educativa; comprueba contratos, tipos, impuestos y normas vigentes antes de actuar.' },
+  fr: { heading: 'Méthode et limites', updated: 'Dernière mise à jour', disclaimer: 'Avertissement', text: 'Estimation pédagogique ; vérifiez contrats, taux, taxes et règles en vigueur avant d’agir.' },
+  de: { heading: 'Methode und Einschränkungen', updated: 'Zuletzt aktualisiert', disclaimer: 'Hinweis zur Schätzung', text: 'Unverbindliche Lernrechnung; Verträge, Zinsen, Steuern und aktuelle Regeln vor einer Entscheidung prüfen.' },
+}[locale];
+const growthLastReviewed = growthEntry?.data.lastReviewed.toISOString().slice(0, 10) ?? '';
 ---
 
 <ToolLayout
-  title={content.title}
-  description={content.description}
+  title={growthEntry?.data.title ?? content!.title}
+  description={growthEntry?.data.description ?? content!.description}
   locale={locale}
-  tool={{ name: content.title }}
-  faq={content.faq}
+  tool={{ name: growthEntry?.data.title ?? content!.title }}
+  faq={content?.faq ?? []}
   related={related}
   alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
   showReview={false}
 >
-  <LocalizedCoreCalculator content={content} />
-  <DecisionGuide content={guide} />
+  {growth && growthDefinition && GrowthContent ? (
+    <>
+      <GrowthCalculator locale={locale} definition={growthDefinition} />
+      <section class="calculator-review">
+        <h2>{growthReview.heading}</h2>
+        <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>
+        <p class="estimate-disclaimer"><strong>{growthReview.disclaimer}:</strong> {growthReview.text}</p>
+        <div class="prose"><GrowthContent /></div>
+      </section>
+    </>
+  ) : (
+    <>
+      <LocalizedCoreCalculator content={content!} />
+      <DecisionGuide content={guide!} />
+    </>
+  )}
 </ToolLayout>

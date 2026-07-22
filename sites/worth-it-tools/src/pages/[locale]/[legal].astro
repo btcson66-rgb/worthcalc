@@ -2,35 +2,48 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { legalContent } from '../../data/legalContent';
 import type { Locale } from '../../consts';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   const released = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'] as const;
-  return (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
+  const legal = (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((legal) => ({ params: { locale, legal } })),
   );
+  const growth = (await getCollection('growthArticles', ({ data }) => !data.draft)).map((entry) => ({
+    params: { locale: entry.data.locale, legal: entry.data.articleSlug },
+    props: { growthEntry: entry },
+  }));
+  return [...legal, ...growth];
 }
 
-const locale = Astro.params.locale as EditorialLocale;
+const locale = Astro.params.locale as Locale;
 const slug = Astro.params.legal!;
-const content = legalContent[locale]?.[slug];
-if (!content) throw new Error(`Missing legal content for ${locale}/${slug}`);
+const growthEntry = Astro.props.growthEntry as CollectionEntry<'growthArticles'> | undefined;
+const rendered = growthEntry ? await render(growthEntry) : undefined;
+const GrowthContent = rendered?.Content;
+const content = !growthEntry && (locale === 'es' || locale === 'fr' || locale === 'de') ? legalContent[locale]?.[slug] : undefined;
+if (!growthEntry && !content) throw new Error(`Missing legal or growth content for ${locale}/${slug}`);
 ---
-<ArticleLayout title={content.title} description={content.description} locale={locale} updated={content.updated} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
-  {content.intro.map((paragraph) => <p>{paragraph}</p>)}
-  {content.sections.map((section) => (
-    <section>
-      <h2>{section.heading}</h2>
-      {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      {section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
-    </section>
-  ))}
-  {content.emailLabel && <p><strong>{content.emailLabel}:</strong> <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a></p>}
-  {content.sources && (
-    <section>
-      <h2>{content.sourcesHeading}</h2>
-      <ul>{content.sources.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}</ul>
-    </section>
+<ArticleLayout title={growthEntry?.data.title ?? content!.title} description={growthEntry?.data.description ?? content!.description} locale={locale} updated={growthEntry ? growthEntry.data.lastReviewed.toISOString().slice(0, 10) : content!.updated} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+  {growthEntry && GrowthContent ? <GrowthContent /> : (
+    <>
+      {content!.intro.map((paragraph) => <p>{paragraph}</p>)}
+      {content!.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+        </section>
+      ))}
+      {content!.emailLabel && <p><strong>{content!.emailLabel}:</strong> <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a></p>}
+      {content!.sources && (
+        <section>
+          <h2>{content!.sourcesHeading}</h2>
+          <ul>{content!.sources.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}</ul>
+        </section>
+      )}
+    </>
   )}
 </ArticleLayout>

@@ -16,9 +16,12 @@
     "check:multilingual": "node scripts/check-multilingual-editorial.mjs",
     "check:shell": "node scripts/check-five-language-shell.mjs",
     "check:all-locales": "node scripts/check-all-localized-routes.mjs",
+    "check:growth-content": "node scripts/check-growth-content.mjs",
+    "check:growth-release": "node scripts/check-growth-release.mjs",
+    "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs",
     "audit:brief-coverage": "node scripts/audit-editorial-brief-coverage.mjs",
     "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",
-    "verify": "npm run build && npm run typecheck && npm run lint && npm run check:links && npm run check:multilingual && npm run check:shell && npm run check:all-locales && npm run audit:brief-coverage"
+    "verify": "npm run test:growth && npm run check:growth-content && npm run build && npm run typecheck && npm run lint && npm run check:links && npm run check:multilingual && npm run check:shell && npm run check:all-locales && npm run check:growth-release && npm run audit:brief-coverage"
   },
   "dependencies": {
     "astro": "^5.6.1",

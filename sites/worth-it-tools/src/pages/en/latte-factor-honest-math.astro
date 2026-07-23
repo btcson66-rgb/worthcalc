@@ -1,0 +1,127 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is the latte factor?',
+    answer:
+      'The long-run total of small, frequent, unexamined spending — named after the daily latte example. The point was never coffee; it is any repeat purchase small enough to slip under your decision threshold: bubble tea, delivery fees, tiny in-app top-ups.',
+  },
+  {
+    question: 'How much is $5 a day over ten years, really?',
+    answer:
+      'Pure accumulation, no investing: $5 × 365 × 10 = $18,250 — a certainty, no assumptions. Invested monthly at an assumed 5% annual return it grows to roughly $23,000 over ten years (the return is an assumption, not a promise). The latte factor calculator lets you adjust every input.',
+  },
+  {
+    question: 'What are the main criticisms of the latte factor?',
+    answer:
+      'Three: for low earners the problem is usually income, not coffee — cutting small treats cannot fix a structural gap; total-deprivation budgets trigger rebound spending; and one optimization of a big item (rent, commute, an annual fee) often outweighs a decade of lattes. It is a good attention tool, not a complete financial plan.',
+  },
+  {
+    question: 'So should I give up my daily coffee or not?',
+    answer:
+      'The test is never the amount — it is whether the joy is worth the ten-year total. Compute the total, then answer honestly: is what this habit gives you each day worth that figure? If yes, keep it as a deliberate purchase. If it is mere autopilot, that is exactly what the latte factor exists to catch.',
+  },
+  {
+    question: 'How does the latte factor relate to subscriptions?',
+    answer:
+      'Same mechanism, two forms: small + automatic + below the thinking threshold. Subscriptions are the more advanced form — they even remove the moment of handing over money. Audit both together for a complete small-spending checkup.',
+  },
+];
+---
+
+<ArticleLayout
+  title="The Latte Factor: The Real Math of Small Spending — and Where It Gets Oversold"
+  description="$5 a day is $18,250 over ten years, or ~$23,000 at an assumed 5% return. The math is real; 'skip coffee, get rich' is oversold. An honest guide to where the latte factor works and where it fails."
+  locale={locale}
+  updated="2026-07-17"
+>
+  <p>
+    Personal-finance books love the example: one daily latte, ten years,
+    tens of thousands of dollars. Critics call it victim-blaming by way of
+    coffee. Both sides are half right — the latte factor&rsquo;s arithmetic
+    is airtight, and its jurisdiction is routinely exaggerated. This article
+    computes both halves; bring your own numbers to the free
+    <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>
+    as you go.
+  </p>
+
+  <h2>Get the math right first: two versions of ten years</h2>
+  <p>Take $5 a day — the coffee-and-a-snack tier:</p>
+  <ul>
+    <li><strong>Pure accumulation:</strong> $5 × 365 × 10 = <strong>$18,250</strong>. No assumptions anywhere; this number is certain.</li>
+    <li><strong>Invested version:</strong> $150 a month at an assumed 5% annual return ≈ <strong>$23,000</strong> in ten years, ≈ <strong>$61,000</strong> in twenty. Note the word <em>assumed</em> — the return is a model input, not a promise; 3% and 7% produce very different curves, and the calculator lets you slide it.</li>
+  </ul>
+  <p>
+    That is the entire indisputable core: <strong>small × frequent × long
+    equals large</strong>. Five dollars feels like pocket lint; $18,250 is a
+    used car. That perception gap is the one lesson the latte factor
+    actually teaches.
+  </p>
+
+  <h2>Where it genuinely works: catching unconscious spending</h2>
+  <p>
+    Used correctly, the latte factor is a flashlight pointed at spending too
+    small to trigger thought:
+  </p>
+  <ul>
+    <li>The 3 p.m. &ldquo;it&rsquo;s only $4&rdquo; drink — when you don&rsquo;t particularly want it and it&rsquo;s just a ritual.</li>
+    <li>The $3 delivery fee, five times a week — $65 a month for restaurants within walking distance.</li>
+    <li>The &ldquo;only $1.99&rdquo; in-app top-ups — invisible per purchase, visible on the statement.</li>
+  </ul>
+  <p>
+    The common thread: <strong>each amount sits below the decision
+    threshold, so no decision was ever made</strong>. Restating them at the
+    ten-year scale converts autopilot back into choice. The automated
+    version of the same mechanism is the subscription — it removes even the
+    moment of paying; see
+    <a href={localizedPath(locale, '/subscription-creep')}>the subscription creep checkup</a>.
+  </p>
+
+  <h2>Where it gets oversold: three honest limits</h2>
+  <ol>
+    <li>
+      <strong>Low income is not a coffee problem.</strong> When the monthly
+      gap is $800, cutting a $60 coffee habit does not change the structure.
+      The priority is the income side and the big fixed costs — not guilt
+      over a latte.
+    </li>
+    <li>
+      <strong>One big-item optimization ≥ a decade of lattes.</strong>
+      $200 off the rent, a cheaper commute, a cancelled annual fee — each
+      single move outweighs the daily cup&rsquo;s ten-year total. Audit the
+      big items <em>first</em>; doing it backwards is picking up sesame
+      seeds while dropping the watermelon. For the big items, see
+      <a href={localizedPath(locale, '/commute-true-cost')}>the true cost of commuting</a> and
+      <a href={localizedPath(locale, '/annual-fee-card-breakeven')}>the annual-fee card breakeven</a>.
+    </li>
+    <li>
+      <strong>Total deprivation rebounds.</strong> A budget that deletes
+      every small joy fails like a crash diet — with interest. The
+      sustainable version: cut what you don&rsquo;t notice, keep what you
+      love. The coffee you genuinely savor is a legitimate line item.
+    </li>
+  </ol>
+
+  <h2>A latte factor routine you can actually run</h2>
+  <ol>
+    <li>List your three most frequent purchases under $15 that happen three or more times a week.</li>
+    <li>Run each through the <a href={localizedPath(locale, '/tools/latte-factor')}>calculator</a> — look at the no-assumption accumulation figure first; that is the floor.</li>
+    <li>For each, answer honestly: is the daily joy worth the ten-year total?</li>
+    <li>Worth it → keep it, guilt-free, as a chosen expense. Not worth it → substitute or cut, and automate the difference into savings — unautomated savings evaporate into other spending.</li>
+    <li>Re-run every six months. Unconscious spending regrows; that is a mechanism, not a willpower failure.</li>
+  </ol>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the latte factor calculator runs entirely in your browser —
+    nothing you enter is uploaded to any server. Return rates in this
+    article are illustrative assumptions, not guarantees or investment
+    advice; investing involves risk, and major decisions deserve your own
+    research or a licensed professional.
+  </p>
+</ArticleLayout>

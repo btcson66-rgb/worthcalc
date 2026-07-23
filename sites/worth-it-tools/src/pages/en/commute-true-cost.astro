@@ -1,0 +1,133 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What counts as commuting cost?',
+    answer:
+      'Three layers: direct transport costs (transit pass, fuel, parking, tolls), time cost (one-way minutes × 2 × workdays × your personal price of time), and invisible wear (vehicle depreciation and maintenance, fatigue, attention). Most people only count the first layer — usually the smallest of the three.',
+  },
+  {
+    question: 'Should I value commute time at my full hourly wage?',
+    answer:
+      'No — commute time saved rarely converts into paid hours. A more honest approach: ask what you would genuinely pay to buy back one hour of after-work time. For most people that lands at 25%–50% of their wage. Use that self-set price and your conclusion will survive scrutiny.',
+  },
+  {
+    question: 'How do I judge a cheaper apartment that is farther away?',
+    answer:
+      'Subtract the added monthly commute cost (transport + time × your time price) from the monthly rent saved. Plenty of "$300 cheaper" apartments turn negative once 70 extra daily minutes enter the math. The commute cost calculator runs the comparison in a minute.',
+  },
+  {
+    question: 'My train commute lets me read or listen to podcasts — still a cost?',
+    answer:
+      'Recoverable commute time (seated, no need to watch the road) can reasonably be discounted — say, by half. Driving and riding time is nearly unrecoverable since attention stays on traffic. Estimate the two kinds separately instead of applying one flat discount.',
+  },
+  {
+    question: 'Does this apply to buying a home?',
+    answer:
+      'Even more so — a bad rental commute can be fixed by moving; a mortgage commute is a ten-year commitment. Multiply the monthly gap by 120 before deciding. For the rent-versus-buy question itself, see the rent vs buy guide.',
+  },
+];
+---
+
+<ArticleLayout
+  title="The True Cost of Commuting: Does the Cheaper Rent Actually Pay for It?"
+  description="Rent drops $300, the commute grows by 70 minutes a day — good trade? A three-layer commute costing method (transport, priced time, invisible wear) with a breakeven comparison and a free calculator."
+  locale={locale}
+  updated="2026-07-17"
+>
+  <p>
+    &ldquo;Move one town over and the same apartment is $300 cheaper!&rdquo;
+    Every renter&rsquo;s ears perk up. The full sentence, though, is:
+    &ldquo;$300 cheaper, and 70 more minutes on the road every day.&rdquo;
+    What the second half costs, most people never compute — it never appears
+    on any bill. Here is a three-layer method, and at the end you can run
+    your own numbers through the free
+    <a href={localizedPath(locale, '/tools/commute-cost')}>commute cost calculator</a>.
+  </p>
+
+  <h2>Layer one: direct transport costs — the visible part</h2>
+  <p>
+    Transit pass, fuel, parking, tolls. Easiest to compute, and most often
+    mistaken for the whole answer. Two commonly missed items:
+    <strong>vehicle depreciation</strong> — every mile wears the car whether
+    or not you notice at the pump — and the bad-weather backup plan
+    (occasional ride-hailing when the usual mode fails). For car commuters,
+    all-in per-mile cost typically runs two to three times the fuel-only
+    number.
+  </p>
+
+  <h2>Layer two: time — the real heavyweight</h2>
+  <p>
+    Seventy extra minutes a day across 22 workdays is 25.7 hours a month —
+    the equivalent of three extra unpaid workdays. The key move is pricing
+    that time honestly:
+  </p>
+  <ul>
+    <li>
+      <strong>Not at your full wage.</strong> Saved commute time mostly
+      becomes rest, chores, and family time — not billable hours. Full-wage
+      pricing systematically overstates the loss.
+    </li>
+    <li>
+      <strong>At your buy-back price.</strong> What would you actually pay
+      to get one hour of evening back? Honest answers usually land at
+      25%–50% of the hourly wage. At a $30 wage with a $10 buy-back price:
+      25.7 hours × $10 = $257 a month of time cost.
+    </li>
+    <li>
+      <strong>Discount recoverable time.</strong> A seated train ride with a
+      book can fairly take a further 50% discount. Driving takes none —
+      attention belongs to the road the whole way.
+    </li>
+  </ul>
+
+  <h2>Now run the duel: added cost versus saved rent</h2>
+  <p>
+    Continuing the example: $300 of rent saved; against it, $60 of extra
+    transport plus $257 of time cost = $317. The trade is already slightly
+    negative at a $10 time price — and it gets worse the more you value your
+    evenings. At a $15 buy-back price the &ldquo;cheaper&rdquo; apartment
+    loses by more than $100 a month.
+  </p>
+  <p>
+    That is the real nature of the commute decision: <strong>it is not an
+    objective &ldquo;which is cheaper&rdquo; question but a subjective
+    &ldquo;what is your hour worth&rdquo; question</strong> — with an
+    objective part that still has to be computed correctly. The
+    <a href={localizedPath(locale, '/tools/commute-cost')}>calculator</a>
+    takes transport costs and your time price separately, so two scenarios
+    can sit side by side.
+  </p>
+
+  <h2>Layer three: invisible wear — outside the formula, inside the decision</h2>
+  <ul>
+    <li><strong>Compounding fatigue.</strong> Commutes over 60 minutes each way correlate consistently with worse sleep and less exercise — costs that bill you months later as &ldquo;always tired.&rdquo;</li>
+    <li><strong>Lost flexibility.</strong> Living far turns overtime, dinners, and the last train into stress events; &ldquo;it&rsquo;s a long way back anyway&rdquo; quietly reshapes your social life.</li>
+    <li><strong>Risk exposure.</strong> Doubling motorcycle or car miles doubles accident exposure — a real cost beyond the insurance premium.</li>
+  </ul>
+  <p>
+    This layer resists precise pricing; use it as a tiebreaker. If layers one
+    and two say the move wins by a small margin, layer three usually flips
+    it. Only a decisive win deserves the moving truck.
+  </p>
+
+  <h2>Three verdicts</h2>
+  <ul>
+    <li><strong>Rent savings clearly beat total commute cost →</strong> move — but verify with a real-week test: actual door-to-door time runs 15–20% over the map estimate once waiting and transfers count.</li>
+    <li><strong>Roughly even →</strong> don&rsquo;t. Moving itself costs money (deposits, movers, settling in) that a thin margin never repays.</li>
+    <li><strong>Buying a home →</strong> multiply the monthly gap by 120 and look again. The commute is the one variable you cannot renovate. For the ownership question itself, see the <a href={localizedPath(locale, '/rent-vs-buy-guide')}>rent vs buy guide</a> or run the <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent vs buy calculator</a>.</li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    Privacy note: the commute cost calculator runs entirely in your browser —
+    wage and cost figures you enter are never uploaded to any server. This
+    article describes a general estimation method and is not financial
+    advice; actual fares, fuel prices, and rents vary by location.
+  </p>
+</ArticleLayout>

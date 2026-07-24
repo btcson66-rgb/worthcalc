@@ -2,8 +2,10 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import type { Locale } from '../../consts';
 
 const locale = 'zh';
+const alternateLocales: Locale[] = ['en', 'zh'];
 const faq = [
   {
     question: '湊免運到底划不划算？',
@@ -37,6 +39,7 @@ const faq = [
   title="湊免運划算嗎？門檻心理學與一條永不虧的湊單規則"
   description="為了省 80 運費多買 199 的東西＝虧 119——但大腦把運費當純損失，所以人人都這樣做。損失趨避的機制、差額 vs 運費的判斷式、以及「補貨清單湊單法」讓你永遠不虧。"
   locale={locale}
+  alternateLocales={alternateLocales}
   updated="2026-07-24"
 >
   <p>

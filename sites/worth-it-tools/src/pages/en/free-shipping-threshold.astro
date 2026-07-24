@@ -2,8 +2,10 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import type { Locale } from '../../consts';
 
 const locale = 'en';
+const alternateLocales: Locale[] = ['en', 'zh'];
 const faq = [
   {
     question: 'Is padding my cart for free shipping ever worth it?',
@@ -37,6 +39,7 @@ const faq = [
   title="Is Chasing Free Shipping Worth It? Threshold Psychology and the One Rule That Never Loses"
   description="Spending $12 extra to dodge a $6 shipping fee = a $6 loss — yet the brain files shipping as pure loss, so everyone does it. The loss-aversion mechanics, the gap-vs-fee test, and the restock-list method."
   locale={locale}
+  alternateLocales={alternateLocales}
   updated="2026-07-24"
 >
   <p>

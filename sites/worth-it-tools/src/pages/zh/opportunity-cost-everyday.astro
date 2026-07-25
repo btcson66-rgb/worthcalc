@@ -2,8 +2,10 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import type { Locale } from '../../consts';
 
 const locale = 'zh';
+const alternateLocales: Locale[] = ['en', 'zh'];
 const faq = [
   {
     question: '機會成本的定義是什麼？',
@@ -37,6 +39,7 @@ const faq = [
   title="什麼是機會成本？五個日常例子講清楚這個最重要的隱形帳"
   description="機會成本＝你選 A 時放棄的次佳選項 B 的價值——它不出現在帳單上，卻決定一筆帳真正划不划算。排隊、比價、年繳、加班五個例子，一次建立這個思考肌肉。"
   locale={locale}
+  alternateLocales={alternateLocales}
   updated="2026-07-25"
 >
   <p>

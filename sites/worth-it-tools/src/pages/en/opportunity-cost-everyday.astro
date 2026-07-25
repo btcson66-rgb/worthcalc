@@ -2,8 +2,10 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import type { Locale } from '../../consts';
 
 const locale = 'en';
+const alternateLocales: Locale[] = ['en', 'zh'];
 const faq = [
   {
     question: 'What is the definition of opportunity cost?',
@@ -37,6 +39,7 @@ const faq = [
   title="What Is Opportunity Cost? Five Everyday Examples of the Most Important Invisible Bill"
   description="Opportunity cost = the value of the next-best option you gave up — never on the receipt, always deciding whether a deal was actually good. Queues, deal-hunting, annual billing, DIY, overtime: five examples that build the muscle."
   locale={locale}
+  alternateLocales={alternateLocales}
   updated="2026-07-25"
 >
   <p>

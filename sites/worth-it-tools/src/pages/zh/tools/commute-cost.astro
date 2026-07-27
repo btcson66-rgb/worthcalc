@@ -30,10 +30,19 @@ const faq = [
     question: '停車費都要算進去嗎？',
     answer: '只建議填因通勤而增加的停車費。如果不管怎麼通勤都要付，就不要算進比較。',
   },
+  {
+    question: '通勤每月大概要花多少錢？',
+    answer: '這跟距離、方式和地區價格差很多，沒有一個通用的全國平均數字。請填入你自己的距離、通勤天數與每公里或票價成本，算出屬於你自己的每月總額，而不是套用一個不準的平均值。',
+  },
+  {
+    question: '怎麼用這個工具算出全年通勤成本？',
+    answer: '把上面算出的每月總額，乘以你實際通勤的月數即可。如果是混合辦公或有淡旺季，先把每月通勤天數調整正確，每月總額就會反映真實狀況。',
+  },
 ];
 const related = [
   { title: '電動機車 vs 油車計算機', href: localizedPath(locale, '/tools/ev-vs-gas') },
   { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'Costco 會員回本計算機', href: localizedPath(locale, '/tools/costco-membership') },
   { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
 ];
 ---
@@ -122,6 +131,9 @@ const related = [
     </p>
     <p>
       若時薪大於 0，每種方式都會加入來回通勤時間乘以天數和時薪。最低成本方式會用現金支出加上選填的時間成本比較。
+    </p>
+    <p>
+      想知道全年通勤成本，把上方每月總額乘以你實際通勤的月數即可，混合辦公或淡旺季不一定是 12 個月。如果你的路線會順道去 Costco 之類的量販店，建議用 <a href={localizedPath(locale, '/tools/costco-membership')}>Costco 會員回本計算機</a> 另外算會員費和省下的錢，不要直接算進通勤成本。
     </p>
   </section>
 

@@ -84,6 +84,24 @@ Content routes are locale-prefixed: `/en/...` for English and `/zh/...` for Trad
 
 To add a language, add the locale to `LOCALES` and the locale maps in `src/consts.ts`, add UI strings in `src/i18n/ui.ts`, then create matching `src/pages/<locale>/` pages.
 
+### i18n expansion policy (2026-07-25, SEO audit)
+
+`es`/`fr`/`de` already cover 195 of the site's 333 sitemap URLs (59%) but had **zero
+GSC impressions** in the 28 days to 2026-07-21, and spot-checked URLs (e.g.
+`/es/tools/costco-membership/`) come back "Google 無法辨識的網址" (URL unknown to
+Google) on URL Inspection — meaning Google has not crawled them yet, not that the
+content is thin (the `check-multilingual-editorial.mjs` native-market-marker gate
+already enforces real localized content, not machine-translated filler).
+
+**Do not add new `es`/`fr`/`de` routes** (new `growth-tools`/`growth-articles`
+locale entries, new `[locale]/tools/[tool].astro` released-tool slugs, or new
+`[locale]/*` editorial pages) until GSC shows the existing 195 URLs picking up
+impressions, or until a CEO/web-department decision explicitly re-opens this line.
+The daily `content-library/` pipeline already only ships `en`/`zh` pairs (see
+`content-library/README.md`) — keep it that way. `en` and `zh` remain fully open
+for new tools and articles; this pause is `es`/`fr`/`de` only, and it does not
+apply to fixing bugs, hreflang, or internal links on the pages that already exist.
+
 ## Project Structure
 
 ```text

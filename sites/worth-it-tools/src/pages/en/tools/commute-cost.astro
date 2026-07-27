@@ -30,6 +30,14 @@ const faq = [
     question: 'Should I include parking at home?',
     answer: 'Include only costs that change because of commuting. If you pay for parking regardless of commute mode, leave it out.',
   },
+  {
+    question: 'How much does a commute cost per month?',
+    answer: 'It depends heavily on distance, mode, and local prices, so there is no single accurate national number. Enter your own distance, workdays, and per-kilometer or fare costs above to get a monthly total specific to your commute instead of a generic average.',
+  },
+  {
+    question: 'How do I get my yearly commute cost from this calculator?',
+    answer: 'Multiply the monthly total shown above by the number of months you actually commute in a year. If your schedule is seasonal or hybrid, adjust the workdays-per-month input first so the monthly figure already reflects your real pattern.',
+  },
 ];
 const related = [
   { title: 'EV vs Gas Car TCO Calculator', href: localizedPath(locale, '/tools/ev-vs-gas') },
@@ -137,6 +145,9 @@ const related = [
     </p>
     <p>
       If a warehouse stop or discounted fuel is part of your route, test the fee and realistic savings separately with the <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership break-even calculator</a> instead of treating every advertised discount as commute savings.
+    </p>
+    <p>
+      For the yearly cost of your commute, multiply the monthly total above by the months you actually commute — not always 12, if you work hybrid or seasonal schedules. If you are deciding between remote and in-office work, also check the <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent vs buy calculator</a> for how commute distance interacts with housing cost trade-offs.
     </p>
   </section>
 

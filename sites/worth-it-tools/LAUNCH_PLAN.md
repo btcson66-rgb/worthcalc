@@ -37,3 +37,14 @@
 - 勞退自提 6% 值不值得
 - 手機資費 vs 預付卡比較
 - Amazon Prime / Disney+ 各訂閱 worth-it 單頁（EN 長尾）
+
+## i18n 擴張政策（2026-07-25 SEO 稽核凍結）
+
+`es`/`fr`/`de` 已佔 sitemap 333 個 URL 中的 195 個（59%），但 28 天 GSC 曝光為 0，
+抽查頁面在 URL Inspection 顯示「Google 無法辨識的網址」，代表這批頁面根本還沒被
+Google 爬過（不是內容品質問題——`check-multilingual-editorial.mjs` 的
+native-market-marker 把關已確保是真在地化內容，非機翻堆量）。
+
+**新工具/新文章一律只做 en+zh，不再新增 es/fr/de 路由**，直到 GSC 對既有 195 個
+URL 有曝光回升，或有 CEO／網站部門明確決策重啟這條線為止。詳見
+`sites/worth-it-tools/README.md` 的「i18n expansion policy」段落。

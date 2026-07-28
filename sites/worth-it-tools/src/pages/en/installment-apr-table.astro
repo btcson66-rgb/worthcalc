@@ -1,0 +1,126 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'A 3% installment fee equals what APR?',
+    answer:
+      'Far more than 3%. On a 12-month plan with a one-time 3% fee, the true APR is about 5.6% — because you never borrow the full amount for the full year: the principal shrinks monthly, so you borrow roughly half on average, while the fee charges the full amount. Shorter terms are worse: 3% on a 3-month plan runs near 18% APR.',
+  },
+  {
+    question: 'Why can\'t the fee rate be read as the interest rate?',
+    answer:
+      'Two distortions: time (a 12-month plan\'s money is used for barely over half a year on average, while the fee is a full-year-sized charge) and declining principal (you owe everything in month one and one-twelfth at the end, yet the fee is computed on the starting amount). True APR unwinds both — typically landing at 1.8–2× the nominal fee rate for one-time fees on 12-month terms.',
+  },
+  {
+    question: 'Is "0% interest, no fee" installment truly free?',
+    answer:
+      'On cash flow, essentially yes — the merchant absorbs the cost as marketing. What remains is the behavioral effect: installments shrink big numbers into small ones and lower the purchase threshold. The real cost of free installments is buying things you otherwise wouldn\'t. See the zero-interest installments article.',
+  },
+  {
+    question: 'What about fees charged per installment instead of upfront?',
+    answer:
+      'Per-period fees look nominally similar but ride the declining balance, so the APR runs higher: 0.5% per month × 12 = a nominal 6%, but roughly 11% APR. The words "per installment" deserve one extra level of alertness.',
+  },
+  {
+    question: 'Is there a quick mental formula for the true APR?',
+    answer:
+      'Approximation: one-time fee rate × 24 ÷ (number of installments + 1) ≈ APR. Check: 3% over 12 months → 3 × 24 ÷ 13 ≈ 5.5%; over 6 months → 3 × 24 ÷ 7 ≈ 10.3%. For exact figures, the installment true-APR calculator takes amount, term, and fee directly.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Installment Fee to APR Conversion Table: A 3% Fee Is Not a 3% Rate"
+  description="A 3% fee on 12 months ≈ 5.6% true APR; the same 3% on 3 months ≈ 18%. The conversion table for common fee × term combinations, the mental formula (fee × 24 ÷ (n+1)), and the per-period fee trap."
+  locale={locale}
+  updated="2026-07-28"
+  alternateLocales={['en', 'zh']}
+>
+  <p>
+    <strong>Direct answer: an installment plan\'s &ldquo;fee rate&rdquo;
+    is not its interest rate — the principal declines monthly, so you
+    borrow roughly half the amount on average while the fee charges all
+    of it. Converted: a one-time 3% fee on 12 months ≈ 5.6% true APR,
+    and the same fee on 3 months ≈ 18%.</strong> The full table below.
+  </p>
+
+  <h2>The table: one-time fee × term → true APR</h2>
+  <table>
+    <thead>
+      <tr><th>One-time fee</th><th>3 mo</th><th>6 mo</th><th>12 mo</th><th>24 mo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1%</td><td>≈ 6.0%</td><td>≈ 3.4%</td><td>≈ 1.8%</td><td>≈ 1.0%</td></tr>
+      <tr><td>2%</td><td>≈ 12.0%</td><td>≈ 6.9%</td><td>≈ 3.7%</td><td>≈ 1.9%</td></tr>
+      <tr><td>3%</td><td>≈ 18.0%</td><td>≈ 10.3%</td><td>≈ 5.6%</td><td>≈ 2.9%</td></tr>
+      <tr><td>5%</td><td>≈ 30.0%</td><td>≈ 17.1%</td><td>≈ 9.2%</td><td>≈ 4.8%</td></tr>
+      <tr><td>8%</td><td>≈ 48.0%</td><td>≈ 27.4%</td><td>≈ 14.8%</td><td>≈ 7.7%</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Values are approximations (average-balance method, rounded to 0.1%);
+    exact figures shift with charge timing and computation method — run
+    yours through the
+    <a href={localizedPath(locale, '/tools/installment-true-apr')}>installment true-APR calculator</a>.
+    The table in one sentence: <strong>same fee, half the term, double
+    the price</strong>.
+  </p>
+
+  <h2>Why: the two hidden distortions</h2>
+  <ol>
+    <li>
+      <strong>You never borrow the whole amount for the whole
+      time.</strong> On 12 installments you owe everything in month one
+      and one-twelfth at the end — average balance ≈ 54% of principal.
+      The fee, charged on 100%, nearly doubles in effective weight.
+    </li>
+    <li>
+      <strong>The term is the denominator.</strong> The same 3% spread
+      over 12 months is a year\'s cost; compressed into 3 months it is
+      &ldquo;3% per quarter&rdquo; — annualized ×4. Short plans lie best,
+      because the number is small and the time is smaller.
+    </li>
+  </ol>
+
+  <h2>The mental formula: one line to carry</h2>
+  <p>
+    <strong>APR ≈ one-time fee rate × 24 ÷ (installments + 1)</strong>
+  </p>
+  <p>
+    Verify against the table: 3% × 24 ÷ 13 ≈ 5.5% (12 mo) ✓; 3% × 24 ÷ 7
+    ≈ 10.3% (6 mo) ✓. Derived from the average-balance method, accurate
+    enough for daily judgment. The decision baseline: compare the APR to
+    what your money could otherwise do — above any reasonable cost of
+    funds, paying upfront or switching plans deserves the look.
+  </p>
+
+  <h2>Three variants worth a second glance</h2>
+  <ul>
+    <li><strong>Per-period fees:</strong> 0.5% monthly × 12 = a nominal 6%, but charged against the shrinking balance — up to ~11% APR. &ldquo;Per installment&rdquo; is a flag.</li>
+    <li><strong>&ldquo;First 3 months at 0%&rdquo; hybrids:</strong> the post-promo rate is the substance; spread the whole schedule before judging, and refuse the anchor.</li>
+    <li><strong>Genuine 0% + no fee:</strong> nearly free on cash flow (the merchant eats it as marketing). The residual cost is behavioral — installments shrink big numbers and lower the buying threshold, and &ldquo;purchases that wouldn\'t have happened&rdquo; are the true expense. Full treatment in <a href={localizedPath(locale, '/zero-interest-installments-truth')}>the zero-interest truth</a>.</li>
+  </ul>
+
+  <h2>The decision flow</h2>
+  <ol>
+    <li>Identify the fee structure: one-time? per-period? post-promo jump?</li>
+    <li>Apply the mental formula (or the <a href={localizedPath(locale, '/tools/installment-true-apr')}>calculator</a>) for the APR.</li>
+    <li>Compare against your money\'s <a href={localizedPath(locale, '/opportunity-cost-everyday')}>opportunity cost</a>: cash available and APR high → pay upfront; genuinely free installments → installing and keeping the cash is the rational move.</li>
+    <li>Final gate, the zero-reset test: would you buy this without installments? No → the problem isn\'t the rate, it\'s the cart (see <a href={localizedPath(locale, '/sunk-cost-fallacy-everyday')}>the behavioral layer</a>).</li>
+  </ol>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article is general interest-rate mathematics education, not a
+    recommendation of any credit, card, or installment plan; table values
+    are illustrative approximations, and actual fees and computation
+    methods are governed by each institution\'s published terms. Not
+    financial advice. All calculators on this site run locally in your
+    browser; nothing you enter is uploaded to any server.
+  </p>
+</ArticleLayout>

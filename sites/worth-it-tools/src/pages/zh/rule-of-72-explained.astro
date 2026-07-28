@@ -38,6 +38,7 @@ const faq = [
   description="72 ÷ 報酬率 ≈ 翻倍年數：6% 十二年翻倍、通膨 3% 二十四年物價翻倍。由來、三種用法（投資/通膨/費用）、失準的邊界條件——一篇把複利裝進心算。"
   locale={locale}
   updated="2026-07-27"
+  alternateLocales={['en', 'zh']}
 >
   <p>
     <strong>直接答案：72 法則＝用 72 除以年報酬率（%），就得到
@@ -90,7 +91,7 @@ const faq = [
     72 法則最值得內化的推論是「連續翻倍」：12 年翻倍的設定下，
     24 年 4 倍、36 年 8 倍。注意每一段的絕對增幅——第三個 12 年
     賺到的金額，等於前 24 年的總和。這是「越早開始差距越大」的
-    數學本體，也解釋了為什麼<a href={localizedPath(locale, '/latte-factor-honest-math')}>拿鐵因子</a>的
+    數學本體，也解釋了為什麼<a href={localizedPath(locale, '/tools/latte-factor')}>拿鐵因子</a>的
     長期數字大得反直覺、為什麼<a href={localizedPath(locale, '/opportunity-cost-everyday')}>機會成本</a>在
     長期決策裡權重這麼高：時間在複利裡不是線性資源，
     是指數資源。

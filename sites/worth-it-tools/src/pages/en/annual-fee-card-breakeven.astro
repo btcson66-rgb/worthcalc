@@ -29,16 +29,42 @@ const faq = [
     question: 'Do rewards still matter if I carry a balance?',
     answer: 'The break-even model assumes the statement balance is paid in full. Interest and late fees can exceed an entire year of rewards, so compare borrowing cost separately and do not use rewards to justify carrying debt.',
   },
+  {
+    question: 'Does the annual fee count towards minimum spend for a welcome bonus?',
+    answer: "Usually no. Most issuers count only posted purchases toward a welcome-bonus minimum-spend requirement, and specifically exclude the annual fee itself, cash advances, balance transfers, and refunded purchases. A small number of cards handle this differently, so check your card's exact bonus terms before assuming the fee will help you hit the threshold.",
+  },
 ];
 ---
 
 <ArticleLayout
-  title="Credit Card Annual Fee Break-Even: How Much Spending Covers the Fee?"
-  description="Calculate the eligible spending needed to offset a credit card annual fee using incremental rewards, real benefit value, reward caps, and a no-fee baseline."
+  title="Credit Card Annual Fee Break-Even: How Much to Spend on a $95 Fee"
+  description="Calculate how much spending offsets a credit card annual fee - e.g. a $95 fee needs about $6,333 in incremental-reward spending. Includes whether the fee counts toward minimum spend."
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
 >
+  <p>
+    <strong>Quick answer:</strong> break-even spending is the annual fee divided
+    by the extra reward rate over the no-fee card you would actually use, not
+    the card's headline rate. A $95 fee with a 1.5-percentage-point advantage
+    needs about $6,333 of eligible spending; a $250 fee with only a 1-point
+    advantage needs $25,000, which is often unreachable. The annual fee itself
+    almost never counts toward a welcome-bonus minimum-spend requirement (see FAQ below).
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Annual fee</th>
+        <th>Extra reward rate vs. no-fee card</th>
+        <th>Spending needed to break even</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>$95</td><td>1.5 points</td><td>$6,333</td></tr>
+      <tr><td>$150</td><td>2 points</td><td>$7,500</td></tr>
+      <tr><td>$250</td><td>1 point</td><td>$25,000</td></tr>
+    </tbody>
+  </table>
   <p>
     A card that earns 3% does not create a full 3% advantage if the card already
     in your wallet earns 1.5% with no annual fee. The economically relevant gain

@@ -1,85 +1,74 @@
-﻿---
+---
 contentType: tool
 toolSlug: inflation-purchasing-power
 locale: en
 title: "Inflation & Purchasing Power Calculator"
-description: "Convert an amount between periods using an official price-index series and show cumulative inflation and purchasing-power change."
+description: "Convert an amount between years using an official CPI series and see cumulative inflation and purchasing-power change side by side."
 relatedArticle: /en/nominal-vs-real-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Convert an amount between periods using an official price-index series and show cumulative inflation and purchasing-power change.
+Enter a dollar amount, a source year, and a target year to see the CPI-adjusted equivalent and how much purchasing power changed between the two periods.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Confirm which CPI series matches your comparison — CPI-U for the broad urban-consumer figure most commonly cited, CPI-W if comparing against Social Security COLA calculations, or a category-specific index if your question is about one spending category rather than the overall basket.
 
-## Calculation method
-
+## Formula
 
 `equivalent amount = source amount × target CPI ÷ source CPI`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
-
 ## Worked example
 
-If the official index rises from 100 to 120, $100 in the start period corresponds to $120 in the end period and the original dollar retains 83.3% of its former purchasing power.
+If the index rises from 100 to 120 between two periods, $100 in the start period is equivalent to $120 in end-period dollars, and the original $100 retains about 83.3% of its former purchasing power.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Why this pair is not yet published
 
-## Local notes
+This tool and its companion article are held back until they're wired to live, dated BLS index data rather than a static table, so every conversion can cite the exact series and vintage used — see `publicationGate: OFFICIAL_CPI_DATA_REQUIRED` in this page's metadata.
 
-Use BLS CPI-U annual averages for the default U.S. view and clearly label monthly versus annual comparisons. CPI represents an average basket and is not a personal cost-of-living index.
+## CPI-U, CPI-W, and core CPI
 
-## Limits and verification
+CPI-U covers urban consumers broadly and is the most commonly cited headline figure; CPI-W (urban wage earners and clerical workers) is the narrower series used for Social Security COLA calculations; core CPI excludes volatile food and energy prices. Confirm which series a comparison requires before treating the results as equivalent.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
+## Limits and privacy
 
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
+This tool will provide a general educational estimate, not individualized financial or legal advice, and will not predict future inflation — only convert amounts using already-recorded historical data.
 
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put identifying information into a shareable link.
 
 ## Related guide
 
-Read [Nominal Money vs Real Purchasing Power](/en/nominal-vs-real-purchasing-power/)for a step-by-step explanation, scenario design and verification checklist.
+Read [Nominal Dollars vs. Real Purchasing Power: What CPI Actually Adjusts](/en/nominal-vs-real-purchasing-power/) for the difference between CPI-U, CPI-W, and core CPI, and the most common mistakes when comparing dollar amounts across years.
 
 ## Frequently asked questions
 
 ### Is CPI the same as my personal inflation rate?
 
-No. It is an average index for a defined basket and population.
+No — it's an average index for a defined basket and population, not a personal cost-of-living measure.
 
-### Can I compare monthly and annual values?
+### Can I compare monthly and annual index values directly?
 
-Only if the series type is clearly consistent.
+Only if you clearly label which type each value is; mixing them without noting it produces a misleading result.
 
-### Why does the official calculator differ?
+### Why might this differ from another official calculator?
 
-It may use a different series, base, period average or latest month.
+It may use a different series, base period, or month-versus-annual-average convention.
 
 ### Does this predict future inflation?
 
-No. Historical adjustment and future assumptions must be separated.
+No — it adjusts historical, already-recorded amounts only.
 
-### Can CPI update a legal contract?
+### Can CPI update a legal contract automatically?
 
-Not automatically; use the index and formula specified by the contract and law.
+Not on its own — use the specific index and formula your contract or applicable law specifies.
 
+## Common mistakes to avoid once this ships
 
-## Sources to verify before publication
+Don't mix an annual-average index value with a single month's value without labeling which is used; don't apply a national CPI figure to price one narrow local product; and don't treat a CPI-adjusted figure as a promise about your personal cost of living rather than an average-basket estimate.
 
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
+## Sources
 
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [U.S. Bureau of Labor Statistics — CPI Inflation Calculator](https://www.bls.gov/data/inflation_calculator.htm), reviewed 2026-07-31

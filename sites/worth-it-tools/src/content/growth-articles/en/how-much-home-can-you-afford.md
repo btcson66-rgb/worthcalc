@@ -1,115 +1,76 @@
-﻿---
+---
 contentType: article
 articleSlug: how-much-home-can-you-afford
 locale: en
-title: "How Much Home Can You Afford After the Costs a Mortgage Calculator Hides?"
-description: "Estimate a home price from income, debts, down payment, rate, taxes, insurance, fees and maintenance—not principal and interest alone."
+title: "How Much House Can You Afford? The 28/36 Rule and What It Leaves Out"
+description: "The 28/36 affordability guideline lenders use, what counts in PITI, and what a mortgage-calculator headline number leaves out — PMI, closing cash, taxes, and maintenance."
 relatedTool: /en/tools/home-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-A useful financial guide should do more than produce a headline number. It should let you reproduce the calculation, identify the assumptions, and see exactly which input changes the conclusion.
+Type any income into an online mortgage calculator and it will happily tell you a home price. Most of those calculators quietly ignore property tax, insurance, HOA dues, PMI, and maintenance — the costs that turn an affordable-looking loan payment into an unaffordable total housing bill.
 
-This guide separates contractual facts from editable assumptions. Start with current statements or official data, then compare a conservative case, a base case and a favorable case without treating any estimate as a promise.
+## The 28/36 Rule Lenders Actually Use
 
-## The decision this guide helps you make
+The 28/36 rule is a long-standing lending guideline, not a law: your total housing costs shouldn't exceed roughly 28% of gross monthly income (the front-end ratio), and your housing costs plus all other debts shouldn't exceed roughly 36% (the back-end ratio, equivalent to overall DTI). It's a starting guideline — many conventional lenders now approve back-end ratios up to 45% or higher with strong credit and reserves — but 28/36 remains a useful conservative anchor for a household's own budget, independent of what a lender might technically approve.
 
-Solve for a home-price range using a user-defined monthly housing limit while including taxes, insurance, HOA, maintenance, mortgage insurance and cash needed at closing.
+## What Counts in Your Housing Payment (PITI, Not Just P&I)
 
-## Numbers to collect before calculating
+A mortgage calculator that only shows principal and interest (P&I) is showing you an incomplete number. The full monthly housing cost — PITI — adds property Taxes and Insurance, plus HOA dues and PMI where applicable. Property tax and insurance alone can add hundreds of dollars a month depending on location, and they're exactly the costs a bare-bones P&I calculator omits.
 
-Use the latest statement, contract, payslip, tax notice or official index available. Record the date beside every rate or fee that can change.
+## Worked Example: A $95,000 Household Income
 
-- Gross and take-home income
-- Down payment and cash reserved after closing
-- Mortgage rate and term
-- Property tax, insurance, HOA and maintenance
-- Other debts and editable housing limit
+A household earning $8,000 gross a month ($96,000/year) with $400 in other debt and a 36% back-end target has a maximum modeled total housing payment of roughly $2,480 a month ($8,000 × 36% − $400). That $2,480 has to cover principal, interest, taxes, insurance, HOA, and PMI combined — not just the loan payment — which is why the resulting affordable home price is often lower than a P&I-only calculator suggests for the same income.
 
-## How the model works
+## Down Payment: the 20% Myth and What PMI Really Costs
 
-`solve the highest home price for which mortgage + taxes + insurance + fees + maintenance ≤ selected monthly housing limit`
+Putting down less than 20% on a conventional loan generally triggers private mortgage insurance (PMI), an added monthly cost that protects the lender, not the buyer. Under the [Homeowners Protection Act](https://www.consumerfinance.gov/ask-cfpb/when-can-i-remove-private-mortgage-insurance-pmi-from-my-loan-en-202/), PMI must be automatically terminated once your balance is scheduled to reach 78% of the original home value (as long as you're current on payments), and you can request cancellation earlier once you reach 20% equity (80% loan-to-value) based on the original value. Twenty percent down is a common target, not a legal requirement — plenty of buyers put down less and pay PMI temporarily instead.
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+## Property Tax and Insurance Vary More Than the Rate Does
 
-Keep full precision inside the calculation and round only for display. Cash costs, timing, fees, taxes and uncertain future values should remain separate so the result can be audited.
+A national "average" property tax rate is nearly useless for budgeting, because rates vary enormously by county and even by school district. The same is true of homeowners insurance, which varies by state, coverage level, and increasingly by wildfire, flood, or hurricane risk. Use your target area's actual mill rate or a recent comparable listing's tax bill — not a national estimate — before finalizing an affordability number.
 
-## Worked example
+## How a 1-Point Rate Change Moves Your Max Price
 
-A household with $8,000 gross income, $400 other debt and a 36% selected DTI has a maximum modeled housing payment of $2,480 before an optional lower cash-flow cap.
+Because a higher rate raises the monthly principal-and-interest cost of every dollar borrowed, a one-percentage-point rate increase reduces the loan amount you can support at the same monthly payment — often by roughly 10%, though the exact impact depends on your term and starting rate. Run your affordability number at your quoted rate plus one point as a stress test before assuming a rate lock is guaranteed through closing.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Closing Costs Are Cash, Not Part of the Monthly Payment
 
-## Run three scenarios, not one
+Closing costs — typically covering lender fees, title insurance, appraisal, and prepaid escrow — are a separate cash requirement due at closing, on top of your down payment, and are not part of your ongoing monthly PITI. Reserving cash after closing for moving costs and an emergency fund is separate again from the down payment itself; treating all available cash as the down payment leaves nothing for the costs that follow immediately after you get the keys.
 
-Change one uncertain input at a time. This reveals sensitivity and prevents an optimistic assumption from hiding another risk.
+## Where These Numbers Come From
 
-- **Conservative:** Use higher costs, slower progress or lower income/return. Raise mortgage rate by one point.
-- **Base:** Use current verified figures and the behavior most likely to continue. Increase maintenance and insurance.
-- **Favorable:** Use a plausible upside case and label it as a scenario, not a forecast. Reserve more cash after closing.
+- [Consumer Financial Protection Bureau — "When can I remove private mortgage insurance (PMI) from my loan?"](https://www.consumerfinance.gov/ask-cfpb/when-can-i-remove-private-mortgage-insurance-pmi-from-my-loan-en-202/), reviewed 2026-07-31, for the 78% automatic-termination and 80% borrower-request thresholds under the Homeowners Protection Act.
+- The 28% front-end / 36% back-end guideline is a widely used industry rule of thumb, not a statutory limit; actual lender approvals commonly extend beyond it with compensating factors — see the companion DTI article for current FHA/VA/conventional program limits.
+- Property tax and insurance figures are inherently local; confirm your target area's rate with the county assessor's office or a current listing's tax bill rather than a national average.
 
-## Common mistakes that change the answer
+This guide is general education, not individualized financial or lending advice, and does not predict loan approval for any specific application. Do not enter identifying information into a shareable URL.
 
-- Solving only principal and interest
-- Using all available cash as down payment
-- Applying one national property-tax estimate to every location
-- Treating lender maximum as a comfortable household budget
+## Frequently Asked Questions
 
-## Local interpretation
+### Why is this result lower than a simple mortgage calculator's number?
 
-Include property tax, homeowners insurance, HOA, maintenance and mortgage insurance where applicable. Closing cash is separate from the monthly payment.
+Because it includes property tax, insurance, HOA, PMI, and maintenance inside your monthly cap, rather than showing only principal and interest.
 
-## A practical step-by-step workflow
+### Are closing costs part of the monthly payment?
 
-1. Define the exact question and time horizon.
-2. Enter verified current figures before changing any assumptions.
-3. Reproduce a known payment, balance or budget total as a reasonableness check.
-4. Save conservative, base and favorable scenarios.
-5. Identify the first input that reverses the conclusion; that is the break-even threshold.
-6. Check contract, tax and eligibility rules before acting.
+No — they're a separate cash requirement at closing, on top of the down payment.
 
-## How to interpret the result
+### Does a result under the 28/36 guideline guarantee loan approval?
 
-Prefer conditional language: “Under these inputs, option A has the lower modeled cost.” A calculator cannot see every contract clause, underwriting rule, behavioral change or emergency-cash need.
+No — approval also depends on credit history, assets, appraisal, and program-specific rules.
 
-## Frequently asked questions
+### Why include maintenance if it's not a fixed bill?
 
-### Why can the result differ from my statement?
+Ownership involves irregular repairs a loan payment doesn't show; budgeting a maintenance reserve avoids treating a predictable long-run cost as a surprise.
 
-Statements may use different timing, compounding, fee, tax or rounding rules. Re-enter the exact contractual figures and compare the schedule line by line.
+### Can I set a lower personal budget than the 36% guideline?
 
-### Which input usually matters most?
-
-Test the rate, time horizon, recurring payment and one-off fees first. The sensitivity section should show which variable changes the result fastest.
-
-### Are the default values market averages?
-
-No. Defaults are editable examples only and must never be presented as current market data.
-
-### Does the result guarantee approval, savings or returns?
-
-No. It is an educational scenario model, not a lender decision, contract quote or investment promise.
-
-### When should I recalculate?
-
-Recalculate after a material change in rate, balance, income, recurring cost, official index or contract term.
+Yes — using a lower personal cap than a lender's maximum approval is a common way to keep a comfortable cash-flow margin.
 
 ## Use the calculator
 
-Open the related calculator, reproduce the example, and then replace each example value with a figure you can verify.
+Open the related calculator, reproduce the $8,000-income example above, and then enter your own income, debts, and local tax and insurance estimates.
 
 [Home Affordability & Full Housing Cost Calculator](/en/tools/home-affordability/)
-
-## Editorial and safety limits
-
-This material is for general education and estimation only. It is not individualized financial, tax, legal, credit or investment advice. Do not place account numbers, addresses or personally identifiable information in shareable URLs.
-
-## Official sources to verify before publishing
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.

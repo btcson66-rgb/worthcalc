@@ -1,117 +1,79 @@
-﻿---
+---
 contentType: article
 articleSlug: nominal-vs-real-purchasing-power
 locale: en
-title: "Nominal Money vs Real Purchasing Power"
-description: "Convert an amount between periods using an official price-index series and show cumulative inflation and purchasing-power change."
+title: "Nominal Dollars vs. Real Purchasing Power: What CPI Actually Adjusts"
+description: "How to convert an amount between years using an official CPI series, which CPI variant to use, and the most common mistakes when comparing dollars across time."
 relatedTool: /en/tools/inflation-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-A useful financial guide should do more than produce a headline number. It should let you reproduce the calculation, identify the assumptions, and see exactly which input changes the conclusion.
+A raise from $60,000 to $66,000 sounds like a 10% gain until you check what prices did over the same period. Comparing dollar amounts across different years without adjusting for inflation compares numbers that aren't actually measuring the same thing — this is what CPI-based conversion is for.
 
-This guide separates contractual facts from editable assumptions. Start with current statements or official data, then compare a conservative case, a base case and a favorable case without treating any estimate as a promise.
+## What CPI Actually Measures
 
-## The decision this guide helps you make
+The Consumer Price Index tracks the average price change of a fixed basket of goods and services over time for a defined population. It's an average across many households and categories, not a personal cost-of-living index — your own inflation experience can run higher or lower than the published CPI depending on what you actually spend money on (housing-heavy budgets versus grocery-heavy budgets react differently to the same reported CPI figure, for instance).
 
-Translate an amount between years using one clearly identified official price index and distinguish nominal change from purchasing-power change.
+## Nominal Change vs. Real Purchasing-Power Change
 
-## Numbers to collect before calculating
+A nominal dollar amount is the raw, unadjusted figure as stated in whatever year it was recorded. A real amount restates that figure in another year's dollars using the ratio of CPI values between the two periods, isolating how much actual purchasing power changed, separate from the sticker-number change. A salary that rose 10% nominally in a period when prices rose 12% actually lost purchasing power, even though the paycheck got larger.
 
-Use the latest statement, contract, payslip, tax notice or official index available. Record the date beside every rate or fee that can change.
-
-- Source year and target year
-- Amount in the source year
-- Official CPI series and geographic coverage
-- Annual-average or monthly index convention
-- Retrieval date and series revision status
-
-## How the model works
+## Worked Example: If the Index Rises From 100 to 120
 
 `equivalent amount = source amount × target CPI ÷ source CPI`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+If an index value of 100 in a start year rises to 120 in an end year, $100 from the start year is equivalent to $120 in end-year dollars, and — read the other direction — the original $100 retains about 83.3% of its former purchasing power (100 ÷ 120) by the end year.
 
-Keep full precision inside the calculation and round only for display. Cash costs, timing, fees, taxes and uncertain future values should remain separate so the result can be audited.
+## CPI-U, CPI-W, and Core CPI: Which One to Use
 
-## Worked example
+The headline U.S. figure most commonly cited is CPI-U (covering urban consumers broadly); CPI-W (urban wage earners and clerical workers) is the narrower series used to calculate Social Security cost-of-living adjustments; "core" CPI excludes volatile food and energy prices and is often used to assess underlying inflation trends rather than the total cost consumers actually pay. Mixing series — comparing a CPI-U figure against a CPI-W-based benchmark, for example — produces a subtly wrong answer even when both are official numbers.
 
-If the official index rises from 100 to 120, $100 in the start period corresponds to $120 in the end period and the original dollar retains 83.3% of its former purchasing power.
+## Regional and Category-Level CPI vs. the National Number
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+The BLS also publishes regional indexes and category-specific indexes (medical care, housing, food) alongside the national all-items figure. A national CPI-U conversion is a reasonable general-purpose default, but if your comparison is specifically about a category — medical costs, for instance — a category-level index is a more accurate adjustment than the broad national basket.
 
-## Run three scenarios, not one
+## Common Mistakes When Comparing Dollars Across Years
 
-Change one uncertain input at a time. This reveals sensitivity and prevents an optimistic assumption from hiding another risk.
+- Mixing an annual-average index value with a single month's index value without labeling which one is being used
+- Applying a national CPI figure to price a single narrow product or local market it wasn't designed to represent
+- Treating a CPI-adjusted comparison as a promise about your own personal cost of living rather than an average-basket estimate
+- Using a provisional or not-yet-finalized recent month's figure without noting it may be revised
 
-- **Conservative:** Use higher costs, slower progress or lower income/return. Compare annual average with a selected month only if documented.
-- **Base:** Use current verified figures and the behavior most likely to continue. Test a different start year.
-- **Favorable:** Use a plausible upside case and label it as a scenario, not a forecast. Compare nominal salary growth with CPI growth.
+## Where These Numbers Come From
 
-## Common mistakes that change the answer
+- [U.S. Bureau of Labor Statistics — CPI Inflation Calculator](https://www.bls.gov/data/inflation_calculator.htm), reviewed 2026-07-31, the official source for historical CPI-U values used in this type of conversion.
+- U.S. Bureau of Labor Statistics, CPI series documentation distinguishing CPI-U, CPI-W, and core CPI definitions and coverage populations.
+- This page and its companion calculator remain unpublished pending direct integration of official, dated BLS series data rather than a static or estimated index table, so that every conversion cites the specific series and vintage used.
 
-- Mixing CPI series with different populations or bases
-- Using a national CPI to price one specific product
-- Publishing values before the official dataset is synced
-- Calling CPI-adjusted value an exact cost-of-living match for every household
+This guide is general education, not individualized financial, tax, or legal advice, and CPI-based adjustments are not a personal cost-of-living guarantee. Do not enter identifying information into a shareable URL.
 
-## Local interpretation
+## Frequently Asked Questions
 
-Use BLS CPI-U annual averages for the default U.S. view and clearly label monthly versus annual comparisons. CPI represents an average basket and is not a personal cost-of-living index.
+### Is CPI the same as my personal inflation rate?
 
-## A practical step-by-step workflow
+No — it's an average across a defined basket and population; your own spending mix can experience meaningfully higher or lower price changes than the published figure.
 
-1. Define the exact question and time horizon.
-2. Enter verified current figures before changing any assumptions.
-3. Reproduce a known payment, balance or budget total as a reasonableness check.
-4. Save conservative, base and favorable scenarios.
-5. Identify the first input that reverses the conclusion; that is the break-even threshold.
-6. Check contract, tax and eligibility rules before acting.
+### Can I compare a monthly index value against an annual-average value?
 
-## How to interpret the result
+Only if you're careful to label which type each figure is — mixing the two without noting it produces a misleading comparison.
 
-Prefer conditional language: “Under these inputs, option A has the lower modeled cost.” A calculator cannot see every contract clause, underwriting rule, behavioral change or emergency-cash need.
+### Why might an official inflation calculator give a slightly different answer than mine?
 
-## Frequently asked questions
+It may use a different series (CPI-U vs. CPI-W), a different base period, an annual average versus a specific month, or a revised figure not yet reflected elsewhere.
 
-### Why can the result differ from my statement?
+### Does a CPI conversion predict future inflation?
 
-Statements may use different timing, compounding, fee, tax or rounding rules. Re-enter the exact contractual figures and compare the schedule line by line.
+No — it adjusts historical dollar amounts using data that has already been recorded; any future assumption is a separate, clearly labeled projection.
 
-### Which input usually matters most?
+### Can CPI be used to automatically update a legal contract or lease?
 
-Test the rate, time horizon, recurring payment and one-off fees first. The sensitivity section should show which variable changes the result fastest.
-
-### Are the default values market averages?
-
-No. Defaults are editable examples only and must never be presented as current market data.
-
-### Does the result guarantee approval, savings or returns?
-
-No. It is an educational scenario model, not a lender decision, contract quote or investment promise.
-
-### When should I recalculate?
-
-Recalculate after a material change in rate, balance, income, recurring cost, official index or contract term.
+Not on its own — use the exact index series and formula specified by the contract or applicable law, which may differ from the general CPI-U conversion shown here.
 
 ## Use the calculator
 
-Open the related calculator, reproduce the example, and then replace each example value with a figure you can verify.
+Open the related calculator to see the mechanics of a CPI-based conversion using the illustrative example above; live official BLS data integration for this pair is in progress.
 
 [Inflation & Purchasing Power Calculator](/en/tools/inflation-purchasing-power/)
-
-## Editorial and safety limits
-
-This material is for general education and estimation only. It is not individualized financial, tax, legal, credit or investment advice. Do not place account numbers, addresses or personally identifiable information in shareable URLs.
-
-## Official sources to verify before publishing
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.

@@ -1,83 +1,73 @@
-﻿---
+---
 contentType: tool
 toolSlug: compound-growth
 locale: en
 title: "Compound Growth & Savings Goal Calculator"
-description: "Project contributions, fees, inflation and a savings target, or solve the monthly contribution needed to reach that target."
+description: "Project contributions, fees, and inflation against a savings target, or solve for the monthly contribution needed to reach that target."
 relatedArticle: /en/how-compound-growth-works/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Project contributions, fees, inflation and a savings target, or solve the monthly contribution needed to reach that target.
+Enter a starting balance, regular contribution, assumed return, fees, and inflation to project a nominal and inflation-adjusted balance — or flip it around and solve for the monthly contribution a target amount requires.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Treat the return rate as an assumption, not a fact — model a conservative, base, and optimistic rate rather than trusting a single figure. Include any account or fund fee explicitly; it compounds against you the same way growth compounds for you.
 
-## Calculation method
-
+## Formula
 
 `FV = PV(1+r)^n + PMT × ((1+r)^n − 1) ÷ r`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
-
 ## Worked example
 
-$10,000 initial principal plus $500 monthly for 10 years at a 7% assumed return, 0.2% fee and 2% inflation produces nominal and real balances side by side.
+$10,000 initial principal plus $500 monthly for 10 years, at a 7% assumed return, a 0.2% fee, and 2% inflation, produces nominal and real (inflation-adjusted) balances side by side.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Rule of 72 sanity check
 
-## Local notes
+Divide 72 by your assumed rate for a rough doubling-time estimate — useful as a quick cross-check against the full projection, most accurate for rates roughly in the 6–10% range.
 
-The return is an assumption, not a promise. Show a low, base and high scenario and keep fees separate. Do not label this as retirement advice without tax and account rules.
+## Why time and fees matter more than the rate
 
-## Limits and verification
+A dollar contributed earlier compounds over more periods than the same dollar contributed later, which is why starting immediately tends to matter more than chasing a slightly higher assumed rate. Fees compound too, just against you — a 1% annual fee against a 7% assumed return effectively grows your balance at roughly 6% net, and the gap widens the longer the horizon.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
+## Limits and privacy
 
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
+This tool provides a general educational estimate, not individualized investment or retirement advice. No return, fee, or inflation figure is a guarantee, and the tool does not recommend any specific investment product.
 
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put account numbers or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [Compound Growth: Contributions, Fees and Inflation Matter More Than the Headline Rate](/en/how-compound-growth-works/)for a step-by-step explanation, scenario design and verification checklist.
+Read [How Compound Growth Actually Works](/en/how-compound-growth-works/) for the Rule of 72 shortcut, why time matters more than rate, and how a 1% fee compounds against you over long horizons.
 
 ## Frequently asked questions
 
 ### Is the return guaranteed?
 
-No.
+No — it's always a modeling assumption; compare low, base, and high scenarios.
 
-### Why subtract fees?
+### Why subtract fees separately?
 
-Even small annual fees compound over long periods.
+Even a small annual fee compounds over long periods and can meaningfully shrink the ending balance versus a fee-free projection at the same nominal rate.
 
-### What is real balance?
+### What is the real balance?
 
-The nominal balance adjusted for the entered inflation assumption.
+The nominal balance adjusted for your entered inflation assumption, approximating today's purchasing power.
 
 ### Can contributions grow each year?
 
-Yes, set an annual contribution-growth rate.
+Yes — set an annual contribution-growth rate if you plan to increase savings over time.
 
 ### How is the required monthly contribution found?
 
-The engine searches for the smallest monthly amount that reaches the target under the assumptions.
+The engine searches for the smallest monthly amount that reaches your target under the entered assumptions.
 
+## Nominal vs. real balance
 
-## Sources to verify before publication
+The nominal balance is the raw dollar figure the projection produces; the real balance divides it by cumulative inflation to show approximate purchasing power in today's terms. Compare any savings target set in today's dollars against the real balance, not the nominal one.
 
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
+## Sources
 
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Investor.gov — Compound Interest Calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator), reviewed 2026-07-31
+- [U.S. Bureau of Labor Statistics — CPI Inflation Calculator](https://www.bls.gov/data/inflation_calculator.htm), reviewed 2026-07-31

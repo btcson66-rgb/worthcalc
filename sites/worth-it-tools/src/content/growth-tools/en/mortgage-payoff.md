@@ -1,83 +1,68 @@
-﻿---
+---
 contentType: tool
 toolSlug: mortgage-payoff
 locale: en
 title: "Mortgage Payoff & Extra Payment Calculator"
-description: "Compare the original payoff schedule with monthly extra payments and lump sums, including interest and months saved."
+description: "Compare your original amortization schedule against monthly extra payments and lump sums, including interest saved and months shaved off the term."
 relatedArticle: /en/extra-mortgage-payments-guide/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Compare the original payoff schedule with monthly extra payments and lump sums, including interest and months saved.
+Enter your current balance, note rate, and remaining term, then add a recurring extra payment, a one-time lump sum, or both, to see the new payoff date and interest saved side by side with your original schedule.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Use the remaining principal, note rate, and remaining term from your latest mortgage statement, not the original loan amount. A lender's official payoff quote may differ slightly because it can include per-diem interest through a specific date and permitted fees.
 
-## Calculation method
-
+## Formula
 
 `i = annual rate ÷ 12; interest = opening balance × i; ending balance = opening balance − (payment − interest) − extra principal`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
-
 ## Worked example
 
-A borrower with a $240,000 remaining balance, 5.5% annual rate and 25 years left can compare the normal schedule with an extra $200 each month. The result should show a shorter payoff period and lower lifetime interest, while keeping the original scheduled payment visible.
+A $240,000 balance at 5.5% with 25 years remaining, adding $200 extra to principal every month, reaches zero balance measurably earlier than the standard schedule and cuts total lifetime interest — while keeping the original required payment unchanged if you ever need to pause the extra amount.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Recast vs. refinance vs. just paying extra
 
-## Local notes
+Extra payments keep your rate and term unchanged while shortening the loan. Recasting re-amortizes your remaining balance over the same remaining term after a lump sum, lowering the required payment without a new loan. Refinancing replaces the loan entirely and can lower the rate, but resets closing costs. Pick the one that matches whether you want a lower required payment, a shorter payoff, or a better rate.
 
-Use the remaining principal, note rate and remaining term from the latest statement. A lender payoff quote can differ because it may include per-diem interest, fees or timing rules. Verify whether extra money is applied to principal and whether a prepayment charge exists.
+## Before you commit to a plan
 
-## Limits and verification
+Confirm two things with your servicer first: that extra payments are applied to principal (not held toward next month's payment), and that your loan carries no prepayment penalty. Most current conventional loans have neither restriction, but older, portfolio, or non-QM loans sometimes do.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
+## Limits and privacy
 
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
+This tool provides a general educational estimate, not individualized financial, tax, or legal advice, and it does not compare mortgage prepayment against investing — any investment return used elsewhere would be an assumption, not a guarantee.
 
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put loan numbers, account numbers, or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [Extra Mortgage Payments: What Actually Changes?](/en/extra-mortgage-payments-guide/)for a step-by-step explanation, scenario design and verification checklist.
+Read [Extra Mortgage Payments: What They Actually Save You](/en/extra-mortgage-payments-guide/) for how amortization front-loads interest, the difference between recasting and refinancing, and why the "biweekly payment" trick is really just one extra payment a year.
 
 ## Frequently asked questions
 
 ### Does an extra payment always reduce principal?
 
-Not automatically. Confirm the servicer’s instructions and whether the payment must be marked as principal-only.
+Not automatically on every servicer — confirm the payment is marked "principal only" rather than applied toward a future due date.
 
-### Is a lender payoff quote the same as the online balance?
+### Is a payoff quote the same as my online balance?
 
-Not always. A payoff quote can include interest through a specific date and permitted fees.
+Not always; a payoff quote can include interest through a specific date and permitted fees.
 
-### Should I reduce the payment or the term?
+### Should I reduce my payment or shorten my term?
 
-The calculator models keeping the scheduled payment and shortening the term. A lender may offer different recast options.
+This calculator models keeping the scheduled payment and shortening the term. Ask your servicer about recasting if you'd rather lower the required payment instead.
 
-### Can I add annual bonuses?
+### Can I add an annual bonus as a lump sum?
 
-Yes. Enter them as lump-sum payments in the month you expect to apply them.
+Yes — enter it as a one-time principal payment in the month you expect to apply it.
 
-### Does this compare investing instead?
+### Does this compare investing instead of paying down the mortgage?
 
-No. It reports loan savings. A separate scenario can compare an uncertain investment return without presenting it as guaranteed.
+No — it reports loan interest and time saved only.
 
+## Sources
 
-## Sources to verify before publication
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Consumer Financial Protection Bureau — "What is a payoff amount, and is it the same as my current balance?"](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/), reviewed 2026-07-31

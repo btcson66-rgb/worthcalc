@@ -1,83 +1,69 @@
-﻿---
+---
 contentType: tool
 toolSlug: car-affordability
 locale: en
 title: "Car Affordability & Total Monthly Cost Calculator"
-description: "Estimate an affordable vehicle price from take-home income after insurance, energy, maintenance, parking and savings goals."
+description: "Estimate an affordable vehicle price from take-home income after insurance, fuel or charging, maintenance, and a target transport-budget cap."
 relatedArticle: /en/true-cost-of-car-ownership/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Estimate an affordable vehicle price from take-home income after insurance, energy, maintenance, parking and savings goals.
+Enter take-home income, expected operating costs, and a transport-budget cap to solve for the maximum loan principal — and vehicle price — your total monthly transportation cost can support, not just the loan payment alone.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Get real insurance quotes and a fuel or charging cost estimate for the specific vehicle you're considering rather than a placeholder — these vary enough by vehicle and driver to change the result meaningfully.
 
-## Calculation method
-
+## Formula
 
 `available loan payment = transport budget − operating costs; maximum principal = payment × (1 − (1+r)^−n) ÷ r`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
-
 ## Worked example
 
-With $5,000 take-home income, $400 operating costs and a 15% transport cap, only $350 remains for the loan payment before the present-value calculation.
+With $5,000 take-home income, $400 in estimated operating costs, and a 15% transport-budget cap, $350 remains available for the loan payment before the present-value calculation converts that into a maximum principal.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## The 20/4/10 guideline as a stress test
 
-## Local notes
+Try your numbers against the widely cited 20/4/10 shorthand — 20% down, a 4-year term, and total transport costs under 10% of gross income — as a sanity check alongside your own transport-budget percentage.
 
-Use take-home income for cash-flow affordability. Enter sales tax, registration and dealer fees instead of hiding them inside the vehicle price. Long terms lower the payment but may increase interest and negative-equity risk.
+## New vs. used, and loan term length
 
-## Limits and verification
+A used vehicle that has already absorbed its steepest depreciation can offer a lower total cost of ownership even at a similar payment to a new car. Whichever you choose, a shorter loan term generally means more monthly cash committed but less total interest and less time spent owing more than the car is worth.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
+## Limits and privacy
 
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
+This tool provides a general educational estimate, not individualized financial or purchasing advice. It does not calculate depreciation or resale value directly — see the companion article for typical depreciation ranges and how they affect negative-equity risk.
 
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put account numbers or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [A Car Payment Is Not the Cost of a Car](/en/true-cost-of-car-ownership/)for a step-by-step explanation, scenario design and verification checklist.
+Read [The 20/4/10 Rule: How Much Car You Can Actually Afford](/en/true-cost-of-car-ownership/) for the reasoning behind the 20/4/10 guideline, first-year depreciation estimates, and why a longer loan term can leave you underwater.
 
 ## Frequently asked questions
 
-### Why use take-home income?
+### Why use take-home income for this calculation?
 
-It reflects cash available after taxes and payroll deductions.
+It reflects cash actually available after taxes and payroll deductions, which is what covers the payment and operating costs.
 
 ### Does the result include depreciation?
 
-Not directly; use the EV/gas TCO tool for ownership comparisons.
+Not directly — it estimates affordability from cash flow; depreciation affects resale value and negative-equity risk separately.
 
-### Why can a longer term be risky?
+### Why can a longer loan term be risky?
 
-It can increase interest and keep the balance above the vehicle value longer.
+It can increase total interest and keep the balance above the vehicle's value for longer.
 
-### Should a trade-in balance be net?
+### Should a trade-in be entered net of its loan?
 
-Yes, subtract any loan payoff from the trade-in value.
+Yes — subtract any remaining payoff on the trade-in from its value first.
 
-### Is the percentage cap a lending rule?
+### Is the percentage cap a lending requirement?
 
-No. It is an editable personal scenario.
+No — it's an editable personal budgeting choice, not a lender rule.
 
+## Sources
 
-## Sources to verify before publication
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Chase — "What Is the 20/4/10 Rule for Car Buying?"](https://www.chase.com/personal/auto/education/buying/what-is-the-20-4-10-rule-for-car-buying), reviewed 2026-07-31
+- [Federal Trade Commission — "Financing or Leasing a Car"](https://consumer.ftc.gov/articles/financing-or-leasing-car), reviewed 2026-07-31

@@ -1,83 +1,68 @@
-﻿---
+---
 contentType: tool
 toolSlug: dti-calculator
 locale: en
-title: "Debt-to-Income Ratio Calculator"
-description: "Calculate front-end and back-end debt-to-income ratios and test how paying off one debt changes the result."
+title: "Debt-to-Income (DTI) Ratio Calculator"
+description: "Calculate front-end and back-end debt-to-income ratios, compare against FHA/VA/conventional benchmarks, and test how paying off one debt changes the result."
 relatedArticle: /en/how-to-calculate-dti/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Calculate front-end and back-end debt-to-income ratios and test how paying off one debt changes the result.
+Enter your gross monthly income and your recurring debt payments to get both the front-end ratio (housing only) and back-end ratio (all debts) that U.S. lenders check before approving a mortgage, auto loan, or refinance.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Pull your latest pay stub for gross income and your most recent statements for every debt's minimum payment — not the full balance. Underwriters generally count credit cards, auto loans, student loans, personal loans, and support obligations, and generally exclude utilities, subscriptions, and non-housing insurance.
 
-## Calculation method
+## Formula
 
+`front-end DTI = housing payment ÷ gross monthly income`
+`back-end DTI = all recurring debt payments ÷ gross monthly income`
 
-`front-end DTI = housing payment ÷ gross monthly income; back-end DTI = all included debt payments ÷ gross monthly income`
-
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+The calculator keeps full precision internally and only rounds the number you see, so the "what changes if I pay off this loan" comparison stays accurate to the cent.
 
 ## Worked example
 
-$8,000 gross monthly income, $2,000 housing and $400 other debt gives a 25% front-end and 30% back-end ratio.
+$8,000 gross monthly income, a $2,000 housing payment, and $400 in other minimums produce a 25% front-end ratio and a 30% back-end ratio. Clearing a $150 auto payment entirely drops back-end DTI to roughly 28.1% — try the "load example" button, then remove one line to see the effect on your own numbers.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## How this compares to lender benchmarks
 
-## Local notes
+FHA underwriting commonly targets 31% front-end / 43% back-end, with documented exceptions running higher. Conventional automated underwriting commonly tolerates back-end DTI up to about 45%, and VA loans have no statutory cap but typically use 41% as a guideline. None of these are guarantees — see the companion article for the current sourcing and the compensating factors that let real applications exceed them.
 
-Lenders define included income and debts differently. The result is not an approval prediction. Use gross monthly income only when comparing with a lender DTI definition.
+## Limits and privacy
 
-## Limits and verification
+This tool provides a general educational estimate, not individualized financial, tax, legal, or lending advice, and it does not predict whether a specific application will be approved. It does not display "approved," "guaranteed," or similar claims — any threshold shown is labeled as a dated public benchmark, not a promise.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
-
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
-
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put account numbers, names, or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [How to Calculate DTI Without Treating It as an Approval Score](/en/how-to-calculate-dti/)for a step-by-step explanation, scenario design and verification checklist.
+Read [How to Calculate DTI (And Why 43% Isn't a Hard Cutoff Anymore)](/en/how-to-calculate-dti/) for the full FHA/VA/conventional comparison, the 2021 rule change that replaced the hard 43% cap, and three ways to lower your ratio before you apply.
 
 ## Frequently asked questions
 
 ### Should income be gross or net?
 
-Use the definition required by the comparison; many DTI definitions use gross income.
+Gross. Nearly every published DTI benchmark — FHA, VA, conventional — is built on gross monthly income, so that is the number to compare against.
 
-### Does rent count as housing?
+### Does rent I pay count as a debt?
 
-For personal planning it can; lender mortgage DTI may use the proposed housing payment.
+Not in a lender's DTI calculation once you're the buyer — it's replaced by the proposed new housing payment. For personal budgeting, some people track it as an expense instead.
 
-### Does a credit-card balance count?
+### Does a credit card balance count, or the minimum payment?
 
-Usually the required monthly payment matters more than the full balance in a DTI ratio.
+The minimum payment. Entering the full balance is one of the most common calculation errors and can overstate your ratio significantly.
 
-### Can I exclude a debt paid by someone else?
+### Can I exclude a debt someone else pays?
 
-Only for a scenario; lender documentation rules may differ.
+Sometimes, with 12 months of documented payment history from the other party — ask your lender whether your specific program allows it.
 
-### Is a lower DTI always enough for approval?
+### Is a DTI under 43% enough to get approved?
 
-No. Credit, assets, collateral and underwriting rules also matter.
+No. Credit history, assets, appraisal, and program rules also matter; DTI is one input among several.
 
+## Sources
 
-## Sources to verify before publication
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Consumer Financial Protection Bureau — "What is a debt-to-income ratio?"](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/), reviewed 2026-07-31
+- [CFPB — General QM loan definition (Regulation Z)](https://www.consumerfinance.gov/rules-policy/final-rules/qualified-mortgage-definition-under-truth-lending-act-regulation-z-general-qm-loan-definition/), reviewed 2026-07-31

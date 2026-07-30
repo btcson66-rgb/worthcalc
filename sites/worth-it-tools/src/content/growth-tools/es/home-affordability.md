@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: home-affordability
 locale: es
-title: "Calculadora de vivienda asequible y coste total"
-description: "Estima un precio de vivienda con ingresos, deudas, entrada, tipo, impuestos, seguros y mantenimiento."
+title: "Calculadora de vivienda asequible (España)"
+description: "Estima cuánto piso puedes comprar en España sumando entrada, ITP o IVA+AJD, notaría, registro y la cuota hipotecaria resultante."
 relatedArticle: /es/how-much-home-can-you-afford/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Estima un precio de vivienda con ingresos, deudas, entrada, tipo, impuestos, seguros y mantenimiento.
+Introduce tus ingresos netos, tu ahorro disponible y el tipo hipotecario estimado para obtener un rango de precio de vivienda que tenga en cuenta el 80% de financiación habitual, los impuestos de la comunidad autónoma y los gastos de notaría y registro.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Reúne tu ahorro real disponible (sin contar el colchón de emergencia que quieres conservar), tus ingresos netos mensuales, tus cuotas de deuda actuales y el tipo de ITP o AJD de tu comunidad autónoma — varía de una a otra y cambia el resultado de forma notable.
 
-## Método de cálculo
+## Cómo se calcula
 
+`entrada mínima = 20% del precio de vivienda; impuesto = ITP (segunda mano) o IVA 10% + AJD (obra nueva); desembolso total = entrada + impuesto + notaría + registro + gestoría`
 
-`resolver el mayor precio cuya hipoteca + impuestos + seguro + comunidad + mantenimiento ≤ límite mensual elegido`
+La calculadora resuelve el precio de vivienda máximo cuya cuota hipotecaria, sumada a tus deudas actuales, mantiene tu ratio de esfuerzo en un nivel razonable, y muestra por separado el ahorro necesario para entrada, impuestos y gastos.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-Con 4.500 € brutos, 300 € de otras deudas y un límite elegido del 35%, la carga total máxima sería 1.575 €, dejando 1.275 € para vivienda.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+Para una vivienda de segunda mano de 220.000 € en una comunidad con ITP al 6%, el impuesto son 13.200 €; con ITP al 10%, son 22.000 €. Sumando el 20% de entrada (44.000 €) y unos 1.500-2.500 € de notaría, registro y gestoría, el desembolso total oscila entre 58.700 € y 68.500 € según dónde compres. Cambia el tipo de ITP para ver cómo se mueve tu presupuesto real.
 
 ## Notas para España
 
-Añade ITP o IVA/AJD según el tipo de vivienda, notaría, registro, gestoría, comunidad, IBI, seguro y mantenimiento. La TAE y el coste de la tasación deben verificarse.
+El LTV habitual para primera vivienda es del 80% del menor valor entre precio y tasación, según los informes del Banco de España. El ITP lo fija cada comunidad autónoma para vivienda de segunda mano; para vivienda nueva se paga IVA al 10% más AJD, también autonómico. Notaría, registro y gestoría no siguen una tarifa nacional única: pide presupuesto concreto antes de dar por buena una estimación.
 
-## Límites y comprobaciones
+## Límites de esta calculadora
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
-
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
-
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal ni jurídico personalizado; no sustituye la oferta vinculante ni la tasación oficial de ningún banco. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. No introduzcas datos identificables si vas a compartir el resultado. Los tipos de ITP y AJD que uses deben confirmarse con la agencia tributaria de tu comunidad autónoma, ya que cambian con el tiempo y por territorio.
 
 ## Guía relacionada
 
-Lee [Cuánta vivienda puedes pagar después de los costes ocultos](/es/how-much-home-can-you-afford/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [Cuánto piso puedes comprar en España: el precio no es solo el precio](/es/how-much-home-can-you-afford/) para ver el desglose completo de impuestos, gastos y financiación, con ejemplos comparando comunidades autónomas.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Por qué el resultado no es solo "precio de vivienda × 80%"?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+Porque el desembolso real incluye también el 20% de entrada que no financia el banco, el impuesto correspondiente (ITP o IVA+AJD) y los gastos de notaría, registro y gestoría, que suman por encima de la entrada sola.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿El ITP que uso por defecto es el de mi comunidad?
 
-No, son ejemplos editables.
+No necesariamente: el tipo por defecto es un ejemplo editable. Sustitúyelo por el tipo vigente en tu comunidad autónoma antes de tomar cualquier decisión.
 
-### ¿Se envían los datos?
+### ¿La calculadora incluye la tasación de la vivienda?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+No como coste aparte en el resultado principal; su importe suele rondar unos cientos de euros y conviene añadirlo manualmente a tus gastos si quieres una cifra más completa.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿Qué pasa si compro vivienda nueva en vez de segunda mano?
 
-No, solo compara escenarios.
+Cambia el impuesto aplicable: en vez de ITP, pagarías IVA al 10% más AJD, cuyo tipo también depende de tu comunidad autónoma.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo debería repetir este cálculo?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Cuando cambien tus ingresos o tu ahorro disponible, cuando el tipo hipotecario de referencia se mueva de forma relevante, o si cambias de comunidad autónoma de compra.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Banco de España — Informe de Estabilidad Financiera, primavera 2026, capítulo 4 (LTV de nuevas hipotecas)](https://www.bde.es/f/webbde/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf), consultado 2026-07-31
+- [Comunidad de Madrid — Transmisiones Patrimoniales Onerosas (tipo ITP vivienda)](https://www.comunidad.madrid/atencion-contribuyente/transmisiones-patrimoniales-onerosas), consultado 2026-07-31
+- [Agencia Tributaria — ITP y AJD, actos jurídicos documentados](https://sede.agenciatributaria.gob.es/Sede/declaraciones-informativas-otros-impuestos-tasas/impuesto-sobre-transmisiones-patrimoniales-actos-juridicos/itp-ajd-transmisiones-derechos-reales-fianzas/actos-juridicos-documentados-ajd_.html), consultado 2026-07-31

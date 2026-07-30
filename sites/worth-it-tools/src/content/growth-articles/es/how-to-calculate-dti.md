@@ -1,114 +1,89 @@
-﻿---
+---
 contentType: article
 articleSlug: how-to-calculate-dti
 locale: es
-title: "Cómo calcular el ratio deuda-ingresos sin confundirlo con una aprobación"
-description: "Calcula el ratio de vivienda y el ratio total deuda-ingresos, con escenarios de eliminación de deudas."
+title: "Ratio de endeudamiento en España: la regla del 35% explicada"
+description: "Cómo calcula el banco tu ratio de esfuerzo en España, de dónde sale el 35% del Banco de España y por qué el LTV del 80% importa tanto como tus ingresos."
 relatedTool: /es/tools/dti-calculator/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Cuando pides una hipoteca en España, el banco no mira solo cuánto ganas: mira qué parte de esos ingresos ya está comprometida en otros pagos. Ese porcentaje tiene nombre —ratio de endeudamiento, también llamado ratio o tasa de esfuerzo— y es, junto con el porcentaje que el banco está dispuesto a financiar sobre el valor de la vivienda, el filtro que decide si tu solicitud avanza o se queda en la primera criba.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+No hay una ley que fije un tope legal para particulares como sí existe en otros países. Lo que hay es una recomendación del supervisor bancario que casi todas las entidades aplican como si lo fuera.
 
-## Qué decisión ayuda a resolver esta guía
+## Qué mide realmente la ratio de esfuerzo (y qué no)
 
-Calcular ratios de vivienda y deuda total sobre ingresos y comprobar el efecto de cancelar una deuda sin predecir la aprobación.
+La ratio de esfuerzo compara el total de tus cuotas mensuales de deuda —la hipoteca que estás pidiendo incluida— con tus ingresos netos mensuales. No es una medida de tu patrimonio, no aparece en ningún informe de solvencia oficial como CIRBE por sí sola, y cambia cada vez que firmas un nuevo préstamo o cancelas uno existente. Por eso una cifra que te dio un agente inmobiliario hace seis meses puede no servir hoy: tu situación de deuda ya no es la misma.
 
-## Datos que conviene reunir antes de calcular
+## El 35% de la guía del Banco de España: de dónde sale
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+La referencia del 35% no es un artículo de una ley, sino una recomendación de educación financiera que el Banco de España incluye en su [Guía de acceso al préstamo hipotecario](https://www.bde.es/f/webbde/Secciones/Publicaciones/Folletos/Fic/Guia_hipotecaria_2013.pdf): como norma general, el conjunto de las cuotas de deuda no debería superar el 35% de los ingresos netos del solicitante. Las entidades bancarias han adoptado este umbral como estándar de mercado en su análisis de riesgo, aunque cada una conserva su propio margen: algunas se mueven hasta el 40% cuando el resto del perfil —antigüedad laboral, ahorro, historial— es sólido.
 
-- Ingreso bruto mensual según la definición aplicada
-- Obligación mensual de vivienda
-- Pagos mínimos de tarjetas y préstamos
-- Pensiones u otras obligaciones recurrentes
-- Deudas incluidas por el criterio elegido
+Esto significa dos cosas a la vez: que superar el 35% no te descarta automáticamente, y que estar por debajo tampoco garantiza la aprobación. Es un filtro de riesgo, no una puerta con llave fija.
 
-## Cómo funciona el modelo
+## Ingresos netos, no brutos: la diferencia que confunde a todo el mundo
 
-`ratio vivienda = cuota de vivienda ÷ ingreso bruto mensual; ratio total = pagos de deuda incluidos ÷ ingreso bruto mensual`
+A diferencia del cálculo de DTI en Estados Unidos, que se construye sobre ingresos brutos, la práctica habitual en España parte de los ingresos netos —lo que realmente entra en tu cuenta después de IRPF y Seguridad Social—. Si conviertes tu nómina bruta a neta con las tablas equivocadas, tu ratio sale mal en las dos direcciones: usar el bruto infla tus ingresos disponibles y te hace parecer más solvente de lo que eres; usar un neto mal calculado puede hacer lo contrario.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Qué cuotas entran en el cálculo y cuáles no
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+- Entran: la cuota de la hipoteca que solicitas, préstamos personales, financiación de coche, pagos de tarjetas revolving, pensiones alimenticias u otras obligaciones recurrentes con contrato.
+- No entran: alquiler que dejarás de pagar al comprar (aunque algunas entidades sí lo piden como referencia de gasto habitual), gastos de suministros, seguros no vinculados al préstamo, ni compras aplazadas ya finiquitadas.
+- El error más habitual: meter el límite de la tarjeta de crédito revolving en vez del pago mensual real que estás haciendo por ella.
 
-## Ejemplo reproducible
+## El otro filtro que decide tu hipoteca: el LTV del 80%
 
-4.000 € de ingresos brutos, 1.000 € de vivienda y 300 € de otras cuotas producen 25% y 32,5%.
+La ratio de esfuerzo no trabaja sola. Según el [Informe de Estabilidad Financiera de primavera de 2026 del Banco de España](https://www.bde.es/f/webbde/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf), el LTV (loan to value, o porcentaje que el banco financia sobre el menor valor entre precio de compra y tasación) habitual para primera vivienda en España sigue siendo el 80%. Aunque tu ratio de esfuerzo sea perfecta, si no tienes el 20% restante más los gastos de compraventa ahorrados, la operación no sale adelante con las condiciones estándar. Algunas entidades ofrecen financiación superior al 80% para menores de 35 años o para funcionarios, pero son la excepción, no la norma.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Ejemplo con nómina real
 
-## Compara tres escenarios, no uno solo
+Una persona con 2.400 € netos mensuales, una cuota hipotecaria propuesta de 650 € y un préstamo de coche de 180 € tiene una ratio de esfuerzo de (650 + 180) ÷ 2.400 = 34,6%. Está justo por debajo del umbral del 35%, lo que en la práctica significa una operación revisable pero no automáticamente rechazada: el banco probablemente pedirá más documentación sobre estabilidad laboral antes de decidir. Si esa misma persona cancelara el préstamo del coche antes de solicitar la hipoteca, la ratio bajaría a 650 ÷ 2.400 = 27,1%, un margen que cambia sustancialmente cómo se percibe el riesgo de la operación.
 
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
+## Cuándo el banco se salta el 35% (y cuándo no)
 
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Eliminar una deuda cancelada.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Reducir el ingreso a un nivel prudente.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Aumentar la cuota de vivienda propuesta.
+Las entidades revisan el umbral hacia arriba cuando el solicitante tiene un contrato indefinido de larga antigüedad, ahorro adicional documentado tras la compra, o avalistas con patrimonio. Lo revisan hacia abajo —siendo más estrictos— con rentas variables, contratos temporales, o cuando el perfil ya se acerca al límite del LTV del 80%. Ninguna de estas excepciones está escrita en una tabla pública; dependen de la política de riesgos interna de cada banco, así que dos entidades pueden dar respuestas distintas para el mismo solicitante.
 
-## Errores habituales que cambian el resultado
+## Cómo bajar tu ratio antes de pedir la hipoteca
 
-- Usar ingreso neto cuando la definición pide bruto
-- Introducir saldo de tarjeta en vez de pago mensual
-- Omitir impuestos, seguro o comunidad cuando corresponda
-- Convertir un umbral orientativo en garantía de aprobación
-
-## Cómo interpretar el resultado en España
-
-La entidad puede usar ingresos netos o criterios propios y valorar estabilidad laboral, TAE, avales y otros compromisos. El ratio no garantiza aprobación.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+- Cancela primero la deuda más pequeña que puedas liquidar por completo: reduce el número de cuotas mensuales, no solo el saldo total.
+- Evita abrir financiación nueva —incluso a plazos "sin intereses"— en los meses previos a la solicitud: cada cuota nueva suma directamente al numerador.
+- Si tienes ingresos variables o eres autónomo, reúne al menos dos ejercicios fiscales completos: los bancos suelen promediar antes de aceptar un ingreso irregular como base de cálculo.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿El 35% es una norma legal que todos los bancos deben cumplir?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+No. Es una recomendación de una guía divulgativa del Banco de España, no un límite fijado por ley para particulares. Cada entidad decide su propio umbral de riesgo interno, normalmente cercano a esa cifra.
 
-### ¿Qué dato suele influir más?
+### ¿Debo usar mi salario bruto o neto para calcular la ratio?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Neto. La práctica bancaria habitual en España compara cuotas de deuda con ingresos netos mensuales, a diferencia de otros mercados donde se usa el ingreso bruto.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Una ratio de esfuerzo baja garantiza que me den la hipoteca?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+No. El LTV del 80%, tu historial crediticio, la estabilidad laboral y la tasación de la vivienda también condicionan la decisión final del banco.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Las cuotas de tarjetas revolving cuentan igual que un préstamo normal?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+Sí, y con frecuencia pesan más de lo que el titular cree, porque el pago mínimo mensual puede mantenerse aunque el saldo pendiente crezca por los intereses.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular mi ratio?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cada vez que cambie tu nómina, canceles o abras un préstamo, o antes de presentar cualquier solicitud nueva de financiación, porque el resultado se queda desactualizado en cuanto cambia cualquiera de esas cifras.
 
-## Abrir la calculadora
+## Calcula tu propia ratio
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Abre la calculadora, introduce tus ingresos netos y tus cuotas actuales, y prueba qué pasa si cancelas una deuda antes de solicitar la hipoteca.
 
-[Calculadora de ratio deuda-ingresos](/es/tools/dti-calculator/)
+[Calculadora de ratio de endeudamiento](/es/tools/dti-calculator/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero, fiscal ni crediticio personalizado. No sustituye la valoración de riesgo que hace cada entidad bancaria ni predice si una solicitud concreta será aprobada.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Banco de España — Guía de acceso al préstamo hipotecario](https://www.bde.es/f/webbde/Secciones/Publicaciones/Folletos/Fic/Guia_hipotecaria_2013.pdf), consultado 2026-07-31
+- [Banco de España — Informe de Estabilidad Financiera, primavera 2026, capítulo 4 (LTV de nuevas hipotecas)](https://www.bde.es/f/webbde/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf), consultado 2026-07-31

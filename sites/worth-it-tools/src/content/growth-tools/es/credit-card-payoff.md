@@ -1,82 +1,64 @@
-﻿---
+---
 contentType: tool
 toolSlug: credit-card-payoff
 locale: es
-title: "Calculadora de pago de tarjeta e intereses"
-description: "Calcula el plazo, los intereses y la cuota necesaria para una fecha objetivo, con tipo promocional y nuevas compras."
+title: "Calculadora de pago de tarjeta revolving (España)"
+description: "Calcula cuánto tardas en liquidar el saldo de tu tarjeta y cuánto interés pagas, según tu TAE y tu cuota mensual."
 relatedArticle: /es/credit-card-minimum-payment-trap/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Calcula el plazo, los intereses y la cuota necesaria para una fecha objetivo, con tipo promocional y nuevas compras.
+Introduce el saldo actual de tu tarjeta, su TAE y la cuota mensual que puedes pagar —fija o el mínimo que exige el emisor— para ver cuántos meses tardarías en liquidarla y cuánto interés total pagarías.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Localiza tu TAE exacta en el contrato o en el extracto (no el tipo mensual que aparece en la publicidad, que suele ser más bajo en apariencia), y confirma si tu tarjeta es de pago único o revolving — solo esta última genera intereses de forma continuada sobre el saldo pendiente.
 
-## Método de cálculo
+## Cómo se calcula
 
+`saldo del mes siguiente = saldo actual + compras nuevas + intereses del periodo − pago realizado`
 
-`saldo final = saldo inicial + compras nuevas + intereses + comisiones − pago`
+La calculadora mantiene la precisión completa internamente y solo redondea la cifra final, para que la comparación entre pagar el mínimo y pagar una cuota fija más alta sea exacta.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-Ejemplo: saldo de 4.000 €, TAE del 19%, cuota de 180 € y ninguna compra nueva.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+Con un saldo de 4.000 €, una TAE del 19% y una cuota de 180 € al mes sin compras nuevas, la calculadora muestra cuántos meses hacen falta para liquidar la deuda y cuánto interés total se paga en ese periodo. Reduce la cuota para ver cuánto se alarga el plazo, o auméntala para ver cuánto interés te ahorras.
 
 ## Notas para España
 
-Distingue entre pago aplazado, revolving y pago total. El TAE puede ser muy distinto del tipo mensual que aparece en la publicidad; introduce la información contractual y evita seguir cargando compras si quieres medir un plan de salida realista.
+Distingue entre pago único, pago aplazado y revolving: solo el revolving genera intereses de forma continuada sobre el saldo, no solo sobre las compras nuevas. Si tu TAE supera en más de seis puntos porcentuales la media del mercado de tarjetas de crédito, el Tribunal Supremo ha establecido que puede tratarse de un interés usurario — la calculadora no evalúa esto, solo simula el pago según los datos que introduzcas.
 
-## Límites y comprobaciones
+## Límites de esta calculadora
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
-
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
-
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento financiero ni jurídico personalizado; no determina si el interés de tu tarjeta es legalmente abusivo. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. No introduzcas datos identificables si vas a compartir el resultado por enlace.
 
 ## Guía relacionada
 
-Lee [La trampa del pago mínimo de la tarjeta](/es/credit-card-minimum-payment-trap/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [La trampa del pago mínimo: qué es el crédito revolving y cuándo es usura](/es/credit-card-minimum-payment-trap/) para entender el criterio del Tribunal Supremo sobre interés usurario y cómo salir de una deuda revolving.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Debo usar la TAE o el tipo mensual que anuncia mi tarjeta?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+La TAE, porque incluye la capitalización de intereses a lo largo del año y es la cifra comparable entre distintas tarjetas y con el umbral que usa el Tribunal Supremo.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿Qué pasa si sigo haciendo compras con la tarjeta mientras pago la deuda?
 
-No, son ejemplos editables.
+Cada compra nueva se suma al saldo sobre el que se calculan los intereses del siguiente periodo, lo que alarga el tiempo necesario para liquidar la deuda. Añádelas en el campo correspondiente para ver su efecto real.
 
-### ¿Se envían los datos?
+### ¿La calculadora me dice si mi interés es usurario?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+No, solo simula el pago según los datos que introduzcas. Para saber si tu TAE podría considerarse usuraria, compárala con la media del mercado en la fecha de contratación y consulta la guía relacionada.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿Pagar solo el mínimo siempre reduce el saldo?
 
-No, solo compara escenarios.
+No necesariamente. Si el pago mínimo apenas supera los intereses generados ese mes, el saldo baja muy poco, y con tipos muy altos puede casi no moverse durante mucho tiempo.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo debería repetir esta simulación?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Cuando cambie el tipo de tu tarjeta, hagas una compra grande nueva, o quieras comparar el efecto de subir tu cuota mensual frente a mantener el pago mínimo.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Consejo General del Poder Judicial — El Tribunal Supremo considera usurario un interés del 27,24% de una tarjeta revolving](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-), consultado 2026-07-31

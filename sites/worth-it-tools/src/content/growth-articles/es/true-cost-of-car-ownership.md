@@ -1,114 +1,78 @@
-﻿---
+---
 contentType: article
 articleSlug: true-cost-of-car-ownership
 locale: es
-title: "La cuota no es el coste real del coche"
-description: "Estima un precio de vehículo asumible después de seguro, energía, mantenimiento, aparcamiento y ahorro."
+title: "El coste real de tener un coche en España: lo que la cuota de financiación no cuenta"
+description: "Impuesto de matriculación por tramos de CO2, IVTM municipal, ITV y seguro obligatorio: el desglose completo del coste anual de un coche en España."
 relatedTool: /es/tools/car-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Cuando alguien calcula si puede permitirse un coche, casi siempre mira solo la cuota de financiación. Es el error más caro y más común: en España, entre impuestos, seguro obligatorio, ITV y depreciación, el coste real de tener un coche puede duplicar fácilmente lo que sugiere la cuota mensual del préstamo.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## El precio de etiqueta es la parte pequeña del coste
 
-## Qué decisión ayuda a resolver esta guía
+Un coche nuevo genera al menos un impuesto en el momento de matricularlo y dos obligaciones fiscales recurrentes cada año, además del seguro obligatorio y las revisiones periódicas. Ninguno de estos conceptos aparece en el precio que ves en el concesionario ni en la cuota de la financiación.
 
-Calcular hacia atrás desde el ingreso neto para obtener un precio de coche asumible, incluyendo seguro, combustible o carga, mantenimiento, aparcamiento e impuestos.
+## Impuesto de matriculación: por qué unos coches pagan 0% y otros 14,75%
 
-## Datos que conviene reunir antes de calcular
+El Impuesto Especial sobre Determinados Medios de Transporte, conocido como impuesto de matriculación, se calcula sobre las emisiones oficiales de CO2 del vehículo, según confirma la [Agencia Tributaria](https://sede.agenciatributaria.gob.es/Sede/impuestos-tasas/impuesto-matriculacion.html). Los tramos vigentes son: exención total (0%) hasta 120 g/km; 4,75% entre 121 y 159 g/km; 9,75% entre 160 y 199 g/km; y 14,75% a partir de 200 g/km. Las comunidades autónomas pueden incrementar estos tipos hasta un 15% adicional. Esto significa que dos coches con el mismo precio de venta pueden tener un coste de matriculación muy distinto solo por su nivel de emisiones — un dato que conviene pedir al concesionario antes de firmar, no después.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## IVTM: el impuesto que varía según tu ayuntamiento
 
-- Ingreso neto mensual y compromisos existentes
-- Entrada y valor neto del vehículo entregado
-- Tipo y plazo del préstamo
-- Seguro, energía, mantenimiento, impuestos y aparcamiento
-- Límite de presupuesto de transporte editable
+El Impuesto sobre Vehículos de Tracción Mecánica (IVTM), que gestiona la [DGT](https://www.dgt.es/nuestros-servicios/tu-vehiculo/tus-vehiculos/impuesto-de-circulacion-ivtm/) a nivel informativo pero cobra cada ayuntamiento, se paga cada año mientras el vehículo esté matriculado. Las cuotas base están fijadas en el texto refundido de la Ley Reguladora de las Haciendas Locales ([Real Decreto Legislativo 2/2004](https://boe.es/buscar/act.php?id=BOE-A-2004-4214)), pero cada ayuntamiento puede aplicar un coeficiente multiplicador dentro de los márgenes legales, así que el mismo coche paga cantidades distintas según el municipio donde esté empadronado su titular. No existe una tarifa nacional única: consulta la ordenanza fiscal de tu ayuntamiento para saber la cifra exacta.
 
-## Cómo funciona el modelo
+## ITV y seguro obligatorio: los gastos que no puedes esquivar
 
-`cuota disponible = presupuesto de transporte − costes de uso; principal máximo = cuota × (1 − (1+r)^−n) ÷ r`
+Todo vehículo debe pasar la Inspección Técnica de Vehículos (ITV) con la periodicidad que marca la normativa según su antigüedad, y todo vehículo en circulación debe tener seguro de responsabilidad civil obligatorio como mínimo. El coste de la ITV varía según la comunidad autónoma y el centro (no hay un precio único regulado a nivel estatal), y el del seguro depende de tu perfil de conductor, el vehículo y la cobertura contratada — con o sin coberturas adicionales el rango es amplio. Ninguno de los dos es opcional ni se puede aplazar sin consecuencias legales.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Depreciación: el coste silencioso que nadie factura
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+Un coche nuevo pierde valor de mercado desde el momento en que sale del concesionario, y esa pérdida de valor es un coste real aunque no aparezca en ningún recibo. Si financias el coche a un plazo largo, es posible que el saldo pendiente del préstamo supere el valor de mercado del vehículo durante buena parte de la vida del préstamo — una situación que complica venderlo o cambiarlo antes de terminar de pagarlo.
 
-## Ejemplo reproducible
+## Calcula el coste anual real, no solo la cuota de financiación
 
-Ejemplo: 2.800 € netos, límite del 15% y 230 € de costes de uso dejan 190 € para la financiación.
+Para tener una cifra honesta, suma: la cuota de financiación (si la hay), el IVTM anual de tu ayuntamiento, el seguro obligatorio (y cualquier cobertura adicional que contrates), el coste medio de mantenimiento y neumáticos, el combustible o la carga eléctrica según tu uso real, y el coste de la ITV en los años en que corresponda. Divide el total entre doce para comparar contra tu presupuesto mensual real, no solo contra la cuota que anuncia el concesionario.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Coche nuevo vs. de segunda mano: dónde cambia la cuenta
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Subir seguro y mantenimiento.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Acortar el préstamo.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Reducir la entrada para conservar liquidez.
-
-## Errores habituales que cambian el resultado
-
-- Usar la cuota anunciada como coste total
-- Alargar el plazo hasta que un coche caro parezca asequible
-- Poner seguro y aparcamiento a cero sin pedir presupuesto
-- Contar la entrega sin restar su deuda pendiente
-
-## Cómo interpretar el resultado en España
-
-Incluye impuesto de matriculación cuando corresponda, seguro, ITV, combustible, mantenimiento y aparcamiento. La cuota baja de un plazo largo no reduce el coste total.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+Un coche de segunda mano evita gran parte del impuesto de matriculación si ya estaba matriculado (el impuesto se paga en la primera matriculación, no en cada cambio de propietario) y ya ha absorbido la mayor parte de su depreciación inicial, que es donde un coche nuevo pierde más valor proporcionalmente. A cambio, puede tener mayores costes de mantenimiento y menos garantía. La decisión no depende solo del precio de compra: depende de qué tramo de la vida útil del vehículo estás pagando.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿El impuesto de matriculación se paga cada año?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+No, se paga una única vez, en el momento de la primera matriculación del vehículo. Comprarlo de segunda mano no genera este impuesto de nuevo para el nuevo propietario.
 
-### ¿Qué dato suele influir más?
+### ¿El IVTM es igual en toda España?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+No. Existe una cuota base fijada por ley estatal, pero cada ayuntamiento aplica un coeficiente propio dentro de los márgenes permitidos, así que el importe final varía según el municipio de empadronamiento del titular.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Puedo circular sin haber pasado la ITV?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+No de forma legal una vez que corresponde pasarla según la antigüedad del vehículo; hacerlo puede acarrear sanciones y problemas con el seguro en caso de accidente.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Un coche eléctrico paga el mismo impuesto de matriculación?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+Los vehículos con emisiones de CO2 muy bajas o nulas suelen quedar en el tramo exento o con tipos reducidos, ya que el impuesto se calcula precisamente sobre esas emisiones oficiales.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular el coste real de mi coche?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Al renovar el seguro, al cambiar de ayuntamiento (el IVTM se paga donde estés empadronado), o antes de decidir entre comprar nuevo o de segunda mano, ya que la estructura de costes cambia según la edad del vehículo.
 
-## Abrir la calculadora
+## Calcula tu presupuesto de coche
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tu ingreso disponible y los costes de uso estimados para ver qué precio de vehículo es realmente asumible, no solo qué cuota de financiación puedes pagar.
 
 [Calculadora de coche asequible y coste mensual total](/es/tools/car-affordability/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero ni fiscal personalizado. El IVTM y el coste de la ITV varían por municipio y comunidad autónoma: confirma siempre la cifra exacta con tu ayuntamiento.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Agencia Tributaria — Impuesto de Matriculación (tramos por emisiones de CO2)](https://sede.agenciatributaria.gob.es/Sede/impuestos-tasas/impuesto-matriculacion.html), consultado 2026-07-31
+- [DGT — Impuesto de Circulación (IVTM)](https://www.dgt.es/nuestros-servicios/tu-vehiculo/tus-vehiculos/impuesto-de-circulacion-ivtm/), consultado 2026-07-31
+- [BOE — Real Decreto Legislativo 2/2004, texto refundido de la Ley Reguladora de las Haciendas Locales (cuotas del IVTM)](https://boe.es/buscar/act.php?id=BOE-A-2004-4214), consultado 2026-07-31

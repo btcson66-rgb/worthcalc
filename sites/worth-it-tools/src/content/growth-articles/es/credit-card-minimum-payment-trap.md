@@ -1,114 +1,78 @@
-﻿---
+---
 contentType: article
 articleSlug: credit-card-minimum-payment-trap
 locale: es
-title: "La trampa del pago mínimo de la tarjeta"
-description: "Calcula el plazo, los intereses y la cuota necesaria para una fecha objetivo, con tipo promocional y nuevas compras."
+title: "La trampa del pago mínimo: qué es el crédito revolving y cuándo es usura"
+description: "Por qué pagar solo el mínimo de una tarjeta revolving en España puede no reducir la deuda, y el umbral que el Tribunal Supremo usa para declarar usurario un interés."
 relatedTool: /es/tools/credit-card-payoff/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Pagar solo el mínimo cada mes parece cómodo: la cuota es baja, no hay presión inmediata. El problema es que, con una tarjeta revolving, ese pago mínimo puede estar cubriendo sobre todo intereses, dejando el saldo pendiente prácticamente intacto mes tras mes, incluso años después de haber dejado de usar la tarjeta.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## Por qué pagar solo el mínimo es la forma más cara de tener una tarjeta
 
-## Qué decisión ayuda a resolver esta guía
+Cuando el pago mínimo mensual es un porcentaje pequeño del saldo (habitualmente entre el 2% y el 4%, según el emisor), gran parte de ese importe se destina primero a cubrir los intereses generados ese mes, y solo lo que sobra reduce el capital. Con un tipo elevado, es posible que el pago mínimo apenas supere los intereses generados, así que el saldo baja muy lentamente aunque no hagas ninguna compra nueva.
 
-Estimar plazo e intereses con pago fijo, regla de pago mínimo o fecha objetivo, incluyendo compras nuevas y el fin de un tipo promocional.
+## Qué es exactamente el crédito revolving (y en qué se diferencia de una tarjeta normal)
 
-## Datos que conviene reunir antes de calcular
+Una tarjeta de crédito "normal" con pago único a fin de mes no suele generar intereses si se liquida el saldo completo cada mes. El crédito revolving es distinto: permite aplazar el pago mediante una cuota fija o un porcentaje del saldo, y ese aplazamiento genera intereses de forma continua sobre el saldo pendiente, de forma parecida a un préstamo renovable. Muchas tarjetas de "pago flexible" o "pago aplazado" que ofrecen bancos y grandes superficies en España funcionan bajo este esquema, y no siempre queda claro para el titular en el momento de contratarla.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## El límite que marcó el Tribunal Supremo: cuándo un interés es usura
 
-- Saldo del último extracto
-- TAE/TIN aplicable y fecha de fin de la promoción
-- Regla de pago mínimo del emisor
-- Pago fijo o mes objetivo
-- Compras nuevas y comisiones mensuales
+El Tribunal Supremo español ha dictado varias sentencias sobre cuándo el interés de una tarjeta revolving se considera usurario. En una de ellas, declaró usurario un interés remuneratorio del 27,24% TAE, y estableció un criterio de referencia: cuando la diferencia entre el tipo pactado y el tipo medio del mercado de tarjetas de crédito supera los seis puntos porcentuales, el interés puede considerarse "notablemente superior al normal del dinero" y por tanto usurario, según recoge el [Consejo General del Poder Judicial](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-). El Supremo también aclaró que la comparación debe hacerse frente al tipo medio de las tarjetas de crédito específicamente, no frente a otros tipos de crédito al consumo con tipos más bajos. Además de la usura, el Supremo ha añadido un segundo motivo de nulidad: la falta de transparencia en las condiciones contractuales, que puede aplicar incluso si el tipo no llega al umbral de usura.
 
-## Cómo funciona el modelo
+## Cuánto tarda en pagarse una deuda pagando solo el mínimo
 
-`saldo final = saldo inicial + compras nuevas + intereses + comisiones − pago`
+El tiempo exacto depende del saldo, el tipo y la regla de pago mínimo de tu emisor concreto — no hay una cifra única válida para todas las tarjetas. Lo que sí es constante es el patrón: cuanto más alto el tipo respecto al pago mínimo mensual, más años puede tardar en liquidarse una deuda que, en euros absolutos, parecía manejable al principio. Simular tu caso concreto con tu saldo y tu TAE real es la única forma fiable de saber cuánto tardarías tú.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Cómo leer la TAE de tu tarjeta y compararla con el umbral
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+La TAE (tasa anual equivalente) de tu tarjeta debe figurar en el contrato y en los extractos periódicos. Compárala con la TAE media del mercado de tarjetas de crédito revolving en el momento en que firmaste el contrato, no con la de préstamos personales u otros productos: el criterio del Supremo es específico para este tipo de producto. Si tu TAE supera esa media en más de seis puntos porcentuales, tienes motivos razonables para revisar si el contrato podría ser impugnable.
 
-## Ejemplo reproducible
+## Salir de la revolving: opciones antes de que la deuda crezca sola
 
-Ejemplo: saldo de 4.000 €, TAE del 19%, cuota de 180 € y ninguna compra nueva.
+- Deja de usar la tarjeta para compras nuevas mientras tengas saldo pendiente: cada compra nueva añade más base sobre la que se calculan intereses.
+- Pregunta al emisor si puedes convertir el saldo a un préstamo personal con un tipo más bajo y fijo, en lugar de mantenerlo en revolving.
+- Prioriza esta deuda sobre cualquier otra con tipo más bajo, siguiendo la lógica de la estrategia avalancha: es casi siempre la que más intereses genera de todas tus deudas.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Qué hacer si crees que tu tarjeta tiene un interés usurario
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Añadir una compra mensual recurrente.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Subir el tipo al terminar la promoción.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Comparar pago mínimo con cuota fija.
-
-## Errores habituales que cambian el resultado
-
-- Suponer que dividir la TAE entre doce reproduce exactamente el cálculo diario
-- Continuar como si la deuda bajara cuando el pago no cubre intereses
-- Olvidar compras nuevas o el fin de la promoción
-- Tratar el pago mínimo como un porcentaje universal
-
-## Cómo interpretar el resultado en España
-
-Distingue entre pago aplazado, revolving y pago total. El TAE puede ser muy distinto del tipo mensual que aparece en la publicidad; introduce la información contractual y evita seguir cargando compras si quieres medir un plan de salida realista.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+Si tu TAE está muy por encima de la media del mercado en la fecha de contratación, puedes plantear una reclamación para que se declare la nulidad del contrato por usura o por falta de transparencia. La consecuencia legal de que un tribunal declare usurario un contrato de este tipo es que el prestatario solo debe devolver el capital prestado, sin los intereses pagados de más — pero esto es una decisión judicial caso por caso, no algo que esta guía pueda garantizarte para tu situación concreta.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿Toda tarjeta con pago aplazado es revolving?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+No siempre, pero muchas tarjetas de "pago flexible" o "pago a plazos" de bancos y grandes superficies en España funcionan bajo este esquema. Revisa el contrato para confirmar si genera intereses de forma continuada sobre el saldo pendiente.
 
-### ¿Qué dato suele influir más?
+### ¿Qué TAE se considera usuraria según el Tribunal Supremo?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+No hay un porcentaje fijo válido para siempre: el criterio es que el tipo supere en más de seis puntos porcentuales la TAE media del mercado de tarjetas de crédito en el momento de la contratación, que varía con el tiempo.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Pagar el mínimo reduce mi deuda cada mes?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+Depende del tipo y de cuánto de ese pago mínimo cubre solo intereses. Con tipos altos, el saldo puede bajar muy poco, especialmente si sigues haciendo compras nuevas con la misma tarjeta.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Puedo reclamar aunque ya haya cancelado la tarjeta?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+La acción de restitución de cantidades pagadas por intereses en un contrato usurario tiene un plazo de prescripción, por lo que conviene consultarlo con un profesional cuanto antes en lugar de asumir que ya no es posible.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular mi plan de pago de la tarjeta?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cuando cambie el tipo aplicado, si haces una compra nueva relevante, o si el emisor modifica la regla de cálculo del pago mínimo — cualquiera de estos cambios altera cuánto tiempo necesitas para liquidar el saldo.
 
-## Abrir la calculadora
+## Simula tu deuda
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tu saldo, tu TAE y la cuota que puedes pagar cada mes para ver cuánto tardarías en liquidar la deuda y cuánto interés total pagarías.
 
 [Calculadora de pago de tarjeta e intereses](/es/tools/credit-card-payoff/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero ni jurídico personalizado. Si sospechas que tu tarjeta tiene un interés usurario, consulta con un profesional cualificado antes de tomar ninguna decisión.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Consejo General del Poder Judicial — El Tribunal Supremo considera usurario un interés del 27,24% de una tarjeta revolving](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-), consultado 2026-07-31

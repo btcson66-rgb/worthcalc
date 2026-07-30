@@ -1,82 +1,65 @@
-﻿---
+---
 contentType: tool
 toolSlug: budget-builder
 locale: es
-title: "Planificador de presupuesto mensual"
-description: "Convierte ingresos y gastos semanales, mensuales y anuales en un presupuesto mensual comparable."
+title: "Planificador de presupuesto para ingresos irregulares (España)"
+description: "Convierte ingresos variables, la cuota de autónomos y el modelo 130 trimestral en un presupuesto mensual estable."
 relatedArticle: /es/budget-with-irregular-income/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Convierte ingresos y gastos semanales, mensuales y anuales en un presupuesto mensual comparable.
+Introduce tus ingresos de varios meses o trimestres, tus gastos fijos y tus recibos anuales o trimestrales, para obtener un presupuesto mensual estable que ya tenga en cuenta la cuota de autónomos y el pago fraccionado del IRPF.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Reúne tu facturación de al menos los últimos seis meses (no solo el mejor mes), tu cuota actual de autónomos según tu tramo de cotización, y tus gastos fijos y anuales (seguros, cuotas, impuestos periódicos).
 
-## Método de cálculo
+## Cómo se calcula
 
+`equivalente mensual = importe × veces al año ÷ 12; ingreso disponible = media de ingresos netos − cuota de autónomos − provisión del 20% para el modelo 130`
 
-`equivalente mensual = importe × veces al año ÷ 12`
+La calculadora convierte cualquier ingreso o gasto no mensual a su equivalente mensual, y separa la provisión para el modelo 130 y la cuota de autónomos del resto de tu presupuesto, para que no los confundas con dinero disponible para gastar.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-Ejemplo: 2.100 € netos mensuales más dos pagas extra, seguro anual de 480 € y gastos trimestrales de 150 €.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+Con una media de 2.100 € netos mensuales más dos pagas extra si trabajas también por cuenta ajena, un seguro anual de 480 € y gastos trimestrales de 150 €, la calculadora reparte esos importes en su equivalente mensual antes de mostrar el disponible real. Si eres autónomo, añade tu cuota mensual y una provisión del 20% de tu rendimiento neto para el modelo 130.
 
 ## Notas para España
 
-En España conviene separar salario neto, pagas extraordinarias y gastos anuales como seguros, IBI o matrícula. Si cobras 14 pagas, no conviertas las extras en dinero “libre” antes de reservar objetivos anuales.
+Desde 2023, la cuota de autónomos se fija según 15 tramos de rendimientos netos reales, y puede cambiarse hasta seis veces al año. El modelo 130 trimestral adelanta el 20% del rendimiento neto acumulado a cuenta del IRPF, salvo que apliques la regla del 70% de retenciones. Si cobras en 14 pagas como asalariado, no conviertas las extras en gasto disponible antes de reservar tus objetivos de ahorro anuales.
 
-## Límites y comprobaciones
+## Límites de esta calculadora
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
-
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
-
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento fiscal ni de gestoría personalizado. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. La cuota de autónomos y el porcentaje del modelo 130 son ejemplos editables: confirma siempre los importes vigentes con la Seguridad Social y la Agencia Tributaria.
 
 ## Guía relacionada
 
-Lee [Cómo presupuestar con ingresos irregulares](/es/budget-with-irregular-income/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [Presupuestar como autónomo: cuota por tramos y el modelo 130 trimestral](/es/budget-with-irregular-income/) para entender el sistema de tramos de cotización y cómo calcular la provisión trimestral de IRPF.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Por qué debo apartar el 20% de cada factura si el modelo 130 es trimestral?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+Porque si esperas al final del trimestre para calcularlo, es fácil haber gastado ya ese dinero. Apartarlo por factura evita sorpresas al presentar el modelo.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿La calculadora ajusta automáticamente mi tramo de cotización?
 
-No, son ejemplos editables.
+No, tienes que introducir la cuota de tu tramo actual; puedes cambiarla si prevés que tus ingresos van a subir o bajar de tramo.
 
-### ¿Se envían los datos?
+### ¿Qué pasa si tengo ingresos tanto de asalariado como de autónomo?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+Introduce cada fuente por separado con su frecuencia real (mensual, con pagas extra, o facturación variable) para que el equivalente mensual sea correcto para cada una.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿Debo restar gastos deducibles antes de introducir mis ingresos?
 
-No, solo compara escenarios.
+Sí, la calculadora trabaja con rendimiento neto (ingresos menos gastos deducibles de la actividad), que es también la base que usa la Seguridad Social para tu tramo de cotización.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo debería repetir este cálculo?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Cada trimestre al presentar el modelo 130, y cada vez que tu facturación media cambie de forma sostenida durante varios meses.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Seguridad Social — Nuevo sistema de cotización de autónomos por rendimientos netos](https://inclusion.seg-social.es/web/guest/w/el-gobierno-aprueba-el-nuevo-sistema-de-cotizacion-para-los-trabajadores-autonomos-basado-en-los-rendimientos-netos), consultado 2026-07-31
+- [Agencia Tributaria — Modelo 130, pago fraccionado del IRPF](https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G601.shtml), consultado 2026-07-31

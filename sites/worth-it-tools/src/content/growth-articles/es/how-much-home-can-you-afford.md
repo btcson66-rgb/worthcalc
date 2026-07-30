@@ -1,114 +1,82 @@
-﻿---
+---
 contentType: article
 articleSlug: how-much-home-can-you-afford
 locale: es
-title: "Cuánta vivienda puedes pagar después de los costes ocultos"
-description: "Estima un precio de vivienda con ingresos, deudas, entrada, tipo, impuestos, seguros y mantenimiento."
+title: "Cuánto piso puedes comprar en España: el precio no es solo el precio"
+description: "Por qué necesitas mucho más que el 20% de entrada para comprar vivienda en España: ITP o IVA+AJD, notaría, registro y el límite real del 80% de financiación."
 relatedTool: /es/tools/home-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Buscar piso con un presupuesto basado solo en "lo que me presta el banco" es el error más caro que se puede cometer al comprar vivienda en España. Entre el porcentaje que el banco no financia y los impuestos y gastos de la operación, el ahorro necesario suele superar con holgura el 20% que la mayoría de la gente tiene en mente.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## El error de mirar solo el precio de la vivienda
 
-## Qué decisión ayuda a resolver esta guía
+Cuando alguien dice "puedo gastar 200.000 € en un piso", normalmente está pensando en el precio de compra, no en el desembolso total que tendrá que hacer de su bolsillo. Esa cifra incluye la entrada que el banco no financia, los impuestos de la transmisión y los gastos de notaría, registro y gestoría — ninguno de los cuales suele estar cubierto por la hipoteca.
 
-Resolver un rango de precio de vivienda a partir de un límite mensual editable, incluyendo impuestos, seguro, comunidad, mantenimiento y efectivo necesario para comprar.
+## El 20% que el banco no te presta: por qué necesitas más ahorro del que crees
 
-## Datos que conviene reunir antes de calcular
+Según el [Informe de Estabilidad Financiera de primavera de 2026 del Banco de España](https://www.bde.es/f/webbde/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf), el LTV habitual para primera vivienda en España sigue siendo el 80% del menor valor entre precio de compra y tasación. Eso significa que, para un piso de 200.000 €, el banco financiaría hasta 160.000 € en condiciones estándar — y tendrías que aportar los 40.000 € restantes de tu bolsillo, antes de sumar ningún impuesto ni gasto. Algunas entidades ofrecen hasta el 90-95% para menores de 35 años o perfiles concretos, pero siguen siendo la excepción y suelen exigir avales o condiciones adicionales.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## ITP o IVA+AJD: cuánto suman los impuestos según dónde compres
 
-- Ingresos brutos y netos
-- Entrada y reserva de efectivo tras la compra
-- Tipo y plazo hipotecario
-- IBI, seguro, comunidad y mantenimiento
-- Otras deudas y límite de vivienda editable
+Si compras una vivienda de segunda mano, pagas el Impuesto sobre Transmisiones Patrimoniales (ITP), que gestiona cada comunidad autónoma y que varía de forma notable: en la Comunidad de Madrid el tipo general es del 6% sobre el mayor valor entre el precio y el valor de referencia catastral, según confirma la propia [Comunidad de Madrid](https://www.comunidad.madrid/atencion-contribuyente/transmisiones-patrimoniales-onerosas); otras comunidades aplican tipos más altos. Si compras vivienda nueva (de promotor), en su lugar pagas IVA al 10% más el Impuesto de Actos Jurídicos Documentados (AJD), cuyo tipo también fija cada comunidad, según recoge la [Agencia Tributaria](https://sede.agenciatributaria.gob.es/Sede/declaraciones-informativas-otros-impuestos-tasas/impuesto-sobre-transmisiones-patrimoniales-actos-juridicos/itp-ajd-transmisiones-derechos-reales-fianzas/actos-juridicos-documentados-ajd_.html). En ambos casos, comprueba el tipo exacto de tu comunidad antes de presupuestar: la diferencia entre comprar en Madrid y en una comunidad con ITP al 10% puede suponer miles de euros.
 
-## Cómo funciona el modelo
+## Notaría, registro y gestoría: la parte que casi nadie presupuesta
 
-`resolver el mayor precio cuya hipoteca + impuestos + seguro + comunidad + mantenimiento ≤ límite mensual elegido`
+Además del impuesto correspondiente, hay que sumar los honorarios de notaría (ligados a la cuantía de la escritura), la inscripción en el Registro de la Propiedad, y, si usas gestoría para tramitar la operación, sus honorarios. Estos gastos no están sujetos a un porcentaje fijo único, pero sumados de forma orientativa suelen representar entre uno y dos puntos porcentuales adicionales sobre el precio de la vivienda. Pide presupuesto cerrado a la notaría y a la gestoría antes de firmar: no forman parte de una tabla oficial nacional y varían según el importe de la operación.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Cuánto te presta realmente el banco (LTV y ratio de esfuerzo juntos)
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+El LTV del 80% fija el máximo que te prestan sobre el valor de la vivienda; tu ratio de esfuerzo —el porcentaje de tus ingresos netos que ya destinas a deuda, con un 35% como referencia habitual del Banco de España— fija si esa cuota mensual es asumible para tu perfil de riesgo. Los dos filtros actúan a la vez: puedes tener ahorrado el 20% de entrada y aun así no calificar si la cuota resultante supera tu ratio de esfuerzo razonable, o al revés, calificar por ingresos pero no tener el ahorro necesario para la entrada y los gastos.
 
-## Ejemplo reproducible
+## Ejemplo: comprar una vivienda de 220.000 € en dos comunidades distintas
 
-Con 4.500 € brutos, 300 € de otras deudas y un límite elegido del 35%, la carga total máxima sería 1.575 €, dejando 1.275 € para vivienda.
+Para una vivienda de segunda mano de 220.000 €: en una comunidad con ITP al 6%, el impuesto son 13.200 €; en una con ITP al 10%, son 22.000 €. Sumando una entrada del 20% (44.000 €) y unos gastos aproximados de notaría, registro y gestoría de 1.500-2.500 €, el desembolso total ronda entre 58.700 € y 68.500 € según la comunidad — muy por encima de los 44.000 € que muchas personas tienen en mente al pensar solo en "la entrada".
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Cómo construir tu presupuesto de compra paso a paso
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Subir un punto el tipo hipotecario.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Aumentar mantenimiento y seguro.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Reservar más efectivo tras la compra.
-
-## Errores habituales que cambian el resultado
-
-- Calcular solo capital e intereses
-- Usar todo el efectivo como entrada
-- Aplicar el mismo IBI y gastos a cualquier municipio
-- Confundir el máximo financiable con un presupuesto cómodo
-
-## Cómo interpretar el resultado en España
-
-Añade ITP o IVA/AJD según el tipo de vivienda, notaría, registro, gestoría, comunidad, IBI, seguro y mantenimiento. La TAE y el coste de la tasación deben verificarse.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+1. Fija el precio máximo de vivienda que quieres explorar y multiplícalo por el 20% para estimar la entrada mínima.
+2. Añade el ITP de tu comunidad (segunda mano) o el IVA del 10% más el AJD de tu comunidad (obra nueva) sobre ese mismo precio.
+3. Suma una estimación de notaría, registro y gestoría — pide presupuesto real antes de dar por buena una cifra genérica.
+4. Compara el total con tu ahorro disponible, dejando aparte un colchón de emergencia que no se destine a la compra.
+5. Calcula la cuota hipotecaria resultante y comprueba que tu ratio de esfuerzo se mantiene en un nivel razonable antes de comprometerte.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿El 80% de financiación es un límite legal?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+No, es la práctica habitual del mercado que refleja el propio Banco de España en sus informes de estabilidad financiera. Algunos bancos ofrecen porcentajes superiores en casos concretos, con condiciones adicionales.
 
-### ¿Qué dato suele influir más?
+### ¿Pago ITP o IVA por la vivienda que quiero comprar?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Depende de si es de segunda mano (ITP, gestionado por tu comunidad autónoma) o nueva, comprada directamente al promotor (IVA al 10% más AJD, también autonómico).
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Los gastos de notaría y registro son iguales en toda España?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+No hay una tarifa plana nacional aplicable a cualquier operación; dependen de la cuantía de la escritura y pueden variar. Pide presupuesto concreto antes de comprometer tu ahorro.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Puedo financiar los impuestos y gastos con la hipoteca?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+En condiciones estándar, no: el LTV del 80% se calcula sobre el valor de la vivienda, no sobre el coste total de la operación, así que impuestos y gastos suelen salir de tu ahorro.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular cuánta vivienda puedo pagar?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cuando cambien tus ingresos, tu ahorro disponible, el tipo de interés de referencia, o si te planteas comprar en una comunidad autónoma distinta con otro tipo de ITP o AJD.
 
-## Abrir la calculadora
+## Calcula tu presupuesto real
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tus ingresos, tu ahorro disponible y el tipo hipotecario estimado para ver un rango de precio de vivienda que tenga en cuenta impuestos, gastos y la cuota mensual resultante.
 
 [Calculadora de vivienda asequible y coste total](/es/tools/home-affordability/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero, fiscal ni jurídico personalizado. Los tipos de ITP y AJD varían por comunidad autónoma y pueden cambiar: confirma siempre la cifra vigente con la agencia tributaria autonómica correspondiente.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Banco de España — Informe de Estabilidad Financiera, primavera 2026, capítulo 4 (LTV de nuevas hipotecas)](https://www.bde.es/f/webbde/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf), consultado 2026-07-31
+- [Comunidad de Madrid — Transmisiones Patrimoniales Onerosas (tipo ITP vivienda)](https://www.comunidad.madrid/atencion-contribuyente/transmisiones-patrimoniales-onerosas), consultado 2026-07-31
+- [Agencia Tributaria — ITP y AJD, actos jurídicos documentados](https://sede.agenciatributaria.gob.es/Sede/declaraciones-informativas-otros-impuestos-tasas/impuesto-sobre-transmisiones-patrimoniales-actos-juridicos/itp-ajd-transmisiones-derechos-reales-fianzas/actos-juridicos-documentados-ajd_.html), consultado 2026-07-31

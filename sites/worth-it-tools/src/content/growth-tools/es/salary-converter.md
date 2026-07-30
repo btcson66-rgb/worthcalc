@@ -1,82 +1,65 @@
-﻿---
+---
 contentType: tool
 toolSlug: salary-converter
 locale: es
-title: "Conversor de salario por hora, mensual y anual"
-description: "Convierte salario por hora y anual considerando semanas trabajadas, horas extra, bonus y 12 o 14 pagas."
+title: "Conversor de salario por hora, mensual y anual (España)"
+description: "Convierte tu salario entre hora, mes y año teniendo en cuenta si cobras en 12 o 14 pagas, y compáralo con el SMI 2026."
 relatedArticle: /es/hourly-vs-annual-salary/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Convierte salario por hora y anual considerando semanas trabajadas, horas extra, bonus y 12 o 14 pagas.
+Introduce tu salario por hora, mensual o anual, tus horas trabajadas y si cobras en 12 o 14 pagas, para obtener la conversión completa y comparar de forma justa dos ofertas de trabajo distintas.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Confirma en tu contrato o convenio si cobras en 12 o 14 pagas, y si las pagas extra están prorrateadas dentro de las mensualidades o se cobran aparte en junio y diciembre. Usa tu jornada semanal contratada, no una estimación aproximada.
 
-## Método de cálculo
+## Cómo se calcula
 
+`salario bruto anual = salario por hora × horas semanales × semanas trabajadas; salario mensual = salario bruto anual ÷ número de pagas (12 o 14)`
 
-`salario bruto anual = tarifa por hora × horas pagadas por semana × semanas trabajadas + extras + bonus + comisiones`
+La calculadora mantiene la precisión completa internamente y solo redondea la cifra final, para que la comparación entre 12 y 14 pagas sea exacta.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-A 18 € por hora, 40 horas semanales y 48 semanas efectivas, el salario base anual es 34.560 € antes de extras.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+A 18 € la hora, 40 horas semanales y 48 semanas efectivas al año, el salario bruto anual base es de 34.560 €, antes de horas extra o bonus. En 14 pagas, eso son 2.468,57 € por paga; en 12 pagas, 2.880 € al mes. Cambia el número de pagas para ver cómo se reparte el mismo total anual.
 
 ## Notas para España
 
-Permite 12 o 14 pagas. Una paga extra cambia el importe por nómina, no necesariamente el salario anual. No estima IRPF ni cotizaciones sin un motor fiscal actualizado.
+El Salario Mínimo Interprofesional 2026 es de 1.221 € brutos mensuales en 14 pagas (17.094 € anuales); en 12 pagas equivale a 1.424,50 € mensuales. La calculadora no estima automáticamente tu retención de IRPF ni tu cotización a la Seguridad Social, porque dependen de tu situación personal y tu comunidad autónoma — usa el resultado bruto como punto de partida, no como tu ingreso neto real.
 
-## Límites y comprobaciones
+## Límites de esta calculadora
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
-
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
-
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento fiscal ni laboral personalizado; no calcula tu nómina neta real. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. No introduzcas datos identificables si vas a compartir el resultado por enlace.
 
 ## Guía relacionada
 
-Lee [Salario por hora o anual: cómo comparar ofertas](/es/hourly-vs-annual-salary/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [12 pagas o 14 pagas: por qué tu nómina no dice lo que ganas por hora](/es/hourly-vs-annual-salary/) para entender la diferencia entre 12 y 14 pagas, el SMI 2026 y cómo pasar de bruto a neto.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Por qué el resultado en 12 y en 14 pagas da el mismo total anual?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+Porque el salario bruto anual no cambia según cuántas pagas recibas: lo único que cambia es en cuántas partes se reparte a lo largo del año.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿La calculadora descuenta el IRPF automáticamente?
 
-No, son ejemplos editables.
+No, porque la retención depende de tu tramo de renta, tu situación personal y tu comunidad autónoma. El resultado que ves es bruto.
 
-### ¿Se envían los datos?
+### ¿Cómo comparo mi salario con el SMI 2026?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+Si cobras en 14 pagas, compáralo directamente con 1.221 € mensuales; si cobras en 12 pagas, compáralo con 1.424,50 € mensuales, que es el equivalente al mismo total anual.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿Incluye horas extra o bonus?
 
-No, solo compara escenarios.
+Puedes añadirlos como importes adicionales al salario base; la calculadora los suma al total anual antes de repartirlo entre las pagas que elijas.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo debería repetir esta conversión?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Al comparar una oferta de trabajo nueva, si cambia tu jornada o tus horas efectivas, o si tu empresa modifica el número de pagas de tu convenio.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [BOE — Real Decreto 126/2026, por el que se fija el salario mínimo interprofesional para 2026](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-3815), consultado 2026-07-31
+- [Agencia Tributaria — Retenciones del IRPF](https://sede.agenciatributaria.gob.es/Sede/Retenciones.shtml), consultado 2026-07-31

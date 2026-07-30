@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: home-affordability
 locale: fr
-title: "Calculateur de capacité d’achat immobilier"
-description: "Estimez un prix d’achat avec revenus, dettes, apport, taux, assurance, charges et entretien."
+title: "Calculateur de capacité d'achat immobilier (frais de notaire et apport inclus)"
+description: "Estimez un prix de bien soutenable en intégrant frais de notaire, apport, taxe foncière, assurance emprunteur et taux d'effort de 35 %."
 relatedArticle: /fr/how-much-home-can-you-afford/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Estimez un prix d’achat avec revenus, dettes, apport, taux, assurance, charges et entretien.
+Entrez vos revenus nets, vos crédits en cours, votre apport disponible et le taux visé pour obtenir un prix de bien soutenable, frais de notaire et apport minimal déduits de votre épargne disponible.
 
-## Comment utiliser le calculateur
+## Ce qu'il faut réunir avant de calculer
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Rassemblez vos revenus nets mensuels et le total de vos mensualités de crédit en cours. Notez votre épargne disponible pour l'apport et les frais de notaire séparément, et indiquez si le bien visé est ancien (7-8 % de frais) ou neuf (2-3 % de frais), car cet écart change fortement le prix de bien atteignable à épargne égale.
 
-## Méthode de calcul
+## Comment le calcul est fait
 
+`mensualité maximale = (revenus nets × taux d'effort choisi) − autres crédits ; prix de bien maximal = fonction du crédit obtenu, de l'apport disponible et des frais de notaire déduits de l'épargne totale`
 
-`résoudre le prix maximal tel que crédit + impôts + assurance + copropriété + entretien ≤ plafond logement choisi`
-
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+Le calculateur conserve la précision complète en interne et n'arrondit qu'à l'affichage. Il traite les frais de notaire et l'apport comme des montants distincts de la mensualité de crédit, et ajoute une estimation de taxe foncière annuelle mensualisée dans le budget logement total.
 
 ## Exemple chiffré
 
-Avec 5 000 € de revenus et 300 € d’autres crédits, un plafond illustratif de 35 % laisse 1 450 € pour le logement.
+Avec 5 000 € de revenus nets, 300 € d'autres crédits et un taux d'effort de 35 %, il reste 1 450 € pour le logement (mensualité, assurance, taxe foncière, copropriété). Sur un bien ancien, prévoyez environ 7 à 8 % de frais de notaire en plus du prix, à financer sur votre épargne et non sur le crédit. Testez l'effet de basculer entre ancien et neuf sur le prix de bien atteignable à apport constant.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Les repères 2026 à connaître
 
-## Repères pour la France
+Les frais de notaire représentent 7 à 8 % du prix dans l'ancien et 2 à 3 % dans le neuf ([economie.gouv.fr — frais de notaire](https://www.economie.gouv.fr/particuliers/gerer-mon-argent/investir-dans-limmobilier/achat-dun-bien-immobilier-quels-frais-de-notaire-devez-vous-payer), consulté le 2026-07-31). Les banques exigent en pratique un apport d'au moins 10 % du prix, l'apport moyen constaté restant sous 40 000 € selon la Banque de France ([Panorama des prêts à l'habitat des ménages, avril 2026](https://www.banque-france.fr/fr/publications-et-statistiques/statistiques/panorama-des-prets-lhabitat-des-menages-avril-2026), consulté le 2026-07-31). Le taux d'effort de référence HCSF reste de 35 %, assurance emprunteur comprise, sur une durée maximale de 25 ans ([HCSF — mesure relative à l'octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers), consulté le 2026-07-31).
 
-Ajoutez frais de notaire, assurance emprunteur, taxe foncière, charges de copropriété et entretien. Le repère de 35 % ne remplace pas le reste à vivre ni la décision bancaire.
+## Limites de ce calculateur
 
-## Limites et vérifications
-
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Cette estimation est pédagogique et ne remplace pas une simulation bancaire officielle ni un acte notarié précis, qui seuls peuvent chiffrer exactement les frais et la taxe foncière d'un bien donné. Le calcul s'exécute entièrement dans votre navigateur, sans envoi de données à un serveur. N'insérez ni numéro de compte, ni adresse précise, ni autre donnée identifiable dans un lien de résultat partagé.
 
 ## Guide associé
 
-Lire [Quel logement pouvez-vous réellement financer après les coûts oubliés ?](/fr/how-much-home-can-you-afford/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Capacité d'achat immobilier en France : frais de notaire, apport et taxe foncière avant le prix affiché](/fr/how-much-home-can-you-afford/) pour comprendre l'écart neuf/ancien, l'apport usuel et pourquoi le taux d'effort HCSF ne couvre pas tout le budget d'achat.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Le calculateur inclut-il automatiquement les frais de notaire ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Vous devez indiquer si le bien est ancien ou neuf pour que le calculateur applique le bon ordre de grandeur (7-8 % ou 2-3 %) sur votre épargne disponible.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Pourquoi mon apport doit-il être supérieur au simple montant de la mensualité ?
 
-Non, ce sont des exemples modifiables.
+Parce que les frais de notaire et souvent la garantie du prêt ne sont pas financés par le crédit lui-même : votre apport doit couvrir ces montants en plus de tout complément de prix souhaité.
 
-### Les données sont-elles envoyées ?
+### Le taux d'effort de 35 % inclut-il la taxe foncière ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+Non, ce seuil réglementaire porte sur la mensualité de crédit et l'assurance emprunteur ; la taxe foncière et les charges de copropriété s'ajoutent séparément à votre budget logement réel.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Le résultat garantit-il l'accord de la banque ?
 
-Non, il compare uniquement des scénarios.
+Non, il s'agit d'une estimation pédagogique ; seule la banque peut confirmer un accord de financement après étude complète du dossier.
 
-### Comment améliorer la précision ?
+### Quand dois-je refaire ce calcul ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+Après tout changement de revenu, de taux de crédit, ou avant de cibler un bien dans une commune différente où la taxe foncière peut varier significativement.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [economie.gouv.fr — achat d'un bien immobilier, quels frais de notaire ?](https://www.economie.gouv.fr/particuliers/gerer-mon-argent/investir-dans-limmobilier/achat-dun-bien-immobilier-quels-frais-de-notaire-devez-vous-payer), consulté le 2026-07-31
+- [impots.gouv.fr — comment est calculée ma taxe foncière ?](https://www.impots.gouv.fr/particulier/questions/comment-est-calculee-ma-taxe-fonciere-pourquoi-t-elle-augmente-en-2025), consulté le 2026-07-31
+- [Banque de France — Panorama des prêts à l'habitat des ménages, avril 2026](https://www.banque-france.fr/fr/publications-et-statistiques/statistiques/panorama-des-prets-lhabitat-des-menages-avril-2026), consulté le 2026-07-31

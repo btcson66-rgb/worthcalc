@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: car-affordability
 locale: fr
-title: "Calculateur de budget automobile et coût mensuel total"
-description: "Estimez un prix automobile soutenable après assurance, énergie, entretien, stationnement et épargne."
+title: "Calculateur de budget automobile (malus, carte grise, contrôle technique inclus)"
+description: "Estimez le prix de véhicule soutenable en incluant malus écologique, carte grise, contrôle technique et assurance, pas seulement la mensualité de financement."
 relatedArticle: /fr/true-cost-of-car-ownership/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Estimez un prix automobile soutenable après assurance, énergie, entretien, stationnement et épargne.
+Entrez votre revenu net mensuel, le plafond de budget transport que vous vous fixez, et vos coûts d'usage — assurance, carburant ou recharge, entretien, stationnement, carte grise, malus provisionné — pour obtenir la mensualité de financement réellement disponible.
 
-## Comment utiliser le calculateur
+## Ce qu'il faut réunir avant de calculer
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Rassemblez votre revenu net mensuel et vos engagements financiers existants. Demandez un devis d'assurance réel plutôt qu'une estimation, vérifiez le prix du cheval fiscal de votre région pour la carte grise, et si le véhicule visé est neuf, calculez le malus écologique applicable à ses émissions de CO2 et à son poids.
 
-## Méthode de calcul
+## Comment le calcul est fait
 
+`mensualité disponible pour le crédit = budget transport plafond − coûts d'usage récurrents ; capital maximal empruntable = mensualité × (1 − (1+taux mensuel)^−durée) ÷ taux mensuel`
 
-`mensualité disponible = budget transport − coûts d’usage ; capital maximal = mensualité × (1 − (1+r)^−n) ÷ r`
-
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+Le calculateur conserve la précision complète en interne et n'arrondit qu'à l'affichage. Il traite le malus écologique et la carte grise comme des coûts ponctuels à l'achat, à provisionner séparément du crédit, et le contrôle technique comme un coût récurrent tous les deux ans.
 
 ## Exemple chiffré
 
-Exemple : 3 200 € nets, plafond transport de 15 % et 260 € de coûts d’usage laissent 220 € pour le crédit.
+Avec 3 200 € de revenus nets, un plafond transport de 15 % (480 €) et 260 € de coûts d'usage récurrents (assurance, carburant, entretien, stationnement), il reste 220 € disponibles pour la mensualité de financement. Testez l'effet d'augmenter ou de réduire les coûts d'usage — notamment l'assurance, très variable selon le profil du conducteur — sur le capital maximal empruntable.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Les coûts qu'une mensualité publicitaire ne montre jamais
 
-## Repères pour la France
+Le malus écologique se déclenche dès 108 g/km de CO2 en 2026 pour toute première immatriculation française et peut atteindre 80 000 € au maximum, malus au poids compris à partir de 1 500 kg ([service-public.fr — malus CO2](https://www.service-public.gouv.fr/particuliers/vosdroits/F35947), consulté le 2026-07-31). Le tarif de la carte grise dépend du prix du cheval fiscal fixé par votre région ([service-public.fr — simulateur du prix du cheval fiscal](https://www.service-public.gouv.fr/simulateur/calcul/PrixCV), consulté le 2026-07-31). Le contrôle technique est obligatoire tous les deux ans après les quatre premières années du véhicule, à un tarif libre selon le centre ([securite-routiere.gouv.fr — contrôle technique voiture](https://www.securite-routiere.gouv.fr/node/38/controle-technique-voiture), consulté le 2026-07-31). Enfin, l'assurance responsabilité civile est une obligation légale pour tout véhicule, même non utilisé ([Code des assurances, article L211-1](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048523650), consulté le 2026-07-31).
 
-Ajoutez assurance, carburant ou recharge, entretien, stationnement, carte grise et éventuel malus. Une LOA ou LLD nécessite un modèle différent si la valeur résiduelle et le kilométrage sont contractuels.
+## Limites de ce calculateur
 
-## Limites et vérifications
-
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Cette estimation est pédagogique et ne remplace pas un devis d'assurance réel, une simulation officielle du malus pour un modèle précis, ni une offre de financement d'un établissement de crédit. Le calcul s'exécute entièrement dans votre navigateur, sans envoi de données à un serveur. N'insérez ni numéro de compte, ni nom, ni autre donnée identifiable dans un lien de résultat partagé. Ce calculateur ne couvre pas les contrats de location longue durée (LLD) ou LOA, dont la structure de coût diffère d'un crédit classique.
 
 ## Guide associé
 
-Lire [La mensualité n’est pas le coût réel d’une voiture](/fr/true-cost-of-car-ownership/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Coût réel d'une voiture en France : malus CO2, carte grise, contrôle technique et assurance](/fr/true-cost-of-car-ownership/) pour comprendre chaque poste de coût et comment neuf, occasion et location se comparent.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Le calculateur inclut-il le malus écologique automatiquement ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Non, indiquez-le vous-même comme coût ponctuel à provisionner, car il dépend entièrement des émissions de CO2 et du poids du véhicule visé.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Pourquoi le prix de la carte grise varie-t-il selon ma réponse à la région ?
 
-Non, ce sont des exemples modifiables.
+Parce que le prix du cheval fiscal est fixé par chaque conseil régional et peut différer significativement d'une région à l'autre pour un même véhicule.
 
-### Les données sont-elles envoyées ?
+### Le contrôle technique doit-il être budgété chaque année ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+Non, il est obligatoire tous les deux ans après les quatre premières années du véhicule ; provisionnez son coût sur cette base plutôt que mensuellement.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Puis-je utiliser ce calculateur pour une LLD ou une LOA ?
 
-Non, il compare uniquement des scénarios.
+Pas directement : ces contrats intègrent souvent le malus dans le loyer mensuel et suivent une logique de valeur résiduelle différente d'un crédit classique amortissable.
 
-### Comment améliorer la précision ?
+### Quand dois-je refaire ce calcul ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+Après tout changement de revenu, avant chaque nouveau devis d'assurance, ou si le barème du malus écologique est révisé en loi de finances.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [service-public.fr — taxe sur les émissions de CO2 des véhicules (malus CO2)](https://www.service-public.gouv.fr/particuliers/vosdroits/F35947), consulté le 2026-07-31
+- [securite-routiere.gouv.fr — contrôle technique voiture](https://www.securite-routiere.gouv.fr/node/38/controle-technique-voiture), consulté le 2026-07-31
+- [Code des assurances, article L211-1 (assurance obligatoire)](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048523650), consulté le 2026-07-31

@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: compound-growth
 locale: fr
-title: "Calculateur de croissance composée et objectif d’épargne"
-description: "Projetez les versements, frais, inflation et objectif, ou calculez l’effort mensuel requis."
+title: "Calculateur d'intérêts composés (Livret A et objectif d'épargne)"
+description: "Projetez un capital avec versements réguliers, frais de gestion et inflation, en comparant au taux garanti du Livret A."
 relatedArticle: /fr/how-compound-growth-works/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Projetez les versements, frais, inflation et objectif, ou calculez l’effort mensuel requis.
+Entrez un capital de départ, un versement régulier, un taux annuel et une durée pour projeter votre épargne, avec la possibilité de comparer un scénario garanti proche du Livret A à un scénario de rendement plus élevé mais non garanti.
 
-## Comment utiliser le calculateur
+## Ce qu'il faut réunir avant de calculer
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Notez votre capital de départ éventuel, le montant et la fréquence de vos versements réguliers, le taux annuel visé — distinguez bien un taux garanti (Livret A, LEP) d'un taux espéré sur un support non garanti (assurance-vie en unités de compte, PEA) — et les frais de gestion annuels applicables à votre support.
 
-## Méthode de calcul
-
+## Comment le calcul est fait
 
 `VF = VA(1+r)^n + versement × ((1+r)^n − 1) ÷ r`
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+Le calculateur conserve la précision complète en interne et n'arrondit qu'à l'affichage. Il applique les frais de gestion en réduisant le taux net utilisé pour chaque période, et peut afficher séparément la valeur nominale finale et sa valeur ajustée d'une hypothèse d'inflation que vous indiquez.
 
 ## Exemple chiffré
 
-10 000 € au départ et 350 € par mois pendant 15 ans avec scénarios à 3 %, 5 % et 7 %.
+Avec 100 € versés chaque mois pendant 20 ans, sans capital de départ, à un taux de 1,7 % proche du Livret A actuel, le capital final approche 28 600 € pour 24 000 € versés, soit environ 4 600 € d'intérêts cumulés. Comparez ce scénario garanti à un taux hypothétique plus élevé sur un support non garanti pour visualiser l'écart, en gardant à l'esprit que ce second scénario n'est ni garanti ni assuré.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Le repère du Livret A et de l'inflation
 
-## Repères pour la France
+Depuis le 1er août 2026, le Livret A rapporte 1,7 %, net d'impôt et de prélèvements sociaux, dans la limite d'un plafond de 22 950 € par personne ([economie.gouv.fr — le Livret A passe à 1,7 %](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/), consulté le 2026-07-31). L'inflation estimée par l'Insee était de 1,8 % sur un an en juin 2026, donnée provisoire ([Insee — informations rapides, juin 2026](https://www.insee.fr/fr/statistiques/9015205), consulté le 2026-07-31), ce qui rapproche le rendement réel du Livret A de zéro sur cette période.
 
-Le rendement est une hypothèse. Distinguez frais, inflation et fiscalité ; le calculateur ne remplace pas une simulation de produit réglementé.
+## Limites de ce calculateur
 
-## Limites et vérifications
-
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Cette projection est pédagogique et ne garantit aucun rendement futur, en particulier sur un support non garanti où le capital peut baisser. Le calcul s'exécute entièrement dans votre navigateur, sans envoi de données à un serveur. N'insérez ni numéro de compte, ni nom, ni autre donnée identifiable dans un lien de résultat partagé. Le modèle ne simule pas la fiscalité d'une assurance-vie ou d'un PEA, qui dépend de la durée de détention et de l'enveloppe choisie.
 
 ## Guide associé
 
-Lire [Croissance composée : versements, frais et inflation](/fr/how-compound-growth-works/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Intérêts composés : ce que le Livret A, les frais et l'inflation changent vraiment](/fr/how-compound-growth-works/) pour comprendre la capitalisation par quinzaine du Livret A, l'effet cumulé des frais de gestion et l'écart entre rendement nominal et rendement réel.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Le taux du Livret A est-il garanti sur toute la durée de la projection ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Non, il est révisé en principe deux fois par an ; le calculateur applique le taux constant que vous indiquez, ce qui est une simplification par rapport à la réalité d'un taux révisable.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Comment le calculateur traite-t-il les frais de gestion ?
 
-Non, ce sont des exemples modifiables.
+Il les déduit du taux brut avant d'appliquer la formule des intérêts composés, ce qui reflète leur effet cumulé année après année plutôt qu'une simple soustraction ponctuelle.
 
-### Les données sont-elles envoyées ?
+### Puis-je comparer un scénario garanti et un scénario non garanti dans le même calcul ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+Oui, testez deux taux différents séparément — un proche du Livret A, un autre hypothétique plus élevé — pour visualiser l'écart, en gardant à l'esprit que seul le premier est sans risque de perte en capital.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Le résultat tient-il compte de la fiscalité d'une assurance-vie ou d'un PEA ?
 
-Non, il compare uniquement des scénarios.
+Non, ces enveloppes ont une fiscalité spécifique selon la durée de détention ; ce calculateur affiche un montant brut avant application de cette fiscalité.
 
-### Comment améliorer la précision ?
+### Quand dois-je refaire ce calcul ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+À chaque révision du taux du Livret A (février et août), changement de votre effort d'épargne mensuel, ou si vous changez de support d'investissement.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [economie.gouv.fr — épargne réglementée, le Livret A passe à 1,7 %](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/), consulté le 2026-07-31
+- [economie.gouv.fr — Livret A, comment ça marche ?](https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/livret-comment-ca-marche), consulté le 2026-07-31
+- [Insee — informations rapides, prix à la consommation juin 2026](https://www.insee.fr/fr/statistiques/9015205), consulté le 2026-07-31

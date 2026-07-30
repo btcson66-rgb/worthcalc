@@ -1,114 +1,66 @@
-﻿---
+---
 contentType: article
 articleSlug: extra-mortgage-payments-guide
 locale: fr
-title: "Remboursement anticipé : ce qui change réellement"
-description: "Comparez l’échéancier initial avec des mensualités supplémentaires et des versements ponctuels."
+title: "Remboursement anticipé du prêt immobilier : indemnités, assurance emprunteur et loi Lemoine"
+description: "Le plafond légal des indemnités de remboursement anticipé, les cas d'exonération, et pourquoi changer d'assurance emprunteur via la loi Lemoine coûte souvent moins cher que rembourser par anticipation."
 relatedTool: /fr/tools/mortgage-payoff/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Un bon guide financier ne se contente pas d’afficher un chiffre final. Il doit permettre de refaire le calcul, d’identifier chaque hypothèse et de voir quelle donnée peut inverser la conclusion.
+Rembourser un prêt immobilier par anticipation en France n'a pas grand-chose à voir avec le "recast" ou le retrait d'une assurance PMI américaine. Le système français repose sur deux mécanismes distincts : un plafond légal sur l'indemnité que la banque peut réclamer, et une assurance emprunteur qui ne baisse pas automatiquement avec le capital remboursé — sauf si vous en changez, ce que la loi Lemoine autorise à tout moment depuis 2022.
 
-Ce guide distingue les données vérifiables du contrat ou du relevé des hypothèses modifiables. Commencez par les informations actuelles, puis comparez un scénario prudent, central et favorable sans transformer une estimation en garantie.
+## Deux indemnités possibles, pas une seule : le plafond des IRA
 
-## La décision que ce guide aide à préparer
+Quand un contrat de prêt immobilier prévoit une indemnité de remboursement anticipé (IRA), la loi encadre son montant maximal : la banque doit retenir le plus faible des deux calculs entre six mois d'intérêts sur le capital remboursé, calculés au taux moyen du prêt, et 3 % du capital restant dû avant le remboursement ([article R313-25 du Code de la consommation](https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/rembourser-son-credit-immobilier-avant-le-terme-comment-ca), consulté le 2026-07-31). Ce plafond s'applique par défaut aux prêts à taux fixe conclus avant 1999 : pour l'essentiel des crédits actuels, c'est la clause contractuelle qui fixe l'indemnité dans cette même limite légale, ce qui signifie que deux banques peuvent proposer des IRA différentes dans le même plafond.
 
-Mesurer l’effet d’un versement supplémentaire ou d’un remboursement ponctuel sur la durée, les intérêts et la trésorerie disponible.
+## Les cas où aucune indemnité n'est due
 
-## Les données à rassembler avant le calcul
+Trois situations exonèrent l'emprunteur de toute indemnité, quel que soit le contrat : la vente du bien à la suite d'un changement du lieu de travail de l'emprunteur ou de son conjoint, le décès de l'un des emprunteurs, ou la cessation forcée de l'activité professionnelle — notamment un licenciement ([article L313-48 du Code de la consommation](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032433263), consulté le 2026-07-31). Ces exceptions ne s'appliquent pas à un remboursement anticipé "de confort" motivé par une rentrée d'argent ou une envie de solder le crédit plus vite : dans ce cas, le plafond des 6 mois d'intérêts ou 3 % s'applique normalement si le contrat prévoit une indemnité.
 
-Utilisez le relevé, le contrat, la fiche de paie, l’avis fiscal ou l’indice officiel le plus récent. Indiquez la date de chaque taux, frais ou règle susceptible d’évoluer.
+## Réduire la durée ou réduire la mensualité : un choix qui change tout
 
-- Capital restant dû
-- Taux contractuel et durée restante
-- Mensualité de capital et intérêts
-- Versement mensuel supplémentaire et remboursements datés
-- Indemnité ou limite de remboursement anticipé
+Un versement ponctuel peut, selon le contrat, soit raccourcir la durée restante en conservant la mensualité initiale, soit réduire la mensualité en conservant la durée initiale. La première option maximise les intérêts économisés sur la durée totale du crédit ; la seconde libère immédiatement de la trésorerie mensuelle, ce qui compte davantage si l'objectif est d'alléger le budget plutôt que d'aller plus vite vers la fin du crédit. Le contrat de prêt précise généralement laquelle de ces deux options s'applique par défaut à un remboursement partiel, et si l'emprunteur peut choisir.
 
-## Fonctionnement du modèle
+## Exemple : 220 000 € restants, versement ponctuel de 15 000 €
 
-`taux mensuel = taux annuel ÷ 12 ; intérêts = capital initial × taux mensuel ; capital final = capital initial − (mensualité − intérêts) − remboursement supplémentaire`
+Un emprunteur avec 220 000 € de capital restant dû, un taux contractuel de 3,4 % et 23 ans restants effectue un versement ponctuel de 15 000 €. Si le contrat prévoit une IRA au taux maximal légal, la banque retient le plus faible entre 3 % de 15 000 € (450 €) et six mois d'intérêts sur ce même montant au taux moyen du prêt (environ 255 €) — soit 255 € d'indemnité dans cet exemple, puisque ce montant est inférieur au plafond de 3 %. En conservant la mensualité initiale, ce versement raccourcit la durée restante de plusieurs mois et réduit le total des intérêts futurs ; en réduisant la mensualité à la place, l'emprunteur gagne une baisse de charge mensuelle immédiate mais économise moins d'intérêts sur la durée totale.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## L'assurance emprunteur ne suit pas automatiquement le capital remboursé
 
-Le moteur conserve la précision complète et n’arrondit qu’à l’affichage. Séparez les flux de trésorerie, le calendrier, les frais, les impôts et les valeurs futures incertaines afin de rendre le calcul vérifiable.
+Un point souvent ignoré : contrairement à la mensualité de capital et d'intérêts, la cotisation d'assurance emprunteur d'un contrat groupe bancaire est fréquemment calculée sur le capital initial emprunté, pas sur le capital restant dû. Un remboursement anticipé partiel peut donc réduire les intérêts sans faire baisser d'un centime la cotisation d'assurance mensuelle, ce qui explique pourquoi deux emprunteurs avec le même capital restant dû peuvent payer des cotisations d'assurance très différentes selon l'ancienneté et le type de leur contrat.
 
-## Exemple reproductible
+## La loi Lemoine : un levier souvent plus rentable que le remboursement anticipé
 
-Exemple : capital restant dû de 220 000 €, taux annuel de 3,4 %, 23 ans restants et 200 € supplémentaires par mois.
+Depuis la loi du 28 février 2022, dite loi Lemoine, tout emprunteur peut résilier son contrat d'assurance emprunteur à tout moment et sans frais, pour le remplacer par un contrat individuel équivalent en garanties ([economie.gouv.fr — changer d'assurance emprunteur](https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/achat-immobilier-pouvez-vous-changer-dassurance-emprunteur), consulté le 2026-07-31). La loi supprime aussi le questionnaire médical lorsque la part assurée par personne est inférieure à 200 000 € et que le remboursement s'achève avant les 60 ans de l'assuré. Pour un emprunt souscrit avec l'assurance groupe de la banque, souvent plus chère qu'un contrat individuel équivalent, changer d'assurance peut faire économiser plusieurs milliers d'euros sur la durée restante du crédit — un montant qui dépasse fréquemment l'indemnité de remboursement anticipé économisée en remboursant plus vite.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Avant de rembourser par anticipation, comparer avec un placement au Livret A
 
-## Comparer trois scénarios plutôt qu’un seul
+Rembourser par anticipation n'est intéressant financièrement que si le taux du crédit dépasse ce que l'argent pourrait rapporter placé ailleurs sans risque. Avec un taux du Livret A à 1,7 % depuis le 1er août 2026 ([economie.gouv.fr — épargne réglementée, taux du Livret A](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/), consulté le 2026-07-31), un crédit immobilier à 3,4 % reste presque toujours plus coûteux à conserver qu'à rembourser par anticipation, sur la seule base de ce comparatif de taux — même si l'arbitrage complet doit aussi tenir compte de la fiscalité de l'épargne concernée et du besoin de garder une trésorerie disponible.
 
-Ne modifiez qu’une variable incertaine à la fois. Vous mesurez ainsi la sensibilité réelle sans laisser une hypothèse optimiste masquer un autre risque.
+## Foire aux questions
 
-- **Prudent:** Retenez des coûts plus élevés, une progression plus lente ou un revenu/rendement plus faible. Augmenter le taux s’il est variable.
-- **Central:** Utilisez les chiffres vérifiés et le comportement le plus probable. Décaler le versement ponctuel de douze mois.
-- **Favorable:** Testez une amélioration plausible, clairement présentée comme scénario et non comme prévision. Comparer avec l’échéancier sans versement supplémentaire.
+### L'indemnité de remboursement anticipé est-elle toujours de 3 % ?
 
-## Erreurs fréquentes qui faussent le résultat
+Non. La loi impose de retenir le plus faible entre 3 % du capital remboursé et six mois d'intérêts à ce même montant au taux moyen du prêt — ce qui donne souvent un montant inférieur à 3 % pour un versement remboursé tôt dans le crédit.
 
-- Utiliser le montant emprunté à l’origine au lieu du capital restant dû
-- Confondre le modèle avec le décompte exact de la banque
-- Oublier les indemnités ou restrictions contractuelles
-- Ne regarder que les intérêts économisés sans préserver une épargne de sécurité
+### Dans quels cas n'y a-t-il aucune indemnité à payer ?
 
-## Interprétation pour la France
+En cas de vente liée à un changement de lieu de travail, de décès de l'emprunteur, ou de cessation forcée de son activité professionnelle, notamment un licenciement.
 
-En France, le coût réel inclut souvent l’assurance emprunteur, qui n’est pas automatiquement réduite de la même façon que les intérêts. Vérifiez les indemnités de remboursement anticipé et si le contrat permet de diminuer la durée ou la mensualité.
+### Un remboursement anticipé fait-il automatiquement baisser mon assurance emprunteur ?
 
-## Méthode pratique étape par étape
+Pas nécessairement : de nombreux contrats groupe calculent la cotisation sur le capital initial, pas sur le capital restant dû. Vérifiez la clause de calcul de votre contrat.
 
-1. Définissez la question précise et l’horizon de comparaison.
-2. Saisissez d’abord les chiffres actuels vérifiables.
-3. Vérifiez que le modèle reproduit une mensualité, un solde ou un budget connu.
-4. Enregistrez les scénarios prudent, central et favorable.
-5. Repérez la première valeur qui inverse la conclusion : c’est le seuil d’équilibre.
-6. Contrôlez contrat, fiscalité et critères applicables avant d’agir.
+### La loi Lemoine s'applique-t-elle aux prêts déjà en cours ?
 
-## Interpréter le résultat sans en faire une promesse
+Oui, depuis le 1er septembre 2022, tous les emprunteurs peuvent changer d'assurance à tout moment, y compris sur des contrats signés avant cette date.
 
-Privilégiez une formulation conditionnelle : « Avec ces données et hypothèses, l’option A présente le coût modélisé le plus faible. » Le calculateur ne connaît pas toutes les clauses, règles d’octroi, évolutions de comportement ou besoins de trésorerie.
+### Faut-il rembourser par anticipation ou investir la somme disponible ?
 
-## Questions fréquentes
+Cela dépend de l'écart entre le taux de votre crédit et le rendement net attendu de votre épargne ; un crédit à un taux nettement supérieur au rendement sans risque disponible penche généralement en faveur du remboursement anticipé.
 
-### Pourquoi le résultat peut-il différer du relevé ou de l’offre ?
+## Simuler votre remboursement anticipé
 
-L’organisme peut utiliser d’autres dates, méthodes de capitalisation, frais, impôts ou arrondis. Reprenez les conditions exactes et comparez l’échéancier période par période.
-
-### Quelle donnée influence généralement le plus le résultat ?
-
-Testez d’abord le taux, la durée, le versement régulier et les frais ponctuels. L’analyse de sensibilité doit montrer la variable la plus déterminante.
-
-### Les valeurs initiales sont-elles des moyennes de marché ?
-
-Non. Ce sont des exemples modifiables, jamais des données de marché actuelles.
-
-### Le résultat garantit-il un crédit, une économie ou un rendement ?
-
-Non. Il s’agit d’un modèle pédagogique, pas d’une décision bancaire, d’un devis contractuel ou d’une promesse de placement.
-
-### Quand faut-il refaire le calcul ?
-
-Après toute modification importante du taux, du solde, du revenu, d’une charge récurrente, d’un indice officiel ou d’une clause.
-
-## Ouvrir le calculateur
-
-Ouvrez le calculateur associé, reproduisez l’exemple, puis remplacez chaque valeur par une donnée vérifiable.
-
-[Calculateur de remboursement anticipé du prêt immobilier](/fr/tools/mortgage-payoff/)
-
-## Limites éditoriales et sécurité
-
-Contenu pédagogique et estimatif uniquement ; il ne constitue pas un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé. N’insérez aucune donnée personnelle dans une URL partageable.
-
-## Sources officielles à revérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+Ouvrez le [calculateur de remboursement anticipé du prêt immobilier](/fr/tools/mortgage-payoff/), reproduisez l'exemple des 220 000 € ci-dessus, puis remplacez chaque valeur par votre capital restant dû et votre taux contractuel réel. Ce contenu est pédagogique et estimatif ; il ne remplace pas le décompte officiel de votre banque ni un conseil fiscal ou financier personnalisé. N'insérez aucune donnée identifiable dans un lien de résultat partagé. Les plafonds légaux cités proviennent du [Code de la consommation, articles R313-25 et L313-48](https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/rembourser-son-credit-immobilier-avant-le-terme-comment-ca) (consulté le 2026-07-31) et de la [loi Lemoine du 28 février 2022](https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/achat-immobilier-pouvez-vous-changer-dassurance-emprunteur) (consulté le 2026-07-31).

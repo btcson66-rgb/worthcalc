@@ -1,82 +1,65 @@
-﻿---
+---
 contentType: tool
 toolSlug: salary-converter
 locale: fr
-title: "Convertisseur salaire horaire, mensuel et annuel"
-description: "Convertissez salaire horaire et annuel avec semaines travaillées, heures supplémentaires et primes."
+title: "Convertisseur salaire horaire / annuel (base 35 heures)"
+description: "Convertissez un taux horaire en salaire annuel brut avec semaines travaillées, heures supplémentaires majorées et comparaison au SMIC 2026."
 relatedArticle: /fr/hourly-vs-annual-salary/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Convertissez salaire horaire et annuel avec semaines travaillées, heures supplémentaires et primes.
+Entrez votre taux horaire ou votre salaire brut annuel, vos heures hebdomadaires, vos semaines travaillées et d'éventuelles heures supplémentaires pour obtenir une conversion cohérente entre les deux bases, brut uniquement.
 
-## Comment utiliser le calculateur
+## Ce qu'il faut réunir avant de calculer
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Notez votre taux horaire brut ou votre salaire brut annuel tel qu'indiqué au contrat, vos heures hebdomadaires payées, le nombre de semaines réellement travaillées dans l'année (après déduction des congés), et si vous effectuez régulièrement des heures supplémentaires, leur nombre et leur taux de majoration contractuel.
 
-## Méthode de calcul
+## Comment le calcul est fait
 
+`salaire brut annuel = taux horaire × heures payées par semaine × semaines travaillées + heures supplémentaires majorées + primes`
 
-`salaire brut annuel = taux horaire × heures payées par semaine × semaines travaillées + heures supplémentaires + primes + commissions`
-
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+Le calculateur conserve la précision complète en interne et n'arrondit qu'à l'affichage. Il calcule uniquement des montants bruts : il ne simule ni les cotisations sociales salariales, ni le prélèvement à la source de l'impôt sur le revenu, qui dépendent de votre situation personnelle.
 
 ## Exemple chiffré
 
-À 20 € de l’heure, 35 heures par semaine et 47 semaines payées, le brut de base est de 32 900 € avant primes.
+À 20 € de l'heure, 35 heures par semaine et 47 semaines travaillées, le brut de base est de 32 900 € par an. Avec 4 heures supplémentaires hebdomadaires majorées à 25 %, ajoutez environ 4 700 € bruts par an. Comparez ce total au SMIC brut annuel pour un temps plein 35 heures afin de situer le résultat.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Le repère du SMIC et la majoration des heures supplémentaires
 
-## Repères pour la France
+Depuis le 1er juin 2026, le SMIC horaire brut est de 12,31 €, soit 1 867,02 € brut mensuel pour un temps plein de 35 heures ([service-public.fr — revalorisation du SMIC](https://www.service-public.gouv.fr/particuliers/actualites/A18916), consulté le 2026-07-31). Les heures supplémentaires sont majorées de 25 % pour les huit premières heures au-delà de 35 heures hebdomadaires, puis de 50 % ensuite, sauf accord différent ne pouvant descendre sous 10 %, et bénéficient d'une exonération d'impôt sur le revenu dans la limite de 7 500 € par an.
 
-Le salaire brut, le net avant impôt et le net payé ne sont pas interchangeables. Le calculateur ne simule pas les cotisations ni le prélèvement à la source.
+## Limites de ce calculateur
 
-## Limites et vérifications
-
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Cette conversion reste brute et pédagogique : elle ne remplace pas votre bulletin de paie, qui seul détaille précisément vos cotisations réelles, ni votre taux personnalisé de prélèvement à la source disponible sur impots.gouv.fr. Le calcul s'exécute entièrement dans votre navigateur, sans envoi de données à un serveur. N'insérez ni nom, ni numéro de sécurité sociale, ni autre donnée identifiable dans un lien de résultat partagé. Ce calculateur ne convient pas à un forfait jours, où la rémunération n'est pas rattachée à un nombre d'heures hebdomadaires.
 
 ## Guide associé
 
-Lire [Salaire horaire ou annuel : comparer sur la même base](/fr/hourly-vs-annual-salary/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Salaire horaire, 35 heures et salaire annuel : convertir sans se tromper de base](/fr/hourly-vs-annual-salary/) pour comprendre le SMIC 2026, la majoration des heures supplémentaires, et pourquoi brut, net avant impôt et net après prélèvement ne sont jamais le même chiffre.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Le résultat est-il mon salaire net ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Non, c'est un montant brut. Les cotisations salariales (environ 22 % du brut pour un non-cadre en ordre de grandeur) et le prélèvement à la source réduisent ensuite ce montant.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Comment le calculateur traite-t-il les heures supplémentaires ?
 
-Non, ce sont des exemples modifiables.
+Il applique le taux de majoration que vous indiquez (25 % ou 50 % par défaut selon le seuil légal, ou un autre taux si votre accord d'entreprise en prévoit un) sur les heures que vous saisissez au-delà de 35 heures hebdomadaires.
 
-### Les données sont-elles envoyées ?
+### Puis-je comparer mon salaire au SMIC avec cet outil ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+Oui, comparez votre résultat brut annuel ou mensuel au SMIC en vigueur (1 867,02 € brut mensuel pour 35 heures depuis juin 2026) pour situer votre niveau de rémunération.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Le calculateur fonctionne-t-il pour un forfait jours ?
 
-Non, il compare uniquement des scénarios.
+Pas de façon fiable : un forfait jours n'est pas rattaché à un nombre d'heures hebdomadaires, ce qui rend une conversion horaire théorique plutôt que représentative de votre contrat réel.
 
-### Comment améliorer la précision ?
+### Quand dois-je refaire ce calcul ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+À chaque revalorisation du SMIC, changement de taux horaire, ou modification du nombre d'heures supplémentaires régulières.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [service-public.fr — le SMIC va augmenter le 1er juin 2026](https://www.service-public.gouv.fr/particuliers/actualites/A18916), consulté le 2026-07-31
+- [urssaf.fr — comprendre les cotisations de votre bulletin de salaire](https://www.urssaf.fr/accueil/salarie/cotisations-urssaf-bulletin-paie.html), consulté le 2026-07-31

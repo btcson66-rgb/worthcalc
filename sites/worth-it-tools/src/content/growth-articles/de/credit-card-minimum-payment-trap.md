@@ -1,114 +1,74 @@
-﻿---
+---
 contentType: article
 articleSlug: credit-card-minimum-payment-trap
 locale: de
-title: "Die Mindestraten-Falle bei Kreditkartenschulden"
-description: "Berechnen Sie Laufzeit, Zinsen und notwendige Monatsrate bis zu einem Wunschdatum."
+title: "Dispozinsen berechnen: Warum der Dispokredit teurer ist als die Kreditkarte"
+description: "Dispozinsen liegen laut BaFin im Schnitt über 11 %. Rechenbeispiel, §504a-Beratungspflicht und wann ein Rahmenkredit noch teurer wird."
 relatedTool: /de/tools/credit-card-payoff/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+In den USA ist die Kreditkarte mit Mindestzahlung die klassische Schuldenfalle, weil sie standardmäßig revolvierend funktioniert. In Deutschland ist das anders: Die meisten Kreditkarten sind Charge Cards und rechnen den kompletten Monatsumsatz automatisch ab — die eigentliche Falle sitzt einen Schritt weiter, direkt auf dem Girokonto.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum die deutsche Kreditkarte meist nicht das Problem ist
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Klassische deutsche Kreditkarten (oft an ein Girokonto gekoppelt) sind in der Regel Charge Cards: Der komplette Monatsumsatz wird einmal im Monat automatisch und vollständig vom Referenzkonto abgebucht, eine Mindestzahlungsoption wie bei US-Karten gibt es dabei gar nicht. Nur wer aktiv eine „Kreditkarte mit Teilzahlungsfunktion" abschließt oder aktiviert, bekommt eine echte revolvierende Kartenschuld mit Mindestrate — und genau diese Funktion ist laut Marktbeobachtungen oft teurer als ein klassischer Ratenkredit und kann sogar die Zinsen des Dispokredits übersteigen.
 
-Laufzeit und Zinsen bei fester Rate, Mindestzahlung oder Zieldatum schätzen und dabei neue Umsätze sowie das Ende eines Aktionszinses berücksichtigen.
+## Der eigentliche Fallstrick: der Dispositionskredit
 
-## Welche Daten vor der Berechnung benötigt werden
+Der Dispositionskredit (Dispo) ist die eingeräumte Überziehungsmöglichkeit auf dem Girokonto — bequem, weil er ohne separaten Antrag automatisch zur Verfügung steht, und genau deshalb gefährlich. Nach aktuellen BaFin-Auswertungen von über 5.000 Kontomodellen bei rund 1.100 Banken und Sparkassen liegt der durchschnittliche Dispozins bei 11,28 % pro Jahr, mit einer Spanne von unter 7,5 % bis über 19 % je nach Institut ([BaFin — Konsumentenkredite vergleichen](https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/kredite-immobilienfinanzierung/kredite/konsumentenkredite-vergleichen/konsumentenkredite-vergleichen.html), abgerufen am 2026-07-31). Zum Vergleich: Neu vergebene klassische Ratenkredite kosten laut Bundesbank-Zinsstatistik im Schnitt deutlich weniger.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Geduldete Überziehung: noch teurer als der vereinbarte Dispo
 
-- Saldo der letzten Abrechnung
-- Geltender Jahreszins und Ende des Aktionszinses
-- Mindestzahlungsregel des Kartenanbieters
-- Feste Monatsrate oder Zielmonat
-- Neue Monatsumsätze und Gebühren
+Wer über den eingeräumten Dispo-Rahmen hinaus überzieht, landet in der „geduldeten Überziehung" — die Bank toleriert die Überschreitung, verlangt dafür aber meist einen noch höheren Zinssatz, oft im Bereich von 13 % und mehr, ohne dass ein fester Rahmen vertraglich vereinbart wurde. Diese Form der Überziehung ist die teuerste reguläre Kontoüberziehungsart und wird von der BaFin gesondert ausgewiesen ([BaFin-Kontenvergleich — Eingeräumte Kontoüberziehung](https://kontenvergleich.bafin.de/de/glossar/eingeraeumte-kontoueberziehung), abgerufen am 2026-07-31).
 
-## So funktioniert das Rechenmodell
+## § 504a BGB: Wann die Bank eine Beratung anbieten muss
 
-`Endsaldo = Anfangssaldo + neue Umsätze + Zinsen + Gebühren − Zahlung`
+Seit der Umsetzung der EU-Wohnimmobilienkreditrichtlinie und der Reform des Verbraucherkreditrechts ist die Bank gesetzlich verpflichtet, Ihnen ein Beratungsangebot zu unterbreiten, wenn Sie Ihren Dispo ununterbrochen über sechs Monate hinweg im Durchschnitt zu mehr als 75 % des vereinbarten Höchstbetrags in Anspruch genommen haben ([§ 504a BGB](https://www.gesetze-im-internet.de/bgb/__504a.html), abgerufen am 2026-07-31). Nehmen Sie das Angebot nicht an, muss die Bank es bei erneutem Erreichen der Schwelle wiederholen — es sei denn, Sie haben ausdrücklich erklärt, keine weiteren Angebote erhalten zu wollen. Diese Pflicht existiert nicht bei Kreditkarten-Teilzahlung oder Rahmenkrediten in gleicher gesetzlicher Form, was den Dispo strukturell noch stärker im Fokus des Verbraucherschutzes hält.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Rechenbeispiel: 2.000 € Dispo ein Jahr lang
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Bei 2.000 € dauerhaft ausgeschöpftem Dispo und einem Zinssatz von 11,3 % pro Jahr fallen bei durchgehender Nutzung über zwölf Monate rund 226 € Zinsen an — ohne dass sich der Saldo dabei automatisch verringert, wenn kein zusätzliches Geld zur Tilgung eingesetzt wird. Wird derselbe Betrag stattdessen über einen klassischen Ratenkredit mit deutlich niedrigerem Effektivzins finanziert und in festen Raten getilgt, sinkt sowohl die Zinslast als auch die Restschuld planmäßig — der entscheidende strukturelle Unterschied zum Dispo, der ohne aktive Tilgungsentscheidung bestehen bleibt.
 
-## Nachvollziehbares Rechenbeispiel
+## Rahmenkredit und Teilzahlungskarte: teurere Alternativen, nicht günstigere
 
-Beispiel: 5.000 € Saldo, 18 % effektiver Jahreszins, 220 € Monatsrate und keine neuen Umsätze.
+Ein Rahmenkredit (revolvierender Kredit, oft „Flexikredit" oder „PrivatKredit flexibel" genannt) funktioniert wie ein vom Girokonto losgelöster Dispo: Sie ziehen innerhalb eines vereinbarten Rahmens Geld, zahlen zurück und ziehen erneut, ohne neuen Vertrag. Die Sollzinsen liegen laut Marktbeobachtungen häufig über denen klassischer Ratenkredite und können die Dispozinsen sogar übersteigen. Kreditkarten mit aktivierter Teilzahlungsfunktion funktionieren ähnlich revolvierend und sind ebenfalls tendenziell teurer als ein zweckgebundener Ratenkredit. Beide Produkte wirken durch niedrige Mindestraten bequemer, verlängern aber bei bloßer Mindestzahlung die Laufzeit und die Gesamtzinskosten erheblich.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Wie man aus dem Dispo herauskommt: Umschuldung in einen Ratenkredit
 
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Monatlichen Neuumsatz ergänzen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Zins nach Aktionsende erhöhen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Mindestzahlung mit fester Rate vergleichen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Jahreszins durch zwölf teilen und damit das tägliche Verfahren exakt gleichsetzen
-- Weiterrechnen, obwohl die Rate nicht einmal die Zinsen deckt
-- Neue Umsätze oder Aktionsende auslassen
-- Mindestzahlung als universellen Prozentsatz darstellen
-
-## Einordnung für Deutschland
-
-Bei echten Kreditkarten mit Teilzahlung gelten andere Bedingungen als bei monatlich vollständig abgerechneten Charge Cards. Nutzen Sie den effektiven Jahreszins und die vertragliche Mindestrate.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Der wirksamste Hebel gegen dauerhafte Dispo-Nutzung ist meist die Umschuldung in einen klassischen Ratenkredit mit festem, niedrigerem Zinssatz und festem Tilgungsplan — dadurch wird aus einer offenen, zinstreibenden Position eine planbare mit sinkender Restschuld. Ob sich das lohnt, hängt vom Effektivzinsvergleich beider Angebote und eventuellen Sondertilgungsmöglichkeiten des Ratenkredits ab; die BaFin empfiehlt ausdrücklich, Konsumentenkredite vor Abschluss zu vergleichen, statt eine Überziehung dauerhaft laufen zu lassen.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Haben deutsche Kreditkarten überhaupt eine Mindestzahlung wie in den USA?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Nur wenn Sie eine Kreditkarte mit aktivierter Teilzahlungsfunktion nutzen. Die Standard-Kreditkarte in Deutschland ist meist eine Charge Card mit vollständiger monatlicher Abbuchung, ganz ohne Mindestzahlungsoption.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Ist der Dispo oder die Teilzahlungskarte teurer?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Das hängt vom jeweiligen Anbieter ab, aber Marktbeobachtungen zeigen, dass Teilzahlungskarten und Rahmenkredite die Dispozinsen häufig übertreffen. Vergleichen Sie immer den effektiven Jahreszins beider Angebote.
 
-### Sind die Startwerte Marktmittelwerte?
+### Wann muss meine Bank mir eine Beratung zum Dispo anbieten?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Nach § 504a BGB, wenn Sie den Dispo sechs Monate ununterbrochen im Schnitt zu über 75 % des vereinbarten Höchstbetrags ausgeschöpft haben.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Was ist der Unterschied zwischen Dispo und geduldeter Überziehung?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Der Dispo ist ein vertraglich vereinbarter Rahmen. Geduldete Überziehung liegt vor, wenn Sie diesen Rahmen überschreiten und die Bank dies toleriert — meist zu einem noch höheren Zinssatz.
 
-### Wann sollte neu gerechnet werden?
+### Senkt eine Umschuldung in einen Ratenkredit wirklich die Kosten?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+In der Regel ja, wenn der effektive Jahreszins des Ratenkredits unter Ihrem aktuellen Dispozins liegt und Sie den Kredit planmäßig tilgen, statt erneut zu überziehen.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Rechner, tragen Sie Ihren aktuellen Dispo- oder Kartensaldo, den geltenden Zinssatz und Ihre geplante Monatsrate ein, um Laufzeit und Gesamtzinsen zu vergleichen.
 
-[Kreditkarten-Schulden- und Zinsrechner](/de/tools/credit-card-payoff/)
+[Rechner für Dispo- und Kartenschulden](/de/tools/credit-card-payoff/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Finanz-, Steuer- oder Rechtsberatung. Die tatsächlichen Konditionen Ihrer Bank, insbesondere bei geduldeter Überziehung, können von den hier genannten Durchschnittswerten abweichen — prüfen Sie Ihren aktuellen Kontoauszug und vergleichen Sie Angebote, bevor Sie eine Umschuldung entscheiden.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [BaFin — Konsumentenkredite vergleichen](https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/kredite-immobilienfinanzierung/kredite/konsumentenkredite-vergleichen/konsumentenkredite-vergleichen.html) (abgerufen 2026-07-31); [BaFin-Kontenvergleich — Eingeräumte Kontoüberziehung](https://kontenvergleich.bafin.de/de/glossar/eingeraeumte-kontoueberziehung) (abgerufen 2026-07-31); [§ 504a BGB — Beratungspflicht bei Inanspruchnahme der Überziehungsmöglichkeit](https://www.gesetze-im-internet.de/bgb/__504a.html) (abgerufen 2026-07-31).

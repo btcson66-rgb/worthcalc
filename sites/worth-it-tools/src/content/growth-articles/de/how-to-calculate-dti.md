@@ -1,114 +1,70 @@
-﻿---
+---
 contentType: article
 articleSlug: how-to-calculate-dti
 locale: de
-title: "DTI berechnen, ohne ihn mit einer Kreditzusage zu verwechseln"
-description: "Berechnen Sie Wohnkosten- und Gesamt-Schuldendienstquote sowie Was-wäre-wenn-Szenarien."
+title: "Haushaltsrechnung statt DTI-Quote: Wie deutsche Banken Ihre Kreditwürdigkeit wirklich prüfen"
+description: "Warum die US-Schuldenquote hier nicht gilt: Haushaltsrechnung, §505a BGB, Schufa-Score und Pfändungsfreigrenze bei der Kreditvergabe."
 relatedTool: /de/tools/dti-calculator/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+In den USA prüfen Banken eine einzelne Kennzahl, die Debt-to-Income-Ratio. Deutsche Banken tun das nicht — sie sind gesetzlich verpflichtet, eine vollständige Haushaltsrechnung mit Ihren tatsächlichen Lebenshaltungskosten zu erstellen, nicht nur ein Verhältnis aus Schuldendienst und Einkommen zu berechnen.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum die US-amerikanische DTI-Quote hier kein Maßstab ist
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Die in den USA verbreitete Debt-to-Income-Ratio setzt monatliche Schuldenzahlungen ins Verhältnis zum Bruttoeinkommen und vergleicht das Ergebnis mit einem pauschalen Schwellenwert. Deutsche Banken arbeiten strukturell anders: Sie sind nach § 505a BGB gesetzlich verpflichtet, vor jedem Verbraucherdarlehensvertrag die Kreditwürdigkeit anhand der voraussichtlichen Fähigkeit zu prüfen, den Kredit während der gesamten Laufzeit zu bedienen — der sogenannten Kapitaldienstfähigkeit. Eine einzelne Quote reicht dafür nicht aus.
 
-Wohnkosten- und Gesamt-Schuldendienstquote berechnen und den Effekt einer getilgten Schuld testen, ohne eine Kreditzusage vorherzusagen.
+## Die Haushaltsrechnung: Wie Banken Ihre tatsächliche Kapitaldienstfähigkeit prüfen
 
-## Welche Daten vor der Berechnung benötigt werden
+Statt einer einzelnen Quote erstellen deutsche Banken eine detaillierte Haushaltsrechnung: Nettoeinkommen abzüglich realistischer Lebenshaltungskosten, bestehender Kreditraten, Versicherungen und weiterer fixer Verpflichtungen ergibt den Betrag, der für eine neue Kreditrate übrig bleibt. Setzt die Bank dabei unrealistisch niedrige Pauschalen für Lebenshaltungskosten an oder erhebt individuelle Ausgaben nicht korrekt, liegt ein Verstoß gegen § 505a BGB vor — mit möglichen Sanktionen nach § 505d BGB, die den Zinssatz für den Darlehensnehmer nachträglich erheblich senken können.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Schufa-Score: Was er misst und was nicht
 
-- Monatliches Bruttoeinkommen nach gewählter Definition
-- Monatliche Wohnverpflichtung
-- Mindestraten von Karten und Krediten
-- Unterhalt und weitere regelmäßige Pflichten
-- Nach gewählter Regel einbezogene Schulden
+Der Schufa-Score bewertet auf Basis der bei der Schufa gespeicherten Zahlungshistorie und laufenden Verträge, wie wahrscheinlich ein Zahlungsausfall statistisch ist — er ist eine Wahrscheinlichkeitseinschätzung, keine Berechnung Ihrer tatsächlichen finanziellen Leistungsfähigkeit. Ein guter Schufa-Score ersetzt bei deutschen Banken nicht die Haushaltsrechnung: Selbst mit einwandfreier Zahlungshistorie kann eine Bank einen Kredit ablehnen, wenn die Haushaltsrechnung keinen ausreichenden Spielraum für die neue Rate zeigt, und umgekehrt kann ein durchschnittlicher Score bei nachweislich solider Kapitaldienstfähigkeit ausreichen.
 
-## So funktioniert das Rechenmodell
+## Pfändungsfreigrenze: Die gesetzliche Untergrenze, die Banken mitdenken
 
-`Wohnkostenquote = Wohnrate ÷ monatliches Bruttoeinkommen; Gesamtquote = einbezogene Schuldzahlungen ÷ monatliches Bruttoeinkommen`
+Unabhängig von der individuellen Haushaltsrechnung gibt es eine gesetzliche Untergrenze, unter die Ihr pfändbares Einkommen nicht fallen darf: die Pfändungsfreigrenze nach § 850c ZPO. Seit dem 1. Juli 2026 liegt der monatliche Grundfreibetrag für eine Person ohne Unterhaltspflichten bei 1.587,40 €, mit einem Zuschlag von 597,42 € für die erste und je 332,83 € für weitere unterhaltsberechtigte Personen ([Bekanntmachung zu den Pfändungsfreigrenzen 2026 nach § 850c ZPO](https://www.gesetze-im-internet.de/pf_ndfreigrbek_2026/BJNR0500A0026.html), abgerufen am 2026-07-31). Seriöse Banken kalkulieren bei der Kreditvergabe so, dass im Fall unerwarteter Einkommensausfälle dieser gesetzlich geschützte Betrag nicht unterschritten würde — die Pfändungsfreigrenze wirkt damit indirekt als eine Art Sicherheitsmarge in der Haushaltsrechnung.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Rechenbeispiel: Haushaltsrechnung für ein Paar mit einem Kind
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Nehmen wir ein Paar mit 4.200 € gemeinsamem Nettoeinkommen und einem Kind. Nach Abzug realistischer Lebenshaltungskosten (nicht einer pauschalen Sparbuch-Tabelle), bestehender Kfz- und Ratenkreditverpflichtungen von 380 € sowie Versicherungsbeiträgen bleibt in diesem Beispiel ein Betrag von rund 950 € für eine neue Kreditrate übrig. Eine einfache DTI-Quote nach US-Vorbild — Gesamtschuldendienst geteilt durch Bruttoeinkommen — würde diesen Haushalt anders einordnen als die tatsächliche Haushaltsrechnung, weil sie individuelle Lebenshaltungskosten und Unterhaltspflichten nicht abbildet.
 
-## Nachvollziehbares Rechenbeispiel
+## Was die Haushaltsrechnung von einer einfachen Verschuldungsquote unterscheidet
 
-5.000 € Monatsbrutto, 1.200 € Wohnen und 350 € weitere Raten ergeben 24 % und 31 %.
-
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
-
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Eine getilgte Schuld entfernen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Einkommen vorsichtiger ansetzen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Vorgesehene Wohnrate erhöhen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Nettoeinkommen verwenden, obwohl Brutto verlangt wird
-- Kartensaldo statt Monatsrate eingeben
-- Notwendige Wohnnebenkosten auslassen
-- Orientierungswert als Kreditzusage darstellen
-
-## Einordnung für Deutschland
-
-Banken nutzen Haushaltsrechnung, Kapitaldienstfähigkeit, Beleihung, Bonität und eigene Pauschalen. Eine Quote allein ist keine Kreditzusage.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Der entscheidende strukturelle Unterschied: Eine Verschuldungsquote wie die DTI arbeitet mit einem Prozentsatz vom Bruttoeinkommen, unabhängig von der tatsächlichen Haushaltsgröße oder den realen Lebenshaltungskosten vor Ort. Die deutsche Haushaltsrechnung arbeitet umgekehrt vom Nettoeinkommen abwärts über tatsächliche Ausgaben zum verbleibenden Spielraum. Zwei Haushalte mit identischer DTI-Quote können bei der Haushaltsrechnung völlig unterschiedlich dastehen, wenn sich ihre Lebenshaltungskosten, Unterhaltspflichten oder regionalen Mietniveaus unterscheiden.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Reicht ein guter Schufa-Score für die Kreditzusage?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Nein. Der Schufa-Score ist eine Wahrscheinlichkeitseinschätzung zur Zahlungshistorie, ersetzt aber nicht die gesetzlich vorgeschriebene Haushaltsrechnung zur Kapitaldienstfähigkeit.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Was passiert, wenn die Bank meine Lebenshaltungskosten falsch ansetzt?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Das kann ein Verstoß gegen § 505a BGB sein. Mögliche Sanktionen nach § 505d BGB können den Zinssatz für Sie nachträglich erheblich senken.
 
-### Sind die Startwerte Marktmittelwerte?
+### Was ist die Pfändungsfreigrenze und warum ist sie hier relevant?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Sie ist der gesetzlich geschützte Mindestbetrag Ihres Einkommens, der auch bei einer Pfändung nicht angetastet werden darf. Banken kalkulieren bei der Haushaltsrechnung typischerweise so, dass dieser Betrag auch bei Zahlungsschwierigkeiten nicht unterschritten würde.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Kann ich eine einfache DTI-Quote trotzdem als groben Selbsttest nutzen?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Ja, als grobe erste Orientierung, aber nicht als Ersatz für die tatsächliche Prüfung Ihrer Bank, die deutlich mehr individuelle Faktoren berücksichtigt.
 
-### Wann sollte neu gerechnet werden?
+### Wie hoch ist die Pfändungsfreigrenze für eine Person mit einem unterhaltsberechtigten Kind?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Seit 1. Juli 2026 beträgt der Grundfreibetrag 1.587,40 € zuzüglich 597,42 € für die erste unterhaltsberechtigte Person, also insgesamt 2.184,82 € monatlich, bevor eine Pfändung greifen kann.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Rechner für eine grobe erste Einschätzung Ihrer Schuldendienstquote — ersetzen Sie ihn danach durch die tatsächliche Haushaltsrechnung Ihrer Bank, bevor Sie eine Finanzierungsentscheidung treffen.
 
-[Schuldendienstquote- und DTI-Rechner](/de/tools/dti-calculator/)
+[Schuldendienstquoten-Rechner](/de/tools/dti-calculator/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine grobe Rechenhilfe, keine individuelle Finanz- oder Rechtsberatung und keine verbindliche Kreditwürdigkeitsprüfung. Nur Ihre Bank kann anhand einer vollständigen Haushaltsrechnung und Ihres Schufa-Scores verbindlich beurteilen, ob und zu welchen Konditionen ein Kredit möglich ist.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [§ 505a BGB — Pflicht zur Kreditwürdigkeitsprüfung](https://www.gesetze-im-internet.de/bgb/__505a.html) (abgerufen 2026-07-31); [Bekanntmachung zu den Pfändungsfreigrenzen 2026 nach § 850c ZPO](https://www.gesetze-im-internet.de/pf_ndfreigrbek_2026/BJNR0500A0026.html) (abgerufen 2026-07-31); [Verbraucherzentrale Bundesverband — Kreditwürdigkeitsprüfung: Schutz für Verbraucher und Marktstabilität](https://www.vzbv.de/pressemitteilungen/kreditwuerdigkeitspruefung-schutz-fuer-verbraucher-und-marktstabilitaet) (abgerufen 2026-07-31).

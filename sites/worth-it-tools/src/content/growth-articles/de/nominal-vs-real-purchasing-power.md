@@ -1,116 +1,80 @@
-﻿---
+---
 contentType: article
 articleSlug: nominal-vs-real-purchasing-power
 locale: de
-title: "Nominaler Betrag und reale Kaufkraft"
-description: "Rechnen Sie Geldbeträge mit einer amtlichen Verbraucherpreisindex-Reihe zwischen Zeiträumen um."
+title: "Nominale Rendite oder reale Kaufkraft? Was der Verbraucherpreisindex von Destatis wirklich zeigt"
+description: "VPI mit Basis 2020=100 und der Unterschied zum harmonisierten Verbraucherpreisindex – so rechnen Sie einen Betrag korrekt zwischen zwei Jahren in heutige Kaufkraft um."
 relatedTool: /de/tools/inflation-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Eine Gehaltserhöhung von 3 % fühlt sich nur dann wie ein echter Zugewinn an, wenn die Preise im selben Zeitraum langsamer gestiegen sind. Ob das der Fall war, lässt sich nicht schätzen, sondern nur mit dem amtlichen Verbraucherpreisindex des Statistischen Bundesamts nachrechnen. Dieser Ratgeber erklärt, was der Index misst, warum es zwei offizielle Varianten gibt und wie Sie einen Betrag korrekt zwischen zwei Zeitpunkten umrechnen.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Der Verbraucherpreisindex (VPI): Deutschlands amtlicher Maßstab, Basis 2020=100
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Der Verbraucherpreisindex (VPI) misst die durchschnittliche Preisentwicklung eines repräsentativen Warenkorbs privater Haushalte in Deutschland und wird monatlich vom Statistischen Bundesamt (Destatis) veröffentlicht. Der aktuell gültige Index hat als Basisjahr 2020, geschrieben als 2020=100 ([Destatis — Verbraucherpreisindex und Inflationsrate](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html), abgerufen am 2026-07-31). Ein Indexwert von beispielsweise 112 würde bedeuten, dass der Warenkorb 12 % mehr kostet als im Jahr 2020 – der tagesaktuelle Indexstand für den von Ihnen benötigten Monat muss jedoch direkt bei Destatis abgerufen werden, da er sich laufend ändert und hier nicht als feste Zahl behauptet werden soll.
 
-Einen Betrag mit einer eindeutig bezeichneten amtlichen Preisindexreihe zwischen Jahren umrechnen und nominale Änderung von Kaufkraftänderung trennen.
+## VPI und HVPI: Warum es zwei offizielle Indizes gibt
 
-## Welche Daten vor der Berechnung benötigt werden
+Neben dem nationalen VPI veröffentlicht Destatis den Harmonisierten Verbraucherpreisindex (HVPI), der nach einer EU-weit einheitlichen Methodik berechnet wird und in erster Linie der Europäischen Zentralbank für den Vergleich der Inflation zwischen Euro-Ländern dient. Beide Indizes basieren auf derselben monatlichen Preiserhebung, unterscheiden sich aber in zwei wichtigen Punkten: Der HVPI enthält bislang keine unterstellte Miete für selbstgenutztes Wohneigentum, während der VPI diese über einen Nettokaltmieten-Ansatz schätzt; außerdem ist der Rundfunkbeitrag im deutschen HVPI seit 2020 nicht enthalten, im VPI dagegen schon ([Destatis — Harmonisierter Verbraucherpreisindex, Methodische Erläuterungen](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Erlaeuterungen/harmonisierter-verbraucherpreisindex.html), abgerufen am 2026-07-31). Für die Umrechnung von Alltagsbeträgen wie Gehalt, Miete oder Sparguthaben in Deutschland ist der nationale VPI die passendere Reihe; der HVPI eignet sich vor allem für Vergleiche mit anderen Euro-Ländern oder für die Einordnung der EZB-Geldpolitik.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Wie man einen Betrag korrekt zwischen zwei Jahren umrechnet
 
-- Ausgangs- und Zieljahr
-- Betrag im Ausgangsjahr
-- Amtliche VPI-Reihe und räumliche Abdeckung
-- Jahresdurchschnitt oder Monatsindex
-- Abrufdatum und Revisionsstand
+Um einen Betrag aus einem Ausgangsjahr in die Kaufkraft eines Zieljahres umzurechnen, benötigen Sie die Indexwerte beider Zeitpunkte aus derselben Reihe (VPI oder HVPI, nicht gemischt) und mit derselben Basis. Die Formel lautet: Vergleichsbetrag = Ausgangsbetrag × Index im Zieljahr ÷ Index im Ausgangsjahr. Die reale Kaufkraft des ursprünglichen Betrags, gemessen im heutigen Geld, ergibt sich spiegelbildlich als Ausgangsbetrag × Index im Ausgangsjahr ÷ Index im Zieljahr. Achten Sie darauf, ob Sie Jahresdurchschnittswerte oder Werte für einen bestimmten Monat vergleichen, und mischen Sie diese beiden Typen nicht in derselben Rechnung.
 
-## So funktioniert das Rechenmodell
+## Rechenbeispiel (illustrativ, keine aktuellen Indexwerte)
 
-`Vergleichsbetrag = Ausgangsbetrag × Ziel-VPI ÷ Ausgangs-VPI`
+Angenommen, ein Index steigt von 100 auf 115 zwischen zwei Zeitpunkten. Dann entsprechen 1.000 € aus dem früheren Zeitpunkt heute einem Betrag von 1.150 € – die reale Kaufkraft des ursprünglichen Betrags beträgt gemessen in heutigem Geld nur noch rund 87 % ihres nominalen Werts. Dieses Beispiel dient ausschließlich der Veranschaulichung der Rechenmethode mit runden, erfundenen Indexwerten. Für eine reale Berechnung müssen Sie die tatsächlichen, tagesaktuellen VPI- oder HVPI-Werte für Ihre beiden Zeitpunkte direkt von Destatis abrufen und in den Rechner eintragen.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Nominale Rendite vs. reale Rendite: Warum die Zinseszinsrechnung ohne Inflation täuscht
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Ein Sparguthaben, das nominal um 3 % pro Jahr wächst, während die Preise um 2,5 % steigen, wächst real nur um etwa 0,5 % – nicht um die einfache Differenz von 0,5 Prozentpunkten, sondern (1 + 0,03) ÷ (1 + 0,025) − 1, was näherungsweise demselben Wert entspricht, bei höheren Raten aber spürbar abweicht. Wer eine mehrjährige Zinseszinsprojektion nur nominal betrachtet, überschätzt systematisch, wie viel zusätzliche Kaufkraft am Ende tatsächlich zur Verfügung steht. Für Deutschland ist zusätzlich zu beachten, dass die nominale Rendite selbst schon vor Abzug der Kapitalertragsteuer betrachtet wird – die tatsächliche reale Nettorendite nach Sparerpauschbetrag, Abgeltungsteuer und gegebenenfalls Kirchensteuer liegt also nochmals unter dem hier beschriebenen Realwert.
 
-## Nachvollziehbares Rechenbeispiel
+## Häufige Fehler beim Kaufkraftvergleich
 
-Steigt der Index von 100 auf 115, entsprechen 1.000 € später 1.150 €; die ursprüngliche Kaufkraft beträgt 87 %.
+- VPI- und HVPI-Werte in derselben Rechnung mischen, obwohl sie unterschiedliche Warenkörbe abbilden
+- Jahresdurchschnittswerte mit Werten für einen einzelnen Monat vergleichen, ohne dies zu kennzeichnen
+- Den bundesweiten Gesamtindex für den exakten Preis eines einzelnen Produkts oder einer einzelnen Dienstleistung verwenden, statt spezifischere Teilindizes zu nutzen
+- Eine nominale Gehaltserhöhung ohne Abgleich mit dem VPI desselben Zeitraums als realen Kaufkraftgewinn darstellen
+- Annehmen, die persönliche Teuerung entspreche exakt dem bundesweiten Durchschnittswarenkorb, obwohl individuelle Ausgabenmuster stark abweichen können
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Wo der amtliche Indexwert veröffentlicht wird
 
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Jahresdurchschnitt und Monat nur mit dokumentierter Methode vergleichen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Anderes Ausgangsjahr testen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Nominales Lohnwachstum mit VPI vergleichen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Indexreihen mit anderer Abdeckung oder Basis mischen
-- Gesamt-VPI für den exakten Preis eines Produkts verwenden
-- Vor Synchronisierung amtlicher Daten veröffentlichen
-- VPI-Anpassung als identische Lebenshaltungskosten jedes Haushalts darstellen
-
-## Einordnung für Deutschland
-
-Nutzen Sie den Verbraucherpreisindex von Destatis und nennen Sie Basis sowie Monats- oder Jahreswert. Vertragsindexierungen können besondere Klauseln erfordern.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Destatis veröffentlicht den VPI monatlich, üblicherweise Mitte des Folgemonats als vorläufigen Wert, mit späterer endgültiger Bestätigung. Für eigene Umrechnungen bietet Destatis zusätzlich ein Online-Werkzeug, das die Indexreihe direkt verarbeitet, statt einzelne Werte manuell heraussuchen zu müssen ([Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html), abgerufen am 2026-07-31). Nutzen Sie für eine verbindliche Berechnung stets den zum Stichtag aktuellsten veröffentlichten Wert und vermerken Sie das Abrufdatum, da Werte rückwirkend revidiert werden können.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Was ist der Unterschied zwischen VPI und HVPI in einem Satz?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Der VPI ist Deutschlands nationaler Index mit Basis 2020=100 und schätzt auch Wohnkosten für Eigentümer; der HVPI folgt einer EU-weiten Methodik ohne diese Wohnkostenkomponente und ohne den Rundfunkbeitrag, vor allem zum Ländervergleich innerhalb der Eurozone.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Welchen Index sollte ich für meine Gehalts- oder Mietentwicklung nutzen?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+In der Regel den nationalen VPI, da er die in Deutschland tatsächlich erlebte Preisentwicklung einschließlich geschätzter Wohnkosten abbildet.
 
-### Sind die Startwerte Marktmittelwerte?
+### Warum enthält dieser Ratgeber keine aktuellen Indexwerte?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Weil sich der VPI monatlich ändert und veraltete Zahlen zu falschen Umrechnungen führen würden. Rufen Sie den tagesaktuellen Wert direkt bei Destatis ab, bevor Sie eine Berechnung für eine wichtige Entscheidung durchführen.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Ist eine nominale Gehaltserhöhung über der Inflationsrate automatisch ein realer Gewinn?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Ja, sofern beide Werte für denselben Zeitraum und dieselbe Indexreihe gemessen werden. Liegt die Erhöhung unter der gemessenen Preissteigerung, sinkt die reale Kaufkraft trotz höherem Nominalbetrag.
 
-### Wann sollte neu gerechnet werden?
+### Berücksichtigt die Kaufkraftrechnung auch Steuern auf Kapitalerträge?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Nein, dieser Ratgeber rechnet ausschließlich Beträge über die Zeit anhand des Preisindex um. Kapitalertragsteuer, Sparerpauschbetrag und Kirchensteuer sind separate Themen und mindern die reale Nettorendite zusätzlich.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den zugehörigen Rechner, tragen Sie Ihren Ausgangsbetrag sowie die tagesaktuellen VPI- oder HVPI-Werte für Ausgangs- und Zieljahr aus der Destatis-Reihe ein, um den umgerechneten Betrag und die reale Kaufkraftveränderung zu sehen.
 
 [Inflations- und Kaufkraftrechner](/de/tools/inflation-purchasing-power/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenmethode, keine individuelle Finanz-, Steuer- oder Rechtsberatung. Diese Seite bleibt bewusst als Entwurf markiert und von der Suchindexierung ausgeschlossen, bis die tatsächlichen, tagesaktuellen VPI-Werte direkt aus der amtlichen Destatis-Reihe eingebunden und redaktionell geprüft wurden; die hier gezeigten Zahlen sind ausschließlich illustrative Beispiele mit erfundenen Indexständen, keine echten Veröffentlichungswerte.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [Destatis — Verbraucherpreisindex und Inflationsrate](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) (abgerufen 2026-07-31); [Destatis — Harmonisierter Verbraucherpreisindex, Methodische Erläuterungen](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Erlaeuterungen/harmonisierter-verbraucherpreisindex.html) (abgerufen 2026-07-31); [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html) (abgerufen 2026-07-31).

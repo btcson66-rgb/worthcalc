@@ -1,114 +1,78 @@
-﻿---
+---
 contentType: article
 articleSlug: extra-mortgage-payments-guide
 locale: de
-title: "Sondertilgung: Was sich bei der Baufinanzierung wirklich ändert"
-description: "Vergleichen Sie den ursprünglichen Tilgungsplan mit monatlichen Sonderzahlungen und Einmaltilgungen."
+title: "Sondertilgung oder §489 BGB: Wann sich vorzeitige Tilgung wirklich lohnt"
+description: "Sondertilgungsrecht, Vorfälligkeitsentschädigung nach der Aktiv-Passiv-Methode und das kostenlose Sonderkündigungsrecht nach zehn Jahren erklärt."
 relatedTool: /de/tools/mortgage-payoff/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Wer eine Baufinanzierung vorzeitig tilgen will, stößt auf zwei völlig unterschiedliche Rechtslagen: Innerhalb der Sollzinsbindung entscheidet der Vertrag, ob und wie viel Sondertilgung möglich ist. Nach zehn Jahren entscheidet das Gesetz — unabhängig davon, was im Vertrag steht.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum die Restschuld in den ersten Jahren kaum sinkt
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Beim Annuitätendarlehen bleibt die Monatsrate konstant, aber der Zinsanteil ist am Anfang der Laufzeit am höchsten, weil er sich von der noch hohen Restschuld berechnet. Bei einem typischen Darlehen mit anfänglicher Tilgung von 2 % fließt in den ersten Jahren oft mehr als die Hälfte jeder Rate in Zinsen statt in Tilgung. Das ist der Grund, warum eine einzelne Sondertilgung früh in der Laufzeit überproportional viel Zinskosten über die Gesamtlaufzeit spart — sie wirkt auf den Teil der Restschuld, der sonst am längsten verzinst würde.
 
-Prüfen, wie stark regelmäßige Sondertilgungen oder eine Einmalzahlung Laufzeit und Zinsen senken und ob die geringere Liquidität vertretbar ist.
+## Sondertilgung ist Vertragssache, nicht Gesetz
 
-## Welche Daten vor der Berechnung benötigt werden
+Ein gesetzlicher Anspruch auf Sondertilgung während der laufenden Sollzinsbindung existiert nicht. Üblich am Markt sind bis zu 5 % der ursprünglichen Darlehenssumme pro Jahr kostenlos, manche Anbieter erlauben bis zu 10 % oder unbegrenzte Sondertilgung — teils gegen einen Zinsaufschlag von bis zu 0,25 Prozentpunkten auf den gesamten Kredit. Die Prozentangabe bezieht sich fast immer auf die ursprüngliche Darlehenssumme, nicht auf die aktuelle Restschuld oder den Kaufpreis. Wer das Sondertilgungsrecht nicht bereits bei Vertragsabschluss vereinbart hat, kann es später oft nur gegen Zinsaufschlag nachverhandeln.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Vorfälligkeitsentschädigung: Wann sie überhaupt anfällt
 
-- Aktuelle Restschuld
-- Sollzins und Restlaufzeit
-- Vertragliche Annuität
-- Monatliche Sonderzahlung und datierte Einmalzahlungen
-- Vorfälligkeitsentschädigung oder Sondertilgungsgrenze
+Eine Vorfälligkeitsentschädigung wird nur fällig, wenn Sie **mehr** zurückzahlen, als der Vertrag an Sondertilgung erlaubt, und dies **innerhalb** der laufenden Sollzinsbindung tun. Innerhalb des vertraglich vereinbarten Sondertilgungsrahmens entsteht der Bank kein Schaden, also auch keine Entschädigung. Kein Anspruch der Bank besteht außerdem in gesetzlich geregelten Ausnahmefällen — etwa wenn die Rückzahlung aus einer vertraglich vorgesehenen Versicherungsleistung stammt oder wenn der Vertrag unzureichende Angaben zur Laufzeit, zum Kündigungsrecht oder zur Berechnungsmethode der Entschädigung enthält ([§ 502 BGB, Absatz 2](https://www.gesetze-im-internet.de/bgb/__502.html), abgerufen am 2026-07-31).
 
-## So funktioniert das Rechenmodell
+## Wie Banken rechnen: die Aktiv-Passiv-Methode
 
-`Monatszins = Jahreszins ÷ 12; Zinsen = Anfangsrestschuld × Monatszins; Endrestschuld = Anfangsrestschuld − (Rate − Zinsen) − Sondertilgung`
+Die Vorfälligkeitsentschädigung wird in der Praxis fast ausschließlich nach der sogenannten Aktiv-Passiv-Methode berechnet: Die Bank vergleicht den entgangenen Zinsertrag aus Ihrem Kredit mit der Rendite, die sie erzielt, wenn sie den zurückgezahlten Betrag stattdessen in sicheren Kapitalmarkttiteln mit vergleichbarer Restlaufzeit anlegt. Grundlage für diese Wiederanlagerendite ist die Kapitalmarktstatistik der Deutschen Bundesbank, nicht ein bankinterner oder von Verbänden veröffentlichter Index — das hat der Bundesgerichtshof bereits 2004 festgelegt (BGH, Urteil vom 30.11.2004, Az. XI ZR 285/03). Vom Zinsschaden abgezogen werden müssen ersparte Risikokosten und ersparte Verwaltungskosten der Bank. Der Bundesgerichtshof hat zudem entschieden, dass auch ein negativer Wiederanlagezins in die Berechnung einfließen kann (BGH, Urteil vom 12.03.2024, Az. XI ZR 159/23) und dass die Bank bei unzureichenden Angaben zur Berechnungsmethode ihren gesamten Anspruch verlieren kann (BGH, Urteil vom 03.12.2024, Az. XI ZR 75/23) ([Verbraucherzentrale — Baufinanzierung vorzeitig ablösen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/baufinanzierung-vorzeitig-abloesen-ohne-extrakosten-aus-dem-baukredit-12773), abgerufen am 2026-07-31).
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Kein 1-Prozent-Deckel — anders als bei anderen Verbraucherkrediten
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Ein häufiger Irrtum: Bei einem Autokredit oder Ratenkredit deckelt § 502 BGB die Vorfälligkeitsentschädigung auf 1 % der zurückgezahlten Summe (0,5 % bei unter einem Jahr Restlaufzeit). Für grundpfandrechtlich besicherte Immobiliardarlehen gilt dieser Deckel **nicht** — hier greift stattdessen § 490 Abs. 2 BGB ohne feste Prozentgrenze, weil die Entschädigung den tatsächlichen wirtschaftlichen Nachteil der Bank ausgleichen soll. Genau deshalb lohnt sich vor jeder außerplanmäßigen Volltilgung ein Blick auf die Berechnung Ihrer Bank — Fehler oder unzureichende Vertragsangaben kommen laut mehreren BGH-Entscheidungen der letzten Jahre nicht selten vor.
 
-## Nachvollziehbares Rechenbeispiel
+## Rechenbeispiel: 280.000 € Restschuld, sechs Jahre Restbindung
 
-Beispiel: 250.000 € Restschuld, 3,5 % Sollzins, 25 Jahre Restlaufzeit und 250 € monatliche Sonderzahlung.
+Nehmen wir eine Restschuld von 280.000 € bei 3,6 % Sollzins mit sechs Jahren verbleibender Zinsbindung. Eine Sondertilgung von 20.000 €, die innerhalb des vertraglich vereinbarten 5-Prozent-Sondertilgungsrahmens liegt, kostet keine Entschädigung — sie verkürzt bei gleichbleibender Rate schlicht die Laufzeit. Würden Sie stattdessen 60.000 € auf einmal zurückzahlen, obwohl der Vertrag nur 5 % (14.000 €) im Jahr erlaubt, würde die Bank für die übersteigenden 46.000 € eine Vorfälligkeitsentschädigung nach der Aktiv-Passiv-Methode berechnen. Deren tatsächliche Höhe hängt vom aktuellen Wiederanlagezins laut Bundesbank-Statistik zum Zeitpunkt der Rückzahlung ab und lässt sich seriös nur mit den tagesaktuellen Daten berechnen — jede pauschale Prozentangabe ohne diese Grundlage ist eine grobe Schätzung, keine verbindliche Zahl.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## § 489 BGB: Nach zehn Jahren jederzeit kostenlos kündbar
 
-## Drei Szenarien statt nur eines vergleichen
+Unabhängig vom Vertrag und unabhängig von der ursprünglich vereinbarten Sollzinsbindung steht Ihnen nach zehn Jahren seit vollständiger Auszahlung des Darlehens ein gesetzliches Sonderkündigungsrecht zu ([§ 489 Abs. 1 Nr. 2 BGB](https://www.gesetze-im-internet.de/bgb/__489.html), abgerufen am 2026-07-31). Die Kündigungsfrist beträgt sechs Monate, danach ist die vollständige oder teilweise Rückzahlung **ohne** Vorfälligkeitsentschädigung möglich — selbst wenn Ihr Vertrag eine 15- oder 20-jährige Zinsbindung hat. Dieses Recht ist zwingend und kann vertraglich nicht wirksam ausgeschlossen werden. Wer eine sehr lange Zinsbindung mit vermeintlich günstigem Zins abgeschlossen hat, sollte sich den Zehn-Jahres-Stichtag notieren: Danach lohnt sich häufig ein Vergleich mit aktuellen Anschlusskonditionen, unabhängig vom Rest der Vertragslaufzeit.
 
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
+## Sondertilgen oder das Geld ins Tagesgeld legen?
 
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Variablen Zins erhöhen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Einmalzahlung um zwölf Monate verschieben.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Mit dem unveränderten Tilgungsplan vergleichen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Mit dem ursprünglichen Darlehensbetrag statt der Restschuld rechnen
-- Modellierte Restschuld mit der Ablösesumme der Bank gleichsetzen
-- Sondertilgungsgrenzen oder Gebühren übersehen
-- Nur Zinsersparnis betrachten und Notreserve aufbrauchen
-
-## Einordnung für Deutschland
-
-Bei deutschen Annuitätendarlehen sind Sollzinsbindung, anfänglicher Tilgungssatz, Sondertilgungsrecht und Restschuld entscheidend. Der Rechner bildet eine konstante Monatsrate ab; prüfen Sie, ob und in welcher Höhe Sondertilgungen vertraglich zulässig sind.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Ob eine kostenlose Sondertilgung sinnvoller ist als eine Anlage des gleichen Betrags, hängt vom Vergleich zwischen Sollzins des Kredits und der nach Steuern verbleibenden Rendite der Alternativanlage ab. Solange Tagesgeld- oder Festgeldzinsen unter dem Sollzins Ihres Kredits liegen, spart die Tilgung mehr, als die Anlage abwirft — ohne Kursrisiko und ohne Abgeltungssteuer, da ersparte Zinsen nicht steuerpflichtig sind. Liegt der erzielbare Nominalzins der Alternativanlage über dem Sollzins, kehrt sich die Rechnung um, sofern eine ausreichende Liquiditätsreserve unabhängig davon bestehen bleibt. Die tagesaktuellen Zinssätze für Tagesgeld und Festgeld sollten Sie vor der Entscheidung selbst prüfen, da sie sich laufend ändern.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Muss ich immer eine Vorfälligkeitsentschädigung zahlen, wenn ich vorzeitig tilge?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Nein. Innerhalb des vertraglich vereinbarten Sondertilgungsrahmens entsteht der Bank kein Schaden. Nach Ablauf von zehn Jahren seit Vollauszahlung greift zusätzlich das kostenlose Sonderkündigungsrecht nach § 489 BGB.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Gilt der 1-Prozent-Deckel aus § 502 BGB auch für meine Baufinanzierung?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Nein, dieser Deckel gilt nur für allgemeine Verbraucherdarlehen wie Raten- oder Autokredite. Für grundpfandrechtlich besicherte Immobiliardarlehen gibt es keine feste Prozentgrenze; die Entschädigung wird individuell nach der Aktiv-Passiv-Methode berechnet.
 
-### Sind die Startwerte Marktmittelwerte?
+### Woher weiß die Bank, welche Wiederanlagerendite sie ansetzen darf?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Laut Bundesgerichtshof muss die Bank die Kapitalmarktstatistik der Deutschen Bundesbank zugrunde legen, nicht einen eigenen oder verbandsinternen Index.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Ab wann läuft die Zehn-Jahres-Frist nach § 489 BGB?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Ab dem Tag nach vollständiger Auszahlung des Darlehens, nicht ab Vertragsunterschrift. Die Kündigungsfrist danach beträgt sechs Monate.
 
-### Wann sollte neu gerechnet werden?
+### Sollte ich vor einer großen Sondertilgung die Berechnung der Bank prüfen lassen?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Ja. Gerichte haben mehrfach festgestellt, dass Banken bei der Berechnung Fehler machen oder unzureichende Vertragsangaben verwenden — eine unabhängige Prüfung, etwa durch eine Verbraucherzentrale, kann sich lohnen.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Sondertilgungsrechner, tragen Sie Ihre tatsächliche Restschuld, Ihren Sollzins und die geplante Sondertilgung ein und vergleichen Sie die Restlaufzeit mit und ohne Sonderzahlung.
 
-[Rechner für Sondertilgung und vorzeitige Baufinanzierungs-Tilgung](/de/tools/mortgage-payoff/)
+[Rechner für Sondertilgung und vorzeitige Tilgung](/de/tools/mortgage-payoff/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Finanz-, Steuer- oder Rechtsberatung. Die tatsächliche Höhe einer Vorfälligkeitsentschädigung kann nur Ihre Bank anhand der tagesaktuellen Bundesbank-Zinsreihe und Ihrer konkreten Vertragsdaten verbindlich berechnen. Lassen Sie diese Berechnung im Zweifel unabhängig prüfen, bevor Sie eine größere Summe zurückzahlen.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [§ 489 BGB — Sonderkündigungsrecht](https://www.gesetze-im-internet.de/bgb/__489.html) (abgerufen 2026-07-31); [§ 502 BGB — Vorfälligkeitsentschädigung](https://www.gesetze-im-internet.de/bgb/__502.html) (abgerufen 2026-07-31); [Verbraucherzentrale — Baufinanzierung vorzeitig ablösen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/baufinanzierung-vorzeitig-abloesen-ohne-extrakosten-aus-dem-baukredit-12773) (abgerufen 2026-07-31); [Deutsche Bundesbank — Kapitalmarktstatistik](https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte) (abgerufen 2026-07-31).

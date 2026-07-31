@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: salary-converter
 locale: de
-title: "Stundenlohn-, Monats- und Jahresgehaltsrechner"
-description: "Rechnen Sie Stunden- und Jahreslohn mit Arbeitswochen, unbezahlter Zeit, Überstunden und Boni um."
+title: "Stundenlohn-Jahresgehalt-Rechner mit Mindestlohn-Vergleich"
+description: "Rechnen Sie Stundenlohn in Bruttojahresgehalt um und vergleichen Sie ihn mit dem gesetzlichen Mindestlohn von 13,90 € (2026)."
 relatedArticle: /de/hourly-vs-annual-salary/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Rechnen Sie Stunden- und Jahreslohn mit Arbeitswochen, unbezahlter Zeit, Überstunden und Boni um.
+Tragen Sie Stundenlohn, Wochenstunden, bezahlte Arbeitswochen sowie vertraglich zugesicherte Sonderzahlungen ein, um Ihr Bruttojahresgehalt zu berechnen und mit dem gesetzlichen Mindestlohn zu vergleichen.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Nehmen Sie den Stundenlohn aus Ihrem Arbeitsvertrag, nicht eine mündlich genannte Zahl. Prüfen Sie, wie viele Wochen im Jahr tatsächlich bezahlt werden — abzüglich unbezahlter Zeiten, aber inklusive bezahltem Urlaub und Feiertagen. Klären Sie außerdem, ob Urlaubs- oder Weihnachtsgeld vertraglich zugesichert sind: Ein gesetzlicher Anspruch darauf besteht in Deutschland nicht, sie zählen nur dann zum Jahresgehalt, wenn Tarifvertrag, Arbeitsvertrag oder betriebliche Übung sie vorsehen.
 
-## Berechnungsmethode
+## Wie der Rechner intern arbeitet
 
+`Bruttojahresgehalt = Stundenlohn × bezahlte Wochenstunden × bezahlte Wochen + Überstundenzuschlag + zugesicherte Sonderzahlungen`
 
-`Bruttojahresgehalt = Stundenlohn × bezahlte Wochenstunden × Arbeitswochen + Überstunden + Bonus + Provision`
-
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Der Rechner ermittelt das Bruttojahresgehalt, nicht das Netto — Lohnsteuer und Sozialversicherungsbeiträge hängen von individuellen Faktoren wie Steuerklasse und Krankenkasse ab und werden nicht automatisch abgezogen.
 
 ## Rechenbeispiel
 
-Bei 22 € pro Stunde, 40 Stunden pro Woche und 48 bezahlten Wochen ergibt sich ein Grundjahresbrutto von 42.240 €.
+Bei 22 € Stundenlohn, 40 Wochenstunden und 48 bezahlten Wochen im Jahr ergibt sich ein Bruttojahresgehalt von 42.240 €. Zum Vergleich: Der gesetzliche Mindestlohn von 13,90 € pro Stunde (Stand 1. Januar 2026) ergibt bei derselben Wochenstundenzahl rund 2.343 € brutto im Monat beziehungsweise etwa 28.120 € brutto im Jahr bei durchgehender Vollzeitbeschäftigung. Ersetzen Sie diese Beispielwerte durch Ihren tatsächlichen Stundenlohn und Ihre vertraglichen Konditionen.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Netto ist ein zweiter Rechenschritt
 
-## Hinweise für Deutschland
+Dieser Rechner endet bewusst beim Bruttojahresgehalt. Der Weg zum Netto führt über Steuerklasse, Kirchensteuerpflicht, individuellen Krankenkassenbeitrag und Kinderfreibeträge — Größen, die sich nicht pauschal aus dem Stundenlohn ableiten lassen. Nutzen Sie für die Nettoberechnung zusätzlich einen offiziellen Brutto-Netto-Rechner mit Ihren persönlichen Angaben.
 
-Brutto, Netto und Arbeitgeberkosten sind unterschiedliche Größen. Der Rechner führt keine Lohnsteuer- oder Sozialversicherungsberechnung durch.
+## Grenzen dieses Rechners
 
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Diese Seite ist eine allgemeine Rechenhilfe und keine individuelle Steuer- oder Rechtsberatung. Ob Urlaubs- oder Weihnachtsgeld tatsächlich gezahlt werden, hängt von Ihrem Arbeits- oder Tarifvertrag ab und wird vom Rechner nicht automatisch unterstellt. Alle Eingaben bleiben im Browser; tragen Sie keine Namens- oder sonstigen personenbezogenen Daten in einen teilbaren Ergebnislink ein.
 
 ## Passender Ratgeber
 
-Lesen Sie [Stundenlohn oder Jahresgehalt: Angebote fair vergleichen](/de/hourly-vs-annual-salary/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Brutto-Netto-Rechner verstehen: Vom Stundenlohn zum tatsächlichen Jahresgehalt](/de/hourly-vs-annual-salary/) für Steuerklassen, Sozialversicherungsbeiträge und warum Urlaubsgeld kein gesetzlicher Anspruch ist.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Berechnet der Rechner mein Nettogehalt?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nein, er berechnet das Bruttojahresgehalt. Für das Netto benötigen Sie zusätzlich Steuerklasse, Kirchensteuerpflicht und Krankenkassenbeitrag.
 
-### Sind Standardwerte Marktmittelwerte?
+### Soll ich Urlaubs- und Weihnachtsgeld automatisch einrechnen?
 
-Nein, sie sind nur editierbare Beispiele.
+Nur wenn Ihr Arbeits- oder Tarifvertrag sie vorsieht. Ein gesetzlicher Anspruch existiert nicht, daher rechnet der Rechner sie nicht automatisch dazu.
 
-### Werden Daten übertragen?
+### Wie vergleiche ich mein Ergebnis mit dem Mindestlohn?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Der gesetzliche Mindestlohn liegt seit 1. Januar 2026 bei 13,90 € brutto pro Stunde. Liegt Ihr eingegebener Stundenlohn darunter, prüfen Sie, ob eine gesetzliche Ausnahme vorliegt oder ob ein Fehler in Ihrem Vertrag steckt.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Was ist mit unbezahlten Pausen oder Krankheitstagen?
 
-Nein, es vergleicht Szenarien.
+Tragen Sie nur die tatsächlich bezahlten Wochenstunden und Wochen ein — unbezahlte Zeiten gehören nicht in die Berechnung des Bruttojahresgehalts.
 
-### Wie wird die Rechnung genauer?
+### Kann ich damit zwei Jobangebote vergleichen?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Ja, berechnen Sie beide Angebote mit identischer Methodik — inklusive oder exklusive vertraglich zugesicherter Sonderzahlungen — und vergleichen Sie erst danach die Bruttojahressummen.
 
+## Quellen
 
-## Vor der Veröffentlichung zu prüfende Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [BMAS — Mindestlohn steigt zum 1. Januar 2026 auf 13,90 Euro](https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/mindestlohn-steigt-zum-ersten-januar-2026.html), abgerufen am 2026-07-31
+- [Deutsche Rentenversicherung — Werte der Rentenversicherung](https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Zahlen-und-Fakten/Werte-der-Rentenversicherung/werte-der-rentenversicherung), abgerufen am 2026-07-31
+- [DGB — Weihnachtsgeld: Anspruch und Grundlagen](https://www.dgb.de/service/ratgeber/weihnachtsgeld/), abgerufen am 2026-07-31

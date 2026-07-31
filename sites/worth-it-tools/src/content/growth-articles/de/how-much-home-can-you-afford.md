@@ -1,114 +1,74 @@
-﻿---
+---
 contentType: article
 articleSlug: how-much-home-can-you-afford
 locale: de
-title: "Wie viel Immobilie ist nach allen Nebenkosten wirklich tragbar?"
-description: "Ermitteln Sie einen tragbaren Kaufpreis aus Einkommen, Schulden, Eigenkapital, Zins und Kaufnebenkosten."
+title: "Kaufnebenkosten berechnen: Warum ein Haus 10–15 % mehr kostet als der Kaufpreis"
+description: "Grunderwerbsteuer nach Bundesland, Notar- und Grundbuchkosten, geteilte Maklerprovision und übliches Eigenkapital für den Immobilienkauf."
 relatedTool: /de/tools/home-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Wer nur den Kaufpreis und die monatliche Kreditrate im Kopf hat, unterschätzt fast immer, wie viel Eigenkapital tatsächlich nötig ist. Kaufnebenkosten in Deutschland liegen typischerweise bei rund 10–15 % des Kaufpreises — und ein erheblicher Teil davon hängt vom Bundesland ab, in dem Sie kaufen.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum US-Faustregeln wie die 28/36-Regel hier nicht passen
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+In den USA verbreitete Faustregeln setzen die maximal tragbare Wohnrate ins Verhältnis zum Bruttoeinkommen. In Deutschland fehlt diesen Regeln ein entscheidender Baustein: die Kaufnebenkosten, die hierzulande deutlich höher ausfallen als in vielen anderen Ländern und die vollständig aus Eigenkapital finanziert werden sollten, da Banken sie in der Regel nicht mitfinanzieren.
 
-Eine Preisspanne aus einer veränderbaren monatlichen Wohnkostenobergrenze ableiten und Annuität, Hausgeld, Instandhaltung, Grundsteuer, Versicherung und Erwerbsnebenkosten einbeziehen.
+## Kaufnebenkosten: Was zusätzlich zum Kaufpreis fällig wird
 
-## Welche Daten vor der Berechnung benötigt werden
+Drei Positionen machen den Großteil der Kaufnebenkosten aus: die Grunderwerbsteuer, Notar- und Grundbuchkosten sowie — sofern ein Makler beteiligt war — die Maklerprovision. Zusammen liegen diese Posten je nach Bundesland und Maklerbeteiligung meist zwischen rund 9 % und 15 % des Kaufpreises, zusätzlich zum eigentlichen Kaufpreis selbst.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Grunderwerbsteuer: Warum sie von Bundesland zu Bundesland unterschiedlich ist
 
-- Brutto- und Nettoeinkommen
-- Eigenkapital und Reserve nach dem Kauf
-- Zins, Zinsbindung und Laufzeit
-- Hausgeld, Instandhaltung, Grundsteuer und Versicherung
-- Andere Schulden und veränderbare Wohnkostenobergrenze
+Die Grunderwerbsteuer ist eine Landessteuer — jedes der 16 Bundesländer legt seinen eigenen Steuersatz fest, aktuell in einer Bandbreite von 3,5 % bis 6,5 % des Kaufpreises. Bayern und Sachsen liegen historisch am unteren Ende dieser Spanne, mehrere andere Länder am oberen Ende bei 6,5 %. Da einzelne Länder ihren Satz in den letzten Jahren mehrfach angepasst haben, sollten Sie den tagesaktuellen Satz für Ihr konkretes Bundesland direkt prüfen, statt sich auf eine pauschale Tabelle zu verlassen ([Bundesministerium der Finanzen — Grunderwerbsteuer](https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Grundsteuer_Grunderwerbsteuer/Grundsteuer_Grunderwerbsteuer.html), abgerufen am 2026-07-31).
 
-## So funktioniert das Rechenmodell
+## Notar- und Grundbuchkosten: gesetzlich gedeckelt, nicht verhandelbar
 
-`höchsten Kaufpreis lösen, für den Annuität + Steuern + Versicherung + Hausgeld + Instandhaltung ≤ gewählte Monatsgrenze`
+Notar- und Grundbuchkosten sind bundesweit einheitlich im Gerichts- und Notarkostengesetz (GNotKG) geregelt und hängen ausschließlich vom Kaufpreis ab, nicht vom gewählten Notar oder Bundesland — ein Notar in München darf für dieselbe Beurkundung nicht mehr verlangen als einer in Rostock. In der Praxis liegen Notarkosten bei rund 1,0–1,5 % und Grundbuchkosten bei rund 0,5 % des Kaufpreises, zusammen also üblicherweise 1,5–2 %. Üblicherweise trägt der Käufer diese Kosten vollständig, da er den Eigentumserwerb veranlasst.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Maklerprovision: seit 2020 hälftig geteilt
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Seit der gesetzlichen Neuregelung von Ende 2020 teilen sich Käufer und Verkäufer die Maklerprovision bei privat verkauften Wohnungen und Einfamilienhäusern in der Regel zu gleichen Teilen ([§§ 656c, 656d BGB](https://www.gesetze-im-internet.de/bgb/__656c.html), abgerufen am 2026-07-31). Für Gewerbeimmobilien und Mehrfamilienhäuser gilt diese Regel nicht. Wie hoch die Gesamtprovision ausfällt, ist weiterhin regional unterschiedlich und frei verhandelbar — informieren Sie sich vor der Beauftragung über die ortsübliche Höhe.
 
-## Nachvollziehbares Rechenbeispiel
+## Wie viel Eigenkapital in der Praxis üblich ist
 
-Bei 5.500 € Monatsbrutto, 350 € anderen Raten und einer selbst gewählten 35-%-Grenze bleiben 1.575 € für die Wohnkosten.
+Als Faustregel gilt in der Praxis häufig, dass die Kaufnebenkosten — Grunderwerbsteuer, Notar, Grundbuch und gegebenenfalls halbe Maklerprovision — vollständig aus Eigenkapital gedeckt sein sollten, da Banken diesen Teil in der Regel nicht finanzieren. Wer zusätzlich einen Teil des Kaufpreises selbst einbringt, verbessert typischerweise die Beleihungsquote und damit oft auch die angebotenen Kreditkonditionen — eine feste Mindestquote schreibt jedoch kein Gesetz vor, sie hängt von der individuellen Haushaltsrechnung und Risikobewertung Ihrer Bank ab.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Rechenbeispiel: 450.000 € Kaufpreis mit Makler
 
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Zins um einen Prozentpunkt erhöhen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Instandhaltung und Versicherung erhöhen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Mehr Reserve nach dem Kauf behalten.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Nur Zins und Tilgung rechnen
-- Gesamtes Barvermögen als Eigenkapital einsetzen
-- Einheitliche Nebenkosten für jeden Ort verwenden
-- Bankmaximum mit komfortablem Haushaltsbudget gleichsetzen
-
-## Einordnung für Deutschland
-
-Kaufnebenkosten können Grunderwerbsteuer, Notar, Grundbuch und Makler umfassen. Hausgeld, Instandhaltung und Anschlussfinanzierung gehören in ein realistisches Szenario.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Bei einem Kaufpreis von 450.000 € in einem Bundesland mit 6 % Grunderwerbsteuer fallen rund 27.000 € Grunderwerbsteuer an. Notar- und Grundbuchkosten von rund 1,8 % ergeben etwa 8.100 €. Bei einer Gesamtmaklerprovision von beispielsweise 6 % (3.570 € brutto je Seite bei hälftiger Teilung, abhängig vom regional vereinbarten Satz) kommen für den Käufer weitere rund 13.900 € hinzu. In diesem Beispiel liegen die gesamten Kaufnebenkosten bei etwa 49.000 € — rund 11 % des Kaufpreises, zusätzlich zum eigentlichen Immobilienpreis. Diese Zahlen sind ein Rechenbeispiel mit angenommenen Sätzen; prüfen Sie den tatsächlichen Grunderwerbsteuersatz Ihres Bundeslands und die ortsübliche Maklerprovision vor einer eigenen Kalkulation.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Finanziert meine Bank die Kaufnebenkosten mit?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+In der Regel nicht vollständig. Banken finanzieren meist nur einen Teil oder gar keinen Anteil der Kaufnebenkosten — planen Sie diese separat aus Eigenkapital ein.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Warum unterscheidet sich die Grunderwerbsteuer so stark je nach Bundesland?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Weil sie eine Landessteuer ist und jedes Bundesland den Satz eigenständig festlegt und über die Jahre anpassen kann — aktuell reicht die Bandbreite von 3,5 % bis 6,5 %.
 
-### Sind die Startwerte Marktmittelwerte?
+### Muss ich als Käufer immer die Hälfte der Maklerprovision zahlen?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Bei privat verkauften Wohnungen und Einfamilienhäusern ist die hälftige Teilung seit Ende 2020 gesetzlich vorgeschrieben. Bei Gewerbeimmobilien und Mehrfamilienhäusern gilt diese Regel nicht.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Sind Notarkosten verhandelbar?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Nein, sie sind bundesweit einheitlich im GNotKG geregelt und hängen nur vom Kaufpreis ab, nicht vom gewählten Notar.
 
-### Wann sollte neu gerechnet werden?
+### Wie viel Eigenkapital brauche ich mindestens?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Es gibt keine gesetzliche Mindestquote. In der Praxis sollten die Kaufnebenkosten aus Eigenkapital gedeckt sein, da sie meist nicht mitfinanziert werden — wie viel darüber hinaus sinnvoll ist, hängt von Ihrer individuellen Haushaltsrechnung ab.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Rechner, tragen Sie Kaufpreis, Grunderwerbsteuersatz Ihres Bundeslands, Notar- und Grundbuchkosten sowie eine mögliche Maklerprovision ein, um den tatsächlich benötigten Gesamtbetrag zu sehen.
 
 [Immobilien-Budget- und Wohnkostenrechner](/de/tools/home-affordability/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Finanz-, Steuer- oder Rechtsberatung. Der tatsächliche Grunderwerbsteuersatz Ihres Bundeslands und die ortsübliche Maklerprovision können vom Rechenbeispiel abweichen und sollten vor einer Kaufentscheidung amtlich beziehungsweise beim Makler geprüft werden.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [Bundesministerium der Finanzen — Grundsteuer und Grunderwerbsteuer](https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Grundsteuer_Grunderwerbsteuer/Grundsteuer_Grunderwerbsteuer.html) (abgerufen 2026-07-31); [§§ 656c, 656d BGB — Teilung der Maklerprovision](https://www.gesetze-im-internet.de/bgb/__656c.html) (abgerufen 2026-07-31); [Gerichts- und Notarkostengesetz (GNotKG)](https://www.gesetze-im-internet.de/gnotkg/) (abgerufen 2026-07-31).

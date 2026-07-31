@@ -1,82 +1,67 @@
-﻿---
+---
 contentType: tool
 toolSlug: compound-growth
 locale: de
 title: "Zinseszins- und Sparzielrechner"
-description: "Projizieren Sie Einzahlungen, Kosten, Inflation und Sparziel oder berechnen Sie die notwendige Monatsrate."
+description: "Projizieren Sie Startkapital, Sparrate, Rendite, Kosten und Inflation zu einem nominalen und einem inflationsbereinigten Endwert oder lösen Sie nach der nötigen Monatsrate."
 relatedArticle: /de/how-compound-growth-works/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Projizieren Sie Einzahlungen, Kosten, Inflation und Sparziel oder berechnen Sie die notwendige Monatsrate.
+Projizieren Sie Startkapital, monatliche Sparrate, angenommene Rendite, laufende Kosten und Inflation zu einem nominalen und einem inflationsbereinigten Endwert – oder lassen Sie die Monatsrate berechnen, die für ein Sparziel nötig ist.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Nehmen Sie den aktuellen Kontoauszug oder Depotauszug für das Startkapital und Ihre tatsächliche monatliche Sparrate. Für die Renditeannahme hilft ein Blick in die Effektivzinsstatistik Ihrer Bank oder die monatliche Zinsstatistik der Deutschen Bundesbank für Tagesgeld und Festgeld, statt Werbezinsen einzelner Neukundenaktionen zu übernehmen. Wichtig: Die hier angesetzte Rendite ist eine Bruttoannahme vor Kapitalertragsteuer. Der Rechner selbst modelliert die deutsche Kapitalertragsbesteuerung nicht separat – Sparerpauschbetrag, Abgeltungsteuer, Solidaritätszuschlag und gegebenenfalls Kirchensteuer müssen Sie vorher gedanklich oder rechnerisch von der erwarteten Bruttorendite abziehen.
 
-## Berechnungsmethode
+## Wie der Rechner intern arbeitet
 
+`Nominaler Endwert = Startkapital × (1 + Nettorendite)^Jahre + Sparrate × ((1 + Nettomonatszins)^Monate − 1) ÷ Nettomonatszins; inflationsbereinigter Endwert = nominaler Endwert ÷ (1 + Inflationsrate)^Jahre`
 
-`Endwert = Anfangswert(1+r)^n + Sparrate × ((1+r)^n − 1) ÷ r`
+Die Nettorendite ergibt sich aus der eingegebenen Jahresrendite abzüglich der eingegebenen laufenden Jahreskosten (z. B. Depot- oder Fondskosten). Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Optional lässt sich zusätzlich ein Zielbetrag hinterlegen; der Rechner löst dann rückwärts, welche monatliche Sparrate nötig wäre, um dieses Ziel innerhalb der gewählten Laufzeit zu erreichen.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Warum Sparerpauschbetrag und Abgeltungsteuer das Ergebnis verändern
+
+Nach § 20 Abs. 9 EStG bleiben Kapitalerträge bis 1.000 € pro Person und Jahr (2.000 € bei Zusammenveranlagung) steuerfrei; darüber hinaus fallen 25 % Abgeltungsteuer zuzüglich 5,5 % Solidaritätszuschlag auf diese Steuer an, macht rund 26,4 % ([§ 20 EStG](https://www.gesetze-im-internet.de/estg/__20.html), abgerufen am 2026-07-31; [§ 32d EStG](https://www.gesetze-im-internet.de/estg/__32d.html), abgerufen am 2026-07-31). Kirchensteuerpflichtige zahlen zusätzlich 8 % (Bayern, Baden-Württemberg) oder 9 % (übrige Bundesländer) der Abgeltungsteuer. Weil dieser Rechner keine separate Steuerlogik enthält, sollten Sie entweder direkt eine bereits um die erwartete Steuerlast bereinigte Nettorendite eintragen, oder das Feld für Jahreskosten zusätzlich als grobe Näherung für die laufende Steuerwirkung nutzen, wenn Sie ein regulär verzinstes Konto statt eines Fondssparplans modellieren.
 
 ## Rechenbeispiel
 
-10.000 € Startkapital und 350 € monatlich über 15 Jahre bei 3-, 5- und 7-%-Szenarien.
+Bei 10.000 € Startkapital, 300 € monatlicher Sparrate, 15 Jahren Laufzeit und einer bereits um Kosten und geschätzte Steuerlast bereinigten Nettorendite von rund 3,6 % ergibt sich ein nominaler Endwert von grob 100.000 €, während die Gesamteinzahlungen bei 64.000 € liegen. Setzen Sie stattdessen die volle Bruttorendite ohne Steuerabzug an, überschätzen Sie den tatsächlich verfügbaren Betrag um den Anteil, der als Abgeltungsteuer, Soli und gegebenenfalls Kirchensteuer an das Finanzamt geht. Diese Zahlen sind ein Rechenbeispiel mit angenommenen Werten, keine Markt- oder Steuerprognose.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Was der Rechner nicht abbildet
 
-## Hinweise für Deutschland
-
-Die Rendite ist eine Annahme. Kosten, Inflation und Steuern sind getrennt zu behandeln; der Rechner ist keine Produkt- oder Altersvorsorgeempfehlung.
-
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Der Rechner bildet weder die jährliche Vorabpauschale bei thesaurierenden Fonds noch die produktabhängige Teilfreistellung für Aktienfonds ab, und er unterscheidet nicht zwischen einem verzinsten Konto mit jährlicher Gutschrift und einem Sparplan mit Gewinnrealisierung erst beim Verkauf. Auch Ein- und Auszahlungsgebühren einzelner Anbieter, ein sich änderndes Zinsniveau während der Laufzeit und die tatsächliche Kapitalertragsteuer Ihres individuellen Falls sind nicht enthalten – diese Faktoren sollten Sie vor einer Entscheidung gesondert prüfen.
 
 ## Passender Ratgeber
 
-Lesen Sie [Zinseszins: Einzahlungen, Kosten und Inflation gemeinsam rechnen](/de/how-compound-growth-works/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Zinseszins nach Steuern: Was von Ihren Kapitalerträgen nach Abgeltungsteuer wirklich übrig bleibt](/de/how-compound-growth-works/) für Sparerpauschbetrag, Freistellungsauftrag und ein vollständiges Rechenbeispiel mit Steuerabzug.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Zieht der Rechner automatisch Abgeltungsteuer ab?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nein. Er projiziert Ihre eingegebene Rendite ohne eigene Steuerlogik. Tragen Sie entweder eine bereits um die erwartete Steuerlast bereinigte Nettorendite ein oder rechnen Sie den Steuerabzug getrennt nach.
 
-### Sind Standardwerte Marktmittelwerte?
+### Wie hoch ist der Sparerpauschbetrag aktuell?
 
-Nein, sie sind nur editierbare Beispiele.
+1.000 € pro Person und Jahr, 2.000 € bei zusammenveranlagten Paaren, seit 2023 unverändert.
 
-### Werden Daten übertragen?
+### Berücksichtigt der Rechner meinen Freistellungsauftrag?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Nein, der Freistellungsauftrag betrifft den Steuerabzug bei Ihrer Bank und ist kein Eingabefeld dieses Rechners. Er beeinflusst nur, wie viel von Ihrem gutgeschriebenen Bruttozins tatsächlich versteuert wird.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Sind die Standardwerte Marktdurchschnitte?
 
-Nein, es vergleicht Szenarien.
+Nein, es sind editierbare Beispielwerte zur Bedienung des Rechners, keine aktuellen Zins- oder Renditedaten.
 
-### Wie wird die Rechnung genauer?
+### Garantiert das Ergebnis eine bestimmte Rendite?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Nein. Der Rechner vergleicht Szenarien auf Basis Ihrer Annahmen; er ist keine Anlageempfehlung und keine Zusage einer bestimmten Verzinsung.
 
+## Quellen
 
-## Vor der Veröffentlichung zu prüfende Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [§ 20 EStG — Sparerpauschbetrag](https://www.gesetze-im-internet.de/estg/__20.html), abgerufen am 2026-07-31
+- [§ 32d EStG — Gesonderter Steuertarif für Einkünfte aus Kapitalvermögen](https://www.gesetze-im-internet.de/estg/__32d.html), abgerufen am 2026-07-31
+- [§ 44a EStG — Abstandnahme vom Steuerabzug (Freistellungsauftrag)](https://www.gesetze-im-internet.de/estg/__44a.html), abgerufen am 2026-07-31
+- [Deutsche Bundesbank — Einlagen- und Kreditzinssätze](https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen/einlagen-und-kreditzinssaetze/einlagen-und-kreditzinssaetze-772402), abgerufen am 2026-07-31

@@ -29,7 +29,8 @@ for (const locale of locales) {
       if (!existsSync(item.file)) { failures.push(`Missing ${item.file}`); continue; }
       const text = readFileSync(item.file, 'utf8');
       if (!text.includes(`locale: ${locale}`)) failures.push(`Wrong locale: ${item.file}`);
-      if (!text.includes('lastReviewed: 2026-07-23')) failures.push(`Missing review date: ${item.file}`);
+      const reviewMatch = text.match(/^lastReviewed:\s*"?(\d{4}-\d{2}-\d{2})"?/m);
+      if (!reviewMatch || Number.isNaN(Date.parse(reviewMatch[1]))) failures.push(`Missing or invalid lastReviewed date: ${item.file}`);
       if (!text.includes('https://')) failures.push(`Missing official source URL: ${item.file}`);
       if (!text.includes(item.link)) failures.push(`Missing reciprocal link ${item.link}: ${item.file}`);
       if ((text.match(/^# /gm) ?? []).length !== 0) failures.push(`Content body must not add a second H1: ${item.file}`);

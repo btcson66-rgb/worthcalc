@@ -1,116 +1,78 @@
-﻿---
+---
 contentType: article
 articleSlug: nominal-vs-real-purchasing-power
 locale: es
-title: "Dinero nominal y poder adquisitivo real"
-description: "Actualiza importes entre periodos con una serie oficial del IPC y muestra inflación acumulada."
+title: "Poder adquisitivo real en España: cómo actualizar una cantidad con el IPC del INE"
+description: "Cómo trasladar un importe entre dos años usando el IPC oficial del INE, y por qué el IPC general no siempre es el índice correcto para actualizar un alquiler."
 relatedTool: /es/tools/inflation-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Decir que "1.000 € de hace diez años no valen lo mismo hoy" es intuitivamente correcto pero, sin un número oficial detrás, no sirve para tomar ninguna decisión concreta. Para convertir esa intuición en una cifra útil —cuánto tendrías que ganar hoy para mantener el mismo poder adquisitivo que hace diez años, o cuánto ha subido realmente el coste de vida— hace falta apoyarse en una única serie oficial bien definida, no en una sensación general de que "todo está más caro".
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## Qué significa que 1.000 € de hace diez años no valgan lo mismo hoy
 
-## Qué decisión ayuda a resolver esta guía
+El poder adquisitivo mide cuántos bienes y servicios puedes comprar con una cantidad de dinero, no la cantidad en sí. Si tu salario sube un 2% en un año pero los precios suben un 3%, tu salario nominal ha crecido pero tu poder adquisitivo ha bajado: puedes comprar menos con el mismo dinero que antes, aunque en la nómina aparezca una cifra mayor.
 
-Trasladar una cantidad entre años con una única serie oficial bien definida y separar variación nominal de poder adquisitivo.
+## El IPC del INE: la única serie que deberías usar para actualizar cantidades
 
-## Datos que conviene reunir antes de calcular
+El Índice de Precios de Consumo (IPC), que publica mensualmente el [Instituto Nacional de Estadística](https://www.ine.es/prensa/ipc_tabla.htm), es la referencia oficial en España para medir la evolución general de los precios. Cuando quieras actualizar un importe entre dos fechas, usa siempre la misma serie del INE de principio a fin del cálculo — mezclar el IPC general con otro índice distinto, o cambiar de base de cálculo a mitad de camino, produce resultados que no son comparables entre sí.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## Cómo actualizar un importe entre dos años sin errores
 
-- Año inicial y final
-- Importe del año inicial
-- Serie oficial de IPC y cobertura geográfica
-- Promedio anual o índice mensual
-- Fecha de descarga y estado de revisión
+La fórmula es sencilla: importe equivalente = importe inicial × (IPC del año final ÷ IPC del año inicial). El detalle que marca la diferencia está en qué dato de IPC exacto usas: si comparas la media anual de un año con el dato de un mes concreto del otro, el resultado no es estrictamente comparable. Usa siempre el mismo tipo de dato —media anual con media anual, o interanual de un mes concreto con el mismo mes del otro año— y anota la fecha de publicación del dato que usaste, porque el INE revisa y publica series con distinto grado de definitividad según el tiempo transcurrido.
 
-## Cómo funciona el modelo
+## Rentas de alquiler: por qué el IPC general no siempre es el índice correcto
 
-`importe equivalente = importe inicial × IPC final ÷ IPC inicial`
+Para actualizar la renta de un alquiler de vivienda, comprobar solo el IPC general puede no ser suficiente: en España han existido periodos con reglas específicas para la actualización de rentas de alquiler distintas de aplicar directamente el IPC general (por ejemplo, límites legales temporales a la subida vinculada al IPC en determinados periodos). Antes de aplicar el IPC general a una renta de alquiler, comprueba si existe alguna norma vigente en el momento de la actualización que module ese índice — no asumas que el IPC general es automáticamente el criterio legal aplicable a tu contrato.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo: sueldo, alquiler y ahorro pasados por el IPC
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+Si el IPC pasa de una base 100 a 118 entre dos fechas, 1.000 € de la fecha inicial equivalen a 1.180 € en la fecha final en términos de poder adquisitivo — es decir, necesitarías 1.180 € en la fecha final para comprar lo mismo que compraban 1.000 € al principio. Dicho de otro modo, si tus ingresos solo subieron a 1.100 € en ese mismo periodo, tu poder adquisitivo real ha bajado, aunque la cifra nominal de tu ingreso sea mayor que al principio.
 
-## Ejemplo reproducible
+## Qué te dice (y qué no te dice) el poder adquisitivo real
 
-Si el índice pasa de 100 a 118, 1.000 € equivalen a 1.180 € y la unidad inicial conserva el 84,7% de poder adquisitivo.
+El IPC general mide una cesta de consumo representativa a nivel nacional, no tu cesta de consumo personal. Si tus gastos se concentran mucho en categorías que suben más o menos que la media (vivienda, energía, alimentación), tu inflación personal puede ser distinta de la del IPC general. Esta calculadora usa el IPC general como aproximación razonable, no como una medida exacta de cómo te afecta la inflación a ti en particular.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Por qué esta calculadora sigue en revisión
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Comparar promedio anual y mes concreto solo con metodología documentada.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Cambiar el año inicial.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Comparar crecimiento salarial nominal e IPC.
-
-## Errores habituales que cambian el resultado
-
-- Mezclar series con distinta población o base
-- Usar el IPC general para fijar el precio exacto de un producto
-- Publicar antes de sincronizar los datos oficiales
-- Tratar el ajuste como coste de vida idéntico para todos los hogares
-
-## Cómo interpretar el resultado en España
-
-Utiliza el IPC del INE y etiqueta la base y el periodo. Para actualización de alquileres pueden existir índices y reglas específicos; no sustituyas automáticamente el IRAV por el IPC general.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+Esta página permanece marcada como borrador y sin indexar mientras no se confirme la serie oficial de IPC exacta —con su base y fecha de publicación— que alimentará el resultado por defecto de la calculadora. Publicar una cifra de IPC desactualizada o sin fuente clara en una herramienta financiera sería más perjudicial que no publicar nada: por eso esta guía y la calculadora asociada quedan pendientes de esa verificación antes de su publicación pública.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿Debo usar la media anual o el dato de un mes concreto del IPC?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+Cualquiera de los dos sirve, pero debes ser consistente: compara media anual con media anual, o el mismo mes de cada año entre sí, para que el resultado sea comparable.
 
-### ¿Qué dato suele influir más?
+### ¿El IPC general sirve para actualizar cualquier tipo de renta?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Para una aproximación general sí, pero para rentas de alquiler concretas conviene comprobar si existe alguna norma específica vigente que module la aplicación directa del IPC general en el periodo que te interesa.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Por qué mi inflación personal puede ser distinta del IPC general?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+Porque el IPC general pondera una cesta de consumo representativa a nivel nacional, mientras que tu gasto real puede concentrarse más en categorías que suben por encima o por debajo de esa media.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Puedo comparar el IPC de España con el de otro país directamente?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+No de forma directa sin ajustes: cada país publica su propio índice con metodología y cesta de consumo distintas, así que una comparación simple entre índices de dos países puede llevar a conclusiones erróneas.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo se actualizará esta calculadora?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cuando se confirme e integre la serie oficial de IPC del INE con su fecha de publicación exacta, para evitar mostrar una cifra de referencia desactualizada o sin fuente verificable.
 
-## Abrir la calculadora
+## Calculadora en revisión
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Esta calculadora permanece sin publicar mientras se confirma la serie oficial de IPC que alimentará su resultado por defecto.
 
 [Calculadora de inflación y poder adquisitivo](/es/tools/inflation-purchasing-power/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero ni fiscal personalizado. No incluyas datos personales identificables en enlaces que compartas con los resultados de esta calculadora.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [INE — Índice de Precios de Consumo (IPC), notas de prensa oficiales](https://www.ine.es/prensa/ipc_tabla.htm), consultado 2026-07-31

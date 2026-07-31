@@ -1,82 +1,64 @@
-﻿---
+---
 contentType: tool
 toolSlug: debt-strategy
 locale: es
-title: "Calculadora bola de nieve vs avalancha"
-description: "Compara orden de pago, intereses y fecha final entre bola de nieve, avalancha y orden personalizado."
+title: "Calculadora bola de nieve vs avalancha (España)"
+description: "Compara el orden de pago de tus deudas —incluida una tarjeta revolving— entre bola de nieve, avalancha y un orden personalizado."
 relatedArticle: /es/snowball-vs-avalanche/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Compara orden de pago, intereses y fecha final entre bola de nieve, avalancha y orden personalizado.
+Introduce cada una de tus deudas con su saldo, tipo de interés y pago mínimo, más el importe extra que puedes destinar cada mes, para comparar cuánto tardas y cuánto interés pagas con bola de nieve, avalancha o un orden que elijas tú.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Reúne el saldo actual (no el límite de crédito) y el tipo de interés o TAE real de cada deuda desde tu último extracto. Si tienes una tarjeta revolving, comprueba su TAE con atención: suele ser mucho más alta que la de un préstamo personal o la financiación de un coche.
 
-## Método de cálculo
+## Cómo se calcula
 
+`ciclo mensual: se devengan intereses sobre cada saldo → se pagan los mínimos → el pago extra se aplica según el orden elegido → los mínimos de las deudas ya canceladas se trasladan a la siguiente`
 
-`ciclo mensual: devengar intereses → pagar mínimos → aplicar pago extra → trasladar mínimos liberados a la siguiente deuda`
+La calculadora simula este ciclo mes a mes para cada estrategia y muestra cuántos meses tarda cada una en liquidar todas las deudas, y cuánto interés total se paga en cada caso.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-Ejemplo: tres deudas de 900 € al 22%, 2.800 € al 14% y 7.000 € al 7%, con 250 € extra al mes.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+Con tres deudas —900 € al 22% (revolving), 2.800 € al 14% y 7.000 € al 7%— y 250 € extra al mes, la calculadora muestra el orden y el calendario de pago para avalancha, bola de nieve y cualquier orden personalizado que definas. Cambia los tipos o los saldos para ver cuándo la elección entre estrategias empieza a importar más.
 
 ## Notas para España
 
-No mezcles deudas con garantías, procedimientos concursales o condiciones especiales sin revisar sus consecuencias. La estrategia matemática debe respetar los mínimos contractuales.
+Cuando una de tus deudas es una tarjeta revolving, su tipo suele ser considerablemente más alto que el de un préstamo personal, así que casi siempre conviene priorizarla primero, coincida o no con la estrategia de avalancha o de bola de nieve que elijas. Si el tipo de tu revolving te parece extremadamente alto, esta calculadora no evalúa si es legalmente abusivo — consulta la guía relacionada para los criterios que ha fijado el Tribunal Supremo.
 
-## Límites y comprobaciones
+## Límites de esta calculadora
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
-
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
-
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento financiero ni jurídico personalizado; no evalúa si el interés de ninguna de tus deudas es usurario. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. No introduzcas datos identificables si vas a compartir el resultado por enlace.
 
 ## Guía relacionada
 
-Lee [Bola de nieve o avalancha: motivación frente a matemáticas](/es/snowball-vs-avalanche/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [Bola de nieve o avalancha: por qué la tarjeta revolving va siempre primero](/es/snowball-vs-avalanche/) para entender por qué el crédito revolving suele condicionar el orden de pago más que la elección entre las dos estrategias.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Debo usar el saldo actual o el límite de crédito de mi tarjeta?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+El saldo actual, es decir, lo que realmente debes ahora. El límite de crédito disponible no forma parte de este cálculo.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿Qué estrategia da menos interés total?
 
-No, son ejemplos editables.
+La avalancha nunca paga más interés total que la bola de nieve, aunque la diferencia puede ser pequeña si la deuda de mayor tipo también es la de menor saldo, como suele pasar con una revolving pequeña.
 
-### ¿Se envían los datos?
+### ¿Puedo priorizar una deuda concreta aunque no sea la de mayor tipo ni la más pequeña?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+Sí, la calculadora permite un orden personalizado si tienes motivos —por ejemplo, un aval compartido con otra persona— para priorizar una deuda distinta.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿Qué pasa si una deuda tiene un tipo promocional que termina pronto?
 
-No, solo compara escenarios.
+Puedes simular el cambio de tipo a partir de esa fecha para ver cómo afecta al orden óptimo y al tiempo total necesario para liquidar todas las deudas.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo debería repetir esta simulación?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Cada vez que liquides una deuda, cuando cambie algún tipo de interés, o si el importe extra que puedes destinar cada mes cambia de forma relevante.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Consejo General del Poder Judicial — El Tribunal Supremo considera usurario un interés del 27,24% de una tarjeta revolving](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-), consultado 2026-07-31

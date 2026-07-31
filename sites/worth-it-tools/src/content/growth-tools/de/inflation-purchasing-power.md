@@ -1,84 +1,72 @@
-﻿---
+---
 contentType: tool
 toolSlug: inflation-purchasing-power
 locale: de
 title: "Inflations- und Kaufkraftrechner"
-description: "Rechnen Sie Geldbeträge mit einer amtlichen Verbraucherpreisindex-Reihe zwischen Zeiträumen um."
+description: "Rechnen Sie einen Betrag mit den amtlichen VPI- oder HVPI-Werten von Destatis zwischen zwei Zeitpunkten in heutige oder frühere Kaufkraft um."
 relatedArticle: /de/nominal-vs-real-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Rechnen Sie Geldbeträge mit einer amtlichen Verbraucherpreisindex-Reihe zwischen Zeiträumen um.
+Rechnen Sie einen Betrag mithilfe einer von Ihnen eingegebenen amtlichen Verbraucherpreisindex-Reihe zwischen zwei Zeitpunkten um und sehen Sie sowohl den umgerechneten Nominalbetrag als auch das reale Kaufkraftverhältnis.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Rufen Sie zunächst die tagesaktuellen Indexwerte für Ihren Ausgangs- und Zielzeitpunkt direkt bei Destatis ab – entweder aus der VPI-Reihe mit Basis 2020=100 für Beträge innerhalb Deutschlands, oder aus der HVPI-Reihe, wenn Sie mit anderen Euro-Ländern vergleichen möchten ([Destatis — Verbraucherpreisindex und Inflationsrate](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html), abgerufen am 2026-07-31). Notieren Sie zusätzlich, ob es sich um Jahresdurchschnittswerte oder Werte für einen bestimmten Monat handelt, und mischen Sie diese beiden Typen nicht in derselben Berechnung.
 
-## Berechnungsmethode
+## Wie der Rechner Beträge zwischen Zeitpunkten umrechnet
 
+`Umgerechneter Betrag = Ausgangsbetrag × Index im Zielzeitpunkt ÷ Index im Ausgangszeitpunkt; reales Kaufkraftverhältnis = Index im Ausgangszeitpunkt ÷ Index im Zielzeitpunkt`
 
-`Vergleichsbetrag = Ausgangsbetrag × Ziel-VPI ÷ Ausgangs-VPI`
+Sie geben den Ausgangsbetrag sowie die von Ihnen recherchierten Indexwerte für beide Zeitpunkte ein; der Rechner selbst liefert keinen amtlichen Indexstand, sondern verarbeitet ausschließlich die von Ihnen eingetragenen Werte. Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Werden identische Zeiträume, ein Index von null oder eine leere Periodenbezeichnung eingegeben, weist der Rechner die Eingabe zurück, statt ein irreführendes Ergebnis zu zeigen.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## VPI oder HVPI: Welchen Index Sie für diesen Rechner nutzen sollten
 
-## Rechenbeispiel
+Für Alltagsbeträge innerhalb Deutschlands – Gehalt, Miete, Sparguthaben – ist der nationale VPI mit Basis 2020=100 die passende Reihe, da er auch eine Schätzung der Wohnkosten für selbstgenutztes Eigentum enthält. Der HVPI folgt einer EU-weit harmonisierten Methodik ohne diese Wohnkostenkomponente und eignet sich eher für Vergleiche zwischen Euro-Ländern oder für die Einordnung von EZB-Entscheidungen ([Destatis — Harmonisierter Verbraucherpreisindex, Methodische Erläuterungen](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Erlaeuterungen/harmonisierter-verbraucherpreisindex.html), abgerufen am 2026-07-31). Verwenden Sie in einer einzigen Berechnung immer nur eine der beiden Reihen.
 
-Steigt der Index von 100 auf 115, entsprechen 1.000 € später 1.150 €; die ursprüngliche Kaufkraft beträgt 87 %.
+## Rechenbeispiel (illustrativ, keine aktuellen Indexwerte)
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+Steigt ein Index zwischen zwei Zeitpunkten von 100 auf 115, entsprechen 1.000 € aus dem früheren Zeitpunkt heute rund 1.150 €; die ursprüngliche Kaufkraft dieses Betrags beträgt gemessen in heutigem Geld nur noch etwa 87 %. Dies ist ein Rechenbeispiel mit runden, erfundenen Indexwerten zur Veranschaulichung der Methode. Ersetzen Sie diese Zahlen durch die tatsächlichen, tagesaktuellen VPI- oder HVPI-Werte von Destatis, bevor Sie das Ergebnis für eine Entscheidung nutzen.
 
-## Hinweise für Deutschland
+## Was der Rechner nicht abbildet
 
-Nutzen Sie den Verbraucherpreisindex von Destatis und nennen Sie Basis sowie Monats- oder Jahreswert. Vertragsindexierungen können besondere Klauseln erfordern.
-
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Der Rechner bildet ausschließlich die Umrechnung eines Gesamtbetrags anhand des von Ihnen eingegebenen Indexpaars ab. Er berücksichtigt weder individuelle Ausgabenmuster, die vom bundesweiten Warenkorb abweichen, noch Kapitalertragsteuer auf einen zwischenzeitlich erzielten nominalen Ertrag, noch regionale Preisunterschiede innerhalb Deutschlands. Für die reale Nettorendite eines Sparguthabens müssen Sie zusätzlich Sparerpauschbetrag, Abgeltungsteuer und gegebenenfalls Kirchensteuer gesondert berücksichtigen.
 
 ## Passender Ratgeber
 
-Lesen Sie [Nominaler Betrag und reale Kaufkraft](/de/nominal-vs-real-purchasing-power/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Nominale Rendite oder reale Kaufkraft? Was der Verbraucherpreisindex von Destatis wirklich zeigt](/de/nominal-vs-real-purchasing-power/) für den Unterschied zwischen VPI und HVPI sowie die vollständige Umrechnungsmethode.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Liefert der Rechner den aktuellen VPI-Wert automatisch?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nein. Sie müssen die tagesaktuellen Indexwerte selbst bei Destatis nachschlagen und eingeben; der Rechner verarbeitet ausschließlich Ihre eigenen Angaben.
 
-### Sind Standardwerte Marktmittelwerte?
+### Was passiert, wenn ich VPI- und HVPI-Werte mische?
 
-Nein, sie sind nur editierbare Beispiele.
+Das Ergebnis wäre methodisch nicht mehr korrekt, da beide Reihen unterschiedliche Warenkörbe abbilden. Verwenden Sie in einer Berechnung immer nur eine der beiden Reihen konsistent.
 
-### Werden Daten übertragen?
+### Warum ist diese Seite als Entwurf markiert und nicht in der Suche sichtbar?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Weil sie derzeit nur ein Rechenbeispiel mit erfundenen Indexwerten zeigt. Die Seite wird erst veröffentlicht, sobald echte, tagesaktuelle Destatis-Werte redaktionell geprüft eingebunden sind.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Rechnet der Rechner auch Kapitalertragsteuer heraus?
 
-Nein, es vergleicht Szenarien.
+Nein, er rechnet ausschließlich einen Betrag anhand des Preisindex um. Steuerliche Effekte auf einen zwischenzeitlichen nominalen Ertrag müssen Sie separat berücksichtigen.
 
-### Wie wird die Rechnung genauer?
+### Kann ich den Rechner auch für andere Euro-Länder nutzen?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Nur mit dem jeweils passenden nationalen Index oder dem HVPI des betreffenden Landes; der hier hinterlegte Beispielwert bezieht sich auf keine bestimmte Landeswährung oder -reihe.
 
+## Grenzen und Prüfung
 
-## Vor der Veröffentlichung zu prüfende Quellen
+Diese Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer- oder Rechtsberatung. Sie bleibt bewusst als Entwurf markiert und von der Suchindexierung ausgeschlossen, bis echte, tagesaktuelle VPI- oder HVPI-Werte direkt aus der amtlichen Destatis-Reihe eingebunden und redaktionell geprüft wurden. Die Berechnung erfolgt im Browser; tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
 
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
+## Quellen
 
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [Destatis — Verbraucherpreisindex und Inflationsrate](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html), abgerufen am 2026-07-31
+- [Destatis — Harmonisierter Verbraucherpreisindex, Methodische Erläuterungen](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Erlaeuterungen/harmonisierter-verbraucherpreisindex.html), abgerufen am 2026-07-31
+- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html), abgerufen am 2026-07-31

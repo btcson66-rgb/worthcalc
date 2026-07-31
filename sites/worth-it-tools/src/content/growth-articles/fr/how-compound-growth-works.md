@@ -1,114 +1,66 @@
-﻿---
+---
 contentType: article
 articleSlug: how-compound-growth-works
 locale: fr
-title: "Croissance composée : versements, frais et inflation"
-description: "Projetez les versements, frais, inflation et objectif, ou calculez l’effort mensuel requis."
+title: "Intérêts composés : ce que le Livret A, les frais et l'inflation changent vraiment"
+description: "Comment les intérêts composés fonctionnent sur une épargne réglementée française, l'écart entre rendement nominal et réel après inflation, et pourquoi un point de frais coûte plus cher qu'il n'y paraît sur 20 ans."
 relatedTool: /fr/tools/compound-growth/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Un bon guide financier ne se contente pas d’afficher un chiffre final. Il doit permettre de refaire le calcul, d’identifier chaque hypothèse et de voir quelle donnée peut inverser la conclusion.
+Les intérêts composés ne sont pas propres à un placement particulier : c'est un mécanisme mathématique qui s'applique aussi bien à un Livret A qu'à une assurance-vie ou, en sens inverse, à une dette qui s'aggrave si elle n'est pas remboursée. Ce guide part d'un produit d'épargne réglementé accessible à tous les résidents français — le Livret A — pour illustrer concrètement ce que le taux, le temps, les frais et l'inflation changent au résultat final.
 
-Ce guide distingue les données vérifiables du contrat ou du relevé des hypothèses modifiables. Commencez par les informations actuelles, puis comparez un scénario prudent, central et favorable sans transformer une estimation en garantie.
+## Le Livret A : le point de départ pour raisonner sur les intérêts composés
 
-## La décision que ce guide aide à préparer
+Depuis le 1er août 2026, le taux du Livret A est de 1,7 %, contre 1,5 % entre février et juillet 2026, et ses intérêts sont entièrement exonérés d'impôt sur le revenu et de prélèvements sociaux ([economie.gouv.fr — épargne réglementée, le Livret A passe à 1,7 %](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/), consulté le 2026-07-31). Le plafond de versement est fixé à 22 950 € par personne, hors intérêts capitalisés, qui peuvent faire dépasser ce montant une fois ajoutés ([economie.gouv.fr — Livret A, comment ça marche ?](https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/livret-comment-ca-marche), consulté le 2026-07-31). Ce taux garanti et sans fiscalité en fait une référence simple pour comprendre les intérêts composés avant de comparer avec des placements plus risqués et non garantis.
 
-Projeter versements et croissance modélisée, calculer l’effort nécessaire pour un objectif et afficher valeur nominale et réelle sans garantir le rendement supposé.
+## La formule des intérêts composés, appliquée à une épargne réglementée
 
-## Les données à rassembler avant le calcul
+Le principe des intérêts composés est que les intérêts d'une période s'ajoutent au capital et génèrent eux-mêmes des intérêts la période suivante, contrairement aux intérêts simples calculés uniquement sur le capital initial. Sur un Livret A, les intérêts sont calculés par quinzaine (le 1er ou le 16 du mois selon la date de l'opération) puis capitalisés une fois par an au 31 décembre, ce qui signifie que l'argent déposé en tout début de quinzaine commence à produire des intérêts plus tôt que celui déposé en fin de quinzaine — un détail qui ne change rien sur 20 ans, mais compte pour optimiser un versement ponctuel important.
 
-Utilisez le relevé, le contrat, la fiche de paie, l’avis fiscal ou l’indice officiel le plus récent. Indiquez la date de chaque taux, frais ou règle susceptible d’évoluer.
+## Le temps compte plus que le taux : versements réguliers sur 20 ans
 
-- Capital initial
-- Versement régulier et moment du versement
-- Rendement modélisé et fréquence de capitalisation
-- Frais et inflation supposée
-- Objectif et échéance
+Sur un horizon long, la régularité des versements et la durée pendant laquelle l'argent reste investi pèsent souvent plus que le taux affiché. Un versement effectué dès la première année profite de la capitalisation sur l'ensemble de la période, alors qu'un versement équivalent effectué la dernière année ne produit quasiment aucun intérêt composé. C'est pourquoi retarder le début d'une épargne régulière, même de quelques années, coûte généralement plus cher en résultat final que de choisir un taux légèrement inférieur mais de commencer immédiatement.
 
-## Fonctionnement du modèle
+## Frais de gestion : ce qu'un point de frais coûte réellement sur la durée
 
-`VF = VA(1+r)^n + versement × ((1+r)^n − 1) ÷ r`
+Sur un placement non garanti comme une assurance-vie en unités de compte ou un PEA, les frais de gestion annuels se soustraient chaque année du rendement brut avant que les intérêts composés ne s'appliquent au reste. Un frais annuel de 1 % peut sembler négligeable comparé à un rendement espéré de 5 ou 7 %, mais parce qu'il s'applique chaque année sur un capital qui grandit, son coût cumulé sur 20 ou 30 ans représente souvent une part significative du capital final — un effet que seul un calcul année par année permet de visualiser correctement, contrairement à une simple soustraction du taux affiché.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## Rendement nominal contre rendement réel : ce que l'inflation retire
 
-Le moteur conserve la précision complète et n’arrondit qu’à l’affichage. Séparez les flux de trésorerie, le calendrier, les frais, les impôts et les valeurs futures incertaines afin de rendre le calcul vérifiable.
+Le taux affiché d'un placement est un rendement nominal ; ce qui compte pour le pouvoir d'achat futur est le rendement réel, c'est-à-dire le rendement nominal diminué de l'inflation sur la même période. Selon l'estimation provisoire de l'Insee, les prix à la consommation ont augmenté de 1,8 % sur un an en juin 2026 ([Insee — informations rapides, juin 2026](https://www.insee.fr/fr/statistiques/9015205), consulté le 2026-07-31, donnée provisoire). Avec un Livret A à 1,7 % net d'impôt, le rendement réel de cette épargne réglementée est donc proche de zéro, voire légèrement négatif selon la période exacte comparée — ce qui ne remet pas en cause son intérêt pour une épargne de précaution disponible immédiatement, mais limite sa pertinence pour un objectif de croissance du capital à long terme.
 
-## Exemple reproductible
+## Exemple : 100 € par mois sur 20 ans à trois taux différents
 
-10 000 € au départ et 350 € par mois pendant 15 ans avec scénarios à 3 %, 5 % et 7 %.
+Un épargnant verse 100 € par mois pendant 20 ans (240 versements), sans capital de départ. À un taux annuel constant de 1,7 % (proche du Livret A actuel), le capital final s'approche de 28 600 €, pour 24 000 € versés au total, soit environ 4 600 € d'intérêts cumulés. À un taux hypothétique de 5 % par an, sans garantie de capital, ce même effort d'épargne produirait un résultat sensiblement plus élevé, mais sur un support non garanti où le capital peut aussi baisser certaines années — la différence entre les deux scénarios illustre l'écart entre un rendement garanti sans risque et un rendement espéré mais non garanti.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Quand le crédit renouvelable inverse totalement la logique des intérêts composés
 
-## Comparer trois scénarios plutôt qu’un seul
+Le même mécanisme joue en sens inverse sur une dette non remboursée : un crédit renouvelable à un TAEG proche du taux d'usure applicable à sa tranche de montant peut voir ses intérêts s'accumuler bien plus vite qu'un Livret A n'en produit sur la même durée. Avant d'épargner à un taux garanti de 1,7 %, il est presque toujours plus rentable de solder une dette à un taux à deux chiffres : rembourser une dette à 20 % équivaut, en termes de rendement garanti, à un placement impossible à trouver ailleurs sans risque.
 
-Ne modifiez qu’une variable incertaine à la fois. Vous mesurez ainsi la sensibilité réelle sans laisser une hypothèse optimiste masquer un autre risque.
+## Foire aux questions
 
-- **Prudent:** Retenez des coûts plus élevés, une progression plus lente ou un revenu/rendement plus faible. Réduire le rendement supposé.
-- **Central:** Utilisez les chiffres vérifiés et le comportement le plus probable. Retarder les versements d’un an.
-- **Favorable:** Testez une amélioration plausible, clairement présentée comme scénario et non comme prévision. Augmenter frais et inflation.
+### Le Livret A est-il un bon placement pour faire fructifier une épargne sur 20 ans ?
 
-## Erreurs fréquentes qui faussent le résultat
+Il reste utile pour une épargne de précaution disponible immédiatement et sans risque, mais son rendement réel proche de zéro après inflation en limite l'intérêt pour un objectif de croissance de capital à long terme.
 
-- Présenter un rendement annuel comme garanti
-- Oublier frais et moment des versements
-- Comparer une somme nominale future à un objectif en pouvoir d’achat actuel
-- Calculer l’effort requis sans vérifier sa compatibilité avec le budget
+### Comment les intérêts du Livret A sont-ils calculés ?
 
-## Interprétation pour la France
+Par quinzaine, selon la date exacte de chaque versement ou retrait, puis capitalisés une fois par an au 31 décembre.
 
-Le rendement est une hypothèse. Distinguez frais, inflation et fiscalité ; le calculateur ne remplace pas une simulation de produit réglementé.
+### Un frais de gestion de 1 % par an fait-il vraiment une grande différence ?
 
-## Méthode pratique étape par étape
+Oui, car il s'applique chaque année sur un capital qui grandit avec les intérêts composés ; son coût cumulé sur 20 à 30 ans peut représenter une part significative du capital final.
 
-1. Définissez la question précise et l’horizon de comparaison.
-2. Saisissez d’abord les chiffres actuels vérifiables.
-3. Vérifiez que le modèle reproduit une mensualité, un solde ou un budget connu.
-4. Enregistrez les scénarios prudent, central et favorable.
-5. Repérez la première valeur qui inverse la conclusion : c’est le seuil d’équilibre.
-6. Contrôlez contrat, fiscalité et critères applicables avant d’agir.
+### Faut-il privilégier le remboursement d'une dette ou l'épargne sur un Livret A ?
 
-## Interpréter le résultat sans en faire une promesse
+En général, rembourser une dette à un taux nettement supérieur au taux d'un Livret A est plus rentable, car cela équivaut à un rendement garanti impossible à obtenir autrement sans risque.
 
-Privilégiez une formulation conditionnelle : « Avec ces données et hypothèses, l’option A présente le coût modélisé le plus faible. » Le calculateur ne connaît pas toutes les clauses, règles d’octroi, évolutions de comportement ou besoins de trésorerie.
+### Le taux du Livret A change-t-il souvent ?
 
-## Questions fréquentes
+Il est révisé en principe deux fois par an, au 1er février et au 1er août, selon une formule liée à l'inflation et aux taux interbancaires, sur recommandation du gouverneur de la Banque de France.
 
-### Pourquoi le résultat peut-il différer du relevé ou de l’offre ?
+## Simuler votre épargne avec vos propres chiffres
 
-L’organisme peut utiliser d’autres dates, méthodes de capitalisation, frais, impôts ou arrondis. Reprenez les conditions exactes et comparez l’échéancier période par période.
-
-### Quelle donnée influence généralement le plus le résultat ?
-
-Testez d’abord le taux, la durée, le versement régulier et les frais ponctuels. L’analyse de sensibilité doit montrer la variable la plus déterminante.
-
-### Les valeurs initiales sont-elles des moyennes de marché ?
-
-Non. Ce sont des exemples modifiables, jamais des données de marché actuelles.
-
-### Le résultat garantit-il un crédit, une économie ou un rendement ?
-
-Non. Il s’agit d’un modèle pédagogique, pas d’une décision bancaire, d’un devis contractuel ou d’une promesse de placement.
-
-### Quand faut-il refaire le calcul ?
-
-Après toute modification importante du taux, du solde, du revenu, d’une charge récurrente, d’un indice officiel ou d’une clause.
-
-## Ouvrir le calculateur
-
-Ouvrez le calculateur associé, reproduisez l’exemple, puis remplacez chaque valeur par une donnée vérifiable.
-
-[Calculateur de croissance composée et objectif d’épargne](/fr/tools/compound-growth/)
-
-## Limites éditoriales et sécurité
-
-Contenu pédagogique et estimatif uniquement ; il ne constitue pas un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé. N’insérez aucune donnée personnelle dans une URL partageable.
-
-## Sources officielles à revérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+Ouvrez le [calculateur de croissance composée et objectif d'épargne](/fr/tools/compound-growth/), reproduisez l'exemple des 100 € par mois ci-dessus, puis remplacez chaque valeur par votre capital de départ, votre versement réel et le taux de votre produit d'épargne. Ce contenu est pédagogique et estimatif ; il ne garantit aucun rendement futur et ne remplace pas une simulation officielle de votre établissement. N'insérez aucune donnée identifiable dans un lien de résultat partagé. Le taux du Livret A cité provient d'[economie.gouv.fr](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/) et l'inflation citée est une estimation provisoire de l'[Insee](https://www.insee.fr/fr/statistiques/9015205) (consultés le 2026-07-31).

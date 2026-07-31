@@ -1,82 +1,65 @@
-﻿---
+---
 contentType: tool
 toolSlug: debt-strategy
 locale: fr
-title: "Calculateur boule de neige vs avalanche des dettes"
-description: "Comparez l’ordre de remboursement, les intérêts et la date de fin pour plusieurs stratégies."
+title: "Calculateur d'ordre de remboursement de dettes (boule de neige / avalanche)"
+description: "Comparez l'ordre boule de neige, avalanche ou personnalisé pour plusieurs dettes françaises — crédit renouvelable, prêt personnel, découvert — et leur coût total en intérêts."
 relatedArticle: /fr/snowball-vs-avalanche/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Comparez l’ordre de remboursement, les intérêts et la date de fin pour plusieurs stratégies.
+Entrez le solde, le taux et le minimum de chaque dette — crédit renouvelable, prêt personnel, découvert bancaire — pour comparer la méthode avalanche, la méthode boule de neige et un ordre personnalisé sur le total des intérêts payés et la date de fin.
 
-## Comment utiliser le calculateur
+## Ce qu'il faut réunir avant de calculer
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Notez le solde actuel, le TAEG contractuel et la mensualité minimale de chaque dette séparément, y compris un découvert bancaire récurrent si vous en avez un — ses agios sont souvent proches du taux d'usure des petits montants. Indiquez le montant supplémentaire que vous pouvez consacrer chaque mois au-delà de tous les minimums cumulés.
 
-## Méthode de calcul
+## Comment le calcul est fait
 
+`cycle mensuel : calcul des intérêts de chaque dette → paiement des minimums → versement supplémentaire sur la dette ciblée → report de la mensualité libérée dès qu'une dette est soldée`
 
-`cycle mensuel : calcul des intérêts → paiement des minimums → versement supplémentaire → report des mensualités libérées`
-
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+Le calculateur conserve la précision complète en interne et n'arrondit qu'à l'affichage. En méthode avalanche, le versement supplémentaire cible la dette au TAEG le plus élevé ; en méthode boule de neige, celle au solde le plus faible. Le crédit immobilier n'est pas inclus par défaut, car son taux et ses règles de remboursement anticipé suivent une logique différente.
 
 ## Exemple chiffré
 
-Exemple : 1 000 € à 21 %, 3 500 € à 13 % et 8 000 € à 6 %, avec 300 € supplémentaires.
+Avec un crédit renouvelable de 1 000 € à 21 %, un prêt personnel de 3 500 € à 13 % et un crédit auto de 8 000 € à 6 %, et 300 € supplémentaires par mois, la méthode avalanche cible d'abord le crédit renouvelable à 21 %, ce qui minimise le total des intérêts sur l'ensemble des trois dettes. Comparez avec l'ordre boule de neige pour voir si le classement change selon vos propres soldes.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Pourquoi le crédit renouvelable ressort presque toujours en premier
 
-## Repères pour la France
+Un crédit renouvelable de moins de 3 000 € peut légalement atteindre un TAEG de 23,53 % au troisième trimestre 2026, largement au-dessus des taux d'un prêt personnel classique ou d'un crédit immobilier ([Banque de France — taux d'usure 2026-T3](https://www.banque-france.fr/fr/statistiques/taux-et-cours/taux-dusure-2026-q3), consulté le 2026-07-31). C'est pourquoi la méthode avalanche cible presque systématiquement un crédit renouvelable en premier dans un foyer français type, avant même de comparer les autres dettes entre elles.
 
-Les crédits immobiliers, dettes faisant l’objet d’un plan et situations de surendettement nécessitent une analyse distincte.
+## Limites de ce calculateur
 
-## Limites et vérifications
-
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Cette estimation est pédagogique et ne remplace pas un conseil budgétaire personnalisé. Si le total de vos mensualités minimales dépasse durablement votre capacité de remboursement, ce calculateur ne se substitue pas à une démarche auprès d'une commission de surendettement de la Banque de France. Le calcul s'exécute entièrement dans votre navigateur, sans envoi de données à un serveur. N'insérez ni numéro de compte, ni nom, ni autre donnée identifiable dans un lien de résultat partagé.
 
 ## Guide associé
 
-Lire [Boule de neige ou avalanche : motivation ou coût minimal ?](/fr/snowball-vs-avalanche/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Boule de neige, avalanche, ou d'abord le crédit renouvelable : quel ordre pour plusieurs dettes](/fr/snowball-vs-avalanche/) pour comprendre pourquoi le crédit renouvelable prime presque toujours, comment traiter le découvert et le crédit immobilier, et quand envisager un rachat de crédits ou un dossier de surendettement.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Dois-je inclure mon crédit immobilier dans ce calculateur ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Non par défaut : son taux est presque toujours inférieur aux dettes à la consommation et il suit des règles de remboursement anticipé différentes. Traitez-le séparément.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Mon découvert bancaire compte-t-il comme une dette dans ce calcul ?
 
-Non, ce sont des exemples modifiables.
+Oui, ajoutez-le si vous êtes régulièrement à découvert : ses agios approchent souvent le taux d'usure des petits montants et il mérite d'être traité comme une priorité, au même titre qu'un crédit renouvelable.
 
-### Les données sont-elles envoyées ?
+### La méthode avalanche est-elle toujours la moins chère ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+Mathématiquement oui, en intérêts totaux payés. La méthode boule de neige peut néanmoins mieux convenir si l'effet de solder rapidement une première dette aide à maintenir l'effort de remboursement dans la durée.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Le calculateur peut-il me dire si je devrais faire un rachat de crédits ?
 
-Non, il compare uniquement des scénarios.
+Non, il compare uniquement des ordres de remboursement à conditions inchangées ; un rachat de crédits change le taux et la durée eux-mêmes et nécessite une simulation séparée auprès d'un établissement.
 
-### Comment améliorer la précision ?
+### Quand dois-je refaire ce calcul ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+À chaque nouvelle dette contractée, chaque changement de taux à la fin d'une période promotionnelle, ou chaque fois que le montant disponible pour le versement supplémentaire change.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [Banque de France — taux d'usure, troisième trimestre 2026](https://www.banque-france.fr/fr/statistiques/taux-et-cours/taux-dusure-2026-q3), consulté le 2026-07-31
+- [economie.gouv.fr — déposer un dossier de surendettement](https://www.economie.gouv.fr/particuliers/gerer-mon-argent/beneficier-daides-et-de-reductions-dimpots/difficultes-financieres-comment-deposer-un-dossier-de-surendettement), consulté le 2026-07-31

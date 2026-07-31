@@ -1,114 +1,74 @@
-﻿---
+---
 contentType: article
 articleSlug: hourly-vs-annual-salary
 locale: de
-title: "Stundenlohn oder Jahresgehalt: Angebote fair vergleichen"
-description: "Rechnen Sie Stunden- und Jahreslohn mit Arbeitswochen, unbezahlter Zeit, Überstunden und Boni um."
+title: "Brutto-Netto-Rechner verstehen: Vom Stundenlohn zum tatsächlichen Jahresgehalt"
+description: "Mindestlohn 13,90 €, Steuerklassen, Sozialversicherungsbeiträge und warum Urlaubsgeld kein gesetzlicher Anspruch ist — Stundenlohn realistisch hochrechnen."
 relatedTool: /de/tools/salary-converter/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Stundenlohn mal Jahresarbeitsstunden ergibt nur das Bruttojahresgehalt — und selbst das nur, wenn niemand krank wird, Urlaub unbezahlt bliebe und es keine Sozialabgaben gäbe. Zwischen dieser Rechnung und dem tatsächlich verfügbaren Einkommen liegen mehrere Faktoren, die in Deutschland gesetzlich geregelt sind.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum Stundenlohn mal Jahresstunden zu hoch greift
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Eine naive Hochrechnung — Stundenlohn mal 40 Wochenstunden mal 52 Wochen — ignoriert bezahlten Urlaub, Feiertage und Krankheitstage, die zwar bezahlt, aber nicht gearbeitet werden. Sie ignoriert vor allem, dass der Stundenlohn ein Bruttobetrag ist: Steuern und Sozialversicherungsbeiträge sind darin noch nicht abgezogen. Wer zwei Jobangebote allein anhand des genannten Stundenlohns vergleicht, vergleicht oft unterschiedliche Grundlagen, ohne es zu merken.
 
-Brutto-Stunden-, Wochen-, Monats- und Jahresgehalt unter Einbezug von Arbeitswochen, unbezahlter Freistellung, Überstunden, Bonus und Provision umrechnen.
+## Der gesetzliche Mindestlohn als Untergrenze, nicht als Zielgröße
 
-## Welche Daten vor der Berechnung benötigt werden
+Seit dem 1. Januar 2026 liegt der gesetzliche Mindestlohn in Deutschland bei 13,90 € brutto pro Stunde, was bei einer Vollzeitstelle rechnerisch rund 2.343 € brutto im Monat entspricht ([BMAS — Mindestlohn steigt zum 1. Januar 2026](https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/mindestlohn-steigt-zum-ersten-januar-2026.html), abgerufen am 2026-07-31). Zum 1. Januar 2027 steigt er weiter auf 14,60 €. Mindestlöhne sind stets Bruttobeträge — vor Abzug von Einkommensteuer und Sozialversicherungsbeiträgen. Die Minijob-Verdienstgrenze liegt 2026 bei 603 € im Monat beziehungsweise 7.236 € im Jahr und ist an die Entwicklung des Mindestlohns gekoppelt.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Steuerklassen: Warum zwei Personen bei gleichem Brutto unterschiedlich netto bekommen
 
-- Stundenlohn oder Bruttojahresgehalt
-- Bezahlte Wochenstunden
-- Arbeitswochen und unbezahlte Auszeit
-- Überstunden und Zuschlagsfaktor
-- Bonus, Provision und Zahlungen pro Jahr
+Bei identischem Bruttolohn kann das Nettoeinkommen stark variieren, weil die Lohnsteuer von der zugewiesenen Steuerklasse abhängt. Alleinstehende ohne Kinder fallen meist in Steuerklasse I, Verheiratete können zwischen den Kombinationen III/V oder IV/IV wählen, Alleinerziehende mit Anspruch auf den Entlastungsbetrag in Klasse II. Die Steuerklasse verändert nicht die tatsächliche Jahressteuerschuld, sondern nur den monatlichen Vorauszahlungsbetrag — bei der jährlichen Einkommensteuererklärung wird ohnehin nach dem tatsächlichen Familieneinkommen abgerechnet. Wer Nettoangebote vergleicht, sollte deshalb prüfen, ob beide auf derselben Steuerklasse basieren.
 
-## So funktioniert das Rechenmodell
+## Sozialversicherungsbeiträge: Was vom Brutto wirklich abgeht
 
-`Bruttojahresgehalt = Stundenlohn × bezahlte Wochenstunden × Arbeitswochen + Überstunden + Bonus + Provision`
+Vom Bruttolohn werden vier Pflichtversicherungen je zur Hälfte von Arbeitnehmer und Arbeitgeber getragen: Krankenversicherung mit 14,6 % allgemeinem Satz plus einem durchschnittlichen Zusatzbeitrag von 2,9 % (jeweils hälftig), Rentenversicherung mit 18,6 % (je 9,3 %), Arbeitslosenversicherung mit 2,6 % (je 1,3 %) und Pflegeversicherung mit 3,6 % beziehungsweise 4,2 % für Kinderlose über 23 Jahre. Allein Renten-, Arbeitslosen- und der hälftige Krankenversicherungsbeitrag ziehen damit strukturell einen zweistelligen Prozentsatz vom Bruttolohn ab, bevor überhaupt Lohnsteuer berechnet wird.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Rechenbeispiel: Mindestlohn in Vollzeit
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Bei 13,90 € Stundenlohn und einer 40-Stunden-Woche ergibt sich ein Bruttomonatslohn von rund 2.343 €. Rechnet man allein die Arbeitnehmeranteile zu Rentenversicherung (9,3 %), Arbeitslosenversicherung (1,3 %), Krankenversicherung (rund 8,75 % inklusive halbem Zusatzbeitrag) und Pflegeversicherung (1,8 % ohne Kinderzuschlag) zusammen, gehen bereits gut ein Fünftel des Bruttolohns für Sozialversicherung ab, bevor die Lohnsteuer überhaupt berücksichtigt ist. Der exakte Nettobetrag hängt zusätzlich von Steuerklasse, Kirchensteuerpflicht und individuellen Freibeträgen ab.
 
-## Nachvollziehbares Rechenbeispiel
+## Urlaubs- und Weihnachtsgeld: kein gesetzlicher Anspruch
 
-Bei 22 € pro Stunde, 40 Stunden pro Woche und 48 bezahlten Wochen ergibt sich ein Grundjahresbrutto von 42.240 €.
+Ein gesetzlicher Anspruch auf Urlaubsgeld oder Weihnachtsgeld existiert in Deutschland nicht. Beide sind freiwillige Zusatzleistungen, die sich aus einem Tarifvertrag, dem individuellen Arbeitsvertrag oder betrieblicher Übung ergeben können — ist der Betrieb tarifgebunden oder gilt ein allgemeinverbindlicher Tarifvertrag, kann die Zahlung faktisch verpflichtend werden. Wer ein Jobangebot mit einem anderen vergleicht, sollte deshalb ausdrücklich fragen, ob und in welcher Höhe Urlaubs- oder Weihnachtsgeld vertraglich zugesichert sind, statt sie als selbstverständlichen Bestandteil des Jahreseinkommens einzuplanen.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Zwei Jobangebote fair vergleichen
 
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Arbeitswochen wegen unbezahlter Auszeit senken.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Regelmäßige Überstunden ergänzen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Grundgehalt mit Bonus vergleichen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Ohne Grund nur mit 48 Wochen rechnen
-- Jedes Monatsgehalt als zwölf identische Zahlungen behandeln
-- Brutto und Netto vermischen
-- Die Umrechnung als Steuer- oder Nettolohnrechner darstellen
-
-## Einordnung für Deutschland
-
-Brutto, Netto und Arbeitgeberkosten sind unterschiedliche Größen. Der Rechner führt keine Lohnsteuer- oder Sozialversicherungsberechnung durch.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Um zwei Angebote wirklich vergleichbar zu machen, rechnen Sie beide auf dieselbe Bruttojahresbasis um — inklusive vertraglich zugesicherter Sonderzahlungen wie Urlaubs- oder Weihnachtsgeld, aber ohne unsichere Boni — und ziehen Sie anschließend dieselben Sozialversicherungssätze und eine vergleichbare Steuerklasse ab. Unterschiede bei Wochenarbeitszeit, Anzahl der Urlaubstage über dem gesetzlichen Mindestanspruch und Pendelkosten verändern den tatsächlichen Stundenwert oft stärker als ein paar Cent Unterschied beim genannten Stundenlohn.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Ist der Mindestlohn ein Brutto- oder Nettobetrag?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Ein Bruttobetrag. Vor der Auszahlung werden Lohnsteuer und Sozialversicherungsbeiträge abgezogen.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Warum bekommen zwei Kollegen mit gleichem Bruttogehalt unterschiedlich viel netto?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Meist wegen unterschiedlicher Steuerklassen, Kirchensteuerpflicht oder Kinderfreibeträgen — die tatsächliche Jahressteuerschuld gleicht sich bei der Steuererklärung an, die monatliche Vorauszahlung nicht.
 
-### Sind die Startwerte Marktmittelwerte?
+### Muss mein Arbeitgeber mir Urlaubsgeld zahlen?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Nur wenn sich ein Anspruch aus Tarifvertrag, Arbeitsvertrag oder betrieblicher Übung ergibt. Ein allgemeiner gesetzlicher Anspruch existiert nicht.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Wie hoch ist die Minijob-Grenze 2026?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+603 € im Monat beziehungsweise 7.236 € im Jahr; die Grenze ist an die Entwicklung des Mindestlohns gekoppelt.
 
-### Wann sollte neu gerechnet werden?
+### Welchen Anteil vom Bruttolohn nehmen Sozialversicherungsbeiträge insgesamt ein?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Arbeitnehmer und Arbeitgeber tragen zusammen für Kranken-, Pflege-, Renten- und Arbeitslosenversicherung deutlich über ein Drittel des Bruttolohns; der Arbeitnehmeranteil allein liegt je nach Krankenkasse und Kinderzahl bei rund einem Fünftel.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Rechner, tragen Sie Stundenlohn, Wochenstunden, Steuerklasse und vertraglich zugesicherte Sonderzahlungen ein, um Brutto- und Nettojahresgehalt zu vergleichen.
 
 [Stundenlohn-, Monats- und Jahresgehaltsrechner](/de/tools/salary-converter/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Steuer- oder Rechtsberatung. Die tatsächliche Steuer- und Abgabenlast hängt von Ihrer persönlichen Situation ab, insbesondere Steuerklasse, Kirchensteuerpflicht, Krankenkasse und Kinderzahl.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [BMAS — Mindestlohn steigt zum 1. Januar 2026 auf 13,90 Euro](https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/mindestlohn-steigt-zum-ersten-januar-2026.html) (abgerufen 2026-07-31); [Deutsche Rentenversicherung — Werte der Rentenversicherung](https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Zahlen-und-Fakten/Werte-der-Rentenversicherung/werte-der-rentenversicherung) (abgerufen 2026-07-31); [DGB — Weihnachtsgeld: Anspruch und Grundlagen](https://www.dgb.de/service/ratgeber/weihnachtsgeld/) (abgerufen 2026-07-31).

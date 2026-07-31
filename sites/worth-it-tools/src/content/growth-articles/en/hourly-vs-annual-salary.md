@@ -1,115 +1,81 @@
-﻿---
+---
 contentType: article
 articleSlug: hourly-vs-annual-salary
 locale: en
-title: "Hourly vs Annual Salary: Compare Offers on the Same Basis"
-description: "Convert hourly and annual pay using real workweeks, unpaid leave, overtime, bonuses and local pay frequencies."
+title: "Hourly vs. Annual Salary: How to Compare Two Job Offers Fairly"
+description: "Convert hourly and annual pay using real workweeks, unpaid leave, overtime, and bonuses, and see what federal overtime law actually requires in 2026."
 relatedTool: /en/tools/salary-converter/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-A useful financial guide should do more than produce a headline number. It should let you reproduce the calculation, identify the assumptions, and see exactly which input changes the conclusion.
+"$25 an hour" and "$52,000 a year" sound like they should mean roughly the same thing, and at 40 hours a week for 52 paid weeks they do — but almost no real job matches that exactly. Unpaid leave, overtime eligibility, and bonus structure can move the honest comparison by thousands of dollars a year.
 
-This guide separates contractual facts from editable assumptions. Start with current statements or official data, then compare a conservative case, a base case and a favorable case without treating any estimate as a promise.
+## Why "Multiply by 2,080 Hours" Undercounts Most Jobs
 
-## The decision this guide helps you make
+The shortcut of hourly rate × 2,080 (40 hours × 52 weeks) assumes every week is paid at the base rate with zero unpaid time off and zero overtime. Most hourly jobs include at least some unpaid leave, and many include recurring overtime — both of which move the real annual figure away from that shortcut in opposite directions.
 
-Convert hourly, weekly, biweekly, monthly and annual gross pay while accounting for working weeks, unpaid leave, overtime, bonus and commission.
-
-## Numbers to collect before calculating
-
-Use the latest statement, contract, payslip, tax notice or official index available. Record the date beside every rate or fee that can change.
-
-- Base hourly rate or annual salary
-- Paid hours per week
-- Working weeks and unpaid leave
-- Overtime hours and multiplier
-- Bonus, commission and payments per year
-
-## How the model works
+## The Conversion Formula, Step by Step
 
 `annual gross = hourly rate × paid hours per week × working weeks + overtime + bonus + commission`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+1. Confirm paid hours per week from the offer or contract — not just "full time."
+2. Subtract unpaid weeks (unpaid leave, unpaid holidays) from 52 to get working weeks actually paid at the base rate.
+3. Add overtime hours at the correct multiplier, separately from base hours.
+4. Add any guaranteed bonus or commission, only if it's contractual rather than discretionary.
 
-Keep full precision inside the calculation and round only for display. Cash costs, timing, fees, taxes and uncertain future values should remain separate so the result can be audited.
+## Worked Example: $25 an Hour, 40 Hours a Week
 
-## Worked example
+At $25/hour, 40 hours a week, and 52 paid weeks, base annual gross is $52,000 before overtime or bonuses. If two of those weeks are actually unpaid leave, the real base annual figure drops to roughly $50,000 — a $2,000 gap the simple shortcut misses entirely.
 
-At $25 per hour, 40 hours a week and 52 paid weeks, base annual gross is $52,000 before overtime or bonuses.
+## Overtime: What Federal Law Actually Requires
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+Under the Fair Labor Standards Act, non-exempt employees must generally be paid at least 1.5 times their regular rate for hours worked beyond 40 in a workweek. Whether a role is "exempt" from overtime depends on both a duties test and a minimum salary threshold. That threshold has moved recently: a 2024 Department of Labor rule to raise it was vacated by a federal court in November 2024, and after the Fifth Circuit denied related appeals, the [DOL restored the pre-2024 threshold of $684 per week (about $35,568 a year)](https://www.dol.gov/agencies/whd/overtime/rulemaking) as the current federal standard, effective May 2026 — so a lower salary generally makes a role non-exempt and overtime-eligible regardless of job title, while some states set their own, higher thresholds.
 
-## Run three scenarios, not one
+## Unpaid Leave and Real Working Weeks
 
-Change one uncertain input at a time. This reveals sensitivity and prevents an optimistic assumption from hiding another risk.
+Two unpaid weeks a year is common even in salaried roles through unpaid holidays, waiting periods on new PTO, or unpaid leave under FMLA. Every unpaid week removes that week's pay from the annual total for an hourly worker, and can also reduce the effective hourly value of a fixed annual salary if you're comparing it against an hourly role with paid leave built in.
 
-- **Conservative:** Use higher costs, slower progress or lower income/return. Reduce working weeks for unpaid leave.
-- **Base:** Use current verified figures and the behavior most likely to continue. Add regular overtime.
-- **Favorable:** Use a plausible upside case and label it as a scenario, not a forecast. Compare 12 and 14 salary payments where relevant.
+## Comparing Two Offers on the Same Basis
 
-## Common mistakes that change the answer
+To compare an hourly offer against a salaried one fairly, convert both to the same basis — usually annual gross — using each role's actual paid hours, unpaid weeks, and any guaranteed extra pay. A salaried role advertised at "$50,000" with unlimited unpaid overtime expectations and an hourly role at "$24/hour" with guaranteed time-and-a-half past 40 hours can rank differently once both are converted honestly, especially in roles where overtime is routine.
 
-- Multiplying weekly pay by 48 instead of 52 without a reason
-- Assuming every monthly salary represents twelve identical payments
-- Mixing gross and take-home pay
-- Calling the conversion an after-tax paycheck estimate
+## Gross Pay Is Not Take-Home Pay
 
-## Local interpretation
+Every figure above is gross pay — before federal income tax, state tax where applicable, Social Security, Medicare, and any benefit deductions. This calculator intentionally stays at the gross level rather than estimating taxes, because take-home pay depends on filing status, state, and withholding elections that a general tool can't reliably model; use your own payroll estimator or a tax professional for a take-home figure.
 
-This is a gross-pay converter unless the user enters take-home figures. Do not estimate taxes without a maintained jurisdiction-specific payroll engine.
+## Where These Numbers Come From
 
-## A practical step-by-step workflow
+- [U.S. Department of Labor — Overtime Rulemaking](https://www.dol.gov/agencies/whd/overtime/rulemaking), reviewed 2026-07-31, for the restored $684/week federal exempt-salary threshold effective May 2026 following the Fifth Circuit's denial of appeals on the vacated 2024 rule.
+- Federal Register, "Defining and Delimiting the Exemptions... Implementation of Federal Court Judgments," published May 15, 2026, reviewed 2026-07-31, for the technical amendment restoring the pre-2024 threshold.
+- FLSA overtime multiplier (1.5× regular rate past 40 hours/week) reflects the statutory default for non-exempt employees; some states set additional daily-overtime rules beyond the federal weekly standard.
 
-1. Define the exact question and time horizon.
-2. Enter verified current figures before changing any assumptions.
-3. Reproduce a known payment, balance or budget total as a reasonableness check.
-4. Save conservative, base and favorable scenarios.
-5. Identify the first input that reverses the conclusion; that is the break-even threshold.
-6. Check contract, tax and eligibility rules before acting.
+This guide is general education, not individualized employment, tax, or legal advice, and it does not determine whether any specific role is legally exempt from overtime — that depends on both duties and salary tests applied to your actual job. Do not enter identifying information into a shareable URL.
 
-## How to interpret the result
+## Frequently Asked Questions
 
-Prefer conditional language: “Under these inputs, option A has the lower modeled cost.” A calculator cannot see every contract clause, underwriting rule, behavioral change or emergency-cash need.
+### Is monthly salary just annual salary divided by 12?
 
-## Frequently asked questions
+As an average, yes — but individual paychecks depend on your actual pay frequency (weekly, biweekly, semimonthly), which can make some months' paychecks larger or smaller than the average.
 
-### Why can the result differ from my statement?
+### How are unpaid weeks handled in the calculation?
 
-Statements may use different timing, compounding, fee, tax or rounding rules. Re-enter the exact contractual figures and compare the schedule line by line.
+They're subtracted from the 52-week base, reducing the number of weeks paid at your hourly rate before overtime and bonuses are added.
 
-### Which input usually matters most?
+### Can I model 14 salary payments a year instead of 12?
 
-Test the rate, time horizon, recurring payment and one-off fees first. The sensitivity section should show which variable changes the result fastest.
+Yes — some employers pay extra "13th" or "14th" month payments; set the pay-period count directly rather than assuming a standard 12.
 
-### Are the default values market averages?
+### Does this calculate my take-home pay?
 
-No. Defaults are editable examples only and must never be presented as current market data.
+No — it intentionally stays at gross pay, since take-home depends on filing status, state, and withholding that a general calculator can't reliably estimate.
 
-### Does the result guarantee approval, savings or returns?
+### How is overtime pay included?
 
-No. It is an educational scenario model, not a lender decision, contract quote or investment promise.
-
-### When should I recalculate?
-
-Recalculate after a material change in rate, balance, income, recurring cost, official index or contract term.
+Hourly equivalent rate × the overtime multiplier (commonly 1.5×) × overtime hours × the number of weeks that overtime recurs.
 
 ## Use the calculator
 
-Open the related calculator, reproduce the example, and then replace each example value with a figure you can verify.
+Open the related calculator, reproduce the $25-an-hour example above, and then enter your own hours, unpaid weeks, and any guaranteed bonus or overtime.
 
 [Hourly, Monthly & Annual Salary Converter](/en/tools/salary-converter/)
-
-## Editorial and safety limits
-
-This material is for general education and estimation only. It is not individualized financial, tax, legal, credit or investment advice. Do not place account numbers, addresses or personally identifiable information in shareable URLs.
-
-## Official sources to verify before publishing
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.

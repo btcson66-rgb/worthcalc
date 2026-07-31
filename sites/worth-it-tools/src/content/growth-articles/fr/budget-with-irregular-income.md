@@ -1,114 +1,66 @@
-﻿---
+---
 contentType: article
 articleSlug: budget-with-irregular-income
 locale: fr
-title: "Construire un budget avec des revenus irréguliers"
-description: "Ramenez revenus et dépenses de fréquences différentes à un budget mensuel cohérent."
+title: "Budget d'auto-entrepreneur : transformer un chiffre d'affaires irrégulier en revenu mensuel"
+description: "Cotisations URSSAF par activité, versement libératoire, franchise de TVA et déclaration mensuelle ou trimestrielle : comment un auto-entrepreneur construit un budget fiable à partir d'un chiffre d'affaires qui varie chaque mois."
 relatedTool: /fr/tools/budget-builder/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Un bon guide financier ne se contente pas d’afficher un chiffre final. Il doit permettre de refaire le calcul, d’identifier chaque hypothèse et de voir quelle donnée peut inverser la conclusion.
+Un salarié en France construit son budget à partir d'un montant net qui tombe le même jour chaque mois. Un auto-entrepreneur part d'un chiffre d'affaires encaissé, dont il faut d'abord retirer les cotisations sociales et, éventuellement, l'impôt prélevé à la source via le versement libératoire, avant de savoir ce qu'il reste vraiment à vivre. Ce guide part de cette réalité plutôt que d'appliquer une règle de répartition conçue pour un salaire fixe.
 
-Ce guide distingue les données vérifiables du contrat ou du relevé des hypothèses modifiables. Commencez par les informations actuelles, puis comparez un scénario prudent, central et favorable sans transformer une estimation en garantie.
+## Le chiffre d'affaires n'est pas votre revenu disponible
 
-## La décision que ce guide aide à préparer
+La confusion la plus coûteuse chez un auto-entrepreneur débutant est de budgétiser sur la base du chiffre d'affaires encaissé, sans avoir mis de côté la part destinée aux cotisations sociales. Contrairement à un salarié dont les cotisations sont prélevées avant versement du salaire net, l'auto-entrepreneur reçoit l'intégralité de ce que paie son client et doit lui-même provisionner la part qui partira ensuite vers l'URSSAF.
 
-Ramener revenus irréguliers et factures annuelles à une base mensuelle pour visualiser excédent, déficit et épargne sans imposer une règle unique.
+## Cotisations URSSAF : le taux dépend de votre activité, pas d'un forfait unique
 
-## Les données à rassembler avant le calcul
+Le taux de cotisations sociales varie selon la nature de l'activité déclarée : 12,3 % du chiffre d'affaires pour la vente de marchandises, 21,2 % pour les prestations de services artisanales ou commerciales (BIC), et 23,1 % à 23,2 % pour les professions libérales (BNC), ces taux couvrant l'assurance maladie, la retraite de base et complémentaire, et les allocations familiales ([Urssaf.fr — évolution des taux de cotisations sociales des auto-entrepreneurs](https://www.urssaf.fr/accueil/actualites/taux-cotisations-autoentrepeneur.html), consulté le 2026-07-31). Un même chiffre d'affaires de 3 000 € ne laisse donc pas la même trésorerie disponible selon qu'il provient d'une activité de vente ou d'une prestation de service intellectuelle — un écart que beaucoup de budgets de débutants ignorent en appliquant un pourcentage générique.
 
-Utilisez le relevé, le contrat, la fiche de paie, l’avis fiscal ou l’indice officiel le plus récent. Indiquez la date de chaque taux, frais ou règle susceptible d’évoluer.
+## Déclarer au mois ou au trimestre : un choix qui change votre trésorerie
 
-- Revenus nets et fréquence de versement
-- Charges fixes mensuelles
-- Dépenses essentielles variables et dépenses choisies
-- Factures trimestrielles, semestrielles et annuelles
-- Épargne prévue et provisions
+À l'immatriculation, l'auto-entrepreneur choisit une périodicité de déclaration mensuelle ou trimestrielle, modifiable une fois par an avant le 31 octobre pour l'année suivante ([autoentrepreneur.urssaf.fr — déclarer et payer mes cotisations](https://www.autoentrepreneur.urssaf.fr/portail/accueil/une-question/toutes-les-fiches-pratiques/declarer-et-payer-mes-cotisation.html), consulté le 2026-07-31). La déclaration mensuelle lisse les sorties de trésorerie sur des montants plus petits mais plus fréquents ; la déclaration trimestrielle laisse plus de temps entre deux échéances mais concentre un prélèvement plus élevé, ce qui peut surprendre un mois où l'activité a été particulièrement forte. Une déclaration à zéro reste obligatoire même sans chiffre d'affaires sur la période, sous peine de pénalité.
 
-## Fonctionnement du modèle
+## Le versement libératoire : intéressant seulement sous certaines conditions
 
-`équivalent mensuel = montant × nombre d’occurrences annuelles ÷ 12`
+Le versement libératoire permet de payer l'impôt sur le revenu en même temps que les cotisations sociales, à un taux fixe appliqué au chiffre d'affaires — 1 % pour la vente, 1,7 % pour les prestations de services BIC, 2,2 % pour les activités libérales BNC — au lieu du barème progressif classique ([impots.gouv.fr — le versement libératoire](https://www.impots.gouv.fr/professionnel/le-versement-liberatoire), consulté le 2026-07-31). Cette option n'est ouverte que si le revenu fiscal de référence du foyer ne dépasse pas un plafond par part fiscale, revu chaque année ; au-delà, l'option n'est pas accessible et l'impôt suit le barème progressif normal, prélevé à la source séparément des cotisations URSSAF. Pour un revenu du foyer proche du plafond, il faut vérifier ce seuil avant de compter sur cette option dans son budget prévisionnel.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## Exemple : un mois à 4 200 € de chiffre d'affaires en prestations de services
 
-Le moteur conserve la précision complète et n’arrondit qu’à l’affichage. Séparez les flux de trésorerie, le calendrier, les frais, les impôts et les valeurs futures incertaines afin de rendre le calcul vérifiable.
+Un auto-entrepreneur en prestations de services BIC facture 4 200 € sur un mois. Les cotisations sociales au taux de 21,2 % représentent 890,40 €. S'il a opté pour le versement libératoire à 1,7 %, l'impôt prélevé à la source ajoute 71,40 €. Il reste donc 4 200 − 890,40 − 71,40 = 3 238,20 € avant toute charge professionnelle (matériel, logiciels, déplacements) non déduite automatiquement en micro-entreprise, puisque le régime applique déjà un abattement forfaitaire sur le chiffre d'affaires pour le calcul de l'impôt hors versement libératoire.
 
-## Exemple reproductible
+## Construire un revenu mensuel stable à partir de mois irréguliers
 
-Exemple : 2 600 € nets mensuels, assurance annuelle de 600 € et charges trimestrielles de 300 €.
+Plutôt que de budgétiser sur le mois le plus récent, calculez une moyenne glissante sur les trois à six derniers mois de chiffre d'affaires net de cotisations, et retenez le mois le plus bas de cette période comme base de vos charges fixes — loyer, assurance, abonnements. Les mois au-dessus de cette base alimentent une réserve de trésorerie professionnelle séparée du compte personnel, qui absorbe les mois creux sans obliger à emprunter ou à retarder une échéance URSSAF.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Le seuil de franchise en base de TVA à surveiller
 
-## Comparer trois scénarios plutôt qu’un seul
+Tant que le chiffre d'affaires annuel reste sous 37 500 € pour une activité de prestation de services (85 000 € pour la vente de marchandises), l'auto-entrepreneur ne facture pas de TVA et n'en récupère pas non plus sur ses achats professionnels ([impots.gouv.fr — seuils de chiffre d'affaires pour rester micro-entrepreneur](https://www.impots.gouv.fr/professionnel/questions/pour-rester-micro-entrepreneur-quel-montant-de-chiffre-daffaires-ou-de), consulté le 2026-07-31). Un dépassement au-delà des seuils majorés (41 250 € pour les services, 93 500 € pour la vente) entraîne un assujettissement immédiat à la TVA dès le jour du dépassement, ce qui change immédiatement les prix pratiqués face à des clients particuliers non récupérateurs de TVA — un point à surveiller dans le budget d'une activité en forte croissance.
 
-Ne modifiez qu’une variable incertaine à la fois. Vous mesurez ainsi la sensibilité réelle sans laisser une hypothèse optimiste masquer un autre risque.
+## Foire aux questions
 
-- **Prudent:** Retenez des coûts plus élevés, une progression plus lente ou un revenu/rendement plus faible. Réduire le revenu irrégulier à une moyenne prudente.
-- **Central:** Utilisez les chiffres vérifiés et le comportement le plus probable. Ajouter une facture annuelle oubliée.
-- **Favorable:** Testez une amélioration plausible, clairement présentée comme scénario et non comme prévision. Comparer les dépenses actuelles à un objectif de baisse.
+### Dois-je mettre de côté un pourcentage fixe à chaque encaissement ?
 
-## Erreurs fréquentes qui faussent le résultat
+Oui, idéalement le taux de cotisation correspondant à votre activité (12,3 %, 21,2 % ou autour de 23 % selon le cas), plus l'impôt si vous avez opté pour le versement libératoire, avant de considérer le reste comme disponible.
 
-- Convertir tout revenu hebdomadaire avec un mois de quatre semaines
-- Oublier assurance, impôts ou entretien annuels
-- Traiter l’épargne comme un reste plutôt que comme une affectation
-- Utiliser 50/30/20 comme seuil de réussite
+### Le versement libératoire est-il toujours avantageux ?
 
-## Interprétation pour la France
+Non, il dépend de votre taux marginal d'imposition réel comparé au taux fixe proposé, et il n'est accessible que si le revenu fiscal de référence du foyer reste sous le plafond fixé chaque année.
 
-Intégrez les dépenses annuelles, les charges de copropriété, les assurances et les impôts non prélevés mensuellement. Les règles de répartition sont des repères, pas des normes universelles.
+### Que se passe-t-il si je ne déclare rien un mois sans chiffre d'affaires ?
 
-## Méthode pratique étape par étape
+Vous devez tout de même transmettre une déclaration à zéro dans les délais ; l'absence de déclaration expose à des pénalités même sans activité sur la période.
 
-1. Définissez la question précise et l’horizon de comparaison.
-2. Saisissez d’abord les chiffres actuels vérifiables.
-3. Vérifiez que le modèle reproduit une mensualité, un solde ou un budget connu.
-4. Enregistrez les scénarios prudent, central et favorable.
-5. Repérez la première valeur qui inverse la conclusion : c’est le seuil d’équilibre.
-6. Contrôlez contrat, fiscalité et critères applicables avant d’agir.
+### Le seuil de franchise de TVA est-il le même pour toutes les activités ?
 
-## Interpréter le résultat sans en faire une promesse
+Non, il est de 37 500 € pour les prestations de services et de 85 000 € pour la vente de marchandises, avec des seuils majorés respectifs de 41 250 € et 93 500 €.
 
-Privilégiez une formulation conditionnelle : « Avec ces données et hypothèses, l’option A présente le coût modélisé le plus faible. » Le calculateur ne connaît pas toutes les clauses, règles d’octroi, évolutions de comportement ou besoins de trésorerie.
+### Comment lisser un budget quand le chiffre d'affaires varie fortement d'un mois à l'autre ?
 
-## Questions fréquentes
+Basez vos charges fixes sur le mois le plus bas d'une moyenne glissante récente, et affectez le surplus des bons mois à une réserve de trésorerie professionnelle plutôt qu'à des dépenses immédiates.
 
-### Pourquoi le résultat peut-il différer du relevé ou de l’offre ?
+## Construire votre budget avec vos propres chiffres
 
-L’organisme peut utiliser d’autres dates, méthodes de capitalisation, frais, impôts ou arrondis. Reprenez les conditions exactes et comparez l’échéancier période par période.
-
-### Quelle donnée influence généralement le plus le résultat ?
-
-Testez d’abord le taux, la durée, le versement régulier et les frais ponctuels. L’analyse de sensibilité doit montrer la variable la plus déterminante.
-
-### Les valeurs initiales sont-elles des moyennes de marché ?
-
-Non. Ce sont des exemples modifiables, jamais des données de marché actuelles.
-
-### Le résultat garantit-il un crédit, une économie ou un rendement ?
-
-Non. Il s’agit d’un modèle pédagogique, pas d’une décision bancaire, d’un devis contractuel ou d’une promesse de placement.
-
-### Quand faut-il refaire le calcul ?
-
-Après toute modification importante du taux, du solde, du revenu, d’une charge récurrente, d’un indice officiel ou d’une clause.
-
-## Ouvrir le calculateur
-
-Ouvrez le calculateur associé, reproduisez l’exemple, puis remplacez chaque valeur par une donnée vérifiable.
-
-[Constructeur de budget mensuel](/fr/tools/budget-builder/)
-
-## Limites éditoriales et sécurité
-
-Contenu pédagogique et estimatif uniquement ; il ne constitue pas un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé. N’insérez aucune donnée personnelle dans une URL partageable.
-
-## Sources officielles à revérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+Ouvrez le [constructeur de budget mensuel](/fr/tools/budget-builder/), reproduisez l'exemple des 4 200 € ci-dessus, puis remplacez chaque valeur par votre chiffre d'affaires réel, votre taux de cotisation et vos charges effectives. Ce contenu est pédagogique et estimatif ; il ne remplace pas une simulation officielle sur autoentrepreneur.urssaf.fr ni un conseil d'un expert-comptable. N'insérez aucune donnée identifiable dans un lien de résultat partagé. Les taux et seuils cités proviennent d'[Urssaf.fr](https://www.urssaf.fr/accueil/actualites/taux-cotisations-autoentrepeneur.html) et d'[impots.gouv.fr](https://www.impots.gouv.fr/professionnel/le-versement-liberatoire) (consultés le 2026-07-31) et sont révisés chaque année.

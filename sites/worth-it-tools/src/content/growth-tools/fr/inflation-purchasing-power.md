@@ -1,84 +1,72 @@
-﻿---
+---
 contentType: tool
 toolSlug: inflation-purchasing-power
 locale: fr
-title: "Calculateur d’inflation et de pouvoir d’achat"
-description: "Convertissez un montant entre deux périodes à partir d’une série officielle de prix."
+title: "Calculateur d'inflation et de pouvoir d'achat (en attente de publication)"
+description: "Ce calculateur reste non publié tant que la série officielle de l'Insee n'est pas intégrée et vérifiée. Cette page documente la méthode prévue."
 relatedArticle: /fr/nominal-vs-real-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Convertissez un montant entre deux périodes à partir d’une série officielle de prix.
+Ce calculateur n'est pas encore publié : il convertira un montant entre deux périodes à partir d'une série officielle de l'Insee, mais reste en attente tant que cette intégration n'est pas finalisée et vérifiée. Cette page décrit la méthode qui sera appliquée une fois la publication effective.
 
-## Comment utiliser le calculateur
+## Pourquoi cette page reste non publiée
 
-1. Commencez avec le relevé, le contrat, la fiche de paie ou l’indice officiel le plus récent.
-2. Remplacez chaque valeur par défaut par une donnée vérifiable ; ce sont des exemples, pas des moyennes de marché ni des recommandations.
-3. Calculez d’abord le scénario actuel, puis enregistrez au moins un scénario prudent, central et favorable.
-4. Examinez le détail des coûts et le seuil de bascule plutôt que le seul résultat principal.
-5. N’exportez ou ne copiez que des résultats non sensibles, sans donnée permettant d’identifier un compte ou une personne.
+Une conversion de pouvoir d'achat fiable nécessite une série d'IPC continue sur toute la période demandée, avec sa base de référence et son champ géographique identifiés sans ambiguïté. Un calculateur publié avec des valeurs approximatives sur un site consacré à des décisions financières présenterait un risque réel d'erreur pour l'utilisateur, en particulier parce qu'un écart de quelques dixièmes de point sur l'indice se traduit par un écart réel en euros sur un montant important. Cette page reste donc marquée non indexée jusqu'à vérification complète.
 
-## Méthode de calcul
+## Ce que l'outil calculera une fois publié
 
+`montant équivalent = montant initial × IPC de l'année cible ÷ IPC de l'année de départ`
 
-`montant équivalent = montant initial × IPC cible ÷ IPC initial`
+La version publiée conservera la précision complète en interne et n'arrondira qu'à l'affichage du résultat final. Elle refusera les années hors plage couverte par la série officielle, les valeurs non finies, et toute incohérence de base entre les deux dates demandées, plutôt que de produire un résultat silencieusement approximatif.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## Exemple illustratif (à ne pas utiliser comme donnée réelle)
 
-## Exemple chiffré
+Si un indice passait hypothétiquement de 100 à 112 entre deux années, 1 000 € au départ deviendraient 1 120 € en valeur nominale équivalente, et le pouvoir d'achat de la somme initiale représenterait environ 89,3 % de celui de la somme finale. Ces valeurs sont purement illustratives et ne correspondent à aucune période réelle de l'IPC français ; elles servent uniquement à montrer le mécanisme de la formule.
 
-Si l’indice passe de 100 à 112, 1 000 € deviennent 1 120 € et le pouvoir d’achat initial vaut 89,3 %.
+## Les séries d'IPC que la version publiée distinguera
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+L'Insee publie plusieurs séries — l'IPC général, l'IPC hors tabac utilisé pour certains contrats, et l'indice harmonisé européen (IPCH), qui diffère notamment sur le traitement des dépenses de santé ([Insee — définition de l'IPC](https://www.insee.fr/fr/metadonnees/definition/c1557), consulté le 2026-07-31). La version publiée du calculateur permettra de préciser la série utilisée, car un usage contractuel spécifique — par exemple une clause de révision de loyer — peut référencer une série précise, différente de l'IPC général par défaut.
 
-## Repères pour la France
+## Un repère provisoire en attendant la publication
 
-Utilisez l’IPC de l’Insee et précisez la base. L’IPC n’est pas un indice individuel du coût de la vie et certains contrats utilisent des indices hors tabac ou spécifiques.
+En attendant, un repère simple pour situer l'érosion du pouvoir d'achat d'une épargne non investie est de comparer le taux d'un placement sans risque à l'inflation constatée. Avec un Livret A à 1,7 % depuis le 1er août 2026 et une inflation provisoire de 1,8 % sur un an en juin 2026 selon l'Insee ([Insee — informations rapides, juin 2026](https://www.insee.fr/fr/statistiques/9015205), consulté le 2026-07-31, donnée provisoire), le rendement réel d'une épargne de précaution reste proche de zéro sur cette période récente.
 
-## Limites et vérifications
+## Limites de cette page
 
-Cette page fournit une estimation pédagogique générale et non un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé.
-
-Avant toute décision, vérifiez le TAEG, les frais, l’assurance, la fiscalité et les clauses en vigueur auprès de l’établissement et des sources officielles.
-
-Le calcul est effectué dans le navigateur. N’insérez pas de numéro de compte, d’adresse ou de donnée personnelle dans un lien partageable.
-
-Le modèle sépare volontairement le résultat mathématique d’une conclusion juridique ou bancaire. Il ne doit jamais afficher « approuvé », « sûr », « garanti » ou une affirmation comparable. Tout seuil doit être présenté comme une référence modifiable ou une règle publique datée, sourcée et accompagnée de ses exceptions.
+Ce contenu est pédagogique et estimatif ; il ne constitue pas un conseil financier, fiscal ou d'investissement personnalisé. Aucune donnée n'est collectée sur cette page, qui ne contient pas encore de calculateur fonctionnel. N'insérez aucune donnée identifiable dans un lien partagé une fois l'outil publié.
 
 ## Guide associé
 
-Lire [Montant nominal et pouvoir d’achat réel](/fr/nominal-vs-real-purchasing-power/)pour suivre la méthode, construire les scénarios et vérifier les données.
+Lisez [Pouvoir d'achat réel en France : pourquoi ce calculateur d'inflation reste en attente de publication](/fr/nominal-vs-real-purchasing-power/) pour comprendre ce que mesure l'IPC, pourquoi la publication est retardée, et la méthode complète prévue.
 
-## Questions fréquentes
+## Foire aux questions
 
-### Pourquoi le résultat reste-t-il une estimation ?
+### Quand ce calculateur sera-t-il publié ?
 
-Les contrats, dates, taux et frais réels peuvent différer.
+Dès que la série officielle complète de l'Insee sera intégrée et vérifiée sur ce site ; aucune date précise n'est communiquée pour éviter un engagement non tenu.
 
-### Les valeurs par défaut sont-elles des moyennes ?
+### Puis-je utiliser l'exemple donné sur cette page comme une estimation réelle ?
 
-Non, ce sont des exemples modifiables.
+Non, les valeurs 100 et 112 sont purement illustratives et ne correspondent à aucune période réelle de l'inflation française.
 
-### Les données sont-elles envoyées ?
+### Quelle série d'IPC la version publiée utilisera-t-elle par défaut ?
 
-Non, le moteur est conçu pour fonctionner localement dans le navigateur.
+L'IPC général de l'Insee, avec la possibilité de préciser une autre série si votre usage — par exemple une clause contractuelle — en référence une spécifique.
 
-### Le résultat garantit-il un crédit ou un rendement ?
+### Le taux du Livret A peut-il remplacer ce calculateur en attendant ?
 
-Non, il compare uniquement des scénarios.
+Comme repère approximatif de rendement réel sur une épargne récente, oui, mais il ne remplace pas une conversion précise entre deux dates éloignées.
 
-### Comment améliorer la précision ?
+### Cette page collecte-t-elle des données en attendant la publication ?
 
-Utilisez les documents à jour et testez plusieurs hypothèses.
+Non, aucun calcul n'est effectué sur cette page tant que l'outil n'est pas publié ; il n'y a donc rien à envoyer ni à stocker.
 
+## Sources
 
-## Sources à vérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+- [Insee — définition de l'IPC](https://www.insee.fr/fr/metadonnees/definition/c1557), consulté le 2026-07-31
+- [Insee — informations rapides, prix à la consommation juin 2026](https://www.insee.fr/fr/statistiques/9015205), consulté le 2026-07-31
+- [economie.gouv.fr — épargne réglementée, le Livret A passe à 1,7 %](https://presse.economie.gouv.fr/epargne-reglementee-le-livret-a-passe-a-17-et-le-lep-se-maintient-a-25-a-compter-du-1er-aout-2026/), consulté le 2026-07-31

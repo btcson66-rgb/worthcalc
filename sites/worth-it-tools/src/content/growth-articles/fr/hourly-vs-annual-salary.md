@@ -1,114 +1,66 @@
-﻿---
+---
 contentType: article
 articleSlug: hourly-vs-annual-salary
 locale: fr
-title: "Salaire horaire ou annuel : comparer sur la même base"
-description: "Convertissez salaire horaire et annuel avec semaines travaillées, heures supplémentaires et primes."
+title: "Salaire horaire, 35 heures et salaire annuel : convertir sans se tromper de base"
+description: "Le SMIC horaire et mensuel 2026, la majoration des heures supplémentaires, le plafond d'exonération fiscale et pourquoi brut, net avant impôt et net après prélèvement à la source ne sont jamais le même chiffre."
 relatedTool: /fr/tools/salary-converter/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Un bon guide financier ne se contente pas d’afficher un chiffre final. Il doit permettre de refaire le calcul, d’identifier chaque hypothèse et de voir quelle donnée peut inverser la conclusion.
+Convertir un salaire horaire en salaire annuel en France ne se résume pas à multiplier par un nombre d'heures. La durée légale du travail à temps plein est fixée à 35 heures par semaine, les heures au-delà suivent une majoration encadrée par la loi, et le résultat obtenu reste un montant brut — trois filtres supplémentaires (cotisations, prélèvement à la source, éventuelle exonération) séparent ce chiffre de ce qui arrive réellement sur le compte en banque.
 
-Ce guide distingue les données vérifiables du contrat ou du relevé des hypothèses modifiables. Commencez par les informations actuelles, puis comparez un scénario prudent, central et favorable sans transformer une estimation en garantie.
+## Le SMIC : un plancher horaire, pas un point de départ pour un vrai salaire annuel
 
-## La décision que ce guide aide à préparer
+Depuis le 1er juin 2026, le SMIC horaire brut s'élève à 12,31 €, soit 1 867,02 € brut par mois pour un temps plein de 35 heures hebdomadaires ([service-public.fr — le SMIC va augmenter le 1er juin](https://www.service-public.gouv.fr/particuliers/actualites/A18916), consulté le 2026-07-31). Ce montant est un plancher légal, pas une moyenne : il sert de référence minimale pour tout salarié, mais la plupart des grilles de rémunération par convention collective démarrent au-dessus de ce seuil dès les premiers échelons de qualification. Le SMIC est révisé chaque 1er janvier selon l'inflation constatée pour les 20 % des ménages les plus modestes, et peut faire l'objet de revalorisations supplémentaires en cours d'année en cas de forte inflation, comme celle intervenue en juin 2026.
 
-Convertir salaire brut horaire, hebdomadaire, mensuel et annuel en intégrant semaines travaillées, congés sans solde, heures supplémentaires, prime et commission.
+## Le temps plein légal de 35 heures et ce qui change au-delà
 
-## Les données à rassembler avant le calcul
+La durée légale du travail à temps plein est de 35 heures par semaine en France. Un salarié dont le contrat prévoit davantage d'heures hebdomadaires n'est pas automatiquement mieux payé à l'heure : il perçoit soit un salaire de base plus élevé intégrant ces heures, soit des heures supplémentaires distinctes soumises à une majoration spécifique. Confondre un salaire "35 heures" et un salaire "39 heures" sans ajuster le calcul horaire fausse systématiquement toute comparaison entre deux offres d'emploi.
 
-Utilisez le relevé, le contrat, la fiche de paie, l’avis fiscal ou l’indice officiel le plus récent. Indiquez la date de chaque taux, frais ou règle susceptible d’évoluer.
+## Heures supplémentaires : majoration et plafond d'exonération fiscale
 
-- Taux horaire ou salaire brut annuel
-- Heures payées par semaine
-- Semaines travaillées et congés sans solde
-- Heures supplémentaires et majoration
-- Primes, commissions et nombre de versements
+Les huit premières heures supplémentaires (de la 36e à la 43e heure hebdomadaire) sont majorées de 25 %, et les heures au-delà de la 43e heure sont majorées de 50 %, sauf accord d'entreprise ou de branche fixant un taux différent, qui ne peut légalement pas descendre sous 10 %. Ces heures supplémentaires bénéficient en outre d'une exonération d'impôt sur le revenu dans la limite de 7 500 € par an ainsi que d'une réduction de cotisations salariales spécifique — un avantage qui n'existe pas pour le salaire de base et qui change la comparaison nette entre deux postes affichant un même total brut annuel.
 
-## Fonctionnement du modèle
+## Brut, net avant impôt, net après prélèvement à la source : trois chiffres, trois usages
 
-`salaire brut annuel = taux horaire × heures payées par semaine × semaines travaillées + heures supplémentaires + primes + commissions`
+Le salaire brut sert de base aux cotisations sociales, prélevées avant tout versement. Le "net avant impôt", qui apparaît sur le bulletin de paie, correspond au montant après cotisations salariales mais avant le prélèvement à la source de l'impôt sur le revenu, appliqué séparément selon un taux calculé par l'administration fiscale à partir de la situation du foyer ([urssaf.fr — comprendre les cotisations de votre bulletin de salaire](https://www.urssaf.fr/accueil/salarie/cotisations-urssaf-bulletin-paie.html), consulté le 2026-07-31). Le montant réellement viré sur le compte bancaire est donc inférieur au "net avant impôt" affiché sur le bulletin, sauf taux de prélèvement à 0 %. Pour un salarié non-cadre, l'ensemble des cotisations salariales représente en général autour de 22 % du brut, un ordre de grandeur qui varie selon le statut cadre ou non-cadre et la convention collective applicable.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## Exemple : 20 € de l'heure sur une base 35 heures
 
-Le moteur conserve la précision complète et n’arrondit qu’à l’affichage. Séparez les flux de trésorerie, le calendrier, les frais, les impôts et les valeurs futures incertaines afin de rendre le calcul vérifiable.
+À 20 € de l'heure brut, 35 heures par semaine et 47 semaines travaillées dans l'année (déduction faite des congés payés), le salaire brut annuel de base est de 20 × 35 × 47 = 32 900 €, avant toute prime ou heure supplémentaire. Si ce même salarié effectue régulièrement 4 heures supplémentaires par semaine majorées à 25 %, cela ajoute 20 × 1,25 × 4 × 47 = 4 700 € bruts par an, avec une fiscalité plus favorable que le salaire de base jusqu'au plafond annuel de 7 500 € d'heures supplémentaires exonérées.
 
-## Exemple reproductible
+## Comparer deux offres qui n'affichent pas le même type de salaire
 
-À 20 € de l’heure, 35 heures par semaine et 47 semaines payées, le brut de base est de 32 900 € avant primes.
+Un recruteur qui annonce "35 000 € brut par an" et un autre qui annonce "18 € de l'heure" ne sont comparables qu'après conversion sur la même base : heures hebdomadaires identiques, nombre de semaines travaillées identique, et statut brut vs net clairement identifié des deux côtés. Une erreur fréquente est de comparer un salaire annuel affiché brut à un taux horaire perçu comme déjà net, ce qui fait paraître une offre bien plus avantageuse qu'elle ne l'est réellement une fois les deux ramenées au même référentiel.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Cadre, non-cadre, forfait jours : la conversion horaire perd son sens
 
-## Comparer trois scénarios plutôt qu’un seul
+Pour un cadre au forfait jours, la rémunération n'est plus rattachée à un nombre d'heures hebdomadaires mais à un nombre de jours travaillés dans l'année, ce qui rend la conversion horaire théorique plutôt qu'opérationnelle : diviser un salaire annuel par un nombre d'heures suppose une durée du travail qui, contractuellement, n'existe pas de la même façon. Pour ce type de contrat, comparer deux offres au salaire annuel brut, en tenant compte du nombre de jours de repos ou RTT accordés, donne une image plus fidèle qu'une conversion horaire artificielle.
 
-Ne modifiez qu’une variable incertaine à la fois. Vous mesurez ainsi la sensibilité réelle sans laisser une hypothèse optimiste masquer un autre risque.
+## Foire aux questions
 
-- **Prudent:** Retenez des coûts plus élevés, une progression plus lente ou un revenu/rendement plus faible. Réduire les semaines pour congé sans solde.
-- **Central:** Utilisez les chiffres vérifiés et le comportement le plus probable. Ajouter les heures supplémentaires habituelles.
-- **Favorable:** Testez une amélioration plausible, clairement présentée comme scénario et non comme prévision. Comparer salaire de base et primes.
+### Le SMIC mensuel est-il le même pour tous les salariés à temps plein ?
 
-## Erreurs fréquentes qui faussent le résultat
+Le montant brut mensuel de 1 867,02 € correspond à une base de 35 heures hebdomadaires ; un contrat à temps plein avec une durée différente ou une convention collective plus favorable donne un montant différent.
 
-- Multiplier par 48 semaines sans justification
-- Supposer que tout salaire mensuel correspond à douze versements identiques
-- Mélanger brut et net
-- Présenter la conversion comme une estimation après impôt
+### Comment sont majorées les heures supplémentaires ?
 
-## Interprétation pour la France
+25 % pour les huit premières heures au-delà de 35 heures par semaine, 50 % au-delà, sauf accord d'entreprise fixant un taux différent, qui ne peut être inférieur à 10 %.
 
-Le salaire brut, le net avant impôt et le net payé ne sont pas interchangeables. Le calculateur ne simule pas les cotisations ni le prélèvement à la source.
+### Les heures supplémentaires sont-elles imposées comme le reste du salaire ?
 
-## Méthode pratique étape par étape
+Non, elles bénéficient d'une exonération d'impôt sur le revenu dans la limite de 7 500 € par an et d'une réduction de cotisations salariales spécifique.
 
-1. Définissez la question précise et l’horizon de comparaison.
-2. Saisissez d’abord les chiffres actuels vérifiables.
-3. Vérifiez que le modèle reproduit une mensualité, un solde ou un budget connu.
-4. Enregistrez les scénarios prudent, central et favorable.
-5. Repérez la première valeur qui inverse la conclusion : c’est le seuil d’équilibre.
-6. Contrôlez contrat, fiscalité et critères applicables avant d’agir.
+### Pourquoi mon salaire net sur le bulletin de paie est-il différent du montant viré sur mon compte ?
 
-## Interpréter le résultat sans en faire une promesse
+Parce que le net affiché sur le bulletin est calculé avant le prélèvement à la source de l'impôt sur le revenu, appliqué séparément selon votre taux personnel.
 
-Privilégiez une formulation conditionnelle : « Avec ces données et hypothèses, l’option A présente le coût modélisé le plus faible. » Le calculateur ne connaît pas toutes les clauses, règles d’octroi, évolutions de comportement ou besoins de trésorerie.
+### Comment comparer un salaire horaire et un salaire annuel entre deux offres ?
 
-## Questions fréquentes
+Ramenez les deux à la même base — heures hebdomadaires, nombre de semaines travaillées, statut brut ou net — avant toute comparaison, sinon l'écart affiché ne reflète pas l'écart réel.
 
-### Pourquoi le résultat peut-il différer du relevé ou de l’offre ?
+## Convertir votre salaire avec vos propres chiffres
 
-L’organisme peut utiliser d’autres dates, méthodes de capitalisation, frais, impôts ou arrondis. Reprenez les conditions exactes et comparez l’échéancier période par période.
-
-### Quelle donnée influence généralement le plus le résultat ?
-
-Testez d’abord le taux, la durée, le versement régulier et les frais ponctuels. L’analyse de sensibilité doit montrer la variable la plus déterminante.
-
-### Les valeurs initiales sont-elles des moyennes de marché ?
-
-Non. Ce sont des exemples modifiables, jamais des données de marché actuelles.
-
-### Le résultat garantit-il un crédit, une économie ou un rendement ?
-
-Non. Il s’agit d’un modèle pédagogique, pas d’une décision bancaire, d’un devis contractuel ou d’une promesse de placement.
-
-### Quand faut-il refaire le calcul ?
-
-Après toute modification importante du taux, du solde, du revenu, d’une charge récurrente, d’un indice officiel ou d’une clause.
-
-## Ouvrir le calculateur
-
-Ouvrez le calculateur associé, reproduisez l’exemple, puis remplacez chaque valeur par une donnée vérifiable.
-
-[Convertisseur salaire horaire, mensuel et annuel](/fr/tools/salary-converter/)
-
-## Limites éditoriales et sécurité
-
-Contenu pédagogique et estimatif uniquement ; il ne constitue pas un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé. N’insérez aucune donnée personnelle dans une URL partageable.
-
-## Sources officielles à revérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+Ouvrez le [convertisseur salaire horaire, mensuel et annuel](/fr/tools/salary-converter/), reproduisez l'exemple des 20 € de l'heure ci-dessus, puis remplacez chaque valeur par votre taux horaire ou salaire annuel réel. Ce contenu est pédagogique et estimatif ; il ne simule pas les cotisations exactes de votre situation ni votre taux personnalisé de prélèvement à la source, disponibles uniquement sur votre espace impots.gouv.fr. N'insérez aucune donnée identifiable dans un lien de résultat partagé. Le montant du SMIC cité provient de [service-public.fr](https://www.service-public.gouv.fr/particuliers/actualites/A18916) (consulté le 2026-07-31) et est révisé chaque 1er janvier.

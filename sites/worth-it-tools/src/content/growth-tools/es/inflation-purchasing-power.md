@@ -1,84 +1,70 @@
-﻿---
+---
 contentType: tool
 toolSlug: inflation-purchasing-power
 locale: es
-title: "Calculadora de inflación y poder adquisitivo"
-description: "Actualiza importes entre periodos con una serie oficial del IPC y muestra inflación acumulada."
+title: "Calculadora de inflación y poder adquisitivo (España)"
+description: "Actualiza un importe entre dos fechas usando el IPC oficial del INE y compara valor nominal con poder adquisitivo real."
 relatedArticle: /es/nominal-vs-real-purchasing-power/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: true
 noindex: true
 publicationGate: OFFICIAL_CPI_DATA_REQUIRED
 ---
 
-Actualiza importes entre periodos con una serie oficial del IPC y muestra inflación acumulada.
+Introduce un importe, el año de origen y el año de destino para ver a cuánto equivale ese importe en poder adquisitivo, usando la serie oficial del IPC que confirmes para tu comparación.
 
-## Cómo usar la calculadora
+## Antes de introducir tus datos
 
-1. Empieza con el último extracto, contrato, nómina o índice oficial relacionado con el cálculo.
-2. Sustituye todos los valores iniciales por datos que puedas comprobar; son ejemplos, no medias de mercado ni recomendaciones.
-3. Calcula primero el escenario actual y guarda al menos uno conservador, uno base y uno favorable.
-4. Revisa el desglose y el punto de equilibrio en lugar de depender únicamente del veredicto principal.
-5. Exporta o copia solo resultados no sensibles y no incluyas datos que identifiquen cuentas o personas.
+Decide si vas a comparar medias anuales o el dato de un mes concreto de cada año, y mantén ese criterio de principio a fin: mezclar ambos tipos de dato produce un resultado que no es comparable.
 
-## Método de cálculo
+## Cómo se calcula
 
+`importe equivalente = importe inicial × (IPC del año final ÷ IPC del año inicial)`
 
-`importe equivalente = importe inicial × IPC final ÷ IPC inicial`
+La calculadora mantiene la precisión completa internamente y solo redondea la cifra final que ves en pantalla.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo
 
-## Ejemplo práctico
-
-Si el índice pasa de 100 a 118, 1.000 € equivalen a 1.180 € y la unidad inicial conserva el 84,7% de poder adquisitivo.
-
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+Si el índice pasa de una base 100 a 118 entre dos fechas, 1.000 € de la fecha inicial equivalen a 1.180 € en la fecha final en términos de poder adquisitivo — necesitarías esa cantidad para comprar lo mismo que compraban 1.000 € al principio del periodo.
 
 ## Notas para España
 
-Utiliza el IPC del INE y etiqueta la base y el periodo. Para actualización de alquileres pueden existir índices y reglas específicos; no sustituyas automáticamente el IRAV por el IPC general.
+El IPC del INE es la referencia oficial para actualizar cantidades en España; para rentas de alquiler concretas, comprueba además si existe alguna norma específica vigente que module la aplicación directa del IPC general en el periodo que te interesa, en lugar de asumir que el índice general aplica siempre sin ajustes.
 
-## Límites y comprobaciones
+## Por qué esta calculadora está en revisión
 
-La página ofrece una estimación educativa general y no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión.
+Esta herramienta permanece marcada como borrador y sin indexar mientras se confirma la serie oficial de IPC —con su base y fecha de publicación exacta— que alimentará el resultado por defecto. Publicar una calculadora de inflación con una cifra desactualizada o sin fuente verificable sería más perjudicial que mantenerla sin publicar hasta completar esa verificación.
 
-Antes de decidir, comprueba el TIN, la TAE, las comisiones, los impuestos y las condiciones vigentes con la entidad y las fuentes oficiales.
+## Límites de esta calculadora
 
-El cálculo se realiza en el navegador. No incluyas números de cuenta, direcciones ni datos personales en enlaces que vayas a compartir.
-
-El modelo separa deliberadamente el resultado matemático de una conclusión jurídica o de concesión de crédito. No debe mostrar “aprobado”, “seguro”, “garantizado” ni expresiones parecidas. Si aparece un umbral, debe figurar como referencia editable o regla pública fechada, con fuente y excepciones.
+Esta herramienta ofrece una estimación educativa general y no constituye asesoramiento financiero ni fiscal personalizado. El cálculo se realiza en tu navegador y no se envían tus datos a ningún servidor. No introduzcas datos identificables si vas a compartir el resultado por enlace.
 
 ## Guía relacionada
 
-Lee [Dinero nominal y poder adquisitivo real](/es/nominal-vs-real-purchasing-power/)para ver el procedimiento, los escenarios y la lista de comprobación.
+Lee [Poder adquisitivo real en España: cómo actualizar una cantidad con el IPC del INE](/es/nominal-vs-real-purchasing-power/) para entender por qué el IPC general no siempre es el índice correcto para actualizar una renta de alquiler.
 
 ## Preguntas frecuentes
 
-### ¿Por qué es una estimación?
+### ¿Por qué esta calculadora sigue sin publicarse?
 
-Las facturas, contratos, tipos y fechas reales pueden ser distintos.
+Porque falta confirmar la serie oficial de IPC —con base y fecha de publicación exactas— que debe alimentar el resultado por defecto, para evitar mostrar una cifra desactualizada.
 
-### ¿Los valores iniciales son promedios de mercado?
+### ¿Puedo usar esta lógica para actualizar un alquiler?
 
-No, son ejemplos editables.
+Con matices: comprueba si existe alguna norma específica vigente para actualización de rentas antes de aplicar directamente el IPC general a tu contrato.
 
-### ¿Se envían los datos?
+### ¿Qué dato de IPC debo usar, media anual o un mes concreto?
 
-No, el motor está pensado para ejecutarse localmente en el navegador.
+Cualquiera de los dos, pero debes mantener el mismo criterio en ambos extremos de la comparación para que el resultado sea válido.
 
-### ¿El resultado garantiza aprobación o rentabilidad?
+### ¿El resultado es una previsión de inflación futura?
 
-No, solo compara escenarios.
+No. Solo traslada un importe entre dos fechas pasadas usando el IPC ya publicado; no proyecta ni predice inflación futura.
 
-### ¿Cómo mejorar la precisión?
+### ¿Cuándo se publicará esta calculadora?
 
-Usa documentos actuales y prueba escenarios conservador, base y favorable.
+Cuando se confirme e integre la serie oficial de IPC del INE con su fecha de publicación exacta.
 
+## Fuentes
 
-## Fuentes que deben comprobarse antes de publicar
-
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [INE — Índice de Precios de Consumo (IPC), notas de prensa oficiales](https://www.ine.es/prensa/ipc_tabla.htm), consultado 2026-07-31

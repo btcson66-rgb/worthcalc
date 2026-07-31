@@ -1,114 +1,74 @@
-﻿---
+---
 contentType: article
 articleSlug: budget-with-irregular-income
 locale: de
-title: "Budgetplanung bei unregelmäßigem Einkommen"
-description: "Führen Sie wöchentliche, monatliche und jährliche Einnahmen und Ausgaben in einem Monatsbudget zusammen."
+title: "Budget bei schwankendem Selbstständigen-Einkommen: Steuerrücklage richtig planen"
+description: "Einkommensteuer-Vorauszahlung, Umsatzsteuer-Voranmeldung und die neue Kleinunternehmergrenze 2026 — wie viel Sie wirklich zurücklegen müssen."
 relatedTool: /de/tools/budget-builder/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Bei schwankendem Einkommen ist nicht das Budgetieren selbst das größte Risiko, sondern die Verwechslung von Umsatz mit tatsächlich verfügbarem Geld. Ein gutes Monat auf dem Kontoauszug enthält fast immer bereits das Geld, das im nächsten Quartal ans Finanzamt geht.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum Umsatz nicht gleich verfügbares Einkommen ist
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Wer als Selbstständige oder Freiberufler 4.000 € Umsatz in einem Monat verbucht, hat nicht 4.000 € frei verfügbares Einkommen. Davon gehen mindestens die anteilige Einkommensteuer-Vorauszahlung, gegebenenfalls Umsatzsteuer, die freiwillige oder gesetzliche Kranken- und Rentenversicherung sowie Betriebsausgaben ab. Ein Budget, das vom Bruttoumsatz statt vom bereits um diese Posten bereinigten Betrag ausgeht, überschätzt systematisch, wie viel monatlich zur Verfügung steht.
 
-Unregelmäßige Einnahmen und jährliche Rechnungen auf Monatswerte umrechnen, um Überschuss, Lücke und Sparzuweisung ohne starre Budgetregel sichtbar zu machen.
+## Einkommensteuer-Vorauszahlung: Wie das Finanzamt die Quartalsraten festsetzt
 
-## Welche Daten vor der Berechnung benötigt werden
+Das Finanzamt legt die Einkommensteuer-Vorauszahlung anhand des zu versteuernden Einkommens des letzten veranlagten Steuerjahres fest und teilt den erwarteten Jahresbetrag in vier gleiche Quartalsraten auf, fällig jeweils am 10. März, 10. Juni, 10. September und 10. Dezember. Eine Vorauszahlung wird nur festgesetzt, wenn sie mindestens 400 € im Jahr und mindestens 100 € pro Termin beträgt. Im ersten Geschäftsjahr, wenn noch kein Vorjahreswert existiert, schätzt das Finanzamt auf Basis Ihrer Angaben im Fragebogen zur steuerlichen Erfassung — diese erste Schätzung weicht bei stark schwankendem Geschäft oft erheblich vom tatsächlichen Jahresergebnis ab.
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Umsatzsteuer-Voranmeldung: Wann Sie überhaupt melden müssen
 
-- Nettoeinnahmen und Zahlungsrhythmus
-- Feste Monatskosten
-- Variable notwendige und frei verfügbare Ausgaben
-- Viertel-, halb- und jährliche Rechnungen
-- Geplante Rücklagen und Sparbeträge
+Ob Sie monatlich, vierteljährlich oder gar nicht voranmelden müssen, hängt von Ihrer Umsatzsteuer-Zahllast des Vorjahres ab: Über 9.000 € Vorjahressteuer bedeutet monatliche Voranmeldung, zwischen 2.000 € und 9.000 € vierteljährliche Voranmeldung, und bei höchstens 2.000 € kann das Finanzamt Sie auf Antrag ganz von der laufenden Voranmeldung befreien — es bleibt dann bei der Jahreserklärung ([§ 18 Abs. 2 UStG](https://www.gesetze-im-internet.de/ustg_1980/__18.html), abgerufen am 2026-07-31). Wer regelmäßig knapp an einer dieser Schwellen liegt, sollte die Meldehäufigkeit jedes Jahr neu prüfen, da sie sich automatisch mit der Vorjahreszahllast ändert.
 
-## So funktioniert das Rechenmodell
+## Die neue Kleinunternehmerregelung: 25.000 € und 100.000 €
 
-`Monatswert = Betrag × Häufigkeit pro Jahr ÷ 12`
+Seit der Reform zum 1. Januar 2025 gelten für die Kleinunternehmerregelung nach § 19 UStG zwei Bruttoumsatzgrenzen: höchstens 25.000 € Umsatz im Vorjahr und höchstens 100.000 € im laufenden Jahr. Wer darunter bleibt, kann auf die Ausweisung und Abführung von Umsatzsteuer verzichten — muss dann aber auch keine Vorsteuer aus eigenen Ausgaben geltend machen. Neugründer starten seit dieser Reform automatisch als Kleinunternehmer, ohne vorab eine Umsatzprognose abgeben zu müssen. Wird die 100.000-Euro-Grenze im laufenden Jahr überschritten, entfällt die Kleinunternehmerregelung ab dem Überschreiten sofort, nicht erst im Folgejahr — ein Punkt, der bei stark schwankendem Geschäft leicht übersehen wird.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## Rechenbeispiel: Ein gutes und ein schlechtes Quartal
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Nehmen wir eine Freiberuflerin mit 4.200 € Umsatz im ersten Quartal und nur 1.800 € im zweiten. Legt sie in guten Monaten grob 25–30 % des Umsatzs für Einkommensteuer-Vorauszahlung und Krankenversicherung zurück, bleibt im ersten Quartal genug Puffer für das schwächere zweite Quartal, in dem die feste Vorauszahlung an das Finanzamt trotzdem in gleicher Höhe fällig wird — die Vorauszahlung orientiert sich am Vorjahr, nicht am aktuellen Monat. Der genaue Prozentsatz hängt vom individuellen Grenzsteuersatz und den Sozialversicherungsbeiträgen ab und lässt sich nicht pauschal auf jeden Fall übertragen.
 
-## Nachvollziehbares Rechenbeispiel
+## Rücklage bilden, bevor Sie budgetieren
 
-Beispiel: 3.000 € Nettoeinkommen, 720 € Jahresversicherung und 450 € vierteljährliche Kosten.
+Die praktikabelste Reihenfolge für schwankendes Einkommen ist: Steuerrücklage und Sozialversicherungsbeiträge zuerst zurücklegen, danach das verbleibende Nettoergebnis auf laufende Kosten und Sparen aufteilen — nicht umgekehrt. Wer zuerst nach einer festen Prozentregel für Ausgaben budgetiert und die Steuerrücklage erst am Quartalsende bildet, gerät bei einem schwachen Folgequartal leicht in Liquiditätsengpässe, weil die Vorauszahlung unabhängig vom aktuellen Umsatz fällig bleibt.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Was bei dauerhaft verändertem Einkommen möglich ist
 
-## Drei Szenarien statt nur eines vergleichen
-
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
-
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Unregelmäßiges Einkommen vorsichtiger ansetzen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Eine vergessene Jahresrechnung ergänzen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Ist-Ausgaben mit einem Reduktionsziel vergleichen.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Jede Wochenzahlung mit einem Vier-Wochen-Monat umrechnen
-- Jährliche Versicherungen, Steuern oder Wartung vergessen
-- Sparen nur als Restbetrag behandeln
-- 50/30/20 als Bestehensgrenze verwenden
-
-## Einordnung für Deutschland
-
-Berücksichtigen Sie Nebenkostenabrechnungen, Versicherungsbeiträge, Kfz-Steuer, Urlaubs- und Instandhaltungsrücklagen. Eine Prozentregel ersetzt keine Haushaltsrechnung.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Weicht Ihr tatsächliches Einkommen absehbar stark vom Vorjahr ab — etwa nach einem großen neuen Auftrag oder einem Auftragsverlust —, können Sie beim Finanzamt formlos eine Anpassung der Einkommensteuer-Vorauszahlung beantragen, per Brief, E-Mail oder über ELSTER. Das Finanzamt setzt die Vorauszahlung dann auf Basis der neuen Schätzung herauf oder herab. Ohne einen solchen Antrag bleibt die Vorauszahlung auf dem alten, möglicherweise nicht mehr passenden Niveau, bis der nächste Steuerbescheid vorliegt.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Wie viel sollte ich pauschal für Steuern zurücklegen?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+Es gibt keinen pauschal richtigen Prozentsatz, da er vom individuellen Grenzsteuersatz, dem Krankenversicherungsstatus und der Umsatzsteuerpflicht abhängt. Nutzen Sie Ihren letzten Steuerbescheid als Ausgangspunkt und passen Sie die Rücklage bei deutlichen Einkommensänderungen an.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Muss ich als Kleinunternehmer trotzdem eine Steuererklärung abgeben?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Ja, die Einkommensteuererklärung bleibt unabhängig von der Kleinunternehmerregelung Pflicht. Die Kleinunternehmerregelung betrifft ausschließlich die Umsatzsteuer.
 
-### Sind die Startwerte Marktmittelwerte?
+### Was passiert, wenn ich die 100.000-Euro-Grenze im laufenden Jahr überschreite?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Die Kleinunternehmerregelung endet mit dem Überschreiten sofort, nicht erst im nächsten Jahr. Ab diesem Zeitpunkt müssen Sie Umsatzsteuer ausweisen und abführen.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Kann ich die Einkommensteuer-Vorauszahlung senken lassen, wenn das Geschäft schlechter läuft?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Ja, über einen formlosen Antrag auf Herabsetzung beim Finanzamt, der mit der erwarteten Einkommensänderung begründet wird.
 
-### Wann sollte neu gerechnet werden?
+### Muss ich monatlich oder vierteljährlich Umsatzsteuer voranmelden?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Das hängt von Ihrer Umsatzsteuer-Zahllast des Vorjahres ab: über 9.000 € monatlich, zwischen 2.000 € und 9.000 € vierteljährlich, darunter ist auf Antrag eine Befreiung von der laufenden Voranmeldung möglich.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Budgetplaner, tragen Sie Ihre unregelmäßigen Einnahmen sowie geschätzte Steuer- und Versicherungsrücklage ein, um ein realistisches Monatsbudget zu sehen.
 
 [Monatlicher Budgetplaner](/de/tools/budget-builder/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Steuerberatung. Die tatsächliche Höhe Ihrer Vorauszahlungen und Ihre Umsatzsteuerpflicht hängen von Ihrer persönlichen Situation ab — bei komplexeren Fällen ist eine Steuerberatung oder Lohnsteuerhilfe sinnvoll.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [§ 18 UStG — Besteuerungsverfahren, Voranmeldungszeiträume](https://www.gesetze-im-internet.de/ustg_1980/__18.html) (abgerufen 2026-07-31); [§ 19 UStG — Besteuerung der Kleinunternehmer](https://www.gesetze-im-internet.de/ustg_1980/__19.html) (abgerufen 2026-07-31); [Bundesministerium der Finanzen — Vorauszahlungen zur Einkommensteuer](https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Einkommensteuer/einkommensteuer.html) (abgerufen 2026-07-31).

@@ -1,114 +1,76 @@
-﻿---
+---
 contentType: article
 articleSlug: how-compound-growth-works
 locale: es
-title: "Interés compuesto: aportaciones, comisiones e inflación"
-description: "Proyecta aportaciones, comisiones, inflación y objetivo, o calcula la aportación mensual necesaria."
+title: "Interés compuesto en España: letras del Tesoro, aportaciones y el IPC del INE"
+description: "Cómo funciona el interés compuesto con aportaciones periódicas, qué rentan hoy las letras del Tesoro frente a un fondo indexado, y por qué descontar el IPC importa."
 relatedTool: /es/tools/compound-growth/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+El interés compuesto se suele explicar con una frase bonita y poco útil: "el interés que genera interés". Lo que de verdad cambia el resultado a largo plazo no es la fórmula en sí, sino tres decisiones muy concretas: cuánto aportas de forma periódica, qué rentabilidad razonable puedes esperar de cada instrumento, y cuánto de esa rentabilidad se queda la inflación por el camino.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## El interés compuesto no es magia, es tiempo multiplicando
 
-## Qué decisión ayuda a resolver esta guía
+Un capital que crece a un tipo fijo cada año no solo gana interés sobre el capital inicial, sino también sobre los intereses acumulados en años anteriores. El efecto es pequeño en los primeros años y se vuelve mucho más visible cuanto más tiempo pasa — por eso el horizonte temporal importa tanto como el tipo de interés que uses en cualquier proyección.
 
-Proyectar aportaciones y crecimiento modelizado, resolver una meta de ahorro y mostrar valor nominal y real sin prometer la rentabilidad supuesta.
+## Cuánto rentan hoy las letras del Tesoro (y por qué no es lo mismo que un fondo indexado)
 
-## Datos que conviene reunir antes de calcular
+En las subastas de 2026, las letras del Tesoro españolas han rentado en un rango aproximado del 2% al 3,5% TAE según el plazo, condicionado por las decisiones de tipos del Banco Central Europeo. Es una rentabilidad prácticamente sin riesgo de impago, respaldada por el Estado, pero limitada: para horizontes largos, la renta variable diversificada ha rentado históricamente por encima de la deuda pública a corto plazo, a cambio de asumir más volatilidad y sin ninguna garantía de que ese patrón se repita en el futuro. Ninguna rentabilidad pasada de renta variable es una promesa de rentabilidad futura.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## Aportaciones periódicas: por qué importan más que el capital inicial
 
-- Saldo inicial
-- Aportación periódica y momento de aportación
-- Rentabilidad modelizada y frecuencia de capitalización
-- Comisiones e inflación supuesta
-- Meta y fecha límite
+Para la mayoría de personas que empiezan a ahorrar sin un capital inicial grande, la aportación periódica constante pesa más en el resultado final que el momento exacto en que empezaron o el capital con el que arrancaron. Aportar de forma constante, incluso en cantidades modestas, aprovecha más ciclos de capitalización que esperar a tener "más dinero de golpe" para empezar más tarde.
 
-## Cómo funciona el modelo
+## Rentabilidad nominal vs. rentabilidad real: descontando el IPC
 
-`VF = VA(1+r)^n + aportación × ((1+r)^n − 1) ÷ r`
+Una rentabilidad del 3% suena bien hasta que la comparas con la inflación del mismo periodo. El [INE](https://www.ine.es/prensa/ipc_tabla.htm) publica cada mes el Índice de Precios de Consumo (IPC), la única serie oficial que deberías usar para descontar el efecto de la inflación de una proyección de ahorro en España. Si tu inversión rinde un 3% nominal y el IPC interanual ronda el 3%, tu rentabilidad real —lo que realmente ganas en poder adquisitivo— se acerca a cero, aunque el saldo en euros haya crecido. Las letras del Tesoro conservan el dinero de forma segura; no necesariamente lo multiplican en términos reales si su rentabilidad apenas supera la inflación del periodo.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Ejemplo: 100 € al mes durante 20 años a distintos tipos
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+Con 100 € aportados cada mes durante 20 años, el capital final varía de forma muy significativa entre un escenario conservador al 3%, uno intermedio al 5% y uno más optimista al 7% — la diferencia entre estos tres escenarios es mayor que la que produciría cambiar el capital inicial en la mayoría de casos reales. Ninguno de estos tipos es una promesa: son supuestos que debes ajustar según el instrumento concreto en el que ahorres, no una media garantizada de mercado.
 
-## Ejemplo reproducible
+## Los riesgos que la fórmula no muestra
 
-10.000 € iniciales y 300 € al mes durante 15 años con escenarios del 3%, 5% y 7%.
+La fórmula del interés compuesto asume un tipo constante durante todo el periodo, algo que casi ningún instrumento real ofrece de forma literal salvo un depósito a tipo fijo. Los fondos indexados y otros productos de renta variable tienen rentabilidad variable año a año, con periodos de pérdidas incluidos; una media histórica a largo plazo no describe lo que pasará en ningún año concreto. Las comisiones también erosionan el resultado de forma silenciosa: una diferencia de un punto porcentual en comisiones anuales, mantenida durante décadas, puede suponer una diferencia considerable en el capital final.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Cuándo el interés compuesto juega en tu contra (deuda revolving)
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Reducir la rentabilidad supuesta.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Retrasar un año las aportaciones.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Aumentar comisiones e inflación.
-
-## Errores habituales que cambian el resultado
-
-- Tratar la rentabilidad anual como garantía
-- Ignorar comisiones y momento de la aportación
-- Comparar euros nominales futuros con una meta de poder adquisitivo actual
-- Resolver la aportación necesaria sin comprobar si cabe en el presupuesto
-
-## Cómo interpretar el resultado en España
-
-La rentabilidad es una hipótesis. Separa comisiones e inflación y no presentes el resultado como asesoramiento sobre pensiones o fiscalidad.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+El mismo mecanismo que hace crecer un ahorro también hace crecer una deuda que no se paga: una tarjeta revolving con un tipo elevado capitaliza intereses de forma parecida, pero en tu contra. Antes de proyectar el crecimiento de un ahorro a largo plazo, suele tener más sentido financiero liquidar cualquier deuda cuyo tipo supere claramente la rentabilidad que esperas obtener del ahorro.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿Qué rentabilidad debería usar en mi proyección?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+No hay una cifra universal correcta: depende del instrumento concreto (letras del Tesoro, depósito, fondo indexado) y de tu horizonte temporal. Usa varios escenarios en lugar de un único número optimista.
 
-### ¿Qué dato suele influir más?
+### ¿Por qué la calculadora separa rentabilidad nominal y real?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Porque una rentabilidad nominal alta puede no representar una ganancia real de poder adquisitivo si la inflación del periodo la absorbe en gran parte. El IPC del INE es la referencia oficial para hacer ese ajuste.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Las letras del Tesoro son más seguras que un fondo indexado?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+Tienen menor riesgo de pérdida de capital a corto plazo por estar respaldadas por el Estado, pero también rentabilidad esperada más baja a largo plazo que la renta variable diversificada, según la evidencia histórica disponible.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Importa más el capital inicial o la aportación mensual?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+Para la mayoría de personas que empiezan sin un capital grande, la constancia de la aportación periódica suele pesar más en el resultado final que el capital inicial con el que se empieza.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular mi proyección de ahorro?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cuando cambien de forma relevante tu aportación mensual, el tipo de interés esperado del instrumento que uses, o al menos una vez al año para ajustar el supuesto de inflación con el dato más reciente del INE.
 
-## Abrir la calculadora
+## Proyecta tu ahorro
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tu capital inicial, tu aportación periódica y varios escenarios de rentabilidad para ver el resultado nominal y real de tu proyección.
 
 [Calculadora de interés compuesto y objetivo de ahorro](/es/tools/compound-growth/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento de inversión personalizado. Ninguna rentabilidad mostrada es una promesa ni una garantía; toda inversión distinta de un depósito a tipo fijo conlleva riesgo de pérdida.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [INE — Índice de Precios de Consumo (IPC), notas de prensa oficiales](https://www.ine.es/prensa/ipc_tabla.htm), consultado 2026-07-31

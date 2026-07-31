@@ -1,114 +1,76 @@
-﻿---
+---
 contentType: article
 articleSlug: snowball-vs-avalanche
 locale: es
-title: "Bola de nieve o avalancha: motivación frente a matemáticas"
-description: "Compara orden de pago, intereses y fecha final entre bola de nieve, avalancha y orden personalizado."
+title: "Bola de nieve o avalancha: por qué la tarjeta revolving va siempre primero"
+description: "Cómo ordenar el pago de varias deudas en España cuando una de ellas es una tarjeta revolving, con los tipos de interés reales de cada producto."
 relatedTool: /es/tools/debt-strategy/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Cuando alguien tiene varias deudas a la vez —una tarjeta, un préstamo personal, la financiación de un coche— la pregunta no es solo "bola de nieve o avalancha", sino algo más simple y más urgente: cuál de esas deudas está creciendo más rápido que las demás y necesita salir primero, casi siempre porque es una tarjeta revolving.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## Dos formas de ordenar tus deudas, un mismo objetivo
 
-## Qué decisión ayuda a resolver esta guía
+La estrategia avalancha ordena las deudas de mayor a menor tipo de interés y destina cualquier pago extra a la de tipo más alto. La estrategia bola de nieve ordena las deudas de menor a mayor saldo y ataca primero la más pequeña, independientemente de su tipo de interés. Ambas comparten una mecánica: cada vez que liquidas una deuda, el pago mínimo que le dedicabas se traslada a la siguiente de la lista, así que el importe total que destinas a deuda no cambia, solo el orden.
 
-Comparar bola de nieve, avalancha y orden personalizado entre varias deudas, trasladando cada pago mínimo liberado a la siguiente.
+## Por qué la revolving debería ir siempre primero (y no es por psicología)
 
-## Datos que conviene reunir antes de calcular
+En España, el crédito revolving —el que ofrecen muchas tarjetas de "pago aplazado" o "pago flexible"— tiene una característica que lo hace distinto a un préstamo personal normal: si solo pagas el mínimo, una parte importante de ese pago se destina a intereses, y el saldo pendiente puede tardar años en bajar de forma perceptible, incluso sin hacer compras nuevas. Por eso, en la práctica, la revolving casi siempre debería ir primera en cualquier estrategia de pago, no por motivación psicológica sino porque matemáticamente es la deuda que más rápido crece si se la deja de lado.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+## Avalancha: pagar primero lo que más intereses genera
 
-- Saldo, tipo y pago mínimo de cada deuda
-- Importe extra mensual
-- Fechas de fin de tipos promocionales
-- Comisiones o límites de amortización
-- Orden personalizado si la motivación es relevante
+Con la avalancha, todo el pago extra disponible se dirige a la deuda con el tipo más alto —que en la práctica suele ser precisamente la tarjeta revolving—, mientras se mantienen los mínimos en el resto. Esto minimiza el interés total pagado a lo largo de todo el proceso, porque ataca primero la deuda que más "cuesta" tener pendiente cada mes.
 
-## Cómo funciona el modelo
+## Bola de nieve: pagar primero lo más pequeño
 
-`ciclo mensual: devengar intereses → pagar mínimos → aplicar pago extra → trasladar mínimos liberados a la siguiente deuda`
+Con la bola de nieve, el pago extra va a la deuda con menor saldo, sin importar su tipo de interés. La ventaja no es matemática sino conductual: cancelar una deuda por completo, aunque sea pequeña, genera una sensación de progreso que ayuda a mantener la disciplina en un plan de varios meses o años. El coste es que, si esa deuda pequeña tiene un tipo bajo y dejas para el final una deuda grande con tipo alto (como una revolving con saldo elevado), pagarás más interés total que con la avalancha.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Cuál usa cada persona según lo que tiene: caso con revolving, préstamo personal y coche
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+Imagina tres deudas: 900 € en una tarjeta revolving a un tipo elevado, 2.800 € en un préstamo personal a un tipo medio, y 7.000 € en la financiación de un coche a un tipo más bajo, con 250 € extra disponibles cada mes. Con avalancha estricta, el orden sería revolving, préstamo personal, coche — que probablemente coincide también con el orden de bola de nieve en este caso, porque la revolving es a la vez la de mayor tipo y la de menor saldo. La diferencia entre ambas estrategias se nota más cuando la deuda con mayor tipo no es también la más pequeña.
 
-## Ejemplo reproducible
+## Cuánto se ahorra realmente cada método
 
-Ejemplo: tres deudas de 900 € al 22%, 2.800 € al 14% y 7.000 € al 7%, con 250 € extra al mes.
+La diferencia de interés total entre avalancha y bola de nieve depende del número de deudas, sus tipos y sus saldos concretos — no hay una cifra genérica válida para todos los casos. Cuando una tarjeta revolving con tipo elevado está en la mezcla, priorizarla primero (que es lo que hace la avalancha, y con frecuencia también la bola de nieve si su saldo es bajo) suele producir el mayor ahorro de interés de cualquier decisión de orden, más que la elección entre las dos estrategias en sí.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Cuándo negociar con el banco en lugar de solo reordenar pagos
 
-## Compara tres escenarios, no uno solo
-
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
-
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Reducir el importe extra.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Dejar vencer un tipo promocional.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Priorizar una deuda concreta.
-
-## Errores habituales que cambian el resultado
-
-- Ordenar solo al principio y no tratar el fin de una promoción
-- No trasladar los pagos mínimos liberados
-- Comparar solo intereses e ignorar la primera deuda cancelada
-- Acelerar una deuda que contractualmente no lo permite
-
-## Cómo interpretar el resultado en España
-
-No mezcles deudas con garantías, procedimientos concursales o condiciones especiales sin revisar sus consecuencias. La estrategia matemática debe respetar los mínimos contractuales.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+Si el tipo de tu tarjeta revolving es muy elevado, el Tribunal Supremo ha establecido criterios sobre cuándo ese interés puede considerarse usurario: en una sentencia relevante, consideró usurario un interés del 27,24% TAE, y ha fijado como referencia que un tipo que supere en más de seis puntos porcentuales la media del mercado de tarjetas de crédito puede ser señal de abuso, según recoge el [Consejo General del Poder Judicial](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-). Si tu tarjeta tiene un tipo muy por encima de la media del mercado, antes de limitarte a reordenar pagos conviene revisar si tienes motivos para reclamar la nulidad del contrato, no solo para pagarlo más rápido.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿La bola de nieve es siempre peor que la avalancha en coste total?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+En términos de interés pagado, la avalancha nunca paga más que la bola de nieve, pero la diferencia puede ser pequeña si las deudas con mayor tipo también tienen el menor saldo, como suele pasar con las tarjetas revolving.
 
-### ¿Qué dato suele influir más?
+### ¿Debo negociar con el banco antes de aplicar cualquiera de las dos estrategias?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Si el tipo de tu tarjeta parece muy elevado respecto a la media del mercado, sí conviene revisarlo primero: podría haber motivos legales para reclamar, no solo una estrategia de pago que aplicar.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Puedo combinar bola de nieve y avalancha?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+Sí, puedes usar un orden personalizado que priorice, por ejemplo, la deuda con mayor tipo de interés primero (revolving) y después seguir el criterio que prefieras entre las restantes.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Qué pasa si una de mis deudas tiene un tipo promocional que termina pronto?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+Anota la fecha de fin de la promoción y revisa tu plan antes de esa fecha: el tipo puede subir de forma notable una vez termine, cambiando qué deuda debería priorizarse.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería recalcular mi plan de pago de deudas?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cada vez que liquides una deuda por completo, cuando cambie algún tipo de interés (especialmente si termina una promoción), o si consigues un importe extra disponible distinto al que usaste en el cálculo original.
 
-## Abrir la calculadora
+## Compara tu estrategia
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tus deudas, sus saldos y tipos, y el importe extra que puedes destinar cada mes para comparar bola de nieve, avalancha y un orden personalizado.
 
 [Calculadora bola de nieve vs avalancha](/es/tools/debt-strategy/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento financiero ni jurídico personalizado. Si sospechas que el interés de tu tarjeta revolving puede ser usurario, consulta con un profesional antes de tomar cualquier decisión.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Consejo General del Poder Judicial — El Tribunal Supremo considera usurario un interés del 27,24% de una tarjeta revolving](https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-considera-usurario-un-tipo-de-interes-de-un-27-24--de-una-tarjeta-de-credito--revolving-), consultado 2026-07-31

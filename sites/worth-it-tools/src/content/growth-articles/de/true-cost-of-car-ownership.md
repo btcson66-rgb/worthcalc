@@ -1,114 +1,78 @@
-﻿---
+---
 contentType: article
 articleSlug: true-cost-of-car-ownership
 locale: de
-title: "Die Autorate ist nicht die tatsächliche Autokosten"
-description: "Ermitteln Sie einen tragbaren Fahrzeugpreis nach Versicherung, Energie, Wartung, Parken und Sparziel."
+title: "Autokosten in Deutschland: Kfz-Steuer, Typklasse und HU realistisch einplanen"
+description: "Kfz-Steuer nach Hubraum und CO2, Typklasse und Regionalklasse bei der Versicherung, HU-Kosten und Wertverlust — die tatsächlichen Fixkosten eines Autos."
 relatedTool: /de/tools/car-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ein nützlicher Finanzratgeber liefert nicht nur eine Endzahl. Er muss die Rechnung reproduzierbar machen, Annahmen offenlegen und zeigen, welche Eingabe die Schlussfolgerung umkehrt.
+Die monatliche Finanzierungsrate ist meist nur ein Drittel bis die Hälfte dessen, was ein Auto tatsächlich kostet. Kfz-Steuer, Versicherung, Hauptuntersuchung und Wertverlust laufen unabhängig von der Rate weiter — und drei davon hängen an Faktoren, die viele Käufer erst nach dem Kauf entdecken.
 
-Dieser Ratgeber trennt nachprüfbare Vertrags- oder Abrechnungsdaten von veränderbaren Szenarioannahmen. Beginnen Sie mit aktuellen Angaben und vergleichen Sie ein vorsichtiges, ein Basisszenario und ein günstiges Szenario, ohne eine Schätzung als Garantie darzustellen.
+## Warum die Kfz-Steuer zwei getrennte Bestandteile hat
 
-## Welche Entscheidung dieser Ratgeber vorbereitet
+Die deutsche Kfz-Steuer für Pkw setzt sich aus einem Hubraumanteil und einem CO2-Anteil zusammen. Beim Hubraum zahlen Sie je angefangene 100 Kubikzentimeter rund 2 € bei Benzinern und rund 9,50 € bei Diesel-Fahrzeugen. Zusätzlich kommt ein CO2-Aufschlag hinzu, der oberhalb eines Freibetrags von 95 g/km je Gramm pro Kilometer in Stufen ansteigt — von rund 2 € je g/km in den unteren bis rund 4 € je g/km in den oberen Emissionsstufen. Die für die Berechnung entscheidenden Werte — Hubraum und der kombinierte CO2-Wert — stehen in Ihrer Zulassungsbescheinigung Teil I, meist in den Feldern P.1 und V.7 (WLTP bei Erstzulassung ab September 2018) oder V.9 (NEFZ bei älteren Fahrzeugen).
 
-Vom verfügbaren Nettoeinkommen rückwärts auf einen tragbaren Fahrzeugpreis rechnen und Versicherung, Energie, Wartung, Parken und Steuern zusätzlich zur Rate berücksichtigen.
+## Wer die Steuer erhebt
 
-## Welche Daten vor der Berechnung benötigt werden
+Zuständig für Festsetzung, Erhebung und Vollstreckung der Kraftfahrzeugsteuer ist die Zollverwaltung über die jeweiligen Hauptzollämter, nicht die Stadt- oder Zulassungsbehörde. Der offizielle Kfz-Steuer-Rechner des Bundesfinanzministeriums nutzt exakt Ihre Zulassungsdaten, um die individuelle Jahressteuer zu ermitteln ([Zoll — Kraftfahrzeugsteuer](https://www.zoll.de/DE/Privatpersonen/Kraftfahrzeugsteuer/kraftfahrzeugsteuer_node.html), abgerufen am 2026-07-31).
 
-Nutzen Sie den neuesten Kontoauszug, Vertrag, Gehaltsnachweis, Steuerbescheid oder amtlichen Index. Vermerken Sie bei veränderlichen Zinsen, Gebühren und Regeln stets den Datenstand.
+## Typklasse und Regionalklasse: zwei getrennte Versicherungsfaktoren
 
-- Monatliches Nettoeinkommen und feste Verpflichtungen
-- Anzahlung und Netto-Inzahlungnahmewert
-- Kreditzins und Laufzeit
-- Versicherung, Energie, Wartung, Steuer und Parken
-- Veränderbare Obergrenze für Mobilitätskosten
+Der Beitrag zur Kfz-Versicherung hängt maßgeblich von zwei unabhängigen Faktoren ab. Die **Typklasse** bewertet, wie schadenträchtig das konkrete Fahrzeugmodell in der Vergangenheit war — sie ist eine Eigenschaft des Autos, nicht des Fahrers. Die **Regionalklasse** bewertet dagegen den Zulassungsbezirk des Halters anhand von Unfallhäufigkeit, Diebstahlrisiko und weiteren regionalen Faktoren. Beide Klassifikationen berechnet der Gesamtverband der deutschen Versicherungswirtschaft (GDV) einmal jährlich neu für alle 413 Zulassungsbezirke Deutschlands ([GDV — Regionalklassen kurz erklärt](https://www.gdv.de/gdv/themen/mobilitaet/regionalklassen-kurz-erklaert-11766), abgerufen am 2026-07-31).
 
-## So funktioniert das Rechenmodell
+## Haftpflicht, Teilkasko, Vollkasko: unterschiedliche Klasseneinteilungen
 
-`verfügbare Kreditrate = Mobilitätsbudget − laufende Kosten; maximaler Kreditbetrag = Rate × (1 − (1+r)^−n) ÷ r`
+Für die Haftpflichtversicherung gibt es 12 Typklassen, für die Teilkasko 16 und für die Vollkasko 9 — dasselbe Fahrzeugmodell kann also in jeder Versicherungsart unterschiedlich eingestuft sein. Ein Fahrzeug mit guter Haftpflicht-Typklasse kann trotzdem eine schlechtere Vollkasko-Einstufung haben, wenn es überdurchschnittlich oft Vollkasko-relevante Schäden wie Diebstahl oder Vandalismus verursacht. Vor dem Kauf lohnt sich deshalb ein Blick auf alle relevanten Typklassen des konkreten Modells, nicht nur auf eine.
 
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+## HU/TÜV: Pflichttermine und tatsächliche Kosten
 
-Die Berechnung behält intern die volle Genauigkeit und rundet erst bei der Anzeige. Trennen Sie Zahlungsströme, Zeitpunkte, Gebühren, Steuern und unsichere Zukunftswerte, damit das Ergebnis prüfbar bleibt.
+Die Hauptuntersuchung (HU) ist in § 29 der Straßenverkehrs-Zulassungs-Ordnung (StVZO) geregelt und wird von amtlich anerkannten Organisationen wie TÜV, DEKRA, GTÜ oder KÜS durchgeführt. Neuwagen müssen erstmals drei Jahre nach Erstzulassung zur HU, danach alle zwei Jahre. Die reine HU kostet im Schnitt rund 90 €, kombiniert mit der Abgasuntersuchung (AU) rund 150 € — beide Beträge schwanken je nach Bundesland und Prüforganisation und kommen zu eventuellen Nachbesserungskosten bei festgestellten Mängeln noch hinzu.
 
-## Nachvollziehbares Rechenbeispiel
+## Wertverlust: der unsichtbarste Kostenfaktor
 
-Beispiel: 3.400 € netto, 15-%-Grenze und 280 € Betriebskosten lassen 230 € für die Finanzierung.
+Anders als Steuer, Versicherung und HU erscheint der Wertverlust nirgends als Abbuchung auf dem Kontoauszug, ist aber oft der größte Einzelposten der Gesamtkosten — besonders in den ersten Jahren nach dem Kauf eines Neuwagens, wenn der Wertverlust prozentual am stärksten ausfällt. Wer den tragbaren Kaufpreis eines Fahrzeugs plant, sollte den erwarteten Wiederverkaufswert nach der geplanten Haltedauer realistisch einplanen, statt nur die monatliche Finanzierungsrate zu betrachten.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Rechenbeispiel: Fixkosten eines Mittelklassewagens im ersten Jahr
 
-## Drei Szenarien statt nur eines vergleichen
+Nehmen wir einen Benziner mit 1.600 ccm Hubraum und einem CO2-Wert knapp über dem Freibetrag: Allein die Kfz-Steuer liegt dann im niedrigen dreistelligen Bereich pro Jahr. Dazu kommen Versicherungsbeiträge, die je nach individueller Typklasse und Regionalklasse stark variieren, sowie anteilig rund 45–75 € HU-Rücklage pro Jahr (bei zweijährigem Intervall). Diese drei Posten allein — Steuer, Versicherung, HU-Rücklage — liegen bei vielen Mittelklassewagen bereits im mittleren dreistelligen Bereich pro Monat, bevor Kraftstoff, Wartung und Wertverlust überhaupt eingerechnet sind. Die exakte Höhe hängt vollständig von Ihrem konkreten Fahrzeug, Wohnort und Versicherer ab.
 
-Ändern Sie jeweils nur eine unsichere Größe. So wird die tatsächliche Sensitivität sichtbar, ohne dass eine optimistische Annahme ein anderes Risiko verdeckt.
+## Neuwagen, Gebrauchtwagen oder Leasing: unterschiedliche Fixkostenstruktur
 
-- **Vorsichtig:** Höhere Kosten, langsameren Fortschritt oder niedrigere Einnahmen/Renditen ansetzen. Versicherung und Wartung erhöhen.
-- **Basis:** Aktuell belegbare Werte und das wahrscheinlichste Verhalten verwenden. Kreditlaufzeit verkürzen.
-- **Günstig:** Eine plausible Verbesserung testen und klar als Szenario statt als Prognose kennzeichnen. Anzahlung senken, um Reserve zu behalten.
-
-## Häufige Fehler, die das Ergebnis verändern
-
-- Beworbene Rate als Gesamtkosten ansehen
-- Laufzeit verlängern, bis ein teures Auto bezahlbar wirkt
-- Versicherung und Parken ohne Angebot mit null ansetzen
-- Inzahlungnahme ohne Abzug der Restfinanzierung rechnen
-
-## Einordnung für Deutschland
-
-Berücksichtigen Sie Kfz-Steuer, Versicherung, Kraftstoff oder Strom, Wartung, Reifen, Stellplatz und Zulassung. Leasing sollte separat mit Restwert-, Kilometer- und Rückgaberegeln modelliert werden.
-
-## Praktischer Ablauf in sechs Schritten
-
-1. Die konkrete Frage und den Vergleichszeitraum festlegen.
-2. Zuerst aktuelle, belegbare Werte eingeben.
-3. Prüfen, ob das Modell eine bekannte Rate, Restschuld oder Budgetsumme reproduziert.
-4. Vorsichtiges, Basis- und günstiges Szenario speichern.
-5. Den ersten Wert bestimmen, der das Ergebnis umkehrt; er ist die Gewinnschwelle.
-6. Vertrag, Steuern und Voraussetzungen vor einer Entscheidung prüfen.
-
-## Das Ergebnis richtig und ohne falsche Sicherheit lesen
-
-Formulieren Sie bedingt: „Unter diesen Eingaben und Annahmen weist Option A die niedrigeren modellierten Kosten auf.“ Der Rechner kennt nicht jede Vertragsklausel, Kreditvergaberegel, Verhaltensänderung oder Liquiditätsreserve.
+Bei einem Neuwagen dominiert in den ersten Jahren der Wertverlust die Gesamtkosten, während Kfz-Steuer und Versicherung bei modernen, emissionsärmeren Fahrzeugen tendenziell moderater ausfallen. Bei einem älteren Gebrauchtwagen sinkt der prozentuale Wertverlust, dafür steigen tendenziell Wartungs- und Reparaturkosten sowie das Risiko kostenpflichtiger HU-Nachbesserungen. Leasing verlagert den Wertverlust auf den Leasinggeber, der ihn über die monatliche Rate einpreist — Steuer, Versicherung und HU bleiben aber in aller Regel weiterhin beim Halter.
 
 ## Häufige Fragen
 
-### Warum kann das Ergebnis von Abrechnung oder Angebot abweichen?
+### Wo finde ich die Werte für meine eigene Kfz-Steuer-Berechnung?
 
-Anbieter können andere Stichtage, Zinsmethoden, Gebühren, Steuern oder Rundungen verwenden. Tragen Sie die exakten Bedingungen ein und vergleichen Sie den Verlauf Periode für Periode.
+In Ihrer Zulassungsbescheinigung Teil I: Hubraum in Feld P.1, kombinierter CO2-Wert in Feld V.7 (WLTP) oder V.9 (NEFZ), je nach Erstzulassungsdatum.
 
-### Welche Eingabe beeinflusst das Ergebnis meist am stärksten?
+### Wer ist für die Kfz-Steuer zuständig, wenn ich Fragen habe?
 
-Testen Sie zuerst Zinssatz, Laufzeit, regelmäßige Zahlung und einmalige Gebühren. Die Sensitivitätsanalyse sollte die entscheidende Variable zeigen.
+Die Hauptzollämter der Zollverwaltung, nicht die Zulassungsstelle. Der offizielle Kfz-Steuer-Rechner des Bundesfinanzministeriums nutzt Ihre amtlichen Zulassungsdaten.
 
-### Sind die Startwerte Marktmittelwerte?
+### Warum kann sich meine Kfz-Versicherung ändern, obwohl ich nicht umgezogen bin?
 
-Nein. Es sind veränderbare Beispiele und keine aktuellen Marktdaten.
+Der GDV berechnet Regionalklassen einmal jährlich neu, auch wenn Ihr Wohnort gleich bleibt — ändert sich die Unfall- und Schadenstatistik Ihres Zulassungsbezirks, kann sich Ihr Beitrag entsprechend anpassen.
 
-### Garantiert das Ergebnis Kredit, Ersparnis oder Rendite?
+### Muss ich Haftpflicht, Teilkasko und Vollkasko getrennt vergleichen?
 
-Nein. Es handelt sich um ein Bildungsmodell, nicht um eine Kreditentscheidung, ein Vertragsangebot oder eine Anlagezusage.
+Ja, da für jede Versicherungsart eine eigene Typklasse gilt, kann ein Fahrzeug in der einen Kategorie günstig, in einer anderen teurer eingestuft sein.
 
-### Wann sollte neu gerechnet werden?
+### Wie oft muss mein Auto zur Hauptuntersuchung?
 
-Nach wesentlichen Änderungen von Zins, Saldo, Einkommen, laufenden Kosten, amtlichem Index oder Vertragsbedingungen.
+Neuwagen erstmals drei Jahre nach Erstzulassung, danach alle zwei Jahre — unabhängig von der gefahrenen Kilometerzahl.
 
 ## Rechner öffnen
 
-Öffnen Sie den zugehörigen Rechner, reproduzieren Sie das Beispiel und ersetzen Sie anschließend jeden Beispielwert durch eine belegbare Angabe.
+Öffnen Sie den Rechner, tragen Sie Kaufpreis, Kfz-Steuer, Versicherungsbeitrag, HU-Rücklage und geplante Haltedauer ein, um einen realistischen tragbaren Fahrzeugpreis zu ermitteln.
 
 [Auto-Budget- und Gesamtkostenrechner](/de/tools/car-affordability/)
 
-## Redaktionelle und sicherheitsbezogene Grenzen
+## Einordnung und Grenzen
 
-Nur allgemeine Bildung und Schätzung; keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung. Persönliche Identifikationsdaten gehören nicht in teilbare URLs.
+Diese Seite bietet allgemeine Bildung und eine Rechenhilfe, keine individuelle Finanz- oder Steuerberatung. Kfz-Steuer und Versicherungsbeiträge hängen von Ihrem konkreten Fahrzeug, Wohnort und Versicherer ab und sollten vor einer Kaufentscheidung amtlich beziehungsweise beim Versicherer geprüft werden.
 
-## Vor der Veröffentlichung erneut zu prüfende amtliche Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+Quellen: [Zoll — Kraftfahrzeugsteuer](https://www.zoll.de/DE/Privatpersonen/Kraftfahrzeugsteuer/kraftfahrzeugsteuer_node.html) (abgerufen 2026-07-31); [Bundesministerium der Finanzen — Kfz-Steuer-Rechner](https://www.bundesfinanzministerium.de/Web/DE/Service/Apps_Rechner/KfzRechner/KfzRechner.html) (abgerufen 2026-07-31); [GDV — Regionalklassen kurz erklärt](https://www.gdv.de/gdv/themen/mobilitaet/regionalklassen-kurz-erklaert-11766) (abgerufen 2026-07-31); [GDV — Typklassen kurz erklärt](https://www.gdv.de/gdv/themen/mobilitaet/typklassen-kurz-erklaert-12228) (abgerufen 2026-07-31).

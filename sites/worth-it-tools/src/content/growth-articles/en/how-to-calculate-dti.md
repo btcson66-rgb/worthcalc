@@ -1,115 +1,94 @@
-﻿---
+---
 contentType: article
 articleSlug: how-to-calculate-dti
 locale: en
-title: "How to Calculate DTI Without Treating It as an Approval Score"
-description: "Calculate front-end and back-end debt-to-income ratios and test how paying off one debt changes the result."
+title: "How to Calculate DTI (And Why 43% Isn't a Hard Cutoff Anymore)"
+description: "Calculate front-end and back-end debt-to-income ratios the way U.S. lenders do, see the current FHA/VA/conventional limits, and test how paying off a debt changes the result."
 relatedTool: /en/tools/dti-calculator/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-A useful financial guide should do more than produce a headline number. It should let you reproduce the calculation, identify the assumptions, and see exactly which input changes the conclusion.
+Debt-to-income ratio, or DTI, is the single number most U.S. mortgage lenders look at first. It is not a credit score, it does not appear on your credit report, and it changes every time your income or minimum payments change — which is exactly why a spreadsheet you control is more useful than a number someone quoted you at an open house.
 
-This guide separates contractual facts from editable assumptions. Start with current statements or official data, then compare a conservative case, a base case and a favorable case without treating any estimate as a promise.
+## What Debt-to-Income Ratio Actually Measures
 
-## The decision this guide helps you make
+DTI compares your monthly debt obligations to your gross (pre-tax) monthly income. The [Consumer Financial Protection Bureau](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/) defines it as "how much you owe each month compared to how much you earn," and it is used as one signal — alongside credit score, assets, and employment history — of whether you can keep up with a new payment. It is not a promise of approval, and a low DTI does not override a weak credit file or thin cash reserves.
 
-Calculate front-end and back-end debt-to-income ratios and test how paying off or excluding a debt changes the result without predicting approval.
+## Front-End vs. Back-End: The Two Numbers Lenders Check
 
-## Numbers to collect before calculating
+- **Front-end DTI** = proposed housing payment (principal, interest, taxes, insurance, HOA) ÷ gross monthly income
+- **Back-end DTI** = every recurring debt payment, including the new housing payment, ÷ gross monthly income
 
-Use the latest statement, contract, payslip, tax notice or official index available. Record the date beside every rate or fee that can change.
+Most conventional lenders quote a single back-end number, but FHA underwriting explicitly separates the two, which is why the guides below name both.
 
-- Gross monthly income under the lender’s definition
-- Monthly housing obligation
-- Minimum payments for cards and loans
-- Support or other recurring obligations
-- Which debts are included in the chosen rule
+## What Counts as Debt (and What Doesn't)
 
-## How the model works
+Underwriters generally include the minimum payment on every account that reports to a credit bureau: credit cards, auto loans, student loans, personal loans, child support, and co-signed debt you're still liable for. They generally exclude utilities, insurance premiums (outside of housing insurance), subscriptions, groceries, and debts someone else has assumed and can document paying. A common error is entering a full credit card balance instead of the minimum payment shown on the statement — that alone can overstate DTI by a wide margin.
 
-`front-end DTI = housing payment ÷ gross monthly income; back-end DTI = all included debt payments ÷ gross monthly income`
+## Step-by-Step: Calculating Your Own DTI
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+1. Pull your most recent pay stub or, if self-employed, your last two years of tax returns averaged monthly.
+2. List every recurring debt payment and its exact minimum from the current statement — not an estimate.
+3. Add the payments and divide by gross monthly income for back-end DTI.
+4. Add only the proposed or current housing payment and divide separately for front-end DTI.
+5. Recalculate after removing one debt to see how much room a payoff would create — this is the number a calculator is genuinely useful for, versus a static formula.
 
-Keep full precision inside the calculation and round only for display. Cash costs, timing, fees, taxes and uncertain future values should remain separate so the result can be audited.
+## Worked Example: An $8,000-a-Month Household
 
-## Worked example
+A household with $8,000 gross monthly income, a $2,000 housing payment, and $400 in other required minimums has a 25% front-end ratio ($2,000 ÷ $8,000) and a 30% back-end ratio ($2,400 ÷ $8,000). If that household pays off a $150 auto loan payment entirely, back-end DTI drops to roughly 28.1% — a change worth modeling before, not after, a lender pulls the number.
 
-$8,000 gross monthly income, $2,000 housing and $400 other debt gives a 25% front-end and 30% back-end ratio.
+## Why 43% Stopped Being a Hard Cutoff in 2021
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+Many borrowers still hear "43% is the limit," and it used to function that way under the original Ability-to-Repay/Qualified Mortgage rule. In 2021 the CFPB replaced the hard 43% cap for the General QM category with a price-based test tied to the [Average Prime Offer Rate](https://www.consumerfinance.gov/rules-policy/final-rules/qualified-mortgage-definition-under-truth-lending-act-regulation-z-general-qm-loan-definition/): a loan can qualify even above 43% DTI if its APR stays within a set margin of that benchmark. In practice, 43% survives as an industry rule of thumb rather than a legal wall, and Federal Reserve Bank of St. Louis research on more than 30 million mortgage applications found the sharpest jump in denial rates actually sits closer to 50% DTI, not 43%.
 
-## Run three scenarios, not one
+## DTI Limits by Loan Type
 
-Change one uncertain input at a time. This reveals sensitivity and prevents an optimistic assumption from hiding another risk.
+- **FHA**: HUD's standard benchmark is 31% front-end / 43% back-end, but manually underwritten files with documented compensating factors — cash reserves, residual income, minimal payment shock — can be approved up to roughly 50% back-end.
+- **VA**: There is no statutory hard cap; lenders commonly use 41% as a guideline but frequently approve higher ratios when residual income (money left after debts and living costs) is strong.
+- **Conventional**: Automated underwriting commonly allows back-end DTI up to about 45%, stretching toward 50% with strong credit, a larger down payment, or significant reserves.
 
-- **Conservative:** Use higher costs, slower progress or lower income/return. Remove one debt after payoff.
-- **Base:** Use current verified figures and the behavior most likely to continue. Reduce gross income to a conservative level.
-- **Favorable:** Use a plausible upside case and label it as a scenario, not a forecast. Increase proposed housing payment.
+These figures move with program updates, so treat them as the shape of the rule, not a substitute for your loan officer's current guideline sheet.
 
-## Common mistakes that change the answer
+## Three Ways to Lower Your DTI Before You Apply
 
-- Using take-home income when the selected definition uses gross income
-- Entering a credit-card balance instead of the required monthly payment
-- Omitting taxes, insurance or HOA from housing cost where required
-- Turning a reference threshold into an approval guarantee
+- Pay off or pay down the smallest installment loan entirely — a $0 balance removes the payment from the ratio completely, unlike a partial paydown on a card.
+- Ask a lender whether a debt paid by someone else (a co-signed student loan the other borrower services) can be excluded with 12 months of documented payment history.
+- Raise income the lender can count — a documented raise, a second job with a two-year history, or averaged bonus/commission income — rather than relying on future or projected pay.
 
-## Local interpretation
+## Where These Numbers Come From
 
-Lenders define included income and debts differently. The result is not an approval prediction. Use gross monthly income only when comparing with a lender DTI definition.
+- [Consumer Financial Protection Bureau — "What is a debt-to-income ratio?"](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/), reviewed 2026-07-31
+- [CFPB — General QM loan definition (Regulation Z)](https://www.consumerfinance.gov/rules-policy/final-rules/qualified-mortgage-definition-under-truth-lending-act-regulation-z-general-qm-loan-definition/), reviewed 2026-07-31
+- [Federal Reserve Bank of St. Louis — "What 30 Million Applications Reveal about Mortgage Denial Thresholds," June 2026](https://www.stlouisfed.org/on-the-economy/2026/jun/what-30-million-applications-reveal-mortgage-denial-thresholds), reviewed 2026-07-31
+- FHA front-end/back-end benchmarks and compensating-factor exceptions come from HUD Handbook 4000.1, Section II.A.5; confirm current figures with your loan officer since manual-underwrite exceptions vary by lender overlay.
 
-## A practical step-by-step workflow
+This guide is general education, not individualized financial, tax, legal, or lending advice, and it does not predict whether any specific application will be approved. Do not enter account numbers or other identifying information into a shareable URL.
 
-1. Define the exact question and time horizon.
-2. Enter verified current figures before changing any assumptions.
-3. Reproduce a known payment, balance or budget total as a reasonableness check.
-4. Save conservative, base and favorable scenarios.
-5. Identify the first input that reverses the conclusion; that is the break-even threshold.
-6. Check contract, tax and eligibility rules before acting.
+## Frequently Asked Questions
 
-## How to interpret the result
+### Is DTI the same as my credit score?
 
-Prefer conditional language: “Under these inputs, option A has the lower modeled cost.” A calculator cannot see every contract clause, underwriting rule, behavioral change or emergency-cash need.
+No. DTI is a cash-flow ratio; your credit score reflects payment history and credit usage. Lenders weigh both, along with assets and employment, separately.
 
-## Frequently asked questions
+### Why did my lender's DTI differ from what I calculated?
 
-### Why can the result differ from my statement?
+Lenders may use a different income averaging method (especially for bonuses, overtime, or self-employment), include or exclude different debts, or round differently. Ask which debts and income sources were used.
 
-Statements may use different timing, compounding, fee, tax or rounding rules. Re-enter the exact contractual figures and compare the schedule line by line.
+### Does a lower DTI guarantee approval?
 
-### Which input usually matters most?
+No. Credit history, appraisal, assets, and program-specific rules all factor into an underwriting decision; DTI is one input, not the whole decision.
 
-Test the rate, time horizon, recurring payment and one-off fees first. The sensitivity section should show which variable changes the result fastest.
+### Should I use gross or take-home income?
 
-### Are the default values market averages?
+Use gross monthly income for any comparison against a lender's published DTI limit — that is the standard those thresholds are built on.
 
-No. Defaults are editable examples only and must never be presented as current market data.
+### When should I recalculate my DTI?
 
-### Does the result guarantee approval, savings or returns?
-
-No. It is an educational scenario model, not a lender decision, contract quote or investment promise.
-
-### When should I recalculate?
-
-Recalculate after a material change in rate, balance, income, recurring cost, official index or contract term.
+Recalculate after paying off a loan, taking on new debt, a documented income change, or before applying for any new financing, since even a small shift can move you across a program's threshold.
 
 ## Use the calculator
 
-Open the related calculator, reproduce the example, and then replace each example value with a figure you can verify.
+Open the related calculator, reproduce the worked example above, and then replace each value with your own verified statement figures.
 
 [Debt-to-Income Ratio Calculator](/en/tools/dti-calculator/)
-
-## Editorial and safety limits
-
-This material is for general education and estimation only. It is not individualized financial, tax, legal, credit or investment advice. Do not place account numbers, addresses or personally identifiable information in shareable URLs.
-
-## Official sources to verify before publishing
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.

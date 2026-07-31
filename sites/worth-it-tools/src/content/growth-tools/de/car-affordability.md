@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: car-affordability
 locale: de
-title: "Auto-Budget- und Gesamtkostenrechner"
-description: "Ermitteln Sie einen tragbaren Fahrzeugpreis nach Versicherung, Energie, Wartung, Parken und Sparziel."
+title: "Auto-Gesamtkostenrechner: Kfz-Steuer, Versicherung und Rate zusammen planen"
+description: "Ermitteln Sie einen tragbaren Fahrzeugpreis, wenn Kfz-Steuer, Versicherung, HU-Rücklage und Wertverlust bereits eingerechnet sind."
 relatedArticle: /de/true-cost-of-car-ownership/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Ermitteln Sie einen tragbaren Fahrzeugpreis nach Versicherung, Energie, Wartung, Parken und Sparziel.
+Tragen Sie Ihr monatliches Mobilitätsbudget sowie laufende Kosten für Kfz-Steuer, Versicherung, HU-Rücklage, Kraftstoff oder Strom und Wartung ein, um zu sehen, wie viel tatsächlich für eine Finanzierungsrate übrig bleibt.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Ermitteln Sie Ihre voraussichtliche Kfz-Steuer mit dem offiziellen Rechner des Bundesfinanzministeriums anhand von Hubraum und CO2-Wert aus der Zulassungsbescheinigung. Holen Sie für die Versicherung ein konkretes Angebot ein, da Typklasse und Regionalklasse den Beitrag stark beeinflussen. Legen Sie zusätzlich eine anteilige HU-Rücklage von rund 45–75 € pro Jahr an (bei zweijährigem Intervall) sowie eine realistische Einschätzung des erwarteten Wertverlusts über Ihre geplante Haltedauer.
 
-## Berechnungsmethode
+## Wie der Rechner intern arbeitet
 
+`verfügbare Finanzierungsrate = Mobilitätsbudget − (Kfz-Steuer + Versicherung + HU-Rücklage + Kraftstoff/Strom + Wartung + Stellplatz) ÷ 12; maximaler Kreditbetrag = Rate × (1 − (1+r)^−n) ÷ r`
 
-`verfügbare Kreditrate = Mobilitätsbudget − laufende Kosten; maximaler Kreditbetrag = Rate × (1 − (1+r)^−n) ÷ r`
-
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Jährliche Posten wie Kfz-Steuer und HU-Rücklage werden auf Monatswerte umgerechnet, damit sie im laufenden Budget sichtbar sind statt erst am Fälligkeitstermin zu überraschen.
 
 ## Rechenbeispiel
 
-Beispiel: 3.400 € netto, 15-%-Grenze und 280 € Betriebskosten lassen 230 € für die Finanzierung.
+Bei 3.400 € Nettoeinkommen, einer 15-%-Budgetgrenze für Mobilität (510 €) und laufenden Kosten von 280 € für Kfz-Steuer, Versicherung, HU-Rücklage, Kraftstoff und Wartung bleiben 230 € für eine mögliche Finanzierungsrate. Bei 6 % Sollzins und 60 Monaten Laufzeit ergibt das einen tragbaren Kreditbetrag von rund 11.800 €. Ersetzen Sie diese Beispielwerte durch Ihre tatsächliche Kfz-Steuer laut amtlichem Rechner und ein echtes Versicherungsangebot.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Leasing separat modellieren
 
-## Hinweise für Deutschland
+Bei Leasing verlagert sich der Wertverlust auf den Leasinggeber und wird über die monatliche Rate eingepreist — Kfz-Steuer, Versicherung und HU-Kosten bleiben aber in aller Regel beim Halter. Modellieren Sie Leasingangebote deshalb mit der tatsächlichen Leasingrate als Fixkosten plus den separat verbleibenden laufenden Kosten, statt sie wie eine Finanzierung mit Zinssatz zu behandeln.
 
-Berücksichtigen Sie Kfz-Steuer, Versicherung, Kraftstoff oder Strom, Wartung, Reifen, Stellplatz und Zulassung. Leasing sollte separat mit Restwert-, Kilometer- und Rückgaberegeln modelliert werden.
+## Grenzen dieses Rechners
 
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Diese Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer- oder Rechtsberatung. Die tatsächliche Kfz-Steuer und der Versicherungsbeitrag hängen von Ihrem konkreten Fahrzeug, Wohnort und Versicherer ab und sollten vor einer Kaufentscheidung amtlich beziehungsweise beim Versicherer geprüft werden. Alle Eingaben bleiben im Browser; tragen Sie keine Konto-, Namens- oder sonstigen personenbezogenen Daten in einen teilbaren Ergebnislink ein.
 
 ## Passender Ratgeber
 
-Lesen Sie [Die Autorate ist nicht die tatsächliche Autokosten](/de/true-cost-of-car-ownership/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Autokosten in Deutschland: Kfz-Steuer, Typklasse und HU realistisch einplanen](/de/true-cost-of-car-ownership/) für die Berechnung der Kfz-Steuer, die Rolle von Typklasse und Regionalklasse sowie HU-Fristen und Wertverlust.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Woher bekomme ich meine tatsächliche Kfz-Steuer für die Eingabe?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nutzen Sie den offiziellen Kfz-Steuer-Rechner des Bundesfinanzministeriums mit den Werten aus Ihrer Zulassungsbescheinigung — Hubraum in Feld P.1, CO2-Wert in Feld V.7 oder V.9.
 
-### Sind Standardwerte Marktmittelwerte?
+### Warum unterscheidet sich mein Versicherungsangebot so stark von anderen Rechnern?
 
-Nein, sie sind nur editierbare Beispiele.
+Typklasse und Regionalklasse werden individuell je Modell und Zulassungsbezirk berechnet und jährlich neu festgelegt — ein pauschaler Schätzwert kann erheblich abweichen.
 
-### Werden Daten übertragen?
+### Sollte ich die HU-Kosten wirklich monatlich einplanen?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Ja, auch wenn sie nur alle zwei Jahre anfallen — eine anteilige monatliche Rücklage verhindert, dass der Fälligkeitstermin das Budget überrascht.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Wie behandle ich Leasing in diesem Rechner?
 
-Nein, es vergleicht Szenarien.
+Tragen Sie die Leasingrate als eigenen Fixkostenposten ein und rechnen Sie Kfz-Steuer, Versicherung und HU-Kosten separat dazu, statt die Leasingrate wie eine Kreditrate mit Zinssatz zu berechnen.
 
-### Wie wird die Rechnung genauer?
+### Was, wenn nach den laufenden Kosten kein Budget für eine Rate übrig bleibt?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Dann zeigt der Rechner einen maximalen Kreditbetrag von null — ein Hinweis, entweder das Mobilitätsbudget, die Fahrzeugwahl oder die laufenden Kosten zu überdenken, bevor Sie einen Kredit aufnehmen.
 
+## Quellen
 
-## Vor der Veröffentlichung zu prüfende Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [Zoll — Kraftfahrzeugsteuer](https://www.zoll.de/DE/Privatpersonen/Kraftfahrzeugsteuer/kraftfahrzeugsteuer_node.html), abgerufen am 2026-07-31
+- [Bundesministerium der Finanzen — Kfz-Steuer-Rechner](https://www.bundesfinanzministerium.de/Web/DE/Service/Apps_Rechner/KfzRechner/KfzRechner.html), abgerufen am 2026-07-31
+- [GDV — Regionalklassen kurz erklärt](https://www.gdv.de/gdv/themen/mobilitaet/regionalklassen-kurz-erklaert-11766), abgerufen am 2026-07-31

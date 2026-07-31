@@ -1,115 +1,76 @@
-﻿---
+---
 contentType: article
 articleSlug: true-cost-of-car-ownership
 locale: en
-title: "A Car Payment Is Not the Cost of a Car"
-description: "Estimate an affordable vehicle price from take-home income after insurance, energy, maintenance, parking and savings goals."
+title: "The 20/4/10 Rule: How Much Car You Can Actually Afford"
+description: "Why the loan payment isn't the cost of a car, the 20/4/10 affordability rule, first-year depreciation, and total cost of ownership beyond the sticker price."
 relatedTool: /en/tools/car-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-A useful financial guide should do more than produce a headline number. It should let you reproduce the calculation, identify the assumptions, and see exactly which input changes the conclusion.
+A car payment and the cost of owning a car are two different numbers, and dealerships are structured to help you focus on the smaller one. Stretch the loan term enough and almost any car looks "affordable" by monthly payment alone — right up until insurance, fuel, and maintenance bills arrive on top.
 
-This guide separates contractual facts from editable assumptions. Start with current statements or official data, then compare a conservative case, a base case and a favorable case without treating any estimate as a promise.
+## Why the Sticker Price Is the Wrong Number to Budget Around
 
-## The decision this guide helps you make
+Financing decisions built around "what payment can I swing" rather than "what's the total transportation cost" are how buyers end up car-rich and cash-poor. A responsible affordability number starts from your take-home income and available cash flow, then works backward to a maximum vehicle price — not the other way around.
 
-Work backward from take-home cash flow to a vehicle price while including insurance, fuel or charging, maintenance, parking and registration—not just the loan payment.
+## The 20/4/10 Rule Explained
 
-## Numbers to collect before calculating
+A widely used shorthand, cited by outlets like Chase and J.D. Power, suggests: put at least 20% down, finance for no more than 4 years (48 months), and keep total monthly transportation costs — loan payment, insurance, fuel, and maintenance combined — under 10% of gross monthly income. It's a guideline, not a formula with legal force, but each piece addresses a real risk: a smaller down payment and a longer term both increase the odds of being "upside down" (owing more than the car is worth), and transportation costs above 10% of income tend to crowd out other financial goals.
 
-Use the latest statement, contract, payslip, tax notice or official index available. Record the date beside every rate or fee that can change.
+## Worked Example: A $28,000 Vehicle
 
-- Monthly take-home income and existing commitments
-- Down payment and trade-in value
-- Loan APR and term
-- Insurance, energy, maintenance, registration and parking
-- Editable transport-budget limit
+A $28,000 vehicle with 20% down ($5,600) leaves $22,400 financed. At a 48-month term, that produces a materially higher monthly payment than a 72-month term on the same amount — but the shorter term pays off faster and accrues less total interest, and it keeps the loan balance closer to the car's depreciating value throughout the loan, reducing negative-equity risk if you need to sell or trade in early.
 
-## How the model works
+## Depreciation: The Cost Nobody Sees on the Sticker
 
-`available loan payment = transport budget − operating costs; maximum principal = payment × (1 − (1+r)^−n) ÷ r`
+New vehicles lose value fast. Commonly cited estimates put first-year depreciation in the range of roughly 20% for the average new car, with some models losing more, and cumulative depreciation reaching around 60% of original value by the five-year mark. That decline happens whether or not you financed the purchase, and it's the main reason a heavily financed new car can leave an owner owing more than the car is worth for the first year or two — a risk a loan-payment-only view never shows.
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+## Insurance, Fuel, and Maintenance Add-Ons
 
-Keep full precision inside the calculation and round only for display. Cash costs, timing, fees, taxes and uncertain future values should remain separate so the result can be audited.
+The loan payment is typically only part of total transportation cost. Insurance premiums vary by vehicle type, driver history, and location; fuel or charging cost depends on efficiency and mileage; and maintenance — tires, brakes, fluids, and eventually larger repairs — grows with vehicle age. None of these show up on a financing quote, which is exactly why the [FTC recommends separating financing shopping from the vehicle-price negotiation](https://consumer.ftc.gov/articles/financing-or-leasing-car): get pre-approved financing first, then negotiate an out-the-door price, so add-on costs aren't buried inside a single monthly number.
 
-## Worked example
+## New vs. Used: Comparing Total Cost, Not Just Payment
 
-With $5,000 take-home income, $400 operating costs and a 15% transport cap, only $350 remains for the loan payment before the present-value calculation.
+A used vehicle that has already absorbed its steepest depreciation can offer a lower total cost of ownership even at a similar loan payment to a new car, because the buyer isn't paying for that first-year value drop. The tradeoff is a shorter remaining useful life and potentially higher near-term maintenance — compare total modeled cost over your expected ownership period, not just the initial price tag.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## When a Longer Loan Term Backfires
 
-## Run three scenarios, not one
+Stretching a loan to 72 or 84 months lowers the monthly payment, which is precisely what makes an expensive vehicle look affordable on paper. But a longer term means more total interest paid, and because the car depreciates faster than a long loan amortizes in the early years, the owner can remain "underwater" — owing more than the car is worth — for a large share of the loan. That matters most if you might need to sell, trade in, or if the vehicle is declared a total loss before the loan catches up to its value.
 
-Change one uncertain input at a time. This reveals sensitivity and prevents an optimistic assumption from hiding another risk.
+## Where These Numbers Come From
 
-- **Conservative:** Use higher costs, slower progress or lower income/return. Raise insurance and maintenance estimates.
-- **Base:** Use current verified figures and the behavior most likely to continue. Shorten the loan term.
-- **Favorable:** Use a plausible upside case and label it as a scenario, not a forecast. Reduce the down payment to preserve emergency cash.
+- [Chase — "What Is the 20/4/10 Rule for Car Buying?"](https://www.chase.com/personal/auto/education/buying/what-is-the-20-4-10-rule-for-car-buying), reviewed 2026-07-31, for the 20% down / 4-year term / 10%-of-income guideline.
+- [Federal Trade Commission — "Financing or Leasing a Car"](https://consumer.ftc.gov/articles/financing-or-leasing-car), reviewed 2026-07-31, for the recommendation to arrange financing before negotiating price.
+- Depreciation estimates (roughly 20% first-year, roughly 60% by year five) are commonly cited industry ranges from sources including Experian and CARFAX and vary meaningfully by make, model, and market conditions — treat them as an illustrative range, not a guaranteed figure for any specific vehicle.
 
-## Common mistakes that change the answer
+This guide is general education, not individualized financial or purchasing advice, and does not guarantee any specific vehicle's resale value or total cost. Do not enter identifying information into a shareable URL.
 
-- Using the advertised monthly payment as the full cost
-- Stretching the term until an expensive car appears affordable
-- Leaving insurance and parking at zero without checking quotes
-- Counting a trade-in without subtracting its outstanding loan
+## Frequently Asked Questions
 
-## Local interpretation
+### Why use take-home income instead of gross for a car budget?
 
-Use take-home income for cash-flow affordability. Enter sales tax, registration and dealer fees instead of hiding them inside the vehicle price. Long terms lower the payment but may increase interest and negative-equity risk.
+It reflects the cash actually available after taxes and payroll deductions, which is what you'll use to make the payment and cover operating costs.
 
-## A practical step-by-step workflow
+### Does this calculator include depreciation directly?
 
-1. Define the exact question and time horizon.
-2. Enter verified current figures before changing any assumptions.
-3. Reproduce a known payment, balance or budget total as a reasonableness check.
-4. Save conservative, base and favorable scenarios.
-5. Identify the first input that reverses the conclusion; that is the break-even threshold.
-6. Check contract, tax and eligibility rules before acting.
+Not as a separate output — depreciation affects resale value and negative-equity risk rather than the monthly affordability figure, so weigh it alongside the calculated numbers.
 
-## How to interpret the result
+### Why can a longer loan term be risky?
 
-Prefer conditional language: “Under these inputs, option A has the lower modeled cost.” A calculator cannot see every contract clause, underwriting rule, behavioral change or emergency-cash need.
+It can increase total interest paid and keep the loan balance above the vehicle's actual value for longer, raising the odds of being underwater if you sell or trade in early.
 
-## Frequently asked questions
+### Should a trade-in value be entered net of its own loan?
 
-### Why can the result differ from my statement?
+Yes — subtract any remaining loan payoff on the trade-in from its value before entering it as your effective down payment contribution.
 
-Statements may use different timing, compounding, fee, tax or rounding rules. Re-enter the exact contractual figures and compare the schedule line by line.
+### Is the 20/4/10 rule a lending requirement?
 
-### Which input usually matters most?
-
-Test the rate, time horizon, recurring payment and one-off fees first. The sensitivity section should show which variable changes the result fastest.
-
-### Are the default values market averages?
-
-No. Defaults are editable examples only and must never be presented as current market data.
-
-### Does the result guarantee approval, savings or returns?
-
-No. It is an educational scenario model, not a lender decision, contract quote or investment promise.
-
-### When should I recalculate?
-
-Recalculate after a material change in rate, balance, income, recurring cost, official index or contract term.
+No — it's a personal-finance guideline, not a legal or lending standard; individual lenders set their own approval criteria.
 
 ## Use the calculator
 
-Open the related calculator, reproduce the example, and then replace each example value with a figure you can verify.
+Open the related calculator, reproduce the $28,000-vehicle example above, and then enter your own take-home income, operating costs, and target down payment.
 
 [Car Affordability & Total Monthly Cost Calculator](/en/tools/car-affordability/)
-
-## Editorial and safety limits
-
-This material is for general education and estimation only. It is not individualized financial, tax, legal, credit or investment advice. Do not place account numbers, addresses or personally identifiable information in shareable URLs.
-
-## Official sources to verify before publishing
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.

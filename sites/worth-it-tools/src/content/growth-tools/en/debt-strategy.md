@@ -1,83 +1,65 @@
-﻿---
+---
 contentType: tool
 toolSlug: debt-strategy
 locale: en
 title: "Debt Snowball vs Avalanche Calculator"
-description: "Compare payoff order, total interest and debt-free date for snowball, avalanche and custom strategies."
+description: "Compare payoff order, total interest, and debt-free date for snowball, avalanche, and custom strategies across multiple debts."
 relatedArticle: /en/snowball-vs-avalanche/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Compare payoff order, total interest and debt-free date for snowball, avalanche and custom strategies.
+List each debt's balance, APR, and minimum payment, add the extra amount you can put toward payoff each month, and compare the snowball order (smallest balance first), the avalanche order (highest rate first), and a custom order you set yourself.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Use the exact balance, APR, and minimum payment from each current statement. Note any promotional rate and its expiration date separately, since a plan calculated on a temporary rate will understate interest once the standard rate resumes.
 
-## Calculation method
+## Formula
 
-
-`monthly cycle: accrue interest → pay minimums → apply extra payment → roll freed minimums to the next debt`
-
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+`monthly cycle: accrue interest → pay minimums → apply extra payment to the target debt → roll the freed minimum into the next debt once the target is cleared`
 
 ## Worked example
 
-Compare a $1,000 card at 22%, a $3,000 card at 15% and a $7,000 loan at 8% with $300 extra each month.
+A $1,000 card at 22% APR, a $3,000 card at 15% APR, and a $7,000 loan at 8% APR, with $300 extra available each month, shows how quickly each method clears the first debt and how much total interest each order costs across all three.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Choosing between the two orders
 
-## Local notes
+Avalanche minimizes total interest in most realistic mixes; snowball clears a full account fastest, which research associates with a higher completion rate for some people. Run both and see which debt-free date and interest total you're comfortable committing to.
 
-Do not include debts with special legal protections or forgiveness programs without understanding the consequences. The lowest mathematical interest is not always the best behavioral plan.
+## Limits and privacy
 
-## Limits and verification
+This tool provides a general educational estimate, not individualized financial or credit counseling advice. It flags, rather than hides, any debt whose minimum payment doesn't cover its own interest under the entered terms.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
-
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
-
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put account numbers or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [Debt Snowball vs Avalanche: Motivation or Mathematics?](/en/snowball-vs-avalanche/)for a step-by-step explanation, scenario design and verification checklist.
+Read [Debt Snowball vs. Avalanche: What the Math (and the Research) Actually Show](/en/snowball-vs-avalanche/) for the 2012 *Journal of Marketing Research* finding on payoff completion, a hybrid-order option, and when a promotional rate or forgiveness program should change your plan.
 
 ## Frequently asked questions
 
 ### Which strategy saves the most interest?
 
-Avalanche usually does when all payments are made as modeled.
+Avalanche usually does, since it targets the highest interest rate first, though the gap narrows when rates across debts are close together.
 
-### Why can snowball still be useful?
+### Why would snowball still be worth using?
 
-It can produce an earlier visible payoff and improve adherence.
+It can produce an earlier visible payoff on one full account, which research links to a higher chance of finishing the overall plan.
 
-### Are minimum payments rolled forward?
+### Are freed minimum payments rolled forward automatically?
 
-Yes, once a debt is cleared its former minimum joins the extra payment.
+Yes — once a target debt reaches zero, its former minimum joins the extra payment aimed at the next debt in the chosen order.
 
-### Can I set my own order?
+### Can I set my own custom order?
 
-Yes, use the custom strategy.
+Yes — select the custom strategy and rank the debts yourself, for example to prioritize a co-signed loan.
 
-### What if minimum payments do not cover interest?
+### What if a minimum payment doesn't cover interest?
 
-The result flags a plan that cannot amortize under the entered assumptions.
+The result flags that debt as not amortizing under the entered terms — a signal to contact the lender or a nonprofit credit counselor before finalizing a payoff order.
 
+## Sources
 
-## Sources to verify before publication
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Ramsey Solutions — "Debt Avalanche vs. Debt Snowball"](https://www.ramseysolutions.com/debt/debt-snowball-vs-debt-avalanche), reviewed 2026-07-31
+- [Consumer Financial Protection Bureau — consumer debt resources](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/), reviewed 2026-07-31

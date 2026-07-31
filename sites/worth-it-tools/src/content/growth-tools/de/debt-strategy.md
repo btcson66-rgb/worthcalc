@@ -1,82 +1,61 @@
-﻿---
+---
 contentType: tool
 toolSlug: debt-strategy
 locale: de
-title: "Schulden-Schneeball-gegen-Lawine-Rechner"
-description: "Vergleichen Sie Tilgungsreihenfolge, Zinsen und schuldenfreies Datum für Schneeball-, Lawinen- und eigene Strategien."
+title: "Schneeball- oder Lawinen-Rechner: Schulden in der richtigen Reihenfolge tilgen"
+description: "Vergleichen Sie, wie viel Zinsen und Zeit Schneeball- und Lawinen-Strategie bei Ihren tatsächlichen Schulden sparen."
 relatedArticle: /de/snowball-vs-avalanche/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Vergleichen Sie Tilgungsreihenfolge, Zinsen und schuldenfreies Datum für Schneeball-, Lawinen- und eigene Strategien.
+Tragen Sie jede Schuld mit Restsumme, Zinssatz und Mindestrate ein sowie Ihr zusätzliches monatliches Tilgungsbudget, um Schneeball- und Lawinen-Reihenfolge nebeneinander zu vergleichen.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Listen Sie zuerst alle existenziellen Zahlungen — Miete, Energie — separat auf; sie gehören nicht in diesen Vergleich, sondern haben unabhängig von Zinssatz immer Vorrang. Tragen Sie danach jede übrige Schuld einzeln ein: Dispo-Saldo mit dem im Preisverzeichnis genannten Zinssatz, Ratenkredite mit dem vertraglichen Effektivzins, Rahmenkredite mit ihrem aktuellen Sollzins. Der Dispo wird in den meisten Haushalten der höchste Zinssatz im Vergleich sein.
 
-## Berechnungsmethode
+## Wie der Rechner intern arbeitet
 
+`Je Monat: Zinsen aller Schulden berechnen → Mindestraten zahlen → Zusatzbudget auf die Prioritätsschuld anwenden → nach Volltilgung einer Schuld deren Rate auf die nächste Priorität umlenken`
 
-`Monatsablauf: Zinsen berechnen → Mindestraten zahlen → Zusatzbetrag einsetzen → frei werdende Raten weiterrollen`
-
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Bei der Lawinen-Reihenfolge priorisiert der Rechner die Schuld mit dem höchsten Zinssatz, bei der Schneeball-Reihenfolge die mit der kleinsten Restsumme — beide Varianten werden parallel berechnet, damit Sie Gesamtzinsen und Tilgungsdauer direkt vergleichen können.
 
 ## Rechenbeispiel
 
-Beispiel: 1.200 € zu 20 %, 4.000 € zu 12 % und 9.000 € zu 6 %, mit 300 € extra monatlich.
+Bei 800 € Dispo zu 11,3 %, 3.500 € Ratenkredit zu 7,9 % und 1.200 € Rahmenkredit zu 13,5 % mit 300 € zusätzlichem Tilgungsbudget im Monat priorisiert die Lawine zuerst den Rahmenkredit, dann den Dispo, dann den Ratenkredit — das spart über die gesamte Laufzeit die meisten Zinsen. Der Schneeball priorisiert zuerst den Dispo als kleinste Summe, was die erste Schuld am schnellsten vollständig tilgt. Ersetzen Sie diese Beispielwerte durch Ihre tatsächlichen Schulden, bevor Sie sich für eine Reihenfolge entscheiden.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Grenzen dieses Rechners
 
-## Hinweise für Deutschland
-
-Besicherte Darlehen, Förderkredite oder laufende Entschuldungsverfahren sollten nicht ohne fachliche Prüfung in eine einfache Reihenfolge eingeordnet werden.
-
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Diese Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Rechts- oder Schuldnerberatung. Besicherte Darlehen wie eine Baufinanzierung, Förderkredite oder laufende Entschuldungsverfahren sollten nicht ohne fachliche Prüfung in eine einfache Reihenfolge mit ungesicherten Konsumschulden eingeordnet werden — dort gelten andere Kündigungs- und Tilgungsregeln. Alle Eingaben bleiben im Browser; tragen Sie keine Konto-, Namens- oder sonstigen personenbezogenen Daten in einen teilbaren Ergebnislink ein.
 
 ## Passender Ratgeber
 
-Lesen Sie [Schulden-Schneeball oder Lawine: Motivation gegen Mathematik](/de/snowball-vs-avalanche/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Schulden abbauen in der richtigen Reihenfolge: Warum der Dispo zuerst dran ist](/de/snowball-vs-avalanche/) für die Einordnung existenzieller Zahlungen, den Vergleich beider Strategien und wann kostenlose Schuldnerberatung sinnvoller ist als Eigenregie.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Sollte ich Miete oder Energie in diesen Rechner eintragen?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nein, laufende existenzielle Zahlungen gehören nicht in diesen Vergleich — sie haben unabhängig vom Zinssatz immer Vorrang vor jeder Tilgungsstrategie.
 
-### Sind Standardwerte Marktmittelwerte?
+### Welche Strategie spart mehr Zinsen?
 
-Nein, sie sind nur editierbare Beispiele.
+In der Regel die Lawine, besonders wenn die Zinssätze Ihrer Schulden stark voneinander abweichen. Der Rechner zeigt Ihnen die genaue Differenz für Ihre eigenen Zahlen.
 
-### Werden Daten übertragen?
+### Warum sollte ich trotzdem den Schneeball wählen, wenn er teurer ist?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Wenn ein früher, sichtbarer Erfolg entscheidend dafür ist, dass Sie den Tilgungsplan durchhalten, kann der geringere Zinsvorteil der Lawine weniger wiegen als die Motivation.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Kann ich eine Baufinanzierung in diesen Vergleich einbeziehen?
 
-Nein, es vergleicht Szenarien.
+Nicht ohne Weiteres — Sondertilgungsgrenzen und mögliche Vorfälligkeitsentschädigung folgen anderen Regeln als bei ungesicherten Konsumschulden. Rechnen Sie Baufinanzierung separat.
 
-### Wie wird die Rechnung genauer?
+### Was, wenn das zusätzliche Tilgungsbudget nicht ausreicht, um voranzukommen?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Wenn selbst die Mindestraten aller Schulden das verfügbare Budget übersteigen, ist eine professionelle Schuldnerberatung der nächste sinnvolle Schritt, kein weiterer Rechenversuch.
 
+## Quellen
 
-## Vor der Veröffentlichung zu prüfende Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [BaFin — Konsumentenkredite vergleichen](https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/kredite-immobilienfinanzierung/kredite/konsumentenkredite-vergleichen/konsumentenkredite-vergleichen.html), abgerufen am 2026-07-31
+- [Verbraucherzentrale Hamburg — Schuldnerberatung](https://www.vzhh.de/themen/schulden/schulden-was-tun-schuldnerberatung-hilft-kostenlos-weiter), abgerufen am 2026-07-31

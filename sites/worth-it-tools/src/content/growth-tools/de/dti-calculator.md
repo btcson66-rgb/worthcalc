@@ -1,82 +1,66 @@
-﻿---
+---
 contentType: tool
 toolSlug: dti-calculator
 locale: de
-title: "Schuldendienstquote- und DTI-Rechner"
-description: "Berechnen Sie Wohnkosten- und Gesamt-Schuldendienstquote sowie Was-wäre-wenn-Szenarien."
+title: "Schuldendienstquoten-Rechner: Grober Selbsttest vor der Haushaltsrechnung"
+description: "Berechnen Sie Wohnkosten- und Gesamt-Schuldendienstquote als groben Vorab-Check, bevor Ihre Bank die vollständige Haushaltsrechnung erstellt."
 relatedArticle: /de/how-to-calculate-dti/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Berechnen Sie Wohnkosten- und Gesamt-Schuldendienstquote sowie Was-wäre-wenn-Szenarien.
+Tragen Sie Ihr monatliches Bruttoeinkommen, Ihre Wohnkosten und weitere Kreditraten ein, um eine grobe Wohnkosten- und Gesamt-Schuldendienstquote als ersten Anhaltspunkt zu sehen.
 
-## So verwenden Sie den Rechner
+## Was Sie vor der Eingabe bereithalten sollten
 
-1. Beginnen Sie mit dem neuesten Kontoauszug, Vertrag, Gehaltsnachweis oder amtlichen Index.
-2. Ersetzen Sie alle Standardwerte durch prüfbare Daten; sie sind Beispiele und weder Marktmittelwerte noch Empfehlungen.
-3. Berechnen Sie zuerst das aktuelle Basisszenario und speichern Sie mindestens ein konservatives, ein Basis- und ein günstiges Szenario.
-4. Prüfen Sie Kostenaufschlüsselung und Kipppunkt statt nur das Hauptergebnis.
-5. Exportieren oder kopieren Sie nur nicht sensible Ergebnisse und keine konto- oder personenbezogenen Angaben.
+Nehmen Sie Ihr Bruttoeinkommen aus dem letzten Gehaltsnachweis und Ihre tatsächliche Wohnrate oder geplante Kreditrate. Beachten Sie: Diese Quote ist ein grober Selbsttest nach US-amerikanischem Vorbild und entspricht nicht der Methode, die deutsche Banken tatsächlich anwenden. Deutsche Banken sind nach § 505a BGB verpflichtet, eine vollständige Haushaltsrechnung mit Ihren individuellen Lebenshaltungskosten zu erstellen — nicht nur eine Quote vom Bruttoeinkommen zu berechnen.
 
-## Berechnungsmethode
+## Wie der Rechner intern arbeitet
 
+`Wohnkostenquote = Wohnrate ÷ monatliches Bruttoeinkommen; Gesamtquote = alle einbezogenen Schuldzahlungen ÷ monatliches Bruttoeinkommen`
 
-`Wohnkostenquote = Wohnrate ÷ monatliches Bruttoeinkommen; Gesamtquote = einbezogene Schuldzahlungen ÷ monatliches Bruttoeinkommen`
-
-Der Rechenkern muss intern mit voller Genauigkeit arbeiten und erst bei der Anzeige runden. Nicht endliche Werte, unmögliche Laufzeiten, sachlich sinnlose negative Zahlen, Division durch null und nicht tilgbare Pläne sind abzuweisen. Die verwendeten Annahmen müssen sichtbar sein, damit die Rechnung reproduzierbar bleibt.
+Die Berechnung läuft vollständig im Browser, arbeitet intern mit voller Genauigkeit und rundet erst bei der Anzeige. Der Rechner bildet bewusst keine individuellen Lebenshaltungskosten, Unterhaltspflichten oder die Pfändungsfreigrenze ab — diese Faktoren fließen nur in die tatsächliche Haushaltsrechnung Ihrer Bank ein, nicht in eine einfache Quote.
 
 ## Rechenbeispiel
 
-5.000 € Monatsbrutto, 1.200 € Wohnen und 350 € weitere Raten ergeben 24 % und 31 %.
+Bei 5.000 € Monatsbrutto, 1.200 € Wohnkosten und 350 € weiteren Kreditraten ergibt sich eine Wohnkostenquote von 24 % und eine Gesamtquote von 31 %. Diese Zahlen sagen für sich genommen wenig darüber aus, ob eine deutsche Bank den Kredit tatsächlich vergeben würde — das hängt von der individuellen Haushaltsrechnung, dem Schufa-Score und weiteren Faktoren ab, die dieser Rechner nicht abbildet.
 
-Das Beispiel dient nur zur Veranschaulichung. Die veröffentlichte Seite soll Schaltflächen zum Laden und Zurücksetzen bieten, ohne freie Eingaben einzuschränken.
+## Warum dieser Rechner keine Kreditzusage ersetzt
 
-## Hinweise für Deutschland
+Deutsche Banken nutzen für die Kreditvergabe keine einfache Schuldendienstquote, sondern die gesetzlich vorgeschriebene Haushaltsrechnung: Nettoeinkommen abzüglich realistischer, individueller Lebenshaltungskosten und bestehender Verpflichtungen ergibt den Spielraum für eine neue Rate. Zwei Haushalte mit identischer Quote in diesem Rechner können bei der tatsächlichen Haushaltsrechnung ihrer Bank sehr unterschiedlich dastehen.
 
-Banken nutzen Haushaltsrechnung, Kapitaldienstfähigkeit, Beleihung, Bonität und eigene Pauschalen. Eine Quote allein ist keine Kreditzusage.
+## Grenzen dieses Rechners
 
-## Grenzen und Prüfung
-
-Die Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Steuer-, Rechts-, Kredit- oder Anlageberatung.
-
-Prüfen Sie vor einer Entscheidung Sollzins, effektiven Jahreszins, Gebühren, Steuern und Vertragsbedingungen bei Anbieter und offiziellen Stellen.
-
-Die Berechnung erfolgt im Browser. Tragen Sie keine Konto-, Adress- oder sonstigen personenbezogenen Daten in teilbare Links ein.
-
-Das Modell trennt mathematische Ergebnisse bewusst von rechtlichen oder kreditbezogenen Aussagen. Begriffe wie „genehmigt“, „sicher“, „garantiert“ oder ähnliche Versprechen sind unzulässig. Schwellenwerte sind als änderbare Orientierung oder als datierte öffentliche Regel mit Quelle und Ausnahmen zu kennzeichnen.
+Diese Seite ist eine allgemeine Rechenhilfe und keine individuelle Finanz-, Rechts- oder Kreditberatung und keine Kreditwürdigkeitsprüfung. Alle Eingaben bleiben im Browser; tragen Sie keine Konto-, Namens- oder sonstigen personenbezogenen Daten in einen teilbaren Ergebnislink ein.
 
 ## Passender Ratgeber
 
-Lesen Sie [DTI berechnen, ohne ihn mit einer Kreditzusage zu verwechseln](/de/how-to-calculate-dti/)für Vorgehen, Szenarien und Prüfliste.
+Lesen Sie [Haushaltsrechnung statt DTI-Quote: Wie deutsche Banken Ihre Kreditwürdigkeit wirklich prüfen](/de/how-to-calculate-dti/) für § 505a BGB, den Schufa-Score und die Pfändungsfreigrenze bei der Kreditvergabe.
 
 ## Häufige Fragen
 
-### Warum ist das Ergebnis nur eine Schätzung?
+### Entspricht dieser Rechner der Prüfung meiner Bank?
 
-Verträge, Zeitpunkte, Zinssätze und Gebühren können abweichen.
+Nein. Er berechnet eine grobe Quote nach US-amerikanischem Vorbild. Deutsche Banken nutzen die gesetzlich vorgeschriebene Haushaltsrechnung mit individuellen Lebenshaltungskosten.
 
-### Sind Standardwerte Marktmittelwerte?
+### Welche Quote gilt in Deutschland als unbedenklich?
 
-Nein, sie sind nur editierbare Beispiele.
+Es gibt keinen offiziellen Schwellenwert wie in den USA. Ihre Bank bewertet Ihre Kapitaldienstfähigkeit anhand der vollständigen Haushaltsrechnung, nicht anhand einer festen Quote.
 
-### Werden Daten übertragen?
+### Berücksichtigt der Rechner meinen Schufa-Score?
 
-Nein, der Rechenkern ist für lokale Browserausführung vorgesehen.
+Nein, der Rechner arbeitet ausschließlich mit den eingegebenen Zahlen. Der Schufa-Score ist ein separater Faktor, den nur Ihre Bank in die Gesamtbewertung einbezieht.
 
-### Garantiert das Ergebnis Kredit oder Rendite?
+### Warum unterscheidet sich mein Ergebnis von dem, was mir meine Bank sagt?
 
-Nein, es vergleicht Szenarien.
+Weil die Bank zusätzlich Ihre individuellen Lebenshaltungskosten, Unterhaltspflichten, den Schufa-Score und die Pfändungsfreigrenze berücksichtigt — Faktoren, die dieser einfache Rechner nicht abbildet.
 
-### Wie wird die Rechnung genauer?
+### Wofür ist dieser Rechner dann sinnvoll?
 
-Nutzen Sie aktuelle Unterlagen und testen Sie konservative, Basis- und günstige Annahmen.
+Als grober erster Anhaltspunkt, bevor Sie mit belastbaren Zahlen zu Ihrer Bank gehen und dort die tatsächliche Haushaltsrechnung erstellen lassen.
 
+## Quellen
 
-## Vor der Veröffentlichung zu prüfende Quellen
-
-- [Destatis — Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/)
-- [Destatis — Wertsicherungsrechner](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Internetprogramm.html)
-- [Deutsche Bundesbank — Glossar Annuitätendarlehen](https://www.bundesbank.de/dynamic/action/de/startseite/glossar/723820/glossar)
-
-Die Redaktion muss am Veröffentlichungstag prüfen, ob jede Quelle aktuell ist, und allgemeine Startseiten nach Möglichkeit durch konkrete amtliche Dokumente ersetzen.
+- [§ 505a BGB — Pflicht zur Kreditwürdigkeitsprüfung](https://www.gesetze-im-internet.de/bgb/__505a.html), abgerufen am 2026-07-31
+- [Bekanntmachung zu den Pfändungsfreigrenzen 2026 nach § 850c ZPO](https://www.gesetze-im-internet.de/pf_ndfreigrbek_2026/BJNR0500A0026.html), abgerufen am 2026-07-31
+- [Verbraucherzentrale Bundesverband — Kreditwürdigkeitsprüfung: Schutz für Verbraucher und Marktstabilität](https://www.vzbv.de/pressemitteilungen/kreditwuerdigkeitspruefung-schutz-fuer-verbraucher-und-marktstabilitaet), abgerufen am 2026-07-31

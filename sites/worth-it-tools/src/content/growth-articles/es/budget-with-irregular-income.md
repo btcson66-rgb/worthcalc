@@ -1,114 +1,87 @@
-﻿---
+---
 contentType: article
 articleSlug: budget-with-irregular-income
 locale: es
-title: "Cómo presupuestar con ingresos irregulares"
-description: "Convierte ingresos y gastos semanales, mensuales y anuales en un presupuesto mensual comparable."
+title: "Presupuestar como autónomo: cuota por tramos y el modelo 130 trimestral"
+description: "Cómo construir un presupuesto mensual estable cuando eres autónomo en España: la cuota de la Seguridad Social por tramos de ingresos reales y cuánto apartar para el modelo 130."
 relatedTool: /es/tools/budget-builder/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Una guía financiera útil no se limita a mostrar una cifra final. Debe permitir repetir el cálculo, entender cada supuesto y detectar qué dato hace cambiar la conclusión.
+Presupuestar con un salario fijo es relativamente sencillo: sabes cuánto entra cada mes. Presupuestar como autónomo en España es otra cosa, porque además de que tus ingresos varían, tienes dos obligaciones que también cambian según lo que factures: la cuota de la Seguridad Social y el pago fraccionado del IRPF.
 
-Esta guía separa los datos comprobables del contrato o recibo de las hipótesis editables. Empieza con información actual, compara un escenario prudente, uno base y otro favorable, y no presentes ninguna estimación como garantía.
+## El problema de presupuestar con ingresos que cambian cada mes
 
-## Qué decisión ayuda a resolver esta guía
+Si un mes facturas 3.000 € y el siguiente 1.200 €, no puedes simplemente dividir gastos fijos entre ingresos de ese mes concreto: necesitas una base mensual estable construida a partir de una media realista, dejando aparte lo que ya sabes que se va a Hacienda y a la Seguridad Social antes de calcular qué te queda para vivir.
 
-Convertir ingresos irregulares y recibos anuales a una base mensual para ver superávit, déficit y ahorro sin imponer una regla universal.
+## La cuota de autónomos ya no es fija: los tramos por ingresos reales
 
-## Datos que conviene reunir antes de calcular
+Desde enero de 2023, el sistema de cotización de autónomos en España ya no usa una base elegida libremente, sino un sistema de 15 tramos según tu previsión de rendimientos netos, según explica la [Seguridad Social](https://inclusion.seg-social.es/web/guest/w/el-gobierno-aprueba-el-nuevo-sistema-de-cotizacion-para-los-trabajadores-autonomos-basado-en-los-rendimientos-netos). Tu rendimiento neto se calcula restando a tus ingresos los gastos deducibles de la actividad, más una deducción adicional por gastos genéricos (7% para autónomos personas físicas, 3% para societarios). Puedes cambiar de tramo hasta seis veces al año según cómo evolucionen tus ingresos reales, y al cierre del ejercicio la Seguridad Social cruza tus datos con la Agencia Tributaria: si cotizaste por debajo de lo que correspondía según tus ingresos reales, puede exigirte una regularización.
 
-Utiliza el último extracto, contrato, nómina, recibo fiscal o índice oficial disponible. Anota la fecha de cada tipo, comisión o dato que pueda cambiar.
+Para 2026, las cuotas se mantienen congeladas en los mismos importes de 2025 en la mayoría de tramos, aunque el Mecanismo de Equidad Intergeneracional sube del 0,8% al 0,9%, lo que añade unos euros más a la cuota mensual según tu base de cotización.
 
-- Ingresos netos y frecuencia de cobro
-- Gastos fijos mensuales
-- Necesidades variables y gasto discrecional
-- Recibos trimestrales, semestrales y anuales
-- Ahorro previsto y fondos para gastos futuros
+## Modelo 130: cuánto hay que apartar cada trimestre para Hacienda
 
-## Cómo funciona el modelo
+Además de la cuota de Seguridad Social, si eres autónomo en estimación directa tienes que presentar el [Modelo 130](https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G601.shtml) cada trimestre: un pago a cuenta del IRPF equivalente al 20% de tu rendimiento neto acumulado desde enero, menos lo que ya pagaste en trimestres anteriores y las retenciones que tus clientes ya te hayan practicado. Los plazos de presentación en 2026 son del 1 al 20 de abril, julio y octubre, y del 1 al 30 de enero de 2027 para el cuarto trimestre. Quedan exonerados quienes tuvieron al menos el 70% de sus ingresos del año anterior sometidos a retención (la llamada regla del 70%).
 
-`equivalente mensual = importe × veces al año ÷ 12`
+Para presupuestar sin sustos, la práctica más segura es apartar ese 20% de cada factura sin retención en cuanto la cobras, en lugar de esperar a hacer la cuenta al final del trimestre — así el dinero ya no está disponible para gastar cuando llegue el momento de pagar.
 
-El motor debe conservar toda la precisión internamente y redondear solo al mostrar. Debe rechazar valores no finitos, plazos imposibles, negativos sin sentido, divisiones por cero y planes que no se amortizan. El panel de resultados debe mostrar los supuestos para que otra persona pueda repetir el cálculo.
+## Construir un "sueldo fijo" a partir de ingresos variables
 
-El motor debe conservar toda la precisión y redondear solo al mostrar. Separa coste en efectivo, calendario, comisiones, impuestos y valores futuros inciertos para que el cálculo pueda revisarse.
+1. Calcula tu media de ingresos netos de al menos los últimos seis a doce meses, no solo el mejor mes reciente.
+2. Resta la cuota de autónomos correspondiente a tu tramo de ingresos reales, no a un tramo mínimo optimista.
+3. Aparta automáticamente el 20% del rendimiento neto de cada factura para el modelo 130 trimestral.
+4. Con lo que queda, define tu "sueldo" mensual fijo que te transfieres a ti mismo, y deja el resto en la cuenta de la actividad como colchón para los meses flojos.
 
-## Ejemplo reproducible
+## El colchón que necesitas antes que cualquier otra cosa
 
-Ejemplo: 2.100 € netos mensuales más dos pagas extra, seguro anual de 480 € y gastos trimestrales de 150 €.
+A diferencia de un asalariado, un autónomo no tiene derecho automático a prestación por desempleo si un cliente deja de pagarle o si un mes no factura nada. Antes de optimizar cualquier otra parte del presupuesto, construir un colchón que cubra al menos la cuota de autónomos y los gastos fijos de varios meses reduce el riesgo de tener que endeudarte para cubrir un mes malo.
 
-El ejemplo es ilustrativo. La página publicada debe incluir botones para cargarlo y restablecer los campos, sin impedir que el usuario introduzca otros datos.
+## Ejemplo: un trimestre bueno y uno malo
 
-## Compara tres escenarios, no uno solo
+Una autónoma que factura 4.500 € en un trimestre bueno y 1.800 € en uno malo tiene una media trimestral de 3.150 €. Si construye su presupuesto sobre el trimestre bueno, se compromete a gastos que no puede sostener en el trimestre malo; si lo hace sobre la media de varios trimestres —reservando el excedente de los buenos para cubrir los malos—, su presupuesto mensual se mantiene estable independientemente de la facturación de ese mes concreto.
 
-Cambia una sola variable incierta cada vez. Así se ve la sensibilidad real y se evita que una hipótesis optimista oculte otro riesgo.
+## Errores que dejan a los autónomos sin liquidez
 
-- **Prudente:** Usa costes más altos, menor progreso o ingresos/rendimientos más bajos. Reducir el ingreso irregular a una media prudente.
-- **Base:** Usa cifras actuales verificadas y el comportamiento más probable. Añadir un recibo anual omitido.
-- **Favorable:** Usa una mejora plausible, identificada como escenario y no como previsión. Comparar gasto actual con una reducción objetivo.
-
-## Errores habituales que cambian el resultado
-
-- Usar cuatro semanas para convertir cualquier ingreso semanal
-- Olvidar seguros, impuestos o mantenimiento anual
-- Tratar el ahorro como sobrante y no como asignación
-- Usar 50/30/20 como criterio de aprobado
-
-## Cómo interpretar el resultado en España
-
-En España conviene separar salario neto, pagas extraordinarias y gastos anuales como seguros, IBI o matrícula. Si cobras 14 pagas, no conviertas las extras en dinero “libre” antes de reservar objetivos anuales.
-
-## Proceso práctico paso a paso
-
-1. Define la pregunta exacta y el horizonte temporal.
-2. Introduce primero los datos actuales verificables.
-3. Comprueba que el modelo reproduce una cuota, saldo o presupuesto conocido.
-4. Guarda escenarios prudente, base y favorable.
-5. Localiza el primer dato que invierte la conclusión: ese es el umbral de equilibrio.
-6. Revisa contrato, fiscalidad y requisitos antes de actuar.
-
-## Cómo leer el resultado sin prometer demasiado
-
-Usa lenguaje condicional: «Con estos datos y supuestos, la opción A tiene un coste modelizado menor». La calculadora no conoce todas las cláusulas, criterios de concesión, cambios de conducta ni necesidades de liquidez.
+- Elegir un tramo de cotización mínimo para pagar menos cuota cada mes, sin tener en cuenta que Hacienda y Seguridad Social cruzan datos al cierre del ejercicio y puede haber regularización.
+- Gastar el 100% de lo que entra cada mes sin apartar antes el porcentaje del modelo 130.
+- No tener colchón para los meses de facturación baja, obligando a usar financiación cara para cubrir gastos fijos.
+- Confundir facturación con ingreso neto disponible, sin restar antes gastos deducibles, cuota de autónomos e IRPF trimestral.
 
 ## Preguntas frecuentes
 
-### ¿Por qué puede diferir del extracto o de la oferta?
+### ¿Puedo cambiar mi tramo de cotización si mis ingresos bajan?
 
-La entidad puede aplicar otras fechas, capitalización, comisiones, impuestos o redondeos. Introduce las condiciones exactas y compara el calendario periodo a periodo.
+Sí, puedes solicitar el cambio hasta seis veces al año según tu previsión de rendimientos netos, ajustando la cuota a tu situación real.
 
-### ¿Qué dato suele influir más?
+### ¿El modelo 130 es un impuesto adicional o un adelanto?
 
-Prueba primero el tipo, el plazo, el pago periódico y las comisiones únicas. La sensibilidad debe mostrar qué variable mueve antes el resultado.
+Es un pago a cuenta del IRPF, no un impuesto extra: se regulariza en la declaración de la renta anual (modelo 100), donde se descuenta lo ya ingresado trimestralmente.
 
-### ¿Los valores iniciales son medias de mercado?
+### ¿Todos los autónomos tienen que presentar el modelo 130?
 
-No. Son ejemplos editables y no deben presentarse como datos actuales de mercado.
+No, quedan exentos quienes tuvieron al menos el 70% de sus ingresos del año anterior sometidos a retención, la llamada regla del 70%.
 
-### ¿El resultado garantiza aprobación, ahorro o rentabilidad?
+### ¿Qué pasa si cotizo por debajo de mi tramo real?
 
-No. Es un modelo educativo, no una decisión bancaria, oferta contractual ni promesa de inversión.
+Al cierre del ejercicio, la Seguridad Social compara lo cotizado con tus rendimientos netos reales declarados a Hacienda y puede exigir una regularización si cotizaste por debajo de lo que correspondía.
 
-### ¿Cuándo conviene repetir el cálculo?
+### ¿Cuándo debería revisar mi presupuesto como autónomo?
 
-Cuando cambien de forma relevante el tipo, saldo, ingreso, coste recurrente, índice oficial o condición contractual.
+Cada trimestre, al presentar el modelo 130, y cada vez que tu facturación media cambie de forma sostenida, no solo tras un mes puntualmente bueno o malo.
 
-## Abrir la calculadora
+## Construye tu presupuesto
 
-Abre la calculadora asociada, reproduce el ejemplo y después sustituye cada valor por un dato que puedas comprobar.
+Introduce tus ingresos variables y tus gastos fijos y anuales para ver un presupuesto mensual estable, con espacio para la cuota de autónomos y el modelo 130.
 
 [Planificador de presupuesto mensual](/es/tools/budget-builder/)
 
-## Límites editoriales y de seguridad
+## Aviso
 
-Contenido educativo y estimativo; no constituye asesoramiento financiero, fiscal, jurídico, crediticio ni de inversión personalizado. No incluyas identificadores personales en enlaces compartidos.
+Este contenido es educativo y no constituye asesoramiento fiscal ni de gestoría personalizado. Las cuotas y tramos de cotización de autónomos pueden cambiar cada año: confirma siempre la tabla vigente con la Seguridad Social.
 
-## Fuentes oficiales que deben verificarse antes de publicar
+## Fuentes
 
-- [Banco de España — simuladores para clientes bancarios](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/)
-- [Banco de España — amortización anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/simulador_amortizacion_anticipada_prestamo.html)
-- [INE — IPC en un clic](https://www.ine.es/ipc/)
-
-La persona editora debe confirmar en la fecha de despliegue que cada fuente sigue vigente y sustituir las páginas generales por documentos oficiales más concretos cuando existan.
+- [Seguridad Social — Nuevo sistema de cotización de autónomos por rendimientos netos](https://inclusion.seg-social.es/web/guest/w/el-gobierno-aprueba-el-nuevo-sistema-de-cotizacion-para-los-trabajadores-autonomos-basado-en-los-rendimientos-netos), consultado 2026-07-31
+- [Agencia Tributaria — Modelo 130, pago fraccionado del IRPF](https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G601.shtml), consultado 2026-07-31

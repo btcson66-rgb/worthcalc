@@ -1,114 +1,62 @@
-﻿---
+---
 contentType: article
 articleSlug: true-cost-of-car-ownership
 locale: fr
-title: "La mensualité n’est pas le coût réel d’une voiture"
-description: "Estimez un prix automobile soutenable après assurance, énergie, entretien, stationnement et épargne."
+title: "Coût réel d'une voiture en France : malus CO2, carte grise, contrôle technique et assurance"
+description: "Ce que la mensualité de financement ne montre pas : malus écologique, taxe régionale de carte grise, contrôle technique obligatoire et assurance responsabilité civile, avec les seuils 2026."
 relatedTool: /fr/tools/car-affordability/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Un bon guide financier ne se contente pas d’afficher un chiffre final. Il doit permettre de refaire le calcul, d’identifier chaque hypothèse et de voir quelle donnée peut inverser la conclusion.
+En France métropolitaine, le prix affiché en concession n'est que le point de départ du coût réel d'une voiture. Entre le malus écologique payé une fois à l'achat, la carte grise dont le tarif dépend de la région de résidence, le contrôle technique obligatoire tous les deux ans et l'assurance responsabilité civile imposée par la loi, plusieurs postes de dépense n'apparaissent jamais dans une mensualité de financement affichée par un vendeur.
 
-Ce guide distingue les données vérifiables du contrat ou du relevé des hypothèses modifiables. Commencez par les informations actuelles, puis comparez un scénario prudent, central et favorable sans transformer une estimation en garantie.
+## Le malus écologique : une taxe qui se déclenche dès la première immatriculation française
 
-## La décision que ce guide aide à préparer
+Pour tout véhicule neuf ou importé faisant l'objet d'une première immatriculation en France en 2026, le malus CO2 se déclenche dès 108 g/km de CO2 en cycle WLTP, contre 113 g/km en 2025, et grimpe jusqu'à un plafond de 80 000 € pour les véhicules les plus émetteurs ([service-public.fr — taxe sur les émissions de CO2, malus CO2](https://www.service-public.gouv.fr/particuliers/vosdroits/F35947), consulté le 2026-07-31). Depuis 2026, un malus au poids s'applique en plus et se cumule avec le malus CO2, à partir d'un seuil de 1 500 kg, toujours dans la limite du même plafond de 80 000 €. Un véhicule d'occasion déjà immatriculé en France n'est en revanche pas soumis à ce malus lors d'une revente : il ne s'applique qu'à la première immatriculation française du véhicule, ce qui explique pourquoi l'écart de prix entre un modèle neuf polluant et son équivalent d'occasion peut dépasser largement la seule décote liée à l'âge.
 
-Partir du revenu net disponible pour estimer un prix de voiture soutenable en intégrant assurance, énergie, entretien, stationnement et taxes, pas seulement le crédit.
+## La carte grise : une taxe régionale calculée au cheval fiscal
 
-## Les données à rassembler avant le calcul
+Le tarif du certificat d'immatriculation (carte grise) dépend du nombre de chevaux fiscaux du véhicule multiplié par le prix du cheval fiscal fixé par chaque conseil régional, avec des écarts qui peuvent dépasser 200 € pour un même véhicule de 7 CV selon la région de résidence ([service-public.fr — simulateur du prix du cheval fiscal](https://www.service-public.gouv.fr/simulateur/calcul/PrixCV), consulté le 2026-07-31). Ce montant s'ajoute au malus écologique éventuel et à une taxe de gestion, et doit être payé au moment de l'immatriculation, qu'il s'agisse d'un véhicule neuf ou d'occasion changeant de titulaire.
 
-Utilisez le relevé, le contrat, la fiche de paie, l’avis fiscal ou l’indice officiel le plus récent. Indiquez la date de chaque taux, frais ou règle susceptible d’évoluer.
+## Le contrôle technique : obligatoire tous les deux ans, prix libre selon le centre
 
-- Revenu net mensuel et engagements existants
-- Apport et valeur nette de reprise
-- Taux et durée du crédit
-- Assurance, carburant/recharge, entretien, taxes et stationnement
-- Plafond de budget transport modifiable
+Un véhicule particulier doit passer son premier contrôle technique avant ses quatre ans, puis tous les deux ans ensuite ([securite-routiere.gouv.fr — contrôle technique voiture](https://www.securite-routiere.gouv.fr/node/38/controle-technique-voiture), consulté le 2026-07-31). Contrairement à la carte grise, le prix du contrôle technique n'est pas fixé par l'État : chaque centre fixe librement son tarif, avec un écart significatif d'une région à l'autre. Un budget automobile réaliste doit donc provisionner cette dépense récurrente tous les deux ans, y compris la contre-visite éventuelle en cas de défaillance détectée, qui ajoute un coût et un délai supplémentaires si des réparations sont nécessaires avant la nouvelle visite.
 
-## Fonctionnement du modèle
+## L'assurance responsabilité civile : le seul poste réellement obligatoire par la loi
 
-`mensualité disponible = budget transport − coûts d’usage ; capital maximal = mensualité × (1 − (1+r)^−n) ÷ r`
+Contrairement au malus ou à la carte grise, l'assurance dite "au tiers" — la garantie responsabilité civile — est une obligation légale directe pour tout véhicule terrestre à moteur circulant ou même simplement stationné sur la voie publique, y compris quand il n'est pas utilisé ([Code des assurances, article L211-1](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048523650), consulté le 2026-07-31). Cette garantie minimale couvre les dommages causés à des tiers, mais pas les dommages subis par le conducteur responsable lui-même ni par son propre véhicule. Rouler sans cette assurance constitue une infraction pénale, indépendamment de la question de savoir si le véhicule est financé au comptant ou à crédit.
 
-Le moteur doit conserver toute la précision en interne et n’arrondir qu’à l’affichage. Il doit refuser les valeurs non finies, durées impossibles, nombres négatifs sans sens, divisions par zéro et plans qui ne s’amortissent pas. Les hypothèses doivent être visibles afin de permettre la reproduction du calcul.
+## Exemple : un budget mensuel complet pour un véhicule à 28 000 €
 
-Le moteur conserve la précision complète et n’arrondit qu’à l’affichage. Séparez les flux de trésorerie, le calendrier, les frais, les impôts et les valeurs futures incertaines afin de rendre le calcul vérifiable.
+Un acheteur avec 3 200 € de revenus nets mensuels envisage un véhicule à 28 000 €. Au-delà de la mensualité de financement, il doit budgétiser l'assurance responsabilité civile ou tous risques, le carburant ou la recharge électrique, l'entretien courant, le stationnement s'il vit en zone urbaine dense, la carte grise au moment de l'achat, et le contrôle technique provisionné sur deux ans. En ne retenant qu'un plafond de 15 % du revenu net pour l'ensemble transport — crédit et coûts d'usage cumulés — soit 480 €, et en estimant les coûts d'usage récurrents à 260 € par mois, il reste 220 € disponibles pour la seule mensualité de financement, un montant très inférieur à ce qu'un vendeur pourrait suggérer en ne parlant que du prix du véhicule.
 
-## Exemple reproductible
+## Neuf, occasion, ou location : le malus et la carte grise ne pèsent pas pareil
 
-Exemple : 3 200 € nets, plafond transport de 15 % et 260 € de coûts d’usage laissent 220 € pour le crédit.
+Un véhicule d'occasion déjà immatriculé en France échappe au malus écologique lors de la revente, ce qui peut représenter une économie de plusieurs milliers d'euros par rapport à un modèle neuf équivalent au-dessus du seuil de déclenchement. En location longue durée (LLD) ou location avec option d'achat (LOA), le malus est généralement intégré au loyer mensuel par le loueur plutôt que payé en une fois, ce qui change la structure du budget sans changer le coût total supporté in fine par l'utilisateur.
 
-L’exemple est uniquement illustratif. La page publiée doit proposer des boutons pour charger l’exemple et réinitialiser les champs, tout en permettant la saisie libre.
+## Foire aux questions
 
-## Comparer trois scénarios plutôt qu’un seul
+### Le malus écologique s'applique-t-il aussi aux voitures d'occasion ?
 
-Ne modifiez qu’une variable incertaine à la fois. Vous mesurez ainsi la sensibilité réelle sans laisser une hypothèse optimiste masquer un autre risque.
+Non, sauf pour une importation depuis l'étranger constituant une première immatriculation française : une revente d'un véhicule déjà immatriculé en France n'est pas soumise au malus.
 
-- **Prudent:** Retenez des coûts plus élevés, une progression plus lente ou un revenu/rendement plus faible. Augmenter assurance et entretien.
-- **Central:** Utilisez les chiffres vérifiés et le comportement le plus probable. Raccourcir la durée du crédit.
-- **Favorable:** Testez une amélioration plausible, clairement présentée comme scénario et non comme prévision. Réduire l’apport pour conserver une réserve.
+### Le prix de la carte grise est-il le même partout en France ?
 
-## Erreurs fréquentes qui faussent le résultat
+Non, le prix du cheval fiscal est fixé par chaque conseil régional et peut varier de plus du double entre deux régions pour un même véhicule.
 
-- Prendre la mensualité publicitaire pour le coût complet
-- Allonger la durée jusqu’à rendre une voiture chère apparemment abordable
-- Mettre assurance et stationnement à zéro sans devis
-- Compter la reprise sans déduire le crédit restant
+### Le contrôle technique a-t-il un tarif fixé par l'État ?
 
-## Interprétation pour la France
+Non, chaque centre de contrôle technique fixe librement son tarif ; seule la fréquence (premier contrôle avant quatre ans, puis tous les deux ans) est encadrée par la réglementation.
 
-Ajoutez assurance, carburant ou recharge, entretien, stationnement, carte grise et éventuel malus. Une LOA ou LLD nécessite un modèle différent si la valeur résiduelle et le kilométrage sont contractuels.
+### Puis-je rouler avec une assurance auto qui ne couvre pas mes propres dommages ?
 
-## Méthode pratique étape par étape
+Oui, l'assurance responsabilité civile (au tiers) est le seul niveau de garantie légalement obligatoire ; les garanties dommages ou tous risques restent optionnelles, à la charge de l'assuré s'il souhaite être couvert pour son propre véhicule.
 
-1. Définissez la question précise et l’horizon de comparaison.
-2. Saisissez d’abord les chiffres actuels vérifiables.
-3. Vérifiez que le modèle reproduit une mensualité, un solde ou un budget connu.
-4. Enregistrez les scénarios prudent, central et favorable.
-5. Repérez la première valeur qui inverse la conclusion : c’est le seuil d’équilibre.
-6. Contrôlez contrat, fiscalité et critères applicables avant d’agir.
+### Le malus au poids s'ajoute-t-il au malus CO2 ou le remplace-t-il ?
 
-## Interpréter le résultat sans en faire une promesse
+Il s'y ajoute, dans la limite du même plafond global de 80 000 €, dès qu'un véhicule dépasse le seuil de poids fixé, indépendamment de son niveau d'émission de CO2.
 
-Privilégiez une formulation conditionnelle : « Avec ces données et hypothèses, l’option A présente le coût modélisé le plus faible. » Le calculateur ne connaît pas toutes les clauses, règles d’octroi, évolutions de comportement ou besoins de trésorerie.
+## Estimer votre budget automobile complet
 
-## Questions fréquentes
-
-### Pourquoi le résultat peut-il différer du relevé ou de l’offre ?
-
-L’organisme peut utiliser d’autres dates, méthodes de capitalisation, frais, impôts ou arrondis. Reprenez les conditions exactes et comparez l’échéancier période par période.
-
-### Quelle donnée influence généralement le plus le résultat ?
-
-Testez d’abord le taux, la durée, le versement régulier et les frais ponctuels. L’analyse de sensibilité doit montrer la variable la plus déterminante.
-
-### Les valeurs initiales sont-elles des moyennes de marché ?
-
-Non. Ce sont des exemples modifiables, jamais des données de marché actuelles.
-
-### Le résultat garantit-il un crédit, une économie ou un rendement ?
-
-Non. Il s’agit d’un modèle pédagogique, pas d’une décision bancaire, d’un devis contractuel ou d’une promesse de placement.
-
-### Quand faut-il refaire le calcul ?
-
-Après toute modification importante du taux, du solde, du revenu, d’une charge récurrente, d’un indice officiel ou d’une clause.
-
-## Ouvrir le calculateur
-
-Ouvrez le calculateur associé, reproduisez l’exemple, puis remplacez chaque valeur par une donnée vérifiable.
-
-[Calculateur de budget automobile et coût mensuel total](/fr/tools/car-affordability/)
-
-## Limites éditoriales et sécurité
-
-Contenu pédagogique et estimatif uniquement ; il ne constitue pas un conseil financier, fiscal, juridique, bancaire ou d’investissement personnalisé. N’insérez aucune donnée personnelle dans une URL partageable.
-
-## Sources officielles à revérifier avant publication
-
-- [Insee — convertisseur de pouvoir d’achat](https://www.insee.fr/fr/information/2417794)
-- [Insee — définition de l’IPC](https://www.insee.fr/fr/metadonnees/definition/c1557)
-- [HCSF — mesure relative à l’octroi de crédits immobiliers](https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers)
-
-La rédaction doit confirmer, le jour du déploiement, que chaque source est toujours à jour et remplacer les pages générales par des documents officiels plus précis lorsqu’ils existent.
+Ouvrez le [calculateur de budget automobile et coût mensuel total](/fr/tools/car-affordability/), reproduisez l'exemple des 28 000 € ci-dessus, puis remplacez chaque valeur par votre revenu net, vos coûts d'usage réels et le malus applicable à votre véhicule. Ce contenu est pédagogique et estimatif ; il ne remplace pas un devis d'assurance ni une simulation officielle du malus pour un modèle précis. N'insérez aucune donnée identifiable dans un lien de résultat partagé. Les seuils cités proviennent de [service-public.fr](https://www.service-public.gouv.fr/particuliers/vosdroits/F35947) et de [securite-routiere.gouv.fr](https://www.securite-routiere.gouv.fr/node/38/controle-technique-voiture) (consultés le 2026-07-31) et sont révisés chaque année en loi de finances.

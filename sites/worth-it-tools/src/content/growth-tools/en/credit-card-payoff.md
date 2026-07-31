@@ -1,83 +1,67 @@
-﻿---
+---
 contentType: tool
 toolSlug: credit-card-payoff
 locale: en
 title: "Credit Card Payoff & Interest Calculator"
-description: "Estimate payoff time, total interest and the payment needed for a target date, including promotional APR and new charges."
+description: "Estimate payoff time and total interest for a fixed payment or a target payoff date, including promotional APR expiry and new monthly charges."
 relatedArticle: /en/credit-card-minimum-payment-trap/
-lastReviewed: 2026-07-23
+lastReviewed: 2026-07-31
 draft: false
 ---
 
-Estimate payoff time, total interest and the payment needed for a target date, including promotional APR and new charges.
+Enter your statement balance, APR, and either a fixed monthly payment or a target payoff month to see how long it will really take and how much interest you'll pay — including what happens if new charges keep hitting the card.
 
-## How to use this calculator
+## Before you enter numbers
 
-1. Start with the latest statement, contract, payslip or official index relevant to the calculation.
-2. Replace every default with a value you can verify. Defaults are examples, not recommendations or market averages.
-3. Calculate the baseline first, then save at least a conservative, base and favorable scenario.
-4. Review the detailed breakdown and the break-even input instead of relying only on the headline verdict.
-5. Export or copy only non-sensitive results. Never include identifying account information.
+Use the exact balance, APR, and minimum-payment formula from your latest statement, not a rounded estimate. If you have a promotional rate, note both the promotional APR and its expiration month so the calculator can switch to the standard rate at the right point.
 
-## Calculation method
-
+## Formula
 
 `ending balance = opening balance + new charges + interest + fees − payment`
 
-The implementation must preserve full precision internally and round only for display. It must reject non-finite values, impossible terms, negative balances where they are not meaningful, division by zero and plans that do not amortize. The result panel must show the assumptions used so another person can reproduce the calculation.
+The engine keeps full precision internally and flags any plan where the payment doesn't exceed the interest accrued — a mathematical sign that the balance won't actually shrink under those inputs.
 
 ## Worked example
 
-With a $5,000 balance at 20% APR, compare a fixed $200 payment with a 24-month target. Turning on $100 of new monthly charges demonstrates why a plan may stop amortizing.
+A $5,000 balance at 20% APR paid at a fixed $200 a month clears in roughly 30 months with substantially less total interest than a declining minimum payment on the same balance. Turning on $100 of new monthly charges shows how quickly a payoff plan can stall.
 
-The example is illustrative. The published page must include a “load example” button and a “reset” button, while leaving the user free to enter different values.
+## Reading the CARD Act box on your own statement
 
-## Local notes
+Every U.S. credit card statement discloses, under the CARD Act, how long minimum payments alone would take and what a 36-month fixed payment would be. Enter that same fixed-payment figure here to see the full amortization schedule and total interest, not just the summary numbers on the statement.
 
-Minimum-payment formulas differ by issuer and account. Use the minimum shown on the statement rather than treating a generic percentage as a legal rule. Promotional balances may receive different payment allocation, so model separate balances when accuracy matters.
+## Limits and privacy
 
-## Limits and verification
+This tool provides a general educational estimate, not individualized financial, tax, legal, or credit counseling advice. It does not display "guaranteed," "safe," or similar claims about outcomes.
 
-This page provides a general educational estimate, not individualized financial, tax, legal, lending, or investment advice.
-
-Before acting, confirm the current rate, fees, taxes, payment rules, and contract terms with the relevant provider or public authority.
-
-The calculation runs in your browser. Do not place personal account numbers, names, addresses, or other identifying information in shareable URLs.
-
-The model intentionally separates mathematical outputs from legal or underwriting conclusions. It must not display “approved”, “safe”, “guaranteed”, “best investment”, or similar claims. If a threshold is shown, label it as an editable illustration or a dated public rule with a source and exceptions.
+The calculation runs in your browser. Do not put account numbers, card numbers, or other identifying information into a shareable link.
 
 ## Related guide
 
-Read [The Minimum Payment Trap: Why Credit Card Debt Lasts So Long](/en/credit-card-minimum-payment-trap/)for a step-by-step explanation, scenario design and verification checklist.
+Read [Why Your Credit Card Statement Warns You About the Minimum Payment](/en/credit-card-minimum-payment-trap/) for the CARD Act disclosure rules, how issuers calculate minimum payments, and when a nonprofit credit counselor is the better next step.
 
 ## Frequently asked questions
 
-### Why can the balance grow while I pay?
+### Why does my balance grow even though I'm paying every month?
 
-New charges and interest can exceed the payment.
+New charges plus accrued interest can exceed your payment in a given cycle — the result panel flags this so it isn't hidden inside a single summary number.
 
-### Is the minimum payment formula universal?
+### Is the minimum-payment formula universal across issuers?
 
-No. Use the statement amount and issuer terms.
+No. Use the exact minimum shown on your statement; formulas vary by issuer and sometimes by account.
 
-### Can I model a 0% promotion?
+### Can I model a 0% promotional period?
 
-Yes, enter the promotional rate and number of months, then the regular rate.
+Yes — enter the promotional rate and its length, then the standard rate that applies afterward.
 
 ### What happens after the promotion ends?
 
-The regular rate is applied to the remaining modeled balance.
+The standard APR applies to the remaining modeled balance from that month forward.
 
 ### Does this include late fees?
 
-Only if you add them to the balance or recurring charges.
+Only if you add them explicitly as a recurring charge; the base formula doesn't assume any fee amount.
 
+## Sources
 
-## Sources to verify before publication
-
-- [Consumer Financial Protection Bureau — debt-to-income definition](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/)
-- [Consumer Financial Protection Bureau — mortgage payoff amount](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/)
-- [U.S. Bureau of Labor Statistics — CPI inflation calculator](https://www.bls.gov/data/inflation_calculator.htm)
-- [Investor.gov — compound interest calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator)
-
-The editor must verify that each source is still current on the deployment date and replace general landing pages with a more specific official document when available.
+- [Consumer Financial Protection Bureau — Appendix M1, Repayment Disclosures (Regulation Z)](https://www.consumerfinance.gov/rules-policy/regulations/1026/m1/), reviewed 2026-07-31
+- [Consumer Action — "Minimum Payment Warning" fact sheet](https://www.consumer-action.org/helpdesk/articles/minimum_payment_warning), reviewed 2026-07-31

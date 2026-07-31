@@ -64,3 +64,21 @@ jobs:
       - run: sleep 60 && node sites/worth-it-tools/scripts/submit-indexnow.mjs
         env:
           INDEXNOW_KEY: a0971145939fb4fcb7b5ff0e736761fc
+
+  gsc-submit:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # 2026-08-01（CEO 派工）：worthcalc 之前完全沒有 GSC 提交步驟，sitemap
+      # 停在 2026-07-22 一次性手動提交後從未再送出。這裡補上，樣式抄自
+      # funnytools 修好後的 gsc-submit-sitemaps.mjs（domain property
+      # sc-domain:worthcalc.win，不是 URL-prefix，避免 403）。不加
+      # "if secret exists" 這種靜默略過的守門條件——缺憑證要讓 job 失敗、
+      # 讓人看到，而不是悄悄跳過（CLAUDE.md 紅線第 6 條）。
+      - run: sleep 60 && node sites/worth-it-tools/scripts/gsc-submit-sitemap.mjs
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}

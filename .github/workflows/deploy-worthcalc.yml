@@ -36,7 +36,14 @@ jobs:
           SITE_URL: https://worthcalc.win
           PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
           PUBLIC_ADSENSE_CLIENT: ${{ vars.WORTHCALC_ADSENSE_CLIENT }}
-          PUBLIC_GSC_VERIFICATION: ${{ vars.WORTHCALC_GSC_VERIFICATION }}
+          # No PUBLIC_GSC_VERIFICATION here: the WORTHCALC_GSC_VERIFICATION repo
+          # variable was never set, and worthcalc.win is verified in Search
+          # Console as a domain property via a DNS TXT record (see the
+          # google-site-verification TXT record on the apex domain and the
+          # sc-domain:worthcalc.win usage in the gsc-submit job below), which
+          # already covers the whole domain. The HTML-tag path in SEO.astro
+          # (PUBLIC_GSC_VERIFICATION env var) still exists for future use if a
+          # URL-prefix property is ever added; set the repo variable again if so.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: sites/worth-it-tools/dist

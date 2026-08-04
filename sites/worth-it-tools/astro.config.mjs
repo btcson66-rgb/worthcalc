@@ -1,10 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { createSitemapLastmodResolver } from './scripts/sitemap-lastmod.mjs';
 
 // The canonical production URL. Override per-site via the SITE_URL env var.
 // MUST be an absolute origin (no trailing path) for sitemap + canonical URLs.
 const SITE_URL = process.env.SITE_URL || 'https://worthcalc.win';
+const resolveSitemapLastmod = createSitemapLastmodResolver();
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,6 +35,10 @@ export default defineConfig({
       // /en/ remains available for old links, but / is the canonical English
       // homepage. Hreflang is emitted in each page head by src/lib/seo.ts.
       filter: (page) => page !== `${SITE_URL}/en/`,
+      serialize: (item) => ({
+        ...item,
+        lastmod: resolveSitemapLastmod(item.url).lastmod,
+      }),
     }),
   ],
 });

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/postbuild-sitemaps.mjs",
     "preview": "astro preview",
     "typecheck": "astro check",
     "lint": "eslint . --ext .js,.mjs,.ts,.astro",
@@ -18,6 +18,7 @@
     "check:all-locales": "node scripts/check-all-localized-routes.mjs",
     "check:growth-content": "node scripts/check-growth-content.mjs",
     "check:growth-release": "node scripts/check-growth-release.mjs",
+    "gsc:sitemap-health": "node scripts/gsc-submit-sitemaps.mjs --health",
     "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs",
     "audit:brief-coverage": "node scripts/audit-editorial-brief-coverage.mjs",
     "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",

@@ -5,6 +5,9 @@ export const prerender = true;
 
 export const GET = ({ site }: APIContext): Response => {
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
+  // The post-build sitemap hardening step reads the generated sitemap index
+  // and appends one Sitemap line per actual child file. That keeps this list
+  // correct automatically when the integration eventually emits sitemap-1.xml.
   const body = [
     'User-agent: *',
     'Allow: /',

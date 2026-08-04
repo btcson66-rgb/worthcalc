@@ -25,6 +25,12 @@ jobs:
         working-directory: sites/worth-it-tools
     steps:
       - uses: actions/checkout@v4
+        with:
+          # scripts/sitemap-lastmod.mjs derives each URL's lastmod from the git
+          # author date of its source file. The default shallow clone exposes a
+          # single commit, which would collapse all 341 URLs onto the build date
+          # — the exact bug this change exists to remove.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -86,6 +92,13 @@ jobs:
       # sc-domain:worthcalc.win，不是 URL-prefix，避免 403）。不加
       # "if secret exists" 這種靜默略過的守門條件——缺憑證要讓 job 失敗、
       # 讓人看到，而不是悄悄跳過（CLAUDE.md 紅線第 6 條）。
-      - run: sleep 60 && node sites/worth-it-tools/scripts/gsc-submit-sitemap.mjs
+      #
+      # 2026-08-05：改指向 gsc-submit-sitemaps.mjs（複數）。舊的單數版只送
+      # sitemap-index.xml 且送完不回查，所以「index 送出成功」與「Google 真的
+      # 下載過」被混為一談——實測三站全部 isPending 且沒有 lastDownloaded 欄位
+      # 長達數週，卻沒有任何一支腳本會為此失敗。新版會送 index 與每個子
+      # sitemap、PUT 後逐筆回讀狀態，並在任一筆 pending 超過 14 天且從未被
+      # 下載時 exit 1。
+      - run: sleep 60 && node sites/worth-it-tools/scripts/gsc-submit-sitemaps.mjs
         env:
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}

@@ -1,34 +1,34 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import DecisionGuide from '../../../components/DecisionGuide.astro';
-import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
-const decisionGuide = costcoGuides.en;
-if (!decisionGuide) throw new Error('Missing English membership guide');
 const title = 'Costco Membership Calculator: Gold Star vs Executive';
-const description = 'Costco membership calculator: compare Gold Star and Executive. Break-even near $434/year at 15% savings; Executive pays off near $3,250/year eligible spend.';
+const description = 'Compare Gold Star and Executive with a Costco membership calculator that shows the eligible-spend break-even, reward cap, exclusions, and tier math.';
 const faq = [
   {
-    question: 'How does this Costco executive membership calculator find the break-even point?',
-    answer: 'The calculator divides the annual fee by your expected savings rate and eligible reward rate. With a $65 fee and 15% savings, break-even is about $36 per month.',
+    question: 'How does this Costco Executive membership calculator find the break-even spend?',
+    answer: 'It subtracts the Gold Star fee from the Executive fee, then divides that extra fee by the reward rate you enter. The result is eligible annual spend, not total Costco spend. The calculator also checks whether the entered reward cap is high enough for the upgrade ever to recover its extra fee.',
+  },
+  {
+    question: 'Which purchases count toward the Executive reward?',
+    answer: 'Under the U.S. terms verified August 5, 2026, the reward is approximately 2% of qualifying pre-tax purchases after refunds. Most merchandise bought through eligible U.S. and Canadian Costco channels can count for U.S. and Canadian residents, but only purchases by the Primary and active Primary Household Cardholder apply. Check the current terms because exclusions can change.',
+  },
+  {
+    question: 'What does not count toward the Costco Executive reward?',
+    answer: 'Current U.S. exclusions include gasoline, food-court purchases, membership fees, Costco Shop Cards, shipping, sales tax and other listed fees. Tobacco, alcohol and prescriptions have location-specific exclusions; several third-party services and travel charges are also excluded. Enter only spending that qualifies under your own membership terms.',
+  },
+  {
+    question: 'Is there an annual cap on the Executive reward?',
+    answer: 'Yes. Costco\'s U.S. terms verified August 5, 2026 state that the annual 2% Reward is capped at $1,250 in a 12-month period. That published cap is the calculator default, but it remains editable so the math does not silently assume that every market or future membership year uses the same limit.',
+  },
+  {
+    question: 'What if my reward is less than the Executive upgrade fee?',
+    answer: 'Costco says the reward is not guaranteed to cover the upgrade fee. Under the U.S. terms verified August 5, 2026, receiving a refund for the current Executive upgrade fee requires canceling or downgrading to Gold Star or Business Membership. Any reward already issued or accrued is subtracted from the refund, and reward above the refund amount is forfeited. Confirm the amount and process with Costco before acting.',
   },
   {
     question: 'Does Executive always beat Gold Star?',
-    answer: 'No. Executive needs enough eligible spending for the 2% reward to overcome the higher annual fee. The recommendation compares both tiers from the same monthly spend.',
-  },
-  {
-    question: 'What savings rate should I use?',
-    answer: 'Use the discount you realistically get versus your usual stores. The default 15% is an assumption, not a promise that every item is cheaper.',
-  },
-  {
-    question: 'Should gas, travel, and services be included?',
-    answer: 'Include categories only if they are part of your normal spending and eligible for the savings or rewards you are modeling.',
-  },
-  {
-    question: 'Is this exact for every Costco rule?',
-    answer: 'No. It is a planning calculator. Official membership terms, eligible categories, reward exclusions, and caps should be checked before buying.',
+    answer: 'No. The upgrade wins this calculator only when its capped reward exceeds the difference between the two entered fees. Shopping savings affect whether either membership beats having no membership, but they do not make the Executive reward larger.',
   },
 ];
 const related = [
@@ -43,69 +43,149 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   <p class="intro">
-    <strong>At the calculator's default 15% savings assumption, Gold Star breaks even at about $434 a year ($36 a month) of Costco spending.</strong>
-    Executive breaks even against no membership near $765 a year when the 2% reward is included, but it only beats Gold Star at about $3,250 in eligible annual spending. Change the assumptions below to test your own prices, purchases, and reward eligibility.
+    A Costco membership decision has two different break-even tests. First, do the price savings on purchases you already planned cover the basic membership fee? Second, does the Executive reward on <em>eligible</em> purchases cover the extra fee over Gold Star? This calculator keeps those questions separate and shows every step.
   </p>
+
+  <aside class="terms-note" aria-label="Published U.S. terms used as calculator defaults">
+    <strong>U.S. defaults, verified August 5, 2026:</strong> Gold Star $65 a year, Executive $130 a year, an approximately 2% reward on qualifying purchases, and a $1,250 reward cap per 12-month period. Fees can be subject to sales tax. Every figure remains editable; use the renewal offer and rules that apply to your membership.
+  </aside>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="costco-inputs">
-      <h2 id="costco-inputs">Inputs</h2>
+      <h2 id="costco-inputs">Enter your fees and spending</h2>
       <div class="input-grid">
         <div class="field">
-          <label for="tier">Membership tier</label>
-          <select id="tier">
-            <option value="gold">Gold Star - $65/year</option>
-            <option value="executive">Executive - $130/year</option>
-          </select>
-          <p class="helper">Choose the tier you are evaluating.</p>
-        </div>
-        <div class="field">
-          <label for="monthly-spend">Monthly Costco spend</label>
+          <label for="monthly-spend">Total monthly Costco spend</label>
           <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="10" value="250" />
-          <p class="helper">Your realistic monthly warehouse spend.</p>
+          <p class="helper">Include only purchases you would make anyway. This drives the separate shopping-savings estimate.</p>
         </div>
         <div class="field">
-          <label for="savings-rate">Assumed savings vs regular stores (%)</label>
+          <label for="eligible-annual-spend">Reward-eligible annual spend</label>
+          <input id="eligible-annual-spend" type="number" inputmode="decimal" min="0" step="100" placeholder="Enter eligible spend" />
+          <p class="helper">Start with receipts or your account estimate, then remove excluded purchases. Do not copy total spend here automatically.</p>
+        </div>
+        <div class="field">
+          <label for="gold-fee">Gold Star annual fee</label>
+          <input id="gold-fee" type="number" inputmode="decimal" min="0" step="1" value="65" />
+          <p class="helper">Published U.S. fee verified August 5, 2026; replace it if your renewal amount differs.</p>
+        </div>
+        <div class="field">
+          <label for="executive-fee">Executive annual fee</label>
+          <input id="executive-fee" type="number" inputmode="decimal" min="0" step="1" value="130" />
+          <p class="helper">Published U.S. fee verified August 5, 2026; the calculator derives the upgrade fee difference.</p>
+        </div>
+        <div class="field">
+          <label for="savings-rate">Assumed savings vs other stores (%)</label>
           <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
-          <p class="helper">Editable assumption for price savings.</p>
+          <p class="helper">An editable planning assumption from the existing calculator, not a Costco price claim.</p>
         </div>
         <div class="field">
-          <label for="reward-rate">Executive reward (%)</label>
+          <label for="reward-rate">Executive reward rate (%)</label>
           <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
-          <p class="helper">Used for Executive tier comparisons.</p>
+          <p class="helper">Current U.S. published rate verified August 5, 2026; apply it only to eligible spend.</p>
+        </div>
+        <div class="field">
+          <label for="reward-cap">Annual reward cap</label>
+          <input id="reward-cap" type="number" inputmode="decimal" min="0" step="50" value="1250" />
+          <p class="helper">Current U.S. published cap for a 12-month period, verified August 5, 2026.</p>
         </div>
       </div>
     </section>
 
     <section class="result-panel" aria-live="polite" aria-labelledby="costco-result">
-      <p class="eyebrow">Verdict</p>
-      <p id="costco-result" class="verdict">Enter your monthly spend to see if membership pays off.</p>
+      <p class="eyebrow">Tier comparison</p>
+      <p id="costco-result" class="verdict">Enter eligible annual spend to compare Gold Star and Executive.</p>
       <div class="metric-grid">
-        <p class="metric"><span>Break-even spend</span><strong id="break-even">$0/month</strong></p>
-        <p class="metric"><span>Annual net benefit</span><strong id="net-benefit">$0</strong></p>
-        <p class="metric"><span>Estimated reward</span><strong id="reward">$0</strong></p>
-        <p class="metric"><span>Recommended tier</span><strong id="recommended-tier">Gold Star</strong></p>
+        <p class="metric"><span>Extra Executive fee</span><strong id="upgrade-fee">$0</strong></p>
+        <p class="metric"><span>Upgrade break-even eligible spend</span><strong id="upgrade-break-even">$0/year</strong></p>
+        <p class="metric"><span>Your capped Executive reward</span><strong id="reward">$0</strong></p>
+        <p class="metric"><span>Reward minus upgrade fee</span><strong id="upgrade-value">$0</strong></p>
+        <p class="metric"><span>Gold Star net benefit</span><strong id="gold-net">$0</strong></p>
+        <p class="metric"><span>Executive net benefit</span><strong id="executive-net">$0</strong></p>
+        <p class="metric"><span>Basic break-even annual spend</span><strong id="basic-break-even">$0/year</strong></p>
+        <p class="metric"><span>Eligible spend that reaches cap</span><strong id="cap-threshold">$0/year</strong></p>
       </div>
     </section>
   </div>
 
-  <section class="explanation" aria-labelledby="costco-how">
-    <h2 id="costco-how">How it works</h2>
+  <section class="explanation" aria-labelledby="costco-math">
+    <h2 id="costco-math">The calculation, line by line</h2>
+    <ol class="formula-list">
+      <li><strong>Extra Executive fee</strong> = Executive annual fee − Gold Star annual fee.</li>
+      <li><strong>Upgrade break-even eligible spend</strong> = extra Executive fee ÷ entered reward rate.</li>
+      <li><strong>Executive reward</strong> = the lower of eligible annual spend × reward rate, or the entered annual cap.</li>
+      <li><strong>Executive advantage over Gold Star</strong> = capped reward − extra Executive fee.</li>
+      <li><strong>Basic membership break-even</strong> = Gold Star fee ÷ your assumed shopping-savings rate.</li>
+    </ol>
     <p>
-      The calculator estimates yearly savings as monthly spend times 12 times your assumed savings rate. Executive also receives the reward percentage on eligible spend. Net benefit is savings plus rewards minus the annual fee.
-    </p>
-    <p>
-      Break-even monthly spend is the point where estimated savings and rewards equal the membership fee. If your regular prices are not actually higher than Costco, lower the savings rate.
+      Shopping savings are applied to total planned spend when estimating whether either tier beats no membership. The Executive comparison uses only reward-eligible spend. Keeping those bases separate prevents excluded gas, food-court, fee, tax, or third-party purchases from making the upgrade look better than it is.
     </p>
   </section>
 
-  <DecisionGuide content={decisionGuide} />
+  <section class="explanation" aria-labelledby="costco-eligible">
+    <h2 id="costco-eligible">What belongs in eligible annual spend</h2>
+    <p>
+      Under the U.S. terms checked on August 5, 2026, the reward is approximately 2% of qualifying pre-tax purchases after refunds. Most eligible merchandise bought through Costco warehouse registers and Costco websites in the U.S. and Canada can count for U.S. and Canadian residents, along with qualifying Costco Travel purchases after travel is completed. Only purchases by the Primary and active Primary Household Cardholder apply.
+    </p>
+    <p>
+      Do not include gasoline, food-court purchases, membership fees, Costco Shop Cards, shipping, sales tax, listed deposits or other excluded fees. Restrictions also apply to tobacco, alcohol in named states, prescriptions in certain states, third-party services, and several travel charges. Purchases made before the Executive upgrade do not earn the reward. Use Costco's current full exclusion list rather than treating this summary as exhaustive.
+    </p>
+  </section>
+
+  <section class="explanation" aria-labelledby="costco-cap-refund">
+    <h2 id="costco-cap-refund">How the cap and downgrade path affect the decision</h2>
+    <p>
+      The cap limits the reward, not the eligible purchases themselves. Once the modeled reward reaches the entered cap, more eligible spend adds no Executive reward in this calculation. If the cap is below the extra Executive fee, the calculator marks the upgrade break-even as unreachable under those inputs.
+    </p>
+    <p>
+      A reward below the upgrade fee does not produce an automatic payment. Costco's U.S. terms say a refund of the current Executive upgrade fee requires canceling or downgrading to Gold Star or Business Membership. Any issued or accrued reward is subtracted from that refund, and reward exceeding the refund is forfeited. Ask Costco to confirm the actual refund before relying on it; the calculator does not add a refund to projected value.
+    </p>
+  </section>
+
+  <section class="explanation" aria-labelledby="costco-checklist">
+    <h2 id="costco-checklist">Before choosing a tier</h2>
+    <ul>
+      <li>Use the fee shown on your own join or renewal screen, including any applicable tax.</li>
+      <li>Separate planned purchases from spending caused by the membership, bulk waste, storage costs, and extra travel.</li>
+      <li>Build eligible spend from qualifying transactions, not from the warehouse total on a card statement.</li>
+      <li>Compare the calculator's reward with Costco's signed-in reward estimate when available.</li>
+      <li>Recheck the official terms before upgrading, renewing, downgrading, or requesting a refund.</li>
+    </ul>
+  </section>
+
+  <section class="sources" aria-labelledby="costco-sources">
+    <h2 id="costco-sources">Official sources</h2>
+    <ul>
+      <li><a href="https://customerservice.costco.com/app/answers/answer_view/a_id/1008254/loc/en_US">Costco Customer Service — Executive 2% Reward FAQs</a></li>
+      <li><a href="https://customerservice.costco.com/app/answers/detail/a_id/1205/~/what-is-an-executive-membership">Costco Customer Service — What is an Executive Membership?</a></li>
+      <li><a href="https://www.costco.com/f/-/executive-rewards">Costco — Executive Rewards terms and exclusions</a></li>
+    </ul>
+    <p class="source-date">Terms and figures on this page were last checked August 5, 2026. Costco can change fees, eligibility, exclusions, caps, and refund procedures.</p>
+  </section>
 
   <style>
     .intro,
     .helper,
-    .explanation {
+    .explanation,
+    .source-date {
       color: var(--color-muted);
+    }
+
+    .terms-note,
+    .input-panel,
+    .result-panel,
+    .explanation,
+    .sources {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .terms-note {
+      margin: 1rem 0;
+      border-left: 4px solid var(--color-accent);
     }
 
     .calculator-grid,
@@ -115,14 +195,9 @@ const related = [
       gap: 1rem;
     }
 
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
+    .explanation,
+    .sources {
+      margin-top: 1rem;
     }
 
     .field label {
@@ -151,9 +226,9 @@ const related = [
 
     .verdict {
       margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 750;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .metric {
@@ -175,16 +250,23 @@ const related = [
     }
 
     .metric strong {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+    }
+
+    .formula-list li + li,
+    .explanation li + li,
+    .sources li + li {
+      margin-top: 0.55rem;
     }
 
     @media (min-width: 760px) {
       .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
         align-items: start;
       }
 
-      .input-grid {
+      .input-grid,
+      .metric-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -192,31 +274,26 @@ const related = [
 
   <script>
     import { formatCurrency } from '../../../lib/money';
-    import { bindPersistentField, getItem, setItem } from '../../../lib/storage';
-
-    type TierKey = 'gold' | 'executive';
-    interface Tier {
-      key: TierKey;
-      name: string;
-      fee: number;
-    }
+    import { bindPersistentField } from '../../../lib/storage';
 
     const locale = 'en';
-    const tiers: Record<TierKey, Tier> = {
-      gold: { key: 'gold', name: 'Gold Star', fee: 65 },
-      executive: { key: 'executive', name: 'Executive', fee: 130 },
-    };
-    const tier = byId<HTMLSelectElement>('tier');
-    const monthlySpend = byId<HTMLInputElement>('monthly-spend');
+    const totalMonthlySpend = byId<HTMLInputElement>('monthly-spend');
+    const eligibleAnnualSpend = byId<HTMLInputElement>('eligible-annual-spend');
+    const goldFee = byId<HTMLInputElement>('gold-fee');
+    const executiveFee = byId<HTMLInputElement>('executive-fee');
     const savingsRate = byId<HTMLInputElement>('savings-rate');
     const rewardRate = byId<HTMLInputElement>('reward-rate');
+    const rewardCap = byId<HTMLInputElement>('reward-cap');
+    const inputs = [totalMonthlySpend, eligibleAnnualSpend, goldFee, executiveFee, savingsRate, rewardRate, rewardCap];
     const verdict = byId<HTMLElement>('costco-result');
-    const breakEven = byId<HTMLElement>('break-even');
-    const netBenefit = byId<HTMLElement>('net-benefit');
-    const reward = byId<HTMLElement>('reward');
-    const recommendedTier = byId<HTMLElement>('recommended-tier');
-    const fields = [monthlySpend, savingsRate, rewardRate];
-    const tierStorageKey = 'costco-membership:tier';
+    const upgradeFeeOutput = byId<HTMLElement>('upgrade-fee');
+    const upgradeBreakEvenOutput = byId<HTMLElement>('upgrade-break-even');
+    const rewardOutput = byId<HTMLElement>('reward');
+    const upgradeValueOutput = byId<HTMLElement>('upgrade-value');
+    const goldNetOutput = byId<HTMLElement>('gold-net');
+    const executiveNetOutput = byId<HTMLElement>('executive-net');
+    const basicBreakEvenOutput = byId<HTMLElement>('basic-break-even');
+    const capThresholdOutput = byId<HTMLElement>('cap-threshold');
 
     function byId<T extends HTMLElement>(id: string): T {
       const element = document.getElementById(id);
@@ -224,68 +301,56 @@ const related = [
       return element as T;
     }
 
-    function readNumber(input: HTMLInputElement): number {
-      const value = Number(input.value);
-      return Number.isFinite(value) ? value : 0;
+    function readNonNegative(input: HTMLInputElement): number {
+      const parsed = Number(input.value);
+      return Number.isFinite(parsed) ? Math.max(0, parsed) : 0;
     }
 
-    function tierRewardRate(selectedTier: Tier): number {
-      return selectedTier.key === 'executive' ? Math.max(0, readNumber(rewardRate)) / 100 : 0;
-    }
-
-    function netFor(monthly: number, selectedTier: Tier): { net: number; rewardValue: number } {
-      const annualSpend = Math.max(0, monthly) * 12;
-      const savings = annualSpend * (Math.max(0, readNumber(savingsRate)) / 100);
-      const rewardValue = annualSpend * tierRewardRate(selectedTier);
-      return { net: savings + rewardValue - selectedTier.fee, rewardValue };
-    }
-
-    function breakEvenSpend(selectedTier: Tier): number {
-      if (netFor(0, selectedTier).net >= 0) return 0;
-      let upper = 50;
-      for (let index = 0; index < 40 && netFor(upper, selectedTier).net < 0; index += 1) {
-        upper *= 2;
-      }
-      let lower = 0;
-      for (let index = 0; index < 80; index += 1) {
-        const middle = (lower + upper) / 2;
-        if (netFor(middle, selectedTier).net >= 0) upper = middle;
-        else lower = middle;
-      }
-      return upper;
+    function annualCurrency(value: number): string {
+      return Number.isFinite(value) ? `${formatCurrency(value, locale)}/year` : 'Not reachable';
     }
 
     function update(): void {
-      const selectedTier = tiers[tier.value as TierKey] ?? tiers.gold;
-      const spend = Math.max(0, readNumber(monthlySpend));
-      const result = netFor(spend, selectedTier);
-      const recommended = Object.values(tiers).reduce((best, candidate) =>
-        netFor(spend, candidate).net > netFor(spend, best).net ? candidate : best,
-      );
-      const needed = breakEvenSpend(selectedTier);
+      const monthlySpend = readNonNegative(totalMonthlySpend);
+      const eligibleSpend = readNonNegative(eligibleAnnualSpend);
+      const goldAnnualFee = readNonNegative(goldFee);
+      const executiveAnnualFee = readNonNegative(executiveFee);
+      const savingsDecimal = readNonNegative(savingsRate) / 100;
+      const rewardDecimal = readNonNegative(rewardRate) / 100;
+      const cap = readNonNegative(rewardCap);
+      const extraFee = Math.max(0, executiveAnnualFee - goldAnnualFee);
+      const annualShoppingSavings = monthlySpend * 12 * savingsDecimal;
+      const modeledReward = Math.min(eligibleSpend * rewardDecimal, cap);
+      const upgradeValue = modeledReward - extraFee;
+      const goldNet = annualShoppingSavings - goldAnnualFee;
+      const executiveNet = annualShoppingSavings + modeledReward - executiveAnnualFee;
+      const upgradeBreakEven = rewardDecimal > 0 && cap >= extraFee ? extraFee / rewardDecimal : Number.POSITIVE_INFINITY;
+      const basicBreakEven = savingsDecimal > 0 ? goldAnnualFee / savingsDecimal : Number.POSITIVE_INFINITY;
+      const capThreshold = rewardDecimal > 0 ? cap / rewardDecimal : Number.POSITIVE_INFINITY;
 
-      breakEven.textContent = `${formatCurrency(needed, locale)}/month`;
-      netBenefit.textContent = formatCurrency(result.net, locale);
-      reward.textContent = formatCurrency(result.rewardValue, locale);
-      recommendedTier.textContent = recommended.name;
+      upgradeFeeOutput.textContent = formatCurrency(extraFee, locale);
+      upgradeBreakEvenOutput.textContent = annualCurrency(upgradeBreakEven);
+      rewardOutput.textContent = formatCurrency(modeledReward, locale);
+      upgradeValueOutput.textContent = formatCurrency(upgradeValue, locale);
+      goldNetOutput.textContent = formatCurrency(goldNet, locale);
+      executiveNetOutput.textContent = formatCurrency(executiveNet, locale);
+      basicBreakEvenOutput.textContent = annualCurrency(basicBreakEven);
+      capThresholdOutput.textContent = annualCurrency(capThreshold);
 
-      if (result.net >= 0) {
-        verdict.textContent = `Worth it: your estimated annual net benefit is ${formatCurrency(result.net, locale)}.`;
+      if (!eligibleAnnualSpend.value.trim()) {
+        verdict.textContent = 'Enter reward-eligible annual spend to compare the tiers. Total warehouse spend is not a safe substitute.';
+      } else if (!Number.isFinite(upgradeBreakEven)) {
+        verdict.textContent = 'Executive cannot recover its extra fee with the reward rate and cap entered.';
+      } else if (upgradeValue >= 0) {
+        verdict.textContent = `Executive leads Gold Star by ${formatCurrency(upgradeValue, locale)} in this model because the capped reward covers the extra fee.`;
       } else {
-        verdict.textContent = `Not worth it yet: you need about ${formatCurrency(needed, locale)} per month at these assumptions.`;
+        verdict.textContent = `Gold Star leads Executive by ${formatCurrency(Math.abs(upgradeValue), locale)} in this model because the capped reward does not cover the extra fee.`;
       }
     }
 
-    const savedTier = getItem<TierKey>(tierStorageKey, 'gold');
-    if (tiers[savedTier]) tier.value = savedTier;
-    tier.addEventListener('change', () => {
-      setItem(tierStorageKey, tier.value);
-      update();
-    });
-
-    fields.forEach((field) => {
-      bindPersistentField(field, `costco-membership:${field.id}`);
-      field.addEventListener('input', update);
+    inputs.forEach((input) => {
+      bindPersistentField(input, `costco-membership:${input.id}`);
+      input.addEventListener('input', update);
     });
     update();
   </script>

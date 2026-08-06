@@ -1,5 +1,6 @@
 import { LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
 import type { FaqItem } from './seo';
+import { organizationId, webSiteId } from './seo';
 
 interface HomeTool {
   icon: string;
@@ -446,7 +447,10 @@ export function homeJsonLd(locale: CoreLocale, site?: URL): object[] {
       description: content.description,
       url: pageUrl,
       inLanguage: LOCALE_HREFLANG[locale],
-      isPartOf: { '@type': 'WebSite', name: SITE.name, url: `${origin}/` },
+      // Point at the one WebSite entity SEO.astro emits instead of repeating an
+      // anonymous copy of it, so a consumer resolves one site rather than two.
+      isPartOf: { '@id': webSiteId(site) },
+      publisher: { '@id': organizationId(site) },
       mainEntity: {
         '@type': 'ItemList',
         numberOfItems: content.tools.length,

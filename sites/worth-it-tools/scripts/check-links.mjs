@@ -73,8 +73,22 @@ function extractLinks(html) {
   return links;
 }
 
+// A page link is anything that resolves to a rendered HTML document rather
+// than an asset. Assets keep their file extension; pages must not have one.
+function isPageLink(sitePath) {
+  const last = sitePath.split('/').pop() ?? '';
+  return !last.includes('.');
+}
+
+// Every page link must end in a slash. The site builds with
+// build.format: 'directory', so a slashless internal link is served as a 301
+// to the slashed form -- a wasted crawl request, and a disagreement with the
+// canonical/hreflang URLs emitted by src/lib/seo.ts. In July 2026 this made
+// roughly a third of all Googlebot requests redirect hops while the site was
+// already under a crawl-budget squeeze.
 const htmlFiles = walkHtml(distDir);
 const broken = [];
+const slashless = [];
 let checked = 0;
 
 for (const file of htmlFiles) {
@@ -92,15 +106,38 @@ for (const file of htmlFiles) {
         link: rawLink,
       });
     }
+    if (isPageLink(sitePath) && !sitePath.endsWith('/')) {
+      slashless.push({
+        file: relative(distDir, file).split(sep).join('/'),
+        link: rawLink,
+      });
+    }
   }
 }
+
+let failed = false;
 
 if (broken.length > 0) {
   console.error(`Checked ${checked} internal links; found ${broken.length} broken links:`);
   for (const item of broken) {
     console.error(`- ${item.file}: ${item.link}`);
   }
-  process.exit(1);
+  failed = true;
 }
 
-console.log(`All ${checked} internal links OK`);
+if (slashless.length > 0) {
+  console.error(
+    `Found ${slashless.length} internal page links without a trailing slash. ` +
+      'Each one costs a 301 redirect on every crawl. Build links with ' +
+      'localizedPath()/localizedCorePath() instead of hand-writing the path:',
+  );
+  for (const item of slashless.slice(0, 40)) {
+    console.error(`- ${item.file}: ${item.link}`);
+  }
+  if (slashless.length > 40) console.error(`  ...and ${slashless.length - 40} more`);
+  failed = true;
+}
+
+if (failed) process.exit(1);
+
+console.log(`All ${checked} internal links OK (all page links end in a slash)`);

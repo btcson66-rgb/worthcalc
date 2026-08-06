@@ -1,0 +1,7 @@
+{
+  "maxUrls": 345,
+  "currentUrls": 341,
+  "reviewedAt": "2026-08-06",
+  "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
+  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Before you raise it: (1) worthcalc's GSC daily impressions must be back above the pre-collapse baseline of 16-35 for seven consecutive days, and (2) the new pages must each be a page a human would search for by name, not a locale fill-in of a page that already exists. Add at most 5 URLs per release."
+}

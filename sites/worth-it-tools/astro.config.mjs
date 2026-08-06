@@ -23,7 +23,11 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  trailingSlash: 'ignore',
+  // 'always' matches how the site is actually served: build.format is
+  // 'directory', so the host 301-redirects /en/about -> /en/about/. Declaring
+  // it here keeps dev, canonical, hreflang and internal links on one form
+  // instead of letting slashless links generate a redirect hop per crawl.
+  trailingSlash: 'always',
   build: {
     format: 'directory',
     // Inline all stylesheets: removes the render-blocking CSS request

@@ -22,6 +22,7 @@ export interface GuideIndexEntry {
 export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
   en: [
     { path: '/annual-vs-monthly-billing/', title: 'Annual or Monthly Billing? The Breakeven Math on Subscription Discounts' },
+    { path: '/average-commuting-cost/', title: 'Average Commuting Cost: Build a Benchmark Without a Misleading National Average' },
     { path: '/bulk-buying-vs-small-packages/', title: 'Bulk buy or small pack? Effective unit cost after waste and storage' },
     { path: '/bnpl-vs-credit-card-installments/', title: 'Buy now, pay later vs credit-card installments: compare total cost and timing' },
     { path: '/cashback-caps-real-reward-rate/', title: 'Cashback caps and bonus categories: calculate your real reward rate' },
@@ -58,6 +59,7 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/price-per-wear-clothing-shoes/', title: 'Price per wear: compare clothing and shoes by actual use' },
     { path: '/rent-vs-buy-guide/', title: 'Rent vs Buy: The Assumptions That Actually Change the Answer' },
     { path: '/repair-or-replace-decision-formula/', title: 'Repair or replace: a practical decision formula for appliances, phones, and cars' },
+    { path: '/return-to-office-cost/', title: 'Return-to-Office Cost Calculator: The Annual Cash Difference From N Days to M' },
     { path: '/reusable-vs-disposable-break-even/', title: 'Reusable vs disposable break-even: cost per actual use' },
     { path: '/subscription-creep/', title: 'Subscription Creep: How Much Are You Really Paying?' },
     { path: '/true-cost-of-car-ownership/', title: 'The 20/4/10 Rule: How Much Car You Can Actually Afford' },
@@ -89,6 +91,7 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/how-much-home-can-you-afford/', title: '購屋能力怎麼算？房貸成數、房屋稅與地價稅都要算進去' },
     { path: '/is-costco-executive-membership-worth-it/', title: '好市多黑鑽卡值得升級嗎？2026 回本門檻與 2% 排除項目' },
     { path: '/costco-math/', title: '好市多會員的數學：年費怎麼算才回本' },
+    { path: '/return-to-office-cost/', title: '回辦公室上班成本計算器：每週從 N 天改成 M 天，一年現金差多少？' },
     { path: '/pay-raise-vs-inflation-purchasing-power/', title: '加薪有追上通膨嗎？計算實質購買力變化' },
     { path: '/home-vs-public-ev-charging-cost/', title: '家用充電和公共快充差多少？電動車每公里成本怎麼算' },
     { path: '/gym-membership-cost-per-visit/', title: '健身房會員每次成本怎麼算？一個月要去幾次才划算' },
@@ -100,6 +103,7 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/rent-vs-buy-breakeven-year/', title: '買房住幾年才可能比租屋划算？損益年分計算' },
     { path: '/price-per-wear-clothing-shoes/', title: '每次穿著成本怎麼算？用真實次數比較衣服和鞋子' },
     { path: '/annual-vs-monthly-billing/', title: '年繳還是月繳？訂閱折扣的損益兩平算法' },
+    { path: '/average-commuting-cost/', title: '平均通勤成本與車馬費行情：不用虛構平均數，也能算出可比較的基準' },
     { path: '/sunk-cost-fallacy-everyday/', title: '什麼是沉沒成本謬誤？「都花錢了」如何讓人越虧越多' },
     { path: '/opportunity-cost-everyday/', title: '什麼是機會成本？五個日常例子講清楚這個最重要的隱形帳' },
     { path: '/hourly-vs-annual-salary/', title: '時薪換算年薪怎麼算才公平？加班費倍率與基本工資要先搞懂' },

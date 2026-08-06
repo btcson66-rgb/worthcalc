@@ -12,6 +12,12 @@ export const SITE = {
   twitter: '',
   /** Default social share image, served from /public. */
   defaultOgImage: '/og-default.png',
+  /**
+   * Logo for schema.org Organization. SVG is a format Google accepts for the
+   * logo property, and the mark is already vector, so there is no raster copy
+   * to keep in sync with it.
+   */
+  logo: '/favicon.svg',
 } as const;
 
 export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';

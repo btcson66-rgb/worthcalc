@@ -118,6 +118,62 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
 
 /* ───────────────────────── Structured data (JSON-LD) ──────────────────────── */
 
+/*
+ * One publisher entity, referenced by @id from everywhere else.
+ *
+ * Every page used to emit `author: { "@type": "Organization", "name": "WorthCalc" }`
+ * as a bare inline stub — no identifier, no URL, no logo. Nothing tied those stubs
+ * together, so to anything building a knowledge graph the site looked like 341
+ * unrelated anonymous publishers rather than one publisher of 341 pages.
+ *
+ * That matters more here than on most sites: worthcalc is currently read far more
+ * by assistants than by people. One week of Cloudflare logs: GPTBot 213 requests,
+ * ClaudeBot 123, ChatGPT-User 77, OAI-SearchBot 74, PerplexityBot 8. Those are the
+ * readers who need a publisher they can actually resolve.
+ */
+function resolveBase(site?: URL): string {
+  return (site?.origin ?? SITE.url).replace(/\/$/, '');
+}
+
+export function organizationId(site?: URL): string {
+  return `${resolveBase(site)}/#organization`;
+}
+
+export function webSiteId(site?: URL): string {
+  return `${resolveBase(site)}/#website`;
+}
+
+/** The publisher entity. Emitted once per page by SEO.astro. */
+export function organizationJsonLd(site?: URL): object {
+  const base = resolveBase(site);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': organizationId(site),
+    name: SITE.name,
+    url: `${base}/`,
+    logo: {
+      '@type': 'ImageObject',
+      url: absolute(base, SITE.logo),
+    },
+    image: absolute(base, SITE.defaultOgImage),
+  };
+}
+
+/** The site entity, so a citation can resolve which site a page belongs to. */
+export function webSiteJsonLd(site?: URL): object {
+  const base = resolveBase(site);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': webSiteId(site),
+    name: SITE.name,
+    url: `${base}/`,
+    publisher: { '@id': organizationId(site) },
+    inLanguage: CORE_LOCALES.map((locale) => LOCALE_HREFLANG[locale]),
+  };
+}
+
 export interface FaqItem {
   question: string;
   answer: string;
@@ -179,6 +235,8 @@ export function softwareAppJsonLd(opts: {
     operatingSystem: 'Any',
     inLanguage: LOCALE_HREFLANG[opts.locale],
     offers: { '@type': 'Offer', price: '0', priceCurrency: opts.locale === 'zh' ? 'TWD' : opts.locale === 'en' ? 'USD' : 'EUR' },
+    publisher: { '@id': organizationId(opts.site) },
+    isPartOf: { '@id': webSiteId(opts.site) },
   };
 }
 
@@ -200,7 +258,8 @@ export function articleJsonLd(opts: {
     mainEntityOfPage: absolute(base, pagePath(opts.url)),
     inLanguage: LOCALE_HREFLANG[opts.locale],
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
-    author: { '@type': 'Organization', name: SITE.name },
-    publisher: { '@type': 'Organization', name: SITE.name },
+    author: { '@id': organizationId(opts.site) },
+    publisher: { '@id': organizationId(opts.site) },
+    isPartOf: { '@id': webSiteId(opts.site) },
   };
 }

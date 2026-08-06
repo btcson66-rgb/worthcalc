@@ -19,13 +19,20 @@ export function useTranslations(locale: Locale) {
 
 /**
  * Build a locale-prefixed, absolute (site-relative) path.
- * `localizedPath('zh', '/tools/word-counter')` -> '/zh/tools/word-counter'
+ * `localizedPath('zh', '/tools/word-counter')` -> '/zh/tools/word-counter/'
  * `localizedPath('en', '/')` -> '/'
+ *
+ * The trailing slash is mandatory: the site is built with
+ * `build.format: 'directory'`, so the host 301-redirects every slashless
+ * variant. Emitting the slashless form made ~30% of Googlebot's requests
+ * redirect hops, which is crawl budget we cannot spare. Canonical and
+ * hreflang (src/lib/seo.ts) have always used the trailing-slash form, so
+ * this also stops internal links from disagreeing with them.
  */
 export function localizedPath(locale: Locale, path = '/'): string {
   const clean = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
-  if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}`;
-  return `/${locale}${clean}`;
+  if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}/`;
+  return `/${locale}${clean}/`;
 }
 
 /**
@@ -46,8 +53,8 @@ export function switchLocalePath(url: URL, target: Locale): string {
   if ((LOCALES as string[]).includes(segments[0])) {
     segments.shift();
   }
-  if (segments.length === 0) return target === DEFAULT_LOCALE ? '/' : `/${target}`;
-  return `/${[target, ...segments].join('/')}`;
+  if (segments.length === 0) return target === DEFAULT_LOCALE ? '/' : `/${target}/`;
+  return `/${[target, ...segments].join('/')}/`;
 }
 
 /** Strip the locale prefix to get the logical route, e.g. '/zh/about' -> '/about'. */

@@ -1,8 +1,12 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import DecisionGuide from '../../../components/DecisionGuide.astro';
+import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
+const decisionGuide = costcoGuides.en;
+if (!decisionGuide) throw new Error('Missing English membership guide');
 const title = 'Costco Membership Calculator: Gold Star vs Executive';
 const description = 'Compare Gold Star and Executive with a Costco membership calculator that shows the eligible-spend break-even, reward cap, exclusions, and tier math.';
 const faq = [
@@ -162,6 +166,8 @@ const related = [
     </ul>
     <p class="source-date">Terms and figures on this page were last checked August 5, 2026. Costco can change fees, eligibility, exclusions, caps, and refund procedures.</p>
   </section>
+
+  <DecisionGuide content={decisionGuide} />
 
   <style>
     .intro,

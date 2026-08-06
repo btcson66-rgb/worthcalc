@@ -73,6 +73,35 @@ function extractLinks(html) {
   return links;
 }
 
+// og:image and twitter:image live in meta content, so the href/src sweep above
+// never saw them. /og-default.png was referenced by every page on the site and
+// 404'd -- long enough that Meta's crawler had fetched the missing file 45 times
+// in one week. Every link preview the site produced was blank, and nothing said so.
+function extractSocialImages(html) {
+  const images = [];
+  const metaPattern = /<meta\b[^>]*>/gi;
+  let tag = metaPattern.exec(html);
+  while (tag !== null) {
+    if (/\b(?:property|name)\s*=\s*(["'])(?:og:image|twitter:image)\1/i.test(tag[0])) {
+      const content = tag[0].match(/\bcontent\s*=\s*(["'])(.*?)\1/i)?.[2]?.trim();
+      if (content) images.push(content);
+    }
+    tag = metaPattern.exec(html);
+  }
+  return images;
+}
+
+function socialImageSitePath(value) {
+  if (value.startsWith('/')) return stripQueryAndHash(value);
+  try {
+    const url = new URL(value);
+    // 只驗自家網域的圖；外部 CDN 不是這道閘門管的事
+    return url.hostname.endsWith('worthcalc.win') ? url.pathname : null;
+  } catch {
+    return null;
+  }
+}
+
 // A page link is anything that resolves to a rendered HTML document rather
 // than an asset. Assets keep their file extension; pages must not have one.
 function isPageLink(sitePath) {
@@ -89,10 +118,22 @@ function isPageLink(sitePath) {
 const htmlFiles = walkHtml(distDir);
 const broken = [];
 const slashless = [];
+const missingSocialImages = new Map(); // 圖片路徑 -> 引用它的頁面數
 let checked = 0;
+let socialImagesChecked = 0;
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
+
+  for (const raw of extractSocialImages(html)) {
+    const imagePath = socialImageSitePath(raw);
+    if (!imagePath) continue;
+    socialImagesChecked += 1;
+    if (!existsSync(join(distDir, imagePath))) {
+      missingSocialImages.set(imagePath, (missingSocialImages.get(imagePath) ?? 0) + 1);
+    }
+  }
+
   for (const rawLink of extractLinks(html)) {
     if (isSkipped(rawLink)) continue;
 
@@ -138,6 +179,18 @@ if (slashless.length > 0) {
   failed = true;
 }
 
+if (missingSocialImages.size > 0) {
+  console.error('These og:image / twitter:image targets do not exist in the build:');
+  for (const [imagePath, count] of missingSocialImages) {
+    console.error(`- ${imagePath} (referenced by ${count} page${count === 1 ? '' : 's'})`);
+  }
+  console.error('A missing share image means every link preview of those pages renders blank.');
+  failed = true;
+}
+
 if (failed) process.exit(1);
 
-console.log(`All ${checked} internal links OK (all page links end in a slash)`);
+console.log(
+  `All ${checked} internal links OK (all page links end in a slash); ` +
+    `${socialImagesChecked} social image references resolve.`,
+);

@@ -1,0 +1,145 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'zh';
+const faq = [
+  {
+    question: '一般通勤成本或車馬費行情是多少？',
+    answer:
+      '沒有一個不看範圍就能套用的數字。只算油錢、只算今年現金支出，以及把折舊與持有成本算進去，會得到不同答案。較實用的行情基準，是先用自己的里程、通勤日、停車與票價算出同口徑金額。',
+  },
+  {
+    question: '一年通勤成本怎麼算？',
+    answer:
+      '先用每週通勤日乘以一年實際工作週數，再用單程距離乘以二得到來回距離。全年距離乘以每公里成本後，加上全年停車、過路費、車票與其他只因通勤發生的費用。',
+  },
+  {
+    question: '每月通勤成本怎麼算？',
+    answer:
+      '先算全年，再除以 12。這樣可以把休假、出差、遠距日與不固定工作週數納入，不會拿某個特別忙的月份直接乘十二。',
+  },
+  {
+    question: '機車通勤要把折舊算進去嗎？',
+    answer:
+      '要看問題。比較今年多騎一天的現金變化時，可先看油錢與隨里程增加的保養；想知道完整經濟成本時，再分攤折舊、保險、規費與其他持有成本。務必標明口徑。',
+  },
+  {
+    question: '車馬費和實際通勤成本一樣嗎？',
+    answer:
+      '不一定。車馬費常是公司與工作者協議的津貼或報支標準，不必然等於實測成本。把津貼和用同一期間、同一口徑算出的通勤成本並列，才能看出補貼了多少。',
+  },
+];
+---
+
+<ArticleLayout
+  title="平均通勤成本與車馬費行情：不用虛構平均數，也能算出可比較的基準"
+  description="用自己的公里數、通勤日、機車油耗、折舊、停車與車票，算出每年及每月通勤成本，再用真正適合台灣讀者的方式比較車馬費與替代方案。"
+  locale={locale}
+  alternateLocales={['en', 'zh']}
+>
+  <p>
+    <strong>直接答案：通勤成本沒有一個脫離計算口徑仍有意義的「平均行情」。</strong>
+    只算機車油錢、只算今年從帳戶付出去的錢，或把折舊與保險都分攤進去，
+    都可能算對，卻是在回答不同問題。想知道自己的數字是否合理，先用實際公里數、
+    出勤日與收據建立同口徑基準，比套用一個來源不明的全國平均更有用。
+  </p>
+
+  <section class="formula-card" aria-labelledby="annual-formula">
+    <h2 id="annual-formula">一年通勤成本公式</h2>
+    <p><strong>全年通勤日</strong>＝每週通勤日 &times; 一年實際工作週數</p>
+    <p><strong>全年通勤距離</strong>＝單程公里數 &times; 2 &times; 全年通勤日</p>
+    <p><strong>全年通勤成本</strong>＝里程成本＋停車＋過路費＋大眾運輸票價＋其他只因通勤發生的費用</p>
+    <p><strong>每月等值</strong>＝全年通勤成本 &divide; 12</p>
+  </section>
+
+  <h2>機車通勤完整算一次</h2>
+  <p>
+    <strong>以下全部是為了示範算式而設定的數字，不是台灣平均、現行價格或建議行情。</strong>
+    假設某位讀者單程 12 公里、每週進辦公室 5 天、一年實際通勤 46 週，
+    騎一輛以示範數字估算的機車：
+  </p>
+  <ol>
+    <li>5 天 &times; 46 週＝<strong>230 個通勤日</strong>。</li>
+    <li>12 公里 &times; 2 &times; 230 天＝<strong>5,520 公里</strong>。</li>
+    <li>示範油耗 40 公里／公升、油價 NT$32／公升：5,520 &divide; 40 &times; 32＝<strong>NT$4,416 油錢</strong>。</li>
+    <li>示範購入價 NT$70,000、五年後殘值 NT$25,000：折舊為 (70,000 − 25,000) &divide; 5＝<strong>每年 NT$9,000</strong>。</li>
+    <li>再假設全年保養與輪胎 NT$3,500、保險與規費 NT$1,800、停車每個通勤日 NT$20，共 <strong>NT$4,600</strong>。</li>
+    <li>合計 4,416 + 9,000 + 3,500 + 1,800 + 4,600＝<strong>每年 NT$23,316</strong>，每月約 <strong>NT$1,943</strong>，每個通勤日約 <strong>NT$101</strong>。</li>
+  </ol>
+  <p>
+    如果這台機車也大量用於非通勤行程，不應把全部固定成本都說成工作造成；
+    可以按里程或用途分攤。想用自己的車價、殘值、油耗與費用建立每公里口徑，
+    可用<a href={localizedPath(locale, '/tools/cost-per-mile')}>每公里用車成本計算器</a>。
+  </p>
+
+  <h2>為什麼不同「平均通勤成本」會差很多？</h2>
+  <ul>
+    <li><strong>只算油錢或算完整持有成本：</strong>後者還會包含折舊、保養、輪胎、保險、規費與利息。</li>
+    <li><strong>折舊要不要列入：</strong>折舊不是每天刷卡的現金支出，但代表車輛價值隨使用與時間消耗。</li>
+    <li><strong>停車與過路費：</strong>短里程不代表便宜；固定的每日停車費可能比油錢更影響結果。</li>
+    <li><strong>時間有沒有換成錢：</strong>替時間定價是另一層模型，不應和純現金成本混成同一個不加說明的數字。</li>
+    <li><strong>都市、郊區與實際替代方案：</strong>距離、停車方式、轉乘與可用交通工具不同，成本結構自然不同。</li>
+    <li><strong>一戶一車或多車：</strong>同一筆固定成本如何分到家中各輛車、各種用途，會改變通勤分攤額。</li>
+    <li><strong>邊際成本或分攤總成本：</strong>臨時多進辦公室一天，和把全年持有成本按里程分給通勤，並不是同一題。</li>
+  </ul>
+
+  <h2>車馬費行情為什麼不能直接當成本？</h2>
+  <p>
+    在台灣職場語境裡，車馬費可能是定額津貼、按次補貼、按里程報支，
+    或雙方議定的待遇項目。它是<strong>協議金額</strong>，不必然是量測結果。
+    最清楚的做法，是把「公司給多少」與「自己實際花多少」分兩欄，並確保期間一致：
+    月津貼對月成本、年津貼對年成本。差額才表示自己吸收或剩餘的金額。
+  </p>
+
+  <h2>不要比全國平均，改比這三個基準</h2>
+  <ol>
+    <li><strong>自己的上一年：</strong>用相同口徑逐項比較公里數、進辦公室天數、油錢、停車、票價與持有成本。</li>
+    <li><strong>真的會採用的替代方案：</strong>例如現有公車或捷運路線、月票、共乘、機車換汽車，而不是想像中的理想交通方式。可用<a href={localizedPath(locale, '/tools/commute-cost')}>通勤成本計算器</a>放在同一個月基準比較。</li>
+    <li><strong>較便宜方式的損益兩平距離：</strong>若方案 A 固定成本較高、每公里成本較低，可用 <code>(方案 B 固定成本 − 方案 A 固定成本) &divide; (方案 A 每公里成本 − 方案 B 每公里成本)</code> 找到兩者總成本相同的距離；分母為零或費用不是線性時則不適用。</li>
+  </ol>
+
+  <h2>查找當期輸入值的官方入口</h2>
+  <p>
+    下列機關可作為讀者自行查找當期油價、交通或家庭支出資料的入口。
+    本頁不轉述它們目前刊載的數字：
+  </p>
+  <ul>
+    <li><a href="https://www.cpc.com.tw/" rel="noopener">台灣中油</a></li>
+    <li><a href="https://www.motc.gov.tw/" rel="noopener">交通部</a></li>
+    <li><a href="https://www.dgbas.gov.tw/" rel="noopener">行政院主計總處</a></li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    本文只說明成本算術，不構成稅務、勞動或財務建議。所有示範數字只用來展示計算流程，
+    請換成自己的紀錄與自行查得的當期資料。本站計算器在瀏覽器本機執行，輸入內容不會上傳伺服器。
+  </p>
+
+  <style>
+    .formula-card {
+      margin: 1.5rem 0;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .formula-card h2,
+    .formula-card p {
+      margin-top: 0;
+    }
+
+    .formula-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    code {
+      overflow-wrap: anywhere;
+    }
+  </style>
+</ArticleLayout>

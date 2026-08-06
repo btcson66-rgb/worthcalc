@@ -1,0 +1,179 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'What is the average cost of commuting to work?',
+    answer:
+      'There is no single useful average unless its scope matches yours. Fuel-only, cash-only, and total vehicle-cost estimates answer different questions. A better benchmark is your own annual commute cost, calculated with your distance, workdays, vehicle rate, parking, tolls, and fares.',
+  },
+  {
+    question: 'How much does commuting cost per year?',
+    answer:
+      'Multiply round-trip distance by commuting days per week and working weeks per year. Multiply that annual distance by the per-mile or per-kilometer cost that fits your decision, then add annual parking, tolls, fares, and other commute-only costs.',
+  },
+  {
+    question: 'How do I calculate average commuting cost per month?',
+    answer:
+      'Calculate the annual cost first, then divide by 12. This handles holidays and weeks away from work more honestly than multiplying one unusually busy month by twelve.',
+  },
+  {
+    question: 'Should depreciation count as a commuting cost?',
+    answer:
+      'Include an allocated share of depreciation when you want total economic cost. Exclude costs that truly would not change when comparing the immediate cash impact of one extra commute. Label the scope so the result is not mistaken for a different kind of estimate.',
+  },
+  {
+    question: 'Is commuting worth it?',
+    answer:
+      'The arithmetic can show the cash cost and the cost of a real alternative, but worth also depends on time and personal trade-offs. Keep those non-cash factors separate instead of hiding an assumed value for them inside an average.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Average Commuting Cost: Build a Benchmark Without a Misleading National Average"
+  description="Calculate annual and monthly commuting cost from your own distance, workdays, vehicle rate, parking, tolls, and fares—then compare it with benchmarks that actually fit your decision."
+  locale={locale}
+  alternateLocales={['en', 'zh']}
+>
+  <p>
+    <strong>Direct answer: there is no single &ldquo;average commuting
+    cost&rdquo; that is useful without knowing what it includes.</strong> A
+    fuel-only figure, an out-of-pocket figure, and a total vehicle-cost
+    figure can all be correct while being far apart. The defensible
+    benchmark starts with your own distance, schedule, and receipts, then
+    states exactly which costs were counted.
+  </p>
+
+  <section class="formula-card" aria-labelledby="annual-formula">
+    <h2 id="annual-formula">The annual commuting cost formula</h2>
+    <p><strong>Annual commute days</strong> = days per week &times; working weeks per year</p>
+    <p><strong>Annual commute distance</strong> = one-way distance &times; 2 &times; annual commute days</p>
+    <p><strong>Annual commuting cost</strong> = annual distance &times; cost per distance + parking + tolls + fares + other commute-only costs</p>
+    <p><strong>Monthly equivalent</strong> = annual commuting cost &divide; 12</p>
+  </section>
+
+  <h2>A worked example from start to finish</h2>
+  <p>
+    <strong>Every figure in this example is illustrative, not an average,
+    current price, or recommendation.</strong> Suppose a reader enters a
+    15-mile one-way trip, 4 office days per week, and 48 working weeks per
+    year. That produces 192 commute days and 5,760 commute miles:
+  </p>
+  <ol>
+    <li>4 days &times; 48 weeks = <strong>192 commute days</strong>.</li>
+    <li>15 miles &times; 2 &times; 192 days = <strong>5,760 commute miles</strong>.</li>
+    <li>At an illustrative all-in vehicle rate of $0.62 per mile: 5,760 &times; $0.62 = <strong>$3,571.20</strong>.</li>
+    <li>Illustrative parking of $12 per day: 192 &times; $12 = <strong>$2,304</strong>.</li>
+    <li>Illustrative tolls of $4 per day: 192 &times; $4 = <strong>$768</strong>.</li>
+    <li>Total: $3,571.20 + $2,304 + $768 = <strong>$6,643.20 per year</strong>, or <strong>$553.60 per month</strong>.</li>
+  </ol>
+  <p>
+    The important input is the $0.62 rate, not because that number is
+    typical—it is not presented as one—but because its scope must match the
+    question. Build your own rate with the
+    <a href={localizedPath(locale, '/tools/cost-per-mile')}>cost per mile calculator</a>.
+    Use fuel and mileage-sensitive maintenance for a short-run cash
+    comparison; use depreciation, insurance, fees, finance interest, and
+    other ownership costs when you want an allocated total economic cost.
+  </p>
+
+  <h2>Why published commute-cost averages disagree</h2>
+  <p>
+    Most disagreement is a difference in method, not necessarily a math
+    error. Before comparing any two figures, ask whether they make the same
+    choices:
+  </p>
+  <ul>
+    <li><strong>Fuel only or total ownership:</strong> fuel ignores depreciation, insurance, registration, maintenance, tires, and finance.</li>
+    <li><strong>Depreciation included or excluded:</strong> depreciation is not a fuel receipt, but it represents vehicle value consumed over time.</li>
+    <li><strong>Parking and tolls:</strong> these can dominate a short trip, yet many per-mile estimates omit them.</li>
+    <li><strong>Time priced or kept separate:</strong> assigning an hourly value can be useful, but it changes a cash-cost comparison into a broader economic model.</li>
+    <li><strong>Urban or rural trip:</strong> distance, parking structure, traffic, and available alternatives produce different cost shapes.</li>
+    <li><strong>One vehicle or a household fleet:</strong> allocating fixed costs across one car, two cars, or all household travel changes the rate assigned to commuting.</li>
+    <li><strong>Marginal or allocated cost:</strong> the cost of one extra office day is not always the same as the share of annual vehicle ownership attributed to work travel.</li>
+  </ul>
+
+  <h2>What to compare your number against instead</h2>
+  <ol>
+    <li>
+      <strong>Your previous year.</strong> Keep the scope identical and
+      compare distance, office days, parking, tolls, fares, and the vehicle
+      rate line by line. This reveals what actually changed.
+    </li>
+    <li>
+      <strong>The alternative you would really take.</strong> Compare with
+      the transit pass, park-and-ride route, carpool arrangement, bicycle,
+      or different vehicle available to you—not an abstract national mode.
+      The <a href={localizedPath(locale, '/tools/commute-cost')}>commute cost calculator</a>
+      can place those modes on the same monthly basis.
+    </li>
+    <li>
+      <strong>The break-even distance.</strong> If option A has a higher
+      fixed cost but a lower rate per mile, solve
+      <code>(fixed cost B − fixed cost A) ÷ (rate A − rate B)</code>.
+      That distance is where the two modeled totals meet, provided the
+      denominator is not zero and both cost structures are truly linear.
+    </li>
+  </ol>
+
+  <h2>So, is commuting worth it?</h2>
+  <p>
+    Start with the cash question: what does the commute add relative to the
+    alternative you could actually choose? Then keep time, comfort,
+    reliability, schedule control, health, and career considerations in a
+    separate list. A national average cannot decide those trade-offs, and
+    silently pricing them inside a single dollar figure makes the result
+    look more objective than it is.
+  </p>
+
+  <h2>Official sources to consult for current inputs</h2>
+  <p>
+    These organizations publish material readers can use to research
+    current fuel, household-spending, or mileage-cost inputs. This page does
+    not quote or summarize their current figures:
+  </p>
+  <ul>
+    <li><a href="https://www.eia.gov/petroleum/gasdiesel/" rel="noopener">U.S. Energy Information Administration — gasoline and diesel information</a></li>
+    <li><a href="https://www.bls.gov/cex/tables.htm" rel="noopener">U.S. Bureau of Labor Statistics — Consumer Expenditure Survey tables</a></li>
+    <li><a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" rel="noopener">Internal Revenue Service — standard mileage rates</a></li>
+  </ul>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This article explains cost arithmetic, not tax, employment, or financial
+    advice. Illustrative figures are included only to show the calculation;
+    replace them with your own records and current source material. Site
+    calculators run locally in your browser, and entries are not uploaded to
+    a server.
+  </p>
+
+  <style>
+    .formula-card {
+      margin: 1.5rem 0;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .formula-card h2,
+    .formula-card p {
+      margin-top: 0;
+    }
+
+    .formula-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    code {
+      overflow-wrap: anywhere;
+    }
+  </style>
+</ArticleLayout>

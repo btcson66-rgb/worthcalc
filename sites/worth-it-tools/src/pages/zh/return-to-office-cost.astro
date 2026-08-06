@@ -1,0 +1,342 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'zh';
+const faq = [
+  {
+    question: '回辦公室上班成本怎麼算？',
+    answer:
+      '用調整後每週進辦公室天數減掉調整前天數，再乘以一年工作週數與每個轉換日的淨成本。淨成本是來回通勤加辦公室額外支出，再減掉當天不在家工作所省下的費用。',
+  },
+  {
+    question: '回辦公室支出應該包含什麼？',
+    answer:
+      '只放會隨進辦公室日改變的金額，例如油錢或車票、每日停車與過路費、外食咖啡、增加的托育或寵物照顧時數，以及因工作增加的服裝成本。固定不變的月費不要重複計入。',
+  },
+  {
+    question: '這也能算遠距上班省多少嗎？',
+    answer:
+      '可以。把調整後天數設得比調整前少，公式會反向顯示每年與每月現金節省，並扣除因在家工作增加的電費、冷暖氣與耗材。',
+  },
+  {
+    question: '計算器有把通勤時間換成錢嗎？',
+    answer:
+      '沒有。本頁只估現金差額。通勤時間、職涯影響、健康、照顧責任與其他非現金後果應另外評估。',
+  },
+  {
+    question: '這是勞動或法律建議嗎？',
+    answer:
+      '不是。這只是使用者自行輸入條件的成本算術。勞動契約、費用補貼、稅務處理與法律權益會因契約和適用地區而不同。',
+  },
+];
+---
+
+<ArticleLayout
+  title="回辦公室上班成本計算器：每週從 N 天改成 M 天，一年現金差多少？"
+  description="比較遠距與通勤成本：輸入調整前後進辦公室天數、每次通勤、外食照顧等辦公室支出，以及在家工作的電費，算出每年與每月現金差額。"
+  locale={locale}
+  alternateLocales={['en', 'zh']}
+>
+  <p>
+    <strong>直接答案：回辦公室政策改變的成本，是每週增加的辦公室天數，
+    乘以一年工作週數，再乘以「把一個在家工作日改成辦公室日」的淨現金成本。</strong>
+    這個淨額包含當天來回通勤與只在辦公室出現的支出，再扣掉因不在家工作而省下的
+    電費、冷暖氣或其他費用。
+  </p>
+
+  <section class="calculator" aria-labelledby="rto-calculator-title">
+    <div class="input-panel">
+      <h2 id="rto-calculator-title">回辦公室現金差額</h2>
+      <p class="defaults-note">預設值全部只是算式示範，請換成自己的工作安排與新台幣支出。</p>
+
+      <div class="input-grid">
+        <div class="field">
+          <label for="days-before">調整前每週進辦公室天數</label>
+          <input id="days-before" type="number" inputmode="decimal" min="0" max="7" step="0.5" value="1" />
+        </div>
+        <div class="field">
+          <label for="days-after">調整後每週進辦公室天數</label>
+          <input id="days-after" type="number" inputmode="decimal" min="0" max="7" step="0.5" value="3" />
+        </div>
+        <div class="field">
+          <label for="weeks-year">一年實際工作週數</label>
+          <input id="weeks-year" type="number" inputmode="decimal" min="0" max="53" step="1" value="48" />
+        </div>
+        <div class="field">
+          <label for="commute-day">每個辦公室日的來回通勤成本</label>
+          <input id="commute-day" type="number" inputmode="decimal" min="0" step="10" value="180" />
+        </div>
+        <div class="field">
+          <label for="office-extras">每個辦公室日的額外支出</label>
+          <input id="office-extras" type="number" inputmode="decimal" min="0" step="10" value="220" />
+          <small>例如外食、咖啡、服裝，或增加的托育與寵物照顧時數。</small>
+        </div>
+        <div class="field">
+          <label for="home-costs">每個遠距工作日的在家成本</label>
+          <input id="home-costs" type="number" inputmode="decimal" min="0" step="10" value="50" />
+          <small>例如電費、冷暖氣、水費或耗材。</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-panel" aria-live="polite" aria-labelledby="delta-result">
+      <p class="eyebrow">試算現金差額</p>
+      <p id="delta-result" class="headline-result">新安排每年增加 NT$33,600。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>每年差額</span><strong id="annual-delta">+NT$33,600</strong></p>
+        <p class="metric"><span>每月等值</span><strong id="monthly-delta">+NT$2,800</strong></p>
+        <p class="metric"><span>辦公室日變化</span><strong id="days-delta">每週 +2 天</strong></p>
+        <p class="metric"><span>每個轉換日淨成本</span><strong id="net-day">NT$350</strong></p>
+      </div>
+      <p id="input-warning" class="warning" hidden></p>
+    </div>
+  </section>
+
+  <section class="formula-card" aria-labelledby="delta-formula">
+    <h2 id="delta-formula">結果背後的公式</h2>
+    <p><strong>每週辦公室日變化</strong>＝調整後天數 − 調整前天數</p>
+    <p><strong>每個轉換日淨成本</strong>＝通勤成本＋辦公室額外支出−在家工作成本</p>
+    <p><strong>全年差額</strong>＝每週辦公室日變化 &times; 工作週數 &times; 每個轉換日淨成本</p>
+  </section>
+
+  <h2>用預設示範值完整算一次</h2>
+  <p>
+    從每週 1 天進辦公室改成 3 天，等於每週多 2 天；一年工作 48 週，
+    就有 96 天從遠距轉成辦公室日。示範輸入是每日來回通勤 NT$180、
+    辦公室額外支出 NT$220，並省下當天在家工作的 NT$50，因此每個轉換日淨增加
+    180 + 220 − 50＝NT$350。NT$350 &times; 96＝<strong>每年 NT$33,600</strong>，
+    每月等值 <strong>NT$2,800</strong>。這些數字只展示公式，不代表台灣行情或目前價格。
+  </p>
+
+  <h2>三個每日欄位該放什麼？</h2>
+  <ul>
+    <li><strong>通勤：</strong>機車油錢、充電費、捷運或公車票、計程車、每日停車、過路費，以及確實隨里程增加的用車成本。</li>
+    <li><strong>辦公室額外支出：</strong>因進辦公室才買的午餐與咖啡、工作服裝分攤，以及增加的托育、安親或寵物照顧時數。</li>
+    <li><strong>在家工作成本：</strong>遠距日才增加的電費、冷暖氣、水費、網路用量或耗材；這筆在改成辦公室日時會被扣除。</li>
+  </ul>
+  <p>
+    只填真正會改變的金額。無論一週進辦公室幾天都會續用的網路月費，不應整筆放進每日差額；
+    已經買而且不會退的交通月票，也不是新增辦公室日的逐日成本。若停車從計次變成月租，
+    應直接比較調整前後的方案總額。通勤細項可先用
+    <a href={localizedPath(locale, '/tools/commute-cost')}>通勤成本計算器</a>整理；
+    機車或汽車的每公里持有成本則可用
+    <a href={localizedPath(locale, '/tools/cost-per-mile')}>每公里用車成本計算器</a>建立。
+  </p>
+
+  <h2>為什麼這一題算「差額」，不是通勤總成本？</h2>
+  <p>
+    通勤計算器回答「目前上下班一共花多少」；本頁回答的是辦公室日從 N 變成 M 時，
+    現金流多了或少了多少。調整前後完全不變的項目會互相抵消。這樣就不會把原本就存在的
+    車貸、家用網路或其他固定帳單，誤說成全部都是回辦公室安排造成的成本。
+  </p>
+
+  <h2>現金只是一部分，不替你做勞動決策</h2>
+  <p>
+    本計算器只估現金差額，不衡量通勤時間、職涯影響、健康、照顧責任或法律權益。
+    勞動條件、費用補貼、稅務處理與權益會因契約及適用地區而不同；這些問題應與成本算術分開，
+    並在需要時查閱契約或尋求適合的專業與在地協助。
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    這是使用者自行輸入條件的成本試算，不構成勞動、法律、稅務或財務建議。
+    計算在瀏覽器本機執行；為方便下次使用，欄位只儲存在你的瀏覽器，不會上傳伺服器。
+  </p>
+
+  <style>
+    .calculator,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .calculator {
+      margin: 1.5rem 0;
+    }
+
+    .input-panel,
+    .result-panel,
+    .formula-card {
+      min-width: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .input-panel h2,
+    .formula-card h2,
+    .formula-card p {
+      margin-top: 0;
+    }
+
+    .defaults-note,
+    .field small,
+    .eyebrow {
+      color: var(--color-muted);
+    }
+
+    .field label,
+    .field small,
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .field label {
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .field small {
+      margin-top: 0.3rem;
+    }
+
+    .result-panel {
+      border-color: var(--color-primary);
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .headline-result {
+      margin: 0.25rem 0 1rem;
+      color: var(--color-primary);
+      font-size: clamp(1.55rem, 7vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span {
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.15rem;
+      overflow-wrap: anywhere;
+    }
+
+    .warning {
+      border-left: 4px solid #b45309;
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .formula-card {
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .formula-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 760px) {
+      .calculator {
+        grid-template-columns: minmax(0, 1.1fr) minmax(290px, 0.9fr);
+        align-items: start;
+      }
+
+      .input-grid,
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-panel {
+        position: sticky;
+        top: 1rem;
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../lib/money';
+    import { bindPersistentField } from '../../lib/storage';
+
+    const locale = 'zh';
+    const ids = ['days-before', 'days-after', 'weeks-year', 'commute-day', 'office-extras', 'home-costs'];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function formatSigned(amount: number): string {
+      if (Math.abs(amount) < 0.5) return formatCurrency(0, locale);
+      return `${amount > 0 ? '+' : '−'}${formatCurrency(Math.abs(amount), locale)}`;
+    }
+
+    function formatDays(days: number): string {
+      const absolute = Math.abs(days).toLocaleString('zh-TW', { maximumFractionDigits: 1 });
+      if (Math.abs(days) < 0.001) return '沒有變化';
+      return `每週 ${days > 0 ? '+' : '−'}${absolute} 天`;
+    }
+
+    function update(): void {
+      const before = value('days-before');
+      const after = value('days-after');
+      const weeks = value('weeks-year');
+      const commute = value('commute-day');
+      const extras = value('office-extras');
+      const home = value('home-costs');
+      const changedDays = after - before;
+      const netPerDay = commute + extras - home;
+      const annual = changedDays * weeks * netPerDay;
+      const monthly = annual / 12;
+
+      byId<HTMLElement>('annual-delta').textContent = formatSigned(annual);
+      byId<HTMLElement>('monthly-delta').textContent = formatSigned(monthly);
+      byId<HTMLElement>('days-delta').textContent = formatDays(changedDays);
+      byId<HTMLElement>('net-day').textContent = formatCurrency(netPerDay, locale);
+
+      const result = byId<HTMLElement>('delta-result');
+      if (annual > 0.5) {
+        result.textContent = `新安排每年增加 ${formatCurrency(annual, locale)}。`;
+      } else if (annual < -0.5) {
+        result.textContent = `新安排每年節省 ${formatCurrency(Math.abs(annual), locale)}。`;
+      } else {
+        result.textContent = '目前輸入的安排沒有試算現金差額。';
+      }
+
+      const warnings: string[] = [];
+      if (before < 0 || before > 7 || after < 0 || after > 7) warnings.push('每週辦公室日必須介於 0 到 7 天。');
+      if (weeks < 0 || weeks > 53) warnings.push('一年工作週數必須介於 0 到 53 週。');
+      if ([commute, extras, home].some((amount) => amount < 0)) warnings.push('每日成本不可為負數。');
+      const warning = byId<HTMLElement>('input-warning');
+      warning.hidden = warnings.length === 0;
+      warning.textContent = warnings.join(' ');
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `return-to-office-cost:v1:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+
+    update();
+  </script>
+</ArticleLayout>

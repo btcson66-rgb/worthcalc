@@ -1,0 +1,357 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { localizedPath } from '../../i18n/utils';
+
+const locale = 'en';
+const faq = [
+  {
+    question: 'How do I calculate the cost of returning to the office?',
+    answer:
+      'Subtract office days before from office days after. Multiply that change by working weeks and by the net cost of one converted day: round-trip commuting cost plus in-office extras minus costs that occur on an at-home day.',
+  },
+  {
+    question: 'What return-to-office expenses should I include?',
+    answer:
+      'Include only costs that change with an office day: fuel or fares, daily parking and tolls, lunch or coffee bought because you are in, and incremental care or clothing costs. Exclude unchanged monthly bills or count only the portion that truly changes.',
+  },
+  {
+    question: 'How does this work as a work-from-home savings calculator?',
+    answer:
+      'Enter fewer days after than before. The same delta runs in reverse and reports the modeled annual and monthly cash saving, after subtracting per-day home electricity, heating, cooling, and other at-home costs.',
+  },
+  {
+    question: 'Does the calculator include commuting time?',
+    answer:
+      'No. It estimates cash difference only. Time, career effects, health, care responsibilities, and other non-cash consequences should be considered separately.',
+  },
+  {
+    question: 'Is this employment or legal advice?',
+    answer:
+      'No. It is arithmetic for a user-defined schedule. Employment terms, reimbursement, tax treatment, and legal entitlements vary by contract and jurisdiction.',
+  },
+];
+---
+
+<ArticleLayout
+  title="Return-to-Office Cost Calculator: The Annual Cash Difference From N Days to M"
+  description="Calculate the annual and monthly cash change when office days increase or decrease, including commute costs, in-office extras, and at-home costs avoided or added."
+  locale={locale}
+  alternateLocales={['en', 'zh']}
+>
+  <p>
+    <strong>Direct answer: the cost of a return-to-office change is the
+    number of office days added, multiplied by working weeks, multiplied
+    by the net cash cost of turning one at-home day into an office
+    day.</strong> That net day includes the round-trip commute and expenses
+    that appear only in the office, minus electricity, heating, cooling,
+    or other costs that occur only when working at home.
+  </p>
+
+  <section class="calculator" aria-labelledby="rto-calculator-title">
+    <div class="input-panel">
+      <h2 id="rto-calculator-title">Return-to-office cash delta</h2>
+      <p class="defaults-note">All defaults are illustrative. Replace them with your schedule and costs.</p>
+
+      <div class="input-grid">
+        <div class="field">
+          <label for="days-before">Office days per week before</label>
+          <input id="days-before" type="number" inputmode="decimal" min="0" max="7" step="0.5" value="1" />
+        </div>
+        <div class="field">
+          <label for="days-after">Office days per week after</label>
+          <input id="days-after" type="number" inputmode="decimal" min="0" max="7" step="0.5" value="3" />
+        </div>
+        <div class="field">
+          <label for="weeks-year">Working weeks per year</label>
+          <input id="weeks-year" type="number" inputmode="decimal" min="0" max="53" step="1" value="48" />
+        </div>
+        <div class="field">
+          <label for="commute-day">Round-trip commuting cost per office day</label>
+          <input id="commute-day" type="number" inputmode="decimal" min="0" step="1" value="24" />
+        </div>
+        <div class="field">
+          <label for="office-extras">In-office extras per office day</label>
+          <input id="office-extras" type="number" inputmode="decimal" min="0" step="1" value="18" />
+          <small>For example: lunch, coffee, clothing, or added care hours.</small>
+        </div>
+        <div class="field">
+          <label for="home-costs">At-home costs per work-from-home day</label>
+          <input id="home-costs" type="number" inputmode="decimal" min="0" step="1" value="4" />
+          <small>For example: electricity, heating, cooling, or consumables.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-panel" aria-live="polite" aria-labelledby="delta-result">
+      <p class="eyebrow">Modeled cash difference</p>
+      <p id="delta-result" class="headline-result">The new schedule adds $3,648 per year.</p>
+      <div class="metric-grid">
+        <p class="metric"><span>Annual difference</span><strong id="annual-delta">+$3,648</strong></p>
+        <p class="metric"><span>Monthly equivalent</span><strong id="monthly-delta">+$304</strong></p>
+        <p class="metric"><span>Office-day change</span><strong id="days-delta">+2 days/week</strong></p>
+        <p class="metric"><span>Net cost per converted day</span><strong id="net-day">$38</strong></p>
+      </div>
+      <p id="input-warning" class="warning" hidden></p>
+    </div>
+  </section>
+
+  <section class="formula-card" aria-labelledby="delta-formula">
+    <h2 id="delta-formula">The formula behind the result</h2>
+    <p><strong>Changed office days</strong> = days after − days before</p>
+    <p><strong>Net cost per converted day</strong> = commuting cost + in-office extras − at-home costs</p>
+    <p><strong>Annual difference</strong> = changed office days &times; working weeks &times; net cost per converted day</p>
+  </section>
+
+  <h2>Worked example using the illustrative defaults</h2>
+  <p>
+    Moving from 1 to 3 office days adds 2 office days each week. With 48
+    working weeks, that is 96 days converted from home to office. The
+    illustrative daily inputs are $24 for the round-trip commute, $18 for
+    office-only extras, and $4 of at-home cost avoided. The net converted
+    day is therefore $24 + $18 − $4 = $38. Multiplying $38 by 96 gives
+    <strong>$3,648 per year</strong>, or <strong>$304 per month</strong>.
+    These figures demonstrate the formula only; they are not typical or
+    current costs.
+  </p>
+
+  <h2>What belongs in each daily input</h2>
+  <ul>
+    <li><strong>Commuting:</strong> fuel or charging attributable to the round trip, transit fare, rideshare, daily parking, tolls, and mileage-sensitive vehicle cost.</li>
+    <li><strong>In-office extras:</strong> lunch or coffee bought because of the office day, incremental work-clothing cost, and added childcare or pet-care hours.</li>
+    <li><strong>At-home costs:</strong> electricity, heating or cooling, water, and supplies that occur on a home-working day and are avoided when that day moves to the office.</li>
+  </ul>
+  <p>
+    Enter only the amount that changes. A monthly transit pass that you keep
+    under both schedules has no delta. A monthly parking contract that rises
+    only after crossing a usage threshold is not a smooth per-day expense;
+    compare the before and after contract totals instead. For a detailed
+    commute input, use the
+    <a href={localizedPath(locale, '/tools/commute-cost')}>commute cost calculator</a>.
+    If you need a vehicle ownership rate first, use the
+    <a href={localizedPath(locale, '/tools/cost-per-mile')}>cost per mile calculator</a>.
+  </p>
+
+  <h2>Why this is a delta, not a commute total</h2>
+  <p>
+    A commute calculator answers &ldquo;what does my current way of getting
+    to work cost?&rdquo; This page asks what changes when the schedule moves
+    from N office days to M. Costs that remain identical before and after
+    cancel out. That distinction prevents an existing car payment, home
+    internet plan, or other unchanged bill from being counted as though the
+    mandate created the entire amount.
+  </p>
+
+  <h2>Cash is only one part of the decision</h2>
+  <p>
+    This calculator estimates cash difference only. It does not weigh
+    commuting time, career effects, health, caring responsibilities, or
+    legal entitlements. Terms of employment, reimbursement, tax treatment,
+    and rights vary by contract and jurisdiction. Keep those questions
+    outside this arithmetic and seek appropriate professional or local
+    guidance where needed.
+  </p>
+
+  <FAQ items={faq} />
+
+  <p class="privacy-note">
+    This is a user-input cost estimate, not employment, legal, tax, or
+    financial advice. The calculator runs locally in your browser; entries
+    are stored only in your browser for convenience and are not uploaded to
+    a server.
+  </p>
+
+  <style>
+    .calculator,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .calculator {
+      margin: 1.5rem 0;
+    }
+
+    .input-panel,
+    .result-panel,
+    .formula-card {
+      min-width: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .input-panel h2,
+    .formula-card h2,
+    .formula-card p {
+      margin-top: 0;
+    }
+
+    .defaults-note,
+    .field small,
+    .eyebrow {
+      color: var(--color-muted);
+    }
+
+    .field label,
+    .field small,
+    .metric span,
+    .metric strong {
+      display: block;
+    }
+
+    .field label {
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+
+    .field small {
+      margin-top: 0.3rem;
+    }
+
+    .result-panel {
+      border-color: var(--color-primary);
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .headline-result {
+      margin: 0.25rem 0 1rem;
+      color: var(--color-primary);
+      font-size: clamp(1.55rem, 7vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span {
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.15rem;
+      overflow-wrap: anywhere;
+    }
+
+    .warning {
+      border-left: 4px solid #b45309;
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .formula-card {
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .formula-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 760px) {
+      .calculator {
+        grid-template-columns: minmax(0, 1.1fr) minmax(290px, 0.9fr);
+        align-items: start;
+      }
+
+      .input-grid,
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-panel {
+        position: sticky;
+        top: 1rem;
+      }
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../lib/money';
+    import { bindPersistentField } from '../../lib/storage';
+
+    const locale = 'en';
+    const ids = ['days-before', 'days-after', 'weeks-year', 'commute-day', 'office-extras', 'home-costs'];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function formatSigned(amount: number): string {
+      if (Math.abs(amount) < 0.5) return formatCurrency(0, locale);
+      return `${amount > 0 ? '+' : '−'}${formatCurrency(Math.abs(amount), locale)}`;
+    }
+
+    function formatDays(days: number): string {
+      const absolute = Math.abs(days).toLocaleString('en-US', { maximumFractionDigits: 1 });
+      if (Math.abs(days) < 0.001) return 'No change';
+      return `${days > 0 ? '+' : '−'}${absolute} ${Math.abs(days) === 1 ? 'day' : 'days'}/week`;
+    }
+
+    function update(): void {
+      const before = value('days-before');
+      const after = value('days-after');
+      const weeks = value('weeks-year');
+      const commute = value('commute-day');
+      const extras = value('office-extras');
+      const home = value('home-costs');
+      const changedDays = after - before;
+      const netPerDay = commute + extras - home;
+      const annual = changedDays * weeks * netPerDay;
+      const monthly = annual / 12;
+
+      byId<HTMLElement>('annual-delta').textContent = formatSigned(annual);
+      byId<HTMLElement>('monthly-delta').textContent = formatSigned(monthly);
+      byId<HTMLElement>('days-delta').textContent = formatDays(changedDays);
+      byId<HTMLElement>('net-day').textContent = formatCurrency(netPerDay, locale);
+
+      const result = byId<HTMLElement>('delta-result');
+      if (annual > 0.5) {
+        result.textContent = `The new schedule adds ${formatCurrency(annual, locale)} per year.`;
+      } else if (annual < -0.5) {
+        result.textContent = `The new schedule saves ${formatCurrency(Math.abs(annual), locale)} per year.`;
+      } else {
+        result.textContent = 'The entered schedules have no modeled cash difference.';
+      }
+
+      const warnings: string[] = [];
+      if (before < 0 || before > 7 || after < 0 || after > 7) warnings.push('Office days must be between 0 and 7.');
+      if (weeks < 0 || weeks > 53) warnings.push('Working weeks must be between 0 and 53.');
+      if ([commute, extras, home].some((amount) => amount < 0)) warnings.push('Daily cost inputs cannot be negative.');
+      const warning = byId<HTMLElement>('input-warning');
+      warning.hidden = warnings.length === 0;
+      warning.textContent = warnings.join(' ');
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `return-to-office-cost:v1:${input.id}`);
+      input.addEventListener('input', update);
+    });
+
+    update();
+  </script>
+</ArticleLayout>

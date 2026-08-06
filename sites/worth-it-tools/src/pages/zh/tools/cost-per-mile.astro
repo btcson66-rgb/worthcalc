@@ -1,0 +1,601 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '每公里成本計算機：汽車／機車養車總成本';
+const description = '計算汽車或機車每公里成本，拆出油錢或電費、折舊、保養維修、輪胎、保險、燃料費、牌照稅、驗車與利息。';
+const faq = [
+  {
+    question: '汽車或機車每公里成本怎麼算？',
+    answer: '先把一年折舊、保險、燃料費、牌照稅、驗車、利息、保養維修、輪胎與油錢或電費加總，再除以一年行駛公里數。計算機會把能源成本與完整養車成本分開顯示。',
+  },
+  {
+    question: '每公里油錢就是每公里養車成本嗎？',
+    answer: '不是。每公里油錢只反映油耗與油價，沒有包含折舊、保險、稅費、驗車、利息、保養與輪胎；只拿油錢比較，通常會低估持有車輛的成本。',
+  },
+  {
+    question: '每公里折舊怎麼算？',
+    answer: '計算機以購車價減預估轉售價，再除以持有年數得到每年折舊；接著用每年折舊除以年行駛公里數。轉售價與持有時間都可以自行調整。',
+  },
+  {
+    question: '電動汽車或電動機車也能算嗎？',
+    answer: '可以。選擇電動後，輸入每 100 公里的度數與每度電價；購車價、轉售價、保險、稅費、保養、輪胎等欄位仍會納入，所以結果不只是一公里電費。',
+  },
+  {
+    question: '為什麼一年騎或開得越多，每公里成本可能越低？',
+    answer: '因為一年折舊、保險、稅費與利息等固定成本會分攤到更多公里。能源費仍會隨里程增加，但固定成本放到每一公里後會下降。',
+  },
+  {
+    question: '這和通勤成本計算機有什麼不同？',
+    answer: '本頁算一輛汽車或機車的一般每公里養車成本，不處理每月上班天數、停車、過路費、大眾運輸、叫車或通勤時間。',
+  },
+];
+const related = [
+  { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: '電動車 vs 油車總成本計算機', href: localizedPath(locale, '/tools/ev-vs-gas') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
+  <p class="intro">
+    這裡算的是一輛汽車或機車真正的每公里成本，不只是加油或充電的錢。所有欄位都能修改；畫面上的預設值只用來示範公式，不代表目前油價、電價、稅率、行情，也不是對任何車款的建議。
+  </p>
+
+  <div class="calculator-grid">
+    <section class="input-panel" aria-labelledby="cost-inputs">
+      <h2 id="cost-inputs">車輛與年度成本</h2>
+
+      <fieldset class="switcher">
+        <legend>計量單位</legend>
+        <div class="switch-options">
+          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" checked /> 公制 <span>（公里、公升）</span></label>
+          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" /> 英制 <span>（英里、加侖）</span></label>
+        </div>
+      </fieldset>
+      <input id="unit-system" type="hidden" value="metric" />
+
+      <div class="field primary-field">
+        <label for="annual-distance">一年行駛距離（<span class="distance-plural">公里</span>）</label>
+        <input id="annual-distance" type="number" inputmode="decimal" min="0" step="100" value="12000" />
+      </div>
+
+      <fieldset class="switcher">
+        <legend>動力類型</legend>
+        <div class="switch-options">
+          <label><input id="powertrain-fuel" type="radio" name="powertrain-choice" value="fuel" checked /> 汽油／柴油</label>
+          <label><input id="powertrain-electric" type="radio" name="powertrain-choice" value="electric" /> 電動</label>
+        </div>
+      </fieldset>
+      <input id="powertrain" type="hidden" value="fuel" />
+
+      <div id="fuel-fields" class="input-grid mode-fields">
+        <div class="field">
+          <label for="fuel-efficiency"><span id="fuel-efficiency-label">油耗（L/100 km）</span></label>
+          <input id="fuel-efficiency" type="number" inputmode="decimal" min="0" step="0.1" value="6.5" />
+        </div>
+        <div class="field">
+          <label for="fuel-price">每<span id="fuel-volume-unit">公升</span>油價</label>
+          <input id="fuel-price" type="number" inputmode="decimal" min="0" step="0.1" value="32" />
+        </div>
+      </div>
+
+      <div id="electric-fields" class="input-grid mode-fields" hidden>
+        <div class="field">
+          <label for="energy-use">每 100 <span class="distance-plural">公里</span>耗電（kWh）</label>
+          <input id="energy-use" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
+        </div>
+        <div class="field">
+          <label for="electricity-price">每度電價</label>
+          <input id="electricity-price" type="number" inputmode="decimal" min="0" step="0.1" value="3" />
+        </div>
+      </div>
+
+      <p class="defaults-note">油耗、電耗與價格都是可編輯的算式範例，請換成車主手冊、帳單、收據與報價上的數字。</p>
+
+      <h3>每年行駛成本</h3>
+      <div class="input-grid">
+        <div class="field">
+          <label for="maintenance">每年保養與維修</label>
+          <input id="maintenance" type="number" inputmode="decimal" min="0" step="500" value="12000" />
+        </div>
+        <div class="field">
+          <label for="tyres">每年輪胎成本</label>
+          <input id="tyres" type="number" inputmode="decimal" min="0" step="500" value="5000" />
+        </div>
+      </div>
+
+      <h3>每年固定成本</h3>
+      <div class="input-grid">
+        <div class="field">
+          <label for="insurance">每年保險</label>
+          <input id="insurance" type="number" inputmode="decimal" min="0" step="500" value="12000" />
+        </div>
+        <div class="field">
+          <label for="registration">每年燃料費、牌照稅與驗車</label>
+          <input id="registration" type="number" inputmode="decimal" min="0" step="500" value="12000" />
+        </div>
+        <div class="field">
+          <label for="finance-interest">每年貸款利息（選填）</label>
+          <input id="finance-interest" type="number" inputmode="decimal" min="0" step="500" value="0" />
+        </div>
+      </div>
+
+      <h3>折舊</h3>
+      <div class="input-grid">
+        <div class="field">
+          <label for="purchase-price">購車價</label>
+          <input id="purchase-price" type="number" inputmode="decimal" min="0" step="10000" value="800000" />
+        </div>
+        <div class="field">
+          <label for="resale-value">預估轉售價</label>
+          <input id="resale-value" type="number" inputmode="decimal" min="0" step="10000" value="350000" />
+        </div>
+        <div class="field">
+          <label for="years-kept">預計持有年數</label>
+          <input id="years-kept" type="number" inputmode="decimal" min="0" step="0.5" value="6" />
+        </div>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-live="polite" aria-labelledby="headline-result">
+      <p class="eyebrow">每<span class="distance-singular">公里</span>養車總成本</p>
+      <p id="headline-result" class="headline-result">NT$0.00／公里</p>
+      <p id="fixed-share" class="insight">輸入年度里程與成本後，這裡會顯示固定成本如何影響每公里結果。</p>
+
+      <div class="metric-grid">
+        <p class="metric energy-metric">
+          <span id="energy-label">每公里油錢</span>
+          <strong id="energy-rate">NT$0.00</strong>
+          <small id="energy-formula">L/100 km × 每公升油價 ÷ 100</small>
+        </p>
+        <p class="metric">
+          <span>一年總成本</span>
+          <strong id="annual-total">NT$0</strong>
+          <small>固定成本 + 行駛成本</small>
+        </p>
+        <p class="metric">
+          <span>一年固定成本</span>
+          <strong id="fixed-total">NT$0</strong>
+          <small>折舊、保險、稅費驗車、利息</small>
+        </p>
+        <p class="metric">
+          <span>一年行駛成本</span>
+          <strong id="running-total">NT$0</strong>
+          <small>油電、保養維修、輪胎</small>
+        </p>
+        <p class="metric">
+          <span>一年折舊</span>
+          <strong id="depreciation-total">NT$0</strong>
+          <small id="depreciation-formula">（購車價 − 轉售價）÷ 持有年數</small>
+        </p>
+      </div>
+      <p id="input-warning" class="warning" hidden></p>
+    </section>
+  </div>
+
+  <section class="explanation" aria-labelledby="fuel-is-not-total">
+    <h2 id="fuel-is-not-total">每公里油錢不等於每公里養車成本</h2>
+    <p>
+      公制的每公里油錢算法是「每 100 公里耗油量 × 每公升油價 ÷ 100」。例如把可編輯欄位設成 6.5 L/100 km 與每公升 32 元，能源這一行就是 6.5 × 32 ÷ 100 = 2.08 元／公里。但這 2.08 元沒有算到折舊、保險、燃料費、牌照稅、驗車、貸款利息、保養、維修與輪胎；若直接把油錢當成養車成本，會漏掉車輛持有期間真正流失的價值與每年固定支出。
+    </p>
+    <p>
+      完整公式是「一年固定成本 + 一年行駛成本」，再除以一年行駛距離。固定成本包含折舊、保險、燃料費、牌照稅、驗車與利息；行駛成本包含油錢或電費、保養維修與輪胎。所有欄位要使用同一個年度口徑。若購車價已透過折舊反映車輛價值的消耗，不要又把貸款本金整筆當費用重複加入；本頁只另外提供每年利息欄位。
+    </p>
+
+    <h2>每公里折舊怎麼來，為什麼常是最大項</h2>
+    <p>
+      年折舊以購車價減掉預估可收回的轉售價，再除以持有年數；每公里折舊則把年折舊除以年行駛公里。買車不是把現金單純「花掉」，而是換成一項通常會逐年掉價的資產，賣車時收不回來的差額才是重要成本。這一項很容易比一公里油錢更大，因此不能因為當下沒有收到折舊帳單就忽略。轉售價與持有時間都不確定，建議自行測試較保守的轉售價，以及不同持有年數，不要把單一預測當成保證。
+    </p>
+
+    <h2>同一台車，一年 5,000 公里與 20,000 公里差很多</h2>
+    <p>
+      假設同一台車的年折舊、保險、燃料費、牌照稅與利息不變，一年只開 5,000 公里時，這些固定金額只能分攤到 5,000 公里；一年開 20,000 公里時，會分攤到四倍的里程，所以每公里固定成本明顯降低。油錢或電費仍會隨距離增加，真實維修與轉售價也可能因使用量改變，但不能因此把固定成本當成零。上方產生的句子會直接顯示目前輸入下，固定成本占全年總成本的比例，以及每公里分攤多少。
+    </p>
+
+    <h2>換成電動汽車或電動機車，哪些地方會改變</h2>
+    <p>
+      電動模式把 MPG 或 L/100 km 換成「每 100 公里或英里使用幾度電」，再乘上每度電價並除以 100。購車價、轉售價、保險、稅費、利息、保養與輪胎仍各自輸入，因此結果不是單純的一公里充電費。這個工具刻意不納入停車、過路費、通勤時間、補助、排放、通膨、現金機會成本、充電設備安裝，以及沒有被你放進維修或其他欄位的電池更換。這些項目是否發生、如何計價，必須依個人車況與實際方案另行處理。
+    </p>
+    <p>
+      汽車與機車都可以使用本頁：算機車時，把購車價、保險、稅費、油耗或電耗、輪胎與保養改成該台機車的資料即可。不要拿畫面上的汽車範例數字直接代表機車，也不要假設同一種動力的所有車款都有相同能源效率或轉售價。
+    </p>
+
+    <h2>依你要回答的問題選工具</h2>
+    <p>
+      想問「這台車每公里到底花多少」，就使用本頁；它以一整年的單一車輛成本為範圍，不假設上班天數或固定路線。若問題是「我每月通勤花多少」，並且要把停車、過路費、大眾運輸、Uber、機車、汽車與時間一起比較，請改用<a href={localizedPath(locale, '/tools/commute-cost')}>通勤成本計算機</a>。若要比較兩台不同車在多年持有期間的購車價、補助、轉售與回本點，則使用<a href={localizedPath(locale, '/tools/ev-vs-gas')}>電動車 vs 油車總成本計算機</a>。三個問題分開計算，才能避免讓一般養車成本與特定通勤支出互相重複。
+    </p>
+  </section>
+
+  <style>
+    .intro,
+    .defaults-note,
+    .explanation,
+    .metric small {
+      color: var(--color-muted);
+    }
+
+    .calculator-grid,
+    .input-grid,
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .input-panel,
+    .result-panel,
+    .explanation {
+      min-width: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .input-panel h3 {
+      margin: 1.4rem 0 0.7rem;
+    }
+
+    .switcher {
+      min-width: 0;
+      margin: 0 0 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+    }
+
+    .switcher legend,
+    .field label {
+      font-weight: 650;
+    }
+
+    .switch-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .switch-options label {
+      display: inline-flex;
+      flex: 1 1 12rem;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+    }
+
+    .switch-options label:has(input:checked) {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
+    }
+
+    .switch-options input {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin: 0;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .primary-field,
+    .mode-fields,
+    .defaults-note {
+      margin-bottom: 1rem;
+    }
+
+    .defaults-note {
+      margin-top: -0.35rem;
+      font-size: 0.9rem;
+    }
+
+    .result-panel {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .headline-result {
+      margin: 0.2rem 0 0.8rem;
+      color: var(--color-primary);
+      font-size: clamp(1.8rem, 7vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+
+    .insight,
+    .warning {
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .metric span,
+    .metric strong,
+    .metric small {
+      display: block;
+    }
+
+    .metric span,
+    .metric small {
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      font-size: 1.15rem;
+    }
+
+    .energy-metric {
+      border-color: var(--color-primary);
+    }
+
+    .warning {
+      border-left-color: #b45309;
+    }
+
+    @media (min-width: 760px) {
+      .calculator-grid {
+        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+        align-items: start;
+      }
+
+      .input-grid,
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      .switch-options,
+      .switch-options label {
+        width: 100%;
+      }
+
+      .result-panel {
+        position: static;
+      }
+    }
+  </style>
+
+  <script>
+    import { bindPersistentField } from '../../../lib/storage';
+
+    type UnitSystem = 'imperial' | 'metric';
+    type Powertrain = 'fuel' | 'electric';
+
+    const kilometersPerMile = 1.609344;
+    const litersPerGallon = 3.785411784;
+    const efficiencyConversion = 235.214583;
+    const ids = [
+      'unit-system',
+      'powertrain',
+      'annual-distance',
+      'fuel-efficiency',
+      'fuel-price',
+      'energy-use',
+      'electricity-price',
+      'maintenance',
+      'tyres',
+      'insurance',
+      'registration',
+      'purchase-price',
+      'resale-value',
+      'years-kept',
+      'finance-interest',
+    ];
+    const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const unitField = byId<HTMLInputElement>('unit-system');
+    const powertrainField = byId<HTMLInputElement>('powertrain');
+    const unitRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="unit-choice"]'));
+    const powertrainRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="powertrain-choice"]'));
+
+    function byId<T extends HTMLElement>(id: string): T {
+      const element = document.getElementById(id);
+      if (!element) throw new Error(`Missing #${id}`);
+      return element as T;
+    }
+
+    function value(id: string): number {
+      const parsed = Number(byId<HTMLInputElement>(id).value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function positive(id: string): number {
+      return Math.max(0, value(id));
+    }
+
+    function currentUnit(): UnitSystem {
+      return unitField.value === 'imperial' ? 'imperial' : 'metric';
+    }
+
+    function currentPowertrain(): Powertrain {
+      return powertrainField.value === 'electric' ? 'electric' : 'fuel';
+    }
+
+    function setValue(id: string, nextValue: number, fractionDigits = 2): void {
+      const input = byId<HTMLInputElement>(id);
+      const formatted = Number.isFinite(nextValue) ? nextValue.toFixed(fractionDigits).replace(/\.?0+$/, '') : '0';
+      input.value = formatted || '0';
+      input.dispatchEvent(new Event('input'));
+    }
+
+    function formatMoney(amount: number, fractionDigits = 0): string {
+      return new Intl.NumberFormat('zh-TW', {
+        style: 'currency',
+        currency: 'TWD',
+        minimumFractionDigits: fractionDigits,
+        maximumFractionDigits: fractionDigits,
+      }).format(Number.isFinite(amount) ? amount : 0);
+    }
+
+    function formatNumber(amount: number, fractionDigits = 0): string {
+      return new Intl.NumberFormat('zh-TW', {
+        minimumFractionDigits: fractionDigits,
+        maximumFractionDigits: fractionDigits,
+      }).format(Number.isFinite(amount) ? amount : 0);
+    }
+
+    function energyRate(): number {
+      if (currentPowertrain() === 'electric') {
+        return (positive('energy-use') * positive('electricity-price')) / 100;
+      }
+      const efficiency = positive('fuel-efficiency');
+      if (efficiency <= 0) return 0;
+      return currentUnit() === 'imperial'
+        ? positive('fuel-price') / efficiency
+        : (efficiency * positive('fuel-price')) / 100;
+    }
+
+    function applyPowertrain(): void {
+      const powertrain = currentPowertrain();
+      (['fuel', 'electric'] as Powertrain[]).forEach((candidate) => {
+        const container = byId<HTMLElement>(`${candidate}-fields`);
+        const active = candidate === powertrain;
+        container.hidden = !active;
+        container.querySelectorAll<HTMLInputElement>('input').forEach((input) => {
+          input.disabled = !active;
+        });
+      });
+      powertrainRadios.forEach((radio) => {
+        radio.checked = radio.value === powertrain;
+      });
+    }
+
+    function applyUnitLabels(): void {
+      const unit = currentUnit();
+      const singular = unit === 'imperial' ? '英里' : '公里';
+      document.querySelectorAll<HTMLElement>('.distance-singular').forEach((element) => {
+        element.textContent = singular;
+      });
+      document.querySelectorAll<HTMLElement>('.distance-plural').forEach((element) => {
+        element.textContent = singular;
+      });
+      byId<HTMLElement>('fuel-efficiency-label').textContent = unit === 'imperial'
+        ? '油耗（MPG）'
+        : '油耗（L/100 km）';
+      byId<HTMLElement>('fuel-volume-unit').textContent = unit === 'imperial' ? '加侖' : '公升';
+      unitRadios.forEach((radio) => {
+        radio.checked = radio.value === unit;
+      });
+    }
+
+    function convertUnit(from: UnitSystem, to: UnitSystem): void {
+      if (from === to) return;
+      const toMetric = to === 'metric';
+      setValue('annual-distance', toMetric ? positive('annual-distance') * kilometersPerMile : positive('annual-distance') / kilometersPerMile, 0);
+      const fuelEfficiency = positive('fuel-efficiency');
+      setValue('fuel-efficiency', fuelEfficiency > 0 ? efficiencyConversion / fuelEfficiency : 0, 2);
+      setValue('fuel-price', toMetric ? positive('fuel-price') / litersPerGallon : positive('fuel-price') * litersPerGallon, 3);
+      setValue('energy-use', toMetric ? positive('energy-use') / kilometersPerMile : positive('energy-use') * kilometersPerMile, 2);
+    }
+
+    function update(): void {
+      const unit = currentUnit();
+      const powertrain = currentPowertrain();
+      const distance = positive('annual-distance');
+      const distanceName = unit === 'imperial' ? '英里' : '公里';
+      const rate = energyRate();
+      const years = positive('years-kept');
+      const depreciableAmount = Math.max(0, positive('purchase-price') - positive('resale-value'));
+      const depreciation = years > 0 ? depreciableAmount / years : 0;
+      const fixed = depreciation + positive('insurance') + positive('registration') + positive('finance-interest');
+      const energyAnnual = rate * distance;
+      const running = energyAnnual + positive('maintenance') + positive('tyres');
+      const annual = fixed + running;
+      const totalRate = distance > 0 ? annual / distance : 0;
+      const fixedShare = annual > 0 ? (fixed / annual) * 100 : 0;
+      const fixedPerDistance = distance > 0 ? fixed / distance : 0;
+
+      byId<HTMLElement>('headline-result').textContent = `${formatMoney(totalRate, 2)}／${distanceName}`;
+      byId<HTMLElement>('energy-label').textContent = `每${distanceName}${powertrain === 'electric' ? '電費' : '油錢'}`;
+      byId<HTMLElement>('energy-rate').textContent = `${formatMoney(rate, 3)}／${distanceName}`;
+      byId<HTMLElement>('annual-total').textContent = formatMoney(annual);
+      byId<HTMLElement>('fixed-total').textContent = formatMoney(fixed);
+      byId<HTMLElement>('running-total').textContent = formatMoney(running);
+      byId<HTMLElement>('depreciation-total').textContent = formatMoney(depreciation);
+      byId<HTMLElement>('depreciation-formula').textContent = years > 0
+        ? `${formatMoney(depreciableAmount)} 價值減損 ÷ ${formatNumber(years, years % 1 === 0 ? 0 : 1)} 年`
+        : '持有年數必須大於 0';
+
+      if (powertrain === 'electric') {
+        byId<HTMLElement>('energy-formula').textContent = `每 100 ${distanceName} ${formatNumber(positive('energy-use'), 1)} kWh × ${formatMoney(positive('electricity-price'), 3)} ÷ 100`;
+      } else if (unit === 'imperial') {
+        byId<HTMLElement>('energy-formula').textContent = `每加侖 ${formatMoney(positive('fuel-price'), 3)} ÷ ${formatNumber(positive('fuel-efficiency'), 1)} MPG`;
+      } else {
+        byId<HTMLElement>('energy-formula').textContent = `${formatNumber(positive('fuel-efficiency'), 1)} L/100 km × 每公升 ${formatMoney(positive('fuel-price'), 3)} ÷ 100`;
+      }
+
+      const insight = byId<HTMLElement>('fixed-share');
+      insight.textContent = distance > 0 && annual > 0
+        ? `一年行駛 ${formatNumber(distance)} ${distanceName}時，固定成本占全年總成本 ${formatNumber(fixedShare, 1)}%，每${distanceName}分攤 ${formatMoney(fixedPerDistance, 2)}。里程增加會把固定金額攤到更多${distanceName}，不代表油電成本會消失。`
+        : `輸入年度里程與成本後，這裡會顯示固定成本如何影響每${distanceName}結果。`;
+
+      const warning = byId<HTMLElement>('input-warning');
+      const messages: string[] = [];
+      if (distance <= 0) messages.push('一年行駛距離必須大於 0，才能算每公里或英里成本。');
+      if (years <= 0) messages.push('持有年數必須大於 0，才能計算折舊。');
+      if (positive('resale-value') > positive('purchase-price')) messages.push('轉售價高於購車價，因此本工具把折舊最低限制為 0。');
+      if (powertrain === 'fuel' && positive('fuel-efficiency') <= 0) messages.push('油耗必須大於 0，才能計算油錢。');
+      warning.hidden = messages.length === 0;
+      warning.textContent = messages.join(' ');
+    }
+
+    inputs.forEach((input) => {
+      bindPersistentField(input, `cost-per-mile:v1:${input.id}:zh`);
+      input.addEventListener('input', update);
+    });
+
+    unitField.value = currentUnit();
+    powertrainField.value = currentPowertrain();
+    applyUnitLabels();
+    applyPowertrain();
+
+    unitRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        const previousUnit = currentUnit();
+        const nextUnit: UnitSystem = radio.value === 'imperial' ? 'imperial' : 'metric';
+        convertUnit(previousUnit, nextUnit);
+        unitField.value = nextUnit;
+        unitField.dispatchEvent(new Event('input'));
+        applyUnitLabels();
+        update();
+      });
+    });
+
+    powertrainRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        powertrainField.value = radio.value === 'electric' ? 'electric' : 'fuel';
+        powertrainField.dispatchEvent(new Event('input'));
+        applyPowertrain();
+        update();
+      });
+    });
+
+    update();
+  </script>
+</ToolLayout>

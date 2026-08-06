@@ -1,7 +1,9 @@
 {
-  "maxUrls": 345,
-  "currentUrls": 341,
-  "reviewedAt": "2026-08-06",
+  "maxUrls": 350,
+  "currentUrls": 343,
+  "reviewedAt": "2026-08-07",
   "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
-  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Before you raise it: (1) worthcalc's GSC daily impressions must be back above the pre-collapse baseline of 16-35 for seven consecutive days, and (2) the new pages must each be a page a human would search for by name, not a locale fill-in of a page that already exists. Add at most 5 URLs per release."
+  "amendedOn": "2026-08-07",
+  "amendedBecause": "The 2026-08-06 cap required impressions to recover before any new page could ship. That condition is NOT met -- impressions are still at 3-9/day. The cap is being raised anyway, deliberately, because the owner has changed the policy the cap was written to protect against: five-language production is stopped, so new routes now ship en+zh only (check-all-localized-routes.mjs already encodes this as requiredLocales/frozenLocales). The risk the cap existed to stop was mass locale fill-in, not a handful of demand-evidenced English pages. Raised 345 -> 350 to fit three new topics at two URLs each (341 -> 347). The evidence for those topics is in Company Vault/10_Web_Department/2026-08-07-worthcalc-topic-research.md: the commuting-cost cluster is 31% of all worthcalc impressions over 180 days while ranking 55-78, which is the only topic on this site with proven demand and no competitiveness.",
+  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be (1) en+zh only -- never es/fr/de while the i18n freeze holds, (2) backed by written demand evidence, not a hunch: GSC impressions at a deep position, or an autocomplete cluster, cited in a Vault research note, and (3) a page a human would search for by name, not a variant of a page that already exists. At most 6 URLs (three topics) per release."
 }

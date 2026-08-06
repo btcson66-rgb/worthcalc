@@ -54,7 +54,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       'Before you sign up, sign the lease, or swipe the card, run the numbers. Every calculator does real math on real money decisions, right in your browser - no sign-up, no data sent anywhere, just a clear estimate.',
     badges: ['No sign-up', '100% private', 'Free forever'],
     toolsHeading: 'Calculators',
-    toolsLead: 'Eight tools for the decisions people actually search "is it worth it?" about.',
+    toolsLead: 'Nine tools for the decisions people actually search "is it worth it?" about.',
     toolsCta: 'Open calculator',
     tools: [
       {
@@ -92,6 +92,12 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
         title: 'Commute Cost Calculator',
         path: '/tools/commute-cost',
         description: 'Compare car, transit, rideshare, and bike costs per month, including your time.',
+      },
+      {
+        icon: '🛞',
+        title: 'Cost Per Mile Calculator',
+        path: '/tools/cost-per-mile',
+        description: 'Calculate total car cost per mile, including energy, depreciation, insurance, maintenance, and fees.',
       },
       {
         icon: '☕',
@@ -167,7 +173,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       '分期划不划算、訂閱是不是在燒錢、好市多會員值不值得續、租屋還是買房比較好，這些問題不用憑感覺。所有計算都在你的瀏覽器本機完成，不需要註冊、資料不外傳，只給你一個清楚的估算方向。',
     badges: ['免註冊', '完全隱私', '永久免費'],
     toolsHeading: '計算機',
-    toolsLead: '八個工具，專門回答大家真的會搜尋的「值不值得？」。',
+    toolsLead: '九個工具，專門回答大家真的會搜尋的「值不值得？」。',
     toolsCta: '開啟計算機',
     tools: [
       {
@@ -205,6 +211,12 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
         title: '通勤成本計算機',
         path: '/tools/commute-cost',
         description: '比較機車、汽車、大眾運輸與 Uber 的每月、每年通勤花費。',
+      },
+      {
+        icon: '🛞',
+        title: '每公里養車成本計算機',
+        path: '/tools/cost-per-mile',
+        description: '計算汽車或機車每公里總成本，拆出油電、折舊、保險、保養、輪胎與稅費。',
       },
       {
         icon: '🧋',

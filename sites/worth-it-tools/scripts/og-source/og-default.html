@@ -1,0 +1,55 @@
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+    padding: 64px 90px;
+    background: #f7fbfb;
+    background-image: radial-gradient(1100px 520px at 88% -18%, #cdf1ec 0%, rgba(205,241,236,0) 62%);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #17323b;
+  }
+  .mark { display: flex; align-items: center; gap: 22px; }
+  .mark svg { width: 68px; height: 68px; }
+  .name { font-size: 42px; font-weight: 700; letter-spacing: -0.015em; }
+  h1 {
+    font-size: 62px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    max-width: 16ch;
+  }
+  h1 em { font-style: normal; color: #0d9488; }
+  .sub { display: flex; gap: 14px; }
+  .sub span {
+    border: 1px solid #b9ded8;
+    border-radius: 999px;
+    padding: 9px 20px;
+    background: #ffffff;
+    color: #2a5c60;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .rule { height: 8px; width: 132px; border-radius: 999px; background: linear-gradient(90deg, #14b8a6, #0d9488); }
+</style>
+<div class="mark">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="WorthCalc">
+    <defs>
+      <linearGradient id="wc" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#14b8a6"/>
+        <stop offset="1" stop-color="#0d9488"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#wc)"/>
+    <path d="M8 16.5l4.2 4.4L24 9.5" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="10.5" cy="10.5" r="1.7" fill="#ffffff" opacity="0.9"/>
+  </svg>
+  <div class="name">WorthCalc</div>
+</div>
+<div class="rule"></div>
+<h1>Free calculators that tell you if it's <em>actually worth it</em>.</h1>
+<div class="sub"><span>No sign-up</span><span>100% private</span><span>Free forever</span></div>

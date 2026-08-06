@@ -2,6 +2,7 @@
 import type { CoreLocale } from '../consts';
 import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
+import { guideIndex } from '../data/guideIndex';
 import { getCollection } from 'astro:content';
 import FAQ from './FAQ.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
@@ -16,6 +17,18 @@ const growthTools = (await getCollection('growthTools', ({ data }) => data.local
   .sort((a, b) => a.data.title.localeCompare(b.data.title, locale));
 const growthHeading = {
   en: 'More planning calculators', zh: '更多財務規劃試算', es: 'Más calculadoras de planificación', fr: 'Autres calculateurs de planification', de: 'Weitere Planungsrechner',
+}[locale];
+
+// 完整指南索引。首頁是全站最常被爬的頁面，這一段讓每一篇編輯內容都至少有一條
+// 來自它的連結——2026-08-06 盤點時有 106 頁內文零內部連結，最新六篇的唯一入站
+// 連結是自己的語言切換器，Google 因此連 07-28 發布的文章都還不知道存在。
+const allGuides = guideIndex[locale];
+const allGuidesCopy = {
+  en: { heading: 'Every guide on this site', lead: 'The full index, so you can find the write-up behind any calculator.' },
+  zh: { heading: '本站所有指南', lead: '完整索引，每一個試算背後的說明都在這裡。' },
+  es: { heading: 'Todas las guías de este sitio', lead: 'El índice completo, para encontrar el análisis detrás de cada calculadora.' },
+  fr: { heading: 'Tous les guides du site', lead: "L'index complet, pour retrouver l'analyse derrière chaque calculateur." },
+  de: { heading: 'Alle Ratgeber dieser Seite', lead: 'Das vollständige Verzeichnis mit der Erklärung hinter jedem Rechner.' },
 }[locale];
 ---
 
@@ -72,6 +85,16 @@ const growthHeading = {
       </article>
     ))}
   </div>
+</section>
+
+<section class="all-guides" aria-labelledby="all-guides-heading">
+  <h2 id="all-guides-heading">{allGuidesCopy.heading}</h2>
+  <p class="section-lead">{allGuidesCopy.lead}</p>
+  <ul class="all-guides__list">
+    {allGuides.map((guide) => (
+      <li><a href={localizedPath(locale, guide.path)}>{guide.title}</a></li>
+    ))}
+  </ul>
 </section>
 
 <section class="seo-copy" aria-labelledby="home-seo-heading">

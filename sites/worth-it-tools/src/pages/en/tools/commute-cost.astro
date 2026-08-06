@@ -7,36 +7,32 @@ import { localizedPath } from '../../../i18n/utils';
 const locale = 'en';
 const decisionGuide = commuteGuides.en;
 if (!decisionGuide) throw new Error('Missing English commute guide');
-const title = 'Commute Cost Calculator: Monthly Cost Including Time';
-const description = 'Calculate monthly and yearly commute cost for car, transit, rideshare, or bike. Include fuel, parking, tolls, depreciation, and optional time value.';
+const title = 'Commute Cost Calculator: Per Mile, Monthly and Annual';
+const description = 'Calculate commute cost per mile, month, and year for a car, EV, transit, rideshare, or bike. Compare fuel, parking, tolls, and optional time value.';
 const faq = [
   {
     question: 'What commute modes can I compare?',
-    answer: 'The calculator compares car, transit pass, rideshare, and bike. Each mode has a different cost model so you can compare realistic monthly totals.',
+    answer: 'The calculator compares car or EV, transit, rideshare, and bike. It reports monthly, annual, and per-distance costs for every mode.',
   },
   {
     question: 'How is car commute cost calculated?',
-    answer: 'Car cost uses round-trip distance, workdays per month, cost per kilometer, parking, and tolls. Cost per kilometer can include fuel, maintenance, depreciation, or your own estimate.',
+    answer: 'Choose a direct cost per mile or kilometer, fuel economy plus pump price, or EV energy use plus electricity price. The calculator multiplies the derived distance rate by round-trip distance and workdays, then adds parking, tolls, and optional time value.',
+  },
+  {
+    question: 'Is fuel cost per mile the full cost of driving?',
+    answer: 'No. Fuel-only and EV electricity figures exclude costs such as maintenance, tires, depreciation, insurance, financing, and registration. Use the direct-cost mode if you have an all-in ownership estimate.',
   },
   {
     question: 'How does optional time cost work?',
-    answer: 'If you enter an hourly wage, the calculator adds commute time value to each mode. Set hourly wage to 0 if you want direct cash cost only.',
+    answer: 'If you enter an hourly wage, the calculator values each mode’s round-trip minutes at that hourly amount and adds it to the comparison. Set hourly wage to 0 for direct cash cost only.',
   },
   {
     question: 'Can I use this for hybrid work?',
-    answer: 'Yes. Enter only the workdays you actually commute in a typical month.',
+    answer: 'Yes. Enter only the workdays you actually commute in a typical month. The annual output is twelve times that monthly schedule, so adjust workdays to represent your usual year.',
   },
   {
-    question: 'Should I include parking at home?',
-    answer: 'Include only costs that change because of commuting. If you pay for parking regardless of commute mode, leave it out.',
-  },
-  {
-    question: 'How much does a commute cost per month?',
-    answer: 'It depends heavily on distance, mode, and local prices, so there is no single accurate national number. Enter your own distance, workdays, and per-kilometer or fare costs above to get a monthly total specific to your commute instead of a generic average.',
-  },
-  {
-    question: 'How do I get my yearly commute cost from this calculator?',
-    answer: 'Multiply the monthly total shown above by the number of months you actually commute in a year. If your schedule is seasonal or hybrid, adjust the workdays-per-month input first so the monthly figure already reflects your real pattern.',
+    question: 'Can I switch between miles and kilometers?',
+    answer: 'Yes. Imperial mode uses miles, gallons, MPG, and kWh per 100 miles. Metric mode uses kilometers, liters, L/100 km, and kWh per 100 km. The calculator converts entered distance and efficiency values when you switch.',
   },
 ];
 const related = [
@@ -49,36 +45,83 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   <p class="intro">
-    <strong>A 30-mile round-trip commute over 20 workdays is roughly $450 a month at a $0.75-per-mile planning rate, before parking and tolls.</strong>
-    Use this commute cost calculator to replace that example with your distance and compare car, transit, rideshare, and bike costs, including optional time value.
+    Compare the cash and time cost of driving, an EV, transit, rideshare, or biking. The editable defaults are a worked example, not current fuel prices or a claim about what your vehicle costs. Replace them with your commute, receipts, vehicle records, and local prices.
   </p>
-
-  <section class="quick-answer" aria-labelledby="us-commute-estimate">
-    <h2 id="us-commute-estimate">A practical U.S. driving-cost estimate</h2>
-    <p>
-      For a quick U.S. estimate, use roughly <strong>$0.70 to $0.80 per mile</strong> (about <strong>$0.44 to $0.50 per kilometer</strong>) as an all-in planning range for a typical car. That range is meant to account broadly for fuel, maintenance, tires, depreciation, insurance, and registration; it is a reference estimate, not a precise national average or a quote for your vehicle.
-    </p>
-    <p>
-      Your incremental commute cost may be lower if you already own and insure the car, while a newer or more expensive vehicle may cost more. Add parking and tolls separately, and use your actual ownership records whenever possible.
-    </p>
-  </section>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="commute-inputs">
-      <h2 id="commute-inputs">Inputs</h2>
-      <div class="input-grid">
+      <h2 id="commute-inputs">Commute inputs</h2>
+
+      <fieldset class="switcher">
+        <legend>Measurement system</legend>
+        <div class="switch-options">
+          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" checked /> Imperial <span>(miles, gallons)</span></label>
+          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" /> Metric <span>(kilometers, liters)</span></label>
+        </div>
+      </fieldset>
+      <input id="unit-system" type="hidden" value="imperial" />
+
+      <div class="input-grid core-inputs">
         <div class="field">
-          <label for="distance">Distance one-way (km)</label>
-          <input id="distance" type="number" inputmode="decimal" min="0" step="1" value="15" />
+          <label for="distance">Distance one-way (<span id="distance-unit">miles</span>)</label>
+          <input id="distance" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
         </div>
         <div class="field">
           <label for="workdays">Workdays per month</label>
-          <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="22" />
+          <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="20" />
+        </div>
+      </div>
+
+      <fieldset class="switcher car-method">
+        <legend>How should car energy or ownership cost be entered?</legend>
+        <div class="switch-options mode-options">
+          <label><input id="mode-direct" type="radio" name="car-mode-choice" value="direct" checked /> Direct cost per <span class="distance-name">mile</span></label>
+          <label><input id="mode-fuel" type="radio" name="car-mode-choice" value="fuel" /> Gas or petrol</label>
+          <label><input id="mode-ev" type="radio" name="car-mode-choice" value="ev" /> EV electricity</label>
+        </div>
+      </fieldset>
+      <input id="car-mode" type="hidden" value="direct" />
+
+      <div id="direct-fields" class="mode-fields">
+        <div class="field">
+          <label for="car-cost">Direct car cost per <span class="distance-name">mile</span></label>
+          <input id="car-cost" type="number" inputmode="decimal" min="0" step="0.01" value="0.75" />
+          <p class="helper">Use your own all-in or incremental driving-cost estimate. The calculator will not assume what this includes.</p>
+        </div>
+      </div>
+
+      <div id="fuel-fields" class="mode-fields input-grid" hidden>
+        <div class="field">
+          <label for="fuel-efficiency"><span id="fuel-efficiency-label">Miles per gallon (MPG)</span></label>
+          <input id="fuel-efficiency" type="number" inputmode="decimal" min="0" step="0.1" value="25" />
         </div>
         <div class="field">
-          <label for="car-cost">Car cost per km</label>
-          <input id="car-cost" type="number" inputmode="decimal" min="0" step="0.01" value="0.67" />
+          <label for="fuel-price">Fuel price per <span id="fuel-volume-unit">gallon</span></label>
+          <input id="fuel-price" type="number" inputmode="decimal" min="0" step="0.01" value="3.50" />
         </div>
+      </div>
+
+      <div id="ev-fields" class="mode-fields input-grid" hidden>
+        <div class="field">
+          <label for="ev-efficiency">EV use (kWh per 100 <span class="distance-name-plural">miles</span>)</label>
+          <input id="ev-efficiency" type="number" inputmode="decimal" min="0" step="0.1" value="30" />
+        </div>
+        <div class="field">
+          <label for="electricity-price">Electricity price per kWh</label>
+          <input id="electricity-price" type="number" inputmode="decimal" min="0" step="0.01" value="0.16" />
+        </div>
+      </div>
+
+      <div class="derived-box" aria-live="polite">
+        <span>Derived driving energy or ownership rate</span>
+        <strong id="derived-rate">$0.00 per mile</strong>
+        <small id="derived-detail">Direct rate entered by you.</small>
+        <small id="fuel-warning">Fuel or electricity alone is not total cost of ownership.</small>
+      </div>
+
+      <p class="defaults-note">Fuel economy, energy use, and prices shown here are editable example defaults only. They are not market rates.</p>
+
+      <div class="input-grid">
         <div class="field">
           <label for="transit-pass">Transit pass per month</label>
           <input id="transit-pass" type="number" inputmode="decimal" min="0" step="5" value="120" />
@@ -100,11 +143,11 @@ const related = [
           <input id="tolls" type="number" inputmode="decimal" min="0" step="5" value="40" />
         </div>
         <div class="field">
-          <label for="hourly-wage">Hourly wage for time cost</label>
+          <label for="hourly-wage">Hourly wage for optional time cost</label>
           <input id="hourly-wage" type="number" inputmode="decimal" min="0" step="1" value="30" />
         </div>
         <div class="field">
-          <label for="car-minutes">Car minutes one-way</label>
+          <label for="car-minutes">Car or EV minutes one-way</label>
           <input id="car-minutes" type="number" inputmode="numeric" min="0" step="1" value="35" />
         </div>
         <div class="field">
@@ -125,29 +168,55 @@ const related = [
     <section class="result-panel" aria-live="polite" aria-labelledby="commute-result">
       <p class="eyebrow">Verdict</p>
       <p id="commute-result" class="verdict">Enter commute assumptions to compare modes.</p>
+      <p id="hour-cost" class="time-summary">At $0 per hour, one hour of commuting has $0 of modeled time cost.</p>
+      <p class="result-note">Monthly, annual, and per-distance totals include optional time cost when hourly wage is above zero.</p>
       <div class="metric-grid">
-        <p class="metric"><span>Cheapest mode</span><strong id="cheapest">None</strong></p>
-        <p class="metric"><span>Car monthly</span><strong id="car-total">$0</strong></p>
-        <p class="metric"><span>Transit monthly</span><strong id="transit-total">$0</strong></p>
-        <p class="metric"><span>Rideshare monthly</span><strong id="rideshare-total">$0</strong></p>
-        <p class="metric"><span>Bike monthly</span><strong id="bike-total">$0</strong></p>
+        <p class="metric cheapest-metric"><span>Cheapest mode</span><strong id="cheapest">None</strong></p>
+        <p class="metric">
+          <span>Car or EV</span><strong id="car-total">$0 monthly</strong>
+          <small id="car-year">$0 yearly</small><small id="car-rate">$0.00 per mile</small>
+        </p>
+        <p class="metric">
+          <span>Transit</span><strong id="transit-total">$0 monthly</strong>
+          <small id="transit-year">$0 yearly</small><small id="transit-rate">$0.00 per mile</small>
+        </p>
+        <p class="metric">
+          <span>Rideshare</span><strong id="rideshare-total">$0 monthly</strong>
+          <small id="rideshare-year">$0 yearly</small><small id="rideshare-rate">$0.00 per mile</small>
+        </p>
+        <p class="metric">
+          <span>Bike</span><strong id="bike-total">$0 monthly</strong>
+          <small id="bike-year">$0 yearly</small><small id="bike-rate">$0.00 per mile</small>
+        </p>
       </div>
     </section>
   </div>
 
-  <section class="explanation" aria-labelledby="commute-how">
-    <h2 id="commute-how">How it works</h2>
+  <section class="explanation" aria-labelledby="per-mile-method">
+    <h2 id="per-mile-method">How the cost per mile is derived</h2>
     <p>
-      Car cost uses round-trip distance, workdays, cost per kilometer, parking, and tolls. Transit uses the pass price, rideshare uses two one-way fares per workday, and bike uses your monthly bike cost.
+      In direct mode, the calculator uses the cost per mile or kilometer you enter. In gas or petrol mode, imperial cost per mile is pump price per gallon divided by MPG; metric cost per kilometer is liters per 100 kilometers multiplied by price per liter, then divided by 100. EV mode uses kWh per 100 miles or kilometers multiplied by price per kWh, then divided by 100. The derived figure is always shown beside the inputs so you can inspect the math.
     </p>
     <p>
-      If hourly wage is above zero, each mode also includes round-trip commute time multiplied by workdays and hourly wage. The cheapest mode is based on direct cost plus optional time cost.
+      Fuel cost per mile is not the same as the full cost of driving per mile. Fuel and electricity modes deliberately omit maintenance, tires, depreciation, insurance, financing, registration, and charging or fueling detours. Parking and tolls are added separately. If you want total ownership cost, calculate it from your own records and enter it in direct mode rather than treating the fuel-only result as complete.
+    </p>
+
+    <h2>What a year of commuting adds up to</h2>
+    <p>
+      The annual result is twelve times the monthly calculation. The largest movers are usually round-trip distance, days traveled, the selected per-distance rate, parking, tolls, fares, and commute time when you choose to value it. For hybrid or seasonal work, set workdays per month to a representative average. This keeps the annual number tied to your schedule instead of pretending everyone commutes the same number of days.
+    </p>
+
+    <h2>How the EV comparison works</h2>
+    <p>
+      EV mode converts your vehicle’s electricity use and your price per kWh into an energy cost per mile or kilometer. It then uses the same distance, workdays, parking, tolls, and time calculation as the car modes. This is an energy comparison, not a full EV-versus-gas ownership model: it excludes purchase price, financing, depreciation, insurance differences, maintenance, home-charger installation, public charging fees not represented by your entered price, and battery replacement. Use the <a href={localizedPath(locale, '/tools/ev-vs-gas')}>EV vs gas total-cost calculator</a> for the broader ownership decision.
+    </p>
+
+    <h2>What one hour of commuting costs—and what it does not mean</h2>
+    <p>
+      The time line values one hour at the hourly wage you enter. Each mode’s monthly time cost remains the existing formula: one-way minutes multiplied by two, workdays, and hourly wage, divided by 60. Setting wage to zero removes time from every total. This is a personal trade-off aid, not a claim that your employer owes that amount, that every minute could become paid work, or that travel time has no benefit. A transit ride you can use productively may feel different from driving even when the arithmetic uses the same hourly value.
     </p>
     <p>
-      If a warehouse stop or discounted fuel is part of your route, test the fee and realistic savings separately with the <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership break-even calculator</a> instead of treating every advertised discount as commute savings.
-    </p>
-    <p>
-      For the yearly cost of your commute, multiply the monthly total above by the months you actually commute — not always 12, if you work hybrid or seasonal schedules. If you are deciding between remote and in-office work, also check the <a href={localizedPath(locale, '/tools/rent-vs-buy')}>rent vs buy calculator</a> for how commute distance interacts with housing cost trade-offs.
+      Transit uses the monthly pass, rideshare uses two one-way fares per workday, and bike uses the monthly amount you enter. Their per-mile or per-kilometer results divide each mode’s total by the same commute distance, which makes modes comparable but does not turn a transit fare into a literal vehicle operating rate. If a fuel discount requires a membership or detour, test that separately with the <a href={localizedPath(locale, '/tools/costco-membership')}>membership break-even calculator</a>.
     </p>
   </section>
 
@@ -155,8 +224,10 @@ const related = [
 
   <style>
     .intro,
-    .quick-answer,
-    .explanation {
+    .explanation,
+    .helper,
+    .defaults-note,
+    .result-note {
       color: var(--color-muted);
     }
 
@@ -169,7 +240,6 @@ const related = [
 
     .input-panel,
     .result-panel,
-    .quick-answer,
     .explanation {
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
@@ -178,10 +248,97 @@ const related = [
       box-shadow: var(--shadow-soft);
     }
 
+    .switcher {
+      min-width: 0;
+      margin: 0 0 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+    }
+
+    .switcher legend,
+    .field label {
+      font-weight: 650;
+    }
+
+    .switch-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .switch-options label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+    }
+
+    .switch-options label:has(input:checked) {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
+    }
+
+    .switch-options input {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin: 0;
+    }
+
+    .mode-options label {
+      flex: 1 1 9rem;
+    }
+
+    .core-inputs,
+    .car-method,
+    .mode-fields,
+    .derived-box,
+    .defaults-note {
+      margin-bottom: 1rem;
+    }
+
     .field label {
       display: block;
       margin-bottom: 0.3rem;
-      font-weight: 650;
+    }
+
+    .helper,
+    .defaults-note,
+    .result-note {
+      margin: 0.4rem 0 0;
+      font-size: 0.9rem;
+    }
+
+    .derived-box,
+    .time-summary {
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      padding: 0.75rem;
+    }
+
+    .derived-box span,
+    .derived-box strong,
+    .derived-box small,
+    .metric span,
+    .metric strong,
+    .metric small {
+      display: block;
+    }
+
+    .derived-box strong {
+      margin: 0.2rem 0;
+      font-size: 1.15rem;
+    }
+
+    .derived-box small + small,
+    .metric small + small {
+      margin-top: 0.2rem;
     }
 
     .result-panel {
@@ -204,6 +361,11 @@ const related = [
       line-height: 1.25;
     }
 
+    .time-summary {
+      margin: 0 0 1rem;
+      font-weight: 650;
+    }
+
     .metric {
       margin: 0;
       border: 1px solid var(--color-border);
@@ -213,11 +375,7 @@ const related = [
     }
 
     .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
+    .metric small {
       color: var(--color-muted);
       font-size: 0.9rem;
     }
@@ -226,9 +384,13 @@ const related = [
       font-size: 1.1rem;
     }
 
+    .cheapest-metric {
+      border-color: var(--color-primary);
+    }
+
     @media (min-width: 760px) {
       .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
         align-items: start;
       }
 
@@ -236,11 +398,21 @@ const related = [
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+
+    @media (max-width: 420px) {
+      .switch-options,
+      .switch-options label {
+        width: 100%;
+      }
+    }
   </style>
 
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';
+
+    type UnitSystem = 'imperial' | 'metric';
+    type CarMode = 'direct' | 'fuel' | 'ev';
 
     interface ModeCost {
       name: string;
@@ -250,10 +422,19 @@ const related = [
     }
 
     const locale = 'en';
+    const kilometersPerMile = 1.609344;
+    const litersPerGallon = 3.785411784;
+    const efficiencyConversion = 235.214583;
     const ids = [
+      'unit-system',
+      'car-mode',
       'distance',
       'workdays',
       'car-cost',
+      'fuel-efficiency',
+      'fuel-price',
+      'ev-efficiency',
+      'electricity-price',
       'transit-pass',
       'rideshare',
       'bike-cost',
@@ -266,12 +447,16 @@ const related = [
       'bike-minutes',
     ];
     const inputs = ids.map((id) => byId<HTMLInputElement>(id));
+    const unitField = byId<HTMLInputElement>('unit-system');
+    const carModeField = byId<HTMLInputElement>('car-mode');
+    const unitRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="unit-choice"]'));
+    const carModeRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="car-mode-choice"]'));
     const verdict = byId<HTMLElement>('commute-result');
     const cheapest = byId<HTMLElement>('cheapest');
-    const carTotal = byId<HTMLElement>('car-total');
-    const transitTotal = byId<HTMLElement>('transit-total');
-    const rideshareTotal = byId<HTMLElement>('rideshare-total');
-    const bikeTotal = byId<HTMLElement>('bike-total');
+    const hourCost = byId<HTMLElement>('hour-cost');
+    const derivedRate = byId<HTMLElement>('derived-rate');
+    const derivedDetail = byId<HTMLElement>('derived-detail');
+    const fuelWarning = byId<HTMLElement>('fuel-warning');
 
     function byId<T extends HTMLElement>(id: string): T {
       const element = document.getElementById(id);
@@ -284,36 +469,132 @@ const related = [
       return Number.isFinite(parsed) ? parsed : 0;
     }
 
+    function positive(id: string): number {
+      return Math.max(0, value(id));
+    }
+
+    function currentUnit(): UnitSystem {
+      return unitField.value === 'metric' ? 'metric' : 'imperial';
+    }
+
+    function currentCarMode(): CarMode {
+      return carModeField.value === 'fuel' || carModeField.value === 'ev' ? carModeField.value : 'direct';
+    }
+
+    function setValue(id: string, nextValue: number, fractionDigits = 2): void {
+      const input = byId<HTMLInputElement>(id);
+      const formatted = Number.isFinite(nextValue) ? nextValue.toFixed(fractionDigits).replace(/\.?0+$/, '') : '0';
+      input.value = formatted || '0';
+      input.dispatchEvent(new Event('input'));
+    }
+
+    function formatRate(amount: number): string {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(Number.isFinite(amount) ? amount : 0);
+    }
+
     function timeCost(minutesOneWay: number, workdays: number, wage: number): number {
       return wage > 0 ? (Math.max(0, minutesOneWay) * 2 * workdays * wage) / 60 : 0;
     }
 
+    function drivingRate(unit: UnitSystem, mode: CarMode): number {
+      if (mode === 'direct') return positive('car-cost');
+      if (mode === 'fuel') {
+        const efficiency = positive('fuel-efficiency');
+        if (efficiency <= 0) return 0;
+        return unit === 'imperial'
+          ? positive('fuel-price') / efficiency
+          : (efficiency * positive('fuel-price')) / 100;
+      }
+      return (positive('ev-efficiency') * positive('electricity-price')) / 100;
+    }
+
+    function applyMode(): void {
+      const mode = currentCarMode();
+      (['direct', 'fuel', 'ev'] as CarMode[]).forEach((candidate) => {
+        const container = byId<HTMLElement>(`${candidate}-fields`);
+        const active = candidate === mode;
+        container.hidden = !active;
+        container.querySelectorAll<HTMLInputElement>('input').forEach((input) => {
+          input.disabled = !active;
+        });
+      });
+      carModeRadios.forEach((radio) => {
+        radio.checked = radio.value === mode;
+      });
+    }
+
+    function applyUnitLabels(): void {
+      const unit = currentUnit();
+      const singular = unit === 'imperial' ? 'mile' : 'kilometer';
+      const plural = unit === 'imperial' ? 'miles' : 'kilometers';
+      byId<HTMLElement>('distance-unit').textContent = plural;
+      document.querySelectorAll<HTMLElement>('.distance-name').forEach((element) => {
+        element.textContent = singular;
+      });
+      document.querySelectorAll<HTMLElement>('.distance-name-plural').forEach((element) => {
+        element.textContent = plural;
+      });
+      byId<HTMLElement>('fuel-efficiency-label').textContent = unit === 'imperial' ? 'Miles per gallon (MPG)' : 'Liters per 100 kilometers (L/100 km)';
+      byId<HTMLElement>('fuel-volume-unit').textContent = unit === 'imperial' ? 'gallon' : 'liter';
+      unitRadios.forEach((radio) => {
+        radio.checked = radio.value === unit;
+      });
+    }
+
+    function convertUnit(from: UnitSystem, to: UnitSystem): void {
+      if (from === to) return;
+      const toMetric = to === 'metric';
+      setValue('distance', toMetric ? positive('distance') * kilometersPerMile : positive('distance') / kilometersPerMile, 2);
+      setValue('car-cost', toMetric ? positive('car-cost') / kilometersPerMile : positive('car-cost') * kilometersPerMile, 3);
+      const fuelEfficiency = positive('fuel-efficiency');
+      setValue('fuel-efficiency', fuelEfficiency > 0 ? efficiencyConversion / fuelEfficiency : 0, 2);
+      setValue('fuel-price', toMetric ? positive('fuel-price') / litersPerGallon : positive('fuel-price') * litersPerGallon, 3);
+      setValue('ev-efficiency', toMetric ? positive('ev-efficiency') / kilometersPerMile : positive('ev-efficiency') * kilometersPerMile, 2);
+    }
+
+    function renderMode(mode: ModeCost, prefix: string, monthlyDistance: number, unit: UnitSystem): void {
+      const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
+      byId<HTMLElement>(`${prefix}-total`).textContent = `${formatCurrency(mode.total, locale)} monthly`;
+      byId<HTMLElement>(`${prefix}-year`).textContent = `${formatCurrency(mode.total * 12, locale)} yearly`;
+      byId<HTMLElement>(`${prefix}-rate`).textContent = `${formatRate(monthlyDistance > 0 ? mode.total / monthlyDistance : 0)} per ${distanceName}`;
+    }
+
     function update(): void {
-      const distance = Math.max(0, value('distance'));
-      const workdays = Math.max(0, value('workdays'));
-      const wage = Math.max(0, value('hourly-wage'));
+      const unit = currentUnit();
+      const carMode = currentCarMode();
+      const distance = positive('distance');
+      const workdays = positive('workdays');
+      const wage = positive('hourly-wage');
+      const monthlyDistance = distance * 2 * workdays;
+      const rate = drivingRate(unit, carMode);
+      const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
       const modes: ModeCost[] = [
         {
-          name: 'Car',
-          direct: distance * 2 * workdays * Math.max(0, value('car-cost')) + Math.max(0, value('parking')) + Math.max(0, value('tolls')),
+          name: carMode === 'ev' ? 'EV' : 'Car',
+          direct: monthlyDistance * rate + positive('parking') + positive('tolls'),
           time: timeCost(value('car-minutes'), workdays, wage),
           total: 0,
         },
         {
           name: 'Transit',
-          direct: Math.max(0, value('transit-pass')),
+          direct: positive('transit-pass'),
           time: timeCost(value('transit-minutes'), workdays, wage),
           total: 0,
         },
         {
           name: 'Rideshare',
-          direct: Math.max(0, value('rideshare')) * 2 * workdays,
+          direct: positive('rideshare') * 2 * workdays,
           time: timeCost(value('rideshare-minutes'), workdays, wage),
           total: 0,
         },
         {
           name: 'Bike',
-          direct: Math.max(0, value('bike-cost')),
+          direct: positive('bike-cost'),
           time: timeCost(value('bike-minutes'), workdays, wage),
           total: 0,
         },
@@ -321,18 +602,63 @@ const related = [
       const winner = modes.reduce((best, mode) => (mode.total < best.total ? mode : best));
       const highest = modes.reduce((max, mode) => Math.max(max, mode.total), 0);
 
+      derivedRate.textContent = `${formatRate(rate)} per ${distanceName}`;
+      if (carMode === 'fuel') {
+        derivedDetail.textContent = unit === 'imperial'
+          ? `${formatRate(positive('fuel-price'))} per gallon ÷ ${positive('fuel-efficiency').toFixed(1)} MPG.`
+          : `${positive('fuel-efficiency').toFixed(1)} L/100 km × ${formatRate(positive('fuel-price'))} per liter ÷ 100.`;
+        fuelWarning.textContent = 'Fuel only: maintenance, tires, depreciation, insurance, financing, and registration are excluded.';
+      } else if (carMode === 'ev') {
+        derivedDetail.textContent = `${positive('ev-efficiency').toFixed(1)} kWh/100 ${unit === 'imperial' ? 'miles' : 'kilometers'} × ${formatRate(positive('electricity-price'))} per kWh ÷ 100.`;
+        fuelWarning.textContent = 'Electricity only: ownership, charger, maintenance, insurance, and depreciation costs are excluded.';
+      } else {
+        derivedDetail.textContent = 'Direct rate entered by you; include only the costs you intend to compare.';
+        fuelWarning.textContent = 'The calculator does not assume whether your direct rate is fuel-only, incremental, or all-in.';
+      }
+
       cheapest.textContent = `${winner.name} (${formatCurrency(winner.total, locale)}/mo)`;
-      carTotal.textContent = formatCurrency(modes[0].total, locale);
-      transitTotal.textContent = formatCurrency(modes[1].total, locale);
-      rideshareTotal.textContent = formatCurrency(modes[2].total, locale);
-      bikeTotal.textContent = formatCurrency(modes[3].total, locale);
+      renderMode(modes[0], 'car', monthlyDistance, unit);
+      renderMode(modes[1], 'transit', monthlyDistance, unit);
+      renderMode(modes[2], 'rideshare', monthlyDistance, unit);
+      renderMode(modes[3], 'bike', monthlyDistance, unit);
       verdict.textContent = `${winner.name} is cheapest at ${formatCurrency(winner.total, locale)} per month, saving up to ${formatCurrency(highest - winner.total, locale)} versus the priciest mode.`;
+      const roundTripMinutes = positive('car-minutes') * 2;
+      hourCost.textContent = `At ${formatCurrency(wage, locale)} per hour, one hour of commuting has ${formatCurrency(wage, locale)} of modeled time cost; your ${roundTripMinutes.toFixed(0)}-minute car or EV round trip is ${formatCurrency((roundTripMinutes * wage) / 60, locale)} in time.`;
     }
 
     inputs.forEach((input) => {
-      bindPersistentField(input, `commute-cost:${input.id}`);
+      bindPersistentField(input, `commute-cost:v2:${input.id}`);
       input.addEventListener('input', update);
     });
+
+    unitField.value = currentUnit();
+    carModeField.value = currentCarMode();
+    applyUnitLabels();
+    applyMode();
+
+    unitRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        const previousUnit = currentUnit();
+        const nextUnit: UnitSystem = radio.value === 'metric' ? 'metric' : 'imperial';
+        convertUnit(previousUnit, nextUnit);
+        unitField.value = nextUnit;
+        unitField.dispatchEvent(new Event('input'));
+        applyUnitLabels();
+        update();
+      });
+    });
+
+    carModeRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        carModeField.value = radio.value;
+        carModeField.dispatchEvent(new Event('input'));
+        applyMode();
+        update();
+      });
+    });
+
     update();
   </script>
 </ToolLayout>

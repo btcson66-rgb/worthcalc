@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
@@ -309,9 +310,16 @@ for (const article of editorialRoutes) {
     const html = read(`${locale}/${article.slug}/index.html`);
     if (!html) continue;
 
-    for (const hreflang of hreflangs) {
+    const url = `https://worthcalc.win/${locale}/${article.slug}/`;
+    const expectedHreflangs = expectedHreflangsFor(url, hreflangs);
+    for (const hreflang of expectedHreflangs) {
       if (!html.includes(`hreflang="${hreflang}"`)) {
         failures.push(`/${locale}/${article.slug}/ missing hreflang=${hreflang}`);
+      }
+    }
+    for (const absentHreflang of hreflangs.filter((item) => !expectedHreflangs.includes(item))) {
+      if (html.includes(`hreflang="${absentHreflang}"`)) {
+        failures.push(`/${locale}/${article.slug}/ advertises soft-deindexed hreflang=${absentHreflang}`);
       }
     }
 
@@ -339,7 +347,11 @@ for (const article of partialEditorialRoutes) {
     const html = read(`${locale}/${article.slug}/index.html`);
     if (!html) continue;
 
-    const expectedHreflangs = [...article.locales.map((item) => item === 'zh' ? 'zh-Hant' : item), 'x-default'];
+    const url = `https://worthcalc.win/${locale}/${article.slug}/`;
+    const expectedHreflangs = expectedHreflangsFor(
+      url,
+      [...article.locales.map((item) => item === 'zh' ? 'zh-Hant' : item), 'x-default'],
+    );
     for (const hreflang of expectedHreflangs) {
       if (!html.includes(`hreflang="${hreflang}"`)) {
         failures.push(`/${locale}/${article.slug}/ missing partial hreflang=${hreflang}`);
@@ -375,13 +387,19 @@ const sitemap = read('sitemap-0.xml');
 for (const article of editorialRoutes) {
   for (const locale of locales) {
     const url = `https://worthcalc.win/${locale}/${article.slug}/`;
-    if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+    const inSitemap = sitemap.includes(`<loc>${url}</loc>`);
+    if (isSoftDeindexedUrl(url) ? inSitemap : !inSitemap) {
+      failures.push(isSoftDeindexedUrl(url) ? `Sitemap includes soft-deindexed ${url}` : `Sitemap missing ${url}`);
+    }
   }
 }
 for (const article of partialEditorialRoutes) {
   for (const locale of article.locales) {
     const url = `https://worthcalc.win/${locale}/${article.slug}/`;
-    if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+    const inSitemap = sitemap.includes(`<loc>${url}</loc>`);
+    if (isSoftDeindexedUrl(url) ? inSitemap : !inSitemap) {
+      failures.push(isSoftDeindexedUrl(url) ? `Sitemap includes soft-deindexed ${url}` : `Sitemap missing ${url}`);
+    }
   }
 }
 for (const [locale, slug] of [

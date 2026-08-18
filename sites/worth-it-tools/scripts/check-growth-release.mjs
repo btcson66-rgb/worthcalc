@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
@@ -23,11 +24,22 @@ function checkPage(file, url, reciprocal) {
   const html = readFileSync(file, 'utf8');
   if ((html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) failures.push(`${url}: expected exactly one H1`);
   if (!html.includes(`<link rel="canonical" href="${url}">`)) failures.push(`${url}: wrong canonical`);
-  for (const lang of hreflangs) if (!html.includes(`hreflang="${lang}"`)) failures.push(`${url}: missing hreflang=${lang}`);
-  if (html.includes('noindex')) failures.push(`${url}: completed page is noindex`);
+  const expectedHreflangs = expectedHreflangsFor(url, hreflangs);
+  for (const lang of expectedHreflangs) if (!html.includes(`hreflang="${lang}"`)) failures.push(`${url}: missing hreflang=${lang}`);
+  for (const lang of hreflangs.filter((item) => !expectedHreflangs.includes(item))) {
+    if (html.includes(`hreflang="${lang}"`)) failures.push(`${url}: advertises soft-deindexed hreflang=${lang}`);
+  }
+  if (isSoftDeindexedUrl(url)) {
+    if (!html.includes('<meta name="robots" content="noindex,follow">')) failures.push(`${url}: missing noindex,follow`);
+  } else if (html.includes('noindex')) {
+    failures.push(`${url}: completed page is noindex`);
+  }
   if (!html.includes(reciprocal)) failures.push(`${url}: missing reciprocal tool/article link`);
   if (/localhost|github\.io|OFFICIAL_CPI_DATA_REQUIRED|lorem ipsum|>TODO</i.test(html)) failures.push(`${url}: placeholder or non-production text leaked`);
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`${url}: missing from sitemap`);
+  const inSitemap = sitemap.includes(`<loc>${url}</loc>`);
+  if (isSoftDeindexedUrl(url) ? inSitemap : !inSitemap) {
+    failures.push(isSoftDeindexedUrl(url) ? `${url}: soft-deindexed URL leaked into sitemap` : `${url}: missing from sitemap`);
+  }
 }
 
 for (const locale of locales) {
@@ -50,4 +62,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Growth release check passed: 45 tools + 45 articles, reciprocal five-locale hreflang/canonical/sitemap coverage, one H1, calculator actions, and inflation block.');
+console.log('Growth release check passed: 45 tools + 45 articles, indexable hreflang/canonical/sitemap coverage, one H1, calculator actions, and inflation block.');

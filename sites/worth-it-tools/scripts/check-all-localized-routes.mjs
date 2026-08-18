@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
+import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
@@ -55,12 +56,25 @@ for (const { locale, route, file } of pages) {
   if (!html.includes(`lang="${expectedLang[locale]}"`)) failures.push(`/${locale}/${route}: wrong html lang`);
   if (!html.includes('rel="canonical"')) failures.push(`/${locale}/${route}: missing canonical`);
 
+  const path = locale === 'en' && route === '' ? '' : `${locale}/${route}${route ? '/' : ''}`;
+  const url = `https://worthcalc.win/${path}`;
+  const expectedHreflangs = expectedHreflangsFor(
+    url,
+    locales.filter((sibling) => present.has(sibling)).map((sibling) => hreflangFor[sibling]),
+  );
+
   // Every existing sibling version must be declared, plus x-default.
-  for (const sibling of locales.filter((l) => present.has(l))) {
-    const tag = hreflangFor[sibling];
+  for (const tag of expectedHreflangs) {
     if (!html.includes(`hreflang="${tag}"`)) failures.push(`/${locale}/${route}: missing hreflang=${tag}`);
   }
   if (!html.includes('hreflang="x-default"')) failures.push(`/${locale}/${route}: missing hreflang=x-default`);
+
+  for (const sibling of locales.filter((candidate) => present.has(candidate))) {
+    const tag = hreflangFor[sibling];
+    if (!expectedHreflangs.includes(tag) && html.includes(`hreflang="${tag}"`)) {
+      failures.push(`/${locale}/${route}: advertises soft-deindexed hreflang=${tag}`);
+    }
+  }
 
   // Declaring a version that does not exist is a real SEO bug: it points Google at a 404.
   for (const absent of locales.filter((l) => !present.has(l))) {
@@ -70,9 +84,13 @@ for (const { locale, route, file } of pages) {
     }
   }
 
-  const path = locale === 'en' && route === '' ? '' : `${locale}/${route}${route ? '/' : ''}`;
-  const url = `https://worthcalc.win/${path}`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  const inSitemap = sitemap.includes(`<loc>${url}</loc>`);
+  if (isSoftDeindexedUrl(url)) {
+    if (!html.includes('<meta name="robots" content="noindex,follow">')) failures.push(`${url}: missing noindex,follow`);
+    if (inSitemap) failures.push(`Sitemap includes soft-deindexed ${url}`);
+  } else if (!inSitemap) {
+    failures.push(`Sitemap missing ${url}`);
+  }
 }
 
 // Route-level coverage rules.
@@ -99,5 +117,5 @@ if (failures.length) {
 console.log(
   `All localized routes check passed: ${routes.size} logical routes, ${localizedPages} localized pages; ` +
     `${routes.size - enZhOnlyRoutes} fully five-language, ${enZhOnlyRoutes} en+zh only (i18n freeze, see README). ` +
-    'Canonical, reciprocal hreflang and sitemap coverage complete; no page declares a version that does not exist.',
+    'Canonical, indexable hreflang and sitemap coverage complete; soft-deindexed German routes are excluded as configured.',
 );

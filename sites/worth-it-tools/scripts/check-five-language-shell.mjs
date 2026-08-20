@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
@@ -17,10 +18,18 @@ function verify(path, kind) {
     return;
   }
   const html = readFileSync(file, 'utf8');
+  const url = `https://worthcalc.win/${path}/`;
   if (!html.includes('<h1')) failures.push(`/${path}/ missing h1`);
   if (!html.includes('rel="canonical"')) failures.push(`/${path}/ missing canonical`);
-  for (const hreflang of hreflangs) {
+  const expectedHreflangs = expectedHreflangsFor(url, hreflangs);
+  for (const hreflang of expectedHreflangs) {
     if (!html.includes(`hreflang="${hreflang}"`)) failures.push(`/${path}/ missing hreflang=${hreflang}`);
+  }
+  for (const absentHreflang of hreflangs.filter((item) => !expectedHreflangs.includes(item))) {
+    if (html.includes(`hreflang="${absentHreflang}"`)) failures.push(`/${path}/ advertises soft-deindexed hreflang=${absentHreflang}`);
+  }
+  if (isSoftDeindexedUrl(url) && !html.includes('<meta name="robots" content="noindex,follow">')) {
+    failures.push(`/${path}/ missing noindex,follow`);
   }
   if (kind !== 'home' && !html.includes('"@type":"BreadcrumbList"')) failures.push(`/${path}/ missing BreadcrumbList`);
   const text = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -34,17 +43,23 @@ for (const slug of releasedSupplemental) for (const locale of locales) verify(`$
 
 const sitemapFile = join(dist, 'sitemap-0.xml');
 const sitemap = existsSync(sitemapFile) ? readFileSync(sitemapFile, 'utf8') : '';
+function verifySitemap(url) {
+  const inSitemap = sitemap.includes(`<loc>${url}</loc>`);
+  if (isSoftDeindexedUrl(url) ? inSitemap : !inSitemap) {
+    failures.push(isSoftDeindexedUrl(url) ? `Sitemap includes soft-deindexed ${url}` : `Sitemap missing ${url}`);
+  }
+}
 for (const slug of releasedLegal) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/${slug}/`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  verifySitemap(url);
 }
 for (const slug of releasedTools) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/tools/${slug}/`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  verifySitemap(url);
 }
 for (const slug of releasedSupplemental) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/${slug}/`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  verifySitemap(url);
 }
 for (const locale of ['zh', 'es', 'fr', 'de']) {
   const url = `https://worthcalc.win/${locale}/`;

@@ -1,4 +1,7 @@
 import { CORE_LOCALES, SITE, LOCALE_HREFLANG, LOCALES, type Locale } from '../consts';
+import deindexedRegistry from '../data/deindexed-urls.json';
+
+const DEINDEXED_PATHS = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
 
 export interface SeoInput {
   /** Page title without the brand suffix. */
@@ -51,6 +54,11 @@ function pagePath(pathname: string): string {
   return pathname.endsWith('/') ? pathname : `${pathname}/`;
 }
 
+/** True for a URL in the reversible W34 soft-deindex registry. */
+export function isSoftDeindexed(pathname: string): boolean {
+  return DEINDEXED_PATHS.has(pagePath(pathname));
+}
+
 function localizedPagePath(locale: Locale, logical: string): string {
   if (!logical && locale === 'en') return '/';
   return logical ? `/${locale}/${logical}/` : `/${locale}/`;
@@ -65,19 +73,33 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const canonical = absolute(base, canonicalPath);
   const ogImage = absolute(base, input.image ?? SITE.defaultOgImage);
   const type = input.type ?? 'website';
-  const robots = input.noindex
-    ? 'noindex, nofollow'
-    : 'index, follow, max-image-preview:large';
+  const softDeindexed = isSoftDeindexed(currentPath);
+  const robots = softDeindexed
+    ? 'noindex,follow'
+    : input.noindex
+      ? 'noindex, nofollow'
+      : 'index, follow, max-image-preview:large';
 
   // hreflang alternates: swap the locale segment of the current path.
   const segments = input.url.pathname.split('/').filter(Boolean);
   if ((LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
   const alternateLocales = input.alternateLocales ?? [...CORE_LOCALES];
-  const alternates = alternateLocales.map((loc) => ({
-    hreflang: LOCALE_HREFLANG[loc],
-    href: absolute(base, localizedPagePath(loc, logical)),
-  }));
+  const alternates = alternateLocales
+    .map((loc) => ({
+      locale: loc,
+      hreflang: LOCALE_HREFLANG[loc],
+      href: absolute(base, localizedPagePath(loc, logical)),
+    }))
+    // Sibling locales must not advertise a German URL that is deliberately
+    // noindex. The German page itself keeps the existing cluster so users can
+    // still switch to an indexable equivalent without changing page routing.
+    .filter((alternate) => !(
+      input.locale !== 'de' &&
+      alternate.locale === 'de' &&
+      isSoftDeindexed(new URL(alternate.href).pathname)
+    ))
+    .map(({ hreflang, href }) => ({ hreflang, href }));
   alternates.push({
     hreflang: 'x-default',
     href: absolute(base, logical ? localizedPagePath(alternateLocales[0] ?? input.locale, logical) : '/'),

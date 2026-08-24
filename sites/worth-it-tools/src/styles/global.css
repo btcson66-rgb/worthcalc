@@ -464,15 +464,55 @@ section#tools > h2 {
   margin-left: 0.2rem;
 }
 
+.home-authority,
+.home-trust,
 .home-method,
 .home-guides {
   margin-top: 2.75rem;
 }
 
+.home-authority > h2,
+.home-trust > h2,
 .home-method > h2,
 .home-guides > h2 {
   margin: 0 0 0.45rem;
   font-size: clamp(1.35rem, 3.5vw, 1.8rem);
+}
+
+.home-trust {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+}
+
+.home-trust h3 {
+  margin: 1rem 0 0.35rem;
+  font-size: 1.02rem;
+}
+
+.home-trust p {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+}
+
+.home-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 0.75rem 1.5rem;
+}
+
+.home-trust__sources {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.65rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.home-trust__advice {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text) !important;
 }
 
 .home-method ol {

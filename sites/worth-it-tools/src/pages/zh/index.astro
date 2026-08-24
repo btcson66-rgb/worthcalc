@@ -7,6 +7,6 @@ const locale = 'zh';
 const content = homeContent[locale];
 ---
 
-<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site)}>
+<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site)} entity={content.entity}>
   <HomePage locale={locale} />
 </BaseLayout>

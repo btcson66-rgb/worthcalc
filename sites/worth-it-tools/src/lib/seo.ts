@@ -165,8 +165,13 @@ export function webSiteId(site?: URL): string {
   return `${resolveBase(site)}/#website`;
 }
 
+export interface EntityJsonLdOptions {
+  description?: string;
+  topics?: readonly string[];
+}
+
 /** The publisher entity. Emitted once per page by SEO.astro. */
-export function organizationJsonLd(site?: URL): object {
+export function organizationJsonLd(site?: URL, options: EntityJsonLdOptions = {}): object {
   const base = resolveBase(site);
   return {
     '@context': 'https://schema.org',
@@ -179,11 +184,13 @@ export function organizationJsonLd(site?: URL): object {
       url: absolute(base, SITE.logo),
     },
     image: absolute(base, SITE.defaultOgImage),
+    ...(options.description ? { description: options.description } : {}),
+    ...(options.topics?.length ? { knowsAbout: options.topics } : {}),
   };
 }
 
 /** The site entity, so a citation can resolve which site a page belongs to. */
-export function webSiteJsonLd(site?: URL): object {
+export function webSiteJsonLd(site?: URL, options: EntityJsonLdOptions = {}): object {
   const base = resolveBase(site);
   return {
     '@context': 'https://schema.org',
@@ -193,6 +200,10 @@ export function webSiteJsonLd(site?: URL): object {
     url: `${base}/`,
     publisher: { '@id': organizationId(site) },
     inLanguage: CORE_LOCALES.map((locale) => LOCALE_HREFLANG[locale]),
+    ...(options.description ? { description: options.description } : {}),
+    ...(options.topics?.length
+      ? { about: options.topics.map((name) => ({ '@type': 'Thing', name })) }
+      : {}),
   };
 }
 

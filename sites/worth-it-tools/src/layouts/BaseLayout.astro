@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import type { Locale } from '../consts';
 import { CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
-import type { SeoInput } from '../lib/seo';
+import type { EntityJsonLdOptions, SeoInput } from '../lib/seo';
 import { getLocaleFromUrl } from '../i18n/utils';
 import SEO from '../components/SEO.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
@@ -20,6 +20,7 @@ interface Props {
   noindex?: boolean;
   alternateLocales?: Locale[];
   jsonLd?: object[];
+  entity?: EntityJsonLdOptions;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   noindex,
   alternateLocales,
   jsonLd = [],
+  entity,
 } = Astro.props;
 const resolvedAlternateLocales = alternateLocales ?? [...CORE_LOCALES];
 ---
@@ -51,6 +53,7 @@ const resolvedAlternateLocales = alternateLocales ?? [...CORE_LOCALES];
       noindex={noindex}
       alternateLocales={resolvedAlternateLocales}
       jsonLd={jsonLd}
+      entity={entity}
     />
     <GoogleAnalytics />
   </head>

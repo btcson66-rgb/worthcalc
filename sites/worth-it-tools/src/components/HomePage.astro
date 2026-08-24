@@ -13,8 +13,17 @@ interface Props {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const authority = content.authority;
+const trust = content.trust;
 const growthTools = (await getCollection('growthTools', ({ data }) => data.locale === locale && !data.draft))
   .sort((a, b) => a.data.title.localeCompare(b.data.title, locale));
+const authorityPaths = new Set(authority?.clusters.map((cluster) => cluster.path) ?? []);
+const remainingTools = authority
+  ? content.tools.filter((tool) => !authorityPaths.has(tool.path))
+  : content.tools;
+const remainingGrowthTools = authority
+  ? growthTools.filter((entry) => !authorityPaths.has(`/tools/${entry.data.toolSlug}`))
+  : growthTools;
 const growthHeading = {
   en: 'More planning calculators', zh: '更多財務規劃試算', es: 'Más calculadoras de planificación', fr: 'Autres calculateurs de planification', de: 'Weitere Planungsrechner',
 }[locale];
@@ -41,11 +50,55 @@ const allGuidesCopy = {
   </ul>
 </section>
 
+{authority && (
+  <section class="home-authority" aria-labelledby="home-authority-heading">
+    <h2 id="home-authority-heading">{authority.heading}</h2>
+    <p class="section-lead">{authority.lead}</p>
+    <div class="guide-grid">
+      {authority.clusters.map((cluster) => (
+        <article class="guide-card">
+          <h3><a href={localizedPath(locale, cluster.path)}>{cluster.title}</a></h3>
+          <p>{cluster.description}</p>
+          <span>{authority.cta} →</span>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+{trust && (
+  <section class="home-trust" aria-labelledby="home-trust-heading">
+    <h2 id="home-trust-heading">{trust.heading}</h2>
+    <div class="home-trust__grid">
+      <div>
+        <h3>{trust.methodHeading}</h3>
+        <p>{trust.method}</p>
+      </div>
+      <div>
+        <h3>{trust.scopeHeading}</h3>
+        <p>{trust.scope}</p>
+      </div>
+    </div>
+    <h3>{trust.sourcesHeading}</h3>
+    <p>{trust.sourcesLead}</p>
+    <ul class="home-trust__sources">
+      {trust.sources.map((source) => (
+        <li><a href={source.href}>{source.label}</a></li>
+      ))}
+    </ul>
+    <p class="updated">
+      <strong>{trust.reviewedLabel}:</strong>{' '}
+      <time datetime={trust.reviewedDate}>{trust.reviewedDisplay}</time>
+    </p>
+    <p class="home-trust__advice"><strong>{trust.advice}</strong></p>
+  </section>
+)}
+
 <section id="tools">
   <h2>{content.toolsHeading}</h2>
   <p class="section-lead">{content.toolsLead}</p>
   <div class="grid">
-    {content.tools.map((tool) => (
+    {remainingTools.map((tool) => (
       <article class="card">
         <span class="card__icon" aria-hidden="true">{tool.icon}</span>
         <h3><a href={localizedPath(locale, tool.path)}>{tool.title}</a></h3>
@@ -53,7 +106,7 @@ const allGuidesCopy = {
         <span class="card__cta">{content.toolsCta}</span>
       </article>
     ))}
-    {growthTools.map((entry) => (
+    {remainingGrowthTools.map((entry) => (
       <article class="card">
         <span class="card__icon" aria-hidden="true">📊</span>
         <h3><a href={localizedPath(locale, `/tools/${entry.data.toolSlug}`)}>{entry.data.title}</a></h3>
@@ -62,7 +115,7 @@ const allGuidesCopy = {
       </article>
     ))}
   </div>
-  <p class="section-lead growth-tool-note"><strong>{growthHeading}:</strong> {growthTools.length}</p>
+  <p class="section-lead growth-tool-note"><strong>{growthHeading}:</strong> {remainingGrowthTools.length}</p>
 </section>
 
 <section class="home-method" aria-labelledby="home-method-heading">

@@ -1,5 +1,5 @@
 import { LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
-import type { FaqItem } from './seo';
+import type { EntityJsonLdOptions, FaqItem } from './seo';
 import { organizationId, webSiteId } from './seo';
 
 interface HomeTool {
@@ -15,6 +15,33 @@ interface HomeGuide {
   description: string;
 }
 
+interface HomeAuthority {
+  heading: string;
+  lead: string;
+  cta: string;
+  clusters: HomeGuide[];
+}
+
+interface HomeTrustSource {
+  label: string;
+  href: string;
+}
+
+interface HomeTrust {
+  heading: string;
+  methodHeading: string;
+  method: string;
+  sourcesHeading: string;
+  sourcesLead: string;
+  sources: HomeTrustSource[];
+  scopeHeading: string;
+  scope: string;
+  reviewedLabel: string;
+  reviewedDate: string;
+  reviewedDisplay: string;
+  advice: string;
+}
+
 export interface HomeContent {
   title: string;
   description: string;
@@ -24,6 +51,9 @@ export interface HomeContent {
   headingSuffix: string;
   intro: string;
   badges: string[];
+  entity?: EntityJsonLdOptions;
+  authority?: HomeAuthority;
+  trust?: HomeTrust;
   toolsHeading: string;
   toolsLead: string;
   toolsCta: string;
@@ -43,18 +73,82 @@ export interface HomeContent {
 
 export const homeContent: Record<CoreLocale, HomeContent> = {
   en: {
-    title: "Free Calculators That Tell You If It's Worth It",
+    title: 'Costco, Card Fee, Commute Cost & DTI Calculators',
     description:
-      'Free browser-based calculators for real money decisions: installments, subscriptions, Costco, EV vs. gas, rent vs. buy, commuting, daily habits, and cashback cards.',
-    eyebrow: 'Money decisions, settled by math',
-    heading: "Free calculators that tell you if it's ",
-    accent: 'actually worth it',
-    headingSuffix: '.',
+      'Calculate Costco membership and annual-fee card break-even, full commuting cost including time, and debt-to-income ratio with formulas and editable assumptions.',
+    eyebrow: 'Break-even, total-cost, and affordability math',
+    heading: 'Costco membership, annual-fee card, ',
+    accent: 'commute cost',
+    headingSuffix: ', and debt-to-income calculators',
     intro:
-      'Before you sign up, sign the lease, or swipe the card, run the numbers. Every calculator does real math on real money decisions, right in your browser - no sign-up, no data sent anywhere, just a clear estimate.',
-    badges: ['No sign-up', '100% private', 'Free forever'],
-    toolsHeading: 'Calculators',
-    toolsLead: 'Nine tools for the decisions people actually search "is it worth it?" about.',
+      'WorthCalc focuses on four money decisions where the answer depends on a visible threshold: whether a Costco membership or annual-fee card pays for itself, what commuting costs after time, and how recurring debt compares with income.',
+    badges: ['Transparent formulas', 'Editable assumptions', 'Browser-based'],
+    entity: {
+      description:
+        'WorthCalc publishes transparent calculators and guides for Costco membership break-even, annual-fee card break-even, full commute cost including time, and debt-to-income ratios.',
+      topics: [
+        'Costco membership break-even',
+        'Annual-fee credit card break-even',
+        'Full commute cost including time',
+        'Debt-to-income ratios',
+      ],
+    },
+    authority: {
+      heading: 'Four decision areas WorthCalc covers in depth',
+      lead: 'Each entry starts with an existing calculator and states the output it produces.',
+      cta: 'Run this calculation',
+      clusters: [
+        {
+          title: 'Costco membership break-even calculator',
+          path: '/tools/costco-membership',
+          description:
+            'Compare Gold Star and Executive using annual fees, eligible spending, reward rate, cap, and shopping savings. The result shows the eligible annual and monthly spend needed for the fee or upgrade to break even.',
+        },
+        {
+          title: 'Annual-fee credit card break-even calculator',
+          path: '/tools/cashback-breakeven',
+          description:
+            'Compare annual cashback and any first-year bonus, minus the fee, with a no-fee 1% card. The result shows renewal value and the monthly spend where the annual-fee card pulls ahead.',
+        },
+        {
+          title: 'Full commute cost calculator, including time',
+          path: '/tools/commute-cost',
+          description:
+            'Add distance, workdays, fuel or charging, maintenance, parking, tolls, fares, and an optional time value. The result shows monthly, annual, and per-mile or per-kilometer cost across transport modes.',
+        },
+        {
+          title: 'Debt-to-income (DTI) ratio calculator',
+          path: '/tools/dti-calculator',
+          description:
+            'Divide recurring monthly debt payments by gross monthly income and keep housing separate from other debt. The result shows front-end and back-end DTI percentages for affordability planning.',
+        },
+      ],
+    },
+    trust: {
+      heading: 'Method, sources, and limits',
+      methodHeading: 'Method',
+      method:
+        'Each calculator applies a visible formula to the values you enter, compares alternatives over the same period, and returns a break-even threshold, total cost, or ratio. Editable defaults are examples, not quotes or recommendations.',
+      sourcesHeading: 'Data sources',
+      sourcesLead:
+        "Start with your own current contract, statement, bill, quote, paystub, and provider terms. The calculation frameworks link to these durable public sources already used by the site's supporting guides:",
+      sources: [
+        { label: 'Costco — Executive Rewards terms', href: 'https://www.costco.com/executive-rewards.html' },
+        { label: 'Consumer Financial Protection Bureau — credit-card rewards program guidance', href: 'https://www.consumerfinance.gov/compliance/circulars/consumer-financial-protection-circular-2024-07-design-marketing-and-administration-of-credit-card-rewards-programs/' },
+        { label: 'IRS Publication 463 — commuting and vehicle-expense boundaries', href: 'https://www.irs.gov/publications/p463' },
+        { label: 'Consumer Financial Protection Bureau — debt-to-income ratio', href: 'https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/' },
+      ],
+      scopeHeading: 'What the calculators include',
+      scope:
+        'A result includes only the inputs and categories named on that calculator. It does not automatically include every tax, fee, eligibility or underwriting rule, reward exclusion, route condition, employer benefit, financing term, or personal risk.',
+      reviewedLabel: 'Homepage method last reviewed',
+      reviewedDate: '2026-08-24',
+      reviewedDisplay: 'August 24, 2026',
+      advice:
+        'WorthCalc provides general educational estimates. This is not financial advice, and no result predicts approval, guarantees savings, or replaces current terms or qualified professional advice.',
+    },
+    toolsHeading: 'All calculators',
+    toolsLead: 'The rest of the calculator library covers installment, subscription, vehicle, housing, debt, budget, and savings planning.',
     toolsCta: 'Open calculator',
     tools: [
       {
@@ -162,18 +256,82 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     ],
   },
   zh: {
-    title: '值不值得計算機：花錢之前，先算一下',
+    title: 'Costco 會員、信用卡年費、通勤成本與負債比試算',
     description:
-      '免費的瀏覽器端計算機，專門回答「值不值得」：分期利率、訂閱花費、好市多會員、電動機車 vs 油車、租屋 vs 買房、通勤成本、手搖飲存錢、信用卡回饋。',
-    eyebrow: '花錢決定，交給數字',
-    heading: '花錢之前，',
-    accent: '先算一下',
-    headingSuffix: '。',
+      '試算 Costco 會員與信用卡年費回本門檻、包含時間的完整通勤成本，以及台灣 DBR 與房貸收支比；公式、輸入與限制皆清楚列出。',
+    eyebrow: '回本門檻、完整成本與負債能力',
+    heading: 'Costco 會員、信用卡年費、',
+    accent: '通勤成本',
+    headingSuffix: '與負債比計算機',
     intro:
-      '分期划不划算、訂閱是不是在燒錢、好市多會員值不值得續、租屋還是買房比較好，這些問題不用憑感覺。所有計算都在你的瀏覽器本機完成，不需要註冊、資料不外傳，只給你一個清楚的估算方向。',
-    badges: ['免註冊', '完全隱私', '永久免費'],
-    toolsHeading: '計算機',
-    toolsLead: '九個工具，專門回答大家真的會搜尋的「值不值得？」。',
+      'WorthCalc 聚焦四類有明確門檻的金錢決策：Costco 會員是否回本、年費信用卡要刷多少才划算、把時間算進去後的通勤成本，以及負債相對收入是否過高。',
+    badges: ['公式公開', '假設可調整', '瀏覽器本機試算'],
+    entity: {
+      description:
+        'WorthCalc 提供公式透明的計算機與指南，聚焦 Costco 會員回本、信用卡年費回本、包含時間的完整通勤成本，以及負債比 DBR 與房貸收支比。',
+      topics: [
+        'Costco 會員回本',
+        '信用卡年費回本',
+        '包含時間的完整通勤成本',
+        '負債比 DBR 與房貸收支比',
+      ],
+    },
+    authority: {
+      heading: 'WorthCalc 深入整理的四個決策主題',
+      lead: '每個入口都連到現有計算機，並直接說明會算出哪一個數字。',
+      cta: '開始試算',
+      clusters: [
+        {
+          title: 'Costco 會員回本門檻計算機',
+          path: '/tools/costco-membership',
+          description:
+            '輸入會員年費、合格消費、回饋率、回饋上限與實際購物省下的金額，比較金星與黑鑽方案。結果會顯示會員費或升級費回本所需的年消費與月消費。',
+        },
+        {
+          title: '信用卡年費回本門檻計算機',
+          path: '/tools/cashback-breakeven',
+          description:
+            '把年度回饋與首年禮減去年費，再和免年費 1% 回饋卡比較。結果會顯示續卡淨價值，以及年費卡開始勝出的每月消費門檻。',
+        },
+        {
+          title: '包含時間成本的完整通勤計算機',
+          path: '/tools/commute-cost',
+          description:
+            '加總距離、上班天數、油電、保養、停車、通行費、車票與自訂時間價值。結果會列出各種交通方式的每月、每年與每公里成本。',
+        },
+        {
+          title: '負債比 DBR 與房貸收支比計算機',
+          path: '/tools/dti-calculator',
+          description:
+            '分開輸入無擔保負債餘額、平均月收入、房貸月付、其他固定負債與生活費。結果會同時顯示 DBR 倍數與房貸收支比，不把兩種不同指標混成一個數字。',
+        },
+      ],
+    },
+    trust: {
+      heading: '計算方法、資料來源與限制',
+      methodHeading: '計算方法',
+      method:
+        '每個計算機都把你輸入的數字帶入頁面公開的公式，在相同期間比較方案，並輸出回本門檻、總成本或比率。可調整的預設值只是示範，不是報價或建議。',
+      sourcesHeading: '資料來源',
+      sourcesLead:
+        '應優先使用你手上的最新契約、帳單、報價、薪資單與業者條款。各主題的計算框架另引用本站既有指南使用的長期公開來源：',
+      sources: [
+        { label: 'Costco 好市多台灣 — 會員權益與方案', href: 'https://www.costco.com.tw/membership' },
+        { label: '金融監督管理委員會 — 信用卡定型化契約規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+        { label: '交通部運輸研究所 — 通勤與行車成本分類', href: 'https://www.iot.gov.tw/zh_tw/archive/pub/reports/-59902021' },
+        { label: '中華民國銀行公會 — 會員授信準則', href: 'https://www.ba.org.tw/Upload/Important/38c042e7-fa61-4bff-88c6-7dc5733f0d1e/%E6%8E%88%E4%BF%A1%E6%BA%96%E5%89%87%E5%85%A8%E6%96%8710701.pdf' },
+      ],
+      scopeHeading: '計算機會納入哪些項目',
+      scope:
+        '試算只會納入該計算機明列且由你輸入的項目；不會自動涵蓋所有稅費、資格或授信規則、回饋排除、路線條件、雇主補助、融資條款與個人風險。',
+      reviewedLabel: '首頁方法最後審閱',
+      reviewedDate: '2026-08-24',
+      reviewedDisplay: '2026 年 8 月 24 日',
+      advice:
+        'WorthCalc 提供一般教育用途的估算。本頁不是財務建議，任何結果都不代表核准、不保證節省，也不能取代最新契約條款或合格專業人士的個別建議。',
+    },
+    toolsHeading: '全部計算機',
+    toolsLead: '其餘計算機涵蓋分期、訂閱、交通工具、住宅、債務、預算與儲蓄規劃。',
     toolsCta: '開啟計算機',
     tools: [
       {
@@ -451,6 +609,7 @@ export function homeJsonLd(locale: CoreLocale, site?: URL): object[] {
   const content = homeContent[locale];
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
   const pageUrl = locale === 'en' ? `${origin}/` : `${origin}/${locale}/`;
+  const featuredItems = content.authority?.clusters ?? content.tools;
   return [
     {
       '@context': 'https://schema.org',
@@ -463,14 +622,18 @@ export function homeJsonLd(locale: CoreLocale, site?: URL): object[] {
       // anonymous copy of it, so a consumer resolves one site rather than two.
       isPartOf: { '@id': webSiteId(site) },
       publisher: { '@id': organizationId(site) },
+      ...(content.entity?.topics?.length
+        ? { about: content.entity.topics.map((name) => ({ '@type': 'Thing', name })) }
+        : {}),
+      ...(content.trust ? { dateModified: content.trust.reviewedDate } : {}),
       mainEntity: {
         '@type': 'ItemList',
-        numberOfItems: content.tools.length,
-        itemListElement: content.tools.map((tool, index) => ({
+        numberOfItems: featuredItems.length,
+        itemListElement: featuredItems.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
-          name: tool.title,
-          url: `${origin}/${locale}${tool.path}/`,
+          name: item.title,
+          url: `${origin}/${locale}${item.path}/`,
         })),
       },
     },

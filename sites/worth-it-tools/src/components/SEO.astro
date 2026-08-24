@@ -1,18 +1,19 @@
 ---
-import type { SeoInput } from '../lib/seo';
+import type { EntityJsonLdOptions, SeoInput } from '../lib/seo';
 import { resolveSeo, organizationJsonLd, webSiteJsonLd } from '../lib/seo';
 import { GSC_VERIFICATION } from '../consts';
 
 interface Props extends SeoInput {
   jsonLd?: object[];
+  entity?: EntityJsonLdOptions;
 }
 
-const { jsonLd = [], ...seoInput } = Astro.props;
+const { jsonLd = [], entity, ...seoInput } = Astro.props;
 const seo = resolveSeo(seoInput);
 // The publisher and site entities go on every page so the @id references in the
 // Article and SoftwareApplication blocks resolve wherever a crawler lands, not
 // only on whichever page it happens to fetch first.
-const entityGraph = [organizationJsonLd(Astro.site), webSiteJsonLd(Astro.site)];
+const entityGraph = [organizationJsonLd(Astro.site, entity), webSiteJsonLd(Astro.site, entity)];
 ---
 
 <title>{seo.fullTitle}</title>

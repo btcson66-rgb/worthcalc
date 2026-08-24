@@ -1,7 +1,7 @@
 ---
 import type { EntityJsonLdOptions, SeoInput } from '../lib/seo';
 import { resolveSeo, organizationJsonLd, webSiteJsonLd } from '../lib/seo';
-import { GSC_VERIFICATION } from '../consts';
+import { ADSENSE_CLIENT, GSC_VERIFICATION } from '../consts';
 
 interface Props extends SeoInput {
   jsonLd?: object[];
@@ -14,6 +14,18 @@ const seo = resolveSeo(seoInput);
 // Article and SoftwareApplication blocks resolve wherever a crawler lands, not
 // only on whichever page it happens to fetch first.
 const entityGraph = [organizationJsonLd(Astro.site, entity), webSiteJsonLd(Astro.site, entity)];
+// AdSense verification loader. Until 2026-08-24 the only thing that ever
+// requested adsbygoogle.js was AdSlot.astro, and it did so from an inline
+// script at runtime. That left every homepage (/, /zh/, /en/, /de/, /es/, /fr/
+// — all `index, follow`) with no AdSense code at all, because homepages render
+// no ad slot, and left even tool pages with nothing in the served HTML for a
+// verification crawler to find. Emitting the standard async tag here puts it in
+// the source of every indexable page, which is what AdSense's site review looks
+// for, and matches how funnytools and roomfeng already do it. It loads the
+// script only — no ad unit is added to any page that did not already have one.
+// noindex pages are excluded: a page Google is told to ignore must not request
+// ads (funnytools' adsense-preflight treats that pairing as a hard error).
+const adsenseVerified = Boolean(ADSENSE_CLIENT) && !seo.robots.includes('noindex');
 ---
 
 <title>{seo.fullTitle}</title>
@@ -21,6 +33,14 @@ const entityGraph = [organizationJsonLd(Astro.site, entity), webSiteJsonLd(Astro
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 <link rel="canonical" href={seo.canonical} />
 <meta name="robots" content={seo.robots} />
+{adsenseVerified && (
+  <script
+    async
+    src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+    crossorigin="anonymous"
+    data-adsbygoogle-loader="true"
+  ></script>
+)}
 {seo.alternates.map((alternate) => (
   <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
 ))}

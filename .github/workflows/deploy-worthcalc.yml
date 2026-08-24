@@ -41,7 +41,18 @@ jobs:
         env:
           SITE_URL: https://worthcalc.win
           PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
-          PUBLIC_ADSENSE_CLIENT: ${{ vars.WORTHCALC_ADSENSE_CLIENT }}
+          # 2026-08-24: was ${{ vars.WORTHCALC_ADSENSE_CLIENT }}. That repo
+          # variable was never set (see the 2026-07-10 AdSense playbook), so
+          # every build injected an empty string and neither the head loader
+          # nor AdSlot rendered anything — which would silently block AdSense
+          # review. The publisher ID is public information anyway (it is served
+          # verbatim in public/ads.txt), so it is written literally here, the
+          # same way roomfeng does it, rather than depending on an invisible
+          # repo setting. Keep this in sync with
+          # sites/worth-it-tools/public/ads.txt — AdSense matches the two.
+          # Account: zxc851558 (the previous account btcson66 can no longer be
+          # signed into).
+          PUBLIC_ADSENSE_CLIENT: ca-pub-9117672212804270
           # No PUBLIC_GSC_VERIFICATION here: the WORTHCALC_GSC_VERIFICATION repo
           # variable was never set, and worthcalc.win is verified in Search
           # Console as a domain property via a DNS TXT record (see the

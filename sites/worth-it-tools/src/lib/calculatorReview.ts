@@ -310,6 +310,42 @@ const reviews: ReviewMap = {
       disclaimer: financialDisclaimer.zh,
     },
   },
+  'cost-per-mile': {
+    en: {
+      methodology:
+        'The calculator adds four annual fixed costs (depreciation, insurance, registration, finance interest) to three annual running costs (fuel or electricity, maintenance, tires), then divides the annual total by annual distance driven. Depreciation is purchase price minus expected resale value, divided by years kept. The energy rate is shown separately: imperial mode is fuel price divided by MPG, metric mode is L/100 km multiplied by price per liter and divided by 100, and electric mode is kWh per 100 miles or kilometers multiplied by price per kWh and divided by 100.',
+      assumptions: [
+        'Default imperial values of 12,000 miles a year, 30 MPG, 3.50 per gallon, 800 maintenance, 250 tires, 1,800 insurance, 250 registration, 0 finance interest, 32,000 purchase price, 14,000 resale value, and 6 years kept are example arithmetic, not typical prices for any vehicle.',
+        'Finance interest should only capture the annual interest actually paid, not loan principal, because purchase-price depreciation already represents the vehicle value consumed.',
+        'Switching between imperial and metric converts distance, fuel efficiency, fuel price, and energy use; it does not change any of the dollar-cost fields you already entered.',
+      ],
+      example:
+        'With the default inputs, annual depreciation is (32,000 − 14,000) ÷ 6 = 3,000, so fixed cost is 3,000 + 1,800 + 250 + 0 = 5,050. Fuel cost per mile is 3.50 ÷ 30 ≈ 0.117, giving an annual fuel cost of 1,400. Running cost is 1,400 + 800 + 250 = 2,450, and the annual total is 5,050 + 2,450 = 7,500. Divided by 12,000 miles, the total cost per mile is 0.625.',
+      limitations: [
+        'Parking, tolls, loan principal, the opportunity cost of cash, tax incentives, emissions costs, inflation, charger installation, and battery replacement are not modeled unless you fold an estimate into one of the existing fields.',
+        'The result describes one vehicle’s modeled annual cost, not a specific trip, a commute, or a two-vehicle comparison; more annual distance lowers the fixed-cost contribution to each mile but does not reduce the energy rate itself.',
+      ],
+      lastUpdated: lastUpdated.en,
+      disclaimer: financialDisclaimer.en,
+    },
+    zh: {
+      methodology:
+        '計算機把四項年度固定成本（折舊、保險、燃料費／牌照稅與驗車、貸款利息）加上三項年度行駛成本（油錢或電費、保養維修、輪胎）加總，再除以一年行駛距離。折舊等於購車價減預估轉售價，再除以持有年數。能源成本會另外顯示：公制是油耗（L/100 km）乘以油價再除以 100，英制是油價除以 MPG，電動車則是每 100 公里耗電度數乘以每度電價再除以 100。',
+      assumptions: [
+        '預設公制值（一年 12,000 公里、油耗 6.5 L/100km、每公升 32、每年保養 12,000、輪胎 5,000、保險 12,000、燃料費牌照稅與驗車 12,000、貸款利息 0、購車價 800,000、轉售價 350,000、持有 6 年）只是示範算式的樣本，不代表目前市場油價、稅率或任何車款行情。',
+        '貸款利息只填實際年繳利息，不要把貸款本金算進去，因為購車價與轉售價的差額已經代表車輛價值折損。',
+        '切換英制／公制只會換算距離、油耗、油價與耗電量等欄位，不會改變你已輸入的其他金額欄位。',
+      ],
+      example:
+        '以預設值計算，年折舊為 (800,000 − 350,000) ÷ 6 = 75,000，固定成本為 75,000 + 12,000 + 12,000 + 0 = 99,000。每公里油錢為 6.5 × 32 ÷ 100 = 2.08，一年油錢為 2.08 × 12,000 = 24,960。行駛成本為 24,960 + 12,000 + 5,000 = 41,960，年度總成本為 99,000 + 41,960 = 140,960。除以 12,000 公里，每公里成本約為 11.75。',
+      limitations: [
+        '未納入停車費、過路費、貸款本金、資金機會成本、稅務優惠、排放成本、通膨、充電樁安裝費與電池更換費，除非你自行把估算金額加進現有欄位。',
+        '結果是這輛車的年度模型成本，不是特定行程、通勤或兩輛車的比較；提高年行駛距離會降低固定成本分攤到每公里的比例，但不會改變能源成本本身的費率。',
+      ],
+      lastUpdated: lastUpdated.zh,
+      disclaimer: financialDisclaimer.zh,
+    },
+  },
 };
 
 export function getCalculatorReview(slug: string, locale: Locale): ReviewDetails | undefined {

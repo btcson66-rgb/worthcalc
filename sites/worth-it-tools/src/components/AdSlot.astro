@@ -1,20 +1,29 @@
 ---
 import { ADSENSE_CLIENT } from '../consts';
+import { isSoftDeindexed } from '../lib/seo';
 import { getLocaleFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   slot?: string;
   format?: string;
   label?: boolean;
+  /** Mirror of the hosting layout's `noindex` prop. */
+  noindex?: boolean;
 }
 
-const { slot, format = 'auto', label = true } = Astro.props;
+const { slot, format = 'auto', label = true, noindex = false } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const adLabel = t('ad.placeholder');
+// A page Google is told to ignore must not request ads. SEO.astro already keeps
+// the head loader off noindex pages; without the same gate here the ad unit
+// stayed and its inline script injected the loader anyway, so the W34
+// soft-deindexed /de/ pages still served live ads. Both robots sources are
+// checked: the per-page prop and the path-based soft-deindex registry.
+const indexable = !noindex && !isSoftDeindexed(Astro.url.pathname);
 ---
 
-{ADSENSE_CLIENT && (
+{ADSENSE_CLIENT && indexable && (
   <div class="ad-slot" role="complementary" aria-label={adLabel}>
     {label && <span class="ad-label">{adLabel}</span>}
     <ins

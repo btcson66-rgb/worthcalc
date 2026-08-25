@@ -113,7 +113,7 @@ const reviewLabels = {
 >
   <Breadcrumb items={crumbs} />
   <h1>{title}</h1>
-  <AdSlot />
+  <AdSlot noindex={noindex} />
   <section class="tool">
     <slot />
   </section>
@@ -148,7 +148,7 @@ const reviewLabels = {
   <p class="privacy-note">{t('tool.privacyNote')}</p>
   <FAQ items={faq} />
   <RelatedLinks links={related} />
-  <AdSlot />
+  <AdSlot noindex={noindex} />
 </BaseLayout>
 
 <style>

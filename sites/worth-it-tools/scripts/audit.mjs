@@ -212,6 +212,11 @@ let hasGa4 = false;
 let hasAdsPlaceholder = false;
 let calculatorPages = 0;
 let calculatorPagesWithoutReview = 0;
+// Checking only 404.html left the W34 soft-deindexed /de/ pages serving live ad
+// units for weeks: they are noindex but they still render a tool layout, so the
+// ad slot and its inline loader shipped with them. Count every noindex page.
+let noindexPagesWithAds = 0;
+const noindexPagesWithAdsSamples = [];
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
@@ -242,6 +247,13 @@ for (const file of htmlFiles) {
   if (html.includes('ad-slot') || html.includes('adsbygoogle')) hasAdsPlaceholder = true;
 
   const relativePath = file.slice(distDir.length).replaceAll('\\', '/');
+
+  // A page Google is told to ignore must never request ads.
+  const isNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
+  if (isNoindex && /pagead2\.googlesyndication|adsbygoogle|data-ad-slot/i.test(html)) {
+    noindexPagesWithAds++;
+    if (noindexPagesWithAdsSamples.length < 5) noindexPagesWithAdsSamples.push(relativePath);
+  }
   if (/\/(?:en|zh)\/tools\/[^/]+\/index\.html$/.test(relativePath)) {
     calculatorPages++;
     const hasReview =
@@ -262,6 +274,13 @@ check('Pages have internal links (≥2)', pagesWithoutInternalLinks === 0, pages
 check('No thin pages (<200 chars body)', thinPages === 0, thinPages > 0 ? `${thinPages} thin pages` : '');
 check('GA4 gtag mechanism present', hasGa4 || 'warn', hasGa4 ? '' : 'GA4 not injected (PUBLIC_GA_ID may be empty)');
 check('AdSense placeholder present', hasAdsPlaceholder);
+check(
+  'No noindex page loads AdSense',
+  noindexPagesWithAds === 0,
+  noindexPagesWithAds > 0
+    ? `${noindexPagesWithAds} noindex pages load ads, e.g. ${noindexPagesWithAdsSamples.join(', ')}`
+    : '',
+);
 check(
   'Calculator methodology disclosure',
   calculatorPages > 0 && calculatorPagesWithoutReview === 0,

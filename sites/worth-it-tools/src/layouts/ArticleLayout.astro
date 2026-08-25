@@ -40,5 +40,5 @@ const crumbs = breadcrumb ?? [
     {updated && <p class="updated">{updated}</p>}
     <slot />
   </article>
-  <AdSlot />
+  <AdSlot noindex={noindex} />
 </BaseLayout>

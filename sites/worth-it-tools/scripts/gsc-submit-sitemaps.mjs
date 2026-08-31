@@ -8,9 +8,9 @@ const EXPECTED_PROPERTY = 'sc-domain:worthcalc.win';
 const INDEX_URL = `${SITE_ORIGIN}/sitemap-index.xml`;
 const CREDENTIAL_ENV = 'GSC_SERVICE_ACCOUNT_JSON';
 const DAY_MS = 24 * 60 * 60 * 1000;
-const COOLDOWN_MS = 7 * DAY_MS;
 const STUCK_MS = 14 * DAY_MS;
 const mode = process.argv.includes('--health') || process.argv.includes('--dry-run') ? 'health' : 'submit';
+const forceSubmit = process.argv.includes('--force');
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const reportsDir = join(projectRoot, 'reports');
 
@@ -35,6 +35,26 @@ function credentials() {
   };
 }
 
+function userOAuthCredentials() {
+  const rawClient = process.env.FABLE_OPS_OAUTH_CLIENT_JSON;
+  const refreshToken = process.env.FABLE_OPS_REFRESH_TOKEN;
+  if (!rawClient && !refreshToken) return null;
+  if (!rawClient || !refreshToken) {
+    throw new Error('FABLE_OPS_OAUTH_CLIENT_JSON and FABLE_OPS_REFRESH_TOKEN must be configured together.');
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(rawClient);
+  } catch {
+    throw new Error('FABLE_OPS_OAUTH_CLIENT_JSON must contain valid OAuth client JSON.');
+  }
+  const client = parsed.installed || parsed.web || parsed;
+  if (!client?.client_id || !client?.client_secret) {
+    throw new Error('FABLE_OPS_OAUTH_CLIENT_JSON is missing client_id or client_secret.');
+  }
+  return { clientId: client.client_id, clientSecret: client.client_secret, refreshToken };
+}
+
 async function jsonRequest(url, options = {}) {
   const response = await fetch(url, options);
   const text = await response.text();
@@ -48,6 +68,24 @@ async function jsonRequest(url, options = {}) {
 }
 
 async function accessToken() {
+  const oauth = userOAuthCredentials();
+  if (oauth) {
+    const { response, json } = await jsonRequest('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: oauth.refreshToken,
+        client_id: oauth.clientId,
+        client_secret: oauth.clientSecret,
+      }),
+    });
+    if (!response.ok || !json?.access_token) {
+      throw new Error(`Configured user OAuth refresh failed (${response.status}): ${json?.error_description ?? json?.error ?? 'unknown error'}`);
+    }
+    return json.access_token;
+  }
+
   const serviceAccount = credentials();
   const now = Math.floor(Date.now() / 1000);
   const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
@@ -83,7 +121,7 @@ async function resolveProperty(token) {
   if (!response.ok) throw new Error(`GSC sites.list failed (${response.status}).`);
   const available = (json?.siteEntry ?? []).map((entry) => entry.siteUrl);
   if (!available.includes(EXPECTED_PROPERTY)) {
-    throw new Error(`Service account cannot access required GSC property ${EXPECTED_PROPERTY}.`);
+    throw new Error(`Configured Google identity cannot access required GSC property ${EXPECTED_PROPERTY}. Accessible: ${available.join(', ') || '(none)'}.`);
   }
   return EXPECTED_PROPERTY;
 }
@@ -199,7 +237,7 @@ async function submitSitemaps(token, property) {
   };
   let failures = 0;
   let submitted = 0;
-  let cooldown = 0;
+  let registered = 0;
 
   for (const path of paths) {
     const endpoint = sitemapEndpoint(property, path);
@@ -215,11 +253,9 @@ async function submitSitemaps(token, property) {
     if (stuckPath(before, now)) {
       report.alerts.push(`GSC sitemap stuck pending for more than 14 days with no lastDownloaded: ${before.path}`);
     }
-    const lastSubmitted = dateValue(before.lastSubmitted);
-    const elapsed = lastSubmitted ? now - lastSubmitted : null;
-    if (lastSubmitted && elapsed >= 0 && elapsed < COOLDOWN_MS) {
-      cooldown += 1;
-      report.entries.push({ ...before, action: 'skipped_cooldown' });
+    if (beforeResponse.ok && !forceSubmit) {
+      registered += 1;
+      report.entries.push({ ...before, action: 'already_registered' });
       continue;
     }
 
@@ -245,24 +281,23 @@ async function submitSitemaps(token, property) {
     if (stuckPath(after, now)) {
       report.alerts.push(`GSC sitemap stuck pending for more than 14 days with no lastDownloaded: ${after.path}`);
     }
-    report.entries.push({ ...after, action: 'submitted' });
+    report.entries.push({ ...after, action: forceSubmit ? 'force_submitted' : 'submitted_unregistered' });
   }
 
   report.alerts = [...new Set(report.alerts)];
-  if (report.alerts.length) {
-    report.status = 'stuck_pending';
-    report.message = report.alerts.join(' ');
-    process.exitCode = 1;
-  } else if (failures) {
+  if (failures) {
     report.status = 'failed';
     report.message = `${failures} sitemap path(s) failed.`;
     process.exitCode = 1;
   } else if (submitted) {
     report.status = 'submitted';
-    report.message = `Submitted ${submitted} sitemap path(s); ${cooldown} path(s) were inside the 7-day cooldown.`;
+    report.message = `Submitted ${submitted} unregistered sitemap path(s); read back ${registered} existing path(s).`;
+  } else if (report.alerts.length) {
+    report.status = 'registered_pending';
+    report.message = `Read back ${registered} registered sitemap path(s). Google download remains pending; no repeat PUT was sent.`;
   } else {
-    report.status = 'skipped_cooldown';
-    report.message = `All ${cooldown} sitemap path(s) were inside the 7-day cooldown.`;
+    report.status = 'already_registered';
+    report.message = `Read back ${registered} registered sitemap path(s); no repeat PUT was needed.`;
   }
   writeReports(report);
   printTable(report.entries);

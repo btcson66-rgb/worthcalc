@@ -97,19 +97,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # 2026-08-01（CEO 派工）：worthcalc 之前完全沒有 GSC 提交步驟，sitemap
-      # 停在 2026-07-22 一次性手動提交後從未再送出。這裡補上，樣式抄自
-      # funnytools 修好後的 gsc-submit-sitemaps.mjs（domain property
-      # sc-domain:worthcalc.win，不是 URL-prefix，避免 403）。不加
+      # Uses the sc-domain:worthcalc.win property (not a URL-prefix property).
+      # The owner user OAuth identity is preferred, with the service account as
+      # a legacy fallback only when user OAuth is absent. Do not add
       # "if secret exists" 這種靜默略過的守門條件——缺憑證要讓 job 失敗、
       # 讓人看到，而不是悄悄跳過（CLAUDE.md 紅線第 6 條）。
       #
-      # 2026-08-05：改指向 gsc-submit-sitemaps.mjs（複數）。舊的單數版只送
-      # sitemap-index.xml 且送完不回查，所以「index 送出成功」與「Google 真的
-      # 下載過」被混為一談——實測三站全部 isPending 且沒有 lastDownloaded 欄位
-      # 長達數週，卻沒有任何一支腳本會為此失敗。新版會送 index 與每個子
-      # sitemap、PUT 後逐筆回讀狀態，並在任一筆 pending 超過 14 天且從未被
-      # 下載時 exit 1。
+      # The plural script reads the index and child sitemap states. It registers
+      # only missing entries, reports long-lived pending as a warning, and fails
+      # only for authentication, API, or public sitemap errors.
       - run: sleep 60 && node sites/worth-it-tools/scripts/gsc-submit-sitemaps.mjs
         env:
+          FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
+          FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}

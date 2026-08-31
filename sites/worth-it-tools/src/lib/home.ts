@@ -65,6 +65,11 @@ export interface HomeContent {
   guidesLead: string;
   guidesCta: string;
   guides: HomeGuide[];
+  guideCluster?: {
+    heading: string;
+    intro: string;
+    cards: HomeGuide[];
+  };
   seoHeading: string;
   seoParagraphs: string[];
   faqHeading: string;
@@ -225,6 +230,17 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: 'True hourly wage after work costs', path: '/true-hourly-wage-after-commuting-work-expenses', description: 'Reprice a job with take-home pay, required time, commuting, and unreimbursed expenses.' },
       { title: 'Pay raise versus inflation', path: '/pay-raise-vs-inflation-purchasing-power', description: 'Use matching CPI periods to distinguish a nominal raise from a real purchasing-power change.' },
     ],
+    guideCluster: {
+      heading: 'Financial resilience and rate literacy',
+      intro: 'A good money decision starts before the calculator. These guides show how to define the number you are actually measuring: emergency runway, liquid net worth, savings rate, APR, APY, and the total cost hidden behind a lower monthly payment. Each page states its formula, assumptions, worked example, limits, and the WorthCalc tool that can take the next step with your own inputs.',
+      cards: [
+        { title: 'Emergency Fund for Irregular Income', path: '/emergency-fund-irregular-income', description: 'Build runway around essential expenses and slow-season gaps, not an average paycheck.' },
+        { title: 'Net Worth vs Liquid Net Worth', path: '/net-worth-vs-liquid-net-worth', description: 'Separate long-term wealth from cash you can realistically access quickly.' },
+        { title: 'Savings Rate: Gross vs Net', path: '/savings-rate-gross-vs-net', description: 'Define the denominator before comparing your percentage with anyone else’s.' },
+        { title: 'APR vs APY', path: '/apr-vs-apy', description: 'See why borrowing cost and deposit yield use different annualized measures.' },
+        { title: 'Loan Term vs Monthly Payment', path: '/loan-term-monthly-payment-vs-total-interest', description: 'Put the lower payment next to the extra interest and longer debt horizon.' },
+      ],
+    },
     seoHeading: 'Worth-it calculators for everyday money choices',
     seoParagraphs: [
       'WorthCalc focuses on practical consumer decisions where a quick estimate can prevent an expensive mistake: installment plans, subscription creep, warehouse memberships, vehicles, housing, commuting, daily habits, and cashback cards.',
@@ -408,6 +424,17 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: '扣除通勤與工作成本的真實時薪', path: '/true-hourly-wage-after-commuting-work-expenses', description: '用同一期實領、必要時間、通勤與未報銷支出重新比較工作。' },
       { title: '加薪有沒有跑贏通膨？', path: '/pay-raise-vs-inflation-purchasing-power', description: '使用相同期間 CPI，分清楚名目加薪與實質購買力變化。' },
     ],
+    guideCluster: {
+      heading: '現金安全墊、資產負債與利率判讀',
+      intro: '真正有用的財務數字，必須先說清楚公式與用途。這組指南把緊急預備金、目標基金、淨資產、流動淨資產、儲蓄率、APR、APY、複利與貸款期數拆開，讓「我該存多少」「我真的有多少可用資產」「月付變低是不是更划算」都能用同一套透明邏輯回答。',
+      cards: [
+        { title: '緊急預備金要存多少？', path: '/emergency-fund-how-much', description: '從必要支出與風險情境算安全墊，不照抄月薪倍數。' },
+        { title: '緊急預備金 vs 目標基金', path: '/emergency-fund-vs-sinking-fund', description: '把真正意外與已知年度帳單分開。' },
+        { title: '淨資產怎麼算？', path: '/how-to-calculate-net-worth', description: '用同一天資產與負債建立可追蹤的家庭資產負債表。' },
+        { title: '儲蓄率怎麼算？', path: '/how-to-calculate-savings-rate', description: '分清稅前、稅後、退休提撥與還本金。' },
+        { title: 'APR、APY、利率差在哪？', path: '/apr-vs-apy', description: '借款成本與存款收益不要混成同一個百分比。' },
+      ],
+    },
     seoHeading: '用估算工具處理日常金錢選擇',
     seoParagraphs: [
       'WorthCalc 聚焦在消費者每天會遇到的「值不值得」問題：分期付款、訂閱支出、賣場會員、交通工具、租屋買房、通勤、每日習慣，以及信用卡回饋。',

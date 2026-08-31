@@ -4,12 +4,26 @@ import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
-// en + zh are always required. es/fr/de are frozen as of 2026-07-25 (see the
-// "i18n expansion policy" section in README.md): new routes ship en+zh only, so a
-// route having no es/fr/de version is intentional, not a defect. What IS a defect
-// is a *partially* localized route (some but not all of es/fr/de) or a page that
-// declares hreflang for a version that does not exist.
+// en + zh are required for normal new routes. es/fr/de are frozen as of
+// 2026-07-25 (see the "i18n expansion policy" section in README.md). Package 001
+// is an approved editorial exception: its manifest intentionally contains a
+// small set of single-language routes. What IS a defect is a *partially*
+// localized frozen-language route or a page that declares hreflang for a version
+// that does not exist.
 const requiredLocales = ['en', 'zh'];
+const approvedSingleLocaleRoutes = new Set([
+  'loan-term-monthly-payment-vs-total-interest',
+  'net-worth-vs-liquid-net-worth',
+  'savings-rate-gross-vs-net',
+  'emergency-fund-how-much',
+  'emergency-fund-vs-debt-payoff',
+  'emergency-fund-vs-sinking-fund',
+  'how-to-calculate-net-worth',
+  'how-to-calculate-savings-rate',
+  'liquid-net-worth-explained',
+  'loan-term-vs-total-interest',
+  'simple-vs-compound-interest',
+]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };
 const hreflangFor = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };
@@ -96,7 +110,9 @@ for (const { locale, route, file } of pages) {
 // Route-level coverage rules.
 let enZhOnlyRoutes = 0;
 for (const [route, present] of routes) {
-  const missingRequired = requiredLocales.filter((locale) => !present.has(locale));
+  const missingRequired = approvedSingleLocaleRoutes.has(route)
+    ? []
+    : requiredLocales.filter((locale) => !present.has(locale));
   if (missingRequired.length) failures.push(`/${route}: missing required locales ${missingRequired.join(', ')}`);
 
   const frozenPresent = frozenLocales.filter((locale) => present.has(locale));

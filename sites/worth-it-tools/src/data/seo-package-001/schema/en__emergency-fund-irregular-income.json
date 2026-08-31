@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Emergency Fund for Irregular Income: A Better Method Than “Six Months of Salary”",
+      "description": "Build an emergency fund around essential expenses, income floors, slow seasons, taxes, and client concentration—not an average monthly paycheck that may never arrive on schedule.",
+      "inLanguage": "en",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/emergency-fund-irregular-income/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/emergency-fund-irregular-income.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "English",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Emergency Fund for Irregular Income: A Better Method Than “Six Months of Salary”",
+          "item": "https://worthcalc.win/en/emergency-fund-irregular-income/"
+        }
+      ]
+    }
+  ]
+}

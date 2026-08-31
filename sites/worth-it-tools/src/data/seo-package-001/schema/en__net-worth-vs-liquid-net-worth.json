@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Net Worth vs. Liquid Net Worth: Why a High Net Worth Can Still Feel Cash-Poor",
+      "description": "Net worth measures assets minus liabilities. Liquid net worth asks how much of that value can become usable cash quickly. Learn a transparent way to track both without double-counting.",
+      "inLanguage": "en",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/net-worth-vs-liquid-net-worth.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "English",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Net Worth vs. Liquid Net Worth: Why a High Net Worth Can Still Feel Cash-Poor",
+          "item": "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/"
+        }
+      ]
+    }
+  ]
+}

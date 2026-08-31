@@ -3,6 +3,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { legalContent } from '../../data/legalContent';
 import type { Locale } from '../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { seoPackage001 } from '../../data/seoPackage001';
 
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
@@ -11,9 +12,16 @@ export async function getStaticPaths() {
   const legal = (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
     released.map((legal) => ({ params: { locale, legal } })),
   );
-  const growth = (await getCollection('growthArticles', ({ data }) => !data.draft)).map((entry) => ({
+  const entries = await getCollection('growthArticles', ({ data }) => !data.draft);
+  const localesBySlug = new Map<string, Locale[]>();
+  for (const entry of entries) {
+    const locales = localesBySlug.get(entry.data.articleSlug) ?? [];
+    locales.push(entry.data.locale);
+    localesBySlug.set(entry.data.articleSlug, locales);
+  }
+  const growth = entries.map((entry) => ({
     params: { locale: entry.data.locale, legal: entry.data.articleSlug },
-    props: { growthEntry: entry },
+    props: { growthEntry: entry, alternateLocales: localesBySlug.get(entry.data.articleSlug) ?? [entry.data.locale] },
   }));
   return [...legal, ...growth];
 }
@@ -21,12 +29,32 @@ export async function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const slug = Astro.params.legal!;
 const growthEntry = Astro.props.growthEntry as CollectionEntry<'growthArticles'> | undefined;
+const packageMeta = growthEntry ? seoPackage001[`${growthEntry.data.locale}/${growthEntry.data.articleSlug}`] : undefined;
+const packageSchemas = import.meta.glob('../../data/seo-package-001/schema/*.json', { eager: true, import: 'default' }) as Record<string, object>;
+const packageSchema = packageMeta && growthEntry
+  ? Object.entries(packageSchemas).find(([path]) => path.endsWith(`/${growthEntry.data.locale}__${growthEntry.data.articleSlug}.json`))?.[1]
+  : undefined;
+const alternateLocales = Astro.props.alternateLocales as Locale[] | undefined;
 const rendered = growthEntry ? await render(growthEntry) : undefined;
 const GrowthContent = rendered?.Content;
 const content = !growthEntry && (locale === 'es' || locale === 'fr' || locale === 'de') ? legalContent[locale]?.[slug] : undefined;
 if (!growthEntry && !content) throw new Error(`Missing legal or growth content for ${locale}/${slug}`);
 ---
-<ArticleLayout title={growthEntry?.data.title ?? content!.title} description={growthEntry?.data.description ?? content!.description} locale={locale} updated={growthEntry ? growthEntry.data.lastReviewed.toISOString().slice(0, 10) : content!.updated} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout
+  title={growthEntry?.data.title ?? content!.title}
+  description={growthEntry?.data.description ?? content!.description}
+  locale={locale}
+  updated={growthEntry ? growthEntry.data.lastReviewed.toISOString().slice(0, 10) : content!.updated}
+  alternateLocales={growthEntry ? alternateLocales : ['en', 'zh', 'es', 'fr', 'de']}
+  seoTitle={packageMeta?.seoTitle}
+  ogTitle={packageMeta?.ogTitle}
+  ogDescription={packageMeta?.ogDescription}
+  robots={packageMeta?.robots}
+  image={packageMeta?.ogImage}
+  imageAlt={packageMeta?.imageAlt}
+  jsonLd={packageSchema ? [packageSchema] : undefined}
+  showTitle={!packageMeta}
+>
   {growthEntry && GrowthContent ? <GrowthContent /> : (
     <>
       {content!.intro.map((paragraph) => <p>{paragraph}</p>)}

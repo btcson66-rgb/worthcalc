@@ -4,9 +4,10 @@ import { breadcrumbJsonLd } from '../lib/seo';
 
 interface Props {
   items: BreadcrumbItem[];
+  includeJsonLd?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, includeJsonLd = true } = Astro.props;
 ---
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -25,4 +26,4 @@ const { items } = Astro.props;
     })}
   </ol>
 </nav>
-<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd(items, Astro.site))} />
+{includeJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd(items, Astro.site))} />}

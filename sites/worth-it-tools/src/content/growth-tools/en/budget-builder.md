@@ -41,6 +41,10 @@ The calculation runs in your browser. Do not put account numbers or other identi
 
 Read [How to Budget on Irregular Income Without Guessing Next Month](/en/budget-with-irregular-income/) for the income-floor method, converting annual bills into sinking funds, and setting aside money for IRS quarterly estimated taxes.
 
+[If your income varies, use the emergency-fund guide to turn the income-floor method into a separate slow-season and true-emergency runway.](/en/emergency-fund-irregular-income/)
+
+[After the monthly plan balances, use the savings-rate guide to label gross-income and take-home versions consistently.](/en/savings-rate-gross-vs-net/)
+
 ## Frequently asked questions
 
 ### Should I use gross or take-home income?

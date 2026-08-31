@@ -41,6 +41,8 @@ The calculation runs in your browser. Do not put account numbers or other identi
 
 Read [How Compound Growth Actually Works](/en/how-compound-growth-works/) for the Rule of 72 shortcut, why time matters more than rate, and how a 1% fee compounds against you over long horizons.
 
+[Savings rate measures today’s allocation; this guide explains why that is different from a modeled future growth rate.](/en/savings-rate-gross-vs-net/)
+
 ## Frequently asked questions
 
 ### Is the return guaranteed?

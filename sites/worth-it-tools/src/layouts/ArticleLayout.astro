@@ -15,9 +15,17 @@ interface Props {
   breadcrumb?: BreadcrumbItem[];
   noindex?: boolean;
   alternateLocales?: Locale[];
+  seoTitle?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  image?: string;
+  imageAlt?: string;
+  robots?: string;
+  jsonLd?: object[];
+  showTitle?: boolean;
 }
 
-const { title, description, locale, updated, breadcrumb, noindex, alternateLocales } = Astro.props;
+const { title, description, locale, updated, breadcrumb, noindex, alternateLocales, seoTitle, ogTitle, ogDescription, image, imageAlt, robots, jsonLd = [], showTitle = true } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
@@ -32,11 +40,17 @@ const crumbs = breadcrumb ?? [
   type="article"
   noindex={noindex}
   alternateLocales={alternateLocales}
-  jsonLd={[articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated, site: Astro.site })]}
+  seoTitle={seoTitle}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  image={image}
+  imageAlt={imageAlt}
+  robots={robots}
+  jsonLd={jsonLd.length > 0 ? jsonLd : [articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated, site: Astro.site })]}
 >
-  <Breadcrumb items={crumbs} />
+  <Breadcrumb items={crumbs} includeJsonLd={jsonLd.length === 0} />
   <article class="prose">
-    <h1>{title}</h1>
+    {showTitle && <h1>{title}</h1>}
     {updated && <p class="updated">{updated}</p>}
     <slot />
   </article>

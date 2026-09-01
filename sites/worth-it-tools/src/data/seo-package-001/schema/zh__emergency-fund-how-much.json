@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "緊急預備金要存多少？3 個月、6 個月不是唯一答案",
+      "description": "緊急預備金不是背一個月數。用必要支出、收入穩定度、保險、自付額、家庭責任與可動用現金，算出真正適合你的安全墊範圍。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/emergency-fund-how-much/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/emergency-fund-how-much.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "緊急預備金要存多少？3 個月、6 個月不是唯一答案",
+          "item": "https://worthcalc.win/zh/emergency-fund-how-much/"
+        }
+      ]
+    }
+  ]
+}

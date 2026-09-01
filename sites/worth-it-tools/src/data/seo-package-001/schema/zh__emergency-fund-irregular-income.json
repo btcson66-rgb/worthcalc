@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "收入不固定，緊急預備金怎麼存？接案、自營與獎金制的現金流做法",
+      "description": "收入波動時不要用平均月薪假裝穩定。用收入底線、必要支出、淡旺季、稅款與大額入帳規劃緊急預備金。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/emergency-fund-irregular-income/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/emergency-fund-irregular-income.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "收入不固定，緊急預備金怎麼存？接案、自營與獎金制的現金流做法",
+          "item": "https://worthcalc.win/zh/emergency-fund-irregular-income/"
+        }
+      ]
+    }
+  ]
+}

@@ -41,6 +41,8 @@ The calculation runs in your browser. Do not put account numbers or other identi
 
 Read [The 20/4/10 Rule: How Much Car You Can Actually Afford](/en/true-cost-of-car-ownership/) for the reasoning behind the 20/4/10 guideline, first-year depreciation estimates, and why a longer loan term can leave you underwater.
 
+[Before choosing a longer term to hit a payment target, compare the lower payment with the extra interest and longer debt horizon.](/en/loan-term-monthly-payment-vs-total-interest/)
+
 ## Frequently asked questions
 
 ### Why use take-home income for this calculation?

@@ -43,6 +43,8 @@ draft: false
 
 閱讀 [信用卡只繳最低應繳，利息怎麼算？循環利率15%上限是什麼](/zh/credit-card-minimum-payment-trap/)，了解完整的最低應繳公式拆解與清償策略。
 
+[如果你正在猶豫額外現金該全部還債還是保留安全墊，可先比較兩種情境的利息與現金餘額。](/zh/emergency-fund-vs-debt-payoff/)
+
 ## 常見問題
 
 ### 循環利息是複利還是單利？

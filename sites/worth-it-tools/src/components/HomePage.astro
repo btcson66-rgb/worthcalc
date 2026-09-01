@@ -140,6 +140,22 @@ const allGuidesCopy = {
   </div>
 </section>
 
+{content.guideCluster && (
+  <section class="home-guides" aria-labelledby="home-guide-cluster-heading">
+    <h2 id="home-guide-cluster-heading">{content.guideCluster.heading}</h2>
+    <p class="section-lead">{content.guideCluster.intro}</p>
+    <div class="guide-grid">
+      {content.guideCluster.cards.map((guide) => (
+        <article class="guide-card">
+          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
+          <p>{guide.description}</p>
+          <span>{content.guidesCta} →</span>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
 <section class="all-guides" aria-labelledby="all-guides-heading">
   <h2 id="all-guides-heading">{allGuidesCopy.heading}</h2>
   <p class="section-lead">{allGuidesCopy.lead}</p>

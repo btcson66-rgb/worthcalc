@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "簡單利息 vs 複利差在哪？存款、投資與債務為什麼不能只看年利率",
+      "description": "簡單利息只對本金計息；複利會讓已產生的利息也進入下一期基礎。用公式、信用卡與長期儲蓄案例看差距。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/simple-vs-compound-interest/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/simple-vs-compound-interest.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "簡單利息 vs 複利差在哪？存款、投資與債務為什麼不能只看年利率",
+          "item": "https://worthcalc.win/zh/simple-vs-compound-interest/"
+        }
+      ]
+    }
+  ]
+}

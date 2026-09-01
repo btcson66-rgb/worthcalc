@@ -6,8 +6,17 @@ const DEINDEXED_PATHS = new Set(deindexedRegistry.urls.map((url) => new URL(url)
 export interface SeoInput {
   /** Page title without the brand suffix. */
   title: string;
+  /** Optional exact title for editorial packages whose title already includes the brand. */
+  titleOverride?: string;
   /** Meta description (~50–160 chars recommended). */
   description: string;
+  /** Optional social metadata overrides. */
+  ogTitle?: string;
+  ogDescription?: string;
+  /** Optional exact robots value supplied by an editorial package. */
+  robots?: string;
+  /** Optional accessible description for the social share image. */
+  imageAlt?: string;
   /** Active locale of the page. */
   locale: Locale;
   /** The current page URL (pass `Astro.url`). */
@@ -67,7 +76,7 @@ function localizedPagePath(locale: Locale, logical: string): string {
 /** Resolve raw SEO input into everything the <head> needs. */
 export function resolveSeo(input: SeoInput): ResolvedSeo {
   const base = origin(input);
-  const fullTitle = input.title ? `${input.title} | ${SITE.name}` : SITE.name;
+  const fullTitle = input.titleOverride ?? (input.title ? `${input.title} | ${SITE.name}` : SITE.name);
   const currentPath = pagePath(input.url.pathname);
   const canonicalPath = input.locale === 'en' && currentPath === '/en/' ? '/' : currentPath;
   const canonical = absolute(base, canonicalPath);
@@ -76,9 +85,9 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const softDeindexed = isSoftDeindexed(currentPath);
   const robots = softDeindexed
     ? 'noindex,follow'
-    : input.noindex
+    : input.robots ?? (input.noindex
       ? 'noindex, nofollow'
-      : 'index, follow, max-image-preview:large';
+      : 'index, follow, max-image-preview:large');
 
   // hreflang alternates: swap the locale segment of the current path.
   const segments = input.url.pathname.split('/').filter(Boolean);
@@ -107,18 +116,20 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
 
   const openGraph: Record<string, string> = {
     'og:type': type,
-    'og:title': fullTitle,
-    'og:description': input.description,
+    'og:title': input.ogTitle ?? fullTitle,
+    'og:description': input.ogDescription ?? input.description,
     'og:url': canonical,
     'og:site_name': SITE.name,
     'og:image': ogImage,
     'og:locale': LOCALE_HREFLANG[input.locale].replace('-', '_'),
   };
 
+  if (input.imageAlt) openGraph['og:image:alt'] = input.imageAlt;
+
   const twitter: Record<string, string> = {
     'twitter:card': 'summary_large_image',
-    'twitter:title': fullTitle,
-    'twitter:description': input.description,
+    'twitter:title': input.ogTitle ?? fullTitle,
+    'twitter:description': input.ogDescription ?? input.description,
     'twitter:image': ogImage,
   };
   if (SITE.twitter) twitter['twitter:site'] = SITE.twitter;

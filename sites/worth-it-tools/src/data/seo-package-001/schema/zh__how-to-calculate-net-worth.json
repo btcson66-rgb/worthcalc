@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "淨資產怎麼算？資產、負債與「看起來有錢」的差別",
+      "description": "淨資產＝資產－負債，但真正容易錯的是哪些東西該列、用什麼價值、共同持有怎麼算。用一致日期建立可追蹤的家庭資產負債表。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/how-to-calculate-net-worth/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/how-to-calculate-net-worth.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "淨資產怎麼算？資產、負債與「看起來有錢」的差別",
+          "item": "https://worthcalc.win/zh/how-to-calculate-net-worth/"
+        }
+      ]
+    }
+  ]
+}

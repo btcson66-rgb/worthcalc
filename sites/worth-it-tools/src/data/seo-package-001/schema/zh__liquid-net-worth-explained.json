@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "流動淨資產是什麼？為什麼總淨資產很高，仍可能缺現金",
+      "description": "流動淨資產聚焦可以快速轉成現金的資產，幫你看出「房子很多、現金很少」的流動性風險。完整範例與保守算法。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-29",
+      "datePublished": "2026-08-29",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/liquid-net-worth-explained/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/seo/liquid-net-worth-explained.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "流動淨資產是什麼？為什麼總淨資產很高，仍可能缺現金",
+          "item": "https://worthcalc.win/zh/liquid-net-worth-explained/"
+        }
+      ]
+    }
+  ]
+}

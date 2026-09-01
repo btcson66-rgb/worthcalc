@@ -16,6 +16,11 @@ interface Props {
   url?: URL;
   site?: URL;
   image?: string;
+  seoTitle?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  robots?: string;
+  imageAlt?: string;
   type?: SeoInput['type'];
   noindex?: boolean;
   alternateLocales?: Locale[];
@@ -30,6 +35,11 @@ const {
   url = Astro.url,
   site = Astro.site,
   image,
+  seoTitle,
+  ogTitle,
+  ogDescription,
+  robots,
+  imageAlt,
   type,
   noindex,
   alternateLocales,
@@ -44,7 +54,12 @@ const resolvedAlternateLocales = alternateLocales ?? [...CORE_LOCALES];
   <head>
     <SEO
       title={title}
+      titleOverride={seoTitle}
       description={description}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      robots={robots}
+      imageAlt={imageAlt}
       locale={locale}
       url={url}
       site={site}

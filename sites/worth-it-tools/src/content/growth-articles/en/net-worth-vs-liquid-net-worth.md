@@ -118,6 +118,10 @@ They belong in total net worth. For liquid net worth, show them separately if ta
 ### Can net worth be negative?
 Yes. It simply means listed liabilities exceed listed assets on that date. It is not the same thing as a legal bankruptcy determination.
 
+Liquid net worth tells you the amount available; the liquidity ratio converts it into months of essential spending and makes before/after stress tests possible.
+
+[personal liquidity ratio](/en/guides/personal-liquidity-ratio/)
+
 ## Sources and limitations
 
 This page is an educational balance-sheet framework, not accounting, tax, legal, investment, or lending advice. Asset values should be supportable and updated consistently. Liquid net worth is intentionally disclosed as a chosen definition rather than a universal rule.

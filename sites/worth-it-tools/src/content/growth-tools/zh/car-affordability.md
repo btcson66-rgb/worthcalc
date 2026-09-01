@@ -70,3 +70,11 @@ draft: false
 
 - [全國法規資料庫—使用牌照稅法](https://law.moj.gov.tw/lawclass/lawall.aspx?pcode=g0340095)，查閱日期 2026-07-31
 - [財團法人保險事業發展中心—強制汽車責任保險費率資訊](https://www.cali.org.tw/Rate/Default)，查閱日期 2026-07-31
+
+車貸報價若只突出月付，建議再看月付得起與總成本合理為何是兩個不同問題。
+
+[月付幻覺](/zh/guides/monthly-payment-affordability-vs-total-cost/)
+
+工具估出可負擔車價後，再比較不同頭期款會如何改變月付、總利息與交車後現金跑道。
+
+[車貸頭期款 vs 買車後現金](/zh/guides/car-down-payment-vs-liquidity/)

@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/promo-apr-payoff-deadline/#article",
+      "headline": "0% 優惠期到期前每月要還多少？不要把最低付款當成清償計畫",
+      "description": "0% intro APR 只維持一段時間。用促銷餘額、剩餘月份與到期後 APR 反推 deadline payment，並分清 0% APR 與 deferred interest。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/promo-apr-payoff-deadline/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/promo-apr-payoff-deadline.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/promo-apr-payoff-deadline/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "0% 優惠期到期前每月要還多少？不要把最低付款當成清償計畫",
+          "item": "https://worthcalc.win/zh/guides/promo-apr-payoff-deadline/"
+        }
+      ]
+    }
+  ]
+}

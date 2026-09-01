@@ -156,6 +156,44 @@ const allGuidesCopy = {
   </section>
 )}
 
+{content.featuredGuide && (
+  <section class="home-guides" aria-labelledby="home-featured-guide-heading">
+    <h2 id="home-featured-guide-heading">{content.featuredGuide.heading}</h2>
+    <p class="section-lead">{content.featuredGuide.intro}</p>
+  </section>
+)}
+
+{content.guideClusters?.map((cluster, index) => (
+  <section class="home-guides" aria-labelledby={'home-guide-package-' + index + '-heading'}>
+    <h2 id={'home-guide-package-' + index + '-heading'}>{cluster.heading}</h2>
+    {cluster.intro && <p class="section-lead">{cluster.intro}</p>}
+    <div class="guide-grid">
+      {cluster.cards.map((guide) => (
+        <article class="guide-card">
+          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
+          <p>{guide.description}</p>
+          <span>{content.guidesCta} →</span>
+        </article>
+      ))}
+    </div>
+  </section>
+))}
+
+{content.guideAdditions && (
+  <section class="home-guides" aria-labelledby="home-guide-additions-heading">
+    <h2 id="home-guide-additions-heading">{content.guidesHeading}</h2>
+    <div class="guide-grid">
+      {content.guideAdditions.map((guide) => (
+        <article class="guide-card">
+          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
+          <p>{guide.description}</p>
+          <span>{content.guidesCta} →</span>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
 <section class="all-guides" aria-labelledby="all-guides-heading">
   <h2 id="all-guides-heading">{allGuidesCopy.heading}</h2>
   <p class="section-lead">{allGuidesCopy.lead}</p>

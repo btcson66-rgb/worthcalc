@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/#article",
+      "headline": "Windfall: Pay Debt or Keep Cash? A Better Framework Than a Fixed Percentage Rule",
+      "description": "Decide how to split a bonus or tax refund by comparing cash-reserve gaps, costly debt, known bills, and the risk of borrowing again after payoff.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/"
+      },
+      "url": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/",
+      "inLanguage": "en",
+      "datePublished": "2026-08-31",
+      "dateModified": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/windfall-debt-vs-cash-allocation.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Windfall: Debt vs. Cash",
+          "item": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/"
+        }
+      ]
+    }
+  ]
+}

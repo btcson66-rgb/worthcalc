@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲",
+      "description": "把年繳保費、牌照稅、學費、維修與會員費換算成每月提存，並用 catch-up 公式處理已經來不及從年初開始存的情況。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/annual-expenses-monthly-equivalent-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲",
+          "item": "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/"
+        }
+      ]
+    }
+  ]
+}

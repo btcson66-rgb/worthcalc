@@ -65,6 +65,10 @@ Yes — subtract any remaining payoff on the trade-in from its value first.
 
 No — it's an editable personal budgeting choice, not a lender rule.
 
+Once you have an affordable vehicle price, compare the payment savings from a larger down payment with the cash reserve you give up.
+
+[car down payment versus liquidity](/en/guides/car-down-payment-vs-liquidity/)
+
 ## Sources
 
 - [Chase — "What Is the 20/4/10 Rule for Car Buying?"](https://www.chase.com/personal/auto/education/buying/what-is-the-20-4-10-rule-for-car-buying), reviewed 2026-07-31

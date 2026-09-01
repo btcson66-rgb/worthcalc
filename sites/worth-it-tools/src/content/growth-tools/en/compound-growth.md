@@ -69,6 +69,10 @@ The engine searches for the smallest monthly amount that reaches your target und
 
 The nominal balance is the raw dollar figure the projection produces; the real balance divides it by cumulative inflation to show approximate purchasing power in today's terms. Compare any savings target set in today's dollars against the real balance, not the nominal one.
 
+The calculator can model inflation-adjusted balances; the guide explains why nominal and real frameworks must not be mixed.
+
+[real-return math](/en/guides/real-vs-nominal-return/)
+
 ## Sources
 
 - [Investor.gov — Compound Interest Calculator](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator), reviewed 2026-07-31

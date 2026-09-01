@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/debt-consolidation-break-even/#article",
+      "headline": "債務整合划算嗎？不要只看月付變低，用期限重置與總成本算 Break-Even",
+      "description": "債務整合把多筆付款變成一筆，但月付下降可能只是期限拉長。用舊債剩餘成本、整合費用、新利率與新期限比較 break-even、總利息與現金流。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/debt-consolidation-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/debt-consolidation-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/debt-consolidation-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "債務整合划算嗎？不要只看月付變低，用期限重置與總成本算 Break-Even",
+          "item": "https://worthcalc.win/zh/guides/debt-consolidation-break-even/"
+        }
+      ]
+    }
+  ]
+}

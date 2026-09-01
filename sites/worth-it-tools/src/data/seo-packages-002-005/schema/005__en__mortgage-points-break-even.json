@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/mortgage-points-break-even/#article",
+      "headline": "Mortgage Points Break-Even: When Paying Upfront for a Lower Rate Actually Pays Off",
+      "description": "Calculate when mortgage discount points break even using upfront cost, monthly savings, remaining balance, and the risk of refinancing or moving early.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/mortgage-points-break-even/"
+      },
+      "url": "https://worthcalc.win/en/guides/mortgage-points-break-even/",
+      "inLanguage": "en",
+      "datePublished": "2026-08-31",
+      "dateModified": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/mortgage-points-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/mortgage-points-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mortgage Points Break-Even",
+          "item": "https://worthcalc.win/en/guides/mortgage-points-break-even/"
+        }
+      ]
+    }
+  ]
+}

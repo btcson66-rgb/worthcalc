@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Annual Bills to Monthly Budget: How to Normalize Irregular Expenses",
+      "description": "Turn insurance, taxes, maintenance, tuition, and other irregular annual bills into a realistic monthly budget using annual/12 and catch-up formulas.",
+      "inLanguage": "en",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/annual-bills-monthly-equivalent-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Annual Bills to Monthly Budget: How to Normalize Irregular Expenses",
+          "item": "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/"
+        }
+      ]
+    }
+  ]
+}

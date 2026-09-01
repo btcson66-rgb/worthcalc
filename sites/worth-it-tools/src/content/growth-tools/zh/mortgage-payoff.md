@@ -71,3 +71,19 @@ draft: false
 
 - [行政院—青年安心成家購屋優惠貸款3.0方案（院會議案）](https://www.ey.gov.tw/Page/448DE008087A1971/1cb37b62-d127-4876-9cce-95016f49bcbe)，查閱日期 2026-07-31
 - [中華民國銀行公會—各銀行消費性貸款提前清償違約金收費標準彙整](https://www.ba.org.tw/)，查閱日期 2026-07-31
+
+若你同時在比較「不轉貸直接多還本金」與 refinance，可先用回本月數加上特定持有期剩餘本金一起判斷。
+
+[轉貸多久回本](/zh/guides/loan-refinance-break-even/)
+
+一次拿出大額現金時，不只試算省息，也要分清楚縮期、降月付與換利率其實是三個不同目標。
+
+[Recast、轉貸與提前還本金](/zh/guides/mortgage-recast-vs-refinance-vs-prepay/)
+
+若目前正在寬限期，可先建立無寬限期 baseline，再比較後期月付與總利息。
+
+[房貸寬限期總成本](/zh/guides/interest-only-period-total-cost/)
+
+試算提前還款後，可再把同一年相同額外本金改成「每月」與「年末一次」比較付款時點差。
+
+[每月多繳 vs 年底一次還本金](/zh/guides/monthly-extra-vs-annual-lump-sum/)

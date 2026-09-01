@@ -118,6 +118,18 @@ CFPB 的 auto loan 說明也強調要看 APR、finance charge、amount financed�
 - https://worthcalc.win/zh/tools/mortgage-payoff/
 - https://worthcalc.win/zh/tools/installment-true-apr/
 
+期數影響月付與總成本；攤還表則能進一步看每一期本金、利息與剩餘餘額。
+
+[貸款攤還表怎麼看？為什麼前期利息多、後期本金多](/zh/guides/amortization-schedule-explained/)
+
+期數拉長會降低月付，但應再檢查付款後自由現金流與全期總成本是否同時可接受。
+
+[月付得起不等於總成本合理](/zh/guides/monthly-payment-affordability-vs-total-cost/)
+
+期數相同時，還款法仍會改變每期本金與利息分布；可再比較本金平均與本息平均。
+
+[還款方式也會改變付款曲線](/zh/guides/principal-equal-vs-payment-equal-amortization/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/consumer-tools/auto-loans/answers/key-terms/

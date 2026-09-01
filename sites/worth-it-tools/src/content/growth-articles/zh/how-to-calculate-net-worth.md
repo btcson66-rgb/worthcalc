@@ -157,6 +157,10 @@ draft: false
 - https://worthcalc.win/zh/how-to-calculate-savings-rate/
 - https://worthcalc.win/zh/tools/budget-builder/
 
+算出第一份淨資產後，下一步不是天天更新，而是建立固定估值日與一致的追蹤頻率。
+
+[淨資產多久算一次？每月、每季、每年各自適合什麼情況](/zh/guides/net-worth-tracking-frequency/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/

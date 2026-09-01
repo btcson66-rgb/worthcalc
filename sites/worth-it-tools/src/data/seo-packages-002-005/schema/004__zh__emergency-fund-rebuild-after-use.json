@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/#article",
+      "headline": "緊急預備金用掉後怎麼補回？先重算缺口，再決定補回速度",
+      "description": "緊急預備金真的被用掉後，不是立刻回到原本存款率就好。用目標金額、剩餘餘額、補回期限與第二次衝擊情境，算出可執行的重建計畫。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/emergency-fund-rebuild-after-use.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "緊急預備金用掉後怎麼補回？先重算缺口，再決定補回速度",
+          "item": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/"
+        }
+      ]
+    }
+  ]
+}

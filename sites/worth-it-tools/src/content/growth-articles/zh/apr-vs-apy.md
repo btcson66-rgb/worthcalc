@@ -134,6 +134,10 @@ APR 的政策目的在於讓信用成本可比較；APY 的政策目的在於讓
 - https://worthcalc.win/zh/simple-vs-compound-interest/
 - https://worthcalc.win/zh/loan-term-vs-total-interest/
 
+若要進一步理解名目利率、有效年利率與台灣總費用年百分率的差異，可看有效利率完整解析。
+
+[有效利率是什麼？名目利率、有效年利率與總費用年百分率別混在一起](/zh/guides/effective-interest-rate-explained/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/ask-cfpb/what-is-the-difference-between-a-loan-interest-rate-and-the-apr-en-733/

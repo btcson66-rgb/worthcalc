@@ -122,6 +122,18 @@ draft: false
 - https://worthcalc.win/zh/how-to-calculate-net-worth/
 - https://worthcalc.win/zh/emergency-fund-vs-sinking-fund/
 
+如果你常在發薪前幾天短缺，問題可能不是預備金月數，而是現金流緩衝不足。
+
+[現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題](/zh/guides/cash-flow-buffer-vs-emergency-fund/)
+
+如果預備金已經真的被動用，下一步不是重看「要存幾個月」，而是用最新餘額與補回期限重新計算缺口。
+
+[預備金用掉後怎麼補回](/zh/guides/emergency-fund-rebuild-after-use/)
+
+建立一般緊急預備金後，可再用保單實際自負額做事件後跑道測試，避免只看「幾個月支出」。
+
+[保險自負額現金壓力測試](/zh/guides/insurance-deductible-cash-reserve/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

@@ -76,3 +76,11 @@ The calculator searches for the smallest monthly amount that reaches your target
 Open the related calculator, reproduce the $10,000-plus-$500-monthly example above, and then test your own contribution amount, assumed rate, and time horizon.
 
 [Compound Growth & Savings Goal Calculator](/en/tools/compound-growth/)
+
+Compound-growth projections are nominal unless inflation is handled consistently; use the real-return framework when the question is purchasing power.
+
+[real vs. nominal return](/en/guides/real-vs-nominal-return/)
+
+Hold the goal and rate assumption constant, then shorten the contribution window to quantify the cost of waiting.
+
+[cost of waiting to save](/en/guides/cost-of-delaying-savings-goal/)

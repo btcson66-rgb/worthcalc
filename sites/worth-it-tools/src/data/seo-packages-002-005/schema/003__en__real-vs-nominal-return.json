@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/real-vs-nominal-return/#article",
+      "headline": "Real vs. Nominal Return: Measure Purchasing Power, Not Just Account Growth",
+      "description": "Convert nominal return to real purchasing-power return, include inflation and fees consistently, and avoid mixing real and nominal planning assumptions.",
+      "inLanguage": "en",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/real-vs-nominal-return/"
+      },
+      "image": "https://worthcalc.win/images/guides/real-vs-nominal-return-en.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/real-vs-nominal-return/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Real vs. Nominal Return",
+          "item": "https://worthcalc.win/en/guides/real-vs-nominal-return/"
+        }
+      ]
+    }
+  ]
+}

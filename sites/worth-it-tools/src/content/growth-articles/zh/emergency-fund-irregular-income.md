@@ -101,6 +101,10 @@ CFPB 的 emergency fund 指南特別提到，一次性收入或較大筆入帳�
 - https://worthcalc.win/zh/emergency-fund-how-much/
 - https://worthcalc.win/zh/how-to-calculate-savings-rate/
 
+收入不固定時，除了緊急預備金金額，也可用保守收入與壓力支出算「現金實際可以撐幾個月」。
+
+[財務跑道](/zh/guides/financial-runway-months/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

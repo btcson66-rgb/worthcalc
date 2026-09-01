@@ -62,6 +62,10 @@ Sometimes, with 12 months of documented payment history from the other party —
 
 No. Credit history, assets, appraisal, and program rules also matter; DTI is one input among several.
 
+DTI measures monthly payment burden; debt-to-assets adds a separate balance-sheet leverage view.
+
+[Personal Debt-to-Assets Ratio: A Balance-Sheet Metric, Not a Lending DTI Rule](/en/guides/debt-to-assets-ratio-personal/)
+
 ## Sources
 
 - [Consumer Financial Protection Bureau — "What is a debt-to-income ratio?"](https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/), reviewed 2026-07-31

@@ -141,6 +141,14 @@ HELOC 或增貸額度代表可能的融資能力，仍需符合條件並承擔�
 - https://worthcalc.win/zh/emergency-fund-how-much/
 - https://worthcalc.win/zh/tools/budget-builder/
 
+流動資產很多不等於全部都能自由使用；可再用四層現金法拆出真正可動用現金。
+
+[手上應該留多少現金？把「現金」拆成 4 種用途再決定](/zh/guides/how-much-cash-to-keep/)
+
+流動淨資產回答你有多少可動用資產；個人流動性比率則把它除以必要月支出，直接換成可支撐月份。
+
+[個人流動性比率](/zh/guides/personal-liquidity-ratio/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/

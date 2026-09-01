@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/#article",
+      "headline": "還債先看利率，還是先釋放月付？數學成本與現金流壓力要分開算",
+      "description": "高利率優先通常可省利息，但先清小額債務可能更快釋放月付。用利息成本、月付釋放、最低還款與現金流壓力比較兩種目標。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/"
+      },
+      "image": "https://worthcalc.win/images/guides/debt-paydown-interest-vs-cashflow.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "還債先看利率，還是先釋放月付？數學成本與現金流壓力要分開算",
+          "item": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/"
+        }
+      ]
+    }
+  ]
+}

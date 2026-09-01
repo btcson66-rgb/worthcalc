@@ -47,9 +47,11 @@ function contentRouteLookup() {
       const markdown = readFileSync(sourceFile, 'utf8');
       const locale = frontmatterValue(markdown, 'locale');
       const slug = frontmatterValue(markdown, collection.slugField);
+      const canonical = frontmatterValue(markdown, 'canonical');
       const draft = frontmatterValue(markdown, 'draft');
       if (!locales.has(locale) || !slug || draft === 'true') continue;
       const contentDate = dateFields.map((field) => validDate(frontmatterValue(markdown, field))).find(Boolean);
+      if (canonical) lookup.set(normalizeRoute(canonical), { sourceFile, contentDate });
       lookup.set(normalizeRoute(`/${locale}/${collection.prefix}${slug}/`), { sourceFile, contentDate });
     }
   }

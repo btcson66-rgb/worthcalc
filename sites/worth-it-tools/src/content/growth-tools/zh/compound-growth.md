@@ -69,3 +69,15 @@ draft: false
 
 - [行政院主計總處—消費者物價指數(CPI)年增率](https://www.stat.gov.tw/point.aspx?sid=t.2&n=3581&sms=11480)，查閱日期 2026-07-31
 - [台灣銀行—牌告利率](https://rate.bot.com.tw/ir?Lang=zh-TW)，查閱日期 2026-07-31
+
+複利工具也可做訂閱的替代情境，但要把預期報酬清楚標成假設，而不是保證收益。
+
+[訂閱的機會成本怎麼算？每月499元，10年不只是59,880元](/zh/guides/subscription-opportunity-cost/)
+
+若目標是多年後的特定支出，先把今天的目標價格做低、中、高通膨情境，再反推每月需要累積多少。
+
+[通膨調整儲蓄目標](/zh/guides/inflation-adjusted-savings-goal/)
+
+同一個目標可以直接比較現在、晚 12 個月、晚 24 個月開始時，每月投入要增加多少。
+
+[延後儲蓄成本](/zh/guides/cost-of-delaying-savings-goal/)

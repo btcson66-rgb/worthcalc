@@ -124,6 +124,18 @@ Debt avalanche 排序回答的是「額外還款應先打哪筆債務」；emerg
 - https://worthcalc.win/zh/emergency-fund-how-much/
 - https://worthcalc.win/zh/tools/debt-strategy/
 
+如果決定把剩餘現金用於信貸，還要再扣提前清償違約金並用現有餘額重算省息。
+
+[信貸提前還款划算嗎？先算省下利息，再扣違約金與流動性成本](/zh/guides/extra-payment-personal-loan/)
+
+確定有額外還款資金後，再比較「最高利率優先」與「先釋放固定月付」其實在優化不同目標。
+
+[還債先看利率還是月付](/zh/guides/debt-paydown-interest-vs-cashflow/)
+
+若資金來源是一筆年終或獎金，可進一步用大筆收入分配模型把已知帳單、現金缺口與高成本債務一起排序。
+
+[年終／獎金如何在還債與現金間分配](/zh/guides/windfall-debt-vs-cash-allocation/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

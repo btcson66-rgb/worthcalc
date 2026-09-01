@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/#article",
+      "headline": "房貸寬限期／只繳利息真的比較輕鬆嗎？用重訂後月付與總利息看完整成本",
+      "description": "寬限期月付較低，因為本金幾乎沒下降。用寬限期前後月付、剩餘攤還年限與總利息比較，避免只看前幾年的低月付。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/interest-only-period-total-cost.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "房貸寬限期／只繳利息真的比較輕鬆嗎？用重訂後月付與總利息看完整成本",
+          "item": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/"
+        }
+      ]
+    }
+  ]
+}

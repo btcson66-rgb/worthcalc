@@ -63,6 +63,10 @@ Yes — enter it as a one-time principal payment in the month you expect to appl
 
 No — it reports loan interest and time saved only.
 
+A lump sum can buy faster payoff, lower required payment, or support a refinance; compare the mechanisms before using the cash.
+
+[recast vs refinance vs extra principal](/en/guides/mortgage-recast-vs-refinance-vs-extra-principal/)
+
 ## Sources
 
 - [Consumer Financial Protection Bureau — "What is a payoff amount, and is it the same as my current balance?"](https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/), reviewed 2026-07-31

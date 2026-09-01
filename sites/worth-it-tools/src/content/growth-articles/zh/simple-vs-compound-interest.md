@@ -119,6 +119,10 @@ WorthCalc Compound Growth 工具因此把 contribution timing 設為明確參數
 - https://worthcalc.win/zh/apr-vs-apy/
 - https://worthcalc.win/zh/tools/credit-card-payoff/
 
+複利算出的是名目金額時，還可以用實質報酬把通膨放回模型，避免把帳戶成長誤當成購買力等幅成長。
+
+[實質報酬率](/zh/guides/real-vs-nominal-return/)
+
 ## Sources
 
 - https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator

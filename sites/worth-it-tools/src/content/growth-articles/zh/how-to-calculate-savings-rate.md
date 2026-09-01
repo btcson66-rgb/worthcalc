@@ -140,6 +140,10 @@ draft: false
 - https://worthcalc.win/zh/tools/compound-growth/
 - https://worthcalc.win/zh/emergency-fund-irregular-income/
 
+如果儲蓄率在加薪後沒有改善，可用加薪留存率拆出有多少新增收入被固定支出吸收。
+
+[加薪留存率與生活膨脹](/zh/guides/lifestyle-inflation-raise-capture/)
+
 ## Sources
 
 - https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_analyzing-budgets_guide.pdf

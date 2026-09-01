@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "手上應該留多少現金？把「現金」拆成 4 種用途再決定",
+      "description": "手上留多少現金沒有單一比例。把日常週轉、現金流緩衝、緊急預備金與已知短期支出分開，避免現金留太少或閒置過多。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/how-much-cash-to-keep-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "手上應該留多少現金？把「現金」拆成 4 種用途再決定",
+          "item": "https://worthcalc.win/zh/guides/how-much-cash-to-keep/"
+        }
+      ]
+    }
+  ]
+}

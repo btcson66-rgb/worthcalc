@@ -90,3 +90,7 @@ draft: false
 - [行政院—青年安心成家購屋優惠貸款3.0方案（院會議案）](https://www.ey.gov.tw/Page/448DE008087A1971/1cb37b62-d127-4876-9cce-95016f49bcbe)，查閱日期 2026-07-31
 - [財政部—青安貸款3.0說明](https://www.mof.gov.tw/singlehtml/384fb3077bb349ea973e7fc6f13b6974?cntId=482aa9c142b34abc83750cb64c15cb11)，查閱日期 2026-07-31
 - [中華民國銀行公會—各銀行消費性貸款提前清償違約金收費標準彙整](https://www.ba.org.tw/)，查閱日期 2026-07-31
+
+額外還本金的總額相同，越早進本金通常越早降低計息基礎；這篇用同總額公平比較。
+
+[同額額外還款的時間差](/zh/guides/monthly-extra-vs-annual-lump-sum/)

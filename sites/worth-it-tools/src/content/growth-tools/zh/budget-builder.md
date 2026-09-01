@@ -71,3 +71,27 @@ draft: false
 
 - [財政部—115年度綜合所得稅及所得基本稅額相關課稅級距公告](https://www.mof.gov.tw/singlehtml/384fb3077bb349ea973e7fc6f13b6974?cntId=34b463dc8f1b49f29d440d92a6fd5139)，查閱日期 2026-07-31
 - [衛生福利部中央健康保險署—補充保險費計算公式](https://www.nhi.gov.tw/Content_List.aspx?n=91FF4945CF7E015B&top=)，查閱日期 2026-07-31
+
+如果月預算看起來足夠但扣款日仍會缺錢，可進一步用「現金流緩衝 vs 緊急預備金」按日期找出最低帳戶餘額。
+
+[現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題](/zh/guides/cash-flow-buffer-vs-emergency-fund/)
+
+除了月繳帳單，也要把年繳保費、稅金與維修換算成月提存，避免高估每月結餘。
+
+[年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲](/zh/guides/annual-expenses-monthly-equivalent/)
+
+若 50/30/20 套不進你的房租、債務或不固定收入，可改用現況固定成本底線與 cash-flow budget。
+
+[比例預算限制](/zh/guides/paycheck-budgeting-limitations/)
+
+完整預算之外，可以把無法快速取消的固定義務除以實領收入，追蹤預算彈性。
+
+[固定成本比率](/zh/guides/fixed-cost-ratio-personal-budget/)
+
+預算表確認新舊住房每月差額後，可把搬家費、通勤與押金資金占用加入搬家 Break-Even。
+
+[搬家多久才回本](/zh/guides/rent-increase-vs-moving-break-even/)
+
+建立家庭預算後，如果是兩人共同支付，可用收入比例模型把共同池與個人支出分開。
+
+[共同生活費按收入比例分攤](/zh/guides/shared-expenses-income-split/)

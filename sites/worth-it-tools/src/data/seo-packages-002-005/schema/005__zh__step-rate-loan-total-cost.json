@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/#article",
+      "headline": "前低後高的優惠貸款怎麼比？不要只看第一段利率，先畫完整付款路徑",
+      "description": "前幾期低利率、之後跳升的貸款容易讓第一年月付看起來便宜。用每段利率、重算月付、利率上限與全期現金流比較真正成本。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/"
+      },
+      "url": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-31",
+      "dateModified": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/step-rate-loan-total-cost.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "理財指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "分段利率貸款總成本",
+          "item": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/"
+        }
+      ]
+    }
+  ]
+}

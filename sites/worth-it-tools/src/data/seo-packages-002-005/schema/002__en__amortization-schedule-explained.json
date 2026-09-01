@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments",
+      "description": "Learn how a fixed-payment amortization schedule splits principal and interest, why interest is heavier early, and how extra principal changes payoff timing and total interest.",
+      "inLanguage": "en",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/en/guides/amortization-schedule-explained/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/amortization-schedule-explained-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments",
+          "item": "https://worthcalc.win/en/guides/amortization-schedule-explained/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/loan-refinance-break-even/#article",
+      "headline": "轉貸多久回本？別只看新利率，用剩餘期間與全部費用算 Break-Even",
+      "description": "轉貸利率比較低不代表一定划算。用舊貸款剩餘付款、新貸款付款、設定費、違約金與持有期間算 break-even，再做利率與費用敏感度分析。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/loan-refinance-break-even/"
+      },
+      "image": "https://worthcalc.win/images/guides/loan-refinance-break-even.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/loan-refinance-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "轉貸多久回本？別只看新利率，用剩餘期間與全部費用算 Break-Even",
+          "item": "https://worthcalc.win/zh/guides/loan-refinance-break-even/"
+        }
+      ]
+    }
+  ]
+}

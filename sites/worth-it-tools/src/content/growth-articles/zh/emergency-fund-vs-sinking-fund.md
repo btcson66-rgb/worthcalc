@@ -145,6 +145,10 @@ Emergency fund 則不同。若你因突發事件使用了 80,000 元，後續應
 - https://worthcalc.win/zh/emergency-fund-how-much/
 - https://worthcalc.win/zh/emergency-fund-irregular-income/
 
+已知用途與截止日的支出，可以直接用目標缺口除以剩餘付款次數反推每月要存多少。
+
+[期限反推 Sinking Fund](/zh/guides/sinking-fund-by-deadline/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

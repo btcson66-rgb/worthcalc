@@ -101,6 +101,18 @@ Monthly payment is one cash-flow input, not the purchase budget. Include insuran
 ### What if I plan to pay the loan off early?
 Model both the planned early-payoff case and the contractual minimum-payment case. Confirm prepayment terms and how extra payments are applied.
 
+After comparing loan terms, read the amortization schedule to see how each payment changes principal and interest.
+
+[Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments](/en/guides/amortization-schedule-explained/)
+
+After comparing term and total interest, test whether a variable-rate reset would still fit the same household cash-flow ceiling.
+
+[fixed vs. variable rate stress test](/en/guides/fixed-vs-variable-rate/)
+
+A lower auto payment can come from a longer term or a larger down payment; the latter also changes your post-purchase liquidity.
+
+[larger down payment versus cash reserve](/en/guides/car-down-payment-vs-liquidity/)
+
 ## Sources and limitations
 
 Examples use simplified fixed-rate amortization and exclude taxes, insurance, and product-specific fees unless stated. Real contracts can use different interest methods, variable rates, origination charges, and prepayment rules.

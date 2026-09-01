@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/#article",
+      "headline": "固定利率 vs 浮動利率怎麼比？不要猜未來利率，先做 3 條利率路徑壓力測試",
+      "description": "固定利率與浮動利率沒有單一最佳答案。用利率不變、上升、下降三條路徑比較月付、總利息與現金流承受力，不靠預測做決策。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/"
+      },
+      "image": "https://worthcalc.win/images/guides/fixed-vs-variable-rate-scenario.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "固定利率 vs 浮動利率怎麼比？不要猜未來利率，先做 3 條利率路徑壓力測試",
+          "item": "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/balance-transfer-break-even/#article",
+      "headline": "Balance Transfer Break-Even: Fee, Promo Window, and Required Payoff Payment",
+      "description": "A 0% balance transfer can still charge a fee. Calculate the transfer cost, required monthly payoff before the promo ends, and post-promo risk.",
+      "inLanguage": "en",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/balance-transfer-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/balance-transfer-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/balance-transfer-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "English",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Balance Transfer Break-Even: Fee, Promo Window, and Required Payoff Payment",
+          "item": "https://worthcalc.win/en/guides/balance-transfer-break-even/"
+        }
+      ]
+    }
+  ]
+}

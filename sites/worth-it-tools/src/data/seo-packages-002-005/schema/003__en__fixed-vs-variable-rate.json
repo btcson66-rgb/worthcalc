@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/fixed-vs-variable-rate/#article",
+      "headline": "Fixed vs. Variable Rate: Stress-Test the Payment Instead of Forecasting Rates",
+      "description": "Compare fixed and variable rates with payment stress tests, reset mechanics, rate caps, and a no-refinance scenario instead of trying to forecast rates.",
+      "inLanguage": "en",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/fixed-vs-variable-rate/"
+      },
+      "image": "https://worthcalc.win/images/guides/fixed-vs-variable-rate-en.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/fixed-vs-variable-rate/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fixed vs. Variable Rate",
+          "item": "https://worthcalc.win/en/guides/fixed-vs-variable-rate/"
+        }
+      ]
+    }
+  ]
+}

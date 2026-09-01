@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/personal-liquidity-ratio/#article",
+      "headline": "Personal Liquidity Ratio: How Many Months Can Your Liquid Assets Cover?",
+      "description": "Calculate how many months liquid assets can cover essential spending, then stress-test cash after major purchases, higher expenses, and income shocks.",
+      "inLanguage": "en",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/personal-liquidity-ratio/"
+      },
+      "image": "https://worthcalc.win/images/guides/personal-liquidity-ratio-en.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/personal-liquidity-ratio/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Personal Liquidity Ratio",
+          "item": "https://worthcalc.win/en/guides/personal-liquidity-ratio/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/minimum-cash-balance-checking/#article",
+      "headline": "帳戶最低現金餘額怎麼抓？別把緊急預備金全部塞在活存帳戶",
+      "description": "帳戶到底要留多少錢才安全？用固定支出、扣款時間、收入波動與安全邊際算出日常帳戶最低餘額，並和緊急預備金清楚分工。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/minimum-cash-balance-checking/"
+      },
+      "image": "https://worthcalc.win/images/guides/minimum-cash-balance-checking.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/minimum-cash-balance-checking/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "帳戶最低現金餘額怎麼抓？別把緊急預備金全部塞在活存帳戶",
+          "item": "https://worthcalc.win/zh/guides/minimum-cash-balance-checking/"
+        }
+      ]
+    }
+  ]
+}

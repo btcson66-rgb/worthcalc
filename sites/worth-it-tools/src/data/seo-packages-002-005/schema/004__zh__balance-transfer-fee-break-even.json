@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/balance-transfer-fee-break-even/#article",
+      "headline": "信用卡餘額轉移划算嗎？0% 優惠也要把轉移費、期限與到期 APR 算進去",
+      "description": "0% 餘額轉移不是零成本。用轉移費、優惠期、每月清償額與到期 APR 比較原卡利息，算出 balance transfer 是否真的划算。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/balance-transfer-fee-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/balance-transfer-fee-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/balance-transfer-fee-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "信用卡餘額轉移划算嗎？0% 優惠也要把轉移費、期限與到期 APR 算進去",
+          "item": "https://worthcalc.win/zh/guides/balance-transfer-fee-break-even/"
+        }
+      ]
+    }
+  ]
+}

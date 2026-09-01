@@ -67,6 +67,10 @@ Base essentials on a conservative income floor and treat income above that floor
 
 Yes — treat it as a planned allocation with its own line, even though it builds assets rather than paying a bill.
 
+A monthly budget should also reserve for predictable annual bills. Convert them into a monthly sinking-fund requirement.
+
+[Annual Bills to Monthly Budget: How to Normalize Irregular Expenses](/en/guides/annual-bills-monthly-equivalent/)
+
 ## Sources
 
 - [Internal Revenue Service — Estimated Taxes](https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes), reviewed 2026-07-31

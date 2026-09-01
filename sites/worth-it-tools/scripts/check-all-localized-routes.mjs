@@ -7,7 +7,9 @@ const locales = ['en', 'zh', 'es', 'fr', 'de'];
 // en + zh are required for normal new routes. es/fr/de are frozen as of
 // 2026-07-25 (see the "i18n expansion policy" section in README.md). Package 001
 // is an approved editorial exception: its manifest intentionally contains a
-// small set of single-language routes. What IS a defect is a *partially*
+// small set of single-language routes. The SEO package guide system is a
+// separate approved bilingual (en + zh-Hant) surface, so /guides/ routes are
+// validated as a pair without requiring the frozen locales. What IS a defect is a *partially*
 // localized frozen-language route or a page that declares hreflang for a version
 // that does not exist.
 const requiredLocales = ['en', 'zh'];
@@ -110,7 +112,8 @@ for (const { locale, route, file } of pages) {
 // Route-level coverage rules.
 let enZhOnlyRoutes = 0;
 for (const [route, present] of routes) {
-  const missingRequired = approvedSingleLocaleRoutes.has(route)
+  const isBilingualGuideRoute = route.startsWith('guides/');
+  const missingRequired = approvedSingleLocaleRoutes.has(route) || isBilingualGuideRoute
     ? []
     : requiredLocales.filter((locale) => !present.has(locale));
   if (missingRequired.length) failures.push(`/${route}: missing required locales ${missingRequired.join(', ')}`);

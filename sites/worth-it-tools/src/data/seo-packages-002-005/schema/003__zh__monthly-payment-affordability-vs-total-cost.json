@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/#article",
+      "headline": "月付得起不等於總成本合理：為什麼延長期數會製造「負擔得起」的錯覺？",
+      "description": "把貸款拉長可以壓低月付，但可能增加總利息、延長負債時間並壓縮未來選擇。用同本金不同期數比較月付、總成本與收入占比。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
+      },
+      "image": "https://worthcalc.win/images/guides/monthly-payment-affordability-vs-total-cost.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "月付得起不等於總成本合理",
+          "item": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
+        }
+      ]
+    }
+  ]
+}

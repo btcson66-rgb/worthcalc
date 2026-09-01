@@ -69,3 +69,7 @@ DBR22倍是金管會要求銀行遵守的上限，不是核貸保證，實際能
 
 - [中華民國銀行公會—會員授信準則（DBR22倍規範）](https://www.ba.org.tw/Upload/Important/38c042e7-fa61-4bff-88c6-7dc5733f0d1e/%E6%8E%88%E4%BF%A1%E6%BA%96%E5%89%87%E5%85%A8%E6%96%8710701.pdf)，查閱日期 2026-07-31
 - [中央銀行—理監事會議決議新聞稿（選擇性信用管制）](https://www.cbc.gov.tw/tw/cp-971-190952-05430-1.html)，查閱日期 2026-07-31
+
+DTI／DBR看收入負擔；若要看總資產與總負債的槓桿，可另算個人負債資產比。
+
+[個人負債資產比怎麼算？它和 DTI、DBR 完全不是同一件事](/zh/guides/debt-to-assets-ratio-personal/)

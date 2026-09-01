@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/personal-liquidity-ratio/#article",
+      "headline": "個人流動性比率怎麼算？比淨資產更快看出「現金能撐多久」",
+      "description": "個人流動性比率可用高流動資產 ÷ 每月必要支出估算可支撐月數。看懂公式、哪些資產能算、與淨資產差異、案例與壓力測試。",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/personal-liquidity-ratio/"
+      },
+      "image": "https://worthcalc.win/images/guides/personal-liquidity-ratio.webp",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/personal-liquidity-ratio/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc 首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "個人流動性比率怎麼算？比淨資產更快看出「現金能撐多久」",
+          "item": "https://worthcalc.win/zh/guides/personal-liquidity-ratio/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題",
+      "description": "現金流緩衝與緊急預備金不是同一筆錢。用日期現金流、最低帳戶餘額與支出風險，算出各自需要多少，並附完整案例與檢查表。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/cash-flow-buffer-vs-emergency-fund-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題",
+          "item": "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/"
+        }
+      ]
+    }
+  ]
+}

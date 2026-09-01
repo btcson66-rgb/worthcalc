@@ -132,6 +132,18 @@ Yes for annual planning, but it should not be the only number used for month-to-
 ### How often should I recalculate the target?
 Revisit it when essential spending, client concentration, family responsibilities, insurance coverage, or income volatility changes materially.
 
+Irregular income creates both timing risk and shock risk. Separate the cash-flow buffer from the emergency reserve.
+
+[Cash-Flow Buffer vs. Emergency Fund: They Solve Different Problems](/en/guides/cash-flow-buffer-vs-emergency-fund/)
+
+If a bonus or tax refund is nonrecurring, test how much should protect the cash reserve before committing the rest to debt payoff.
+
+[windfall: debt or cash](/en/guides/windfall-debt-vs-cash-allocation/)
+
+After sizing an emergency fund, test whether a claim would leave enough essential-spending runway afterward.
+
+[cash reserve for insurance deductibles](/en/guides/insurance-deductible-cash-reserve/)
+
 ## Sources and limitations
 
 This guide is educational, not individualized financial, tax, or business advice. The Federal Reserve’s three-month rainy-day-fund measure is a survey indicator, not a mandatory target. CFPB guidance emphasizes dedicated emergency savings, cash-flow management, automatic saving, and using one-time inflows as opportunities to build reserves.

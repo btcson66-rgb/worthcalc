@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/#article",
+      "headline": "Insurance Deductible Cash Reserve: How Much Liquid Cash Should Be Ready for a Claim?",
+      "description": "Stress-test cash for insurance claims by combining deductibles, short-term uncovered costs, income interruption, and post-claim liquidity.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/"
+      },
+      "url": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/",
+      "inLanguage": "en",
+      "datePublished": "2026-08-31",
+      "dateModified": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/insurance-deductible-cash-reserve.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Insurance Deductible Cash Reserve",
+          "item": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "淨資產多久算一次？每月、每季、每年各自適合什麼情況",
+      "description": "淨資產不需要每天更新。比較每月、每季、每年追蹤的優缺點，建立固定估值日與變動拆解法，避免被房價與市場波動誤導。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-30",
+      "datePublished": "2026-08-30",
+      "mainEntityOfPage": "https://worthcalc.win/zh/guides/net-worth-tracking-frequency/",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/net-worth-tracking-frequency-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "淨資產多久算一次？每月、每季、每年各自適合什麼情況",
+          "item": "https://worthcalc.win/zh/guides/net-worth-tracking-frequency/"
+        }
+      ]
+    }
+  ]
+}

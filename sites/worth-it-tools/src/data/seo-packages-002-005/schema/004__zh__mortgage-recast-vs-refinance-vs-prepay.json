@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/#article",
+      "headline": "房貸 Recast、轉貸、提前還本金怎麼選？先確認你要降月付、降利率還是縮短期限",
+      "description": "手上有一筆大額資金時，recast、refinance 與提前還本金改善的是不同問題。用剩餘本金、利率、期數、費用與月付目標比較三種機制。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-08-31",
+      "datePublished": "2026-08-31",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/mortgage-recast-vs-refinance-vs-prepay.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "繁體中文",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "房貸 Recast、轉貸、提前還本金怎麼選？先確認你要降月付、降利率還是縮短期限",
+          "item": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/"
+        }
+      ]
+    }
+  ]
+}

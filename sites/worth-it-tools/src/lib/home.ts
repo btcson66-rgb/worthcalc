@@ -1,6 +1,7 @@
 import { LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
 import type { EntityJsonLdOptions, FaqItem } from './seo';
 import { organizationId, webSiteId } from './seo';
+import { seoPackageGuideContent } from '../data/seoPackageGuideIndex';
 
 interface HomeTool {
   icon: string;
@@ -69,6 +70,16 @@ export interface HomeContent {
     heading: string;
     intro: string;
     cards: HomeGuide[];
+  };
+  guideClusters?: ReadonlyArray<{
+    heading: string;
+    intro: string;
+    cards: ReadonlyArray<HomeGuide>;
+  }>;
+  guideAdditions?: ReadonlyArray<HomeGuide>;
+  featuredGuide?: {
+    heading: string;
+    intro: string;
   };
   seoHeading: string;
   seoParagraphs: string[];
@@ -241,6 +252,9 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
         { title: 'Loan Term vs Monthly Payment', path: '/loan-term-monthly-payment-vs-total-interest', description: 'Put the lower payment next to the extra interest and longer debt horizon.' },
       ],
     },
+    guideClusters: seoPackageGuideContent.en.groups,
+    guideAdditions: seoPackageGuideContent.en.additions,
+    featuredGuide: seoPackageGuideContent.en.featured,
     seoHeading: 'Worth-it calculators for everyday money choices',
     seoParagraphs: [
       'WorthCalc focuses on practical consumer decisions where a quick estimate can prevent an expensive mistake: installment plans, subscription creep, warehouse memberships, vehicles, housing, commuting, daily habits, and cashback cards.',
@@ -435,6 +449,9 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
         { title: 'APR、APY、利率差在哪？', path: '/apr-vs-apy', description: '借款成本與存款收益不要混成同一個百分比。' },
       ],
     },
+    guideClusters: seoPackageGuideContent.zh.groups,
+    guideAdditions: seoPackageGuideContent.zh.additions,
+    featuredGuide: seoPackageGuideContent.zh.featured,
     seoHeading: '用估算工具處理日常金錢選擇',
     seoParagraphs: [
       'WorthCalc 聚焦在消費者每天會遇到的「值不值得」問題：分期付款、訂閱支出、賣場會員、交通工具、租屋買房、通勤、每日習慣，以及信用卡回饋。',

@@ -24,13 +24,13 @@ coste por uso = cuota + visitas + piezas − reembolsos, dividido por eventos cu
 
 ## Usa escenarios, no una sola respuesta
 
-Lee el contrato como reembolsos condicionados. Cuenta solo reparaciones probables y cubiertas por el texto exacto. No conviertas el límite del plan en valor garantizado. Prueba rechazo, carencia, elección de técnico y flexibilidad de una reserva propia. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+Lee el contrato como reembolsos condicionados. Cuenta solo reparaciones probables y cubiertas por el texto exacto. No conviertas el límite del plan en valor garantizado. Prueba rechazo, carencia, elección de técnico y flexibilidad de una reserva propia. Compara un caso de poco uso, uno realista y otro de coste o uso alto. Si cambia la conclusión, muestra el rango y la suposición que lo provoca en lugar de dar una recomendación universal. Anota la fecha y el origen de cada dato. Recalcula cuando cambien el precio, el uso o la renovación; la calculadora organiza una comparación, no promete un resultado.
 
 ## Errores comunes y siguiente paso
 
-No cuentes un límite teórico, un titular promocional ni un beneficio que no comprarías. Revisa las condiciones actuales, las tasas, las exclusiones, los reembolsos y las fechas. The [guía de coste anual](/es/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [costes recurrentes anuales](/es/guides/recurring-costs-annual-total/) and [otra guía de decisión](/es/guides/true-cost-of-convenience-delivery/).
+No cuentes un límite teórico, un titular promocional ni un beneficio que no comprarías. Revisa las condiciones actuales, las tasas, las exclusiones, los reembolsos y las fechas. Usa [guía de coste anual](/es/guides/annual-cost-savings-calculator/) para la comparación de doce meses. Las decisiones relacionadas incluyen [costes recurrentes anuales](/es/guides/recurring-costs-annual-total/) y [otra guía de decisión](/es/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## Preguntas frecuentes
 
 ### ¿Puedo aplicar el resultado a todos?
 
@@ -40,4 +40,4 @@ No. Los precios, el uso, la cobertura, los impuestos, las fechas y el contrato c
 
 ¿Es igual que un seguro de hogar? No; contratos, eventos y exclusiones son distintos. Compara documentos y no solo nombres. Recalcula si cambian las condiciones o el uso.
 
-Fuentes para consultar: [consumer guidance](https://consumer.ftc.gov/articles/extended-warranties-and-service-contracts) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). Estas fuentes ayudan a revisar el coste real; no fijan un precio universal ni garantizan un resultado.
+Fuentes para consultar: [orientación al consumidor](https://consumer.ftc.gov/articles/extended-warranties-and-service-contracts) y [evaluación de gastos del CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). Estas fuentes ayudan a revisar el coste real; no fijan un precio universal ni garantizan un resultado.

@@ -24,13 +24,13 @@ draft: false
 
 ## استخدم سيناريوهات لا جواباً واحداً
 
-قد يوفر التوصيل وقتاً لكنه يرفع النقد المدفوع. اختبر شهراً عادياً وشهراً قليل الاستخدام وشهراً يتطلب شراءً إضافياً للوصول إلى الحد الأدنى. لا تحوّل الوقت الموفر إلى دخل مضمون. اعرضه كسيناريو شخصي، واجعل نتيجة النقد مستقلة عن افتراض أن كل دقيقة ستصبح عملاً مدفوعاً. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+قد يوفر التوصيل وقتاً لكنه يرفع النقد المدفوع. اختبر شهراً عادياً وشهراً قليل الاستخدام وشهراً يتطلب شراءً إضافياً للوصول إلى الحد الأدنى. لا تحوّل الوقت الموفر إلى دخل مضمون. اعرضه كسيناريو شخصي، واجعل نتيجة النقد مستقلة عن افتراض أن كل دقيقة ستصبح عملاً مدفوعاً. قارن حالة استخدام منخفض وحالة واقعية وحالة تكلفة أو استخدام مرتفع. إذا تغير الاستنتاج فاعرض النطاق والافتراض الذي سببه بدلاً من توصية عامة. سجّل تاريخ ومصدر كل إدخال. أعد الحساب عند تغير السعر أو الاستخدام أو التجديد؛ الحاسبة تنظم المقارنة ولا تضمن النتيجة.
 
 ## الأخطاء الشائعة والخطوة التالية
 
-لا تحسب حداً نظرياً أو عنواناً ترويجياً أو منفعة لم تكن ستشتريها. راجع الشروط الحالية والرسوم والاستثناءات والاسترداد والتوقيت. The [دليل التكلفة السنوية](/ar/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [التكاليف المتكررة السنوية](/ar/guides/recurring-costs-annual-total/) and [دليل قرار مرتبط](/ar/guides/true-cost-of-free-shipping-threshold/).
+لا تحسب حداً نظرياً أو عنواناً ترويجياً أو منفعة لم تكن ستشتريها. راجع الشروط الحالية والرسوم والاستثناءات والاسترداد والتوقيت. استخدم [دليل التكلفة السنوية](/ar/guides/annual-cost-savings-calculator/) للمقارنة على مدى اثني عشر شهراً. وتشمل القرارات المرتبطة [التكاليف المتكررة السنوية](/ar/guides/recurring-costs-annual-total/) و [دليل قرار مرتبط](/ar/guides/true-cost-of-free-shipping-threshold/).
 
-## FAQ
+## الأسئلة الشائعة
 
 ### هل تنطبق النتيجة على الجميع؟
 
@@ -40,4 +40,4 @@ draft: false
 
 هل يصبح التوصيل مفيداً إذا أُلغي رسمه؟ ليس بالضرورة؛ قارن الإكرامية وحصة الاشتراك والإنفاق الإضافي بالسفر الذي كنت ستقوم به فعلاً. أعد الحساب عند تغير الشروط أو الاستخدام.
 
-مصادر للقراءة: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.
+مصادر للقراءة: [إرشادات المستهلك](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) و [تقييم الإنفاق من CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.

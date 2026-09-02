@@ -24,13 +24,13 @@ draft: false
 
 ## استخدم سيناريوهات لا جواباً واحداً
 
-هذا قرار حد أدنى لا حساب نسبة خصم. قارن السلة المخططة بالسلة التي يحفزها العرض واختبر الإرجاع وعدم الاستخدام. لا تعتبر إجمالي الطلب توفيراً؛ احسب التغير فقط مقارنة بشراء السلة الأصلية ودفع الشحن. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+هذا قرار حد أدنى لا حساب نسبة خصم. قارن السلة المخططة بالسلة التي يحفزها العرض واختبر الإرجاع وعدم الاستخدام. لا تعتبر إجمالي الطلب توفيراً؛ احسب التغير فقط مقارنة بشراء السلة الأصلية ودفع الشحن. قارن حالة استخدام منخفض وحالة واقعية وحالة تكلفة أو استخدام مرتفع. إذا تغير الاستنتاج فاعرض النطاق والافتراض الذي سببه بدلاً من توصية عامة. سجّل تاريخ ومصدر كل إدخال. أعد الحساب عند تغير السعر أو الاستخدام أو التجديد؛ الحاسبة تنظم المقارنة ولا تضمن النتيجة.
 
 ## الأخطاء الشائعة والخطوة التالية
 
-لا تحسب حداً نظرياً أو عنواناً ترويجياً أو منفعة لم تكن ستشتريها. راجع الشروط الحالية والرسوم والاستثناءات والاسترداد والتوقيت. The [دليل التكلفة السنوية](/ar/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [التكاليف المتكررة السنوية](/ar/guides/recurring-costs-annual-total/) and [دليل قرار مرتبط](/ar/guides/true-cost-of-convenience-delivery/).
+لا تحسب حداً نظرياً أو عنواناً ترويجياً أو منفعة لم تكن ستشتريها. راجع الشروط الحالية والرسوم والاستثناءات والاسترداد والتوقيت. استخدم [دليل التكلفة السنوية](/ar/guides/annual-cost-savings-calculator/) للمقارنة على مدى اثني عشر شهراً. وتشمل القرارات المرتبطة [التكاليف المتكررة السنوية](/ar/guides/recurring-costs-annual-total/) و [دليل قرار مرتبط](/ar/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## الأسئلة الشائعة
 
 ### هل تنطبق النتيجة على الجميع؟
 
@@ -40,4 +40,4 @@ draft: false
 
 هل أضيف سلعة رخيصة للشحن المجاني؟ فقط إن كنت تحتاجها أصلاً أو كانت منفعتها أعلى من تكلفتها الإضافية؛ وإلا فقد يكون دفع الشحن أرخص. أعد الحساب عند تغير الشروط أو الاستخدام.
 
-مصادر للقراءة: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.
+مصادر للقراءة: [إرشادات المستهلك](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) و [تقييم الإنفاق من CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.

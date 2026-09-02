@@ -111,37 +111,52 @@ for (const topic of topics.filter((topic) => !activeTopics.includes(topic))) {
 }
 
 const linkFor = (locale, slug) => `/${locale}/guides/${slug}/`;
-const labels = { en: 'annual cost guide', es: 'guía de coste anual', zh: '年度成本指南', hi: 'annual cost guide', ar: 'دليل التكلفة السنوية' };
+const labels = { en: 'annual cost guide', es: 'guía de coste anual', zh: '年度成本指南', hi: 'वार्षिक लागत मार्गदर्शिका', ar: 'دليل التكلفة السنوية' };
 const common = {
   en: {
     mistakes: 'Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing.',
     inbound: 'No. Prices, usage, coverage, taxes, timing, and contract terms differ. Replace the example values with your own records and keep the low, base, and high cases visible.',
     question: 'What is the most important check?',
     source: 'Source reading',
+    faqHeading: 'Frequently asked questions',
+    scenarios: 'Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.',
+    extra: 'Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.',
   },
   es: {
     mistakes: 'No cuentes un límite teórico, un titular promocional ni un beneficio que no comprarías. Revisa las condiciones actuales, las tasas, las exclusiones, los reembolsos y las fechas.',
     inbound: 'No. Los precios, el uso, la cobertura, los impuestos, las fechas y el contrato cambian. Sustituye los ejemplos por tus propios registros y conserva los escenarios bajo, base y alto.',
     question: '¿Cuál es la comprobación más importante?',
     source: 'Fuentes para consultar',
+    faqHeading: 'Preguntas frecuentes',
+    scenarios: 'Compara un caso de poco uso, uno realista y otro de coste o uso alto. Si cambia la conclusión, muestra el rango y la suposición que lo provoca en lugar de dar una recomendación universal.',
+    extra: 'Anota la fecha y el origen de cada dato. Recalcula cuando cambien el precio, el uso o la renovación; la calculadora organiza una comparación, no promete un resultado.',
   },
   zh: {
     mistakes: '不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。',
     inbound: '不一定。價格、使用量、保障、稅費、時間與合約條款都可能不同。請用自己的紀錄取代範例數字，並保留低、基準、高三種情境。',
     question: '最重要的檢查是什麼？',
     source: '來源閱讀',
+    faqHeading: '常見問題',
+    scenarios: '比較低使用量、實際預期與高成本或高使用量三種情境。如果結論改變，請呈現範圍與造成變化的假設，不要寫成適用所有人的建議。',
+    extra: '請註明每個輸入值的日期與來源；價格、使用量或合約續期改變時要重新試算。計算器是整理比較的工具，不是保證結果的承諾。若涉及免運、押金、退貨或保障，請把「何時付款」與「何時能取回」分開記錄，避免只看最後的總額而漏掉短期現金壓力。',
   },
   hi: {
     mistakes: 'Theoretical limit, promotional headline या ऐसी benefit न गिनें जिसे आप वैसे भी नहीं खरीदते। Current terms में fees, exclusions, refunds और timing जाँचें।',
     inbound: 'नहीं। Price, usage, coverage, tax, timing और contract अलग हो सकते हैं। Example values को अपने records से बदलें और low, base, high scenarios रखें।',
     question: 'सबसे जरूरी check क्या है?',
     source: 'स्रोत पढ़ें',
+    faqHeading: 'अक्सर पूछे जाने वाले प्रश्न',
+    scenarios: 'Low-use, realistic और high-cost या high-use cases compare करें। निष्कर्ष बदले तो range और बदलने वाली assumption दिखाएँ; universal recommendation न दें।',
+    extra: 'हर input की date और source लिखें। Price, usage या renewal बदलने पर फिर calculate करें; calculator comparison record है, result की guarantee नहीं।',
   },
   ar: {
     mistakes: 'لا تحسب حداً نظرياً أو عنواناً ترويجياً أو منفعة لم تكن ستشتريها. راجع الشروط الحالية والرسوم والاستثناءات والاسترداد والتوقيت.',
     inbound: 'لا. تختلف الأسعار والاستخدام والتغطية والضرائب والتوقيت وشروط العقد. استبدل أمثلة المقال بسجلاتك وأبقِ السيناريو المنخفض والأساسي والمرتفع.',
     question: 'ما أهم فحص؟',
     source: 'مصادر للقراءة',
+    faqHeading: 'الأسئلة الشائعة',
+    scenarios: 'قارن حالة استخدام منخفض وحالة واقعية وحالة تكلفة أو استخدام مرتفع. إذا تغير الاستنتاج فاعرض النطاق والافتراض الذي سببه بدلاً من توصية عامة.',
+    extra: 'سجّل تاريخ ومصدر كل إدخال. أعد الحساب عند تغير السعر أو الاستخدام أو التجديد؛ الحاسبة تنظم المقارنة ولا تضمن النتيجة.',
   },
 };
 const related = (locale, slug) => {
@@ -200,13 +215,13 @@ ${item.formula} ${item.example}
 
 ## ${locale === 'zh' ? '用情境而不是單一答案' : locale === 'es' ? 'Usa escenarios, no una sola respuesta' : locale === 'hi' ? 'एक answer नहीं, scenarios चलाएँ' : locale === 'ar' ? 'استخدم سيناريوهات لا جواباً واحداً' : 'Use scenarios instead of one answer'}
 
-${item.angle} ${item.caution} Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+${item.angle} ${item.caution} ${common[locale].scenarios} ${common[locale].extra}
 
 ## ${locale === 'zh' ? '常見誤區與下一步' : locale === 'es' ? 'Errores comunes y siguiente paso' : locale === 'hi' ? 'Common mistakes और next step' : locale === 'ar' ? 'الأخطاء الشائعة والخطوة التالية' : 'Common mistakes and next step'}
 
-${common[locale].mistakes} The [${labels[locale]}](${rel[2]}) provides the broader twelve-month comparison. Related decisions: [${locale === 'zh' ? '週期性成本年度總額' : locale === 'es' ? 'costes recurrentes anuales' : locale === 'hi' ? 'recurring annual costs' : locale === 'ar' ? 'التكاليف المتكررة السنوية' : 'recurring annual costs'}](${rel[3]}) and [${locale === 'zh' ? '同群組延伸頁面' : locale === 'es' ? 'otra guía de decisión' : locale === 'hi' ? 'related decision guide' : locale === 'ar' ? 'دليل قرار مرتبط' : 'a related decision guide'}](${rel[0]}).
+${common[locale].mistakes} ${locale === 'zh' ? '可用' : locale === 'es' ? 'Usa' : locale === 'hi' ? 'Broader comparison के लिए' : locale === 'ar' ? 'استخدم' : 'Use'} [${labels[locale]}](${rel[2]}) ${locale === 'zh' ? '查看完整十二個月比較。相關判斷還包括' : locale === 'es' ? 'para la comparación de doce meses. Las decisiones relacionadas incluyen' : locale === 'hi' ? 'के लिए broader twelve-month comparison देखें। Related decisions:' : locale === 'ar' ? 'للمقارنة على مدى اثني عشر شهراً. وتشمل القرارات المرتبطة' : 'for the broader twelve-month comparison. Related decisions include'} [${locale === 'zh' ? '週期性成本年度總額' : locale === 'es' ? 'costes recurrentes anuales' : locale === 'hi' ? 'recurring annual costs' : locale === 'ar' ? 'التكاليف المتكررة السنوية' : 'recurring annual costs'}](${rel[3]}) ${locale === 'zh' ? '與' : locale === 'es' ? 'y' : locale === 'hi' ? 'और' : locale === 'ar' ? 'و' : 'and'} [${locale === 'zh' ? '同群組延伸頁面' : locale === 'es' ? 'otra guía de decisión' : locale === 'hi' ? 'related decision guide' : locale === 'ar' ? 'دليل قرار مرتبط' : 'a related decision guide'}](${rel[0]}).
 
-## FAQ
+## ${common[locale].faqHeading}
 
 ### ${locale === 'zh' ? '這個結果能直接套用到所有人嗎？' : locale === 'es' ? '¿Puedo aplicar el resultado a todos?' : locale === 'hi' ? 'क्या यह result सब पर लागू है?' : locale === 'ar' ? 'هل تنطبق النتيجة على الجميع؟' : 'Can everyone use the same result?'}
 
@@ -216,7 +231,7 @@ ${common[locale].inbound}
 
 ${item.faq} ${locale === 'zh' ? '若條款或使用量改變，請重新計算。' : locale === 'es' ? 'Recalcula si cambian las condiciones o el uso.' : locale === 'hi' ? 'Terms या usage बदलें तो फिर calculate करें।' : locale === 'ar' ? 'أعد الحساب عند تغير الشروط أو الاستخدام.' : 'Recalculate when the terms or usage change.'}
 
-${common[locale].source}: [consumer guidance](${source}) and [CFPB spending assessment](${sources.cfpb}). ${locale === 'zh' ? '這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。' : locale === 'es' ? 'Estas fuentes ayudan a revisar el coste real; no fijan un precio universal ni garantizan un resultado.' : locale === 'hi' ? 'ये स्रोत actual cost को समझने में मदद करते हैं; universal price या guaranteed result नहीं देते।' : locale === 'ar' ? 'تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.' : 'These sources help frame the actual-cost check; they do not set a universal price or guarantee a result.'}
+${common[locale].source}: [${locale === 'zh' ? '消費者指引' : locale === 'es' ? 'orientación al consumidor' : locale === 'hi' ? 'consumer guidance' : locale === 'ar' ? 'إرشادات المستهلك' : 'consumer guidance'}](${source}) ${locale === 'zh' ? '與' : locale === 'es' ? 'y' : locale === 'hi' ? 'और' : locale === 'ar' ? 'و' : 'and'} [${locale === 'zh' ? 'CFPB 支出評估' : locale === 'es' ? 'evaluación de gastos del CFPB' : locale === 'hi' ? 'CFPB spending assessment' : locale === 'ar' ? 'تقييم الإنفاق من CFPB' : 'CFPB spending assessment'}](${sources.cfpb}). ${locale === 'zh' ? '這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。' : locale === 'es' ? 'Estas fuentes ayudan a revisar el coste real; no fijan un precio universal ni garantizan un resultado.' : locale === 'hi' ? 'ये स्रोत actual cost को समझने में मदद करते हैं; universal price या guaranteed result नहीं देते।' : locale === 'ar' ? 'تساعد هذه المصادر في فحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.' : 'These sources help frame the actual-cost check; they do not set a universal price or guarantee a result.'}
 `;
     const dir = join(root, 'src', 'content', 'growth-articles', locale);
     mkdirSync(dir, { recursive: true });

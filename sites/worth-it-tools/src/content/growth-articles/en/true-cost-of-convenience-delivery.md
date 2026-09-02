@@ -24,13 +24,13 @@ true delivery premium = service fee + tip + plan allocation + induced spending �
 
 ## Use scenarios instead of one answer
 
-A delivery option can be cheaper in time but more expensive in cash. Test a normal order, a low-use month, and a month with a minimum-order top-up; the third case often reveals why a “free delivery” badge is not free. Do not price your time as guaranteed income. You may record time saved as a separate preference or scenario, but the cash conclusion should stand without assuming every saved minute becomes billable work. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+A delivery option can be cheaper in time but more expensive in cash. Test a normal order, a low-use month, and a month with a minimum-order top-up; the third case often reveals why a “free delivery” badge is not free. Do not price your time as guaranteed income. You may record time saved as a separate preference or scenario, but the cash conclusion should stand without assuming every saved minute becomes billable work. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation. Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.
 
 ## Common mistakes and next step
 
-Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. The [annual cost guide](/en/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-free-shipping-threshold/).
+Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. Use [annual cost guide](/en/guides/annual-cost-savings-calculator/) for the broader twelve-month comparison. Related decisions include [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-free-shipping-threshold/).
 
-## FAQ
+## Frequently asked questions
 
 ### Can everyone use the same result?
 

@@ -24,13 +24,13 @@ draft: false
 
 ## 用情境而不是單一答案
 
-這一頁處理「true value calculator」意圖：先隔離相對於現有方案的改變，再跑低、基準、高使用量，找出何時比替代方案便宜。 功能雖然存在，但若沒有融入工作流程，實際價值仍很低。計算完成的成果，不是點擊數或理論上限。 Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+這一頁處理「true value calculator」意圖：先隔離相對於現有方案的改變，再跑低、基準、高使用量，找出何時比替代方案便宜。 功能雖然存在，但若沒有融入工作流程，實際價值仍很低。計算完成的成果，不是點擊數或理論上限。 比較低使用量、實際預期與高成本或高使用量三種情境。如果結論改變，請呈現範圍與造成變化的假設，不要寫成適用所有人的建議。 請註明每個輸入值的日期與來源；價格、使用量或合約續期改變時要重新試算。計算器是整理比較的工具，不是保證結果的承諾。若涉及免運、押金、退貨或保障，請把「何時付款」與「何時能取回」分開記錄，避免只看最後的總額而漏掉短期現金壓力。
 
 ## 常見誤區與下一步
 
-不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 The [年度成本指南](/zh/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) and [同群組延伸頁面](/zh/guides/true-cost-of-convenience-delivery/).
+不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 可用 [年度成本指南](/zh/guides/annual-cost-savings-calculator/) 查看完整十二個月比較。相關判斷還包括 [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) 與 [同群組延伸頁面](/zh/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## 常見問題
 
 ### 這個結果能直接套用到所有人嗎？
 
@@ -40,4 +40,4 @@ draft: false
 
 為未來可能需求升級可以嗎？可以把可能性與時間範圍列成情境，但未來可能不等於現在的增量價值。 若條款或使用量改變，請重新計算。
 
-來源閱讀: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。
+來源閱讀: [消費者指引](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) 與 [CFPB 支出評估](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。

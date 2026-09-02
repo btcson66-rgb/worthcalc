@@ -24,13 +24,13 @@ draft: false
 
 ## 用情境而不是單一答案
 
-FTC 提醒延長保固或服務合約可能有免賠額、上限與排除項目，也不一定等同原廠保固。讀完合約再設定承保機率。 期望值不是保證拿得到錢。還要測試申請被拒或延遲時，你是否有現金支付維修。 Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+FTC 提醒延長保固或服務合約可能有免賠額、上限與排除項目，也不一定等同原廠保固。讀完合約再設定承保機率。 期望值不是保證拿得到錢。還要測試申請被拒或延遲時，你是否有現金支付維修。 比較低使用量、實際預期與高成本或高使用量三種情境。如果結論改變，請呈現範圍與造成變化的假設，不要寫成適用所有人的建議。 請註明每個輸入值的日期與來源；價格、使用量或合約續期改變時要重新試算。計算器是整理比較的工具，不是保證結果的承諾。若涉及免運、押金、退貨或保障，請把「何時付款」與「何時能取回」分開記錄，避免只看最後的總額而漏掉短期現金壓力。
 
 ## 常見誤區與下一步
 
-不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 The [年度成本指南](/zh/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) and [同群組延伸頁面](/zh/guides/true-cost-of-convenience-delivery/).
+不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 可用 [年度成本指南](/zh/guides/annual-cost-savings-calculator/) 查看完整十二個月比較。相關判斷還包括 [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) 與 [同群組延伸頁面](/zh/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## 常見問題
 
 ### 這個結果能直接套用到所有人嗎？
 
@@ -40,4 +40,4 @@ FTC 提醒延長保固或服務合約可能有免賠額、上限與排除項目�
 
 延長保固一定不划算嗎？不一定。若維修風險難以負擔，且保障是額外、清楚並且實際可申請，風險轉移可能有價值。 若條款或使用量改變，請重新計算。
 
-來源閱讀: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。
+來源閱讀: [消費者指引](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) 與 [CFPB 支出評估](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。

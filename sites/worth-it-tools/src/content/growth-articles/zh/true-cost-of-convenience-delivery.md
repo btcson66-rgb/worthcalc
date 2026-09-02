@@ -24,13 +24,13 @@ draft: false
 
 ## 用情境而不是單一答案
 
-配送可能節省時間，卻增加現金支出。至少比較平常月份、低使用月份，以及為了達到低消而補買的月份，才能看出免運標籤是否真的有價值。 不要把省下的時間直接當成一定能賺到的收入。可以把時間價值當作個人情境，但現金結果不能依賴每分鐘都能轉成可計費工作。 Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+配送可能節省時間，卻增加現金支出。至少比較平常月份、低使用月份，以及為了達到低消而補買的月份，才能看出免運標籤是否真的有價值。 不要把省下的時間直接當成一定能賺到的收入。可以把時間價值當作個人情境，但現金結果不能依賴每分鐘都能轉成可計費工作。 比較低使用量、實際預期與高成本或高使用量三種情境。如果結論改變，請呈現範圍與造成變化的假設，不要寫成適用所有人的建議。 請註明每個輸入值的日期與來源；價格、使用量或合約續期改變時要重新試算。計算器是整理比較的工具，不是保證結果的承諾。若涉及免運、押金、退貨或保障，請把「何時付款」與「何時能取回」分開記錄，避免只看最後的總額而漏掉短期現金壓力。
 
 ## 常見誤區與下一步
 
-不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 The [年度成本指南](/zh/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) and [同群組延伸頁面](/zh/guides/true-cost-of-free-shipping-threshold/).
+不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 可用 [年度成本指南](/zh/guides/annual-cost-savings-calculator/) 查看完整十二個月比較。相關判斷還包括 [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) 與 [同群組延伸頁面](/zh/guides/true-cost-of-free-shipping-threshold/).
 
-## FAQ
+## 常見問題
 
 ### 這個結果能直接套用到所有人嗎？
 
@@ -40,4 +40,4 @@ draft: false
 
 免運時配送一定划算嗎？不一定。若配送讓你多買不需要的商品，且小費、會員分攤與其他費用高於真正省下的交通成本，就不代表划算。 若條款或使用量改變，請重新計算。
 
-來源閱讀: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。
+來源閱讀: [消費者指引](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) 與 [CFPB 支出評估](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。

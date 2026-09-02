@@ -24,13 +24,13 @@ true rental total = quoted rate + mandatory charges + chosen protection + fuel +
 
 ## Use scenarios instead of one answer
 
-Compare the entire trip, not the daily headline. Run short and long rental cases because taxes, daily protection, and fuel policy do not scale in the same way. Do not buy duplicate coverage without checking existing insurance or card terms, and do not assume a deposit is refundable until the contract says how and when it is released. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+Compare the entire trip, not the daily headline. Run short and long rental cases because taxes, daily protection, and fuel policy do not scale in the same way. Do not buy duplicate coverage without checking existing insurance or card terms, and do not assume a deposit is refundable until the contract says how and when it is released. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation. Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.
 
 ## Common mistakes and next step
 
-Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. The [annual cost guide](/en/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-convenience-delivery/).
+Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. Use [annual cost guide](/en/guides/annual-cost-savings-calculator/) for the broader twelve-month comparison. Related decisions include [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## Frequently asked questions
 
 ### Can everyone use the same result?
 

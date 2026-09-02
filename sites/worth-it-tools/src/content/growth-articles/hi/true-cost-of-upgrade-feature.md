@@ -24,13 +24,13 @@ incremental cost per useful use = upgrade + add-ons + switching cost − certain
 
 ## एक answer नहीं, scenarios चलाएँ
 
-यह “true value calculator” intent है: current plan से केवल change isolate करें। Low, base और high-use scenarios से break-even देखें। Workflow में integrate न होने वाला feature कम realized value देता है। Clicks या theoretical limit नहीं, completed outcome गिनें। Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+यह “true value calculator” intent है: current plan से केवल change isolate करें। Low, base और high-use scenarios से break-even देखें। Workflow में integrate न होने वाला feature कम realized value देता है। Clicks या theoretical limit नहीं, completed outcome गिनें। Low-use, realistic और high-cost या high-use cases compare करें। निष्कर्ष बदले तो range और बदलने वाली assumption दिखाएँ; universal recommendation न दें। हर input की date और source लिखें। Price, usage या renewal बदलने पर फिर calculate करें; calculator comparison record है, result की guarantee नहीं।
 
 ## Common mistakes और next step
 
-Theoretical limit, promotional headline या ऐसी benefit न गिनें जिसे आप वैसे भी नहीं खरीदते। Current terms में fees, exclusions, refunds और timing जाँचें। The [annual cost guide](/hi/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [recurring annual costs](/hi/guides/recurring-costs-annual-total/) and [related decision guide](/hi/guides/true-cost-of-convenience-delivery/).
+Theoretical limit, promotional headline या ऐसी benefit न गिनें जिसे आप वैसे भी नहीं खरीदते। Current terms में fees, exclusions, refunds और timing जाँचें। Broader comparison के लिए [वार्षिक लागत मार्गदर्शिका](/hi/guides/annual-cost-savings-calculator/) के लिए broader twelve-month comparison देखें। Related decisions: [recurring annual costs](/hi/guides/recurring-costs-annual-total/) और [related decision guide](/hi/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## अक्सर पूछे जाने वाले प्रश्न
 
 ### क्या यह result सब पर लागू है?
 
@@ -40,4 +40,4 @@ Theoretical limit, promotional headline या ऐसी benefit न गिन�
 
 क्या future needs के लिए upgrade करना चाहिए? Probability और time horizon लगाएँ। Future possibility वर्तमान incremental value नहीं है। Terms या usage बदलें तो फिर calculate करें।
 
-स्रोत पढ़ें: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). ये स्रोत actual cost को समझने में मदद करते हैं; universal price या guaranteed result नहीं देते।
+स्रोत पढ़ें: [consumer guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) और [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). ये स्रोत actual cost को समझने में मदद करते हैं; universal price या guaranteed result नहीं देते।

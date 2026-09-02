@@ -24,13 +24,13 @@ net warranty cost = contract price + expected deductibles and fees − expected 
 
 ## Use scenarios instead of one answer
 
-The FTC explains that an extended warranty or service contract can differ from the original warranty and may include deductibles, limits, and exclusions. Read the contract before assigning a covered probability. Expected value is not a promise of reimbursement. Keep a worst-case cash test: could you pay the repair if the claim is denied or reimbursement is delayed? Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+The FTC explains that an extended warranty or service contract can differ from the original warranty and may include deductibles, limits, and exclusions. Read the contract before assigning a covered probability. Expected value is not a promise of reimbursement. Keep a worst-case cash test: could you pay the repair if the claim is denied or reimbursement is delayed? Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation. Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.
 
 ## Common mistakes and next step
 
-Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. The [annual cost guide](/en/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-convenience-delivery/).
+Do not count a theoretical limit, a promotional headline, or a benefit you would not otherwise buy. Review the current terms for fees, exclusions, refunds, and timing. Use [annual cost guide](/en/guides/annual-cost-savings-calculator/) for the broader twelve-month comparison. Related decisions include [recurring annual costs](/en/guides/recurring-costs-annual-total/) and [a related decision guide](/en/guides/true-cost-of-convenience-delivery/).
 
-## FAQ
+## Frequently asked questions
 
 ### Can everyone use the same result?
 

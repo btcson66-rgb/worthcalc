@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/external-hard-drive-electricity-cost-per-backup-job-used/#article",
+      "headline": "External Hard Drive Electricity Cost Per Backup Job Used: Count Transfer and Idle Time",
+      "description": "Calculate external hard drive electricity cost per completed backup job using measured spin-up, transfer, USB, and post-job idle energy.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "External Hard Drive Electricity Cost Per Backup Job Used: Count Transfer and Idle Time",
+          "item": "https://worthcalc.win/en/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+        }
+      ]
+    }
+  ]
+}

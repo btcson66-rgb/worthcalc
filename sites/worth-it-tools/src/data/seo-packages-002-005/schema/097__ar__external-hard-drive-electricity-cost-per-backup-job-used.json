@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/external-hard-drive-electricity-cost-per-backup-job-used/#article",
+      "headline": "تكلفة القرص الخارجي لكل مهمة نسخ احتياطي: احسب النقل والخمول",
+      "description": "احسب تكلفة القرص الخارجي لكل مهمة مكتملة من طاقة بدء الدوران والنقل وUSB والخمول المقاسة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة القرص الخارجي لكل مهمة نسخ احتياطي: احسب النقل والخمول",
+          "item": "https://worthcalc.win/ar/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+        }
+      ]
+    }
+  ]
+}

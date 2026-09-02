@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/#article",
+      "headline": "External hard drive electricity cost per backup job: transfer और idle समय गिनें",
+      "description": "Spin-up, transfer, USB और post-job idle की measured energy से completed backup job की बिजली लागत निकालें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "External hard drive electricity cost per backup job: transfer और idle समय गिनें",
+          "item": "https://worthcalc.win/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+        }
+      ]
+    }
+  ]
+}

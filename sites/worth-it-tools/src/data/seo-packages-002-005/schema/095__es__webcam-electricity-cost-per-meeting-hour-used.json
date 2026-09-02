@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/webcam-electricity-cost-per-meeting-hour-used/#article",
+      "headline": "Coste eléctrico de una webcam por hora de reunión: separa cámara y luz",
+      "description": "Calcula el coste eléctrico de una webcam por hora de reunión con energía medida de cámara, luz, USB y espera, sin convertirlo en una promesa de rendimiento.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/webcam-electricity-cost-per-meeting-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de una webcam por hora de reunión: separa cámara y luz",
+          "item": "https://worthcalc.win/es/guides/webcam-electricity-cost-per-meeting-hour-used/"
+        }
+      ]
+    }
+  ]
+}

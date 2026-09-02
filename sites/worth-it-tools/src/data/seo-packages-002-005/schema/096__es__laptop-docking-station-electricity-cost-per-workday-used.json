@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/laptop-docking-station-electricity-cost-per-workday-used/#article",
+      "headline": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
+      "description": "Calcula el coste de una base para portátil por jornada con energía medida de base, pantallas, USB, red y espera, dejando visible la carga de la batería.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/laptop-docking-station-electricity-cost-per-workday-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
+          "item": "https://worthcalc.win/es/guides/laptop-docking-station-electricity-cost-per-workday-used/"
+        }
+      ]
+    }
+  ]
+}

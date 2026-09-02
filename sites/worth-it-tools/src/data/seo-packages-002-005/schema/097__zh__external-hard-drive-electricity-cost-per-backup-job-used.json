@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/external-hard-drive-electricity-cost-per-backup-job-used/#article",
+      "headline": "外接硬碟每次備份工作電費：計入傳輸與閒置時間",
+      "description": "用外接硬碟啟動、傳輸、USB 與備份後閒置的實測能源，估算每次完成備份工作的電費。",
+      "inLanguage": "zh-Hant",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "外接硬碟每次備份工作電費：計入傳輸與閒置時間",
+          "item": "https://worthcalc.win/zh/guides/external-hard-drive-electricity-cost-per-backup-job-used/"
+        }
+      ]
+    }
+  ]
+}

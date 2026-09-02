@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/webcam-electricity-cost-per-meeting-hour-used/#article",
+      "headline": "Webcam electricity cost per meeting hour: camera और LED modes अलग करें",
+      "description": "Camera, indicator light, USB और standby की measured energy से webcam की प्रति meeting hour बिजली लागत निकालें; इसे performance promise न बनाएं।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/webcam-electricity-cost-per-meeting-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Webcam electricity cost per meeting hour: camera और LED modes अलग करें",
+          "item": "https://worthcalc.win/hi/guides/webcam-electricity-cost-per-meeting-hour-used/"
+        }
+      ]
+    }
+  ]
+}

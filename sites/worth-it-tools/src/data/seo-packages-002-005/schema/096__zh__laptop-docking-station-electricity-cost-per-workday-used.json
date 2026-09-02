@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/laptop-docking-station-electricity-cost-per-workday-used/#article",
+      "headline": "筆電擴充底座每工作日電費：分開螢幕與充電負載",
+      "description": "用擴充底座、螢幕輸出、USB 充電與閒置的實測能源估算每工作日電費，並保留筆電電池負載的邊界。",
+      "inLanguage": "zh-Hant",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/laptop-docking-station-electricity-cost-per-workday-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "筆電擴充底座每工作日電費：分開螢幕與充電負載",
+          "item": "https://worthcalc.win/zh/guides/laptop-docking-station-electricity-cost-per-workday-used/"
+        }
+      ]
+    }
+  ]
+}

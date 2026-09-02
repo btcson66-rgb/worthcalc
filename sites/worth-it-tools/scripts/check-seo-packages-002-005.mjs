@@ -61,7 +61,7 @@ for (const guide of guides) {
 }
 
 const sitemapUrls = (sitemap.match(/<loc>[^<]+<\/loc>/g) ?? []).length;
-if (sitemapUrls !== 432) failures.push(`expected 432 sitemap URLs, found ${sitemapUrls}`);
+if (sitemapUrls < 432) failures.push(`expected at least the 432 URLs from released SEO packages, found ${sitemapUrls}`);
 
 if (failures.length) {
   console.error(`SEO package check failed (${failures.length}):`);
@@ -69,4 +69,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`SEO package check passed: ${guides.length} guides, 1 h1/canonical/robots/Article/BreadcrumbList/image/sitemap entry per page; ${sitemapUrls} sitemap URLs.`);
+console.log(`SEO package check passed: ${guides.length} legacy package guides, 1 h1/canonical/robots/Article/BreadcrumbList/image/sitemap entry per page; ${sitemapUrls} sitemap URLs.`);

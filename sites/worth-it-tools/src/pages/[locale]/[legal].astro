@@ -1,10 +1,10 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { legalContent } from '../../data/legalContent';
-import type { Locale } from '../../consts';
+import type { ContentLocale, Locale } from '../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { seoPackage001 } from '../../data/seoPackage001';
-import { seoPackageGuides } from '../../data/seoPackages002to005';
+import { seoPackageGuides } from '../../data/seoPackageRegistry';
 
 type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
 
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
     released.map((legal) => ({ params: { locale, legal } })),
   );
   const entries = await getCollection('growthArticles', ({ data }) => !data.draft);
-  const localesBySlug = new Map<string, Locale[]>();
+  const localesBySlug = new Map<string, ContentLocale[]>();
   for (const entry of entries) {
     const locales = localesBySlug.get(entry.data.articleSlug) ?? [];
     locales.push(entry.data.locale);
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
   return [...legal, ...growth];
 }
 
-const locale = Astro.params.locale as Locale;
+const locale = Astro.params.locale as ContentLocale;
 const slug = Astro.params.legal!;
 const growthEntry = Astro.props.growthEntry as CollectionEntry<'growthArticles'> | undefined;
 const packageMeta = growthEntry ? seoPackage001[`${growthEntry.data.locale}/${growthEntry.data.articleSlug}`] : undefined;
@@ -35,7 +35,7 @@ const packageSchemas = import.meta.glob('../../data/seo-package-001/schema/*.jso
 const packageSchema = packageMeta && growthEntry
   ? Object.entries(packageSchemas).find(([path]) => path.endsWith(`/${growthEntry.data.locale}__${growthEntry.data.articleSlug}.json`))?.[1]
   : undefined;
-const alternateLocales = Astro.props.alternateLocales as Locale[] | undefined;
+const alternateLocales = Astro.props.alternateLocales as ContentLocale[] | undefined;
 const rendered = growthEntry ? await render(growthEntry) : undefined;
 const GrowthContent = rendered?.Content;
 const content = !growthEntry && (locale === 'es' || locale === 'fr' || locale === 'de') ? legalContent[locale]?.[slug] : undefined;

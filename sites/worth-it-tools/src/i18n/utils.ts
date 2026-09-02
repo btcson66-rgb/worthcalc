@@ -1,19 +1,21 @@
-import { CORE_LOCALES, DEFAULT_LOCALE, LOCALES, type Locale } from '../consts';
+import { CONTENT_LOCALES, CORE_LOCALES, DEFAULT_LOCALE, type ContentLocale } from '../consts';
 import { ui, type UIKey } from './ui';
 
 /** Extract the active locale from a URL pathname (/en/..., /zh/...). */
-export function getLocaleFromUrl(url: URL): Locale {
+export function getLocaleFromUrl(url: URL): ContentLocale {
   const [, maybeLocale] = url.pathname.split('/');
-  if ((LOCALES as string[]).includes(maybeLocale)) {
-    return maybeLocale as Locale;
+  if ((CONTENT_LOCALES as string[]).includes(maybeLocale)) {
+    return maybeLocale as ContentLocale;
   }
   return DEFAULT_LOCALE;
 }
 
 /** Return a translator bound to a locale, with fallback to the default locale. */
-export function useTranslations(locale: Locale) {
+export function useTranslations(locale: ContentLocale) {
   return function t(key: UIKey): string {
-    return ui[locale][key] ?? ui[DEFAULT_LOCALE][key] ?? key;
+    const active = ui[locale] as Record<string, string>;
+    const fallback = ui[DEFAULT_LOCALE] as Record<string, string>;
+    return active[key] ?? fallback[key] ?? key;
   };
 }
 
@@ -29,7 +31,7 @@ export function useTranslations(locale: Locale) {
  * hreflang (src/lib/seo.ts) have always used the trailing-slash form, so
  * this also stops internal links from disagreeing with them.
  */
-export function localizedPath(locale: Locale, path = '/'): string {
+export function localizedPath(locale: ContentLocale, path = '/'): string {
   const clean = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
   if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}/`;
   return `/${locale}${clean}/`;
@@ -39,7 +41,7 @@ export function localizedPath(locale: Locale, path = '/'): string {
  * Link to a route in the complete five-language site shell. Keeping this
  * helper central makes any future staged locale release explicit.
  */
-export function localizedCorePath(locale: Locale, path = '/'): string {
+export function localizedCorePath(locale: ContentLocale, path = '/'): string {
   const coreLocale = (CORE_LOCALES as readonly string[]).includes(locale) ? locale : DEFAULT_LOCALE;
   return localizedPath(coreLocale, path);
 }
@@ -48,9 +50,9 @@ export function localizedCorePath(locale: Locale, path = '/'): string {
  * Given the current URL, return the equivalent path in another locale —
  * used by the language switcher to keep the user on the same page.
  */
-export function switchLocalePath(url: URL, target: Locale): string {
+export function switchLocalePath(url: URL, target: ContentLocale): string {
   const segments = url.pathname.split('/').filter(Boolean);
-  if ((LOCALES as string[]).includes(segments[0])) {
+  if ((CONTENT_LOCALES as string[]).includes(segments[0])) {
     segments.shift();
   }
   if (segments.length === 0) return target === DEFAULT_LOCALE ? '/' : `/${target}/`;
@@ -60,7 +62,7 @@ export function switchLocalePath(url: URL, target: Locale): string {
 /** Strip the locale prefix to get the logical route, e.g. '/zh/about' -> '/about'. */
 export function routeWithoutLocale(url: URL): string {
   const segments = url.pathname.split('/').filter(Boolean);
-  if ((LOCALES as string[]).includes(segments[0])) {
+  if ((CONTENT_LOCALES as string[]).includes(segments[0])) {
     segments.shift();
   }
   return `/${segments.join('/')}`;

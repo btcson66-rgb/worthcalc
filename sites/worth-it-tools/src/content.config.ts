@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const sharedSchema = z.object({
-  locale: z.enum(['en', 'zh', 'es', 'fr', 'de']),
+    locale: z.enum(['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar']),
   title: z.string(),
   description: z.string(),
   lastReviewed: z.coerce.date(),

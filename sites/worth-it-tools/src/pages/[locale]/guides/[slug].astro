@@ -1,33 +1,33 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import type { Locale } from '../../../consts';
+import type { ContentLocale } from '../../../consts';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
-import { seoPackageGuides } from '../../../data/seoPackages002to005';
+import { seoPackageGuides } from '../../../data/seoPackageRegistry';
 
 type Props = {
   growthEntry: CollectionEntry<'growthArticles'>;
-  alternateLocales: Locale[];
+  alternateLocales: ContentLocale[];
 };
 
 export async function getStaticPaths() {
   const entries = await getCollection('growthArticles', ({ data }) => !data.draft);
   const packageEntries = entries.filter((entry) => seoPackageGuides[entry.data.locale + '/' + entry.data.articleSlug]);
-  const localesBySlug = new Map<string, Locale[]>();
+  const localesBySlug = new Map<string, ContentLocale[]>();
   for (const entry of packageEntries) {
     const locales = localesBySlug.get(entry.data.articleSlug) ?? [];
-    locales.push(entry.data.locale as Locale);
+    locales.push(entry.data.locale as ContentLocale);
     localesBySlug.set(entry.data.articleSlug, locales);
   }
   return packageEntries.map((entry) => ({
     params: { locale: entry.data.locale, slug: entry.data.articleSlug },
     props: {
       growthEntry: entry,
-      alternateLocales: localesBySlug.get(entry.data.articleSlug) ?? [entry.data.locale as Locale],
+      alternateLocales: localesBySlug.get(entry.data.articleSlug) ?? [entry.data.locale as ContentLocale],
     },
   }));
 }
 
-const locale = Astro.params.locale as Locale;
+const locale = Astro.params.locale as ContentLocale;
 const slug = Astro.params.slug!;
 const meta = seoPackageGuides[locale + '/' + slug];
 const growthEntry = Astro.props.growthEntry as Props['growthEntry'];

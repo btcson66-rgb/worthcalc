@@ -14,10 +14,9 @@ const deindexedPaths = new Set(deindexedRegistry.urls.map((url) => new URL(url).
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  // Complete five-language routing. Every released core route has a native
-  // EN, Traditional Chinese, Spanish, French, and German equivalent.
+  // Core shell remains five-language; staged editorial routes may add hi/ar.
   i18n: {
-    locales: ['en', 'zh', 'es', 'fr', 'de'],
+    locales: ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'],
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: true,

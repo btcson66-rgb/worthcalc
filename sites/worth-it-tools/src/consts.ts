@@ -21,30 +21,37 @@ export const SITE = {
 } as const;
 
 export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+export type ContentLocale = Locale | 'hi' | 'ar';
 export type CoreLocale = Locale;
 
 /** Every locale with at least one completed, indexable route. */
 export const LOCALES: Locale[] = ['en', 'zh', 'es', 'fr', 'de'];
+/** Locales currently supported by the staged editorial content programme. */
+export const CONTENT_LOCALES: ContentLocale[] = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
 /** Locales with a complete homepage, legal pages, and calculator catalogue. */
 export const CORE_LOCALES: CoreLocale[] = ['en', 'zh', 'es', 'fr', 'de'];
 export const DEFAULT_LOCALE: Locale = 'en';
 
 /** Human-readable language names for the language switcher. */
-export const LOCALE_LABELS: Record<Locale, string> = {
+export const LOCALE_LABELS: Record<ContentLocale, string> = {
   en: 'English',
   zh: '中文',
   es: 'Español',
   fr: 'Français',
   de: 'Deutsch',
+  hi: 'हिन्दी',
+  ar: 'العربية',
 };
 
 /** BCP-47 codes for the <html lang> attribute and hreflang. */
-export const LOCALE_HREFLANG: Record<Locale, string> = {
+export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
   en: 'en',
   zh: 'zh-Hant',
   es: 'es',
   fr: 'fr',
   de: 'de',
+  hi: 'hi',
+  ar: 'ar',
 };
 
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';

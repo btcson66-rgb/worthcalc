@@ -11,7 +11,7 @@
 //
 // 這個檔案由 `npm run generate:guide-index` 從 dist 產生，不要手改。
 
-import type { Locale } from '../consts';
+import type { ContentLocale } from '../consts';
 
 export interface GuideIndexEntry {
   /** 不含語系前綴的路徑，交給 localizedPath() 組。 */
@@ -19,13 +19,14 @@ export interface GuideIndexEntry {
   title: string;
 }
 
-export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
+export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
   en: [
     { path: '/guides/post-debt-payoff-lifestyle-creep/', title: 'After Debt Payoff: Stop Lifestyle Creep From Replacing the Payment You Just Eliminated' },
     { path: '/guides/ai-tool-realized-time-savings-break-even/', title: 'AI Tool ROI Without Fantasy Hours: Measure Realized Time Savings, Rework and Recoverable Value' },
     { path: '/guides/amortization-schedule-explained/', title: 'Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments' },
     { path: '/guides/annual-bills-cash-flow-low-point/', title: 'Annual Bills Cash-Flow Low Point: Build a 12-Month Calendar Before Insurance, Tuition, Taxes, and Renewals Hit' },
     { path: '/guides/annual-bills-monthly-equivalent/', title: 'Annual Bills to Monthly Budget: How to Normalize Irregular Expenses' },
+    { path: '/guides/annual-cost-savings-calculator/', title: 'Annual Cost Savings Calculator: Compare Real Savings After Fees, Waste, and Usage' },
     { path: '/annual-vs-monthly-billing/', title: 'Annual or Monthly Billing? The Breakeven Math on Subscription Discounts' },
     { path: '/guides/annual-vs-monthly-insurance-payment/', title: 'Annual vs. Monthly Insurance Payments: Compare Surcharges and Liquidity' },
     { path: '/guides/annual-plan-cancellation-risk-break-even/', title: 'Annual vs. Monthly Subscription: A Cancellation-Risk Break-Even Model' },
@@ -196,6 +197,7 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/price-per-wear-clothing-shoes/', title: '每次穿著成本怎麼算？用真實次數比較衣服和鞋子' },
     { path: '/guides/monthly-extra-vs-annual-lump-sum/', title: '每月多繳 vs 年底一次大額還款，哪個省利息？同樣一年 6 萬也會有時間差' },
     { path: '/guides/sinking-fund-by-deadline/', title: '目標基金每月要存多少？用期限反推 Sinking Fund，而不是臨到期才刷卡' },
+    { path: '/guides/annual-cost-savings-calculator/', title: '年度省下多少錢怎麼算？把手續費、耗損與實際使用算進來' },
     { path: '/guides/annual-expenses-monthly-equivalent/', title: '年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲' },
     { path: '/annual-vs-monthly-billing/', title: '年繳還是月繳？訂閱折扣的損益兩平算法' },
     { path: '/guides/annual-bill-cluster-cash-low-point/', title: '年繳帳單都擠在同一季怎麼辦？用年度現金最低點安排保險、稅費與會員續約' },
@@ -274,6 +276,7 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/subscription-creep/', title: 'Auditoría de suscripciones: calcula tu gasto anual real' },
     { path: '/bnpl-vs-credit-card-installments/', title: 'BNPL frente a cuotas de tarjeta: compara coste total, calendario e impago' },
     { path: '/snowball-vs-avalanche/', title: 'Bola de nieve o avalancha: por qué la tarjeta revolving va siempre primero' },
+    { path: '/guides/annual-cost-savings-calculator/', title: 'Calculadora de ahorro anual: compara el ahorro real tras comisiones y uso' },
     { path: '/home-vs-public-ev-charging-cost/', title: 'Carga en casa o pública: cuánto cuesta realmente recorrer un kilómetro en coche eléctrico' },
     { path: '/ev-vs-gas-total-cost/', title: 'Coche eléctrico o gasolina: cómo comparar el coste total de propiedad' },
     { path: '/new-vs-used-car-total-cost/', title: 'Coche nuevo o usado: comparar depreciación, reparaciones, financiación y reventa' },
@@ -389,5 +392,11 @@ export const guideIndex: Record<Locale, GuideIndexEntry[]> = {
     { path: '/annual-fee-card-breakeven/', title: 'Wie viel Umsatz gleicht die Jahresgebühr einer Kreditkarte aus?' },
     { path: '/how-compound-growth-works/', title: 'Zinseszins nach Steuern: Was von Ihren Kapitalerträgen nach Abgeltungsteuer wirklich übrig bleibt' },
     { path: '/home-vs-public-ev-charging-cost/', title: 'Zu Hause oder öffentlich laden: Was kostet ein E-Auto wirklich pro Kilometer?' },
+  ],
+  hi: [
+    { path: '/guides/annual-cost-savings-calculator/', title: 'वार्षिक बचत कैलकुलेटर: शुल्क और वास्तविक उपयोग के बाद असली बचत' },
+  ],
+  ar: [
+    { path: '/guides/annual-cost-savings-calculator/', title: 'حاسبة التوفير السنوي: احسب التوفير الحقيقي بعد الرسوم والاستخدام' },
   ],
 };

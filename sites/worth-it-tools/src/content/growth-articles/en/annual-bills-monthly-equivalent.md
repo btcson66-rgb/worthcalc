@@ -301,3 +301,5 @@ The framework is consistent with CFPB consumer budgeting guidance on irregular a
 - [Cash-Flow Buffer vs. Emergency Fund](/en/guides/cash-flow-buffer-vs-emergency-fund/)
 - [Savings Rate: Gross vs. Net](/en/savings-rate-gross-vs-net/)
 - [Budget Builder](/en/tools/budget-builder/)
+
+The new annual-cost comparison is also available in [हिन्दी](/hi/guides/annual-cost-savings-calculator/) and [العربية](/ar/guides/annual-cost-savings-calculator/) for readers comparing a plan change across languages.

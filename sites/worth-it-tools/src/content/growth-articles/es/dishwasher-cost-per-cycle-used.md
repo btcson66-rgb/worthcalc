@@ -30,7 +30,7 @@ Los criterios de ENERGY STAR describen límites de energía y agua, pero las tar
 
 ## Errores comunes y guías relacionadas
 
-Para otros costes unitarios, compara la [guía de gas](/es/guides/natural-gas-cost-per-therm-used/), la [guía de electricidad](/es/guides/electricity-cost-per-kwh-used/) y la [guía de agua](/es/guides/water-bill-cost-per-gallon-used/). La [guía de colada](/es/guides/laundry-cost-per-load/) muestra otro divisor de uso terminado.
+Para otros costes unitarios, compara la [guía de gas](/es/guides/natural-gas-cost-per-therm-used/), la [guía de electricidad](/es/guides/electricity-cost-per-kwh-used/), la [guía de agua](/es/guides/water-bill-cost-per-gallon-used/) y la [guía de secadora](/es/guides/clothes-dryer-cost-per-load-used/). La [guía de colada](/es/guides/laundry-cost-per-load/) muestra otro divisor de uso terminado.
 
 Si sube el coste mensual, compara ciclos, carga, programa, secado y tarifas antes de atribuirlo al aparato. No uses la estimación anual del fabricante como tu coste real por uso.
 

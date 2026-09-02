@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/slow-cooker-cost-per-cooking-hour-used/#article",
+      "headline": "Coste de la olla de cocción lenta por hora",
+      "description": "Coste de la olla de cocción lenta por hora: estima la electricidad con la rutina medida, minutos reales, tamaño de tanda y tarifa entregada, no con vatios nominales como coste universal.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/slow-cooker-cost-per-cooking-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la olla de cocción lenta por hora",
+          "item": "https://worthcalc.win/es/guides/slow-cooker-cost-per-cooking-hour-used/"
+        }
+      ]
+    }
+  ]
+}

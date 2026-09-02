@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/blender-cost-per-blending-session-used/#article",
+      "headline": "果汁／調理機每次攪拌成本",
+      "description": "果汁／調理機每次攪拌成本：用實測流程、實際分鐘、批次大小與已交付費率估算電費，不要把銘牌瓦數直接當通用單次成本。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/blender-cost-per-blending-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "果汁／調理機每次攪拌成本",
+          "item": "https://worthcalc.win/zh/guides/blender-cost-per-blending-session-used/"
+        }
+      ]
+    }
+  ]
+}

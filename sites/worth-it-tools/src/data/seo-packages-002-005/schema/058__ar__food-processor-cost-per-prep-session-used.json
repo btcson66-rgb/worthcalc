@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/food-processor-cost-per-prep-session-used/#article",
+      "headline": "تكلفة محضرة الطعام لكل جلسة تجهيز",
+      "description": "تكلفة محضرة الطعام لكل جلسة تجهيز: قدّر الكهرباء من الروتين المقاس والدقائق والحجم والتعرفة المسلّمة، ولا تجعل القدرة الاسمية تكلفة دورة عامة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/food-processor-cost-per-prep-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة محضرة الطعام لكل جلسة تجهيز",
+          "item": "https://worthcalc.win/ar/guides/food-processor-cost-per-prep-session-used/"
+        }
+      ]
+    }
+  ]
+}

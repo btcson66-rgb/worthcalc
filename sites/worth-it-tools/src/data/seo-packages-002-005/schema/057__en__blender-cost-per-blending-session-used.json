@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/blender-cost-per-blending-session-used/#article",
+      "headline": "Blender Cost Per Blending Session Used",
+      "description": "Blender Cost Per Blending Session Used: estimate electricity from the measured routine, actual minutes, batch size, and delivered rate instead of treating the nameplate wattage as a universal cycle cost.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/blender-cost-per-blending-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blender Cost Per Blending Session Used",
+          "item": "https://worthcalc.win/en/guides/blender-cost-per-blending-session-used/"
+        }
+      ]
+    }
+  ]
+}

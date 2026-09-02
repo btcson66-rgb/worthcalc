@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/solar-inverter-electricity-cost-per-monitoring-day-used/#article",
+      "headline": "Coste eléctrico del inversor solar por día de monitorización: separa espera y conversión",
+      "description": "Calcula el coste diario de monitorización separando espera nocturna, conversión diurna, comunicaciones y equipos auxiliares.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/solar-inverter-electricity-cost-per-monitoring-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico del inversor solar por día de monitorización: separa espera y conversión",
+          "item": "https://worthcalc.win/es/guides/solar-inverter-electricity-cost-per-monitoring-day-used/"
+        }
+      ]
+    }
+  ]
+}

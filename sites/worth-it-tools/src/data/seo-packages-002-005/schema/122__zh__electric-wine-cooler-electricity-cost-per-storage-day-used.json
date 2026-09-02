@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/#article",
+      "headline": "酒櫃每天保存電費：把壓縮機循環算進 24 小時",
+      "description": "以實測 kWh、壓縮機啟停、設定溫度與已交付電力費率，估算酒櫃每個使用中保存日的電費。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "酒櫃每天保存電費：把壓縮機循環算進 24 小時",
+          "item": "https://worthcalc.win/zh/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/"
+        }
+      ]
+    }
+  ]
+}

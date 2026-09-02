@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-toothbrush-electricity-cost-per-charging-day-used/#article",
+      "headline": "تكلفة كهرباء فرشاة الأسنان لكل يوم شحن: أدرج استعداد القاعدة",
+      "description": "قِس قاعدة شحن فرشاة الأسنان والشاحن وفترة الاستعداد لتقدير التكلفة لكل يوم شحن.",
+      "inLanguage": "ar",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/ar/guides/electric-toothbrush-electricity-cost-per-charging-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة كهرباء فرشاة الأسنان لكل يوم شحن: أدرج استعداد القاعدة",
+          "item": "https://worthcalc.win/ar/guides/electric-toothbrush-electricity-cost-per-charging-day-used/"
+        }
+      ]
+    }
+  ]
+}

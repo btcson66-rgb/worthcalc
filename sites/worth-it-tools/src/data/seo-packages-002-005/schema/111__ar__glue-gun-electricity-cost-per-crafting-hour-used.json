@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/glue-gun-electricity-cost-per-crafting-hour-used/#article",
+      "headline": "تكلفة مسدس الغراء لكل ساعة حرفة: افصل الحرارة والخمول",
+      "description": "قدّر تكلفة مسدس الغراء الساخن لكل ساعة حرفة من قياس التسخين ودورات الحرارة والخمول.",
+      "inLanguage": "ar",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/ar/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مسدس الغراء لكل ساعة حرفة: افصل الحرارة والخمول",
+          "item": "https://worthcalc.win/ar/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+        }
+      ]
+    }
+  ]
+}

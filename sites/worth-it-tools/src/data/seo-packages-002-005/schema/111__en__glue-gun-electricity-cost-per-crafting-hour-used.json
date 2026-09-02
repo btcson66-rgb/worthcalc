@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/glue-gun-electricity-cost-per-crafting-hour-used/#article",
+      "headline": "Glue Gun Electricity Cost Per Crafting Hour Used: Separate Heat and Idle",
+      "description": "Estimate hot-glue-gun electricity cost per crafting hour from warm-up, heating, and idle measurements.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/en/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Glue Gun Electricity Cost Per Crafting Hour Used: Separate Heat and Idle",
+          "item": "https://worthcalc.win/en/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+        }
+      ]
+    }
+  ]
+}

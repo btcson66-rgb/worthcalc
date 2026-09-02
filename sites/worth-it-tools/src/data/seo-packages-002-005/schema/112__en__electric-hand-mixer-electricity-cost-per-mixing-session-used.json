@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/#article",
+      "headline": "Electric Hand Mixer Electricity Cost Per Mixing Session Used: Count Speed",
+      "description": "Calculate electric hand-mixer cost per mixing session from speed, motor runtime, and standby boundaries.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/en/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Hand Mixer Electricity Cost Per Mixing Session Used: Count Speed",
+          "item": "https://worthcalc.win/en/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/"
+        }
+      ]
+    }
+  ]
+}

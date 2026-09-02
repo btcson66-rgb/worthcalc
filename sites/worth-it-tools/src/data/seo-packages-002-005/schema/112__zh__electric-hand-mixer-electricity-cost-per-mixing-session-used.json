@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/#article",
+      "headline": "手持電動打蛋器每次攪拌工作電費：按檔位與批次分攤",
+      "description": "依檔位、馬達運轉時間與插電閒置，計算手持電動打蛋器每次攪拌的實際電費。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/zh/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "手持電動打蛋器每次攪拌工作電費：按檔位與批次分攤",
+          "item": "https://worthcalc.win/zh/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/"
+        }
+      ]
+    }
+  ]
+}

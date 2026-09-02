@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-shaver-electricity-cost-per-grooming-session-used/#article",
+      "headline": "電動刮鬍刀每次修容電費：把清潔與充電分攤",
+      "description": "分開馬達、清潔循環與充電，估算電動刮鬍刀每次修容的實際電費。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/zh/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動刮鬍刀每次修容電費：把清潔與充電分攤",
+          "item": "https://worthcalc.win/zh/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+        }
+      ]
+    }
+  ]
+}

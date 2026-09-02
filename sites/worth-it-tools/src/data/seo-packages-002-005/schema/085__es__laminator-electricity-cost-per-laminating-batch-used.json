@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/laminator-electricity-cost-per-laminating-batch-used/#article",
+      "headline": "Coste eléctrico de una plastificadora por lote: incluye el calentamiento",
+      "description": "Estima el coste eléctrico de una plastificadora por lote con energía medida de calentamiento, rodillos, enfriamiento y espera, separando fundas y hojas rechazadas.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/laminator-electricity-cost-per-laminating-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de una plastificadora por lote: incluye el calentamiento",
+          "item": "https://worthcalc.win/es/guides/laminator-electricity-cost-per-laminating-batch-used/"
+        }
+      ]
+    }
+  ]
+}

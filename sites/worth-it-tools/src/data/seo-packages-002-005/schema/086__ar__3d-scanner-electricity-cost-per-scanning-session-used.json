@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/#article",
+      "headline": "تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب",
+      "description": "احسب تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة من طاقة الماسح والحاسوب والمعايرة والاستعداد المقاسة، مع فصل المعالجة والبرمجيات.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب",
+          "item": "https://worthcalc.win/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/"
+        }
+      ]
+    }
+  ]
+}

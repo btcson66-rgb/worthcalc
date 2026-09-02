@@ -1,0 +1,47 @@
+---
+contentType: article
+articleSlug: "electric-standing-desk-electricity-cost-per-adjusted-day-used"
+locale: "ar"
+title: "تكلفة المكتب الكهربائي لكل يوم ضبط: أدرج المحرك والاستعداد"
+description: "قدّر تكلفة كهرباء المكتب القابل للرفع لكل يوم ضبط من طاقة حركات المحرك ووحدة التحكم والاستعداد المقاسة، مع فصل الشاشة والحاسوب."
+relatedTool: "/ar/tools/budget-builder/"
+canonical: "https://worthcalc.win/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
+lastReviewed: "2026-09-03"
+draft: false
+---
+
+# تكلفة المكتب الكهربائي لكل يوم ضبط: أدرج المحرك والاستعداد
+
+> **الخلاصة:** قدّر تكلفة كهرباء المكتب القابل للرفع لكل يوم ضبط من طاقة حركات المحرك ووحدة التحكم والاستعداد المقاسة، مع فصل الشاشة والحاسوب. This is a cost estimate, not a savings, product-performance, ranking, or household-outcome guarantee.
+
+## ما الذي يغيّر النتيجة
+
+المكتب الكهربائي القابل للرفع cost per يوم ضبط starts with a declared wall-meter boundary. حدّد البداية والنهاية بقراءة معلنة من عداد الحائط. سجّل حالة الجهاز والحمل والملحقات والوحدة المكتملة والتعرفة وتاريخ القياس. تصلح القدرة الاسمية لتخطيط الاختبار لكنها لا تستبدل قراءة قابلة للتكرار.
+
+قد يعمل المحرك ثواني فقط بينما تبقى وحدة التحكم موصولة طوال اليوم. عرّف يوم الضبط الذي تقارنه ولا تحوّل قياس المكتب وحده إلى تقدير محطة العمل.
+
+## الصيغة ومثال عملي
+
+تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم الثابتة والضرائب والمواد والصيانة والاشتراكات وحمل الحاسوب أو الشبكة خارج البسط ما لم يشملها الحد المعلن. قراءة المكتب وحده 0.018 kWh بسعر 0.18 تعطي 0.00324 ليوم الضبط. أضف الشاشة أو الحاسوب المقاس منفصلاً فقط عند حساب الإعداد الكامل.
+
+Do not multiply a rated wattage by the whole elapsed period unless the wall meter confirms that load. If a computer, display, network device, charger, or accessory is present, measure it separately before combining boundaries.
+
+## قارن حالات الاستخدام
+
+قارن دون حركة وضبطاً صباحياً عادياً وتغييرات متكررة. سجّل الحمل والحركات وأحداث منع الاصطدام وحالة التحكم ونافذة الاستعداد.
+
+أدلة مرتبطة: [تكلفة مكبر الصوت الذكي لكل ساعة استماع: افصل التشغيل والاستعداد](/ar/guides/smart-speaker-electricity-cost-per-listening-hour-used/), [تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد](/ar/guides/label-maker-electricity-cost-per-labeling-session-used/), [تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك](/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/), and [تكلفة كهرباء آلة التغليف لكل دفعة: أدرج التسخين](/ar/guides/laminator-electricity-cost-per-laminating-batch-used/). They answer different unit-cost questions, so choose the denominator and boundary before comparing.
+
+## الحدود والأخطاء الشائعة
+
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث جلسات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. The estimate is not a promise of savings, performance, or household results.
+
+## الأسئلة الشائعة
+
+### هل المكتب مصروف كهرباء مهم؟ قِس قبل الحكم؛ حركة المحرك القصيرة ومحطة العمل المتصلة حدّان مختلفان.
+
+هل المكتب مصروف كهرباء مهم؟ قِس قبل الحكم؛ حركة المحرك القصيرة ومحطة العمل المتصلة حدّان مختلفان. For comparison, keep the same measurement boundary and tariff date.
+
+## قراءة المصادر
+
+لسياق التعرفة راجع [أسئلة EIA عن سعر الكهرباء المسلّمة](https://www.eia.gov/tools/faqs/faq.php?id=507) و[نظرة EIA على كهرباء المنازل](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php). تقدّم صفحتا [ENERGY STAR للحواسيب](https://www.energystar.gov/products/computers) و[معدات التصوير](https://www.energystar.gov/products/imaging_equipment) سياق الفئة وإدارة الطاقة، ولا تضمنان أداء هذا الجهاز. يساعد [دليل الإنفاق CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) على اعتبار القياس مدخلاً واحداً للقرار المنزلي.

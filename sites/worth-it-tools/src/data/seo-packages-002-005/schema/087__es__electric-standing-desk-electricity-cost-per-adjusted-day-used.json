@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/#article",
+      "headline": "Coste eléctrico de un escritorio elevable por día: incluye motor y espera",
+      "description": "Estima el coste eléctrico de un escritorio elevable por día con energía medida de movimientos, controlador y espera, separando monitor y ordenador.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de un escritorio elevable por día: incluye motor y espera",
+          "item": "https://worthcalc.win/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
+        }
+      ]
+    }
+  ]
+}

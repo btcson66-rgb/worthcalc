@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/label-maker-electricity-cost-per-labeling-session-used/#article",
+      "headline": "標籤機每次工作電費：計入預熱與待機",
+      "description": "用預熱、列印、裁切與待機的實測能源，估算標籤機每次工作電費；標籤帶與失敗標籤另列。",
+      "inLanguage": "zh-Hant",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/label-maker-electricity-cost-per-labeling-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "標籤機每次工作電費：計入預熱與待機",
+          "item": "https://worthcalc.win/zh/guides/label-maker-electricity-cost-per-labeling-session-used/"
+        }
+      ]
+    }
+  ]
+}

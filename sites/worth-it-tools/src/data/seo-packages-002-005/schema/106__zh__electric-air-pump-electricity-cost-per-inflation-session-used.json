@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-air-pump-electricity-cost-per-inflation-session-used/#article",
+      "headline": "電動充氣泵每次充氣工作電費：計入壓力停止與重試",
+      "description": "用馬達、壓力停止、氣管與重試的實測能源估算電動充氣泵每次充氣工作電費。",
+      "inLanguage": "zh-Hant",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動充氣泵每次充氣工作電費：計入壓力停止與重試",
+          "item": "https://worthcalc.win/zh/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+        }
+      ]
+    }
+  ]
+}

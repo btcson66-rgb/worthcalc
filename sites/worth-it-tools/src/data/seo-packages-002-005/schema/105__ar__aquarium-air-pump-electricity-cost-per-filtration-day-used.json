@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/#article",
+      "headline": "تكلفة مضخة هواء الحوض لكل يوم ترشيح: أدرج الضغط العكسي",
+      "description": "احسب تكلفة مضخة هواء الحوض لكل يوم ترشيح من طاقة المضخة والحجر والأنبوب والمؤقت المقاسة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مضخة هواء الحوض لكل يوم ترشيح: أدرج الضغط العكسي",
+          "item": "https://worthcalc.win/ar/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
+        }
+      ]
+    }
+  ]
+}

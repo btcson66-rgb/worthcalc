@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/#article",
+      "headline": "Aquarium Air Pump Electricity Cost Per Filtration Day Used: Include Back Pressure",
+      "description": "Calculate aquarium air pump electricity cost per filtration day from measured pump, air stone, tubing, and timer energy.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aquarium Air Pump Electricity Cost Per Filtration Day Used: Include Back Pressure",
+          "item": "https://worthcalc.win/en/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
+        }
+      ]
+    }
+  ]
+}

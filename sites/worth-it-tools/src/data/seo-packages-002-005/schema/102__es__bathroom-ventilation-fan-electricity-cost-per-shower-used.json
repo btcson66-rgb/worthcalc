@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/#article",
+      "headline": "Coste del extractor de baño por ducha: incluye el temporizador posterior",
+      "description": "Calcula el coste del extractor por ducha con energía medida de ventilador, luz, sensor de humedad y tiempo posterior.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del extractor de baño por ducha: incluye el temporizador posterior",
+          "item": "https://worthcalc.win/es/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/"
+        }
+      ]
+    }
+  ]
+}

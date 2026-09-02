@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-citrus-juicer-cost-per-juice-session-used/#article",
+      "headline": "تكلفة عصارة الحمضيات لكل جلسة: قِس وقت الضغط والمحرك",
+      "description": "احسب تكلفة عصارة الحمضيات لكل جلسة من زمن المحرك المقاس وعدد الثمار المعصورة، مع فصل الفاكهة والمخلفات والغسل عن الكهرباء.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة عصارة الحمضيات لكل جلسة: قِس وقت الضغط والمحرك",
+          "item": "https://worthcalc.win/ar/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/countertop-ice-maker-cost-per-batch-used/#article",
+      "headline": "Countertop ice maker cost per batch used: include freeze and hold time",
+      "description": "Freeze, harvest और hold की measured energy से countertop ice maker cost per batch निकालें और electricity, water, cleaning व output weight अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/countertop-ice-maker-cost-per-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Countertop ice maker cost per batch used: include freeze and hold time",
+          "item": "https://worthcalc.win/hi/guides/countertop-ice-maker-cost-per-batch-used/"
+        }
+      ]
+    }
+  ]
+}

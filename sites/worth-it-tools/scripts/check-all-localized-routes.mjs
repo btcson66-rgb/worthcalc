@@ -130,6 +130,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/electric-egg-cooker-cost-per-cooking-cycle-used',
   'guides/electric-lunch-box-cost-per-heating-cycle-used',
   'guides/electric-can-opener-cost-per-use-used',
+  'guides/countertop-ice-maker-cost-per-batch-used',
+  'guides/electric-citrus-juicer-cost-per-juice-session-used',
+  'guides/electric-meat-grinder-cost-per-grinding-session-used',
+  'guides/electric-pasta-maker-cost-per-batch-used',
+  'guides/electric-milk-frother-cost-per-frothing-session-used',
+  'guides/electric-food-warmer-cost-per-heating-hour-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

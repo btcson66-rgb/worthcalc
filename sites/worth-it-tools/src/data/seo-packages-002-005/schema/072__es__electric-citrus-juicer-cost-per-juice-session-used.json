@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-citrus-juicer-cost-per-juice-session-used/#article",
+      "headline": "Coste del exprimidor eléctrico por sesión de zumo",
+      "description": "Calcula el coste eléctrico de un exprimidor por sesión con el tiempo medido del motor y las frutas exprimidas, separando fruta, residuos y lavado.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del exprimidor eléctrico por sesión de zumo",
+          "item": "https://worthcalc.win/es/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+        }
+      ]
+    }
+  ]
+}

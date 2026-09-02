@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/electric-citrus-juicer-cost-per-juice-session-used/#article",
+      "headline": "Electric citrus juicer cost per juice session used: measure pressing time",
+      "description": "Measured motor runtime और pressed fruits की संख्या से electric citrus juicer cost per session निकालें; fruit, pulp disposal और washing अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric citrus juicer cost per juice session used: measure pressing time",
+          "item": "https://worthcalc.win/hi/guides/electric-citrus-juicer-cost-per-juice-session-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -112,6 +112,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/coffee-maker-cost-per-brew-used',
   'guides/hair-dryer-cost-per-drying-session-used',
   'guides/garment-steamer-cost-per-steaming-hour-used',
+  'guides/air-fryer-cost-per-cooking-cycle-used',
+  'guides/rice-cooker-cost-per-cooking-cycle-used',
+  'guides/slow-cooker-cost-per-cooking-hour-used',
+  'guides/toaster-cost-per-use-used',
+  'guides/blender-cost-per-blending-session-used',
+  'guides/food-processor-cost-per-prep-session-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

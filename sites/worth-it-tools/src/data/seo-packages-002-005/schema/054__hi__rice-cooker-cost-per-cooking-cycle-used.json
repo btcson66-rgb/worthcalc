@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/rice-cooker-cost-per-cooking-cycle-used/#article",
+      "headline": "Rice cooker cost per cooking cycle used",
+      "description": "Rice cooker cost per cooking cycle used: measured routine, actual minutes, batch size और delivered rate से electricity estimate करें; nameplate watts universal cycle cost नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/rice-cooker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Rice cooker cost per cooking cycle used",
+          "item": "https://worthcalc.win/hi/guides/rice-cooker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

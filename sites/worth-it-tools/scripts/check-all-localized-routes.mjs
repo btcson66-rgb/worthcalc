@@ -124,6 +124,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/electric-griddle-cost-per-cooking-hour-used',
   'guides/stand-mixer-cost-per-mixing-session-used',
   'guides/espresso-machine-cost-per-shot-used',
+  'guides/bread-maker-cost-per-loaf-used',
+  'guides/food-dehydrator-cost-per-drying-hour-used',
+  'guides/electric-yogurt-maker-cost-per-batch-used',
+  'guides/electric-egg-cooker-cost-per-cooking-cycle-used',
+  'guides/electric-lunch-box-cost-per-heating-cycle-used',
+  'guides/electric-can-opener-cost-per-use-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-can-opener-cost-per-use-used/#article",
+      "headline": "تكلفة فتاحة العلب الكهربائية لكل استخدام: قِس وقت المحرك",
+      "description": "احسب تكلفة فتاحة العلب الكهربائية لكل استخدام من قراءة العداد أثناء القطع الفعلي، وأدرج إعادة التشغيل فقط إذا كانت طبيعية في الاستخدام.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/electric-can-opener-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة فتاحة العلب الكهربائية لكل استخدام: قِس وقت المحرك",
+          "item": "https://worthcalc.win/ar/guides/electric-can-opener-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

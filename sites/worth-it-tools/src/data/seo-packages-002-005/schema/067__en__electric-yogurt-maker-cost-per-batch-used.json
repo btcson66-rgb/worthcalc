@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-yogurt-maker-cost-per-batch-used/#article",
+      "headline": "Electric Yogurt Maker Cost Per Batch Used: Include Incubation Hours",
+      "description": "Estimate electric yogurt maker cost per batch by measuring the incubating heater cycle and dividing electricity by the actual finished batch, while keeping milk, starter, and refrigeration separate.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-yogurt-maker-cost-per-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Yogurt Maker Cost Per Batch Used: Include Incubation Hours",
+          "item": "https://worthcalc.win/en/guides/electric-yogurt-maker-cost-per-batch-used/"
+        }
+      ]
+    }
+  ]
+}

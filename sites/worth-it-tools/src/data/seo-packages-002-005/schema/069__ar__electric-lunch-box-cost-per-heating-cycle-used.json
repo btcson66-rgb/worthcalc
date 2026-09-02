@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/#article",
+      "headline": "تكلفة علبة الطعام الكهربائية لكل دورة تسخين: افصل التسخين والانتظار",
+      "description": "قدّر تكلفة علبة الطعام الكهربائية لكل دورة من طاقة الحائط المقاسة للوجبة والحمل ووقت التسخين والاحتفاظ، لا من قدرة المحول الاسمية.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة علبة الطعام الكهربائية لكل دورة تسخين: افصل التسخين والانتظار",
+          "item": "https://worthcalc.win/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

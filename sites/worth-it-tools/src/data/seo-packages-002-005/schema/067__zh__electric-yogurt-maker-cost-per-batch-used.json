@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-yogurt-maker-cost-per-batch-used/#article",
+      "headline": "電動優格機每批成本：把發酵保溫時間算進來",
+      "description": "量測優格機發酵期間的加熱循環，再按實際完成的批量分攤電費；牛奶、菌種與冷藏另列。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-yogurt-maker-cost-per-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動優格機每批成本：把發酵保溫時間算進來",
+          "item": "https://worthcalc.win/zh/guides/electric-yogurt-maker-cost-per-batch-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -44,4 +44,6 @@ draft: false
 
 كيف أحسب تكلفة الإنترنت الحقيقية؟ اجمع الرسوم الفعلية للدورة، واطرح الخصومات التي خفضت الفاتورة فعلاً، ثم اقسم على الجيجابايت المسجلة للدورة. أعد الحساب بعد انتهاء العرض أو تغيير الخطة.
 
+للمقارنة مع تكلفة الاستخدام المكتمل، راجع [دليل تكلفة الغسيل لكل حمولة](/ar/guides/laundry-cost-per-load/).
+
 مصادر للقراءة: [FCC Broadband Consumer Labels](https://www.fcc.gov/broadbandlabels) و [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). توفر FCC وCFPB سياقاً لفحص الرسوم الفعلية ولا تحددان سعراً منزلياً عاماً أو تضمنان نتيجة.

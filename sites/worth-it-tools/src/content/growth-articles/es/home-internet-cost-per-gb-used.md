@@ -44,4 +44,6 @@ No. Precio, uso, necesidades de velocidad y condiciones varían. Usa tu factura 
 
 ¿Cómo calculo el coste real de internet? Suma los cargos del ciclo, resta descuentos que redujeron la factura y divide por los GB registrados. Recalcula al terminar la promoción o cambiar el plan.
 
+Para otra comparación de uso terminado, consulta la [guía de coste de la colada por carga](/es/guides/laundry-cost-per-load/).
+
 Fuentes para consultar: [FCC Broadband Consumer Labels](https://www.fcc.gov/broadbandlabels) y [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). FCC y CFPB aportan contexto para revisar cargos reales; no fijan un precio doméstico universal ni garantizan un resultado.

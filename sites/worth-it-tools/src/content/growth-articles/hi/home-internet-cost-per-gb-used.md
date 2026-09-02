@@ -44,4 +44,6 @@ Fixed charges और actual usage अलग लिखें और allowance, pr
 
 Real home internet cost कैसे निकालें? Billing cycle के actual charges जोड़ें, bill घटाने वाले discounts घटाएँ और उसी cycle के recorded GB से divide करें। Promotion खत्म या plan बदलने पर फिर calculate करें।
 
+Completed-use comparison के लिए [laundry cost per load guide](/hi/guides/laundry-cost-per-load/) देखें।
+
 स्रोत पढ़ें: [FCC Broadband Consumer Labels](https://www.fcc.gov/broadbandlabels) और [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). FCC और CFPB actual charges check करने का context देते हैं; universal household price या guaranteed result नहीं देते।

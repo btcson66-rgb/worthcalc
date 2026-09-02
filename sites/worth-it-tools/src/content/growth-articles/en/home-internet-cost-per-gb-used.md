@@ -44,4 +44,6 @@ No. Price, usage, speed needs, and terms vary. Use your own bill and keep light,
 
 How do I calculate the real cost of home internet? Add the charges that apply in the billing cycle, subtract discounts that actually reduce the bill, and divide by the GB recorded for that cycle. Recalculate after the introductory period or a plan change.
 
+For a completed-use comparison, see the [laundry cost per load guide](/en/guides/laundry-cost-per-load/).
+
 Source reading: [FCC Broadband Consumer Labels](https://www.fcc.gov/broadbandlabels) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). FCC and CFPB provide consumer context for checking actual charges; they do not set a universal household price or guarantee a result.

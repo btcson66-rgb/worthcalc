@@ -44,4 +44,6 @@ FCC 的寬頻標籤會呈現價格、促銷期間、資料額度、效能與額�
 
 家用網路實際成本怎麼算？加總該帳單週期實際收取的費用，扣除真正降低帳單的折扣，再除以同一週期記錄的 GB。促銷結束或方案改變時重新計算。
 
+若要比較另一種實際完成使用的成本，可閱讀［每洗一桶衣物成本指南](/zh/guides/laundry-cost-per-load/)。
+
 來源閱讀: [FCC Broadband Consumer Labels](https://www.fcc.gov/broadbandlabels) 與 [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). FCC 與 CFPB 提供核對實際收費的消費者背景，不提供通用家庭價格，也不保證結果。

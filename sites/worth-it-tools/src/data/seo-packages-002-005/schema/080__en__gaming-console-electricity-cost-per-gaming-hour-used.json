@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/gaming-console-electricity-cost-per-gaming-hour-used/#article",
+      "headline": "Gaming Console Electricity Cost Per Gaming Hour Used: Include Display and Network Boundaries",
+      "description": "Calculate gaming console electricity cost per gaming hour from measured console, display, and accessory energy, making the boundary clear instead of treating the console rating as the whole setup.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/gaming-console-electricity-cost-per-gaming-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Gaming Console Electricity Cost Per Gaming Hour Used: Include Display and Network Boundaries",
+          "item": "https://worthcalc.win/en/guides/gaming-console-electricity-cost-per-gaming-hour-used/"
+        }
+      ]
+    }
+  ]
+}

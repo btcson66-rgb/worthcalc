@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/scanner-electricity-cost-per-scanning-session-used/#article",
+      "headline": "تكلفة كهرباء الماسح لكل جلسة: احسب المصباح والاستعداد",
+      "description": "احسب تكلفة الماسح لكل جلسة من طاقة التنبيه والمصباح والتغذية والاستعداد المقاسة، ثم اقسمها على الصفحات أو المستندات الملتقطة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/scanner-electricity-cost-per-scanning-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة كهرباء الماسح لكل جلسة: احسب المصباح والاستعداد",
+          "item": "https://worthcalc.win/ar/guides/scanner-electricity-cost-per-scanning-session-used/"
+        }
+      ]
+    }
+  ]
+}

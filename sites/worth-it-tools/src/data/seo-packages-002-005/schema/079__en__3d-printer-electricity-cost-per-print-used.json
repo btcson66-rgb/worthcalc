@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/3d-printer-electricity-cost-per-print-used/#article",
+      "headline": "3D Printer Electricity Cost Per Print Used: Allocate Heat-Up and Print Runtime",
+      "description": "Estimate 3D printer electricity cost per completed print from measured bed, nozzle, motors, and cooling energy, while keeping filament, failed prints, and post-processing separate.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/3d-printer-electricity-cost-per-print-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "3D Printer Electricity Cost Per Print Used: Allocate Heat-Up and Print Runtime",
+          "item": "https://worthcalc.win/en/guides/3d-printer-electricity-cost-per-print-used/"
+        }
+      ]
+    }
+  ]
+}

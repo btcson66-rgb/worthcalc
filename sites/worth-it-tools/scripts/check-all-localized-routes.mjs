@@ -136,6 +136,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/electric-pasta-maker-cost-per-batch-used',
   'guides/electric-milk-frother-cost-per-frothing-session-used',
   'guides/electric-food-warmer-cost-per-heating-hour-used',
+  'guides/printer-electricity-cost-per-print-job-used',
+  'guides/scanner-electricity-cost-per-scanning-session-used',
+  'guides/3d-printer-electricity-cost-per-print-used',
+  'guides/gaming-console-electricity-cost-per-gaming-hour-used',
+  'guides/soundbar-electricity-cost-per-watched-hour-used',
+  'guides/desktop-speakers-electricity-cost-per-listening-hour-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

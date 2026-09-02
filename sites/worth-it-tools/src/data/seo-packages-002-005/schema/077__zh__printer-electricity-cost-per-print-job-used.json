@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/printer-electricity-cost-per-print-job-used/#article",
+      "headline": "印表機每次列印工作電費：計入預熱與待機",
+      "description": "用預熱、列印與工作後待機的實測能源，估算印表機每次列印工作電費；紙張、墨水、碳粉與重印另列。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/printer-electricity-cost-per-print-job-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "印表機每次列印工作電費：計入預熱與待機",
+          "item": "https://worthcalc.win/zh/guides/printer-electricity-cost-per-print-job-used/"
+        }
+      ]
+    }
+  ]
+}

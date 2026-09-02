@@ -1,0 +1,43 @@
+---
+contentType: article
+articleSlug: "true-cost-of-buy-now-pay-later"
+locale: "zh"
+title: "先買後付的真實成本：把費用、扣款時間與付款風險算進去"
+description: "BNPL 真實成本是商品現金價格加上所有確定費用與延遲付款後果；零利息不等於沒有成本，也不等於現金流安全。"
+relatedTool: "/zh/tools/budget-builder/"
+canonical: "https://worthcalc.win/zh/guides/true-cost-of-buy-now-pay-later/"
+lastReviewed: "2026-09-02"
+draft: false
+---
+
+# 先買後付的真實成本：把費用、扣款時間與付款風險算進去
+
+> **先說結論:** BNPL 真實成本是商品現金價格加上所有確定費用與延遲付款後果；零利息不等於沒有成本，也不等於現金流安全。
+
+## 先收集真正會影響決策的數字
+
+記下現金價格、各期扣款日、開辦費或逾期費、退款規則、其他同時存在的分期，以及必須保留的最低現金水位。 CFPB 將 BNPL 說明為通常分四期或更少的分期貸款，並提醒查看費用。應使用實際合約，不要套用供應商的通用假設。
+
+## 公式與實例
+
+BNPL 淨成本＝現金價格＋確定費用＋情境逾期費－確定折扣。流動性風險要另外看：四筆小額扣款仍可能和房租、帳單或其他購買重疊。 400 元商品分 4 期、每期 100 元且無利息；若一次逾期費 15 元，下行情境現金成本就是 415 元。若同兩週已有其他分期 180 元，問題是扣款重疊，不是 APR。
+
+## 用情境而不是單一答案
+
+CFPB 將 BNPL 說明為通常分四期或更少的分期貸款，並提醒查看費用。應使用實際合約，不要套用供應商的通用假設。 不要用先買後付把負擔不起的商品偽裝成負擔得起。先排出付款日曆，再測試一次漏付款情境。 Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation.
+
+## 常見誤區與下一步
+
+不要把理論上限、促銷標語或你本來不會購買的利益算進去。請依目前條款確認費用、排除項目、退款與時間點。 The [年度成本指南](/zh/guides/annual-cost-savings-calculator/) provides the broader twelve-month comparison. Related decisions: [週期性成本年度總額](/zh/guides/recurring-costs-annual-total/) and [同群組延伸頁面](/zh/guides/true-cost-of-convenience-delivery/).
+
+## FAQ
+
+### 這個結果能直接套用到所有人嗎？
+
+不一定。價格、使用量、保障、稅費、時間與合約條款都可能不同。請用自己的紀錄取代範例數字，並保留低、基準、高三種情境。
+
+### 最重要的檢查是什麼？
+
+四期零利息就等於免費嗎？不一定。費用、逾期後果、退款處理與現金流壓力都要算入。 若條款或使用量改變，請重新計算。
+
+來源閱讀: [consumer guidance](https://www.consumerfinance.gov/ask-cfpb/what-is-a-buy-now-pay-later-bnpl-loan-en-2119/) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). 這些連結用來核對實際成本背景，不提供通用價格，也不保證任何結果。

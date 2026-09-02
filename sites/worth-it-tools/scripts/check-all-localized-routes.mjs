@@ -50,6 +50,13 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/costco-reward-exclusion-effective-rate',
   'guides/costco-reward-cap-usage-break-even',
   'guides/costco-renewal-refund-reward-timing',
+  'guides/true-cost-of-convenience-delivery',
+  'guides/true-cost-of-free-shipping-threshold',
+  'guides/true-cost-of-extended-warranty',
+  'guides/true-cost-of-buy-now-pay-later',
+  'guides/true-cost-of-rental-car',
+  'guides/true-cost-of-home-service-plan',
+  'guides/true-cost-of-upgrade-feature',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

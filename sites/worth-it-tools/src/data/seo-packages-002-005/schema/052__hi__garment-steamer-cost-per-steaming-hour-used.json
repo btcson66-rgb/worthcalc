@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/garment-steamer-cost-per-steaming-hour-used/#article",
+      "headline": "Garment steamer cost per steaming hour used: heat-up और steam duty time गिनें",
+      "description": "Measured wall kWh, heat-up, active steam, pauses और delivered electricity tariff से garment steamer hourly cost निकालें; heater rating continuous draw नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/garment-steamer-cost-per-steaming-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Garment steamer cost per steaming hour used: heat-up और steam duty time गिनें",
+          "item": "https://worthcalc.win/hi/guides/garment-steamer-cost-per-steaming-hour-used/"
+        }
+      ]
+    }
+  ]
+}

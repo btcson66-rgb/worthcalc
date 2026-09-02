@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/robot-vacuum-cost-per-cleaning-cycle-used/#article",
+      "headline": "Robot Vacuum Cost Per Cleaning Cycle Used: Include Docking, Charging, and Emptying",
+      "description": "Calculate a robot vacuum electricity cost per completed cleaning cycle from measured wall energy for cleaning, navigation, charging, and dock functions rather than dividing a battery label by an assumed number of runs.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/robot-vacuum-cost-per-cleaning-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Robot Vacuum Cost Per Cleaning Cycle Used: Include Docking, Charging, and Emptying",
+          "item": "https://worthcalc.win/en/guides/robot-vacuum-cost-per-cleaning-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

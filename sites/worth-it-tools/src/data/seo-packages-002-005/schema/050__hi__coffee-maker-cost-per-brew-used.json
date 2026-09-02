@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/coffee-maker-cost-per-brew-used/#article",
+      "headline": "Coffee maker cost per brew used: brewing, warming और consumed cups अलग करें",
+      "description": "Heating और warming के measured wall energy, served volume और delivered electricity tariff से coffee maker cost per brew निकालें; nameplate watts पूरा cycle नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/coffee-maker-cost-per-brew-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coffee maker cost per brew used: brewing, warming और consumed cups अलग करें",
+          "item": "https://worthcalc.win/hi/guides/coffee-maker-cost-per-brew-used/"
+        }
+      ]
+    }
+  ]
+}

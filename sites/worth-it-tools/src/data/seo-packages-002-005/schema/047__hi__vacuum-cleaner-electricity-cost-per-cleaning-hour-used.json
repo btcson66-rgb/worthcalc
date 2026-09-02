@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/#article",
+      "headline": "Vacuum cleaner electricity cost per cleaning hour used: real session मापें",
+      "description": "Measured wall watts, active cleaning time, power mode और delivered electricity tariff से vacuum cleaner hourly cost निकालें; motor label constant use नहीं बताता।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Vacuum cleaner electricity cost per cleaning hour used: real session मापें",
+          "item": "https://worthcalc.win/hi/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/"
+        }
+      ]
+    }
+  ]
+}

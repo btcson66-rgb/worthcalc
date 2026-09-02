@@ -64,6 +64,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/gym-membership-cost-per-visit',
   'guides/software-seat-cost-per-active-user',
   'guides/hobby-equipment-cost-per-use',
+  'guides/childcare-cost-per-hour-used',
+  'guides/parking-pass-cost-per-day-used',
+  'guides/transit-pass-cost-per-ride-used',
+  'guides/streaming-cost-per-watched-hour',
+  'guides/online-course-cost-per-completed-lesson',
+  'guides/tool-rental-cost-per-project',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

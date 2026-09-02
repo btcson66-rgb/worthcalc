@@ -106,6 +106,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/router-electricity-cost-per-month-used',
   'guides/phone-charger-cost-per-charge-used',
   'guides/electric-blanket-cost-per-night-used',
+  'guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used',
+  'guides/robot-vacuum-cost-per-cleaning-cycle-used',
+  'guides/electric-kettle-cost-per-boil-used',
+  'guides/coffee-maker-cost-per-brew-used',
+  'guides/hair-dryer-cost-per-drying-session-used',
+  'guides/garment-steamer-cost-per-steaming-hour-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

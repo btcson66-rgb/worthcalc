@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/coffee-maker-cost-per-brew-used/#article",
+      "headline": "Coffee Maker Cost Per Brew Used: Separate Brewing, Warming, and the Cup Served",
+      "description": "Estimate a coffee maker electricity cost per brew from measured wall energy for heating and warming, the coffee volume actually served, and your delivered electricity rate instead of treating the nameplate wattage as a full cycle.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/coffee-maker-cost-per-brew-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coffee Maker Cost Per Brew Used: Separate Brewing, Warming, and the Cup Served",
+          "item": "https://worthcalc.win/en/guides/coffee-maker-cost-per-brew-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/robot-vacuum-cost-per-cleaning-cycle-used/#article",
+      "headline": "Coste del robot aspirador por ciclo: incluye base, carga y vaciado",
+      "description": "Calcula el coste eléctrico por ciclo completo con kWh medidos durante limpieza, navegación, carga y base, sin dividir la etiqueta de batería por un número supuesto de usos.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/robot-vacuum-cost-per-cleaning-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del robot aspirador por ciclo: incluye base, carga y vaciado",
+          "item": "https://worthcalc.win/es/guides/robot-vacuum-cost-per-cleaning-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

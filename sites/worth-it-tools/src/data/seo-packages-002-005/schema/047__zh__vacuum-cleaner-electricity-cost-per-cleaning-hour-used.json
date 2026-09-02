@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/#article",
+      "headline": "吸塵器每清潔一小時用電成本：量測真正工作時段",
+      "description": "用插座實測瓦數、實際吸塵時間、功率模式與已交付電力費率，估算吸塵器每清潔小時成本，不要把馬達標示功率當成固定耗電。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "吸塵器每清潔一小時用電成本：量測真正工作時段",
+          "item": "https://worthcalc.win/zh/guides/vacuum-cleaner-electricity-cost-per-cleaning-hour-used/"
+        }
+      ]
+    }
+  ]
+}

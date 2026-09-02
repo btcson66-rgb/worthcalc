@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/hair-dryer-cost-per-drying-session-used/#article",
+      "headline": "تكلفة مجفف الشعر لكل جلسة: افصل الحرارة وتدفق الهواء والدقائق",
+      "description": "احسب تكلفة مجفف الشعر لكل جلسة من القدرة المقاسة عند كل إعداد والوقت الفعلي وسعر الكهرباء المسلّمة، لا من ضرب أقصى قدرة في ساعة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/hair-dryer-cost-per-drying-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مجفف الشعر لكل جلسة: افصل الحرارة وتدفق الهواء والدقائق",
+          "item": "https://worthcalc.win/ar/guides/hair-dryer-cost-per-drying-session-used/"
+        }
+      ]
+    }
+  ]
+}

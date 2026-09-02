@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/coffee-maker-cost-per-brew-used/#article",
+      "headline": "تكلفة ماكينة القهوة لكل تحضير: افصل التخمير والحفاظ على الحرارة والأكواب",
+      "description": "قدّر تكلفة الكهرباء لكل تحضير من طاقة الحائط المقاسة للتسخين والحفاظ على الحرارة وحجم القهوة المشروبة وسعر الكهرباء المسلّمة، لا من القدرة الاسمية وحدها.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/coffee-maker-cost-per-brew-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة ماكينة القهوة لكل تحضير: افصل التخمير والحفاظ على الحرارة والأكواب",
+          "item": "https://worthcalc.win/ar/guides/coffee-maker-cost-per-brew-used/"
+        }
+      ]
+    }
+  ]
+}

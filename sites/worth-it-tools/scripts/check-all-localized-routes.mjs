@@ -36,6 +36,13 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/introductory-discount-renewal-cost',
   'guides/unused-membership-capacity-cost',
   'guides/one-time-switching-cost-payback',
+  'guides/subscription-price-increase-annual-impact',
+  'guides/free-trial-auto-renewal-first-charge',
+  'guides/pause-vs-cancel-membership-cost',
+  'guides/family-plan-break-even-members',
+  'guides/prepaid-balance-expiration-cost',
+  'guides/minimum-spend-fee-waiver-break-even',
+  'guides/billing-date-cash-flow-overlap',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

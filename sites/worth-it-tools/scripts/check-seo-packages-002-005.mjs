@@ -5,7 +5,7 @@ const projectRoot = resolve('.');
 const contentRoot = join(projectRoot, 'src', 'content', 'growth-articles');
 const distRoot = join(projectRoot, 'dist');
 const sitemapPath = join(distRoot, 'sitemap-0.xml');
-const packageIds = new Set(['002', '003', '004', '005']);
+const packageIds = new Set(['002', '003', '004', '005', '006', '007', '008', '009']);
 const failures = [];
 const guides = [];
 
@@ -31,7 +31,7 @@ for (const locale of ['en', 'zh']) {
   }
 }
 
-if (guides.length !== 60) failures.push(`expected 60 package guides, found ${guides.length}`);
+if (guides.length !== 120) failures.push(`expected 120 package guides, found ${guides.length}`);
 
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
 if (!sitemap) failures.push('dist/sitemap-0.xml is missing');
@@ -61,7 +61,7 @@ for (const guide of guides) {
 }
 
 const sitemapUrls = (sitemap.match(/<loc>[^<]+<\/loc>/g) ?? []).length;
-if (sitemapUrls !== 372) failures.push(`expected 372 sitemap URLs, found ${sitemapUrls}`);
+if (sitemapUrls !== 432) failures.push(`expected 432 sitemap URLs, found ${sitemapUrls}`);
 
 if (failures.length) {
   console.error(`SEO package check failed (${failures.length}):`);

@@ -4,7 +4,7 @@ articleSlug: "extra-payment-personal-loan"
 locale: "zh"
 title: "信貸提前還款划算嗎？先算省下利息，再扣違約金與流動性成本"
 description: "信貸提前還款不能只看「省利息」。用 50 萬、8%、60 期案例試算每月多還 2,000 元，再加入違約金與緊急預備金判斷。"
-relatedTool: "/zh/tools/dti-calculator/"
+relatedTool: "/zh/tools/dti-dbr/"
 lastReviewed: "2026-08-30"
 draft: false
 packageId: "002"

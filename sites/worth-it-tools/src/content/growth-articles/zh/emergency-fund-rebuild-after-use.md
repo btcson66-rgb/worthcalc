@@ -210,3 +210,5 @@ breadcrumbLabel: "緊急預備金用掉後怎麼補回？先重算缺口，再�
 - CFPB, *Your Money, Your Goals — Savings booklet*: https://www.consumerfinance.gov/documents/8256/cfpb_your-money-your-goals_savings_booklet_cobrand.pdf
 
 本文只提供一般教育、公式與情境試算，不構成個人財務、信用、投資或保險建議。實際優先順序應依你的契約、現金流與風險而定。
+
+- [如果緊急預備金因搬家或其他必要事件被動用，可接著用搬家後新支出結構重新建立補回順序。](/zh/guides/emergency-fund-rebuild-after-move/)

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "工作設備要自己買嗎？公司補助、報銷等待期、殘值與自付成本完整算法",
+      "description": "公司只補助部分筆電、螢幕、手機或軟體時，別只算售價減補助。把報銷等待、所有權、離職返還、必要配件、維護、殘值與自付現金低點一起比較。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/work-equipment-reimbursement-break-even/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/work-equipment-reimbursement-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "工作設備要自己買嗎",
+          "item": "https://worthcalc.win/zh/guides/work-equipment-reimbursement-break-even/"
+        }
+      ]
+    }
+  ]
+}

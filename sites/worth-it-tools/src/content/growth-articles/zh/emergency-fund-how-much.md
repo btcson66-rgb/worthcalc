@@ -134,6 +134,10 @@ draft: false
 
 [保險自負額現金壓力測試](/zh/guides/insurance-deductible-cash-reserve/)
 
+- [單薪家庭壓力測試](/zh/guides/single-income-household-stress-test/)
+
+- [債務清償後現金流](/zh/guides/post-debt-payoff-cashflow-plan/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

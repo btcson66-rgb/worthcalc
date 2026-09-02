@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Car Loan 60 vs. 72 vs. 84 Months: Compare the Balance at an Early Exit, Not Just the Payment",
+      "description": "Compare 60-, 72-, and 84-month auto loans by monthly payment, total interest, and the balance still owed at months 24 and 36 if you trade early.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/car-loan-60-vs-72-vs-84-early-exit/"
+      },
+      "image": "https://worthcalc.win/images/guides/car-loan-60-vs-72-vs-84-early-exit.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "60 vs. 72 vs. 84 Month Car Loan",
+          "item": "https://worthcalc.win/en/guides/car-loan-60-vs-72-vs-84-early-exit/"
+        }
+      ]
+    }
+  ]
+}

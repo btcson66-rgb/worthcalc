@@ -234,3 +234,5 @@ Break-Even 如果是 31 個月，而你只預計住 18 個月，答案已經很�
 - CFPB, Assess your spending: https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/
 
 搬家費、租金、押金規定與租賃法律依所在地與契約而異。本頁提供一般數學框架，不是租賃法律或房仲建議。
+
+- [租屋押金 準備多少現金](/zh/guides/rental-deposit-liquidity-cost/)

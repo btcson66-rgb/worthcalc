@@ -105,6 +105,10 @@ CFPB 的 emergency fund 指南特別提到，一次性收入或較大筆入帳�
 
 [財務跑道](/zh/guides/financial-runway-months/)
 
+- [獎金制收入 固定支出](/zh/guides/variable-bonus-income-fixed-obligations/)
+
+- [收入不固定時，緊急預備金之外還需要把稅款與營運現金分開，避免同一筆資金被重複計算。](/zh/guides/commission-income-tax-reserve-cashflow/)
+
 ## Sources
 
 - https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/

@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Pay Cash for a Car vs. Finance: A Liquidity-Adjusted Cost Test",
+      "description": "Compare paying cash for a car with financing by separating guaranteed loan cost from post-purchase liquidity. No assumed investment return required.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/cash-vs-financing-car-liquidity/"
+      },
+      "image": "https://worthcalc.win/images/guides/cash-vs-financing-car-liquidity.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cash vs. Financing a Car",
+          "item": "https://worthcalc.win/en/guides/cash-vs-financing-car-liquidity/"
+        }
+      ]
+    }
+  ]
+}

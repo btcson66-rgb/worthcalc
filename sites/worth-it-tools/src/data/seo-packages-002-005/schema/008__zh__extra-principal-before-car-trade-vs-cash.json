@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "準備一年後換車，現在該多繳車貸本金還是留現金？負資產與流動性一起算",
+      "description": "預計 6～18 個月後換車時，多繳本金可以降低 payoff 與負資產，但同時會降低手上現金。用未來車價、未來貸款餘額、換車所需現金與安全底線一起比較。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/extra-principal-before-car-trade-vs-cash/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/extra-principal-before-car-trade-vs-cash.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "準備一年後換車，現在該多繳車貸本金還是留現金",
+          "item": "https://worthcalc.win/zh/guides/extra-principal-before-car-trade-vs-cash/"
+        }
+      ]
+    }
+  ]
+}

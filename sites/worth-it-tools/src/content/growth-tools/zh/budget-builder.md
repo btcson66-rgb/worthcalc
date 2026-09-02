@@ -95,3 +95,45 @@ draft: false
 建立家庭預算後，如果是兩人共同支付，可用收入比例模型把共同池與個人支出分開。
 
 [共同生活費按收入比例分攤](/zh/guides/shared-expenses-income-split/)
+
+- [托育費 回職場 划算嗎](/zh/guides/childcare-return-to-work-break-even/)
+
+- [工作 offer 不只看薪資；把通勤、餐飲、托育與額外工作成本放回家庭預算，再比較真正每月差額。](/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/)
+
+- [cash runway before quitting job](/en/guides/cash-runway-before-quitting-job/)
+
+- [freelance minimum billable rate](/en/guides/freelance-minimum-billable-rate/)
+
+- [prepay rent discount vs liquidity](/en/guides/prepay-rent-discount-vs-liquidity/)
+
+- [relocation higher salary break even](/en/guides/relocation-higher-salary-break-even/)
+
+- [certification break even](/en/guides/training-certification-break-even/)
+
+- [離職前要準備多少現金](/zh/guides/cash-runway-before-quitting-job/)
+
+- [接案最低報價怎麼算](/zh/guides/freelance-minimum-billable-rate/)
+
+- [共同家庭帳戶最低餘額](/zh/guides/joint-account-minimum-cash-floor/)
+
+- [加班 到底多賺多少](/zh/guides/overtime-marginal-take-home-cost/)
+
+- [租金預繳折扣 值得嗎](/zh/guides/prepay-rent-discount-vs-liquidity/)
+
+- [為了更高薪搬家值不值得](/zh/guides/relocation-for-higher-salary-break-even/)
+
+- [自費證照 課程 多久回本](/zh/guides/training-certification-break-even/)
+
+- [工作設備 自費 公司補助](/zh/guides/work-equipment-reimbursement-break-even/)
+
+- [延伸檢查：高底薪 vs 高獎金](/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/)
+
+- [延伸檢查：專業會員費值不值得](/zh/guides/professional-membership-replacement-value-break-even/)
+
+- [延伸檢查：副業設備多久回本](/zh/guides/side-hustle-equipment-billable-utilization-break-even/)
+
+- [延伸檢查：公司福利 vs 現金薪資](/zh/guides/employer-benefits-replacement-cost-vs-cash/)
+
+- [延伸檢查：居家辦公 多租一房 值不值得](/zh/guides/extra-room-home-office-incremental-rent-break-even/)
+
+- [延伸檢查：簽約獎金 vs 高底薪](/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/)

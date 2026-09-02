@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "獎金制收入怎麼抓固定支出？不要用最好月份養固定成本",
+      "description": "業務獎金、佣金、績效獎金收入波動大時，不要用最好月份決定房租、車貸與訂閱。用base-pay floor、12月收入分布與獎金平滑帳戶壓力測試。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/variable-bonus-income-fixed-obligations/"
+      },
+      "image": "https://worthcalc.win/images/guides/variable-bonus-income-fixed-obligations.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "獎金制收入固定支出",
+          "item": "https://worthcalc.win/zh/guides/variable-bonus-income-fixed-obligations/"
+        }
+      ]
+    }
+  ]
+}

@@ -35,6 +35,16 @@ export const seoPackageGuideContent = {
           card('en', 'windfall-debt-vs-cash-allocation'),
         ],
       },
+      {
+        heading: 'Cash-flow stress tests and second-order break-even decisions',
+        intro: 'These guides keep the variable that can reverse a simple answer visible: early-exit balance, dated cash runway, annual-bill timing, fixed-cost capacity, cancellation risk, realized utilization, replacement cost, and clawback.',
+        cards: [
+          card('en', 'auto-loan-negative-equity-rollover-cost'),
+          card('en', 'cash-runway-before-quitting-job'),
+          card('en', 'annual-bills-cash-flow-low-point'),
+          card('en', 'post-debt-payoff-lifestyle-creep'),
+        ],
+      },
     ],
     additions: [
       card('en', 'personal-liquidity-ratio'),
@@ -97,6 +107,16 @@ export const seoPackageGuideContent = {
           card('zh', 'shared-expenses-income-split'),
           card('zh', 'step-rate-loan-total-cost'),
           card('zh', 'windfall-debt-vs-cash-allocation'),
+        ],
+      },
+      {
+        heading: '現金流壓力測試與會讓答案反轉的第二層變數',
+        intro: '這些指南把簡單公式容易忽略的變數攤開：提前退出本金、日期現金跑道、年度帳單低點、固定支出承受力、取消風險、實際可計費利用率、福利替代成本與 Clawback。',
+        cards: [
+          card('zh', 'car-loan-60-72-84-early-exit'),
+          card('zh', 'cash-vs-car-loan-liquidity-adjusted'),
+          card('zh', 'base-salary-vs-bonus-fixed-cost-capacity'),
+          card('zh', 'annual-plan-cancellation-risk-break-even'),
         ],
       },
     ],

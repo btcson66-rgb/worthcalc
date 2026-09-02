@@ -78,3 +78,11 @@ draft: false
 工具估出可負擔車價後，再比較不同頭期款會如何改變月付、總利息與交車後現金跑道。
 
 [車貸頭期款 vs 買車後現金](/zh/guides/car-down-payment-vs-liquidity/)
+
+- [車貸60 72 84期怎麼選](/zh/guides/car-loan-60-72-84-early-exit/)
+
+- [現金買車 vs 車貸](/zh/guides/cash-vs-car-loan-liquidity-adjusted/)
+
+- [車子大修後要開多久才回本](/zh/guides/car-major-repair-hold-period-break-even/)
+
+- [換車前 多繳本金 還是留現金](/zh/guides/extra-principal-before-car-trade-vs-cash/)

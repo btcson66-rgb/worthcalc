@@ -287,6 +287,8 @@ Normalize recurring bills first, then compare the true monthly housing-cost diff
 
 [net monthly savings after moving](/en/guides/rent-increase-vs-moving-break-even/)
 
+- [Converting annual bills to a monthly equivalent is only the funding layer; add a 12-month calendar to see whether several due dates create a cash low point.](/en/guides/annual-bills-cash-flow-low-point/)
+
 ## Sources and limitations
 
 The framework is consistent with CFPB consumer budgeting guidance on irregular and less-frequent expenses. All examples are educational. Taxes, insurance, and required fees vary by location and contract.

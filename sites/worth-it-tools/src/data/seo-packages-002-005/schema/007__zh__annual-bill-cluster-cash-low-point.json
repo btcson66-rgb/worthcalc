@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/#article",
+      "headline": "年繳帳單都擠在同一季怎麼辦？用年度現金最低點安排保險、稅費與會員續約",
+      "description": "保險、稅費、學費、年費集中時，平均月預算看起來有錢也可能某月爆掉。建立 12 個月現金流，找出全年最低現金點與每月 sinking fund。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/"
+      },
+      "url": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/annual-bill-cluster-cash-low-point.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "年度帳單現金最低點",
+          "item": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/"
+        }
+      ]
+    }
+  ]
+}

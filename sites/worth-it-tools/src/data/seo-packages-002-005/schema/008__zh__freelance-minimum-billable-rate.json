@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "接案最低報價怎麼算？不要用月薪除 160，小時費率要先補回不可計費時間與營運成本",
+      "description": "自由工作者最低報價不能用目標月薪除工作時數。把不可計費時間、軟體、保險、稅款準備、平台抽成、空窗與收款風險放入，反推最低可持續 billable rate。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/freelance-minimum-billable-rate/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/freelance-minimum-billable-rate.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "接案最低報價怎麼算",
+          "item": "https://worthcalc.win/zh/guides/freelance-minimum-billable-rate/"
+        }
+      ]
+    }
+  ]
+}

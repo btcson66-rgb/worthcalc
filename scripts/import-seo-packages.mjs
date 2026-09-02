@@ -3,7 +3,7 @@ import { basename, dirname, join, resolve } from 'node:path';
 
 const inputRoot = resolve(process.argv[2] || 'C:/Users/User/Downloads/worthcalc-seo-extracted-20260902');
 const siteRoot = resolve(process.argv[3] || 'sites/worth-it-tools');
-const packageIds = ['002', '003', '004', '005'];
+const packageIds = ['002', '003', '004', '005', '006', '007', '008', '009'];
 const contentRoot = join(siteRoot, 'src', 'content', 'growth-articles');
 const schemaRoot = join(siteRoot, 'src', 'data', 'seo-packages-002-005', 'schema');
 const metadataPath = join(siteRoot, 'src', 'data', 'seoPackages002to005.ts');
@@ -23,6 +23,40 @@ function parseFrontmatter(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!match) throw new Error('Page is missing YAML frontmatter');
   return { frontmatter: match[1], body: match[2] };
+}
+
+// Package formulas use LaTeX's \[...\] display delimiters. Astro's Markdown
+// parser recognizes the equivalent $$...$$ form, so normalize only the
+// delimiter lines while preserving every formula token and editorial word.
+function normalizeDisplayMath(body) {
+  return body
+    .replace(/^(\s*)\\\[\s*$/gm, '$1$$$$')
+    .replace(/^(\s*)\\\]\s*$/gm, '$1$$$$');
+}
+
+function normalizeInternalLinks(body) {
+  const replacements = [
+    ['/en/guides/loan-term-vs-monthly-payment/', '/en/loan-term-monthly-payment-vs-total-interest/'],
+    ['/en/guides/apr-vs-apy/', '/en/apr-vs-apy/'],
+    ['/en/guides/savings-rate-gross-vs-net/', '/en/savings-rate-gross-vs-net/'],
+    ['/en/guides/emergency-fund-irregular-income/', '/en/emergency-fund-irregular-income/'],
+    ['/en/guides/net-worth-vs-liquid-net-worth/', '/en/net-worth-vs-liquid-net-worth/'],
+    ['/en/tools/dti-dbr/', '/en/tools/dti-calculator/'],
+    ['/zh/guides/loan-term-vs-monthly-payment/', '/zh/loan-term-vs-total-interest/'],
+    ['/zh/guides/emergency-fund-vs-sinking-fund/', '/zh/emergency-fund-vs-sinking-fund/'],
+    ['/zh/guides/savings-rate-calculation/', '/zh/how-to-calculate-savings-rate/'],
+    ['/zh/guides/installment-zero-interest/', '/zh/zero-interest-installments-truth/'],
+    ['/zh/guides/apr-vs-apy/', '/zh/apr-vs-apy/'],
+    ['/zh/guides/emergency-fund-how-much/', '/zh/emergency-fund-how-much/'],
+    ['/zh/guides/emergency-fund-irregular-income/', '/zh/emergency-fund-irregular-income/'],
+    ['/zh/guides/emergency-fund-vs-debt-payoff/', '/zh/emergency-fund-vs-debt-payoff/'],
+    ['/zh/guides/net-worth-how-to-calculate/', '/zh/how-to-calculate-net-worth/'],
+    ['/zh/guides/liquid-net-worth/', '/zh/liquid-net-worth-explained/'],
+    ['/zh/tools/dti-dbr/', '/zh/tools/dti-calculator/'],
+    ['/zh/guides/simple-vs-compound-interest/', '/zh/simple-vs-compound-interest/'],
+    ['/zh/guides/subscription-cost/', '/zh/tools/subscription-audit/'],
+  ];
+  return replacements.reduce((text, [from, to]) => text.replaceAll(from, to), body);
 }
 
 function firstTool(related, locale) {
@@ -50,7 +84,7 @@ for (const packageId of packageIds) {
     const locale = item.language === 'zh-Hant' ? 'zh' : item.language;
     if (!['en', 'zh'].includes(locale)) throw new Error(packageId + ': unsupported locale ' + item.language);
     const articleSlug = slugFromPath(item.canonical);
-    const pageFile = item.page_file || item.filename;
+    const pageFile = item.page_file || item.source_file || item.filename;
     const schemaFile = item.schema_file || ('schema/' + item.filename.replace(/\.md$/, '.json'));
     const sourcePath = existsSync(join(dir, pageFile)) ? join(dir, pageFile) : join(dir, 'pages', pageFile);
     const sourceSchemaPath = existsSync(join(dir, schemaFile)) ? join(dir, schemaFile) : join(dir, 'schema', basename(schemaFile));
@@ -59,10 +93,10 @@ for (const packageId of packageIds) {
     }
     const source = readFileSync(sourcePath, 'utf8');
     const parsed = parseFrontmatter(source);
-    const body = parsed.body;
+    const body = normalizeInternalLinks(normalizeDisplayMath(parsed.body));
     const lastReviewed = item.last_reviewed || parsed.frontmatter.match(/^last_reviewed:\s*['"]?([^'"\r\n]+)['"]?\s*$/m)?.[1];
     if (!lastReviewed) throw new Error(packageId + ': missing last_reviewed for ' + articleSlug);
-    const related = item.related || [];
+    const related = item.related || item.related_routes || [];
     const pageFrontmatter = [
       'contentType: article',
       'articleSlug: ' + yamlString(articleSlug),

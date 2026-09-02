@@ -343,6 +343,10 @@ A healthy liquidity ratio can still be tested against a real claim scenario: ded
 
 [insurance deductible cash stress test](/en/guides/insurance-deductible-cash-reserve/)
 
+- [High vs. Low Deductible](/en/guides/high-vs-low-insurance-deductible-break-even/)
+
+- [Annual vs. Monthly Insurance Payment](/en/guides/annual-vs-monthly-insurance-payment/)
+
 ## Sources and limitations
 
 CFPB — emergency savings guidance and the role of accessible cash:

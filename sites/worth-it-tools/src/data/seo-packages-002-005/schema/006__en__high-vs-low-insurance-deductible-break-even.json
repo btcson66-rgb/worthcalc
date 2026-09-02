@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "High vs. Low Insurance Deductible: Premium Break-Even and Claim Stress Test",
+      "description": "Compare high- and low-deductible insurance options using actual premium quotes, deductible gaps, claim scenarios, and the cash you could access after a loss.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/high-vs-low-insurance-deductible-break-even/"
+      },
+      "image": "https://worthcalc.win/images/guides/high-vs-low-insurance-deductible-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "High vs. Low Deductible",
+          "item": "https://worthcalc.win/en/guides/high-vs-low-insurance-deductible-break-even/"
+        }
+      ]
+    }
+  ]
+}

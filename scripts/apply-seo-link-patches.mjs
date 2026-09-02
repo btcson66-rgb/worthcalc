@@ -23,6 +23,9 @@ const aliases = new Map([
   ['/zh/guides/subscription-cost/', '/zh/subscription-creep/'],
   ['/en/tools/dti-dbr/', '/en/tools/dti-calculator/'],
   ['/zh/tools/dti-dbr/', '/zh/tools/dti-calculator/'],
+  ['/zh/tools/installment-apr/', '/zh/tools/installment-true-apr/'],
+  ['/en/commute-cost-comparison/', '/en/tools/commute-cost/'],
+  ['/zh/commute-cost-comparison/', '/zh/tools/commute-cost/'],
 ]);
 
 function pathOf(value) {
@@ -63,6 +66,10 @@ function sourceFileFor(route) {
   if (!locale || !slug) return null;
   const explicit = join(siteRoot, 'src', 'pages', locale, 'tools', slug + '.astro');
   if (existsSync(explicit)) return explicit;
+  const localizedPage = join(siteRoot, 'src', 'pages', locale, slug + '.astro');
+  if (existsSync(localizedPage)) return localizedPage;
+  const sharedPage = join(siteRoot, 'src', 'pages', '[locale]', slug + '.astro');
+  if (existsSync(sharedPage)) return sharedPage;
   const base = join(siteRoot, 'src', 'content');
   const directory = parts[1] === 'tools' ? 'growth-tools' : 'growth-articles';
   const file = join(base, directory, locale, slug + '.md');
@@ -73,6 +80,20 @@ function titleFromFile(file) {
   if (!file) return '';
   const source = readFileSync(file, 'utf8');
   return source.match(/^title:\s*["']?(.+?)["']?\s*$/m)?.[1] || '';
+}
+
+function addRelatedLink(source, anchor, target) {
+  if (source.includes(`](${target})`)) return source;
+  const marker = source.match(/^##\s+(?:Related Guides|Related guides|相關指南|延伸指南|延伸閱讀|相關文章)\s*$/im);
+  const link = '- [' + anchor.trim() + '](' + target + ')';
+  if (marker) {
+    const sectionStart = marker.index + marker[0].length;
+    const remainder = source.slice(sectionStart);
+    const nextHeading = remainder.search(/^##\s+/m);
+    const sectionEnd = nextHeading === -1 ? source.length : sectionStart + nextHeading;
+    return source.slice(0, sectionEnd).trimEnd() + '\n' + link + '\n\n' + source.slice(sectionEnd).replace(/^\n+/, '');
+  }
+  return addBeforeSources(source, link);
 }
 
 function addBeforeSources(source, addition) {
@@ -96,24 +117,23 @@ function addBeforeSources(source, addition) {
 
 let totalRows = 0;
 let changedFiles = 0;
-for (const packageId of ['002', '003', '004', '005']) {
+for (const packageId of ['002', '003', '004', '005', '006', '007', '008', '009']) {
   const parent = join(inputRoot, packageId);
   const child = readdirSync(parent, { withFileTypes: true }).find((entry) => entry.isDirectory());
   const dir = join(parent, child.name);
   const csv = readFileSync(join(dir, '04_internal_link_patch.csv'), 'utf8');
   for (const row of parseCsv(csv)) {
-    const sourceRaw = row.source_path || row.source_url;
-    const targetRaw = row.target_path || row.target_url;
+    const sourceRaw = row.source_path || row.source_url || row.source_route;
+    const targetRaw = row.target_path || row.target_url || row.target_route;
     const copy = row.exact_copy_to_add || row.insertion_copy || row.suggested_sentence;
     const sourceRoute = pathOf(sourceRaw);
     const targetRoute = pathOf(targetRaw);
     const file = sourceFileFor(sourceRoute);
     if (!file) throw new Error(packageId + ': source route has no Markdown file: ' + sourceRoute);
-    if (!copy) throw new Error(packageId + ': patch has no insertion copy for ' + sourceRaw);
-    const anchor = row.anchor_text || titleFromFile(sourceFileFor(targetRoute)) || targetRoute;
-    const addition = copy.trim() + '\n\n[' + anchor.trim() + '](' + targetRoute + ')';
+    const anchor = row.anchor_text || row.suggested_anchor || row.anchor_copy || titleFromFile(sourceFileFor(targetRoute)) || targetRoute;
     const source = readFileSync(file, 'utf8');
-    const updated = addBeforeSources(source, addition);
+    const addition = copy ? copy.trim() + '\n\n[' + anchor.trim() + '](' + targetRoute + ')' : null;
+    const updated = addition ? addBeforeSources(source, addition) : addRelatedLink(source, anchor, targetRoute);
     if (updated !== source) {
       writeFileSync(file, updated, 'utf8');
       changedFiles += 1;

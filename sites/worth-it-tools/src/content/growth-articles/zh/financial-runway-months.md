@@ -343,3 +343,7 @@ https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-go
 若搬家需要先付新押金與重疊租金，除了回本月份，也要檢查搬家當月會不會壓縮現金跑道。
 
 [搬家前的現金橋接](/zh/guides/rent-increase-vs-moving-break-even/)
+
+- [單薪家庭 收入中斷](/zh/guides/single-income-household-stress-test/)
+
+- [轉職跑道不能只用「幾個月」估算；把最後舊薪與第一筆新薪的實際日期放進時間軸才能算橋接現金。](/zh/guides/job-change-pay-gap-cashflow/)

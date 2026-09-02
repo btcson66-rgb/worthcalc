@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/#article",
+      "headline": "通勤月票 vs 單次付費怎麼選？用「實際通勤天數」而不是每天都上班的假設算回本",
+      "description": "月票是否划算，不要假設每月 22 天都通勤。把混合辦公、請假、遠距、轉乘與非通勤使用分開，算出真正 Break-Even 使用次數。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/transit-pass-vs-pay-as-you-go-usage-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "通勤月票 vs 單次付費",
+          "item": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/"
+        }
+      ]
+    }
+  ]
+}

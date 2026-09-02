@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "租屋押金要準備多少現金？把資金占用、搬家重疊與退還時間放進現金流",
+      "description": "台灣住宅租賃押金最高不得超過兩個月租金。除了押金，還要算首月租金、搬家、重疊租期與押金退還時間造成的現金缺口。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/"
+      },
+      "image": "https://worthcalc.win/images/guides/rental-deposit-liquidity-cost.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "租屋押金流動性",
+          "item": "https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/"
+        }
+      ]
+    }
+  ]
+}

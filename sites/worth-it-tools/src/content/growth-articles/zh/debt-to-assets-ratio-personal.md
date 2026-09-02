@@ -4,7 +4,7 @@ articleSlug: "debt-to-assets-ratio-personal"
 locale: "zh"
 title: "個人負債資產比怎麼算？它和 DTI、DBR 完全不是同一件事"
 description: "個人負債資產比是總負債 ÷ 總資產，不是 DTI 或 DBR。用完整資產負債表案例，看懂槓桿、流動性與比率可能誤導你的地方。"
-relatedTool: "/zh/tools/dti-calculator/"
+relatedTool: "/zh/tools/dti-dbr/"
 lastReviewed: "2026-08-30"
 draft: false
 packageId: "002"

@@ -69,6 +69,10 @@ Once you have an affordable vehicle price, compare the payment savings from a la
 
 [car down payment versus liquidity](/en/guides/car-down-payment-vs-liquidity/)
 
+- [60 vs 72 vs 84 month car loan](/en/guides/car-loan-60-vs-72-vs-84-early-exit/)
+
+- [pay cash for car vs finance](/en/guides/cash-vs-financing-car-liquidity/)
+
 ## Sources
 
 - [Chase — "What Is the 20/4/10 Rule for Car Buying?"](https://www.chase.com/personal/auto/education/buying/what-is-the-20-4-10-rule-for-car-buying), reviewed 2026-07-31

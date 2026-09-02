@@ -239,3 +239,6 @@ breadcrumbLabel: "年度支出怎麼換算成每月預算？別再被年繳保�
 共同生活費別漏掉年繳保險、稅費等非月繳支出；先月均化，再依雙方約定比例分攤。
 
 [共同年度帳單怎麼分](/zh/guides/shared-expenses-income-split/)
+- [托育費 vs 回職場](/zh/guides/childcare-return-to-work-break-even/)
+- [把年度支出換算成月額只是第一步；若多筆帳單集中，還要用 12 個月時間軸找出真正的現金最低點。](/zh/guides/annual-bill-cluster-cash-low-point/)
+

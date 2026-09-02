@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Annual vs. Monthly Insurance Payments: Compare Surcharges and Liquidity",
+      "description": "Compare annual and monthly insurance payment options using the same coverage, total annual amount, installment surcharge, cash reserve impact, and renewal sinking fund.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/annual-vs-monthly-insurance-payment/"
+      },
+      "image": "https://worthcalc.win/images/guides/annual-vs-monthly-insurance-payment.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Annual vs. Monthly Insurance Payment",
+          "item": "https://worthcalc.win/en/guides/annual-vs-monthly-insurance-payment/"
+        }
+      ]
+    }
+  ]
+}

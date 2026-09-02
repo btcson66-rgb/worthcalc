@@ -1,0 +1,43 @@
+---
+contentType: article
+articleSlug: "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used"
+locale: "ar"
+title: "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة"
+description: "قدّر تكلفة مبراة القلم الكهربائية لكل جلسة من دورات المحرك والاستعداد المقاسة، مع فصل بقايا القلم واستبدال الشفرة."
+relatedTool: "/ar/tools/budget-builder/"
+canonical: "https://worthcalc.win/ar/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/"
+lastReviewed: "2026-09-03"
+draft: false
+---
+
+# تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة
+
+> **الخلاصة:** قدّر تكلفة مبراة القلم الكهربائية لكل جلسة من دورات المحرك والاستعداد المقاسة، مع فصل بقايا القلم واستبدال الشفرة. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+
+## ما الذي يغيّر النتيجة
+
+لا تعني الجلسة بدءاً واحداً دائماً؛ قد تولّد الأقلام اللينة أو السميكة والمبالغة والتنظيف دورات إضافية. سجّل الأقلام المقبولة والتوقف الآلي. استخدم عداد حائط وحدد البداية والنهاية بدقة. سجّل الوضع والحمل والملحقات والوحدة المكتملة والتعرفة والتاريخ. تساعد القدرة الاسمية في تخطيط الاختبار لكنها لا تستبدل قراءة قابلة للتكرار.
+
+## الصيغة ومثال عملي
+
+تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم والضرائب والمواد والصيانة والاشتراكات والأجهزة الأخرى خارج البسط ما لم يشملها الحد بوضوح. إذا استهلكت خمس جلسات قابلة للتكرار معاً 0.004 kWh بسعر 0.18 فالإجمالي 0.00072 أو 0.000144 للجلسة. لا تقرّب النتيجة الصغيرة إلى صفر.
+
+Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+
+## قارن حالات الاستخدام
+
+هل تدخل مادة القلم؟ أدخلها في نموذج التكلفة الكامل، لكن خارج بسط الكهرباء وحدها. Related guides: [تكلفة دباسة كهربائية لكل جلسة تدبيس: افصل حالات الانسداد](/ar/guides/electric-stapler-electricity-cost-per-stapling-session-used/), [تكلفة مروحة المكتب لكل ساعة تبريد: أدرج السرعة والتذبذب](/ar/guides/desk-fan-electricity-cost-per-cooling-hour-used/), [تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة](/ar/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), and [تكلفة كهرباء جهاز العرض لكل ساعة تقديم: أدرج التسخين والتبريد](/ar/guides/projector-electricity-cost-per-presentation-hour-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+
+## الحدود والأخطاء الشائعة
+
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث اختبارات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. For comparison, keep the tariff date and measurement boundary fixed.
+
+## الأسئلة الشائعة
+
+### هل تدخل مادة القلم؟ أدخلها في نموذج التكلفة الكامل، لكن خارج بسط الكهرباء وحدها.
+
+هل تدخل مادة القلم؟ أدخلها في نموذج التكلفة الكامل، لكن خارج بسط الكهرباء وحدها.
+
+## قراءة المصادر
+
+لسياق التعرفة راجع [أسئلة EIA عن سعر الكهرباء المسلّمة](https://www.eia.gov/tools/faqs/faq.php?id=507) و[نظرة EIA على كهرباء المنازل](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php). تقدّم صفحتا [ENERGY STAR للحواسيب](https://www.energystar.gov/products/computers) و[معدات التصوير](https://www.energystar.gov/products/imaging_equipment) سياق الفئة وإدارة الطاقة، ولا تضمنان أداء هذا الجهاز. يساعد [دليل الإنفاق CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) على اعتبار القياس مدخلاً واحداً للقرار.

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/e-reader-electricity-cost-per-reading-hour-used/#article",
+      "headline": "E-reader electricity cost per reading hour used: count charging energy",
+      "description": "Measured charging energy और actual reading hours से e-reader की प्रति reading hour electricity cost निकालें; light, Wi-Fi और replacement अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/e-reader-electricity-cost-per-reading-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "E-reader electricity cost per reading hour used: count charging energy",
+          "item": "https://worthcalc.win/hi/guides/e-reader-electricity-cost-per-reading-hour-used/"
+        }
+      ]
+    }
+  ]
+}

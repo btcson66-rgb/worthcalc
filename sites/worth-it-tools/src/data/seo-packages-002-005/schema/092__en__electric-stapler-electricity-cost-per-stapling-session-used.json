@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-stapler-electricity-cost-per-stapling-session-used/#article",
+      "headline": "Electric Stapler Electricity Cost Per Stapling Session Used: Separate Jam Events",
+      "description": "Calculate electric stapler electricity cost per stapling session from measured trigger, motor, and standby energy, separating staples, paper, and jam-clearing events.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-stapler-electricity-cost-per-stapling-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Stapler Electricity Cost Per Stapling Session Used: Separate Jam Events",
+          "item": "https://worthcalc.win/en/guides/electric-stapler-electricity-cost-per-stapling-session-used/"
+        }
+      ]
+    }
+  ]
+}

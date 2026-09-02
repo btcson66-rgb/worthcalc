@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/e-reader-electricity-cost-per-reading-hour-used/#article",
+      "headline": "E-Reader Electricity Cost Per Reading Hour Used: Count Charging Energy",
+      "description": "Calculate e-reader electricity cost per reading hour from measured charging energy and actual reading hours, keeping screen light, Wi-Fi, and replacement costs separate.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/e-reader-electricity-cost-per-reading-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "E-Reader Electricity Cost Per Reading Hour Used: Count Charging Energy",
+          "item": "https://worthcalc.win/en/guides/e-reader-electricity-cost-per-reading-hour-used/"
+        }
+      ]
+    }
+  ]
+}

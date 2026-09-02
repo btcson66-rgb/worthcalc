@@ -148,6 +148,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/3d-scanner-electricity-cost-per-scanning-session-used',
   'guides/electric-standing-desk-electricity-cost-per-adjusted-day-used',
   'guides/smart-speaker-electricity-cost-per-listening-hour-used',
+  'guides/projector-electricity-cost-per-presentation-hour-used',
+  'guides/e-reader-electricity-cost-per-reading-hour-used',
+  'guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used',
+  'guides/electric-stapler-electricity-cost-per-stapling-session-used',
+  'guides/desk-fan-electricity-cost-per-cooling-hour-used',
+  'guides/electric-foot-massager-electricity-cost-per-massage-session-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

@@ -36,7 +36,9 @@ function simulate(input: MortgagePayoffInput, accelerated: boolean) {
   let balance = input.balance;
   let interestTotal = 0;
   const schedule: LoanScheduleRow[] = [];
-  const maxMonths = Math.max(input.remainingMonths * 4, 1200);
+  // Bounded on both sides: at least 1200 months of headroom for an accelerated
+  // schedule, but never an unbounded loop driven straight by user input.
+  const maxMonths = Math.min(Math.max(input.remainingMonths * 4, 1200), 4800);
 
   for (let month = 1; month <= maxMonths && balance > 0.005; month += 1) {
     const startingBalance = balance;

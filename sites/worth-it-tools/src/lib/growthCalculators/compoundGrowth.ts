@@ -28,6 +28,15 @@ export interface CompoundGrowthResult {
   yearly: GrowthYearRow[];
 }
 
+// A projection horizon is a modelling choice, not a free parameter. Beyond a
+// human planning horizon the month loop stops being a calculation and becomes
+// two failure modes at once: the balance overflows to Infinity (and the
+// inflation division then yields NaN), and the loop itself blocks the main
+// thread long enough to freeze the tab. `years` carries a matching `max` in
+// growthToolDefinitions.ts so the form rejects it before we get here; this
+// constant is the library-level backstop for any other caller.
+export const MAX_PROJECTION_YEARS = 100;
+
 function simulate(input: CompoundGrowthInput, contribution: number) {
   const months = Math.round(input.years * 12);
   const netAnnualReturn = input.annualReturnPercent - input.annualFeePercent;
@@ -64,6 +73,9 @@ export function calculateCompoundGrowth(input: CompoundGrowthInput): CompoundGro
   assertFiniteNumber(input.annualFeePercent, 'annualFeePercent', 0);
   assertFiniteNumber(input.annualInflationPercent, 'annualInflationPercent', -99.999999);
   assertFiniteNumber(input.years, 'years', 0.01);
+  if (input.years > MAX_PROJECTION_YEARS) {
+    throw new RangeError(`years must be ${MAX_PROJECTION_YEARS} or fewer.`);
+  }
   if (input.annualContributionGrowthPercent != null) assertFiniteNumber(input.annualContributionGrowthPercent, 'annualContributionGrowthPercent', -99.999999);
   if (input.targetAmount != null) assertFiniteNumber(input.targetAmount, 'targetAmount', 0);
   if (input.annualReturnPercent - input.annualFeePercent <= -100) {
@@ -79,6 +91,12 @@ export function calculateCompoundGrowth(input: CompoundGrowthInput): CompoundGro
     );
   }
   const realEndingBalance = base.balance / Math.pow(1 + input.annualInflationPercent / 100, input.years);
+  // Final backstop. Even inside the year cap an extreme rate combination can
+  // still overflow to Infinity, and `Infinity / x` then produces NaN. Showing a
+  // reader "$∞" or "$NaN" on a money page is worse than refusing to answer.
+  if (!Number.isFinite(base.balance) || !Number.isFinite(realEndingBalance)) {
+    throw new RangeError('The assumptions produce a number too large to model. Lower the return rate or the number of years.');
+  }
   return {
     endingBalance: base.balance,
     realEndingBalance,

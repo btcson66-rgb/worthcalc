@@ -136,4 +136,29 @@ assert.throws(() => calculateCompoundGrowth({
   annualFeePercent: 100, annualInflationPercent: 0, years: 1,
 }), /greater than -100/);
 
+// Projection horizon is bounded. Before this cap an unbounded `years` overflowed
+// the balance to Infinity (and the inflation division then to NaN), and the
+// month loop blocked the main thread long enough to freeze the tab.
+const atCap = calculateCompoundGrowth({
+  initialPrincipal: 10000, monthlyContribution: 500, annualReturnPercent: 6,
+  annualFeePercent: 0.5, annualInflationPercent: 2.5, years: 100, targetAmount: 250000,
+});
+assert.ok(Number.isFinite(atCap.endingBalance), 'ending balance at the year cap must be finite');
+assert.ok(Number.isFinite(atCap.realEndingBalance), 'real ending balance at the year cap must be finite');
+assert.throws(() => calculateCompoundGrowth({
+  initialPrincipal: 10000, monthlyContribution: 500, annualReturnPercent: 6,
+  annualFeePercent: 0.5, annualInflationPercent: 2.5, years: 101,
+}), /100 or fewer/);
+assert.throws(() => calculateCompoundGrowth({
+  initialPrincipal: 10000, monthlyContribution: 500, annualReturnPercent: 6,
+  annualFeePercent: 0.5, annualInflationPercent: 2.5, years: 50000,
+}), /100 or fewer/);
+
+// Mortgage payoff never loops on a term supplied straight by the user: an
+// absurd remaining term still returns promptly instead of hanging the tab.
+const absurdTerm = calculateMortgagePayoff({
+  balance: 240000, annualRatePercent: 5.5, remainingMonths: 100_000_000, extraMonthly: 0,
+});
+assert.ok(Number.isFinite(absurdTerm.baselineInterest), 'an absurd term must still produce a finite result');
+
 console.log('WorthCalc edge-case and regression tests passed.');

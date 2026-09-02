@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/countertop-ice-maker-cost-per-batch-used/#article",
+      "headline": "Countertop Ice Maker Cost Per Batch Used: Include Freeze and Hold Time",
+      "description": "Estimate countertop ice maker electricity cost per batch from measured freeze, harvest, and hold energy, then separate electricity from water, cleaning, and output weight.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/countertop-ice-maker-cost-per-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Countertop Ice Maker Cost Per Batch Used: Include Freeze and Hold Time",
+          "item": "https://worthcalc.win/en/guides/countertop-ice-maker-cost-per-batch-used/"
+        }
+      ]
+    }
+  ]
+}

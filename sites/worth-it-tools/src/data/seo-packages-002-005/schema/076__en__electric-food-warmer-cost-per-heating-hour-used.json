@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-food-warmer-cost-per-heating-hour-used/#article",
+      "headline": "Electric Food Warmer Cost Per Heating Hour Used: Measure Thermostat Cycling",
+      "description": "Calculate electric food warmer cost per heating hour from measured wall energy while the thermostat cycles, then distinguish an empty tray, a covered meal, and a normal serving load.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-food-warmer-cost-per-heating-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Food Warmer Cost Per Heating Hour Used: Measure Thermostat Cycling",
+          "item": "https://worthcalc.win/en/guides/electric-food-warmer-cost-per-heating-hour-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-milk-frother-cost-per-frothing-session-used/#article",
+      "headline": "電動奶泡機每次成本：分開加熱與打發耗電",
+      "description": "用加熱、打發與待機的實測能源估算電動奶泡機每次成本；牛奶、清洗與飲品食材不混入設備電費。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-milk-frother-cost-per-frothing-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動奶泡機每次成本：分開加熱與打發耗電",
+          "item": "https://worthcalc.win/zh/guides/electric-milk-frother-cost-per-frothing-session-used/"
+        }
+      ]
+    }
+  ]
+}

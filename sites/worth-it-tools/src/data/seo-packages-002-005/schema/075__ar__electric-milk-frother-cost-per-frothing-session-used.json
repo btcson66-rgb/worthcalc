@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-milk-frother-cost-per-frothing-session-used/#article",
+      "headline": "تكلفة مخفّق الحليب لكل جلسة: افصل التسخين والخفق",
+      "description": "قدّر تكلفة مخفّق الحليب لكل جلسة من طاقة التسخين والخفق والاستعداد المقاسة، وافصل الحليب والتنظيف ومكونات المشروب.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/electric-milk-frother-cost-per-frothing-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مخفّق الحليب لكل جلسة: افصل التسخين والخفق",
+          "item": "https://worthcalc.win/ar/guides/electric-milk-frother-cost-per-frothing-session-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-meat-grinder-cost-per-grinding-session-used/#article",
+      "headline": "Electric Meat Grinder Cost Per Grinding Session Used: Allocate Motor Runtime",
+      "description": "Estimate electric meat grinder electricity cost per grinding session from measured cutting and idle energy, then divide by the actual kilograms processed instead of the motor rating.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-meat-grinder-cost-per-grinding-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Meat Grinder Cost Per Grinding Session Used: Allocate Motor Runtime",
+          "item": "https://worthcalc.win/en/guides/electric-meat-grinder-cost-per-grinding-session-used/"
+        }
+      ]
+    }
+  ]
+}

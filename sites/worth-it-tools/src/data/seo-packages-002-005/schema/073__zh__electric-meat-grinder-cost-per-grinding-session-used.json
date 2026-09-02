@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-meat-grinder-cost-per-grinding-session-used/#article",
+      "headline": "電動絞肉機每次絞肉成本：分攤馬達運轉時間",
+      "description": "用切割與短暫閒置的實測能源估算電動絞肉機每次成本，再按實際處理的公斤數分攤，不把馬達額定功率當成耗電。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-meat-grinder-cost-per-grinding-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動絞肉機每次絞肉成本：分攤馬達運轉時間",
+          "item": "https://worthcalc.win/zh/guides/electric-meat-grinder-cost-per-grinding-session-used/"
+        }
+      ]
+    }
+  ]
+}

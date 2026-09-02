@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/#article",
+      "headline": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
+      "description": "قِس صاعق الحشرات خلال فترة ليلية كاملة لتقدير تكلفة كل ليلة استخدام.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
+          "item": "https://worthcalc.win/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/"
+        }
+      ]
+    }
+  ]
+}

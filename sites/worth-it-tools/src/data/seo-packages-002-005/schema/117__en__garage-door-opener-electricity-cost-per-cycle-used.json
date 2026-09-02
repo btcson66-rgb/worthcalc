@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/garage-door-opener-electricity-cost-per-cycle-used/#article",
+      "headline": "Garage Door Opener Electricity Cost Per Cycle Used: Count the Light and Standby",
+      "description": "Measure a garage-door opener through a complete open-close cycle and its standby window.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Garage Door Opener Electricity Cost Per Cycle Used: Count the Light and Standby",
+          "item": "https://worthcalc.win/en/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+import type { ContentLocale } from '../consts';
+
+export interface SeoPackage113GuideMeta { key: string; packageId: '113'; locale: ContentLocale; articleSlug: string; title: string; seoTitle: string; metaDescription: string; excerpt: string; canonical: string; robots: 'index,follow'; ogTitle: string; ogDescription: string; ogImage: string; imageAlt: string; imageBrief: string; lastReviewed: string; related: string[]; breadcrumbLabel: string; schemaFile: string; }
+
+export const seoPackage113Guides: Record<string, SeoPackage113GuideMeta> = {
+  "en/aquarium-heater-electricity-cost-per-tank-day-used": {
+    "key": "en/aquarium-heater-electricity-cost-per-tank-day-used",
+    "packageId": "113",
+    "locale": "en",
+    "articleSlug": "aquarium-heater-electricity-cost-per-tank-day-used",
+    "title": "Aquarium Heater Electricity Cost Per Tank Day Used: Separate Thermostat Cycles",
+    "seoTitle": "Aquarium Heater Electricity Cost Per Tank Day Used: Separate Thermostat Cycles | WorthCalc",
+    "metaDescription": "Measure an aquarium heater and thermostat window to estimate electricity cost per tank day.",
+    "excerpt": "Measure an aquarium heater and thermostat window to estimate electricity cost per tank day.",
+    "canonical": "https://worthcalc.win/en/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+    "robots": "index,follow",
+    "ogTitle": "Aquarium Heater Electricity Cost Per Tank Day Used: Separate Thermostat Cycles",
+    "ogDescription": "Measure an aquarium heater and thermostat window to estimate electricity cost per tank day.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Aquarium Heater Electricity Cost Per Tank Day Used: Separate Thermostat Cycles",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/en/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/en/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Aquarium Heater Electricity Cost Per Tank Day Used: Separate Thermostat Cycles",
+    "schemaFile": "113__en__aquarium-heater-electricity-cost-per-tank-day-used.json"
+  },
+  "es/aquarium-heater-electricity-cost-per-tank-day-used": {
+    "key": "es/aquarium-heater-electricity-cost-per-tank-day-used",
+    "packageId": "113",
+    "locale": "es",
+    "articleSlug": "aquarium-heater-electricity-cost-per-tank-day-used",
+    "title": "Coste eléctrico del calentador de acuario por día de tanque: separa los ciclos del termostato",
+    "seoTitle": "Coste eléctrico del calentador de acuario por día de tanque: separa los ciclos del termostato | WorthCalc",
+    "metaDescription": "Mide el calentador del acuario y el periodo del termostato para estimar el coste por día de tanque.",
+    "excerpt": "Mide el calentador del acuario y el periodo del termostato para estimar el coste por día de tanque.",
+    "canonical": "https://worthcalc.win/es/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+    "robots": "index,follow",
+    "ogTitle": "Coste eléctrico del calentador de acuario por día de tanque: separa los ciclos del termostato",
+    "ogDescription": "Mide el calentador del acuario y el periodo del termostato para estimar el coste por día de tanque.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Coste eléctrico del calentador de acuario por día de tanque: separa los ciclos del termostato",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/es/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/es/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/es/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/es/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Coste eléctrico del calentador de acuario por día de tanque: separa los ciclos del termostato",
+    "schemaFile": "113__es__aquarium-heater-electricity-cost-per-tank-day-used.json"
+  },
+  "zh/aquarium-heater-electricity-cost-per-tank-day-used": {
+    "key": "zh/aquarium-heater-electricity-cost-per-tank-day-used",
+    "packageId": "113",
+    "locale": "zh",
+    "articleSlug": "aquarium-heater-electricity-cost-per-tank-day-used",
+    "title": "魚缸加熱器每日電費：把恆溫循環分開計算",
+    "seoTitle": "魚缸加熱器每日電費：把恆溫循環分開計算 | WorthCalc",
+    "metaDescription": "量測魚缸加熱器與恆溫期間，估算每個魚缸日的實際電費。",
+    "excerpt": "量測魚缸加熱器與恆溫期間，估算每個魚缸日的實際電費。",
+    "canonical": "https://worthcalc.win/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+    "robots": "index,follow",
+    "ogTitle": "魚缸加熱器每日電費：把恆溫循環分開計算",
+    "ogDescription": "量測魚缸加熱器與恆溫期間，估算每個魚缸日的實際電費。",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "魚缸加熱器每日電費：把恆溫循環分開計算",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "魚缸加熱器每日電費：把恆溫循環分開計算",
+    "schemaFile": "113__zh__aquarium-heater-electricity-cost-per-tank-day-used.json"
+  },
+  "hi/aquarium-heater-electricity-cost-per-tank-day-used": {
+    "key": "hi/aquarium-heater-electricity-cost-per-tank-day-used",
+    "packageId": "113",
+    "locale": "hi",
+    "articleSlug": "aquarium-heater-electricity-cost-per-tank-day-used",
+    "title": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+    "seoTitle": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें | WorthCalc",
+    "metaDescription": "Aquarium heater और thermostat window को मापकर प्रति tank day electricity cost निकालें।",
+    "excerpt": "Aquarium heater और thermostat window को मापकर प्रति tank day electricity cost निकालें।",
+    "canonical": "https://worthcalc.win/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+    "robots": "index,follow",
+    "ogTitle": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+    "ogDescription": "Aquarium heater और thermostat window को मापकर प्रति tank day electricity cost निकालें।",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/hi/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/hi/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/hi/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/hi/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/hi/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+    "schemaFile": "113__hi__aquarium-heater-electricity-cost-per-tank-day-used.json"
+  },
+  "ar/aquarium-heater-electricity-cost-per-tank-day-used": {
+    "key": "ar/aquarium-heater-electricity-cost-per-tank-day-used",
+    "packageId": "113",
+    "locale": "ar",
+    "articleSlug": "aquarium-heater-electricity-cost-per-tank-day-used",
+    "title": "تكلفة سخان الحوض لكل يوم: افصل دورات منظم الحرارة",
+    "seoTitle": "تكلفة سخان الحوض لكل يوم: افصل دورات منظم الحرارة | WorthCalc",
+    "metaDescription": "قِس سخان الحوض وفترة منظم الحرارة لتقدير تكلفة الكهرباء لكل يوم.",
+    "excerpt": "قِس سخان الحوض وفترة منظم الحرارة لتقدير تكلفة الكهرباء لكل يوم.",
+    "canonical": "https://worthcalc.win/ar/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+    "robots": "index,follow",
+    "ogTitle": "تكلفة سخان الحوض لكل يوم: افصل دورات منظم الحرارة",
+    "ogDescription": "قِس سخان الحوض وفترة منظم الحرارة لتقدير تكلفة الكهرباء لكل يوم.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "تكلفة سخان الحوض لكل يوم: افصل دورات منظم الحرارة",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/ar/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "تكلفة سخان الحوض لكل يوم: افصل دورات منظم الحرارة",
+    "schemaFile": "113__ar__aquarium-heater-electricity-cost-per-tank-day-used.json"
+  }
+};

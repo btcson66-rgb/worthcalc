@@ -1,0 +1,141 @@
+import type { ContentLocale } from '../consts';
+
+export interface SeoPackage116GuideMeta { key: string; packageId: '116'; locale: ContentLocale; articleSlug: string; title: string; seoTitle: string; metaDescription: string; excerpt: string; canonical: string; robots: 'index,follow'; ogTitle: string; ogDescription: string; ogImage: string; imageAlt: string; imageBrief: string; lastReviewed: string; related: string[]; breadcrumbLabel: string; schemaFile: string; }
+
+export const seoPackage116Guides: Record<string, SeoPackage116GuideMeta> = {
+  "en/outdoor-string-lights-electricity-cost-per-evening-used": {
+    "key": "en/outdoor-string-lights-electricity-cost-per-evening-used",
+    "packageId": "116",
+    "locale": "en",
+    "articleSlug": "outdoor-string-lights-electricity-cost-per-evening-used",
+    "title": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+    "seoTitle": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer | WorthCalc",
+    "metaDescription": "Estimate outdoor string-light electricity cost per evening from measured timer and transformer energy.",
+    "excerpt": "Estimate outdoor string-light electricity cost per evening from measured timer and transformer energy.",
+    "canonical": "https://worthcalc.win/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+    "robots": "index,follow",
+    "ogTitle": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+    "ogDescription": "Estimate outdoor string-light electricity cost per evening from measured timer and transformer energy.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/en/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/en/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/en/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+    "schemaFile": "116__en__outdoor-string-lights-electricity-cost-per-evening-used.json"
+  },
+  "es/outdoor-string-lights-electricity-cost-per-evening-used": {
+    "key": "es/outdoor-string-lights-electricity-cost-per-evening-used",
+    "packageId": "116",
+    "locale": "es",
+    "articleSlug": "outdoor-string-lights-electricity-cost-per-evening-used",
+    "title": "Coste eléctrico de luces de guirnalda por tarde: mide el temporizador",
+    "seoTitle": "Coste eléctrico de luces de guirnalda por tarde: mide el temporizador | WorthCalc",
+    "metaDescription": "Estima el coste por tarde de luces exteriores usando la energía medida del temporizador y transformador.",
+    "excerpt": "Estima el coste por tarde de luces exteriores usando la energía medida del temporizador y transformador.",
+    "canonical": "https://worthcalc.win/es/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+    "robots": "index,follow",
+    "ogTitle": "Coste eléctrico de luces de guirnalda por tarde: mide el temporizador",
+    "ogDescription": "Estima el coste por tarde de luces exteriores usando la energía medida del temporizador y transformador.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Coste eléctrico de luces de guirnalda por tarde: mide el temporizador",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/es/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/es/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/es/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/es/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Coste eléctrico de luces de guirnalda por tarde: mide el temporizador",
+    "schemaFile": "116__es__outdoor-string-lights-electricity-cost-per-evening-used.json"
+  },
+  "zh/outdoor-string-lights-electricity-cost-per-evening-used": {
+    "key": "zh/outdoor-string-lights-electricity-cost-per-evening-used",
+    "packageId": "116",
+    "locale": "zh",
+    "articleSlug": "outdoor-string-lights-electricity-cost-per-evening-used",
+    "title": "戶外串燈每晚電費：把定時器與變壓器納入邊界",
+    "seoTitle": "戶外串燈每晚電費：把定時器與變壓器納入邊界 | WorthCalc",
+    "metaDescription": "量測戶外串燈、定時器與變壓器，估算每個晚上使用的實際電費。",
+    "excerpt": "量測戶外串燈、定時器與變壓器，估算每個晚上使用的實際電費。",
+    "canonical": "https://worthcalc.win/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+    "robots": "index,follow",
+    "ogTitle": "戶外串燈每晚電費：把定時器與變壓器納入邊界",
+    "ogDescription": "量測戶外串燈、定時器與變壓器，估算每個晚上使用的實際電費。",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "戶外串燈每晚電費：把定時器與變壓器納入邊界",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "戶外串燈每晚電費：把定時器與變壓器納入邊界",
+    "schemaFile": "116__zh__outdoor-string-lights-electricity-cost-per-evening-used.json"
+  },
+  "hi/outdoor-string-lights-electricity-cost-per-evening-used": {
+    "key": "hi/outdoor-string-lights-electricity-cost-per-evening-used",
+    "packageId": "116",
+    "locale": "hi",
+    "articleSlug": "outdoor-string-lights-electricity-cost-per-evening-used",
+    "title": "Outdoor string lights electricity cost per evening: timer और transformer मापें",
+    "seoTitle": "Outdoor string lights electricity cost per evening: timer और transformer मापें | WorthCalc",
+    "metaDescription": "Outdoor string lights, timer और transformer energy को मापकर प्रति evening cost निकालें।",
+    "excerpt": "Outdoor string lights, timer और transformer energy को मापकर प्रति evening cost निकालें।",
+    "canonical": "https://worthcalc.win/hi/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+    "robots": "index,follow",
+    "ogTitle": "Outdoor string lights electricity cost per evening: timer और transformer मापें",
+    "ogDescription": "Outdoor string lights, timer और transformer energy को मापकर प्रति evening cost निकालें।",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Outdoor string lights electricity cost per evening: timer और transformer मापें",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/hi/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/hi/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/hi/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/hi/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Outdoor string lights electricity cost per evening: timer और transformer मापें",
+    "schemaFile": "116__hi__outdoor-string-lights-electricity-cost-per-evening-used.json"
+  },
+  "ar/outdoor-string-lights-electricity-cost-per-evening-used": {
+    "key": "ar/outdoor-string-lights-electricity-cost-per-evening-used",
+    "packageId": "116",
+    "locale": "ar",
+    "articleSlug": "outdoor-string-lights-electricity-cost-per-evening-used",
+    "title": "تكلفة أضواء السلسلة الخارجية لكل مساء: قِس المؤقت والمحول",
+    "seoTitle": "تكلفة أضواء السلسلة الخارجية لكل مساء: قِس المؤقت والمحول | WorthCalc",
+    "metaDescription": "قدّر تكلفة أضواء السلسلة الخارجية لكل مساء من قياس المؤقت والمحول.",
+    "excerpt": "قدّر تكلفة أضواء السلسلة الخارجية لكل مساء من قياس المؤقت والمحول.",
+    "canonical": "https://worthcalc.win/ar/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+    "robots": "index,follow",
+    "ogTitle": "تكلفة أضواء السلسلة الخارجية لكل مساء: قِس المؤقت والمحول",
+    "ogDescription": "قدّر تكلفة أضواء السلسلة الخارجية لكل مساء من قياس المؤقت والمحول.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "تكلفة أضواء السلسلة الخارجية لكل مساء: قِس المؤقت والمحول",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/ar/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "تكلفة أضواء السلسلة الخارجية لكل مساء: قِس المؤقت والمحول",
+    "schemaFile": "116__ar__outdoor-string-lights-electricity-cost-per-evening-used.json"
+  }
+};

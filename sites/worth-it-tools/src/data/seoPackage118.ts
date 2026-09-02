@@ -1,0 +1,141 @@
+import type { ContentLocale } from '../consts';
+
+export interface SeoPackage118GuideMeta { key: string; packageId: '118'; locale: ContentLocale; articleSlug: string; title: string; seoTitle: string; metaDescription: string; excerpt: string; canonical: string; robots: 'index,follow'; ogTitle: string; ogDescription: string; ogImage: string; imageAlt: string; imageBrief: string; lastReviewed: string; related: string[]; breadcrumbLabel: string; schemaFile: string; }
+
+export const seoPackage118Guides: Record<string, SeoPackage118GuideMeta> = {
+  "en/electric-fireplace-electricity-cost-per-heating-hour-used": {
+    "key": "en/electric-fireplace-electricity-cost-per-heating-hour-used",
+    "packageId": "118",
+    "locale": "en",
+    "articleSlug": "electric-fireplace-electricity-cost-per-heating-hour-used",
+    "title": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+    "seoTitle": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode | WorthCalc",
+    "metaDescription": "Estimate electric-fireplace cost per heating hour by separating heater, flame display, and standby energy.",
+    "excerpt": "Estimate electric-fireplace cost per heating hour by separating heater, flame display, and standby energy.",
+    "canonical": "https://worthcalc.win/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+    "ogDescription": "Estimate electric-fireplace cost per heating hour by separating heater, flame display, and standby energy.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/en/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/en/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/en/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+    ],
+    "breadcrumbLabel": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+    "schemaFile": "118__en__electric-fireplace-electricity-cost-per-heating-hour-used.json"
+  },
+  "es/electric-fireplace-electricity-cost-per-heating-hour-used": {
+    "key": "es/electric-fireplace-electricity-cost-per-heating-hour-used",
+    "packageId": "118",
+    "locale": "es",
+    "articleSlug": "electric-fireplace-electricity-cost-per-heating-hour-used",
+    "title": "Coste eléctrico de chimenea eléctrica por hora de calefacción: separa la llama",
+    "seoTitle": "Coste eléctrico de chimenea eléctrica por hora de calefacción: separa la llama | WorthCalc",
+    "metaDescription": "Estima el coste por hora de calefacción separando calefactor, efecto de llama y espera.",
+    "excerpt": "Estima el coste por hora de calefacción separando calefactor, efecto de llama y espera.",
+    "canonical": "https://worthcalc.win/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Coste eléctrico de chimenea eléctrica por hora de calefacción: separa la llama",
+    "ogDescription": "Estima el coste por hora de calefacción separando calefactor, efecto de llama y espera.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Coste eléctrico de chimenea eléctrica por hora de calefacción: separa la llama",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/es/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/es/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/es/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/es/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/es/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+    ],
+    "breadcrumbLabel": "Coste eléctrico de chimenea eléctrica por hora de calefacción: separa la llama",
+    "schemaFile": "118__es__electric-fireplace-electricity-cost-per-heating-hour-used.json"
+  },
+  "zh/electric-fireplace-electricity-cost-per-heating-hour-used": {
+    "key": "zh/electric-fireplace-electricity-cost-per-heating-hour-used",
+    "packageId": "118",
+    "locale": "zh",
+    "articleSlug": "electric-fireplace-electricity-cost-per-heating-hour-used",
+    "title": "電壁爐每加熱小時電費：把火焰燈效與暖風分開",
+    "seoTitle": "電壁爐每加熱小時電費：把火焰燈效與暖風分開 | WorthCalc",
+    "metaDescription": "分開暖風、火焰燈效與待機用電，估算電壁爐每個加熱小時的電費。",
+    "excerpt": "分開暖風、火焰燈效與待機用電，估算電壁爐每個加熱小時的電費。",
+    "canonical": "https://worthcalc.win/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "電壁爐每加熱小時電費：把火焰燈效與暖風分開",
+    "ogDescription": "分開暖風、火焰燈效與待機用電，估算電壁爐每個加熱小時的電費。",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "電壁爐每加熱小時電費：把火焰燈效與暖風分開",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+    ],
+    "breadcrumbLabel": "電壁爐每加熱小時電費：把火焰燈效與暖風分開",
+    "schemaFile": "118__zh__electric-fireplace-electricity-cost-per-heating-hour-used.json"
+  },
+  "hi/electric-fireplace-electricity-cost-per-heating-hour-used": {
+    "key": "hi/electric-fireplace-electricity-cost-per-heating-hour-used",
+    "packageId": "118",
+    "locale": "hi",
+    "articleSlug": "electric-fireplace-electricity-cost-per-heating-hour-used",
+    "title": "Electric fireplace electricity cost per heating hour: flame mode अलग करें",
+    "seoTitle": "Electric fireplace electricity cost per heating hour: flame mode अलग करें | WorthCalc",
+    "metaDescription": "Heater, flame display और standby energy को अलग करके प्रति heating hour cost निकालें।",
+    "excerpt": "Heater, flame display और standby energy को अलग करके प्रति heating hour cost निकालें।",
+    "canonical": "https://worthcalc.win/hi/guides/electric-fireplace-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Electric fireplace electricity cost per heating hour: flame mode अलग करें",
+    "ogDescription": "Heater, flame display और standby energy को अलग करके प्रति heating hour cost निकालें।",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Electric fireplace electricity cost per heating hour: flame mode अलग करें",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/hi/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/hi/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/hi/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/hi/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+    ],
+    "breadcrumbLabel": "Electric fireplace electricity cost per heating hour: flame mode अलग करें",
+    "schemaFile": "118__hi__electric-fireplace-electricity-cost-per-heating-hour-used.json"
+  },
+  "ar/electric-fireplace-electricity-cost-per-heating-hour-used": {
+    "key": "ar/electric-fireplace-electricity-cost-per-heating-hour-used",
+    "packageId": "118",
+    "locale": "ar",
+    "articleSlug": "electric-fireplace-electricity-cost-per-heating-hour-used",
+    "title": "تكلفة المدفأة الكهربائية لكل ساعة تدفئة: افصل وضع اللهب",
+    "seoTitle": "تكلفة المدفأة الكهربائية لكل ساعة تدفئة: افصل وضع اللهب | WorthCalc",
+    "metaDescription": "قدّر تكلفة المدفأة الكهربائية لكل ساعة بفصل السخان وعرض اللهب والطاقة في الاستعداد.",
+    "excerpt": "قدّر تكلفة المدفأة الكهربائية لكل ساعة بفصل السخان وعرض اللهب والطاقة في الاستعداد.",
+    "canonical": "https://worthcalc.win/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "تكلفة المدفأة الكهربائية لكل ساعة تدفئة: افصل وضع اللهب",
+    "ogDescription": "قدّر تكلفة المدفأة الكهربائية لكل ساعة بفصل السخان وعرض اللهب والطاقة في الاستعداد.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "تكلفة المدفأة الكهربائية لكل ساعة تدفئة: افصل وضع اللهب",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/ar/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+      "/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/ar/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+    ],
+    "breadcrumbLabel": "تكلفة المدفأة الكهربائية لكل ساعة تدفئة: افصل وضع اللهب",
+    "schemaFile": "118__ar__electric-fireplace-electricity-cost-per-heating-hour-used.json"
+  }
+};

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/#article",
+      "headline": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+      "description": "احسب تكلفة مصباح حرارة الحوض لكل ساعة من قياس المصباح والمؤقت والطاقة في الاستعداد.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+          "item": "https://worthcalc.win/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/"
+        }
+      ]
+    }
+  ]
+}

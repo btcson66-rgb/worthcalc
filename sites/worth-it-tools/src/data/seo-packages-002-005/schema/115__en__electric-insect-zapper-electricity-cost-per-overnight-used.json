@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/#article",
+      "headline": "Electric Insect Zapper Electricity Cost Per Overnight Used: Include Standby",
+      "description": "Measure an electric insect zapper across one overnight window to estimate cost per night used.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Insect Zapper Electricity Cost Per Overnight Used: Include Standby",
+          "item": "https://worthcalc.win/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/"
+        }
+      ]
+    }
+  ]
+}

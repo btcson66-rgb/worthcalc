@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/#article",
+      "headline": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+      "description": "Aquarium heater और thermostat window को मापकर प्रति tank day electricity cost निकालें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aquarium heater electricity cost per tank day: thermostat cycles अलग करें",
+          "item": "https://worthcalc.win/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/"
+        }
+      ]
+    }
+  ]
+}

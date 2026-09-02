@@ -401,6 +401,12 @@ A cheaper apartment can still create a short-term cash squeeze from deposits and
 
 [moving break-even and cash bridge](/en/guides/rent-increase-vs-moving-break-even/)
 
+- [Childcare vs. Returning to Work](/en/guides/childcare-return-to-work-break-even/)
+
+- [A return-to-work plan can be profitable monthly and still require bridge cash before the first paycheck; test that startup gap against runway.](/en/guides/fulltime-vs-parttime-childcare-break-even/)
+
+- [Recalculate runway after debt payoff to verify that the eliminated payment actually improved resilience rather than being replaced by new fixed obligations.](/en/guides/post-debt-payoff-lifestyle-creep/)
+
 ## Sources and limitations
 
 CFPB — emergency fund and cash-flow guidance:

@@ -61,6 +61,8 @@ The standard APR applies to the remaining modeled balance from that month forwar
 
 Only if you add them explicitly as a recurring charge; the base formula doesn't assume any fee amount.
 
+- [After a balance reaches zero, decide where the former payment goes before new recurring costs absorb the freed cash flow.](/en/guides/post-debt-payoff-lifestyle-creep/)
+
 ## Sources
 
 - [Consumer Financial Protection Bureau — Appendix M1, Repayment Disclosures (Regulation Z)](https://www.consumerfinance.gov/rules-policy/regulations/1026/m1/), reviewed 2026-07-31

@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Prepay Rent Discount vs. Liquidity: Is Paying Months Upfront Actually Worth It?",
+      "description": "Compare an upfront rent discount with the cash you lose access to. Test your emergency floor, early-move risk and month-by-month liquidity.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/prepay-rent-discount-vs-liquidity/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/prepay-rent-discount-vs-liquidity.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Prepay Rent Discount vs. Liquidity",
+          "item": "https://worthcalc.win/en/guides/prepay-rent-discount-vs-liquidity/"
+        }
+      ]
+    }
+  ]
+}

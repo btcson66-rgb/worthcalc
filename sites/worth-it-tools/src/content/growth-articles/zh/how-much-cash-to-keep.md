@@ -194,3 +194,8 @@ breadcrumbLabel: "手上應該留多少現金？把「現金」拆成 4 種用�
 如果提高頭期會動用大量現金，應做一次買房前後的流動資產壓力測試。
 
 [頭期款 vs 現金](/zh/guides/down-payment-vs-post-purchase-liquidity/)
+- [現金買車 vs 車貸](/zh/guides/cash-vs-car-loan-liquidity-adjusted/)
+- [保險年繳 vs 月繳](/zh/guides/insurance-annual-vs-monthly-payment/)
+- [高 vs 低自負額](/zh/guides/high-vs-low-deductible-break-even/)
+- [租屋押金流動性](/zh/guides/rental-deposit-liquidity-cost/)
+

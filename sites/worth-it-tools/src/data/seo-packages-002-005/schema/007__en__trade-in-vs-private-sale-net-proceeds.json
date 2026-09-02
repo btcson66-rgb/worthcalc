@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/#article",
+      "headline": "Trade-In vs. Private Sale: Compare Net Proceeds, Time, Loan Payoff, and Bridge Cash",
+      "description": "Compare a dealer trade-in with selling your car privately. Model payoff, selling costs, bridge cash, transaction timing, and the real net proceeds.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/"
+      },
+      "url": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/",
+      "inLanguage": "en",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/trade-in-vs-private-sale-net-proceeds.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trade-In vs. Private Sale",
+          "item": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/"
+        }
+      ]
+    }
+  ]
+}

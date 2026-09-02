@@ -269,3 +269,5 @@ https://www.consumerfinance.gov/consumer-tools/debt-collection/
 債務排序確定後，如果手上是一筆一次性資金，再檢查全部還債是否會造成短期現金缺口。
 
 [一次性大筆收入分配](/zh/guides/windfall-debt-vs-cash-allocation/)
+
+- [債務還清後 錢怎麼分配](/zh/guides/post-debt-payoff-cashflow-plan/)

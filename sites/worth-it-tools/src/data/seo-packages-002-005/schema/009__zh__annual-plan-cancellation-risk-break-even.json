@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/#article",
+      "headline": "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本",
+      "description": "年繳方案便宜不代表一定划算。比較年繳折扣、預計使用月數、退款規則、取消風險與被鎖住的現金，算出真正回本月數。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/annual-plan-cancellation-risk-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "年繳 vs 月繳",
+          "item": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/"
+        }
+      ]
+    }
+  ]
+}

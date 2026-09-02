@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "先存再買 vs 現在分期怎麼比？用等待時間與確定融資成本做決策",
+      "description": "計畫性消費要不要分期？先算存到現金價需要幾個月、分期確定多付多少，以及等待是否會造成可量化替代成本。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/save-first-vs-installment-purchase/"
+      },
+      "image": "https://worthcalc.win/images/guides/save-first-vs-installment-purchase.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "先存再買 vs 分期",
+          "item": "https://worthcalc.win/zh/guides/save-first-vs-installment-purchase/"
+        }
+      ]
+    }
+  ]
+}

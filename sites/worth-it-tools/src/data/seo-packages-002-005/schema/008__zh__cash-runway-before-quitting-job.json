@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "離職前要準備多少現金？不要只用「幾個月預備金」，改做離職現金跑道",
+      "description": "準備離職時，不要直接用存款 ÷ 平均月支出。扣掉不能碰的安全底線、離職一次性成本與年度大帳單，再用下一筆可靠收入的日期建立真正的離職現金跑道。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/cash-runway-before-quitting-job/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/cash-runway-before-quitting-job.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "離職前要準備多少現金",
+          "item": "https://worthcalc.win/zh/guides/cash-runway-before-quitting-job/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/#article",
+      "headline": "After Debt Payoff: Stop Lifestyle Creep From Replacing the Payment You Just Eliminated",
+      "description": "Paying off debt frees cash flow, but new fixed costs can replace it. Use a shadow payment, capture rate, stress test, and 90-day baseline to keep the gain.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/"
+      },
+      "url": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/",
+      "inLanguage": "en",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/post-debt-payoff-lifestyle-creep.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "After Debt Payoff Lifestyle Creep",
+          "item": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/"
+        }
+      ]
+    }
+  ]
+}

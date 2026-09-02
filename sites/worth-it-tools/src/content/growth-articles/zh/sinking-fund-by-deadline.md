@@ -237,3 +237,5 @@ breadcrumbLabel: "目標基金每月要存多少？用期限反推 Sinking Fund�
 - Investor.gov, *Savings Goal Calculator*: https://www.investor.gov/financial-tools-calculators/calculators/savings-goal-calculator
 
 本文為一般教育與試算內容，不提供特定存款、投資或金融商品建議。
+
+- [多個 deadline sinking fund 同時運作時，建議再把所有到期日疊到年度 cash-flow calendar 檢查是否同季擠壓現金。](/zh/guides/annual-bill-cluster-cash-low-point/)

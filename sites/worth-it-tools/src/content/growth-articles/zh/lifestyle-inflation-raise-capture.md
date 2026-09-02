@@ -246,3 +246,5 @@ breadcrumbLabel: "加薪後生活膨脹"
 - CFPB, Financial well-being: https://www.consumerfinance.gov/consumer-tools/financial-well-being/about/
 
 「加薪留存率」為 WorthCalc 的透明編輯指標，不是政府、銀行或學術界的法定標準。本文為一般財務教育。
+
+- [加薪會出現生活膨脹，債務月付消失也一樣；兩者都可以用「先捕捉一部分、再允許升級」的方式管理。](/zh/guides/debt-free-fixed-cost-creep/)

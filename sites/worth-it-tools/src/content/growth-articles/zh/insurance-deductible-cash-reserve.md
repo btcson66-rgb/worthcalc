@@ -201,3 +201,7 @@ breadcrumbLabel: "保險自負額現金準備"
 - CFPB, Emergency savings and financial security: https://www.consumerfinance.gov/data-research/research-reports/emergency-savings-financial-security-insights-from-making-ends-meet-survey-and-consumer-credit-panel/
 
 實際自負額、承保範圍與理賠條件以你的保單為準。本文不是保險、法律或個別財務建議。
+
+- [保險年繳 vs 月繳](/zh/guides/insurance-annual-vs-monthly-payment/)
+
+- [高自負額 vs 低自負額](/zh/guides/high-vs-low-deductible-break-even/)

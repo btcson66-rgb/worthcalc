@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/extra-room-home-office-incremental-rent-break-even/#article",
+      "headline": "為居家工作多租一房值不值得？用「增量房租」比較 coworking、通勤與可計費收入",
+      "description": "為遠距工作多租一房，不要把整間房租算工作成本。比較額外房租、coworking、通勤節省與真正可增加的可計費收入，找回本點。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/extra-room-home-office-incremental-rent-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/extra-room-home-office-incremental-rent-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/extra-room-home-office-incremental-rent-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "居家辦公 多租一房 值不值得",
+          "item": "https://worthcalc.win/zh/guides/extra-room-home-office-incremental-rent-break-even/"
+        }
+      ]
+    }
+  ]
+}

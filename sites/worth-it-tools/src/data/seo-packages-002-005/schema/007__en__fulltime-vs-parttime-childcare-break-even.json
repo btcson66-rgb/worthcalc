@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/#article",
+      "headline": "Full-Time vs. Part-Time Return to Work: Childcare Break-Even, Benefits, Commute, and Startup Cash",
+      "description": "Compare full-time and part-time return-to-work options using take-home pay, childcare tiers, commute, benefits, startup cash, and marginal workdays.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/"
+      },
+      "url": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/",
+      "inLanguage": "en",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/fulltime-vs-parttime-childcare-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/en/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Full-Time vs. Part-Time Childcare Break-Even",
+          "item": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/"
+        }
+      ]
+    }
+  ]
+}

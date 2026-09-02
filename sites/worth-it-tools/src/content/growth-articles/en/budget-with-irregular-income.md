@@ -74,3 +74,9 @@ Treat it as a planned allocation with its own line in the budget — it's still 
 Open the related calculator, enter the freelancer example above, and then replace it with your own income floor and monthly-equivalent bills.
 
 [Personal Monthly Budget Builder](/en/tools/budget-builder/)
+
+- [prepay rent discount vs liquidity](/en/guides/prepay-rent-discount-vs-liquidity/)
+
+- [共同家庭帳戶最低餘額](/zh/guides/joint-account-minimum-cash-floor/)
+
+- [租金預繳折扣 值得嗎](/zh/guides/prepay-rent-discount-vs-liquidity/)

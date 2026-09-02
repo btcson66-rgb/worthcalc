@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "保險年繳 vs 月繳怎麼比？把分期加價與現金占用一起算",
+      "description": "同一保障下比較保險年繳與月繳：先算全年實付差額，再看一次年繳會占用多少流動現金。不要假設每家公司分期成本相同。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/insurance-annual-vs-monthly-payment/"
+      },
+      "image": "https://worthcalc.win/images/guides/insurance-annual-vs-monthly-payment.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "保險年繳 vs 月繳",
+          "item": "https://worthcalc.win/zh/guides/insurance-annual-vs-monthly-payment/"
+        }
+      ]
+    }
+  ]
+}

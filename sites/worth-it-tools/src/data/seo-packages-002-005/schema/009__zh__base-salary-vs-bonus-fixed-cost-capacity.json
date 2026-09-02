@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/#article",
+      "headline": "高底薪 vs 高獎金怎麼選？不要只比年薪，先測「固定支出承受力」與獎金落空風險",
+      "description": "比較高底薪與高獎金工作，不只看期望年薪。用保證收入、獎金低／中／高情境、固定支出與現金緩衝，判斷哪個 Offer 更耐風險。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/base-salary-vs-bonus-fixed-cost-capacity.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "高底薪 vs 高獎金",
+          "item": "https://worthcalc.win/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/"
+        }
+      ]
+    }
+  ]
+}

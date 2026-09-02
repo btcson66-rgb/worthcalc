@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/ai-tool-realized-time-savings-break-even/#article",
+      "headline": "AI 工具訂閱真的回本嗎？不要用「宣稱節省時間」，只算你實際追回的時間與可用產出",
+      "description": "AI ROI 不要只用訂閱費與理論節省時間。記錄實際任務前後工時、返工與驗證時間，再判斷省下的時間是否真的變成收入或可用閒暇。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/ai-tool-realized-time-savings-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/ai-tool-realized-time-savings-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/ai-tool-realized-time-savings-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI 工具訂閱值不值得",
+          "item": "https://worthcalc.win/zh/guides/ai-tool-realized-time-savings-break-even/"
+        }
+      ]
+    }
+  ]
+}

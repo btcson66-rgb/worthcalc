@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import remarkMath from 'remark-math';
 import { createSitemapLastmodResolver } from './scripts/sitemap-lastmod.mjs';
 import deindexedRegistry from './src/data/deindexed-urls.json' with { type: 'json' };
 
@@ -35,6 +36,9 @@ export default defineConfig({
     // Inline all stylesheets: removes the render-blocking CSS request
     // (Lighthouse mobile flagged /_astro/*.css as render-blocking).
     inlineStylesheets: 'always',
+  },
+  markdown: {
+    remarkPlugins: [remarkMath],
   },
   integrations: [
     sitemap({

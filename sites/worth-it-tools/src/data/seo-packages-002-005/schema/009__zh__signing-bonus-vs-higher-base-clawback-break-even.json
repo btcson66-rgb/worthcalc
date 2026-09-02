@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/#article",
+      "headline": "簽約獎金 vs 更高底薪怎麼比？把留任期與 Clawback 返還條款放進 Break-Even",
+      "description": "比較高簽約獎金與高底薪 Offer：把留任月數、返還條款、稅後可用現金與預計任職時間放進，找出哪個方案真正回本。",
+      "inLanguage": "zh-TW",
+      "dateModified": "2026-09-01",
+      "datePublished": "2026-09-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win"
+      },
+      "image": "https://worthcalc.win/images/guides/signing-bonus-vs-higher-base-clawback-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "簽約獎金 vs 高底薪",
+          "item": "https://worthcalc.win/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/"
+        }
+      ]
+    }
+  ]
+}

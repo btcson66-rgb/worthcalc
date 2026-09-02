@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "單薪家庭收入中斷怎麼測？從必要支出算現金跑道與削減順序",
+      "description": "單薪家庭最大的風險是收入來源集中。用必要支出、可動用現金、可延後支出與替代收入，計算失去收入後能撐多久。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/single-income-household-stress-test/"
+      },
+      "image": "https://worthcalc.win/images/guides/single-income-household-stress-test.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "單薪家庭壓力測試",
+          "item": "https://worthcalc.win/zh/guides/single-income-household-stress-test/"
+        }
+      ]
+    }
+  ]
+}

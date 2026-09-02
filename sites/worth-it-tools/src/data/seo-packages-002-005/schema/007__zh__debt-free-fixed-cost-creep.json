@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/#article",
+      "headline": "債務還清後為什麼還是沒錢？小心月付消失後被新的固定支出吃掉",
+      "description": "車貸、信貸、卡債還清後，原本月付若立刻被訂閱、升級與新分期取代，財務彈性不會改善。用 Debt-Payment Capture Rate 重建現金流。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/"
+      },
+      "url": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/debt-free-fixed-cost-creep.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "債務還清後固定支出反彈",
+          "item": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/"
+        }
+      ]
+    }
+  ]
+}

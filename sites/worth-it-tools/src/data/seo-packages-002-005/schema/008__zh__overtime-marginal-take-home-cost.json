@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "加班到底多賺多少？把加班費、托育、通勤、餐費與額外時間算成真正邊際收益",
+      "description": "加班費不是全部多賺的錢。用實際增加薪資，扣掉額外托育、交通、餐費與其他因加班才發生的成本，再除以加班＋新增通勤／交接時間，算真正邊際時薪。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/overtime-marginal-take-home-cost/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/overtime-marginal-take-home-cost.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "加班到底多賺多少",
+          "item": "https://worthcalc.win/zh/guides/overtime-marginal-take-home-cost/"
+        }
+      ]
+    }
+  ]
+}

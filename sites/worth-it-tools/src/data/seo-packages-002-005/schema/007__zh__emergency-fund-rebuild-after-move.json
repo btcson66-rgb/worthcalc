@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/#article",
+      "headline": "搬家把緊急預備金花掉了怎麼補？先重建最低安全墊，再恢復完整目標",
+      "description": "押金、搬家費、家具與重疊租金可能快速消耗現金。用搬家後必要支出、最低安全墊、已知新支出與每月可補回金額，規劃恢復路徑。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/"
+      },
+      "url": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/",
+      "inLanguage": "zh-Hant",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team",
+        "url": "https://worthcalc.win/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "image": "https://worthcalc.win/images/guides/emergency-fund-rebuild-after-move.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "指南",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "搬家後緊急預備金重建",
+          "item": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/"
+        }
+      ]
+    }
+  ]
+}

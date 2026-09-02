@@ -260,3 +260,5 @@ CFPB — An essential guide to building an emergency fund：
 https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/
 
 延伸閱讀：WorthCalc《現金流緩衝 vs 緊急預備金》、《年度支出怎麼換算月預算》、《緊急預備金要存多少？》。
+
+- [若換工作會拉長薪資入帳間隔，先設定帳戶最低現金底線，再檢查 Day 0／30／60／90 是否跌破。](/zh/guides/job-change-pay-gap-cashflow/)

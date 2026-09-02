@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "現金買車 vs 車貸怎麼比？把確定利息與買車後流動性放同一模型",
+      "description": "現金買車省下融資成本，但會一次吃掉大量現金；車貸保留流動性但增加確定利息。用同一車價做流動性調整比較。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-02",
+      "datePublished": "2026-08-31",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc",
+        "url": "https://worthcalc.win/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/cash-vs-car-loan-liquidity-adjusted/"
+      },
+      "image": "https://worthcalc.win/images/guides/cash-vs-car-loan-liquidity-adjusted.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "現金買車 vs 車貸",
+          "item": "https://worthcalc.win/zh/guides/cash-vs-car-loan-liquidity-adjusted/"
+        }
+      ]
+    }
+  ]
+}

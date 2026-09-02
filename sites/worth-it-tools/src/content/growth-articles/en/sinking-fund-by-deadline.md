@@ -283,6 +283,8 @@ That depends on time horizon and risk tolerance. This page does not recommend pr
 ### What happens when the goal is fully funded?
 Stop the contribution or redirect it to another named goal so the freed cash flow does not disappear into unplanned spending.
 
+- [When multiple sinking funds run at once, place every deadline on one annual cash-flow calendar so the same monthly surplus is not promised to several bills.](/en/guides/annual-bills-cash-flow-low-point/)
+
 ## Sources and Limitations
 
 - CFPB, *My savings rule to live by*: https://www.consumerfinance.gov/documents/5152/cfpb_worksheet_my-savings-rule-to-live-by.pdf

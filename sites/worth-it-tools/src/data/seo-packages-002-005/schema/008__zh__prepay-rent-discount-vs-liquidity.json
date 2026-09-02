@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "租金一次預繳有折扣值得嗎？把確定折扣、現金占用與提前退租條款一起算",
+      "description": "房東提出半年或一年租金預繳折扣時，不要只算折扣率。把確定節省、預繳後最低現金、押金、提前退租／退款條款與資金被占用的期間一起比較。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/prepay-rent-discount-vs-liquidity/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/prepay-rent-discount-vs-liquidity.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "租金一次預繳有折扣值得嗎",
+          "item": "https://worthcalc.win/zh/guides/prepay-rent-discount-vs-liquidity/"
+        }
+      ]
+    }
+  ]
+}

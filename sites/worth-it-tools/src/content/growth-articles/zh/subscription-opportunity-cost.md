@@ -274,7 +274,7 @@ breadcrumbLabel: "訂閱的機會成本怎麼算？每月499元，10年不只是
 
 ## 延伸閱讀
 
-- [訂閱成本怎麼算？](/zh/subscription-creep/)
+- [訂閱成本怎麼算？](/zh/tools/subscription-audit/)
 - [複利成長工具](/zh/tools/compound-growth/)
 - [Budget Builder](/zh/tools/budget-builder/)
 - [儲蓄率怎麼算？](/zh/how-to-calculate-savings-rate/)

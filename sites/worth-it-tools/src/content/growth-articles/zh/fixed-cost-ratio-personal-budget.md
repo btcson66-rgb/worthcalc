@@ -252,3 +252,5 @@ Budget Builder 可先把週、月、年支出標準化；Annual Expenses Monthly
 固定成本率上升時，可再檢查是否是加薪後把新增收入轉成更高房租、車貸或訂閱。
 
 [固定成本型生活膨脹](/zh/guides/lifestyle-inflation-raise-capture/)
+
+- [獎金制收入固定支出](/zh/guides/variable-bonus-income-fixed-obligations/)

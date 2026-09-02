@@ -264,6 +264,10 @@ Not necessarily. Premium differences, claim risk, coverage terms, and liquidity 
 ### Can I count my credit-card limit as emergency reserves?
 It is better treated as backup borrowing capacity, not as a liquid asset you own.
 
+- [high vs low insurance deductible](/en/guides/high-vs-low-insurance-deductible-break-even/)
+
+- [annual vs monthly insurance payments](/en/guides/annual-vs-monthly-insurance-payment/)
+
 ## Sources and limitations
 
 - CFPB educational handout, “What is insurance?”: https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_what-is-insurance_handout.pdf

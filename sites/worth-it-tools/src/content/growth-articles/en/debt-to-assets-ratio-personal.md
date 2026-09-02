@@ -4,7 +4,7 @@ articleSlug: "debt-to-assets-ratio-personal"
 locale: "en"
 title: "Personal Debt-to-Assets Ratio: A Balance-Sheet Metric, Not a Lending DTI Rule"
 description: "Calculate personal debt-to-assets ratio from total liabilities and assets, then learn why it is not DTI, why valuation matters, and why no universal cutoff fits every household."
-relatedTool: "/en/tools/dti-calculator/"
+relatedTool: "/en/tools/dti-dbr/"
 lastReviewed: "2026-08-30"
 draft: false
 packageId: "002"

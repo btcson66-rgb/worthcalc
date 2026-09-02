@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "車子大修後還要開多久才回本？把維修費、換車成本與持有期放進同一張表",
+      "description": "車子要修 5 萬、9 萬甚至更多時，不要只問修不修。用維修後可靠月份、換車完整月成本、停車與保險差、停駛成本與退出價值，算這次大修至少要買到幾個月才合理。",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/car-major-repair-hold-period-break-even/"
+      },
+      "dateModified": "2026-09-01",
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "image": "/images/guides/car-major-repair-hold-period-break-even.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://worthcalc.win/zh/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "車子大修後還要開多久才回本",
+          "item": "https://worthcalc.win/zh/guides/car-major-repair-hold-period-break-even/"
+        }
+      ]
+    }
+  ]
+}

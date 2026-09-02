@@ -251,6 +251,14 @@ This page does not make an individualized recommendation. Compare the certain lo
 ### What tool should I use next?
 Use WorthCalc’s Car Affordability calculator for the full monthly ownership cost, then compare post-purchase cash with the Personal Liquidity Ratio guide.
 
+- [60 vs. 72 vs. 84 Month Car Loan](/en/guides/car-loan-60-vs-72-vs-84-early-exit/)
+
+- [Cash vs. Financing a Car](/en/guides/cash-vs-financing-car-liquidity/)
+
+- [A larger down payment can reduce future negative-equity exposure, but the liquidity tradeoff should be tested separately before increasing cash at signing.](/en/guides/auto-loan-negative-equity-rollover-cost/)
+
+- [If sale proceeds become the next down payment, compare trade-in and private-sale net proceeds after payoff and unavoidable transaction costs.](/en/guides/trade-in-vs-private-sale-net-proceeds/)
+
 ## Sources and limitations
 
 - CFPB, “How does a down payment affect my auto loan?”: https://www.consumerfinance.gov/ask-cfpb/how-does-a-down-payment-affect-my-auto-loan-en-773/

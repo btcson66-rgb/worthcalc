@@ -71,6 +71,12 @@ A monthly budget should also reserve for predictable annual bills. Convert them 
 
 [Annual Bills to Monthly Budget: How to Normalize Irregular Expenses](/en/guides/annual-bills-monthly-equivalent/)
 
+- [childcare return to work break even](/en/guides/childcare-return-to-work-break-even/)
+
+- [Second-order check: bonus volatility fixed cost capacity](/en/guides/bonus-volatility-fixed-cost-capacity/)
+
+- [Second-order check: benefits replacement cost vs salary](/en/guides/benefits-replacement-cost-vs-salary/)
+
 ## Sources
 
 - [Internal Revenue Service — Estimated Taxes](https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes), reviewed 2026-07-31

@@ -236,3 +236,9 @@ WorthCalc 不預測二手車價格；你可以用保守、基準、樂觀三個�
 - CFPB, auto-loan negotiation and total-cost guidance: https://www.consumerfinance.gov/ask-cfpb/what-things-can-i-negotiate-when-shopping-for-a-car-or-auto-loan-en-2132/
 
 本文為一般教育試算，不是車貸核准、利率、保險或購車建議。實際條件以書面契約與金融機構報價為準。
+
+- [車貸60／72／84期比較](/zh/guides/car-loan-60-72-84-early-exit/)
+
+- [頭期款降低貸款本金，也會影響未來換車時的負資產風險；可進一步用負資產滾貸模型測試。](/zh/guides/auto-loan-negative-equity-rollover-cost/)
+
+- [如果舊車處分款會成為下一台車的頭期款，先比較 Trade-in 與自售最後真正可投入的淨額。](/zh/guides/trade-in-vs-private-sale-net-proceeds/)

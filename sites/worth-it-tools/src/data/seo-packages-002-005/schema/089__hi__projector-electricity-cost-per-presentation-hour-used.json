@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/projector-electricity-cost-per-presentation-hour-used/#article",
+      "headline": "Projector electricity cost per presentation hour used: include warm-up and cooling",
+      "description": "Measured lamp or LED operation, warm-up, cooling और standby energy से projector की प्रति presentation hour cost निकालें; computer और room equipment अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/projector-electricity-cost-per-presentation-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projector electricity cost per presentation hour used: include warm-up and cooling",
+          "item": "https://worthcalc.win/hi/guides/projector-electricity-cost-per-presentation-hour-used/"
+        }
+      ]
+    }
+  ]
+}

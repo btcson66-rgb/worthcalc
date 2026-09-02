@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/projector-electricity-cost-per-presentation-hour-used/#article",
+      "headline": "Projector Electricity Cost Per Presentation Hour Used: Include Warm-Up and Cooling",
+      "description": "Estimate projector electricity cost per presentation hour from measured lamp or LED operation, warm-up, cooling, and standby energy, separating the computer and room equipment.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/projector-electricity-cost-per-presentation-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projector Electricity Cost Per Presentation Hour Used: Include Warm-Up and Cooling",
+          "item": "https://worthcalc.win/en/guides/projector-electricity-cost-per-presentation-hour-used/"
+        }
+      ]
+    }
+  ]
+}

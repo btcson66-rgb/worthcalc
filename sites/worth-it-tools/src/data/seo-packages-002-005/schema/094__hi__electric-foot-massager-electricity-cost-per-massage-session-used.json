@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/electric-foot-massager-electricity-cost-per-massage-session-used/#article",
+      "headline": "Electric foot massager cost per massage session used: separate standby and heat",
+      "description": "Measured motor, heat, pressure और standby energy से electric foot massager की प्रति massage session cost निकालें; comfort claims और ownership costs अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/electric-foot-massager-electricity-cost-per-massage-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric foot massager cost per massage session used: separate standby and heat",
+          "item": "https://worthcalc.win/hi/guides/electric-foot-massager-electricity-cost-per-massage-session-used/"
+        }
+      ]
+    }
+  ]
+}

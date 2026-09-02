@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/projector-electricity-cost-per-presentation-hour-used/#article",
+      "headline": "Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento",
+      "description": "Estima el coste eléctrico de un proyector por hora de presentación con energía medida de funcionamiento, calentamiento, enfriamiento y espera, separando ordenador y sala.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/projector-electricity-cost-per-presentation-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento",
+          "item": "https://worthcalc.win/es/guides/projector-electricity-cost-per-presentation-hour-used/"
+        }
+      ]
+    }
+  ]
+}

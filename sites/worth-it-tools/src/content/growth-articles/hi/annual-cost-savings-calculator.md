@@ -63,3 +63,7 @@ draft: false
 ### अलग उपयोग-सीमा हो तो?
 
 दोनों योजनाओं पर अपना वास्तविक उपयोग लगाएँ और अधिक उपयोग का एक परिदृश्य भी चलाएँ।
+
+## वास्तविक मूल्य के नए निर्णय
+
+इस समूह में delivery, लाभ, कवरेज और भुगतान समय को एक ही संख्या में छिपाने के बजाय अलग किया गया है। [वास्तविक delivery cost](/hi/guides/true-cost-of-convenience-delivery/), [free-shipping threshold](/hi/guides/true-cost-of-free-shipping-threshold/), [extended warranty](/hi/guides/true-cost-of-extended-warranty/), [BNPL की लागत](/hi/guides/true-cost-of-buy-now-pay-later/), [rental car total](/hi/guides/true-cost-of-rental-car/), [home service plan](/hi/guides/true-cost-of-home-service-plan/) और [paid feature upgrade](/hi/guides/true-cost-of-upgrade-feature/) अपने-अपने उपयोग और अनुबंध के आधार पर अलग परिणाम देते हैं।

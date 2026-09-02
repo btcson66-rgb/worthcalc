@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/bread-maker-cost-per-loaf-used/#article",
+      "headline": "تكلفة آلة صنع الخبز لكل رغيف: احسب طاقة العجن والخبز",
+      "description": "قدّر تكلفة آلة صنع الخبز لكل رغيف من طاقة العجن والتخمير والخبز المقاسة، وافصل الكهرباء عن المكونات ووقت العمل.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/bread-maker-cost-per-loaf-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة آلة صنع الخبز لكل رغيف: احسب طاقة العجن والخبز",
+          "item": "https://worthcalc.win/ar/guides/bread-maker-cost-per-loaf-used/"
+        }
+      ]
+    }
+  ]
+}

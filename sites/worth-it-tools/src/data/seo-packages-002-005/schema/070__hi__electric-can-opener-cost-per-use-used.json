@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/electric-can-opener-cost-per-use-used/#article",
+      "headline": "Electric can opener cost per use used: measure motor time, not rated watts",
+      "description": "Actual cutting के wall-meter reading से electric can opener cost per use निकालें; केवल normal repeated starts को include करें。",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/electric-can-opener-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric can opener cost per use used: measure motor time, not rated watts",
+          "item": "https://worthcalc.win/hi/guides/electric-can-opener-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

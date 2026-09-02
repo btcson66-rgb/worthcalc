@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-can-opener-cost-per-use-used/#article",
+      "headline": "電動開罐器每次使用成本：量測馬達時間而非額定瓦數",
+      "description": "用牆上電表量測實際切罐的讀值，估算電動開罐器每次電費；只有平常會重開時才把重複啟動算入。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-can-opener-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電動開罐器每次使用成本：量測馬達時間而非額定瓦數",
+          "item": "https://worthcalc.win/zh/guides/electric-can-opener-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

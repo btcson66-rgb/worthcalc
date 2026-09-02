@@ -1,9 +1,16 @@
 {
-  "maxUrls": 940,
   "currentUrls": 937,
-  "reviewedAt": "2026-09-02",
-  "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
-  "amendedOn": "2026-09-03",
-  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Packages 065-070 add a coherent five-locale small kitchen appliance unit-cost cluster (30 routes) for bread-maker, food-dehydrator, yogurt-maker, egg-cooker, electric-lunch-box, and can-opener routines; the cap is raised 910 -> 940 before implementation.",
-  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be backed by written GA4/GSC evidence, reliable sources, a distinct human search intent, substantive copy, and sitemap reconciliation. Future writing batches are capped at 5 pages; related batches should accumulate into a coherent 30-60 page cluster before one deployment. Packages 047-052 add cleaning, boiling, brewing, drying, and steaming intents; packages 053-058 add cooking-cycle and prep-session intents for small kitchen appliances; packages 059-064 extend the cluster to pressure cooking, griddling, mixing, and espresso routines; packages 065-070 extend the same measured unit-cost method to baking, dehydration, incubation, reheating, and short motor-use routines, all backed by EIA measurement and price context, ENERGY STAR electric-cooking guidance, and CFPB spending context."
+  "recordedAt": "2026-09-02",
+  "capRemoved": {
+    "on": "2026-09-02",
+    "by": "owner",
+    "decision": "Lift the URL cap. The site is scaling SEO pages up deliberately, and every release had come to mean editing maxUrls first -- the guard had become paperwork rather than a decision.",
+    "whatRemains": "check-url-budget.mjs no longer fails the build on a number. It still prints the URL count and the delta against the last recorded build every run, so the growth rate stays visible in the verify output instead of disappearing."
+  },
+  "routeStandards": "Every new route must be backed by written GA4/GSC evidence, reliable sources, a distinct human search intent, substantive copy, and sitemap reconciliation. Future writing batches are capped at 5 pages; related batches should accumulate into a coherent 30-60 page cluster before one deployment. Packages 047-052 add cleaning, boiling, brewing, drying, and steaming intents; packages 053-058 add cooking-cycle and prep-session intents for small kitchen appliances; packages 059-064 extend the cluster to pressure cooking, griddling, mixing, and espresso routines; packages 065-070 extend the same measured unit-cost method to baking, dehydration, incubation, reheating, and short motor-use routines, all backed by EIA measurement and price context, ENERGY STAR electric-cooking guidance, and CFPB spending context.",
+  "history": {
+    "note": "Kept as the record of a real incident. Do not delete: this is why the counter exists at all.",
+    "2026-07-25": "Site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. GSC impressions fell from 87/day to 3/day and stayed there. Nothing in the pipeline noticed the URL count moving, which is why the cap was introduced.",
+    "2026-09-02": "Cap lifted. It stood at 940 with the sitemap at 937, having been raised repeatedly through SEO clusters 023-064."
+  }
 }

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/stand-mixer-cost-per-mixing-session-used/#article",
+      "headline": "Stand mixer cost per mixing session used: motor time और attachments गिनें",
+      "description": "Whisking, kneading और mixing settings की measured motor energy से stand mixer session cost निकालें; motor rating पूरी recipe की energy नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/stand-mixer-cost-per-mixing-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Stand mixer cost per mixing session used: motor time और attachments गिनें",
+          "item": "https://worthcalc.win/hi/guides/stand-mixer-cost-per-mixing-session-used/"
+        }
+      ]
+    }
+  ]
+}

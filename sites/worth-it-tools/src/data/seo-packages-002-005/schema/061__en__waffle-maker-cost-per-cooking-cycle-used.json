@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/waffle-maker-cost-per-cooking-cycle-used/#article",
+      "headline": "Waffle Maker Cost Per Cooking Cycle Used: Include Preheat and Repeated Plates",
+      "description": "Estimate a waffle maker electricity cost per cooking cycle using measured preheat and plate energy, batter quantity, and the number of waffles actually finished instead of assuming the heater draws its maximum continuously.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/waffle-maker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Waffle Maker Cost Per Cooking Cycle Used: Include Preheat and Repeated Plates",
+          "item": "https://worthcalc.win/en/guides/waffle-maker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -118,6 +118,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/toaster-cost-per-use-used',
   'guides/blender-cost-per-blending-session-used',
   'guides/food-processor-cost-per-prep-session-used',
+  'guides/electric-pressure-cooker-cost-per-cooking-cycle-used',
+  'guides/sandwich-maker-cost-per-use-used',
+  'guides/waffle-maker-cost-per-cooking-cycle-used',
+  'guides/electric-griddle-cost-per-cooking-hour-used',
+  'guides/stand-mixer-cost-per-mixing-session-used',
+  'guides/espresso-machine-cost-per-shot-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

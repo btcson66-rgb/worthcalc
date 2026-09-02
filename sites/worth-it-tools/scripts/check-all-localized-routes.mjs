@@ -70,6 +70,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/streaming-cost-per-watched-hour',
   'guides/online-course-cost-per-completed-lesson',
   'guides/tool-rental-cost-per-project',
+  'guides/cloud-storage-cost-per-retained-gb',
+  'guides/mobile-data-cost-per-gb-used',
+  'guides/event-ticket-cost-per-attended-hour',
+  'guides/language-class-cost-per-completed-session',
+  'guides/meal-delivery-plan-cost-per-eaten-meal',
+  'guides/software-add-on-cost-per-active-seat',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

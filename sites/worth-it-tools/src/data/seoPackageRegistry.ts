@@ -5,6 +5,7 @@ import { seoPackage012Guides } from './seoPackage012';
 import { seoPackage013Guides } from './seoPackage013';
 import { seoPackage014Guides } from './seoPackage014';
 import { seoPackage015Guides } from './seoPackage015';
+import { seoPackage016Guides } from './seoPackage016';
 
 /** Single route registry for staged editorial packages. */
-export const seoPackageGuides = { ...seoPackages002to009, ...seoPackage010Guides, ...seoPackage011Guides, ...seoPackage012Guides, ...seoPackage013Guides, ...seoPackage014Guides, ...seoPackage015Guides };
+export const seoPackageGuides = { ...seoPackages002to009, ...seoPackage010Guides, ...seoPackage011Guides, ...seoPackage012Guides, ...seoPackage013Guides, ...seoPackage014Guides, ...seoPackage015Guides, ...seoPackage016Guides };

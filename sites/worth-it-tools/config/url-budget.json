@@ -1,9 +1,9 @@
 {
   "maxUrls": 540,
-  "currentUrls": 502,
+  "currentUrls": 537,
   "reviewedAt": "2026-09-02",
   "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
   "amendedOn": "2026-09-02",
-  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Package 011 adds a coherent subscription and membership cost cluster in five locales (35 routes) using the same low-volume GA4/GSC signals, official CFPB/FTC sources, substantive final copy, and a dedicated build/readback check. The cap is raised 500 -> 540 to retain review headroom without bypassing the budget gate.",
+  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Package 012 adds a coherent Costco membership, reward, fuel, and renewal decision cluster in five locales (35 routes) using fresh low-volume GA4/GSC signals, official Costco/CFPB sources, substantive final copy, and a dedicated build/readback check. The cap is raised 500 -> 540 to retain review headroom without bypassing the budget gate.",
   "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be backed by written GA4/GSC evidence, reliable sources, a distinct human search intent, substantive copy, and sitemap reconciliation. Later packages must remain grouped by a coherent topic cluster; the per-batch ceiling is 35 pages."
 }

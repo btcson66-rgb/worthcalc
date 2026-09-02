@@ -43,6 +43,13 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/prepaid-balance-expiration-cost',
   'guides/minimum-spend-fee-waiver-break-even',
   'guides/billing-date-cash-flow-overlap',
+  'guides/costco-executive-break-even-eligible-spend',
+  'guides/costco-membership-fee-break-even-savings',
+  'guides/costco-household-card-break-even-use',
+  'guides/costco-gas-detour-break-even',
+  'guides/costco-reward-exclusion-effective-rate',
+  'guides/costco-reward-cap-usage-break-even',
+  'guides/costco-renewal-refund-reward-timing',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/bread-maker-cost-per-loaf-used/#article",
+      "headline": "Coste de la panificadora por pan: reparte amasado y horneado",
+      "description": "Calcula el coste eléctrico de una panificadora por pan con energía medida durante amasado, fermentación y horneado, separando electricidad, ingredientes y tiempo.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/bread-maker-cost-per-loaf-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la panificadora por pan: reparte amasado y horneado",
+          "item": "https://worthcalc.win/es/guides/bread-maker-cost-per-loaf-used/"
+        }
+      ]
+    }
+  ]
+}

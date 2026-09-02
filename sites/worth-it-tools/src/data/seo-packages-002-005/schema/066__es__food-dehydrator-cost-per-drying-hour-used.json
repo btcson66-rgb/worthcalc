@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/food-dehydrator-cost-per-drying-hour-used/#article",
+      "headline": "Coste del deshidratador de alimentos por hora de secado",
+      "description": "Calcula el coste eléctrico de un deshidratador por hora con energía medida y bandejas realmente ocupadas, sin suponer que la potencia nominal funciona continuamente.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/food-dehydrator-cost-per-drying-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del deshidratador de alimentos por hora de secado",
+          "item": "https://worthcalc.win/es/guides/food-dehydrator-cost-per-drying-hour-used/"
+        }
+      ]
+    }
+  ]
+}

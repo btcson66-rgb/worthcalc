@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-lunch-box-cost-per-heating-cycle-used/#article",
+      "headline": "電熱便當盒每次加熱成本：分開預熱、保溫與等待",
+      "description": "依餐點、裝載量、加熱與保溫時間的牆上實測能源，估算電熱便當盒每次成本，不把變壓器標示功率當成耗電。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-lunch-box-cost-per-heating-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電熱便當盒每次加熱成本：分開預熱、保溫與等待",
+          "item": "https://worthcalc.win/zh/guides/electric-lunch-box-cost-per-heating-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

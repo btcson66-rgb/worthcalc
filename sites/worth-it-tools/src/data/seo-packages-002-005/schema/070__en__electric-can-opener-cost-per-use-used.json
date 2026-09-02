@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-can-opener-cost-per-use-used/#article",
+      "headline": "Electric Can Opener Cost Per Use Used: Measure Motor Time, Not Rated Watts",
+      "description": "Work out an electric can opener electricity cost per use from the wall-meter reading for the actual cut, including repeated starts only when they occur in normal use.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-can-opener-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Can Opener Cost Per Use Used: Measure Motor Time, Not Rated Watts",
+          "item": "https://worthcalc.win/en/guides/electric-can-opener-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

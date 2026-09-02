@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-yogurt-maker-cost-per-batch-used/#article",
+      "headline": "Coste de la yogurtera eléctrica por lote: incluye la incubación",
+      "description": "Calcula el coste de una yogurtera por lote midiendo el ciclo de calentamiento durante la incubación y separando leche, cultivo y refrigeración.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-yogurt-maker-cost-per-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la yogurtera eléctrica por lote: incluye la incubación",
+          "item": "https://worthcalc.win/es/guides/electric-yogurt-maker-cost-per-batch-used/"
+        }
+      ]
+    }
+  ]
+}

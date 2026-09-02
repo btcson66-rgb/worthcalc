@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-egg-cooker-cost-per-cooking-cycle-used/#article",
+      "headline": "電煮蛋器每次烹調循環成本：計入加熱與用水量",
+      "description": "依選定水位與雞蛋數量量測牆上能源，估算電煮蛋器每次循環電費，不把最大額定功率當成單次耗電。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-egg-cooker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電煮蛋器每次烹調循環成本：計入加熱與用水量",
+          "item": "https://worthcalc.win/zh/guides/electric-egg-cooker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

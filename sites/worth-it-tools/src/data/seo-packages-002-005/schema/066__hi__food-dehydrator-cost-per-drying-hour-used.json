@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/food-dehydrator-cost-per-drying-hour-used/#article",
+      "headline": "Food dehydrator cost per drying hour used: measure heater and fan runtime",
+      "description": "Wall-meter energy और इस्तेमाल की गई trays से food dehydrator cost per drying hour निकालें; rated wattage को लगातार चलने वाला न मानें。",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/food-dehydrator-cost-per-drying-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Food dehydrator cost per drying hour used: measure heater and fan runtime",
+          "item": "https://worthcalc.win/hi/guides/food-dehydrator-cost-per-drying-hour-used/"
+        }
+      ]
+    }
+  ]
+}

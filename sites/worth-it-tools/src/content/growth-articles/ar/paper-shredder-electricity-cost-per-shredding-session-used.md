@@ -1,0 +1,47 @@
+---
+contentType: article
+articleSlug: "paper-shredder-electricity-cost-per-shredding-session-used"
+locale: "ar"
+title: "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك"
+description: "احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة."
+relatedTool: "/ar/tools/budget-builder/"
+canonical: "https://worthcalc.win/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+lastReviewed: "2026-09-03"
+draft: false
+---
+
+# تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك
+
+> **الخلاصة:** احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة. This is a cost estimate, not a savings, product-performance, ranking, or household-outcome guarantee.
+
+## ما الذي يغيّر النتيجة
+
+آلة تمزيق الورق cost per جلسة تمزيق starts with a declared wall-meter boundary. حدّد البداية والنهاية بقراءة معلنة من عداد الحائط. سجّل حالة الجهاز والحمل والملحقات والوحدة المكتملة والتعرفة وتاريخ القياس. تصلح القدرة الاسمية لتخطيط الاختبار لكنها لا تستبدل قراءة قابلة للتكرار.
+
+عدد الأوراق في المرور وسماكة الورق وامتلاء الحاوية ودورات العكس تغيّر الزمن والطاقة. عرّف البداية عند إدخال أول ورقة والنهاية بعد نافذة ثابتة.
+
+## الصيغة ومثال عملي
+
+تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم الثابتة والضرائب والمواد والصيانة والاشتراكات وحمل الحاسوب أو الشبكة خارج البسط ما لم يشملها الحد المعلن. إذا قاست الجلسة 0.035 kWh بسعر 0.18 لكل kWh فالكهرباء 0.0063. ومع 180 ورقة ممزقة بنجاح تكون الحصة 0.000035 لكل ورقة؛ الإجابة الأساسية للجلسة.
+
+Do not multiply a rated wattage by the whole elapsed period unless the wall meter confirms that load. If a computer, display, network device, charger, or accessory is present, measure it separately before combining boundaries.
+
+## قارن حالات الاستخدام
+
+اختبر رزمة خفيفة ورزمة قريبة من الحد ورزمة مختلطة مع عكس. سجّل الأوراق الناجحة ولا تنسب دائرة المكتب كلها للآلة.
+
+أدلة مرتبطة: [تكلفة كهرباء آلة التغليف لكل دفعة: أدرج التسخين](/ar/guides/laminator-electricity-cost-per-laminating-batch-used/), [تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب](/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/), [تكلفة المكتب الكهربائي لكل يوم ضبط: أدرج المحرك والاستعداد](/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/), and [تكلفة مكبر الصوت الذكي لكل ساعة استماع: افصل التشغيل والاستعداد](/ar/guides/smart-speaker-electricity-cost-per-listening-hour-used/). They answer different unit-cost questions, so choose the denominator and boundary before comparing.
+
+## الحدود والأخطاء الشائعة
+
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث جلسات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. The estimate is not a promise of savings, performance, or household results.
+
+## الأسئلة الشائعة
+
+### هل يحسب العكس؟ نعم إذا وقع بين نقطتي البداية والنهاية، لكن أبلغ عنه منفصلاً لأنه حالة تشغيل مختلفة.
+
+هل يحسب العكس؟ نعم إذا وقع بين نقطتي البداية والنهاية، لكن أبلغ عنه منفصلاً لأنه حالة تشغيل مختلفة. For comparison, keep the same measurement boundary and tariff date.
+
+## قراءة المصادر
+
+لسياق التعرفة راجع [أسئلة EIA عن سعر الكهرباء المسلّمة](https://www.eia.gov/tools/faqs/faq.php?id=507) و[نظرة EIA على كهرباء المنازل](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php). تقدّم صفحتا [ENERGY STAR للحواسيب](https://www.energystar.gov/products/computers) و[معدات التصوير](https://www.energystar.gov/products/imaging_equipment) سياق الفئة وإدارة الطاقة، ولا تضمنان أداء هذا الجهاز. يساعد [دليل الإنفاق CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) على اعتبار القياس مدخلاً واحداً للقرار المنزلي.

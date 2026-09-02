@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/#article",
+      "headline": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
+      "description": "احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
+          "item": "https://worthcalc.win/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+        }
+      ]
+    }
+  ]
+}

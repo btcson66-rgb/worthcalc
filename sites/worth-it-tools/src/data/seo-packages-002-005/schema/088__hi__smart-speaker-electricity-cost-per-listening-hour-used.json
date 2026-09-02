@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/smart-speaker-electricity-cost-per-listening-hour-used/#article",
+      "headline": "Smart speaker electricity cost per listening hour used: separate active and standby",
+      "description": "Measured playback और standby energy से smart speaker की प्रति listening hour cost निकालें; multi-room devices, chargers और subscriptions अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/smart-speaker-electricity-cost-per-listening-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Smart speaker electricity cost per listening hour used: separate active and standby",
+          "item": "https://worthcalc.win/hi/guides/smart-speaker-electricity-cost-per-listening-hour-used/"
+        }
+      ]
+    }
+  ]
+}

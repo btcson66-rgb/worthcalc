@@ -1,0 +1,47 @@
+---
+contentType: article
+articleSlug: "3d-scanner-electricity-cost-per-scanning-session-used"
+locale: "ar"
+title: "تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب"
+description: "احسب تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة من طاقة الماسح والحاسوب والمعايرة والاستعداد المقاسة، مع فصل المعالجة والبرمجيات."
+relatedTool: "/ar/tools/budget-builder/"
+canonical: "https://worthcalc.win/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/"
+lastReviewed: "2026-09-03"
+draft: false
+---
+
+# تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب
+
+> **الخلاصة:** احسب تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة من طاقة الماسح والحاسوب والمعايرة والاستعداد المقاسة، مع فصل المعالجة والبرمجيات. This is a cost estimate, not a savings, product-performance, ranking, or household-outcome guarantee.
+
+## ما الذي يغيّر النتيجة
+
+ماسح ثلاثي الأبعاد cost per جلسة مسح starts with a declared wall-meter boundary. حدّد البداية والنهاية بقراءة معلنة من عداد الحائط. سجّل حالة الجهاز والحمل والملحقات والوحدة المكتملة والتعرفة وتاريخ القياس. تصلح القدرة الاسمية لتخطيط الاختبار لكنها لا تستبدل قراءة قابلة للتكرار.
+
+قد تشمل الجلسة المعايرة والتمريرات المتكررة والمعاينة ومعالجة الملف والشاشة. صرّح هل القياس للماسح وحده أم لمحطة العمل، ولا تنسب حملاً غير مقاس.
+
+## الصيغة ومثال عملي
+
+تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم الثابتة والضرائب والمواد والصيانة والاشتراكات وحمل الحاسوب أو الشبكة خارج البسط ما لم يشملها الحد المعلن. إذا استخدم الماسح ومحطة العمل المقاسة 0.24 kWh بسعر 0.18 فتكلفة الجلسة 0.0432. وإذا قيس الحاسوب منفصلاً عند 0.11 kWh فأظهر الإجماليين منفصلين.
+
+Do not multiply a rated wattage by the whole elapsed period unless the wall meter confirms that load. If a computer, display, network device, charger, or accessory is present, measure it separately before combining boundaries.
+
+## قارن حالات الاستخدام
+
+قارن جسماً واحداً وجلسة كثيرة المعايرة والتقاطاً طويلاً مع معالجة. سجّل الجودة والإضاءة والمنصة والشاشة ومسار البرنامج.
+
+أدلة مرتبطة: [تكلفة المكتب الكهربائي لكل يوم ضبط: أدرج المحرك والاستعداد](/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/), [تكلفة مكبر الصوت الذكي لكل ساعة استماع: افصل التشغيل والاستعداد](/ar/guides/smart-speaker-electricity-cost-per-listening-hour-used/), [تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد](/ar/guides/label-maker-electricity-cost-per-labeling-session-used/), and [تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك](/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/). They answer different unit-cost questions, so choose the denominator and boundary before comparing.
+
+## الحدود والأخطاء الشائعة
+
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث جلسات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. The estimate is not a promise of savings, performance, or household results.
+
+## الأسئلة الشائعة
+
+### هل تكفي القدرة الاسمية؟ استخدمها للتخطيط لا للنتيجة النهائية؛ قراءة عداد الحائط ضمن الحدود المعلنة أفضل.
+
+هل تكفي القدرة الاسمية؟ استخدمها للتخطيط لا للنتيجة النهائية؛ قراءة عداد الحائط ضمن الحدود المعلنة أفضل. For comparison, keep the same measurement boundary and tariff date.
+
+## قراءة المصادر
+
+لسياق التعرفة راجع [أسئلة EIA عن سعر الكهرباء المسلّمة](https://www.eia.gov/tools/faqs/faq.php?id=507) و[نظرة EIA على كهرباء المنازل](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php). تقدّم صفحتا [ENERGY STAR للحواسيب](https://www.energystar.gov/products/computers) و[معدات التصوير](https://www.energystar.gov/products/imaging_equipment) سياق الفئة وإدارة الطاقة، ولا تضمنان أداء هذا الجهاز. يساعد [دليل الإنفاق CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) على اعتبار القياس مدخلاً واحداً للقرار المنزلي.

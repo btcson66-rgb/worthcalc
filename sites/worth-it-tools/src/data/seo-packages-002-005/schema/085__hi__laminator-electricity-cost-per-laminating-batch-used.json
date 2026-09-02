@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/laminator-electricity-cost-per-laminating-batch-used/#article",
+      "headline": "Laminator electricity cost per laminating batch used: include warm-up",
+      "description": "Measured warm-up, roller, cooling और standby energy से laminator की प्रति batch electricity cost निकालें; pouches और rejected sheets अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/laminator-electricity-cost-per-laminating-batch-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Laminator electricity cost per laminating batch used: include warm-up",
+          "item": "https://worthcalc.win/hi/guides/laminator-electricity-cost-per-laminating-batch-used/"
+        }
+      ]
+    }
+  ]
+}

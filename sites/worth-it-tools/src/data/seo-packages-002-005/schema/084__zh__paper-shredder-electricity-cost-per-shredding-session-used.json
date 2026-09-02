@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/paper-shredder-electricity-cost-per-shredding-session-used/#article",
+      "headline": "碎紙機每次碎紙工作電費：計入馬達循環",
+      "description": "用馬達、反轉、清除卡紙與待機的實測能源，估算碎紙機每次工作電費；集屑袋與維護另列。",
+      "inLanguage": "zh-Hant",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "碎紙機每次碎紙工作電費：計入馬達循環",
+          "item": "https://worthcalc.win/zh/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+        }
+      ]
+    }
+  ]
+}

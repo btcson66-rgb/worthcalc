@@ -1,0 +1,47 @@
+---
+contentType: article
+articleSlug: "laminator-electricity-cost-per-laminating-batch-used"
+locale: "ar"
+title: "تكلفة كهرباء آلة التغليف لكل دفعة: أدرج التسخين"
+description: "قدّر تكلفة كهرباء آلة التغليف لكل دفعة من طاقة التسخين والبكرات والتبريد والاستعداد المقاسة، مع فصل الأكياس والأوراق المرفوضة."
+relatedTool: "/ar/tools/budget-builder/"
+canonical: "https://worthcalc.win/ar/guides/laminator-electricity-cost-per-laminating-batch-used/"
+lastReviewed: "2026-09-03"
+draft: false
+---
+
+# تكلفة كهرباء آلة التغليف لكل دفعة: أدرج التسخين
+
+> **الخلاصة:** قدّر تكلفة كهرباء آلة التغليف لكل دفعة من طاقة التسخين والبكرات والتبريد والاستعداد المقاسة، مع فصل الأكياس والأوراق المرفوضة. This is a cost estimate, not a savings, product-performance, ranking, or household-outcome guarantee.
+
+## ما الذي يغيّر النتيجة
+
+آلة التغليف الحراري cost per دفعة تغليف starts with a declared wall-meter boundary. حدّد البداية والنهاية بقراءة معلنة من عداد الحائط. سجّل حالة الجهاز والحمل والملحقات والوحدة المكتملة والتعرفة وتاريخ القياس. تصلح القدرة الاسمية لتخطيط الاختبار لكنها لا تستبدل قراءة قابلة للتكرار.
+
+تتوزع طاقة التسخين على أوراق الدفعة، وقد تتحمل ورقة واحدة معظمها. حدّد هل تنتهي الدفعة عند خروج آخر ورقة أم بعد فترة تبريد ثابتة.
+
+## الصيغة ومثال عملي
+
+تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم الثابتة والضرائب والمواد والصيانة والاشتراكات وحمل الحاسوب أو الشبكة خارج البسط ما لم يشملها الحد المعلن. دفعة مقدارها 0.09 kWh بسعر 0.18 تكلف 0.0162 كهرباء. ومع 30 ورقة مقبولة تصبح الحصة 0.00054 لكل ورقة قبل الكيس والورق والمحاولات الفاشلة.
+
+Do not multiply a rated wattage by the whole elapsed period unless the wall meter confirms that load. If a computer, display, network device, charger, or accessory is present, measure it separately before combining boundaries.
+
+## قارن حالات الاستخدام
+
+قارن تشغيل ورقة واحدة وعشر أوراق ودفعة كاملة. ثبّت حجم الكيس ووضع الحرارة ودرجة البداية حتى لا يبدو توزيع التسخين فرق كفاءة.
+
+أدلة مرتبطة: [تكلفة كهرباء الماسح ثلاثي الأبعاد لكل جلسة: افصل حمل الحاسوب](/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/), [تكلفة المكتب الكهربائي لكل يوم ضبط: أدرج المحرك والاستعداد](/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/), [تكلفة مكبر الصوت الذكي لكل ساعة استماع: افصل التشغيل والاستعداد](/ar/guides/smart-speaker-electricity-cost-per-listening-hour-used/), and [تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد](/ar/guides/label-maker-electricity-cost-per-labeling-session-used/). They answer different unit-cost questions, so choose the denominator and boundary before comparing.
+
+## الحدود والأخطاء الشائعة
+
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث جلسات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. The estimate is not a promise of savings, performance, or household results.
+
+## الأسئلة الشائعة
+
+### هل يدخل التبريد؟ استخدم نقطة نهاية موحدة، وسمّ نافذة التبريد أو الاستعداد بدلاً من خلط أوضاع التشغيل.
+
+هل يدخل التبريد؟ استخدم نقطة نهاية موحدة، وسمّ نافذة التبريد أو الاستعداد بدلاً من خلط أوضاع التشغيل. For comparison, keep the same measurement boundary and tariff date.
+
+## قراءة المصادر
+
+لسياق التعرفة راجع [أسئلة EIA عن سعر الكهرباء المسلّمة](https://www.eia.gov/tools/faqs/faq.php?id=507) و[نظرة EIA على كهرباء المنازل](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php). تقدّم صفحتا [ENERGY STAR للحواسيب](https://www.energystar.gov/products/computers) و[معدات التصوير](https://www.energystar.gov/products/imaging_equipment) سياق الفئة وإدارة الطاقة، ولا تضمنان أداء هذا الجهاز. يساعد [دليل الإنفاق CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) على اعتبار القياس مدخلاً واحداً للقرار المنزلي.

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/#article",
+      "headline": "Electric standing desk cost per adjusted day used: include motor and standby",
+      "description": "Measured motor movements, controller और standby energy से electric standing desk की प्रति adjusted day electricity cost निकालें; monitor और computer load अलग रखें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric standing desk cost per adjusted day used: include motor and standby",
+          "item": "https://worthcalc.win/hi/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/3d-scanner-electricity-cost-per-scanning-session-used/#article",
+      "headline": "Coste eléctrico de un escáner 3D por sesión: separa el ordenador",
+      "description": "Calcula el coste eléctrico de un escáner 3D por sesión con energía medida del escáner, ordenador, calibración y espera, separando procesamiento y software.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/3d-scanner-electricity-cost-per-scanning-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de un escáner 3D por sesión: separa el ordenador",
+          "item": "https://worthcalc.win/es/guides/3d-scanner-electricity-cost-per-scanning-session-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/paper-shredder-electricity-cost-per-shredding-session-used/#article",
+      "headline": "Paper Shredder Electricity Cost Per Shredding Session Used: Count Motor Cycles",
+      "description": "Calculate paper shredder electricity cost per shredding session from measured motor, reverse, jam-clearing, and standby energy, separating bags and maintenance.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Paper Shredder Electricity Cost Per Shredding Session Used: Count Motor Cycles",
+          "item": "https://worthcalc.win/en/guides/paper-shredder-electricity-cost-per-shredding-session-used/"
+        }
+      ]
+    }
+  ]
+}

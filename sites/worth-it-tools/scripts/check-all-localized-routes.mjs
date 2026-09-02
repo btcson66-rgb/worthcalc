@@ -142,6 +142,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/gaming-console-electricity-cost-per-gaming-hour-used',
   'guides/soundbar-electricity-cost-per-watched-hour-used',
   'guides/desktop-speakers-electricity-cost-per-listening-hour-used',
+  'guides/label-maker-electricity-cost-per-labeling-session-used',
+  'guides/paper-shredder-electricity-cost-per-shredding-session-used',
+  'guides/laminator-electricity-cost-per-laminating-batch-used',
+  'guides/3d-scanner-electricity-cost-per-scanning-session-used',
+  'guides/electric-standing-desk-electricity-cost-per-adjusted-day-used',
+  'guides/smart-speaker-electricity-cost-per-listening-hour-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

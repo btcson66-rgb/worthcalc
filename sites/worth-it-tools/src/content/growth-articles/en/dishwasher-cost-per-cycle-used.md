@@ -30,7 +30,7 @@ ENERGY STAR criteria identify energy and water performance limits, but local rat
 
 ## Common mistakes and related guides
 
-For related household unit costs, compare the [natural gas guide](/en/guides/natural-gas-cost-per-therm-used/), [electricity guide](/en/guides/electricity-cost-per-kwh-used/), and [water bill guide](/en/guides/water-bill-cost-per-gallon-used/). The [laundry cost guide](/en/guides/laundry-cost-per-load/) shows another completed-use denominator.
+For related household unit costs, compare the [natural gas guide](/en/guides/natural-gas-cost-per-therm-used/), [electricity guide](/en/guides/electricity-cost-per-kwh-used/), [water bill guide](/en/guides/water-bill-cost-per-gallon-used/), and [clothes dryer guide](/en/guides/clothes-dryer-cost-per-load-used/). The [laundry cost guide](/en/guides/laundry-cost-per-load/) shows another completed-use denominator.
 
 If monthly cost rises, compare cycle count, load, settings, drying, and rates before attributing the change to the appliance. Do not treat a manufacturer annual estimate as your actual per-use cost.
 

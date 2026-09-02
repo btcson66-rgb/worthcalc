@@ -30,7 +30,7 @@ draft: false
 
 ## الأخطاء الشائعة والأدلة المرتبطة
 
-للتكاليف المنزلية الوحدية ذات الصلة قارن [دليل الغاز](/ar/guides/natural-gas-cost-per-therm-used/) و[دليل الكهرباء](/ar/guides/electricity-cost-per-kwh-used/) و[دليل المياه](/ar/guides/water-bill-cost-per-gallon-used/). ويعرض [دليل الغسيل](/ar/guides/laundry-cost-per-load/) مقام استخدام مكتمل آخر.
+للتكاليف المنزلية الوحدية ذات الصلة قارن [دليل الغاز](/ar/guides/natural-gas-cost-per-therm-used/) و[دليل الكهرباء](/ar/guides/electricity-cost-per-kwh-used/) و[دليل المياه](/ar/guides/water-bill-cost-per-gallon-used/) و[دليل تكلفة المجفف](/ar/guides/clothes-dryer-cost-per-load-used/). ويعرض [دليل الغسيل](/ar/guides/laundry-cost-per-load/) مقام استخدام مكتمل آخر.
 
 إذا ارتفعت التكلفة الشهرية فقارن عدد الدورات والحمولة والبرنامج والتجفيف والتعرفة قبل إسناد الزيادة للجهاز. لا تعتبر تقدير الشركة السنوي تكلفتك الفعلية لكل استخدام.
 

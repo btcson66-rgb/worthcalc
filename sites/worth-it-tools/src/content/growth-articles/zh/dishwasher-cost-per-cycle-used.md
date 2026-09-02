@@ -30,7 +30,7 @@ ENERGY STAR 的標準描述能源與用水表現界線，但你實際支付的�
 
 ## 常見誤區與相關指南
 
-其他家庭單位成本可比較[天然氣每 therm 指南](/zh/guides/natural-gas-cost-per-therm-used/)、[每 kWh 電費指南](/zh/guides/electricity-cost-per-kwh-used/)與[每加侖用水成本指南](/zh/guides/water-bill-cost-per-gallon-used/)；[每桶洗衣成本指南](/zh/guides/laundry-cost-per-load/)則示範另一種完成使用分母。
+其他家庭單位成本可比較[天然氣每 therm 指南](/zh/guides/natural-gas-cost-per-therm-used/)、[每 kWh 電費指南](/zh/guides/electricity-cost-per-kwh-used/)、[每加侖用水成本指南](/zh/guides/water-bill-cost-per-gallon-used/)與[乾衣機每桶成本指南](/zh/guides/clothes-dryer-cost-per-load-used/)；[每桶洗衣成本指南](/zh/guides/laundry-cost-per-load/)則示範另一種完成使用分母。
 
 如果每月成本上升，先比較週期數、裝載量、模式、烘乾設定與各項費率，再看洗劑、維護或設備分攤是否改變。不要把廠商年度估算直接當作你的實際每次成本。
 

@@ -30,7 +30,7 @@ ENERGY STAR criteria energy और water performance limits बताते ह�
 
 ## Common mistakes और related guides
 
-Related household unit costs के लिए [natural gas guide](/hi/guides/natural-gas-cost-per-therm-used/), [electricity guide](/hi/guides/electricity-cost-per-kwh-used/) और [water bill guide](/hi/guides/water-bill-cost-per-gallon-used/) देखें। [Laundry cost guide](/hi/guides/laundry-cost-per-load/) एक और completed-use denominator दिखाता है।
+Related household unit costs के लिए [natural gas guide](/hi/guides/natural-gas-cost-per-therm-used/), [electricity guide](/hi/guides/electricity-cost-per-kwh-used/), [water bill guide](/hi/guides/water-bill-cost-per-gallon-used/) और [clothes dryer guide](/hi/guides/clothes-dryer-cost-per-load-used/) देखें। [Laundry cost guide](/hi/guides/laundry-cost-per-load/) एक और completed-use denominator दिखाता है।
 
 Monthly cost बढ़े तो cycles, load, setting, drying और rates पहले compare करें। Manufacturer की annual estimate को अपना actual per-use cost न मानें।
 

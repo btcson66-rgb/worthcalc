@@ -40,4 +40,4 @@ draft: false
 
 ## مصادر للقراءة
 
-اقرأ [شرح استخدام الكهرباء من EIA](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) و[إرشادات تكاليف السكن من CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). تساعدان على فصل الاستهلاك المقاس عن ظروف المرافق المحلية وقيمة المنزل.
+اقرأ [شرح استخدام الكهرباء من EIA](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) و[إرشادات تكاليف السكن من CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). تساعدان على فصل الاستهلاك المقاس عن ظروف المرافق المحلية وقيمة المنزل. وإذا كان الحمل المستمر يخص محطة عمل، فتابع إلى [دليل تكلفة الكمبيوتر اليومية](/ar/guides/computer-electricity-cost-per-day-used/).

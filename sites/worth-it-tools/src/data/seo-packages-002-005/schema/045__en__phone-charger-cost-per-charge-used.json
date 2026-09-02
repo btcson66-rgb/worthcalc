@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/phone-charger-cost-per-charge-used/#article",
+      "headline": "Phone Charger Cost Per Charge Used: Measure the Wall Energy, Not the Adapter Maximum",
+      "description": "Calculate a phone-charging session cost from measured wall energy, battery state, charging losses, charger idle power, electricity rates, and charge frequency instead of using the adapter wattage as if it were continuous.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/phone-charger-cost-per-charge-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Phone Charger Cost Per Charge Used: Measure the Wall Energy, Not the Adapter Maximum",
+          "item": "https://worthcalc.win/en/guides/phone-charger-cost-per-charge-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/router-electricity-cost-per-month-used/#article",
+      "headline": "Router Electricity Cost Per Month Used: Separate Always-On Power from Internet Service",
+      "description": "Estimate a router and modem setup cost per month from measured watts, uptime, backup equipment, electricity rates, and the service it keeps available; do not confuse electricity with the internet bill.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/router-electricity-cost-per-month-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Router Electricity Cost Per Month Used: Separate Always-On Power from Internet Service",
+          "item": "https://worthcalc.win/en/guides/router-electricity-cost-per-month-used/"
+        }
+      ]
+    }
+  ]
+}

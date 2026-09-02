@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-blanket-cost-per-night-used/#article",
+      "headline": "電熱毯每晚使用成本：計入加熱設定與實際睡眠時間",
+      "description": "用電熱毯各段設定的實測瓦數、溫控循環、預熱時間、電價與實際使用晚數，估算每晚成本；不要只套最大標示功率。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-blanket-cost-per-night-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電熱毯每晚使用成本：計入加熱設定與實際睡眠時間",
+          "item": "https://worthcalc.win/zh/guides/electric-blanket-cost-per-night-used/"
+        }
+      ]
+    }
+  ]
+}

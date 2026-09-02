@@ -40,4 +40,4 @@ No. Mide primero y compara coste anual con servicio perdido, sustitución, tempo
 
 ## Fuentes para consultar
 
-Lee la [explicación de uso eléctrico de EIA](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) y la [guía de costes de vivienda de CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). Ayudan a separar consumo medido, condiciones locales y valor doméstico.
+Lee la [explicación de uso eléctrico de EIA](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) y la [guía de costes de vivienda de CFPB](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). Ayudan a separar consumo medido, condiciones locales y valor doméstico. Continúa con la [guía del coste diario del ordenador](/es/guides/computer-electricity-cost-per-day-used/) cuando la carga permanente pertenece a un puesto de trabajo.

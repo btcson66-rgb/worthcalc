@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-blanket-cost-per-night-used/#article",
+      "headline": "Coste de la manta eléctrica por noche: incluye ajustes y horas reales",
+      "description": "Calcula el coste nocturno de una manta o cobertor eléctrico con vatios medidos por ajuste, ciclos del termostato, precalentamiento, tarifa y noches usadas; no uses solo el máximo.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-blanket-cost-per-night-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la manta eléctrica por noche: incluye ajustes y horas reales",
+          "item": "https://worthcalc.win/es/guides/electric-blanket-cost-per-night-used/"
+        }
+      ]
+    }
+  ]
+}

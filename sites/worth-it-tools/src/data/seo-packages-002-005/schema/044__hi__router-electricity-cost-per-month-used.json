@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/router-electricity-cost-per-month-used/#article",
+      "headline": "Router electricity cost per month used: always-on power और internet service अलग करें",
+      "description": "Measured router और modem watts, uptime, backup equipment और delivered electricity tariff से monthly electricity cost निकालें; internet bill को electricity से न मिलाएं।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/router-electricity-cost-per-month-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Router electricity cost per month used: always-on power और internet service अलग करें",
+          "item": "https://worthcalc.win/hi/guides/router-electricity-cost-per-month-used/"
+        }
+      ]
+    }
+  ]
+}

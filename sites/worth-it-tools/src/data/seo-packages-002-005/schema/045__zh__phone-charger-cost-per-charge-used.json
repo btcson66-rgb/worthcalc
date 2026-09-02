@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/phone-charger-cost-per-charge-used/#article",
+      "headline": "手機充電器每次充電成本：量測牆上用電，不要套變壓器上限",
+      "description": "用插座實測 kWh、起訖電量、充電損耗、充電器待機功率與電價，計算手機每次充電成本；充電器標示瓦數不是持續耗電。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/phone-charger-cost-per-charge-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "手機充電器每次充電成本：量測牆上用電，不要套變壓器上限",
+          "item": "https://worthcalc.win/zh/guides/phone-charger-cost-per-charge-used/"
+        }
+      ]
+    }
+  ]
+}

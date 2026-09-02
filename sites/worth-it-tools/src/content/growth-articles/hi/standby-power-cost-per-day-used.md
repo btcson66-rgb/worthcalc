@@ -40,4 +40,4 @@ Plug-meter result device, mode, voltage और time window-specific है। �
 
 ## स्रोत पढ़ें
 
-EIA की [electricity-use explanation](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) और CFPB की [housing-cost guidance](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) पढ़ें। ये measured consumption, local utility conditions और household value अलग करने में मदद करती हैं।
+EIA की [electricity-use explanation](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) और CFPB की [housing-cost guidance](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) पढ़ें। ये measured consumption, local utility conditions और household value अलग करने में मदद करती हैं। अगर standby load workstation से जुड़ा है, तो [computer daily-cost guide](/hi/guides/computer-electricity-cost-per-day-used/) भी देखें।

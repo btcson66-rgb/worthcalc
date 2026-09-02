@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/monitor-electricity-cost-per-work-hour-used/#article",
+      "headline": "Monitor Electricity Cost Per Work Hour Used: Include Brightness, Sleep, and USB Power",
+      "description": "Calculate a monitor's cost per work hour from measured on-mode and sleep-mode power, brightness, USB-C charging, electricity rates, and the hours it supports useful work instead of treating screen size as consumption.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/monitor-electricity-cost-per-work-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Monitor Electricity Cost Per Work Hour Used: Include Brightness, Sleep, and USB Power",
+          "item": "https://worthcalc.win/en/guides/monitor-electricity-cost-per-work-hour-used/"
+        }
+      ]
+    }
+  ]
+}

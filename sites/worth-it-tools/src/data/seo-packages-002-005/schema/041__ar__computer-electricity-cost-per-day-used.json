@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/computer-electricity-cost-per-day-used/#article",
+      "headline": "تكلفة الكمبيوتر الكهربائية يومياً: افصل العمل والسكون والشحن",
+      "description": "قدّر تكلفة الكمبيوتر اليومية من القدرة المقاسة في العمل والخمول والسكون والشحن مع سعر الكهرباء المسلّمة؛ قدرة محول الحاسوب ليست فاتورتك اليومية.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/computer-electricity-cost-per-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة الكمبيوتر الكهربائية يومياً: افصل العمل والسكون والشحن",
+          "item": "https://worthcalc.win/ar/guides/computer-electricity-cost-per-day-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -40,4 +40,4 @@ draft: false
 
 ## 來源閱讀
 
-可閱讀 EIA 的[家庭用電說明](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1)與 CFPB 的[住宅成本指南](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/)，理解實測用電、當地公用事業條件與家庭價值的差別。
+可閱讀 EIA 的[家庭用電說明](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1)與 CFPB 的[住宅成本指南](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/)，理解實測用電、當地公用事業條件與家庭價值的差別；若待機負載屬於工作站，接著閱讀[電腦每天用電成本指南](/zh/guides/computer-electricity-cost-per-day-used/)。

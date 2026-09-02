@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/pool-pump-cost-per-operating-hour-used/#article",
+      "headline": "Coste de la bomba de piscina por hora: separa velocidad, caudal y tareas",
+      "description": "Calcula el coste por hora de una bomba de piscina con vatios medidos por velocidad, filtrado, limpieza, tarifa, mantenimiento y equipo; cada hora no consume lo mismo.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/pool-pump-cost-per-operating-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la bomba de piscina por hora: separa velocidad, caudal y tareas",
+          "item": "https://worthcalc.win/es/guides/pool-pump-cost-per-operating-hour-used/"
+        }
+      ]
+    }
+  ]
+}

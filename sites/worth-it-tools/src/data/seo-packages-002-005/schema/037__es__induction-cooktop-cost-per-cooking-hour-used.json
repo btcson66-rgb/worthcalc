@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/induction-cooktop-cost-per-cooking-hour-used/#article",
+      "headline": "Coste de una placa de inducción por hora: separa calor, espera y limpieza",
+      "description": "Calcula el coste por hora de cocina de una placa de inducción con potencia medida, calentamiento, espera, tarifa, limpieza y equipo; una receta de una hora no implica potencia máxima durante una hora.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/induction-cooktop-cost-per-cooking-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de una placa de inducción por hora: separa calor, espera y limpieza",
+          "item": "https://worthcalc.win/es/guides/induction-cooktop-cost-per-cooking-hour-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/portable-ac-cost-per-cooling-hour-used/#article",
+      "headline": "Coste del aire acondicionado portátil por hora: mide escape, ventilador y carga",
+      "description": "Calcula el coste por hora ocupada de un aire acondicionado portátil con consumo medido, ciclos del compresor, ventilador, tarifa, salida de aire, mantenimiento y carga de la habitación; los BTU no son una factura.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/portable-ac-cost-per-cooling-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del aire acondicionado portátil por hora: mide escape, ventilador y carga",
+          "item": "https://worthcalc.win/es/guides/portable-ac-cost-per-cooling-hour-used/"
+        }
+      ]
+    }
+  ]
+}

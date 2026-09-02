@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/standby-power-cost-per-day-used/#article",
+      "headline": "Coste diario de la energía en espera: mide la carga y el servicio que mantiene",
+      "description": "Calcula el coste diario del modo espera con vatios medidos, horas conectadas, red o reloj, tarifa y cargos, comparándolo con el servicio que presta; no todo vatio conectado es desperdicio.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/standby-power-cost-per-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste diario de la energía en espera: mide la carga y el servicio que mantiene",
+          "item": "https://worthcalc.win/es/guides/standby-power-cost-per-day-used/"
+        }
+      ]
+    }
+  ]
+}

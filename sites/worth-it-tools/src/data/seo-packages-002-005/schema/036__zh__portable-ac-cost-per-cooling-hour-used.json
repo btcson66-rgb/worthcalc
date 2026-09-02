@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/portable-ac-cost-per-cooling-hour-used/#article",
+      "headline": "移動式冷氣每使用一小時成本：量測排風、風扇與房間負載",
+      "description": "用實測輸入功率、壓縮機啟停、送風時間、電價、排風安裝、維護與房間負載，估算移動式冷氣每個有人使用冷房小時的成本；BTU 標示不是帳單。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/portable-ac-cost-per-cooling-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "移動式冷氣每使用一小時成本：量測排風、風扇與房間負載",
+          "item": "https://worthcalc.win/zh/guides/portable-ac-cost-per-cooling-hour-used/"
+        }
+      ]
+    }
+  ]
+}

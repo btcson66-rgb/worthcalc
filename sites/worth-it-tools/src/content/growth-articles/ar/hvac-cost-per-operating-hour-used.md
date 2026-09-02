@@ -26,7 +26,7 @@ draft: false
 
 قارن أسابيع الطقس المعتدل والقاسي لا إعداد الحرارة فقط. تسرب القنوات والعزل والرطوبة والدورات القصيرة والمروحة والتدفئة المساعدة وجودة التركيب تغيّر التشغيل والراحة. الراحة نتيجة وليست وعد توفير.
 
-قارن هذا القرار مع [الدليل السابق](/ar/guides/oven-stove-cost-per-cooking-hour-used/) و[الدليل التالي](/ar/guides/led-lighting-cost-per-hour-used/) و[دليل تكلفة الكهرباء](/ar/guides/electricity-cost-per-kwh-used/) و[دليل الغاز الطبيعي](/ar/guides/natural-gas-cost-per-therm-used/).
+قارن هذا القرار مع [الدليل السابق](/ar/guides/oven-stove-cost-per-cooking-hour-used/) و[دليل تكلفة التدفئة بالمضخة الحرارية](/ar/guides/heat-pump-cost-per-heating-hour-used/) و[الدليل التالي](/ar/guides/led-lighting-cost-per-hour-used/) و[دليل تكلفة الكهرباء](/ar/guides/electricity-cost-per-kwh-used/) و[دليل الغاز الطبيعي](/ar/guides/natural-gas-cost-per-therm-used/).
 
 ## الحدود والأخطاء الشائعة
 

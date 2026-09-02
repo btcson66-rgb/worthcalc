@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/microwave-cost-per-cooking-cycle-used/#article",
+      "headline": "Coste del microondas por ciclo: cuenta vatios, tiempo y recalentados fallidos",
+      "description": "Calcula el coste de un ciclo de microondas con potencia medida, minutos activos, espera, tamaño del lote, tarifa, limpieza y comida aprovechable; la potencia de placa no es el coste del ciclo.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/microwave-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del microondas por ciclo: cuenta vatios, tiempo y recalentados fallidos",
+          "item": "https://worthcalc.win/es/guides/microwave-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

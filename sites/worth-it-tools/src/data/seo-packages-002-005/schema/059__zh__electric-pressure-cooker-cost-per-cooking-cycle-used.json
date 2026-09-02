@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/#article",
+      "headline": "電壓力鍋每次烹調循環成本",
+      "description": "用預熱、升壓、烹調、洩壓與保溫的牆上實測能源，估算電壓力鍋每次烹調循環成本，不要把最大標示功率乘上食譜時間。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電壓力鍋每次烹調循環成本",
+          "item": "https://worthcalc.win/zh/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

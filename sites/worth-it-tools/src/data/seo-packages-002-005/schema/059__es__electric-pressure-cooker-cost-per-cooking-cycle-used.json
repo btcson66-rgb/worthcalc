@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/#article",
+      "headline": "Coste de la olla a presión eléctrica por ciclo de cocción",
+      "description": "Calcula el coste eléctrico por ciclo de una olla a presión con energía medida durante precalentamiento, presión, liberación y mantenimiento, no multiplicando la potencia máxima por la duración de la receta.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de la olla a presión eléctrica por ciclo de cocción",
+          "item": "https://worthcalc.win/es/guides/electric-pressure-cooker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

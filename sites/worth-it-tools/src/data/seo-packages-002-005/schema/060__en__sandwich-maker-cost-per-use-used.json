@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/sandwich-maker-cost-per-use-used/#article",
+      "headline": "Sandwich Maker Cost Per Use Used: Count Preheat and Actual Plates",
+      "description": "Calculate a sandwich maker electricity cost per use from measured preheat, cooking, and standby energy for the plates you actually use, rather than applying the nameplate watts to an assumed hour.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/sandwich-maker-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sandwich Maker Cost Per Use Used: Count Preheat and Actual Plates",
+          "item": "https://worthcalc.win/en/guides/sandwich-maker-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

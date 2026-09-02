@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/sandwich-maker-cost-per-use-used/#article",
+      "headline": "Sandwich maker cost per use used: preheat और actual plates गिनें",
+      "description": "Actual plates के लिए measured preheat, cooking और standby energy से sandwich maker cost per use निकालें; nameplate watts को assumed one hour पर न लगाएं।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/sandwich-maker-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sandwich maker cost per use used: preheat और actual plates गिनें",
+          "item": "https://worthcalc.win/hi/guides/sandwich-maker-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

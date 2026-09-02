@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/sandwich-maker-cost-per-use-used/#article",
+      "headline": "三明治機每次使用成本：計入預熱與實際烘烤片數",
+      "description": "用插電預熱、烘烤與實際使用烤盤的牆上實測能源，計算三明治機每次使用成本，不要把銘牌瓦數套成假定一小時。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/sandwich-maker-cost-per-use-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "三明治機每次使用成本：計入預熱與實際烘烤片數",
+          "item": "https://worthcalc.win/zh/guides/sandwich-maker-cost-per-use-used/"
+        }
+      ]
+    }
+  ]
+}

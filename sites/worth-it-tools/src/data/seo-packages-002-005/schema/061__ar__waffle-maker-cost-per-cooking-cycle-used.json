@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/waffle-maker-cost-per-cooking-cycle-used/#article",
+      "headline": "تكلفة آلة الوافل لكل دورة طهي: أدرج التسخين والصفائح المتكررة",
+      "description": "قدّر تكلفة آلة الوافل لكل دورة باستخدام طاقة التسخين والصفائح المقاسة وكمية الخليط وعدد قطع الوافل المكتملة، لا بافتراض سحب أقصى مستمر.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/waffle-maker-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة آلة الوافل لكل دورة طهي: أدرج التسخين والصفائح المتكررة",
+          "item": "https://worthcalc.win/ar/guides/waffle-maker-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

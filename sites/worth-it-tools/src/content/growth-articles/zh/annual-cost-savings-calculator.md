@@ -46,6 +46,15 @@ draft: false
 
 也可閱讀本主題的[印地文版本](/hi/guides/annual-cost-savings-calculator/)或[阿拉伯文版本](/ar/guides/annual-cost-savings-calculator/)。
 
+## 年度成本主題延伸
+
+- [整合月繳、季繳與年繳的固定支出總額](/zh/guides/recurring-costs-annual-total/)
+- [比較月繳與年繳的總成本](/zh/guides/monthly-vs-annual-total-cost/)
+- [算出省錢損益兩平所需時間](/zh/guides/savings-break-even-use-period/)
+- [拆開首年優惠與續約價格](/zh/guides/introductory-discount-renewal-cost/)
+- [計算用不完的會員額度成本](/zh/guides/unused-membership-capacity-cost/)
+- [找出一次性轉換費的回本月份](/zh/guides/one-time-switching-cost-payback/)
+
 ## 常見問題
 
 ### 限時優惠要不要算？

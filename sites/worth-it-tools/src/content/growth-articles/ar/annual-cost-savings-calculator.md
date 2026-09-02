@@ -43,6 +43,15 @@ draft: false
 
 هذه حاسبة تعليمية وليست نصيحة مالية أو ضريبية أو قانونية. اقرأ العقد وشروط الإلغاء الحالية قبل التبديل.
 
+## قراءات إضافية في مجموعة التكلفة السنوية
+
+- [جمع التكاليف المتكررة في إجمالي سنوي](/ar/guides/recurring-costs-annual-total/)
+- [مقارنة الدفع الشهري والسنوي](/ar/guides/monthly-vs-annual-total-cost/)
+- [حساب فترة التعادل في التوفير](/ar/guides/savings-break-even-use-period/)
+- [فصل الخصم التمهيدي عن التجديد](/ar/guides/introductory-discount-renewal-cost/)
+- [قياس السعة غير المستخدمة في العضوية](/ar/guides/unused-membership-capacity-cost/)
+- [حساب استرداد تكلفة التبديل لمرة واحدة](/ar/guides/one-time-switching-cost-payback/)
+
 ## أسئلة شائعة
 
 ### هل أحتسب السعر الترويجي؟

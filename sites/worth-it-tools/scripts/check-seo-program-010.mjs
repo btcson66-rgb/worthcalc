@@ -3,20 +3,18 @@ import { join, resolve } from 'node:path';
 
 const root = resolve('.');
 const dist = join(root, 'dist');
-const slug = 'annual-cost-savings-calculator';
-const pages = [
-  ['en', 'https://worthcalc.win/en/guides/annual-cost-savings-calculator/'],
-  ['es', 'https://worthcalc.win/es/guides/annual-cost-savings-calculator/'],
-  ['zh', 'https://worthcalc.win/zh/guides/annual-cost-savings-calculator/'],
-  ['hi', 'https://worthcalc.win/hi/guides/annual-cost-savings-calculator/'],
-  ['ar', 'https://worthcalc.win/ar/guides/annual-cost-savings-calculator/'],
+const slugs = [
+  'annual-cost-savings-calculator', 'recurring-costs-annual-total', 'monthly-vs-annual-total-cost',
+  'savings-break-even-use-period', 'introductory-discount-renewal-cost', 'unused-membership-capacity-cost',
+  'one-time-switching-cost-payback',
 ];
+const pages = slugs.flatMap((slug) => ['en', 'es', 'zh', 'hi', 'ar'].map((locale) => [locale, `https://worthcalc.win/${locale}/guides/${slug}/`]));
 const failures = [];
 const sitemap = ['sitemap-0.xml', 'sitemap-1.xml', 'sitemap-2.xml']
   .map((file) => existsSync(join(dist, file)) ? readFileSync(join(dist, file), 'utf8') : '').join('\n');
 
-for (const [locale, canonical] of pages) {
-  const path = `/${locale}/guides/${slug}/`;
+for (const [, canonical] of pages) {
+  const path = new URL(canonical).pathname;
   const htmlPath = join(dist, path.slice(1), 'index.html');
   const html = existsSync(htmlPath) ? readFileSync(htmlPath, 'utf8') : '';
   if (!html) { failures.push(`${path}: missing build output`); continue; }
@@ -26,6 +24,9 @@ for (const [locale, canonical] of pages) {
   if (!html.includes('"@type":"Article"') && !html.includes('"@type": "Article"')) failures.push(`${path}: Article schema missing`);
   if (!html.includes('"@type":"BreadcrumbList"') && !html.includes('"@type": "BreadcrumbList"')) failures.push(`${path}: BreadcrumbList schema missing`);
   if (!html.includes('CFPB')) failures.push(`${path}: source attribution missing`);
+  const articleText = (html.match(/<article[\s\S]*?<\/article>/i)?.[0] ?? '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (articleText.length < 900) failures.push(`${path}: substantive article text is shorter than 900 characters`);
+  if ((html.match(/<h2(?:\s|>)/g) ?? []).length < 3) failures.push(`${path}: fewer than three explanatory h2 sections`);
   const internalLinks = (html.match(/href="\/(?:en|es|zh|hi|ar)\//g) ?? []).length;
   if (internalLinks < 3) failures.push(`${path}: fewer than three locale-aware internal links`);
   if (!sitemap.includes(`<loc>${canonical}</loc>`)) failures.push(`${path}: missing from sitemap`);
@@ -36,4 +37,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('SEO program 010 passed: 5 localized guides have one H1, indexable canonical/robots, Article + BreadcrumbList schema, sources, internal links, and sitemap entries.');
+console.log(`SEO program 010 passed: ${pages.length} localized guides have one H1, indexable canonical/robots, Article + BreadcrumbList schema, sources, internal links, and sitemap entries.`);

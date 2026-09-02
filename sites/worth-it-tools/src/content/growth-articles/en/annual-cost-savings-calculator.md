@@ -45,6 +45,15 @@ The [CFPB spending guidance](https://www.consumerfinance.gov/owning-a-home/prepa
 
 For readers who prefer another language, the same calculation is also available in [हिन्दी](/hi/guides/annual-cost-savings-calculator/) and [العربية](/ar/guides/annual-cost-savings-calculator/).
 
+### Continue the annual-cost cluster
+
+- [Build a recurring-cost annual total](/en/guides/recurring-costs-annual-total/)
+- [Compare monthly and annual total cost](/en/guides/monthly-vs-annual-total-cost/)
+- [Find the savings break-even period](/en/guides/savings-break-even-use-period/)
+- [Separate introductory discount from renewal cost](/en/guides/introductory-discount-renewal-cost/)
+- [Measure unused membership capacity](/en/guides/unused-membership-capacity-cost/)
+- [Calculate one-time switching-cost payback](/en/guides/one-time-switching-cost-payback/)
+
 ## Frequently asked questions
 
 ### Should I count a discount?

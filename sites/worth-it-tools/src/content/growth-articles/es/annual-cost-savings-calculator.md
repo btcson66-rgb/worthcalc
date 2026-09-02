@@ -44,6 +44,15 @@ El [modelo mensual de presupuesto del CFPB](https://files.consumerfinance.gov/f/
 
 Si el ahorro cambia de positivo a negativo, la opción depende demasiado del consumo para resumirla como “ahorro garantizado”. Esto es una herramienta educativa, no asesoramiento fiscal, jurídico ni financiero; revisa el contrato y las condiciones actuales antes de cancelar o cambiar.
 
+## Siguiente lectura del grupo anual
+
+- [Sumar costes recurrentes en un total anual](/es/guides/recurring-costs-annual-total/)
+- [Comparar pago mensual y anual](/es/guides/monthly-vs-annual-total-cost/)
+- [Calcular el punto de equilibrio del ahorro](/es/guides/savings-break-even-use-period/)
+- [Separar descuento inicial y renovación](/es/guides/introductory-discount-renewal-cost/)
+- [Medir capacidad de membresía sin usar](/es/guides/unused-membership-capacity-cost/)
+- [Calcular la recuperación del coste de cambiar](/es/guides/one-time-switching-cost-payback/)
+
 ## Preguntas frecuentes
 
 ### ¿Cuento una promoción?

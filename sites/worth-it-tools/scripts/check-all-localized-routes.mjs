@@ -28,7 +28,15 @@ const approvedSingleLocaleRoutes = new Set([
 ]);
 // Staged editorial programmes can introduce a complete non-core language
 // cluster without pretending that the five-language product shell is complete.
-const approvedStagedEditorialRoutes = new Set(['guides/annual-cost-savings-calculator']);
+const approvedStagedEditorialRoutes = new Set([
+  'guides/annual-cost-savings-calculator',
+  'guides/recurring-costs-annual-total',
+  'guides/monthly-vs-annual-total-cost',
+  'guides/savings-break-even-use-period',
+  'guides/introductory-discount-renewal-cost',
+  'guides/unused-membership-capacity-cost',
+  'guides/one-time-switching-cost-payback',
+]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };
 const hreflangFor = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

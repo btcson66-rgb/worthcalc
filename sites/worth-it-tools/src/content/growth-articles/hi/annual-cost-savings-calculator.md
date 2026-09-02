@@ -41,6 +41,15 @@ draft: false
 
 यह शैक्षिक अनुमान है, वित्तीय, कर या कानूनी सलाह नहीं। रद्द करने या बदलने से पहले मौजूदा अनुबंध और शुल्क देखें।
 
+## इसी वार्षिक लागत समूह में आगे पढ़ें
+
+- [नियमित खर्च का वार्षिक कुल](/hi/guides/recurring-costs-annual-total/)
+- [मासिक और वार्षिक भुगतान की तुलना](/hi/guides/monthly-vs-annual-total-cost/)
+- [बचत का ब्रेक-ईवन समय](/hi/guides/savings-break-even-use-period/)
+- [पहले साल की छूट और नवीनीकरण लागत](/hi/guides/introductory-discount-renewal-cost/)
+- [अप्रयुक्त सदस्यता क्षमता की लागत](/hi/guides/unused-membership-capacity-cost/)
+- [एकमुश्त बदलाव लागत की वापसी](/hi/guides/one-time-switching-cost-payback/)
+
 ## सामान्य प्रश्न
 
 ### प्रचार मूल्य शामिल करें?

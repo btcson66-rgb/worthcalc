@@ -94,6 +94,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   if ((CONTENT_LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
   const alternateLocales = input.alternateLocales ?? [...CORE_LOCALES];
+  const xDefaultLocale = alternateLocales.includes('en') ? 'en' : (alternateLocales[0] ?? input.locale);
   const alternates = alternateLocales
     .map((loc) => ({
       locale: loc,
@@ -111,7 +112,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
     .map(({ hreflang, href }) => ({ hreflang, href }));
   alternates.push({
     hreflang: 'x-default',
-    href: absolute(base, logical ? localizedPagePath(alternateLocales[0] ?? input.locale, logical) : '/'),
+    href: absolute(base, logical ? localizedPagePath(xDefaultLocale, logical) : '/'),
   });
 
   const openGraph: Record<string, string> = {

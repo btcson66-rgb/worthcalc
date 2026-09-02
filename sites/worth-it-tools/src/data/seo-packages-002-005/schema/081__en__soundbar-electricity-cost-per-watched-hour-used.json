@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/soundbar-electricity-cost-per-watched-hour-used/#article",
+      "headline": "Soundbar Electricity Cost Per Watched Hour Used: Separate Playback and Standby",
+      "description": "Estimate soundbar electricity cost per watched hour by measuring playback, wake-up, subwoofer, and standby energy, with the television and streaming device reported separately.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/soundbar-electricity-cost-per-watched-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Soundbar Electricity Cost Per Watched Hour Used: Separate Playback and Standby",
+          "item": "https://worthcalc.win/en/guides/soundbar-electricity-cost-per-watched-hour-used/"
+        }
+      ]
+    }
+  ]
+}

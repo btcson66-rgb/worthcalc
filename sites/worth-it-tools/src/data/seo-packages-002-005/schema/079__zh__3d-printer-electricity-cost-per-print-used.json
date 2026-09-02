@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/3d-printer-electricity-cost-per-print-used/#article",
+      "headline": "3D 印表機每件列印成本：分攤預熱與列印運轉",
+      "description": "用熱床、噴嘴、馬達與風扇的實測能源，估算 3D 印表機每件完成列印成本；耗材、失敗列印與後處理另列。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/3d-printer-electricity-cost-per-print-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "3D 印表機每件列印成本：分攤預熱與列印運轉",
+          "item": "https://worthcalc.win/zh/guides/3d-printer-electricity-cost-per-print-used/"
+        }
+      ]
+    }
+  ]
+}

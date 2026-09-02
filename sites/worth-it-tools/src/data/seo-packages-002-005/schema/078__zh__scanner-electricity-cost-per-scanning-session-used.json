@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/scanner-electricity-cost-per-scanning-session-used/#article",
+      "headline": "掃描器每次工作電費：計入燈管與待機能源",
+      "description": "用喚醒、燈管、送紙與待機的實測能源估算掃描器每次工作成本，再按實際掃描的頁數或文件分攤。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/scanner-electricity-cost-per-scanning-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "掃描器每次工作電費：計入燈管與待機能源",
+          "item": "https://worthcalc.win/zh/guides/scanner-electricity-cost-per-scanning-session-used/"
+        }
+      ]
+    }
+  ]
+}

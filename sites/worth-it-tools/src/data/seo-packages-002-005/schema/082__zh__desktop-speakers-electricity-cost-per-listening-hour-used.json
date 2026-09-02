@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/desktop-speakers-electricity-cost-per-listening-hour-used/#article",
+      "headline": "桌上型喇叭每聆聽小時電費：量測擴大機與閒置耗電",
+      "description": "用擴大機、播放與閒置的實測能源，估算桌上型喇叭每聆聽小時成本；電腦與螢幕要排除或清楚分攤。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/desktop-speakers-electricity-cost-per-listening-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "桌上型喇叭每聆聽小時電費：量測擴大機與閒置耗電",
+          "item": "https://worthcalc.win/zh/guides/desktop-speakers-electricity-cost-per-listening-hour-used/"
+        }
+      ]
+    }
+  ]
+}

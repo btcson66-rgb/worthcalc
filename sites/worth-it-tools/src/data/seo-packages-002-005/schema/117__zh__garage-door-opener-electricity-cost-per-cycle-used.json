@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/#article",
+      "headline": "車庫門開門機每次循環電費：把燈具與待機拆開",
+      "description": "量測車庫門開門機完整開關循環與待機窗口，估算每次循環的電費。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "車庫門開門機每次循環電費：把燈具與待機拆開",
+          "item": "https://worthcalc.win/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

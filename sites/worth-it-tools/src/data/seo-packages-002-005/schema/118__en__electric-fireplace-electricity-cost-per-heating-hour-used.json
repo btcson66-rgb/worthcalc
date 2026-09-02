@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/#article",
+      "headline": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+      "description": "Estimate electric-fireplace cost per heating hour by separating heater, flame display, and standby energy.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric Fireplace Electricity Cost Per Heating Hour Used: Separate Flame Mode",
+          "item": "https://worthcalc.win/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+        }
+      ]
+    }
+  ]
+}

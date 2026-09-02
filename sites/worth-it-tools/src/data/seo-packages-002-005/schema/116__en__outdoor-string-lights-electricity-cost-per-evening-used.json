@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/#article",
+      "headline": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+      "description": "Estimate outdoor string-light electricity cost per evening from measured timer and transformer energy.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Outdoor String Lights Electricity Cost Per Evening Used: Measure the Timer",
+          "item": "https://worthcalc.win/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/"
+        }
+      ]
+    }
+  ]
+}

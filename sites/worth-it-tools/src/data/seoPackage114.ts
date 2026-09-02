@@ -1,0 +1,141 @@
+import type { ContentLocale } from '../consts';
+
+export interface SeoPackage114GuideMeta { key: string; packageId: '114'; locale: ContentLocale; articleSlug: string; title: string; seoTitle: string; metaDescription: string; excerpt: string; canonical: string; robots: 'index,follow'; ogTitle: string; ogDescription: string; ogImage: string; imageAlt: string; imageBrief: string; lastReviewed: string; related: string[]; breadcrumbLabel: string; schemaFile: string; }
+
+export const seoPackage114Guides: Record<string, SeoPackage114GuideMeta> = {
+  "en/terrarium-heat-lamp-electricity-cost-per-heating-hour-used": {
+    "key": "en/terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "packageId": "114",
+    "locale": "en",
+    "articleSlug": "terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "title": "Terrarium Heat Lamp Electricity Cost Per Heating Hour Used: Count the Timer",
+    "seoTitle": "Terrarium Heat Lamp Electricity Cost Per Heating Hour Used: Count the Timer | WorthCalc",
+    "metaDescription": "Calculate terrarium heat-lamp cost per heating hour from measured lamp, timer, and standby energy.",
+    "excerpt": "Calculate terrarium heat-lamp cost per heating hour from measured lamp, timer, and standby energy.",
+    "canonical": "https://worthcalc.win/en/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Terrarium Heat Lamp Electricity Cost Per Heating Hour Used: Count the Timer",
+    "ogDescription": "Calculate terrarium heat-lamp cost per heating hour from measured lamp, timer, and standby energy.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Terrarium Heat Lamp Electricity Cost Per Heating Hour Used: Count the Timer",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/en/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/en/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/en/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/en/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/en/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Terrarium Heat Lamp Electricity Cost Per Heating Hour Used: Count the Timer",
+    "schemaFile": "114__en__terrarium-heat-lamp-electricity-cost-per-heating-hour-used.json"
+  },
+  "es/terrarium-heat-lamp-electricity-cost-per-heating-hour-used": {
+    "key": "es/terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "packageId": "114",
+    "locale": "es",
+    "articleSlug": "terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "title": "Coste eléctrico de la lámpara de calor del terrario por hora: cuenta el temporizador",
+    "seoTitle": "Coste eléctrico de la lámpara de calor del terrario por hora: cuenta el temporizador | WorthCalc",
+    "metaDescription": "Calcula el coste por hora de la lámpara del terrario a partir de la lámpara, el temporizador y el modo de espera medidos.",
+    "excerpt": "Calcula el coste por hora de la lámpara del terrario a partir de la lámpara, el temporizador y el modo de espera medidos.",
+    "canonical": "https://worthcalc.win/es/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Coste eléctrico de la lámpara de calor del terrario por hora: cuenta el temporizador",
+    "ogDescription": "Calcula el coste por hora de la lámpara del terrario a partir de la lámpara, el temporizador y el modo de espera medidos.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Coste eléctrico de la lámpara de calor del terrario por hora: cuenta el temporizador",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/es/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/es/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/es/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/es/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Coste eléctrico de la lámpara de calor del terrario por hora: cuenta el temporizador",
+    "schemaFile": "114__es__terrarium-heat-lamp-electricity-cost-per-heating-hour-used.json"
+  },
+  "zh/terrarium-heat-lamp-electricity-cost-per-heating-hour-used": {
+    "key": "zh/terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "packageId": "114",
+    "locale": "zh",
+    "articleSlug": "terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "title": "爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚",
+    "seoTitle": "爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚 | WorthCalc",
+    "metaDescription": "量測爬蟲箱加熱燈、定時器與待機時間，估算每個加熱小時的電費。",
+    "excerpt": "量測爬蟲箱加熱燈、定時器與待機時間，估算每個加熱小時的電費。",
+    "canonical": "https://worthcalc.win/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚",
+    "ogDescription": "量測爬蟲箱加熱燈、定時器與待機時間，估算每個加熱小時的電費。",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚",
+    "schemaFile": "114__zh__terrarium-heat-lamp-electricity-cost-per-heating-hour-used.json"
+  },
+  "hi/terrarium-heat-lamp-electricity-cost-per-heating-hour-used": {
+    "key": "hi/terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "packageId": "114",
+    "locale": "hi",
+    "articleSlug": "terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "title": "Terrarium heat lamp electricity cost per heating hour: timer window शामिल करें",
+    "seoTitle": "Terrarium heat lamp electricity cost per heating hour: timer window शामिल करें | WorthCalc",
+    "metaDescription": "Terrarium heat lamp, timer और standby energy को मापकर प्रति heating hour cost निकालें।",
+    "excerpt": "Terrarium heat lamp, timer और standby energy को मापकर प्रति heating hour cost निकालें।",
+    "canonical": "https://worthcalc.win/hi/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Terrarium heat lamp electricity cost per heating hour: timer window शामिल करें",
+    "ogDescription": "Terrarium heat lamp, timer और standby energy को मापकर प्रति heating hour cost निकालें।",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Terrarium heat lamp electricity cost per heating hour: timer window शामिल करें",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/hi/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/hi/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/hi/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/hi/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "Terrarium heat lamp electricity cost per heating hour: timer window शामिल करें",
+    "schemaFile": "114__hi__terrarium-heat-lamp-electricity-cost-per-heating-hour-used.json"
+  },
+  "ar/terrarium-heat-lamp-electricity-cost-per-heating-hour-used": {
+    "key": "ar/terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "packageId": "114",
+    "locale": "ar",
+    "articleSlug": "terrarium-heat-lamp-electricity-cost-per-heating-hour-used",
+    "title": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+    "seoTitle": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت | WorthCalc",
+    "metaDescription": "احسب تكلفة مصباح حرارة الحوض لكل ساعة من قياس المصباح والمؤقت والطاقة في الاستعداد.",
+    "excerpt": "احسب تكلفة مصباح حرارة الحوض لكل ساعة من قياس المصباح والمؤقت والطاقة في الاستعداد.",
+    "canonical": "https://worthcalc.win/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+    "ogDescription": "احسب تكلفة مصباح حرارة الحوض لكل ساعة من قياس المصباح والمؤقت والطاقة في الاستعداد.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+    "imageBrief": "Measured household device electricity cost",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/ar/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
+      "/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
+      "/ar/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
+      "/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/",
+      "/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
+    ],
+    "breadcrumbLabel": "تكلفة مصباح حرارة الحوض لكل ساعة تدفئة: احسب فترة المؤقت",
+    "schemaFile": "114__ar__terrarium-heat-lamp-electricity-cost-per-heating-hour-used.json"
+  }
+};

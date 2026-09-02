@@ -57,6 +57,13 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/true-cost-of-rental-car',
   'guides/true-cost-of-home-service-plan',
   'guides/true-cost-of-upgrade-feature',
+  'guides/cost-per-wear-clothing',
+  'guides/cost-per-use-kitchen-appliance',
+  'guides/meal-kit-cost-per-serving-after-waste',
+  'guides/coworking-membership-cost-per-day',
+  'guides/gym-membership-cost-per-visit',
+  'guides/software-seat-cost-per-active-user',
+  'guides/hobby-equipment-cost-per-use',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

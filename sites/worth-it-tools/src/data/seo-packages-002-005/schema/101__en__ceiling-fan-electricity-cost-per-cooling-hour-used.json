@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/#article",
+      "headline": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+      "description": "Calculate ceiling fan electricity cost per cooling hour from measured motor speed, light-kit, and standby energy.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+          "item": "https://worthcalc.win/en/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/electric-air-pump-electricity-cost-per-inflation-session-used/#article",
+      "headline": "Electric air pump electricity cost per inflation session: pressure cutoff और retries गिनें",
+      "description": "Motor, pressure cutoff, hose और retries की measured energy से electric air pump की प्रति inflation session लागत निकालें।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Electric air pump electricity cost per inflation session: pressure cutoff और retries गिनें",
+          "item": "https://worthcalc.win/hi/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+        }
+      ]
+    }
+  ]
+}

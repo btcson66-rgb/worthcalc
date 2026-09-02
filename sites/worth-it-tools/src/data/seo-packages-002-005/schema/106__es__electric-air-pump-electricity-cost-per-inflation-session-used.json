@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-air-pump-electricity-cost-per-inflation-session-used/#article",
+      "headline": "Coste de una bomba eléctrica por sesión de inflado: incluye el corte de presión",
+      "description": "Calcula el coste por inflado con energía medida de motor, corte, tubo y reintentos.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste de una bomba eléctrica por sesión de inflado: incluye el corte de presión",
+          "item": "https://worthcalc.win/es/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+        }
+      ]
+    }
+  ]
+}

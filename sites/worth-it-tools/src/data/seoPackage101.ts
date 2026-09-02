@@ -1,0 +1,141 @@
+import type { ContentLocale } from '../consts';
+
+export interface SeoPackage101GuideMeta { key: string; packageId: '101'; locale: ContentLocale; articleSlug: string; title: string; seoTitle: string; metaDescription: string; excerpt: string; canonical: string; robots: 'index,follow'; ogTitle: string; ogDescription: string; ogImage: string; imageAlt: string; imageBrief: string; lastReviewed: string; related: string[]; breadcrumbLabel: string; schemaFile: string; }
+
+export const seoPackage101Guides: Record<string, SeoPackage101GuideMeta> = {
+  "en/ceiling-fan-electricity-cost-per-cooling-hour-used": {
+    "key": "en/ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "packageId": "101",
+    "locale": "en",
+    "articleSlug": "ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "title": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+    "seoTitle": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby | WorthCalc",
+    "metaDescription": "Calculate ceiling fan electricity cost per cooling hour from measured motor speed, light-kit, and standby energy.",
+    "excerpt": "Calculate ceiling fan electricity cost per cooling hour from measured motor speed, light-kit, and standby energy.",
+    "canonical": "https://worthcalc.win/en/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+    "ogDescription": "Calculate ceiling fan electricity cost per cooling hour from measured motor speed, light-kit, and standby energy.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+    "imageBrief": "ceiling-fan-electricity-cost-per-cooling-hour-used comparison",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/en/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
+      "/en/guides/water-cooler-electricity-cost-per-cooling-day-used/",
+      "/en/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
+      "/en/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/",
+      "/en/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+    ],
+    "breadcrumbLabel": "Ceiling Fan Electricity Cost Per Cooling Hour Used: Separate Light and Standby",
+    "schemaFile": "101__en__ceiling-fan-electricity-cost-per-cooling-hour-used.json"
+  },
+  "es/ceiling-fan-electricity-cost-per-cooling-hour-used": {
+    "key": "es/ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "packageId": "101",
+    "locale": "es",
+    "articleSlug": "ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "title": "Coste eléctrico de un ventilador de techo por hora de uso: separa luz y espera",
+    "seoTitle": "Coste eléctrico de un ventilador de techo por hora de uso: separa luz y espera | WorthCalc",
+    "metaDescription": "Calcula el coste de un ventilador de techo por hora de refrigeración con energía medida del motor, luz y espera.",
+    "excerpt": "Calcula el coste de un ventilador de techo por hora de refrigeración con energía medida del motor, luz y espera.",
+    "canonical": "https://worthcalc.win/es/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Coste eléctrico de un ventilador de techo por hora de uso: separa luz y espera",
+    "ogDescription": "Calcula el coste de un ventilador de techo por hora de refrigeración con energía medida del motor, luz y espera.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Coste eléctrico de un ventilador de techo por hora de uso: separa luz y espera",
+    "imageBrief": "ceiling-fan-electricity-cost-per-cooling-hour-used comparison",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/es/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
+      "/es/guides/water-cooler-electricity-cost-per-cooling-day-used/",
+      "/es/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
+      "/es/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/",
+      "/es/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+    ],
+    "breadcrumbLabel": "Coste eléctrico de un ventilador de techo por hora de uso: separa luz y espera",
+    "schemaFile": "101__es__ceiling-fan-electricity-cost-per-cooling-hour-used.json"
+  },
+  "zh/ceiling-fan-electricity-cost-per-cooling-hour-used": {
+    "key": "zh/ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "packageId": "101",
+    "locale": "zh",
+    "articleSlug": "ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "title": "吊扇每冷卻小時電費：分開燈具與待機",
+    "seoTitle": "吊扇每冷卻小時電費：分開燈具與待機 | WorthCalc",
+    "metaDescription": "用馬達檔位、燈具與待機的實測能源估算吊扇每冷卻小時電費。",
+    "excerpt": "用馬達檔位、燈具與待機的實測能源估算吊扇每冷卻小時電費。",
+    "canonical": "https://worthcalc.win/zh/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "吊扇每冷卻小時電費：分開燈具與待機",
+    "ogDescription": "用馬達檔位、燈具與待機的實測能源估算吊扇每冷卻小時電費。",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "吊扇每冷卻小時電費：分開燈具與待機",
+    "imageBrief": "ceiling-fan-electricity-cost-per-cooling-hour-used comparison",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/zh/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
+      "/zh/guides/water-cooler-electricity-cost-per-cooling-day-used/",
+      "/zh/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
+      "/zh/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/",
+      "/zh/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+    ],
+    "breadcrumbLabel": "吊扇每冷卻小時電費：分開燈具與待機",
+    "schemaFile": "101__zh__ceiling-fan-electricity-cost-per-cooling-hour-used.json"
+  },
+  "hi/ceiling-fan-electricity-cost-per-cooling-hour-used": {
+    "key": "hi/ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "packageId": "101",
+    "locale": "hi",
+    "articleSlug": "ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "title": "Ceiling fan electricity cost per cooling hour: light और standby अलग करें",
+    "seoTitle": "Ceiling fan electricity cost per cooling hour: light और standby अलग करें | WorthCalc",
+    "metaDescription": "Motor speed, light kit और standby की measured energy से ceiling fan की प्रति cooling hour बिजली लागत निकालें।",
+    "excerpt": "Motor speed, light kit और standby की measured energy से ceiling fan की प्रति cooling hour बिजली लागत निकालें।",
+    "canonical": "https://worthcalc.win/hi/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "Ceiling fan electricity cost per cooling hour: light और standby अलग करें",
+    "ogDescription": "Motor speed, light kit और standby की measured energy से ceiling fan की प्रति cooling hour बिजली लागत निकालें।",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "Ceiling fan electricity cost per cooling hour: light और standby अलग करें",
+    "imageBrief": "ceiling-fan-electricity-cost-per-cooling-hour-used comparison",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/hi/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
+      "/hi/guides/water-cooler-electricity-cost-per-cooling-day-used/",
+      "/hi/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
+      "/hi/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/",
+      "/hi/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+    ],
+    "breadcrumbLabel": "Ceiling fan electricity cost per cooling hour: light और standby अलग करें",
+    "schemaFile": "101__hi__ceiling-fan-electricity-cost-per-cooling-hour-used.json"
+  },
+  "ar/ceiling-fan-electricity-cost-per-cooling-hour-used": {
+    "key": "ar/ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "packageId": "101",
+    "locale": "ar",
+    "articleSlug": "ceiling-fan-electricity-cost-per-cooling-hour-used",
+    "title": "تكلفة مروحة السقف لكل ساعة تبريد: افصل المصباح والاستعداد",
+    "seoTitle": "تكلفة مروحة السقف لكل ساعة تبريد: افصل المصباح والاستعداد | WorthCalc",
+    "metaDescription": "احسب تكلفة مروحة السقف لكل ساعة تبريد من طاقة المحرك والمصباح والاستعداد المقاسة.",
+    "excerpt": "احسب تكلفة مروحة السقف لكل ساعة تبريد من طاقة المحرك والمصباح والاستعداد المقاسة.",
+    "canonical": "https://worthcalc.win/ar/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
+    "robots": "index,follow",
+    "ogTitle": "تكلفة مروحة السقف لكل ساعة تبريد: افصل المصباح والاستعداد",
+    "ogDescription": "احسب تكلفة مروحة السقف لكل ساعة تبريد من طاقة المحرك والمصباح والاستعداد المقاسة.",
+    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
+    "imageAlt": "تكلفة مروحة السقف لكل ساعة تبريد: افصل المصباح والاستعداد",
+    "imageBrief": "ceiling-fan-electricity-cost-per-cooling-hour-used comparison",
+    "lastReviewed": "2026-09-03",
+    "related": [
+      "/ar/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
+      "/ar/guides/water-cooler-electricity-cost-per-cooling-day-used/",
+      "/ar/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
+      "/ar/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/",
+      "/ar/guides/electric-air-pump-electricity-cost-per-inflation-session-used/"
+    ],
+    "breadcrumbLabel": "تكلفة مروحة السقف لكل ساعة تبريد: افصل المصباح والاستعداد",
+    "schemaFile": "101__ar__ceiling-fan-electricity-cost-per-cooling-hour-used.json"
+  }
+};

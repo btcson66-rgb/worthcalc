@@ -42,4 +42,6 @@ draft: false
 
 كيف أقارن خطط التخزين؟ اقسم الرسوم الكاملة على السعة التي تحتاجها وراجع التجديد والاسترداد. أعد الحساب عند تغير الشروط أو السعر أو الاستخدام.
 
+بعد ذلك راجع [دليل تكلفة الكهرباء لكل كيلوواط ساعي](/ar/guides/electricity-cost-per-kwh-used/) لمقارنة الرسوم الثابتة بالاستخدام الفعلي في حالة أخرى.
+
 مصادر للقراءة: [consumer guidance](https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions) و [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). توفر هذه المصادر سياقاً لفحص التكلفة الفعلية ولا تحدد سعراً عاماً أو تضمن نتيجة.

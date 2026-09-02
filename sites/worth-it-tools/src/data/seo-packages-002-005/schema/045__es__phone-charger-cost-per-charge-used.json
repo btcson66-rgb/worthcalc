@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/phone-charger-cost-per-charge-used/#article",
+      "headline": "Coste del cargador del móvil por carga: mide la energía de pared, no el máximo",
+      "description": "Calcula el coste de una carga con kWh medidos en el enchufe, porcentaje de batería, pérdidas, consumo en vacío y tarifa; la potencia del cargador no es consumo continuo.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/phone-charger-cost-per-charge-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del cargador del móvil por carga: mide la energía de pared, no el máximo",
+          "item": "https://worthcalc.win/es/guides/phone-charger-cost-per-charge-used/"
+        }
+      ]
+    }
+  ]
+}

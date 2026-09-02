@@ -30,6 +30,12 @@ import { seoPackage037Guides } from './seoPackage037';
 import { seoPackage038Guides } from './seoPackage038';
 import { seoPackage039Guides } from './seoPackage039';
 import { seoPackage040Guides } from './seoPackage040';
+import { seoPackage041Guides } from './seoPackage041';
+import { seoPackage042Guides } from './seoPackage042';
+import { seoPackage043Guides } from './seoPackage043';
+import { seoPackage044Guides } from './seoPackage044';
+import { seoPackage045Guides } from './seoPackage045';
+import { seoPackage046Guides } from './seoPackage046';
 
 /** Single route registry for staged editorial packages. */
-export const seoPackageGuides = { ...seoPackages002to009, ...seoPackage010Guides, ...seoPackage011Guides, ...seoPackage012Guides, ...seoPackage013Guides, ...seoPackage014Guides, ...seoPackage015Guides, ...seoPackage016Guides, ...seoPackage017Guides, ...seoPackage018Guides, ...seoPackage019Guides, ...seoPackage020Guides, ...seoPackage021Guides, ...seoPackage022Guides, ...seoPackage023Guides, ...seoPackage024Guides, ...seoPackage025Guides, ...seoPackage026Guides, ...seoPackage027Guides, ...seoPackage028Guides, ...seoPackage029Guides, ...seoPackage030Guides, ...seoPackage031Guides, ...seoPackage032Guides, ...seoPackage033Guides, ...seoPackage034Guides, ...seoPackage035Guides, ...seoPackage036Guides, ...seoPackage037Guides, ...seoPackage038Guides, ...seoPackage039Guides, ...seoPackage040Guides };
+export const seoPackageGuides = { ...seoPackages002to009, ...seoPackage010Guides, ...seoPackage011Guides, ...seoPackage012Guides, ...seoPackage013Guides, ...seoPackage014Guides, ...seoPackage015Guides, ...seoPackage016Guides, ...seoPackage017Guides, ...seoPackage018Guides, ...seoPackage019Guides, ...seoPackage020Guides, ...seoPackage021Guides, ...seoPackage022Guides, ...seoPackage023Guides, ...seoPackage024Guides, ...seoPackage025Guides, ...seoPackage026Guides, ...seoPackage027Guides, ...seoPackage028Guides, ...seoPackage029Guides, ...seoPackage030Guides, ...seoPackage031Guides, ...seoPackage032Guides, ...seoPackage033Guides, ...seoPackage034Guides, ...seoPackage035Guides, ...seoPackage036Guides, ...seoPackage037Guides, ...seoPackage038Guides, ...seoPackage039Guides, ...seoPackage040Guides, ...seoPackage041Guides, ...seoPackage042Guides, ...seoPackage043Guides, ...seoPackage044Guides, ...seoPackage045Guides, ...seoPackage046Guides };

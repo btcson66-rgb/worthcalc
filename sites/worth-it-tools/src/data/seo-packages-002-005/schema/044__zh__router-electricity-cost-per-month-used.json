@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/router-electricity-cost-per-month-used/#article",
+      "headline": "路由器每月用電成本：分開全天供電與網路服務費",
+      "description": "用路由器與數據機實測瓦數、連線時數、備援設備與電價，估算每月用電成本；不要把電費與網路月租混為一談。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/router-electricity-cost-per-month-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "路由器每月用電成本：分開全天供電與網路服務費",
+          "item": "https://worthcalc.win/zh/guides/router-electricity-cost-per-month-used/"
+        }
+      ]
+    }
+  ]
+}

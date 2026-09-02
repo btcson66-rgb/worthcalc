@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/television-electricity-cost-per-watched-hour-used/#article",
+      "headline": "電視每觀看一小時用電成本：計入畫面模式與串流設備",
+      "description": "用電視開啟與待機的實測耗電、畫面設定、串流設備、電價與實際觀看時數，估算每觀看小時成本，不要只看螢幕尺寸。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/television-electricity-cost-per-watched-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電視每觀看一小時用電成本：計入畫面模式與串流設備",
+          "item": "https://worthcalc.win/zh/guides/television-electricity-cost-per-watched-hour-used/"
+        }
+      ]
+    }
+  ]
+}

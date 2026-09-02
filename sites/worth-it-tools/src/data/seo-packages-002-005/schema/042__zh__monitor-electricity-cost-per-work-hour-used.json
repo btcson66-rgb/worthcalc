@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/monitor-electricity-cost-per-work-hour-used/#article",
+      "headline": "螢幕每工作一小時用電成本：計入亮度、睡眠與 USB 供電",
+      "description": "用螢幕開啟與睡眠模式的實測功率、亮度、USB-C 供電、電價與實際工作時數，計算每工作小時成本，不要把尺寸直接當成耗電量。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/monitor-electricity-cost-per-work-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "螢幕每工作一小時用電成本：計入亮度、睡眠與 USB 供電",
+          "item": "https://worthcalc.win/zh/guides/monitor-electricity-cost-per-work-hour-used/"
+        }
+      ]
+    }
+  ]
+}

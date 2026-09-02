@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/monitor-electricity-cost-per-work-hour-used/#article",
+      "headline": "Coste del monitor por hora de trabajo: incluye brillo, reposo y USB",
+      "description": "Calcula el coste por hora de trabajo de un monitor con consumo medido en encendido y reposo, brillo, carga USB-C, tarifa y horas útiles; tamaño de pantalla no equivale a factura.",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/es/guides/monitor-electricity-cost-per-work-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste del monitor por hora de trabajo: incluye brillo, reposo y USB",
+          "item": "https://worthcalc.win/es/guides/monitor-electricity-cost-per-work-hour-used/"
+        }
+      ]
+    }
+  ]
+}

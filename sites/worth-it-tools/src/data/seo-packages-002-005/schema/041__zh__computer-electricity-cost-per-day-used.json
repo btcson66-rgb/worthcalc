@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/computer-electricity-cost-per-day-used/#article",
+      "headline": "電腦每天使用電費：分開工作、閒置、睡眠與充電",
+      "description": "用工作、閒置、睡眠與充電模式的實測瓦數，加上已交付電力費率，估算電腦每天用電成本；筆電變壓器標示功率不是每天帳單。",
+      "inLanguage": "zh",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/zh/guides/computer-electricity-cost-per-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "電腦每天使用電費：分開工作、閒置、睡眠與充電",
+          "item": "https://worthcalc.win/zh/guides/computer-electricity-cost-per-day-used/"
+        }
+      ]
+    }
+  ]
+}

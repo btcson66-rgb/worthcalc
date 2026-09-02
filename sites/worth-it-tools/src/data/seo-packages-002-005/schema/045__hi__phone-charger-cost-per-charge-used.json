@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/phone-charger-cost-per-charge-used/#article",
+      "headline": "Phone charger cost per charge used: wall energy मापें, adapter maximum नहीं",
+      "description": "Wall kWh, battery percentage, charging losses, idle charger power और electricity tariff से phone charge cost निकालें; adapter wattage continuous draw नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/phone-charger-cost-per-charge-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Phone charger cost per charge used: wall energy मापें, adapter maximum नहीं",
+          "item": "https://worthcalc.win/hi/guides/phone-charger-cost-per-charge-used/"
+        }
+      ]
+    }
+  ]
+}

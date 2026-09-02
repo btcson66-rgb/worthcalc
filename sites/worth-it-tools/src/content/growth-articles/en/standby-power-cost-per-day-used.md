@@ -40,4 +40,4 @@ No. First measure it, then compare the annual cost with the service lost, replac
 
 ## Source reading
 
-Read EIA's [electricity-use explanation](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) and CFPB's [housing-cost guidance](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). They support separating measured consumption from local utility conditions and household value.
+Read EIA's [electricity-use explanation](https://www.eia.gov/tools/faqs/faq.php?id=96&t=1) and CFPB's [housing-cost guidance](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/). They support separating measured consumption from local utility conditions and household value. Continue with the [computer daily-cost guide](/en/guides/computer-electricity-cost-per-day-used/) when the always-on load belongs to a workstation.

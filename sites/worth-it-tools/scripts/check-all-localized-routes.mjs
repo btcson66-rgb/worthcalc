@@ -100,6 +100,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/microwave-cost-per-cooking-cycle-used',
   'guides/pool-pump-cost-per-operating-hour-used',
   'guides/standby-power-cost-per-day-used',
+  'guides/computer-electricity-cost-per-day-used',
+  'guides/monitor-electricity-cost-per-work-hour-used',
+  'guides/television-electricity-cost-per-watched-hour-used',
+  'guides/router-electricity-cost-per-month-used',
+  'guides/phone-charger-cost-per-charge-used',
+  'guides/electric-blanket-cost-per-night-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

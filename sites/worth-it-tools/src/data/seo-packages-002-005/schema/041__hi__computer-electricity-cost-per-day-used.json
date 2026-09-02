@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/hi/guides/computer-electricity-cost-per-day-used/#article",
+      "headline": "Computer electricity cost per day used: work, sleep और charging अलग करें",
+      "description": "Work, idle, sleep और charging modes के measured watts तथा delivered electricity tariff से computer daily cost निकालें; laptop adapter rating daily bill नहीं है।",
+      "inLanguage": "hi",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/hi/guides/computer-electricity-cost-per-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/hi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Computer electricity cost per day used: work, sleep और charging अलग करें",
+          "item": "https://worthcalc.win/hi/guides/computer-electricity-cost-per-day-used/"
+        }
+      ]
+    }
+  ]
+}

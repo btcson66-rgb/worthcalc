@@ -76,6 +76,7 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/language-class-cost-per-completed-session',
   'guides/meal-delivery-plan-cost-per-eaten-meal',
   'guides/software-add-on-cost-per-active-seat',
+  'guides/electricity-cost-per-kwh-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

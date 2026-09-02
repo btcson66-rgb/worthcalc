@@ -26,6 +26,7 @@
       "check:seo-program-014": "node scripts/check-seo-program-014.mjs",
       "check:seo-program-015": "node scripts/check-seo-program-015.mjs",
       "check:seo-program-016": "node scripts/check-seo-program-016.mjs",
+      "check:seo-program-017": "node scripts/check-seo-program-017.mjs",
     "check:url-budget": "node scripts/check-url-budget.mjs",
     "check:guide-index": "node scripts/check-guide-index.mjs",
     "generate:guide-index": "node scripts/generate-guide-index.mjs",
@@ -33,7 +34,7 @@
     "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs",
     "audit:brief-coverage": "node scripts/audit-editorial-brief-coverage.mjs",
     "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",
-      "verify": "npm run test:growth && npm run check:growth-content && npm run build && npm run typecheck && npm run lint && npm run check:links && npm run check:seo-packages && npm run check:seo-program-010 && npm run check:seo-program-011 && npm run check:seo-program-012 && npm run check:seo-program-013 && npm run check:seo-program-014 && npm run check:seo-program-015 && npm run check:seo-program-016 && npm run check:url-budget && npm run check:guide-index && npm run check:multilingual && npm run check:shell && npm run check:all-locales && npm run check:growth-release && npm run audit:brief-coverage"
+      "verify": "npm run test:growth && npm run check:growth-content && npm run build && npm run typecheck && npm run lint && npm run check:links && npm run check:seo-packages && npm run check:seo-program-010 && npm run check:seo-program-011 && npm run check:seo-program-012 && npm run check:seo-program-013 && npm run check:seo-program-014 && npm run check:seo-program-015 && npm run check:seo-program-016 && npm run check:seo-program-017 && npm run check:url-budget && npm run check:guide-index && npm run check:multilingual && npm run check:shell && npm run check:all-locales && npm run check:growth-release && npm run audit:brief-coverage"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",

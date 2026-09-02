@@ -42,4 +42,6 @@ Current, growth और cleanup scenarios compare करें। Delete duplicat
 
 Cloud plans कैसे compare करें? Complete charges को genuinely needed retained GB से divide करें और renewal/recovery terms check करें। Terms, price या usage बदलें तो फिर calculate करें।
 
+इसके बाद [electricity cost per kWh guide](/hi/guides/electricity-cost-per-kwh-used/) में fixed charges और actual usage वाले दूसरे unit-cost case को देखें।
+
 स्रोत पढ़ें: [consumer guidance](https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions) और [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). ये sources actual cost समझने का context देते हैं; universal price या guaranteed result नहीं देते।

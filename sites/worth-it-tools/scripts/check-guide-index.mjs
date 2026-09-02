@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
-const LOCALES = ['en', 'zh', 'es', 'fr', 'de'];
+const LOCALES = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
 const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 // 每頁都有的語言切換器會讓同一篇文章的各語言版互指。那不是發現路徑——
 // 如果整組五個語言版都沒有別的入口，Google 一個都找不到。所以互指不算數。

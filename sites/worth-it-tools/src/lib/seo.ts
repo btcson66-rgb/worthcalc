@@ -1,4 +1,4 @@
-import { CORE_LOCALES, SITE, LOCALE_HREFLANG, LOCALES, type Locale } from '../consts';
+import { CONTENT_LOCALES, CORE_LOCALES, SITE, LOCALE_HREFLANG, type ContentLocale } from '../consts';
 import deindexedRegistry from '../data/deindexed-urls.json';
 
 const DEINDEXED_PATHS = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
@@ -18,7 +18,7 @@ export interface SeoInput {
   /** Optional accessible description for the social share image. */
   imageAlt?: string;
   /** Active locale of the page. */
-  locale: Locale;
+  locale: ContentLocale;
   /** The current page URL (pass `Astro.url`). */
   url: URL;
   /** The deployed site origin (pass `Astro.site`). Falls back to SITE.url. */
@@ -30,7 +30,7 @@ export interface SeoInput {
   /** When true, emit a noindex robots directive. */
   noindex?: boolean;
   /** Locales that have an equivalent page. Defaults to complete site locales. */
-  alternateLocales?: Locale[];
+  alternateLocales?: ContentLocale[];
 }
 
 export interface ResolvedSeo {
@@ -39,7 +39,7 @@ export interface ResolvedSeo {
   canonical: string;
   ogImage: string;
   type: 'website' | 'article';
-  locale: Locale;
+  locale: ContentLocale;
   htmlLang: string;
   robots: string;
   /** hreflang alternates for every locale + x-default. */
@@ -68,7 +68,7 @@ export function isSoftDeindexed(pathname: string): boolean {
   return DEINDEXED_PATHS.has(pagePath(pathname));
 }
 
-function localizedPagePath(locale: Locale, logical: string): string {
+function localizedPagePath(locale: ContentLocale, logical: string): string {
   if (!logical && locale === 'en') return '/';
   return logical ? `/${locale}/${logical}/` : `/${locale}/`;
 }
@@ -91,9 +91,10 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
 
   // hreflang alternates: swap the locale segment of the current path.
   const segments = input.url.pathname.split('/').filter(Boolean);
-  if ((LOCALES as string[]).includes(segments[0])) segments.shift();
+  if ((CONTENT_LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
   const alternateLocales = input.alternateLocales ?? [...CORE_LOCALES];
+  const xDefaultLocale = alternateLocales.includes('en') ? 'en' : (alternateLocales[0] ?? input.locale);
   const alternates = alternateLocales
     .map((loc) => ({
       locale: loc,
@@ -111,7 +112,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
     .map(({ hreflang, href }) => ({ hreflang, href }));
   alternates.push({
     hreflang: 'x-default',
-    href: absolute(base, logical ? localizedPagePath(alternateLocales[0] ?? input.locale, logical) : '/'),
+    href: absolute(base, logical ? localizedPagePath(xDefaultLocale, logical) : '/'),
   });
 
   const openGraph: Record<string, string> = {
@@ -265,7 +266,7 @@ export function softwareAppJsonLd(opts: {
   name: string;
   description: string;
   url: string;
-  locale: Locale;
+  locale: ContentLocale;
   site?: URL;
 }): object {
   const base = (opts.site?.origin ?? SITE.url).replace(/\/$/, '');
@@ -289,7 +290,7 @@ export function articleJsonLd(opts: {
   headline: string;
   description: string;
   url: string;
-  locale: Locale;
+  locale: ContentLocale;
   dateModified?: string;
   site?: URL;
 }): object {

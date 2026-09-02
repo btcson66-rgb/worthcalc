@@ -1,4 +1,4 @@
-import type { Locale } from '../consts';
+import type { ContentLocale } from '../consts';
 
 /**
  * UI string table. Keys are shared across locales; `t(key)` resolves the
@@ -205,6 +205,40 @@ export const ui = {
     'lang.switch': 'Sprache',
     'ad.placeholder': 'Werbung',
   },
-} satisfies Record<Locale, Record<string, string>>;
+  hi: {
+    'nav.home': 'होम',
+    'nav.tools': 'टूल्स',
+    'nav.about': 'हमारे बारे में',
+    'nav.contact': 'संपर्क',
+    'breadcrumb.home': 'होम',
+    'footer.legal': 'कानूनी जानकारी',
+    'footer.about': 'हमारे बारे में',
+    'footer.privacy': 'गोपनीयता नीति',
+    'footer.terms': 'सेवा की शर्तें',
+    'footer.contact': 'संपर्क',
+    'footer.disclaimer': 'अस्वीकरण',
+    'footer.changelog': 'परिवर्तन',
+    'footer.rights': 'सर्वाधिकार सुरक्षित।',
+    'lang.switch': 'भाषा',
+    'ad.placeholder': 'विज्ञापन',
+  },
+  ar: {
+    'nav.home': 'الرئيسية',
+    'nav.tools': 'الأدوات',
+    'nav.about': 'من نحن',
+    'nav.contact': 'اتصل بنا',
+    'breadcrumb.home': 'الرئيسية',
+    'footer.legal': 'قانوني',
+    'footer.about': 'من نحن',
+    'footer.privacy': 'سياسة الخصوصية',
+    'footer.terms': 'شروط الخدمة',
+    'footer.contact': 'اتصل بنا',
+    'footer.disclaimer': 'إخلاء المسؤولية',
+    'footer.changelog': 'سجل التغييرات',
+    'footer.rights': 'جميع الحقوق محفوظة.',
+    'lang.switch': 'اللغة',
+    'ad.placeholder': 'إعلان',
+  },
+} satisfies Record<ContentLocale, Record<string, string>>;
 
 export type UIKey = keyof (typeof ui)['en'];

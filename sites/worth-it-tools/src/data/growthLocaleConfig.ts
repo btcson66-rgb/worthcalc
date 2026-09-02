@@ -1,4 +1,4 @@
-export type WorthCalcLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+export type WorthCalcLocale = 'en' | 'zh' | 'es' | 'fr' | 'de' | 'hi' | 'ar';
 
 export interface LocaleFinanceConfig {
   locale: WorthCalcLocale;
@@ -57,5 +57,21 @@ export const localeFinanceConfig: Record<WorthCalcLocale, LocaleFinanceConfig> =
     homeCostFields: ['Annuität', 'Hausgeld', 'Instandhaltung', 'Grundsteuer', 'Versicherung', 'Grunderwerbsteuer', 'Notar und Grundbuch'],
     officialInflationAuthority: 'Statistisches Bundesamt (Destatis)', inflationSeriesKey: 'DE_VPI_ANNUAL_AVERAGE',
     legalDisclaimer: 'Allgemeine Rechenhilfe; Kreditprüfung, Nebenkosten, Zinsbindung und Vertragsbedingungen können abweichen.',
+  },
+  hi: {
+    locale: 'hi', htmlLang: 'hi-IN', region: 'भारत / अंतरराष्ट्रीय हिन्दी', currency: 'INR', currencyDigits: 2,
+    decimalSeparator: '.', groupSeparator: ',', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
+    mortgageTerminology: ['ब्याज दर', 'मूलधन', 'ब्याज', 'डाउन पेमेंट', 'प्रीपेमेंट', 'प्रोसेसिंग फीस'],
+    homeCostFields: ['होम लोन भुगतान', 'प्रॉपर्टी टैक्स', 'बीमा', 'मेंटेनेंस', 'सोसाइटी शुल्क', 'रजिस्ट्रेशन खर्च'],
+    officialInflationAuthority: 'भारत सरकार का सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय', inflationSeriesKey: 'IN_CPI_ANNUAL_AVERAGE',
+    legalDisclaimer: 'यह सामान्य शैक्षिक अनुमान है; ऋणदाता, अनुबंध, कर और स्थानीय नियम अलग हो सकते हैं।',
+  },
+  ar: {
+    locale: 'ar', htmlLang: 'ar', region: 'العالم العربي / استخدام عربي دولي', currency: 'USD', currencyDigits: 2,
+    decimalSeparator: '.', groupSeparator: ',', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
+    mortgageTerminology: ['معدل الفائدة', 'أصل الدين', 'الفائدة', 'الدفعة الأولى', 'السداد المبكر', 'الرسوم'],
+    homeCostFields: ['دفعة التمويل', 'الضريبة العقارية', 'التأمين', 'الصيانة', 'رسوم الخدمات', 'تكاليف التسجيل'],
+    officialInflationAuthority: 'الجهة الإحصائية الرسمية المحلية', inflationSeriesKey: 'AR_CPI_ANNUAL_AVERAGE',
+    legalDisclaimer: 'هذا تقدير تعليمي عام؛ قد تختلف شروط المقرضين والعقود والضرائب والقواعد المحلية.',
   },
 };

@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
 const outPath = join(projectRoot, 'src', 'data', 'guideIndex.ts');
-const LOCALES = ['en', 'zh', 'es', 'fr', 'de'];
+const LOCALES = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
 const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 
 if (!existsSync(distDir)) {
@@ -84,7 +84,7 @@ const lines = [
   '//',
   '// 這個檔案由 `npm run generate:guide-index` 從 dist 產生，不要手改。',
   '',
-  "import type { Locale } from '../consts';",
+  "import type { ContentLocale } from '../consts';",
   '',
   'export interface GuideIndexEntry {',
   '  /** 不含語系前綴的路徑，交給 localizedPath() 組。 */',
@@ -92,7 +92,7 @@ const lines = [
   '  title: string;',
   '}',
   '',
-  'export const guideIndex: Record<Locale, GuideIndexEntry[]> = {',
+  'export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {',
 ];
 for (const locale of LOCALES) {
   lines.push(`  ${locale}: [`);

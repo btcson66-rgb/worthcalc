@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import type { Locale } from '../consts';
+import type { ContentLocale } from '../consts';
 import { CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
 import type { EntityJsonLdOptions, SeoInput } from '../lib/seo';
 import { getLocaleFromUrl } from '../i18n/utils';
@@ -12,7 +12,7 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description: string;
-  locale?: Locale;
+  locale?: ContentLocale;
   url?: URL;
   site?: URL;
   image?: string;
@@ -23,7 +23,7 @@ interface Props {
   imageAlt?: string;
   type?: SeoInput['type'];
   noindex?: boolean;
-  alternateLocales?: Locale[];
+  alternateLocales?: ContentLocale[];
   jsonLd?: object[];
   entity?: EntityJsonLdOptions;
 }

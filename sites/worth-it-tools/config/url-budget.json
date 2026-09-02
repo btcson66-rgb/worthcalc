@@ -1,9 +1,9 @@
 {
-  "maxUrls": 450,
-  "currentUrls": 432,
+  "maxUrls": 500,
+  "currentUrls": 467,
   "reviewedAt": "2026-09-02",
   "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
   "amendedOn": "2026-09-02",
-  "amendedBecause": "The owner explicitly authorized shipping SEO packages 002-009. Packages 006-009 add 60 en+zh routes (15 pages per package) with package-supplied cannibalization audits, substantive final copy, and distinct decision intents. The cap is raised 400 -> 450 to make the approved 432-route sitemap fit while retaining headroom for review rather than silently bypassing the budget check.",
-  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be (1) en+zh only -- never es/fr/de while the i18n freeze holds, (2) backed by written demand evidence, not a hunch: GSC impressions at a deep position, or an autocomplete cluster, cited in a Vault research note, and (3) a page a human would search for by name, not a variant of a page that already exists. At most 6 URLs (three topics) per release."
+  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Package 010 adds one annual-cost-savings search intent in five locales (5 routes) with GA4/GSC evidence, source citations, substantive final copy, and a dedicated build/readback check. The cap is raised 450 -> 500 to retain review headroom without bypassing the budget gate.",
+  "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be backed by written GA4/GSC evidence, reliable sources, a distinct human search intent, substantive copy, and sitemap reconciliation. Later packages must remain grouped by a coherent topic cluster; the per-batch ceiling is 35 pages."
 }

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pagesRoot = join(projectRoot, 'src', 'pages');
-const locales = new Set(['en', 'zh', 'es', 'fr', 'de']);
+const locales = new Set(['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar']);
 const dateFields = ['updated', 'lastUpdated', 'lastReviewed', 'published', 'pubDate', 'date'];
 
 function normalizeRoute(value) {

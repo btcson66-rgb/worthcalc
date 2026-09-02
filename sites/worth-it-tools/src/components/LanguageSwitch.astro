@@ -1,9 +1,9 @@
 ---
-import { LOCALE_LABELS, LOCALES, type Locale } from '../consts';
+import { LOCALE_LABELS, LOCALES, type ContentLocale } from '../consts';
 import { getLocaleFromUrl, switchLocalePath, useTranslations } from '../i18n/utils';
 
 interface Props {
-  locales?: Locale[];
+  locales?: ContentLocale[];
 }
 
 const { locales = [...LOCALES] } = Astro.props;

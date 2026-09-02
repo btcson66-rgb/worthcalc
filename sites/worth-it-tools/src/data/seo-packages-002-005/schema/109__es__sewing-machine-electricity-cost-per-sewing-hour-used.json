@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/sewing-machine-electricity-cost-per-sewing-hour-used/#article",
+      "headline": "Coste eléctrico de una máquina de coser por hora: incluye el pedal",
+      "description": "Calcula el coste por hora de costura separando motor, luz y espera.",
+      "inLanguage": "es",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/es/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de una máquina de coser por hora: incluye el pedal",
+          "item": "https://worthcalc.win/es/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+        }
+      ]
+    }
+  ]
+}

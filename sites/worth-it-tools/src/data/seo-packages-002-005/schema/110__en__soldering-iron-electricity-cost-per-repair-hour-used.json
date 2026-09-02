@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/soldering-iron-electricity-cost-per-repair-hour-used/#article",
+      "headline": "Soldering Iron Electricity Cost Per Repair Hour Used: Include Warm-Up",
+      "description": "Measure soldering-iron warm-up, regulated heat, and idle time to estimate cost per repair hour.",
+      "inLanguage": "en",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/en/guides/soldering-iron-electricity-cost-per-repair-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Soldering Iron Electricity Cost Per Repair Hour Used: Include Warm-Up",
+          "item": "https://worthcalc.win/en/guides/soldering-iron-electricity-cost-per-repair-hour-used/"
+        }
+      ]
+    }
+  ]
+}

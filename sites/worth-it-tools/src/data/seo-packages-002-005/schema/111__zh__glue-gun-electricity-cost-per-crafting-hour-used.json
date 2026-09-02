@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/glue-gun-electricity-cost-per-crafting-hour-used/#article",
+      "headline": "熱熔膠槍每手作小時電費：分開加熱與插電閒置",
+      "description": "從預熱、控溫與閒置量測，估算熱熔膠槍每個手作小時的實際電費。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/zh/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "熱熔膠槍每手作小時電費：分開加熱與插電閒置",
+          "item": "https://worthcalc.win/zh/guides/glue-gun-electricity-cost-per-crafting-hour-used/"
+        }
+      ]
+    }
+  ]
+}

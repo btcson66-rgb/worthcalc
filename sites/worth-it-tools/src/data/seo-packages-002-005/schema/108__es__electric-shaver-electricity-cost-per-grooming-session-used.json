@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/electric-shaver-electricity-cost-per-grooming-session-used/#article",
+      "headline": "Coste eléctrico de una afeitadora por sesión de cuidado: cuenta la carga",
+      "description": "Calcula el coste de una afeitadora por sesión separando motor, limpieza y carga.",
+      "inLanguage": "es",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/es/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de una afeitadora por sesión de cuidado: cuenta la carga",
+          "item": "https://worthcalc.win/es/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+        }
+      ]
+    }
+  ]
+}

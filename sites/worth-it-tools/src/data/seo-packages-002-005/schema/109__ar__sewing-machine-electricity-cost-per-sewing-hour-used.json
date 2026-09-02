@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/sewing-machine-electricity-cost-per-sewing-hour-used/#article",
+      "headline": "تكلفة ماكينة الخياطة لكل ساعة خياطة: أدرج زمن الدواسة",
+      "description": "احسب تكلفة ماكينة الخياطة لكل ساعة من قياسات المحرك والمصباح والاستعداد.",
+      "inLanguage": "ar",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/ar/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة ماكينة الخياطة لكل ساعة خياطة: أدرج زمن الدواسة",
+          "item": "https://worthcalc.win/ar/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+        }
+      ]
+    }
+  ]
+}

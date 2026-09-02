@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/es/guides/soldering-iron-electricity-cost-per-repair-hour-used/#article",
+      "headline": "Coste eléctrico de un soldador por hora de reparación: incluye el calentamiento",
+      "description": "Mide calentamiento, regulación térmica y espera para calcular el coste por hora de reparación.",
+      "inLanguage": "es",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/es/guides/soldering-iron-electricity-cost-per-repair-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Coste eléctrico de un soldador por hora de reparación: incluye el calentamiento",
+          "item": "https://worthcalc.win/es/guides/soldering-iron-electricity-cost-per-repair-hour-used/"
+        }
+      ]
+    }
+  ]
+}

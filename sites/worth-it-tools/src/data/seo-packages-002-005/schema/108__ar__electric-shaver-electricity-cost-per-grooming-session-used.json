@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/electric-shaver-electricity-cost-per-grooming-session-used/#article",
+      "headline": "تكلفة الحلاقة الكهربائية لكل جلسة عناية: احسب الشحن",
+      "description": "قدّر تكلفة ماكينة الحلاقة لكل جلسة بفصل وقت المحرك والتنظيف والشحن.",
+      "inLanguage": "ar",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/ar/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة الحلاقة الكهربائية لكل جلسة عناية: احسب الشحن",
+          "item": "https://worthcalc.win/ar/guides/electric-shaver-electricity-cost-per-grooming-session-used/"
+        }
+      ]
+    }
+  ]
+}

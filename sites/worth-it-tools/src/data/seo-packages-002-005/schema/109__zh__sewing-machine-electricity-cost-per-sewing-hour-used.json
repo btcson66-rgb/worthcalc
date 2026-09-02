@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/zh/guides/sewing-machine-electricity-cost-per-sewing-hour-used/#article",
+      "headline": "縫紉機每縫紉小時電費：把腳踏與工作燈分開",
+      "description": "從馬達、工作燈與待機讀值，計算縫紉機每個縫紉小時的實際電費。",
+      "inLanguage": "zh-Hant",
+      "dateModified": "2026-09-03",
+      "mainEntityOfPage": {
+        "@id": "https://worthcalc.win/zh/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/zh/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "縫紉機每縫紉小時電費：把腳踏與工作燈分開",
+          "item": "https://worthcalc.win/zh/guides/sewing-machine-electricity-cost-per-sewing-hour-used/"
+        }
+      ]
+    }
+  ]
+}

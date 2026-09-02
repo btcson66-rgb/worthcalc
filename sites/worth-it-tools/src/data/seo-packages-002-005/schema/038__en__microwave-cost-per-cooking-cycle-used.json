@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/microwave-cost-per-cooking-cycle-used/#article",
+      "headline": "Microwave Cost Per Cooking Cycle Used: Count Wattage, Time, and Failed Reheats",
+      "description": "Estimate the cost of a microwave cooking cycle from measured input power, active minutes, standby draw, batch size, electricity rates, cleaning, and edible output rather than treating the nameplate wattage as the cycle cost.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/microwave-cost-per-cooking-cycle-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Microwave Cost Per Cooking Cycle Used: Count Wattage, Time, and Failed Reheats",
+          "item": "https://worthcalc.win/en/guides/microwave-cost-per-cooking-cycle-used/"
+        }
+      ]
+    }
+  ]
+}

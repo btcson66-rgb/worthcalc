@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/standby-power-cost-per-day-used/#article",
+      "headline": "Standby Power Cost Per Day Used: Measure the Plug Load and the Service It Supports",
+      "description": "Estimate a device's standby cost per day from measured watts, always-on hours, network or clock functions, electricity rates, delivery charges, and the service the device provides rather than assuming every plugged-in watt is waste.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/standby-power-cost-per-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Standby Power Cost Per Day Used: Measure the Plug Load and the Service It Supports",
+          "item": "https://worthcalc.win/en/guides/standby-power-cost-per-day-used/"
+        }
+      ]
+    }
+  ]
+}

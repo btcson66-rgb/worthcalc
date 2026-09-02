@@ -94,6 +94,12 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/room-air-conditioner-cost-per-cooling-hour-used',
   'guides/freezer-cost-per-day-used',
   'guides/electric-space-heater-cost-per-heating-hour-used',
+  'guides/heat-pump-cost-per-heating-hour-used',
+  'guides/portable-ac-cost-per-cooling-hour-used',
+  'guides/induction-cooktop-cost-per-cooking-hour-used',
+  'guides/microwave-cost-per-cooking-cycle-used',
+  'guides/pool-pump-cost-per-operating-hour-used',
+  'guides/standby-power-cost-per-day-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };

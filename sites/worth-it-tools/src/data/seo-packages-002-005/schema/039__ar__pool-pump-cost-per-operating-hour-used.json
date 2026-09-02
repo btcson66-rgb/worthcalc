@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/pool-pump-cost-per-operating-hour-used/#article",
+      "headline": "تكلفة مضخة المسبح لكل ساعة تشغيل: افصل السرعة والتدفق والمهام",
+      "description": "احسب تكلفة مضخة المسبح لكل ساعة من القدرة المقاسة عند كل سرعة وجدول الترشيح والتنظيف والتعرفة والصيانة وحصة المعدات؛ ليست كل ساعة تشغيل متساوية.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/pool-pump-cost-per-operating-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة مضخة المسبح لكل ساعة تشغيل: افصل السرعة والتدفق والمهام",
+          "item": "https://worthcalc.win/ar/guides/pool-pump-cost-per-operating-hour-used/"
+        }
+      ]
+    }
+  ]
+}

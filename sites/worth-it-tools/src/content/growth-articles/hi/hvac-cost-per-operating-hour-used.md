@@ -26,7 +26,7 @@ effective HVAC hour cost = (energy + delivery charges + maintenance + equipment 
 
 Mild और extreme-weather weeks compare करें, सिर्फ setpoint नहीं। Duct leakage, insulation, humidity, short cycling, fan-only time, auxiliary heat और installation runtime तथा comfort बदलते हैं। Comfort को outcome रखें, guaranteed saving claim नहीं।
 
-इस decision को [previous guide](/hi/guides/oven-stove-cost-per-cooking-hour-used/), [next guide](/hi/guides/led-lighting-cost-per-hour-used/), [electricity guide](/hi/guides/electricity-cost-per-kwh-used/) और [natural-gas guide](/hi/guides/natural-gas-cost-per-therm-used/) से compare करें।
+इस decision को [previous guide](/hi/guides/oven-stove-cost-per-cooking-hour-used/), [heat-pump heating-hour guide](/hi/guides/heat-pump-cost-per-heating-hour-used/), [next guide](/hi/guides/led-lighting-cost-per-hour-used/), [electricity guide](/hi/guides/electricity-cost-per-kwh-used/) और [natural-gas guide](/hi/guides/natural-gas-cost-per-therm-used/) से compare करें।
 
 ## Limits और common mistakes
 

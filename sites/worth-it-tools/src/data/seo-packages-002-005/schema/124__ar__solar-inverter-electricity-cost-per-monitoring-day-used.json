@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/ar/guides/solar-inverter-electricity-cost-per-monitoring-day-used/#article",
+      "headline": "تكلفة عاكس الطاقة الشمسية لكل يوم مراقبة: افصل الاستعداد والتحويل",
+      "description": "قدّر تكلفة يوم مراقبة العاكس بفصل الاستعداد الليلي والتحويل النهاري والاتصالات ومعدات الاحتياط.",
+      "inLanguage": "ar",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/ar/guides/solar-inverter-electricity-cost-per-monitoring-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "تكلفة عاكس الطاقة الشمسية لكل يوم مراقبة: افصل الاستعداد والتحويل",
+          "item": "https://worthcalc.win/ar/guides/solar-inverter-electricity-cost-per-monitoring-day-used/"
+        }
+      ]
+    }
+  ]
+}

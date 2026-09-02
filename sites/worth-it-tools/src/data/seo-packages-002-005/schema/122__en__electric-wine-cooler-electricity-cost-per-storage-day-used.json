@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/#article",
+      "headline": "Wine Cooler Electricity Cost Per Storage Day Used: Count Compressor Cycling",
+      "description": "Estimate a wine cooler cost per occupied storage day from measured kWh, compressor cycling, temperature setting, and your delivered electricity rate.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Wine Cooler Electricity Cost Per Storage Day Used: Count Compressor Cycling",
+          "item": "https://worthcalc.win/en/guides/electric-wine-cooler-electricity-cost-per-storage-day-used/"
+        }
+      ]
+    }
+  ]
+}

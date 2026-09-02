@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://worthcalc.win/en/guides/attic-fan-electricity-cost-per-ventilation-hour-used/#article",
+      "headline": "Attic Fan Electricity Cost Per Ventilation Hour Used: Measure Duty Cycle",
+      "description": "Estimate attic-fan electricity cost per ventilation hour from measured kWh, thermostat duty cycle, weather window, and delivered electricity rate.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://worthcalc.win/en/guides/attic-fan-electricity-cost-per-ventilation-hour-used/"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WorthCalc"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "WorthCalc",
+          "item": "https://worthcalc.win/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Attic Fan Electricity Cost Per Ventilation Hour Used: Measure Duty Cycle",
+          "item": "https://worthcalc.win/en/guides/attic-fan-electricity-cost-per-ventilation-hour-used/"
+        }
+      ]
+    }
+  ]
+}

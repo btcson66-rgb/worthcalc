@@ -44,4 +44,6 @@ No. Rate structure, fixed charges, timing, and credits vary; use your own bill t
 
 How do I calculate my real electricity rate? Add the bill lines that were actually charged, subtract credits that actually reduced the bill, and divide by the kWh on that bill. Recalculate after a rate change or a different billing period.
 
+For another fixed-charge comparison, see the [home internet cost per GB guide](/en/guides/home-internet-cost-per-gb-used/).
+
 Source reading: [EIA electricity price and rate context](https://www.eia.gov/tools/faqs/faq.php?id=507) and [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). EIA and CFPB provide context for checking actual costs; they do not set a universal household price or guarantee savings.

@@ -44,4 +44,6 @@ draft: false
 
 怎麼算自己的實際電費單價？把帳單實際收取的項目加總，扣除真正降低應付金額的折抵，再除以該週期的用電度數。費率或計費天數改變時要重新計算。
 
+若要比較另一種固定費與實際用量，可接著閱讀［家用網路每使用 GB 成本指南](/zh/guides/home-internet-cost-per-gb-used/)。
+
 來源閱讀: [EIA electricity price and rate context](https://www.eia.gov/tools/faqs/faq.php?id=507) 與 [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). EIA 與 CFPB 提供核對實際成本的背景，不提供通用家庭電價，也不保證節省。

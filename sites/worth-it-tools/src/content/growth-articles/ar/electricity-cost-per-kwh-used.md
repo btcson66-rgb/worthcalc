@@ -44,4 +44,6 @@ draft: false
 
 كيف أحسب سعر الكهرباء الفعلي؟ اجمع البنود المفروضة فعلاً، واطرح الائتمانات التي خفّضت الفاتورة فعلاً، ثم اقسم على استخدام الكيلوواط الساعي في الفترة نفسها. أعد الحساب عند تغير التعرفة أو فترة الفوترة.
 
+للمقارنة التالية، راجع [دليل تكلفة الإنترنت المنزلي لكل جيجابايت](/ar/guides/home-internet-cost-per-gb-used/) الذي يفصل الرسوم الثابتة عن الاستخدام.
+
 مصادر للقراءة: [EIA electricity price and rate context](https://www.eia.gov/tools/faqs/faq.php?id=507) و [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). توفر EIA وCFPB سياقاً لفحص التكاليف الفعلية ولا تحددان سعراً منزلياً عاماً أو تضمنان التوفير.

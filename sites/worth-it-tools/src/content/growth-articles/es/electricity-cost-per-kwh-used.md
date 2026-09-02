@@ -44,4 +44,6 @@ No. La estructura, los cargos fijos, el horario y los créditos pueden variar; u
 
 ¿Cómo calculo mi tarifa eléctrica real? Suma las líneas cobradas, resta los créditos que redujeron la factura y divide por los kWh de ese periodo. Recalcula si cambian la tarifa o los días facturados.
 
+Para otra comparación de cargos fijos, consulta la [guía de coste de internet doméstico por GB](/es/guides/home-internet-cost-per-gb-used/).
+
 Fuentes para consultar: [EIA electricity price and rate context](https://www.eia.gov/tools/faqs/faq.php?id=507) y [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). EIA y CFPB aportan contexto para revisar costes reales; no fijan un precio doméstico universal ni garantizan ahorro.

@@ -44,4 +44,6 @@ Required charges, actual usage, billing period और credits अलग लि�
 
 अपनी real electricity rate कैसे निकालें? Bill की charged lines जोड़ें, bill घटाने वाले actual credits घटाएँ और उसी period के kWh से divide करें। Rate या billing period बदलने पर फिर calculate करें।
 
+अगले fixed-charge comparison के लिए [home internet cost per GB guide](/hi/guides/home-internet-cost-per-gb-used/) देखें।
+
 स्रोत पढ़ें: [EIA electricity price and rate context](https://www.eia.gov/tools/faqs/faq.php?id=507) और [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). EIA और CFPB actual cost check करने का context देते हैं; universal household price या guaranteed saving नहीं देते।

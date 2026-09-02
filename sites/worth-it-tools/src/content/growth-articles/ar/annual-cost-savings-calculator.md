@@ -65,3 +65,7 @@ draft: false
 ### ماذا لو اختلفت حدود الاستخدام؟
 
 طبّق استخدامك المعتاد على الخيارين، ثم اختبر حالة استخدام أعلى؛ السعة لا تصبح قيمة إلا إذا استُخدمت.
+
+## قرارات القيمة الفعلية الجديدة
+
+تفصل هذه المجموعة بين رسوم الراحة والتغطية وتوقيت الدفع بدلاً من إخفائها في رقم واحد. راجع [تكلفة التوصيل الفعلية](/ar/guides/true-cost-of-convenience-delivery/)، و[حد الشحن المجاني](/ar/guides/true-cost-of-free-shipping-threshold/)، و[الضمان الممتد](/ar/guides/true-cost-of-extended-warranty/)، و[تكلفة BNPL](/ar/guides/true-cost-of-buy-now-pay-later/)، و[إجمالي استئجار السيارة](/ar/guides/true-cost-of-rental-car/)، و[خطة خدمات المنزل](/ar/guides/true-cost-of-home-service-plan/)، و[ترقية الميزة المدفوعة](/ar/guides/true-cost-of-upgrade-feature/). لكل قرار استخدام وشروط عقد مختلفة.

@@ -1,9 +1,9 @@
 {
-  "maxUrls": 575,
-  "currentUrls": 572,
+  "maxUrls": 610,
+  "currentUrls": 607,
   "reviewedAt": "2026-09-02",
   "reviewedBecause": "2026-07-25 site-level ranking collapse. The sitemap went 41 -> 341 URLs between 2026-07-19 and 2026-07-23 (five-language site shell + a 100-page growth pack) on a YMYL money domain with no authority. That is the scaled-content profile, and impressions fell from 87/day to 3/day and stayed there. URL count is now a budgeted resource, not a free one.",
   "amendedOn": "2026-09-02",
-  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Package 012 added a coherent Costco membership, reward, fuel, and renewal decision cluster in five locales (35 routes) using fresh low-volume GA4/GSC signals, official Costco/CFPB sources, substantive final copy, and a dedicated build/readback check. Package 013 now extends the same measured demand signal into a distinct true-cost and realized-value cluster (35 routes) with CFPB and FTC consumer guidance, so the cap is raised 540 -> 575 before implementation.",
+  "amendedBecause": "The owner explicitly authorized the staged multilingual editorial programme. Package 012 added a coherent Costco membership, reward, fuel, and renewal decision cluster in five locales (35 routes) using fresh low-volume GA4/GSC signals, official Costco/CFPB sources, substantive final copy, and a dedicated build/readback check. Package 013 extended the same measured demand signal into a distinct true-cost and realized-value cluster (35 routes) with CFPB and FTC consumer guidance. Package 014 now tests the narrower cost-per-use and waste-adjusted value cluster (35 routes), supported by CFPB spending guidance, USDA food-waste guidance, ENERGY STAR appliance cost guidance, and FTC subscription guidance; the cap is raised 575 -> 610 before implementation.",
   "raisingThisCap": "Raising maxUrls is a deliberate act that must be argued for in the pull request. Every new route must be backed by written GA4/GSC evidence, reliable sources, a distinct human search intent, substantive copy, and sitemap reconciliation. Later packages must remain grouped by a coherent topic cluster; the per-batch ceiling is 35 pages."
 }

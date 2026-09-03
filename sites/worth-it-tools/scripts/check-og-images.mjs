@@ -25,20 +25,33 @@ const pages = [];
 })(dist);
 
 const OG = /<meta property="og:image" content="([^"]+)"/;
+const GUIDE_ROUTE = /^\/[a-z-]+\/guides\/[^/]+\/index\.html$/;
 const byImage = new Map();
 const missing = [];
+const notGenerated = [];
 for (const p of pages) {
   const m = OG.exec(readFileSync(p, 'utf8'));
   if (!m) continue;
   const url = m[1];
   const path = url.replace(/^https?:\/\/[^/]+/, '');
-  if (!path.startsWith('/images/guides/og/')) continue;   // 只管推導出來的這批
+  const route = p.replace(dist, '').replace(/\\/g, '/');
+  if (!path.startsWith('/images/guides/og/')) {
+    // guide 路由卻沒指到專屬圖 = 這篇的卡還沒產（頁面已 fallback 到站台預設圖，不會 404）。
+    if (GUIDE_ROUTE.test(route)) notGenerated.push(route.replace(/index\.html$/, ''));
+    continue;   // 其餘（首頁、工具頁、法務頁）本來就用預設圖
+  }
   if (!existsSync(join(dist, path))) missing.push(`${p.replace(dist, '')} → ${path}`);
   if (!byImage.has(path)) byImage.set(path, []);
   byImage.get(path).push(p.replace(dist, '').replace(/index\.html$/, ''));
 }
 
 let failed = false;
+if (notGenerated.length) {
+  failed = true;
+  console.error(`[og-images] ${notGenerated.length} 篇 guide 還沒產專屬社群預覽圖，目前退回站台預設圖。`);
+  console.error('  補產：npm run generate:og-images（需要 Playwright、Noto CJK/Arabic/Devanagari 字型、cwebp），產完把 public/images/guides/og/ 一起 commit。');
+  notGenerated.slice(0, 10).forEach((x) => console.error(`  ${x}`));
+}
 if (missing.length) {
   failed = true;
   console.error(`[og-images] ${missing.length} 頁指向不存在的圖，請跑 npm run generate:og-images：`);

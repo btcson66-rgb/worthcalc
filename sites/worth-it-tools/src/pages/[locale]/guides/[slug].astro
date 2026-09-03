@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { ContentLocale } from '../../../consts';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 import { seoPackageGuides } from '../../../data/seoPackageRegistry';
+import { resolveGuideOgImage } from '../../../lib/ogImageAvailability';
 
 type Props = {
   growthEntry: CollectionEntry<'growthArticles'>;
@@ -43,6 +44,8 @@ if (!packageSchema) throw new Error('Missing schema for ' + meta.key);
 const rendered = await render(growthEntry);
 const GrowthContent = rendered.Content;
 const alternateLocales = Astro.props.alternateLocales as Props['alternateLocales'];
+// Falls back to SITE.defaultOgImage when this guide's card has not been generated yet.
+const ogImage = resolveGuideOgImage(meta.ogImage);
 ---
 
 <ArticleLayout
@@ -55,8 +58,8 @@ const alternateLocales = Astro.props.alternateLocales as Props['alternateLocales
   ogTitle={meta.ogTitle}
   ogDescription={meta.ogDescription}
   robots={meta.robots}
-  image={meta.ogImage}
-  imageAlt={meta.imageAlt}
+  image={ogImage}
+  imageAlt={ogImage ? meta.imageAlt : undefined}
   jsonLd={[packageSchema]}
   showTitle={false}
 >

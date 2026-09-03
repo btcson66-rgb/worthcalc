@@ -40,6 +40,6 @@ cost per active user = (plan + add-ons + implementation + admin) ÷ active users
 
 ### सबसे पहले क्या check करें?
 
-Software को कितने active users justify करते हैं? Cost per active user को realistic alternative और completed work से compare करें। Terms, price या usage बदलें तो फिर calculate करें।
+Software को कितने active users justify करते हैं? Per active user को realistic alternative और completed work से compare करें। Terms, price या usage बदलें तो फिर calculate करें।
 
 स्रोत पढ़ें: [consumer guidance](https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions) और [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/). ये sources actual cost समझने का context देते हैं; universal price या guaranteed result नहीं देते।

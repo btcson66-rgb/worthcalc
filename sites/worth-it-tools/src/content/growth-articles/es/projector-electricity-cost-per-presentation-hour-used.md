@@ -12,7 +12,7 @@ draft: false
 
 # Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento
 
-> **Quick answer:** Estima el coste eléctrico de un proyector por hora de presentación con energía medida de funcionamiento, calentamiento, enfriamiento y espera, separando ordenador y sala. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **Respuesta rápida:** Estima el coste eléctrico de un proyector por hora de presentación con energía medida de funcionamiento, calentamiento, enfriamiento y espera, separando ordenador y sala. Es una estimación de coste, no una garantía de ahorro, rendimiento, posición ni resultados.
 
 ## Qué cambia el resultado
 
@@ -22,11 +22,11 @@ La hora puede incluir imagen brillante, pausas, brillo automático, ventilador y
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y otros equipos fuera del numerador salvo que el límite los incluya. Si una sesión mide 0,42 kWh a 0,18, cuesta 0,0756 dentro del límite. Si el ordenador mide 0,16 kWh aparte, muestra ambos totales.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor confirme esa carga. Mide por separado ordenadores, pantallas, redes, cargadores y otros accesorios antes de sumarlos.
 
 ## Compara usos reales
 
-¿Se incluye la pantalla? Solo si preguntas por el conjunto; de lo contrario mide el proyector y registra la pantalla aparte. Related guides: [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/), and [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+¿Se incluye la pantalla? Solo si preguntas por el conjunto; de lo contrario mide el proyector y registra la pantalla aparte. Related guides: [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/), and [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/). Cada página responde a una pregunta distinta sobre el coste unitario; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 

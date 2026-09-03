@@ -36,7 +36,7 @@ ENERGY STAR कहता है actual energy usage pattern से बदलत�
 
 ### Repeatable rule रखें। Recipe के कारण preheat या powered idle हो तो include करें; equipment और अपना time cash result में है या नहीं, साफ लिखें।
 
-undefined
+Fair hourly comparison के लिए पूरा cooking window मापें और measured energy को घंटों से divide करें। Appliance cycle होकर बंद होता है तो rated power को पूरे समय से गुणा न करें; meter से मिले kWh को इस्तेमाल करें।
 
 ## स्रोत पढ़ें
 

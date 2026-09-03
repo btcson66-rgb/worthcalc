@@ -25,13 +25,13 @@ coste = kWh medidos × tarifa entregada. Registra segundos de motor, tandas repe
 
 ## Compara rutinas reales
 
-Registra segundos de motor, tandas repetidas, amasado frente a picado, tamaño del bol y si sustituye trabajo manual. Un procesador de 700 W con 2 minutos de picado y 4 de amasado usa 0,07 kWh; a 0,20 son 0,014, sin ingredientes ni limpieza. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Registra segundos de motor, tandas repetidas, amasado frente a picado, tamaño del bol y si sustituye trabajo manual. Un procesador de 700 W con 2 minutos de picado y 4 de amasado usa 0,07 kWh; a 0,20 son 0,014, sin ingredientes ni limpieza. Compara el lote medido con una carga menor, un ajuste más largo y una rutina que logre el mismo resultado con otro número de lotes.
 
 Sigue con la [siguiente rutina de cocina](/es/guides/air-fryer-cost-per-cooking-cycle-used/), [otra guía de ciclos](/es/guides/rice-cooker-cost-per-cooking-cycle-used/), [la guía de preparación](/es/guides/slow-cooker-cost-per-cooking-hour-used/) y [la guía de hervor](/es/guides/toaster-cost-per-use-used/).
 
 ## Límites y errores comunes
 
-Registra segundos de motor, tandas repetidas, amasado frente a picado, tamaño del bol y si sustituye trabajo manual. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Registra segundos de motor, tandas repetidas, amasado frente a picado, tamaño del bol y si sustituye trabajo manual. La energía real cambia con el voltaje, los ciclos del termostato, la carga, las pausas, la espera, el agua o los ingredientes y la tarifa de la factura. Separa ingredientes, agua, mano de obra, depreciación del equipo y limpieza; no conviertas una estimación en una garantía de eficiencia o salud.
 
 ## Preguntas frecuentes
 

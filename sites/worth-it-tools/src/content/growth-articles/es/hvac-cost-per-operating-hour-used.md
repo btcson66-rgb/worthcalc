@@ -36,7 +36,7 @@ ENERGY STAR señala que calefacción y refrigeración consumen mucho y que la in
 
 ### No. Usa energía medida o un modelo consistente. Clima, carga, controles, conductos, mantenimiento y tarifa deciden el resultado real.
 
-undefined
+Para comparar por hora, mide una ventana completa de funcionamiento y divide la energía medida entre sus horas. Si el sistema se enciende y apaga, no multipliques la potencia nominal por todas las horas: reparte los kWh medidos dentro de la ventana definida.
 
 ## Fuentes para consultar
 

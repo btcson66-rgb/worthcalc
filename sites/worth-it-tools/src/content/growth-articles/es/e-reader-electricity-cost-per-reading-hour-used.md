@@ -12,7 +12,7 @@ draft: false
 
 # Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga
 
-> **Quick answer:** Calcula el coste eléctrico de un lector electrónico por hora de lectura con energía de carga medida y horas reales, separando luz, Wi-Fi y reemplazo. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **Respuesta rápida:** Calcula el coste eléctrico de un lector electrónico por hora de lectura con energía de carga medida y horas reales, separando luz, Wi-Fi y reemplazo. Es una estimación de coste, no una garantía de ahorro, rendimiento, posición ni resultados.
 
 ## Qué cambia el resultado
 
@@ -22,11 +22,11 @@ Puede consumir sobre todo al cargar, no al leer. Usa un ciclo completo de carga 
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y otros equipos fuera del numerador salvo que el límite los incluya. Una carga de 0,018 kWh a 0,18 cuesta 0,00324. Con 36 horas observadas, son 0,00009 por hora, sin precio del dispositivo ni contenido.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor confirme esa carga. Mide por separado ordenadores, pantallas, redes, cargadores y otros accesorios antes de sumarlos.
 
 ## Compara usos reales
 
-¿Divido por la autonomía anunciada? Úsala para planificar, pero divide la energía medida por horas realmente observadas y condiciones declaradas. Related guides: [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/), [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/), and [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+¿Divido por la autonomía anunciada? Úsala para planificar, pero divide la energía medida por horas realmente observadas y condiciones declaradas. Related guides: [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/), [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/), and [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/). Cada página responde a una pregunta distinta sobre el coste unitario; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 

@@ -25,13 +25,13 @@ cost = measured kWh × delivered rate. Each slot के heating minutes, re-toas
 
 ## Actual routines compare करें
 
-Each slot के heating minutes, re-toast cycles, shade setting और crumb-clearing step count करें। 900 W toaster 3.5 minutes heating में 0.0525 kWh लेता है; $0.20/kWh पर electricity cost करीब $0.011/use है। Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Each slot के heating minutes, re-toast cycles, shade setting और crumb-clearing step count करें। 900 W toaster 3.5 minutes heating में 0.0525 kWh लेता है; $0.20/kWh पर electricity cost करीब $0.011/use है। Measured batch को smaller load, longer setting और same result देने वाली अलग number of batches वाली routine से compare करें।
 
 [next kitchen routine](/hi/guides/blender-cost-per-blending-session-used/), [another cooking cycle guide](/hi/guides/food-processor-cost-per-prep-session-used/), [prep-session guide](/hi/guides/air-fryer-cost-per-cooking-cycle-used/) और [boiling guide](/hi/guides/rice-cooker-cost-per-cooking-cycle-used/) से तुलना आगे बढ़ाएं।
 
 ## Limits और common mistakes
 
-Each slot के heating minutes, re-toast cycles, shade setting और crumb-clearing step count करें। Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Each slot के heating minutes, re-toast cycles, shade setting और crumb-clearing step count करें। Actual energy voltage, thermostat cycling, load, pauses, standby, water या ingredients और bill tariff से बदलती है। Ingredients, water, labour, equipment depreciation और cleanup अलग रखें; estimate को product efficiency या health guarantee न बनाएं।
 
 ## अक्सर पूछे जाने वाले प्रश्न
 

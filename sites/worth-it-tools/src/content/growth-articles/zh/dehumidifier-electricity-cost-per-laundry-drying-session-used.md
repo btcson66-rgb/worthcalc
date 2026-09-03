@@ -16,23 +16,23 @@ draft: false
 
 ## 會改變結果的輸入
 
-除濕機可能讓壓縮機與風扇循環，達到濕度設定後暫停，也可能除霜或啟動排水泵。讀電表前先定義「完成除濕小時」，並說明你量的是主動運轉時間、時鐘時間，還是某個室內濕度窗口。 Record the device state, start and stop readings, measured kWh, delivered rate, and exact window. Define one completed unit before calculating, and list any shared outlet load rather than assuming it is zero.
+除濕機可能讓壓縮機與風扇循環，達到濕度設定後暫停，也可能除霜或啟動排水泵。讀電表前先定義「完成除濕小時」，並說明你量的是主動運轉時間、時鐘時間，還是某個室內濕度窗口。 記錄設備狀態、起訖讀值、實測 kWh、到戶電價與完整量測窗口。 計算前先定義一個完成單位，並列出共用插座的負載，不要假設它是零。
 
 ## 公式與實測算例
 
-每個完成除濕小時成本＝實測 kWh × 實際到戶電價 ÷ 完成除濕小時數。 如果 2 個完成除濕小時實測 0.7 kWh、每 kWh 電價 0.21，示例結果為每小時 0.0735。這不是通用機型平均值。 Keep the raw readings, currency, date, and rate beside the result so another person can reproduce it. A rounded value without its measurement boundary is not an auditable household cost.
+每個完成除濕小時成本＝實測 kWh × 實際到戶電價 ÷ 完成除濕小時數。 如果 2 個完成除濕小時實測 0.7 kWh、每 kWh 電價 0.21，示例結果為每小時 0.0735。這不是通用機型平均值。 請把原始讀值、貨幣、日期與費率放在結果旁，方便他人重現。 沒有量測邊界的四捨五入數字，不能算是可複核的家庭成本。
 
 ## 比較實際使用情境
 
-把潮濕房間拉低濕度、維持目標濕度與衣物乾燥時段分開比較。門窗、房間體積、目標濕度、風速、排水方式與電表邊界要一致；共用插座的排水泵或出風加熱要另行記錄。 相關實測設備指南: [portable-air-conditioner-electricity-cost-per-cooling-session-used](/zh/guides/portable-air-conditioner-electricity-cost-per-cooling-session-used/)、[pool-pump-electricity-cost-per-filtration-cycle-used](/zh/guides/pool-pump-electricity-cost-per-filtration-cycle-used/)、[electric-fireplace-electricity-cost-per-heating-hour-used](/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/)、[garage-door-opener-electricity-cost-per-cycle-used](/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/). Each related page has its own equipment, completed unit, and measurement window; a shared kWh formula does not make the answers interchangeable.
+把潮濕房間拉低濕度、維持目標濕度與衣物乾燥時段分開比較。門窗、房間體積、目標濕度、風速、排水方式與電表邊界要一致；共用插座的排水泵或出風加熱要另行記錄。 相關實測設備指南: [portable-air-conditioner-electricity-cost-per-cooling-session-used](/zh/guides/portable-air-conditioner-electricity-cost-per-cooling-session-used/)、[pool-pump-electricity-cost-per-filtration-cycle-used](/zh/guides/pool-pump-electricity-cost-per-filtration-cycle-used/)、[electric-fireplace-electricity-cost-per-heating-hour-used](/zh/guides/electric-fireplace-electricity-cost-per-heating-hour-used/)、[garage-door-opener-electricity-cost-per-cycle-used](/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/). 每個相關頁面都有自己的設備、完成單位與量測區間；共用 kWh 公式不代表答案可以互換。
 
 ## 量測方法
 
-記錄起訖相對濕度、溫度、設定值、壓縮機狀態、風速、除霜、集水箱或連續排水、實測 kWh、電價與完整時間窗。可重複量測，但要保留濕度和溫度，避免把一個容易乾燥的短測試當成一般結果。 If the load is estimated rather than measured, label the assumption and show how it changes the result. Repeat comparable windows, but do not erase a real operating difference just to make the numbers look tidy.
+記錄起訖相對濕度、溫度、設定值、壓縮機狀態、風速、除霜、集水箱或連續排水、實測 kWh、電價與完整時間窗。可重複量測，但要保留濕度和溫度，避免把一個容易乾燥的短測試當成一般結果。 若負載是估算而非實測，請標成假設並說明它如何改變結果。 重複可比較的量測窗口，但不要為了讓數字整齊而抹去真實的運轉差異。
 
 ## 限制與常見錯誤
 
-乾燥速度、防霉、舒適度、噪音與空氣品質是不同主張，不能由電費直接推導。不要把額定瓦數當成帳單，也不要在潮濕來源不同時省略房間差異。 Keep electricity separate from maintenance, water, consumables, repair, and any claimed outcome. At least three comparable readings can reveal variation, but repetition does not turn a small sample into a universal product claim.
+乾燥速度、防霉、舒適度、噪音與空氣品質是不同主張，不能由電費直接推導。不要把額定瓦數當成帳單，也不要在潮濕來源不同時省略房間差異。 請把電費與維護、水、耗材、維修及任何效果宣稱分開。 至少三次可比較讀值能顯示差異，但重複量測不會把小樣本變成通用產品結論。
 
 ## 常見問題
 

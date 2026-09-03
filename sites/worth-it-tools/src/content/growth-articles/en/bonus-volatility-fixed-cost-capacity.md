@@ -27,11 +27,11 @@ Target compensation is not the same as money you can safely assign to rent, chil
 
 This is not a generic calculator page with a prettier form. The purpose is to isolate the uncertainty that broad calculators usually hide. Start with **verified cash**, move to **conditional scenarios**, then keep **non-cash preferences** visible without pretending they are guaranteed dollars. The result should show a range and a reversal condition, not a fake-precise recommendation.
 
-## Why this modifier keyword deserves its own page
+## Separate guaranteed and conditional income
 
-Most job-offer calculators simply add a bonus field to salary. That is useful for a headline total but weak for cash-flow resilience. This page targets a narrower keyword: bonus volatility fixed-cost capacity. The model separates guaranteed cash, conditional cash, and one-time cash. It also puts timing on the timeline. A bonus paid the following March cannot fund rent due this October unless the household already has the liquidity to bridge the gap. First-year eligibility, performance gates, company results, plan changes and employment status at payout all belong in the verification checklist rather than being hidden inside one optimistic annual number. A financially resilient comparison therefore has two outputs: expected upside and guaranteed floor.
+Adding a target bonus to salary can make an offer look stronger than its monthly cash flow. Separate guaranteed pay, conditional pay and one-time pay, then place each payment on the date it can actually arrive. First-year eligibility, performance gates, company results, plan changes and employment status at payout belong in the verification checklist.
 
-That positioning matters for SEO as well as usefulness. Mature calculator sites already cover the obvious head terms. WorthCalc should win by answering the follow-up question a user asks after the generic calculator: “what did that simple model leave out, and can that missing variable reverse my decision?” The page therefore needs a method that is visibly different in the search snippet, the direct answer, the formulas and the examples.
+Compare expected upside with a zero-bonus floor. A bonus paid next March cannot fund rent due this October unless existing liquidity bridges the gap.
 
 ## Input worksheet
 
@@ -164,4 +164,4 @@ Use four columns: **estimated, actual, variance, explanation**. If realized usag
 
 ## Final interpretation
 
-Target compensation is not the same as money you can safely assign to rent, childcare or debt. Stress-test the offer using guaranteed income first. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. A user who understands those three items can decide whether the choice is robust, reversible or dependent on an optimistic assumption. That is the point of this page and the keyword differentiation strategy behind WorthCalc 009.
+Target compensation is not the same as money you can safely assign to rent, childcare or debt. Stress-test the offer using guaranteed income first. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. These outputs expose how much of the decision depends on an uncertain payout.

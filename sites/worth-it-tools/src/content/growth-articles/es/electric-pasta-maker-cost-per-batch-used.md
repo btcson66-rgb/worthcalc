@@ -16,25 +16,25 @@ draft: false
 
 ## Datos que cambian el resultado
 
-For this máquina de pasta eléctrica, define the electricity boundary before looking at a per-lote de pasta number. Record mezcla, amasado, extrusión, corte y cualquier fase de calentamiento o secado from a repeatable start to a repeatable end. Keep starting temperature, load, mode, finished output, warm-hold behavior, tariff unit, and date together. A recipe duration, package instruction, or nameplate wattage is not a wall-meter kWh reading.
+Para este máquina de pasta eléctrica, define el límite eléctrico antes de calcular un coste por lote de pasta. Registra mezcla, amasado, extrusión, corte y cualquier fase de calentamiento o secado desde un inicio repetible hasta un final repetible. Conserva juntas la temperatura inicial, la carga, el modo, la producción terminada, el comportamiento de mantenimiento caliente, la unidad de tarifa y la fecha. La duración de una receta, una instrucción del envase o la potencia de la placa no son una lectura de kWh del medidor de pared.
 
-Use a plug-in meter for at least three repeatable runs and preserve the readings and tariff source. A bill can combine generation, delivery, taxes, fees, and fixed charges; an appliance comparison should state whether it uses a marginal kWh rate and should list fixed charges separately.
+Usa un medidor de enchufe durante al menos tres mediciones repetibles y conserva las lecturas y la fuente de la tarifa. Una factura puede combinar generación, transporte, distribución, impuestos, tasas y cargos fijos; una comparación de aparatos debe indicar si usa una tarifa marginal por kWh y separar los cargos fijos.
 
 ## Fórmula y ejemplo calculado
 
-Cost per run = measured wall kWh from the stated start to the stated end × delivered electricity rate. Cost per lote de pasta = that electricity cost ÷ the number of finished lote de pastas. Si un lote con 400 g de harina usa 0,14 kWh a 0,18 $/kWh, son 0,0252 $ por lote. Con 520 g finales, unos 0,0485 $/kg solo de electricidad; ingredientes y espacio de secado aparte. This demonstrates allocation; it is not a forecast for a particular model, tariff, or food output.
+Coste por medición = kWh medidos en la pared desde el inicio hasta el final × tarifa eléctrica entregada. Coste por lote de pasta = ese coste eléctrico ÷ el número de lote de pastas. Si un lote con 400 g de harina usa 0,14 kWh a 0,18 $/kWh, son 0,0252 $ por lote. Con 520 g finales, unos 0,0485 $/kg solo de electricidad; ingredientes y espacio de secado aparte. Esto demuestra una asignación; no es una previsión para un modelo, tarifa o producción concretos.
 
-Do not multiply the maximum rated watts by the entire recipe or holding time unless the meter confirms continuous operation at that load. Thermostat cycling, motor load, adapter losses, ventilation, holding behavior, and automatic shutoff can all change the reading. For a very short load, group several normal runs and divide the combined kWh.
+No multipliques los vatios nominales máximos por toda la receta o el mantenimiento salvo que el medidor confirme un funcionamiento continuo con esa carga. Los ciclos del termostato, la carga del motor, las pérdidas del adaptador, la ventilación, el mantenimiento y el apagado automático pueden cambiar la lectura. Para una carga muy corta, agrupa varias mediciones normales y divide los kWh combinados.
 
 ## Compara usos reales
 
-Compara hidrataciones, corte manual frente a extrusión eléctrica y pasta fresca frente a secada. Dureza, presión, accesorio, tamaño y retrabajo cambian el motor; registra receta y final. Change one condition at a time and keep the denominator explicit: per run, per lote de pasta, or per kilogram, cup, or serving. If output weight, portions, or success rate changes, put it beside the result; a lower number can simply reflect a smaller load.
+Compara hidrataciones, corte manual frente a extrusión eléctrica y pasta fresca frente a secada. Dureza, presión, accesorio, tamaño y retrabajo cambian el motor; registra receta y final. Cambia una condición cada vez y deja explícito el denominador: por medición, porlote de pasta, o por kilogramo, taza o porción. Si cambia el peso producido, las porciones o la tasa de éxito, ponlo junto al resultado; una cifra menor puede reflejar simplemente una carga menor.
 
-Related reading: [Coste del espumador de leche por sesión](/es/guides/electric-milk-frother-cost-per-frothing-session-used/), [Coste del calentador de comida por hora](/es/guides/electric-food-warmer-cost-per-heating-hour-used/), [Coste de la máquina de hielo por lote](/es/guides/countertop-ice-maker-cost-per-batch-used/), [Coste del exprimidor eléctrico por sesión de zumo](/es/guides/electric-citrus-juicer-cost-per-juice-session-used/). These four pages use different appliances or time/output denominators, so the links help readers choose a meaningful denominator rather than treating every device as the same service.
+Lecturas relacionadas: [Coste del espumador de leche por sesión](/es/guides/electric-milk-frother-cost-per-frothing-session-used/), [Coste del calentador de comida por hora](/es/guides/electric-food-warmer-cost-per-heating-hour-used/), [Coste de la máquina de hielo por lote](/es/guides/countertop-ice-maker-cost-per-batch-used/), [Coste del exprimidor eléctrico por sesión de zumo](/es/guides/electric-citrus-juicer-cost-per-juice-session-used/). Estas cuatro páginas usan aparatos y denominadores de tiempo o producción distintos; los enlaces ayudan a elegir un denominador útil en vez de tratar todos los equipos como el mismo servicio.
 
 ## Límites y errores frecuentes
 
-Voltage, tariff design, room temperature, food, container, cleanliness, consumables, wear, and meter resolution affect the result. For full ownership cost, list purchase price, ingredients, water, cleaning, maintenance, refrigeration, waste, and time separately instead of hiding them in electricity. Es una estimación de coste, no una garantía de ahorro, rendimiento, calidad alimentaria, salud o seguridad.
+El voltaje, el diseño de la tarifa, la temperatura, los alimentos, el recipiente, la limpieza, los consumibles, el desgaste y la resolución del medidor afectan al resultado. Para el coste total de propiedad, enumera por separado el precio, los ingredientes, el agua, la limpieza, el mantenimiento, la refrigeración, los residuos y el tiempo en vez de ocultarlos en la electricidad. Es una estimación de coste, no una garantía de ahorro, rendimiento, calidad alimentaria, salud o seguridad.
 
 ## Pregunta frecuente
 

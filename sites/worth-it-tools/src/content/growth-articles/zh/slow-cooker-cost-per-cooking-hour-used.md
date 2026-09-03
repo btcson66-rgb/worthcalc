@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-把預熱、低／高檔、開蓋時間、鍋內份量，與完整備餐時段分開；烹調小時不等於整段家務時間。 210 W 慢燉鍋低檔 6 小時、保溫 30 分鐘實測 1.31 kWh；每 kWh 0.20 時這段流程約 0.262。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+把預熱、低／高檔、開蓋時間、鍋內份量，與完整備餐時段分開；烹調小時不等於整段家務時間。 210 W 慢燉鍋低檔 6 小時、保溫 30 分鐘實測 1.31 kWh；每 kWh 0.20 時這段流程約 0.262。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/toaster-cost-per-use-used/)、[另一個烹調循環指南](/zh/guides/blender-cost-per-blending-session-used/)、[備料流程指南](/zh/guides/food-processor-cost-per-prep-session-used/)與[煮沸指南](/zh/guides/air-fryer-cost-per-cooking-cycle-used/)。
 
 ## 限制與常見誤區
 
-把預熱、低／高檔、開蓋時間、鍋內份量，與完整備餐時段分開；烹調小時不等於整段家務時間。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+把預熱、低／高檔、開蓋時間、鍋內份量，與完整備餐時段分開；烹調小時不等於整段家務時間。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

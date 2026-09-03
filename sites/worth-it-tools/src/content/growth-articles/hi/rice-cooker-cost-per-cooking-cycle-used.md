@@ -25,13 +25,13 @@ cost = measured kWh × delivered rate. Cooking, keep-warm transition, warm minut
 
 ## Actual routines compare करें
 
-Cooking, keep-warm transition, warm minutes, rice quantity, rinsing water और repeated lid opening record करें। Cooker 0.6 kg rice में 0.16 kWh और दो घंटे warming में 0.06 kWh लेता है: 0.22 kWh, यानी $0.20/kWh पर $0.044। Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Cooking, keep-warm transition, warm minutes, rice quantity, rinsing water और repeated lid opening record करें। Cooker 0.6 kg rice में 0.16 kWh और दो घंटे warming में 0.06 kWh लेता है: 0.22 kWh, यानी $0.20/kWh पर $0.044। Measured batch को smaller load, longer setting और same result देने वाली अलग number of batches वाली routine से compare करें।
 
 [next kitchen routine](/hi/guides/slow-cooker-cost-per-cooking-hour-used/), [another cooking cycle guide](/hi/guides/toaster-cost-per-use-used/), [prep-session guide](/hi/guides/blender-cost-per-blending-session-used/) और [boiling guide](/hi/guides/food-processor-cost-per-prep-session-used/) से तुलना आगे बढ़ाएं।
 
 ## Limits और common mistakes
 
-Cooking, keep-warm transition, warm minutes, rice quantity, rinsing water और repeated lid opening record करें। Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Cooking, keep-warm transition, warm minutes, rice quantity, rinsing water और repeated lid opening record करें। Actual energy voltage, thermostat cycling, load, pauses, standby, water या ingredients और bill tariff से बदलती है। Ingredients, water, labour, equipment depreciation और cleanup अलग रखें; estimate को product efficiency या health guarantee न बनाएं।
 
 ## अक्सर पूछे जाने वाले प्रश्न
 

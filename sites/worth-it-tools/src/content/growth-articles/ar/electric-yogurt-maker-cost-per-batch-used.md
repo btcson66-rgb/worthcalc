@@ -16,31 +16,31 @@ draft: false
 
 ## المدخلات التي تغيّر النتيجة
 
-The useful denominator is one دفعة, but the electricity boundary must be chosen first. For this صانعة الزبادي الكهربائية, record التسخين المسبق والتخمير ودورات الحرارة وأي إبقاء دافئ from a defined start point to a defined end point. Keep the starting temperature, load, mode, number of finished units, and any warm-hold or idle time in the same note. A recipe duration or package instruction is not a wall-meter reading.
+المقام العملي هو دفعة, لكن يجب تحديد حدود الكهرباء أولاً. بالنسبة إلى صانعة الزبادي الكهربائية, سجّل التسخين المسبق والتخمير ودورات الحرارة وأي إبقاء دافئ من نقطة بداية محددة إلى نقطة نهاية محددة. احتفظ في الملاحظة نفسها بدرجة البداية والحمل والوضع وعدد الوحدات المكتملة وأي وقت للحفظ الدافئ أو الخمول. مدة الوصفة أو تعليمات العبوة ليست قراءة من عداد الحائط.
 
-ابدأ باختبار قابل للتكرار باستخدام عداد عند المقبس. سجّل حالة الجهاز قبل البدء ونقطة النهاية الدقيقة ووحدة السعر والنتيجة المفيدة. تصف القدرة الاسمية حملاً ممكناً، ولا تثبت أن السخان أو المحرك يستهلكها طوال الاستخدام. Also save the tariff source and date. A delivered bill rate may include generation, transmission, distribution, taxes, fees, or fixed charges; for an appliance comparison, state whether you used a marginal kWh rate or allocated a fixed charge.
+ابدأ باختبار قابل للتكرار باستخدام عداد عند المقبس. سجّل حالة الجهاز قبل البدء ونقطة النهاية الدقيقة ووحدة السعر والنتيجة المفيدة. تصف القدرة الاسمية حملاً ممكناً، ولا تثبت أن السخان أو المحرك يستهلكها طوال الاستخدام. واحفظ مصدر التعرفة وتاريخها أيضاً. قد تشمل تعرفة الفاتورة التوليد والنقل والتوزيع والضرائب والرسوم أو الرسوم الثابتة؛ وعند مقارنة الأجهزة اذكر هل استخدمت تعرفة هامشية لكل kWh أم وزعت رسماً ثابتاً.
 
 ## المعادلة ومثال محسوب
 
-Cost per cycle or session = measured wall kWh from the stated start to the stated end × delivered electricity rate. Cost per دفعة = that electricity cost ÷ the number of finished دفعةs. إذا استهلك التخمير المقاس 0.30 kWh بسعر 0.18 دولار، فتكون كهرباء الدفعة 0.054 دولار. عند إنتاج 1.2 كغ تكون الكهرباء وحدها 0.045 دولار لكل كغ؛ الحليب والبادئ والعبوات والتبريد خارج الرقم. This is an illustration of the allocation method, not a prediction for a particular model or household tariff.
+تكلفة الدورة أو الجلسة = kWh المقاسة من الحائط بين البداية والنهاية المعلنتين × تعرفة الكهرباء المسلّمة. تكلفة دفعة = تكلفة الكهرباء ÷ عدد دفعةs. إذا استهلك التخمير المقاس 0.30 kWh بسعر 0.18 دولار، فتكون كهرباء الدفعة 0.054 دولار. عند إنتاج 1.2 كغ تكون الكهرباء وحدها 0.045 دولار لكل كغ؛ الحليب والبادئ والعبوات والتبريد خارج الرقم. هذا مثال على طريقة التوزيع، وليس توقعاً لطراز أو تعرفة منزلية محددة.
 
-Do not multiply the maximum rated watts by the whole recipe or waiting time unless a meter confirms that the device draws that load continuously. Thermostat cycling, motor load, adapter losses, automatic shutoff, and a partly filled tray can all change the measured result.
+لا تضرب القدرة الاسمية القصوى في كامل وقت الوصفة أو الانتظار إلا إذا أكد العداد أن الجهاز يسحب هذا الحمل باستمرار. قد تغيّر دورات منظم الحرارة وحمل المحرك وفواقد المحول والإيقاف التلقائي والصينية غير الممتلئة النتيجة المقاسة.
 
 ## قارن الاستخدام الفعلي
 
-قِس الحاوية الكبيرة والعبوات الصغيرة منفصلة؛ فالتسخين والمساحة وحرارة الغرفة والكمية تغيّر الدورة. لا تحوّل تكلفة الدفعة إلى تكلفة لكل كغ إلا بعد وزن المنتج النهائي. Repeat each normal setup at least three times when the load is small, then divide the combined kWh by the number of runs. If the finished output changes, show both the per-دفعة and per-run denominators. Change one condition at a time and write it down; otherwise a lower number can simply reflect a smaller load, not a different appliance.
+قِس الحاوية الكبيرة والعبوات الصغيرة منفصلة؛ فالتسخين والمساحة وحرارة الغرفة والكمية تغيّر الدورة. لا تحوّل تكلفة الدفعة إلى تكلفة لكل كغ إلا بعد وزن المنتج النهائي. عندما يكون الحمل صغيراً، كرر كل إعداد عادي ثلاث مرات على الأقل ثم اقسم kWh المجمعة على عدد مرات التشغيل. إذا تغيّر الناتج النهائي، اعرض كلاً من تكلفة كل دفعة ومقام كل تشغيل. غيّر شرطاً واحداً في كل مرة وسجّله؛ وإلا فقد يعكس الرقم الأقل حملاً أصغر لا جهازاً مختلفاً.
 
-Related reading: [تكلفة جهاز طهي البيض لكل دورة](/ar/guides/electric-egg-cooker-cost-per-cooking-cycle-used/), [تكلفة علبة الطعام الكهربائية لكل دورة تسخين](/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/), [تكلفة فتاحة العلب الكهربائية لكل استخدام](/ar/guides/electric-can-opener-cost-per-use-used/), [تكلفة آلة صنع الخبز لكل رغيف](/ar/guides/bread-maker-cost-per-loaf-used/). Each link uses a different usage denominator, which helps keep “per use,” “per hour,” “per batch,” and “per serving” calculations from being mixed together.
+قراءة مرتبطة: [تكلفة جهاز طهي البيض لكل دورة](/ar/guides/electric-egg-cooker-cost-per-cooking-cycle-used/), [تكلفة علبة الطعام الكهربائية لكل دورة تسخين](/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/), [تكلفة فتاحة العلب الكهربائية لكل استخدام](/ar/guides/electric-can-opener-cost-per-use-used/), [تكلفة آلة صنع الخبز لكل رغيف](/ar/guides/bread-maker-cost-per-loaf-used/). يستخدم كل رابط مقام استخدام مختلفاً، مما يساعد على عدم خلط حسابات كل استخدام وكل ساعة وكل دفعة وكل حصة.
 
 ## الحدود والأخطاء الشائعة
 
-Results vary with voltage, tariff design, room temperature, moisture, container, cleanliness, control settings, wear, and the meter's resolution. Very short motor runs may not register reliably; a grouped test is more defensible than a single tiny display change. If the question is full ownership cost, list purchase price, ingredients, consumables, refrigeration, maintenance, and time separately instead of hiding them in electricity. اذكر بوضوح حدود الكهرباء المحتسبة. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
+تختلف النتائج مع الجهد وتصميم التعرفة وحرارة الغرفة والرطوبة والحاوية والنظافة وإعدادات التحكم والتآكل ودقة العداد. قد لا تسجل فترات تشغيل المحرك القصيرة جداً بثبات؛ والاختبار المجمع أكثر قابلية للدفاع من تغير صغير في شاشة واحدة. إذا كان السؤال عن التكلفة الكاملة للملكية، فاذكر سعر الشراء والمكونات والمستهلكات والتبريد والصيانة والوقت منفصلة بدلاً من إخفائها في الكهرباء. اذكر بوضوح حدود الكهرباء المحتسبة. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
 
 ## سؤال شائع
 
 ### هل يجب إدراج التبريد؟
 
-أدرجه فقط عند حساب تكلفة التحضير الكامل وبند منفصل. أما رقم الجهاز، فأظهر كهرباء التخمير وحدها حتى لا يخفي استهلاك الثلاجة النتيجة.
+أدرجه فقط عند حساب تكلفة التحضير الكامل وبند منفصل. أما رقم الجهاز، فأظهر كهرباء التخمير وحدها حتى لا يخفي استهلاك الثلاجة.
 
 ## قراءة المصادر
 

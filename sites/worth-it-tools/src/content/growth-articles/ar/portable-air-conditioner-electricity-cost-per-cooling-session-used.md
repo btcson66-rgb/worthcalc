@@ -16,23 +16,23 @@ draft: false
 
 ## المدخلات التي تغير النتيجة
 
-قد ينتقل مكيف الهواء المتنقل بين الضاغط والمروحة وتوقف منظم الحرارة والعادم والاستعداد. لا تساوي قدرة اللوحة مقدار kWh في ساعة تبريد مكتملة. سجل حالة الغرفة ودرجة الضبط ووضع المروحة والعادم وتصريف التكاثف، وهل تشمل النافذة بدء التشغيل والتوقف. Record the device state, start and stop readings, measured kWh, delivered rate, and exact window. Define one completed unit before calculating, and list any shared outlet load rather than assuming it is zero.
+قد ينتقل مكيف الهواء المتنقل بين الضاغط والمروحة وتوقف منظم الحرارة والعادم والاستعداد. لا تساوي قدرة اللوحة مقدار kWh في ساعة تبريد مكتملة. سجل حالة الغرفة ودرجة الضبط ووضع المروحة والعادم وتصريف التكاثف، وهل تشمل النافذة بدء التشغيل والتوقف. سجّل حالة الجهاز وقراءات البداية والنهاية وkWh المقاسة والتعرفة المسلّمة ونافذة القياس الدقيقة. حدّد وحدة مكتملة قبل الحساب، وسجّل أي حمل مشترك على المقبس بدلاً من افتراض أنه صفر.
 
 ## الصيغة ومثال مقاس
 
-تكلفة ساعة التبريد المكتملة = kWh المقاس × تعرفة الكهرباء المسلّمة ÷ ساعات التبريد المكتملة. إذا استُهلك 1.4 kWh خلال ساعتين مكتملتين وبسعر 0.22 لكل kWh، فالناتج التوضيحي 0.154 لكل ساعة. هذا مثال حسابي وليس متوسط منتج. Keep the raw readings, currency, date, and rate beside the result so another person can reproduce it. A rounded value without its measurement boundary is not an auditable household cost.
+تكلفة ساعة التبريد المكتملة = kWh المقاس × تعرفة الكهرباء المسلّمة ÷ ساعات التبريد المكتملة. إذا استُهلك 1.4 kWh خلال ساعتين مكتملتين وبسعر 0.22 لكل kWh، فالناتج التوضيحي 0.154 لكل ساعة. هذا مثال حسابي وليس متوسط منتج. احتفظ بالقراءات الخام والعملة والتاريخ والتعرفة بجانب النتيجة حتى يستطيع شخص آخر إعادة إنتاجها. القيمة المقربة بلا حدود قياس ليست تكلفة منزلية قابلة للتدقيق.
 
 ## قارن حالات الاستخدام الفعلية
 
-قارن بداية غرفة دافئة، وثبات درجة الضبط، ونافذة قصيرة بعد استقرار دورات الضاغط. حافظ على الغرفة والباب ودرجة الضبط وحدود العداد نفسها. افصل ساعة المروحة وحدها عن ساعة التبريد. دليل القياس المرتبط: [pool-pump-electricity-cost-per-filtration-cycle-used](/ar/guides/pool-pump-electricity-cost-per-filtration-cycle-used/), [dehumidifier-electricity-cost-per-laundry-drying-session-used](/ar/guides/dehumidifier-electricity-cost-per-laundry-drying-session-used/), [electric-fireplace-electricity-cost-per-heating-hour-used](/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/), [garage-door-opener-electricity-cost-per-cycle-used](/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/). Each related page has its own equipment, completed unit, and measurement window; a shared kWh formula does not make the answers interchangeable.
+قارن بداية غرفة دافئة، وثبات درجة الضبط، ونافذة قصيرة بعد استقرار دورات الضاغط. حافظ على الغرفة والباب ودرجة الضبط وحدود العداد نفسها. افصل ساعة المروحة وحدها عن ساعة التبريد. دليل القياس المرتبط: [pool-pump-electricity-cost-per-filtration-cycle-used](/ar/guides/pool-pump-electricity-cost-per-filtration-cycle-used/), [dehumidifier-electricity-cost-per-laundry-drying-session-used](/ar/guides/dehumidifier-electricity-cost-per-laundry-drying-session-used/), [electric-fireplace-electricity-cost-per-heating-hour-used](/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/), [garage-door-opener-electricity-cost-per-cycle-used](/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/). لكل صفحة مرتبطة جهازها ووحدتها المكتملة ونافذة قياسها؛ لا تجعل صيغة kWh المشتركة الإجابات قابلة للتبادل.
 
 ## طريقة القياس
 
-استخدم مقياس قابس أو عداداً جداريّاً وسجل درجات البداية والنهاية والضبط وحالة الضاغط والمروحة وkWh المقاس والتعرفة والنافذة. أعد القياس بعد استقرار الغرفة ولا تخفِ فترة الخفض الأولى داخل متوسط الصيانة. If the load is estimated rather than measured, label the assumption and show how it changes the result. Repeat comparable windows, but do not erase a real operating difference just to make the numbers look tidy.
+استخدم مقياس قابس أو عداداً جداريّاً وسجل درجات البداية والنهاية والضبط وحالة الضاغط والمروحة وkWh المقاس والتعرفة والنافذة. أعد القياس بعد استقرار الغرفة ولا تخفِ فترة الخفض الأولى داخل متوسط الصيانة. إذا قُدّر الحمل بدلاً من قياسه، فسمّ الافتراض واشرح كيف يغير. كرّر نوافذ قابلة للمقارنة، لكن لا تمحُ فرق تشغيل حقيقياً لمجرد جعل الأرقام مرتبة.
 
 ## الحدود والأخطاء الشائعة
 
-الأداء والضجيج والتكاثف والراحة أمور منفصلة عن تكلفة الكهرباء. لا تحول القدرة الاسمية إلى فاتورة شخصية ولا تقارن جهازين بظروف غرفة أو طقس أو وحدة مكتملة مختلفة. Keep electricity separate from maintenance, water, consumables, repair, and any claimed outcome. At least three comparable readings can reveal variation, but repetition does not turn a small sample into a universal product claim.
+الأداء والضجيج والتكاثف والراحة أمور منفصلة عن تكلفة الكهرباء. لا تحول القدرة الاسمية إلى فاتورة شخصية ولا تقارن جهازين بظروف غرفة أو طقس أو وحدة مكتملة مختلفة. افصل الكهرباء عن الصيانة والماء والمستهلكات والإصلاح وأي نتيجة مدعاة. قد تكشف ثلاث قراءات قابلة للمقارنة على الأقل عن التباين، لكن التكرار لا يحول عينة صغيرة إلى ادعاء عام عن المنتج.
 
 ## الأسئلة الشائعة
 

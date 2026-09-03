@@ -36,7 +36,7 @@ A product page or rated life is not a promise of your exact bill or replacement 
 
 ### For a short cash estimate, report energy separately. For a long-run comparison, allocate purchase and replacement cost over observed or defensible hours, and label that assumption.
 
-undefined
+For a fair hourly comparison, use one complete operating window and divide its measured energy by the hours in that window. If the system cycles off, do not multiply nameplate capacity by every hour; allocate the measured kWh across the defined window.
 
 ## Source reading
 

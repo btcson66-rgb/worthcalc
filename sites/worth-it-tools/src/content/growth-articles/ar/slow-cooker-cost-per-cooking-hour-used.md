@@ -25,13 +25,13 @@ draft: false
 
 ## قارن الروتين الفعلي
 
-افصل التسخين والإعداد المنخفض أو العالي ووقت فتح الغطاء وحجم الدفعة عن نافذة إعداد الوجبة الكاملة. تستهلك طباخة 210 W على المنخفض 6 ساعات و30 دقيقة للحفاظ 1.31 kWh؛ بسعر 0.20 تكون تكلفة الروتين نحو 0.262. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+افصل التسخين والإعداد المنخفض أو العالي ووقت فتح الغطاء وحجم الدفعة عن نافذة إعداد الوجبة الكاملة. تستهلك طباخة 210 W على المنخفض 6 ساعات و30 دقيقة للحفاظ 1.31 kWh؛ بسعر 0.20 تكون تكلفة الروتين نحو 0.262. قارن الدفعة المقاسة بحمل أصغر وإعداد أطول وروتين يحقق النتيجة نفسها بعدد دفعات مختلف.
 
 تابع مع [روتين المطبخ التالي](/ar/guides/toaster-cost-per-use-used/) و[دليل دورة طهي أخرى](/ar/guides/blender-cost-per-blending-session-used/) و[دليل جلسة التجهيز](/ar/guides/food-processor-cost-per-prep-session-used/) و[دليل الغليان](/ar/guides/air-fryer-cost-per-cooking-cycle-used/).
 
 ## الحدود والأخطاء الشائعة
 
-افصل التسخين والإعداد المنخفض أو العالي ووقت فتح الغطاء وحجم الدفعة عن نافذة إعداد الوجبة الكاملة. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+افصل التسخين والإعداد المنخفض أو العالي ووقت فتح الغطاء وحجم الدفعة عن نافذة إعداد الوجبة الكاملة. تتغير الطاقة الفعلية مع الجهد ودورات منظم الحرارة والحمل والتوقف والاستعداد والماء أو المكونات وتعرفة الفاتورة. افصل المكونات والماء والعمل واستهلاك المعدات والتنظيف؛ لا تحوّل التقدير إلى ضمان لكفاءة المنتج أو الصحة.
 
 ## الأسئلة الشائعة
 

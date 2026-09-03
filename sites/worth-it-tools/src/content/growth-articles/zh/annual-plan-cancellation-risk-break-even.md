@@ -14,7 +14,7 @@ canonical: "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-
 ogTitle: "年繳 vs 月繳怎麼選？取消風險調整 Break-Even | WorthCalc"
 ogDescription: "年繳方案便宜不代表一定划算。比較年繳折扣、預計使用月數、退款規則、取消風險與被鎖住的現金，算出真正回本月數。"
 ogImage: "/images/guides/annual-plan-cancellation-risk-break-even.webp"
-imageAlt: "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本 的情境試算示意圖"
+imageAlt: "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本的情境試算示意圖"
 breadcrumbLabel: "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本"
 ---
 
@@ -27,7 +27,7 @@ breadcrumbLabel: "訂閱年繳 vs 月繳，不只看折扣：把「中途不用�
 
 這頁不是一般「輸入兩個數字就得到一個漂亮答案」的計算器文。它的目的，是把最容易被廣告文案、主觀價值或理想假設藏起來的變數拆出來。**先算可驗證的現金，再算條件情境，最後才放非財務偏好。** 這三層不能混在一起，否則結果看起來精準，實際上只是把你的偏好包裝成公式。
 
-## 這個關鍵詞為什麼值得獨立做一頁？
+## 提前取消時，結果會怎麼變？
 
 搜尋結果已經有大量 annual vs monthly calculator，只告訴你一年省多少。WorthCalc 009 的差異化 modifier 是 cancellation-risk adjusted。你要建立至少三個使用期限：確定使用期、基準使用期、提前停止期。若是企業軟體或 AI 工具，還要考慮 seat 數、換工具成本、資料匯出與續約日；若是影音或健身訂閱，則以真實使用頻率與取消彈性為主。折扣是確定的，未來使用不是。
 
@@ -128,7 +128,7 @@ breadcrumbLabel: "訂閱年繳 vs 月繳，不只看折扣：把「中途不用�
 
 ## 與 WorthCalc 其他頁面的分工
 
-這頁只處理「年繳 vs 月繳」這個窄搜尋任務。它不應取代泛用預算、通勤、訂閱、會員或薪資文章，也不應再建立一個名稱不同、公式相同的通用 calculator。Codex 上架時應把它放進相鄰主題 cluster，從既有頁導入，而不是製造孤島頁。
+本文聚焦年繳與月繳方案的使用期間、退款條款和流動性比較。請把實際停止月份與現金底線一起代入，再用相關的預算與訂閱指南核對尚未列入的固定支出。
 
 ## FAQ
 

@@ -36,7 +36,7 @@ ENERGY STAR measured consumption को standards से compare करता �
 
 ### नहीं। Same rate basis रखें और equipment, service, fixed charges और actual days include करें। Usage pattern बदलने से result बदलता है।
 
-undefined
+Fair daily comparison के लिए पूरे 24 घंटे मापें और compressor के cycles लिखें। Nameplate rating को पूरे दिन से तभी गुणा करें जब compressor लगातार चले; सामान्यतः measured kWh इस्तेमाल करें।
 
 ## स्रोत पढ़ें
 

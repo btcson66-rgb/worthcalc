@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-要分開預熱、加熱管、風扇運轉與籃容量，並記錄食物一次完成還是分兩批。 1.35 kW 氣炸鍋預熱 4 分鐘、烹調 18 分鐘耗 0.49 kWh；每 kWh 0.20 時每批約 0.098，未含食材。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+要分開預熱、加熱管、風扇運轉與籃容量，並記錄食物一次完成還是分兩批。 1.35 kW 氣炸鍋預熱 4 分鐘、烹調 18 分鐘耗 0.49 kWh；每 kWh 0.20 時每批約 0.098，未含食材。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/rice-cooker-cost-per-cooking-cycle-used/)、[另一個烹調循環指南](/zh/guides/slow-cooker-cost-per-cooking-hour-used/)、[備料流程指南](/zh/guides/toaster-cost-per-use-used/)與[煮沸指南](/zh/guides/blender-cost-per-blending-session-used/)。
 
 ## 限制與常見誤區
 
-要分開預熱、加熱管、風扇運轉與籃容量，並記錄食物一次完成還是分兩批。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+要分開預熱、加熱管、風扇運轉與籃容量，並記錄食物一次完成還是分兩批。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

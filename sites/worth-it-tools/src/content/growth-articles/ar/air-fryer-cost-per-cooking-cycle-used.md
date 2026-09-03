@@ -25,13 +25,13 @@ draft: false
 
 ## قارن الروتين الفعلي
 
-قِس التسخين المسبق والسخان والمروحة وحجم السلة وهل تُنجز الوجبة في دفعة واحدة أو دفعتين. تستخدم قلاية 1.35 kW مدة 4 دقائق للتسخين و18 دقيقة للطهي، أي 0.49 kWh؛ بسعر 0.20 تبلغ 0.098 للدفعة قبل المكونات. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+قِس التسخين المسبق والسخان والمروحة وحجم السلة وهل تُنجز الوجبة في دفعة واحدة أو دفعتين. تستخدم قلاية 1.35 kW مدة 4 دقائق للتسخين و18 دقيقة للطهي، أي 0.49 kWh؛ بسعر 0.20 تبلغ 0.098 للدفعة قبل المكونات. قارن الدفعة المقاسة بحمل أصغر وإعداد أطول وروتين يحقق النتيجة نفسها بعدد دفعات مختلف.
 
 تابع مع [روتين المطبخ التالي](/ar/guides/rice-cooker-cost-per-cooking-cycle-used/) و[دليل دورة طهي أخرى](/ar/guides/slow-cooker-cost-per-cooking-hour-used/) و[دليل جلسة التجهيز](/ar/guides/toaster-cost-per-use-used/) و[دليل الغليان](/ar/guides/blender-cost-per-blending-session-used/).
 
 ## الحدود والأخطاء الشائعة
 
-قِس التسخين المسبق والسخان والمروحة وحجم السلة وهل تُنجز الوجبة في دفعة واحدة أو دفعتين. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+قِس التسخين المسبق والسخان والمروحة وحجم السلة وهل تُنجز الوجبة في دفعة واحدة أو دفعتين. تتغير الطاقة الفعلية مع الجهد ودورات منظم الحرارة والحمل والتوقف والاستعداد والماء أو المكونات وتعرفة الفاتورة. افصل المكونات والماء والعمل واستهلاك المعدات والتنظيف؛ لا تحوّل التقدير إلى ضمان لكفاءة المنتج أو الصحة.
 
 ## الأسئلة الشائعة
 

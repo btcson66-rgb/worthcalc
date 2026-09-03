@@ -24,7 +24,7 @@ cost per display day = defined frame measured kWh × delivered rate ÷ completed
 
 ## Real use cases compare करें
 
-Bright slideshow, dim static image, offline USB, Wi-Fi sync और overnight standby compare करें। Calendar day और active-screen day अलग units हैं। Related measured-use guides:[webcam per meeting hour](/hi/guides/webcam-electricity-cost-per-meeting-hour-used/)、[docking station per workday](/hi/guides/laptop-docking-station-electricity-cost-per-workday-used/)、[external drive per backup job](/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/)、[USB hub per charging session](/hi/guides/usb-charging-hub-electricity-cost-per-charging-session-used/) हर page अपने device, completed unit और measurement window का उपयोग करता है; समान kWh होने से results interchangeable नहीं हो जाते।
+Bright slideshow, dim static image, offline USB, Wi-Fi sync और overnight standby compare करें। Calendar day और active-screen day अलग units हैं। मापे गए उपयोग की संबंधित गाइड:[webcam per meeting hour](/hi/guides/webcam-electricity-cost-per-meeting-hour-used/)、[docking station per workday](/hi/guides/laptop-docking-station-electricity-cost-per-workday-used/)、[external drive per backup job](/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/)、[USB hub per charging session](/hi/guides/usb-charging-hub-electricity-cost-per-charging-session-used/) हर page अपने device, completed unit और measurement window का उपयोग करता है; समान kWh होने से results interchangeable नहीं हो जाते।
 
 ## Limits और common mistakes
 
@@ -36,6 +36,6 @@ Brightness, transitions, Wi-Fi polling, firmware, light sensor, adapter loss, sl
 
 उत्तर: Routine में connected रहता है तो जोड़ें; network behavior के लिए offline result अलग दें।
 
-## Source reading
+## स्रोत पढ़ें
 
 [EIA delivered electricity price FAQ](https://www.eia.gov/tools/faqs/faq.php?id=507)、[EIA household electricity use](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php)、[ENERGY STAR product list](https://www.energystar.gov/products/products-list)、[ENERGY STAR computers](https://www.energystar.gov/products/computers)、[ENERGY STAR monitors](https://www.energystar.gov/products/monitors)、[ENERGY STAR imaging equipment](https://www.energystar.gov/products/imaging_equipment)、[CFPB spending guide](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/)。EIA delivered price और household use का context देता है। ENERGY STAR product categories और power management समझाता है，CFPB recurring spending को wider budget में रखने में मदद करता है। कोई source आपकी tariff या device की measured reading की जगह नहीं लेता।

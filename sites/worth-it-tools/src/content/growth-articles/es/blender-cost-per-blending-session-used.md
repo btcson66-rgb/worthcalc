@@ -25,13 +25,13 @@ coste = kWh medidos × tarifa entregada. Mide pulsos, mezcla continua, cambios d
 
 ## Compara rutinas reales
 
-Mide pulsos, mezcla continua, cambios de velocidad, hielo o alimentos espesos y si el lavado usa otro aparato. Una batidora de 600 W durante 90 segundos a pulsos usa unos 0,015 kWh; a 0,20 son 0,003, pero una mezcla espesa larga debe medirse. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Mide pulsos, mezcla continua, cambios de velocidad, hielo o alimentos espesos y si el lavado usa otro aparato. Una batidora de 600 W durante 90 segundos a pulsos usa unos 0,015 kWh; a 0,20 son 0,003, pero una mezcla espesa larga debe medirse. Compara el lote medido con una carga menor, un ajuste más largo y una rutina que logre el mismo resultado con otro número de lotes.
 
 Sigue con la [siguiente rutina de cocina](/es/guides/food-processor-cost-per-prep-session-used/), [otra guía de ciclos](/es/guides/air-fryer-cost-per-cooking-cycle-used/), [la guía de preparación](/es/guides/rice-cooker-cost-per-cooking-cycle-used/) y [la guía de hervor](/es/guides/slow-cooker-cost-per-cooking-hour-used/).
 
 ## Límites y errores comunes
 
-Mide pulsos, mezcla continua, cambios de velocidad, hielo o alimentos espesos y si el lavado usa otro aparato. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Mide pulsos, mezcla continua, cambios de velocidad, hielo o alimentos espesos y si el lavado usa otro aparato. La energía real cambia con el voltaje, los ciclos del termostato, la carga, las pausas, la espera, el agua o los ingredientes y la tarifa de la factura. Separa ingredientes, agua, mano de obra, depreciación del equipo y limpieza; no conviertas una estimación en una garantía de eficiencia o salud.
 
 ## Preguntas frecuentes
 

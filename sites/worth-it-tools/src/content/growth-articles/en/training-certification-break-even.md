@@ -62,7 +62,7 @@ A $3,000 course can be a $3,000 decision, a $7,000 decision, or a $15,000 decisi
 
 Someone who studies at night while keeping the same job may have little lost income. Someone who reduces work by 10 hours per week for six months has a real cash-flow cost even if the tuition is identical. A program that requires a laptop, travel, exam retakes, membership dues, background checks, or annual continuing education has a different cost structure again.
 
-For SEO and personal-finance analysis, this distinction matters because “Is this certification worth it?” is rarely answered by the sticker price.
+For a personal-finance comparison, this distinction matters because “Is this certification worth it?” is rarely answered by the sticker price.
 
 ## Input Worksheet
 

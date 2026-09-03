@@ -25,13 +25,13 @@ draft: false
 
 ## قارن الروتين الفعلي
 
-سجّل الطهي والانتقال إلى التسخين والحفاظ على الحرارة وكمية الأرز والماء وفتح الغطاء المتكرر. تستخدم الطباخة 0.16 kWh لطهي 0.6 كغ و0.06 kWh للحفاظ ساعتين، أي 0.22 kWh أو 0.044 بسعر 0.20 لكل kWh. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+سجّل الطهي والانتقال إلى التسخين والحفاظ على الحرارة وكمية الأرز والماء وفتح الغطاء المتكرر. تستخدم الطباخة 0.16 kWh لطهي 0.6 كغ و0.06 kWh للحفاظ ساعتين، أي 0.22 kWh أو 0.044 بسعر 0.20 لكل kWh. قارن الدفعة المقاسة بحمل أصغر وإعداد أطول وروتين يحقق النتيجة نفسها بعدد دفعات مختلف.
 
 تابع مع [روتين المطبخ التالي](/ar/guides/slow-cooker-cost-per-cooking-hour-used/) و[دليل دورة طهي أخرى](/ar/guides/toaster-cost-per-use-used/) و[دليل جلسة التجهيز](/ar/guides/blender-cost-per-blending-session-used/) و[دليل الغليان](/ar/guides/food-processor-cost-per-prep-session-used/).
 
 ## الحدود والأخطاء الشائعة
 
-سجّل الطهي والانتقال إلى التسخين والحفاظ على الحرارة وكمية الأرز والماء وفتح الغطاء المتكرر. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+سجّل الطهي والانتقال إلى التسخين والحفاظ على الحرارة وكمية الأرز والماء وفتح الغطاء المتكرر. تتغير الطاقة الفعلية مع الجهد ودورات منظم الحرارة والحمل والتوقف والاستعداد والماء أو المكونات وتعرفة الفاتورة. افصل المكونات والماء والعمل واستهلاك المعدات والتنظيف؛ لا تحوّل التقدير إلى ضمان لكفاءة المنتج أو الصحة.
 
 ## الأسئلة الشائعة
 

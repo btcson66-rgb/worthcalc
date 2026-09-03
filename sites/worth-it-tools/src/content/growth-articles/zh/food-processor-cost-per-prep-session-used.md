@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-記錄馬達開啟秒數、重複批次、揉麵或切碎、容器容量，以及它是取代手工還是增加一道通電步驟。 700 W 調理機切碎 2 分鐘、揉麵 4 分鐘耗 0.07 kWh；每 kWh 0.20 時每次約 0.014，未含食材與清洗。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+記錄馬達開啟秒數、重複批次、揉麵或切碎、容器容量，以及它是取代手工還是增加一道通電步驟。 700 W 調理機切碎 2 分鐘、揉麵 4 分鐘耗 0.07 kWh；每 kWh 0.20 時每次約 0.014，未含食材與清洗。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/air-fryer-cost-per-cooking-cycle-used/)、[另一個烹調循環指南](/zh/guides/rice-cooker-cost-per-cooking-cycle-used/)、[備料流程指南](/zh/guides/slow-cooker-cost-per-cooking-hour-used/)與[煮沸指南](/zh/guides/toaster-cost-per-use-used/)。
 
 ## 限制與常見誤區
 
-記錄馬達開啟秒數、重複批次、揉麵或切碎、容器容量，以及它是取代手工還是增加一道通電步驟。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+記錄馬達開啟秒數、重複批次、揉麵或切碎、容器容量，以及它是取代手工還是增加一道通電步驟。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

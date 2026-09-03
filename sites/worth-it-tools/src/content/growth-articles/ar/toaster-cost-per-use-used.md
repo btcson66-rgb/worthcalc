@@ -25,13 +25,13 @@ draft: false
 
 ## قارن الروتين الفعلي
 
-احسب دقائق التسخين لكل فتحة ودورات إعادة التحميص وإعداد اللون وما إذا كان تنظيف الفتات جزءاً من الاستخدام. تستهلك محمصة 900 W مدة 3.5 دقائق 0.0525 kWh؛ بسعر 0.20 تكون حصة الكهرباء نحو 0.011 لكل استخدام. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+احسب دقائق التسخين لكل فتحة ودورات إعادة التحميص وإعداد اللون وما إذا كان تنظيف الفتات جزءاً من الاستخدام. تستهلك محمصة 900 W مدة 3.5 دقائق 0.0525 kWh؛ بسعر 0.20 تكون حصة الكهرباء نحو 0.011 لكل استخدام. قارن الدفعة المقاسة بحمل أصغر وإعداد أطول وروتين يحقق النتيجة نفسها بعدد دفعات مختلف.
 
 تابع مع [روتين المطبخ التالي](/ar/guides/blender-cost-per-blending-session-used/) و[دليل دورة طهي أخرى](/ar/guides/food-processor-cost-per-prep-session-used/) و[دليل جلسة التجهيز](/ar/guides/air-fryer-cost-per-cooking-cycle-used/) و[دليل الغليان](/ar/guides/rice-cooker-cost-per-cooking-cycle-used/).
 
 ## الحدود والأخطاء الشائعة
 
-احسب دقائق التسخين لكل فتحة ودورات إعادة التحميص وإعداد اللون وما إذا كان تنظيف الفتات جزءاً من الاستخدام. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+احسب دقائق التسخين لكل فتحة ودورات إعادة التحميص وإعداد اللون وما إذا كان تنظيف الفتات جزءاً من الاستخدام. تتغير الطاقة الفعلية مع الجهد ودورات منظم الحرارة والحمل والتوقف والاستعداد والماء أو المكونات وتعرفة الفاتورة. افصل المكونات والماء والعمل واستهلاك المعدات والتنظيف؛ لا تحوّل التقدير إلى ضمان لكفاءة المنتج أو الصحة.
 
 ## الأسئلة الشائعة
 

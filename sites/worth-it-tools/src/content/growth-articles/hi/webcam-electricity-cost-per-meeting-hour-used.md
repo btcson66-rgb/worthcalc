@@ -24,7 +24,7 @@ cost per meeting hour = webcam path measured kWh × delivered rate ÷ completed 
 
 ## Real use cases compare करें
 
-Camera-only, camera-plus-light और call के बाद idle window compare करें। Denominator completed meeting time है, calendar में planned slots नहीं। Related measured-use guides:[docking station per workday](/hi/guides/laptop-docking-station-electricity-cost-per-workday-used/)、[external drive per backup job](/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/)、[USB hub per charging session](/hi/guides/usb-charging-hub-electricity-cost-per-charging-session-used/)、[document camera per presentation hour](/hi/guides/document-camera-electricity-cost-per-presentation-hour-used/)、[digital frame per display day](/hi/guides/digital-photo-frame-electricity-cost-per-display-day-used/) हर page अपने device, completed unit और measurement window का उपयोग करता है; समान kWh होने से results interchangeable नहीं हो जाते।
+Camera-only, camera-plus-light और call के बाद idle window compare करें। Denominator completed meeting time है, calendar में planned slots नहीं। मापे गए उपयोग की संबंधित गाइड:[docking station per workday](/hi/guides/laptop-docking-station-electricity-cost-per-workday-used/)、[external drive per backup job](/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/)、[USB hub per charging session](/hi/guides/usb-charging-hub-electricity-cost-per-charging-session-used/)、[document camera per presentation hour](/hi/guides/document-camera-electricity-cost-per-presentation-hour-used/)、[digital frame per display day](/hi/guides/digital-photo-frame-electricity-cost-per-display-day-used/) हर page अपने device, completed unit और measurement window का उपयोग करता है; समान kWh होने से results interchangeable नहीं हो जाते।
 
 ## Limits और common mistakes
 
@@ -36,6 +36,6 @@ Autofocus, HDR, USB conversion loss, computer power management, cable और ख
 
 उत्तर: सिर्फ complete meeting setup के लिए। Webcam-only cost में camera path isolate करके laptop और monitor अलग दिखाएं।
 
-## Source reading
+## स्रोत पढ़ें
 
 [EIA delivered electricity price FAQ](https://www.eia.gov/tools/faqs/faq.php?id=507)、[EIA household electricity use](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php)、[ENERGY STAR product list](https://www.energystar.gov/products/products-list)、[ENERGY STAR computers](https://www.energystar.gov/products/computers)、[ENERGY STAR monitors](https://www.energystar.gov/products/monitors)、[ENERGY STAR imaging equipment](https://www.energystar.gov/products/imaging_equipment)、[CFPB spending guide](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/)。EIA delivered price और household use का context देता है। ENERGY STAR product categories और power management समझाता है，CFPB recurring spending को wider budget में रखने में मदद करता है। कोई source आपकी tariff या device की measured reading की जगह नहीं लेता।

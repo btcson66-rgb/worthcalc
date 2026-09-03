@@ -2,17 +2,17 @@
 contentType: article
 articleSlug: "cost-per-wear-clothing"
 locale: "hi"
-title: "Cost per wear calculator: कपड़ों की वास्तविक उपयोग लागत निकालें"
-description: "Cost per wear में price, alterations, care और repair को वास्तविक wears से divide करें, hoped-for wears से नहीं।"
+title: "Per wear calculator: कपड़ों की वास्तविक उपयोग लागत निकालें"
+description: "Per wear में price, alterations, care और repair को वास्तविक wears से divide करें, hoped-for wears से नहीं।"
 relatedTool: "/hi/tools/budget-builder/"
 canonical: "https://worthcalc.win/hi/guides/cost-per-wear-clothing/"
 lastReviewed: "2026-09-02"
 draft: false
 ---
 
-# Cost per wear calculator: कपड़ों की वास्तविक उपयोग लागत निकालें
+# Per wear calculator: कपड़ों की वास्तविक उपयोग लागत निकालें
 
-> **संक्षिप्त उत्तर:** Cost per wear में price, alterations, care और repair को वास्तविक wears से divide करें, hoped-for wears से नहीं।
+> **संक्षिप्त उत्तर:** Per wear में price, alterations, care और repair को वास्तविक wears से divide करें, hoped-for wears से नहीं।
 
 ## Result बदलने वाले inputs इकट्ठे करें
 

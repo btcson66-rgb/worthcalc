@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-記錄每個槽位的加熱分鐘、重烤次數、烘烤檔位，以及清理麵包屑是否屬於同一流程。 900 W 烤麵包機加熱 3.5 分鐘耗 0.0525 kWh；每 kWh 0.20 時每次電費約 0.011。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+記錄每個槽位的加熱分鐘、重烤次數、烘烤檔位，以及清理麵包屑是否屬於同一流程。 900 W 烤麵包機加熱 3.5 分鐘耗 0.0525 kWh；每 kWh 0.20 時每次電費約 0.011。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/blender-cost-per-blending-session-used/)、[另一個烹調循環指南](/zh/guides/food-processor-cost-per-prep-session-used/)、[備料流程指南](/zh/guides/air-fryer-cost-per-cooking-cycle-used/)與[煮沸指南](/zh/guides/rice-cooker-cost-per-cooking-cycle-used/)。
 
 ## 限制與常見誤區
 
-記錄每個槽位的加熱分鐘、重烤次數、烘烤檔位，以及清理麵包屑是否屬於同一流程。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+記錄每個槽位的加熱分鐘、重烤次數、烘烤檔位，以及清理麵包屑是否屬於同一流程。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

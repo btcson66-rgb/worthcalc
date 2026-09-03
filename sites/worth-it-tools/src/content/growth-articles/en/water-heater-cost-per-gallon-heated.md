@@ -36,7 +36,7 @@ ENERGY STAR uses Uniform Energy Factor and product-specific test conditions. Its
 
 ### It may reduce energy per delivered gallon, but your answer also depends on standby use, draw volume, tariffs, installation, maintenance, and equipment cost. Measure or model the complete period.
 
-undefined
+For a fair comparison, measure the complete heating window and divide the energy by the gallons that reached the defined temperature. Do not assume the rated power ran continuously; standby loss, inlet temperature and cycling belong in the measured result.
 
 ## Source reading
 

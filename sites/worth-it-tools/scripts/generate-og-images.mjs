@@ -7,15 +7,19 @@
 //
 // 這支腳本產生標題卡：圖上就是那篇的標題，alt 因此自動變成誠實的描述。
 //
-// 這是維護工具，不在 build 或 verify 鏈上——它需要 Playwright 與多語系字型
-// （CJK／阿拉伯／天城體），CI 沒有裝。新增套件後在本機跑一次，把產出的圖
-// commit 進去；`npm run check:og-images` 會在 build 時擋下漏掉的圖。
+// 它需要 Playwright 與多語系字型（CJK／阿拉伯／天城體）＋cwebp，所以不在
+// build 或 verify 鏈上。平常由 .github/workflows/ci-worthcalc.yml 在 PR 上
+// 自動跑：只在有缺圖時才裝依賴、只產缺的那幾張，產完 commit 回 PR 分支。
+// 本機要手動跑的話：
 //
 //   npm i -D playwright && npx playwright install chromium
 //   sudo apt-get install -y fonts-noto-cjk fonts-noto-core webp
 //   npm run generate:og-images
+//
+// `--check-only` 只回報缺幾張就結束（不啟動瀏覽器），給 CI 決定要不要裝
+// 那一整包依賴用；有 $GITHUB_OUTPUT 時同時寫入 missing=<n>。
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, rmSync, statSync, unlinkSync, writeFileSync, readdirSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, statSync, unlinkSync, writeFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -86,6 +90,14 @@ mkdirSync(outDir, { recursive: true });
 
 const todo = guides.filter((g) => !existsSync(join(root, 'public', ogImagePathFor(g))));
 console.log(`[og-images] ${guides.length} 篇 guide，其中 ${todo.length} 篇還沒有圖。`);
+
+// CI 先用 --check-only 問「缺幾張」，缺 0 張就整個跳過裝 chromium 與字型那一步。
+if (process.argv.includes('--check-only')) {
+  rmSync(distDir, { recursive: true, force: true });
+  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `missing=${todo.length}\n`);
+  process.exit(0);
+}
+
 if (todo.length === 0) { rmSync(distDir, { recursive: true, force: true }); process.exit(0); }
 
 const { chromium } = await import('playwright');

@@ -1,0 +1,99 @@
+# PR 階段的守門員。
+#
+# 在這之前 worthcalc 的 PR 上沒有任何檢查——deploy-worthcalc.yml 只在 push 到
+# main 時觸發，而且只跑 `npm run build`。也就是說 package.json 裡那整條 verify
+# （typecheck、lint、check:links、約 120 支套件檢查、og-images、url-budget、
+# guide-index、多語系與 shell 檢查、growth-release、brief-coverage）從來沒有在
+# 任何自動流程裡跑過，只有人記得手動跑時才跑。Codex 持續在開 SEO 套件 PR，
+# 這個缺口只會越來越貴。
+#
+# 順便解掉 OG 圖的維護問題：generate-og-images.mjs 需要 Playwright＋Noto
+# CJK/Arabic/Devanagari 字型＋cwebp，本機沒人會想裝。這裡在 PR 上自動判斷缺不
+# 缺圖，缺才裝那一整包依賴、只產缺的那幾張，產完 commit 回 PR 分支，圖就跟著
+# 內容一起進 main，不必再有人記得跑腳本。
+name: CI WorthCalc
+
+on:
+  pull_request:
+    paths:
+      - 'sites/worth-it-tools/**'
+      - '.github/workflows/ci-worthcalc.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # 產出的 OG 圖要 commit 回 PR 分支
+
+concurrency:
+  group: ci-worthcalc-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: sites/worth-it-tools
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 取 PR 分支本身而不是 merge ref，因為產出的圖要 push 回這個分支。
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          # scripts/sitemap-lastmod.mjs 用每個來源檔的 git author date 當 lastmod，
+          # 淺 clone 會讓所有 URL 塌到同一天（見 deploy-worthcalc.yml 同一段註解）。
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: sites/worth-it-tools/package-lock.json
+
+      - run: npm ci
+
+      # 先只問「缺幾張」——不啟動瀏覽器、不裝任何東西。缺 0 張（絕大多數 PR）
+      # 就整個跳過下面那兩步，省掉 chromium 與字型的安裝時間。
+      - id: ogcheck
+        run: node scripts/generate-og-images.mjs --check-only
+
+      - name: 安裝產圖依賴（僅在有缺圖時）
+        if: steps.ogcheck.outputs.missing != '0'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-core webp
+          npm i --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: 產生缺少的 OG 圖
+        if: steps.ogcheck.outputs.missing != '0'
+        run: npm run generate:og-images
+
+      # verify 自己會跑 build，所以 build 環境要跟 deploy-worthcalc.yml 一致，
+      # 否則這裡驗過的產物跟真正上線的不是同一個東西。
+      # PUBLIC_ADSENSE_CLIENT 沿用 deploy 已寫死的同一組公開 publisher ID
+      # （public/ads.txt 裡本來就是這個值），這裡沒有新增或修改任何廣告碼。
+      - run: npm run verify
+        env:
+          SITE_URL: https://worthcalc.win
+          PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
+          PUBLIC_ADSENSE_CLIENT: ca-pub-9117672212804270
+
+      # 只推同 repo 的 PR 分支：fork 來的 PR 拿不到寫入權限，硬推只會紅一片。
+      # 這個 push 會再觸發一次本 workflow，第二次 ogcheck 會回 0、直接跑完 verify，
+      # 讓 PR 最終那個 commit 也有一支綠燈。刻意不加 [skip ci]。
+      - name: 把新產的 OG 圖 commit 回 PR 分支
+        if: >-
+          steps.ogcheck.outputs.missing != '0'
+          && github.event_name == 'pull_request'
+          && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          if [ -z "$(git status --porcelain public/images/guides/og)" ]; then
+            echo "沒有新檔案，不用 commit。"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/guides/og
+          git commit -m "chore(worthcalc): 補上 ${{ steps.ogcheck.outputs.missing }} 篇 guide 的社群預覽圖"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}

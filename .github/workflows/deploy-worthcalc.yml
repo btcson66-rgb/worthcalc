@@ -41,6 +41,7 @@ jobs:
         env:
           SITE_URL: https://worthcalc.win
           PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
+          PUBLIC_AFFILIATE_GA_ID: G-Q78WN8NZ0R
           # 2026-08-24: was ${{ vars.WORTHCALC_ADSENSE_CLIENT }}. That repo
           # variable was never set (see the 2026-07-10 AdSense playbook), so
           # every build injected an empty string and neither the head loader

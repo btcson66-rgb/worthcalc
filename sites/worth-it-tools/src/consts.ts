@@ -55,6 +55,7 @@ export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
 };
 
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
+export const AFFILIATE_GA_ID = import.meta.env.PUBLIC_AFFILIATE_GA_ID?.trim() || 'G-Q78WN8NZ0R';
 export const ADSENSE_CLIENT = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 /** Google Search Console HTML-tag verification token (the `content` value). Empty = no meta tag. */
 export const GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';

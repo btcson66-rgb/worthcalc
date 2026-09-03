@@ -23,3 +23,7 @@ Thumbs.db
 
 # codex scratch
 .codex-prompt.txt
+
+# OG 圖產生器的中間產物（scripts/generate-og-images.mjs 每次會重寫）
+.og-data-dist/
+tsconfig.ogdata.json

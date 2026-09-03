@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-要量測點動、連續攪拌、速度切換、冰塊或濃稠食材負載；清洗若用另一台設備就不要混入。 600 W 調理機點動合計 90 秒約耗 0.015 kWh；每 kWh 0.20 時約 0.003，但濃稠食材的長時間流程應實測。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+要量測點動、連續攪拌、速度切換、冰塊或濃稠食材負載；清洗若用另一台設備就不要混入。 600 W 調理機點動合計 90 秒約耗 0.015 kWh；每 kWh 0.20 時約 0.003，但濃稠食材的長時間流程應實測。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/food-processor-cost-per-prep-session-used/)、[另一個烹調循環指南](/zh/guides/air-fryer-cost-per-cooking-cycle-used/)、[備料流程指南](/zh/guides/rice-cooker-cost-per-cooking-cycle-used/)與[煮沸指南](/zh/guides/slow-cooker-cost-per-cooking-hour-used/)。
 
 ## 限制與常見誤區
 
-要量測點動、連續攪拌、速度切換、冰塊或濃稠食材負載；清洗若用另一台設備就不要混入。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+要量測點動、連續攪拌、速度切換、冰塊或濃稠食材負載；清洗若用另一台設備就不要混入。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

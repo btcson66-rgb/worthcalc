@@ -16,7 +16,7 @@ draft: false
 
 ## Collect the numbers that change the decision
 
-Record the cart you would buy without the promotion, the threshold, added items, shipping charge, return cost, and any membership allocation. Treat the gap as induced spending, not a discount. The search intent is a threshold decision, not a percentage-off calculation. Compare the basket you planned with the basket the promotion encourages, then test a returned item or an unused item.
+Record the cart you would buy without the promotion, the threshold, added items, shipping charge, return cost, and any membership allocation. Treat the gap as induced spending, not a discount. This comparison answers a threshold decision, not a percentage-off calculation. Compare the basket you planned with the basket the promotion encourages, then test a returned item or an unused item.
 
 ## Formula and worked example
 
@@ -24,7 +24,7 @@ promotion cost = induced items + plan allocation + return risk − shipping char
 
 ## Use scenarios instead of one answer
 
-The search intent is a threshold decision, not a percentage-off calculation. Compare the basket you planned with the basket the promotion encourages, then test a returned item or an unused item. Do not count the full order as a saving. The relevant comparison is the incremental amount caused by the threshold against the shipping fee and costs of returning or storing the extra item. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation. Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.
+This is a threshold decision, not a percentage-off calculation. Compare the basket you planned with the basket the promotion encourages, then test a returned item or an unused item. Do not count the full order as a saving. The relevant comparison is the incremental amount caused by the threshold against the shipping fee and costs of returning or storing the extra item. Compare a low-use case, a realistic case, and a high-cost or high-use case. If the conclusion changes, report the range and the assumption that caused the change rather than presenting a universal recommendation. Write down the date and the source of each input. Recheck the result after a price change, a different usage pattern, or a contract renewal; a calculator is a comparison record, not a promise.
 
 ## Common mistakes and next step
 

@@ -16,25 +16,25 @@ draft: false
 
 ## المدخلات التي تغيّر النتيجة
 
-For this مخفّق الحليب الكهربائي, define the electricity boundary before looking at a per-جلسة رغوة number. Record التسخين والخفق ودورات الحرارة والوقت المتروك على القاعدة from a repeatable start to a repeatable end. Keep starting temperature, load, mode, finished output, warm-hold behavior, tariff unit, and date together. A recipe duration, package instruction, or nameplate wattage is not a wall-meter kWh reading.
+بالنسبة إلى مخفّق الحليب الكهربائي, حدّد حدود الكهرباء قبل حساب تكلفة كل جلسة رغوة. سجّل التسخين والخفق ودورات الحرارة والوقت المتروك على القاعدة من بداية قابلة للتكرار إلى نهاية قابلة للتكرار. اجمع درجة البداية والحمل والوضع والإنتاج المكتمل وسلوك الحفظ الدافئ ووحدة التعرفة والتاريخ. مدة الوصفة أو تعليمات العبوة أو القدرة الاسمية ليست قراءة kWh من عداد الحائط.
 
-Use a plug-in meter for at least three repeatable runs and preserve the readings and tariff source. A bill can combine generation, delivery, taxes, fees, and fixed charges; an appliance comparison should state whether it uses a marginal kWh rate and should list fixed charges separately.
+استخدم مقياس مقبس لثلاث قياسات قابلة للتكرار على الأقل، واحتفظ بالقراءات ومصدر التعرفة. قد تجمع الفاتورة التوليد والتوصيل والضرائب والرسوم والتكاليف الثابتة؛ يجب أن يوضح تقارن الأجهزة ما إذا كانت تستخدم تعرفة kWh هامشية وأن تفصل التكاليف الثابتة.
 
 ## المعادلة ومثال محسوب
 
-Cost per run = measured wall kWh from the stated start to the stated end × delivered electricity rate. Cost per جلسة رغوة = that electricity cost ÷ the number of finished جلسة رغوةs. إذا استهلكت الجلسة 0.07 kWh بسعر 0.18 دولار، فالكهرباء 0.0126 دولار. عند إنتاج رغوة لكوبين تكون 0.0063 دولار لكل كوب للكهرباء فقط؛ الحليب والتنظيف منفصلان. This demonstrates allocation; it is not a forecast for a particular model, tariff, or food output.
+تكلفة التشغيل = kWh المقاسة من بداية القياس المحددة إلى نهايته × تعرفة الكهرباء المسلّمة. تكلفة جلسة رغوة = تكلفة الكهرباء ÷ عدد جلسة رغوةs. إذا استهلكت الجلسة 0.07 kWh بسعر 0.18 دولار، فالكهرباء 0.0126 دولار. عند إنتاج رغوة لكوبين تكون 0.0063 دولار لكل كوب للكهرباء فقط؛ الحليب والتنظيف منفصلان. هذا يوضح طريقة التوزيع، وليس توقعاً لطراز أو تعرفة أو إنتاج غذائي محدد.
 
-Do not multiply the maximum rated watts by the entire recipe or holding time unless the meter confirms continuous operation at that load. Thermostat cycling, motor load, adapter losses, ventilation, holding behavior, and automatic shutoff can all change the reading. For a very short load, group several normal runs and divide the combined kWh.
+لا تضرب القدرة الاسمية القصوى في كامل وقت الوصفة أو الحفظ إلا إذا أكد العداد التشغيل المستمر بهذا الحمل. قد تغيّر دورات منظم الحرارة وحمل المحرك وفواقد المحول والتهوية وسلوك الحفظ والإيقاف التلقائي القراءة. للحمل القصير جداً، اجمع عدة قياسات عادية واقسم kWh المجمعة.
 
 ## قارن الاستخدام الفعلي
 
-قِس الحليب البارد والدافئ وحصة واحدة وعدة حصص. يغيّر الحجم ودرجة البداية والملحق والحرارة المستهدفة ووقت القاعدة النتيجة؛ لا تخلط جلسة التسخين بالخفق فقط. Change one condition at a time and keep the denominator explicit: per run, per جلسة رغوة, or per kilogram, cup, or serving. If output weight, portions, or success rate changes, put it beside the result; a lower number can simply reflect a smaller load.
+قِس الحليب البارد والدافئ وحصة واحدة وعدة حصص. يغيّر الحجم ودرجة البداية والملحق والحرارة المستهدفة ووقت القاعدة النتيجة؛ لا تخلط جلسة التسخين بالخفق فقط. غيّر شرطاً واحداً في كل مرة واذكر المقام بوضوح: لكل تشغيل، لكلجلسة رغوة, أو لكل كيلوغرام أو كوب أو حصة. إذا تغير وزن الناتج أو عدد الحصص أو معدل النجاح، فاكتبه بجانب النتيجة؛ فقد يعكس الرقم الأقل حملاً أصغر فحسب.
 
-Related reading: [تكلفة سخان الطعام لكل ساعة](/ar/guides/electric-food-warmer-cost-per-heating-hour-used/), [تكلفة آلة الثلج لكل دفعة](/ar/guides/countertop-ice-maker-cost-per-batch-used/), [تكلفة عصارة الحمضيات لكل جلسة](/ar/guides/electric-citrus-juicer-cost-per-juice-session-used/), [تكلفة مفرمة اللحم لكل جلسة](/ar/guides/electric-meat-grinder-cost-per-grinding-session-used/). These four pages use different appliances or time/output denominators, so the links help readers choose a meaningful denominator rather than treating every device as the same service.
+قراءة مرتبطة: [تكلفة سخان الطعام لكل ساعة](/ar/guides/electric-food-warmer-cost-per-heating-hour-used/), [تكلفة آلة الثلج لكل دفعة](/ar/guides/countertop-ice-maker-cost-per-batch-used/), [تكلفة عصارة الحمضيات لكل جلسة](/ar/guides/electric-citrus-juicer-cost-per-juice-session-used/), [تكلفة مفرمة اللحم لكل جلسة](/ar/guides/electric-meat-grinder-cost-per-grinding-session-used/). تستخدم هذه الصفحات الأربعة أجهزة أو مقامات زمنية وإنتاجية مختلفة؛ تساعد الروابط القارئ على اختيار مقام مناسب بدلاً من اعتبار كل جهاز الخدمة نفسها.
 
 ## الحدود والأخطاء الشائعة
 
-Voltage, tariff design, room temperature, food, container, cleanliness, consumables, wear, and meter resolution affect the result. For full ownership cost, list purchase price, ingredients, water, cleaning, maintenance, refrigeration, waste, and time separately instead of hiding them in electricity. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
+يؤثر الجهد وتصميم التعرفة وحرارة الغرفة والطعام والحاوية والنظافة والمستهلكات والتآكل ودقة العداد في. لحساب التكلفة الكاملة للملكية، اذكر سعر الشراء والمكونات والماء والتنظيف والصيانة والتبريد والهدر والوقت منفصلة بدلاً من إخفائها في الكهرباء. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
 
 ## سؤال شائع
 

@@ -36,7 +36,7 @@ ENERGY STAR usa el Uniform Energy Factor y pruebas específicas. Sus criterios n
 
 ### Puede reducir energía por galón, pero el resultado depende también de espera, volumen, tarifas, instalación, mantenimiento y equipo.
 
-undefined
+Para comparar el coste por galón, mide todo el ciclo de calentamiento y divide la energía entre los galones que alcanzaron la temperatura definida. No supongas que la potencia nominal fue continua: influyen la temperatura de entrada, las pérdidas y los ciclos.
 
 ## Fuentes para consultar
 

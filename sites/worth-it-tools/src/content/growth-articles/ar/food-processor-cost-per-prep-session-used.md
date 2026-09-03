@@ -25,13 +25,13 @@ draft: false
 
 ## قارن الروتين الفعلي
 
-سجّل ثواني تشغيل المحرك والدفعات المتكررة والعجن مقابل الفرم وحجم الوعاء وهل يستبدل عملاً يدوياً. يستخدم جهاز 700 W دقيقتين للفرم وأربعاً للعجن 0.07 kWh؛ بسعر 0.20 تكون الجلسة 0.014 قبل المكونات والتنظيف. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+سجّل ثواني تشغيل المحرك والدفعات المتكررة والعجن مقابل الفرم وحجم الوعاء وهل يستبدل عملاً يدوياً. يستخدم جهاز 700 W دقيقتين للفرم وأربعاً للعجن 0.07 kWh؛ بسعر 0.20 تكون الجلسة 0.014 قبل المكونات والتنظيف. قارن الدفعة المقاسة بحمل أصغر وإعداد أطول وروتين يحقق النتيجة نفسها بعدد دفعات مختلف.
 
 تابع مع [روتين المطبخ التالي](/ar/guides/air-fryer-cost-per-cooking-cycle-used/) و[دليل دورة طهي أخرى](/ar/guides/rice-cooker-cost-per-cooking-cycle-used/) و[دليل جلسة التجهيز](/ar/guides/slow-cooker-cost-per-cooking-hour-used/) و[دليل الغليان](/ar/guides/toaster-cost-per-use-used/).
 
 ## الحدود والأخطاء الشائعة
 
-سجّل ثواني تشغيل المحرك والدفعات المتكررة والعجن مقابل الفرم وحجم الوعاء وهل يستبدل عملاً يدوياً. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+سجّل ثواني تشغيل المحرك والدفعات المتكررة والعجن مقابل الفرم وحجم الوعاء وهل يستبدل عملاً يدوياً. تتغير الطاقة الفعلية مع الجهد ودورات منظم الحرارة والحمل والتوقف والاستعداد والماء أو المكونات وتعرفة الفاتورة. افصل المكونات والماء والعمل واستهلاك المعدات والتنظيف؛ لا تحوّل التقدير إلى ضمان لكفاءة المنتج أو الصحة.
 
 ## الأسئلة الشائعة
 

@@ -24,7 +24,7 @@ Mode, charging state, dock time, starting और ending battery level, measured 
 
 ## Real operating cases compare करें
 
-हर use के बाद dock पर लौटाना, scheduled recharge और full battery के साथ dock से दूर रहना compare करें। बताएं कि charger, dock और adapter measurement boundary में हैं या नहीं। Related measured-device guides:[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Glue gun electricity cost per crafting hour](/hi/guides/glue-gun-electricity-cost-per-crafting-hour-used/)、[Electric hand mixer electricity cost per mixing session](/hi/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
+हर use के बाद dock पर लौटाना, scheduled recharge और full battery के साथ dock से दूर रहना compare करें। बताएं कि charger, dock और adapter measurement boundary में हैं या नहीं। मापे गए उपकरणों की संबंधित गाइड:[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Glue gun electricity cost per crafting hour](/hi/guides/glue-gun-electricity-cost-per-crafting-hour-used/)、[Electric hand mixer electricity cost per mixing session](/hi/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
 
 ## Limits और common mistakes
 
@@ -36,6 +36,6 @@ Battery chemistry, dock electronics, adapter loss, cleaning cycle और dock �
 
 Complete charging setup का cost चाहिए तो शामिल करें। केवल adapter cost चाहिए तो dock electronics को अलग measure करके report करें।
 
-## Source reading
+## स्रोत पढ़ें
 
 [EIA delivered electricity price FAQ](https://www.eia.gov/tools/faqs/faq.php?id=507)、[EIA household electricity use](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php)、[ENERGY STAR product list](https://www.energystar.gov/products/products-list)、[CFPB spending guide](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) EIA delivered price और household use context देता है; ENERGY STAR product categories और efficiency context देता है; CFPB recurring costs को budget में रखता है। कोई source आपकी tariff या measured reading की जगह नहीं लेता।

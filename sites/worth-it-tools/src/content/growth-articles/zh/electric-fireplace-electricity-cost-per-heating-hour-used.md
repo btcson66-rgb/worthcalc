@@ -16,23 +16,23 @@ draft: false
 
 ## 會改變結果的輸入值
 
-記下設備狀態、開始與結束時間、實測 kWh、已交付電價，以及插座或電表究竟納入哪些負載。 For this topic, record 暖風設定、火焰模式、恆溫循環、房間大小、室溫、實測 kWh、費率與量測窗口. Define one completed unit as **完成一個加熱小時** before reading the meter. If the equipment has a timer, thermostat, charger, light, or standby state, write down whether it is inside the boundary rather than assuming the label captures it.
+記下設備狀態、開始與結束時間、實測 kWh、已交付電價，以及插座或電表究竟納入哪些負載。 請記錄暖風設定、火焰模式、恆溫循環、房間大小、室溫、實測 kWh、費率與量測窗口。 將一個完整單位定義為 **完成一個加熱小時**後再讀取電表。 若設備有定時器、恆溫器、充電器、燈光或待機狀態，請寫明是否包含在邊界內，不要假設標示已經涵蓋。
 
 ## 公式與實測算例
 
-每完成單位電費＝實測 kWh × 已交付電價 ÷ 完成單位。請使用本頁指定的完成單位，不要未說明就換成小時、天或循環。 若量測窗口使用 0.18 kWh、費率每 kWh 0.20，電費是 0.036；若窗口完成 3 個完成一個加熱小時，每單位是 0.012。這是公式示例，不是產品平均值。 Keep the raw start and end readings, the rate currency, and the date beside the result. A rounded number without its measurement window is difficult to audit or reproduce.
+每完成單位電費＝實測 kWh × 已交付電價 ÷ 完成單位。請使用本頁指定的完成單位，不要未說明就換成小時、天或循環。 若量測窗口使用 0.18 kWh、費率每 kWh 0.20，電費是 0.036；若窗口完成 3 個完成一個加熱小時，每單位是 0.012。這是公式示例，不是產品平均值。 請把開始與結束讀值、費率貨幣與日期和結果放在一起。 沒有量測區間的四捨五入數字，很難複核或重現。
 
 ## 比較實際使用情境
 
-在相同房間與量測時間下，比較只暖風、只燈效與兩者同開。 只有完成單位與量測邊界相近時才比較情境。若燈具、過濾器、充電器、變壓器或配件共用插座，請納入系統一起量，或另列為獨立負載。 Related measured-device guides: [魚缸加熱器每日電費：把恆溫循環分開計算](/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/)、[爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚](/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/)、[電蚊拍／捕蚊燈每夜電費：把待機與啟動窗口分開](/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/)、[戶外串燈每晚電費：把定時器與變壓器納入邊界](/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/)、[車庫門開門機每次循環電費：把燈具與待機拆開](/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/). Each related page has its own equipment, completed unit, and measurement window; shared kWh does not make the results interchangeable.
+在相同房間與量測時間下，比較只暖風、只燈效與兩者同開。 只有完成單位與量測邊界相近時才比較情境。若燈具、過濾器、充電器、變壓器或配件共用插座，請納入系統一起量，或另列為獨立負載。 相關實測設備指南： [魚缸加熱器每日電費：把恆溫循環分開計算](/zh/guides/aquarium-heater-electricity-cost-per-tank-day-used/)、[爬蟲箱加熱燈每加熱小時電費：把定時器時間算清楚](/zh/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/)、[電蚊拍／捕蚊燈每夜電費：把待機與啟動窗口分開](/zh/guides/electric-insect-zapper-electricity-cost-per-overnight-used/)、[戶外串燈每晚電費：把定時器與變壓器納入邊界](/zh/guides/outdoor-string-lights-electricity-cost-per-evening-used/)、[車庫門開門機每次循環電費：把燈具與待機拆開](/zh/guides/garage-door-opener-electricity-cost-per-cycle-used/). 每個相關頁面都有自己的設備、完成單位與量測區間；共用 kWh 公式不代表結果可以互換。
 
 ## 可重複的量測方法
 
-要讓量測可重複，固定插座邊界與費率，記下運轉窗口並保存原始讀值。牆上電表能把待機與控制循環算進來，通常比只看標示瓦數更接近你的問題。 Repeat the window under similar conditions, but do not erase real operating differences. Note 暖風設定、火焰模式、恆溫循環、房間大小、室溫、實測 kWh、費率與量測窗口 and identify which readings came from the wall meter, plug meter, or device display. If a load is estimated rather than measured, label it as an assumption and show how it affects the total.
+要讓量測可重複，固定插座邊界與費率，記下運轉窗口並保存原始讀值。牆上電表能把待機與控制循環算進來，通常比只看標示瓦數更接近你的問題。 在相近條件下重複量測，但不要為了讓數字整齊而抹去真實運轉差異。 請注意，暖風設定、火焰模式、恆溫循環、房間大小、室溫、實測 kWh、費率與量測窗口，並註明讀值來自牆上電表、插座電表或設備顯示。 若負載是估算而非實測，請標成假設並說明它如何影響總額。
 
 ## 限制與常見誤區
 
-[object Object] 把設備電費與耗材、維護、水、材料及任何效果宣稱分開。較低電費不能證明產品或決策一定較好。 Do not convert a rated wattage into a personal bill without accounting for run time, control cycles, standby, and your delivered rate. At least three repeatable readings can expose start-up or thermostat variation, but repetition does not turn a small sample into a universal product claim.
+請把設備電費與耗材、維護、水、材料及任何效果宣稱分開。較低電費不能證明產品或決策一定較好。 不要忽略運轉時間、控制循環、待機與實際到戶費率，就把額定瓦數直接換成個人帳單。 至少三次可重複讀值能顯示啟動或恆溫差異，但重複量測不會把小樣本變成通用產品結論。
 
 ## 常見問題
 

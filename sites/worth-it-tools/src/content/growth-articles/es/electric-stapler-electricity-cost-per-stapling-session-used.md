@@ -12,7 +12,7 @@ draft: false
 
 # Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos
 
-> **Quick answer:** Calcula el coste eléctrico de una grapadora eléctrica por sesión con energía medida del disparo, motor y espera, separando grapas, papel y atascos. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **Respuesta rápida:** Calcula el coste eléctrico de una grapadora eléctrica por sesión con energía medida del disparo, motor y espera, separando grapas, papel y atascos. Es una estimación de coste, no una garantía de ahorro, rendimiento, posición ni resultados.
 
 ## Qué cambia el resultado
 
@@ -22,11 +22,11 @@ El grosor, la alineación, la presión y un atasco cambian los intentos del moto
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y otros equipos fuera del numerador salvo que el límite los incluya. Una sesión de 0,003 kWh a 0,18 cuesta 0,00054. Si contiene un atasco, mantenlo en el total pero repórtalo como condición distinta.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor confirme esa carga. Mide por separado ordenadores, pantallas, redes, cargadores y otros accesorios antes de sumarlos.
 
 ## Compara usos reales
 
-¿Puedo usar la potencia nominal? Solo para planificar; usa la lectura del medidor porque el disparo y la espera difieren. Related guides: [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/), [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), and [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+¿Puedo usar la potencia nominal? Solo para planificar; usa la lectura del medidor porque el disparo y la espera difieren. Related guides: [Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación](/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/), [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), and [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/). Cada página responde a una pregunta distinta sobre el coste unitario; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 

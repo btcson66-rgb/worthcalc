@@ -16,7 +16,7 @@ draft: false
 
 ## Build a qualified-spend ledger
 
-The [Costco Executive Rewards page](https://www.costco.com/f/-/executive-rewards) describes an approximately 2% reward on qualified purchases and lists exclusions such as membership fees, taxes, shipping, gasoline, and other categories in its U.S. terms. The list can vary by region and change over time. Treat the page as a prompt to verify, not as a universal rule for every account.
+The [Costco Executive Rewards page](https://www.costco.com/f/-/executive-rewards) describes an approximately 2% reward on qualified purchases and lists exclusions such as membership fees, taxes, shipping, gasoline, and other categories in its U.S. terms. The list can vary by region and change over time. Treat the terms as a reference to verify, not as a universal rule for every account.
 
 Create columns for date, category, pre-tax merchandise amount, refunds, cardholder, and qualification status. Mark uncertain transactions separately instead of forcing them into the reward base. The [Costco FAQ](https://customerservice.costco.com/app/answers/detail/a_id/1205/) explains that only specified cardholders and qualified categories may count.
 

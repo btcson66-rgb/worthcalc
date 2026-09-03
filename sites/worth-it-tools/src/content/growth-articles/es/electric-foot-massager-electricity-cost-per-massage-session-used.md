@@ -12,7 +12,7 @@ draft: false
 
 # Coste eléctrico de un masajeador de pies por sesión: separa espera y calor
 
-> **Quick answer:** Calcula el coste eléctrico de un masajeador de pies por sesión con energía medida del motor, calor, presión y espera, separando afirmaciones de confort y propiedad. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **Respuesta rápida:** Calcula el coste eléctrico de un masajeador de pies por sesión con energía medida del motor, calor, presión y espera, separando afirmaciones de confort y propiedad. Es una estimación de coste, no una garantía de ahorro, rendimiento, posición ni resultados.
 
 ## Qué cambia el resultado
 
@@ -22,11 +22,11 @@ El calor y la presión pueden consumir distinto que el masaje solo, y la sesión
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y otros equipos fuera del numerador salvo que el límite los incluya. Si una sesión de 25 minutos usa 0,045 kWh a 0,18, cuesta 0,0081. Deja fuera precio, limpieza, reparaciones y afirmaciones de salud o confort.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor confirme esa carga. Mide por separado ordenadores, pantallas, redes, cargadores y otros accesorios antes de sumarlos.
 
 ## Compara usos reales
 
-¿Se incluye el calor? Sí si está dentro del límite; reporta por separado calor y masaje para no mezclar modos. Related guides: [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), and [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+¿Se incluye el calor? Sí si está dentro del límite; reporta por separado calor y masaje para no mezclar modos. Related guides: [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/), and [Coste eléctrico de una grapadora eléctrica por sesión: separa los atascos](/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/). Cada página responde a una pregunta distinta sobre el coste unitario; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 

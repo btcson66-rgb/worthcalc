@@ -16,25 +16,25 @@ draft: false
 
 ## परिणाम बदलने वाले inputs
 
-For this printer, define the wall-meter start and end before calculating a per-print job result. Record wake-up, warm-up, printing, cooling और idle mode together with device state, brightness or volume, accessories, workload, finished pages or time, tariff unit, and date. Rated watts, a typical product value, and a job duration do not replace the actual kWh reading.
+इस printer, गणना से पहले wall-meter का start और end तय करें, फिर print job का result निकालें। लिखें wake-up, warm-up, printing, cooling और idle mode और device state, brightness या volume, accessories, workload, finished pages या time, tariff unit और date भी record करें। Rated watts, typical product value और job duration actual kWh reading का विकल्प नहीं हैं।
 
-Use a plug-in meter for at least three repeatable runs; for a short or low load, group several runs and divide the combined reading. If the reading includes a display, computer, router, USB charger, or other accessory, split those lines in the note so a boundary difference is not mistaken for an efficiency difference.
+कम से कम तीन repeatable runs के लिए plug-in meter इस्तेमाल करें; short या low load हो तो कई runs को group करके combined reading को divide करें। Reading में display, computer, router, USB charger या कोई accessory शामिल हो तो note में उन्हें अलग लिखें, ताकि boundary difference को efficiency difference न समझें।
 
 ## Formula और worked example
 
-Cost per run = measured wall kWh from the stated start to the stated end × delivered electricity rate. Cost per print job = that electricity cost ÷ the number of finished print jobs. 40-page job में 0.08 kWh और $0.18/kWh tariff हो तो electricity $0.0144, यानी $0.00036/page है। Paper, ink/toner, failed pages और fixed-charge allocation अलग हैं। This demonstrates allocation; it is not a forecast for a model, tariff, or household setup.
+Per run cost = stated start से end तक measured wall kWh × delivered electricity rate। Per print job = उस electricity cost ÷ finished print jobs. 40-page job में 0.08 kWh और $0.18/kWh tariff हो तो electricity $0.0144, यानी $0.00036/page है। Paper, ink/toner, failed pages और fixed-charge allocation अलग हैं। यह allocation का example है; किसी model, tariff या household setup का forecast नहीं है।
 
-Do not multiply rated watts by the entire work or viewing period unless the meter confirms continuous operation at that load. Wake-up, heat, displays, motors, volume, network activity, power supplies, and sleep controls can change the reading; the same device will not draw the same energy in every mode or content load.
+Meter उस load पर continuous operation confirm न करे तो rated watts को पूरे work या viewing period से multiply न करें। Wake-up, heat, displays, motors, volume, network activity, power supplies और sleep controls reading बदल सकते हैं; same device हर mode या content load में same energy नहीं लेता।
 
 ## वास्तविक उपयोग की तुलना
 
-Already-warm state, page count, color mode, duplex, speed और idle window लिखें। Single-page wake-up में long job से अधिक warm-up allocation हो सकता है; per-page और per-job अलग decisions हैं। Change one condition at a time and state whether the denominator is a job, page, print, hour, or complete setup. To answer a full desk or room question, measure the computer, display, speakers, and network equipment separately and add them; do not present one device's number as a whole-room result.
+Already-warm state, page count, color mode, duplex, speed और idle window लिखें। Single-page wake-up में long job से अधिक warm-up allocation हो सकता है; per-page और per-job अलग decisions हैं। एक समय में एक condition बदलें और बताएं कि denominator job, page, print, hour या complete setup है। पूरे desk या room का उत्तर चाहिए तो computer, display, speakers और network equipment को अलग measure करके जोड़ें; एक device का number पूरे room का result न बताएं।
 
-Related reading: [Scanner electricity cost per scanning session used](/hi/guides/scanner-electricity-cost-per-scanning-session-used/), [3D printer electricity cost per print used](/hi/guides/3d-printer-electricity-cost-per-print-used/), [Gaming console electricity cost per gaming hour used](/hi/guides/gaming-console-electricity-cost-per-gaming-hour-used/), [Soundbar electricity cost per watched hour used](/hi/guides/soundbar-electricity-cost-per-watched-hour-used/). These pages cover printing, scanning, 3D printing, gaming, and audio with different unit-cost boundaries, helping readers choose a denominator that matches the question.
+Related reading: [Scanner electricity cost per scanning session used](/hi/guides/scanner-electricity-cost-per-scanning-session-used/), [3D printer electricity cost per print used](/hi/guides/3d-printer-electricity-cost-per-print-used/), [Gaming console electricity cost per gaming hour used](/hi/guides/gaming-console-electricity-cost-per-gaming-hour-used/), [Soundbar electricity cost per watched hour used](/hi/guides/soundbar-electricity-cost-per-watched-hour-used/). इन pages में printing, scanning, 3D printing, gaming और audio के अलग unit-cost boundaries हैं; इससे question के अनुसार denominator चुनने में मदद मिलती है।
 
 ## सीमाएँ और आम गलतियाँ
 
-Voltage, tariff design, room temperature, firmware, content load, resolution, brightness, volume, sleep settings, consumables, meter resolution, and fixed charges affect the result. For full ownership cost, list purchase price, supplies, maintenance, subscriptions, paper, materials, and time separately instead of hiding them in electricity. यह cost estimate है, savings, product performance, ranking या household result की guarantee नहीं।
+Voltage, tariff design, room temperature, firmware, content load, resolution, brightness, volume, sleep settings, consumables, meter resolution और fixed charges result बदलते हैं। Full ownership cost के लिए purchase price, supplies, maintenance, subscriptions, paper, materials और time को electricity में छिपाने के बजाय अलग list करें। यह cost estimate है, savings, product performance, ranking या household result की guarantee नहीं।
 
 ## अक्सर पूछा गया सवाल
 
@@ -42,6 +42,6 @@ Voltage, tariff design, room temperature, firmware, content load, resolution, br
 
 केवल stated endpoint तक। Print-only comparison में job के बाद रुकें; desk routine के लिए idle या sleep window अलग scenario में मापें。
 
-## Source reading
+## स्रोत पढ़ें
 
 Price context के लिए EIA की [delivered electricity price explanation](https://www.eia.gov/tools/faqs/faq.php?id=507) और [home electricity overview](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php) देखें। ENERGY STAR [imaging equipment](https://www.energystar.gov/products/imaging_equipment) और [computers](https://www.energystar.gov/products/computers) के operating modes और power management समझाता है; यह category/certification context है, इस exact device का claim नहीं। CFPB की [spending guidance](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) result को household decision के एक input की तरह रखने में मदद करती है।

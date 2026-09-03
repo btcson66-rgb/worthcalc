@@ -16,23 +16,23 @@ draft: false
 
 ## Datos que cambian el resultado
 
-Una bomba de piscina puede consumir distinto durante el cebado, la circulación lenta, la limpieza rápida y los cambios del temporizador. El denominador útil es una hora de filtración completada con un caudal o condición declarada, no solo el tiempo que el motor estuvo encendido. Record the device state, start and stop readings, measured kWh, delivered rate, and exact window. Define one completed unit before calculating, and list any shared outlet load rather than assuming it is zero.
+Una bomba de piscina puede consumir distinto durante el cebado, la circulación lenta, la limpieza rápida y los cambios del temporizador. El denominador útil es una hora de filtración completada con un caudal o condición declarada, no solo el tiempo que el motor estuvo encendido. Registra el estado del equipo, las lecturas inicial y final, los kWh medidos, la tarifa entregada y la ventana exacta. Define una unidad completada antes de calcular y anota cualquier carga compartida del enchufe en lugar de suponer que es cero.
 
 ## Fórmula y ejemplo medido
 
-Coste por hora de filtración completada = kWh medidos × tarifa entregada ÷ horas de filtración completadas. 0,9 kWh a 0,20 por kWh durante 3 horas lentas completadas da 0,06 por hora. Es un ejemplo medido ilustrativo, no un coste típico. Keep the raw readings, currency, date, and rate beside the result so another person can reproduce it. A rounded value without its measurement boundary is not an auditable household cost.
+Coste por hora de filtración completada = kWh medidos × tarifa entregada ÷ horas de filtración completadas. 0,9 kWh a 0,20 por kWh durante 3 horas lentas completadas da 0,06 por hora. Es un ejemplo medido ilustrativo, no un coste típico. Conserva las lecturas originales, la moneda, la fecha y la tarifa junto al resultado para que otra persona pueda reproducirlo. Un valor redondeado sin su límite de medición no es un coste doméstico auditable.
 
 ## Compara situaciones reales
 
-Mantén separados filtrado lento, limpieza rápida y cebado. Indica si el calentador, sal, limpiafondos, luces o bomba auxiliar comparte la frontera del medidor. No atribuyas toda la energía al motor sin documentarlo. guía relacionada de medición: [portable-air-conditioner-electricity-cost-per-cooling-session-used](/es/guides/portable-air-conditioner-electricity-cost-per-cooling-session-used/), [dehumidifier-electricity-cost-per-laundry-drying-session-used](/es/guides/dehumidifier-electricity-cost-per-laundry-drying-session-used/), [electric-fireplace-electricity-cost-per-heating-hour-used](/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/), [garage-door-opener-electricity-cost-per-cycle-used](/es/guides/garage-door-opener-electricity-cost-per-cycle-used/). Each related page has its own equipment, completed unit, and measurement window; a shared kWh formula does not make the answers interchangeable.
+Mantén separados filtrado lento, limpieza rápida y cebado. Indica si el calentador, sal, limpiafondos, luces o bomba auxiliar comparte la frontera del medidor. No atribuyas toda la energía al motor sin documentarlo. guía relacionada de medición: [portable-air-conditioner-electricity-cost-per-cooling-session-used](/es/guides/portable-air-conditioner-electricity-cost-per-cooling-session-used/), [dehumidifier-electricity-cost-per-laundry-drying-session-used](/es/guides/dehumidifier-electricity-cost-per-laundry-drying-session-used/), [electric-fireplace-electricity-cost-per-heating-hour-used](/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/), [garage-door-opener-electricity-cost-per-cycle-used](/es/guides/garage-door-opener-electricity-cost-per-cycle-used/). Cada página relacionada tiene su propio equipo, unidad completada y ventana de medición; una fórmula de kWh compartida no hace intercambiables las respuestas.
 
 ## Método de medición
 
-Registra nivel de agua, presión del filtro, velocidad, temporizador, cebado, kWh medidos, tarifa y lecturas inicial y final. Repite con presión normal; un filtro obstruido o una válvula distinta vuelve incomparables dos horas. If the load is estimated rather than measured, label the assumption and show how it changes the result. Repeat comparable windows, but do not erase a real operating difference just to make the numbers look tidy.
+Registra nivel de agua, presión del filtro, velocidad, temporizador, cebado, kWh medidos, tarifa y lecturas inicial y final. Repite con presión normal; un filtro obstruido o una válvula distinta vuelve incomparables dos horas. Si la carga se estima en vez de medirse, marca el supuesto y muestra cómo cambia el resultado. Repite ventanas comparables, pero no borres una diferencia real de funcionamiento solo para que los números parezcan ordenados.
 
 ## Límites y errores comunes
 
-La calidad de filtración, química del agua, mantenimiento y vida útil no quedan demostrados por una cifra menor. No anualices una prueba corta ni compares sistemas con cargas anexas distintas. Keep electricity separate from maintenance, water, consumables, repair, and any claimed outcome. At least three comparable readings can reveal variation, but repetition does not turn a small sample into a universal product claim.
+La calidad de filtración, química del agua, mantenimiento y vida útil no quedan demostrados por una cifra menor. No anualices una prueba corta ni compares sistemas con cargas anexas distintas. Separa la electricidad del mantenimiento, el agua, los consumibles, las reparaciones y cualquier resultado anunciado. Al menos tres lecturas comparables pueden mostrar variaciones, pero repetir no convierte una muestra pequeña en una afirmación universal del producto.
 
 ## Preguntas frecuentes
 

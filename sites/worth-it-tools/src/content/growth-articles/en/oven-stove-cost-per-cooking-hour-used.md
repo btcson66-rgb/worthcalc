@@ -36,7 +36,7 @@ ENERGY STAR notes that actual cooking energy varies with usage patterns and that
 
 ### Choose one repeatable rule. If preheating or an oven left on is caused by the meal, include it; disclose whether equipment allocation and labor time are excluded from the cash result.
 
-undefined
+For a fair hourly comparison, use one complete cooking window and divide its measured energy by the hours in that window. If the appliance cycles off, do not multiply nameplate capacity by every hour; allocate the measured kWh across the defined window.
 
 ## Source reading
 

@@ -25,13 +25,13 @@ cost = measured kWh × delivered rate. Warm-up, low/high setting, lid-off time, 
 
 ## Actual routines compare करें
 
-Warm-up, low/high setting, lid-off time, batch volume और cooking hours versus full preparation window अलग करें। 210 W cooker low पर 6 घंटे और 30-minute warm में 1.31 kWh measure करता है; $0.20/kWh पर routine करीब $0.262 है। Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Warm-up, low/high setting, lid-off time, batch volume और cooking hours versus full preparation window अलग करें। 210 W cooker low पर 6 घंटे और 30-minute warm में 1.31 kWh measure करता है; $0.20/kWh पर routine करीब $0.262 है। Measured batch को smaller load, longer setting और same result देने वाली अलग number of batches वाली routine से compare करें।
 
 [next kitchen routine](/hi/guides/toaster-cost-per-use-used/), [another cooking cycle guide](/hi/guides/blender-cost-per-blending-session-used/), [prep-session guide](/hi/guides/food-processor-cost-per-prep-session-used/) और [boiling guide](/hi/guides/air-fryer-cost-per-cooking-cycle-used/) से तुलना आगे बढ़ाएं।
 
 ## Limits और common mistakes
 
-Warm-up, low/high setting, lid-off time, batch volume और cooking hours versus full preparation window अलग करें। Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Warm-up, low/high setting, lid-off time, batch volume और cooking hours versus full preparation window अलग करें। Actual energy voltage, thermostat cycling, load, pauses, standby, water या ingredients और bill tariff से बदलती है। Ingredients, water, labour, equipment depreciation और cleanup अलग रखें; estimate को product efficiency या health guarantee न बनाएं।
 
 ## अक्सर पूछे जाने वाले प्रश्न
 

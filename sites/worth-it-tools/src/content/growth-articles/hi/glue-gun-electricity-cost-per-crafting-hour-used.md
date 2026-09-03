@@ -24,7 +24,7 @@ Gun wattage, warm-up minutes, trigger activity, thermostat cycles, idle time, me
 
 ## Real operating cases compare करें
 
-Short intermittent craft, continuous assembly और pieces के बीच plugged-in gun compare करें। Denominator में planning और cooling time है या नहीं बताएं। Related measured-device guides:[Electric toothbrush electricity cost per charging day](/hi/guides/electric-toothbrush-electricity-cost-per-charging-day-used/)、[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Electric hand mixer electricity cost per mixing session](/hi/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
+Short intermittent craft, continuous assembly और pieces के बीच plugged-in gun compare करें। Denominator में planning और cooling time है या नहीं बताएं। मापे गए उपकरणों की संबंधित गाइड:[Electric toothbrush electricity cost per charging day](/hi/guides/electric-toothbrush-electricity-cost-per-charging-day-used/)、[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Electric hand mixer electricity cost per mixing session](/hi/guides/electric-hand-mixer-electricity-cost-per-mixing-session-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
 
 ## Limits और common mistakes
 
@@ -36,6 +36,6 @@ Gun size, glue temperature, thermostat, room temperature, cord loss, idle habit 
 
 Electricity-only cost में नहीं। Glue sticks को separate consumable रखें और total crafting cost पूछे जाने पर जोड़ें।
 
-## Source reading
+## स्रोत पढ़ें
 
 [EIA delivered electricity price FAQ](https://www.eia.gov/tools/faqs/faq.php?id=507)、[EIA household electricity use](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php)、[ENERGY STAR product list](https://www.energystar.gov/products/products-list)、[CFPB spending guide](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) EIA delivered price और household use context देता है; ENERGY STAR product categories और efficiency context देता है; CFPB recurring costs को budget में रखता है। कोई source आपकी tariff या measured reading की जगह नहीं लेता।

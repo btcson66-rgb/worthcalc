@@ -36,7 +36,7 @@ ENERGY STAR says heating and cooling represent a major home energy use and that 
 
 ### No. Use a consistent measured or modeled energy input. Ratings compare equipment under defined conditions; weather, load, controls, ducts, maintenance, and tariffs determine your home result.
 
-undefined
+For a fair hourly comparison, use one complete operating window and divide its measured energy by the hours in that window. If the system cycles off, do not multiply nameplate capacity by every hour; allocate the measured kWh across the defined window.
 
 ## Source reading
 

@@ -25,13 +25,13 @@ coste = kWh medidos × tarifa entregada. Mide precalentamiento, resistencia, ven
 
 ## Compara rutinas reales
 
-Mide precalentamiento, resistencia, ventilador, tamaño de la cesta y si una receta cabe en una tanda o exige dos. Una freidora de 1,35 kW con 4 minutos de precalentamiento y 18 de cocción usa 0,49 kWh; a 0,20 son 0,098 por tanda, sin ingredientes. Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+Mide precalentamiento, resistencia, ventilador, tamaño de la cesta y si una receta cabe en una tanda o exige dos. Una freidora de 1,35 kW con 4 minutos de precalentamiento y 18 de cocción usa 0,49 kWh; a 0,20 son 0,098 por tanda, sin ingredientes. Compara el lote medido con una carga menor, un ajuste más largo y una rutina que logre el mismo resultado con otro número de lotes.
 
 Sigue con la [siguiente rutina de cocina](/es/guides/rice-cooker-cost-per-cooking-cycle-used/), [otra guía de ciclos](/es/guides/slow-cooker-cost-per-cooking-hour-used/), [la guía de preparación](/es/guides/toaster-cost-per-use-used/) y [la guía de hervor](/es/guides/blender-cost-per-blending-session-used/).
 
 ## Límites y errores comunes
 
-Mide precalentamiento, resistencia, ventilador, tamaño de la cesta y si una receta cabe en una tanda o exige dos. Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+Mide precalentamiento, resistencia, ventilador, tamaño de la cesta y si una receta cabe en una tanda o exige dos. La energía real cambia con el voltaje, los ciclos del termostato, la carga, las pausas, la espera, el agua o los ingredientes y la tarifa de la factura. Separa ingredientes, agua, mano de obra, depreciación del equipo y limpieza; no conviertas una estimación en una garantía de eficiencia o salud.
 
 ## Preguntas frecuentes
 

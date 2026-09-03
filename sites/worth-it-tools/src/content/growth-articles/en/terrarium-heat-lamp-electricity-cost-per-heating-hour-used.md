@@ -32,7 +32,7 @@ For a repeatable reading, use the same outlet boundary and rate, record the oper
 
 ## Limits and common mistakes
 
-[object Object] Keep equipment electricity separate from consumables, maintenance, water, materials, and any claimed outcome. A lower electricity cost is not proof of a better product or decision. Do not convert a rated wattage into a personal bill without accounting for run time, control cycles, standby, and your delivered rate. At least three repeatable readings can expose start-up or thermostat variation, but repetition does not turn a small sample into a universal product claim.
+Keep equipment electricity separate from consumables, maintenance, water, materials, and any claimed outcome. A lower electricity cost is not proof of a better product or decision. Do not convert a rated wattage into a personal bill without accounting for run time, control cycles, standby, and your delivered rate. At least three repeatable readings can expose start-up or thermostat variation, but repetition does not turn a small sample into a universal product claim.
 
 ## Frequently asked questions
 

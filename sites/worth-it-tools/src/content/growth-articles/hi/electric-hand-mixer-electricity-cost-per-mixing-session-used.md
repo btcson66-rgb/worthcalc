@@ -24,7 +24,7 @@ Beaters, speed, motor minutes, pauses, plugged-in time, measured kWh, tariff औ
 
 ## Real operating cases compare करें
 
-Low-speed batter, high-speed cream और stop-start recipe compare करें। Completed batches denominator तभी रखें जब measured work हर batch को मिला हो। Related measured-device guides:[Electric toothbrush electricity cost per charging day](/hi/guides/electric-toothbrush-electricity-cost-per-charging-day-used/)、[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Glue gun electricity cost per crafting hour](/hi/guides/glue-gun-electricity-cost-per-crafting-hour-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
+Low-speed batter, high-speed cream और stop-start recipe compare करें। Completed batches denominator तभी रखें जब measured work हर batch को मिला हो। मापे गए उपकरणों की संबंधित गाइड:[Electric toothbrush electricity cost per charging day](/hi/guides/electric-toothbrush-electricity-cost-per-charging-day-used/)、[Electric shaver electricity cost per grooming session](/hi/guides/electric-shaver-electricity-cost-per-grooming-session-used/)、[Sewing machine electricity cost per sewing hour](/hi/guides/sewing-machine-electricity-cost-per-sewing-hour-used/)、[Soldering iron electricity cost per repair hour](/hi/guides/soldering-iron-electricity-cost-per-repair-hour-used/)、[Glue gun electricity cost per crafting hour](/hi/guides/glue-gun-electricity-cost-per-crafting-hour-used/) हर page को अपने device, completed unit और measurement window के अनुसार पढ़ें; समान kWh से results interchangeable नहीं हो जाते।
 
 ## Limits और common mistakes
 
@@ -36,6 +36,6 @@ Mixture thickness, speed, beater load, motor temperature, pauses, voltage और
 
 हाँ, यदि दोनों को comparable measured work मिले। Allocation rule लिखें और ingredients तथा washing अलग रखें।
 
-## Source reading
+## स्रोत पढ़ें
 
 [EIA delivered electricity price FAQ](https://www.eia.gov/tools/faqs/faq.php?id=507)、[EIA household electricity use](https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php)、[ENERGY STAR product list](https://www.energystar.gov/products/products-list)、[CFPB spending guide](https://www.consumerfinance.gov/owning-a-home/prepare/figure-out-how-much-you-want-to-spend/) EIA delivered price और household use context देता है; ENERGY STAR product categories और efficiency context देता है; CFPB recurring costs को budget में रखता है। कोई source आपकी tariff या measured reading की जगह नहीं लेता।

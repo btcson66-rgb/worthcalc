@@ -12,7 +12,7 @@ draft: false
 
 # تكلفة مروحة المكتب لكل ساعة تبريد: أدرج السرعة والتذبذب
 
-> **الخلاصة:** قدّر تكلفة مروحة المكتب لكل ساعة تبريد من طاقة السرعة والتذبذب والمؤقت والاستعداد المقاسة، مع فصل التكييف وافتراضات الراحة. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **الخلاصة:** قدّر تكلفة مروحة المكتب لكل ساعة تبريد من طاقة السرعة والتذبذب والمؤقت والاستعداد المقاسة، مع فصل التكييف وافتراضات الراحة. هذا تقدير للتكلفة، وليس ضماناً للتوفير أو الأداء أو الترتيب أو.
 
 ## ما الذي يغيّر النتيجة
 
@@ -22,15 +22,15 @@ draft: false
 
 تكلفة الكهرباء = kWh المقاسة من الحائط × تعرفة الكهرباء المسلّمة. تكلفة الوحدة = تكلفة الكهرباء ÷ الوحدات المكتملة. أبقِ الرسوم والضرائب والمواد والصيانة والاشتراكات والأجهزة الأخرى خارج البسط ما لم يشملها الحد بوضوح. عند 0.028 kWh لكل ساعة تشغيل وسعر 0.18 تكون تكلفة المروحة 0.00504 للساعة. ليست تكلفة تبريد الغرفة كلها أو استبدال التكييف.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+لا تضرب القدرة الاسمية في كامل الزمن المنقضي إلا إذا أكد العداد ذلك الحمل. قِس الحواسيب والشاشات والشبكات والشواحن والملحقات الأخرى منفصلة قبل جمعها.
 
 ## قارن حالات الاستخدام
 
-هل يغير التذبذب النتيجة؟ قِسه كحالة منفصلة؛ نتيجة الكهرباء لا تضمن مقدار انخفاض الحرارة. Related guides: [تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة](/ar/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [تكلفة كهرباء جهاز العرض لكل ساعة تقديم: أدرج التسخين والتبريد](/ar/guides/projector-electricity-cost-per-presentation-hour-used/), [تكلفة قارئ الكتب الإلكتروني لكل ساعة قراءة: احسب طاقة الشحن](/ar/guides/e-reader-electricity-cost-per-reading-hour-used/), and [تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة](/ar/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+هل يغير التذبذب النتيجة؟ قِسه كحالة منفصلة؛ نتيجة الكهرباء لا تضمن مقدار انخفاض الحرارة. Related guides: [تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة](/ar/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [تكلفة كهرباء جهاز العرض لكل ساعة تقديم: أدرج التسخين والتبريد](/ar/guides/projector-electricity-cost-per-presentation-hour-used/), [تكلفة قارئ الكتب الإلكتروني لكل ساعة قراءة: احسب طاقة الشحن](/ar/guides/e-reader-electricity-cost-per-reading-hour-used/), and [تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة](/ar/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/). تجيب كل صفحة عن سؤال مختلف لتكلفة الوحدة؛ لذلك اختر المقام والحد قبل المقارنة.
 
 ## الحدود والأخطاء الشائعة
 
-قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل النتيجة. نفّذ ثلاث اختبارات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. For comparison, keep the tariff date and measurement boundary fixed.
+قد يغيّر الجهد والتعرفة والبرمجيات والظروف والوضع والحمل ودقة العداد ونافذة الاستعداد والعمل الفاشل. نفّذ ثلاث اختبارات قابلة للتكرار على الأقل وغيّر شرطاً واحداً كل مرة. For comparison, keep the tariff date and measurement boundary fixed.
 
 ## الأسئلة الشائعة
 

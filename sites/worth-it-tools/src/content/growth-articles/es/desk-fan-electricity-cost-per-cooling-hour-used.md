@@ -12,7 +12,7 @@ draft: false
 
 # Coste eléctrico de un ventilador de mesa por hora de uso: incluye velocidad y oscilación
 
-> **Quick answer:** Estima el coste eléctrico de un ventilador de mesa por hora con energía medida según velocidad, oscilación, temporizador y espera, separando el aire acondicionado. This is a cost estimate, not a savings, performance, ranking, or outcome guarantee.
+> **Respuesta rápida:** Estima el coste eléctrico de un ventilador de mesa por hora con energía medida según velocidad, oscilación, temporizador y espera, separando el aire acondicionado. Es una estimación de coste, no una garantía de ahorro, rendimiento, posición ni resultados.
 
 ## Qué cambia el resultado
 
@@ -22,11 +22,11 @@ El ventilador mueve aire, pero no equivale a una reducción medida de temperatur
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y otros equipos fuera del numerador salvo que el límite los incluya. Con 0,028 kWh por hora y 0,18 por kWh, el coste es 0,00504 por hora. No es el coste de enfriar toda una habitación.
 
-Do not multiply rated wattage by the full elapsed time unless the meter confirms that load. Measure computers, displays, networks, chargers, and other accessories separately before combining them.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor confirme esa carga. Mide por separado ordenadores, pantallas, redes, cargadores y otros accesorios antes de sumarlos.
 
 ## Compara usos reales
 
-¿Cambia la oscilación el resultado? Mídela como condición aparte y no la presentes como garantía térmica. Related guides: [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), and [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/). Each answers a different unit-cost question, so select the denominator and boundary before comparing.
+¿Cambia la oscilación el resultado? Mídela como condición aparte y no la presentes como garantía térmica. Related guides: [Coste eléctrico de un masajeador de pies por sesión: separa espera y calor](/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/), [Coste eléctrico de un proyector por hora de presentación: incluye calentamiento y enfriamiento](/es/guides/projector-electricity-cost-per-presentation-hour-used/), [Coste eléctrico de un lector electrónico por hora de lectura: cuenta la carga](/es/guides/e-reader-electricity-cost-per-reading-hour-used/), and [Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos](/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/). Cada página responde a una pregunta distinta sobre el coste unitario; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 

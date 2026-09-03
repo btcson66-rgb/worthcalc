@@ -25,13 +25,13 @@ draft: false
 
 ## 比較實際使用流程
 
-記錄煮飯、轉保溫、保溫分鐘、米量、洗米用水，以及是否反覆開蓋，因為每次流程的分母不只是一鍋。 電子鍋煮 0.6 kg 米耗 0.16 kWh，再保溫兩小時耗 0.06 kWh，共 0.22 kWh；每 kWh 0.20 時約 0.044。 Compare the measured batch with a smaller load, a longer setting, and a routine that uses the same result but a different number of batches.
+記錄煮飯、轉保溫、保溫分鐘、米量、洗米用水，以及是否反覆開蓋，因為每次流程的分母不只是一鍋。 電子鍋煮 0.6 kg 米耗 0.16 kWh，再保溫兩小時耗 0.06 kWh，共 0.22 kWh；每 kWh 0.20 時約 0.044。 比較實測批次與較小負載、較長設定，以及產出相同但批次數不同的流程。
 
 可延伸閱讀[下一個廚房流程](/zh/guides/slow-cooker-cost-per-cooking-hour-used/)、[另一個烹調循環指南](/zh/guides/toaster-cost-per-use-used/)、[備料流程指南](/zh/guides/blender-cost-per-blending-session-used/)與[煮沸指南](/zh/guides/food-processor-cost-per-prep-session-used/)。
 
 ## 限制與常見誤區
 
-記錄煮飯、轉保溫、保溫分鐘、米量、洗米用水，以及是否反覆開蓋，因為每次流程的分母不只是一鍋。 Actual energy changes with voltage, thermostat cycling, load, pauses, standby, water or ingredients, and the tariff on the bill. Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
+記錄煮飯、轉保溫、保溫分鐘、米量、洗米用水，以及是否反覆開蓋，因為每次流程的分母不只是一鍋。 實際能耗會隨電壓、恆溫循環、負載、暫停、待機、水或食材，以及帳單費率而改變。 Keep ingredients, water, labour, equipment depreciation, and cleanup separate; do not turn an estimate into a product-efficiency or health guarantee.
 
 ## 常見問題
 

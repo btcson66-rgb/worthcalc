@@ -27,11 +27,11 @@ A benefit is not worth its brochure price to you. The useful question is what yo
 
 This is not a generic calculator page with a prettier form. The purpose is to isolate the uncertainty that broad calculators usually hide. Start with **verified cash**, move to **conditional scenarios**, then keep **non-cash preferences** visible without pretending they are guaranteed dollars. The result should show a range and a reversal condition, not a fake-precise recommendation.
 
-## Why this modifier keyword deserves its own page
+## Value only benefits you would replace
 
-Generic total-compensation calculators often include a single “benefits value” field. That is precisely where overstatement enters. WorthCalc targets a narrower keyword: benefits replacement cost vs salary. The user should not value a perk by what it costs the employer, nor by the retail price printed on a portal. Use the cheapest realistic alternative the worker would actually purchase. Then check eligibility, vesting, waiting periods and caps. Some benefits also have special tax treatment. In the United States, IRS Publication 15-B explains that fringe benefits do not all receive identical employment-tax treatment. The page should not calculate personal tax liability, but it should prevent readers from assuming that every $1 of benefit equals $1 of take-home salary.
+Do not value a benefit by the employer's cost or by a catalogue price. Ask what you would actually pay for a comparable replacement, then check eligibility, vesting, waiting periods, annual caps and tax treatment. In the United States, IRS Publication 15-B explains that fringe benefits do not all receive identical employment-tax treatment; this guide is not a personal tax calculation.
 
-That positioning matters for SEO as well as usefulness. Mature calculator sites already cover the obvious head terms. WorthCalc should win by answering the follow-up question a user asks after the generic calculator: “what did that simple model leave out, and can that missing variable reverse my decision?” The page therefore needs a method that is visibly different in the search snippet, the direct answer, the formulas and the examples.
+Separate guaranteed cash, replaceable benefits and preferences that have no reliable dollar value. That keeps the job-offer comparison useful without treating every advertised perk as take-home pay.
 
 ## Input worksheet
 
@@ -164,4 +164,4 @@ Use four columns: **estimated, actual, variance, explanation**. If realized usag
 
 ## Final interpretation
 
-A benefit is not worth its brochure price to you. The useful question is what you would actually pay to replace it if the employer stopped providing it. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. A user who understands those three items can decide whether the choice is robust, reversible or dependent on an optimistic assumption. That is the point of this page and the keyword differentiation strategy behind WorthCalc 009.
+A benefit is not worth its brochure price to you. The useful question is what you would actually pay to replace it if the employer stopped providing it. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. These outputs make it clear which part of the comparison depends on a real replacement quote and which part is only a preference.

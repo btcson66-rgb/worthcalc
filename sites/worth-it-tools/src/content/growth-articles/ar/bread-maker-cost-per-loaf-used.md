@@ -16,25 +16,25 @@ draft: false
 
 ## المدخلات التي تغيّر النتيجة
 
-The useful denominator is one رغيف, but the electricity boundary must be chosen first. For this آلة صنع الخبز, record العجن والتخمير والخبز وأي مرحلة للحفاظ على الحرارة from a defined start point to a defined end point. Keep the starting temperature, load, mode, number of finished units, and any warm-hold or idle time in the same note. A recipe duration or package instruction is not a wall-meter reading.
+المقام العملي هو رغيف, لكن يجب تحديد حدود الكهرباء أولاً. بالنسبة إلى آلة صنع الخبز, سجّل العجن والتخمير والخبز وأي مرحلة للحفاظ على الحرارة من نقطة بداية محددة إلى نقطة نهاية محددة. احتفظ في الملاحظة نفسها بدرجة البداية والحمل والوضع وعدد الوحدات المكتملة وأي وقت للحفظ الدافئ أو الخمول. مدة الوصفة أو تعليمات العبوة ليست قراءة من عداد الحائط.
 
-ابدأ باختبار قابل للتكرار باستخدام عداد عند المقبس. سجّل حالة الجهاز قبل البدء ونقطة النهاية الدقيقة ووحدة السعر والنتيجة المفيدة. تصف القدرة الاسمية حملاً ممكناً، ولا تثبت أن السخان أو المحرك يستهلكها طوال الاستخدام. Also save the tariff source and date. A delivered bill rate may include generation, transmission, distribution, taxes, fees, or fixed charges; for an appliance comparison, state whether you used a marginal kWh rate or allocated a fixed charge.
+ابدأ باختبار قابل للتكرار باستخدام عداد عند المقبس. سجّل حالة الجهاز قبل البدء ونقطة النهاية الدقيقة ووحدة السعر والنتيجة المفيدة. تصف القدرة الاسمية حملاً ممكناً، ولا تثبت أن السخان أو المحرك يستهلكها طوال الاستخدام. واحفظ مصدر التعرفة وتاريخها أيضاً. قد تشمل تعرفة الفاتورة التوليد والنقل والتوزيع والضرائب والرسوم أو الرسوم الثابتة؛ وعند مقارنة الأجهزة اذكر هل استخدمت تعرفة هامشية لكل kWh أم وزعت رسماً ثابتاً.
 
 ## المعادلة ومثال محسوب
 
-Cost per cycle or session = measured wall kWh from the stated start to the stated end × delivered electricity rate. Cost per رغيف = that electricity cost ÷ the number of finished رغيفs. إذا استهلكت الدورة المقاسة 0.42 kWh وكان السعر 0.18 دولار لكل kWh، فتكلفة الكهرباء 0.0756 دولار. عند تقسيم الرغيف إلى ثماني حصص تكون الحصة الكهربائية نحو 0.00945 دولار؛ الدقيق والخميرة والدفعات الفاشلة منفصلة. This is an illustration of the allocation method, not a prediction for a particular model or household tariff.
+تكلفة الدورة أو الجلسة = kWh المقاسة من الحائط بين البداية والنهاية المعلنتين × تعرفة الكهرباء المسلّمة. تكلفة رغيف = تكلفة الكهرباء ÷ عدد رغيفs. إذا استهلكت الدورة المقاسة 0.42 kWh وكان السعر 0.18 دولار لكل kWh، فتكلفة الكهرباء 0.0756 دولار. عند تقسيم الرغيف إلى ثماني حصص تكون الحصة الكهربائية نحو 0.00945 دولار؛ الدقيق والخميرة والدفعات الفاشلة منفصلة. هذا مثال على طريقة التوزيع، وليس توقعاً لطراز أو تعرفة منزلية محددة.
 
-Do not multiply the maximum rated watts by the whole recipe or waiting time unless a meter confirms that the device draws that load continuously. Thermostat cycling, motor load, adapter losses, automatic shutoff, and a partly filled tray can all change the measured result.
+لا تضرب القدرة الاسمية القصوى في كامل وقت الوصفة أو الانتظار إلا إذا أكد العداد أن الجهاز يسحب هذا الحمل باستمرار. قد تغيّر دورات منظم الحرارة وحمل المحرك وفواقد المحول والإيقاف التلقائي والصينية غير الممتلئة النتيجة المقاسة.
 
 ## قارن الاستخدام الفعلي
 
-قارن بين دورة العجين فقط ودورة الخَبز الكاملة، وبين رغيف صغير وكبير، وبين ترك الرغيف دافئاً بعد الخَبز. المقارنة تصف الاستخدام الفعلي لا قدرة الملصق وحدها. Repeat each normal setup at least three times when the load is small, then divide the combined kWh by the number of runs. If the finished output changes, show both the per-رغيف and per-run denominators. Change one condition at a time and write it down; otherwise a lower number can simply reflect a smaller load, not a different appliance.
+قارن بين دورة العجين فقط ودورة الخَبز الكاملة، وبين رغيف صغير وكبير، وبين ترك الرغيف دافئاً بعد الخَبز. المقارنة تصف الاستخدام الفعلي لا قدرة الملصق وحدها. عندما يكون الحمل صغيراً، كرر كل إعداد عادي ثلاث مرات على الأقل ثم اقسم kWh المجمعة على عدد مرات التشغيل. إذا تغيّر الناتج النهائي، اعرض كلاً من تكلفة كل رغيف ومقام كل تشغيل. غيّر شرطاً واحداً في كل مرة وسجّله؛ وإلا فقد يعكس الرقم الأقل حملاً أصغر لا جهازاً مختلفاً.
 
-Related reading: [تكلفة مجفف الطعام لكل ساعة تجفيف](/ar/guides/food-dehydrator-cost-per-drying-hour-used/), [تكلفة صانعة الزبادي الكهربائية لكل دفعة](/ar/guides/electric-yogurt-maker-cost-per-batch-used/), [تكلفة جهاز طهي البيض لكل دورة](/ar/guides/electric-egg-cooker-cost-per-cooking-cycle-used/), [تكلفة علبة الطعام الكهربائية لكل دورة تسخين](/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/). Each link uses a different usage denominator, which helps keep “per use,” “per hour,” “per batch,” and “per serving” calculations from being mixed together.
+قراءة مرتبطة: [تكلفة مجفف الطعام لكل ساعة تجفيف](/ar/guides/food-dehydrator-cost-per-drying-hour-used/), [تكلفة صانعة الزبادي الكهربائية لكل دفعة](/ar/guides/electric-yogurt-maker-cost-per-batch-used/), [تكلفة جهاز طهي البيض لكل دورة](/ar/guides/electric-egg-cooker-cost-per-cooking-cycle-used/), [تكلفة علبة الطعام الكهربائية لكل دورة تسخين](/ar/guides/electric-lunch-box-cost-per-heating-cycle-used/). يستخدم كل رابط مقام استخدام مختلفاً، مما يساعد على عدم خلط حسابات كل استخدام وكل ساعة وكل دفعة وكل حصة.
 
 ## الحدود والأخطاء الشائعة
 
-Results vary with voltage, tariff design, room temperature, moisture, container, cleanliness, control settings, wear, and the meter's resolution. Very short motor runs may not register reliably; a grouped test is more defensible than a single tiny display change. If the question is full ownership cost, list purchase price, ingredients, consumables, refrigeration, maintenance, and time separately instead of hiding them in electricity. اذكر بوضوح حدود الكهرباء المحتسبة. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
+تختلف النتائج مع الجهد وتصميم التعرفة وحرارة الغرفة والرطوبة والحاوية والنظافة وإعدادات التحكم والتآكل ودقة العداد. قد لا تسجل فترات تشغيل المحرك القصيرة جداً بثبات؛ والاختبار المجمع أكثر قابلية للدفاع من تغير صغير في شاشة واحدة. إذا كان السؤال عن التكلفة الكاملة للملكية، فاذكر سعر الشراء والمكونات والمستهلكات والتبريد والصيانة والوقت منفصلة بدلاً من إخفائها في الكهرباء. اذكر بوضوح حدود الكهرباء المحتسبة. هذا تقدير تكلفة وليس ضماناً للتوفير أو أداء المنتج أو جودة الطعام أو الصحة أو السلامة.
 
 ## سؤال شائع
 

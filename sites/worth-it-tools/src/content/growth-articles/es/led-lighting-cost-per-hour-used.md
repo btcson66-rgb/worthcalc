@@ -36,7 +36,7 @@ La vida nominal no garantiza tu factura ni la fecha exacta de recambio. Usa la b
 
 ### Para un cálculo breve separa energía. Para comparar a largo plazo asigna compra y reemplazos a horas observadas o justificadas y explica el supuesto.
 
-undefined
+Para comparar por hora, mide una ventana completa de uso y divide la energía medida entre sus horas. Si el equipo se regula o se apaga, no multipliques la potencia nominal por todo el periodo: usa los kWh realmente medidos.
 
 ## Fuentes para consultar
 

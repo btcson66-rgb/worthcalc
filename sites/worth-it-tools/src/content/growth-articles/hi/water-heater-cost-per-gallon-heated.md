@@ -36,7 +36,7 @@ ENERGY STAR UEF और defined tests use करता है। Criteria आप�
 
 ### Energy per gallon घट सकती है, लेकिन standby, volume, tariff, installation, maintenance और equipment cost भी result तय करते हैं।
 
-undefined
+Fair comparison के लिए पूरा heating window मापें और energy को तय temperature तक पहुँचे gallons से divide करें। Rated power को लगातार चलने वाला न मानें; inlet temperature, standby loss और cycling भी परिणाम बदलते हैं।
 
 ## स्रोत पढ़ें
 

@@ -36,7 +36,7 @@ ENERGY STAR बताता है heating/cooling बड़ा home-energy use 
 
 ### नहीं। Measured या consistent modeled input लें। Weather, load, controls, ducts, maintenance और tariff actual result तय करते हैं।
 
-undefined
+Fair hourly comparison के लिए एक पूरा operating window मापें और measured energy को उस window के घंटों से divide करें। System cycle होकर बंद होता है तो nameplate capacity को हर घंटे से गुणा न करें; defined window में measured kWh allocate करें।
 
 ## स्रोत पढ़ें
 

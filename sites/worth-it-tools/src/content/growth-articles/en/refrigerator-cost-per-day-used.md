@@ -36,7 +36,7 @@ ENERGY STAR criteria compare measured energy against standards and product pages
 
 ### Not by itself. Use the same rate basis and include purchase allocation, service, fixed charges, and the useful days of the appliance. A smaller or better-rated appliance can still have a different household cost if your usage pattern changes.
 
-undefined
+For a fair daily comparison, measure a complete 24-hour window and record the refrigerator's cycling behavior. Do not multiply the nameplate rating by a full day unless the compressor actually runs continuously; use the measured kWh instead.
 
 ## Source reading
 

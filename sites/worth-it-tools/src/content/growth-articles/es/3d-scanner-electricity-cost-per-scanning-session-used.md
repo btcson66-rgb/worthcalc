@@ -12,11 +12,11 @@ draft: false
 
 # Coste eléctrico de un escáner 3D por sesión: separa el ordenador
 
-> **Quick answer:** Calcula el coste eléctrico de un escáner 3D por sesión con energía medida del escáner, ordenador, calibración y espera, separando procesamiento y software. This is a cost estimate, not a savings, product-performance, ranking, or household-outcome guarantee.
+> **Respuesta rápida:** Calcula el coste eléctrico de un escáner 3D por sesión con energía medida del escáner, ordenador, calibración y espera, separando procesamiento y software. Es una estimación de coste, no una garantía de ahorro, rendimiento del producto, posición ni resultados domésticos.
 
 ## Qué cambia el resultado
 
-escáner 3D cost per sesión de escaneo starts with a declared wall-meter boundary. Define el inicio y el final con una lectura del medidor de pared. Registra estado, carga, accesorios conectados, unidad terminada, tarifa y fecha. La potencia nominal sirve para planear, pero no sustituye una medición repetible.
+escáner 3D cost per sesión de escaneo empieza con un límite declarado del medidor de pared. Define el inicio y el final con una lectura del medidor de pared. Registra estado, carga, accesorios conectados, unidad terminada, tarifa y fecha. La potencia nominal sirve para planear, pero no sustituye una medición repetible.
 
 Una sesión puede incluir calibración, pasadas repetidas, vista previa, procesamiento y pantalla. Declara si mides solo el escáner o toda la estación.
 
@@ -24,23 +24,23 @@ Una sesión puede incluir calibración, pasadas repetidas, vista previa, procesa
 
 Coste eléctrico = kWh medidos en la pared × tarifa eléctrica entregada. Coste unitario = coste eléctrico ÷ unidades terminadas. Mantén cuotas fijas, impuestos, consumibles, reparaciones, suscripciones y carga del ordenador o red fuera del numerador salvo que el límite declarado los incluya. Si el escáner y la estación usan 0,24 kWh a 0,18, la sesión cuesta 0,0432. Si el ordenador separado usa 0,11 kWh, muestra ambos totales.
 
-Do not multiply a rated wattage by the whole elapsed period unless the wall meter confirms that load. If a computer, display, network device, charger, or accessory is present, measure it separately before combining boundaries.
+No multipliques la potencia nominal por todo el tiempo transcurrido salvo que el medidor de pared confirme esa carga. Si hay ordenador, pantalla, dispositivo de red, cargador o accesorio, mídelo por separado antes de combinar los límites.
 
 ## Compara usos reales
 
 Compara un objeto, una sesión con mucha calibración y una captura larga con procesamiento. Registra calidad, luz, plataforma, pantalla y flujo de software.
 
-Guías relacionadas: [Coste eléctrico de un escritorio elevable por día: incluye motor y espera](/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/), [Coste eléctrico de un altavoz inteligente por hora: separa escucha y espera](/es/guides/smart-speaker-electricity-cost-per-listening-hour-used/), [Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera](/es/guides/label-maker-electricity-cost-per-labeling-session-used/), and [Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor](/es/guides/paper-shredder-electricity-cost-per-shredding-session-used/). They answer different unit-cost questions, so choose the denominator and boundary before comparing.
+Guías relacionadas: [Coste eléctrico de un escritorio elevable por día: incluye motor y espera](/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/), [Coste eléctrico de un altavoz inteligente por hora: separa escucha y espera](/es/guides/smart-speaker-electricity-cost-per-listening-hour-used/), [Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera](/es/guides/label-maker-electricity-cost-per-labeling-session-used/), and [Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor](/es/guides/paper-shredder-electricity-cost-per-shredding-session-used/). Responden a preguntas de coste unitario distintas; elige el denominador y el límite antes de comparar.
 
 ## Límites y errores comunes
 
-El voltaje, la tarifa, el firmware, las condiciones, el modo, la carga, la resolución del medidor, la espera y los fallos cambian el resultado. Haz al menos tres sesiones repetibles y cambia una condición por vez. The estimate is not a promise of savings, performance, or household results.
+El voltaje, la tarifa, el firmware, las condiciones, el modo, la carga, la resolución del medidor, la espera y los fallos cambian el resultado. Haz al menos tres sesiones repetibles y cambia una condición por vez. La estimación no promete ahorro, rendimiento ni resultados domésticos.
 
 ## Preguntas frecuentes
 
 ### ¿Puedo usar la potencia nominal? Sirve para planificar, no para cerrar el resultado; mide el límite declarado con un medidor de pared.
 
-¿Puedo usar la potencia nominal? Sirve para planificar, no para cerrar el resultado; mide el límite declarado con un medidor de pared. For comparison, keep the same measurement boundary and tariff date.
+¿Puedo usar la potencia nominal? Sirve para planificar, no para cerrar el resultado; mide el límite declarado con un medidor de pared. Para comparar, mantén el mismo límite de medición y la misma fecha de tarifa.
 
 ## Fuentes
 

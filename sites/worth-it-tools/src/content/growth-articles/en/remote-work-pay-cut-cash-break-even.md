@@ -27,11 +27,11 @@ Do not start with “remote work is worth 10%.” Start with the expenses that a
 
 This is not a generic calculator page with a prettier form. The purpose is to isolate the uncertainty that broad calculators usually hide. Start with **verified cash**, move to **conditional scenarios**, then keep **non-cash preferences** visible without pretending they are guaranteed dollars. The result should show a range and a reversal condition, not a fake-precise recommendation.
 
-## Why this modifier keyword deserves its own page
+## Separate cash savings from time and housing effects
 
-Search results are crowded with generic job-offer comparators and calculators that subtract commute cost from salary. WorthCalc can differentiate by targeting pay-cut break-even and by separating cash, time and lifestyle. Housing is especially easy to misuse: a remote worker should not assign the entire rent payment to work. Only incremental rent paid specifically to obtain a home office belongs in the cash comparison. Childcare is another common error. Working from home does not automatically eliminate care needs. If the worker still needs uninterrupted care during working hours, that cost remains. The model therefore tags each line as certain, conditional or non-cash. Hybrid work should be run at one, three and five office days rather than forcing the user into fully remote versus fully in-office extremes.
+Subtract only costs that actually change: commuting, parking, tolls, meals, clothing, childcare windows and equipment. Do not assign the entire rent payment to work; count only incremental housing cost that exists to create the work arrangement. Working from home also does not automatically remove care needs. Tag each line as certain, conditional or non-cash, and run hybrid schedules separately.
 
-That positioning matters for SEO as well as usefulness. Mature calculator sites already cover the obvious head terms. WorthCalc should win by answering the follow-up question a user asks after the generic calculator: “what did that simple model leave out, and can that missing variable reverse my decision?” The page therefore needs a method that is visibly different in the search snippet, the direct answer, the formulas and the examples.
+Compare one, three and five office days when the schedule is flexible. This keeps recovered time visible without converting every personal hour into fictional income.
 
 ## Input worksheet
 
@@ -165,4 +165,4 @@ Use four columns: **estimated, actual, variance, explanation**. If realized usag
 
 ## Final interpretation
 
-Do not start with “remote work is worth 10%.” Start with the expenses that actually disappear, the expenses that appear, and the commute time you actually recover. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. A user who understands those three items can decide whether the choice is robust, reversible or dependent on an optimistic assumption. That is the point of this page and the keyword differentiation strategy behind WorthCalc 009.
+Do not start with “remote work is worth 10%.” Start with the expenses that actually disappear, the expenses that appear, and the commute time you actually recover. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. These outputs show whether the pay cut remains acceptable after realistic office frequency and care needs are included.

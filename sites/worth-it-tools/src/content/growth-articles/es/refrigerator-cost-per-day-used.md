@@ -36,7 +36,7 @@ Los criterios de ENERGY STAR comparan consumo medido con estándares; tamaño, c
 
 ### No necesariamente. Usa la misma base tarifaria e incluye equipo, servicio, cargos fijos y días de uso. El resultado cambia cuando cambia tu patrón real.
 
-undefined
+Para comparar por día, mide 24 horas completas y anota los ciclos del frigorífico. No multipliques la potencia nominal por todo el día salvo que el compresor funcione sin pausa; usa los kWh medidos.
 
 ## Fuentes para consultar
 

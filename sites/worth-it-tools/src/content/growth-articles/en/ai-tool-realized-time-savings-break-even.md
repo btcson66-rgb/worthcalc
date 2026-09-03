@@ -27,11 +27,11 @@ breadcrumbLabel: "AI Tool ROI Without Fantasy Hours: Measure Realized Time Savin
 
 This is not a generic calculator page with a prettier form. The purpose is to isolate the uncertainty that broad calculators usually hide. Start with **verified cash**, move to **conditional scenarios**, then keep **non-cash preferences** visible without pretending they are guaranteed dollars. The result should show a range and a reversal condition, not a fake-precise recommendation.
 
-## Why this modifier keyword deserves its own page
+## What this comparison measures
 
-AI ROI calculators already exist and commonly multiply “hours saved” by hourly rate. WorthCalc should not compete on that solved formula. The differentiated keyword is realized time savings. The page instructs users to create a baseline using repeated task classes, then includes all AI workflow time: setup, prompt iteration, model waiting, source verification, formatting and rework. Next, saved time is classified into billable capacity, avoided overtime, higher-priority internal work and leisure. Only the first two are usually straightforward cash value. A free version should also be the baseline when it is functionally adequate; the paid plan earns credit only for incremental value. The result is often lower than vendor ROI claims, but far more useful for renewal decisions.
+The useful comparison is not a vendor's headline about hours saved. Record repeated tasks before and after the tool, including setup, prompt iteration, waiting, source checking, formatting and rework. Then separate time that becomes billable work or avoided overtime from time that improves convenience without a direct cash value. A free or lower-cost alternative is a useful baseline when it handles the task adequately.
 
-That positioning matters for SEO as well as usefulness. Mature calculator sites already cover the obvious head terms. WorthCalc should win by answering the follow-up question a user asks after the generic calculator: “what did that simple model leave out, and can that missing variable reverse my decision?” The page therefore needs a method that is visibly different in the search snippet, the direct answer, the formulas and the examples.
+Run a conservative, typical and optimistic case. If the conclusion changes between them, show the assumption that causes the change instead of turning an uncertain time estimate into a precise return claim.
 
 ## Input worksheet
 
@@ -165,4 +165,4 @@ Use four columns: **estimated, actual, variance, explanation**. If realized usag
 
 ## Final interpretation
 
-“Hours saved” is not an input you should guess. Measure the same class of task before and after the tool, including prompting, checking, fixing and redoing. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. A user who understands those three items can decide whether the choice is robust, reversible or dependent on an optimistic assumption. That is the point of this page and the keyword differentiation strategy behind WorthCalc 009.
+“Hours saved” is not an input you should guess. Measure the same class of task before and after the tool, including prompting, checking, fixing and redoing. Keep three outputs visible: **verified cash difference, lowest cash point, and the reversal variable**. Those outputs show whether the choice is robust, reversible or dependent on an optimistic assumption.

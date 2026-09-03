@@ -36,7 +36,7 @@ ENERGY STAR indica que el consumo real cambia con los hábitos y que sus criteri
 
 ### Usa una regla repetible. Incluye precalentado o tiempo encendido provocado por la receta y aclara si excluyes equipo y tu tiempo.
 
-undefined
+Para comparar por hora, mide una ventana completa de cocción y divide la energía medida entre sus horas. Si el aparato realiza ciclos, no multipliques la potencia nominal por todo el tiempo: reparte los kWh que indique la medición.
 
 ## Fuentes para consultar
 

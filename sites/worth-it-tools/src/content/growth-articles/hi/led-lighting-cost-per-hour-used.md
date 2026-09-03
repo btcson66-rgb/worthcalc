@@ -36,7 +36,7 @@ Rated life आपकी exact bill या replacement date की guarantee न�
 
 ### Short cash estimate में energy अलग दिखाएँ। Long-run comparison में purchase और replacement को observed या defensible hours पर allocate करें और assumption लिखें।
 
-undefined
+Fair hourly comparison के लिए पूरा usage window मापें और measured energy को घंटों से divide करें। Dimming या automatic shutoff होने पर nameplate power को पूरे समय से गुणा न करें; measured kWh इस्तेमाल करें।
 
 ## स्रोत पढ़ें
 

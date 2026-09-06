@@ -1,7 +1,6 @@
 import { LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
 import type { EntityJsonLdOptions, FaqItem } from './seo';
 import { organizationId, webSiteId } from './seo';
-import { seoPackageGuideContent } from '../data/seoPackageGuideIndex';
 
 interface HomeTool {
   icon: string;
@@ -16,11 +15,25 @@ interface HomeGuide {
   description: string;
 }
 
-interface HomeAuthority {
+interface HomeValue {
+  heading: string;
+  lead: string;
+  items: { title: string; body: string }[];
+}
+
+interface HomeCategories {
   heading: string;
   lead: string;
   cta: string;
-  clusters: HomeGuide[];
+}
+
+/** Copy for the section that hands the reader off to the two directories. */
+interface HomeLibrary {
+  heading: string;
+  lead: string;
+  calculators: string;
+  guides: string;
+  moreTopics: string;
 }
 
 interface HomeTrustSource {
@@ -34,7 +47,7 @@ interface HomeTrust {
   method: string;
   sourcesHeading: string;
   sourcesLead: string;
-  sources: HomeTrustSource[];
+  sources?: HomeTrustSource[];
   scopeHeading: string;
   scope: string;
   reviewedLabel: string;
@@ -53,8 +66,10 @@ export interface HomeContent {
   intro: string;
   badges: string[];
   entity?: EntityJsonLdOptions;
-  authority?: HomeAuthority;
-  trust?: HomeTrust;
+  value: HomeValue;
+  categories: HomeCategories;
+  library: HomeLibrary;
+  trust: HomeTrust;
   toolsHeading: string;
   toolsLead: string;
   toolsCta: string;
@@ -66,79 +81,64 @@ export interface HomeContent {
   guidesLead: string;
   guidesCta: string;
   guides: HomeGuide[];
-  guideCluster?: {
-    heading: string;
-    intro: string;
-    cards: HomeGuide[];
-  };
-  guideClusters?: ReadonlyArray<{
-    heading: string;
-    intro: string;
-    cards: ReadonlyArray<HomeGuide>;
-  }>;
-  guideAdditions?: ReadonlyArray<HomeGuide>;
-  featuredGuide?: {
-    heading: string;
-    intro: string;
-  };
-  seoHeading: string;
-  seoParagraphs: string[];
+  guidesMore: string;
   faqHeading: string;
   faq: FaqItem[];
 }
 
 export const homeContent: Record<CoreLocale, HomeContent> = {
   en: {
-    title: 'Costco, Card Fee, Commute Cost & DTI Calculators',
+    title: 'Transparent Calculators for Real Money Decisions',
     description:
-      'Calculate Costco membership and annual-fee card break-even, full commuting cost including time, and debt-to-income ratio with formulas and editable assumptions.',
-    eyebrow: 'Break-even, total-cost, and affordability math',
-    heading: 'Costco membership, annual-fee card, ',
-    accent: 'commute cost',
-    headingSuffix: ', and debt-to-income calculators',
+      'WorthCalc turns money decisions into visible arithmetic. Every calculator states its formula, lets you replace the defaults with your own numbers, and says what it leaves out.',
+    eyebrow: 'Break-even, total cost, and affordability, worked in the open',
+    heading: 'Transparent calculators for ',
+    accent: 'real money decisions',
+    headingSuffix: '',
     intro:
-      'WorthCalc focuses on four money decisions where the answer depends on a visible threshold: whether a Costco membership or annual-fee card pays for itself, what commuting costs after time, and how recurring debt compares with income.',
+      'Most money questions have a threshold hiding in them: the spend where a fee pays for itself, the year where buying beats renting, the number of uses that makes a purchase worth it. WorthCalc finds that threshold and shows the arithmetic that produced it.',
     badges: ['Transparent formulas', 'Editable assumptions', 'Browser-based'],
     entity: {
       description:
-        'WorthCalc publishes transparent calculators and guides for Costco membership break-even, annual-fee card break-even, full commute cost including time, and debt-to-income ratios.',
+        'WorthCalc publishes transparent calculators and decision guides across six money topics: housing affordability, debt and credit, transportation and ownership cost, everyday break-evens, subscriptions and memberships, and income, savings and growth.',
       topics: [
-        'Costco membership break-even',
-        'Annual-fee credit card break-even',
-        'Full commute cost including time',
-        'Debt-to-income ratios',
+        'Housing affordability and rent versus buy',
+        'Debt, credit and true borrowing cost',
+        'Transportation and total cost of ownership',
+        'Everyday break-even and cost per use',
+        'Subscriptions and membership break-even',
+        'Income, savings rate and compound growth',
       ],
     },
-    authority: {
-      heading: 'Four decision areas WorthCalc covers in depth',
-      lead: 'Each entry starts with an existing calculator and states the output it produces.',
-      cta: 'Run this calculation',
-      clusters: [
+    value: {
+      heading: 'What WorthCalc is for',
+      lead: 'A number you cannot check is not much better than a guess. These three rules decide what gets published here.',
+      items: [
         {
-          title: 'Costco membership break-even calculator',
-          path: '/tools/costco-membership',
-          description:
-            'Compare Gold Star and Executive using annual fees, eligible spending, reward rate, cap, and shopping savings. The result shows the eligible annual and monthly spend needed for the fee or upgrade to break even.',
+          title: 'The formula is on the page',
+          body: 'Every calculator states the arithmetic it runs and shows the intermediate figures, so you can verify the result rather than trust it.',
         },
         {
-          title: 'Annual-fee credit card break-even calculator',
-          path: '/tools/cashback-breakeven',
-          description:
-            'Compare annual cashback and any first-year bonus, minus the fee, with a no-fee 1% card. The result shows renewal value and the monthly spend where the annual-fee card pulls ahead.',
+          title: 'The assumptions are yours to change',
+          body: 'Defaults are editable examples, never market averages or quotes. Replace them with your own bill, contract, statement or offer.',
         },
         {
-          title: 'Full commute cost calculator, including time',
-          path: '/tools/commute-cost',
-          description:
-            'Add distance, workdays, fuel or charging, maintenance, parking, tolls, fares, and an optional time value. The result shows monthly, annual, and per-mile or per-kilometer cost across transport modes.',
-        },
-        {
-          title: 'Debt-to-income (DTI) ratio calculator',
-          path: '/tools/dti-calculator',
-          description:
-            'Divide recurring monthly debt payments by gross monthly income and keep housing separate from other debt. The result shows front-end and back-end DTI percentages for affordability planning.',
+          title: 'The limits are written down',
+          body: 'Each page names what it excludes — taxes, eligibility rules, contract terms — and which input would reverse the conclusion.',
         },
       ],
+    },
+    categories: {
+      heading: 'Four decisions WorthCalc covers in depth',
+      lead: 'Each area pairs the calculators that produce a number with the guides that explain what the number means.',
+      cta: 'Open this topic',
+    },
+    library: {
+      heading: 'Browse the whole library',
+      lead: 'Two directories, both grouped by topic: one for the calculators, one for the written guides behind them.',
+      calculators: 'All calculators',
+      guides: 'All guides',
+      moreTopics: 'More topics',
     },
     trust: {
       heading: 'Method, sources, and limits',
@@ -163,8 +163,8 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       advice:
         'WorthCalc provides general educational estimates. This is not financial advice, and no result predicts approval, guarantees savings, or replaces current terms or qualified professional advice.',
     },
-    toolsHeading: 'All calculators',
-    toolsLead: 'The rest of the calculator library covers installment, subscription, vehicle, housing, debt, budget, and savings planning.',
+    toolsHeading: 'Most-used calculators',
+    toolsLead: 'Ten to start with. The full catalogue, grouped by topic, is on the calculator directory.',
     toolsCta: 'Open calculator',
     tools: [
       {
@@ -223,7 +223,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       },
     ],
     methodHeading: 'A decision process you can audit',
-    methodLead: 'A useful calculator should show what changes the answer, not hide a recommendation behind one default.',
+    methodLead: 'A useful calculator shows what changes the answer instead of hiding a recommendation behind one default.',
     methodSteps: [
       'Start with the contract, bill, quote, or usage history—not a promotional headline.',
       'Compare alternatives over the same period and keep recoverable value separate from true cost.',
@@ -241,27 +241,8 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: 'True hourly wage after work costs', path: '/true-hourly-wage-after-commuting-work-expenses', description: 'Reprice a job with take-home pay, required time, commuting, and unreimbursed expenses.' },
       { title: 'Pay raise versus inflation', path: '/pay-raise-vs-inflation-purchasing-power', description: 'Use matching CPI periods to distinguish a nominal raise from a real purchasing-power change.' },
     ],
-    guideCluster: {
-      heading: 'Financial resilience and rate literacy',
-      intro: 'A good money decision starts before the calculator. These guides show how to define the number you are actually measuring: emergency runway, liquid net worth, savings rate, APR, APY, and the total cost hidden behind a lower monthly payment. Each page states its formula, assumptions, worked example, limits, and the WorthCalc tool that can take the next step with your own inputs.',
-      cards: [
-        { title: 'Emergency Fund for Irregular Income', path: '/emergency-fund-irregular-income', description: 'Build runway around essential expenses and slow-season gaps, not an average paycheck.' },
-        { title: 'Net Worth vs Liquid Net Worth', path: '/net-worth-vs-liquid-net-worth', description: 'Separate long-term wealth from cash you can realistically access quickly.' },
-        { title: 'Savings Rate: Gross vs Net', path: '/savings-rate-gross-vs-net', description: 'Define the denominator before comparing your percentage with anyone else’s.' },
-        { title: 'APR vs APY', path: '/apr-vs-apy', description: 'See why borrowing cost and deposit yield use different annualized measures.' },
-        { title: 'Loan Term vs Monthly Payment', path: '/loan-term-monthly-payment-vs-total-interest', description: 'Put the lower payment next to the extra interest and longer debt horizon.' },
-      ],
-    },
-    guideClusters: seoPackageGuideContent.en.groups,
-    guideAdditions: seoPackageGuideContent.en.additions,
-    featuredGuide: seoPackageGuideContent.en.featured,
-    seoHeading: 'Worth-it calculators for everyday money choices',
-    seoParagraphs: [
-      'WorthCalc focuses on practical consumer decisions where a quick estimate can prevent an expensive mistake: installment plans, subscription creep, warehouse memberships, vehicles, housing, commuting, daily habits, and cashback cards.',
-      'The calculators are informational estimates, not financial advice. You control the inputs, can change the assumptions, and should verify important prices, rates, fees, taxes, and terms before acting on the result.',
-      'Every tool runs in your browser. WorthCalc does not require an account and does not send your calculator inputs to a custom backend server.',
-    ],
-    faqHeading: 'Homepage FAQ',
+    guidesMore: 'Every guide, grouped by topic',
+    faqHeading: 'Common questions about WorthCalc',
     faq: [
       {
         question: 'Are WorthCalc results financial advice?',
@@ -286,56 +267,57 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     ],
   },
   zh: {
-    title: 'Costco 會員、信用卡年費、通勤成本與負債比試算',
+    title: '算得出來的金錢決策：公式透明的計算機',
     description:
-      '試算 Costco 會員與信用卡年費回本門檻、包含時間的完整通勤成本，以及台灣 DBR 與房貸收支比；公式、輸入與限制皆清楚列出。',
-    eyebrow: '回本門檻、完整成本與負債能力',
-    heading: 'Costco 會員、信用卡年費、',
-    accent: '通勤成本',
-    headingSuffix: '與負債比計算機',
+      'WorthCalc 把金錢決策變成看得見的算式。每個計算機都寫出公式、讓你用自己的數字取代預設值，並說明它刻意不納入什麼。',
+    eyebrow: '回本門檻、完整成本與負擔能力，全部攤開來算',
+    heading: '算得出來的',
+    accent: '金錢決策',
+    headingSuffix: '：公式透明、假設可調',
     intro:
-      'WorthCalc 聚焦四類有明確門檻的金錢決策：Costco 會員是否回本、年費信用卡要刷多少才划算、把時間算進去後的通勤成本，以及負債相對收入是否過高。',
+      '大多數金錢問題裡都藏著一個門檻：年費要刷多少才回本、第幾年買房才勝過租房、一件東西要用幾次才值得。WorthCalc 把那個門檻算出來，並把得到它的算式一起攤開。',
     badges: ['公式公開', '假設可調整', '瀏覽器本機試算'],
     entity: {
       description:
-        'WorthCalc 提供公式透明的計算機與指南，聚焦 Costco 會員回本、信用卡年費回本、包含時間的完整通勤成本，以及負債比 DBR 與房貸收支比。',
+        'WorthCalc 提供公式透明的計算機與決策指南，涵蓋六個金錢主題：住房負擔能力、債務與信用、交通與持有成本、日常回本門檻、訂閱與會員，以及收入、儲蓄與成長。',
       topics: [
-        'Costco 會員回本',
-        '信用卡年費回本',
-        '包含時間的完整通勤成本',
-        '負債比 DBR 與房貸收支比',
+        '住房負擔能力與租買比較',
+        '債務、信用與真實借貸成本',
+        '交通與總持有成本',
+        '日常回本門檻與每次使用成本',
+        '訂閱與會員回本門檻',
+        '收入、儲蓄率與複利成長',
       ],
     },
-    authority: {
-      heading: 'WorthCalc 深入整理的四個決策主題',
-      lead: '每個入口都連到現有計算機，並直接說明會算出哪一個數字。',
-      cta: '開始試算',
-      clusters: [
+    value: {
+      heading: 'WorthCalc 想解決的問題',
+      lead: '一個你無法自己驗算的數字，和猜的差別不大。本站只出版符合這三條規則的內容。',
+      items: [
         {
-          title: 'Costco 會員回本門檻計算機',
-          path: '/tools/costco-membership',
-          description:
-            '輸入會員年費、合格消費、回饋率、回饋上限與實際購物省下的金額，比較金星與黑鑽方案。結果會顯示會員費或升級費回本所需的年消費與月消費。',
+          title: '公式就寫在頁面上',
+          body: '每個計算機都會寫出它執行的算式，並顯示中間數字，讓你可以自己核對結果，而不是只能相信它。',
         },
         {
-          title: '信用卡年費回本門檻計算機',
-          path: '/tools/cashback-breakeven',
-          description:
-            '把年度回饋與首年禮減去年費，再和免年費 1% 回饋卡比較。結果會顯示續卡淨價值，以及年費卡開始勝出的每月消費門檻。',
+          title: '假設由你決定',
+          body: '預設值是可以修改的範例，不是市場平均值，也不是報價。請換成你自己的帳單、契約、對帳單或報價單。',
         },
         {
-          title: '包含時間成本的完整通勤計算機',
-          path: '/tools/commute-cost',
-          description:
-            '加總距離、上班天數、油電、保養、停車、通行費、車票與自訂時間價值。結果會列出各種交通方式的每月、每年與每公里成本。',
-        },
-        {
-          title: '負債比 DBR 與房貸收支比計算機',
-          path: '/tools/dti-calculator',
-          description:
-            '分開輸入無擔保負債餘額、平均月收入、房貸月付、其他固定負債與生活費。結果會同時顯示 DBR 倍數與房貸收支比，不把兩種不同指標混成一個數字。',
+          title: '限制會寫清楚',
+          body: '每一頁都會說明它不納入什麼——稅費、資格條件、契約條款——以及哪一個輸入值會讓結論翻轉。',
         },
       ],
+    },
+    categories: {
+      heading: 'WorthCalc 深入整理的四個決策主題',
+      lead: '每個主題都把算出數字的計算機，和解釋這個數字代表什麼的指南放在一起。',
+      cta: '進入這個主題',
+    },
+    library: {
+      heading: '瀏覽完整內容庫',
+      lead: '兩份依主題分類的索引：一份是所有計算機，一份是它們背後的文字指南。',
+      calculators: '全部計算機',
+      guides: '全部指南',
+      moreTopics: '更多主題',
     },
     trust: {
       heading: '計算方法、資料來源與限制',
@@ -360,8 +342,8 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       advice:
         'WorthCalc 提供一般教育用途的估算。本頁不是財務建議，任何結果都不代表核准、不保證節省，也不能取代最新契約條款或合格專業人士的個別建議。',
     },
-    toolsHeading: '全部計算機',
-    toolsLead: '其餘計算機涵蓋分期、訂閱、交通工具、住宅、債務、預算與儲蓄規劃。',
+    toolsHeading: '最常用的計算機',
+    toolsLead: '先從這十個開始。完整目錄依主題分類，放在計算機索引頁。',
     toolsCta: '開啟計算機',
     tools: [
       {
@@ -438,27 +420,8 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: '扣除通勤與工作成本的真實時薪', path: '/true-hourly-wage-after-commuting-work-expenses', description: '用同一期實領、必要時間、通勤與未報銷支出重新比較工作。' },
       { title: '加薪有沒有跑贏通膨？', path: '/pay-raise-vs-inflation-purchasing-power', description: '使用相同期間 CPI，分清楚名目加薪與實質購買力變化。' },
     ],
-    guideCluster: {
-      heading: '現金安全墊、資產負債與利率判讀',
-      intro: '真正有用的財務數字，必須先說清楚公式與用途。這組指南把緊急預備金、目標基金、淨資產、流動淨資產、儲蓄率、APR、APY、複利與貸款期數拆開，讓「我該存多少」「我真的有多少可用資產」「月付變低是不是更划算」都能用同一套透明邏輯回答。',
-      cards: [
-        { title: '緊急預備金要存多少？', path: '/emergency-fund-how-much', description: '從必要支出與風險情境算安全墊，不照抄月薪倍數。' },
-        { title: '緊急預備金 vs 目標基金', path: '/emergency-fund-vs-sinking-fund', description: '把真正意外與已知年度帳單分開。' },
-        { title: '淨資產怎麼算？', path: '/how-to-calculate-net-worth', description: '用同一天資產與負債建立可追蹤的家庭資產負債表。' },
-        { title: '儲蓄率怎麼算？', path: '/how-to-calculate-savings-rate', description: '分清稅前、稅後、退休提撥與還本金。' },
-        { title: 'APR、APY、利率差在哪？', path: '/apr-vs-apy', description: '借款成本與存款收益不要混成同一個百分比。' },
-      ],
-    },
-    guideClusters: seoPackageGuideContent.zh.groups,
-    guideAdditions: seoPackageGuideContent.zh.additions,
-    featuredGuide: seoPackageGuideContent.zh.featured,
-    seoHeading: '用估算工具處理日常金錢選擇',
-    seoParagraphs: [
-      'WorthCalc 聚焦在消費者每天會遇到的「值不值得」問題：分期付款、訂閱支出、賣場會員、交通工具、租屋買房、通勤、每日習慣，以及信用卡回饋。',
-      '本站計算結果僅供一般資訊與估算參考，不是財務建議。你可以自行調整輸入值與假設，但在採取行動前，仍應確認最新價格、費率、稅費、合約條款與個人條件。',
-      '每一個工具都在你的瀏覽器中執行。WorthCalc 不需要註冊帳號，也不會把你在計算機輸入的數字送到自訂後端伺服器。',
-    ],
-    faqHeading: '首頁常見問題',
+    guidesMore: '全部指南，依主題分類',
+    faqHeading: '關於 WorthCalc 的常見問題',
     faq: [
       {
         question: 'WorthCalc 的結果是財務建議嗎？',
@@ -483,16 +446,54 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     ],
   },
   es: {
-    title: 'Calculadoras financieras gratis: TAE, cuotas, alquiler y ahorro',
-    description: 'Calculadoras gratuitas para comparar TAE y cuotas, suscripciones, alquiler o compra, coche eléctrico, desplazamientos y tarjetas con datos de España.',
+    title: 'Calculadoras transparentes para decisiones de dinero',
+    description: 'WorthCalc convierte una decisión de dinero en una cuenta que puedes revisar: cada calculadora muestra su fórmula, admite tus cifras y explica qué deja fuera.',
     eyebrow: 'Decisiones de dinero con cuentas claras',
     heading: 'Antes de pagar, calcula el ',
     accent: 'coste real',
     headingSuffix: '.',
     intro: 'Una cuota baja, un 0 % o un regalo de bienvenida no cuentan toda la historia. Introduce tus cifras y compara el coste total, el plazo y la alternativa real. Los cálculos se hacen en tu navegador, sin registro y sin enviar tus importes a WorthCalc.',
     badges: ['Sin registro', 'Datos en tu dispositivo', 'Uso gratuito'],
-    toolsHeading: 'Calculadoras para decisiones cotidianas',
-    toolsLead: 'Ocho herramientas en euros, escritas para conceptos que se usan en España como TAE, cuota, coste total, alquiler y consumo elegible.',
+    value: {
+      heading: 'Para qué sirve WorthCalc',
+      lead: 'Una cifra que no puedes comprobar no vale mucho más que una intuición. Estas tres reglas deciden qué se publica aquí.',
+      items: [
+        { title: 'La fórmula está en la página', body: 'Cada calculadora indica la operación que ejecuta y muestra los pasos intermedios, para que compruebes el resultado en lugar de creerlo.' },
+        { title: 'Los supuestos los cambias tú', body: 'Los valores iniciales son ejemplos editables, nunca medias del mercado ni ofertas. Sustitúyelos por tu factura, contrato, extracto o presupuesto.' },
+        { title: 'Los límites están escritos', body: 'Cada página nombra lo que deja fuera —impuestos, requisitos, cláusulas— y qué dato invertiría la conclusión.' },
+      ],
+    },
+    categories: {
+      heading: 'Cuatro decisiones que WorthCalc trata a fondo',
+      lead: 'Cada área reúne las calculadoras que producen la cifra y las guías que explican qué significa.',
+      cta: 'Ver este tema',
+    },
+    library: {
+      heading: 'Recorre toda la biblioteca',
+      lead: 'Dos índices agrupados por tema: uno con las calculadoras y otro con las guías que hay detrás.',
+      calculators: 'Todas las calculadoras',
+      guides: 'Todas las guías',
+      moreTopics: 'Más temas',
+    },
+    trust: {
+      heading: 'Método, fuentes y límites',
+      methodHeading: 'Método',
+      method: 'Cada calculadora aplica una fórmula visible a los datos que introduces, compara alternativas durante el mismo plazo y devuelve un umbral de equilibrio, un coste total o una ratio. Los valores iniciales son ejemplos editables, no ofertas ni recomendaciones.',
+      sourcesHeading: 'Referencias',
+      sourcesLead: 'Empieza por tu contrato, factura, extracto, oferta o nómina vigentes. Para distinguir información de asesoramiento, estas referencias públicas ya se citan en las páginas legales del sitio:',
+      sources: [
+        { label: 'CNMV — qué es el asesoramiento en materia de inversión', href: 'https://www.cnmv.es/portal/inversor/asesoramiento?lang=es' },
+        { label: 'CNMV — información que debe revisarse antes de decidir', href: 'https://www.cnmv.es/portal/inversor/decisiones-informarse?lang=es' },
+      ],
+      scopeHeading: 'Qué incluye el cálculo',
+      scope: 'El resultado solo incluye las entradas y categorías que la calculadora nombra. No incorpora automáticamente todos los impuestos, requisitos de contratación, exclusiones de recompensa, condiciones de ruta, ayudas del empleador, cláusulas de financiación ni riesgos personales.',
+      reviewedLabel: 'Método de la portada revisado por última vez',
+      reviewedDate: '2026-09-05',
+      reviewedDisplay: '5 de septiembre de 2026',
+      advice: 'WorthCalc ofrece estimaciones educativas de carácter general. No es asesoramiento financiero: ningún resultado predice una aprobación, garantiza un ahorro ni sustituye las condiciones vigentes o el criterio de un profesional cualificado.',
+    },
+    toolsHeading: 'Calculadoras más usadas',
+    toolsLead: 'Un punto de partida. El catálogo completo, agrupado por tema, está en el índice de calculadoras.',
     toolsCta: 'Abrir calculadora',
     tools: [
       { icon: '💳', title: 'Calculadora de TAE real de una compra a plazos', path: '/tools/installment-true-apr', description: 'Convierte comisión, entrada, descuento perdido y calendario de cuotas en un coste anual comparable.' },
@@ -523,12 +524,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: 'Salario real por hora tras transporte y gastos', path: '/true-hourly-wage-after-commuting-work-expenses', description: 'Compara ofertas con nómina neta, tiempo necesario y costes no reembolsados del mismo periodo.' },
       { title: 'Subida salarial frente a inflación', path: '/pay-raise-vs-inflation-purchasing-power', description: 'Alinea fechas e IPC para calcular el cambio de poder adquisitivo, no solo el porcentaje nominal.' },
     ],
-    seoHeading: 'Calculadoras de coste total para España',
-    seoParagraphs: [
-      'WorthCalc responde a búsquedas concretas como calcular la TAE de una financiación, saber si compensa una suscripción, comparar alquiler y compra o calcular el coste por kilómetro. No publica una cifra universal: cada herramienta deja visibles las variables y permite sustituir el ejemplo por tus documentos.',
-      'En crédito, la cuota mensual no basta. La TAE sirve para comparar el coste anual de una oferta, pero también debes revisar importe total adeudado, comisiones, seguros o servicios vinculados y capacidad de pago durante todo el plazo. Las guías enlazan la metodología con fuentes como Banco de España y organismos de consumo.',
-      'Los resultados son estimaciones educativas, no asesoramiento financiero, fiscal, jurídico, hipotecario ni de inversión. Confirma precios, contratos, impuestos y elegibilidad actuales. Tus entradas se procesan localmente en el navegador y no requieren una cuenta.',
-    ],
+    guidesMore: 'Todas las guías, por tema',
     faqHeading: 'Preguntas frecuentes',
     faq: [
       { question: '¿Qué diferencia hay entre TIN, TAE y coste total?', answer: 'El TIN expresa el tipo nominal; la TAE anualiza el coste con la frecuencia de pagos y determinados gastos; el coste total muestra euros pagados. Para comparar ofertas necesitas revisar los tres y las condiciones del contrato.' },
@@ -538,16 +534,54 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     ],
   },
   fr: {
-    title: 'Calculateurs gratuits : TAEG, abonnements, logement et voiture',
-    description: 'Calculez un TAEG réel, le coût des abonnements, louer ou acheter, voiture électrique ou thermique, trajet domicile-travail et carte à cotisation.',
+    title: 'Calculateurs transparents pour vos décisions d’argent',
+    description: 'WorthCalc transforme une décision d’argent en calcul vérifiable : chaque calculateur affiche sa formule, accepte vos chiffres et indique ce qu’il laisse de côté.',
     eyebrow: 'Décider avec un coût complet',
     heading: 'Avant de signer, calculez ce que cela ',
     accent: 'coûte vraiment',
     headingSuffix: '.',
     intro: 'Une mensualité, une remise ou une prime de bienvenue ne suffit pas pour comparer. Reconstituez le coût total, choisissez la même durée et testez l’hypothèse qui ferait basculer le résultat. Les montants restent dans votre navigateur, sans compte.',
     badges: ['Sans inscription', 'Calcul local', 'Accès gratuit'],
-    toolsHeading: 'Calculateurs pour les choix qui engagent votre budget',
-    toolsLead: 'Huit outils en euros, avec le vocabulaire utile en France : TAEG, mensualité, reste à payer, coût de détention et valeur récupérée.',
+    value: {
+      heading: 'À quoi sert WorthCalc',
+      lead: 'Un chiffre que vous ne pouvez pas vérifier ne vaut guère mieux qu’une intuition. Trois règles décident de ce qui est publié ici.',
+      items: [
+        { title: 'La formule est sur la page', body: 'Chaque calculateur énonce l’opération qu’il effectue et montre les étapes intermédiaires, pour que vous puissiez contrôler le résultat au lieu de le croire.' },
+        { title: 'Les hypothèses vous appartiennent', body: 'Les valeurs préremplies sont des exemples modifiables, jamais des moyennes de marché ni des offres. Remplacez-les par votre facture, contrat, relevé ou devis.' },
+        { title: 'Les limites sont écrites', body: 'Chaque page nomme ce qu’elle exclut — fiscalité, conditions d’éligibilité, clauses — et l’hypothèse qui renverserait la conclusion.' },
+      ],
+    },
+    categories: {
+      heading: 'Quatre décisions traitées en profondeur',
+      lead: 'Chaque thème réunit les calculateurs qui produisent le chiffre et les guides qui expliquent ce qu’il signifie.',
+      cta: 'Voir ce thème',
+    },
+    library: {
+      heading: 'Parcourir toute la bibliothèque',
+      lead: 'Deux index classés par thème : l’un pour les calculateurs, l’autre pour les guides qui les accompagnent.',
+      calculators: 'Tous les calculateurs',
+      guides: 'Tous les guides',
+      moreTopics: 'Autres thèmes',
+    },
+    trust: {
+      heading: 'Méthode, références et limites',
+      methodHeading: 'Méthode',
+      method: 'Chaque calculateur applique une formule visible aux montants que vous saisissez, compare les options sur la même durée et renvoie un seuil de rentabilité, un coût complet ou un ratio. Les valeurs préremplies sont des exemples modifiables, pas des offres ni des recommandations.',
+      sourcesHeading: 'Références',
+      sourcesLead: 'Partez de votre contrat, facture, relevé, offre ou bulletin de paie en cours. Pour distinguer information et conseil, ces références publiques sont déjà citées dans les pages légales du site :',
+      sources: [
+        { label: 'AMF — obligations d’un conseiller en investissements financiers', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers' },
+        { label: 'AMF — vérifier frais, risques et documentation avant de décider', href: 'https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/bien-suivre-ses-placements' },
+      ],
+      scopeHeading: 'Ce que le calcul comprend',
+      scope: 'Le résultat ne contient que les entrées et les postes nommés par le calculateur. Il n’intègre pas automatiquement l’ensemble des taxes, conditions d’éligibilité, exclusions de récompense, contraintes de trajet, avantages employeur, clauses de financement ou risques personnels.',
+      reviewedLabel: 'Méthode de la page d’accueil vérifiée le',
+      reviewedDate: '2026-09-05',
+      reviewedDisplay: '5 septembre 2026',
+      advice: 'WorthCalc fournit des estimations pédagogiques générales. Ce n’est pas un conseil financier : aucun résultat ne prédit une acceptation, ne garantit une économie ni ne remplace les conditions en vigueur ou l’avis d’un professionnel qualifié.',
+    },
+    toolsHeading: 'Calculateurs les plus utilisés',
+    toolsLead: 'De quoi commencer. Le catalogue complet, classé par thème, se trouve sur l’index des calculateurs.',
     toolsCta: 'Ouvrir le calculateur',
     tools: [
       { icon: '💳', title: 'TAEG réel d’un paiement fractionné', path: '/tools/installment-true-apr', description: 'Transformez frais, apport, remise abandonnée et échéancier en taux annuel et coût en euros.' },
@@ -578,12 +612,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: 'Salaire horaire réel après trajet et frais', path: '/true-hourly-wage-after-commuting-work-expenses', description: 'Comparez salaire net, temps nécessaire et dépenses professionnelles non remboursées sur la même période.' },
       { title: 'Hausse de salaire et inflation', path: '/pay-raise-vs-inflation-purchasing-power', description: 'Alignez les périodes de salaire et d’IPC pour mesurer la variation réelle du pouvoir d’achat.' },
     ],
-    seoHeading: 'Des calculateurs de coût total, pas des verdicts commerciaux',
-    seoParagraphs: [
-      'WorthCalc traite des recherches concrètes : calculer le TAEG d’un crédit, additionner ses abonnements, savoir s’il vaut mieux louer ou acheter, comparer une voiture électrique et thermique ou chiffrer un trajet domicile-travail. Les valeurs d’exemple expliquent la méthode ; elles ne sont pas présentées comme une moyenne française.',
-      'Pour un crédit à la consommation, l’offre doit être lue avec ses mensualités, sa durée, son TAEG et son montant total dû. Une LOA, une carte ou un paiement fractionné peut ajouter des frais, conditions de restitution ou services qui ne figurent pas dans le prix d’appel. Les guides renvoient notamment aux sources publiques françaises pertinentes.',
-      'Ces outils donnent des estimations pédagogiques, jamais un conseil financier, fiscal, juridique, immobilier ou d’investissement personnalisé. Confirmez les tarifs, contrats, droits et aides actuels. Les saisies restent dans le navigateur.',
-    ],
+    guidesMore: 'Tous les guides, par thème',
     faqHeading: 'Questions fréquentes',
     faq: [
       { question: 'Pourquoi comparer le TAEG et pas seulement le taux ou la mensualité ?', answer: 'Le TAEG vise à exprimer le coût annuel global du crédit avec les éléments prévus par la réglementation. La mensualité dépend aussi de la durée : une petite mensualité peut produire un coût total plus élevé.' },
@@ -593,16 +622,54 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     ],
   },
   de: {
-    title: 'Kostenlose Rechner für Effektivzins, Abos, Wohnen und Auto',
-    description: 'Effektivzins, Ratenkauf, Abo-Kosten, Mieten oder Kaufen, E-Auto oder Benziner, Pendelkosten und Kreditkarten-Gebühr nachvollziehbar berechnen.',
+    title: 'Transparente Rechner für echte Geldentscheidungen',
+    description: 'WorthCalc macht aus einer Geldentscheidung eine nachprüfbare Rechnung: Jeder Rechner nennt seine Formel, nimmt Ihre Zahlen und benennt, was er weglässt.',
     eyebrow: 'Geldentscheidungen mit vollständigen Kosten',
     heading: 'Vor dem Abschluss den ',
     accent: 'echten Preis',
     headingSuffix: ' berechnen.',
     intro: 'Null-Prozent-Werbung, eine niedrige Rate oder ein Willkommensbonus zeigen selten die ganze Rechnung. Vergleichen Sie Gesamtkosten, denselben Zeitraum und eine echte Alternative. Alle Eingaben werden ohne Konto direkt im Browser verarbeitet.',
     badges: ['Ohne Anmeldung', 'Eingaben bleiben lokal', 'Kostenlos nutzbar'],
-    toolsHeading: 'Rechner für konkrete Alltagsentscheidungen',
-    toolsLead: 'Acht Euro-Rechner mit den in Deutschland üblichen Größen: effektiver Jahreszins, Monatsrate, Gesamtkosten, Restwert und Break-even.',
+    value: {
+      heading: 'Wofür WorthCalc da ist',
+      lead: 'Eine Zahl, die Sie nicht nachprüfen können, ist kaum besser als ein Bauchgefühl. Drei Regeln entscheiden, was hier erscheint.',
+      items: [
+        { title: 'Die Formel steht auf der Seite', body: 'Jeder Rechner nennt die Rechenoperation und zeigt die Zwischenwerte, damit Sie das Ergebnis prüfen können, statt es zu glauben.' },
+        { title: 'Die Annahmen gehören Ihnen', body: 'Vorgaben sind änderbare Beispiele, keine Marktdurchschnitte und keine Angebote. Ersetzen Sie sie durch Rechnung, Vertrag, Kontoauszug oder Kostenvoranschlag.' },
+        { title: 'Die Grenzen sind benannt', body: 'Jede Seite nennt, was sie auslässt — Steuern, Voraussetzungen, Vertragsklauseln — und welche Eingabe das Ergebnis umkehren würde.' },
+      ],
+    },
+    categories: {
+      heading: 'Vier Entscheidungen, die WorthCalc vertieft',
+      lead: 'Jeder Bereich verbindet die Rechner, die eine Zahl liefern, mit den Ratgebern, die erklären, was sie bedeutet.',
+      cta: 'Thema öffnen',
+    },
+    library: {
+      heading: 'Die gesamte Bibliothek durchsehen',
+      lead: 'Zwei nach Thema gruppierte Verzeichnisse: eines für die Rechner, eines für die Ratgeber dahinter.',
+      calculators: 'Alle Rechner',
+      guides: 'Alle Ratgeber',
+      moreTopics: 'Weitere Themen',
+    },
+    trust: {
+      heading: 'Methode, Quellen und Grenzen',
+      methodHeading: 'Methode',
+      method: 'Jeder Rechner wendet eine sichtbare Formel auf Ihre Eingaben an, vergleicht Alternativen über denselben Zeitraum und liefert eine Break-even-Schwelle, Gesamtkosten oder eine Kennzahl. Vorgaben sind änderbare Beispiele, keine Angebote und keine Empfehlungen.',
+      sourcesHeading: 'Quellen',
+      sourcesLead: 'Beginnen Sie mit Ihrem aktuellen Vertrag, Ihrer Rechnung, Abrechnung oder Ihrem Angebot. Zur Abgrenzung von Information und Beratung sind diese amtlichen Quellen bereits auf den Rechtsseiten der Website zitiert:',
+      sources: [
+        { label: 'BaFin — Prospekte und Informationsblätter vor einer Anlageentscheidung', href: 'https://www.bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Prospektpflicht/prospekte_artikel.html' },
+        { label: 'BaFin — Kosten, Risiken und Geeignetheit bei Publikumsfonds', href: 'https://bafin.de/DE/Verbraucher/GeldanlageWertpapiere/Produkte/GeschlossenerPublikumsfonds/Geschlossener_Publikumsfonds_node.html' },
+      ],
+      scopeHeading: 'Was die Rechnung enthält',
+      scope: 'Ein Ergebnis enthält nur die Eingaben und Positionen, die der jeweilige Rechner benennt. Steuern, Voraussetzungen, Bonusausschlüsse, Streckenbedingungen, Arbeitgeberleistungen, Finanzierungsklauseln und persönliche Risiken sind nicht automatisch berücksichtigt.',
+      reviewedLabel: 'Methode der Startseite zuletzt geprüft',
+      reviewedDate: '2026-09-05',
+      reviewedDisplay: '5. September 2026',
+      advice: 'WorthCalc liefert allgemeine, unverbindliche Lernrechnungen. Das ist keine Finanzberatung: Kein Ergebnis sagt eine Zusage voraus, garantiert eine Ersparnis oder ersetzt geltende Vertragsbedingungen oder qualifizierten Rat.',
+    },
+    toolsHeading: 'Meistgenutzte Rechner',
+    toolsLead: 'Ein Einstieg. Der vollständige Katalog, nach Thema gruppiert, steht im Rechnerverzeichnis.',
     toolsCta: 'Rechner öffnen',
     tools: [
       { icon: '💳', title: 'Effektivzins bei Ratenkauf und 0-%-Finanzierung', path: '/tools/installment-true-apr', description: 'Rechnet Gebühren, Anzahlung, verlorenen Barrabatt und Ratenplan in Jahreszins und Eurokosten um.' },
@@ -633,12 +700,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
       { title: 'Echter Stundenlohn nach Pendeln und Arbeitskosten', path: '/true-hourly-wage-after-commuting-work-expenses', description: 'Nettoentgelt, gebundene Zeit und nicht erstattete Ausgaben desselben Zeitraums zusammenführen.' },
       { title: 'Gehaltserhöhung gegen Inflation', path: '/pay-raise-vs-inflation-purchasing-power', description: 'Passende Zeiträume des Verbraucherpreisindex verwenden und reale Kaufkraft statt nur Prozentwerte messen.' },
     ],
-    seoHeading: 'Gesamtkosten-Rechner für deutsche Verträge und Preise',
-    seoParagraphs: [
-      'WorthCalc beantwortet konkrete Suchfragen: Wie hoch ist der effektive Jahreszins einer Ratenzahlung, was kosten alle Abos, wann lohnt sich Kaufen statt Mieten oder wie teuer ist Pendeln wirklich? Beispielwerte erklären nur die Methode. Eigene Verträge, Rechnungen und Angebote bleiben die maßgebliche Grundlage.',
-      'Bei einer Finanzierung sind Monatsrate und Null-Prozent-Hinweis nicht ausreichend. Entscheidend sind unter anderem Barpreis, Laufzeit, effektiver Jahreszins, Gesamtbetrag, Gebühren, Zusatzverträge und die Belastbarkeit des Haushalts über die gesamte Laufzeit. Die vertiefenden Seiten ordnen diese Punkte mit deutschen Verbraucher- und Behördenquellen ein.',
-      'Die Ergebnisse sind unverbindliche Lernrechnungen und keine individuelle Finanz-, Steuer-, Rechts-, Immobilien- oder Anlageberatung. Preise, Bedingungen und Förderfähigkeit vor einer Entscheidung aktuell bestätigen. Eingaben verlassen den Browser nicht.',
-    ],
+    guidesMore: 'Alle Ratgeber, nach Thema',
     faqHeading: 'Häufige Fragen',
     faq: [
       { question: 'Warum ist der effektive Jahreszins wichtiger als die Monatsrate?', answer: 'Die Rate hängt stark von der Laufzeit ab. Der effektive Jahreszins macht viele preisbestimmende Kreditkosten jährlich vergleichbar; zusätzlich sollten Gesamtbetrag, Barpreis und Vertragsbedingungen geprüft werden.' },
@@ -649,11 +711,18 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
   },
 };
 
-export function homeJsonLd(locale: CoreLocale, site?: URL): object[] {
+export interface HomeFeaturedItem {
+  title: string;
+  path: string;
+}
+
+export function homeJsonLd(locale: CoreLocale, site?: URL, featured?: readonly HomeFeaturedItem[]): object[] {
   const content = homeContent[locale];
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
   const pageUrl = locale === 'en' ? `${origin}/` : `${origin}/${locale}/`;
-  const featuredItems = content.authority?.clusters ?? content.tools;
+  // The ItemList has to describe what the page actually renders, so the caller
+  // passes the same featured selection the homepage lays out.
+  const featuredItems = featured ?? content.tools;
   return [
     {
       '@context': 'https://schema.org',

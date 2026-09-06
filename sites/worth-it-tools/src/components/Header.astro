@@ -31,9 +31,9 @@ const t = useTranslations(locale);
     <div class="site-header__actions">
       <nav class="primary-nav" aria-label="Primary">
         <a href={localizedCorePath(locale, '/')}>{t('nav.home')}</a>
-        <a href={`${localizedCorePath(locale, '/')}#tools`}>{t('nav.tools')}</a>
+        <a href={localizedCorePath(locale, '/tools')}>{t('nav.tools')}</a>
+        <a href={localizedCorePath(locale, '/guides')}>{t('nav.guides')}</a>
         <a href={localizedCorePath(locale, '/about')}>{t('nav.about')}</a>
-        <a href={localizedCorePath(locale, '/contact')}>{t('nav.contact')}</a>
       </nav>
       <LanguageSwitch locales={locales} />
     </div>

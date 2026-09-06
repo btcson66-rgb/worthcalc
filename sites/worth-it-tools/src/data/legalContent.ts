@@ -27,7 +27,7 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       updated: '2026-07-19',
       intro: [
         'WorthCalc convierte preguntas como «¿me compensa?» en variables que se puedan revisar. No publicamos una respuesta universal: mostramos la fórmula, los datos que faltan y el punto en que cambia el resultado.',
-        'La web es independiente y no pertenece a un banco, una financiera, una aseguradora ni una cadena comercial. Las ocho calculadoras principales y las 29 guías de decisión se pueden usar gratis y sin crear una cuenta.',
+        'La web es independiente y no pertenece a un banco, una financiera, una aseguradora ni una cadena comercial. Todas las calculadoras y guías de decisión se pueden usar gratis y sin crear una cuenta; el catálogo completo y actualizado está en el índice de calculadoras y en el índice de guías.',
       ],
       sections: [
         { heading: 'Cómo elegimos un problema', paragraphs: ['Priorizamos decisiones repetidas en España —financiación, suscripciones, vivienda, movilidad, cuotas, tarjetas y coste del tiempo— donde comparar el precio anunciado con el coste completo aporta una respuesta útil. No creamos páginas de marcas solo para captar búsquedas.'] },
@@ -133,7 +133,7 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       updated: '2026-07-19',
       intro: [
         'WorthCalc transforme une question vague — « est-ce vraiment rentable ? » — en hypothèses visibles. Le site ne donne pas une réponse valable pour tout le monde : il expose la formule, les données à vérifier et le seuil qui fait basculer le résultat.',
-        'WorthCalc est indépendant d’une banque, d’un organisme de crédit, d’un assureur ou d’une enseigne. Les huit calculateurs principaux et les 29 guides de décision sont accessibles gratuitement, sans création de compte.',
+        'WorthCalc est indépendant d’une banque, d’un organisme de crédit, d’un assureur ou d’une enseigne. Tous les calculateurs et guides de décision sont accessibles gratuitement, sans création de compte ; le catalogue complet et à jour figure sur l’index des calculateurs et sur l’index des guides.',
       ],
       sections: [
         { heading: 'Les sujets que nous retenons', paragraphs: ['Nous privilégions les décisions courantes en France — crédit et paiement fractionné, abonnements, logement, mobilité, cartes, adhésions et valeur du temps — lorsqu’un coût complet est plus utile qu’un prix d’appel. Nous ne créons pas de pages de marque sans valeur de calcul propre.'] },
@@ -239,7 +239,7 @@ export const legalContent: Partial<Record<EditorialLocale, Record<string, LegalP
       updated: '2026-07-19',
       intro: [
         'WorthCalc zerlegt die Frage „Lohnt sich das?“ in überprüfbare Annahmen. Wir behaupten keine allgemeingültige Antwort, sondern zeigen Formel, fehlende Daten und den Punkt, an dem sich das Ergebnis ändert.',
-        'Die Website ist unabhängig von Banken, Kreditgebern, Versicherern und Händlern. Acht Kernrechner und 29 ausführliche Entscheidungsleitfäden sind kostenlos und ohne Benutzerkonto nutzbar.',
+        'Die Website ist unabhängig von Banken, Kreditgebern, Versicherern und Händlern. Alle Rechner und Entscheidungsleitfäden sind kostenlos und ohne Benutzerkonto nutzbar; der vollständige, aktuelle Katalog steht im Rechnerverzeichnis und im Ratgeberverzeichnis.',
       ],
       sections: [
         { heading: 'Welche Entscheidungen wir bearbeiten', paragraphs: ['Im Mittelpunkt stehen in Deutschland häufige Fragen zu Ratenzahlung, Abonnements, Wohnen, Mobilität, Mitgliedschaften, Karten und Zeitkosten. Eine Seite wird nur dann veröffentlicht, wenn sie mehr leistet als einen Preis oder eine Werbeaussage zu wiederholen.'] },

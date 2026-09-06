@@ -2,11 +2,13 @@
 import HomePage from '../../components/HomePage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { homeContent, homeJsonLd } from '../../lib/home';
+import { getFeaturedCalculators } from '../../lib/catalog';
 
 const locale = 'zh';
 const content = homeContent[locale];
+const featured = await getFeaturedCalculators(locale);
 ---
 
-<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site)} entity={content.entity}>
+<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site, featured)} entity={content.entity}>
   <HomePage locale={locale} />
 </BaseLayout>

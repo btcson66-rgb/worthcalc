@@ -10,6 +10,13 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__inner">
     <p>{t('site.tagline')}</p>
+    <section aria-labelledby="footer-browse-heading">
+      <h2 id="footer-browse-heading">{t('footer.browse')}</h2>
+      <nav class="footer-links" aria-label={t('footer.browse')}>
+        <a href={localizedCorePath(locale, '/tools')}>{t('footer.calculators')}</a>
+        <a href={localizedCorePath(locale, '/guides')}>{t('footer.guides')}</a>
+      </nav>
+    </section>
     <section aria-labelledby="footer-legal-heading">
       <h2 id="footer-legal-heading">{t('footer.legal')}</h2>
       <nav class="footer-links" aria-label={t('footer.legal')}>

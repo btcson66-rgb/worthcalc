@@ -1,9 +1,23 @@
 ---
+/*
+ * The homepage.
+ *
+ * It used to render the entire site: 15 <h2> sections and 304 internal links on
+ * English, including `guideIndex[locale]` in full because that index was the
+ * only inbound link 131 editorial pages had. That made the most-crawled page on
+ * the site a sitemap, and it made the homepage's own topic — what WorthCalc is
+ * for — impossible to read from the markup.
+ *
+ * Now it is nine sections: hero, what the site is for, the four decision
+ * clusters, ten calculators, the two directories, six guides, method and
+ * limits, FAQ. The complete catalogue moved to /tools/ and /guides/, which is
+ * where the 131 pages get their inbound link from instead.
+ */
 import type { CoreLocale } from '../consts';
 import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
-import { guideIndex } from '../data/guideIndex';
-import { getCollection } from 'astro:content';
+import { getFeaturedCalculators } from '../lib/catalog';
+import { PRIMARY_TOPIC_IDS, TOPIC_IDS, topicCopy, topicHref } from '../lib/topics';
 import FAQ from './FAQ.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
 
@@ -13,32 +27,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const authority = content.authority;
 const trust = content.trust;
-const growthTools = (await getCollection('growthTools', ({ data }) => data.locale === locale && !data.draft))
-  .sort((a, b) => a.data.title.localeCompare(b.data.title, locale));
-const authorityPaths = new Set(authority?.clusters.map((cluster) => cluster.path) ?? []);
-const remainingTools = authority
-  ? content.tools.filter((tool) => !authorityPaths.has(tool.path))
-  : content.tools;
-const remainingGrowthTools = authority
-  ? growthTools.filter((entry) => !authorityPaths.has(`/tools/${entry.data.toolSlug}`))
-  : growthTools;
-const growthHeading = {
-  en: 'More planning calculators', zh: '更多財務規劃試算', es: 'Más calculadoras de planificación', fr: 'Autres calculateurs de planification', de: 'Weitere Planungsrechner',
-}[locale];
+const topics = topicCopy[locale];
 
-// 完整指南索引。首頁是全站最常被爬的頁面，這一段讓每一篇編輯內容都至少有一條
-// 來自它的連結——2026-08-06 盤點時有 106 頁內文零內部連結，最新六篇的唯一入站
-// 連結是自己的語言切換器，Google 因此連 07-28 發布的文章都還不知道存在。
-const allGuides = guideIndex[locale];
-const allGuidesCopy = {
-  en: { heading: 'Every guide on this site', lead: 'The full index, so you can find the write-up behind any calculator.' },
-  zh: { heading: '本站所有指南', lead: '完整索引，每一個試算背後的說明都在這裡。' },
-  es: { heading: 'Todas las guías de este sitio', lead: 'El índice completo, para encontrar el análisis detrás de cada calculadora.' },
-  fr: { heading: 'Tous les guides du site', lead: "L'index complet, pour retrouver l'analyse derrière chaque calculateur." },
-  de: { heading: 'Alle Ratgeber dieser Seite', lead: 'Das vollständige Verzeichnis mit der Erklärung hinter jedem Rechner.' },
-}[locale];
+const featured = await getFeaturedCalculators(locale);
+const secondaryTopics = TOPIC_IDS.filter((topic) => !PRIMARY_TOPIC_IDS.includes(topic));
 ---
 
 <section class="hero">
@@ -50,55 +43,38 @@ const allGuidesCopy = {
   </ul>
 </section>
 
-{authority && (
-  <section class="home-authority" aria-labelledby="home-authority-heading">
-    <h2 id="home-authority-heading">{authority.heading}</h2>
-    <p class="section-lead">{authority.lead}</p>
-    <div class="guide-grid">
-      {authority.clusters.map((cluster) => (
-        <article class="guide-card">
-          <h3><a href={localizedPath(locale, cluster.path)}>{cluster.title}</a></h3>
-          <p>{cluster.description}</p>
-          <span>{authority.cta} →</span>
-        </article>
-      ))}
-    </div>
-  </section>
-)}
+<section class="home-value" aria-labelledby="home-value-heading">
+  <h2 id="home-value-heading">{content.value.heading}</h2>
+  <p class="section-lead">{content.value.lead}</p>
+  <div class="home-value__grid">
+    {content.value.items.map((item) => (
+      <div>
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
-{trust && (
-  <section class="home-trust" aria-labelledby="home-trust-heading">
-    <h2 id="home-trust-heading">{trust.heading}</h2>
-    <div class="home-trust__grid">
-      <div>
-        <h3>{trust.methodHeading}</h3>
-        <p>{trust.method}</p>
-      </div>
-      <div>
-        <h3>{trust.scopeHeading}</h3>
-        <p>{trust.scope}</p>
-      </div>
-    </div>
-    <h3>{trust.sourcesHeading}</h3>
-    <p>{trust.sourcesLead}</p>
-    <ul class="home-trust__sources">
-      {trust.sources.map((source) => (
-        <li><a href={source.href}>{source.label}</a></li>
-      ))}
-    </ul>
-    <p class="updated">
-      <strong>{trust.reviewedLabel}:</strong>{' '}
-      <time datetime={trust.reviewedDate}>{trust.reviewedDisplay}</time>
-    </p>
-    <p class="home-trust__advice"><strong>{trust.advice}</strong></p>
-  </section>
-)}
+<section class="home-categories" aria-labelledby="home-categories-heading">
+  <h2 id="home-categories-heading">{content.categories.heading}</h2>
+  <p class="section-lead">{content.categories.lead}</p>
+  <div class="guide-grid">
+    {PRIMARY_TOPIC_IDS.map((topic) => (
+      <article class="guide-card">
+        <h3><a href={topicHref(locale, topic)}>{topics[topic].name}</a></h3>
+        <p>{topics[topic].blurb}</p>
+        <span>{content.categories.cta} →</span>
+      </article>
+    ))}
+  </div>
+</section>
 
 <section id="tools">
   <h2>{content.toolsHeading}</h2>
   <p class="section-lead">{content.toolsLead}</p>
   <div class="grid">
-    {remainingTools.map((tool) => (
+    {featured.map((tool) => (
       <article class="card">
         <span class="card__icon" aria-hidden="true">{tool.icon}</span>
         <h3><a href={localizedPath(locale, tool.path)}>{tool.title}</a></h3>
@@ -106,24 +82,25 @@ const allGuidesCopy = {
         <span class="card__cta">{content.toolsCta}</span>
       </article>
     ))}
-    {remainingGrowthTools.map((entry) => (
-      <article class="card">
-        <span class="card__icon" aria-hidden="true">📊</span>
-        <h3><a href={localizedPath(locale, `/tools/${entry.data.toolSlug}`)}>{entry.data.title}</a></h3>
-        <p>{entry.data.description}</p>
-        <span class="card__cta">{content.toolsCta}</span>
-      </article>
-    ))}
   </div>
-  <p class="section-lead growth-tool-note"><strong>{growthHeading}:</strong> {remainingGrowthTools.length}</p>
 </section>
 
-<section class="home-method" aria-labelledby="home-method-heading">
-  <h2 id="home-method-heading">{content.methodHeading}</h2>
-  <p class="section-lead">{content.methodLead}</p>
-  <ol>
-    {content.methodSteps.map((step) => <li>{step}</li>)}
-  </ol>
+<section class="home-library" aria-labelledby="home-library-heading">
+  <h2 id="home-library-heading">{content.library.heading}</h2>
+  <p class="section-lead">{content.library.lead}</p>
+  <ul class="home-library__links">
+    <li><a href={localizedPath(locale, '/tools')}>{content.library.calculators}</a></li>
+    <li><a href={localizedPath(locale, '/guides')}>{content.library.guides}</a></li>
+  </ul>
+  <p class="home-library__more">
+    <strong>{content.library.moreTopics}:</strong>{' '}
+    {secondaryTopics.map((topic, index) => (
+      <>
+        {index > 0 && <span aria-hidden="true"> · </span>}
+        <a href={topicHref(locale, topic)}>{topics[topic].name}</a>
+      </>
+    ))}
+  </p>
 </section>
 
 <section class="home-guides" aria-labelledby="home-guides-heading">
@@ -138,75 +115,44 @@ const allGuidesCopy = {
       </article>
     ))}
   </div>
+  <p class="home-guides__more">
+    <a href={localizedPath(locale, '/guides')}>{content.guidesMore} →</a>
+  </p>
 </section>
 
-{content.guideCluster && (
-  <section class="home-guides" aria-labelledby="home-guide-cluster-heading">
-    <h2 id="home-guide-cluster-heading">{content.guideCluster.heading}</h2>
-    <p class="section-lead">{content.guideCluster.intro}</p>
-    <div class="guide-grid">
-      {content.guideCluster.cards.map((guide) => (
-        <article class="guide-card">
-          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
-          <p>{guide.description}</p>
-          <span>{content.guidesCta} →</span>
-        </article>
-      ))}
+<section class="home-trust" aria-labelledby="home-trust-heading">
+  <h2 id="home-trust-heading">{trust.heading}</h2>
+  <div class="home-trust__grid">
+    <div>
+      <h3>{trust.methodHeading}</h3>
+      <p>{trust.method}</p>
     </div>
-  </section>
-)}
-
-{content.featuredGuide && (
-  <section class="home-guides" aria-labelledby="home-featured-guide-heading">
-    <h2 id="home-featured-guide-heading">{content.featuredGuide.heading}</h2>
-    <p class="section-lead">{content.featuredGuide.intro}</p>
-  </section>
-)}
-
-{content.guideClusters?.map((cluster, index) => (
-  <section class="home-guides" aria-labelledby={'home-guide-package-' + index + '-heading'}>
-    <h2 id={'home-guide-package-' + index + '-heading'}>{cluster.heading}</h2>
-    {cluster.intro && <p class="section-lead">{cluster.intro}</p>}
-    <div class="guide-grid">
-      {cluster.cards.map((guide) => (
-        <article class="guide-card">
-          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
-          <p>{guide.description}</p>
-          <span>{content.guidesCta} →</span>
-        </article>
-      ))}
+    <div>
+      <h3>{trust.scopeHeading}</h3>
+      <p>{trust.scope}</p>
     </div>
-  </section>
-))}
-
-{content.guideAdditions && (
-  <section class="home-guides" aria-labelledby="home-guide-additions-heading">
-    <h2 id="home-guide-additions-heading">{content.guidesHeading}</h2>
-    <div class="guide-grid">
-      {content.guideAdditions.map((guide) => (
-        <article class="guide-card">
-          <h3><a href={localizedPath(locale, guide.path)}>{guide.title}</a></h3>
-          <p>{guide.description}</p>
-          <span>{content.guidesCta} →</span>
-        </article>
-      ))}
-    </div>
-  </section>
-)}
-
-<section class="all-guides" aria-labelledby="all-guides-heading">
-  <h2 id="all-guides-heading">{allGuidesCopy.heading}</h2>
-  <p class="section-lead">{allGuidesCopy.lead}</p>
-  <ul class="all-guides__list">
-    {allGuides.map((guide) => (
-      <li><a href={localizedPath(locale, guide.path)}>{guide.title}</a></li>
-    ))}
-  </ul>
-</section>
-
-<section class="seo-copy" aria-labelledby="home-seo-heading">
-  <h2 id="home-seo-heading">{content.seoHeading}</h2>
-  {content.seoParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+  <h3>{content.methodHeading}</h3>
+  <p>{content.methodLead}</p>
+  <ol>
+    {content.methodSteps.map((step) => <li>{step}</li>)}
+  </ol>
+  {trust.sources && trust.sources.length > 0 && (
+    <>
+      <h3>{trust.sourcesHeading}</h3>
+      <p>{trust.sourcesLead}</p>
+      <ul class="home-trust__sources">
+        {trust.sources.map((source) => (
+          <li><a href={source.href}>{source.label}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+  <p class="updated">
+    <strong>{trust.reviewedLabel}:</strong>{' '}
+    <time datetime={trust.reviewedDate}>{trust.reviewedDisplay}</time>
+  </p>
+  <p class="home-trust__advice"><strong>{trust.advice}</strong></p>
 </section>
 
 <FAQ items={content.faq} heading={content.faqHeading} />

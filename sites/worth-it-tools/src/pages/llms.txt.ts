@@ -1,8 +1,7 @@
 import type { APIContext } from 'astro';
-import { getCollection } from 'astro:content';
 import { SITE, CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
-import { homeContent } from '../lib/home';
-import { guideIndex } from '../data/guideIndex';
+import { getCalculators, getGuides } from '../lib/catalog';
+import { TOPIC_IDS, topicCopy, topicPath } from '../lib/topics';
 
 export const prerender = true;
 
@@ -13,8 +12,9 @@ export const prerender = true;
  * drift that left 106 pages with no internal link: a list a human has to remember
  * to update is a list that goes stale.
  *
- * It is generated from the same data the pages render from now, so it cannot
- * disagree with them.
+ * It is generated from the same catalogue the pages render from now, so it
+ * cannot disagree with them, and it leads with the topic hubs so an assistant
+ * reading it sees the site's structure before its 1,200 URLs.
  */
 const LOCALE_LABEL: Record<string, string> = {
   en: 'English (default, canonical)',
@@ -27,10 +27,8 @@ const LOCALE_LABEL: Record<string, string> = {
 export const GET = async ({ site }: APIContext): Promise<Response> => {
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
   const url = (path: string) => `${origin}${path}`;
-  const en = homeContent.en;
-
-  const growthTools = (await getCollection('growthTools', ({ data }) => data.locale === 'en' && !data.draft))
-    .sort((left, right) => left.data.title.localeCompare(right.data.title, 'en'));
+  const calculators = (await getCalculators('en')).sort((left, right) => left.title.localeCompare(right.title, 'en'));
+  const guides = getGuides('en');
 
   const lines: string[] = [
     `# ${SITE.name} (worthcalc.win)`,
@@ -50,16 +48,21 @@ export const GET = async ({ site }: APIContext): Promise<Response> => {
     lines.push(`- ${LOCALE_LABEL[locale] ?? LOCALE_HREFLANG[locale]}: ${url(path)}`);
   }
 
-  lines.push('', '## Calculators', '');
-  for (const tool of en.tools) {
-    lines.push(`- [${tool.title}](${url(`/en${tool.path}/`)}): ${tool.description}`);
+  lines.push('', '## Topics', '');
+  lines.push(`Every page belongs to one of six decision topics. Each hub lists the calculators and guides for it.`, '');
+  for (const topic of TOPIC_IDS) {
+    lines.push(`- [${topicCopy.en[topic].name}](${url(`/en${topicPath(topic)}/`)}): ${topicCopy.en[topic].blurb}`);
   }
-  for (const entry of growthTools) {
-    lines.push(`- [${entry.data.title}](${url(`/en/tools/${entry.data.toolSlug}/`)}): ${entry.data.description}`);
+
+  lines.push('', '## Calculators', '');
+  lines.push(`- Directory, grouped by topic: ${url('/en/tools/')}`, '');
+  for (const tool of calculators) {
+    lines.push(`- [${tool.title}](${url(`/en${tool.path}/`)}): ${tool.description}`);
   }
 
   lines.push('', '## Guides', '');
-  for (const guide of guideIndex.en) {
+  lines.push(`- Directory, grouped by topic: ${url('/en/guides/')}`, '');
+  for (const guide of guides) {
     lines.push(`- [${guide.title}](${url(`/en${guide.path}`)})`);
   }
 
@@ -74,7 +77,8 @@ export const GET = async ({ site }: APIContext): Promise<Response> => {
     '## Site index',
     '',
     `- Sitemap: ${url('/sitemap-index.xml')}`,
-    `- Every guide, linked in full: ${url('/')}`,
+    `- Every calculator, grouped by topic: ${url('/en/tools/')}`,
+    `- Every guide, grouped by topic: ${url('/en/guides/')}`,
     '',
   );
 

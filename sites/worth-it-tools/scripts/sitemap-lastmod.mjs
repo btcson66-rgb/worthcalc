@@ -73,11 +73,33 @@ function sourceFileForRoute(route, contentLookup) {
   const localePage = join(pagesRoot, '[locale]', relativeRoute ? `${relativeRoute}.astro` : 'index.astro');
   if (existsSync(localePage)) return { sourceFile: localePage, contentDate: null };
 
+  // Directory routes such as /en/tools/ and /en/guides/, served by an
+  // index.astro inside the directory. Without this they fall through to the
+  // legal-page catch-all below and inherit an unrelated file's date.
+  for (const base of [locale, '[locale]']) {
+    const directoryIndex = join(pagesRoot, base, relativeRoute, 'index.astro');
+    if (relativeRoute && existsSync(directoryIndex)) return { sourceFile: directoryIndex, contentDate: null };
+  }
+
   // These two catch-all routes render their content from the named data files.
   // Prefer those content sources over a single generic wrapper for every URL.
   if (parts[0] === 'tools' && parts.length === 2) {
     return { sourceFile: join(projectRoot, 'src', 'data', 'coreToolContent.ts'), contentDate: null };
   }
+
+  // A dynamic leaf such as /en/topics/housing/, served by
+  // src/pages/[locale]/topics/[topic].astro.
+  const parentRoute = parts.slice(0, -1).join('/');
+  if (parentRoute) {
+    const dynamicDirectory = join(pagesRoot, '[locale]', parentRoute);
+    if (existsSync(dynamicDirectory)) {
+      const dynamicPage = readdirSync(dynamicDirectory).find(
+        (name) => name.startsWith('[') && name.endsWith('.astro'),
+      );
+      if (dynamicPage) return { sourceFile: join(dynamicDirectory, dynamicPage), contentDate: null };
+    }
+  }
+
   if (parts.length === 1) {
     return { sourceFile: join(projectRoot, 'src', 'data', 'legalContent.ts'), contentDate: null };
   }

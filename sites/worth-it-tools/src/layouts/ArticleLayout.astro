@@ -5,6 +5,7 @@ import { localizedCorePath, useTranslations } from '../i18n/utils';
 import { articleJsonLd } from '../lib/seo';
 import AdSlot from '../components/AdSlot.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import TopicLinks from '../components/TopicLinks.astro';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
@@ -27,6 +28,8 @@ interface Props {
 
 const { title, description, locale, updated, breadcrumb, noindex, alternateLocales, seoTitle, ogTitle, ogDescription, image, imageAlt, robots, jsonLd = [], showTitle = true } = Astro.props;
 const t = useTranslations(locale);
+// The locale prefix is stripped so the topic classifier sees the logical route.
+const logicalPath = `/${Astro.url.pathname.split('/').filter(Boolean).slice(1).join('/')}`;
 const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: title, url: Astro.url.pathname },
@@ -54,5 +57,6 @@ const crumbs = breadcrumb ?? [
     {updated && <p class="updated">{updated}</p>}
     <slot />
   </article>
+  <TopicLinks locale={locale} path={logicalPath} />
   <AdSlot noindex={noindex} />
 </BaseLayout>

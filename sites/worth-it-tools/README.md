@@ -102,6 +102,38 @@ The daily `content-library/` pipeline already only ships `en`/`zh` pairs (see
 for new tools and articles; this pause is `es`/`fr`/`de` only, and it does not
 apply to fixing bugs, hreflang, or internal links on the pages that already exist.
 
+## Information architecture (2026-09-05)
+
+Before this, the site had no layer between a 1,207-URL sitemap and a single
+calculator page. The homepage carried the whole catalogue — 15 `<h2>` sections
+and 304 internal links on English, including `guideIndex[locale]` rendered in
+full, because that index was the only inbound link 131 editorial pages had.
+
+Four layers now:
+
+| Layer | Route | What it holds |
+|-------|-------|---------------|
+| Homepage | `/`, `/{locale}/` | Hero, what the site is for, the four decision clusters, ten calculators, links to both directories, six guides, method and limits, FAQ. Nine sections; nothing exhaustive. |
+| Topic hub | `/{locale}/topics/{topic}/` | One decision area: its calculators, up to twelve of its guides, how to read the pages. **`en` and `zh` only** — see the i18n freeze above. `es`/`fr`/`de` get the same grouping as headed, anchored sections of their own directories. |
+| Directory | `/{locale}/tools/`, `/{locale}/guides/` | The complete catalogue, grouped by topic. All five core locales. This is where the 131 formerly homepage-only pages get their inbound link. |
+| Leaf | calculator and guide pages | Every one ends with a topic strip (`TopicLinks.astro`) linking its hub, both directories, and any page sharing its slug at another URL prefix. |
+
+Six topics, defined in `src/lib/topics.ts`: `housing`, `debt-credit`,
+`transportation`, `everyday`, `memberships`, `income-savings`. The first, second,
+third and fourth are `PRIMARY_TOPIC_IDS`, the clusters the homepage leads with.
+Pages are assigned by `classifyTopic()` — ordered rules over hyphen-separated
+slug tokens, plus an explicit override table for the slugs that mislead the
+rules. Adding a page needs no registration; adding a page whose slug does not
+match any rule lands it in `everyday`, so check the directory after publishing
+something unusual.
+
+**Never hard-code a catalogue count.** `/en/about/` once said "we currently
+publish eight calculators" while the site served eighteen, and the Spanish,
+French and German About pages each claimed eight calculators and 29 guides.
+`src/lib/catalog.ts` counts the real catalogue at build time; use
+`getLibraryCounts(locale)` when a page needs a number, or write the sentence
+without one.
+
 ## Project Structure
 
 ```text
@@ -109,8 +141,8 @@ src/
   components/       Shared UI, SEO, ads, export controls
   i18n/             Locale utilities and UI strings
   layouts/          Base, article, and tool layouts
-  lib/              SEO and browser storage helpers
-  pages/            Static routes, tools, robots.txt
+  lib/              SEO helpers, topic model, catalogue counts, browser storage
+  pages/            Static routes, tools, directories, topic hubs, robots.txt
   styles/           Global styles
 public/             Static assets such as og-default.png and ads.txt
 dist/               Build output

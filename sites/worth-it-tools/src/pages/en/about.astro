@@ -1,15 +1,21 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { localizedPath } from '../../i18n/utils';
+import { getLibraryCounts } from '../../lib/catalog';
 
 const locale = 'en';
+// Counted from the catalogue at build time. This paragraph used to read "we
+// currently publish eight calculators" and list them by name; the site served
+// eighteen. A number a human has to remember to update is a number that will
+// be wrong, and on a money site a stale self-description is a trust problem.
+const counts = await getLibraryCounts(locale);
 ---
 
 <ArticleLayout
   title="About WorthCalc"
   description="WorthCalc is a free set of browser-based calculators that answer one question: is it actually worth it?"
   locale={locale}
-  updated="2026-07-15"
+  updated="2026-09-05"
   alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
 >
   <p>
@@ -28,12 +34,15 @@ const locale = 'en';
     locally for next time).
   </p>
   <p>
-    We currently publish eight calculators covering everyday money decisions:
-    true APR on installment and BNPL plans, subscription cost audits, Costco
-    membership break-even, EV vs. gas total cost of ownership, rent vs. buy,
-    commute cost comparison, the "latte factor" daily habit calculator, and
-    cashback credit card break-even. Each one is free, ad-supported, and
-    built to give you a plain verdict — not just a pile of numbers.
+    WorthCalc publishes a set of transparent decision calculators alongside the
+    written guides that explain them — currently {counts.calculators} calculators
+    and {counts.guides} guides in English, maintained across {counts.languages}
+    languages. Those figures are counted from the catalogue when this page is
+    built, so they cannot drift out of date. The complete, current lists are the
+    <a href={localizedPath(locale, '/tools')}>calculator directory</a> and the
+    <a href={localizedPath(locale, '/guides')}>guide directory</a>, both grouped
+    by the decision they answer. Everything is free and ad-supported, and each
+    tool is built to give a plain verdict rather than a pile of numbers.
   </p>
   <p>
     WorthCalc is independently run. We are not a bank, lender, brokerage, or

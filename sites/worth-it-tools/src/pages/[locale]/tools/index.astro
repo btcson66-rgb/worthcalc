@@ -1,0 +1,118 @@
+---
+/*
+ * The calculator directory.
+ *
+ * Every calculator used to be listed on the homepage, which is how the English
+ * homepage ended up carrying 304 internal links and reading as a sitemap. The
+ * complete catalogue lives here now, grouped by topic; the homepage keeps a
+ * curated ten and links to this page for the rest.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { CORE_LOCALES, type CoreLocale } from '../../../consts';
+import { localizedCorePath, localizedPath, useTranslations } from '../../../i18n/utils';
+import { getCalculators, getCalculatorsByTopic } from '../../../lib/catalog';
+import { TOPIC_IDS, topicCopy, topicPath, hasHubPages } from '../../../lib/topics';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return CORE_LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as CoreLocale;
+const t = useTranslations(locale);
+const calculators = await getCalculators(locale);
+const grouped = getCalculatorsByTopic(calculators);
+const topics = topicCopy[locale];
+
+const copy = {
+  en: {
+    title: 'All calculators',
+    description: 'Every WorthCalc calculator, grouped by the decision it answers: housing, debt and credit, transportation, everyday break-evens, memberships, and income and savings.',
+    lead: 'Every calculator on the site, grouped by the decision it answers. Each one shows its formula, lets you replace the example numbers with your own, and states what it deliberately leaves out.',
+    guidesCta: 'Read the guides for this decision',
+  },
+  zh: {
+    title: '全部計算機',
+    description: 'WorthCalc 的所有計算機，依照它們回答的決策分類：住房、債務與信用、交通、日常回本、訂閱會員、收入與儲蓄。',
+    lead: '本站所有計算機，依照它們回答的決策分類。每一個都會列出公式、讓你用自己的數字取代範例值，並說明它刻意不納入什麼。',
+    guidesCta: '閱讀這個主題的指南',
+  },
+  es: {
+    title: 'Todas las calculadoras',
+    description: 'Todas las calculadoras de WorthCalc, agrupadas por la decisión que resuelven: vivienda, deuda y crédito, movilidad, punto de equilibrio cotidiano, membresías e ingresos.',
+    lead: 'Todas las calculadoras del sitio, agrupadas por la decisión que resuelven. Cada una muestra su fórmula, permite sustituir el ejemplo por tus cifras y explica qué deja fuera a propósito.',
+    guidesCta: 'Ver las guías de este tema',
+  },
+  fr: {
+    title: 'Tous les calculateurs',
+    description: 'Tous les calculateurs WorthCalc, regroupés par décision : logement, crédit, mobilité, seuils du quotidien, abonnements, revenus et épargne.',
+    lead: 'Tous les calculateurs du site, regroupés par la décision qu’ils tranchent. Chacun affiche sa formule, accepte vos propres chiffres à la place de l’exemple et indique ce qu’il laisse volontairement de côté.',
+    guidesCta: 'Lire les guides de ce thème',
+  },
+  de: {
+    title: 'Alle Rechner',
+    description: 'Alle WorthCalc-Rechner, gruppiert nach Entscheidung: Wohnen, Kredit, Mobilität, Break-even im Alltag, Abos sowie Einkommen und Sparen.',
+    lead: 'Alle Rechner der Seite, gruppiert nach der Entscheidung, die sie beantworten. Jeder zeigt seine Formel, nimmt Ihre eigenen Zahlen statt des Beispiels und benennt, was er bewusst weglässt.',
+    guidesCta: 'Ratgeber zu diesem Thema lesen',
+  },
+}[locale];
+
+const crumbs = [
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+  { name: copy.title, url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+  locale={locale}
+  jsonLd={[
+    breadcrumbJsonLd(crumbs, Astro.site),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: copy.title,
+      description: copy.description,
+      url: new URL(Astro.url.pathname, Astro.site ?? 'https://worthcalc.win').href,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: calculators.length,
+        itemListElement: calculators.map((entry, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: entry.title,
+          url: new URL(localizedPath(locale, entry.path), Astro.site ?? 'https://worthcalc.win').href,
+        })),
+      },
+    },
+  ]}
+>
+  <Breadcrumb items={crumbs} includeJsonLd={false} />
+  <section class="directory-intro">
+    <h1>{copy.title}</h1>
+    <p class="section-lead">{copy.lead}</p>
+  </section>
+
+  {TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0).map((topic) => (
+    <section class="directory-topic" id={topic} aria-labelledby={`topic-${topic}-heading`}>
+      <h2 id={`topic-${topic}-heading`}>{topics[topic].name}</h2>
+      <p class="section-lead">{topics[topic].intro}</p>
+      <div class="grid">
+        {(grouped.get(topic) ?? []).map((entry) => (
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">{entry.icon}</span>
+            <h3><a href={localizedPath(locale, entry.path)}>{entry.title}</a></h3>
+            <p>{entry.description}</p>
+          </article>
+        ))}
+      </div>
+      {hasHubPages(locale) && (
+        <p class="directory-topic__more">
+          <a href={localizedPath(locale, topicPath(topic))}>{copy.guidesCta} →</a>
+        </p>
+      )}
+    </section>
+  ))}
+</BaseLayout>

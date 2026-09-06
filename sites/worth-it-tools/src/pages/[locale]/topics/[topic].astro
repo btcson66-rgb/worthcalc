@@ -1,0 +1,123 @@
+---
+/*
+ * Topic hubs.
+ *
+ * The middle layer the site never had: something between a 1,200-URL sitemap
+ * and a single calculator page that says "these pages answer one kind of
+ * question, and here is how they fit together".
+ *
+ * English and Traditional Chinese only. es/fr/de are frozen for new routes
+ * (README, "i18n expansion policy") — those locales get the same grouping as
+ * headed sections on their own /tools/ and /guides/ directories instead.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import type { CoreLocale } from '../../../consts';
+import { localizedCorePath, localizedPath, useTranslations } from '../../../i18n/utils';
+import { getCalculators, getGuides } from '../../../lib/catalog';
+import { HUB_LOCALES, TOPIC_IDS, topicCopy, type TopicId } from '../../../lib/topics';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return HUB_LOCALES.flatMap((locale) => TOPIC_IDS.map((topic) => ({ params: { locale, topic } })));
+}
+
+const locale = Astro.params.locale as CoreLocale;
+const topic = Astro.params.topic as TopicId;
+const t = useTranslations(locale);
+const copyForTopic = topicCopy[locale][topic];
+
+const calculators = (await getCalculators(locale)).filter((entry) => entry.topic === topic);
+const guides = getGuides(locale).filter((entry) => entry.topic === topic);
+// The hand-written editorial pages sit at the locale root; the programmatic
+// guide programme lives under /guides/. Lead with the former: they are the
+// pages a reader arriving on a hub is most likely to want.
+const editorial = guides.filter((entry) => !entry.path.startsWith('/guides/'));
+const programme = guides.filter((entry) => entry.path.startsWith('/guides/'));
+const featuredGuides = [...editorial, ...programme].slice(0, 12);
+
+const copy = {
+  en: {
+    calculators: 'Calculators for this decision',
+    guides: 'Guides that explain the decision',
+    allGuides: 'Every guide in this topic',
+    allCalculators: 'Every calculator on the site',
+    remaining: (count: number) => `${count} more guides in this topic`,
+    scope: 'How to read these pages',
+    scopeBody:
+      'Each calculator applies a stated formula to the numbers you enter and shows the threshold where the answer flips. The default values are editable examples, not market averages or quotes. Nothing here is financial advice: confirm current prices, rates, fees, taxes and contract terms before acting on a result.',
+  },
+  zh: {
+    calculators: '這個決策的計算機',
+    guides: '解釋這個決策的指南',
+    allGuides: '這個主題的所有指南',
+    allCalculators: '本站所有計算機',
+    remaining: (count: number) => `這個主題還有 ${count} 篇指南`,
+    scope: '怎麼看這些頁面',
+    scopeBody:
+      '每個計算機都用寫明的公式處理你輸入的數字，並顯示答案翻轉的門檻。預設值是可以修改的範例，不是市場平均值，也不是報價。本站內容不構成財務建議：採取行動前請確認當下的價格、利率、費用、稅負與契約條款。',
+  },
+}[locale as 'en' | 'zh'];
+
+const crumbs = [
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+  { name: copy.calculators, url: localizedPath(locale, '/tools') },
+  { name: copyForTopic.name, url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={copyForTopic.name}
+  description={copyForTopic.blurb}
+  locale={locale}
+  alternateLocales={[...HUB_LOCALES]}
+  jsonLd={[breadcrumbJsonLd(crumbs, Astro.site)]}
+>
+  <Breadcrumb items={crumbs} includeJsonLd={false} />
+  <section class="hub-intro">
+    <h1>{copyForTopic.name}</h1>
+    <p class="section-lead">{copyForTopic.intro}</p>
+  </section>
+
+  {calculators.length > 0 && (
+    <section class="hub-tools" aria-labelledby="hub-tools-heading">
+      <h2 id="hub-tools-heading">{copy.calculators}</h2>
+      <div class="grid">
+        {calculators.map((entry) => (
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">{entry.icon}</span>
+            <h3><a href={localizedPath(locale, entry.path)}>{entry.title}</a></h3>
+            <p>{entry.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {featuredGuides.length > 0 && (
+    <section class="hub-guides" aria-labelledby="hub-guides-heading">
+      <h2 id="hub-guides-heading">{copy.guides}</h2>
+      <ul class="directory-list">
+        {featuredGuides.map((entry) => (
+          <li><a href={localizedPath(locale, entry.path)}>{entry.title}</a></li>
+        ))}
+      </ul>
+      {guides.length > featuredGuides.length && (
+        <p class="directory-topic__more">
+          <a href={`${localizedPath(locale, '/guides')}#${topic}`}>
+            {copy.remaining(guides.length - featuredGuides.length)} →
+          </a>
+        </p>
+      )}
+    </section>
+  )}
+
+  <section class="hub-scope" aria-labelledby="hub-scope-heading">
+    <h2 id="hub-scope-heading">{copy.scope}</h2>
+    <p>{copy.scopeBody}</p>
+    <p class="directory-topic__more">
+      <a href={localizedPath(locale, '/tools')}>{copy.allCalculators} →</a>
+      <a href={`${localizedPath(locale, '/guides')}#${topic}`}>{copy.allGuides} →</a>
+    </p>
+  </section>
+</BaseLayout>

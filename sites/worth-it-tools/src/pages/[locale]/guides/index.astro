@@ -1,0 +1,107 @@
+---
+/*
+ * The guide directory.
+ *
+ * The homepage used to render `guideIndex[locale]` in full — 251 links on
+ * English, 296 on Chinese — because that index was the only inbound link 131
+ * editorial pages had. Those links live here now, so the homepage can stop
+ * being a sitemap without orphaning anything.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { CORE_LOCALES, type CoreLocale } from '../../../consts';
+import { localizedCorePath, localizedPath, useTranslations } from '../../../i18n/utils';
+import { getGuides, getGuidesByTopic } from '../../../lib/catalog';
+import { TOPIC_IDS, topicCopy, topicPath, hasHubPages } from '../../../lib/topics';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return CORE_LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as CoreLocale;
+const t = useTranslations(locale);
+const guides = getGuides(locale);
+const grouped = getGuidesByTopic(guides);
+const topics = topicCopy[locale];
+
+const copy = {
+  en: {
+    title: 'All guides',
+    description: 'Every WorthCalc decision guide, grouped by topic: housing, debt and credit, transportation, everyday break-evens, memberships, and income and savings.',
+    lead: 'The complete index of decision guides, grouped by topic. Each guide states the question it answers, the formula behind it, a worked example, what would reverse the conclusion, and the calculator that runs it with your numbers.',
+    toolsCta: 'Calculators for this decision',
+    hubCta: 'Topic overview',
+  },
+  zh: {
+    title: '全部指南',
+    description: 'WorthCalc 的所有決策指南，依主題分類：住房、債務與信用、交通、日常回本、訂閱會員、收入與儲蓄。',
+    lead: '決策指南的完整索引，依主題分類。每一篇都會說明它回答什麼問題、背後的公式、可重算的範例、什麼條件會讓結論翻轉，以及用你自己的數字執行它的計算機。',
+    toolsCta: '這個主題的計算機',
+    hubCta: '主題總覽',
+  },
+  es: {
+    title: 'Todas las guías',
+    description: 'Todas las guías de decisión de WorthCalc, agrupadas por tema: vivienda, deuda y crédito, movilidad, punto de equilibrio cotidiano, membresías e ingresos.',
+    lead: 'Índice completo de guías de decisión, agrupadas por tema. Cada guía indica la pregunta que responde, su fórmula, un ejemplo reproducible, qué invertiría la conclusión y la calculadora que la ejecuta con tus cifras.',
+    toolsCta: 'Calculadoras de este tema',
+    hubCta: 'Resumen del tema',
+  },
+  fr: {
+    title: 'Tous les guides',
+    description: 'Tous les guides de décision WorthCalc, regroupés par thème : logement, crédit, mobilité, seuils du quotidien, abonnements, revenus et épargne.',
+    lead: 'Index complet des guides de décision, regroupés par thème. Chaque guide énonce la question traitée, sa formule, un exemple refaisable, ce qui inverserait la conclusion et le calculateur qui l’applique à vos chiffres.',
+    toolsCta: 'Calculateurs de ce thème',
+    hubCta: 'Vue d’ensemble du thème',
+  },
+  de: {
+    title: 'Alle Ratgeber',
+    description: 'Alle WorthCalc-Entscheidungsratgeber, nach Thema gruppiert: Wohnen, Kredit, Mobilität, Break-even im Alltag, Abos sowie Einkommen und Sparen.',
+    lead: 'Vollständiges Verzeichnis der Entscheidungsratgeber, nach Thema gruppiert. Jeder Ratgeber nennt die Frage, die Formel, ein nachrechenbares Beispiel, was das Ergebnis umkehren würde, und den Rechner für Ihre eigenen Zahlen.',
+    toolsCta: 'Rechner zu diesem Thema',
+    hubCta: 'Themenüberblick',
+  },
+}[locale];
+
+const crumbs = [
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+  { name: copy.title, url: Astro.url.pathname },
+];
+const populated = TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0);
+---
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+  locale={locale}
+  jsonLd={[breadcrumbJsonLd(crumbs, Astro.site)]}
+>
+  <Breadcrumb items={crumbs} includeJsonLd={false} />
+  <section class="directory-intro">
+    <h1>{copy.title}</h1>
+    <p class="section-lead">{copy.lead}</p>
+    <nav class="directory-jump" aria-label={copy.title}>
+      <ul>
+        {populated.map((topic) => <li><a href={`#${topic}`}>{topics[topic].name}</a></li>)}
+      </ul>
+    </nav>
+  </section>
+
+  {populated.map((topic) => (
+    <section class="directory-topic" id={topic} aria-labelledby={`topic-${topic}-heading`}>
+      <h2 id={`topic-${topic}-heading`}>{topics[topic].name}</h2>
+      <p class="section-lead">{topics[topic].intro}</p>
+      <ul class="directory-list">
+        {(grouped.get(topic) ?? []).map((entry) => (
+          <li><a href={localizedPath(locale, entry.path)}>{entry.title}</a></li>
+        ))}
+      </ul>
+      <p class="directory-topic__more">
+        <a href={`${localizedPath(locale, '/tools')}#${topic}`}>{copy.toolsCta} →</a>
+        {hasHubPages(locale) && (
+          <a href={localizedPath(locale, topicPath(topic))}>{copy.hubCta} →</a>
+        )}
+      </p>
+    </section>
+  ))}
+</BaseLayout>

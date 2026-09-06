@@ -110,10 +110,15 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
       isSoftDeindexed(new URL(alternate.href).pathname)
     ))
     .map(({ hreflang, href }) => ({ hreflang, href }));
-  alternates.push({
-    hreflang: 'x-default',
-    href: absolute(base, logical ? localizedPagePath(xDefaultLocale, logical) : '/'),
-  });
+  // A page that declares no locale alternates (the 404 handler) has no
+  // localized siblings to point at. Emitting x-default anyway advertised
+  // /en/404/, a URL that has never existed.
+  if (alternateLocales.length > 0) {
+    alternates.push({
+      hreflang: 'x-default',
+      href: absolute(base, logical ? localizedPagePath(xDefaultLocale, logical) : '/'),
+    });
+  }
 
   const openGraph: Record<string, string> = {
     'og:type': type,

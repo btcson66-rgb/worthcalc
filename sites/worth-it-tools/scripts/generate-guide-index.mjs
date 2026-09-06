@@ -51,7 +51,9 @@ for (const file of walkIndexHtml(distDir)) {
   const locale = segments[0];
   if (!LOCALES.includes(locale)) continue;             // 根首頁
   if (segments.length < 2) continue;                   // 語系首頁
-  if (segments[1] === 'tools') continue;               // 工具頁由首頁工具區連
+  if (segments[1] === 'tools') continue;               // 工具頁由 /tools/ 目錄與首頁精選連
+  if (segments[1] === 'topics') continue;              // 主題 Hub 是索引本身，不是被索引的內容
+  if (segments.length === 2 && segments[1] === 'guides') continue; // /guides/ 目錄頁本身
   if (LEGAL_SLUGS.has(segments.at(-1))) continue;      // 法務頁由頁尾連
 
   const heading = readFileSync(file, 'utf8').match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1];

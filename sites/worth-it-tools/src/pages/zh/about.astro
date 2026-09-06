@@ -1,15 +1,19 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { localizedPath } from '../../i18n/utils';
+import { getLibraryCounts } from '../../lib/catalog';
 
 const locale = 'zh';
+// 數量在建置時從實際目錄數出來。這段原本寫死「目前我們提供八個計算機」並逐一列名，
+// 但站上已經有十八個——需要靠人記得更新的數字，就是遲早會錯的數字。
+const counts = await getLibraryCounts(locale);
 ---
 
 <ArticleLayout
   title="關於 WorthCalc"
   description="WorthCalc 是一組免費的瀏覽器端計算機，專門回答一個問題：這樣做到底值不值得？"
   locale={locale}
-  updated="2026-07-15"
+  updated="2026-09-05"
   alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
 >
   <p>
@@ -25,10 +29,13 @@ const locale = 'zh';
     本機瀏覽器中，方便下次繼續使用）。
   </p>
   <p>
-    目前我們提供八個計算機，涵蓋日常生活中常見的花錢決策：分期付款真實年利率、
-    訂閱服務年度稽核、好市多會員回本試算、電動機車 vs 油車總持有成本、租屋 vs
-    買房試算、通勤成本比較、「手搖飲存錢」每日習慣計算機，以及信用卡回饋回本試算。
-    每一個都是免費的，靠廣告支撐營運，目標是給你一個清楚的答案，而不是一堆數字。
+    WorthCalc 提供一系列公式透明的決策計算機，以及解釋它們的文字指南——中文版目前
+    有 {counts.calculators} 個計算機與 {counts.guides} 篇指南，全站共維護
+    {counts.languages} 種語言。這些數字是在建置頁面時從實際目錄數出來的，不會過期。
+    完整且最新的清單請看
+    <a href={localizedPath(locale, '/tools')}>計算機索引</a>與
+    <a href={localizedPath(locale, '/guides')}>指南索引</a>，兩者都依照它們回答的決策分類。
+    所有內容免費，靠廣告支撐營運，目標是給你一個清楚的答案，而不是一堆數字。
   </p>
   <p>
     WorthCalc 是獨立營運的網站，我們不是銀行、放款機構、券商，也不是財務顧問。

@@ -1,0 +1,57 @@
+---
+/*
+ * The sideways move.
+ *
+ * Before the topic layer existed, a reader who finished a calculator or a guide
+ * had two ways out: the footer's legal links, or the browser back button. Every
+ * page now names the decision topic it belongs to and links to that topic's hub
+ * (or, in the frozen es/fr/de locales, to the matching section of the
+ * directories), so the whole cluster is one click away from any page in it.
+ *
+ * Non-core locales are skipped: hi/ar publish guide content only and have no
+ * localized directories to point at.
+ */
+import { CORE_LOCALES, type ContentLocale, type CoreLocale } from '../consts';
+import { localizedPath } from '../i18n/utils';
+import { getSlugSiblings } from '../lib/catalog';
+import { classifyTopic, topicCopy, topicHref } from '../lib/topics';
+
+interface Props {
+  locale: ContentLocale;
+  /** Locale-free path of the current page, e.g. `/tools/rent-vs-buy` or `/guides/laundry-cost-per-load`. */
+  path: string;
+}
+
+// ArticleLayout also renders the legal pages. They belong to no decision topic,
+// so classifying them would put a misleading "Topic: everyday break-even" strip
+// under the privacy policy.
+const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
+
+const { locale, path } = Astro.props;
+const slug = path.split('/').filter(Boolean).at(-1) ?? '';
+const isCore = (CORE_LOCALES as readonly string[]).includes(locale) && !LEGAL_SLUGS.has(slug);
+const coreLocale = locale as CoreLocale;
+const topic = classifyTopic(path);
+
+const siblings = isCore ? getSlugSiblings(locale, path) : [];
+
+const copy = {
+  en: { label: 'Topic', calculators: 'All calculators', guides: 'All guides', sibling: 'Also on this question' },
+  zh: { label: '所屬主題', calculators: '全部計算機', guides: '全部指南', sibling: '同一問題的另一篇' },
+  es: { label: 'Tema', calculators: 'Todas las calculadoras', guides: 'Todas las guías', sibling: 'Sobre la misma pregunta' },
+  fr: { label: 'Thème', calculators: 'Tous les calculateurs', guides: 'Tous les guides', sibling: 'Sur la même question' },
+  de: { label: 'Thema', calculators: 'Alle Rechner', guides: 'Alle Ratgeber', sibling: 'Zur selben Frage' },
+}[isCore ? coreLocale : 'en'];
+---
+
+{isCore && (
+  <nav class="topic-links" aria-label={copy.label}>
+    <span class="topic-links__label">{copy.label}:</span>
+    <a href={topicHref(coreLocale, topic)}>{topicCopy[coreLocale][topic].name}</a>
+    <a href={localizedPath(coreLocale, '/tools')}>{copy.calculators}</a>
+    <a href={localizedPath(coreLocale, '/guides')}>{copy.guides}</a>
+    {siblings.map((sibling) => (
+      <a href={localizedPath(coreLocale, sibling.path)}>{copy.sibling}: {sibling.title}</a>
+    ))}
+  </nav>
+)}

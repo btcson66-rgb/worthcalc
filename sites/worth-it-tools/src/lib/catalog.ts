@@ -2,6 +2,7 @@ import { getCollection } from 'astro:content';
 import { CORE_LOCALES, type ContentLocale, type CoreLocale } from '../consts';
 import { guideIndex } from '../data/guideIndex';
 import { homeContent } from './home';
+import { findSlugSiblings, isReviewedSiblingPair } from './slugSiblings';
 import { classifyTopic, type TopicId } from './topics';
 
 /*
@@ -124,24 +125,26 @@ export function getGuides(locale: ContentLocale): GuideEntry[] {
   return entries;
 }
 
-/*
- * Pages that answer the same question at two URLs.
+/**
+ * Every page in this locale that shares the given path's slug.
  *
- * The hand-written five-language editorial set and the programmatic guide
- * programme grew independently, and they collided: /en/gym-membership-cost-per-visit/
- * and /en/guides/gym-membership-cost-per-visit/ are the same slug, the same
- * intent, and both indexable. Left unlinked they compete with each other for
- * the same query. This surfaces the sibling on both pages so the pair reads as
- * one cluster; deciding which URL should survive needs Search Console data this
- * build does not have.
+ * Generic and unfiltered: a slug match is evidence of a collision, not proof
+ * that two pages answer the same question. Use this for auditing. Production
+ * UI must use getReviewedSlugSiblings() instead — see src/lib/slugSiblings.ts
+ * for why the two are separate.
  */
 export function getSlugSiblings(locale: ContentLocale, path: string): GuideEntry[] {
-  const slug = path.split('/').filter(Boolean).at(-1);
-  if (!slug) return [];
-  const normalized = path.endsWith('/') ? path : `${path}/`;
-  return getGuides(locale).filter(
-    (entry) => entry.path !== normalized && entry.path.split('/').filter(Boolean).at(-1) === slug,
-  );
+  const entries = getGuides(locale);
+  const siblingPaths = new Set(findSlugSiblings(entries.map((entry) => entry.path), path));
+  return entries.filter((entry) => siblingPaths.has(entry.path));
+}
+
+/**
+ * The subset of getSlugSiblings() a person has confirmed shares one search
+ * intent. This is the only sibling list a reader is ever shown.
+ */
+export function getReviewedSlugSiblings(locale: ContentLocale, path: string): GuideEntry[] {
+  return getSlugSiblings(locale, path).filter((entry) => isReviewedSiblingPair(path, entry.path));
 }
 
 export function getGuidesByTopic(entries: GuideEntry[]): Map<TopicId, GuideEntry[]> {

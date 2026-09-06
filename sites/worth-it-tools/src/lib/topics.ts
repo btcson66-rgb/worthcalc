@@ -306,17 +306,55 @@ const RULES: Rule[] = [
 
 const tokenize = (slug: string) => slug.split('-');
 
-/** Resolve a locale-free page path (or bare slug) to its topic. */
-export function classifyTopic(pathOrSlug: string): TopicId {
+/**
+ * The topic a slug lands in when nothing matched it.
+ *
+ * Named rather than inlined so the audit can distinguish "this page is about
+ * everyday break-evens" from "nothing recognised this page".
+ */
+export const FALLBACK_TOPIC: TopicId = 'everyday';
+
+/** How a page got its topic. */
+export type TopicSource = 'override' | 'rule' | 'fallback';
+
+export interface TopicClassification {
+  topic: TopicId;
+  source: TopicSource;
+}
+
+/*
+ * Why the source is reported at all.
+ *
+ * classifyTopic() answers with a topic for every slug, which makes the site
+ * look 100% classified. It is not: an unmatched slug silently becomes
+ * `everyday`, and a fallback is indistinguishable from a real match once the
+ * TopicId is returned. That hides the size of the taxonomy's blind spot from
+ * the next content inventory. classifyTopicDetailed() keeps the decision and
+ * the reason together; `npm run audit:topics` counts them.
+ *
+ * The classification itself is unchanged — same overrides, same rules, same
+ * order, same fallback. This only makes the existing outcome legible.
+ */
+export function classifyTopicDetailed(pathOrSlug: string): TopicClassification {
   const segments = pathOrSlug.split('/').filter(Boolean);
   const slug = segments.at(-1) ?? '';
   const override = OVERRIDES[slug];
-  if (override) return override;
+  if (override) return { topic: override, source: 'override' };
 
   const tokens = new Set(tokenize(slug));
   for (const rule of RULES) {
-    if (rule.tokens?.some((token) => tokens.has(token))) return rule.topic;
-    if (rule.phrases?.some((phrase) => slug.includes(phrase))) return rule.topic;
+    if (rule.tokens?.some((token) => tokens.has(token))) return { topic: rule.topic, source: 'rule' };
+    if (rule.phrases?.some((phrase) => slug.includes(phrase))) return { topic: rule.topic, source: 'rule' };
   }
-  return 'everyday';
+  return { topic: FALLBACK_TOPIC, source: 'fallback' };
+}
+
+/**
+ * Resolve a locale-free page path (or bare slug) to its topic.
+ *
+ * Kept returning a bare TopicId so the ~1,150 call sites that only need the
+ * topic do not have to change.
+ */
+export function classifyTopic(pathOrSlug: string): TopicId {
+  return classifyTopicDetailed(pathOrSlug).topic;
 }

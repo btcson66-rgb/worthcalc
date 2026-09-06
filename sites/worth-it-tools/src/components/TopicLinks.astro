@@ -13,7 +13,7 @@
  */
 import { CORE_LOCALES, type ContentLocale, type CoreLocale } from '../consts';
 import { localizedPath } from '../i18n/utils';
-import { getSlugSiblings } from '../lib/catalog';
+import { getReviewedSlugSiblings } from '../lib/catalog';
 import { classifyTopic, topicCopy, topicHref } from '../lib/topics';
 
 interface Props {
@@ -33,7 +33,10 @@ const isCore = (CORE_LOCALES as readonly string[]).includes(locale) && !LEGAL_SL
 const coreLocale = locale as CoreLocale;
 const topic = classifyTopic(path);
 
-const siblings = isCore ? getSlugSiblings(locale, path) : [];
+// Reviewed pairs only. A slug collision nobody has checked stays in the audit
+// (`npm run audit:topics`) and out of the page — telling a reader two pages are
+// "the same question" is an editorial claim, not something a slug match earns.
+const siblings = isCore ? getReviewedSlugSiblings(locale, path) : [];
 
 const copy = {
   en: { label: 'Topic', calculators: 'All calculators', guides: 'All guides', sibling: 'Also on this question' },

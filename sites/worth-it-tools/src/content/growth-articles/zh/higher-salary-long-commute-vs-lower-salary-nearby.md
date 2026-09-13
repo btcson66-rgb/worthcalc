@@ -300,8 +300,8 @@ $$
 
 ## Related Guides
 
-- [Commute Cost Calculator](https://worthcalc.win/en/commute-cost-calculator/)
-- [True Hourly Wage](https://worthcalc.win/en/true-hourly-wage-calculator/)
+- [Commute Cost Calculator](https://worthcalc.win/en/tools/commute-cost/)
+- [True Hourly Wage](https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程

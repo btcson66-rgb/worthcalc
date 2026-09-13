@@ -233,16 +233,24 @@ for (const { locale, route, file } of pages) {
 
   const path = locale === 'en' && route === '' ? '' : `${locale}/${route}${route ? '/' : ''}`;
   const url = `https://worthcalc.win/${path}`;
-  const expectedHreflangs = expectedHreflangsFor(
-    url,
-    locales.filter((sibling) => present.has(sibling)).map((sibling) => hreflangFor[sibling]),
-  );
+  // /en/ is a compatibility alias for the canonical root homepage. A
+  // soft-deindexed German route is intentionally outside the hreflang cluster.
+  const compatibilityDefault = locale === 'en' && route === '';
+  const softDeindexed = isSoftDeindexedUrl(url);
+  const expectedHreflangs = compatibilityDefault || softDeindexed
+    ? []
+    : expectedHreflangsFor(
+      url,
+      locales.filter((sibling) => present.has(sibling)).map((sibling) => hreflangFor[sibling]),
+    );
 
   // Every existing sibling version must be declared, plus x-default.
   for (const tag of expectedHreflangs) {
     if (!html.includes(`hreflang="${tag}"`)) failures.push(`/${locale}/${route}: missing hreflang=${tag}`);
   }
-  if (!html.includes('hreflang="x-default"')) failures.push(`/${locale}/${route}: missing hreflang=x-default`);
+  if (!compatibilityDefault && !softDeindexed && !html.includes('hreflang="x-default"')) {
+    failures.push(`/${locale}/${route}: missing hreflang=x-default`);
+  }
 
   for (const sibling of locales.filter((candidate) => present.has(candidate))) {
     const tag = hreflangFor[sibling];

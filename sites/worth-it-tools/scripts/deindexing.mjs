@@ -11,7 +11,7 @@ export function expectedHreflangsFor(url, candidates) {
   const segments = current.pathname.split('/').filter(Boolean);
   const currentLocale = segments[0];
   if (['en', 'zh', 'es', 'fr', 'de'].includes(currentLocale)) segments.shift();
-  if (currentLocale === 'de') return [...candidates];
+  if (currentLocale === 'de') return isSoftDeindexedUrl(url) ? [] : [...candidates];
 
   const logical = segments.join('/');
   const germanUrl = new URL(`/de/${logical ? `${logical}/` : ''}`, current.origin).href;

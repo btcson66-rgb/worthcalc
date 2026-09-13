@@ -21,7 +21,9 @@ function verify(path, kind) {
   const url = `https://worthcalc.win/${path}/`;
   if (!html.includes('<h1')) failures.push(`/${path}/ missing h1`);
   if (!html.includes('rel="canonical"')) failures.push(`/${path}/ missing canonical`);
-  const expectedHreflangs = expectedHreflangsFor(url, hreflangs);
+  // /en/ is a compatibility alias for the canonical root homepage, not a
+  // member of the localized homepage hreflang cluster.
+  const expectedHreflangs = path === 'en' ? [] : expectedHreflangsFor(url, hreflangs);
   for (const hreflang of expectedHreflangs) {
     if (!html.includes(`hreflang="${hreflang}"`)) failures.push(`/${path}/ missing hreflang=${hreflang}`);
   }

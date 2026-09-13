@@ -209,8 +209,8 @@ GSC historical data must be read with its reporting delay. No 24-hour failure co
 
 ## 8. Current decision
 
-**DISCOVERY TREND: TOO EARLY / NEUTRAL**  
-**ACTION: KEEP OBSERVING**  
+**DISCOVERY TREND: TOO EARLY / NEUTRAL**
+**ACTION: KEEP OBSERVING**
 **OBSERVE / PARTIAL_DATA — DO NOT MASS EXPAND.**
 
 Production is technically ready for continued Google recrawl, while the fresh full-site Page Indexing response is not yet available. Continue at T+3/T+7/T+14/T+28 checkpoints and preserve the evidence boundary.

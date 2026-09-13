@@ -30,6 +30,7 @@ npm run preview
 | `npm run typecheck` | Run Astro and TypeScript checks. |
 | `npm run lint` | Run ESLint. |
 | `npm run check:links` | Run the project link checker. |
+| `npm run check:indexation` | Verify sitemap/indexability, canonical, hreflang, internal-link, orphan, and similarity evidence after a build. |
 | `npm run verify` | Run the combined verification workflow. |
 
 ## Cloning Into a New Site
@@ -58,6 +59,10 @@ Create a Google Analytics 4 property, copy the Measurement ID in the form `G-XXX
 ## Google Search Console Setup
 
 Add your site in Google Search Console as either a Domain property or a URL-prefix property. Verify ownership with a DNS TXT record or by placing the provided HTML verification file in `/public`. After the site is live, submit the sitemap.
+
+## Indexation recovery audit
+
+Run `npm run build` followed by `npm run check:indexation` for the permanent local gate. To refresh repository evidence and perform a production readback, run `node scripts/check-indexation-recovery.mjs --write --live`; the live result documents HTTP and discovery state but is not proof of Google indexing.
 
 ## Sitemap Submission
 

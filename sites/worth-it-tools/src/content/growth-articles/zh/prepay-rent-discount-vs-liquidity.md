@@ -195,5 +195,5 @@ $$
 ## Related Guides
 
 - [租屋押金流動性成本](https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/)
-- [年度支出轉月預算](https://worthcalc.win/zh/guides/annual-expenses-to-monthly-budget/)
+- [年度支出轉月預算](https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)

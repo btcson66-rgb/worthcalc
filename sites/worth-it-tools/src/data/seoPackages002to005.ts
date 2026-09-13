@@ -190,7 +190,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "/en/tools/car-affordability/",
-      "/en/guides/car-loan-60-72-84-early-exit/",
+      "/en/guides/car-loan-60-vs-72-vs-84-early-exit/",
       "/en/guides/car-down-payment-vs-liquidity/"
     ],
     "breadcrumbLabel": "Rolling Negative Equity Into a New Auto Loan: Calculate the Real Cost Before You Trade",
@@ -816,7 +816,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/",
-      "https://worthcalc.win/en/annual-bills-to-monthly-budget/"
+      "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/"
     ],
     "breadcrumbLabel": "Prepay Rent Discount vs. Liquidity: Is Paying Months Upfront Actually Worth It?",
     "schemaFile": "008__en__prepay-rent-discount-vs-liquidity.json"
@@ -1939,8 +1939,8 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "/en/commute-cost-calculator/",
-      "/en/true-hourly-wage-calculator/",
+      "/en/tools/commute-cost/",
+      "/en/true-hourly-wage-after-commuting-work-expenses/",
       "/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "高薪遠通勤 vs 低薪近工作怎麼選？把交通、時間與額外生活成本換成同一模型",
@@ -2440,7 +2440,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/",
-      "https://worthcalc.win/zh/guides/annual-expenses-to-monthly-budget/",
+      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "租金一次預繳有折扣值得嗎？把確定折扣、現金占用與提前退租條款一起算",

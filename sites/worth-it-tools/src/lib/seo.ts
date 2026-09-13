@@ -93,7 +93,13 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const segments = input.url.pathname.split('/').filter(Boolean);
   if ((CONTENT_LOCALES as string[]).includes(segments[0])) segments.shift();
   const logical = segments.join('/');
-  const alternateLocales = input.alternateLocales ?? [...CORE_LOCALES];
+  // A deliberately noindex page is outside the indexable translation cluster.
+  // Advertising it in hreflang would make every alternate point at a target
+  // Google is explicitly told not to index, and would break reciprocity for
+  // the remaining indexable locales. The legacy /en/ compatibility page is
+  // also outside the cluster because / is the canonical English homepage.
+  const compatibilityDefault = input.locale === 'en' && currentPath === '/en/';
+  const alternateLocales = softDeindexed || compatibilityDefault ? [] : (input.alternateLocales ?? [...CORE_LOCALES]);
   const xDefaultLocale = alternateLocales.includes('en') ? 'en' : (alternateLocales[0] ?? input.locale);
   const alternates = alternateLocales
     .map((loc) => ({

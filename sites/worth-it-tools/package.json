@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/postbuild-sitemaps.mjs",
+    "build": "astro build && node scripts/postbuild-sitemaps.mjs && npm run check:url-budget",
     "preview": "astro preview",
     "typecheck": "astro check",
     "lint": "eslint . --ext .js,.mjs,.ts,.astro",
@@ -163,6 +163,7 @@
     "eslint": "^9.23.0",
     "eslint-plugin-astro": "^1.3.1",
     "globals": "^16.0.0",
+    "playwright": "^1.63.0",
     "typescript": "^5.8.2"
   }
 }

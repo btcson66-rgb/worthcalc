@@ -6,7 +6,13 @@ on:
     paths:
       - 'sites/worth-it-tools/**'
       - '.github/workflows/deploy-worthcalc.yml'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      ci_only:
+        description: 'Run verify only; skip Pages deploy, IndexNow, and GSC submission.'
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: read
@@ -37,7 +43,7 @@ jobs:
           cache: npm
           cache-dependency-path: sites/worth-it-tools/package-lock.json
       - run: npm ci
-      - run: npm run build
+      - run: npm run verify
         env:
           SITE_URL: https://worthcalc.win
           PUBLIC_GA_ID: ${{ vars.WORTHCALC_GA_ID }}
@@ -67,6 +73,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -77,6 +84,7 @@ jobs:
 
   indexnow:
     needs: deploy
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -91,6 +99,7 @@ jobs:
 
   gsc-submit:
     needs: deploy
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

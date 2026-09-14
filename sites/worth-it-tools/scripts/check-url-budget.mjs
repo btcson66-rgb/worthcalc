@@ -1,4 +1,4 @@
-// Reports how many URLs the sitemap carries. It does not cap them.
+// Reports how many URLs the sitemap carries and enforces the recorded cap.
 //
 // History, kept deliberately: between 2026-07-19 and 2026-07-23 worthcalc's
 // sitemap went from 41 to 341 URLs -- a five-language site shell plus a
@@ -7,12 +7,9 @@
 // stayed there. Nothing in the pipeline noticed the URL count moving, so this
 // check was built to fail the build past a fixed cap.
 //
-// 2026-09-02: the owner decided to lift the cap and scale SEO pages up. The
-// cap is gone; the instrument is not. Deleting the counter as well would put
-// us back where we were in July -- growing the URL count with nothing watching
-// it. So this now reports the number and the delta on every build, and always
-// exits 0. Read the delta in the verify output; it is the only place the
-// growth rate is visible at a glance.
+// 2026-09-15: S5 restored a bounded cap at 310 after S1 sitemap consolidation.
+// The counter remains visible on every build, and exceeding maxUrls is a hard
+// failure so a new page batch cannot silently expand the submitted surface.
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

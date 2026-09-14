@@ -7,6 +7,7 @@ import AdSlot from '../components/AdSlot.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import TopicLinks from '../components/TopicLinks.astro';
 import BaseLayout from './BaseLayout.astro';
+import PaidProductPanel from '../components/PaidProductPanel.astro';
 
 interface Props {
   title: string;
@@ -34,6 +35,26 @@ const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: title, url: Astro.url.pathname },
 ];
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const p3Placements = new Set([
+  '/en/guides/freelance-minimum-billable-rate/',
+  '/zh/guides/freelance-minimum-billable-rate/',
+  '/en/price-in-work-hours/',
+  '/zh/price-in-work-hours/',
+]);
+const p5Placements = new Set([
+  '/en/guides/benefits-replacement-cost-vs-salary/',
+  '/en/guides/relocation-higher-salary-break-even/',
+  '/en/guides/cash-runway-before-quitting-job/',
+  '/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/',
+  '/en/price-in-work-hours/',
+  '/zh/price-in-work-hours/',
+  '/en/true-hourly-wage-after-commuting-work-expenses/',
+  '/zh/true-hourly-wage-after-commuting-work-expenses/',
+]);
+const contextualProducts: { id: 'PRODUCT-003' | 'PRODUCT-005'; placement: string }[] = [];
+if (p3Placements.has(path)) contextualProducts.push({ id: 'PRODUCT-003', placement: `worthcalc_${path.slice(1, -1).replaceAll('/', '_')}` });
+if (p5Placements.has(path)) contextualProducts.push({ id: 'PRODUCT-005', placement: `worthcalc_${path.slice(1, -1).replaceAll('/', '_')}` });
 ---
 
 <BaseLayout
@@ -56,6 +77,7 @@ const crumbs = breadcrumb ?? [
     {showTitle && <h1>{title}</h1>}
     {updated && <p class="updated">{updated}</p>}
     <slot />
+    {contextualProducts.map((product) => <PaidProductPanel productId={product.id} locale={locale as 'en' | 'zh'} placement={product.placement} />)}
   </article>
   <TopicLinks locale={locale} path={logicalPath} />
   <AdSlot noindex={noindex} />

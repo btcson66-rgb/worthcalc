@@ -1,0 +1,4 @@
+url,action,reason
+https://worthcalc.win/en/annual-vs-monthly-billing/,keep,保留作為既有資料觀察頁
+https://worthcalc.win/zh/annual-vs-monthly-billing/,deindex,需人工確認同意圖後才處置
+https://worthcalc.win/es/annual-vs-monthly-billing/,merge_into:https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/,同意圖合併候選；Phase 1 前不執行

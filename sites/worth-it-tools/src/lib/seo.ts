@@ -107,14 +107,10 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
       hreflang: LOCALE_HREFLANG[loc],
       href: absolute(base, localizedPagePath(loc, logical)),
     }))
-    // Sibling locales must not advertise a German URL that is deliberately
-    // noindex. The German page itself keeps the existing cluster so users can
-    // still switch to an indexable equivalent without changing page routing.
-    .filter((alternate) => !(
-      input.locale !== 'de' &&
-      alternate.locale === 'de' &&
-      isSoftDeindexed(new URL(alternate.href).pathname)
-    ))
+    // No sibling that is deliberately noindex belongs in an indexable
+    // translation cluster. Keep the filter generic: the registry may expand
+    // beyond the original German cohort without weakening hreflang reciprocity.
+    .filter((alternate) => !isSoftDeindexed(new URL(alternate.href).pathname))
     .map(({ hreflang, href }) => ({ hreflang, href }));
   // A page that declares no locale alternates (the 404 handler) has no
   // localized siblings to point at. Emitting x-default anyway advertised

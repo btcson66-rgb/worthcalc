@@ -141,6 +141,7 @@
     "gsc:sitemap-health": "node scripts/gsc-submit-sitemaps.mjs --health",
     "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs",
     "test:topics": "node tests/topic-classification.mjs",
+    "test:disposition": "node --test tests/apply-disposition.test.mjs",
     "audit:topics": "node scripts/audit-topic-classification.mjs",
     "audit:brief-coverage": "node scripts/audit-editorial-brief-coverage.mjs",
     "audit": "npm run build && node scripts/check-links.mjs && node scripts/audit.mjs",

@@ -1,6 +1,8 @@
 {
-  "currentUrls": 1229,
-  "recordedAt": "2026-09-05",
+  "currentUrls": 1233,
+  "maxUrls": 1233,
+  "recordedAt": "2026-09-14",
+  "freezeNote": "2026-09-14 凍結。依 Company Vault/10_Web_Department/2026-09-14-worthcalc-10k-impressions-master-plan.md 第 2 節原則 1：worthcalc 新增可索引 URL 凍結，直到 GSC 每日曝光 7 天中位數 ≥16 且 Phase 1 收斂完成。調高需附需求證據（GSC 或 Keyword Planner 區間）。",
   "capRemoved": {
     "on": "2026-09-02",
     "by": "owner",

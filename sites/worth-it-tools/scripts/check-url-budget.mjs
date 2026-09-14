@@ -41,6 +41,12 @@ const total = childSitemaps.flatMap((name) =>
 
 const record = existsSync(budgetPath) ? JSON.parse(readFileSync(budgetPath, 'utf8')) : {};
 const previous = Number.isInteger(record.currentUrls) ? record.currentUrls : null;
+const maximum = Number.isInteger(record.maxUrls) ? record.maxUrls : null;
+
+if (maximum !== null && total > maximum) {
+  console.error(`[url-count] ${total} URLs exceed the frozen maxUrls=${maximum}. Update the budget only with the required evidence.`);
+  process.exit(1);
+}
 
 if (previous === null) {
   console.log(`[url-count] ${total} URLs in the sitemap.`);

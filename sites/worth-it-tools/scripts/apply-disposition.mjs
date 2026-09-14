@@ -59,7 +59,7 @@ export function validateRows(rows) {
     const action = input.action.trim();
     const reason = input.reason.trim();
     if (!reason) throw new Error(`第 ${line} 列 reason 不可為空`);
-    if (action === 'keep' || action === 'deindex') return { url, action, reason };
+    if (action === 'keep' || action === 'keep-priority' || action === 'deindex') return { url, action, reason };
     const match = action.match(/^merge_into:(.+)$/);
     if (!match) throw new Error(`第 ${line} 列 action 無效：${action}`);
     const target = normalizeUrl(match[1].trim(), `第 ${line} 列 merge target`);
@@ -93,7 +93,7 @@ export function planDisposition(rows, { deindexed = { urls: [] }, redirects = { 
   const additions = [];
 
   for (const row of normalized) {
-    if (row.action === 'keep') { counts.keep += 1; counts.unchanged += 1; continue; }
+    if (row.action === 'keep' || row.action === 'keep-priority') { counts.keep += 1; counts.unchanged += 1; continue; }
     if (row.action === 'deindex') {
       counts.deindex += 1;
       if (deindexedUrls.has(row.url)) counts.unchanged += 1;

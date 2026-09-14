@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
@@ -8,7 +9,7 @@ const locales = ['en', 'es', 'zh', 'hi', 'ar'];
 const pages = locales.map((locale) => `https://worthcalc.win/${locale}/guides/${slug}/`);
 const sitemap = ['sitemap-0.xml', 'sitemap-1.xml', 'sitemap-2.xml'].map((file) => existsSync(join(dist, file)) ? readFileSync(join(dist, file), 'utf8') : '').join('\n');
 const failures = [];
-for (const canonical of pages) {
+for (const canonical of pages.filter((candidate) => !isSoftDeindexedUrl(candidate))) {
   const path = new URL(canonical).pathname; const htmlPath = join(dist, path.slice(1), 'index.html'); const html = existsSync(htmlPath) ? readFileSync(htmlPath, 'utf8') : '';
   if (!html) { failures.push(path + ': missing build output'); continue; }
   if ((html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) failures.push(path + ': expected exactly one h1');

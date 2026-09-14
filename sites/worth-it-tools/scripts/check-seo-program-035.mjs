@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -5,7 +6,7 @@ const root = process.cwd();
 const slug = 'heat-pump-cost-per-heating-hour-used';
 const locales = ['en', 'es', 'zh', 'hi', 'ar'];
 const errors = [];
-for (const locale of locales) {
+for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) {
   const route = '/' + locale + '/guides/' + slug + '/';
   const source = join(root, 'src', 'content', 'growth-articles', locale, slug + '.md');
   const output = join(root, 'dist', locale, 'guides', slug, 'index.html');
@@ -32,7 +33,7 @@ const sitemap = join(root, 'dist', 'sitemap-0.xml');
 if (!existsSync(sitemap)) errors.push('dist/sitemap-0.xml missing');
 else {
   const xml = readFileSync(sitemap, 'utf8');
-  for (const locale of locales) if (!xml.includes('https://worthcalc.win/' + locale + '/guides/' + slug + '/')) errors.push('/' + locale + '/guides/' + slug + '/: missing sitemap entry');
+  for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) if (!xml.includes('https://worthcalc.win/' + locale + '/guides/' + slug + '/')) errors.push('/' + locale + '/guides/' + slug + '/: missing sitemap entry');
 }
 if (errors.length) {
   console.error('SEO program 035 check failed (' + errors.length + '):\n- ' + errors.join('\n- '));

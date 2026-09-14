@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
@@ -13,7 +14,7 @@ const failures = [];
 const sitemap = ['sitemap-0.xml', 'sitemap-1.xml', 'sitemap-2.xml']
   .map((file) => existsSync(join(dist, file)) ? readFileSync(join(dist, file), 'utf8') : '').join('\n');
 
-for (const [, canonical] of pages) {
+for (const [, canonical] of pages.filter(([, candidate]) => !isSoftDeindexedUrl(candidate))) {
   const path = new URL(canonical).pathname;
   const htmlPath = join(dist, path.slice(1), 'index.html');
   const html = existsSync(htmlPath) ? readFileSync(htmlPath, 'utf8') : '';

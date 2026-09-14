@@ -10,11 +10,11 @@ const TARGET = 'https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/
 
 test('validates keep, deindex, and merge_into rows', () => {
   const rows = validateRows([
-    { url: SOURCE, action: 'keep', reason: '保留既有頁面' },
+    { url: SOURCE, action: 'keep-priority', reason: '保留既有頁面' },
     { url: 'https://worthcalc.win/zh/annual-vs-monthly-billing/', action: 'deindex', reason: '需人工確認的重疊意圖' },
     { url: 'https://worthcalc.win/es/annual-vs-monthly-billing/', action: `merge_into:${TARGET}`, reason: '合併到同意圖英文指南' },
   ]);
-  assert.deepEqual(rows[0], { url: SOURCE, action: 'keep', reason: '保留既有頁面' });
+  assert.deepEqual(rows[0], { url: SOURCE, action: 'keep-priority', reason: '保留既有頁面' });
   assert.equal(rows[1].action, 'deindex');
   assert.equal(rows[2].target, TARGET);
   assert.throws(() => validateRows([{ url: SOURCE, action: 'bad', reason: 'x' }]), /action 無效/);

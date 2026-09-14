@@ -13,14 +13,14 @@ viewport: 375x667
 
 - 水平溢出：0/304 頁。
 - 低於 44px 的可點擊控制：304/304 頁。
-- 有主要按鈕的頁面：47 頁；首屏：0 頁；首屏以下：47 頁。沒有主要計算按鈕的內容／索引頁標為 not_applicable。
+- 有主要按鈕的頁面：36 頁；首屏：0 頁；首屏以下：36 頁。沒有主要計算按鈕的內容／索引頁標為 not_applicable。
 - 導航／執行錯誤：0/304 頁。
 
 ## 逐頁結果
 
 | # | URL | HTTP | overflow | max scroll px | undersized controls | primary button | error |
 |---:|---|---:|---|---:|---:|---|---|
-| 1 | / | 200 | no | 0 | 39 | below_fold |  |
+| 1 | / | 200 | no | 0 | 39 | not_applicable |  |
 | 2 | /de/ | 200 | no | 0 | 32 | not_applicable |  |
 | 3 | /de/annual-fee-card-breakeven/ | 200 | no | 0 | 22 | not_applicable |  |
 | 4 | /de/cashback-caps-real-reward-rate/ | 200 | no | 0 | 22 | not_applicable |  |
@@ -86,22 +86,22 @@ viewport: 375x667
 | 64 | /en/tools/ | 200 | no | 0 | 35 | not_applicable |  |
 | 65 | /en/tools/budget-builder/ | 200 | no | 0 | 24 | below_fold |  |
 | 66 | /en/tools/car-affordability/ | 200 | no | 0 | 26 | below_fold |  |
-| 67 | /en/tools/cashback-breakeven/ | 200 | no | 0 | 23 | below_fold |  |
-| 68 | /en/tools/commute-cost/ | 200 | no | 0 | 30 | below_fold |  |
+| 67 | /en/tools/cashback-breakeven/ | 200 | no | 0 | 23 | not_applicable |  |
+| 68 | /en/tools/commute-cost/ | 200 | no | 0 | 30 | not_applicable |  |
 | 69 | /en/tools/compound-growth/ | 200 | no | 0 | 25 | below_fold |  |
-| 70 | /en/tools/cost-per-mile/ | 200 | no | 0 | 25 | below_fold |  |
-| 71 | /en/tools/costco-membership/ | 200 | no | 0 | 24 | below_fold |  |
+| 70 | /en/tools/cost-per-mile/ | 200 | no | 0 | 25 | not_applicable |  |
+| 71 | /en/tools/costco-membership/ | 200 | no | 0 | 24 | not_applicable |  |
 | 72 | /en/tools/credit-card-payoff/ | 200 | no | 0 | 23 | below_fold |  |
 | 73 | /en/tools/debt-strategy/ | 200 | no | 0 | 23 | below_fold |  |
 | 74 | /en/tools/dti-calculator/ | 200 | no | 0 | 25 | below_fold |  |
-| 75 | /en/tools/ev-vs-gas/ | 200 | no | 0 | 23 | below_fold |  |
+| 75 | /en/tools/ev-vs-gas/ | 200 | no | 0 | 23 | not_applicable |  |
 | 76 | /en/tools/home-affordability/ | 200 | no | 0 | 23 | below_fold |  |
-| 77 | /en/tools/installment-true-apr/ | 200 | no | 0 | 23 | below_fold |  |
-| 78 | /en/tools/latte-factor/ | 200 | no | 0 | 23 | below_fold |  |
+| 77 | /en/tools/installment-true-apr/ | 200 | no | 0 | 23 | not_applicable |  |
+| 78 | /en/tools/latte-factor/ | 200 | no | 0 | 23 | not_applicable |  |
 | 79 | /en/tools/mortgage-payoff/ | 200 | no | 0 | 24 | below_fold |  |
-| 80 | /en/tools/rent-vs-buy/ | 200 | no | 0 | 23 | below_fold |  |
+| 80 | /en/tools/rent-vs-buy/ | 200 | no | 0 | 23 | not_applicable |  |
 | 81 | /en/tools/salary-converter/ | 200 | no | 0 | 23 | below_fold |  |
-| 82 | /en/tools/subscription-audit/ | 200 | no | 0 | 23 | below_fold |  |
+| 82 | /en/tools/subscription-audit/ | 200 | no | 0 | 23 | not_applicable |  |
 | 83 | /en/topics/debt-credit/ | 200 | no | 0 | 22 | not_applicable |  |
 | 84 | /en/topics/everyday/ | 200 | no | 0 | 21 | not_applicable |  |
 | 85 | /en/topics/housing/ | 200 | no | 0 | 20 | not_applicable |  |
@@ -311,7 +311,7 @@ viewport: 375x667
 | 289 | /zh/tools/mortgage-payoff/ | 200 | no | 0 | 26 | below_fold |  |
 | 290 | /zh/tools/rent-vs-buy/ | 200 | no | 0 | 22 | not_applicable |  |
 | 291 | /zh/tools/salary-converter/ | 200 | no | 0 | 23 | below_fold |  |
-| 292 | /zh/tools/subscription-audit/ | 200 | no | 0 | 32 | below_fold |  |
+| 292 | /zh/tools/subscription-audit/ | 200 | no | 0 | 32 | not_applicable |  |
 | 293 | /zh/topics/debt-credit/ | 200 | no | 0 | 29 | not_applicable |  |
 | 294 | /zh/topics/everyday/ | 200 | no | 0 | 24 | not_applicable |  |
 | 295 | /zh/topics/housing/ | 200 | no | 0 | 24 | not_applicable |  |
@@ -634,25 +634,15 @@ viewport: 375x667
 
 ## 主要按鈕未在首屏
 
-- /: button[type="submit"] top=9704.1px.
 - /en/tools/budget-builder/: [data-action="calculate"] top=991.8px.
 - /en/tools/car-affordability/: [data-action="calculate"] top=1857.4px.
-- /en/tools/cashback-breakeven/: button[type="submit"] top=3841.6px.
-- /en/tools/commute-cost/: button[type="submit"] top=10524.5px.
 - /en/tools/compound-growth/: [data-action="calculate"] top=1084.8px.
-- /en/tools/cost-per-mile/: button[type="submit"] top=8644.7px.
-- /en/tools/costco-membership/: button[type="submit"] top=10321.2px.
 - /en/tools/credit-card-payoff/: [data-action="calculate"] top=1055.6px.
 - /en/tools/debt-strategy/: [data-action="calculate"] top=1649px.
 - /en/tools/dti-calculator/: [data-action="calculate"] top=948.4px.
-- /en/tools/ev-vs-gas/: button[type="submit"] top=4300.6px.
 - /en/tools/home-affordability/: [data-action="calculate"] top=1221.1px.
-- /en/tools/installment-true-apr/: button[type="submit"] top=5286.6px.
-- /en/tools/latte-factor/: button[type="submit"] top=6107px.
 - /en/tools/mortgage-payoff/: [data-action="calculate"] top=977.6px.
-- /en/tools/rent-vs-buy/: button[type="submit"] top=4333.5px.
 - /en/tools/salary-converter/: [data-action="calculate"] top=1084.8px.
-- /en/tools/subscription-audit/: button[type="submit"] top=4497.5px.
 - /es/tools/budget-builder/: [data-action="calculate"] top=1075.8px.
 - /es/tools/car-affordability/: [data-action="calculate"] top=1828.3px.
 - /es/tools/compound-growth/: [data-action="calculate"] top=1084.8px.
@@ -680,7 +670,6 @@ viewport: 375x667
 - /zh/tools/home-affordability/: [data-action="calculate"] top=1142.8px.
 - /zh/tools/mortgage-payoff/: [data-action="calculate"] top=922.8px.
 - /zh/tools/salary-converter/: [data-action="calculate"] top=998.8px.
-- /zh/tools/subscription-audit/: button top=802.8px.
 
 ## 判定與限制
 

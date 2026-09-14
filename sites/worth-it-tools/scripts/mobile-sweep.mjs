@@ -125,7 +125,11 @@ for (const publicUrl of sitemapUrls) {
             top: Math.round(rect.top * 10) / 10,
           };
         });
-      const primarySelectors = ['[data-action="calculate"]', 'button[type="submit"]', 'button.button--primary', 'button'];
+      const primarySelectors = [
+        '[data-action="calculate"]',
+        'form:not([data-newsletter-form]) button[type="submit"]',
+        'form:not([data-newsletter-form]) input[type="submit"]',
+      ];
       let primary = null;
       let selector = null;
       for (const candidateSelector of primarySelectors) {
@@ -234,7 +238,7 @@ if (errors.length > 0) {
   for (const result of errors) lines.push(`- ${result.path}: ${result.error}`);
 }
 
-lines.push('', '## 判定與限制', '', '- 這是本機靜態 build 的 layout smoke sweep，不等同於正式站部署或真實裝置實測。', '- 外部網路資源由掃描器阻擋，以避免第三方資源、廣告或分析請求改變結果；本機 build 內的頁面與資產仍照常載入。', '- 本報告只記錄 S5 要求的三項觀察，不會自動修改頁面或把此掃描加入 verify gate。', '');
+lines.push('', '## 判定與限制', '', '- 這是本機靜態 build 的 layout smoke sweep，不等同於正式站部署或真實裝置實測。', '- 外部網路資源由掃描器阻擋，以避免第三方資源、廣告或分析請求改變結果；本機 build 內的頁面與資產仍照常載入。', '- 本報告只記錄 S5 要求的三項觀察，不會自動修改頁面或把此掃描加入 verify gate。');
 
 mkdirSync(join(siteDir, 'docs', 'audits'), { recursive: true });
 writeFileSync(reportPath, `${lines.join('\n')}\n`, 'utf8');

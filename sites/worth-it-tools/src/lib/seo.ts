@@ -296,6 +296,38 @@ export function softwareAppJsonLd(opts: {
   };
 }
 
+/** A paid downloadable decision system; kept separate from free calculator schema. */
+export function paidSoftwareAppJsonLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  locale: ContentLocale;
+  price: string;
+  providerUrl: string;
+  site?: URL;
+}): object {
+  const base = (opts.site?.origin ?? SITE.url).replace(/\/$/, '');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: opts.name,
+    description: opts.description,
+    url: absolute(base, opts.url),
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any modern browser',
+    inLanguage: LOCALE_HREFLANG[opts.locale],
+    offers: {
+      '@type': 'Offer',
+      price: opts.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: opts.providerUrl,
+    },
+    publisher: { '@id': organizationId(opts.site) },
+    isPartOf: { '@id': webSiteId(opts.site) },
+  };
+}
+
 /** Build a schema.org Article object for editorial pages. */
 export function articleJsonLd(opts: {
   headline: string;

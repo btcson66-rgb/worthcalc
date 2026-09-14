@@ -7,6 +7,7 @@ import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/grow
 import { annualFeeGuides, commuteFullCostGuides, evGasTcoGuides, installmentGuides, latteFactorGuides, paidMembershipGuides, rentBuyBreakevenGuides, subscriptionGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import PaidProductPanel from '../../../components/PaidProductPanel.astro';
 import type { Locale } from '../../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 
@@ -96,5 +97,8 @@ const growthLastReviewed = growthEntry?.data.lastReviewed.toISOString().slice(0,
       <LocalizedCoreCalculator content={content!} />
       <DecisionGuide content={guide!} />
     </>
+  )}
+  {growth && slug === 'salary-converter' && (
+    <PaidProductPanel productId="PRODUCT-003" locale={locale as 'en' | 'zh'} placement={`worthcalc_${locale}_salary_converter`} />
   )}
 </ToolLayout>

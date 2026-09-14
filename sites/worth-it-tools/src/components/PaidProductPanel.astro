@@ -1,0 +1,100 @@
+---
+import { paidProducts, type PaidProductId, type PaidProductLocale } from '../data/paid-products';
+
+interface Props {
+  productId: PaidProductId;
+  locale: PaidProductLocale;
+  placement: string;
+  variant?: 'contextual' | 'product';
+}
+
+const { productId, locale, placement, variant = 'contextual' } = Astro.props;
+const product = paidProducts[productId];
+const copy = locale === 'zh'
+  ? {
+      contextLabel: '延伸決策系統',
+      contextAction: '查看自有產品頁',
+      productLabel: 'WorthCalc 自有下載產品',
+      purchase: '在 Payhip 購買',
+      gumroad: '在 Gumroad 購買',
+      oneTime: '一次買斷，非訂閱',
+    }
+  : {
+      contextLabel: 'A deeper decision system',
+      contextAction: 'View the owned product page',
+      productLabel: 'WorthCalc owned downloadable product',
+      purchase: 'Buy on Payhip',
+      gumroad: 'Buy on Gumroad',
+      oneTime: 'One-time purchase, not a subscription',
+    };
+const siteName = 'worthcalc';
+---
+
+{variant === 'contextual' ? (
+  <aside class="paid-product-context" data-product-cta-block data-product-id={product.id} data-product-name={product.name} data-placement={placement} data-site-name={siteName} data-locale={locale}>
+    <p class="paid-product-context__label">{copy.contextLabel}</p>
+    <h2>{product.name}</h2>
+    <p>{product.value[locale]}</p>
+    <a class="button primary" href={product.landing[locale]} data-product-cta-link data-product-id={product.id} data-product-name={product.name} data-placement={placement} data-site-name={siteName} data-locale={locale}>{copy.contextAction}</a>
+  </aside>
+) : (
+  <section class="paid-product-hero" data-product-cta-block data-product-id={product.id} data-product-name={product.name} data-placement={placement} data-site-name={siteName} data-locale={locale}>
+    <p class="paid-product-hero__label">{copy.productLabel}</p>
+    <h1>{product.name}</h1>
+    <p class="paid-product-hero__value">{product.value[locale]}</p>
+    <div class="paid-product-hero__buy">
+      <strong>{product.price}</strong>
+      <span>{copy.oneTime}</span>
+      <a class="button primary" href={product.providers.payhip} target="_blank" rel="noopener" data-product-checkout-link data-product-id={product.id} data-product-name={product.name} data-placement={placement} data-provider="payhip" data-site-name={siteName} data-locale={locale}>{copy.purchase}</a>
+      <a class="button secondary" href={product.providers.gumroad} target="_blank" rel="noopener" data-product-checkout-link data-product-id={product.id} data-product-name={product.name} data-placement={placement} data-provider="gumroad" data-site-name={siteName} data-locale={locale}>{copy.gumroad}</a>
+    </div>
+  </section>
+)}
+
+<script>
+  import { trackProductEvent } from '../lib/productAnalytics';
+
+  const paramsFor = (element: HTMLElement, provider = 'owned') => ({
+    product_id: element.dataset.productId || 'unknown',
+    product_name: element.dataset.productName || 'unknown',
+    site_name: element.dataset.siteName || 'worthcalc',
+    placement: element.dataset.placement || 'paid_product_surface',
+    provider,
+    locale: element.dataset.locale || document.documentElement.lang || 'en',
+  });
+
+  document.querySelectorAll('[data-product-cta-block]').forEach((block) => {
+    if (!(block instanceof HTMLElement)) return;
+    const emitView = () => {
+      if (block.dataset.productCtaViewed === 'true') return;
+      block.dataset.productCtaViewed = 'true';
+      trackProductEvent('product_cta_view', paramsFor(block));
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) { emitView(); observer.disconnect(); }
+      }, { threshold: 0.25 });
+      observer.observe(block);
+    } else emitView();
+  });
+  document.querySelectorAll('[data-product-cta-link]').forEach((link) => {
+    if (link instanceof HTMLElement) link.addEventListener('click', () => trackProductEvent('product_cta_click', paramsFor(link)));
+  });
+  document.querySelectorAll('[data-product-checkout-link]').forEach((link) => {
+    if (link instanceof HTMLElement) link.addEventListener('click', () => trackProductEvent('product_checkout_click', paramsFor(link, link.dataset.provider || 'unknown')));
+  });
+</script>
+
+<style>
+  .paid-product-context, .paid-product-hero { display: grid; gap: 10px; margin-top: 30px; padding: 22px; border: 1px solid rgba(15,118,110,.32); border-radius: 16px; background: linear-gradient(135deg, rgba(15,118,110,.08), var(--card)); box-shadow: 0 8px 22px rgba(15,23,42,.06); }
+  .paid-product-context h2, .paid-product-context p, .paid-product-hero h1, .paid-product-hero p { margin: 0; }
+  .paid-product-context h2 { font-size: 1.25rem; }
+  .paid-product-context p, .paid-product-hero__value { color: var(--muted); line-height: 1.65; }
+  .paid-product-context__label, .paid-product-hero__label { margin: 0; color: var(--brand); font-size: .78rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+  .paid-product-hero { margin: 0; padding: 30px; }
+  .paid-product-hero h1 { font-size: clamp(2rem, 4vw, 3rem); }
+  .paid-product-hero__buy { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 10px; }
+  .paid-product-hero__buy strong { font-size: 1.35rem; }
+  .paid-product-hero__buy span { color: var(--muted); }
+  @media (max-width: 640px) { .paid-product-hero__buy .button { width: 100%; text-align: center; } }
+</style>

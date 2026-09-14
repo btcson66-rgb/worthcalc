@@ -1,0 +1,38 @@
+---
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import PaidDecisionProductContent from '../../components/PaidDecisionProductContent.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { paidProducts } from '../../data/paid-products';
+import { breadcrumbJsonLd, faqJsonLd, paidSoftwareAppJsonLd } from '../../lib/seo';
+import type { ContentLocale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['en', 'zh'] as const).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const locale = Astro.props.locale as ContentLocale & ('en' | 'zh');
+const product = paidProducts['PRODUCT-005'];
+const title = product.name;
+const description = locale === 'zh'
+  ? '離線工作 offer 真實價值決策系統：一起比較薪資、福利、通勤、時間、生活適配與談判空間。'
+  : 'An offline job-offer decision system for comparing salary, benefits, commute, time, lifestyle fit, and negotiation room together.';
+const path = `/${locale}/job-offer-true-value-decision-engine/`;
+const breadcrumbs = [
+  { name: locale === 'zh' ? '首頁' : 'Home', url: `/${locale}/` },
+  { name: locale === 'zh' ? '工作與薪資指南' : 'Job and salary guides', url: locale === 'zh' ? '/zh/true-hourly-wage-after-commuting-work-expenses/' : '/en/true-hourly-wage-after-commuting-work-expenses/' },
+  { name: title, url: path },
+];
+const jsonLd = [
+  paidSoftwareAppJsonLd({ name: title, description, url: path, locale, price: '19.00', providerUrl: product.providers.payhip, site: Astro.site }),
+  faqJsonLd((locale === 'zh'
+    ? [['薪資資料會上傳嗎？', '不會。產品是單檔離線瀏覽器 app，沒有 analytics、telemetry、server sync 或外部 API。'], ['它是職涯或財務建議嗎？', '不是。它只對你輸入的 offer 假設做算術比較，不是稅務、法律、財務、投資、勞資或職涯預測服務。'], ['需要安裝 Node、Python 或 npm 嗎？', '不需要。解壓 buyer package 後直接開啟其中的 index.html。']]
+    : [['Does salary data leave my device?', 'No. The product is a standalone offline browser app with no analytics, telemetry, server sync, or external API.'], ['Is it career or financial advice?', 'No. It performs arithmetic on your offer assumptions; it is not tax, legal, financial, investment, employment, or career-prediction advice.'], ['Do I need Node, Python, npm, or an installer?', 'No. Unzip the buyer package and open its included index.html.']]
+  ).map(([question, answer]) => ({ question, answer }))),
+  breadcrumbJsonLd(breadcrumbs, Astro.site),
+];
+---
+
+<BaseLayout title={title} description={description} locale={locale} type="website" alternateLocales={['en', 'zh']} jsonLd={jsonLd}>
+  <Breadcrumb items={breadcrumbs} includeJsonLd={false} />
+  <PaidDecisionProductContent productId="PRODUCT-005" locale={locale} />
+</BaseLayout>

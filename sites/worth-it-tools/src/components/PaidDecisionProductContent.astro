@@ -1,0 +1,111 @@
+---
+import PaidProductPanel from './PaidProductPanel.astro';
+import type { PaidProductId, PaidProductLocale } from '../data/paid-products';
+
+interface Props {
+  productId: PaidProductId;
+  locale: PaidProductLocale;
+}
+
+const { productId, locale } = Astro.props;
+const isFreelancer = productId === 'PRODUCT-003';
+const copy = isFreelancer
+  ? locale === 'zh'
+    ? {
+        intro: '在接受下一個案子前，把目標收入、可計費能力、營運成本、付款風險、權利範圍與修改成本放到同一個模型裡，得到個人 floor、target、settlement 與 opening ask。',
+        featuresTitle: '你會得到什麼',
+        features: ['從個人收入目標與實際可計費時間建立最低費率。', '拆出會議、溝通、研究、修改、交付等容易漏算的時間。', '分開時間風險、金錢風險與收款風險，不把它們壓成一個假精準分數。', '比較報價、訂金、範圍、修改、權利、平台與時程等談判選項。', '在瀏覽器本機儲存與匯出 JSON、CSV、摘要與列印報告。'],
+        previewTitle: '功能預覽（不是產品截圖）',
+        previewNote: '目前產品交付證據沒有核准的公開 screenshot；以下是依 buyer package 已完成內容整理的功能預覽，不宣稱為實際畫面。',
+        preview: ['Rate baseline：收入目標、overhead、benefits、tax reserve、billable utilization。', 'Project economics：可見工時、隱藏工時、direct cost、fee、risk 與 retained profit。', 'Decision dashboard：ACCEPT、NEGOTIATE、DECLINE 及原因與影響。', 'Lever Engine：從客戶預算或目標費率反推可談的條件。'],
+        faqTitle: 'FAQ',
+        faq: [['資料會離開我的裝置嗎？', '不會。產品是離線瀏覽器套件，沒有帳號、伺服器、analytics、telemetry 或外部 API。'], ['這是稅務或法律建議嗎？', '不是。它只依你輸入的假設做商業報價算術，不是稅務、法律、會計、財務或市場行情服務。'], ['是訂閱嗎？', '不是。這是一次買斷的下載產品。'], ['付款與退款由誰處理？', 'Payhip 或 Gumroad 處理付款、收據、檔案交付與退款規則；本頁不代收款。']],
+        linksTitle: '從 WorthCalc 免費內容開始',
+        links: [['接案最低報價指南', '/zh/guides/freelance-minimum-billable-rate/'], ['薪資與時薪換算工具', '/zh/tools/salary-converter/'], ['通勤與工作支出後的真實時薪', '/zh/true-hourly-wage-after-commuting-work-expenses/']],
+        disclosure: 'Provider disclosure：目前回查到 Payhip 與 Gumroad 都有已發布的 US$19 listing；checkout 可由上方按鈕開啟。請以 provider checkout 的當前付款、交付與退款條款為準。',
+      }
+    : {
+        intro: 'Before accepting the next project, put your income target, realistic billable capacity, operating costs, payment risk, rights scope, and revision cost into one model. See a personal floor, target, settlement range, and opening ask.',
+        featuresTitle: 'What it covers',
+        features: ['Build a minimum rate from your income goal and realistic billable capacity.', 'Expose meetings, communication, research, revisions, delivery, and other hours that quotes often omit.', 'Keep time risk, money risk, and collection risk separate instead of hiding them in one false-precision score.', 'Compare price, deposit, scope, revisions, rights, platform, and timeline levers.', 'Save locally and export JSON, CSV, a summary, or a print-ready report.'],
+        previewTitle: 'Feature preview (not a product screenshot)',
+        previewNote: 'The current product evidence does not include an approved public screenshot. The list below is a feature preview based on the completed buyer package; it is not presented as a captured screen.',
+        preview: ['Rate baseline: income goal, overhead, benefits, tax reserve, and billable utilization.', 'Project economics: visible hours, hidden hours, direct costs, fees, risk, and retained profit.', 'Decision dashboard: ACCEPT, NEGOTIATE, or DECLINE with reasons and impacts.', 'Lever Engine: work backward from a client budget or target rate to negotiable terms.'],
+        faqTitle: 'FAQ',
+        faq: [['Does data leave my device?', 'No. The product is an offline browser package with no account, server, analytics, telemetry, or external API.'], ['Is it tax or legal advice?', 'No. It performs business-pricing arithmetic on your assumptions; it is not tax, legal, accounting, financial, or market-rate advice.'], ['Is it a subscription?', 'No. It is a one-time downloadable purchase.'], ['Who handles payment and refunds?', 'Payhip or Gumroad handles payment, receipts, delivery, and refund rules; this site does not process a separate payment.']],
+        linksTitle: 'Start with free WorthCalc content',
+        links: [['Freelance minimum billable rate guide', '/en/guides/freelance-minimum-billable-rate/'], ['Salary converter', '/en/tools/salary-converter/'], ['True hourly wage after commuting and work expenses', '/en/true-hourly-wage-after-commuting-work-expenses/']],
+        disclosure: 'Provider disclosure: the current readback found published US$19 listings on both Payhip and Gumroad; the buttons above open those existing checkout routes. Follow the provider checkout for current payment, delivery, and refund terms.',
+      }
+  : locale === 'zh'
+    ? {
+        intro: '把目前工作與新 offer 的薪資、獎金、PTO、工時、通勤、福利、股權、搬遷成本與個人優先順序放進同一個離線比較模型，看見 True Annual Economic Value、Effective Hourly Compensation、Financial、Lifestyle 與 Balanced winners。',
+        featuresTitle: '你會得到什麼',
+        features: ['比較現職、offer、counter-offer 與理想條件，而不是只看 base salary。', '把通勤、工作成本、福利、PTO、remote／onsite 與時間放回一年模型。', '分開 Financial、Lifestyle 與 Balanced 三條結果，保留取捨。', '用 break-even 與 numeric negotiation levers 找出可談的條件。', '本機儲存、duplicate scenario、JSON/CSV/列印報告，沒有帳號或外部 API。'],
+        previewTitle: '功能預覽（不是產品截圖）',
+        previewNote: '目前產品證據沒有核准的公開 screenshot；以下整理 buyer package 已完成的實際功能，不宣稱為截圖或現場結果。',
+        preview: ['Offer editor：薪資、bonus、PTO、工時、通勤、福利、股權、搬遷與個人 fit。', 'Core result：TAEV、effective hourly compensation、committed hours 與 switching gain。', 'Three winner tracks：Financial、Lifestyle、Balanced 各自保留。', 'Negotiation：break-even 與 numeric levers 協助建立 counter-scenario。'],
+        faqTitle: 'FAQ',
+        faq: [['薪資資料會上傳嗎？', '不會。產品是單檔離線瀏覽器 app，沒有 analytics、telemetry、server sync 或外部 API。'], ['它是職涯或財務建議嗎？', '不是。它只對你輸入的 offer 假設做算術比較，不是稅務、法律、財務、投資、勞資或職涯預測服務。'], ['需要安裝 Node、Python 或 npm 嗎？', '不需要。解壓 buyer package 後直接開啟其中的 index.html。'], ['付款與退款由誰處理？', 'Payhip 或 Gumroad 處理付款、收據、檔案交付與退款規則；本頁不代收款。']],
+        linksTitle: '從 WorthCalc 免費內容開始',
+        links: [['通勤與工作支出後的真實時薪', '/zh/true-hourly-wage-after-commuting-work-expenses/'], ['高薪遠通勤 vs 低薪近工作指南', '/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/'], ['公司福利 vs 現金薪資指南', '/zh/guides/employer-benefits-replacement-cost-vs-cash/']],
+        disclosure: 'Provider disclosure：目前回查到 Payhip 與 Gumroad 都有已發布的 US$19 listing；checkout 可由上方按鈕開啟。請以 provider checkout 的當前付款、交付與退款條款為準。',
+      }
+    : {
+        intro: 'Compare your current job and new offers with compensation, bonus, PTO, hours, commute, benefits, equity, relocation costs, and personal priorities in one offline model. See True Annual Economic Value, Effective Hourly Compensation, and separate Financial, Lifestyle, and Balanced winners.',
+        featuresTitle: 'What it covers',
+        features: ['Compare a current job, offer, counter-offer, and ideal terms instead of looking only at base salary.', 'Put commute, work costs, benefits, PTO, remote/onsite days, and time into an annual model.', 'Keep Financial, Lifestyle, and Balanced winner tracks separate so trade-offs remain visible.', 'Use break-even and numeric negotiation levers to build a counter-scenario.', 'Save locally, duplicate scenarios, and export JSON, CSV, or a print-ready report with no account or external API.'],
+        previewTitle: 'Feature preview (not a product screenshot)',
+        previewNote: 'The current product evidence does not include an approved public screenshot. The list below describes completed buyer-package functions; it is not presented as a screenshot or live result.',
+        preview: ['Offer editor: compensation, bonus, PTO, hours, commute, benefits, equity, relocation, and personal fit.', 'Core result: True Annual Economic Value, effective hourly compensation, committed hours, and switching gain.', 'Three winner tracks: Financial, Lifestyle, and Balanced remain separate.', 'Negotiation: break-even and numeric levers help build a counter-scenario.'],
+        faqTitle: 'FAQ',
+        faq: [['Does salary data leave my device?', 'No. The product is a standalone offline browser app with no analytics, telemetry, server sync, or external API.'], ['Is it career or financial advice?', 'No. It performs arithmetic on your offer assumptions; it is not tax, legal, financial, investment, employment, or career-prediction advice.'], ['Do I need Node, Python, npm, or an installer?', 'No. Unzip the buyer package and open its included index.html.'], ['Who handles payment and refunds?', 'Payhip or Gumroad handles payment, receipts, delivery, and refund rules; this site does not process a separate payment.']],
+        linksTitle: 'Start with free WorthCalc content',
+        links: [['True hourly wage after commuting and work expenses', '/en/true-hourly-wage-after-commuting-work-expenses/'], ['Benefits vs higher salary guide', '/en/guides/benefits-replacement-cost-vs-salary/'], ['Relocating for a higher salary guide', '/en/guides/relocation-higher-salary-break-even/']],
+        disclosure: 'Provider disclosure: the current readback found published US$19 listings on both Payhip and Gumroad; the buttons above open those existing checkout routes. Follow the provider checkout for current payment, delivery, and refund terms.',
+      };
+---
+
+<PaidProductPanel productId={productId} locale={locale} placement="product_owned_hero" variant="product" />
+
+<section class="paid-content-section" aria-labelledby="features-title">
+  <h2 id="features-title">{copy.featuresTitle}</h2>
+  <ul>{copy.features.map((feature) => <li>{feature}</li>)}</ul>
+</section>
+
+<section class="paid-content-section" aria-labelledby="preview-title">
+  <h2 id="preview-title">{copy.previewTitle}</h2>
+  <p class="preview-note">{copy.previewNote}</p>
+  <ul class="preview-list">{copy.preview.map((item) => <li>{item}</li>)}</ul>
+</section>
+
+<section class="paid-content-section" aria-labelledby="faq-title">
+  <h2 id="faq-title">{copy.faqTitle}</h2>
+  <div class="paid-faq">{copy.faq.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div>
+</section>
+
+<section class="paid-content-section" aria-labelledby="links-title">
+  <h2 id="links-title">{copy.linksTitle}</h2>
+  <nav class="paid-internal-links" aria-label={copy.linksTitle}>
+    {copy.links.map(([label, href]) => <a class="button secondary" href={href}>{label}</a>)}
+  </nav>
+</section>
+
+<section class="paid-content-section paid-disclosure" aria-labelledby="disclosure-title">
+  <h2 id="disclosure-title">{locale === 'zh' ? '退款、provider 與資料處理' : 'Refunds, providers, and data handling'}</h2>
+  <p>{copy.disclosure}</p>
+  <p>{locale === 'zh' ? '這些 downloadable systems 與 WorthCalc 的免費 calculators 分開；免費 calculators 不會因購買而改變功能，也不會被加上 paywall。' : 'These downloadable systems are separate from WorthCalc free calculators. The free calculators do not change features or gain a paywall because a visitor buys a product.'}</p>
+</section>
+
+<style>
+  .paid-content-section { margin-top: 20px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: 0 8px 22px rgba(15,23,42,.05); }
+  .paid-content-section h2 { margin-top: 0; }
+  .paid-content-section li { margin-top: 8px; line-height: 1.7; }
+  .preview-note, .paid-faq p { color: var(--muted); line-height: 1.65; }
+  .paid-faq { display: grid; gap: 10px; }
+  .paid-faq details { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; }
+  .paid-faq summary { cursor: pointer; font-weight: 800; }
+  .paid-faq p { margin-bottom: 0; }
+  .paid-internal-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .paid-disclosure { background: var(--soft); box-shadow: none; }
+</style>

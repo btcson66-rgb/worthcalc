@@ -1,0 +1,38 @@
+---
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import PaidDecisionProductContent from '../../components/PaidDecisionProductContent.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { paidProducts } from '../../data/paid-products';
+import { breadcrumbJsonLd, faqJsonLd, paidSoftwareAppJsonLd } from '../../lib/seo';
+import type { ContentLocale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['en', 'zh'] as const).map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const locale = Astro.props.locale as ContentLocale & ('en' | 'zh');
+const product = paidProducts['PRODUCT-003'];
+const title = product.name;
+const description = locale === 'zh'
+  ? '離線接案報價決策系統：把不可計費時間、成本、風險與談判選項放進同一個透明模型。'
+  : 'An offline freelance pricing decision system that models hidden hours, costs, risk, and negotiation options in one transparent model.';
+const path = `/${locale}/freelancer-pricing-decision-engine/`;
+const breadcrumbs = [
+  { name: locale === 'zh' ? '首頁' : 'Home', url: `/${locale}/` },
+  { name: locale === 'zh' ? 'Freelance 定價指南' : 'Freelance pricing guides', url: locale === 'zh' ? '/zh/guides/freelance-minimum-billable-rate/' : '/en/guides/freelance-minimum-billable-rate/' },
+  { name: title, url: path },
+];
+const jsonLd = [
+  paidSoftwareAppJsonLd({ name: title, description, url: path, locale, price: '19.00', providerUrl: product.providers.payhip, site: Astro.site }),
+  faqJsonLd((locale === 'zh'
+    ? [['資料會離開我的裝置嗎？', '不會。產品是離線瀏覽器套件，沒有帳號、伺服器、analytics、telemetry 或外部 API。'], ['這是稅務或法律建議嗎？', '不是。它只依你輸入的假設做商業報價算術，不是稅務、法律、會計、財務或市場行情服務。'], ['是訂閱嗎？', '不是。這是一次買斷的下載產品。']]
+    : [['Does data leave my device?', 'No. The product is an offline browser package with no account, server, analytics, telemetry, or external API.'], ['Is it tax or legal advice?', 'No. It performs business-pricing arithmetic on your assumptions; it is not tax, legal, accounting, financial, or market-rate advice.'], ['Is it a subscription?', 'No. It is a one-time downloadable purchase.']]
+  ).map(([question, answer]) => ({ question, answer }))),
+  breadcrumbJsonLd(breadcrumbs, Astro.site),
+];
+---
+
+<BaseLayout title={title} description={description} locale={locale} type="website" alternateLocales={['en', 'zh']} jsonLd={jsonLd}>
+  <Breadcrumb items={breadcrumbs} includeJsonLd={false} />
+  <PaidDecisionProductContent productId="PRODUCT-003" locale={locale} />
+</BaseLayout>

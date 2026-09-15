@@ -97,6 +97,10 @@ h1, h2, h3 {
 }
 
 a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   color: var(--brand-ink);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
@@ -114,6 +118,12 @@ img, svg {
 
 button, input, textarea, select {
   font: inherit;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
 }
 
 button, .button {

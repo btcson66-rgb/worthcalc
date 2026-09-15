@@ -109,7 +109,7 @@ for (const publicUrl of sitemapUrls) {
       const visible = (element) => {
         const style = window.getComputedStyle(element);
         const rect = element.getBoundingClientRect();
-        return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) !== 0 && rect.width > 0 && rect.height > 0;
+        return !element.closest('[aria-hidden="true"]') && style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) !== 0 && rect.width > 0 && rect.height > 0;
       };
       const label = (element) => (element.getAttribute('aria-label') || element.textContent || element.getAttribute('title') || '').replace(/\s+/g, ' ').trim().slice(0, 100);
       const allClickables = [...document.querySelectorAll('a,button,input,select,textarea,[role="button"],[tabindex]')]

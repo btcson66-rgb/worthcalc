@@ -1,0 +1,254 @@
+{
+  "/en/tools/costco-membership/": {
+    "title": "Is Costco Executive Membership Worth It? Break-Even Calculator (2026)",
+    "description": "Executive pays 2% back on most purchases. Enter your monthly Costco spend to see the exact break-even point and whether the $130 tier beats Gold Star for you."
+  },
+  "/en/tools/commute-cost/": {
+    "title": "How Much Does Your Commute Really Cost? Per Mile, Per Year Calculator (2026)",
+    "description": "Fuel (MPG or EV), parking, tolls, wear and the value of your time, in miles or km. Compare driving with transit, rideshare and bike, and see the yearly total."
+  },
+  "/en/tools/latte-factor/": {
+    "title": "Latte Factor Calculator: What Small Daily Spending Costs Over Time (2026)",
+    "description": "Enter a daily habit and a return rate to see the honest long-term cost, with the trade-offs most latte-factor articles skip."
+  },
+  "/en/tools/ev-vs-gas/": {
+    "title": "EV vs Gas Car: Which Is Cheaper Per Mile and Over 5 Years? Calculator (2026)",
+    "description": "Enter fuel price, MPG, electricity rate and kWh/100 mi to compare cost per mile, annual running cost and 5-year total ownership."
+  },
+  "/en/tools/installment-true-apr/": {
+    "title": "What Is the True APR of an Installment Plan? Calculator (2026)",
+    "description": "Fees, add-ons and timing can turn a \"0%\" plan into double-digit APR. Enter the payments and see the real annual rate."
+  },
+  "/en/tools/subscription-audit/": {
+    "title": "How Much Do Your Subscriptions Cost Per Year? Audit Calculator (2026)",
+    "description": "List every recurring charge, see the annual total and cost per use, and find which ones to cancel or switch to annual billing."
+  },
+  "/en/is-costco-executive-membership-worth-it/": {
+    "title": "Is Costco Executive Membership Worth It? The Math for 2026",
+    "description": "The 2% reward, the $130 fee, the refund guarantee and the spend level where Executive wins. Numbers with sources, then a calculator."
+  },
+  "/zh/home-vs-public-ev-charging-cost/": {
+    "title": "家用充電樁一度電多少錢？在家充 vs 外面充電費計算機（2026）",
+    "description": "用台電時間電價和公共充電站牌價，算出每度電成本、每月與每年充電費差多少，並看家用充電樁多久回本。"
+  },
+  "/es/is-costco-executive-membership-worth-it/": {
+    "title": "¿Vale la pena la membresía Executive de Costco? Los números (2026)",
+    "description": "El 2% de recompensa, la cuota anual y cuánto hay que gastar para que Executive salga a cuenta, con calculadora."
+  },
+  "/en/upfront-fees-financing-cost/": {
+    "title": "Should You Pay an Upfront Fee to Get a Lower Rate? Calculator (2026)",
+    "description": "Compare paying a fee now against a higher rate later. See the break-even month and the total cost of each option."
+  },
+  "/en/annual-fee-card-breakeven/": {
+    "title": "Is a Credit Card Annual Fee Worth It? Break-Even Spend Calculator (2026)",
+    "description": "Enter the fee, the rewards rate and your spend to see the exact point where the card pays for itself."
+  },
+  "/zh/tools/ev-vs-gas/": {
+    "title": "電動車和汽油車哪個便宜？每公里成本與五年總成本計算機（2026）",
+    "description": "輸入油價、油耗、電價與每百公里耗電，比較每公里成本、每年油電費用與五年持有總成本。"
+  },
+  "/en/tools/debt-strategy/": {
+    "title": "Snowball vs Avalanche: Which Pays Off Debt Faster? Calculator (2026)",
+    "description": "Enter your balances, rates and monthly budget to compare payoff date and total interest under both methods."
+  },
+  "/en/tools/rent-vs-buy/": {
+    "title": "Should You Rent or Buy? Break-Even Year Calculator (2026)",
+    "description": "Compare total cost of renting against buying, including down payment, maintenance, taxes and opportunity cost, and see the break-even year."
+  },
+  "/en/ev-vs-gas-total-cost/": {
+    "title": "EV vs Gas Total Cost of Ownership: 5-Year Comparison (2026)",
+    "description": "Purchase price, fuel or charging, maintenance, insurance and resale, side by side. Sources listed, then a calculator."
+  },
+  "/zh/tools/cashback-breakeven/": {
+    "title": "信用卡年費值得嗎？回饋回本計算機（2026）",
+    "description": "輸入年費、回饋率與每月消費，算出多少消費額才能把年費賺回來。"
+  },
+  "/zh/tools/commute-cost/": {
+    "title": "每天通勤到底花多少錢？每公里、每年通勤成本計算機（2026）",
+    "description": "油錢（油耗或電耗）、停車、過路費、折舊和你的時間成本，算出每公里與每年總支出，比較開車、大眾運輸、機車與叫車。"
+  },
+  "/en/tools/budget-builder/": {
+    "title": "Build a Monthly Budget That Actually Balances: Calculator (2026)",
+    "description": "Enter income and expense categories to see what is left, the savings rate and where the money goes."
+  },
+  "/en/monthly-vs-annual-subscription/": {
+    "title": "Monthly or Annual Billing: Which Is Cheaper? Calculator (2026)",
+    "description": "The annual discount versus the cost of paying upfront and the risk of not using it. Enter the two prices and see the real saving."
+  },
+  "/es/tools/dti-calculator/": {
+    "title": "Calculadora de ratio de endeudamiento: ¿cuánto puedes pedir? (2026)",
+    "description": "Introduce ingresos y cuotas mensuales para ver tu ratio de esfuerzo y el límite que aplican los bancos."
+  },
+  "/en/rent-vs-buy-guide/": {
+    "title": "Rent vs Buy: How to Decide With Numbers, Not Feelings (2026)",
+    "description": "The costs people forget on both sides, the break-even logic and a calculator to run your own case."
+  },
+  "/zh/tools/latte-factor/": {
+    "title": "每天一杯咖啡，十年花多少？拿鐵因子計算機（2026）",
+    "description": "輸入每日小額花費與報酬率，看長期真實成本，也看這個說法哪裡被誇大。"
+  },
+  "/en/extra-mortgage-payments-guide/": {
+    "title": "Do Extra Mortgage Payments Save Money? Interest and Years Cut (2026)",
+    "description": "How one extra payment a year or a bi-weekly schedule changes total interest and payoff date, with a calculator."
+  },
+  "/zh/tools/subscription-audit/": {
+    "title": "你的訂閱一年花多少？訂閱盤點計算機（2026）",
+    "description": "列出所有定期扣款，看年度總額與每次使用成本，找出該取消或改年繳的項目。"
+  },
+  "/en/pay-raise-vs-inflation-purchasing-power/": {
+    "title": "Did Your Raise Beat Inflation? Real Purchasing Power Calculator (2026)",
+    "description": "Enter your raise and the inflation rate to see whether your real income went up or down."
+  },
+  "/en/tools/compound-growth/": {
+    "title": "Compound Growth Calculator: How Money Grows Over Time (2026)",
+    "description": "Enter a starting amount, contributions, rate and years to see the growth path and the share that came from compounding."
+  },
+  "/fr/tools/dti-calculator/": {
+    "title": "Calcul du taux d'effort : combien pouvez-vous emprunter ? (2026)",
+    "description": "Saisissez vos revenus et vos mensualités pour obtenir votre taux d'effort et la limite HCSF de 35 %."
+  },
+  "/en/costco-math/": {
+    "title": "Costco Math: When Bulk Buying Actually Saves Money (2026)",
+    "description": "Unit price, spoilage and storage, membership fee per trip. The formulas, then a calculator."
+  },
+  "/zh/tools/costco-membership/": {
+    "title": "好市多黑鑽卡值得升級嗎？回本金額計算機（2026）",
+    "description": "輸入每月在好市多的消費，算出 2% 回饋何時能補回年費差額，該辦金星還是黑鑽一目了然。"
+  },
+  "/en/tools/car-affordability/": {
+    "title": "How Much Car Can You Afford? Payment and Total Cost Calculator (2026)",
+    "description": "Enter income, down payment, rate and term to see the affordable price and the true monthly cost with insurance and fuel."
+  },
+  "/zh/pay-raise-vs-inflation-purchasing-power/": {
+    "title": "加薪追得上通膨嗎？實質購買力計算機（2026）",
+    "description": "輸入加薪幅度與通膨率，看你的實質收入是變多還是變少。"
+  },
+  "/en/zero-interest-installments-truth/": {
+    "title": "Is 0% Installment Really Free? What It Actually Costs (2026)",
+    "description": "Fees, lost discounts and cash-flow risk behind \"interest-free\" plans, with a true-APR calculator."
+  },
+  "/es/tools/latte-factor/": {
+    "title": "Calculadora del factor latte: cuánto cuestan los gastos pequeños (2026)",
+    "description": "Introduce un gasto diario y una rentabilidad para ver el coste real a largo plazo."
+  },
+  "/fr/is-costco-executive-membership-worth-it/": {
+    "title": "Carte Costco Executive : est-elle rentable en France ? (2026)",
+    "description": "Le prix, la remise de 2 % et le montant d'achats à partir duquel l'Executive devient rentable, avec calculateur."
+  },
+  "/fr/zero-interest-installments-truth/": {
+    "title": "Paiement en plusieurs fois « sans frais » : ce que ça coûte vraiment (2026)",
+    "description": "Frais cachés, remises perdues et TAEG réel derrière le 0 %, avec calculateur."
+  },
+  "/en/subscription-creep/": {
+    "title": "Subscription Creep: How Small Charges Add Up and How to Stop It (2026)",
+    "description": "Why recurring costs grow unnoticed, what a yearly audit finds, and a calculator to total yours."
+  },
+  "/en/tools/credit-card-payoff/": {
+    "title": "Credit Card Payoff Calculator: Months and Interest at Your Payment (2026)",
+    "description": "Enter balance, APR and monthly payment to see the payoff date and total interest, and what paying more changes."
+  },
+  "/de/tools/mortgage-payoff/": {
+    "title": "Sondertilgung-Rechner: Wie viel Zinsen und Jahre sparen Sie? (2026)",
+    "description": "Restschuld, Zinssatz und Sondertilgung eingeben und sehen, wie sich Laufzeit und Gesamtzinsen ändern."
+  },
+  "/fr/monthly-vs-annual-subscription/": {
+    "title": "Abonnement mensuel ou annuel : lequel coûte le moins ? (2026)",
+    "description": "La remise annuelle face au risque de ne pas utiliser le service, avec calculateur."
+  },
+  "/en/bnpl-vs-credit-card-installments/": {
+    "title": "BNPL vs Credit Card Installments: Which Costs Less? (2026)",
+    "description": "Fees, interest, late penalties and credit impact compared, with a calculator for your purchase."
+  },
+  "/en/tools/cost-per-mile/": {
+    "title": "Cost Per Mile to Drive: Gas vs EV Calculator (2026)",
+    "description": "Enter fuel price and MPG, or electricity rate and kWh/100 mi, to see cost per mile, per month and per year for each."
+  },
+  "/zh/tools/cost-per-mile/": {
+    "title": "開車每公里成本多少？汽油車 vs 電動車計算機（2026）",
+    "description": "輸入油價與油耗，或電價與每百公里耗電，比較每公里、每月與每年成本。"
+  },
+  "/en/tools/appliance-running-cost/": {
+    "title": "How Much Does It Cost to Run an Appliance? Per Hour, Day, Month Calculator (2026)",
+    "description": "Pick an appliance to load its typical wattage, enter your electricity rate and hours, and see the cost per hour, day, month and year. 40+ appliances with sources."
+  },
+  "/zh/tools/appliance-electricity-cost/": {
+    "title": "家電電費怎麼算？冷氣、除濕機、電熱器每小時電費計算機（2026）",
+    "description": "選家電自動帶入瓦數，輸入台電電價與使用時數，算出每小時、每天、每月、每年電費。40 種以上家電附來源。"
+  },
+  "/en/tools/home-affordability/": {
+    "title": "How Much House Can You Afford? Full Cost Calculator (2026)",
+    "description": "Income, down payment, rate and term give a price range. Adds taxes, insurance and maintenance so the monthly number is the real one."
+  },
+  "/en/tools/mortgage-payoff/": {
+    "title": "Do Extra Mortgage Payments Save Money? Payoff Calculator (2026)",
+    "description": "Enter balance, rate and any extra payment to see the new payoff date and how much total interest you avoid."
+  },
+  "/zh/tools/debt-strategy/": {
+    "title": "雪球法還是雪崩法還債比較快？比較計算機（2026）",
+    "description": "輸入各筆餘額、利率與每月可還金額，比較兩種還法的清償日期與總利息差多少。"
+  },
+  "/zh/tools/salary-converter/": {
+    "title": "月薪換算時薪是多少？時薪月薪年薪換算器（2026）",
+    "description": "輸入任一種薪資與每週工時，換算其餘兩種，並可看加班與年終如何影響實際時薪。"
+  },
+  "/es/tools/car-affordability/": {
+    "title": "¿Cuánto coche te puedes permitir? Calculadora (2026)",
+    "description": "Ingresos, entrada, tipo y plazo para ver el precio máximo, con seguro, ITV y combustible en la cuota real."
+  },
+  "/es/tools/home-affordability/": {
+    "title": "¿Cuánta hipoteca puedes pedir? Calculadora de capacidad (2026)",
+    "description": "Ingresos y deudas para ver el precio asumible, con el límite del 35 % de esfuerzo y los gastos de compraventa."
+  },
+  "/es/tools/mortgage-payoff/": {
+    "title": "¿Compensa amortizar hipoteca anticipadamente? Calculadora (2026)",
+    "description": "Introduce capital pendiente, tipo y aportación extra para ver cuántos años y cuántos intereses te ahorras."
+  },
+  "/es/tools/salary-converter/": {
+    "title": "¿Cuánto cobras por hora realmente? Conversor de salario (2026)",
+    "description": "Convierte entre sueldo por hora, mensual y anual, y ve cómo cambian las pagas extra y la jornada."
+  },
+  "/fr/tools/budget-builder/": {
+    "title": "Quel budget mensuel pour un auto-entrepreneur ? Calculateur (2026)",
+    "description": "Chiffre d'affaires, cotisations et charges fixes pour voir ce qu'il reste vraiment chaque mois."
+  },
+  "/fr/tools/car-affordability/": {
+    "title": "Quelle voiture pouvez-vous vous offrir ? Calculateur (2026)",
+    "description": "Prix, malus, carte grise, assurance et carburant réunis pour obtenir le coût mensuel réel, pas seulement la mensualité."
+  },
+  "/fr/tools/compound-growth/": {
+    "title": "Combien rapportent les intérêts composés ? Calculateur (2026)",
+    "description": "Capital de départ, versements et taux pour voir la courbe et la part due aux intérêts sur les intérêts."
+  },
+  "/fr/tools/costco-membership/": {
+    "title": "L'abonnement Costco est-il rentable ? Calculateur de seuil (2026)",
+    "description": "Indiquez vos achats mensuels pour savoir à partir de quel montant la carte est amortie."
+  },
+  "/fr/tools/credit-card-payoff/": {
+    "title": "Combien de temps pour rembourser un crédit renouvelable ? (2026)",
+    "description": "Solde, TAEG et mensualité pour voir la date de fin et le coût total des intérêts."
+  },
+  "/fr/tools/home-affordability/": {
+    "title": "Quelle capacité d'emprunt immobilier avez-vous ? Calculateur (2026)",
+    "description": "Revenus et charges pour estimer le montant empruntable, avec la règle HCSF des 35 % et les frais de notaire."
+  },
+  "/fr/tools/latte-factor/": {
+    "title": "Combien coûtent vraiment vos petites dépenses ? Calculateur (2026)",
+    "description": "Une dépense quotidienne et un rendement pour voir le coût réel sur dix ans, sans exagérer l'effet."
+  },
+  "/fr/tools/mortgage-payoff/": {
+    "title": "Faut-il rembourser son prêt immobilier par anticipation ? (2026)",
+    "description": "Capital restant, taux et versement supplémentaire pour voir les années et les intérêts économisés, IRA comprises."
+  },
+  "/fr/tools/rent-vs-buy/": {
+    "title": "Louer ou acheter : qu'est-ce qui coûte le moins cher ? Calculateur (2026)",
+    "description": "Compare le coût total sur la durée, avec apport, frais de notaire, taxe foncière et coût d'opportunité."
+  },
+  "/fr/tools/salary-converter/": {
+    "title": "Quel est votre salaire horaire réel ? Convertisseur (2026)",
+    "description": "Convertit entre horaire, mensuel et annuel sur la base 35 heures, brut et net."
+  },
+  "/fr/tools/subscription-audit/": {
+    "title": "Combien vous coûtent vos abonnements par an ? Calculateur (2026)",
+    "description": "Listez vos prélèvements récurrents pour voir le total annuel et le coût par utilisation de chacun."
+  }
+}

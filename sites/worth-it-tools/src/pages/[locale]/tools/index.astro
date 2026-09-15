@@ -93,6 +93,21 @@ const crumbs = [
   <section class="directory-intro">
     <h1>{copy.title}</h1>
     <p class="section-lead">{copy.lead}</p>
+    {locale === 'zh' && (
+      <p>
+        如果你正在評估房貸或負債壓力，可先看<a href={localizedPath(locale, '/tools/dti-calculator')}>負債收入比（DTI）計算機</a>，再用<a href={localizedPath(locale, '/tools/home-affordability')}>買房負擔能力計算機</a>把收入、月付與住房預算放在同一個決策脈絡裡。
+      </p>
+    )}
+    {locale === 'en' && (
+      <p>
+        For an electricity-use estimate, try the new <a href="/en/tools/appliance-running-cost/">appliance running-cost calculator</a> with an editable wattage, hours, rate, and source-backed appliance list.
+      </p>
+    )}
+    {locale === 'zh' && (
+      <p>
+        想估算家電電費，可直接使用新的<a href="/zh/tools/appliance-electricity-cost/">家電電費計算機</a>；瓦數、時數與每度電價都能改，並附上有來源的完整清單。
+      </p>
+    )}
   </section>
 
   {TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0).map((topic) => (

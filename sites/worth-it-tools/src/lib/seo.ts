@@ -100,21 +100,19 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   // also outside the cluster because / is the canonical English homepage.
   const compatibilityDefault = input.locale === 'en' && currentPath === '/en/';
   const alternateLocales = softDeindexed || compatibilityDefault ? [] : (input.alternateLocales ?? [...CORE_LOCALES]);
-  const xDefaultLocale = alternateLocales.includes('en') ? 'en' : (alternateLocales[0] ?? input.locale);
-  const alternates = alternateLocales
+  const indexableAlternateLocales = alternateLocales.filter((loc) => {
+    const siblingPath = localizedPagePath(loc, logical);
+    return !isSoftDeindexed(siblingPath);
+  });
+  const xDefaultLocale = indexableAlternateLocales.includes('en')
+    ? 'en'
+    : (indexableAlternateLocales[0] ?? input.locale);
+  const alternates = indexableAlternateLocales
     .map((loc) => ({
       locale: loc,
       hreflang: LOCALE_HREFLANG[loc],
       href: absolute(base, localizedPagePath(loc, logical)),
     }))
-    // Sibling locales must not advertise a German URL that is deliberately
-    // noindex. The German page itself keeps the existing cluster so users can
-    // still switch to an indexable equivalent without changing page routing.
-    .filter((alternate) => !(
-      input.locale !== 'de' &&
-      alternate.locale === 'de' &&
-      isSoftDeindexed(new URL(alternate.href).pathname)
-    ))
     .map(({ hreflang, href }) => ({ hreflang, href }));
   // A page that declares no locale alternates (the 404 handler) has no
   // localized siblings to point at. Emitting x-default anyway advertised
@@ -193,6 +191,38 @@ export interface EntityJsonLdOptions {
   topics?: readonly string[];
 }
 
+const ORGANIZATION_NAME = 'Btcson Lab';
+const ORGANIZATION_SAME_AS = [
+  'https://funnytools.win/',
+  'https://roomfeng.win/',
+] as const;
+
+/** The resolved author entity used by every Article schema. */
+export function organizationAuthorJsonLd(site?: URL, locale: ContentLocale = 'en'): object {
+  const base = resolveBase(site);
+  return {
+    '@type': 'Organization',
+    '@id': organizationId(site),
+    name: ORGANIZATION_NAME,
+    url: `${base}/${locale}/about/`,
+  };
+}
+
+/** The resolved publisher entity used by Article and SoftwareApplication schemas. */
+export function organizationPublisherJsonLd(site?: URL): object {
+  const base = resolveBase(site);
+  return {
+    '@type': 'Organization',
+    '@id': organizationId(site),
+    name: ORGANIZATION_NAME,
+    url: `${base}/`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${base}/og-default.png`,
+    },
+  };
+}
+
 /** The publisher entity. Emitted once per page by SEO.astro. */
 export function organizationJsonLd(site?: URL, options: EntityJsonLdOptions = {}): object {
   const base = resolveBase(site);
@@ -200,16 +230,47 @@ export function organizationJsonLd(site?: URL, options: EntityJsonLdOptions = {}
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': organizationId(site),
-    name: SITE.name,
+    name: ORGANIZATION_NAME,
     url: `${base}/`,
     logo: {
       '@type': 'ImageObject',
-      url: absolute(base, SITE.logo),
+      url: `${base}/og-default.png`,
     },
     image: absolute(base, SITE.defaultOgImage),
+    sameAs: [...ORGANIZATION_SAME_AS],
     ...(options.description ? { description: options.description } : {}),
     ...(options.topics?.length ? { knowsAbout: options.topics } : {}),
   };
+}
+
+/**
+ * Normalize imported package schemas at the final rendering boundary.
+ *
+ * Older package JSON files are immutable source artifacts and may contain an
+ * outdated or person-shaped author. Replacing author/publisher here keeps the
+ * source fixtures intact while ensuring every served schema uses the verified
+ * organization entity.
+ */
+export function normalizeJsonLd(value: unknown, site?: URL, locale: ContentLocale = 'en'): unknown {
+  if (Array.isArray(value)) return value.map((item) => normalizeJsonLd(item, site, locale));
+  if (!value || typeof value !== 'object') return value;
+
+  const normalized: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+    if (key === 'author') {
+      normalized[key] = organizationAuthorJsonLd(site, locale);
+    } else if (key === 'publisher') {
+      normalized[key] = organizationPublisherJsonLd(site);
+    } else {
+      normalized[key] = normalizeJsonLd(child, site, locale);
+    }
+  }
+
+  const type = normalized['@type'];
+  const isArticle = type === 'Article' || (Array.isArray(type) && type.includes('Article'));
+  if (isArticle && !normalized.author) normalized.author = organizationAuthorJsonLd(site, locale);
+  if (isArticle && !normalized.publisher) normalized.publisher = organizationPublisherJsonLd(site);
+  return normalized;
 }
 
 /** The site entity, so a citation can resolve which site a page belongs to. */
@@ -291,7 +352,7 @@ export function softwareAppJsonLd(opts: {
     operatingSystem: 'Any',
     inLanguage: LOCALE_HREFLANG[opts.locale],
     offers: { '@type': 'Offer', price: '0', priceCurrency: opts.locale === 'zh' ? 'TWD' : opts.locale === 'en' ? 'USD' : 'EUR' },
-    publisher: { '@id': organizationId(opts.site) },
+    publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
   };
 }
@@ -323,7 +384,7 @@ export function paidSoftwareAppJsonLd(opts: {
       availability: 'https://schema.org/InStock',
       url: opts.providerUrl,
     },
-    publisher: { '@id': organizationId(opts.site) },
+    publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
   };
 }
@@ -346,8 +407,8 @@ export function articleJsonLd(opts: {
     mainEntityOfPage: absolute(base, pagePath(opts.url)),
     inLanguage: LOCALE_HREFLANG[opts.locale],
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
-    author: { '@id': organizationId(opts.site) },
-    publisher: { '@id': organizationId(opts.site) },
+    author: organizationAuthorJsonLd(opts.site, opts.locale),
+    publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
   };
 }

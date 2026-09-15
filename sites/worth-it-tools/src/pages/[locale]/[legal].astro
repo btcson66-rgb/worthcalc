@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AuthorMethodology from '../../components/AuthorMethodology.astro';
 import { legalContent } from '../../data/legalContent';
 import type { ContentLocale, Locale } from '../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
@@ -75,4 +76,5 @@ if (!growthEntry && !content) throw new Error(`Missing legal or growth content f
       )}
     </>
   )}
+  {slug === 'about' && (locale === 'en' || locale === 'zh' || locale === 'es' || locale === 'fr' || locale === 'de') && <AuthorMethodology locale={locale} />}
 </ArticleLayout>

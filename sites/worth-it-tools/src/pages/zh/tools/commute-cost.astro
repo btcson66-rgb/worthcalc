@@ -7,8 +7,8 @@ import { localizedPath } from '../../../i18n/utils';
 const locale = 'zh';
 const decisionGuide = commuteGuides.zh;
 if (!decisionGuide) throw new Error('Missing Traditional Chinese commute guide');
-const title = '通勤成本計算機：每公里、每月與全年車馬費';
-const description = '計算汽車、電動車、機車、大眾運輸、叫車與單車的每公里、每月及全年通勤成本，可分開比較燃料、停車、過路費與時間成本。';
+const title = '通勤每公里花多少？油錢、時間與回辦公室成本計算機';
+const description = '你的通勤每公里、每天、每月與全年到底花多少？用台灣公里、公升與新台幣比較油車、電動車、機車、大眾運輸、叫車、單車與時間成本。';
 const faq = [
   {
     question: '可以比較哪些通勤方式？',
@@ -45,21 +45,12 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   <p class="intro">
-    這個通勤成本計算機以台灣常見的公里、公升與新台幣為預設，讓汽車、電動車、機車、TPASS 或其他大眾運輸、Uber 或計程車、單車放在同一個車馬費比較表。畫面中的數值只是可修改的試算預設，不是油價、電價或車馬費行情；請換成自己的里程、帳單、加油紀錄與票價。
+    <strong>直接答案：20 km 單程 × 20 天、6.5 L/100 km、NT$32.7/L = 約 NT$1,700/月燃油；15 kWh/100 km、NT$3.80/kWh = 約 NT$456/月電費。</strong> 公式：來回公里 × 天數 × L/100 km ÷ 100 × 價格。<a href="https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx">中油來源</a>（2026-09-14）與<a href="https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true">台電來源</a>（查核 2026-09-15）；請換成自己的資料。
   </p>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="commute-inputs">
       <h2 id="commute-inputs">通勤資料</h2>
-
-      <fieldset class="switcher">
-        <legend>計量單位</legend>
-        <div class="switch-options">
-          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" checked /> 公制 <span>（公里、公升）</span></label>
-          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" /> 英制 <span>（英里、加侖）</span></label>
-        </div>
-      </fieldset>
-      <input id="unit-system" type="hidden" value="metric" />
 
       <div class="input-grid core-inputs">
         <div class="field">
@@ -70,6 +61,21 @@ const related = [
           <label for="workdays">每月通勤天數</label>
           <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="22" />
         </div>
+      </div>
+
+      <fieldset class="switcher">
+        <legend>計量單位</legend>
+        <div class="switch-options">
+          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" checked /> 公制 <span>（公里、公升）</span></label>
+          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" /> 英制 <span>（英里、加侖）</span></label>
+        </div>
+      </fieldset>
+      <input id="unit-system" type="hidden" value="metric" />
+
+      <div class="field rto-field">
+        <label for="rto-days">每週進辦公室天數（RTO 情境）</label>
+        <input id="rto-days" type="number" inputmode="numeric" min="0" max="7" step="1" value="5" />
+        <p class="helper">和完全遠距的基準比較；使用汽車或電動車模式，以及你填入的時間價值。</p>
       </div>
 
       <fieldset class="switcher car-method">
@@ -177,6 +183,7 @@ const related = [
           <input id="bike-minutes" type="number" inputmode="numeric" min="0" step="1" value="50" />
         </div>
       </div>
+      <button id="calculate-button" type="button">重新計算</button>
     </section>
 
     <section class="result-panel" aria-live="polite" aria-labelledby="commute-result">
@@ -188,25 +195,30 @@ const related = [
         <p class="metric cheapest-metric"><span>最低成本方式</span><strong id="cheapest">無</strong></p>
         <p class="metric">
           <span>汽車或電動車</span><strong id="car-total">NT$0／月</strong>
-          <small id="car-year">NT$0／年</small><small id="car-rate">NT$0.00／公里</small>
+          <small id="car-trip">NT$0／趟</small><small id="car-day">NT$0／天</small><small id="car-year">NT$0／年</small><small id="car-rate">NT$0.00／公里</small>
         </p>
         <p class="metric">
           <span>機車</span><strong id="scooter-total">NT$0／月</strong>
-          <small id="scooter-year">NT$0／年</small><small id="scooter-rate">NT$0.00／公里</small>
+          <small id="scooter-trip">NT$0／趟</small><small id="scooter-day">NT$0／天</small><small id="scooter-year">NT$0／年</small><small id="scooter-rate">NT$0.00／公里</small>
         </p>
         <p class="metric">
           <span>大眾運輸</span><strong id="transit-total">NT$0／月</strong>
-          <small id="transit-year">NT$0／年</small><small id="transit-rate">NT$0.00／公里</small>
+          <small id="transit-trip">NT$0／趟</small><small id="transit-day">NT$0／天</small><small id="transit-year">NT$0／年</small><small id="transit-rate">NT$0.00／公里</small>
         </p>
         <p class="metric">
           <span>Uber 或計程車</span><strong id="rideshare-total">NT$0／月</strong>
-          <small id="rideshare-year">NT$0／年</small><small id="rideshare-rate">NT$0.00／公里</small>
+          <small id="rideshare-trip">NT$0／趟</small><small id="rideshare-day">NT$0／天</small><small id="rideshare-year">NT$0／年</small><small id="rideshare-rate">NT$0.00／公里</small>
         </p>
         <p class="metric">
           <span>單車</span><strong id="bike-total">NT$0／月</strong>
-          <small id="bike-year">NT$0／年</small><small id="bike-rate">NT$0.00／公里</small>
+          <small id="bike-trip">NT$0／趟</small><small id="bike-day">NT$0／天</small><small id="bike-year">NT$0／年</small><small id="bike-rate">NT$0.00／公里</small>
         </p>
       </div>
+      <section class="rto-summary" aria-labelledby="rto-heading">
+        <h2 id="rto-heading">如果回辦公室，一年會多花多少？</h2>
+        <p>每週進辦公室 <span id="rto-days-value">5</span> 天，相對完全遠距基準的汽車或電動車估算增加：</p>
+        <strong id="rto-annual-extra">NT$0／年</strong>
+      </section>
     </section>
   </div>
 
@@ -221,7 +233,7 @@ const related = [
 
     <h2>一年通勤會累積多少車馬費</h2>
     <p>
-      全年結果是每月試算乘以 12。最容易讓數字改變的輸入包括來回距離、每月實際進辦公室天數、每公里成本、停車費、過路費、車資，以及你是否把時間換成金額。混合辦公、輪班或淡旺季工作者，可把每月通勤天數改成具代表性的月平均。這比直接套用一個所謂的車馬費行情更貼近個人狀況，也能看出搬家、換工作地點或改搭大眾運輸後的差距。
+      全年結果是每月試算乘以 12。最容易讓數字改變的輸入包括來回距離、每月實際進辦公室天數、每公里成本、停車費、過路費、車資，以及你是否把時間換成金額。混合辦公、輪班或淡旺季工作者，可把每月通勤天數改成具代表性的月平均。這比直接套用一個所謂的車馬費行情更貼近個人狀況，也能看出搬家、換工作地點或改搭大眾運輸後的差距。若只想知道單一車輛的持有成本每公里是多少，請使用<a href={localizedPath(locale, '/tools/cost-per-mile')}>每公里成本計算機</a>。
     </p>
 
     <h2>電動車與機車比較怎麼運作</h2>
@@ -244,6 +256,22 @@ const related = [
   <DecisionGuide content={decisionGuide} />
 
   <style>
+    :global(main.container) {
+      padding-top: 1rem;
+    }
+
+    :global(.breadcrumb) {
+      margin-bottom: 0.5rem;
+    }
+
+    :global(section.tool) {
+      margin-top: 0.5rem;
+    }
+
+    :global(main h1) {
+      margin-bottom: 0.5rem;
+    }
+
     .intro,
     .explanation,
     .helper,
@@ -252,11 +280,36 @@ const related = [
       color: var(--color-muted);
     }
 
+    .intro {
+      margin: 0 0 0.75rem;
+    }
+
     .calculator-grid,
     .input-grid,
     .metric-grid {
       display: grid;
       gap: 1rem;
+    }
+
+    .rto-summary {
+      margin-top: 1rem;
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+      padding: 0.9rem;
+    }
+
+    .rto-summary h2,
+    .rto-summary p {
+      margin-top: 0;
+    }
+
+    .rto-summary p {
+      margin-bottom: 0.45rem;
+    }
+
+    .rto-summary strong {
+      font-size: 1.2rem;
     }
 
     .input-panel,
@@ -267,6 +320,11 @@ const related = [
       background: var(--color-surface);
       padding: 1rem;
       box-shadow: var(--shadow-soft);
+    }
+
+    .input-panel > h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
     }
 
     .switcher {
@@ -430,6 +488,18 @@ const related = [
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';
+    import {
+      IMPERIAL_EFFICIENCY_CONVERSION,
+      KILOMETERS_PER_MILE,
+      LITERS_PER_GALLON,
+      buildModeCost,
+      calculateRtoAnnual,
+      deriveDrivingRate,
+      finiteNonNegative,
+      safeAdd,
+      safeDivide,
+      safeMultiply,
+    } from '../../../lib/commuteMath.mjs';
 
     type UnitSystem = 'imperial' | 'metric';
     type CarMode = 'direct' | 'fuel' | 'ev';
@@ -439,17 +509,20 @@ const related = [
       direct: number;
       time: number;
       total: number;
+      perTrip: number;
+      perDay: number;
+      perMonth: number;
+      perYear: number;
+      perDistance: number;
     }
 
     const locale = 'zh';
-    const kilometersPerMile = 1.609344;
-    const litersPerGallon = 3.785411784;
-    const efficiencyConversion = 235.214583;
     const ids = [
       'unit-system',
       'car-mode',
       'distance',
       'workdays',
+      'rto-days',
       'car-cost',
       'fuel-efficiency',
       'fuel-price',
@@ -474,12 +547,15 @@ const related = [
     const carModeField = byId<HTMLInputElement>('car-mode');
     const unitRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="unit-choice"]'));
     const carModeRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="car-mode-choice"]'));
+    const calculateButton = byId<HTMLButtonElement>('calculate-button');
     const verdict = byId<HTMLElement>('commute-result');
     const cheapest = byId<HTMLElement>('cheapest');
     const hourCost = byId<HTMLElement>('hour-cost');
     const derivedRate = byId<HTMLElement>('derived-rate');
     const derivedDetail = byId<HTMLElement>('derived-detail');
     const fuelWarning = byId<HTMLElement>('fuel-warning');
+    const rtoDaysValue = byId<HTMLElement>('rto-days-value');
+    const rtoAnnualExtra = byId<HTMLElement>('rto-annual-extra');
 
     function byId<T extends HTMLElement>(id: string): T {
       const element = document.getElementById(id);
@@ -488,12 +564,7 @@ const related = [
     }
 
     function value(id: string): number {
-      const parsed = Number(byId<HTMLInputElement>(id).value);
-      return Number.isFinite(parsed) ? parsed : 0;
-    }
-
-    function positive(id: string): number {
-      return Math.max(0, value(id));
+      return finiteNonNegative(Number(byId<HTMLInputElement>(id).value));
     }
 
     function currentUnit(): UnitSystem {
@@ -506,7 +577,8 @@ const related = [
 
     function setValue(id: string, nextValue: number, fractionDigits = 2): void {
       const input = byId<HTMLInputElement>(id);
-      const formatted = Number.isFinite(nextValue) ? nextValue.toFixed(fractionDigits).replace(/\.?0+$/, '') : '0';
+      const safeValue = finiteNonNegative(nextValue);
+      const formatted = safeValue.toFixed(fractionDigits).replace(/\.?0+$/, '');
       input.value = formatted || '0';
       input.dispatchEvent(new Event('input'));
     }
@@ -518,22 +590,6 @@ const related = [
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(Number.isFinite(amount) ? amount : 0);
-    }
-
-    function timeCost(minutesOneWay: number, workdays: number, wage: number): number {
-      return wage > 0 ? (Math.max(0, minutesOneWay) * 2 * workdays * wage) / 60 : 0;
-    }
-
-    function drivingRate(unit: UnitSystem, mode: CarMode): number {
-      if (mode === 'direct') return positive('car-cost');
-      if (mode === 'fuel') {
-        const efficiency = positive('fuel-efficiency');
-        if (efficiency <= 0) return 0;
-        return unit === 'imperial'
-          ? positive('fuel-price') / efficiency
-          : (efficiency * positive('fuel-price')) / 100;
-      }
-      return (positive('ev-efficiency') * positive('electricity-price')) / 100;
     }
 
     function applyMode(): void {
@@ -554,9 +610,13 @@ const related = [
     function applyUnitLabels(): void {
       const unit = currentUnit();
       const singular = unit === 'imperial' ? '英里' : '公里';
+      const plural = unit === 'imperial' ? '英里' : '公里';
       byId<HTMLElement>('distance-unit').textContent = singular;
       document.querySelectorAll<HTMLElement>('.distance-name').forEach((element) => {
         element.textContent = singular;
+      });
+      document.querySelectorAll<HTMLElement>('.distance-name-plural').forEach((element) => {
+        element.textContent = plural;
       });
       byId<HTMLElement>('fuel-efficiency-label').textContent = unit === 'imperial' ? '每加侖英里數（MPG）' : '每 100 公里耗油（L/100 km）';
       byId<HTMLElement>('fuel-volume-unit').textContent = unit === 'imperial' ? '加侖' : '公升';
@@ -568,74 +628,92 @@ const related = [
     function convertUnit(from: UnitSystem, to: UnitSystem): void {
       if (from === to) return;
       const toMetric = to === 'metric';
-      setValue('distance', toMetric ? positive('distance') * kilometersPerMile : positive('distance') / kilometersPerMile, 2);
-      setValue('car-cost', toMetric ? positive('car-cost') / kilometersPerMile : positive('car-cost') * kilometersPerMile, 3);
-      setValue('scooter-cost', toMetric ? positive('scooter-cost') / kilometersPerMile : positive('scooter-cost') * kilometersPerMile, 3);
-      const fuelEfficiency = positive('fuel-efficiency');
-      setValue('fuel-efficiency', fuelEfficiency > 0 ? efficiencyConversion / fuelEfficiency : 0, 2);
-      setValue('fuel-price', toMetric ? positive('fuel-price') / litersPerGallon : positive('fuel-price') * litersPerGallon, 3);
-      setValue('ev-efficiency', toMetric ? positive('ev-efficiency') / kilometersPerMile : positive('ev-efficiency') * kilometersPerMile, 2);
+      setValue('distance', toMetric ? value('distance') * KILOMETERS_PER_MILE : safeDivide(value('distance'), KILOMETERS_PER_MILE), 2);
+      setValue('car-cost', toMetric ? safeDivide(value('car-cost'), KILOMETERS_PER_MILE) : value('car-cost') * KILOMETERS_PER_MILE, 3);
+      setValue('scooter-cost', toMetric ? safeDivide(value('scooter-cost'), KILOMETERS_PER_MILE) : value('scooter-cost') * KILOMETERS_PER_MILE, 3);
+      const fuelEfficiency = value('fuel-efficiency');
+      setValue('fuel-efficiency', fuelEfficiency > 0 ? safeDivide(IMPERIAL_EFFICIENCY_CONVERSION, fuelEfficiency) : 0, 2);
+      setValue('fuel-price', toMetric ? safeDivide(value('fuel-price'), LITERS_PER_GALLON) : value('fuel-price') * LITERS_PER_GALLON, 3);
+      setValue('ev-efficiency', toMetric ? safeDivide(value('ev-efficiency'), KILOMETERS_PER_MILE) : value('ev-efficiency') * KILOMETERS_PER_MILE, 2);
     }
 
-    function renderMode(mode: ModeCost, prefix: string, monthlyDistance: number, unit: UnitSystem): void {
+    function renderMode(mode: ModeCost, prefix: string, unit: UnitSystem): void {
       const distanceName = unit === 'imperial' ? '英里' : '公里';
-      byId<HTMLElement>(`${prefix}-total`).textContent = `${formatCurrency(mode.total, locale)}／月`;
-      byId<HTMLElement>(`${prefix}-year`).textContent = `${formatCurrency(mode.total * 12, locale)}／年`;
-      byId<HTMLElement>(`${prefix}-rate`).textContent = `${formatRate(monthlyDistance > 0 ? mode.total / monthlyDistance : 0)}／${distanceName}`;
+      byId<HTMLElement>(`${prefix}-total`).textContent = `${formatCurrency(mode.perMonth, locale)}／月`;
+      byId<HTMLElement>(`${prefix}-trip`).textContent = `${formatCurrency(mode.perTrip, locale)}／趟`;
+      byId<HTMLElement>(`${prefix}-day`).textContent = `${formatCurrency(mode.perDay, locale)}／天`;
+      byId<HTMLElement>(`${prefix}-year`).textContent = `${formatCurrency(mode.perYear, locale)}／年`;
+      byId<HTMLElement>(`${prefix}-rate`).textContent = `${formatRate(mode.perDistance)}／${distanceName}`;
     }
 
     function update(): void {
       const unit = currentUnit();
       const carMode = currentCarMode();
-      const distance = positive('distance');
-      const workdays = positive('workdays');
-      const wage = positive('hourly-wage');
-      const monthlyDistance = distance * 2 * workdays;
-      const rate = drivingRate(unit, carMode);
-      const distanceName = unit === 'imperial' ? '英里' : '公里';
+      const distance = value('distance');
+      const workdays = value('workdays');
+      const wage = value('hourly-wage');
+      const rate = deriveDrivingRate({
+        unit,
+        mode: carMode,
+        directCost: value('car-cost'),
+        fuelEfficiency: value('fuel-efficiency'),
+        fuelPrice: value('fuel-price'),
+        evEfficiency: value('ev-efficiency'),
+        electricityPrice: value('electricity-price'),
+      });
       const modes: ModeCost[] = [
-        {
+        buildModeCost({
           name: carMode === 'ev' ? '電動車' : '汽車',
-          direct: monthlyDistance * rate + positive('parking') + positive('tolls'),
-          time: timeCost(value('car-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          distanceOneWay: distance,
+          workdays,
+          rate,
+          monthlyFixed: safeAdd(value('parking'), value('tolls')),
+          minutesOneWay: value('car-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: '機車',
-          direct: monthlyDistance * positive('scooter-cost') + positive('scooter-parking'),
-          time: timeCost(value('scooter-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          distanceOneWay: distance,
+          workdays,
+          rate: value('scooter-cost'),
+          monthlyFixed: value('scooter-parking'),
+          minutesOneWay: value('scooter-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: '大眾運輸',
-          direct: positive('transit-pass'),
-          time: timeCost(value('transit-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          workdays,
+          monthlyPass: value('transit-pass'),
+          minutesOneWay: value('transit-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: 'Uber／計程車',
-          direct: positive('rideshare') * 2 * workdays,
-          time: timeCost(value('rideshare-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          workdays,
+          oneWayFare: value('rideshare'),
+          minutesOneWay: value('rideshare-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: '單車',
-          direct: positive('bike-cost'),
-          time: timeCost(value('bike-minutes'), workdays, wage),
-          total: 0,
-        },
-      ].map((mode) => ({ ...mode, total: mode.direct + mode.time }));
+          workdays,
+          monthlyFixed: value('bike-cost'),
+          minutesOneWay: value('bike-minutes'),
+          wage,
+        }),
+      ];
       const winner = modes.reduce((best, mode) => (mode.total < best.total ? mode : best));
       const highest = modes.reduce((max, mode) => Math.max(max, mode.total), 0);
+      const distanceName = unit === 'imperial' ? '英里' : '公里';
 
       derivedRate.textContent = `${formatRate(rate)}／${distanceName}`;
       if (carMode === 'fuel') {
         derivedDetail.textContent = unit === 'imperial'
-          ? `每加侖 ${formatRate(positive('fuel-price'))} ÷ ${positive('fuel-efficiency').toFixed(1)} MPG。`
-          : `${positive('fuel-efficiency').toFixed(1)} L/100 km × 每公升 ${formatRate(positive('fuel-price'))} ÷ 100。`;
+          ? `每加侖 ${formatRate(value('fuel-price'))} ÷ ${value('fuel-efficiency').toFixed(1)} MPG。`
+          : `${value('fuel-efficiency').toFixed(1)} L/100 km × 每公升 ${formatRate(value('fuel-price'))} ÷ 100。`;
         fuelWarning.textContent = '僅含燃油：不含保養、輪胎、折舊、保險、貸款與稅費。';
       } else if (carMode === 'ev') {
-        derivedDetail.textContent = `每 100 ${distanceName} ${positive('ev-efficiency').toFixed(1)} kWh × 每度 ${formatRate(positive('electricity-price'))} ÷ 100。`;
+        derivedDetail.textContent = `每 100 ${distanceName} ${value('ev-efficiency').toFixed(1)} kWh × 每度 ${formatRate(value('electricity-price'))} ÷ 100。`;
         fuelWarning.textContent = '僅含電費：不含車價、充電設備、保養、保險與折舊。';
       } else {
         derivedDetail.textContent = '採用你直接輸入的單位成本，包含哪些項目由你決定。';
@@ -643,20 +721,33 @@ const related = [
       }
 
       cheapest.textContent = `${winner.name}（${formatCurrency(winner.total, locale)}／月）`;
-      renderMode(modes[0], 'car', monthlyDistance, unit);
-      renderMode(modes[1], 'scooter', monthlyDistance, unit);
-      renderMode(modes[2], 'transit', monthlyDistance, unit);
-      renderMode(modes[3], 'rideshare', monthlyDistance, unit);
-      renderMode(modes[4], 'bike', monthlyDistance, unit);
+      renderMode(modes[0], 'car', unit);
+      renderMode(modes[1], 'scooter', unit);
+      renderMode(modes[2], 'transit', unit);
+      renderMode(modes[3], 'rideshare', unit);
+      renderMode(modes[4], 'bike', unit);
       verdict.textContent = `${winner.name}成本最低，每月約 ${formatCurrency(winner.total, locale)}，比最高成本方式最多少 ${formatCurrency(highest - winner.total, locale)}。`;
-      const roundTripMinutes = positive('car-minutes') * 2;
-      hourCost.textContent = `時薪 ${formatCurrency(wage, locale)} 時，一小時通勤的試算時間成本是 ${formatCurrency(wage, locale)}；汽車或電動車來回 ${roundTripMinutes.toFixed(0)} 分鐘，相當於 ${formatCurrency((roundTripMinutes * wage) / 60, locale)} 的時間。`;
+      const roundTripMinutes = safeMultiply(value('car-minutes'), 2);
+      hourCost.textContent = `時薪 ${formatCurrency(wage, locale)} 時，一小時通勤的試算時間成本是 ${formatCurrency(wage, locale)}；汽車或電動車來回 ${roundTripMinutes.toFixed(0)} 分鐘，相當於 ${formatCurrency(safeDivide(safeMultiply(roundTripMinutes, wage), 60), locale)} 的時間。`;
+
+      const rtoDays = Math.min(value('rto-days'), 7);
+      rtoDaysValue.textContent = rtoDays.toFixed(0);
+      rtoAnnualExtra.textContent = `${formatCurrency(calculateRtoAnnual({
+        weeklyOfficeDays: rtoDays,
+        distanceOneWay: distance,
+        rate,
+        monthlyFixed: safeAdd(value('parking'), value('tolls')),
+        minutesOneWay: value('car-minutes'),
+        wage,
+        baselineWorkdaysPerMonth: workdays || 20,
+      }), locale)}／年`;
     }
 
     inputs.forEach((input) => {
-      bindPersistentField(input, `commute-cost:v2:${input.id}:zh`);
+      bindPersistentField(input, `commute-cost:v3:${input.id}:zh`);
       input.addEventListener('input', update);
     });
+    calculateButton.addEventListener('click', update);
 
     unitField.value = currentUnit();
     carModeField.value = currentCarMode();

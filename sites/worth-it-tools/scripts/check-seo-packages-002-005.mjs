@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 
 const projectRoot = resolve('.');
 const contentRoot = join(projectRoot, 'src', 'content', 'growth-articles');
@@ -44,6 +45,11 @@ for (const guide of guides) {
     failures.push(`${expectedPath}: missing build output`);
     continue;
   }
+  if (isSoftDeindexedUrl(guide.canonical)) {
+    if (!html.includes('<meta name="robots" content="noindex,follow">')) failures.push(`${expectedPath}: soft-deindexed page is not noindex,follow`);
+    if (sitemap.includes(`<loc>${guide.canonical}</loc>`)) failures.push(`${expectedPath}: soft-deindexed URL leaked into sitemap`);
+    continue;
+  }
   if ((html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) failures.push(`${expectedPath}: expected one h1`);
   if (!html.includes(`<link rel="canonical" href="${guide.canonical}"`)) failures.push(`${expectedPath}: canonical mismatch`);
   if (!html.includes('<meta name="robots" content="index,follow">')) failures.push(`${expectedPath}: not index,follow`);
@@ -61,7 +67,10 @@ for (const guide of guides) {
 }
 
 const sitemapUrls = (sitemap.match(/<loc>[^<]+<\/loc>/g) ?? []).length;
-if (sitemapUrls < 432) failures.push(`expected at least the 432 URLs from released SEO packages, found ${sitemapUrls}`);
+const expectedIndexablePackageGuides = guides.filter((guide) => !isSoftDeindexedUrl(guide.canonical)).length;
+if (sitemapUrls < expectedIndexablePackageGuides) {
+  failures.push(`expected at least ${expectedIndexablePackageGuides} indexable released package URLs, found ${sitemapUrls}`);
+}
 
 if (failures.length) {
   console.error(`SEO package check failed (${failures.length}):`);

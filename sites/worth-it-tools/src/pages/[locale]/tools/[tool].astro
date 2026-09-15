@@ -6,6 +6,7 @@ import { coreToolContent } from '../../../data/coreToolContent';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { annualFeeGuides, commuteFullCostGuides, evGasTcoGuides, installmentGuides, latteFactorGuides, paidMembershipGuides, rentBuyBreakevenGuides, subscriptionGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
+import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import PaidProductPanel from '../../../components/PaidProductPanel.astro';
 import type { Locale } from '../../../consts';
@@ -70,6 +71,16 @@ const growthReview = {
   de: { heading: 'Methode und Einschränkungen', updated: 'Zuletzt aktualisiert', disclaimer: 'Hinweis zur Schätzung', text: 'Unverbindliche Lernrechnung; Verträge, Zinsen, Steuern und aktuelle Regeln vor einer Entscheidung prüfen.' },
 }[locale];
 const growthLastReviewed = growthEntry?.data.lastReviewed.toISOString().slice(0, 10) ?? '';
+const trustBlock = guide
+  ? {
+      method: guide.directAnswer,
+      formula: guide.formula,
+      sources: guide.sources.map((source) => ({ label: source.label, url: source.href, verifiedDate: guide.lastVerified })),
+      limits: guide.limitations,
+      lastReviewed: guide.lastVerified,
+      locale,
+    }
+  : fallbackTrustBlock(locale, growthLastReviewed);
 ---
 
 <ToolLayout
@@ -81,6 +92,7 @@ const growthLastReviewed = growthEntry?.data.lastReviewed.toISOString().slice(0,
   related={related}
   alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
   showReview={false}
+  trustBlock={trustBlock}
 >
   {growth && growthDefinition && GrowthContent ? (
     <>

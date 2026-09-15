@@ -10,8 +10,11 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import FAQ from '../components/FAQ.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 import RelatedLinks from '../components/RelatedLinks.astro';
+import TrustBlock from '../components/TrustBlock.astro';
 import TopicLinks from '../components/TopicLinks.astro';
 import BaseLayout from './BaseLayout.astro';
+import type { TrustBlockProps } from '../types/trustBlock';
+import { fallbackTrustBlock } from '../lib/trustBlock';
 
 interface RelatedLink {
   title: string;
@@ -29,6 +32,8 @@ interface Props {
   noindex?: boolean;
   alternateLocales?: Locale[];
   showReview?: boolean;
+  trustBlock?: TrustBlockProps;
+  showTrustBlock?: boolean;
 }
 
 const {
@@ -42,6 +47,8 @@ const {
   noindex,
   alternateLocales,
   showReview = true,
+  trustBlock,
+  showTrustBlock = true,
 } = Astro.props;
 const t = useTranslations(locale);
 const crumbs = breadcrumb ?? [
@@ -59,6 +66,7 @@ const jsonLd = [
 ];
 const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
 const review = getCalculatorReview(slug, locale);
+const resolvedTrustBlock = trustBlock ?? fallbackTrustBlock(locale, review?.lastUpdated);
 const reviewLabels = {
   en: {
     methodology: 'Methodology',
@@ -144,6 +152,7 @@ const reviewLabels = {
       </p>
     </section>
   )}
+  {showTrustBlock && <TrustBlock {...resolvedTrustBlock} />}
   <AffiliateRecs toolSlug={slug} locale={locale} />
   {locale === 'en' && <NewsletterSignup id="tool-newsletter-signup" />}
   <p class="privacy-note">{t('tool.privacyNote')}</p>

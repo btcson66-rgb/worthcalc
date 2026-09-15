@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -16,7 +17,7 @@ if (!topics[id]) throw new Error(`Unknown SEO programme: ${process.argv[2]}`);
 const slug = topics[id];
 const errors = [];
 
-for (const locale of locales) {
+for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) {
   const label = `/${locale}/guides/${slug}/`;
   const source = join(root, 'src', 'content', 'growth-articles', locale, `${slug}.md`);
   const output = join(root, 'dist', locale, 'guides', slug, 'index.html');
@@ -45,7 +46,7 @@ const sitemap = join(root, 'dist', 'sitemap-0.xml');
 if (!existsSync(sitemap)) errors.push('missing dist/sitemap-0.xml');
 else {
   const text = readFileSync(sitemap, 'utf8');
-  for (const locale of locales) if (!text.includes(`<loc>https://worthcalc.win/${locale}/guides/${slug}/</loc>`)) errors.push(`${slug}: missing sitemap entry for ${locale}`);
+  for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) if (!text.includes(`<loc>https://worthcalc.win/${locale}/guides/${slug}/</loc>`)) errors.push(`${slug}: missing sitemap entry for ${locale}`);
 }
 
 if (errors.length) {

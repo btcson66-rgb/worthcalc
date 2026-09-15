@@ -103,6 +103,30 @@ a {
   transition: color 0.15s var(--ease);
 }
 
+/*
+ * Comfortable 44px targets apply to navigational links, cards, buttons, and
+ * form controls. Plain links in prose remain inline so a paragraph keeps its
+ * intended line-height; WCAG 2.2's Target Size (Minimum) explicitly exempts
+ * inline text links.
+ */
+.site-header a,
+.site-footer a,
+.breadcrumb a,
+.topic-links a,
+.directory-list a,
+.directory-jump a,
+.home-library__links a,
+.guide-card h3 a,
+.card h3 a,
+.related-links a,
+.affiliate-card,
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
 a:hover {
   color: var(--brand-strong);
 }
@@ -114,6 +138,12 @@ img, svg {
 
 button, input, textarea, select {
   font: inherit;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
 }
 
 button, .button {

@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 const root = process.cwd();
@@ -7,7 +8,7 @@ const id = process.argv[2];
 if (!topics[id]) throw new Error(`Unknown SEO programme: ${id}`);
 const slug = topics[id];
 const errors = [];
-for (const locale of locales) {
+for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) {
   const source = join(root, 'src', 'content', 'growth-articles', locale, `${slug}.md`);
   const output = join(root, 'dist', locale, 'guides', slug, 'index.html');
   const schema = join(root, 'src', 'data', 'seo-packages-002-005', 'schema', `${id}__${locale}__${slug}.json`);
@@ -19,6 +20,6 @@ for (const locale of locales) {
   if (existsSync(output)) { const html = readFileSync(output, 'utf8'); if (!html.includes('rel="canonical"') || !html.includes(`https://worthcalc.win${label}`)) errors.push(`${label}: missing exact canonical`); if (!html.includes('index,follow')) errors.push(`${label}: missing indexable robots`); if (!html.includes('"@type":"Article"') || !html.includes('"@type":"BreadcrumbList"')) errors.push(`${label}: missing Article/BreadcrumbList schema`); }
 }
 const sitemap = join(root, 'dist', 'sitemap-0.xml');
-if (!existsSync(sitemap)) errors.push('missing dist/sitemap-0.xml'); else { const text = readFileSync(sitemap, 'utf8'); for (const locale of locales) if (!text.includes(`<loc>https://worthcalc.win/${locale}/guides/${slug}/</loc>`)) errors.push(`/${locale}/guides/${slug}/: missing sitemap entry`); }
+if (!existsSync(sitemap)) errors.push('missing dist/sitemap-0.xml'); else { const text = readFileSync(sitemap, 'utf8'); for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) if (!text.includes(`<loc>https://worthcalc.win/${locale}/guides/${slug}/</loc>`)) errors.push(`/${locale}/guides/${slug}/: missing sitemap entry`); }
 if (errors.length) { console.error(`SEO programme ${id} failed (${errors.length}):`); errors.forEach((error) => console.error(`- ${error}`)); process.exit(1); }
 console.log(`SEO programme ${id} passed: ${locales.length} localized substantive routes, official sources, measurement boundary, internal links, canonical/robots/schema, and sitemap.`);

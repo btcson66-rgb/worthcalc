@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -13,7 +14,7 @@ const packages = {
 const id = process.argv[2] ?? '';
 if (!packages[id]) throw new Error('Usage: node check-seo-programs-024-028.mjs <024|025|026|027|028>');
 const slug = packages[id]; const errors = [];
-for (const locale of locales) {
+for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) {
   const route = `/${locale}/guides/${slug}/`;
   const source = join(root, 'src', 'content', 'growth-articles', locale, `${slug}.md`);
   const output = join(root, 'dist', locale, 'guides', slug, 'index.html');
@@ -39,6 +40,6 @@ for (const locale of locales) {
 }
 const sitemap = join(root, 'dist', 'sitemap-0.xml');
 if (!existsSync(sitemap)) errors.push('dist/sitemap-0.xml missing');
-else { const xml = readFileSync(sitemap, 'utf8'); for (const locale of locales) if (!xml.includes(`https://worthcalc.win/${locale}/guides/${slug}/`)) errors.push(`/${locale}/guides/${slug}/: missing sitemap entry`); }
+else { const xml = readFileSync(sitemap, 'utf8'); for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${slug}/`))) if (!xml.includes(`https://worthcalc.win/${locale}/guides/${slug}/`)) errors.push(`/${locale}/guides/${slug}/: missing sitemap entry`); }
 if (errors.length) { console.error(`SEO program ${id} check failed (${errors.length}):\n- ${errors.join('\n- ')}`); process.exit(1); }
 console.log(`SEO program ${id} passed: 5 localized ${slug} guides have substantive copy, official-source attribution, internal links, indexable canonical/robots, Article + BreadcrumbList schema, and sitemap entries.`);

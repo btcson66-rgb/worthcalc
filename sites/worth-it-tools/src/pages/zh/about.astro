@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AuthorMethodology from '../../components/AuthorMethodology.astro';
 import { localizedPath } from '../../i18n/utils';
 import { getLibraryCounts } from '../../lib/catalog';
 
@@ -70,4 +71,5 @@ const counts = await getLibraryCounts(locale);
     看到「可能不划算」時，也不代表便利性、時間、無障礙需求或生活品質沒有價值。本站的角色是把
     隱藏假設攤開，最後決定仍由你做。
   </p>
+  <AuthorMethodology locale={locale} />
 </ArticleLayout>

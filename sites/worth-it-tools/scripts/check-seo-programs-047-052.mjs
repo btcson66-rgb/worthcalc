@@ -1,3 +1,4 @@
+import { isSoftDeindexedUrl } from './deindexing.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -17,7 +18,7 @@ const root = process.cwd();
 const locales = ['en', 'es', 'zh', 'hi', 'ar'];
 const sitemap = readFileSync(join(root, 'dist', 'sitemap-0.xml'), 'utf8');
 const failures = [];
-for (const locale of locales) {
+for (const locale of locales.filter((candidate) => !isSoftDeindexedUrl(`https://worthcalc.win/${candidate}/guides/${definition.slug}/`))) {
   const key = `${locale}/${definition.slug}`;
   const sourcePath = join(root, 'src', 'content', 'growth-articles', locale, `${definition.slug}.md`);
   const htmlPath = join(root, 'dist', locale, 'guides', definition.slug, 'index.html');

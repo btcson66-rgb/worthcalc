@@ -2,6 +2,13 @@ import { existsSync, readdirSync, statSync, readFileSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 
 const distDir = resolve('dist');
+const reverseMode = process.env.LINKS_REVERSE_MODE ?? '';
+const reversePath = process.env.LINKS_REVERSE_PATH ?? '/en/tools/commute-cost/';
+let reverseApplied = false;
+
+if (reverseMode && !new Set(['missing', 'invalid']).has(reverseMode)) {
+  throw new Error('LINKS_REVERSE_MODE must be missing or invalid');
+}
 
 if (!existsSync(distDir)) {
   console.error('dist/ does not exist. Build the site before running link checks.');
@@ -109,6 +116,10 @@ function isPageLink(sitePath) {
   return !last.includes('.');
 }
 
+function normalizedSitePath(sitePath) {
+  return sitePath.endsWith('/') ? sitePath : sitePath + '/';
+}
+
 // Every page link must end in a slash. The site builds with
 // build.format: 'directory', so a slashless internal link is served as a 301
 // to the slashed form -- a wasted crawl request, and a disagreement with the
@@ -140,8 +151,16 @@ for (const file of htmlFiles) {
     const sitePath = toSitePath(file, rawLink);
     if (sitePath === '') continue;
 
+    let checkedPath = sitePath;
+    if (reverseMode && normalizedSitePath(sitePath) === reversePath) {
+      reverseApplied = true;
+      checkedPath = reverseMode === 'missing'
+        ? '/__codex-missing-link-target__/'
+        : '/__codex-invalid-link-target__/';
+    }
+
     checked += 1;
-    if (!existsInternal(sitePath)) {
+    if (!existsInternal(checkedPath)) {
       broken.push({
         file: relative(distDir, file).split(sep).join('/'),
         link: rawLink,
@@ -157,6 +176,11 @@ for (const file of htmlFiles) {
 }
 
 let failed = false;
+
+if (reverseMode && !reverseApplied) {
+  console.error(`[links] reverse target was not found: ${reversePath}`);
+  failed = true;
+}
 
 if (broken.length > 0) {
   console.error(`Checked ${checked} internal links; found ${broken.length} broken links:`);

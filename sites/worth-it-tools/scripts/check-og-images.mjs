@@ -26,18 +26,47 @@ const pages = [];
 
 const OG = /<meta property="og:image" content="([^"]+)"/;
 const GUIDE_ROUTE = /^\/[a-z-]+\/guides\/[^/]+\/index\.html$/;
+const reverseMode = process.env.OG_IMAGES_REVERSE_MODE ?? '';
+const reversePath = process.env.OG_IMAGES_REVERSE_PATH ?? '/en/guides/3d-printer-electricity-cost-per-print-used/';
+const missingOgMeta = [];
+let reverseApplied = false;
+
+if (reverseMode && !new Set(['missing', 'invalid']).has(reverseMode)) {
+  throw new Error('OG_IMAGES_REVERSE_MODE must be missing or invalid');
+}
+
+function sitePath(file) {
+  const route = file.replace(dist, '').replace(/\\/g, '/');
+  return route.replace(/index\.html$/, '');
+}
+
+function reverseHtml(html, pathname) {
+  if (!reverseMode || pathname !== reversePath) return html;
+  reverseApplied = true;
+  if (reverseMode === 'missing') {
+    return html.replace(/<meta\b[^>]*\bproperty="og:image"[^>]*>/i, '');
+  }
+  return html.replace(
+    /(<meta\b[^>]*\bproperty="og:image"[^>]*\bcontent=")[^"]+(")/i,
+    '$1/images/guides/og/__codex-invalid-og-image.webp$2',
+  );
+}
+
 const byImage = new Map();
 const missing = [];
 const notGenerated = [];
 for (const p of pages) {
-  const m = OG.exec(readFileSync(p, 'utf8'));
-  if (!m) continue;
+  const pathname = sitePath(p);
+  const m = OG.exec(reverseHtml(readFileSync(p, 'utf8'), pathname));
+  if (!m) {
+    missingOgMeta.push(pathname);
+    continue;
+  }
   const url = m[1];
   const path = url.replace(/^https?:\/\/[^/]+/, '');
-  const route = p.replace(dist, '').replace(/\\/g, '/');
   if (!path.startsWith('/images/guides/og/')) {
     // guide 路由卻沒指到專屬圖 = 這篇的卡還沒產（頁面已 fallback 到站台預設圖，不會 404）。
-    if (GUIDE_ROUTE.test(route)) notGenerated.push(route.replace(/index\.html$/, ''));
+    if (GUIDE_ROUTE.test(p.replace(dist, '').replace(/\\/g, '/'))) notGenerated.push(pathname);
     continue;   // 其餘（首頁、工具頁、法務頁）本來就用預設圖
   }
   if (!existsSync(join(dist, path))) missing.push(`${p.replace(dist, '')} → ${path}`);
@@ -46,6 +75,11 @@ for (const p of pages) {
 }
 
 let failed = false;
+if (missingOgMeta.length) {
+  failed = true;
+  console.error(`[og-images] ${missingOgMeta.length} HTML page(s) are missing the required og:image meta tag.`);
+  missingOgMeta.slice(0, 10).forEach((x) => console.error(`  ${x}`));
+}
 if (notGenerated.length) {
   failed = true;
   console.error(`[og-images] ${notGenerated.length} 篇 guide 還沒產專屬社群預覽圖，目前退回站台預設圖。`);
@@ -64,6 +98,11 @@ if (shared.length) {
   failed = true;
   console.error(`[og-images] ${shared.length} 張圖被多頁共用（每篇 guide 應有專屬的圖）：`);
   shared.slice(0, 10).forEach(([img, ps]) => console.error(`  ${img} ← ${ps.length} 頁：${ps.slice(0, 3).join(', ')}`));
+}
+
+if (reverseMode && !reverseApplied) {
+  failed = true;
+  console.error(`[og-images] reverse target was not found: ${reversePath}`);
 }
 
 if (failed) process.exit(1);

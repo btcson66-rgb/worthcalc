@@ -7,9 +7,16 @@ const siteDir = fileURLToPath(new URL('..', import.meta.url));
 const distDir = resolve(siteDir, 'dist');
 const legalSlugs = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 const failures = [];
+const reverseMode = process.env.TRUST_BLOCK_REVERSE_MODE ?? '';
+const reversePath = normalizedPath(process.env.TRUST_BLOCK_REVERSE_PATH ?? '/en/tools/commute-cost/');
+let reverseApplied = false;
+
+if (reverseMode && !new Set(['missing', 'invalid']).has(reverseMode)) {
+  throw new Error('TRUST_BLOCK_REVERSE_MODE must be missing or invalid');
+}
 
 function normalizedPath(url) {
-  const parsed = new URL(url);
+  const parsed = new URL(url, 'https://worthcalc.win');
   const pathname = parsed.pathname.endsWith('/') ? parsed.pathname : parsed.pathname + '/';
   return pathname === '//' ? '/' : pathname;
 }
@@ -78,7 +85,16 @@ for (const candidate of candidates) {
     continue;
   }
   const html = await readFile(filePath, 'utf8');
-  const trustTag = html.match(/<section\b[^>]*data-trust-block[^>]*>/i)?.[0];
+  let candidateHtml = html;
+  if (reverseMode && pathname === reversePath) {
+    reverseApplied = true;
+    if (reverseMode === 'missing') {
+      candidateHtml = candidateHtml.replace(/<section\b[^>]*data-trust-block[^>]*>/i, '');
+    } else {
+      candidateHtml = candidateHtml.replace(/data-last-reviewed="[^"]*"/i, 'data-last-reviewed="not-a-date"');
+    }
+  }
+  const trustTag = candidateHtml.match(/<section\b[^>]*data-trust-block[^>]*>/i)?.[0];
   if (!trustTag) {
     failures.push(pathname + ': missing TrustBlock');
     continue;
@@ -92,12 +108,16 @@ for (const candidate of candidates) {
     failures.push(pathname + ': source count is invalid');
     continue;
   }
-  const sourceTags = [...html.matchAll(/<li\b[^>]*data-trust-source[^>]*>/gi)].map((match) => match[0]);
+  const sourceTags = [...candidateHtml.matchAll(/<li\b[^>]*data-trust-source[^>]*>/gi)].map((match) => match[0]);
   if (sourceTags.length !== sourceCount) failures.push(pathname + ': source count does not match rendered sources');
   for (const sourceTag of sourceTags) {
     if (!attribute(sourceTag, 'data-source-url')) failures.push(pathname + ': source is missing url');
     if (!validIsoDate(attribute(sourceTag, 'data-verified-date'))) failures.push(pathname + ': source is missing valid verifiedDate');
   }
+}
+
+if (reverseMode && !reverseApplied) {
+  failures.push(reversePath + ': reverse target was not found in the eligible page set');
 }
 
 if (failures.length > 0) {

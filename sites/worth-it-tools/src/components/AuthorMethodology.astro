@@ -1,0 +1,161 @@
+---
+import type { CoreLocale } from '../consts';
+
+interface Props {
+  locale: CoreLocale;
+}
+
+const { locale } = Astro.props;
+
+const copy = {
+  en: {
+    heading: 'Who builds this and how the numbers are checked',
+    lead: {
+      before: 'WorthCalc is built and maintained by the ',
+      strong: 'Btcson Lab Team',
+      after: '. We are not financial advisers and we hold no financial certifications. What we do is narrower and, we think, more useful: we build calculators that show their own arithmetic, and we say where every number comes from.',
+    },
+    formula: 'Every formula is on the page. If a calculator produces a result, the arithmetic behind it is written out in the same page, not hidden in code. You can check our work with a pen.',
+    labelsIntro: 'Every number is labelled. We sort figures into four kinds, and each is marked as such:',
+    labels: [
+      { term: 'Verified', text: 'taken from a named primary or official source, with a link and the date we checked it.' },
+      { term: 'Illustrative', text: 'a worked example to show how the formula behaves. Not a claim about your situation.' },
+      { term: 'Your input', text: 'a value you typed. We never change it silently.' },
+      { term: 'Derived', text: 'calculated from the above, using the formula shown.' },
+    ],
+    sources: 'Sources are primary where possible. We cite the agency or institution that publishes the figure rather than an article about it. Where we could not find a primary source, the page says so instead of citing a weaker one.',
+    stale: 'Prices and rates go stale. Energy tariffs, fees and thresholds change. Every page carries the date it was last checked. If that date is old, treat the defaults as a starting point and enter your own figures.',
+    advice: 'This is not advice. These tools compute; they do not recommend. A calculator cannot know your circumstances, and we do not ask for them.',
+    error: {
+      before: 'Found an error? Tell us and we will fix it or take the page down. Contact details are on the ',
+      link: 'contact page',
+      after: '. We would rather be corrected than be wrong quietly.',
+      href: '/en/contact/',
+    },
+  },
+  zh: {
+    heading: '這個站是誰做的，數字怎麼查核',
+    lead: {
+      before: 'WorthCalc 由 ',
+      strong: 'Btcson Lab 團隊',
+      after: '開發與維護。我們不是理財顧問，也沒有任何金融證照。我們做的事比較窄，但我們認為更有用：做會把自己算式攤開來的計算機，並且說清楚每個數字從哪裡來。',
+    },
+    formula: '每一條公式都寫在頁面上。計算機算出結果，背後的算式就寫在同一頁，不藏在程式裡。你可以拿紙筆自己驗算。',
+    labelsIntro: '每一個數字都標明種類。我們把數字分成四類，頁面上會標示：',
+    labels: [
+      { term: '已查證', text: '取自具名的一手或官方來源，附連結與我們查核的日期。' },
+      { term: '示意', text: '用來說明公式怎麼運作的算例，不是對你處境的宣稱。' },
+      { term: '你的輸入', text: '你自己填的值，我們不會偷偷改動。' },
+      { term: '推導', text: '由以上數字依頁面所示公式算出。' },
+    ],
+    sources: '來源盡量用一手。我們引用發布該數字的機關或機構本身，而不是報導它的文章。找不到一手來源時，頁面會直說，而不是隨便找個次級來源充數。',
+    stale: '價格與費率會過期。電價、手續費、級距門檻都會變。每一頁都標了最後查核日期。如果那個日期已經很舊，請把預設值當成起點，改填你自己的數字。',
+    advice: '這不是投資或理財建議。這些工具只做計算，不做推薦。計算機不可能知道你的處境，我們也不會問。',
+    error: {
+      before: '發現錯誤？告訴我們，我們會更正或把那一頁下架。聯絡方式在',
+      link: '聯絡頁',
+      after: '。我們寧可被指正，也不要安靜地錯下去。',
+      href: '/zh/contact/',
+    },
+  },
+  es: {
+    heading: 'Quién construye esto y cómo se comprueban las cifras',
+    lead: {
+      before: 'WorthCalc está desarrollado y mantenido por el ',
+      strong: 'Equipo Btcson Lab',
+      after: '. No somos asesores financieros y no tenemos ninguna certificación financiera. Lo que hacemos es más limitado y, creemos, más útil: calculadoras que enseñan su propia aritmética y que dicen de dónde sale cada cifra.',
+    },
+    formula: 'Cada fórmula está en la página. Si una calculadora da un resultado, la operación está escrita en la misma página, no escondida en el código. Puede comprobarlo con papel y lápiz.',
+    labelsIntro: 'Cada cifra lleva etiqueta. Las clasificamos en cuatro tipos y así aparecen marcadas:',
+    labels: [
+      { term: 'Verificada', text: 'de una fuente primaria u oficial identificada, con enlace y fecha de comprobación.' },
+      { term: 'Ilustrativa', text: 'un ejemplo para mostrar cómo funciona la fórmula. No es una afirmación sobre su caso.' },
+      { term: 'Su dato', text: 'el valor que usted ha introducido. Nunca lo modificamos en silencio.' },
+      { term: 'Derivada', text: 'calculada a partir de lo anterior con la fórmula mostrada.' },
+    ],
+    sources: 'Fuentes primarias siempre que se pueda. Citamos al organismo que publica el dato, no a un artículo que habla de él. Si no encontramos fuente primaria, la página lo dice en lugar de citar una peor.',
+    stale: 'Los precios y tipos caducan. Tarifas, comisiones y umbrales cambian. Cada página indica la fecha de última comprobación. Si es antigua, tome los valores por defecto como punto de partida e introduzca los suyos.',
+    advice: 'Esto no es asesoramiento. Estas herramientas calculan; no recomiendan. Una calculadora no puede conocer su situación y no se la preguntamos.',
+    error: {
+      before: '¿Ha encontrado un error? Díganoslo y lo corregiremos o retiraremos la página. Los datos de contacto están en la ',
+      link: 'página de contacto',
+      after: '. Preferimos que nos corrijan a equivocarnos en silencio.',
+      href: '/es/contact/',
+    },
+  },
+  fr: {
+    heading: 'Qui réalise ce site et comment les chiffres sont vérifiés',
+    lead: {
+      before: 'WorthCalc est développé et maintenu par l\'',
+      strong: 'Équipe Btcson Lab',
+      after: '. Nous ne sommes pas conseillers financiers et nous n\'avons aucune certification financière. Notre travail est plus étroit et, nous le pensons, plus utile : des calculateurs qui montrent leur propre arithmétique et qui indiquent d\'où vient chaque chiffre.',
+    },
+    formula: 'Chaque formule figure sur la page. Quand un calculateur donne un résultat, l\'opération est écrite sur la même page, pas cachée dans le code. Vous pouvez refaire le calcul à la main.',
+    labelsIntro: 'Chaque chiffre est étiqueté. Nous les classons en quatre catégories, signalées comme telles :',
+    labels: [
+      { term: 'Vérifié', text: 'issu d\'une source primaire ou officielle nommée, avec lien et date de vérification.' },
+      { term: 'Illustratif', text: 'un exemple chiffré pour montrer le fonctionnement de la formule. Ce n\'est pas une affirmation sur votre situation.' },
+      { term: 'Votre saisie', text: 'la valeur que vous avez entrée. Nous ne la modifions jamais en silence.' },
+      { term: 'Dérivé', text: 'calculé à partir de ce qui précède, avec la formule affichée.' },
+    ],
+    sources: 'Des sources primaires autant que possible. Nous citons l\'organisme qui publie le chiffre, pas un article qui en parle. Faute de source primaire, la page le dit plutôt que d\'en citer une moins fiable.',
+    stale: 'Les prix et les taux vieillissent. Tarifs, frais et seuils changent. Chaque page porte sa date de dernière vérification. Si elle est ancienne, considérez les valeurs par défaut comme un point de départ et saisissez les vôtres.',
+    advice: 'Ceci n\'est pas un conseil. Ces outils calculent ; ils ne recommandent pas. Un calculateur ne peut pas connaître votre situation, et nous ne vous la demandons pas.',
+    error: {
+      before: 'Vous avez trouvé une erreur ? Signalez-la : nous la corrigerons ou retirerons la page. Les coordonnées sont sur la ',
+      link: 'page de contact',
+      after: '. Nous préférons être corrigés qu\'avoir tort en silence.',
+      href: '/fr/contact/',
+    },
+  },
+  de: {
+    heading: 'Wer das hier baut und wie die Zahlen geprüft werden',
+    lead: {
+      before: 'WorthCalc wird vom ',
+      strong: 'Btcson-Lab-Team',
+      after: ' entwickelt und gepflegt. Wir sind keine Finanzberater und haben keine Finanzzertifizierungen. Unsere Arbeit ist enger gefasst und aus unserer Sicht nützlicher: Rechner, die ihre eigene Rechnung offenlegen und sagen, woher jede Zahl stammt.',
+    },
+    formula: 'Jede Formel steht auf der Seite. Wenn ein Rechner ein Ergebnis liefert, ist die Rechnung auf derselben Seite ausgeschrieben, nicht im Code versteckt. Sie können sie mit Stift und Papier nachvollziehen.',
+    labelsIntro: 'Jede Zahl ist gekennzeichnet. Wir unterscheiden vier Arten und markieren sie entsprechend:',
+    labels: [
+      { term: 'Geprüft', text: 'aus einer benannten primären oder amtlichen Quelle, mit Link und Prüfdatum.' },
+      { term: 'Beispielhaft', text: 'ein Rechenbeispiel, das zeigt, wie die Formel funktioniert. Keine Aussage über Ihre Lage.' },
+      { term: 'Ihre Eingabe', text: 'der von Ihnen eingegebene Wert. Wir ändern ihn nie stillschweigend.' },
+      { term: 'Abgeleitet', text: 'aus dem Obigen mit der gezeigten Formel berechnet.' },
+    ],
+    sources: 'Möglichst primäre Quellen. Wir zitieren die Stelle, die die Zahl veröffentlicht, nicht einen Artikel darüber. Wo wir keine primäre Quelle gefunden haben, sagt die Seite das, statt eine schwächere zu zitieren.',
+    stale: 'Preise und Sätze veralten. Tarife, Gebühren und Grenzwerte ändern sich. Jede Seite trägt ihr letztes Prüfdatum. Ist es alt, behandeln Sie die Voreinstellungen als Ausgangspunkt und tragen Sie Ihre eigenen Zahlen ein.',
+    advice: 'Das ist keine Beratung. Diese Werkzeuge rechnen; sie empfehlen nicht. Ein Rechner kann Ihre Situation nicht kennen, und wir fragen nicht danach.',
+    error: {
+      before: 'Fehler gefunden? Sagen Sie uns Bescheid, wir korrigieren ihn oder nehmen die Seite herunter. Kontaktdaten finden Sie auf der ',
+      link: 'Kontaktseite',
+      after: '. Lieber korrigiert werden, als still im Unrecht bleiben.',
+      href: '/de/contact/',
+    },
+  },
+}[locale];
+---
+
+<section class="author-methodology" data-author-methodology>
+  <h2>{copy.heading}</h2>
+  <p>{copy.lead.before}<strong>{copy.lead.strong}</strong>{copy.lead.after}</p>
+  <p>{copy.formula}</p>
+  <p>{copy.labelsIntro}</p>
+  <ul>
+    {copy.labels.map((item) => <li><strong>{item.term}</strong> — {item.text}</li>)}
+  </ul>
+  <p>{copy.sources}</p>
+  <p>{copy.stale}</p>
+  <p>{copy.advice}</p>
+  <p>{copy.error.before}<a href={copy.error.href}>{copy.error.link}</a>{copy.error.after}</p>
+</section>
+
+<style>
+  .author-methodology {
+    margin-block: 2rem 0;
+  }
+
+  .author-methodology li + li {
+    margin-top: 0.4rem;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AuthorMethodology from '../../components/AuthorMethodology.astro';
 import { localizedPath } from '../../i18n/utils';
 import { getLibraryCounts } from '../../lib/catalog';
 
@@ -87,4 +88,5 @@ const counts = await getLibraryCounts(locale);
     mean convenience, time, accessibility, or quality of life has no value.
     WorthCalc makes assumptions visible; the final decision remains yours.
   </p>
+  <AuthorMethodology locale={locale} />
 </ArticleLayout>

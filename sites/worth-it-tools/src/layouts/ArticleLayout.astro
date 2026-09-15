@@ -5,9 +5,12 @@ import { localizedCorePath, useTranslations } from '../i18n/utils';
 import { articleJsonLd } from '../lib/seo';
 import AdSlot from '../components/AdSlot.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import TrustBlock from '../components/TrustBlock.astro';
 import TopicLinks from '../components/TopicLinks.astro';
 import BaseLayout from './BaseLayout.astro';
 import PaidProductPanel from '../components/PaidProductPanel.astro';
+import type { TrustBlockProps } from '../types/trustBlock';
+import { fallbackTrustBlock, isoDate } from '../lib/trustBlock';
 
 interface Props {
   title: string;
@@ -25,12 +28,27 @@ interface Props {
   robots?: string;
   jsonLd?: object[];
   showTitle?: boolean;
+  trustBlock?: TrustBlockProps;
+  showTrustBlock?: boolean;
 }
 
-const { title, description, locale, updated, breadcrumb, noindex, alternateLocales, seoTitle, ogTitle, ogDescription, image, imageAlt, robots, jsonLd = [], showTitle = true } = Astro.props;
+const { title, description, locale, updated, breadcrumb, noindex, alternateLocales, seoTitle, ogTitle, ogDescription, image, imageAlt, robots, jsonLd = [], showTitle = true, trustBlock, showTrustBlock } = Astro.props;
 const t = useTranslations(locale);
 // The locale prefix is stripped so the topic classifier sees the logical route.
 const logicalPath = `/${Astro.url.pathname.split('/').filter(Boolean).slice(1).join('/')}`;
+const pageSlug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+const legalSlugs = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
+const shouldShowTrustBlock = showTrustBlock ?? !legalSlugs.has(pageSlug);
+const resolvedTrustBlock = trustBlock ?? fallbackTrustBlock(locale, updated);
+const authorLabels = {
+  en: { team: 'Btcson Lab Team', verified: 'Last verified' },
+  zh: { team: 'Btcson Lab 團隊', verified: '最後查核' },
+  es: { team: 'Equipo Btcson Lab', verified: 'Última comprobación' },
+  fr: { team: 'Équipe Btcson Lab', verified: 'Dernière vérification' },
+  de: { team: 'Btcson-Lab-Team', verified: 'Zuletzt geprüft' },
+} as const;
+const authorCopy = authorLabels[locale as keyof typeof authorLabels];
+const shouldShowAuthor = showTitle && Boolean(authorCopy) && Boolean(updated) && !new Set(['privacy', 'terms', 'contact', 'disclaimer', 'changelog']).has(pageSlug);
 const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: title, url: Astro.url.pathname },
@@ -70,15 +88,17 @@ if (p5Placements.has(path)) contextualProducts.push({ id: 'PRODUCT-005', placeme
   image={image}
   imageAlt={imageAlt}
   robots={robots}
-  jsonLd={jsonLd.length > 0 ? jsonLd : [articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated, site: Astro.site })]}
+  jsonLd={jsonLd.length > 0 ? jsonLd : [articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated ? isoDate(updated) : undefined, site: Astro.site })]}
 >
   <Breadcrumb items={crumbs} includeJsonLd={jsonLd.length === 0} />
   <article class="prose">
     {showTitle && <h1>{title}</h1>}
+    {shouldShowAuthor && <p class="author-byline"><strong>{authorCopy.team}</strong> · {authorCopy.verified} {isoDate(updated)}</p>}
     {updated && <p class="updated">{updated}</p>}
     <slot />
     {contextualProducts.map((product) => <PaidProductPanel productId={product.id} locale={locale as 'en' | 'zh'} placement={product.placement} />)}
   </article>
+  {shouldShowTrustBlock && <TrustBlock {...resolvedTrustBlock} />}
   <TopicLinks locale={locale} path={logicalPath} />
   <AdSlot noindex={noindex} />
 </BaseLayout>

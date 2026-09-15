@@ -1,0 +1,152 @@
+---
+import type { TrustBlockProps } from '../types/trustBlock';
+
+const { method, formula, sources, limits, lastReviewed, locale } = Astro.props as TrustBlockProps;
+
+const copy = {
+  en: {
+    heading: 'How this is calculated',
+    method: 'Method',
+    formula: 'Formula',
+    sources: 'Sources',
+    limits: 'Limits',
+    lastReviewed: 'Last verified',
+    dateSuffix: (date: string) => `(checked ${date})`,
+    noSources: 'This page uses only arithmetic and the values you enter. It cites no outside figures.',
+  },
+  zh: {
+    heading: '這一頁怎麼算的',
+    method: '方法',
+    formula: '公式',
+    sources: '資料來源',
+    limits: '限制',
+    lastReviewed: '最後查核',
+    dateSuffix: (date: string) => `（${date} 查核）`,
+    noSources: '本頁只用算術與你輸入的數值，沒有引用任何外部數字。',
+  },
+  es: {
+    heading: 'Cómo se calcula',
+    method: 'Método',
+    formula: 'Fórmula',
+    sources: 'Fuentes',
+    limits: 'Limitaciones',
+    lastReviewed: 'Última comprobación',
+    dateSuffix: (date: string) => `(comprobado ${date})`,
+    noSources: 'Esta página solo usa aritmética y los valores que usted introduce. No cita cifras externas.',
+  },
+  fr: {
+    heading: 'Comment ce calcul est fait',
+    method: 'Méthode',
+    formula: 'Formule',
+    sources: 'Sources',
+    limits: 'Limites',
+    lastReviewed: 'Dernière vérification',
+    dateSuffix: (date: string) => `(vérifié le ${date})`,
+    noSources: "Cette page n'utilise que l'arithmétique et les valeurs que vous saisissez. Elle ne cite aucun chiffre extérieur.",
+  },
+  de: {
+    heading: 'So wird gerechnet',
+    method: 'Methode',
+    formula: 'Formel',
+    sources: 'Quellen',
+    limits: 'Grenzen',
+    lastReviewed: 'Zuletzt geprüft',
+    dateSuffix: (date: string) => `(geprüft am ${date})`,
+    noSources: 'Diese Seite nutzt nur Arithmetik und Ihre Eingaben. Sie zitiert keine externen Zahlen.',
+  },
+}[locale];
+---
+
+<section
+  class="trust-block"
+  data-trust-block
+  data-last-reviewed={lastReviewed}
+  data-limit-count={limits.length}
+  data-source-count={sources.length}
+  aria-labelledby="trust-block-heading"
+>
+  <h2 id="trust-block-heading">{copy.heading}</h2>
+
+  <h3>{copy.method}</h3>
+  <p>{method}</p>
+
+  {formula && (
+    <>
+      <h3>{copy.formula}</h3>
+      <p class="trust-formula"><code>{formula}</code></p>
+    </>
+  )}
+
+  <h3>{copy.sources}</h3>
+  {sources.length > 0 ? (
+    <ul class="trust-sources">
+      {sources.map((source) => (
+        <li data-trust-source data-source-url={source.url} data-verified-date={source.verifiedDate}>
+          <a href={source.url} rel="noopener noreferrer">{source.label}</a>
+          <span> {copy.dateSuffix(source.verifiedDate)}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p data-trust-no-external-sources>{copy.noSources}</p>
+  )}
+
+  <h3>{copy.limits}</h3>
+  <ul data-trust-limits>
+    {limits.map((limit) => <li>{limit}</li>)}
+  </ul>
+
+  <p class="trust-reviewed">
+    <strong>{copy.lastReviewed}:</strong>
+    <time datetime={lastReviewed}>{lastReviewed}</time>
+  </p>
+</section>
+
+<style>
+  .trust-block {
+    margin-block: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .trust-block h2 {
+    margin-top: 0;
+  }
+
+  .trust-block h3 {
+    margin-top: 1.1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .trust-block p {
+    margin-top: 0;
+  }
+
+  .trust-formula {
+    overflow-wrap: anywhere;
+  }
+
+  .trust-formula code {
+    white-space: pre-wrap;
+  }
+
+  .trust-sources,
+  .trust-block [data-trust-limits] {
+    margin-block: 0.35rem 0;
+    padding-left: 1.25rem;
+  }
+
+  .trust-sources li + li,
+  .trust-block [data-trust-limits] li + li {
+    margin-top: 0.4rem;
+  }
+
+  .trust-reviewed {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+</style>

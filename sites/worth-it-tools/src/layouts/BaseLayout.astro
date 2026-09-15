@@ -8,6 +8,7 @@ import SEO from '../components/SEO.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import s4TitleOverrides from '../data/s4TitleOverrides.json';
 
 interface Props {
   title: string;
@@ -47,17 +48,20 @@ const {
   entity,
 } = Astro.props;
 const resolvedAlternateLocales = alternateLocales ?? [...CORE_LOCALES];
+const s4TitleOverride = s4TitleOverrides[Astro.url.pathname as keyof typeof s4TitleOverrides];
+const resolvedTitle = s4TitleOverride?.title ?? title;
+const resolvedDescription = s4TitleOverride?.description ?? description;
 ---
 
 <!doctype html>
 <html lang={LOCALE_HREFLANG[locale]}>
   <head>
     <SEO
-      title={title}
-      titleOverride={seoTitle}
-      description={description}
-      ogTitle={ogTitle}
-      ogDescription={ogDescription}
+      title={resolvedTitle}
+      titleOverride={s4TitleOverride?.title ?? seoTitle}
+      description={resolvedDescription}
+      ogTitle={s4TitleOverride?.title ?? ogTitle}
+      ogDescription={s4TitleOverride?.description ?? ogDescription}
       robots={robots}
       imageAlt={imageAlt}
       locale={locale}

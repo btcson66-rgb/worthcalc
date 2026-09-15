@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const siteDir = fileURLToPath(new URL('..', import.meta.url));
@@ -83,7 +83,7 @@ for (const candidate of candidates) {
   const pathname = normalizedPath(candidate.url);
   const relativePath = pathname === '/' ? 'index.html' : join(pathname.replace(/^\/+/, ''), 'index.html');
   const filePath = resolve(distDir, relativePath);
-  const distRoot = resolve(distDir) + '\\';
+  const distRoot = resolve(distDir) + sep;
   if (filePath !== resolve(distDir) && !filePath.startsWith(distRoot)) {
     failures.push(pathname + ': resolved outside dist');
     continue;

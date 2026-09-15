@@ -92,7 +92,7 @@ const localeTags: Record<CalculatorLocale, string> = {
   data-ev-wins={copy.evWins}
   data-gas-wins={copy.gasWins}
   data-tie={copy.tie}
->
+ data-label-a={copy.evTotal} data-label-b={copy.gasTotal}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
@@ -122,6 +122,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.evTotal}</dt><dd data-output="evTotal">—</dd></div>
         <div><dt>{copy.gasTotal}</dt><dd data-output="gasTotal">—</dd></div>
@@ -140,6 +141,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-ev-gas-tco-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -187,6 +189,12 @@ const localeTags: Record<CalculatorLocale, string> = {
       const gasTotal = gasPurchasePrice + gasOneTimeCosts + ownershipYears * (gasEnergyAnnual + gasAnnualOther) - gasResale;
       const difference = Math.abs(evTotal - gasTotal);
       const totalDistance = Math.max(1, annualDistance * ownershipYears);
+
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: evTotal },
+        { label: root.dataset.labelB || '', value: gasTotal },
+      ], formatMoney);
 
       output('evTotal').textContent = formatMoney(evTotal);
       output('gasTotal').textContent = formatMoney(gasTotal);

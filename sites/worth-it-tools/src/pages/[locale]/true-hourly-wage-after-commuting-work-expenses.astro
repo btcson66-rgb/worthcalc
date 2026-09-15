@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -36,7 +37,8 @@ const article = articles[locale];
 const guide = trueHourlyWageGuides[locale]!;
 const calculator = calculators[locale];
 ---
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <><p>A job’s advertised hourly rate prices paid work only. A personal decision also needs spendable pay, required extra time, commuting and costs the employer does not reimburse.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>Keep two clocks</h2><p>For personal comparison, count every hour the job takes from you. For labor-law questions, preserve a separate record: DOL says ordinary commuting is generally not work time, while suffered or permitted off-the-clock work and job-site travel may be compensable.</p><h2>Use the paystub boundary</h2><p>The IRS distinguishes gross pay before deductions from net take-home after deductions. Enter both from the same pay period; do not apply an average tax percentage to a different salary or location.</p><p class="privacy-note">General education, not tax, legal, employment or financial advice.</p></>}
   {locale === 'zh' && <><p>職缺寫的時薪只看有薪時間；個人選擇還要看真正實領、必要額外時間、通勤與公司未報銷的成本。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>個人時間成本與法定工時分開</h2><p>個人比較可以把所有通勤都放入分母；但勞動部對工作時間的認定重點是是否受雇主指揮監督、提供或等待提供勞務。疑似未付工時要另存出勤、訊息與指示，不要只在計算器裡當成本。</p><h2>同一期薪資單才能對齊</h2><p>勞動部要求薪資明細列出總額、各項給付、合法扣除與實際發給。應發與實領必須取同一期，並把雇主已報銷款項排除。</p><p class="privacy-note">一般教育資訊，不是稅務、法律、勞資或財務建議。</p></>}
   {locale === 'es' && <><p>La tarifa anunciada divide el bruto entre horas pagadas. Para elegir empleo también importan el líquido, el tiempo exigido, el trayecto y los gastos que la empresa no devuelve.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>Separar la métrica personal del registro legal</h2><p>Cuenta el desplazamiento para valorar tu tiempo, pero no lo declares automáticamente jornada. La guía de MITES exige registrar inicio y final y recomienda identificar pausas; las obligaciones concretas dependen del trabajo y la organización.</p><h2>La nómina debe ser del mismo periodo</h2><p>El modelo oficial separa devengos y deducciones. Usa el líquido realmente cobrado y las horas correspondientes; no apliques un porcentaje fiscal genérico ni restes gastos ya reembolsados.</p><p class="privacy-note">Información general; no es asesoramiento fiscal, jurídico, laboral ni financiero.</p></>}

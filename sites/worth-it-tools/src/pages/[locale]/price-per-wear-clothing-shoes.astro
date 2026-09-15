@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -36,7 +37,8 @@ const article = articles[locale];
 const guide = pricePerWearGuides[locale]!;
 const calculator = calculators[locale];
 ---
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <><p>A low price tag can still be expensive if fit, care or occasion limits actual wear. Compare net ownership cost per logged wear; do not build a brand verdict from marketing promises.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="price-per-wear-calculator" mode="pricePerWear" locale={locale} {...calculator}/><h2>Read care before predicting durability</h2><p>The FTC requires care instructions to have a reasonable basis and remain legible through the product’s useful life. Dry cleaning, heat restrictions and component warnings can change both cost and the number of wears you can reach.</p><h2>Separate resale asking price from proceeds</h2><p>Use a conservative completed-sale amount after platform fees, shipping, cleaning and negotiation. If you cannot substantiate a buyer market, use zero and treat any later resale as upside.</p><p class="privacy-note">General consumer education, not financial, textile-care or product advice.</p></>}
   {locale === 'zh' && <><p>標價便宜不代表每次穿著便宜；尺寸、場合與洗燙限制會決定真的穿幾次。本頁只比較同等用途，不做品牌內容農場。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="price-per-wear-calculator" mode="pricePerWear" locale={locale} {...calculator}/><h2>先看洗標，再估耐用與維護</h2><p>台灣服飾標示基準要求標示水洗、漂白、乾燥、熨燙與專業維護。需乾洗、不可烘乾或不同部件要分開照護，都可能提高成本或降低實際穿著頻率。</p><h2>用成交淨額，不用刊登夢想價</h2><p>轉售要扣平台費、寄送、清潔、議價與滯銷風險。找不到可驗證的成交市場時填零，之後真的賣出再回填。</p><p class="privacy-note">一般消費教育資訊，不是財務、洗護或商品建議。</p></>}
   {locale === 'es' && <><p>Una etiqueta barata puede salir cara si la talla, el clima o el cuidado reducen las puestas. Esta página compara usos equivalentes y no fabrica páginas por marca.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="price-per-wear-calculator" mode="pricePerWear" locale={locale} {...calculator}/><h2>La conservación forma parte del coste</h2><p>La información oficial de Consumo distingue composición y conservación: lavado, planchado, limpieza en seco y secado. Esas condiciones influyen en el gasto y en la duración realmente alcanzable.</p><h2>Reventa neta, no precio anunciado</h2><p>Resta comisión, envío, preparación, negociación y riesgo de no vender. Si no puedes justificar un mercado real, usa cero para no abaratar artificialmente el resultado.</p><p class="privacy-note">Información general; no es consejo financiero, de cuidado textil ni de producto.</p></>}

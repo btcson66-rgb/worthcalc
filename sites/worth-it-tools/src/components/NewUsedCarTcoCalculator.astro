@@ -80,7 +80,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
   data-new-wins={copy.newWins}
   data-used-wins={copy.usedWins}
   data-tie={copy.tie}
->
+ data-label-a={copy.newTco} data-label-b={copy.usedTco}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -105,6 +105,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.newTco}</dt><dd data-output="newTco">—</dd></div>
         <div><dt>{copy.usedTco}</dt><dd data-output="usedTco">—</dd></div>
@@ -127,6 +128,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-new-used-car-tco-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -178,6 +180,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const usedTco = usedPrice + usedFees + usedLoan.interest + usedExpectedRepairs - usedResale;
       const usedDownside = usedPrice + usedFees + usedLoan.interest + usedScheduledRepairs + usedMajorRepair - usedResale;
       const difference = Math.abs(newTco - usedTco);
+
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: newTco },
+        { label: root.dataset.labelB || '', value: usedTco },
+      ], formatMoney);
 
       output('newTco').textContent = formatMoney(newTco);
       output('usedTco').textContent = formatMoney(usedTco);

@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../../lib/trustBlock';
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
@@ -45,7 +46,7 @@ const related = [
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']} trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}>
   <p class="intro">
     A Costco membership decision has two different break-even tests. First, do the price savings on purchases you already planned cover the basic membership fee? Second, does the Executive reward on <em>eligible</em> purchases cover the extra fee over Gold Star? This calculator keeps those questions separate and shows every step.
   </p>

@@ -13,7 +13,7 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id="repair-replace-calculator" class="calc" data-repair-replace-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-repair={copy.verdictRepair} data-verdict-replace={copy.verdictReplace}>
+<section id="repair-replace-calculator" class="calc" data-repair-replace-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-repair={copy.verdictRepair} data-verdict-replace={copy.verdictReplace} data-label-a={copy.repairExpected} data-label-b={copy.replacementNet}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -30,6 +30,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.repairExpected}</dt><dd data-output="repairExpected">—</dd></div>
         <div><dt>{copy.repairMonthly}</dt><dd data-output="repairMonthly">—</dd></div>
@@ -44,6 +45,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-repair-replace-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -65,6 +67,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const breakEvenQuote = Math.max(0, repairMonths * replacementMonthly - recurrenceExpected - energyPenalty);
       const repairWins = repairMonthly <= replacementMonthly;
       const difference = Math.abs(repairMonthly - replacementMonthly);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: repairExpected },
+        { label: root.dataset.labelB || '', value: replacementNet },
+      ], money);
+
       out('repairExpected').textContent = money(repairExpected);
       out('repairMonthly').textContent = money(repairMonthly);
       out('replacementNet').textContent = money(replacementNet);

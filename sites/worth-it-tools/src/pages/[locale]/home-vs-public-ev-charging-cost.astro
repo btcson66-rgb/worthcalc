@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import EVChargingCostCalculator from '../../components/EVChargingCostCalculator.astro';
 import TWChargingCostCalculator from '../../components/TWChargingCostCalculator.astro';
@@ -130,7 +131,8 @@ const guide = evChargingCostGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-09-15' : '2026-07-19'} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-09-15' : '2026-07-19'} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>“How much does an EV cost per mile?” has no defensible answer until the charging mix is known. A driver who can charge overnight at home and a renter who relies on highway DC stations can own the same car yet pay very different energy costs.</p>
     <p>The useful unit is the price of one mile under a stated mix: vehicle efficiency, charging loss, kWh share by channel and every fee caused by charging. The calculator keeps those assumptions visible so a search or answer engine can quote the conditions with the result.</p>

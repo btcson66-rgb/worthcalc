@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import RentBuyBreakevenCalculator from '../../components/RentBuyBreakevenCalculator.astro';
@@ -116,7 +117,8 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing rent-buy break-even guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A five-year rule cannot know your closing cash, mortgage balance, repair history or likely sale cost. The practical question is conditional: if you sell at the end of year one, two, three and so on, when does the net owner cost first fall below the net cost of the comparable rental?</p>
     <p>The CFPB explicitly connects rent-versus-buy tradeoffs to how long you expect to stay and warns that calculators must assume future home-price growth. A useful result therefore names the assumptions and can honestly return “not reached.”</p>

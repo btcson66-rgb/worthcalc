@@ -13,7 +13,7 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id="phone-keep-upgrade-calculator" class="calc" data-phone-keep-upgrade-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-keep={copy.verdictKeep} data-verdict-upgrade={copy.verdictUpgrade}>
+<section id="phone-keep-upgrade-calculator" class="calc" data-phone-keep-upgrade-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-keep={copy.verdictKeep} data-verdict-upgrade={copy.verdictUpgrade} data-label-a={copy.keepFullMonthly} data-label-b={copy.upgradeFullMonthly}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -32,6 +32,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.keepDeviceMonthly}</dt><dd data-output="keepDeviceMonthly">—</dd></div>
         <div><dt>{copy.upgradeDeviceMonthly}</dt><dd data-output="upgradeDeviceMonthly">—</dd></div>
@@ -45,6 +46,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-phone-keep-upgrade-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -65,6 +67,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const difference = Math.abs(keepFullMonthly - upgradeFullMonthly);
       out('keepDeviceMonthly').textContent = money(keepDeviceMonthly);
       out('upgradeDeviceMonthly').textContent = money(upgradeDeviceMonthly);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: keepFullMonthly },
+        { label: root.dataset.labelB || '', value: upgradeFullMonthly },
+      ], money);
+
       out('keepFullMonthly').textContent = money(keepFullMonthly);
       out('upgradeFullMonthly').textContent = money(upgradeFullMonthly);
       out('breakEvenTradeIn').textContent = money(breakEvenTradeIn);

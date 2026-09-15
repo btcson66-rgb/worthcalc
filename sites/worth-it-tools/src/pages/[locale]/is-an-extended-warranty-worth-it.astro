@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import ExtendedWarrantyCalculator from '../../components/ExtendedWarrantyCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -80,7 +81,8 @@ const guide = extendedWarrantyGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>An extended warranty is not automatically “peace of mind for pennies.” Its price must be compared with the probability-weighted repair cost it actually removes after exclusions, deductibles, claim friction and payout limits.</p>
     <DecisionGuide content={guide} />

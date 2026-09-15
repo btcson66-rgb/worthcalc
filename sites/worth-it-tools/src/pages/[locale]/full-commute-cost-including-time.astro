@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import CommuteFullCostCalculator from '../../components/CommuteFullCostCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -104,7 +105,8 @@ const guide = commuteFullCostGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A cheap-looking commute can be expensive once a parking pass, tires, repairs, depreciation and door-to-door time are visible. The useful answer has two totals: money that leaves your budget and an optional generalized cost that adds your own value of time.</p>
     <p>Keep those totals separate. Calling every commute hour “lost salary” creates false precision when the hour could not actually have been sold as paid work.</p>

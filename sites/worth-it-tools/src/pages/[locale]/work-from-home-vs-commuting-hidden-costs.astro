@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import WfhCommuteCalculator from '../../components/WfhCommuteCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -104,7 +105,8 @@ const guide = wfhCommuteGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>Remote work can remove a large commute without making the home free. The fair comparison uses incremental cash: extra HVAC and equipment at home versus transport, parking, meals and office-only purchases, then subtracts reimbursements actually received.</p>
     <p>Hybrid work needs its own line because fixed costs can survive on both sides. A parking pass and upgraded internet can remain even when each is used only part of the month.</p>

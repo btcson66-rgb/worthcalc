@@ -231,7 +231,14 @@ export function renderLine(
       <text class="viz-line__marker-label" x="${Math.min(mx + 8, W - 40).toFixed(1)}" y="${Math.max(my - 8, 12).toFixed(1)}">${escapeHtml(xLabel(crossoverIndex))}</text>`;
   }
 
-  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(series[0].label)} versus ${escapeHtml(series[1].label)} over time">
+  const endA = series[0].points[n - 1];
+  const endB = series[1].points[n - 1];
+  const summary =
+    `${series[0].label} versus ${series[1].label} over ${xLabel(n - 1)}: ` +
+    `${format(endA)} against ${format(endB)}` +
+    (crossoverIndex > 0 ? `, crossing at ${xLabel(crossoverIndex)}` : '');
+
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(summary)}">
       <g class="viz-line__grid">${gridRows}</g>
       ${ticks}
       <path class="viz-line__series viz-line__series--2" d="${path(series[1].points)}" />

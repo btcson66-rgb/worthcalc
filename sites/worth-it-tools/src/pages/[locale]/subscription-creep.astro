@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES, type Locale } from '../../consts';
@@ -70,7 +71,8 @@ const englishTool = localizedCorePath(locale, '/tools/subscription-audit');
   locale={locale as Locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'es' && (
     <>
       <p>

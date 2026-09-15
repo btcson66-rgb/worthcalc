@@ -41,7 +41,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
   data-lease-wins={copy.leaseWins}
   data-buy-wins={copy.buyWins}
   data-tie={copy.tie}
->
+ data-label-a={copy.leaseTotal} data-label-b={copy.buyTotal}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -68,6 +68,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.leaseTotal}</dt><dd data-output="leaseTotal">—</dd></div>
         <div><dt>{copy.buyTotal}</dt><dd data-output="buyTotal">—</dd></div>
@@ -89,6 +90,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-car-lease-buy-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -135,6 +137,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const buyTotal = buyPrice + buyFees + buyLoan.interest + buyRunning - buyResale;
       const buyoutGap = Math.max(0, value('expectedLeaseMarketValue')) - Math.max(0, value('leaseOptionPrice'));
       const difference = Math.abs(leaseTotal - buyTotal);
+
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: leaseTotal },
+        { label: root.dataset.labelB || '', value: buyTotal },
+      ], formatMoney);
 
       output('leaseTotal').textContent = formatMoney(leaseTotal);
       output('buyTotal').textContent = formatMoney(buyTotal);

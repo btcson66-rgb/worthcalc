@@ -17,7 +17,7 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id="wfh-commute-calculator" class="calc" data-wfh-commute-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-home={copy.verdictHome} data-verdict-office={copy.verdictOffice}>
+<section id="wfh-commute-calculator" class="calc" data-wfh-commute-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-home={copy.verdictHome} data-verdict-office={copy.verdictOffice} data-label-a={copy.allHome} data-label-b={copy.allOffice}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -39,6 +39,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.allHome}</dt><dd data-output="allHome">—</dd></div>
         <div><dt>{copy.allOffice}</dt><dd data-output="allOffice">—</dd></div>
@@ -53,6 +54,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-wfh-commute-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: 0 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -73,6 +75,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const commuteHours = officeDays * value('commuteMinutes') / 60;
       const hybridFull = hybridCash + commuteHours * value('timeValue');
       const officePremium = allOffice - allHome;
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: allHome },
+        { label: root.dataset.labelB || '', value: allOffice },
+      ], money);
+
       out('allHome').textContent = money(allHome);
       out('allOffice').textContent = money(allOffice);
       out('hybridCash').textContent = money(hybridCash);

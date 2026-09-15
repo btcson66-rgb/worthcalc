@@ -13,7 +13,7 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id="extended-warranty-calculator" class="calc" data-extended-warranty-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-plan={copy.verdictPlan} data-verdict-self={copy.verdictSelf}>
+<section id="extended-warranty-calculator" class="calc" data-extended-warranty-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-plan={copy.verdictPlan} data-verdict-self={copy.verdictSelf} data-label-a={copy.selfFundExpected} data-label-b={copy.planExpected}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -28,6 +28,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.selfFundExpected}</dt><dd data-output="selfFundExpected">—</dd></div>
         <div><dt>{copy.planExpected}</dt><dd data-output="planExpected">—</dd></div>
@@ -41,6 +42,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-extended-warranty-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -63,6 +65,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const savingsPerFailure = approval * Math.max(0, payout - claimCost);
       const breakEven = savingsPerFailure ? value('planPrice') / savingsPerFailure * 100 : Infinity;
       const planWins = netValue >= 0;
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: selfFundExpected },
+        { label: root.dataset.labelB || '', value: planExpected },
+      ], money);
+
       out('selfFundExpected').textContent = money(selfFundExpected);
       out('planExpected').textContent = money(planExpected);
       out('expectedPayout').textContent = money(expectedPayout);

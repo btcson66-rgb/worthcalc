@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -42,7 +43,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(installmentGuides.zh, locale)}>
   <p>
     「0 利率，輕鬆 12 期！」不管是信用卡分期、手機空機分期，還是購物網站的
     先買後付，這句話聽起來都像天上掉下來的好康。但很多「0 利率」方案其實

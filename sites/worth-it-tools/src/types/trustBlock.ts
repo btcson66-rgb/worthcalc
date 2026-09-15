@@ -1,4 +1,4 @@
-import type { CoreLocale } from '../consts';
+import type { ContentLocale } from '../consts';
 
 export interface TrustBlockSource {
   label: string;
@@ -12,5 +12,5 @@ export interface TrustBlockProps {
   sources: TrustBlockSource[];
   limits: string[];
   lastReviewed: string;
-  locale: CoreLocale;
+  locale: ContentLocale;
 }

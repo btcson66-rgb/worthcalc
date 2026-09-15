@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import CarLeaseBuyCalculator from '../../components/CarLeaseBuyCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -119,7 +120,8 @@ const guide = carLeaseBuyGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>“Lease or buy?” is often answered with two monthly payments that do not represent the same thing. A purchase payment includes principal that may become equity; a lease payment mainly covers expected depreciation, a rent charge, taxes and fees for a fixed term and mileage.</p>
     <p>The fair comparison ends on the same month, uses the same driving, and states what happens then: return the lease and pay contractual charges, or sell the purchased vehicle and use the proceeds to clear any remaining loan.</p>

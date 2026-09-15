@@ -122,6 +122,11 @@
   --muted: var(--color-muted);
   --soft: var(--color-surface-2);
 
+  /* Height a slider occupies once calcUi injects it: the wrapper (1.6rem track
+     + 1.22rem ticks + 0.15rem gap) plus its 0.4rem top margin. Fields that opt
+     into a slider reserve this up front — see the .calc-field__slider rules. */
+  --slider-reserve: 3.9rem;
+
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -2302,9 +2307,22 @@ a {
   accent-color: var(--brand-bright);
 }
 
-/* The wrapper calcUi injects after an input that opted into a slider. */
+/* ── Reserving the slider's space ──────────────────────────────────────────
+   calcUi injects the slider after load, so without a reservation each one
+   pushes the rest of the page down — 0.0568 of CLS on the nine-slider page at
+   desktop width, which is over half the "good" budget spent on nothing.
+
+   The field reserves the height up front; the injected wrapper then sits in
+   that reserved space instead of adding to it, so the net change on injection
+   is zero. Browsers without :has() fall back to the old behaviour. */
+.field:has(input[data-range]),
+.calc-field:has(input[data-range]) {
+  padding-bottom: var(--slider-reserve);
+}
+
 .calc-field__slider {
   margin-top: 0.4rem;
+  margin-bottom: calc(-1 * var(--slider-reserve));
 }
 
 .field .calc-field__slider + .helper {
@@ -2435,10 +2453,28 @@ a {
 
 .prose .calc,
 .prose .calculator-grid,
-.prose .viz,
+.prose > .viz,
 .prose .decision-guide > .calc {
   width: min(var(--container), calc(100vw - 2rem));
   max-width: none;
+}
+
+/* ── Reserving the chart's space ───────────────────────────────────────────
+   The chart is drawn by JS, so before it exists the figures below it sit
+   higher and then get pushed down — the whole of the residual CLS on the
+   rent-vs-buy page once the sliders were reserved.
+
+   The plot box holds the chart's own 320x150 ratio plus one legend row, sized
+   against the result panel's width, so the reservation tracks the layout
+   instead of assuming a fixed panel. */
+
+.result-panel,
+.calc__results {
+  container-type: inline-size;
+}
+
+.viz__plot {
+  min-height: calc(46.875cqw + 1.65rem);
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */

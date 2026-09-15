@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -38,7 +39,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   <p>
     月租 NT$38,000 和房貸月付 NT$45,000 放在一起，還不能回答租屋或買房。
     房貸本金會變成房屋淨值，但利息、契稅、房屋稅、地價稅、管理、修繕與買賣費用不會；

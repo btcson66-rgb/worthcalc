@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -38,7 +39,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   <p>
     「3% 回饋，年費 NT$3,000，所以刷 NT$100,000 就回本」是常見但不完整的算法。
     如果你本來就能用免年費卡拿 1%，改用年費卡真正多賺的只有 2%；同樣年費的回本門檻其實是

@@ -1,7 +1,8 @@
-import type { ContentLocale, CoreLocale } from '../consts';
+import type { ContentLocale } from '../consts';
+import type { DecisionGuideContent } from '../types/decisionGuide';
 import type { TrustBlockProps } from '../types/trustBlock';
 
-const FALLBACK_COPY: Record<CoreLocale, {
+const FALLBACK_COPY: Record<ContentLocale, {
   method: string;
   noAdvice: string;
   defaults: string;
@@ -37,10 +38,28 @@ const FALLBACK_COPY: Record<CoreLocale, {
     defaults: 'Vorgaben können veralten; prüfen Sie aktuelle Zahlen, bevor Sie sie verwenden.',
     excluded: 'Nur die genannten Eingaben werden berücksichtigt; weitere Kosten, Bedingungen, Steuern und persönliche Umstände bleiben außen vor.',
   },
+  hi: {
+    method: 'यह पृष्ठ दिखाई देने वाले इनपुट को पृष्ठ पर दी गई गणना में लागू करता है।',
+    noAdvice: 'यह एक गणना है, सलाह नहीं।',
+    defaults: 'डिफ़ॉल्ट मान पुराने पड़ सकते हैं; उन पर भरोसा करने से पहले मौजूदा आंकड़े जाँच लें।',
+    excluded: 'इसमें केवल सूचीबद्ध इनपुट शामिल हैं; अन्य लागतें, शर्तें, कर और व्यक्तिगत परिस्थितियाँ इस गणना से बाहर हैं।',
+  },
+  ar: {
+    method: 'تطبّق هذه الصفحة المدخلات الظاهرة على الحساب المعروض فيها.',
+    noAdvice: 'هذا حساب وليس نصيحة.',
+    defaults: 'قد تتقادم القيم الافتراضية؛ تحقق من الأرقام الحالية قبل الاعتماد عليها.',
+    excluded: 'تشمل الحسبة المدخلات المذكورة فقط؛ أما التكاليف والشروط والضرائب والظروف الشخصية الأخرى فهي خارج نطاقها.',
+  },
 };
 
-export function trustLocale(locale: ContentLocale): CoreLocale {
-  return locale === 'en' || locale === 'zh' || locale === 'es' || locale === 'fr' || locale === 'de' ? locale : 'en';
+/**
+ * Every content locale now has its own trust copy, so this is the identity.
+ * It used to collapse hi and ar onto English, which put an English "How this
+ * is calculated" block — heading, labels and all — on 310 pages that declare
+ * lang="hi" and lang="ar".
+ */
+export function trustLocale(locale: ContentLocale): ContentLocale {
+  return locale;
 }
 
 export function isoDate(value?: string): string {
@@ -58,5 +77,39 @@ export function fallbackTrustBlock(locale: ContentLocale, lastReviewed?: string)
     limits: [copy.noAdvice, copy.defaults, copy.excluded],
     lastReviewed: isoDate(lastReviewed),
     locale: core,
+  };
+}
+
+/**
+ * Build a page's trust block from the decision guide it already renders.
+ *
+ * These pages carry real per-page substantiation in `decisionGuides.ts` — a
+ * formula, specific limitations, and primary sources (CFPB, IRS, ADAC and the
+ * like) — but none of it reached the trust block, so 178 indexable pages fell
+ * back to identical boilerplate. Worse, that boilerplate asserted "this page
+ * cites no outside figures" on pages that cite the CFPB directly, which is not
+ * a thin-content problem but a false statement on YMYL pages.
+ *
+ * Nothing here is invented: every field is the guide's own data. Each source
+ * takes the guide's `lastVerified` as its verification date, which is exactly
+ * what that date means on these pages.
+ */
+export function trustBlockFromDecisionGuide(
+  guide: DecisionGuideContent,
+  locale: ContentLocale,
+): TrustBlockProps {
+  const base = fallbackTrustBlock(locale, guide.lastVerified);
+  const verifiedDate = isoDate(guide.lastVerified);
+  return {
+    method: base.method,
+    formula: guide.formula || undefined,
+    sources: guide.sources.map((source) => ({
+      label: source.label,
+      url: source.href,
+      verifiedDate,
+    })),
+    limits: guide.limitations.length > 0 ? guide.limitations : base.limits,
+    lastReviewed: verifiedDate,
+    locale,
   };
 }

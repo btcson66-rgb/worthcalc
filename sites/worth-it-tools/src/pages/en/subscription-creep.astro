@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -42,7 +43,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(subscriptionGuides.en, locale)}>
   <p>
     Quick: how much are you spending on subscriptions each month? If you just
     produced a number, there is a very good chance it is too low. Streaming

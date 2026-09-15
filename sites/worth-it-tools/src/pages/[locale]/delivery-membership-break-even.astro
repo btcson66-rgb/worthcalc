@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DeliveryMembershipCalculator from '../../components/DeliveryMembershipCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -115,7 +116,8 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>“Free delivery” is not the number to divide into the annual fee. A plan can leave service fees, small-order charges, distance fees, taxes, menu-price differences, and tips untouched. Start with orders you would place anyway, then compare the final member and nonmember checkout for the same restaurant, basket, address, and time.</p>
     <DecisionGuide content={guide} />

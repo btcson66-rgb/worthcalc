@@ -7,7 +7,7 @@ viewport: 375x667
 
 # WorthCalc mobile sweep
 
-本機 build 的 sitemap-0.xml 共 306 個 URL；Playwright Chromium 以 375×667 viewport 逐頁檢查。此掃描器是 S5 稽核工具，不納入 npm run verify。
+本機 build 的 sitemap-0.xml 共 306 個 URL；Playwright Chromium 以 375×667 viewport 逐頁檢查。44px 控制項只涵蓋導覽、卡片、按鈕、表單與其他明確觸控目標；WCAG 2.2 例外的正文行內連結不列入 undersized 統計。此掃描器是 S5 稽核工具，不納入 npm run verify。
 
 ## 結果摘要
 
@@ -370,4 +370,5 @@ viewport: 375x667
 
 - 這是本機靜態 build 的 layout smoke sweep，不等同於正式站部署或真實裝置實測。
 - 外部網路資源由掃描器阻擋，以避免第三方資源、廣告或分析請求改變結果；本機 build 內的頁面與資產仍照常載入。
+- undersized 統計與 CSS 觸控目標範圍一致；正文行內連結保留原生 inline 排版，依 WCAG 2.2 Target Size (Minimum) 例外排除。
 - 本報告只記錄 S5 要求的三項觀察，不會自動修改頁面或把此掃描加入 verify gate。

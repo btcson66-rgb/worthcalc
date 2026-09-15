@@ -13,6 +13,25 @@ const reportDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei' })
 const reportPath = join(siteDir, 'docs', 'audits', `mobile-sweep-${reportDate}.md`);
 const viewport = { width: 375, height: 667 };
 
+// Keep the 44px audit aligned with the CSS target scope. Inline text links in
+// prose are a WCAG 2.2 Target Size (Minimum) exception and must not be treated
+// as undersized controls; navigational, card, button, and form links remain in
+// the audited set.
+const touchTargetSelector = [
+  '.site-header a',
+  '.site-footer a',
+  '.breadcrumb a',
+  '.topic-links a',
+  '.directory-list a',
+  '.directory-jump a',
+  '.home-library__links a',
+  '.guide-card h3 a',
+  '.card h3 a',
+  '.related-links a',
+  '.affiliate-card',
+  '.button',
+].join(',');
+
 if (!existsSync(sitemapPath)) {
   throw new Error(`Missing ${sitemapPath}; run npm run build first.`);
 }
@@ -105,14 +124,14 @@ for (const publicUrl of sitemapUrls) {
     const response = await page.goto(localUrl(publicUrl), { waitUntil: 'networkidle', timeout: 30000 });
     result.status = response?.status() ?? null;
     await page.waitForTimeout(50);
-    const metrics = await page.evaluate((pageViewport) => {
+    const metrics = await page.evaluate(({ pageViewport, targetSelector }) => {
       const visible = (element) => {
         const style = window.getComputedStyle(element);
         const rect = element.getBoundingClientRect();
         return !element.closest('[aria-hidden="true"]') && style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) !== 0 && rect.width > 0 && rect.height > 0;
       };
       const label = (element) => (element.getAttribute('aria-label') || element.textContent || element.getAttribute('title') || '').replace(/\s+/g, ' ').trim().slice(0, 100);
-      const allClickables = [...document.querySelectorAll('a,button,input,select,textarea,[role="button"],[tabindex]')]
+      const allClickables = [...document.querySelectorAll(`button,input,select,textarea,[role="button"],[tabindex],${targetSelector}`)]
         .filter(visible)
         .map((element) => {
           const rect = element.getBoundingClientRect();
@@ -146,7 +165,7 @@ for (const publicUrl of sitemapUrls) {
         undersized: allClickables.filter((item) => item.width < 44 || item.height < 44),
         primary: primary ? { selector, top: Math.round(primary.top * 10) / 10, bottom: Math.round(primary.bottom * 10) / 10 } : null,
       };
-    }, viewport);
+    }, { pageViewport: viewport, targetSelector: touchTargetSelector });
     result.overflow = {
       scrollWidth: metrics.scrollWidth,
       viewportWidth: metrics.viewportWidth,
@@ -196,7 +215,7 @@ const lines = [
   '',
   '# WorthCalc mobile sweep',
   '',
-  `本機 build 的 sitemap-0.xml 共 ${sitemapUrls.length} 個 URL；Playwright Chromium 以 ${viewport.width}×${viewport.height} viewport 逐頁檢查。此掃描器是 S5 稽核工具，不納入 npm run verify。`,
+  `本機 build 的 sitemap-0.xml 共 ${sitemapUrls.length} 個 URL；Playwright Chromium 以 ${viewport.width}×${viewport.height} viewport 逐頁檢查。44px 控制項只涵蓋導覽、卡片、按鈕、表單與其他明確觸控目標；WCAG 2.2 例外的正文行內連結不列入 undersized 統計。此掃描器是 S5 稽核工具，不納入 npm run verify。`,
   '',
   '## 結果摘要',
   '',
@@ -238,7 +257,7 @@ if (errors.length > 0) {
   for (const result of errors) lines.push(`- ${result.path}: ${result.error}`);
 }
 
-lines.push('', '## 判定與限制', '', '- 這是本機靜態 build 的 layout smoke sweep，不等同於正式站部署或真實裝置實測。', '- 外部網路資源由掃描器阻擋，以避免第三方資源、廣告或分析請求改變結果；本機 build 內的頁面與資產仍照常載入。', '- 本報告只記錄 S5 要求的三項觀察，不會自動修改頁面或把此掃描加入 verify gate。');
+lines.push('', '## 判定與限制', '', '- 這是本機靜態 build 的 layout smoke sweep，不等同於正式站部署或真實裝置實測。', '- 外部網路資源由掃描器阻擋，以避免第三方資源、廣告或分析請求改變結果；本機 build 內的頁面與資產仍照常載入。', '- undersized 統計與 CSS 觸控目標範圍一致；正文行內連結保留原生 inline 排版，依 WCAG 2.2 Target Size (Minimum) 例外排除。', '- 本報告只記錄 S5 要求的三項觀察，不會自動修改頁面或把此掃描加入 verify gate。');
 
 mkdirSync(join(siteDir, 'docs', 'audits'), { recursive: true });
 writeFileSync(reportPath, `${lines.join('\n')}\n`, 'utf8');

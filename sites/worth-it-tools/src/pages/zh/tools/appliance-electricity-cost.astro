@@ -2,6 +2,7 @@
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import ApplianceCostCalculator from '../../../components/ApplianceCostCalculator.astro';
 import { localizedPath } from '../../../i18n/utils';
+import type { TrustBlockProps } from '../../../types/trustBlock';
 
 const locale = 'zh';
 const title = '家電一天用多少電？每小時、每月電費怎麼算？';
@@ -18,8 +19,31 @@ const related = [
   { title: '家用與公共充電樁電費比較', href: localizedPath(locale, '/home-vs-public-ev-charging-cost') },
   { title: '每公里成本計算機', href: localizedPath(locale, '/tools/cost-per-mile') },
 ];
+const trustBlock: TrustBlockProps = {
+  method: '本頁先把瓦數換成 kW，再套用可見的使用時數與每度電價，估算新增用電的邊際成本。',
+  formula: 'W ÷ 1,000 × 小時 × 每度電價',
+  sources: [
+    {
+      label: '台電簡要電價表（2025-10-01 起實施）',
+      url: 'https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true',
+      verifiedDate: '2026-09-15',
+    },
+    {
+      label: '每種家電的瓦數來源列在下方完整家電清單',
+      url: 'https://worthcalc.win/zh/tools/appliance-electricity-cost/#complete-appliance-list-heading',
+      verifiedDate: '2026-09-15',
+    },
+  ],
+  limits: [
+    '這是計算，不是建議。',
+    '預設值可能過期；使用前請確認當下數字。',
+    '本頁只納入列出的輸入，其他成本、條款、稅費與個人情況不在計算範圍。',
+  ],
+  lastReviewed: '2026-09-15',
+  locale,
+};
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']} trustBlock={trustBlock}>
   <ApplianceCostCalculator locale={locale} />
 </ToolLayout>

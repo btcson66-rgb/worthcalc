@@ -1,38 +1,12 @@
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const siteDir = fileURLToPath(new URL('..', import.meta.url));
 const distDir = resolve(siteDir, 'dist');
-const defaultDisposition = join(siteDir, 'docs', 'audits', 'worthcalc-disposition-2026-09-15.csv');
-const dispositionPath = process.env.S4_TRUST_DISPOSITION_FILE
-  ? resolve(siteDir, process.env.S4_TRUST_DISPOSITION_FILE)
-  : defaultDisposition;
 const legalSlugs = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 const failures = [];
-
-function parseCsvLine(line) {
-  const fields = [];
-  let field = '';
-  let quoted = false;
-  for (let index = 0; index < line.length; index += 1) {
-    const char = line[index];
-    if (char === '"' && line[index + 1] === '"') {
-      field += '"';
-      index += 1;
-    } else if (char === '"') {
-      quoted = !quoted;
-    } else if (char === ',' && !quoted) {
-      fields.push(field);
-      field = '';
-    } else {
-      field += char;
-    }
-  }
-  fields.push(field);
-  return fields;
-}
 
 function normalizedPath(url) {
   const parsed = new URL(url);
@@ -40,16 +14,30 @@ function normalizedPath(url) {
   return pathname === '//' ? '/' : pathname;
 }
 
-function isCalculatorOrArticle(row) {
-  if (row.action !== 'keep' && row.action !== 'keep-priority') return false;
-  if (row.routeType !== 'tool' && row.routeType !== 'index') return false;
-  const pathname = normalizedPath(row.url);
+function pathnameFromDistFile(filePath) {
+  const relativePath = relative(distDir, filePath).replaceAll('\\', '/');
+  return normalizedPath(`https://worthcalc.win/${relativePath.replace(/index\.html$/, '')}`);
+}
+
+function isCalculatorOrArticle(pathname, html) {
+  const robots = html.match(/<meta\b[^>]*name="robots"[^>]*content="([^"]*)"/i)?.[1] ?? '';
+  if (/noindex/i.test(robots)) return false;
+  if (!/<section\b[^>]*class="[^"]*\btool\b/i.test(html) && !/<article\b[^>]*class="[^"]*\bprose\b/i.test(html)) return false;
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length < 2) return false;
   const slug = segments.at(-1);
   if (legalSlugs.has(slug)) return false;
-  if (segments.length === 2 && ['tools', 'guides', 'topics'].includes(slug)) return false;
   return true;
+}
+
+async function walk(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const filePath = join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await walk(filePath));
+    else if (entry.isFile() && entry.name === 'index.html') files.push(filePath);
+  }
+  return files;
 }
 
 function attribute(tag, name) {
@@ -63,26 +51,23 @@ function validIsoDate(value) {
   return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value;
 }
 
-const csv = await readFile(dispositionPath, 'utf8');
-const lines = csv.split(/\r?\n/).filter((line) => line.trim().length > 0);
-if (lines.length < 2) throw new Error('Disposition CSV has no data rows: ' + dispositionPath);
-const candidates = lines.slice(1).map((line) => {
-  const fields = parseCsvLine(line.replace(/^\\uFEFF/, ''));
-  return { url: fields[0], action: fields[1], routeType: fields.at(-1) };
-}).filter(isCalculatorOrArticle);
+const candidates = [];
+for (const filePath of await walk(distDir)) {
+  const html = await readFile(filePath, 'utf8');
+  const pathname = pathnameFromDistFile(filePath);
+  if (isCalculatorOrArticle(pathname, html)) candidates.push({ url: `https://worthcalc.win${pathname}`, filePath });
+}
 
 if (process.env.S4_TRUST_BLOCK_REVERSE_URL) {
   candidates.push({
     url: new URL(process.env.S4_TRUST_BLOCK_REVERSE_URL, 'https://worthcalc.win').toString(),
-    action: 'keep',
-    routeType: 'tool',
   });
 }
 
 for (const candidate of candidates) {
   const pathname = normalizedPath(candidate.url);
   const relativePath = pathname === '/' ? 'index.html' : join(pathname.replace(/^\/+/, ''), 'index.html');
-  const filePath = resolve(distDir, relativePath);
+  const filePath = candidate.filePath ?? resolve(distDir, relativePath);
   const distRoot = resolve(distDir) + sep;
   if (filePath !== resolve(distDir) && !filePath.startsWith(distRoot)) {
     failures.push(pathname + ': resolved outside dist');

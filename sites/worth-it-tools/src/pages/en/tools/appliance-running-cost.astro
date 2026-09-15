@@ -2,6 +2,7 @@
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import ApplianceCostCalculator from '../../../components/ApplianceCostCalculator.astro';
 import { localizedPath } from '../../../i18n/utils';
+import type { TrustBlockProps } from '../../../types/trustBlock';
 
 const locale = 'en';
 const title = 'How Much Does Each Appliance Cost to Run?';
@@ -17,8 +18,31 @@ const related = [
   { title: 'Home charging vs public charging', href: localizedPath(locale, '/home-vs-public-ev-charging-cost') },
   { title: 'Cost per mile calculator', href: localizedPath(locale, '/tools/cost-per-mile') },
 ];
+const trustBlock: TrustBlockProps = {
+  method: 'This page converts watts to kilowatts, then applies the visible hours and electricity rate to estimate marginal energy cost.',
+  formula: 'W ÷ 1,000 × hours × electricity rate',
+  sources: [
+    {
+      label: 'EIA residential average electricity price (June 2026)',
+      url: 'https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03',
+      verifiedDate: '2026-09-15',
+    },
+    {
+      label: 'Per-appliance wattage sources are listed in the table below',
+      url: 'https://worthcalc.win/en/tools/appliance-running-cost/#complete-appliance-list-heading',
+      verifiedDate: '2026-09-15',
+    },
+  ],
+  limits: [
+    'This is a calculation, not advice.',
+    'Default values can go stale; confirm current figures before relying on them.',
+    'Only the listed inputs are included; other costs, terms, taxes, and personal circumstances are outside this calculation.',
+  ],
+  lastReviewed: '2026-09-15',
+  locale,
+};
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en']} trustBlock={trustBlock}>
   <ApplianceCostCalculator locale={locale} />
 </ToolLayout>

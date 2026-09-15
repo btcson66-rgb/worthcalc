@@ -268,8 +268,10 @@ export function normalizeJsonLd(value: unknown, site?: URL, locale: ContentLocal
 
   const type = normalized['@type'];
   const isArticle = type === 'Article' || (Array.isArray(type) && type.includes('Article'));
+  const isSoftwareApplication = type === 'SoftwareApplication' || (Array.isArray(type) && type.includes('SoftwareApplication'));
   if (isArticle && !normalized.author) normalized.author = organizationAuthorJsonLd(site, locale);
   if (isArticle && !normalized.publisher) normalized.publisher = organizationPublisherJsonLd(site);
+  if (isSoftwareApplication && !normalized.author) normalized.author = organizationAuthorJsonLd(site, locale);
   return normalized;
 }
 
@@ -351,6 +353,7 @@ export function softwareAppJsonLd(opts: {
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     inLanguage: LOCALE_HREFLANG[opts.locale],
+    author: organizationAuthorJsonLd(opts.site, opts.locale),
     offers: { '@type': 'Offer', price: '0', priceCurrency: opts.locale === 'zh' ? 'TWD' : opts.locale === 'en' ? 'USD' : 'EUR' },
     publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
@@ -377,6 +380,7 @@ export function paidSoftwareAppJsonLd(opts: {
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any modern browser',
     inLanguage: LOCALE_HREFLANG[opts.locale],
+    author: organizationAuthorJsonLd(opts.site, opts.locale),
     offers: {
       '@type': 'Offer',
       price: opts.price,

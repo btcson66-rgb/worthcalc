@@ -19,6 +19,13 @@ const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer
 // 每頁都有的語言切換器會讓同一篇文章的各語言版互指。那不是發現路徑——
 // 如果整組五個語言版都沒有別的入口，Google 一個都找不到。所以互指不算數。
 const MIN_INBOUND = 1;
+const reverseMode = process.env.GUIDE_INDEX_REVERSE_MODE ?? '';
+const reversePath = process.env.GUIDE_INDEX_REVERSE_PATH ?? '/en/rule-of-72-explained/';
+let reverseApplied = false;
+
+if (reverseMode && !new Set(['missing', 'invalid']).has(reverseMode)) {
+  throw new Error('GUIDE_INDEX_REVERSE_MODE must be missing or invalid');
+}
 
 if (!existsSync(distDir)) {
   console.error('[guide-index] dist/ does not exist. Build the site first.');
@@ -59,11 +66,21 @@ for (const file of htmlFiles) {
     let to = match[1];
     if (/\.[a-z0-9]+$/i.test(to)) continue;              // 資產
     if (!to.endsWith('/')) to += '/';
+    if (reverseMode && to === reversePath) {
+      reverseApplied = true;
+      if (reverseMode === 'missing') continue;            // 模擬完全沒有入站連結
+      to = from;                                          // 模擬錯誤渲染成自連
+    }
     if (to === from) continue;                           // 自連
     if (logicalRoute(to) && logicalRoute(to) === logicalRoute(from)) continue; // 語言切換器
     if (!inbound.has(to)) inbound.set(to, new Set());
     inbound.get(to).add(from);
   }
+}
+
+if (reverseMode && !reverseApplied) {
+  console.error(`[guide-index] reverse target was not found: ${reversePath}`);
+  process.exit(1);
 }
 
 const orphans = htmlFiles

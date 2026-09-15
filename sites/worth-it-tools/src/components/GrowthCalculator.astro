@@ -78,6 +78,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
   <section class="calc__results" aria-labelledby={`growth-results-${definition.slug}`} aria-live="polite">
     <h2 id={`growth-results-${definition.slug}`}>{copy.results}</h2>
     <p class="growth-status" data-status>{copy.ready}</p>
+    <div class="viz" data-chart aria-hidden="true"></div>
     <div class="metric-grid">
       {definition.metrics.map((metric) => <p class="metric"><span>{metric.label}</span><strong data-metric={metric.id}>—</strong></p>)}
     </div>
@@ -103,6 +104,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
 </section>
 
 <script>
+  import { renderBars, renderStack, renderLegendTable } from '../lib/calcUi';
   import { calculateMortgagePayoff } from '../lib/growthCalculators/mortgagePayoff';
   import { calculateCreditCardPayoff } from '../lib/growthCalculators/creditCardPayoff';
   import { calculateBudget } from '../lib/growthCalculators/budgetBuilder';
@@ -209,6 +211,29 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
           const result = calculateCompoundGrowth({ initialPrincipal:number('initialPrincipal'), monthlyContribution:number('monthlyContribution'), annualReturnPercent:number('returnRate'), annualFeePercent:number('feeRate'), annualInflationPercent:number('inflationRate'), years:number('years'), annualContributionGrowthPercent:number('contributionGrowth'), contributionTiming:text('contributionTiming') as 'beginning'|'end', targetAmount:number('targetAmount') > 0 ? number('targetAmount') : undefined });
           metrics = { endingBalance:result.endingBalance, realBalance:result.realEndingBalance, totalContributions:result.totalContributions, growth:result.investmentGrowth, requiredContribution:result.requiredMonthlyContributionForTarget, targetReached:result.targetReached };
           csvRows = [['year','ending balance','contributions','growth','real balance'], ...result.yearly.map((row) => [row.year,row.endingBalance,row.contributionsToDate,row.growthToDate,row.realBalance])];
+        }
+
+        // Only the slugs that declared a chart get one; see GrowthChart.
+        const chartHost = root.querySelector<HTMLElement>('[data-chart]');
+        const chartSpec = config.definition.chart;
+        if (chartHost && chartSpec) {
+          const label = (id: string) => config.definition.metrics.find((x) => x.id === id)?.label ?? id;
+          const parts = chartSpec.metrics.map((id) => ({ label: label(id), value: Number(metrics[id] ?? 0) }));
+          const usable = parts.every((x) => Number.isFinite(x.value));
+          const pct = chartSpec.metrics.every((id) =>
+            config.definition.metrics.find((x) => x.id === id)?.format === 'percent');
+          const fmt = pct ? (n: number) => `${numeric(n)}%` : (n: number) => money(n);
+          if (!usable) chartHost.innerHTML = '';
+          else if (chartSpec.kind === 'parts') {
+            chartHost.innerHTML = '<div class="viz-stack"></div><div class="viz-table"></div>';
+            renderStack(chartHost.querySelector('.viz-stack') as HTMLElement, parts);
+            // Caption with the total the parts add up to — the first metric is that total.
+            renderLegendTable(chartHost.querySelector('.viz-table') as HTMLElement, parts, fmt, config.definition.metrics[0]?.label ?? '');
+          } else {
+            renderBars(chartHost, parts, fmt, chartSpec.bestIs ?? 'low');
+          }
+        } else if (chartHost) {
+          chartHost.innerHTML = '';
         }
 
         for (const metric of config.definition.metrics) {

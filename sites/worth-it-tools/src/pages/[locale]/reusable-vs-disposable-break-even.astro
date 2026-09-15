@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -37,7 +38,8 @@ const article = articles[locale];
 const guide = reusableGuides[locale]!;
 const calculator = calculators[locale];
 ---
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <><p>“Reusable” describes a design, not a guaranteed saving. Money breaks even only when actual use spreads the purchase cost and per-use cleaning remains below the disposable alternative.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="reusable-calculator" mode="reusable" locale={locale} {...calculator}/><h2>Keep the environmental question separate</h2><p>The FTC warns that broad green claims are difficult to substantiate. This calculator reports dollars and uses only; emissions, water and waste require product-specific evidence and boundaries.</p><h2>Use the retirement condition, not the advertised maximum</h2><p>Estimate loss, breakage, filter replacement and hygiene instructions. If the product is unlikely to reach the break-even count in normal behavior, the theoretical design life is irrelevant.</p><p class="privacy-note">General consumer education, not safety, environmental, financial or product advice.</p></>}
   {locale === 'zh' && <><p>「可以重複」只是設計，不是保證省錢。要先讓實際使用次數攤掉購入成本，並確保每次清洗與耗材仍低於一次性用品。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="reusable-calculator" mode="reusable" locale={locale} {...calculator}/><h2>循環杯的前提就是重複清洗</h2><p>環境部法規把循環杯定義為店家設計提供、可重複清洗使用的容器與杯蓋。清洗不是零成本，也不能忽略商品的衛生與汰換指示。</p><h2>環境效益另需證據</h2><p>本頁只回答金錢損益。碳排、水、製造與廢棄處理的界線不同，不能由「每次較便宜」直接推論整體環境較好。</p><p class="privacy-note">一般消費教育資訊，不是安全、環境、財務或商品建議。</p></>}
   {locale === 'es' && <><p>“Reutilizable” describe el diseño, no garantiza ahorro. Solo hay equilibrio cuando los usos reales reparten la compra y la limpieza más consumibles queda por debajo del desechable.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="reusable-calculator" mode="reusable" locale={locale} {...calculator}/><h2>La reutilización incluye lavado e higiene</h2><p>La nota oficial de MITECO sobre sistemas de reutilización incluye limpieza y lavado según condiciones higiénicas. Introduce ese coste y la vida que permite el producto concreto.</p><h2>No convertir euros en una afirmación ambiental</h2><p>El resultado económico no mide fabricación, energía, agua ni fin de vida. Cualquier conclusión ambiental necesita evidencia específica del producto y una comparación equivalente.</p><p class="privacy-note">Información general; no es consejo de seguridad, ambiental, financiero ni de producto.</p></>}

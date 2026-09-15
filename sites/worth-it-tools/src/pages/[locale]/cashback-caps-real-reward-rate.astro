@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import CashbackCapsCalculator from '../../components/CashbackCapsCalculator.astro';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -116,7 +117,8 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing cashback caps guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A category headline describes one slice of spend, not the return on the card. The useful number is a weighted rate that follows the cap, fallback rate, excluded transactions, and the redemption value you can actually receive. Calculate inside one statement month or quarter so the cap and the spending use the same clock.</p>
     <DecisionGuide content={guide} />

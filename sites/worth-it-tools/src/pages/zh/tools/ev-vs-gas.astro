@@ -50,7 +50,7 @@ const related = [
         </div>
         <div class="field">
           <label for="gas-price">油車購車價</label>
-          <input id="gas-price" type="number" inputmode="decimal" min="0" step="1000" value="75000" />
+          <input id="gas-price" type="number" inputmode="decimal" min="0" step="1000" value="75000" data-range data-range-min="0" data-range-max="12" data-range-step="0.05" />
         </div>
         <div class="field">
           <label for="subsidy">電動機車補助</label>
@@ -82,7 +82,7 @@ const related = [
         </div>
         <div class="field">
           <label for="years">持有年限</label>
-          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" />
+          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" data-range data-range-min="1" data-range-max="40" data-range-step="1" />
         </div>
       </div>
     </section>
@@ -115,89 +115,6 @@ const related = [
       如果你的問題是「充電樁一度電多少錢」或想比較家充與公共充電的每月電費，請接著看<a href={localizedPath(locale, '/home-vs-public-ev-charging-cost')}>家用與公共充電樁電費比較</a>；那一頁讓你填台電方案、公共業者單價與家充工程成本。
     </p>
   </section>
-
-  <style>
-    .intro,
-    .explanation {
-      color: var(--color-muted);
-    }
-
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 650;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .verdict {
-      margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
-      font-weight: 750;
-      line-height: 1.25;
-    }
-
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
-      color: var(--color-muted);
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.1rem;
-    }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        align-items: start;
-      }
-
-      .input-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';

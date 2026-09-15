@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES, type Locale } from '../../consts';
@@ -74,7 +75,8 @@ const guide = paidMembershipGuides[locale];
 if (!guide) throw new Error(`Missing paid membership guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A membership badge does not create savings. The comparison starts with the free or nonmember option you would otherwise choose. Count only eligible purchases already in your plan, value only benefits you will actually use, and subtract the extra costs the membership encourages.</p>
     <DecisionGuide content={guide} />

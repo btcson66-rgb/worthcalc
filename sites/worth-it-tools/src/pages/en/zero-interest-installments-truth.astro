@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -42,7 +43,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(installmentGuides.en, locale)}>
   <p>
     "0% interest, 12 easy payments." It sounds like free money — and retailers,
     credit card issuers, and BNPL apps know exactly how good it sounds. But a

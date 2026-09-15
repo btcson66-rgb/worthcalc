@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -35,7 +36,8 @@ const article = articles[locale];
 const guide = raiseInflationGuides[locale]!;
 const calculator = calculators[locale];
 ---
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <><p>A bigger number on the offer letter is nominal. To test purchasing power, align one pay period with one official CPI comparison and compound the two rates.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="raise-inflation-calculator" mode="raiseInflation" locale={locale} {...calculator}/><h2>Match BLS periods before calculating</h2><p>The BLS calculator uses calendar-year average CPI for completed years and the latest monthly index for the current year. If your raise begins in a particular month, obtain the CPI change for matching months instead of mixing it with an annual average.</p><h2>Keep compensation outside the CPI formula visible</h2><p>A promotion can change hours, bonus eligibility, health premiums, retirement match or tax withholding. The real-raise result answers one narrow question about gross base pay; it does not settle total compensation.</p><p class="privacy-note">General education, not individualized financial, tax or employment advice.</p></>}
   {locale === 'zh' && <><p>薪資單上的增加是名目值；要判斷是否真的變富，必須把同一起訖期間的固定薪資與官方 CPI 放進精確比例公式。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="raise-inflation-calculator" mode="raiseInflation" locale={locale} {...calculator}/><h2>先選口徑，再抄數字</h2><p>主計總處換算頁可以比較任兩時點，也能用全年平均。若加薪從 2025 年 7 月到 2026 年 7 月，就比較相同月份；不能拿單月月增率或別的起訖區間替代。</p><h2>平均 CPI 不等於個人帳單</h2><p>結果反映平均消費籃的購買力。租屋、通勤、育兒或醫療占比若特別高，應另做自己的固定支出前後表；也要把工時、獎金、勞退提撥與實領差額列在旁邊。</p><p class="privacy-note">一般教育資訊，不是個人化財務、稅務或勞資建議。</p></>}
   {locale === 'es' && <><p>Una subida en nómina es nominal. Para saber si mejora la capacidad de compra, compara el salario y el IPC oficial entre el mismo inicio y final.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="raise-inflation-calculator" mode="raiseInflation" locale={locale} {...calculator}/><h2>Elegir la serie correcta del INE</h2><p>El INE permite calcular entre meses y por ámbito. Conserva los dos periodos, el tipo de índice y la fecha de consulta; una tasa interanual no se sustituye por la variación mensual ni por otra comunidad.</p><h2>El bruto real no es el paquete completo</h2><p>IRPF, cotizaciones, jornada, variable, seguro y otros beneficios pueden cambiar a la vez. Anota esos efectos por separado antes de decidir si la oferta o promoción compensa.</p><p class="privacy-note">Información general, no asesoramiento financiero, fiscal o laboral individual.</p></>}

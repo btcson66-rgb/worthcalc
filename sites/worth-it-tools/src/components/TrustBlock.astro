@@ -54,6 +54,26 @@ const copy = {
     dateSuffix: (date: string) => `(geprüft am ${date})`,
     noSources: 'Diese Seite nutzt nur Arithmetik und Ihre Eingaben. Sie zitiert keine externen Zahlen.',
   },
+  hi: {
+    heading: 'यह गणना कैसे की जाती है',
+    method: 'विधि',
+    formula: 'सूत्र',
+    sources: 'स्रोत',
+    limits: 'सीमाएँ',
+    lastReviewed: 'अंतिम जाँच',
+    dateSuffix: (date: string) => `(${date} को जाँचा गया)`,
+    noSources: 'यह पृष्ठ केवल अंकगणित और आपके दर्ज किए गए मानों का उपयोग करता है। इसमें कोई बाहरी आंकड़ा उद्धृत नहीं किया गया है।',
+  },
+  ar: {
+    heading: 'كيف يتم هذا الحساب',
+    method: 'الطريقة',
+    formula: 'المعادلة',
+    sources: 'المصادر',
+    limits: 'الحدود',
+    lastReviewed: 'آخر تحقق',
+    dateSuffix: (date: string) => `(تم التحقق في ${date})`,
+    noSources: 'تستخدم هذه الصفحة الحساب الرياضي والقيم التي تُدخلها فقط، ولا تستشهد بأي أرقام خارجية.',
+  },
 }[locale];
 ---
 

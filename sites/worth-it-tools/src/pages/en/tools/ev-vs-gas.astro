@@ -50,7 +50,7 @@ const related = [
         </div>
         <div class="field">
           <label for="gas-price">Gas car purchase price</label>
-          <input id="gas-price" type="number" inputmode="decimal" min="0" step="500" value="30000" />
+          <input id="gas-price" type="number" inputmode="decimal" min="0" step="500" value="30000" data-range data-range-min="0" data-range-max="12" data-range-step="0.05" />
         </div>
         <div class="field">
           <label for="subsidy">EV subsidy or rebate</label>
@@ -74,7 +74,7 @@ const related = [
         </div>
         <div class="field">
           <label for="mpg">Gas car efficiency (mpg)</label>
-          <input id="mpg" type="number" inputmode="decimal" min="1" step="0.1" value="30" />
+          <input id="mpg" type="number" inputmode="decimal" min="1" step="0.1" value="30" data-range data-range-min="5" data-range-max="60" data-range-step="1" />
         </div>
         <div class="field">
           <label for="ev-maintenance">EV maintenance per year</label>
@@ -86,7 +86,7 @@ const related = [
         </div>
         <div class="field">
           <label for="years">Years of ownership</label>
-          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" />
+          <input id="years" type="number" inputmode="decimal" min="1" step="1" value="5" data-range data-range-min="1" data-range-max="40" data-range-step="1" />
         </div>
       </div>
     </section>
@@ -116,90 +116,6 @@ const related = [
       If you only need the energy and ownership cost of one vehicle per mile, use the <a href={localizedPath(locale, '/tools/cost-per-mile')}>cost-per-mile calculator</a>; this page is for the broader EV-versus-gas ownership comparison.
     </p>
   </section>
-
-  <style>
-    .intro,
-    .explanation {
-      color: var(--color-muted);
-    }
-
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 650;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .verdict {
-      margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
-      font-weight: 750;
-      line-height: 1.25;
-    }
-
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
-      color: var(--color-muted);
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.1rem;
-    }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        align-items: start;
-      }
-
-      .input-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';

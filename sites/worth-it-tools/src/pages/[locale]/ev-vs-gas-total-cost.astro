@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import EVGasTcoCalculator from '../../components/EVGasTcoCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -130,7 +131,8 @@ const guide = evGasTcoGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>Start with a harder comparison than “electric versus gasoline”: choose two vehicles that can perform the same job. A larger premium EV and a smaller economy hatchback do not reveal a powertrain saving. Match body style, seats, cargo, safety equipment, expected reliability and the options you would actually buy.</p>
     <p>Total cost of ownership is a holding-period cash-flow test. It does not assume that lower energy cost will recover any purchase premium, and it does not count a headline credit until the buyer has verified eligibility.</p>

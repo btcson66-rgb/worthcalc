@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import GymCostCalculator from '../../components/GymCostCalculator.astro';
@@ -115,7 +116,8 @@ const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing gym cost guide for ${locale}`);
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}>
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A $45 gym does not cost $45 per month when enrollment, facility charges, and paid absences are part of the contract. The decision unit is the visit you will actually make. Count every unavoidable payment, estimate zero-visit months before signing, and compare the result with the drop-in or community option you would genuinely use.</p>
     <DecisionGuide content={guide} />

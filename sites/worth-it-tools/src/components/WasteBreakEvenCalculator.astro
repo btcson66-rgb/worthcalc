@@ -32,36 +32,46 @@ const fields = [
 ---
 
 <section
-  class="waste-break-even"
+  class="calc"
   data-waste-break-even
   data-locale={locale === 'zh' ? 'zh-TW' : locale}
   data-currency={content.currency}
   data-positive={content.positive}
   data-negative={content.negative}
   data-no-margin={content.noMargin}
+  data-label-a={content.smallUnit}
+  data-label-b={content.bulkUnit}
   aria-labelledby="waste-break-even-heading"
 >
-  <h2 id="waste-break-even-heading">{content.heading}</h2>
-  <p>{content.intro}</p>
-  <div class="waste-fields">
-    {fields.map(([id, label, value, step, min, max]) => (
-      <label for={`waste-${id}`}>
-        <span>{label}</span>
-        <input id={`waste-${id}`} data-field={id} type="number" inputmode="decimal" value={value} step={step} min={min} max={max} />
-      </label>
-    ))}
+  <header class="calc__head">
+    <h2 id="waste-break-even-heading">{content.heading}</h2>
+    <p>{content.intro}</p>
+  </header>
+  <div class="calc__body">
+    <div class="calc__controls">
+      {fields.map(([id, label, value, step, min, max]) => (
+        <label for={`waste-${id}`}>
+          <span>{label}</span>
+          <input id={`waste-${id}`} data-field={id} type="number" inputmode="decimal" value={value} step={step} min={min} max={max} />
+        </label>
+      ))}
+    </div>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-verdict></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
+      <div class="metric-grid">
+        <p class="metric"><span>{content.smallUnit}</span><strong data-output="small-unit">—</strong></p>
+        <p class="metric"><span>{content.bulkUnit}</span><strong data-output="bulk-unit">—</strong></p>
+        <p class="metric"><span>{content.maxWaste}</span><strong data-output="max-waste">—</strong></p>
+        <p class="metric"><span>{content.difference}</span><strong data-output="difference">—</strong></p>
+      </div>
+    </div>
   </div>
-  <p class="waste-verdict" data-verdict aria-live="polite"></p>
-  <div class="waste-results">
-    <p><span>{content.smallUnit}</span><strong data-output="small-unit">—</strong></p>
-    <p><span>{content.bulkUnit}</span><strong data-output="bulk-unit">—</strong></p>
-    <p><span>{content.maxWaste}</span><strong data-output="max-waste">—</strong></p>
-    <p><span>{content.difference}</span><strong data-output="difference">—</strong></p>
-  </div>
-  <p class="privacy-note">{content.privacy}</p>
+  <p class="calc__note">{content.privacy}</p>
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   document.querySelectorAll<HTMLElement>('[data-waste-break-even]').forEach((container) => {
     const read = (id: string) => Number(container.querySelector<HTMLInputElement>(`[data-field="${id}"]`)?.value ?? 0);
     const output = (id: string, value: string) => {
@@ -80,6 +90,14 @@ const fields = [
       const bulkUnit = bulkTotal / bulkUsable;
       const maxWaste = 1 - bulkTotal / Math.max(0.000001, read('bulk-qty') * smallUnit);
       const difference = bulkUnit - smallUnit;
+
+      const chart = container.querySelector<HTMLElement>('[data-chart]');
+      if (chart && Number.isFinite(smallUnit) && Number.isFinite(bulkUnit)) {
+        renderBars(chart, [
+          { label: container.dataset.labelA || '', value: smallUnit },
+          { label: container.dataset.labelB || '', value: bulkUnit },
+        ], (n) => money.format(n));
+      }
       output('small-unit', money.format(smallUnit));
       output('bulk-unit', money.format(bulkUnit));
       output('max-waste', maxWaste < 0 ? (container.dataset.noMargin ?? '—') : percent.format(Math.min(0.999, maxWaste)));
@@ -92,13 +110,3 @@ const fields = [
   });
 </script>
 
-<style>
-  .waste-break-even { margin-block: 2rem; padding: 1.2rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-2); }
-  .waste-break-even h2 { margin-top: 0; }
-  .waste-fields, .waste-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: .85rem; }
-  .waste-fields label { display: grid; gap: .35rem; font-weight: 700; }
-  .waste-fields input { width: 100%; min-width: 0; padding: .7rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: var(--color-text); font: inherit; }
-  .waste-verdict { padding: .8rem; border-left: .3rem solid var(--brand); background: var(--color-surface); font-weight: 700; }
-  .waste-results p { display: grid; gap: .35rem; margin: 0; padding: .8rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); }
-  .waste-results strong { overflow-wrap: anywhere; font-size: 1.05rem; }
-</style>

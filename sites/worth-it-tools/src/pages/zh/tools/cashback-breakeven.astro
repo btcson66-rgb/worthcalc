@@ -46,7 +46,7 @@ const related = [
       <div class="input-grid">
         <div class="field">
           <label for="annual-fee">年費</label>
-          <input id="annual-fee" type="number" inputmode="decimal" min="0" step="100" value="3000" />
+          <input id="annual-fee" type="number" inputmode="decimal" min="0" step="100" value="3000" data-range data-range-min="0" data-range-max="400" data-range-step="5" />
         </div>
         <div class="field">
           <label for="welcome-bonus">首刷禮價值</label>
@@ -100,89 +100,6 @@ const related = [
       判斷會把這個淨價值和免年費 1% 卡比較。打平月消費則依照你目前的消費類別比例，估算年費卡需要多少月消費才會勝出。
     </p>
   </section>
-
-  <style>
-    .intro,
-    .explanation {
-      color: var(--color-muted);
-    }
-
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 650;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .verdict {
-      margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
-      font-weight: 750;
-      line-height: 1.25;
-    }
-
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
-      color: var(--color-muted);
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.1rem;
-    }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        align-items: start;
-      }
-
-      .input-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';

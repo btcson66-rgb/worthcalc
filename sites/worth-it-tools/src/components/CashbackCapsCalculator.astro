@@ -48,17 +48,17 @@ const localeTags: Record<CalculatorLocale, string> = {
 ---
 
 <section
-  class="cashback-calc"
+  class="calc"
   data-cashback-caps-calculator
   data-locale={localeTags[locale]}
   data-currency={currency}
   data-verdict-prefix={copy.verdictPrefix}
->
+ data-label-a={copy.eligibleRate} data-label-b={copy.wholeBillRate}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
-  <div class="cashback-calc-grid">
-    <div class="cashback-calc-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label>
         <span>{copy.bonusSpend}</span>
         <input data-field="bonusSpend" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.bonusSpend} />
@@ -89,8 +89,9 @@ const localeTags: Record<CalculatorLocale, string> = {
       </label>
     </div>
 
-    <div class="cashback-calc-results" aria-live="polite">
-      <p class="cashback-verdict" data-output="verdict"></p>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.cappedBonusSpend}</dt><dd data-output="cappedBonusSpend">—</dd></div>
         <div><dt>{copy.aboveCapSpend}</dt><dd data-output="aboveCapSpend">—</dd></div>
@@ -102,10 +103,11 @@ const localeTags: Record<CalculatorLocale, string> = {
     </div>
   </div>
 
-  <p class="cashback-calc-note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-cashback-caps-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -141,6 +143,12 @@ const localeTags: Record<CalculatorLocale, string> = {
       output('cappedBonusSpend').textContent = formatMoney(cappedBonusSpend);
       output('aboveCapSpend').textContent = formatMoney(aboveCapSpend);
       output('totalRewards').textContent = formatMoney(totalRewards);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: eligibleRate },
+        { label: root.dataset.labelB || '', value: wholeBillRate },
+      ], formatPercent, 'high');
+
       output('eligibleRate').textContent = formatPercent(eligibleRate);
       output('wholeBillRate').textContent = formatPercent(wholeBillRate);
       output('headlineShortfall').textContent = formatMoney(headlineShortfall);
@@ -151,108 +159,3 @@ const localeTags: Record<CalculatorLocale, string> = {
     calculate();
   }
 </script>
-
-<style>
-  .cashback-calc {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .cashback-calc h2 {
-    margin-top: 0;
-  }
-
-  .cashback-calc-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(17rem, 0.9fr);
-    gap: 1.25rem;
-    margin-top: 1.25rem;
-  }
-
-  .cashback-calc-inputs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-
-  .cashback-calc-inputs label,
-  .cashback-calc-results dl {
-    margin: 0;
-  }
-
-  .cashback-calc-inputs label span {
-    display: block;
-    min-height: 2.9rem;
-    margin-bottom: 0.35rem;
-    font-weight: 650;
-  }
-
-  .cashback-calc-inputs input {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    padding: 0.7rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.55rem;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font: inherit;
-  }
-
-  .cashback-calc-results {
-    align-self: start;
-    padding: 1rem;
-    border-radius: 0.8rem;
-    background: var(--color-surface-2);
-  }
-
-  .cashback-verdict {
-    margin-top: 0;
-    font-size: 1.1rem;
-    font-weight: 750;
-  }
-
-  .cashback-calc-results dl div {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.65rem 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .cashback-calc-results dt,
-  .cashback-calc-results dd {
-    overflow-wrap: anywhere;
-  }
-
-  .cashback-calc-results dd {
-    margin: 0;
-    text-align: right;
-    font-weight: 700;
-  }
-
-  .cashback-calc-note {
-    margin-bottom: 0;
-    color: var(--color-muted);
-    font-size: 0.92rem;
-  }
-
-  @media (max-width: 760px) {
-    .cashback-calc {
-      padding: 1rem;
-    }
-
-    .cashback-calc-grid,
-    .cashback-calc-inputs {
-      grid-template-columns: 1fr;
-    }
-
-    .cashback-calc-inputs label span {
-      min-height: 0;
-    }
-  }
-</style>

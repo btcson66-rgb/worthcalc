@@ -60,12 +60,12 @@ const related = [
         </div>
         <div class="field">
           <label for="monthly-spend">每月 Costco 消費</label>
-          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="100" value="8000" />
+          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="100" value="8000" data-range data-range-min="0" data-range-max="2000" data-range-step="10" />
           <p class="helper">請填你合理會在 Costco 花的金額。</p>
         </div>
         <div class="field">
           <label for="savings-rate">相對一般通路省下比例 (%)</label>
-          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" />
+          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" data-range data-range-min="0" data-range-max="25" data-range-step="0.5" />
           <p class="helper">可自行調整的價差假設。</p>
         </div>
         <div class="field">
@@ -99,95 +99,6 @@ const related = [
   </section>
 
   <DecisionGuide content={decisionGuide} />
-
-  <style>
-    .intro,
-    .helper,
-    .explanation {
-      color: var(--color-muted);
-    }
-
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 650;
-    }
-
-    .helper {
-      margin: 0.25rem 0 0;
-      font-size: 0.92rem;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .verdict {
-      margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
-      font-weight: 750;
-      line-height: 1.25;
-    }
-
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
-      color: var(--color-muted);
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.1rem;
-    }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        align-items: start;
-      }
-
-      .input-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField, getItem, setItem } from '../../../lib/storage';

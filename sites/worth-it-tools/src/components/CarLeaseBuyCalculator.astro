@@ -33,7 +33,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 
 <section
   id="car-lease-buy-calculator"
-  class="lease-buy-calc"
+  class="calc"
   data-car-lease-buy-calculator
   data-locale={localeTags[locale]}
   data-currency={currency}
@@ -41,11 +41,11 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
   data-lease-wins={copy.leaseWins}
   data-buy-wins={copy.buyWins}
   data-tie={copy.tie}
->
+ data-label-a={copy.leaseTotal} data-label-b={copy.buyTotal}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
-  <div class="lease-buy-grid">
-    <div class="lease-buy-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label class="wide"><span>{copy.months}</span><input data-field="months" type="number" inputmode="numeric" min="12" max="120" step="1" value={defaults.months} /></label>
       <label><span>{copy.leaseUpfront}</span><input data-field="leaseUpfront" type="number" inputmode="decimal" min="0" step="100" value={defaults.leaseUpfront} /></label>
       <label><span>{copy.leaseMonthly}</span><input data-field="leaseMonthly" type="number" inputmode="decimal" min="0" step="10" value={defaults.leaseMonthly} /></label>
@@ -66,8 +66,9 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       <label><span>{copy.buyMaintenanceAnnual}</span><input data-field="buyMaintenanceAnnual" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyMaintenanceAnnual} /></label>
       <label><span>{copy.buyResale}</span><input data-field="buyResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.buyResale} /></label>
     </div>
-    <div class="lease-buy-results" aria-live="polite">
-      <p class="lease-buy-verdict" data-output="verdict"></p>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.leaseTotal}</dt><dd data-output="leaseTotal">—</dd></div>
         <div><dt>{copy.buyTotal}</dt><dd data-output="buyTotal">—</dd></div>
@@ -85,10 +86,11 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       </dl>
     </div>
   </div>
-  <p class="lease-buy-note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-car-lease-buy-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -136,6 +138,12 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       const buyoutGap = Math.max(0, value('expectedLeaseMarketValue')) - Math.max(0, value('leaseOptionPrice'));
       const difference = Math.abs(leaseTotal - buyTotal);
 
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: leaseTotal },
+        { label: root.dataset.labelB || '', value: buyTotal },
+      ], formatMoney);
+
       output('leaseTotal').textContent = formatMoney(leaseTotal);
       output('buyTotal').textContent = formatMoney(buyTotal);
       output('difference').textContent = formatMoney(difference);
@@ -158,26 +166,3 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     calculate();
   }
 </script>
-
-<style>
-  .lease-buy-calc { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
-  .lease-buy-calc h2 { margin-top: 0; }
-  .lease-buy-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.7fr); gap: 1.25rem; margin-top: 1.25rem; }
-  .lease-buy-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
-  .lease-buy-inputs .wide { grid-column: 1 / -1; }
-  .lease-buy-inputs label span { display: block; min-height: 2.9rem; margin-bottom: 0.35rem; font-weight: 650; }
-  .lease-buy-inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem 0.75rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
-  .lease-buy-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
-  .lease-buy-verdict { margin-top: 0; font-weight: 800; }
-  .lease-buy-results dl { margin: 0; }
-  .lease-buy-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--color-border); }
-  .lease-buy-results dt { font-weight: 600; }
-  .lease-buy-results dd { margin: 0; text-align: right; font-weight: 750; }
-  .lease-buy-note { margin-bottom: 0; color: var(--color-text-muted); font-size: 0.92rem; }
-  @media (max-width: 760px) {
-    .lease-buy-calc { padding: 1rem; }
-    .lease-buy-grid, .lease-buy-inputs { grid-template-columns: 1fr; }
-    .lease-buy-inputs .wide { grid-column: auto; }
-    .lease-buy-inputs label span { min-height: 0; }
-  }
-</style>

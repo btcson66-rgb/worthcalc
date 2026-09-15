@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import NewUsedCarTcoCalculator from '../../components/NewUsedCarTcoCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -119,7 +120,8 @@ const guide = newUsedCarGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>The useful new-versus-used question is not which category has the lower sticker price. It is which exact vehicle leaves you with the lower cost and manageable risk over the years you will actually keep it. A five-year answer can reverse at year three because depreciation, loan payoff and repair exposure do not move at the same speed.</p>
     <p>This model therefore avoids a single market-average verdict. It compares two written offers, accrues interest only while you own each car, and publishes both an expected used-car repair case and the full-repair downside.</p>

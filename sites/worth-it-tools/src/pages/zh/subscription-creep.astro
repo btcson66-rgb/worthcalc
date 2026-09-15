@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES } from '../../consts';
@@ -42,7 +43,8 @@ const faq = [
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
->
+
+  trustBlock={trustBlockFromDecisionGuide(subscriptionGuides.zh, locale)}>
   <p>
     快問快答：你每個月花多少錢在訂閱上？如果你剛剛心裡冒出一個數字，
     它八成偏低。Netflix、Disney+、Spotify、YouTube Premium、iCloud、

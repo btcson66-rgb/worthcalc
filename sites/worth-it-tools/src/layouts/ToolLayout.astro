@@ -162,6 +162,12 @@ const reviewLabels = {
   <AdSlot noindex={noindex} />
 </BaseLayout>
 
+<script>
+  // Shared calculator interaction layer (sliders, chart helpers, count-up).
+  // Loaded here so every tool page gets it without importing anything.
+  import '../lib/calcUi';
+</script>
+
 <style>
   .calculator-review {
     border: 1px solid var(--color-border);

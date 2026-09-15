@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import RepairReplaceCalculator from '../../components/RepairReplaceCalculator.astro';
 import FAQ from '../../components/FAQ.astro';
@@ -80,7 +81,8 @@ const guide = repairReplaceGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>The familiar “repair if it costs less than half of new” rule leaves out the most important variable: how many reliable months the repair actually buys. A $250 repair can be poor if it buys six months and excellent if it buys three years.</p>
     <DecisionGuide content={guide} />

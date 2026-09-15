@@ -50,7 +50,7 @@ const numberLocale = locale === 'zh'
 
 <section
   id="gym-cost-calculator"
-  class="gym-calc"
+  class="calc"
   data-gym-calculator
   data-locale={numberLocale}
   data-currency={currency}
@@ -60,14 +60,14 @@ const numberLocale = locale === 'zh'
   data-no-visits={copy.noVisits}
   data-active-month-suffix={copy.activeMonthSuffix}
   aria-labelledby="gym-calculator-heading"
->
+ data-label-meter={copy.breakEvenVisits}>
   <header>
     <h2 id="gym-calculator-heading">{copy.heading}</h2>
     <p>{copy.intro}</p>
   </header>
 
-  <div class="gym-calc-grid">
-    <div class="gym-calc-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label>
         <span>{copy.joiningFee}</span>
         <input data-field="joiningFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.joiningFee} />
@@ -98,8 +98,9 @@ const numberLocale = locale === 'zh'
       </label>
     </div>
 
-    <div class="gym-calc-results" aria-live="polite">
-      <p class="gym-verdict" data-output="verdict"></p>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.totalCost}</dt><dd data-output="totalCost">—</dd></div>
         <div><dt>{copy.totalVisits}</dt><dd data-output="totalVisits">—</dd></div>
@@ -109,10 +110,11 @@ const numberLocale = locale === 'zh'
     </div>
   </div>
 
-  <p class="gym-calc-note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
+  import { renderMeter } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-gym-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -144,6 +146,11 @@ const numberLocale = locale === 'zh'
       output('totalCost').textContent = formatMoney(totalCost);
       output('totalVisits').textContent = formatNumber.format(totalVisits);
       output('costPerVisit').textContent = totalVisits > 0 ? formatMoney(costPerVisit) : '—';
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart && breakEven > 0) {
+        renderMeter(chart, visitsPerActiveMonth, breakEven, (n) => formatNumber.format(n), root.dataset.labelMeter || '');
+      } else if (chart) { chart.innerHTML = ''; }
+
       output('breakEvenVisits').textContent = breakEven > 0 ? `${formatNumber.format(breakEven)} ${root.dataset.activeMonthSuffix || ''}`.trim() : '—';
 
       if (totalVisits <= 0) output('verdict').textContent = root.dataset.noVisits || '';
@@ -156,85 +163,3 @@ const numberLocale = locale === 'zh'
     calculate();
   }
 </script>
-
-<style>
-  .gym-calc {
-    margin: 2rem 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    padding: clamp(1rem, 3vw, 1.5rem);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .gym-calc header p,
-  .gym-calc-note {
-    color: var(--color-muted);
-  }
-
-  .gym-calc-grid,
-  .gym-calc-inputs,
-  .gym-calc-results dl {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .gym-calc-inputs label span {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 650;
-  }
-
-  .gym-calc-results {
-    border-radius: var(--radius);
-    background: var(--color-bg);
-    padding: 1rem;
-  }
-
-  .gym-verdict {
-    margin-top: 0;
-    font-size: 1.15rem;
-    font-weight: 750;
-  }
-
-  .gym-calc-results dl,
-  .gym-calc-results dd {
-    margin: 0;
-  }
-
-  .gym-calc-results dl div {
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.75rem;
-  }
-
-  .gym-calc-results dt {
-    color: var(--color-muted);
-    font-size: 0.9rem;
-  }
-
-  .gym-calc-results dd {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .gym-calc-note {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: 760px) {
-    .gym-calc-grid {
-      grid-template-columns: minmax(0, 1.2fr) minmax(270px, 0.8fr);
-      align-items: start;
-    }
-
-    .gym-calc-inputs {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .gym-calc-results {
-      position: sticky;
-      top: 1rem;
-    }
-  }
-</style>

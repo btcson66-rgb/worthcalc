@@ -16,7 +16,7 @@ const embedSnippet = isZh
   : '<iframe src="https://worthcalc.win/en/tools/appliance-running-cost/" title="WorthCalc appliance running cost calculator" loading="lazy"></iframe>\n<p>Provided by <a href="https://worthcalc.win/en/tools/appliance-running-cost/">WorthCalc appliance running cost calculator</a>.</p>';
 ---
 
-<section class="appliance-calculator" data-appliance-calculator data-locale={locale} aria-labelledby="appliance-calculator-heading">
+<section class="calc" data-appliance-calculator data-locale={locale} aria-labelledby="appliance-calculator-heading">
   <h2 id="appliance-calculator-heading">{isZh ? '家電每小時、每天、每月、每年電費' : 'Appliance running cost by hour, day, month and year'}</h2>
   <p class="direct-answer">
     {isZh
@@ -24,8 +24,8 @@ const embedSnippet = isZh
       : <>Direct answer: the guide's 1,350 W example used 0.37 hours/day at the EIA June 2026 residential average of $0.1834/kWh, or about $0.09/day. Formula: W ÷ 1,000 × hours × rate. This is a source-backed example checked 2026-09-15, not a product guarantee.</>}
   </p>
 
-  <div class="appliance-grid">
-    <div class="appliance-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label>
         <span>{isZh ? '選擇家電' : 'Appliance'}</span>
         <select id="appliance-select">
@@ -56,15 +56,15 @@ const embedSnippet = isZh
         <span>{isZh ? '你的每度電價' : 'Your electricity rate per kWh'}</span>
         <input id="appliance-rate" type="number" inputmode="decimal" min="0" step="0.001" value={isZh ? '3.80' : '0.1834'} />
       </label>
-      <p id="appliance-range-note" class="source-note"></p>
-      <p class="rate-note">
+      <p id="appliance-range-note" class="calc__note"></p>
+      <p class="calc__note">
         {isZh
           ? <>電價只是可編輯起點，請改成電費單上的邊際單價。台電現行簡要電價表標示 2025-10-01 起實施；夏月為 6/1–9/30。<a href={rateSource}>查看台電官方表</a>（查核 2026-09-15）。</>
           : <>The rate is an editable starting point; replace it with your bill. The EIA table is June 2026 residential average, 18.34¢/kWh, preliminary. <a href={rateSource}>View EIA source</a> (checked 2026-09-15).</>}
       </p>
     </div>
 
-    <div class="appliance-results" aria-live="polite">
+    <div class="calc__results" aria-live="polite">
       <p class="result-label">{isZh ? '試算結果' : 'Estimate'}</p>
       <dl>
         <div><dt>{isZh ? '每小時' : 'Per hour'}</dt><dd id="appliance-per-hour">—</dd></div>
@@ -77,7 +77,7 @@ const embedSnippet = isZh
     </div>
   </div>
 
-  <p class="measurement-note">
+  <p class="calc__note">
     {isZh
       ? '機身標籤是額定值，不等於整段使用的平均值。若要更準，使用插座電表／智慧插座量測完整使用邊界；每列預設值都可替換。'
       : 'A nameplate is a rating, not the average draw for a complete routine. For a tighter estimate, meter the full operating boundary; every default above is editable.'}
@@ -185,17 +185,7 @@ const embedSnippet = isZh
   .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
   .appliance-calculator h2, .embed-panel h2, .appliance-method h2, .complete-appliance-list h2 { margin-top: 0; }
   .direct-answer { font-size: 1.02rem; }
-  .appliance-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(17rem, 0.85fr); gap: 1.25rem; margin-top: 1.25rem; }
-  .appliance-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; align-content: start; }
-  .appliance-inputs label { display: block; min-width: 0; }
-  .appliance-inputs label > span { display: block; min-height: 2.7rem; margin-bottom: 0.35rem; font-weight: 650; }
-  .appliance-inputs input, .appliance-inputs select { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
-  .source-note, .rate-note, .measurement-note { grid-column: 1 / -1; margin: 0; color: var(--color-muted); font-size: 0.92rem; overflow-wrap: anywhere; }
-  .appliance-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
   .result-label { margin-top: 0; font-weight: 750; }
-  .appliance-results dl { margin: 0; }
-  .appliance-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border); }
-  .appliance-results dd { margin: 0; text-align: right; font-weight: 750; }
   .rank-summary { margin-bottom: 0.5rem; font-size: 0.92rem; color: var(--color-muted); }
   .ranking { margin: 0; padding-left: 1.25rem; }
   pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--color-bg); border-radius: 0.6rem; }
@@ -204,5 +194,7 @@ const embedSnippet = isZh
   table { width: 100%; min-width: 38rem; border-collapse: collapse; }
   th, td { padding: 0.65rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
   td { overflow-wrap: anywhere; }
-  @media (max-width: 760px) { .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { padding: 1rem; } .appliance-grid, .appliance-inputs { grid-template-columns: 1fr; } .appliance-inputs label > span { min-height: 0; } .appliance-results dl div { align-items: baseline; } }
+@media (max-width: 760px) {
+ .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { padding: 1rem; }
+  }
 </style>

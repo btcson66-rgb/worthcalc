@@ -83,7 +83,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 
 <section
   id="ev-gas-tco-calculator"
-  class="tco-calc"
+  class="calc"
   data-ev-gas-tco-calculator
   data-locale={localeTags[locale]}
   data-currency={currency}
@@ -96,8 +96,8 @@ const localeTags: Record<CalculatorLocale, string> = {
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
-  <div class="tco-calc-grid">
-    <div class="tco-calc-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label><span>{copy.evPurchasePrice}</span><input data-field="evPurchasePrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.evPurchasePrice} /></label>
       <label><span>{copy.gasPurchasePrice}</span><input data-field="gasPurchasePrice" type="number" inputmode="decimal" min="0" step="100" value={defaults.gasPurchasePrice} /></label>
       <label><span>{copy.evIncentive}</span><input data-field="evIncentive" type="number" inputmode="decimal" min="0" step="100" value={defaults.evIncentive} /></label>
@@ -120,8 +120,8 @@ const localeTags: Record<CalculatorLocale, string> = {
       <label><span>{copy.gasResale}</span><input data-field="gasResale" type="number" inputmode="decimal" min="0" step="100" value={defaults.gasResale} /></label>
     </div>
 
-    <div class="tco-calc-results" aria-live="polite">
-      <p class="tco-verdict" data-output="verdict"></p>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
       <dl>
         <div><dt>{copy.evTotal}</dt><dd data-output="evTotal">—</dd></div>
         <div><dt>{copy.gasTotal}</dt><dd data-output="gasTotal">—</dd></div>
@@ -136,7 +136,7 @@ const localeTags: Record<CalculatorLocale, string> = {
     </div>
   </div>
 
-  <p class="tco-calc-note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
@@ -206,94 +206,3 @@ const localeTags: Record<CalculatorLocale, string> = {
     calculate();
   }
 </script>
-
-<style>
-  .tco-calc {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .tco-calc h2 { margin-top: 0; }
-
-  .tco-calc-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
-    gap: 1.25rem;
-    margin-top: 1.25rem;
-  }
-
-  .tco-calc-inputs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-
-  .tco-calc-inputs label,
-  .tco-calc-results dl { margin: 0; }
-
-  .tco-calc-inputs label span {
-    display: block;
-    min-height: 2.9rem;
-    margin-bottom: 0.35rem;
-    font-weight: 650;
-  }
-
-  .tco-calc-inputs input {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    padding: 0.7rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.55rem;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font: inherit;
-  }
-
-  .tco-calc-results {
-    align-self: start;
-    padding: 1rem;
-    border-radius: 0.8rem;
-    background: var(--color-surface-2);
-  }
-
-  .tco-verdict {
-    margin-top: 0;
-    font-size: 1.1rem;
-    font-weight: 750;
-  }
-
-  .tco-calc-results dl div {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.65rem 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .tco-calc-results dt,
-  .tco-calc-results dd { overflow-wrap: anywhere; }
-
-  .tco-calc-results dd {
-    margin: 0;
-    text-align: right;
-    font-weight: 700;
-  }
-
-  .tco-calc-note {
-    margin-bottom: 0;
-    color: var(--color-muted);
-    font-size: 0.92rem;
-  }
-
-  @media (max-width: 760px) {
-    .tco-calc { padding: 1rem; }
-    .tco-calc-grid,
-    .tco-calc-inputs { grid-template-columns: 1fr; }
-    .tco-calc-inputs label span { min-height: 0; }
-  }
-</style>

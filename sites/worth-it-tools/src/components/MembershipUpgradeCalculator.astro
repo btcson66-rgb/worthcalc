@@ -128,18 +128,20 @@ const { locale, currency, extraFee, monthlySpend, rewardRate, extraBenefits = 0,
 
 <style>
   .upgrade-calculator { margin: 2rem 0; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--color-border); border-radius: 1.25rem; background: var(--color-surface); }
+
   .calculator-heading h2 { margin: .2rem 0 .5rem; }
-  .eyebrow { margin: 0; color: var(--color-accent-strong); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-  .calculator-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 1rem; margin-top: 1rem; }
-  .input-panel, .result-panel { display: grid; gap: .85rem; }
+
   label { display: grid; gap: .3rem; font-weight: 700; }
+
   label small { color: var(--color-muted); font-weight: 400; line-height: 1.45; }
+
   input { box-sizing: border-box; width: 100%; min-height: 2.75rem; padding: .65rem .75rem; border: 1px solid var(--color-border); border-radius: .65rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
-  .result-panel { align-content: start; padding: 1rem; border-radius: .9rem; background: var(--color-bg); }
-  .verdict { margin: 0; font-weight: 750; line-height: 1.55; }
+
   dl { display: grid; gap: .65rem; margin: 0; }
+
   dl div { display: flex; justify-content: space-between; gap: 1rem; padding-top: .65rem; border-top: 1px solid var(--color-border); }
+
   dt { color: var(--color-muted); }
+
   dd { margin: 0; font-weight: 800; text-align: right; }
-  @media (max-width: 720px) { .calculator-grid { grid-template-columns: 1fr; } }
 </style>

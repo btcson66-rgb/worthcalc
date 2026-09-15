@@ -317,13 +317,6 @@ const config = {
     color: var(--color-muted);
   }
 
-  .calculator-grid,
-  .input-grid,
-  .metric-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
   .localized-calculator,
   .calculator-grid,
   .input-grid,
@@ -341,79 +334,9 @@ const config = {
     width: 100%;
   }
 
-  .input-panel,
-  .result-panel {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .field label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 650;
-  }
-
   .field input {
     box-sizing: border-box;
     max-width: 100%;
     width: 100%;
-  }
-
-  .helper {
-    margin: 0.25rem 0 0;
-    font-size: 0.92rem;
-  }
-
-  .eyebrow {
-    margin: 0;
-    color: var(--color-muted);
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .verdict {
-    margin: 0.25rem 0 1rem;
-    font-size: 1.25rem;
-    font-weight: 750;
-    line-height: 1.35;
-  }
-
-  .metric {
-    margin: 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-bg);
-    padding: 0.75rem;
-  }
-
-  .metric span,
-  .metric strong {
-    display: block;
-    overflow-wrap: anywhere;
-  }
-
-  .metric span {
-    color: var(--color-muted);
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: 760px) {
-    .calculator-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-      align-items: start;
-    }
-
-    .input-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
   }
 </style>

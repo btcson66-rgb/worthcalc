@@ -14,11 +14,11 @@ const basicFields = definition.fields.filter((field) => !field.advanced);
 const advancedFields = definition.fields.filter((field) => field.advanced);
 ---
 
-<section class="growth-calculator" data-growth-calculator>
+<section class="calc" data-growth-calculator>
   <script type="application/json" class="growth-config" is:inline set:html={JSON.stringify({ locale, definition, copy })} />
-  <p class="example-note">{copy.exampleNote}</p>
 
-  <form novalidate>
+  <div class="calc__body">
+  <form class="calc__controls" novalidate>
     <fieldset>
       <legend>{copy.basic}</legend>
       <div class="growth-fields">
@@ -75,7 +75,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
     </div>
   </form>
 
-  <section class="growth-results" aria-labelledby={`growth-results-${definition.slug}`} aria-live="polite">
+  <section class="calc__results" aria-labelledby={`growth-results-${definition.slug}`} aria-live="polite">
     <h2 id={`growth-results-${definition.slug}`}>{copy.results}</h2>
     <p class="growth-status" data-status>{copy.ready}</p>
     <div class="metric-grid">
@@ -97,6 +97,9 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
       </details>
     )}
   </section>
+  </div>
+
+  <p class="calc__note">{copy.exampleNote}</p>
 </section>
 
 <script>
@@ -305,8 +308,6 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
 </script>
 
 <style>
-  .growth-calculator { border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); padding: clamp(.85rem, 3vw, 1.25rem); }
-  .example-note { color: var(--color-muted); margin-top: 0; }
   fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
   legend { font-size: 1.15rem; font-weight: 750; margin-bottom: .8rem; }
   .growth-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: .85rem; }
@@ -324,7 +325,6 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
   .growth-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
   .growth-actions button { min-height: 2.65rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-surface-2); color: var(--color-text); padding: .55rem .85rem; font: inherit; font-weight: 650; cursor: pointer; }
   .growth-actions .primary { background: var(--brand); border-color: var(--brand); color: white; }
-  .growth-results { border-top: 1px solid var(--color-border); margin-top: 1.25rem; padding-top: 1rem; }
   .growth-status { color: var(--color-muted); }
   /* The nine growth tools share these class names with LocalizedCoreCalculator,
      but Astro scopes styles per component — so without these rules the label and
@@ -339,5 +339,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
   table { width: 100%; border-collapse: collapse; font-size: .9rem; }
   th, td { border: 1px solid var(--color-border); padding: .45rem .55rem; text-align: end; white-space: nowrap; }
   th:first-child { text-align: start; }
-  @media print { form, .growth-export-actions, .example-note { display: none !important; } .growth-calculator { border: 0; box-shadow: none; } }
+@media print {
+ form, .growth-export-actions, .example-note { display: none !important; }
+  }
 </style>

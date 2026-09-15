@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import type { ContentLocale } from '../consts';
-import { CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
+import { CORE_LOCALES, LOCALE_DIR, LOCALE_HREFLANG } from '../consts';
 import type { EntityJsonLdOptions, SeoInput } from '../lib/seo';
 import { getLocaleFromUrl } from '../i18n/utils';
 import SEO from '../components/SEO.astro';
@@ -54,7 +54,7 @@ const resolvedDescription = s4TitleOverride?.description ?? description;
 ---
 
 <!doctype html>
-<html lang={LOCALE_HREFLANG[locale]}>
+<html lang={LOCALE_HREFLANG[locale]} dir={LOCALE_DIR[locale]}>
   <head>
     <SEO
       title={resolvedTitle}

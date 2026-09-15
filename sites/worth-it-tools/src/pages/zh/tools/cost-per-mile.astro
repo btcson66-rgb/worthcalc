@@ -88,7 +88,7 @@ const related = [
         </div>
         <div class="field">
           <label for="electricity-price">每度電價</label>
-          <input id="electricity-price" type="number" inputmode="decimal" min="0" step="0.1" value="3" />
+          <input id="electricity-price" type="number" inputmode="decimal" min="0" step="0.1" value="3" data-range data-range-min="0" data-range-max="1" data-range-step="0.01" />
         </div>
       </div>
 
@@ -126,7 +126,7 @@ const related = [
       <div class="input-grid">
         <div class="field">
           <label for="purchase-price">購車價</label>
-          <input id="purchase-price" type="number" inputmode="decimal" min="0" step="10000" value="800000" />
+          <input id="purchase-price" type="number" inputmode="decimal" min="0" step="10000" value="800000" data-range data-range-min="0" data-range-max="10000" data-range-step="50" />
         </div>
         <div class="field">
           <label for="resale-value">預估轉售價</label>
@@ -252,13 +252,6 @@ const related = [
       color: var(--color-muted);
     }
 
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
     .comparison-panel {
       margin: 1rem 0;
       border: 1px solid var(--color-border);
@@ -295,21 +288,6 @@ const related = [
       color: var(--color-muted);
     }
 
-    .intro {
-      margin: 0 0 0.75rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      min-width: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
     .input-panel h3 {
       margin: 1.4rem 0 0.7rem;
     }
@@ -327,41 +305,6 @@ const related = [
       font-weight: 650;
     }
 
-    .switch-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .switch-options label {
-      display: inline-flex;
-      flex: 1 1 12rem;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.75rem;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.5rem 0.75rem;
-      cursor: pointer;
-    }
-
-    .switch-options label:has(input:checked) {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
-    }
-
-    .switch-options input {
-      width: 1.1rem;
-      height: 1.1rem;
-      margin: 0;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
     .primary-field,
     .mode-fields,
     .defaults-note {
@@ -371,18 +314,6 @@ const related = [
     .defaults-note {
       margin-top: -0.35rem;
       font-size: 0.9rem;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
     }
 
     .headline-result {
@@ -402,29 +333,6 @@ const related = [
       padding: 0.75rem;
     }
 
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong,
-    .metric small {
-      display: block;
-    }
-
-    .metric span,
-    .metric small {
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.15rem;
-    }
-
     .energy-metric {
       border-color: var(--color-primary);
     }
@@ -432,30 +340,7 @@ const related = [
     .warning {
       border-left-color: #b45309;
     }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
-        align-items: start;
-      }
-
-      .input-grid,
-      .metric-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 420px) {
-      .switch-options,
-      .switch-options label {
-        width: 100%;
-      }
-
-      .result-panel {
-        position: static;
-      }
-    }
-  </style>
+</style>
 
   <script>
     import { bindPersistentField } from '../../../lib/storage';

@@ -1,73 +1,185 @@
 /* ============================================================================
    WorthCalc design system
-   OKLCH-based palette. Legacy --color-* names are kept populated because the
-   per-tool inline <style> blocks reference them; new tokens layer on top.
+
+   Direction: a decision tool, not a form. Two grounds carry the whole idea —
+   a WARM cream for everything the reader controls, a COOL mint for everything
+   the site concludes. That split is what makes a result feel like an answer
+   instead of another box on the page.
+
+   Brand is deep teal (authority, used for actions and headings); bright teal
+   is the accent that also serves as chart slot 1.
+
+   Legacy --color-* names stay populated: per-tool inline <style> blocks still
+   reference them, so they must never disappear, only be re-pointed.
    ============================================================================ */
 
 :root {
   color-scheme: light;
 
-  /* Brand */
-  --brand: oklch(60% 0.115 182);
-  --brand-strong: oklch(50% 0.1 184);
-  --brand-ink: oklch(38% 0.08 188);
-  --brand-soft: oklch(96% 0.025 184);
-  --brand-grad: linear-gradient(135deg, oklch(66% 0.12 178), oklch(52% 0.1 190));
+  /* ── Brand ───────────────────────────────────────────────────────────────
+     --brand        deep teal, primary actions
+     --brand-strong deeper still, hover + headings
+     --brand-bright the accent; doubles as chart slot 1 (validated, see below)
+     --brand-ink    the step that clears text contrast on cream            */
+  --brand: oklch(50% 0.082 186);
+  --brand-strong: oklch(42% 0.072 187);
+  --brand-bright: #0f9e95;
+  --brand-ink: oklch(44% 0.076 187);
+  --brand-soft: oklch(95.5% 0.022 188);
+  --brand-softer: oklch(97.5% 0.012 188);
+  --brand-grad: linear-gradient(135deg, oklch(56% 0.088 184), oklch(44% 0.076 190));
 
-  /* Verdict semantics */
-  --positive: oklch(58% 0.14 155);
-  --positive-soft: oklch(95% 0.04 155);
-  --negative: oklch(58% 0.16 27);
-  --negative-soft: oklch(95% 0.035 27);
+  /* ── Verdict semantics ───────────────────────────────────────────────────
+     Reserved. Never reused as a chart series colour.                       */
+  --positive: oklch(52% 0.13 158);
+  --positive-soft: oklch(95% 0.04 158);
+  --positive-ink: oklch(42% 0.11 158);
+  --negative: oklch(53% 0.16 28);
+  --negative-soft: oklch(95.5% 0.035 28);
+  --negative-ink: oklch(45% 0.15 28);
+  --caution: oklch(62% 0.13 62);
+  --caution-soft: oklch(96% 0.04 70);
 
-  /* Surfaces & text */
-  --color-bg: oklch(98.6% 0.006 180);
-  --color-surface: oklch(100% 0 0);
-  --color-surface-2: oklch(97.5% 0.008 185);
-  --color-text: oklch(26% 0.02 205);
-  --color-muted: oklch(52% 0.02 205);
-  --color-border: oklch(91% 0.01 195);
+  /* ── The warm/cool split ─────────────────────────────────────────────────
+     --color-bg      warm cream page ground
+     --color-surface warm white, cards
+     --color-surface-2 warm panel — the CONTROL side of a calculator
+     --result-bg     cool mint — the RESULT side. The one deliberate
+                     temperature break in the system.                       */
+  --color-bg: oklch(97.4% 0.011 88);
+  --color-surface: oklch(99.4% 0.005 92);
+  --color-surface-2: oklch(95.8% 0.018 88);
+  --result-bg: oklch(96.2% 0.019 192);
+  --result-bg-2: oklch(93.5% 0.028 193);
+  --result-border: oklch(88% 0.032 192);
+
+  --color-text: oklch(27% 0.024 190);
+  --color-muted: oklch(50% 0.019 192);
+  --color-faint: oklch(62% 0.015 192);
+  --color-border: oklch(90.5% 0.014 90);
+  --color-border-strong: oklch(84% 0.02 90);
   --color-accent: var(--brand);
   --color-accent-strong: var(--brand-strong);
   --color-accent-soft: var(--brand-soft);
-  --color-code-bg: oklch(96% 0.012 190);
+  --color-code-bg: oklch(95.5% 0.014 90);
+  --track: oklch(90% 0.012 92);
 
-  /* Elevation & shape */
-  --shadow-soft: 0 1px 2px oklch(50% 0.02 200 / 8%), 0 12px 28px oklch(45% 0.03 200 / 8%);
-  --shadow-lift: 0 2px 4px oklch(50% 0.02 200 / 10%), 0 20px 40px oklch(45% 0.04 200 / 14%);
+  /* ── Chart slots ─────────────────────────────────────────────────────────
+     Fixed order, assigned in sequence, never cycled. Validated with the
+     dataviz validator (adjacent pairlist, light mode): worst adjacent CVD
+     ΔE 12.9, worst adjacent normal-vision ΔE 27.5, all inside the L band
+     with chroma ≥ 0.10.
+
+     Slots 4 (#eda100, 2.11:1) and 6 (#e87ba4, 2.62:1) sit below 3:1 on this
+     surface. That is a relief obligation, not a dismissable warning: every
+     chart in this system ships direct labels AND a values table, which is
+     also why the figures stay crawlable.                                   */
+  --chart-1: #0f9e95;
+  --chart-2: #eb6834;
+  --chart-3: #2a78d6;
+  --chart-4: #eda100;
+  --chart-5: #4a3aa7;
+  --chart-6: #e87ba4;
+  --chart-grid: oklch(89% 0.012 92);
+  --chart-axis: oklch(62% 0.015 192);
+
+  /* ── Elevation & shape ───────────────────────────────────────────────────
+     Shadows carry a warm hue so they sit on cream instead of greying it.   */
+  --shadow-soft: 0 1px 2px oklch(45% 0.03 80 / 7%), 0 10px 24px oklch(42% 0.04 80 / 7%);
+  --shadow-lift: 0 2px 4px oklch(45% 0.03 80 / 9%), 0 18px 38px oklch(42% 0.05 80 / 13%);
+  --shadow-panel: 0 1px 3px oklch(45% 0.03 80 / 8%), 0 24px 56px oklch(42% 0.05 80 / 10%);
+  --shadow-inset: inset 0 1px 2px oklch(45% 0.03 80 / 6%);
+
+  --radius-sm: 8px;
   --radius: 12px;
   --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-pill: 999px;
-  --container: 960px;
+
+  /* ── Rhythm ──────────────────────────────────────────────────────────────
+     One scale, used everywhere, so blocks breathe consistently.            */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --container: 1080px;
+  --container-prose: 46rem;
+
+  /* ── Compatibility aliases ───────────────────────────────────────────────
+     Six names were referenced across scoped <style> blocks but had never been
+     defined anywhere — most visibly --color-primary, which carried the checked
+     state of every .switch-options control, so "selected" rendered with no
+     highlight at all. Aliasing them is what makes those 30 references resolve. */
+  --color-primary: var(--brand);
+  --color-text-muted: var(--color-muted);
+  --card: var(--color-surface);
+  --line: var(--color-border);
+  --muted: var(--color-muted);
+  --soft: var(--color-surface-2);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
 
-    --brand: oklch(80% 0.12 182);
-    --brand-strong: oklch(88% 0.11 183);
-    --brand-ink: oklch(90% 0.09 185);
+    --brand: oklch(72% 0.1 184);
+    --brand-strong: oklch(82% 0.095 184);
+    --brand-bright: #14a99e;
+    --brand-ink: oklch(84% 0.09 185);
     --brand-soft: oklch(32% 0.045 188);
-    --brand-grad: linear-gradient(135deg, oklch(72% 0.12 178), oklch(58% 0.1 192));
+    --brand-softer: oklch(27% 0.03 190);
+    --brand-grad: linear-gradient(135deg, oklch(70% 0.1 182), oklch(56% 0.088 192));
 
     --positive: oklch(76% 0.15 158);
-    --positive-soft: oklch(32% 0.06 158);
+    --positive-soft: oklch(31% 0.06 158);
+    --positive-ink: oklch(82% 0.13 158);
     --negative: oklch(72% 0.15 28);
-    --negative-soft: oklch(33% 0.07 28);
+    --negative-soft: oklch(32% 0.07 28);
+    --negative-ink: oklch(80% 0.13 28);
+    --caution: oklch(78% 0.13 70);
+    --caution-soft: oklch(33% 0.06 70);
 
-    --color-bg: oklch(21% 0.015 205);
-    --color-surface: oklch(25% 0.018 205);
-    --color-surface-2: oklch(28% 0.02 205);
-    --color-text: oklch(95% 0.008 185);
-    --color-muted: oklch(74% 0.02 195);
-    --color-border: oklch(35% 0.02 200);
-    --color-code-bg: oklch(30% 0.02 200);
+    /* The warm/cool split survives into dark: the control side stays a warmer
+       neutral, the result side a cooler one. Subtler than in light, but the
+       relationship is what the reader learns. */
+    --color-bg: oklch(19.5% 0.012 196);
+    --color-surface: oklch(23.5% 0.014 196);
+    --color-surface-2: oklch(26.5% 0.013 90);
+    --result-bg: oklch(25% 0.022 193);
+    --result-bg-2: oklch(29% 0.028 193);
+    --result-border: oklch(37% 0.03 193);
 
-    --shadow-soft: 0 1px 2px oklch(0% 0 0 / 30%), 0 12px 28px oklch(0% 0 0 / 34%);
-    --shadow-lift: 0 2px 6px oklch(0% 0 0 / 36%), 0 22px 44px oklch(0% 0 0 / 44%);
+    --color-text: oklch(95% 0.008 188);
+    --color-muted: oklch(73% 0.018 192);
+    --color-faint: oklch(62% 0.016 192);
+    --color-border: oklch(33% 0.016 196);
+    --color-border-strong: oklch(42% 0.02 196);
+    --color-code-bg: oklch(28% 0.018 196);
+    --track: oklch(34% 0.016 196);
+
+    /* Same six hues, stepped for the dark surface and validated as a set:
+       worst adjacent CVD ΔE 14.5, normal-vision ΔE 19.7, all ≥ 3:1. */
+    --chart-1: #14a99e;
+    --chart-2: #d95926;
+    --chart-3: #3987e5;
+    --chart-4: #c98500;
+    --chart-5: #9085e9;
+    --chart-6: #d55181;
+    --chart-grid: oklch(33% 0.016 196);
+    --chart-axis: oklch(62% 0.016 192);
+
+    --shadow-soft: 0 1px 2px oklch(0% 0 0 / 32%), 0 10px 24px oklch(0% 0 0 / 34%);
+    --shadow-lift: 0 2px 6px oklch(0% 0 0 / 38%), 0 20px 40px oklch(0% 0 0 / 44%);
+    --shadow-panel: 0 2px 6px oklch(0% 0 0 / 36%), 0 26px 56px oklch(0% 0 0 / 42%);
+    --shadow-inset: inset 0 1px 2px oklch(0% 0 0 / 30%);
   }
 }
 
@@ -75,15 +187,22 @@
   box-sizing: border-box;
 }
 
+/* Latin glyphs come from the platform UI face; CJK falls through to PingFang /
+   Noto because none of the Latin faces cover it. Listing the CJK faces after
+   the Latin ones is what makes that fall-through happen — putting system-ui
+   first, as this stack used to, meant the named CJK faces were never reached
+   on most platforms. */
 html {
   font-family:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
-    "PingFang TC", "Microsoft JhengHei", sans-serif;
-  line-height: 1.6;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    "PingFang TC", "PingFang SC", "Noto Sans TC", "Noto Sans SC",
+    "Microsoft JhengHei", "Hiragino Sans GB", sans-serif;
+  line-height: 1.65;
   background: var(--color-bg);
   color: var(--color-text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
@@ -92,9 +211,26 @@ body {
   margin: 0;
 }
 
-h1, h2, h3 {
-  letter-spacing: -0.02em;
+/* Every figure on this site is meant to be compared against another figure —
+   across a table row, or against the same number a second ago as a slider
+   moves. Proportional digits make that jitter; tabular digits hold the column. */
+.num,
+.calc-verdict__figure,
+.calc-metric__value,
+.calc-table td,
+.stat__value,
+output {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+}
+
+h1 { font-weight: 800; }
+h2, h3 { font-weight: 750; }
 
 a {
   color: var(--brand-ink);
@@ -150,14 +286,14 @@ button, .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   min-height: 2.75rem;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--color-border);
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius);
   background: var(--color-surface);
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: 650;
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.15s var(--ease), border-color 0.15s var(--ease),
@@ -167,7 +303,7 @@ button, .button {
 button:hover, .button:hover {
   border-color: var(--brand);
   background: var(--color-accent-soft);
-  color: var(--color-text);
+  color: var(--brand-strong);
 }
 
 button:active, .button:active {
@@ -187,6 +323,21 @@ button:active, .button:active {
   transform: translateY(-1px);
 }
 
+/* Full-bleed commit button, as in the calculator concept. */
+.button--block {
+  width: 100%;
+}
+
+.button--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--brand-ink);
+}
+
+.button--ghost:hover {
+  background: var(--brand-soft);
+}
+
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible,
@@ -199,18 +350,42 @@ select:focus-visible {
 
 input, textarea, select {
   width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
   background: var(--color-surface);
   color: var(--color-text);
+  font-weight: 600;
   transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+/* Money and rate fields read as figures, so they get the figure treatment:
+   tabular digits and a little more weight than surrounding prose. */
+input[type="number"],
+input[inputmode="decimal"],
+input[inputmode="numeric"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
 input:focus, textarea:focus, select:focus {
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px var(--color-accent-soft);
+  box-shadow: 0 0 0 3px var(--brand-soft);
   outline: none;
+}
+
+/* Native number spinners fight the slider that now sits beside each field,
+   and they shrink the hit area of the text itself. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 textarea {
@@ -230,8 +405,8 @@ textarea {
   top: 0;
   z-index: 50;
   border-bottom: 1px solid var(--color-border);
-  background: color-mix(in oklab, var(--color-bg) 82%, transparent);
-  backdrop-filter: saturate(1.4) blur(10px);
+  background: color-mix(in oklab, var(--color-bg) 84%, transparent);
+  backdrop-filter: saturate(1.5) blur(12px);
 }
 
 .site-header__inner,
@@ -287,19 +462,41 @@ textarea {
 .footer-links a {
   color: var(--color-muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 550;
+}
+
+/* The nav reads as a segmented control rather than a row of links — the same
+   pill vocabulary the calculators use for a choice, so the chrome and the
+   controls speak the same language. */
+.primary-nav a {
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
 }
 
 .primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+.primary-nav a[aria-current="page"] {
+  font-weight: 700;
+}
+
 .language-switch a:hover,
 .footer-links a:hover,
 .language-switch a[aria-current="true"] {
   color: var(--brand-strong);
 }
 
+.language-switch a[aria-current="true"] {
+  font-weight: 700;
+}
+
 .language-switch {
-  padding-left: 0.9rem;
-  border-left: 1px solid var(--color-border);
+  padding-inline-start: 0.9rem;
+  border-inline-start: 1px solid var(--color-border);
 }
 
 .site-header__actions {
@@ -311,15 +508,23 @@ textarea {
 }
 
 main.container {
-  padding: 2.25rem 0 3.5rem;
+  padding: var(--space-6) 0 var(--space-8);
 }
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 
+/* The hero is where the reader first meets the cool ground that later means
+   "this is a result". Introducing it here, behind the promise, is deliberate. */
 .hero {
   position: relative;
-  margin-bottom: 2.75rem;
-  padding: 2.5rem 0 0.5rem;
+  margin-bottom: var(--space-7);
+  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.75rem);
+  border: 1px solid var(--result-border);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(90% 120% at 100% 0%, var(--result-bg-2) 0%, transparent 62%),
+    linear-gradient(160deg, var(--result-bg) 0%, var(--color-surface) 78%);
+  overflow: hidden;
 }
 
 .hero__eyebrow {
@@ -327,12 +532,14 @@ main.container {
   align-items: center;
   gap: 0.45rem;
   margin-bottom: 1rem;
-  padding: 0.3rem 0.8rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--result-border);
   border-radius: var(--radius-pill);
-  background: var(--color-accent-soft);
+  background: var(--color-surface);
   color: var(--brand-ink);
   font-size: 0.82rem;
   font-weight: 700;
+  box-shadow: var(--shadow-soft);
 }
 
 .hero h1 {
@@ -408,7 +615,7 @@ section#tools > h2 {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.25rem 1.25rem 1.35rem;
+  padding: 1.4rem 1.4rem 1.5rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -438,16 +645,26 @@ section#tools > h2 {
   opacity: 1;
 }
 
+/* The icon tile is the card's only strong colour. Cycling the tint across the
+   grid keeps a long list of calculators from reading as one grey block, while
+   the text stays on neutral ink. */
 .card__icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 11px;
-  background: var(--color-accent-soft);
-  font-size: 1.35rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  font-size: 1.4rem;
   line-height: 1;
 }
+
+.grid > .card:nth-child(6n + 2) .card__icon { background: color-mix(in oklab, var(--chart-2) 16%, var(--color-surface)); }
+.grid > .card:nth-child(6n + 3) .card__icon { background: color-mix(in oklab, var(--chart-3) 16%, var(--color-surface)); }
+.grid > .card:nth-child(6n + 4) .card__icon { background: color-mix(in oklab, var(--chart-4) 20%, var(--color-surface)); }
+.grid > .card:nth-child(6n + 5) .card__icon { background: color-mix(in oklab, var(--chart-5) 14%, var(--color-surface)); }
+.grid > .card:nth-child(6n + 6) .card__icon { background: color-mix(in oklab, var(--chart-6) 18%, var(--color-surface)); }
 
 .card h3 {
   margin: 0.15rem 0 0;
@@ -487,11 +704,14 @@ section#tools > h2 {
 
 .card__cta::after {
   content: " →";
-  transition: margin-left 0.18s var(--ease);
+  transition: margin-inline-start 0.18s var(--ease);
 }
 
+/* A right arrow means "onward" only in a left-to-right document. */
+[dir="rtl"] .card__cta::after { content: " ←"; }
+
 .card:hover .card__cta::after {
-  margin-left: 0.2rem;
+  margin-inline-start: 0.2rem;
 }
 
 .home-value,
@@ -571,7 +791,7 @@ section#tools > h2 {
 }
 
 .directory-topic__more a + a {
-  margin-left: 1rem;
+  margin-inline-start: 1rem;
 }
 
 /* Directory and hub listings: plain link lists on purpose. Their job is to give
@@ -662,7 +882,7 @@ section#tools > h2 {
   display: grid;
   gap: 0.35rem;
   margin: 0.65rem 0 1rem;
-  padding-left: 1.25rem;
+  padding-inline-start: 1.25rem;
 }
 
 .home-trust__advice {
@@ -804,7 +1024,7 @@ section#tools > h2 {
 
 .breadcrumb li:not(:last-child)::after {
   content: "/";
-  margin-left: 0.35rem;
+  margin-inline-start: 0.35rem;
   color: var(--color-border);
 }
 
@@ -897,6 +1117,10 @@ main h1 {
 }
 
 .faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
   cursor: pointer;
   padding: 0.95rem 1.1rem;
   font-weight: 650;
@@ -907,9 +1131,11 @@ main h1 {
   display: none;
 }
 
+/* Flex rather than float: float pins the marker to the physical right, which
+   is the wrong end in Arabic. */
 .faq-item summary::after {
   content: "+";
-  float: right;
+  flex: none;
   color: var(--brand);
   font-weight: 800;
   transition: transform 0.2s var(--ease);
@@ -957,6 +1183,10 @@ main h1 {
   color: var(--brand);
 }
 
+[dir="rtl"] .related-links a::after { content: "←"; }
+
+[dir="rtl"] .related-links a:hover { transform: translateX(-2px); }
+
 /* ── Prose (articles) ────────────────────────────────────────────────────── */
 
 .prose {
@@ -1002,7 +1232,7 @@ main h1 {
 
 .prose blockquote {
   padding: 0.5rem 0 0.5rem 1.1rem;
-  border-left: 4px solid var(--brand);
+  border-inline-start: 4px solid var(--brand);
   color: var(--color-muted);
 }
 
@@ -1067,6 +1297,1150 @@ a {
   overflow-wrap: anywhere;
 }
 
+/* ============================================================================
+   The calculator system
+
+   Seventeen calculators used to ship seventeen copies of this: a `.x-calc`
+   card, an `.x-grid` two-column split, `.x-inputs`, `.x-results`,
+   `.x-verdict`, `.x-note` — identical rules under different prefixes, so a
+   change to the shared idea had to be made seventeen times and never was.
+
+   One shell now, used by all of them:
+
+     .calc
+       .calc__controls   warm ground — everything the reader changes
+       .calc__results    cool ground — everything the site concludes
+
+   The temperature break between the two halves is the whole point. A result
+   should not look like another input.
+   ============================================================================ */
+
+.calc {
+  margin: var(--space-6) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+}
+
+.calc__head {
+  padding: clamp(1.15rem, 3.5vw, 1.75rem) clamp(1.15rem, 3.5vw, 1.9rem) 0;
+}
+
+.calc__head h2 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+  color: var(--brand-strong);
+}
+
+.calc__head p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-muted);
+}
+
+.calc__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+.calc__controls {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding: clamp(1.15rem, 3.5vw, 1.9rem);
+  background: var(--color-surface-2);
+}
+
+.calc__results {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding: clamp(1.15rem, 3.5vw, 1.9rem);
+  background: var(--result-bg);
+  border-top: 1px solid var(--result-border);
+}
+
+.calc__note {
+  margin: 0;
+  padding: 0.9rem clamp(1.15rem, 3.5vw, 1.9rem);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+@media (min-width: 880px) {
+  .calc__body {
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  }
+
+  .calc__results {
+    border-top: none;
+    border-inline-start: 1px solid var(--result-border);
+  }
+}
+
+/* ── Fields ─────────────────────────────────────────────────────────────────
+   A field is a label, a figure you can type, and a slider for the same value.
+   Typing suits someone who knows their number; dragging suits someone who is
+   exploring "what if". Both write to the same input, so neither is a
+   second-class path. */
+
+.calc-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.calc-field__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-weight: 650;
+  font-size: 0.94rem;
+}
+
+.calc-field__hint {
+  color: var(--color-faint);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.calc-field__row {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 0.62fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.calc-field__row--wide {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The unit lives inside the box, so the number and what it counts never get
+   separated by a line break on a narrow screen. */
+.calc-field__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.calc-field__box input {
+  padding-inline-end: 2.9rem;
+}
+
+.calc-field__unit {
+  position: absolute;
+  inset-inline-end: 0.7rem;
+  color: var(--color-faint);
+  font-size: 0.85rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.calc-field__prefix + input {
+  padding-inline-start: 1.7rem;
+}
+
+.calc-field__prefix {
+  position: absolute;
+  inset-inline-start: 0.75rem;
+  color: var(--color-faint);
+  font-size: 0.9rem;
+  font-weight: 650;
+  pointer-events: none;
+}
+
+.calc-field__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.15rem;
+  color: var(--color-faint);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Range ──────────────────────────────────────────────────────────────────
+   The filled portion of the track is a gradient driven by --fill, which the
+   shared script updates on input. Doing it with a gradient keeps one element
+   and works identically in both engines. */
+
+.calc-range {
+  --fill: 0%;
+  width: 100%;
+  height: 1.6rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.calc-range:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.calc-range::-webkit-slider-runnable-track {
+  height: 0.4rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    to right,
+    var(--brand-bright) var(--fill),
+    var(--track) var(--fill)
+  );
+}
+
+.calc-range::-moz-range-track {
+  height: 0.4rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    to right,
+    var(--brand-bright) var(--fill),
+    var(--track) var(--fill)
+  );
+}
+
+.calc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: -0.375rem;
+  border: 3px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.12s var(--ease);
+}
+
+.calc-range::-moz-range-thumb {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 3px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.12s var(--ease);
+}
+
+.calc-range:hover::-webkit-slider-thumb,
+.calc-range:active::-webkit-slider-thumb { transform: scale(1.12); }
+.calc-range:hover::-moz-range-thumb,
+.calc-range:active::-moz-range-thumb { transform: scale(1.12); }
+
+.calc-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+
+.calc-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+
+/* In RTL the slider's own direction flips, and so must the gradient. */
+[dir="rtl"] .calc-range::-webkit-slider-runnable-track,
+[dir="rtl"] .calc-range::-moz-range-track {
+  background: linear-gradient(
+    to left,
+    var(--brand-bright) var(--fill),
+    var(--track) var(--fill)
+  );
+}
+
+/* ── Segmented control ──────────────────────────────────────────────────────
+   For a choice among two to four named options — rent or buy, 15/20/30 years.
+   A radio group underneath, so it is keyboard- and screen-reader-native. */
+
+.calc-segmented {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.calc-segmented__option {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.calc-segmented__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.calc-segmented__option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: calc(var(--radius) - 4px);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-align: center;
+  white-space: nowrap;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.calc-segmented__option input:checked + span {
+  background: var(--brand);
+  color: oklch(99% 0 0);
+  box-shadow: var(--shadow-soft);
+}
+
+.calc-segmented__option input:focus-visible + span {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.calc-segmented__option input:not(:checked):hover + span {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+/* ── Verdict ────────────────────────────────────────────────────────────────
+   The one thing the reader came for. It is a hero figure, not a table row:
+   the answer should be readable from across the room, and the sentence under
+   it should say what the number means in words. */
+
+.calc-verdict {
+  display: grid;
+  gap: 0.3rem;
+  padding: clamp(1rem, 3vw, 1.35rem);
+  border: 1px solid var(--result-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.calc-verdict__label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.calc-verdict__figure {
+  margin: 0;
+  font-size: clamp(2.1rem, 7vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--brand-strong);
+}
+
+.calc-verdict__figure small {
+  font-size: 0.42em;
+  font-weight: 650;
+  color: var(--color-muted);
+  letter-spacing: -0.01em;
+}
+
+.calc-verdict__say {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.calc-verdict.is-positive .calc-verdict__figure { color: var(--positive-ink); }
+.calc-verdict.is-negative .calc-verdict__figure { color: var(--negative-ink); }
+
+/* Status never travels by colour alone. */
+.calc-verdict__say::before {
+  font-weight: 800;
+  margin-inline-end: 0.35rem;
+}
+
+.calc-verdict.is-positive .calc-verdict__say::before { content: "✓"; color: var(--positive-ink); }
+.calc-verdict.is-negative .calc-verdict__say::before { content: "✕"; color: var(--negative-ink); }
+.calc-verdict.is-neutral  .calc-verdict__say::before { content: "＝"; color: var(--color-muted); }
+
+/* ── Metrics ────────────────────────────────────────────────────────────── */
+
+.calc-metrics {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.calc-metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--result-border);
+}
+
+.calc-metrics > .calc-metric:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.calc-metric__label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.calc-metric__value {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 750;
+  text-align: end;
+}
+
+/* ── The values table ───────────────────────────────────────────────────────
+   Two slots in the chart palette sit below 3:1 on this surface. That obliges a
+   relief channel, so every chart carries its numbers as text as well. It is
+   not a fallback nobody sees: it is how the figures stay selectable, and how a
+   crawler reads them. */
+
+.calc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.calc-table caption {
+  margin-bottom: 0.4rem;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: start;
+}
+
+.calc-table th,
+.calc-table td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--result-border);
+  text-align: start;
+}
+
+.calc-table td:last-child,
+.calc-table th:last-child {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-table tr:last-child th,
+.calc-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* The swatch is what ties a table row to its mark in the chart. */
+.calc-table__swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-inline-end: 0.45rem;
+  border-radius: 3px;
+  vertical-align: baseline;
+}
+
+/* ── Motion ─────────────────────────────────────────────────────────────────
+   Results fade in rather than snapping, so a changed number reads as a
+   consequence of the drag. Kept to 0.25s: any longer and it feels laggy
+   while a slider is moving. */
+
+.calc__results [aria-live] > * {
+  animation: calc-fade 0.25s var(--ease-out) both;
+}
+
+@keyframes calc-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ============================================================================
+   Charts
+
+   Forms are picked by the job, not by what looks lively:
+
+     compare two options      → paired bars
+     part-to-whole breakdown  → horizontal stacked bar (donut only when the
+                                split is the headline and has ≤ 6 segments)
+     progress toward a
+       break-even threshold   → meter
+     crossover over time      → line
+
+   Every chart here is inline SVG or plain CSS with no library: this site ships
+   1,200+ static pages and a charting bundle on each of them would cost far more
+   in load time than the charts are worth. Every chart is also accompanied by
+   its numbers as text — see .calc-table.
+   ============================================================================ */
+
+.viz {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.viz__title {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.viz svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Legends carry identity alongside colour; the label is the encoding that
+   survives CVD, print and forced-colors. */
+.viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+}
+
+.viz-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-muted);
+}
+
+.viz-legend__swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ── Paired bars: option A against option B ────────────────────────────────
+   The dominant form on this site — nearly every calculator here is "is this
+   cheaper than that". Width is driven by --pct so the same markup animates. */
+
+.viz-bars {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+}
+
+.viz-bar__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.viz-bar__name {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.viz-bar__value {
+  font-size: 0.95rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz-bar__track {
+  height: 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+  overflow: hidden;
+}
+
+.viz-bar__fill {
+  --pct: 0%;
+  display: block;
+  width: var(--pct);
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--chart-1);
+  transition: width 0.35s var(--ease-out);
+}
+
+.viz-bar:nth-child(2) .viz-bar__fill { background: var(--chart-2); }
+.viz-bar:nth-child(3) .viz-bar__fill { background: var(--chart-3); }
+.viz-bar:nth-child(4) .viz-bar__fill { background: var(--chart-4); }
+
+/* The cheaper option is the answer, so it gets the emphasis and the rest
+   recede — the "highlight one, gray the rest" form. */
+.viz-bars.is-emphasis .viz-bar__fill { background: var(--color-border-strong); }
+.viz-bars.is-emphasis .viz-bar.is-best .viz-bar__fill { background: var(--chart-1); }
+.viz-bars.is-emphasis .viz-bar.is-best .viz-bar__name::after {
+  content: " ✓";
+  color: var(--positive-ink);
+  font-weight: 800;
+}
+
+/* ── Stacked bar: where the money goes ─────────────────────────────────────
+   A 2px surface gap between segments keeps adjacent fills from reading as one
+   block — the separation the palette's adjacency check assumes. */
+
+.viz-stack {
+  display: flex;
+  gap: 2px;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--track);
+}
+
+.viz-stack__seg {
+  --pct: 0%;
+  width: var(--pct);
+  min-width: 0;
+  transition: width 0.35s var(--ease-out);
+}
+
+.viz-stack__seg:nth-child(1) { background: var(--chart-1); }
+.viz-stack__seg:nth-child(2) { background: var(--chart-2); }
+.viz-stack__seg:nth-child(3) { background: var(--chart-3); }
+.viz-stack__seg:nth-child(4) { background: var(--chart-4); }
+.viz-stack__seg:nth-child(5) { background: var(--chart-5); }
+.viz-stack__seg:nth-child(6) { background: var(--chart-6); }
+
+/* ── Meter: one ratio against a threshold ──────────────────────────────────
+   "A pie of two slices" is the wrong form for this and it is what these pages
+   were reaching for. A meter says how far along you are in one glance. */
+
+.viz-meter {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.viz-meter__track {
+  position: relative;
+  height: 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+  overflow: hidden;
+}
+
+.viz-meter__fill {
+  --pct: 0%;
+  width: min(var(--pct), 100%);
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--chart-1);
+  transition: width 0.35s var(--ease-out);
+}
+
+.viz-meter.is-over .viz-meter__fill { background: var(--positive); }
+
+.viz-meter__scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-faint);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Line: the crossover year ──────────────────────────────────────────────
+   2px strokes, recessive grid, and the crossing point marked directly — that
+   intersection is the entire answer to "rent or buy". */
+
+.viz-line__grid line {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.viz-line__axis {
+  fill: var(--chart-axis);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz-line__series {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.viz-line__series--1 { stroke: var(--chart-1); }
+.viz-line__series--2 { stroke: var(--chart-2); }
+
+/* A 2px ring in the surface colour keeps the marker legible where the two
+   lines overlap. */
+.viz-line__marker {
+  fill: var(--color-surface);
+  stroke: var(--brand-strong);
+  stroke-width: 2.5;
+}
+
+.viz-line__marker-label {
+  fill: var(--color-text);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── Donut ─────────────────────────────────────────────────────────────────
+   Only where a part-to-whole split IS the headline and has ≤ 6 segments. The
+   centre carries the total, so the chart answers "how much" as well as
+   "of what". */
+
+.viz-donut {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.viz-donut__chart {
+  width: clamp(110px, 32vw, 150px);
+  flex: none;
+}
+
+.viz-donut__seg {
+  fill: none;
+  stroke-width: 14;
+  transition: stroke-dasharray 0.35s var(--ease-out);
+}
+
+.viz-donut__total {
+  fill: var(--color-text);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+}
+
+.viz-donut__caption {
+  fill: var(--color-muted);
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+@media (max-width: 420px) {
+  .viz-donut {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viz-bar__fill,
+  .viz-stack__seg,
+  .viz-meter__fill,
+  .viz-donut__seg {
+    transition: none;
+  }
+}
+
+/* Forced-colors: fills collapse to the system palette, so identity has to come
+   from the labels and the table, both of which are always present. */
+@media (forced-colors: active) {
+  .viz-bar__fill,
+  .viz-stack__seg,
+  .viz-meter__fill {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}
+
+/* ============================================================================
+   The .calculator-grid vocabulary
+
+   Roughly 78 built pages — the standalone /tools/ pages plus
+   LocalizedCoreCalculator and MembershipUpgradeCalculator — share this exact
+   markup: .calculator-grid wrapping an .input-panel and a .result-panel, with
+   .field, .eyebrow, .verdict and .metric inside. Each of them also carried its
+   own near-identical copy of the CSS in a scoped <style>, so the shared idea
+   could not be changed in one place. It is defined here once instead.
+
+   Same warm/cool split as .calc: the panel you edit is warm, the panel that
+   answers you is cool.
+   ============================================================================ */
+
+.calculator-grid {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-5) 0;
+}
+
+.input-panel,
+.result-panel,
+.explanation {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+  box-shadow: var(--shadow-soft);
+}
+
+.input-panel {
+  background: var(--color-surface-2);
+}
+
+.result-panel {
+  border-color: var(--result-border);
+  background: var(--result-bg);
+  box-shadow: var(--shadow-panel);
+}
+
+.explanation {
+  color: var(--color-muted);
+}
+
+.input-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 650;
+  font-size: 0.94rem;
+}
+
+/* ── The answer ────────────────────────────────────────────────────────────
+   .verdict holds a full sentence ("Buying wins by $92,792 over seven years"),
+   so it cannot be set at hero-figure size without turning into a wall. It gets
+   the next thing: brand ink, real weight, and a measure short enough to read
+   in one pass. The figures underneath carry the numerals. */
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.verdict {
+  margin: 0.35rem 0 var(--space-4);
+  max-width: 32ch;
+  font-size: clamp(1.35rem, 3.2vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+  color: var(--brand-strong);
+  text-wrap: balance;
+}
+
+.verdict.is-positive { color: var(--positive-ink); }
+.verdict.is-negative { color: var(--negative-ink); }
+
+.metric-grid {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--result-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.metric span {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.metric strong {
+  font-size: 1.12rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  text-align: end;
+  white-space: nowrap;
+}
+
+/* A result that changed should look like it changed. */
+.result-panel[aria-live] .verdict,
+.result-panel[aria-live] .metric strong {
+  transition: color 0.2s var(--ease);
+}
+
+@media (min-width: 860px) {
+  .calculator-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.85fr);
+    align-items: start;
+  }
+
+  .input-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The answer stays on screen while the inputs scroll past it. */
+  .result-panel {
+    position: sticky;
+    top: var(--space-4);
+  }
+}
+
+/* ── Remaining shared pieces of the .calculator-grid vocabulary ─────────── */
+
+.intro {
+  color: var(--color-muted);
+}
+
+.helper {
+  margin: 0.35rem 0 0;
+  color: var(--color-faint);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.metric small {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.metric small + small {
+  margin-top: 0.2rem;
+}
+
+/* A .metric holding sub-lines is a stacked block, not a single row. */
+.metric:has(small) {
+  display: block;
+}
+
+.metric:has(small) strong {
+  text-align: start;
+}
+
+/* ── .switch-options: the segmented control these pages already had ────────
+   The markup is a radio group wrapped in labels. It was rendering as plain
+   bordered boxes whose checked state pointed at an undefined token. Same pill
+   vocabulary as .calc-segmented and the nav, so a choice looks like a choice
+   everywhere on the site. */
+
+.switch-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.switch-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease),
+    color 0.15s var(--ease);
+}
+
+.switch-options label:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+
+.switch-options label:has(input:checked) {
+  border-color: transparent;
+  background: var(--brand);
+  color: oklch(99% 0 0);
+  box-shadow: var(--shadow-soft);
+}
+
+.switch-options label:has(input:checked) span {
+  color: oklch(99% 0 0 / 82%);
+}
+
+.switch-options label:has(input:focus-visible) {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.switch-options span {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+/* The site-wide 2.75rem minimum applies to a standalone checkbox; inside a pill
+   the label itself is the target, so the dot returns to its natural size. */
+.switch-options input {
+  width: 1.05rem;
+  height: 1.05rem;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  accent-color: var(--brand-bright);
+}
+
+/* The wrapper calcUi injects after an input that opted into a slider. */
+.calc-field__slider {
+  margin-top: 0.4rem;
+}
+
+.field .calc-field__slider + .helper {
+  margin-top: 0.5rem;
+}
+
+/* ── Legacy calculator markup, adopted into the .calc shell ────────────────
+   Fifteen components used a <header>, a <label> wrapping its own input, and a
+   <dl> of dt/dd pairs. Rather than rewrite that markup, the shell accepts it:
+   the classes were renamed onto .calc and these rules style what is inside. */
+
+.calc > header {
+  padding: clamp(1.15rem, 3.5vw, 1.75rem) clamp(1.15rem, 3.5vw, 1.9rem) 0;
+}
+
+.calc > header h2 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+  color: var(--brand-strong);
+}
+
+.calc > header p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-muted);
+}
+
+/* A label that wraps its own control. */
+.calc__controls label {
+  display: block;
+  font-weight: 650;
+  font-size: 0.94rem;
+}
+
+.calc__controls label > span {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.calc__controls fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.calc__controls legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-weight: 650;
+  font-size: 0.94rem;
+}
+
+@media (min-width: 880px) {
+  .calc__controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Two columns suit a run of short labelled inputs. Anything that is not one
+     of those — a fieldset with its own grid inside, a disclosure, a button row,
+     a heading — spans both, otherwise it gets wedged into half a column beside
+     an unrelated control. */
+  .calc__controls > fieldset,
+  .calc__controls > details,
+  .calc__controls > h2,
+  .calc__controls > h3,
+  .calc__controls > p,
+  .calc__controls > .growth-fields,
+  .calc__controls > .growth-actions,
+  .calc__controls > .input-grid,
+  .calc__controls > .switch-options,
+  .calc__controls > .calc-field--wide,
+  .calc__controls > .is-wide {
+    grid-column: 1 / -1;
+  }
+
+  .calc__results {
+    position: sticky;
+    top: var(--space-4);
+  }
+}
+
+/* The dt/dd figure list these components use for their outputs. */
+.calc__results dl {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.calc__results dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--result-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.calc__results dt {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.calc__results dd {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  text-align: end;
+  white-space: nowrap;
+}
+
+/* The verdict line inside a .calc result panel gets the same treatment as the
+   one in .result-panel — it is the same thing. */
+.calc__results > .verdict {
+  margin: 0 0 0.25rem;
+}
+
+/* ── Breaking the calculator out of the reading column ──────────────────────
+   On 152 pages the calculator sits inside <article class="prose">, which is
+   capped at a 72ch reading measure — about 640px. The split-screen layout needs
+   more than that, and a calculator is not prose: it is the tool the prose is
+   about. Since .prose is flush with the container's inline start, giving these
+   blocks the container's own width lets them span it exactly. */
+
+.prose .calc,
+.prose .calculator-grid,
+.prose .viz,
+.prose .decision-guide > .calc {
+  width: min(var(--container), calc(100vw - 2rem));
+  max-width: none;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 680px) {
@@ -1081,8 +2455,8 @@ a {
   }
 
   .language-switch {
-    padding-left: 0;
-    border-left: none;
+    padding-inline-start: 0;
+    border-inline-start: none;
   }
 }
 

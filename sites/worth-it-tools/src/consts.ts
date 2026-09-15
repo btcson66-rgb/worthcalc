@@ -54,6 +54,25 @@ export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
   ar: 'ar',
 };
 
+/**
+ * Writing direction for the <html dir> attribute.
+ *
+ * Arabic shipped 155 pages with no dir at all, so the browser applied bidi to
+ * the Arabic runs but laid the document out left-to-right: the breadcrumb sat
+ * on the wrong side, sentence-final punctuation landed at the wrong end of the
+ * line, and Latin tokens inside Arabic headings (CADR, kWh) collided with the
+ * text around them. `lang` alone does not set direction — this does.
+ */
+export const LOCALE_DIR: Record<ContentLocale, 'ltr' | 'rtl'> = {
+  en: 'ltr',
+  zh: 'ltr',
+  es: 'ltr',
+  fr: 'ltr',
+  de: 'ltr',
+  hi: 'ltr',
+  ar: 'rtl',
+};
+
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
 export const ADSENSE_CLIENT = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
 /** Google Search Console HTML-tag verification token (the `content` value). Empty = no meta tag. */

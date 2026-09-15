@@ -46,39 +46,39 @@ const related = [
       <div class="input-grid">
         <div class="field">
           <label for="home-price">Home price</label>
-          <input id="home-price" type="number" inputmode="decimal" min="0" step="5000" value="450000" />
+          <input id="home-price" type="number" inputmode="decimal" min="0" step="5000" value="450000" data-range data-range-min="50000" data-range-max="1500000" data-range-step="5000" />
         </div>
         <div class="field">
           <label for="down-payment">Down payment (%)</label>
-          <input id="down-payment" type="number" inputmode="decimal" min="0" max="100" step="1" value="20" />
+          <input id="down-payment" type="number" inputmode="decimal" min="0" max="100" step="1" value="20" data-range data-range-min="0" data-range-max="50" data-range-step="1" />
         </div>
         <div class="field">
           <label for="mortgage-rate">Mortgage rate (%)</label>
-          <input id="mortgage-rate" type="number" inputmode="decimal" min="0" step="0.1" value="6.5" />
+          <input id="mortgage-rate" type="number" inputmode="decimal" min="0" step="0.1" value="6.5" data-range data-range-min="0" data-range-max="12" data-range-step="0.1" />
         </div>
         <div class="field">
           <label for="loan-years">Loan years</label>
-          <input id="loan-years" type="number" inputmode="numeric" min="1" step="1" value="30" />
+          <input id="loan-years" type="number" inputmode="numeric" min="1" step="1" value="30" data-range data-range-min="5" data-range-max="40" data-range-step="1" />
         </div>
         <div class="field">
           <label for="monthly-rent">Monthly rent</label>
-          <input id="monthly-rent" type="number" inputmode="decimal" min="0" step="100" value="2500" />
+          <input id="monthly-rent" type="number" inputmode="decimal" min="0" step="100" value="2500" data-range data-range-min="300" data-range-max="8000" data-range-step="50" />
         </div>
         <div class="field">
           <label for="rent-growth">Rent growth per year (%)</label>
-          <input id="rent-growth" type="number" inputmode="decimal" step="0.1" value="3" />
+          <input id="rent-growth" type="number" inputmode="decimal" step="0.1" value="3" data-range data-range-min="0" data-range-max="10" data-range-step="0.1" />
         </div>
         <div class="field">
           <label for="appreciation">Home appreciation per year (%)</label>
-          <input id="appreciation" type="number" inputmode="decimal" step="0.1" value="3" />
+          <input id="appreciation" type="number" inputmode="decimal" step="0.1" value="3" data-range data-range-min="0" data-range-max="10" data-range-step="0.1" />
         </div>
         <div class="field">
           <label for="investment-return">Investment return on down payment (%)</label>
-          <input id="investment-return" type="number" inputmode="decimal" step="0.1" value="5" />
+          <input id="investment-return" type="number" inputmode="decimal" step="0.1" value="5" data-range data-range-min="0" data-range-max="12" data-range-step="0.1" />
         </div>
         <div class="field">
           <label for="holding-years">Holding years</label>
-          <input id="holding-years" type="number" inputmode="numeric" min="1" step="1" value="7" />
+          <input id="holding-years" type="number" inputmode="numeric" min="1" step="1" value="7" data-range data-range-min="1" data-range-max="30" data-range-step="1" />
         </div>
       </div>
     </section>
@@ -86,6 +86,10 @@ const related = [
     <section class="result-panel" aria-live="polite" aria-labelledby="rent-buy-result">
       <p class="eyebrow">Verdict</p>
       <p id="rent-buy-result" class="verdict">Enter your housing assumptions to compare.</p>
+      <div class="viz" id="rent-buy-chart" aria-hidden="true">
+        <p class="viz__title">Cumulative cost by year</p>
+        <div id="rent-buy-plot"></div>
+      </div>
       <div class="metric-grid">
         <p class="metric"><span>Net cost of buying</span><strong id="buy-cost">$0</strong></p>
         <p class="metric"><span>Net cost of renting</span><strong id="rent-cost">$0</strong></p>
@@ -107,93 +111,10 @@ const related = [
       Once you compare housing costs, include recurring household commitments in the same budget. For example, the <a href={localizedPath(locale, '/tools/costco-membership')}>Costco membership calculator</a> tests whether your realistic warehouse savings recover the annual fee instead of assuming every membership pays for itself.
     </p>
   </section>
-
-  <style>
-    .intro,
-    .explanation {
-      color: var(--color-muted);
-    }
-
-    .calculator-grid,
-    .input-grid,
-    .metric-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .input-panel,
-    .result-panel,
-    .explanation {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 650;
-    }
-
-    .result-panel {
-      position: sticky;
-      top: 1rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: var(--color-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .verdict {
-      margin: 0.25rem 0 1rem;
-      font-size: 1.35rem;
-      font-weight: 750;
-      line-height: 1.25;
-    }
-
-    .metric {
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-bg);
-      padding: 0.75rem;
-    }
-
-    .metric span,
-    .metric strong {
-      display: block;
-    }
-
-    .metric span {
-      color: var(--color-muted);
-      font-size: 0.9rem;
-    }
-
-    .metric strong {
-      font-size: 1.1rem;
-    }
-
-    @media (min-width: 760px) {
-      .calculator-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        align-items: start;
-      }
-
-      .input-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
   <script>
     import { compoundValue, formatCurrency, monthlyPayment, remainingLoanBalance } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';
+    import { renderLine } from '../../../lib/calcUi';
 
     const locale = 'en';
     const ownerCostRate = 0.015;
@@ -261,6 +182,24 @@ const related = [
           crossoverYear = year;
           break;
         }
+      }
+
+      const plot = document.getElementById('rent-buy-plot');
+      if (plot) {
+        const buySeries: number[] = [];
+        const rentSeries: number[] = [];
+        for (let year = 1; year <= years; year += 1) {
+          const yearCosts = modeledCosts(year);
+          buySeries.push(yearCosts.buy);
+          rentSeries.push(yearCosts.rent);
+        }
+        renderLine(
+          plot,
+          [{ label: 'Buying', points: buySeries }, { label: 'Renting', points: rentSeries }],
+          (i) => `Year ${i + 1}`,
+          (n) => formatCurrency(n, locale),
+          crossoverYear > 0 ? crossoverYear - 1 : -1,
+        );
       }
 
       buyCost.textContent = formatCurrency(costs.buy, locale);

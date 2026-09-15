@@ -52,7 +52,7 @@ const numberLocale = locale === 'zh'
 
 <section
   id="delivery-membership-calculator"
-  class="delivery-calc"
+  class="calc"
   data-delivery-membership-calculator
   data-locale={numberLocale}
   data-currency={currency}
@@ -68,8 +68,8 @@ const numberLocale = locale === 'zh'
     <p>{copy.intro}</p>
   </header>
 
-  <div class="delivery-calc-grid">
-    <div class="delivery-calc-inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       <label>
         <span>{copy.membershipFee}</span>
         <input data-field="membershipFee" type="number" inputmode="decimal" min="0" step="0.01" value={defaults.membershipFee} />
@@ -100,8 +100,8 @@ const numberLocale = locale === 'zh'
       </label>
     </div>
 
-    <div class="delivery-calc-results" aria-live="polite">
-      <p class="delivery-verdict" data-output="verdict"></p>
+    <div class="calc__results" aria-live="polite">
+      <p class="verdict" data-output="verdict"></p>
       <dl>
         <div><dt>{copy.plannedOrders}</dt><dd data-output="plannedOrders">—</dd></div>
         <div><dt>{copy.eligibleOrders}</dt><dd data-output="eligibleOrders">—</dd></div>
@@ -113,7 +113,7 @@ const numberLocale = locale === 'zh'
     </div>
   </div>
 
-  <p class="delivery-calc-note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
@@ -164,85 +164,3 @@ const numberLocale = locale === 'zh'
     calculate();
   }
 </script>
-
-<style>
-  .delivery-calc {
-    margin: 2rem 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-    padding: clamp(1rem, 3vw, 1.5rem);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .delivery-calc header p,
-  .delivery-calc-note {
-    color: var(--color-muted);
-  }
-
-  .delivery-calc-grid,
-  .delivery-calc-inputs,
-  .delivery-calc-results dl {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .delivery-calc-inputs label span {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 650;
-  }
-
-  .delivery-calc-results {
-    border-radius: var(--radius);
-    background: var(--color-bg);
-    padding: 1rem;
-  }
-
-  .delivery-verdict {
-    margin-top: 0;
-    font-size: 1.15rem;
-    font-weight: 750;
-  }
-
-  .delivery-calc-results dl,
-  .delivery-calc-results dd {
-    margin: 0;
-  }
-
-  .delivery-calc-results dl div {
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.75rem;
-  }
-
-  .delivery-calc-results dt {
-    color: var(--color-muted);
-    font-size: 0.9rem;
-  }
-
-  .delivery-calc-results dd {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .delivery-calc-note {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: 760px) {
-    .delivery-calc-grid {
-      grid-template-columns: minmax(0, 1.2fr) minmax(270px, 0.8fr);
-      align-items: start;
-    }
-
-    .delivery-calc-inputs {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .delivery-calc-results {
-      position: sticky;
-      top: 1rem;
-    }
-  }
-</style>

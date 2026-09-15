@@ -15,14 +15,14 @@ const { id, mode, locale, currency, defaults, fields, copy } = Astro.props;
 const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id={id} class="decision-math" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''}>
+<section id={id} class="calc" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
-  <div class="calc-grid">
-    <div class="inputs">
+  <div class="calc__body">
+    <div class="calc__controls">
       {fields.map((field) => <label><span>{field.label}</span><input data-field={field.key} type="number" min={field.min ?? 0} max={field.max} step={field.step ?? 1} value={defaults[field.key]} /></label>)}
     </div>
-    <div class="results" aria-live="polite">
+    <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
       <dl>
         <div><dt>{copy.output1}</dt><dd data-output="output1">—</dd></div>
@@ -31,7 +31,7 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
       </dl>
     </div>
   </div>
-  <p class="note">{copy.privacy}</p>
+  <p class="calc__note">{copy.privacy}</p>
 </section>
 
 <script>
@@ -113,20 +113,3 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
     calculate();
   }
 </script>
-
-<style>
-  .decision-math { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
-  .decision-math h2 { margin-top: 0; }
-  .calc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: 1.25rem; margin-top: 1.25rem; }
-  .inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
-  .inputs label span { display: block; min-height: 2.8rem; margin-bottom: .35rem; font-weight: 650; }
-  .inputs input { box-sizing: border-box; width: 100%; min-width: 0; padding: .7rem .75rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
-  .results { align-self: start; padding: 1rem; border-radius: .8rem; background: var(--color-bg); }
-  .results .verdict { margin-top: 0; font-weight: 800; }
-  .results dl { margin: 0; }
-  .results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--color-border); }
-  .results dt { font-weight: 600; }
-  .results dd { margin: 0; text-align: right; font-weight: 750; }
-  .note { margin-bottom: 0; color: var(--color-text-muted); font-size: .92rem; }
-  @media (max-width: 760px) { .decision-math { padding: 1rem; } .calc-grid, .inputs { grid-template-columns: 1fr; } .inputs label span { min-height: 0; } }
-</style>

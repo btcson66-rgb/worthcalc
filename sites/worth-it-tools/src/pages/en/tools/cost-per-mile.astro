@@ -3,8 +3,8 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'en';
-const title = 'Cost Per Mile Calculator: Total Car Cost, Not Just Fuel';
-const description = 'Calculate total car cost per mile or kilometer, including fuel or electricity, depreciation, maintenance, tires, insurance, fees, and finance interest.';
+const title = 'What Does Your Car Really Cost Per Mile?';
+const description = 'What does your car really cost per mile or kilometer? Compare fuel or electricity with depreciation, maintenance, tires, insurance, fees, and finance interest.';
 const faq = [
   {
     question: 'How do I calculate the total cost of driving per mile?',
@@ -40,12 +40,17 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
   <p class="intro">
-    Find the cost of driving one vehicle per mile or kilometer, including the costs that a fuel-only answer misses. Every value below is editable. The defaults are an illustration of the arithmetic, not current prices, typical costs, or a recommendation for any vehicle.
+    <strong>What does your car really cost per mile?</strong> Add annual energy and ownership costs, then divide by annual distance. Defaults are examples; replace them with your own vehicle data.
   </p>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="cost-inputs">
       <h2 id="cost-inputs">Vehicle and annual-cost inputs</h2>
+
+      <div class="field primary-field">
+        <label for="annual-distance">Annual distance driven (<span class="distance-plural">miles</span>)</label>
+        <input id="annual-distance" type="number" inputmode="decimal" min="0" step="100" value="12000" />
+      </div>
 
       <fieldset class="switcher">
         <legend>Measurement system</legend>
@@ -55,11 +60,6 @@ const related = [
         </div>
       </fieldset>
       <input id="unit-system" type="hidden" value="imperial" />
-
-      <div class="field primary-field">
-        <label for="annual-distance">Annual distance driven (<span class="distance-plural">miles</span>)</label>
-        <input id="annual-distance" type="number" inputmode="decimal" min="0" step="100" value="12000" />
-      </div>
 
       <fieldset class="switcher">
         <legend>Powertrain</legend>
@@ -137,6 +137,7 @@ const related = [
           <input id="years-kept" type="number" inputmode="decimal" min="0" step="0.5" value="6" />
         </div>
       </div>
+      <button id="calculate-button" type="button">Recalculate</button>
     </section>
 
     <section class="result-panel" aria-live="polite" aria-labelledby="headline-result">
@@ -175,6 +176,25 @@ const related = [
     </section>
   </div>
 
+  <section class="comparison-panel" aria-labelledby="ev-gas-comparison-heading">
+    <h2 id="ev-gas-comparison-heading">EV vs gas energy cost per mile</h2>
+    <p>Use the same distance unit and inspect both powertrains side by side. The table compares energy only; the calculator's headline still includes ownership costs.</p>
+    <div class="comparison-table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Input group</th><th scope="col">Gas</th><th scope="col">EV</th><th scope="col">Energy cost per <span id="comparison-distance">mile</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><span id="comparison-gas-price-label">Gas price</span></th><td id="comparison-gas-price">$0.00</td><td>—</td><td id="comparison-gas-rate">$0.000</td></tr>
+          <tr><th scope="row"><span id="comparison-electricity-price-label">Electricity price</span></th><td>—</td><td id="comparison-electricity-price">$0.00</td><td id="comparison-ev-rate">$0.000</td></tr>
+          <tr><th scope="row"><span id="comparison-mpg-label">MPG</span></th><td id="comparison-mpg">0</td><td>—</td><td>Gas row above</td></tr>
+          <tr><th scope="row"><span id="comparison-kwh-label">kWh/100 miles</span></th><td>—</td><td id="comparison-kwh">0</td><td>EV row above</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p id="comparison-difference" class="comparison-note">Enter both sets of energy inputs to compare the rates.</p>
+  </section>
+
   <section class="explanation" aria-labelledby="fuel-is-not-total">
     <h2 id="fuel-is-not-total">Why fuel cost per mile is not total cost per mile</h2>
     <p>
@@ -206,6 +226,22 @@ const related = [
   </section>
 
   <style>
+    :global(main.container) {
+      padding-top: 1rem;
+    }
+
+    :global(.breadcrumb) {
+      margin-bottom: 0.5rem;
+    }
+
+    :global(section.tool) {
+      margin-top: 0.5rem;
+    }
+
+    :global(main h1) {
+      margin-bottom: 0.5rem;
+    }
+
     .intro,
     .defaults-note,
     .explanation,
@@ -218,6 +254,46 @@ const related = [
     .metric-grid {
       display: grid;
       gap: 1rem;
+    }
+
+    .comparison-panel {
+      margin: 1rem 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .comparison-table-wrap {
+      overflow-x: auto;
+    }
+
+    .comparison-panel table {
+      width: 100%;
+      min-width: 38rem;
+      border-collapse: collapse;
+    }
+
+    .comparison-panel th,
+    .comparison-panel td {
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .comparison-panel th {
+      font-weight: 650;
+    }
+
+    .comparison-note {
+      margin-bottom: 0;
+      color: var(--color-muted);
+    }
+
+    .intro {
+      margin: 0 0 0.75rem;
     }
 
     .input-panel,
@@ -408,6 +484,7 @@ const related = [
     const inputs = ids.map((id) => byId<HTMLInputElement>(id));
     const unitField = byId<HTMLInputElement>('unit-system');
     const powertrainField = byId<HTMLInputElement>('powertrain');
+    const calculateButton = byId<HTMLButtonElement>('calculate-button');
     const unitRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="unit-choice"]'));
     const powertrainRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="powertrain-choice"]'));
 
@@ -457,8 +534,8 @@ const related = [
       }).format(Number.isFinite(amount) ? amount : 0);
     }
 
-    function energyRate(): number {
-      if (currentPowertrain() === 'electric') {
+    function energyRateFor(powertrain: Powertrain): number {
+      if (powertrain === 'electric') {
         return (positive('energy-use') * positive('electricity-price')) / 100;
       }
       const efficiency = positive('fuel-efficiency');
@@ -466,6 +543,10 @@ const related = [
       return currentUnit() === 'imperial'
         ? positive('fuel-price') / efficiency
         : (efficiency * positive('fuel-price')) / 100;
+    }
+
+    function energyRate(): number {
+      return energyRateFor(currentPowertrain());
     }
 
     function applyPowertrain(): void {
@@ -519,6 +600,8 @@ const related = [
       const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
       const distancePlural = unit === 'imperial' ? 'miles' : 'kilometers';
       const rate = energyRate();
+      const gasRate = energyRateFor('fuel');
+      const evRate = energyRateFor('electric');
       const years = positive('years-kept');
       const depreciableAmount = Math.max(0, positive('purchase-price') - positive('resale-value'));
       const depreciation = years > 0 ? depreciableAmount / years : 0;
@@ -562,12 +645,31 @@ const related = [
       if (powertrain === 'fuel' && positive('fuel-efficiency') <= 0) messages.push('Fuel economy must be above zero to calculate fuel cost.');
       warning.hidden = messages.length === 0;
       warning.textContent = messages.join(' ');
+
+      byId<HTMLElement>('comparison-distance').textContent = distanceName;
+      byId<HTMLElement>('comparison-gas-price').textContent = `${formatMoney(positive('fuel-price'), 3)} / ${unit === 'imperial' ? 'gallon' : 'liter'}`;
+      byId<HTMLElement>('comparison-electricity-price').textContent = `${formatMoney(positive('electricity-price'), 3)} / kWh`;
+      byId<HTMLElement>('comparison-mpg').textContent = unit === 'imperial'
+        ? `${formatNumber(positive('fuel-efficiency'), 1)} MPG`
+        : `${formatNumber(positive('fuel-efficiency'), 1)} L/100 km`;
+      byId<HTMLElement>('comparison-kwh').textContent = `${formatNumber(positive('energy-use'), 1)} kWh/100 ${distancePlural}`;
+      byId<HTMLElement>('comparison-gas-rate').textContent = `${formatMoney(gasRate, 3)} / ${distanceName}`;
+      byId<HTMLElement>('comparison-ev-rate').textContent = `${formatMoney(evRate, 3)} / ${distanceName}`;
+      byId<HTMLElement>('comparison-gas-price-label').textContent = unit === 'imperial' ? 'Gas price' : 'Fuel price';
+      byId<HTMLElement>('comparison-electricity-price-label').textContent = 'Electricity price';
+      byId<HTMLElement>('comparison-mpg-label').textContent = unit === 'imperial' ? 'MPG' : 'Fuel use';
+      byId<HTMLElement>('comparison-kwh-label').textContent = `kWh/100 ${distancePlural}`;
+      const comparison = byId<HTMLElement>('comparison-difference');
+      comparison.textContent = gasRate === evRate
+        ? `Gas and EV energy rates are both ${formatMoney(gasRate, 3)} per ${distanceName}.`
+        : `${evRate < gasRate ? 'EV' : 'Gas'} has the lower energy rate here: ${formatMoney(Math.min(gasRate, evRate), 3)} versus ${formatMoney(Math.max(gasRate, evRate), 3)} per ${distanceName}.`;
     }
 
     inputs.forEach((input) => {
       bindPersistentField(input, `cost-per-mile:v1:${input.id}`);
       input.addEventListener('input', update);
     });
+    calculateButton.addEventListener('click', update);
 
     unitField.value = currentUnit();
     powertrainField.value = currentPowertrain();

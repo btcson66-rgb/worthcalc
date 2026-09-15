@@ -7,8 +7,8 @@ import { localizedPath } from '../../../i18n/utils';
 const locale = 'en';
 const decisionGuide = commuteGuides.en;
 if (!decisionGuide) throw new Error('Missing English commute guide');
-const title = 'Commute Cost Calculator: Per Mile, Monthly and Annual';
-const description = 'Calculate commute cost per mile, month, and year for a car, EV, transit, rideshare, or bike. Compare fuel, parking, tolls, and optional time value.';
+const title = 'How Much Does Your Commute Cost Per Mile and Per Year?';
+const description = 'How much does your commute really cost per mile, per day, per month, and per year? Compare fuel, parking, tolls, transit, EVs, and time.';
 const faq = [
   {
     question: 'What commute modes can I compare?',
@@ -45,21 +45,12 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
   <p class="intro">
-    Compare the cash and time cost of driving, an EV, transit, rideshare, or biking. The editable defaults are a worked example, not current fuel prices or a claim about what your vehicle costs. Replace them with your commute, receipts, vehicle records, and local prices.
+    <strong>Direct answer: 15 mi one way × 20 days, 25 MPG, and EIA $4.157/gal (week of 2026-09-07) = about $99.77/month fuel before parking or tolls.</strong> Formula: round-trip miles × days × price ÷ MPG. <a href="https://www.eia.gov/dnav/pet/pet_pri_gnd_a_epm0_pte_dpgal_w.htm">EIA source</a>, checked 2026-09-15; replace it with your data.
   </p>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="commute-inputs">
       <h2 id="commute-inputs">Commute inputs</h2>
-
-      <fieldset class="switcher">
-        <legend>Measurement system</legend>
-        <div class="switch-options">
-          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" checked /> Imperial <span>(miles, gallons)</span></label>
-          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" /> Metric <span>(kilometers, liters)</span></label>
-        </div>
-      </fieldset>
-      <input id="unit-system" type="hidden" value="imperial" />
 
       <div class="input-grid core-inputs">
         <div class="field">
@@ -70,6 +61,21 @@ const related = [
           <label for="workdays">Workdays per month</label>
           <input id="workdays" type="number" inputmode="numeric" min="0" step="1" value="20" />
         </div>
+      </div>
+
+      <fieldset class="switcher">
+        <legend>Measurement system</legend>
+        <div class="switch-options">
+          <label><input id="unit-imperial" type="radio" name="unit-choice" value="imperial" checked /> Imperial <span>(miles, gallons)</span></label>
+          <label><input id="unit-metric" type="radio" name="unit-choice" value="metric" /> Metric <span>(kilometers, liters)</span></label>
+        </div>
+      </fieldset>
+      <input id="unit-system" type="hidden" value="imperial" />
+
+      <div class="field rto-field">
+        <label for="rto-days">Office days per week (RTO scenario)</label>
+        <input id="rto-days" type="number" inputmode="numeric" min="0" max="7" step="1" value="5" />
+        <p class="helper">Compare a fully remote baseline; this uses the car or EV model and the time value you enter.</p>
       </div>
 
       <fieldset class="switcher car-method">
@@ -163,6 +169,7 @@ const related = [
           <input id="bike-minutes" type="number" inputmode="numeric" min="0" step="1" value="50" />
         </div>
       </div>
+      <button id="calculate-button" type="button">Recalculate</button>
     </section>
 
     <section class="result-panel" aria-live="polite" aria-labelledby="commute-result">
@@ -174,21 +181,26 @@ const related = [
         <p class="metric cheapest-metric"><span>Cheapest mode</span><strong id="cheapest">None</strong></p>
         <p class="metric">
           <span>Car or EV</span><strong id="car-total">$0 monthly</strong>
-          <small id="car-year">$0 yearly</small><small id="car-rate">$0.00 per mile</small>
+          <small id="car-trip">$0.00 per trip</small><small id="car-day">$0.00 per day</small><small id="car-year">$0 yearly</small><small id="car-rate">$0.00 per mile</small>
         </p>
         <p class="metric">
           <span>Transit</span><strong id="transit-total">$0 monthly</strong>
-          <small id="transit-year">$0 yearly</small><small id="transit-rate">$0.00 per mile</small>
+          <small id="transit-trip">$0.00 per trip</small><small id="transit-day">$0.00 per day</small><small id="transit-year">$0 yearly</small><small id="transit-rate">$0.00 per mile</small>
         </p>
         <p class="metric">
           <span>Rideshare</span><strong id="rideshare-total">$0 monthly</strong>
-          <small id="rideshare-year">$0 yearly</small><small id="rideshare-rate">$0.00 per mile</small>
+          <small id="rideshare-trip">$0.00 per trip</small><small id="rideshare-day">$0.00 per day</small><small id="rideshare-year">$0 yearly</small><small id="rideshare-rate">$0.00 per mile</small>
         </p>
         <p class="metric">
           <span>Bike</span><strong id="bike-total">$0 monthly</strong>
-          <small id="bike-year">$0 yearly</small><small id="bike-rate">$0.00 per mile</small>
+          <small id="bike-trip">$0.00 per trip</small><small id="bike-day">$0.00 per day</small><small id="bike-year">$0 yearly</small><small id="bike-rate">$0.00 per mile</small>
         </p>
       </div>
+      <section class="rto-summary" aria-labelledby="rto-heading">
+        <h2 id="rto-heading">What would going back to the office add?</h2>
+        <p>At <span id="rto-days-value">5</span> office days per week, the modeled car or EV cost above a fully remote baseline is:</p>
+        <strong id="rto-annual-extra">$0 per year</strong>
+      </section>
     </section>
   </div>
 
@@ -203,7 +215,7 @@ const related = [
 
     <h2>What a year of commuting adds up to</h2>
     <p>
-      The annual result is twelve times the monthly calculation. The largest movers are usually round-trip distance, days traveled, the selected per-distance rate, parking, tolls, fares, and commute time when you choose to value it. For hybrid or seasonal work, set workdays per month to a representative average. This keeps the annual number tied to your schedule instead of pretending everyone commutes the same number of days.
+      The annual result is twelve times the monthly calculation. The largest movers are usually round-trip distance, days traveled, the selected per-distance rate, parking, tolls, fares, and commute time when you choose to value it. For hybrid or seasonal work, set workdays per month to a representative average. This keeps the annual number tied to your schedule instead of pretending everyone commutes the same number of days. For the narrower question of one vehicle's ownership cost per mile, use the <a href={localizedPath(locale, '/tools/cost-per-mile')}>cost-per-mile calculator</a>.
     </p>
 
     <h2>How the EV comparison works</h2>
@@ -223,6 +235,22 @@ const related = [
   <DecisionGuide content={decisionGuide} />
 
   <style>
+    :global(main.container) {
+      padding-top: 1rem;
+    }
+
+    :global(.breadcrumb) {
+      margin-bottom: 0.5rem;
+    }
+
+    :global(section.tool) {
+      margin-top: 0.5rem;
+    }
+
+    :global(main h1) {
+      margin-bottom: 0.5rem;
+    }
+
     .intro,
     .explanation,
     .helper,
@@ -231,11 +259,36 @@ const related = [
       color: var(--color-muted);
     }
 
+    .intro {
+      margin: 0 0 0.75rem;
+    }
+
     .calculator-grid,
     .input-grid,
     .metric-grid {
       display: grid;
       gap: 1rem;
+    }
+
+    .rto-summary {
+      margin-top: 1rem;
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+      padding: 0.9rem;
+    }
+
+    .rto-summary h2,
+    .rto-summary p {
+      margin-top: 0;
+    }
+
+    .rto-summary p {
+      margin-bottom: 0.45rem;
+    }
+
+    .rto-summary strong {
+      font-size: 1.2rem;
     }
 
     .input-panel,
@@ -246,6 +299,11 @@ const related = [
       background: var(--color-surface);
       padding: 1rem;
       box-shadow: var(--shadow-soft);
+    }
+
+    .input-panel > h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
     }
 
     .switcher {
@@ -410,6 +468,18 @@ const related = [
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { bindPersistentField } from '../../../lib/storage';
+    import {
+      IMPERIAL_EFFICIENCY_CONVERSION,
+      KILOMETERS_PER_MILE,
+      LITERS_PER_GALLON,
+      buildModeCost,
+      calculateRtoAnnual,
+      deriveDrivingRate,
+      finiteNonNegative,
+      safeAdd,
+      safeDivide,
+      safeMultiply,
+    } from '../../../lib/commuteMath.mjs';
 
     type UnitSystem = 'imperial' | 'metric';
     type CarMode = 'direct' | 'fuel' | 'ev';
@@ -419,17 +489,20 @@ const related = [
       direct: number;
       time: number;
       total: number;
+      perTrip: number;
+      perDay: number;
+      perMonth: number;
+      perYear: number;
+      perDistance: number;
     }
 
     const locale = 'en';
-    const kilometersPerMile = 1.609344;
-    const litersPerGallon = 3.785411784;
-    const efficiencyConversion = 235.214583;
     const ids = [
       'unit-system',
       'car-mode',
       'distance',
       'workdays',
+      'rto-days',
       'car-cost',
       'fuel-efficiency',
       'fuel-price',
@@ -451,12 +524,15 @@ const related = [
     const carModeField = byId<HTMLInputElement>('car-mode');
     const unitRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="unit-choice"]'));
     const carModeRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="car-mode-choice"]'));
+    const calculateButton = byId<HTMLButtonElement>('calculate-button');
     const verdict = byId<HTMLElement>('commute-result');
     const cheapest = byId<HTMLElement>('cheapest');
     const hourCost = byId<HTMLElement>('hour-cost');
     const derivedRate = byId<HTMLElement>('derived-rate');
     const derivedDetail = byId<HTMLElement>('derived-detail');
     const fuelWarning = byId<HTMLElement>('fuel-warning');
+    const rtoDaysValue = byId<HTMLElement>('rto-days-value');
+    const rtoAnnualExtra = byId<HTMLElement>('rto-annual-extra');
 
     function byId<T extends HTMLElement>(id: string): T {
       const element = document.getElementById(id);
@@ -465,12 +541,7 @@ const related = [
     }
 
     function value(id: string): number {
-      const parsed = Number(byId<HTMLInputElement>(id).value);
-      return Number.isFinite(parsed) ? parsed : 0;
-    }
-
-    function positive(id: string): number {
-      return Math.max(0, value(id));
+      return finiteNonNegative(Number(byId<HTMLInputElement>(id).value));
     }
 
     function currentUnit(): UnitSystem {
@@ -483,7 +554,8 @@ const related = [
 
     function setValue(id: string, nextValue: number, fractionDigits = 2): void {
       const input = byId<HTMLInputElement>(id);
-      const formatted = Number.isFinite(nextValue) ? nextValue.toFixed(fractionDigits).replace(/\.?0+$/, '') : '0';
+      const safeValue = finiteNonNegative(nextValue);
+      const formatted = safeValue.toFixed(fractionDigits).replace(/\.?0+$/, '');
       input.value = formatted || '0';
       input.dispatchEvent(new Event('input'));
     }
@@ -495,22 +567,6 @@ const related = [
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(Number.isFinite(amount) ? amount : 0);
-    }
-
-    function timeCost(minutesOneWay: number, workdays: number, wage: number): number {
-      return wage > 0 ? (Math.max(0, minutesOneWay) * 2 * workdays * wage) / 60 : 0;
-    }
-
-    function drivingRate(unit: UnitSystem, mode: CarMode): number {
-      if (mode === 'direct') return positive('car-cost');
-      if (mode === 'fuel') {
-        const efficiency = positive('fuel-efficiency');
-        if (efficiency <= 0) return 0;
-        return unit === 'imperial'
-          ? positive('fuel-price') / efficiency
-          : (efficiency * positive('fuel-price')) / 100;
-      }
-      return (positive('ev-efficiency') * positive('electricity-price')) / 100;
     }
 
     function applyMode(): void {
@@ -549,67 +605,82 @@ const related = [
     function convertUnit(from: UnitSystem, to: UnitSystem): void {
       if (from === to) return;
       const toMetric = to === 'metric';
-      setValue('distance', toMetric ? positive('distance') * kilometersPerMile : positive('distance') / kilometersPerMile, 2);
-      setValue('car-cost', toMetric ? positive('car-cost') / kilometersPerMile : positive('car-cost') * kilometersPerMile, 3);
-      const fuelEfficiency = positive('fuel-efficiency');
-      setValue('fuel-efficiency', fuelEfficiency > 0 ? efficiencyConversion / fuelEfficiency : 0, 2);
-      setValue('fuel-price', toMetric ? positive('fuel-price') / litersPerGallon : positive('fuel-price') * litersPerGallon, 3);
-      setValue('ev-efficiency', toMetric ? positive('ev-efficiency') / kilometersPerMile : positive('ev-efficiency') * kilometersPerMile, 2);
+      setValue('distance', toMetric ? value('distance') * KILOMETERS_PER_MILE : safeDivide(value('distance'), KILOMETERS_PER_MILE), 2);
+      setValue('car-cost', toMetric ? safeDivide(value('car-cost'), KILOMETERS_PER_MILE) : value('car-cost') * KILOMETERS_PER_MILE, 3);
+      const fuelEfficiency = value('fuel-efficiency');
+      setValue('fuel-efficiency', fuelEfficiency > 0 ? safeDivide(IMPERIAL_EFFICIENCY_CONVERSION, fuelEfficiency) : 0, 2);
+      setValue('fuel-price', toMetric ? safeDivide(value('fuel-price'), LITERS_PER_GALLON) : value('fuel-price') * LITERS_PER_GALLON, 3);
+      setValue('ev-efficiency', toMetric ? safeDivide(value('ev-efficiency'), KILOMETERS_PER_MILE) : value('ev-efficiency') * KILOMETERS_PER_MILE, 2);
     }
 
-    function renderMode(mode: ModeCost, prefix: string, monthlyDistance: number, unit: UnitSystem): void {
+    function renderMode(mode: ModeCost, prefix: string, unit: UnitSystem): void {
       const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
-      byId<HTMLElement>(`${prefix}-total`).textContent = `${formatCurrency(mode.total, locale)} monthly`;
-      byId<HTMLElement>(`${prefix}-year`).textContent = `${formatCurrency(mode.total * 12, locale)} yearly`;
-      byId<HTMLElement>(`${prefix}-rate`).textContent = `${formatRate(monthlyDistance > 0 ? mode.total / monthlyDistance : 0)} per ${distanceName}`;
+      byId<HTMLElement>(`${prefix}-total`).textContent = `${formatCurrency(mode.perMonth, locale)} monthly`;
+      byId<HTMLElement>(`${prefix}-trip`).textContent = `${formatCurrency(mode.perTrip, locale)} per trip`;
+      byId<HTMLElement>(`${prefix}-day`).textContent = `${formatCurrency(mode.perDay, locale)} per day`;
+      byId<HTMLElement>(`${prefix}-year`).textContent = `${formatCurrency(mode.perYear, locale)} yearly`;
+      byId<HTMLElement>(`${prefix}-rate`).textContent = `${formatRate(mode.perDistance)} per ${distanceName}`;
     }
 
     function update(): void {
       const unit = currentUnit();
       const carMode = currentCarMode();
-      const distance = positive('distance');
-      const workdays = positive('workdays');
-      const wage = positive('hourly-wage');
-      const monthlyDistance = distance * 2 * workdays;
-      const rate = drivingRate(unit, carMode);
-      const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
+      const distance = value('distance');
+      const workdays = value('workdays');
+      const wage = value('hourly-wage');
+      const rate = deriveDrivingRate({
+        unit,
+        mode: carMode,
+        directCost: value('car-cost'),
+        fuelEfficiency: value('fuel-efficiency'),
+        fuelPrice: value('fuel-price'),
+        evEfficiency: value('ev-efficiency'),
+        electricityPrice: value('electricity-price'),
+      });
       const modes: ModeCost[] = [
-        {
+        buildModeCost({
           name: carMode === 'ev' ? 'EV' : 'Car',
-          direct: monthlyDistance * rate + positive('parking') + positive('tolls'),
-          time: timeCost(value('car-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          distanceOneWay: distance,
+          workdays,
+          rate,
+          monthlyFixed: safeAdd(value('parking'), value('tolls')),
+          minutesOneWay: value('car-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: 'Transit',
-          direct: positive('transit-pass'),
-          time: timeCost(value('transit-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          workdays,
+          monthlyPass: value('transit-pass'),
+          minutesOneWay: value('transit-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: 'Rideshare',
-          direct: positive('rideshare') * 2 * workdays,
-          time: timeCost(value('rideshare-minutes'), workdays, wage),
-          total: 0,
-        },
-        {
+          workdays,
+          oneWayFare: value('rideshare'),
+          minutesOneWay: value('rideshare-minutes'),
+          wage,
+        }),
+        buildModeCost({
           name: 'Bike',
-          direct: positive('bike-cost'),
-          time: timeCost(value('bike-minutes'), workdays, wage),
-          total: 0,
-        },
-      ].map((mode) => ({ ...mode, total: mode.direct + mode.time }));
+          workdays,
+          monthlyFixed: value('bike-cost'),
+          minutesOneWay: value('bike-minutes'),
+          wage,
+        }),
+      ];
       const winner = modes.reduce((best, mode) => (mode.total < best.total ? mode : best));
       const highest = modes.reduce((max, mode) => Math.max(max, mode.total), 0);
+      const distanceName = unit === 'imperial' ? 'mile' : 'kilometer';
 
       derivedRate.textContent = `${formatRate(rate)} per ${distanceName}`;
       if (carMode === 'fuel') {
         derivedDetail.textContent = unit === 'imperial'
-          ? `${formatRate(positive('fuel-price'))} per gallon ÷ ${positive('fuel-efficiency').toFixed(1)} MPG.`
-          : `${positive('fuel-efficiency').toFixed(1)} L/100 km × ${formatRate(positive('fuel-price'))} per liter ÷ 100.`;
+          ? `${formatRate(value('fuel-price'))} per gallon ÷ ${value('fuel-efficiency').toFixed(1)} MPG.`
+          : `${value('fuel-efficiency').toFixed(1)} L/100 km × ${formatRate(value('fuel-price'))} per liter ÷ 100.`;
         fuelWarning.textContent = 'Fuel only: maintenance, tires, depreciation, insurance, financing, and registration are excluded.';
       } else if (carMode === 'ev') {
-        derivedDetail.textContent = `${positive('ev-efficiency').toFixed(1)} kWh/100 ${unit === 'imperial' ? 'miles' : 'kilometers'} × ${formatRate(positive('electricity-price'))} per kWh ÷ 100.`;
+        derivedDetail.textContent = `${value('ev-efficiency').toFixed(1)} kWh/100 ${unit === 'imperial' ? 'miles' : 'kilometers'} × ${formatRate(value('electricity-price'))} per kWh ÷ 100.`;
         fuelWarning.textContent = 'Electricity only: ownership, charger, maintenance, insurance, and depreciation costs are excluded.';
       } else {
         derivedDetail.textContent = 'Direct rate entered by you; include only the costs you intend to compare.';
@@ -617,19 +688,32 @@ const related = [
       }
 
       cheapest.textContent = `${winner.name} (${formatCurrency(winner.total, locale)}/mo)`;
-      renderMode(modes[0], 'car', monthlyDistance, unit);
-      renderMode(modes[1], 'transit', monthlyDistance, unit);
-      renderMode(modes[2], 'rideshare', monthlyDistance, unit);
-      renderMode(modes[3], 'bike', monthlyDistance, unit);
+      renderMode(modes[0], 'car', unit);
+      renderMode(modes[1], 'transit', unit);
+      renderMode(modes[2], 'rideshare', unit);
+      renderMode(modes[3], 'bike', unit);
       verdict.textContent = `${winner.name} is cheapest at ${formatCurrency(winner.total, locale)} per month, saving up to ${formatCurrency(highest - winner.total, locale)} versus the priciest mode.`;
-      const roundTripMinutes = positive('car-minutes') * 2;
-      hourCost.textContent = `At ${formatCurrency(wage, locale)} per hour, one hour of commuting has ${formatCurrency(wage, locale)} of modeled time cost; your ${roundTripMinutes.toFixed(0)}-minute car or EV round trip is ${formatCurrency((roundTripMinutes * wage) / 60, locale)} in time.`;
+      const roundTripMinutes = safeMultiply(value('car-minutes'), 2);
+      hourCost.textContent = `At ${formatCurrency(wage, locale)} per hour, one hour of commuting has ${formatCurrency(wage, locale)} of modeled time cost; your ${roundTripMinutes.toFixed(0)}-minute car or EV round trip is ${formatCurrency(safeDivide(safeMultiply(roundTripMinutes, wage), 60), locale)} in time.`;
+
+      const rtoDays = Math.min(value('rto-days'), 7);
+      rtoDaysValue.textContent = rtoDays.toFixed(0);
+      rtoAnnualExtra.textContent = `${formatCurrency(calculateRtoAnnual({
+        weeklyOfficeDays: rtoDays,
+        distanceOneWay: distance,
+        rate,
+        monthlyFixed: safeAdd(value('parking'), value('tolls')),
+        minutesOneWay: value('car-minutes'),
+        wage,
+        baselineWorkdaysPerMonth: workdays || 20,
+      }), locale)} per year`;
     }
 
     inputs.forEach((input) => {
-      bindPersistentField(input, `commute-cost:v2:${input.id}`);
+      bindPersistentField(input, `commute-cost:v3:${input.id}`);
       input.addEventListener('input', update);
     });
+    calculateButton.addEventListener('click', update);
 
     unitField.value = currentUnit();
     carModeField.value = currentCarMode();

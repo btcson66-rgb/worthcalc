@@ -93,6 +93,11 @@ const crumbs = [
   <section class="directory-intro">
     <h1>{copy.title}</h1>
     <p class="section-lead">{copy.lead}</p>
+    {locale === 'zh' && (
+      <p>
+        如果你正在評估房貸或負債壓力，可先看<a href={localizedPath(locale, '/tools/dti-calculator')}>負債收入比（DTI）計算機</a>，再用<a href={localizedPath(locale, '/tools/home-affordability')}>買房負擔能力計算機</a>把收入、月付與住房預算放在同一個決策脈絡裡。
+      </p>
+    )}
   </section>
 
   {TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0).map((topic) => (

@@ -1,0 +1,101 @@
+---
+const taipowerSource = 'https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true';
+const uPowerSource = 'https://www.u-power.com.tw/qa/charge.html';
+---
+
+<section class="tw-charging-calculator" data-tw-charging-calculator data-ev-charging-cost-calculator aria-labelledby="tw-charging-heading">
+  <h2 id="tw-charging-heading">家用充電 vs 公共充電：每月電費與回本比較</h2>
+  <p>輸入你的車輛耗電、每月里程與實際費率。結果只算充電能源；停車、占位、會員月費、稅費與家充工程以外的一次性支出，請按你的帳單另外調整。</p>
+
+  <div class="tw-charging-grid">
+    <div class="tw-charging-inputs">
+      <label><span>車輛耗電（kWh／100km）</span><input id="tw-ev-efficiency" type="number" inputmode="decimal" min="0" step="0.1" value="16.5" /></label>
+      <label><span>每月行駛公里</span><input id="tw-monthly-km" type="number" inputmode="decimal" min="0" step="50" value="1000" /></label>
+      <label><span>家用電價方案起點</span>
+        <select id="tw-home-plan">
+          <option value="non-time-summer">台電非時間：夏月 331–500 度邊際級距</option>
+          <option value="non-time-non-summer">台電非時間：非夏月 331–500 度邊際級距</option>
+          <option value="tou-peak-summer">台電簡易型時間：夏月尖峰</option>
+          <option value="tou-offpeak-summer">台電簡易型時間：夏月離峰</option>
+          <option value="tou-peak-non-summer">台電簡易型時間：非夏月尖峰</option>
+          <option value="tou-offpeak-non-summer">台電簡易型時間：非夏月離峰</option>
+          <option value="custom">自訂／直接填入帳單單價</option>
+        </select>
+      </label>
+      <label><span>家用每度電價（NT$／kWh）</span><input id="tw-home-rate" type="number" inputmode="decimal" min="0" step="0.01" value="3.80" /></label>
+      <label><span>公共充電每度單價（NT$／kWh）</span><input id="tw-public-rate" type="number" inputmode="decimal" min="0" step="0.1" value="6.9" /></label>
+      <label><span>家充設備／工程一次性成本（NT$，可填 0）</span><input id="tw-equipment-cost" type="number" inputmode="decimal" min="0" step="1000" value="30000" /></label>
+      <p class="tw-source-note">家用起點採台電現行簡要電價表：2025-10-01 起實施；夏月為 6/1–9/30。非時間住宅 331–500 度為夏月 3.80、非夏月 3.13；簡易型時間電價尖峰／離峰為夏月 5.16／2.06、非夏月 4.93／1.99 元。<a href={taipowerSource}>台電官方表</a>（查核 2026-09-15）。請改成你的適用級距與帳單。</p>
+      <p class="tw-source-note">公共起點是 U-POWER 會員離峰示例 NT$6.9／度；官方 FAQ 同時列會員尖峰 13.5、假日 8.5、非會員全時 14 元。實際場站與 APP 可能不同，請在付款前核對。<a href={uPowerSource}>U-POWER 官方費率說明</a>（查核 2026-09-15）。</p>
+    </div>
+
+    <div class="tw-charging-results" aria-live="polite">
+      <p class="result-label">試算結果</p>
+      <dl>
+        <div><dt>每月用電</dt><dd id="tw-monthly-kwh">—</dd></div>
+        <div><dt>家充每月</dt><dd id="tw-home-monthly">—</dd></div>
+        <div><dt>公共每月</dt><dd id="tw-public-monthly">—</dd></div>
+        <div><dt>家充每年</dt><dd id="tw-home-annual">—</dd></div>
+        <div><dt>公共每年</dt><dd id="tw-public-annual">—</dd></div>
+        <div><dt>家充每度</dt><dd id="tw-home-per-kwh">—</dd></div>
+        <div><dt>公共每度</dt><dd id="tw-public-per-kwh">—</dd></div>
+      </dl>
+      <p id="tw-payback" class="payback-result"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculateSimpleEvCharging } from '../lib/evChargingMath.mjs';
+  import { bindPersistentField } from '../lib/storage';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-charging-calculator]');
+  if (root) {
+    const get = (id: string) => root.querySelector<HTMLInputElement | HTMLSelectElement>(`#${id}`)!;
+    const efficiency = get('tw-ev-efficiency');
+    const monthlyKm = get('tw-monthly-km');
+    const homePlan = get('tw-home-plan') as HTMLSelectElement;
+    const homeRate = get('tw-home-rate');
+    const publicRate = get('tw-public-rate');
+    const equipment = get('tw-equipment-cost');
+    const planRates: Record<string, number> = { 'non-time-summer': 3.8, 'non-time-non-summer': 3.13, 'tou-peak-summer': 5.16, 'tou-offpeak-summer': 2.06, 'tou-peak-non-summer': 4.93, 'tou-offpeak-non-summer': 1.99 };
+    const money = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 });
+    const unitMoney = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const number = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 1 });
+    const value = (input: HTMLInputElement) => Number.isFinite(Number(input.value)) ? Number(input.value) : 0;
+    const render = () => {
+      const result = calculateSimpleEvCharging({ efficiencyKwhPer100Km: value(efficiency as HTMLInputElement), monthlyKm: value(monthlyKm as HTMLInputElement), homeRate: value(homeRate as HTMLInputElement), publicRate: value(publicRate as HTMLInputElement), homeEquipmentCost: value(equipment as HTMLInputElement) });
+      root.querySelector('#tw-monthly-kwh')!.textContent = `${number.format(result.monthlyKwh)} kWh`;
+      root.querySelector('#tw-home-monthly')!.textContent = money.format(result.homeMonthly);
+      root.querySelector('#tw-public-monthly')!.textContent = money.format(result.publicMonthly);
+      root.querySelector('#tw-home-annual')!.textContent = money.format(result.homeAnnual);
+      root.querySelector('#tw-public-annual')!.textContent = money.format(result.publicAnnual);
+      root.querySelector('#tw-home-per-kwh')!.textContent = `${unitMoney.format(result.homePerKwh)}／kWh`;
+      root.querySelector('#tw-public-per-kwh')!.textContent = `${unitMoney.format(result.publicPerKwh)}／kWh`;
+      root.querySelector('#tw-payback')!.textContent = result.monthlySavings > 0
+        ? `家充每月約少 ${money.format(result.monthlySavings)}；若一次性設備／工程成本為 ${money.format(value(equipment as HTMLInputElement))}，單以能源差額約 ${result.paybackMonths.toFixed(1)} 個月回本。未計停車、維修、融資與機會成本。`
+        : '目前輸入下公共充電沒有比家充貴，設備成本無法只用能源差額回本；請重新核對方案、時段與場站價格。';
+    };
+    [efficiency, monthlyKm, homeRate, publicRate, equipment].forEach((input) => { bindPersistentField(input as HTMLInputElement, `tw-charging:${input.id}`); input.addEventListener('input', render); });
+    homePlan.addEventListener('change', () => { if (homePlan.value in planRates) homeRate.value = String(planRates[homePlan.value]); render(); });
+    render();
+  }
+</script>
+
+<style>
+  .tw-charging-calculator { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .tw-charging-calculator h2 { margin-top: 0; }
+  .tw-charging-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(17rem, 0.85fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .tw-charging-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+  .tw-charging-inputs label { display: block; min-width: 0; }
+  .tw-charging-inputs label > span { display: block; min-height: 2.7rem; margin-bottom: 0.35rem; font-weight: 650; }
+  .tw-charging-inputs input, .tw-charging-inputs select { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .tw-source-note { grid-column: 1 / -1; margin: 0; color: var(--color-muted); font-size: 0.92rem; overflow-wrap: anywhere; }
+  .tw-charging-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
+  .result-label { margin-top: 0; font-weight: 750; }
+  .tw-charging-results dl { margin: 0; }
+  .tw-charging-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border); }
+  .tw-charging-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .payback-result { margin-bottom: 0; font-size: 0.92rem; color: var(--color-muted); }
+  @media (max-width: 760px) { .tw-charging-calculator { padding: 1rem; } .tw-charging-grid, .tw-charging-inputs { grid-template-columns: 1fr; } .tw-charging-inputs label > span { min-height: 0; } }
+</style>

@@ -1,0 +1,208 @@
+---
+import appliances from '../data/appliances.json';
+
+interface Props {
+  locale: 'en' | 'zh';
+}
+
+const { locale } = Astro.props;
+const isZh = locale === 'zh';
+const rateSource = isZh
+  ? 'https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true'
+  : 'https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03';
+const publicSource = 'https://www.u-power.com.tw/qa/charge.html';
+const embedSnippet = isZh
+  ? '<iframe src="https://worthcalc.win/zh/tools/appliance-electricity-cost/" title="WorthCalc 家電電費計算機" loading="lazy"></iframe>\n<p>由 <a href="https://worthcalc.win/zh/tools/appliance-electricity-cost/">WorthCalc 家電電費計算機</a> 提供。</p>'
+  : '<iframe src="https://worthcalc.win/en/tools/appliance-running-cost/" title="WorthCalc appliance running cost calculator" loading="lazy"></iframe>\n<p>Provided by <a href="https://worthcalc.win/en/tools/appliance-running-cost/">WorthCalc appliance running cost calculator</a>.</p>';
+---
+
+<section class="appliance-calculator" data-appliance-calculator data-locale={locale} aria-labelledby="appliance-calculator-heading">
+  <h2 id="appliance-calculator-heading">{isZh ? '家電每小時、每天、每月、每年電費' : 'Appliance running cost by hour, day, month and year'}</h2>
+  <p class="direct-answer">
+    {isZh
+      ? <>直接答案：以指南算例的 1,350 W、每天 0.37 小時與台電夏月 331–500 度邊際電價 NT$3.80／度，約 NT$1.90／日。公式：W ÷ 1,000 × 小時 × 每度電價。這是 2026-09-15 查核的來源算例，不是你家機型的保證值。</>
+      : <>Direct answer: the guide's 1,350 W example used 0.37 hours/day at the EIA June 2026 residential average of $0.1834/kWh, or about $0.09/day. Formula: W ÷ 1,000 × hours × rate. This is a source-backed example checked 2026-09-15, not a product guarantee.</>}
+  </p>
+
+  <div class="appliance-grid">
+    <div class="appliance-inputs">
+      <label>
+        <span>{isZh ? '選擇家電' : 'Appliance'}</span>
+        <select id="appliance-select">
+          {appliances.map((appliance) => <option value={appliance.id}>{appliance.name[locale]}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>{isZh ? '實際瓦數（W）' : 'Your wattage (W)'}</span>
+        <input id="appliance-watts" type="number" inputmode="decimal" min="0" step="1" value={appliances[0].default_watts} />
+      </label>
+      <label>
+        <span>{isZh ? '每天使用時數' : 'Hours used per day'}</span>
+        <input id="appliance-hours" type="number" inputmode="decimal" min="0" step="0.1" value={appliances[0].default_hours_per_day} />
+      </label>
+      {isZh && <label>
+        <span>台電方案起點</span>
+        <select id="taiwan-rate-plan">
+          <option value="non-time-summer">住宅非時間電價：夏月 331–500 度邊際級距</option>
+          <option value="non-time-non-summer">住宅非時間電價：非夏月 331–500 度邊際級距</option>
+          <option value="tou-peak-summer">簡易型時間電價：夏月尖峰</option>
+          <option value="tou-offpeak-summer">簡易型時間電價：夏月離峰</option>
+          <option value="tou-peak-non-summer">簡易型時間電價：非夏月尖峰</option>
+          <option value="tou-offpeak-non-summer">簡易型時間電價：非夏月離峰</option>
+          <option value="custom">自訂／直接填電費單</option>
+        </select>
+      </label>}
+      <label>
+        <span>{isZh ? '你的每度電價' : 'Your electricity rate per kWh'}</span>
+        <input id="appliance-rate" type="number" inputmode="decimal" min="0" step="0.001" value={isZh ? '3.80' : '0.1834'} />
+      </label>
+      <p id="appliance-range-note" class="source-note"></p>
+      <p class="rate-note">
+        {isZh
+          ? <>電價只是可編輯起點，請改成電費單上的邊際單價。台電現行簡要電價表標示 2025-10-01 起實施；夏月為 6/1–9/30。<a href={rateSource}>查看台電官方表</a>（查核 2026-09-15）。</>
+          : <>The rate is an editable starting point; replace it with your bill. The EIA table is June 2026 residential average, 18.34¢/kWh, preliminary. <a href={rateSource}>View EIA source</a> (checked 2026-09-15).</>}
+      </p>
+    </div>
+
+    <div class="appliance-results" aria-live="polite">
+      <p class="result-label">{isZh ? '試算結果' : 'Estimate'}</p>
+      <dl>
+        <div><dt>{isZh ? '每小時' : 'Per hour'}</dt><dd id="appliance-per-hour">—</dd></div>
+        <div><dt>{isZh ? '每天' : 'Per day'}</dt><dd id="appliance-per-day">—</dd></div>
+        <div><dt>{isZh ? '每月（30 天）' : 'Per month (30 days)'}</dt><dd id="appliance-per-month">—</dd></div>
+        <div><dt>{isZh ? '每年（365 天）' : 'Per year (365 days)'}</dt><dd id="appliance-per-year">—</dd></div>
+      </dl>
+      <p id="appliance-rank" class="rank-summary"></p>
+      <ol id="appliance-ranking" class="ranking"></ol>
+    </div>
+  </div>
+
+  <p class="measurement-note">
+    {isZh
+      ? '機身標籤是額定值，不等於整段使用的平均值。若要更準，使用插座電表／智慧插座量測完整使用邊界；每列預設值都可替換。'
+      : 'A nameplate is a rating, not the average draw for a complete routine. For a tighter estimate, meter the full operating boundary; every default above is editable.'}
+  </p>
+</section>
+
+<section class="embed-panel" aria-labelledby="embed-heading">
+  <h2 id="embed-heading">{isZh ? '嵌入這個計算機' : 'Embed this calculator'}</h2>
+  <p>{isZh ? '可將下方程式碼貼到你的文章或工具頁，保留 WorthCalc 署名與回連。' : 'Paste the code below into an article or tool page, keeping the WorthCalc attribution and backlink.'}</p>
+  <pre><code>{embedSnippet}</code></pre>
+</section>
+
+<section class="appliance-method" aria-labelledby="appliance-method-heading">
+  <h2 id="appliance-method-heading">{isZh ? '怎麼讀這個結果' : 'How to read the result'}</h2>
+  <p>{isZh ? '計算只處理用電：瓦數先換成 kW，再乘使用時數與你輸入的每度電價。月用 30 天、年用 365 天，未包含固定基本費、維修、耗材或購買成本。不同電價級距請用真正新增的用電邊際單價，而不是把全戶帳單平均分攤。' : 'The model covers electricity only: convert watts to kW, then multiply by hours and the rate you enter. Month means 30 days and year means 365 days; fixed charges, repairs, consumables and purchase cost are outside the result. Use the marginal rate for the added load rather than allocating your whole household bill.'}</p>
+  {isZh && <p>公共充電不是本家電表的預設；U-POWER 公開 FAQ（查核 2026-09-15）列出會員離峰 NT$6.9／度、尖峰 NT$13.5／度、假日 NT$8.5／度，非會員全時 NT$14／度，實際仍以場站與 APP 為準。<a href={publicSource}>查看 U-POWER 官方費率說明</a>。</p>}
+</section>
+
+<section class="complete-appliance-list" aria-labelledby="complete-appliance-list-heading">
+  <h2 id="complete-appliance-list-heading">{isZh ? '完整家電清單' : 'Complete appliance list'}</h2>
+  <p>{isZh ? '以下是本 hub 合併的 repo 指南錨點；單點範圍表示目前只有一個可追溯算例，並不宣稱所有產品相同。' : 'These rows merge the repo guide anchors used by this hub. A single-point range means the repo currently has one traceable example; it is not a claim that every product is identical.'}</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>{isZh ? '家電' : 'Appliance'}</th><th>{isZh ? '典型瓦數' : 'Typical watts'}</th><th>{isZh ? '來源／查核日' : 'Source / checked'}</th></tr></thead>
+      <tbody>
+        {appliances.map((appliance) => <tr>
+          <th scope="row">{appliance.name[locale]}</th>
+          <td>{appliance.watts_low}–{appliance.watts_high} W</td>
+          <td><a href={appliance.source_url}>{appliance.guide_slug}</a><br /><small>{appliance.verified_date}</small></td>
+        </tr>)}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  import { calculateApplianceCost, rankAppliances } from '../lib/applianceMath.mjs';
+  import { bindPersistentField } from '../lib/storage';
+  import applianceData from '../data/appliances.json';
+
+  type Appliance = (typeof applianceData)[number];
+  const isZh = document.querySelector<HTMLElement>('[data-appliance-calculator]')?.dataset.locale === 'zh';
+  const localeTag = isZh ? 'zh-TW' : 'en-US';
+  const currency = isZh ? 'TWD' : 'USD';
+  const byId = <T extends HTMLElement>(id: string): T => {
+    const element = document.getElementById(id);
+    if (!element) throw new Error(`Missing #${id}`);
+    return element as T;
+  };
+  const select = byId<HTMLSelectElement>('appliance-select');
+  const watts = byId<HTMLInputElement>('appliance-watts');
+  const hours = byId<HTMLInputElement>('appliance-hours');
+  const rate = byId<HTMLInputElement>('appliance-rate');
+  const rangeNote = byId<HTMLElement>('appliance-range-note');
+  const ratePlan = document.getElementById('taiwan-rate-plan') as HTMLSelectElement | null;
+  const rateByPlan: Record<string, number> = { 'non-time-summer': 3.8, 'non-time-non-summer': 3.13, 'tou-peak-summer': 5.16, 'tou-offpeak-summer': 2.06, 'tou-peak-non-summer': 4.93, 'tou-offpeak-non-summer': 1.99 };
+  const formatter = new Intl.NumberFormat(localeTag, { style: 'currency', currency, maximumFractionDigits: isZh ? 0 : 2 });
+
+  function selected(): Appliance {
+    return applianceData.find((item) => item.id === select.value) ?? applianceData[0];
+  }
+  function finiteValue(input: HTMLInputElement): number {
+    const value = Number(input?.value);
+    return Number.isFinite(value) ? value : 0;
+  }
+  function formatCost(value: number): string {
+    return formatter.format(Number.isFinite(value) ? value : 0);
+  }
+  function updateRangeNote(item: Appliance): void {
+    rangeNote.innerHTML = `${isZh ? '指南錨點範圍' : 'Guide anchor range'}: <strong>${item.watts_low}–${item.watts_high} W</strong> · ${item.source_note} <a href="${item.source_url}">${isZh ? '來源' : 'source'}</a> · ${item.verified_date}`;
+  }
+  function update(): void {
+    const item = selected();
+    const result = calculateApplianceCost({ watts: finiteValue(watts), hoursPerDay: finiteValue(hours), rate: finiteValue(rate) });
+    byId<HTMLElement>('appliance-per-hour').textContent = formatCost(result.perHour);
+    byId<HTMLElement>('appliance-per-day').textContent = formatCost(result.perDay);
+    byId<HTMLElement>('appliance-per-month').textContent = formatCost(result.perMonth);
+    byId<HTMLElement>('appliance-per-year').textContent = formatCost(result.perYear);
+    updateRangeNote(item);
+    const ranking = rankAppliances(applianceData, result.rate) as Array<Appliance & { cost: number }>;
+    const selectedRank = ranking.findIndex((entry: Appliance & { cost: number }) => entry.id === item.id) + 1;
+    byId<HTMLElement>('appliance-rank').textContent = isZh ? `以同一個電價與各列預設時數計算，${item.name.zh}目前排第 ${selectedRank}／${ranking.length}（由高到低）。` : `Using the same rate and each row's default hours, ${item.name.en} ranks ${selectedRank} of ${ranking.length} (highest daily cost first).`;
+    byId<HTMLElement>('appliance-ranking').innerHTML = ranking.slice(0, 5).map((entry: Appliance & { cost: number }, index: number) => `<li>${index + 1}. ${isZh ? entry.name.zh : entry.name.en} — ${formatCost(entry.cost)}${isZh ? '／日' : '/day'}</li>`).join('');
+  }
+  select.addEventListener('change', () => {
+    const item = selected();
+    watts.value = String(item.default_watts);
+    hours.value = String(item.default_hours_per_day);
+    update();
+  });
+  [watts, hours, rate].filter(Boolean).forEach((input) => {
+    bindPersistentField(input, `appliance-cost:${input.id}:${isZh ? 'zh' : 'en'}`);
+    input.addEventListener('input', update);
+  });
+  if (ratePlan) {
+    ratePlan.addEventListener('change', () => {
+      if (ratePlan.value in rateByPlan) rate.value = String(rateByPlan[ratePlan.value]);
+      update();
+    });
+  }
+  update();
+</script>
+
+<style>
+  .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .appliance-calculator h2, .embed-panel h2, .appliance-method h2, .complete-appliance-list h2 { margin-top: 0; }
+  .direct-answer { font-size: 1.02rem; }
+  .appliance-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(17rem, 0.85fr); gap: 1.25rem; margin-top: 1.25rem; }
+  .appliance-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; align-content: start; }
+  .appliance-inputs label { display: block; min-width: 0; }
+  .appliance-inputs label > span { display: block; min-height: 2.7rem; margin-bottom: 0.35rem; font-weight: 650; }
+  .appliance-inputs input, .appliance-inputs select { box-sizing: border-box; width: 100%; min-width: 0; padding: 0.7rem; border: 1px solid var(--color-border); border-radius: 0.55rem; background: var(--color-bg); color: var(--color-text); font: inherit; }
+  .source-note, .rate-note, .measurement-note { grid-column: 1 / -1; margin: 0; color: var(--color-muted); font-size: 0.92rem; overflow-wrap: anywhere; }
+  .appliance-results { align-self: start; padding: 1rem; border-radius: 0.8rem; background: var(--color-bg); }
+  .result-label { margin-top: 0; font-weight: 750; }
+  .appliance-results dl { margin: 0; }
+  .appliance-results dl div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border); }
+  .appliance-results dd { margin: 0; text-align: right; font-weight: 750; }
+  .rank-summary { margin-bottom: 0.5rem; font-size: 0.92rem; color: var(--color-muted); }
+  .ranking { margin: 0; padding-left: 1.25rem; }
+  pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--color-bg); border-radius: 0.6rem; }
+  code { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; min-width: 38rem; border-collapse: collapse; }
+  th, td { padding: 0.65rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+  td { overflow-wrap: anywhere; }
+  @media (max-width: 760px) { .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { padding: 1rem; } .appliance-grid, .appliance-inputs { grid-template-columns: 1fr; } .appliance-inputs label > span { min-height: 0; } .appliance-results dl div { align-items: baseline; } }
+</style>

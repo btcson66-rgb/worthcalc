@@ -1,7 +1,7 @@
 {
-  "currentUrls": 304,
+  "currentUrls": 306,
   "maxUrls": 310,
-  "recordedAt": "2026-09-14",
+  "recordedAt": "2026-09-15",
   "freezeNote": "2026-09-15 S5：maxUrls=310，依 Company Vault/10_Web_Department/2026-09-15-worthcalc-one-week-sprint.md；基準為 S1 後 sitemap 304 + S3 預留 2 個新頁 + 4 頁緩衝。調高需附需求證據（GSC 或 Keyword Planner 區間）。",
   "capRemoved": {
     "on": "2026-09-02",

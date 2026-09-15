@@ -1,0 +1,25 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import ApplianceCostCalculator from '../../../components/ApplianceCostCalculator.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'zh';
+const title = '家電一天用多少電？每小時、每月電費怎麼算？';
+const description = '家電一天用多少電、每小時或每月電費多少？輸入瓦數、使用時數與電費單單價，再比較 40 多種有來源的家電算例。';
+const faq = [
+  { question: '家電電費公式怎麼算？', answer: '瓦數先除以 1,000 換成 kW，再乘使用時數與你輸入的每度電價：W ÷ 1,000 × 小時 × 電價。每月用 30 天、每年用 365 天。' },
+  { question: '清單裡的典型瓦數是產品平均嗎？', answer: '不是。它們是 repo 指南裡可追溯的算例錨點，可能是某段實測或工作示例；請用機身標籤、智慧插座或插座電表讀值替換。' },
+  { question: '可以比較家裡哪台電器最耗電嗎？', answer: '可以先用同一個每度電價比較，但排序使用每列預設每日時數。換成你家的使用時數後，才是較有意義的規劃結果。' },
+  { question: '台電基本費、維修與購買成本有算嗎？', answer: '沒有。本頁估算新增用電的邊際能源費；固定基本費、維修、耗材、購買成本與保固應另外列。' },
+  { question: '台灣時間電價可以怎麼填？', answer: '可從台電方案起點選夏月／非夏月與簡易型時間電價的尖峰／離峰，再把數字改成你的契約與電費單。這些是可編輯起點，不是對每個家庭的適用判定。' },
+];
+const related = [
+  { title: '每 kWh 電費指南', href: localizedPath(locale, '/guides/electricity-cost-per-kwh-used') },
+  { title: '家用與公共充電樁電費比較', href: localizedPath(locale, '/home-vs-public-ev-charging-cost') },
+  { title: '每公里成本計算機', href: localizedPath(locale, '/tools/cost-per-mile') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']}>
+  <ApplianceCostCalculator locale={locale} />
+</ToolLayout>

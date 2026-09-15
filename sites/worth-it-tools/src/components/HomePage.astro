@@ -42,36 +42,6 @@ const homeLinks = [
   { href: '/de/', label: 'Deutsche Startseite' },
 ].filter((link) => link.href !== Astro.url.pathname);
 
-const siteInfoLinks = {
-  en: [
-    { href: '/en/changelog/', label: 'Changelog' },
-    { href: '/en/terms/', label: 'Terms of use' },
-  ],
-  zh: [
-    { href: '/zh/changelog/', label: '更新紀錄' },
-    { href: '/zh/terms/', label: '使用條款' },
-  ],
-  es: [
-    { href: '/es/about/', label: 'Sobre WorthCalc' },
-    { href: '/es/changelog/', label: 'Registro de cambios' },
-    { href: '/es/contact/', label: 'Contacto' },
-    { href: '/es/disclaimer/', label: 'Aviso legal' },
-    { href: '/es/privacy/', label: 'Privacidad' },
-    { href: '/es/terms/', label: 'Términos de uso' },
-  ],
-  fr: [
-    { href: '/fr/about/', label: 'À propos de WorthCalc' },
-    { href: '/fr/changelog/', label: 'Journal des modifications' },
-    { href: '/fr/contact/', label: 'Contact' },
-    { href: '/fr/disclaimer/', label: 'Avertissement' },
-    { href: '/fr/privacy/', label: 'Confidentialité' },
-    { href: '/fr/terms/', label: "Conditions d'utilisation" },
-  ],
-  de: [
-    { href: '/de/terms/', label: 'Nutzungsbedingungen' },
-  ],
-}[locale];
-
 const zhDecisionLinks = locale === 'zh'
   ? [
       { href: localizedPath(locale, '/tools/dti-calculator'), label: '負債收入比（DTI）計算機' },
@@ -153,7 +123,7 @@ const zhDecisionLinks = locale === 'zh'
   <h2 id="home-site-links-heading">{locale === 'zh' ? '網站與決策入口' : locale === 'es' ? 'Sitio y decisiones' : locale === 'fr' ? 'Le site et vos décisions' : locale === 'de' ? 'Website und Entscheidungen' : 'Site and decision links'}</h2>
   <p class="section-lead">
     {locale === 'zh'
-      ? '先從適合你的語言與決策問題開始；這些正文入口會帶你到網站資訊、更新紀錄與下一個可計算的問題。'
+      ? '先從適合你的語言與決策問題開始；這些正文入口會帶你到其他首頁與下一個可計算的問題。'
       : locale === 'es'
         ? 'Empieza por tu idioma y la decisión que quieres comprobar; estos enlaces forman parte del contenido del sitio.'
         : locale === 'fr'
@@ -164,7 +134,6 @@ const zhDecisionLinks = locale === 'zh'
   </p>
   <ul class="home-site-links__list">
     {homeLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-    {siteInfoLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
     {zhDecisionLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
   </ul>
 </section>

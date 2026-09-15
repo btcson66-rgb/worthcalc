@@ -1,0 +1,24 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import ApplianceCostCalculator from '../../../components/ApplianceCostCalculator.astro';
+import { localizedPath } from '../../../i18n/utils';
+
+const locale = 'en';
+const title = 'How Much Does Each Appliance Cost to Run?';
+const description = 'How much does an appliance cost per hour, day, month, or year? Enter watts, hours and your electricity rate, then compare 40+ source-backed appliance anchors.';
+const faq = [
+  { question: 'What is the appliance electricity formula?', answer: 'Convert watts to kilowatts, then multiply by hours used and your electricity rate: W ÷ 1,000 × hours × rate. The monthly and annual views use 30 and 365 days.' },
+  { question: 'Are the wattage defaults product averages?', answer: 'No. They are traceable anchors from the repo guide library, often a worked example or measured routine. Replace them with the nameplate, smart-plug reading or plug-meter result for your model.' },
+  { question: 'Can I compare different appliances fairly?', answer: 'Yes, as a planning comparison when you use the same rate. The ranking uses each row’s default hours; change the selected appliance hours for your household and treat the result as an estimate.' },
+  { question: 'Does the result include the whole electricity bill?', answer: 'No. It estimates the marginal energy charge only. Fixed household charges, repairs, consumables, purchase cost and maintenance are separate.' },
+];
+const related = [
+  { title: 'Electricity cost per kWh guide', href: localizedPath(locale, '/guides/electricity-cost-per-kwh-used') },
+  { title: 'Home charging vs public charging', href: localizedPath(locale, '/home-vs-public-ev-charging-cost') },
+  { title: 'Cost per mile calculator', href: localizedPath(locale, '/tools/cost-per-mile') },
+];
+---
+
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en']}>
+  <ApplianceCostCalculator locale={locale} />
+</ToolLayout>

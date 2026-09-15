@@ -25,6 +25,10 @@ const approvedSingleLocaleRoutes = new Set([
   'liquid-net-worth-explained',
   'loan-term-vs-total-interest',
   'simple-vs-compound-interest',
+  // S3 intentionally uses two market-native slugs for one appliance hub;
+  // adding reciprocal pages would exceed the two-URL budget.
+  'tools/appliance-running-cost',
+  'tools/appliance-electricity-cost',
 ]);
 // Staged editorial programmes can introduce a complete non-core language
 // cluster without pretending that the five-language product shell is complete.

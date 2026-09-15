@@ -69,7 +69,7 @@ const localeTags: Record<CalculatorLocale, string> = {
   data-no-break-even={copy.noBreakEven}
   data-verdict-found={copy.verdictFound}
   data-verdict-missing={copy.verdictMissing}
->
+ data-label-a={copy.ownerCost} data-label-b={copy.renterCost}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
@@ -91,6 +91,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.breakEvenYear}</dt><dd data-output="breakEvenYear">—</dd></div>
         <div><dt>{copy.ownerCost}</dt><dd data-output="ownerCost">—</dd></div>
@@ -106,6 +107,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-rent-buy-breakeven-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -174,6 +176,12 @@ const localeTags: Record<CalculatorLocale, string> = {
       const advantage = shown.renterCost - shown.ownerCost;
       const yearText = result ? `${shown.year} ${root.dataset.yearUnit || ''}`.trim() : root.dataset.noBreakEven || 'Not reached';
       output('breakEvenYear').textContent = yearText;
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: shown.ownerCost },
+        { label: root.dataset.labelB || '', value: shown.renterCost },
+      ], formatMoney);
+
       output('ownerCost').textContent = formatMoney(shown.ownerCost);
       output('renterCost').textContent = formatMoney(shown.renterCost);
       output('ownerAdvantage').textContent = formatMoney(advantage);

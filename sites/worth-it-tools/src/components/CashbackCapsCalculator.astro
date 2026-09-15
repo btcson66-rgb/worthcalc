@@ -53,7 +53,7 @@ const localeTags: Record<CalculatorLocale, string> = {
   data-locale={localeTags[locale]}
   data-currency={currency}
   data-verdict-prefix={copy.verdictPrefix}
->
+ data-label-a={copy.eligibleRate} data-label-b={copy.wholeBillRate}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
@@ -91,6 +91,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.cappedBonusSpend}</dt><dd data-output="cappedBonusSpend">—</dd></div>
         <div><dt>{copy.aboveCapSpend}</dt><dd data-output="aboveCapSpend">—</dd></div>
@@ -106,6 +107,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-cashback-caps-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -141,6 +143,12 @@ const localeTags: Record<CalculatorLocale, string> = {
       output('cappedBonusSpend').textContent = formatMoney(cappedBonusSpend);
       output('aboveCapSpend').textContent = formatMoney(aboveCapSpend);
       output('totalRewards').textContent = formatMoney(totalRewards);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: eligibleRate },
+        { label: root.dataset.labelB || '', value: wholeBillRate },
+      ], formatPercent, 'high');
+
       output('eligibleRate').textContent = formatPercent(eligibleRate);
       output('wholeBillRate').textContent = formatPercent(wholeBillRate);
       output('headlineShortfall').textContent = formatMoney(headlineShortfall);

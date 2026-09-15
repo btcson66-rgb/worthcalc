@@ -60,7 +60,7 @@ const numberLocale = locale === 'zh'
   data-no-visits={copy.noVisits}
   data-active-month-suffix={copy.activeMonthSuffix}
   aria-labelledby="gym-calculator-heading"
->
+ data-label-meter={copy.breakEvenVisits}>
   <header>
     <h2 id="gym-calculator-heading">{copy.heading}</h2>
     <p>{copy.intro}</p>
@@ -100,6 +100,7 @@ const numberLocale = locale === 'zh'
 
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.totalCost}</dt><dd data-output="totalCost">—</dd></div>
         <div><dt>{copy.totalVisits}</dt><dd data-output="totalVisits">—</dd></div>
@@ -113,6 +114,7 @@ const numberLocale = locale === 'zh'
 </section>
 
 <script>
+  import { renderMeter } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-gym-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -144,6 +146,11 @@ const numberLocale = locale === 'zh'
       output('totalCost').textContent = formatMoney(totalCost);
       output('totalVisits').textContent = formatNumber.format(totalVisits);
       output('costPerVisit').textContent = totalVisits > 0 ? formatMoney(costPerVisit) : '—';
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart && breakEven > 0) {
+        renderMeter(chart, visitsPerActiveMonth, breakEven, (n) => formatNumber.format(n), root.dataset.labelMeter || '');
+      } else if (chart) { chart.innerHTML = ''; }
+
       output('breakEvenVisits').textContent = breakEven > 0 ? `${formatNumber.format(breakEven)} ${root.dataset.activeMonthSuffix || ''}`.trim() : '—';
 
       if (totalVisits <= 0) output('verdict').textContent = root.dataset.noVisits || '';

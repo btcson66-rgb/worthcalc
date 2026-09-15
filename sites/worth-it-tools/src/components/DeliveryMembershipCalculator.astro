@@ -62,7 +62,7 @@ const numberLocale = locale === 'zh'
   data-impossible={copy.impossible}
   data-order-suffix={copy.orderSuffix}
   aria-labelledby="delivery-calculator-heading"
->
+ data-label-meter={copy.breakEvenOrders}>
   <header>
     <h2 id="delivery-calculator-heading">{copy.heading}</h2>
     <p>{copy.intro}</p>
@@ -102,6 +102,7 @@ const numberLocale = locale === 'zh'
 
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.plannedOrders}</dt><dd data-output="plannedOrders">—</dd></div>
         <div><dt>{copy.eligibleOrders}</dt><dd data-output="eligibleOrders">—</dd></div>
@@ -117,6 +118,7 @@ const numberLocale = locale === 'zh'
 </section>
 
 <script>
+  import { renderMeter } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-delivery-membership-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -152,6 +154,11 @@ const numberLocale = locale === 'zh'
       output('savingPerEligibleOrder').textContent = formatMoney(savingPerEligibleOrder);
       output('grossSavings').textContent = formatMoney(grossSavings);
       output('netValue').textContent = formatMoney(netValue);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart && breakEvenOrders > 0) {
+        renderMeter(chart, eligibleOrders, breakEvenOrders, (n) => formatNumber.format(n), root.dataset.labelMeter || '');
+      } else if (chart) { chart.innerHTML = ''; }
+
       output('breakEvenOrders').textContent = breakEvenOrders > 0 ? `${formatNumber.format(breakEvenOrders)} ${root.dataset.orderSuffix || ''}`.trim() : '—';
 
       if (savingPerEligibleOrder <= 0) output('verdict').textContent = root.dataset.impossible || '';

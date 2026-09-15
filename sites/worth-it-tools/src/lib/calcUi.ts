@@ -102,9 +102,23 @@ export interface Slice {
  * answer and the rest recede, so the chart states a conclusion instead of
  * leaving the reader to compare two similar lengths.
  */
-export function renderBars(host: HTMLElement, items: Slice[], format: (n: number) => string) {
+export function renderBars(
+  host: HTMLElement,
+  items: Slice[],
+  format: (n: number) => string,
+  /**
+   * Which end of the scale wins. Almost every comparison on this site is a
+   * cost, so the smaller bar is the answer — but a few (real hourly wage) are
+   * the other way round, and marking the wrong bar with a tick would state the
+   * opposite of the truth.
+   */
+  bestIs: 'low' | 'high' = 'low',
+) {
   const max = Math.max(...items.map((i) => i.value), 0);
-  const best = items.reduce((a, b) => (b.value < a.value ? b : a), items[0]);
+  const best = items.reduce(
+    (a, b) => ((bestIs === 'high' ? b.value > a.value : b.value < a.value) ? b : a),
+    items[0],
+  );
   host.classList.add('viz-bars', 'is-emphasis');
   host.innerHTML = items
     .map((item) => {
@@ -127,14 +141,23 @@ export function renderBars(host: HTMLElement, items: Slice[], format: (n: number
  * replaces drew that as two numbers side by side, which makes the reader do
  * the division themselves.
  */
-export function renderMeter(host: HTMLElement, value: number, target: number, format: (n: number) => string) {
+export function renderMeter(
+  host: HTMLElement,
+  value: number,
+  target: number,
+  format: (n: number) => string,
+  /** What the bar measures. Without it a filled bar between 0 and 4 says nothing. */
+  label = '',
+) {
   const pct = target > 0 ? (value / target) * 100 : 0;
+  const reached = value >= target;
   host.classList.add('viz-meter');
-  host.classList.toggle('is-over', value >= target);
-  host.innerHTML = `<div class="viz-meter__track">
+  host.classList.toggle('is-over', reached);
+  const title = label ? `<p class="viz__title">${escapeHtml(label)}</p>` : '';
+  host.innerHTML = `${title}<div class="viz-meter__track">
       <div class="viz-meter__fill" style="--pct:${pct.toFixed(1)}%"></div>
     </div>
-    <div class="viz-meter__scale"><span>${escapeHtml(format(0))}</span><span>${escapeHtml(format(target))}</span></div>`;
+    <div class="viz-meter__scale"><span>${escapeHtml(format(0))}</span><span>${escapeHtml(format(value))} / ${escapeHtml(format(target))}</span></div>`;
 }
 
 /** Part-to-whole, ≤ 6 segments, with a 2px surface gap between fills. */

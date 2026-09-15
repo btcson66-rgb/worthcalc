@@ -67,7 +67,7 @@ const localeTags: Record<CalculatorLocale, string> = {
   data-distance-unit={distanceUnit}
   data-mix-summary={copy.mixSummary}
   data-normalized-mix={copy.normalizedMix}
->
+ data-label-a={copy.homeOnlyCost} data-label-b={copy.annualCost}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
 
@@ -88,6 +88,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 
     <div class="calc__results" aria-live="polite">
       <p class="charging-mix" data-output="mix"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.annualCost}</dt><dd data-output="annualCost">—</dd></div>
         <div><dt>{copy.costPerDistance}</dt><dd data-output="costPerDistance">—</dd></div>
@@ -104,6 +105,7 @@ const localeTags: Record<CalculatorLocale, string> = {
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-ev-charging-cost-calculator]:not([data-tw-charging-calculator])')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -140,6 +142,12 @@ const localeTags: Record<CalculatorLocale, string> = {
       const annualCost = gridEnergy * weightedRate + fixedFees;
       const homeOnlyCost = gridEnergy * rates[0];
       const publicPremium = annualCost - homeOnlyCost;
+
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) renderBars(chart, [
+        { label: root.dataset.labelA || '', value: homeOnlyCost },
+        { label: root.dataset.labelB || '', value: annualCost },
+      ], formatMoney);
 
       output('annualCost').textContent = formatMoney(annualCost);
       output('costPerDistance').textContent = `${formatUnitMoney(annualDistance > 0 ? annualCost / annualDistance : 0)} / ${distanceUnit}`;

@@ -17,7 +17,7 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id="commute-full-cost-calculator" class="calc" data-commute-full-cost-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict={copy.verdict}>
+<section id="commute-full-cost-calculator" class="calc" data-commute-full-cost-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict={copy.verdict} data-label-a={copy.cashCost} data-label-b={copy.timeCost} data-label-c={copy.fullCost}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -36,6 +36,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.cashCost}</dt><dd data-output="cashCost">—</dd></div>
         <div><dt>{copy.timeHours}</dt><dd data-output="timeHours">—</dd></div>
@@ -51,6 +52,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 </section>
 
 <script>
+  import { renderStack, renderLegendTable } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-commute-full-cost-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: 0 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -70,6 +72,17 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
       out('cashCost').textContent = money(cashCost);
       out('timeHours').textContent = number.format(timeHours);
       out('timeCost').textContent = money(timeCost);
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      if (chart) {
+        const parts = [
+          { label: root.dataset.labelA || '', value: cashCost },
+          { label: root.dataset.labelB || '', value: timeCost },
+        ];
+        chart.innerHTML = '<div class="viz-stack"></div><div class="viz-table"></div>';
+        renderStack(chart.querySelector('.viz-stack') as HTMLElement, parts);
+        renderLegendTable(chart.querySelector('.viz-table') as HTMLElement, parts, money, root.dataset.labelC || '');
+      }
+
       out('fullCost').textContent = money(fullCost);
       out('perDay').textContent = money(days ? fullCost / days : 0);
       out('distanceCost').textContent = money(distanceCost);

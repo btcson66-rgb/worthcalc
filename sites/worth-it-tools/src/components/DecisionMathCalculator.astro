@@ -15,7 +15,7 @@ const { id, mode, locale, currency, defaults, fields, copy } = Astro.props;
 const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
 ---
 
-<section id={id} class="calc" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''}>
+<section id={id} class="calc" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''} data-label-a={copy.output1} data-label-b={copy.output2}>
   <h2>{copy.heading}</h2>
   <p>{copy.intro}</p>
   <div class="calc__body">
@@ -24,6 +24,7 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
     </div>
     <div class="calc__results" aria-live="polite">
       <p class="verdict" data-output="verdict"></p>
+      <div class="viz" data-chart aria-hidden="true"></div>
       <dl>
         <div><dt>{copy.output1}</dt><dd data-output="output1">—</dd></div>
         <div><dt>{copy.output2}</dt><dd data-output="output2">—</dd></div>
@@ -35,6 +36,7 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
 </section>
 
 <script>
+  import { renderBars } from '../lib/calcUi';
   for (const root of document.querySelectorAll<HTMLElement>('[data-decision-math]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 2 });
@@ -107,6 +109,26 @@ const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-E
       else if (root.dataset.mode === 'hourlyWage') out('output3').textContent = number.format(third);
       else if (root.dataset.mode === 'raiseInflation') out('output3').textContent = money(third);
       else out('output3').textContent = money(third);
+      // Only six of the eight modes put two comparable figures in output1 and
+      // output2. In `appliance` they are an annual saving and a payback period,
+      // and in `raiseInflation` a salary and a percentage — drawing those as
+      // two bars would compare unlike units, so those modes get no chart.
+      const COMPARABLE: Record<string, 'low' | 'high'> = {
+        costPerUse: 'low', bulk: 'low', meal: 'low',
+        reusable: 'low', pricePerWear: 'low',
+        hourlyWage: 'high',
+      };
+      const chart = root.querySelector<HTMLElement>('[data-chart]');
+      const bestIs = COMPARABLE[root.dataset.mode || ''];
+      if (chart && bestIs && Number.isFinite(first) && Number.isFinite(second)) {
+        renderBars(chart, [
+          { label: root.dataset.labelA || '', value: first },
+          { label: root.dataset.labelB || '', value: second },
+        ], money, bestIs);
+      } else if (chart) {
+        chart.innerHTML = '';
+      }
+
       out('verdict').textContent = positive ? root.dataset.positive || '' : root.dataset.negative || '';
     };
     root.querySelectorAll('input').forEach((input) => input.addEventListener('input', calculate));

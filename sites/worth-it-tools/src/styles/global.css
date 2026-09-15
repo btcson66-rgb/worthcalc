@@ -1722,10 +1722,19 @@ a {
    not a fallback nobody sees: it is how the figures stay selectable, and how a
    crawler reads them. */
 
+/* `display: table` overrides the `.prose table { display: block }` rule these
+   calculators inherit when they sit inside an article. Left as a block, the
+   cells shrink to their content and the row rules stop short of the panel
+   edge, so a two-row legend reads as a stray fragment rather than a table. */
 .calc-table {
+  display: table;
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+}
+
+.calc-table th:first-child {
+  width: 100%;
 }
 
 .calc-table caption {

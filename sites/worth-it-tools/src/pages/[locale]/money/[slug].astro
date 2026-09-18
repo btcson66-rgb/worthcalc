@@ -1,0 +1,150 @@
+---
+/*
+ * A money brief.
+ *
+ * The cluster exists because every one of the site's 307 indexable pages was an
+ * evergreen formula page: nothing on worthcalc.win had a reason to be
+ * re-crawled, and nothing carried a figure an answer engine would cite. These
+ * pages lead with a dated number from a primary source (IRS, EIA, Freddie Mac,
+ * Federal Reserve), then show the arithmetic that turns it into a decision, and
+ * hand the reader to the calculator that runs it on their own inputs.
+ *
+ * Only briefs whose `publishAt` has arrived are emitted — see src/lib/publication.ts
+ * for why the gate is a date rather than a flag.
+ */
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import type { ContentLocale } from '../../../consts';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import FAQ from '../../../components/FAQ.astro';
+import RelatedLinks from '../../../components/RelatedLinks.astro';
+import { localizedCorePath, useTranslations } from '../../../i18n/utils';
+import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '../../../lib/seo';
+import { isPublished, publishCutoff } from '../../../lib/publication';
+import { isoDate } from '../../../lib/trustBlock';
+import { briefCopy, moneyHubPath } from '../../../lib/moneyBriefs';
+
+type Props = {
+  entry: CollectionEntry<'moneyBriefs'>;
+  alternateLocales: ContentLocale[];
+  /** `related`, minus any sibling brief that has not been released yet. */
+  liveRelated: string[];
+};
+
+export async function getStaticPaths() {
+  const cutoff = publishCutoff();
+  const all = await getCollection('moneyBriefs', ({ data }) => !data.draft);
+  const due = all.filter((entry) => isPublished(entry.data.publishAt, cutoff));
+  // Cross-brief links are written once, in frontmatter, against the finished
+  // cluster; the cluster goes live a few pages at a time. Rendering a link to a
+  // brief that is three weeks from release would put a 404 in the internal link
+  // graph for three weeks and fail check:links, so the set of live brief URLs
+  // is computed here and the links are filtered against it below.
+  const liveBriefUrls = new Set(due.map((entry) => `/${entry.data.locale}/money/${entry.data.briefSlug}/`));
+  // Only locales that are themselves live may be named as an hreflang
+  // alternate. A brief published in English on Monday and in Chinese on
+  // Thursday would otherwise advertise a Chinese URL that 404s for three days.
+  const localesBySlug = new Map<string, ContentLocale[]>();
+  for (const entry of due) {
+    const locales = localesBySlug.get(entry.data.briefSlug) ?? [];
+    locales.push(entry.data.locale as ContentLocale);
+    localesBySlug.set(entry.data.briefSlug, locales);
+  }
+  return due.map((entry) => ({
+    params: { locale: entry.data.locale, slug: entry.data.briefSlug },
+    props: {
+      entry,
+      alternateLocales: localesBySlug.get(entry.data.briefSlug) ?? [entry.data.locale as ContentLocale],
+      liveRelated: entry.data.related.filter((href) => !href.startsWith(`/${entry.data.locale}/money/`) || liveBriefUrls.has(href)),
+    },
+  }));
+}
+
+const { entry, alternateLocales, liveRelated } = Astro.props as Props;
+const locale = entry.data.locale as ContentLocale;
+const data = entry.data;
+const t = useTranslations(locale);
+const copy = briefCopy(locale);
+const { Content } = await render(entry);
+const reviewed = isoDate(data.lastReviewed.toISOString().slice(0, 10));
+
+const crumbs = [
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+  { name: copy.hubTitle, url: moneyHubPath(locale) },
+  { name: data.title, url: Astro.url.pathname },
+];
+
+const faqItems = data.faq.map((item) => ({ question: item.q, answer: item.a }));
+
+// The trust block is built from the brief's own frontmatter rather than the
+// layout fallback, so `data-source-count` matches the sources actually rendered
+// and check-trust-block.mjs sees a real verification date per source.
+const trustBlock = {
+  method: copy.method,
+  formula: data.formula,
+  sources: data.sources.map((source) => ({ label: source.label, url: source.url, verifiedDate: source.verifiedDate })),
+  limits: data.limits,
+  lastReviewed: reviewed,
+  locale,
+};
+
+const briefTitles = new Map(
+  (await getCollection('moneyBriefs', ({ data: other }) => other.locale === locale)).map(
+    (other) => [`/${other.data.locale}/money/${other.data.briefSlug}/`, other.data.title],
+  ),
+);
+// A sibling brief is labelled with its own title; anything else on the site is
+// labelled from its slug, which is how the existing RelatedLinks callers do it.
+const relatedLinks = liveRelated.map((href) => ({
+  title: briefTitles.get(href) ?? href.split('/').filter(Boolean).at(-1)!.replaceAll('-', ' '),
+  href,
+}));
+---
+
+<ArticleLayout
+  title={data.title}
+  description={data.description}
+  locale={locale}
+  updated={reviewed}
+  breadcrumb={crumbs}
+  alternateLocales={alternateLocales}
+  trustBlock={trustBlock}
+  jsonLd={[
+    articleJsonLd({
+      headline: data.title,
+      description: data.description,
+      url: Astro.url.pathname,
+      locale,
+      dateModified: reviewed,
+      site: Astro.site,
+    }),
+    breadcrumbJsonLd(crumbs, Astro.site),
+    faqJsonLd(faqItems),
+  ]}
+>
+  <p class="brief-answer"><strong>{copy.answerLabel}</strong> {data.answer}</p>
+
+  <Content />
+
+  <p class="brief-cta">
+    <a href={data.relatedTool}>{copy.runIt} {data.relatedToolLabel} →</a>
+  </p>
+
+  <FAQ items={faqItems} />
+  {relatedLinks.length > 0 && <RelatedLinks heading={copy.relatedHeading} links={relatedLinks} />}
+</ArticleLayout>
+
+<style>
+  .brief-answer {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.15rem;
+    border-inline-start: 4px solid var(--accent, #b4530a);
+    background: var(--surface-muted, rgba(180, 83, 10, 0.06));
+    border-radius: 0 8px 8px 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .brief-cta {
+    margin: 2rem 0 0;
+    font-weight: 600;
+  }
+</style>

@@ -18,6 +18,7 @@ import { localizedPath } from '../i18n/utils';
 import { homeContent } from '../lib/home';
 import { getFeaturedCalculators } from '../lib/catalog';
 import { PRIMARY_TOPIC_IDS, TOPIC_IDS, topicCopy, topicHref } from '../lib/topics';
+import { BRIEF_LOCALES, briefCopy, moneyHubPath } from '../lib/moneyBriefs';
 import FAQ from './FAQ.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
 
@@ -31,6 +32,12 @@ const trust = content.trust;
 const topics = topicCopy[locale];
 
 const featured = await getFeaturedCalculators(locale);
+// The money hub is a third directory, listed beside the other two rather than
+// only in the footer: a site-wide footer link is boilerplate, and this cluster's
+// pages are released one a day by a scheduled build, so the homepage is where a
+// crawler should meet them. en and zh only — see BRIEF_LOCALES.
+const showMoneyHub = (BRIEF_LOCALES as readonly string[]).includes(locale);
+const moneyHub = showMoneyHub ? { href: moneyHubPath(locale), label: briefCopy(locale).hubTitle } : null;
 const secondaryTopics = TOPIC_IDS.filter((topic) => !PRIMARY_TOPIC_IDS.includes(topic));
 
 const homeLinks = [
@@ -107,6 +114,7 @@ const zhDecisionLinks = locale === 'zh'
   <ul class="home-library__links">
     <li><a href={localizedPath(locale, '/tools')}>{content.library.calculators}</a></li>
     <li><a href={localizedPath(locale, '/guides')}>{content.library.guides}</a></li>
+    {moneyHub && <li><a href={moneyHub.href}>{moneyHub.label}</a></li>}
   </ul>
   <p class="home-library__more">
     <strong>{content.library.moreTopics}:</strong>{' '}

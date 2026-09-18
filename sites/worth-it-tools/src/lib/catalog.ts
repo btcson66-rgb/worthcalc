@@ -117,7 +117,11 @@ export function getGuides(locale: ContentLocale): GuideEntry[] {
   const cached = guideCache.get(locale);
   if (cached) return cached;
   const entries = guideIndex[locale]
-    .filter((entry) => entry.path !== '/guides/' && !entry.path.startsWith('/topics/'))
+    // '/money/' is the brief hub, the same kind of navigation surface as
+    // '/guides/' and the topic hubs. Individual briefs ('/money/<slug>/') stay
+    // in the list: an extra inbound link from the guide directory is exactly
+    // what a newly released brief wants.
+    .filter((entry) => entry.path !== '/guides/' && entry.path !== '/money/' && !entry.path.startsWith('/topics/'))
     .map((entry) => ({ path: entry.path, title: entry.title, topic: classifyTopic(entry.path) }));
   // Every editorial page asks for this list to find its topic and its siblings,
   // so it is built once per locale rather than ~1,150 times per build.

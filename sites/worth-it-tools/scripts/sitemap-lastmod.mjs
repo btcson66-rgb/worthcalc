@@ -40,6 +40,12 @@ function contentRouteLookup() {
   const collections = [
     { directory: join(projectRoot, 'src', 'content', 'growth-tools'), slugField: 'toolSlug', prefix: 'tools/' },
     { directory: join(projectRoot, 'src', 'content', 'growth-articles'), slugField: 'articleSlug', prefix: '' },
+    // Without this entry every brief would fall through to the shared
+    // src/pages/[locale]/money/[slug].astro route and inherit that one file's
+    // git date, so eighty pages released on eighty different days would all
+    // claim the same lastmod. The briefs carry `lastReviewed` in frontmatter,
+    // which is already in dateFields above, so the per-page date is used.
+    { directory: join(projectRoot, 'src', 'content', 'money-briefs'), slugField: 'briefSlug', prefix: 'money/' },
   ];
 
   for (const collection of collections) {

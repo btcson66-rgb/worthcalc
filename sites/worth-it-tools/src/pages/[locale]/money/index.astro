@@ -1,0 +1,129 @@
+---
+/*
+ * The money-brief hub.
+ *
+ * It lists briefs straight from the collection rather than from
+ * src/data/guideIndex.ts, and that is the point. guideIndex.ts is generated
+ * from a previous build and committed, so a brief released by the scheduled
+ * rebuild on a day nobody touched the repo would not be in it — and
+ * scripts/check-guide-index.mjs fails any editorial page with no inbound
+ * internal link. Reading the collection means a brief acquires its inbound link
+ * in the same build that first emits it, with no generated file to keep in sync.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+import type { ContentLocale, CoreLocale } from '../../../consts';
+import { localizedCorePath, useTranslations } from '../../../i18n/utils';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { isPublished, publishCutoff } from '../../../lib/publication';
+import { BRIEF_CLUSTERS, BRIEF_LOCALES, briefCopy, moneyHubPath } from '../../../lib/moneyBriefs';
+
+export function getStaticPaths() {
+  return BRIEF_LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as CoreLocale;
+const t = useTranslations(locale);
+const copy = briefCopy(locale);
+const cutoff = publishCutoff();
+
+const briefs = (await getCollection('moneyBriefs', ({ data }) => !data.draft))
+  .filter((entry) => entry.data.locale === locale && isPublished(entry.data.publishAt, cutoff))
+  // Newest release first: the hub doubles as the "what changed" surface, and a
+  // crawler arriving after a scheduled rebuild should meet the new pages first.
+  .sort((left, right) =>
+    right.data.publishAt.localeCompare(left.data.publishAt) || left.data.title.localeCompare(right.data.title, locale),
+  );
+
+const grouped = BRIEF_CLUSTERS.map((cluster) => ({
+  cluster,
+  entries: briefs.filter((entry) => entry.data.cluster === cluster),
+})).filter((group) => group.entries.length > 0);
+
+const crumbs = [
+  { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+  { name: copy.hubTitle, url: Astro.url.pathname },
+];
+
+// BaseLayout otherwise defaults to all five CORE_LOCALES, and the header's
+// language switcher would render links to /es/money/, /fr/money/ and /de/money/ —
+// six broken internal links that check:links fails the build on, plus hreflang
+// alternates pointing at URLs that do not exist. The cluster is en/zh only.
+const hubAlternates = [...BRIEF_LOCALES] as ContentLocale[];
+const hubPath = moneyHubPath(locale);
+const isoDay = (value: Date) => value.toISOString().slice(0, 10);
+---
+
+<BaseLayout
+  title={copy.hubTitle}
+  description={copy.hubDescription}
+  locale={locale}
+  alternateLocales={hubAlternates}
+  jsonLd={[
+    breadcrumbJsonLd(crumbs, Astro.site),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: copy.hubTitle,
+      description: copy.hubDescription,
+      url: new URL(hubPath, Astro.site ?? 'https://worthcalc.win').toString(),
+      hasPart: briefs.map((entry) => ({
+        '@type': 'Article',
+        headline: entry.data.title,
+        url: new URL(`${hubPath}${entry.data.briefSlug}/`, Astro.site ?? 'https://worthcalc.win').toString(),
+        dateModified: isoDay(entry.data.lastReviewed),
+      })),
+    },
+  ]}
+>
+  <Breadcrumb items={crumbs} includeJsonLd={false} />
+  <section class="directory-intro">
+    <h1>{copy.hubTitle}</h1>
+    <p class="section-lead">{copy.hubLead}</p>
+  </section>
+
+  {grouped.map((group) => (
+    <section class="directory-topic" id={group.cluster} aria-labelledby={`cluster-${group.cluster}-heading`}>
+      <h2 id={`cluster-${group.cluster}-heading`}>{copy.clusterNames[group.cluster]}</h2>
+      <p class="section-lead">{copy.clusterIntros[group.cluster]}</p>
+      <ul class="brief-list">
+        {group.entries.map((entry) => (
+          <li>
+            <a href={`${hubPath}${entry.data.briefSlug}/`}>{entry.data.title}</a>
+            <p class="brief-list__answer">{entry.data.answer}</p>
+            <p class="brief-list__meta">
+              {copy.updatedLabel} <time datetime={isoDay(entry.data.lastReviewed)}>{isoDay(entry.data.lastReviewed)}</time>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .brief-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .brief-list > li {
+    padding-inline-start: 0.9rem;
+    border-inline-start: 3px solid var(--border, rgba(0, 0, 0, 0.12));
+  }
+  .brief-list > li > a {
+    font-weight: 600;
+  }
+  .brief-list__answer {
+    margin: 0.35rem 0 0.2rem;
+    line-height: 1.55;
+  }
+  .brief-list__meta {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.72;
+  }
+</style>

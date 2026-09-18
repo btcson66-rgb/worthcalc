@@ -1,10 +1,15 @@
 ---
 import { SITE } from '../consts';
 import { getLocaleFromUrl, localizedCorePath, useTranslations } from '../i18n/utils';
+import { BRIEF_LOCALES, briefCopy, moneyHubPath } from '../lib/moneyBriefs';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
+// The money hub exists in en and zh only, so the link is conditional: a footer
+// link to /es/money/ on every Spanish page would be 141 broken internal links
+// and a check:links failure, not a soft 404.
+const showMoneyHub = (BRIEF_LOCALES as readonly string[]).includes(locale);
 ---
 
 <footer class="site-footer">
@@ -15,6 +20,7 @@ const year = new Date().getFullYear();
       <nav class="footer-links" aria-label={t('footer.browse')}>
         <a href={localizedCorePath(locale, '/tools')}>{t('footer.calculators')}</a>
         <a href={localizedCorePath(locale, '/guides')}>{t('footer.guides')}</a>
+        {showMoneyHub && <a href={moneyHubPath(locale)}>{briefCopy(locale).hubTitle}</a>}
       </nav>
     </section>
     <section aria-labelledby="footer-legal-heading">

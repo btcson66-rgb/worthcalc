@@ -87,6 +87,24 @@ an already-published day is harmless because the build is deterministic for a da
 merged to `main`. GitHub also disables scheduled workflows in repositories with 60 days
 of no activity — if releases stop, check that first.
 
+### Current runway
+
+| Batch | Topics | Release window |
+| --- | ---: | --- |
+| 1 | 27 | 2026-09-18 → 2026-10-14 |
+| 2 | 11 | 2026-10-15 → 2026-10-25 |
+| 3 | 14 | 2026-10-26 → 2026-11-08 |
+| **Total** | **52** | **2026-09-18 → 2026-11-08** |
+
+52 topics × en/zh = 104 brief pages, plus the two hubs. At full release the sitemap
+reaches 412 URLs against `maxUrls` 425 in `config/url-budget.json`. The rate is two
+URLs a day throughout; only the runway gets longer when a batch is added.
+
+The last scheduled release is **2026-11-08**. After that date the cron still fires
+nightly, `check-due-briefs.mjs` reports nothing due, and the build is skipped — so the
+cluster stops publishing silently rather than failing. Adding the next batch is the
+only thing that restarts it.
+
 ## Internal linking, and why the hub does not read `guideIndex.ts`
 
 `scripts/check-guide-index.mjs` fails any editorial page in the sitemap that has no

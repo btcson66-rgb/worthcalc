@@ -5,10 +5,19 @@ import { localizedPath } from '../i18n/utils';
  * Locales the money-brief cluster publishes into.
  *
  * en and zh only, matching HUB_LOCALES in src/lib/topics.ts and the i18n
- * expansion freeze in README.md: es, fr and de carry 141 of the site's 307
- * indexable URLs between them and recorded zero GSC impressions across them,
- * so a new cluster in those locales would add crawl surface with no evidence
- * of demand behind it. They can be added later from GSC data, not from a guess.
+ * expansion freeze in README.md. The reason is where the measured demand is,
+ * not that the other locales have none: in the 3-month GSC window recorded in
+ * docs/audits/worthcalc-disposition-2026-09-15.csv, en and zh took 760 of the
+ * 873 impressions across the kept set (87%) on 163 of its 304 URLs, while es,
+ * fr and de took 113 on the other 141. Writing a new cluster where 87% of the
+ * demand already is beats spreading it five ways.
+ *
+ * Do not read this as "es/fr/de are dead" — that claim was in this comment
+ * until 2026-09-19 and the same CSV disproves it. German in particular has the
+ * highest hit rate on the site: 15 of its 17 kept URLs earned impressions (88%),
+ * against 49% for en and 33% for zh. On that evidence de is the most
+ * under-built locale here, not the most expendable, and the case for adding
+ * content there should be made from GSC data rather than from this freeze.
  */
 export const BRIEF_LOCALES: readonly CoreLocale[] = ['en', 'zh'];
 

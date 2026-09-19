@@ -128,10 +128,20 @@ at build time, so a brief published today never links to one that is three weeks
 ## Boundaries
 
 - **en and zh only.** `BRIEF_LOCALES` matches `HUB_LOCALES` in `src/lib/topics.ts` and
-  the i18n expansion freeze in `README.md`: es, fr and de hold 141 of the 307 indexable
-  URLs and recorded zero GSC impressions across them. Adding a cluster there would add
-  crawl surface with no evidence of demand. That decision should be revisited from GSC
-  data, not from a guess.
+  the i18n expansion freeze in `README.md`. The reason is concentration of measured
+  demand: in the 3-month window recorded in
+  `docs/audits/worthcalc-disposition-2026-09-15.csv`, en and zh took **760 of the 873
+  impressions (87%)** across the kept set, on 163 of its 304 URLs. Writing a new cluster
+  where 87% of the demand already sits beats spreading it five ways.
+
+  > **Correction, 2026-09-19.** This bullet previously said es, fr and de "recorded zero
+  > GSC impressions". That is false. The same CSV shows they recorded **113 impressions
+  > across 50 URLs**; the zero belongs to the *deindexed* 195 URLs described in the
+  > comment in `src/lib/topics.ts`, not to the kept 141. German is in fact the
+  > best-performing locale on the site by hit rate — **15 of its 17 kept URLs earned
+  > impressions (88%)**, against 49% for en and 33% for zh — which argues de is
+  > under-built rather than expendable. Do not use this freeze as grounds for removing
+  > or deindexing those locales.
 - **The figures need re-verification.** Every brief carries a `lastReviewed` date and
   renders it. A rate brief whose figure is six months stale is worse than no brief,
   because the whole premise of the cluster is that these numbers are current.

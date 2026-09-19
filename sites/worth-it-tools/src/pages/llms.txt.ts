@@ -1,6 +1,8 @@
 import type { APIContext } from 'astro';
 import { SITE, CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
+import { getCollection } from 'astro:content';
 import { getCalculators, getGuides } from '../lib/catalog';
+import { isPublished, publishCutoff } from '../lib/publication';
 import { TOPIC_IDS, topicCopy, topicPath } from '../lib/topics';
 
 export const prerender = true;
@@ -29,6 +31,15 @@ export const GET = async ({ site }: APIContext): Promise<Response> => {
   const url = (path: string) => `${origin}${path}`;
   const calculators = (await getCalculators('en')).sort((left, right) => left.title.localeCompare(right.title, 'en'));
   const guides = getGuides('en');
+  // Read from the collection rather than from getGuides(): guideIndex.ts is
+  // generated from a previous build and committed, so a brief released by the
+  // nightly rebuild would be missing from this file until someone regenerated
+  // it. This is the file answer engines read to find out what the site holds,
+  // and a stale list here is worse than a stale list anywhere else on the site.
+  const briefCutoff = publishCutoff();
+  const briefs = (await getCollection('moneyBriefs', ({ data }) => !data.draft))
+    .filter((entry) => entry.data.locale === 'en' && isPublished(entry.data.publishAt, briefCutoff))
+    .sort((left, right) => right.data.publishAt.localeCompare(left.data.publishAt));
 
   const lines: string[] = [
     `# ${SITE.name} (worthcalc.win)`,
@@ -66,6 +77,23 @@ export const GET = async ({ site }: APIContext): Promise<Response> => {
     lines.push(`- [${guide.title}](${url(`/en${guide.path}`)})`);
   }
 
+  if (briefs.length > 0) {
+    lines.push('', '## Money briefs (dated reference figures)', '');
+    lines.push(
+      `- Hub: ${url('/en/money/')}`,
+      '',
+      'Each brief states one figure from a named primary source with the date it was',
+      'verified, then applies it to the arithmetic that turns it into a decision. Unlike',
+      'the guides above, these carry figures that move; every entry below shows the date',
+      'that figure was last checked, and a brief is re-verified rather than left standing.',
+      '',
+    );
+    for (const brief of briefs) {
+      const checked = brief.data.lastReviewed.toISOString().slice(0, 10);
+      lines.push(`- [${brief.data.title}](${url(`/en/money/${brief.data.briefSlug}/`)}) — checked ${checked}. ${brief.data.answer}`);
+    }
+  }
+
   lines.push(
     '',
     '## Other languages',
@@ -79,6 +107,7 @@ export const GET = async ({ site }: APIContext): Promise<Response> => {
     `- Sitemap: ${url('/sitemap-index.xml')}`,
     `- Every calculator, grouped by topic: ${url('/en/tools/')}`,
     `- Every guide, grouped by topic: ${url('/en/guides/')}`,
+    `- Dated reference figures, newest first: ${url('/en/money/')}`,
     '',
   );
 

@@ -6,6 +6,18 @@ on:
     paths:
       - 'sites/worth-it-tools/**'
       - '.github/workflows/deploy-worthcalc.yml'
+  # Daily release window for the money-brief cluster. Those pages are gated on a
+  # publishAt date in their own frontmatter (sites/worth-it-tools/src/lib/publication.ts),
+  # so a page written today does not appear until its date arrives — and it only
+  # appears if something rebuilds the site on that date. Nothing else in this
+  # repo does that: the push trigger above fires when a human merges, which is
+  # exactly what the date gate exists to decouple from.
+  #
+  # 03:20 UTC rather than the hour: GitHub queues scheduled workflows and drops
+  # them under load at popular times, and on-the-hour crons are the most popular
+  # times there are.
+  schedule:
+    - cron: '20 3 * * *'
   workflow_dispatch:
     inputs:
       ci_only:
@@ -24,7 +36,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Scheduled runs only. A rebuild on a day with no release produces byte-identical
+  # output, so deploying it would burn ~15 minutes of CI and resubmit every sitemap
+  # URL to IndexNow for no change. This decides whether the night is a release night.
+  # Push and workflow_dispatch runs skip this job entirely and build unconditionally.
+  release-window:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.due.outputs.due }}
+      count: ${{ steps.due.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - id: due
+        run: node sites/worth-it-tools/scripts/check-due-briefs.mjs
+      - name: 摘要
+        run: |
+          echo "due=${{ steps.due.outputs.due }} count=${{ steps.due.outputs.count }}" >> "$GITHUB_STEP_SUMMARY"
+
   build:
+    needs: [release-window]
+    # `always()` is required because release-window is skipped on push and
+    # workflow_dispatch; without it a skipped dependency would skip the build and
+    # no merge would ever deploy again.
+    if: always() && (github.event_name != 'schedule' || needs.release-window.outputs.due == 'true')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -73,7 +111,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -84,7 +122,7 @@ jobs:
 
   indexnow:
     needs: deploy
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -99,7 +137,7 @@ jobs:
 
   gsc-submit:
     needs: deploy
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

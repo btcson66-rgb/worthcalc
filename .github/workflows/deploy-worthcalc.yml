@@ -111,7 +111,19 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    # 2026-09-19 起 push 觸發的部署全部沒有發生，原因在這一行。
+    #
+    # release-window 只在 schedule 時執行，push 時是 skipped。GitHub Actions 會把
+    # skipped 沿著 needs 鏈往下傳：一個沒有使用 always()／!cancelled() 之類狀態函式
+    # 的 if，隱含條件是 success()，而 success() 看的是整條相依closure，不只直接
+    # needs。build 自己用 always() 擋住了，下游三個 job 沒有，於是 #179（09-19，
+    # PR #170 加入 release-window 的那次）之後每一次 merge 都只 build 不部署——
+    # 對照 #176／#178（09-15，還沒有 release-window）三個 job 都正常執行。
+    #
+    # 結果是網站只靠每天 03:20 UTC 的排程更新，合併後最多 24 小時才上線。
+    # needs.<job>.result 明確檢查上游結果，取代那個隱含的 success()。
+    if: always() && needs.build.result == 'success'
+      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -122,7 +134,9 @@ jobs:
 
   indexnow:
     needs: deploy
-    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    # 同 deploy：明確檢查上游結果，否則 release-window 的 skipped 會傳遞下來。
+    if: always() && needs.deploy.result == 'success'
+      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -137,7 +151,9 @@ jobs:
 
   gsc-submit:
     needs: deploy
-    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true)
+    # 同 deploy：明確檢查上游結果，否則 release-window 的 skipped 會傳遞下來。
+    if: always() && needs.deploy.result == 'success'
+      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

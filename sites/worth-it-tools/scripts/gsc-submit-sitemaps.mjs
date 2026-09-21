@@ -8,7 +8,22 @@ const EXPECTED_PROPERTY = 'sc-domain:worthcalc.win';
 const INDEX_URL = `${SITE_ORIGIN}/sitemap-index.xml`;
 const CREDENTIAL_ENV = 'GSC_SERVICE_ACCOUNT_JSON';
 const DAY_MS = 24 * 60 * 60 * 1000;
-const STUCK_MS = 14 * DAY_MS;
+// Search Console 的 sitemap 資源沒有獨立的「擷取失敗」旗標。GSC 網頁介面顯示
+// 「無法擷取 / Couldn't fetch」、類型「未知」的那一筆，API 讀回來是：
+//   isPending: true, lastDownloaded: null, errors: "0", warnings: "0"
+// 所以 lastDownloaded == null 同時涵蓋「還沒輪到」與「Google 抓了但失敗」，只能
+// 靠距離上次提交多久來區分。兩天寬限是為了不誤報剛送出去的那一筆。
+const NEVER_FETCHED_MS = 2 * DAY_MS;
+// 一筆已註冊但從未被成功下載的 sitemap，每隔這麼多天重送一次 PUT。
+//
+// 在此之前這支腳本只要 GSC 回報已註冊就直接跳過 PUT（下面 already_registered
+// 那一段），所以一筆註冊在失敗狀態的 sitemap 永遠不會被重新提交，狀態就這樣凍住。
+// 重新提交是 Google 對 Couldn't fetch 的官方處理方式，而這段程式碼把它變成
+// 只有人工 --force 才做得到。roomfeng 與 funnytools 在 2026-09-21 修掉同一件事。
+//
+// 為什麼要有間隔：每次部署都 PUT 一樣是錯的，那會讓 lastSubmitted 永遠是「剛剛」，
+// 抹掉「已註冊」與「剛提交」的區別，也讓下面的 never-fetched 判定永遠不成立。
+const RESUBMIT_MS = 7 * DAY_MS;
 const mode = process.argv.includes('--health') || process.argv.includes('--dry-run') ? 'health' : 'submit';
 const forceSubmit = process.argv.includes('--force');
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -149,12 +164,22 @@ function dateValue(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+/** 已在 Search Console 註冊，但 Google 從未回報下載過。 */
 function stuckPath(entry, now = new Date()) {
   const submitted = dateValue(entry.lastSubmitted);
   return entry.isPending === true
     && !entry.lastDownloaded
     && submitted
-    && now - submitted > STUCK_MS;
+    && now - submitted > NEVER_FETCHED_MS;
+}
+
+/**
+ * 該不該重送一次 PUT，讓 Google 重試。
+ * 已經成功下載過的項目永遠不重送；沒有可解析的送出時間也不重送，避免無限 PUT。
+ */
+function needsResubmission(entry, now = new Date()) {
+  const submitted = dateValue(entry.lastSubmitted);
+  return !entry.lastDownloaded && Boolean(submitted) && now - submitted > RESUBMIT_MS;
 }
 
 function printTable(entries) {
@@ -178,7 +203,7 @@ async function sitemapHealth(token, property) {
   printTable(entries);
   const stuck = entries.filter((entry) => stuckPath(entry));
   if (stuck.length) {
-    throw new Error(`GSC sitemap stuck pending for more than 14 days with no lastDownloaded: ${stuck.map((entry) => entry.path).join(', ')}`);
+    throw new Error(`Search Console has never reported a download for: ${stuck.map((entry) => entry.path).join(', ')} (its web UI shows these as 無法擷取 / Couldn't fetch).`);
   }
   return entries;
 }
@@ -251,9 +276,10 @@ async function submitSitemaps(token, property) {
     }
     const before = beforeResponse.ok ? snapshot(path, beforeJson) : snapshot(path);
     if (stuckPath(before, now)) {
-      report.alerts.push(`GSC sitemap stuck pending for more than 14 days with no lastDownloaded: ${before.path}`);
+      report.alerts.push(`NEVER FETCHED: Search Console has never reported a download for ${before.path} (submitted ${before.lastSubmitted}); its web UI shows this as 無法擷取 / Couldn't fetch.`);
     }
-    if (beforeResponse.ok && !forceSubmit) {
+    const resubmitting = beforeResponse.ok && needsResubmission(before, now);
+    if (beforeResponse.ok && !forceSubmit && !resubmitting) {
       registered += 1;
       report.entries.push({ ...before, action: 'already_registered' });
       continue;
@@ -279,9 +305,15 @@ async function submitSitemaps(token, property) {
     submitted += 1;
     const after = snapshot(path, afterJson);
     if (stuckPath(after, now)) {
-      report.alerts.push(`GSC sitemap stuck pending for more than 14 days with no lastDownloaded: ${after.path}`);
+      report.alerts.push(`NEVER FETCHED: Search Console has never reported a download for ${after.path} (submitted ${after.lastSubmitted}); its web UI shows this as 無法擷取 / Couldn't fetch.`);
     }
-    report.entries.push({ ...after, action: forceSubmit ? 'force_submitted' : 'submitted_unregistered' });
+    report.entries.push({
+      ...after,
+      action: forceSubmit
+        ? 'force_submitted'
+        : resubmitting ? 'resubmitted_never_fetched' : 'submitted_unregistered',
+      ...(resubmitting ? { previousSubmission: before.lastSubmitted } : {}),
+    });
   }
 
   report.alerts = [...new Set(report.alerts)];
@@ -293,8 +325,8 @@ async function submitSitemaps(token, property) {
     report.status = 'submitted';
     report.message = `Submitted ${submitted} unregistered sitemap path(s); read back ${registered} existing path(s).`;
   } else if (report.alerts.length) {
-    report.status = 'registered_pending';
-    report.message = `Read back ${registered} registered sitemap path(s). Google download remains pending; no repeat PUT was sent.`;
+    report.status = 'registered_never_fetched';
+    report.message = `Read back ${registered} registered sitemap path(s); Search Console has never reported a download for ${report.alerts.length} of them.`;
   } else {
     report.status = 'already_registered';
     report.message = `Read back ${registered} registered sitemap path(s); no repeat PUT was needed.`;

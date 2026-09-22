@@ -1,0 +1,48 @@
+{
+  "$comment": "WorthCalc 全站費率資料源。每一筆都必須帶 source 與 checked，過期由 scripts/verify-rates.mjs 在 CI 擋下。計算頁面一律從這裡讀，不要在元件裡寫死數字。",
+  "$schema_version": 2,
+  "$review_interval_days": 120,
+  "$guard": {
+    "$comment": "硬寫費率掃描的設定。掃描規則是「離該群組 keywords 不到 context_lines 行的地方，出現該群組的費率數字」＝ 有人繞過資料源。用鄰近判斷而不是全檔掃描，是因為 3000 這種數字在別的計算機（電動車補助、電信月租、信用卡年費）有完全無關的正當用途，全檔掃描會產生數百筆假警報，最後只會讓人關掉這個檢查。",
+    "context_lines": 4,
+    "separators": [",", ".", " ", " "],
+    "$exclude_comment": "guideIndex.ts 是 scripts/generate-guide-index.mjs 從 dist/ 的 H1 產生的建置產物，內容跟著頁面走。掃描產物等於重複計算同一個事實，而且會讓人以為要去改產生出來的檔案。",
+    "exclude": ["src/data/guideIndex.ts"]
+  },
+
+  "costco_tw": {
+    "label": "好市多台灣會員",
+    "currency": "TWD",
+    "keywords": ["costco", "好市多", "黑鑽", "金星", "尊榮"],
+    "tiers": {
+      "gold_star": { "name": "金星會員", "annual_fee": 1500, "reward_rate": 0 },
+      "business":  { "name": "商業會員", "annual_fee": 1500, "reward_rate": 0 },
+      "executive": { "name": "黑鑽卡會員", "annual_fee": 3000, "reward_rate": 0.02, "reward_cap": 30000 }
+    },
+    "upgrade_delta": 1500,
+    "breakeven_qualified_spend": 75000,
+    "breakeven_note": "1500 ÷ 2% = 75,000。這是「升級黑鑽 vs 金星」的門檻，不是「辦不辦會員」的門檻，兩者是不同問題，頁面上要分開講。回饋不適用加油、菸酒、禮券、電信與美食廣場。",
+    "source": "https://www.costco.com.tw/membership",
+    "checked": "2026-09-22",
+    "history": [
+      { "until": "2025-12-31", "gold_star": 1350, "business": 1150, "executive": 3000, "upgrade_delta": 1650, "breakeven": 82500, "reward_cap": 30000 }
+    ]
+  },
+
+  "costco_us": {
+    "label": "Costco US membership",
+    "currency": "USD",
+    "keywords": ["costco", "gold star", "executive membership", "好市多"],
+    "tiers": {
+      "gold_star": { "name": "Gold Star", "annual_fee": 65, "reward_rate": 0 },
+      "executive": { "name": "Executive", "annual_fee": 130, "reward_rate": 0.02, "reward_cap": 1250 }
+    },
+    "upgrade_delta": 65,
+    "breakeven_qualified_spend": 3250,
+    "breakeven_note": "65 ÷ 2% = 3,250. Reward excludes gas, tobacco, gift cards, cell plans, food court and membership fees.",
+    "source": "https://www.costco.com/executive-rewards.html",
+    "checked": "2026-09-22"
+  },
+
+  "$usage": "在 Astro 元件裡：import { costcoTw } from '../lib/rates'; 不要複製數字到別處。新增任何費率都要照同樣格式帶 source、checked 與 keywords，否則 CI 會失敗。"
+}

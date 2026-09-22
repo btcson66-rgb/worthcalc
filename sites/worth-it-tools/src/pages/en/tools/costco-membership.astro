@@ -1,6 +1,7 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../../lib/trustBlock';
+import { capReachedAt, costcoUs, enDate, percent, usd } from '../../../lib/rates';
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
@@ -8,6 +9,13 @@ import { localizedPath } from '../../../i18n/utils';
 const locale = 'en';
 const decisionGuide = costcoGuides.en;
 if (!decisionGuide) throw new Error('Missing English membership guide');
+const gold = costcoUs.tiers.gold_star;
+const executive = costcoUs.tiers.executive;
+const rewardRate = executive.reward_rate;
+const rewardCap = executive.reward_cap ?? 0;
+const verified = enDate(costcoUs.checked);
+const upgradeBreakeven = costcoUs.breakeven_qualified_spend;
+const capReached = capReachedAt(executive);
 const title = 'Costco Membership Calculator: Gold Star vs Executive';
 const description = 'Compare Gold Star and Executive with a Costco membership calculator that shows the eligible-spend break-even, reward cap, exclusions, and tier math.';
 const faq = [
@@ -17,7 +25,7 @@ const faq = [
   },
   {
     question: 'Which purchases count toward the Executive reward?',
-    answer: 'Under the U.S. terms verified August 5, 2026, the reward is approximately 2% of qualifying pre-tax purchases after refunds. Most merchandise bought through eligible U.S. and Canadian Costco channels can count for U.S. and Canadian residents, but only purchases by the Primary and active Primary Household Cardholder apply. Check the current terms because exclusions can change.',
+    answer: `Under the U.S. terms verified ${verified}, the reward is approximately ${percent(rewardRate)} of qualifying pre-tax purchases after refunds. Most merchandise bought through eligible U.S. and Canadian Costco channels can count for U.S. and Canadian residents, but only purchases by the Primary and active Primary Household Cardholder apply. Check the current terms because exclusions can change.`,
   },
   {
     question: 'What does not count toward the Costco Executive reward?',
@@ -25,11 +33,11 @@ const faq = [
   },
   {
     question: 'Is there an annual cap on the Executive reward?',
-    answer: 'Yes. Costco\'s U.S. terms verified August 5, 2026 state that the annual 2% Reward is capped at $1,250 in a 12-month period. That published cap is the calculator default, but it remains editable so the math does not silently assume that every market or future membership year uses the same limit.',
+    answer: `Yes. Costco's U.S. terms verified ${verified} state that the annual ${percent(rewardRate)} Reward is capped at ${usd(rewardCap)} in a 12-month period. That published cap is the calculator default, but it remains editable so the math does not silently assume that every market or future membership year uses the same limit.`,
   },
   {
     question: 'What if my reward is less than the Executive upgrade fee?',
-    answer: 'Costco says the reward is not guaranteed to cover the upgrade fee. Under the U.S. terms verified August 5, 2026, receiving a refund for the current Executive upgrade fee requires canceling or downgrading to Gold Star or Business Membership. Any reward already issued or accrued is subtracted from the refund, and reward above the refund amount is forfeited. Confirm the amount and process with Costco before acting.',
+    answer: `Costco says the reward is not guaranteed to cover the upgrade fee. Under the U.S. terms verified ${verified}, receiving a refund for the current Executive upgrade fee requires canceling or downgrading to Gold Star or Business Membership. Any reward already issued or accrued is subtracted from the refund, and reward above the refund amount is forfeited. Confirm the amount and process with Costco before acting.`,
   },
   {
     question: 'Does Executive always beat Gold Star?',
@@ -46,13 +54,13 @@ const related = [
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']} trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']} showReview={false} trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}>
   <p class="intro">
     A Costco membership decision has two different break-even tests. First, do the price savings on purchases you already planned cover the basic membership fee? Second, does the Executive reward on <em>eligible</em> purchases cover the extra fee over Gold Star? This calculator keeps those questions separate and shows every step.
   </p>
 
   <aside class="terms-note" aria-label="Published U.S. terms used as calculator defaults">
-    <strong>U.S. defaults, verified August 5, 2026:</strong> Gold Star $65 a year, Executive $130 a year, an approximately 2% reward on qualifying purchases, and a $1,250 reward cap per 12-month period. Fees can be subject to sales tax. Every figure remains editable; use the renewal offer and rules that apply to your membership.
+    <strong>U.S. defaults, verified {verified}:</strong> {gold.name} {usd(gold.annual_fee)} a year, {executive.name} {usd(executive.annual_fee)} a year, an approximately {percent(rewardRate)} reward on qualifying purchases, and a {usd(rewardCap)} reward cap per 12-month period. Fees can be subject to sales tax. Every figure remains editable; use the renewal offer and rules that apply to your membership.
   </aside>
 
   <div class="calculator-grid">
@@ -70,14 +78,14 @@ const related = [
           <p class="helper">Start with receipts or your account estimate, then remove excluded purchases. Do not copy total spend here automatically.</p>
         </div>
         <div class="field">
-          <label for="gold-fee">Gold Star annual fee</label>
-          <input id="gold-fee" type="number" inputmode="decimal" min="0" step="1" value="65" />
-          <p class="helper">Published U.S. fee verified August 5, 2026; replace it if your renewal amount differs.</p>
+          <label for="gold-fee">{gold.name} annual fee</label>
+          <input id="gold-fee" type="number" inputmode="decimal" min="0" step="1" value={gold.annual_fee} />
+          <p class="helper">Published U.S. fee verified {verified}; replace it if your renewal amount differs.</p>
         </div>
         <div class="field">
-          <label for="executive-fee">Executive annual fee</label>
-          <input id="executive-fee" type="number" inputmode="decimal" min="0" step="1" value="130" />
-          <p class="helper">Published U.S. fee verified August 5, 2026; the calculator derives the upgrade fee difference.</p>
+          <label for="executive-fee">{executive.name} annual fee</label>
+          <input id="executive-fee" type="number" inputmode="decimal" min="0" step="1" value={executive.annual_fee} />
+          <p class="helper">Published U.S. fee verified {verified}; the calculator derives the upgrade fee difference.</p>
         </div>
         <div class="field">
           <label for="savings-rate">Assumed savings vs other stores (%)</label>
@@ -85,14 +93,14 @@ const related = [
           <p class="helper">An editable planning assumption from the existing calculator, not a Costco price claim.</p>
         </div>
         <div class="field">
-          <label for="reward-rate">Executive reward rate (%)</label>
-          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
-          <p class="helper">Current U.S. published rate verified August 5, 2026; apply it only to eligible spend.</p>
+          <label for="reward-rate">{executive.name} reward rate (%)</label>
+          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value={rewardRate * 100} />
+          <p class="helper">Current U.S. published rate verified {verified}; apply it only to eligible spend.</p>
         </div>
         <div class="field">
           <label for="reward-cap">Annual reward cap</label>
-          <input id="reward-cap" type="number" inputmode="decimal" min="0" step="50" value="1250" />
-          <p class="helper">Current U.S. published cap for a 12-month period, verified August 5, 2026.</p>
+          <input id="reward-cap" type="number" inputmode="decimal" min="0" step="50" value={rewardCap} />
+          <p class="helper">Current U.S. published cap for a 12-month period, verified {verified}.</p>
         </div>
       </div>
     </section>
@@ -120,8 +128,11 @@ const related = [
       <li><strong>Upgrade break-even eligible spend</strong> = extra Executive fee ÷ entered reward rate.</li>
       <li><strong>Executive reward</strong> = the lower of eligible annual spend × reward rate, or the entered annual cap.</li>
       <li><strong>Executive advantage over Gold Star</strong> = capped reward − extra Executive fee.</li>
-      <li><strong>Basic membership break-even</strong> = Gold Star fee ÷ your assumed shopping-savings rate.</li>
+      <li><strong>Basic membership break-even</strong> = {gold.name} fee ÷ your assumed shopping-savings rate.</li>
     </ol>
+    <p>
+      At the published fees that is {usd(costcoUs.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>{usd(upgradeBreakeven)}</strong> of eligible annual spend, and the {usd(rewardCap)} cap stops the reward growing once eligible spend passes {usd(capReached)}.
+    </p>
     <p>
       Shopping savings are applied to total planned spend when estimating whether either tier beats no membership. The Executive comparison uses only reward-eligible spend. Keeping those bases separate prevents excluded gas, food-court, fee, tax, or third-party purchases from making the upgrade look better than it is.
     </p>
@@ -130,7 +141,7 @@ const related = [
   <section class="explanation" aria-labelledby="costco-eligible">
     <h2 id="costco-eligible">What belongs in eligible annual spend</h2>
     <p>
-      Under the U.S. terms checked on August 5, 2026, the reward is approximately 2% of qualifying pre-tax purchases after refunds. Most eligible merchandise bought through Costco warehouse registers and Costco websites in the U.S. and Canada can count for U.S. and Canadian residents, along with qualifying Costco Travel purchases after travel is completed. Only purchases by the Primary and active Primary Household Cardholder apply.
+      Under the U.S. terms checked on {verified}, the reward is approximately {percent(rewardRate)} of qualifying pre-tax purchases after refunds. Most eligible merchandise bought through Costco warehouse registers and Costco websites in the U.S. and Canada can count for U.S. and Canadian residents, along with qualifying Costco Travel purchases after travel is completed. Only purchases by the Primary and active Primary Household Cardholder apply.
     </p>
     <p>
       Do not include gasoline, food-court purchases, membership fees, Costco Shop Cards, shipping, sales tax, listed deposits or other excluded fees. Restrictions also apply to tobacco, alcohol in named states, prescriptions in certain states, third-party services, and several travel charges. Purchases made before the Executive upgrade do not earn the reward. Use Costco's current full exclusion list rather than treating this summary as exhaustive.
@@ -165,7 +176,7 @@ const related = [
       <li><a href="https://customerservice.costco.com/app/answers/detail/a_id/1205/~/what-is-an-executive-membership">Costco Customer Service — What is an Executive Membership?</a></li>
       <li><a href="https://www.costco.com/f/-/executive-rewards">Costco — Executive Rewards terms and exclusions</a></li>
     </ul>
-    <p class="source-date">Terms and figures on this page were last checked August 5, 2026. Costco can change fees, eligibility, exclusions, caps, and refund procedures.</p>
+    <p class="source-date">Terms and figures on this page were last checked {verified}. Costco can change fees, eligibility, exclusions, caps, and refund procedures.</p>
   </section>
 
   <DecisionGuide content={decisionGuide} />

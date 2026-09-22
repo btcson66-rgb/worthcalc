@@ -4,7 +4,7 @@ import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
-const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
+const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const failures = [];
 const editorialRoutes = [
   {
@@ -350,7 +350,7 @@ for (const article of partialEditorialRoutes) {
     const url = `https://worthcalc.win/${locale}/${article.slug}/`;
     const expectedHreflangs = expectedHreflangsFor(
       url,
-      [...article.locales.map((item) => item === 'zh' ? 'zh-Hant' : item), 'x-default'],
+      [...article.locales.map((item) => item === 'zh' ? 'zh-TW' : item), 'x-default'],
     );
     for (const hreflang of expectedHreflangs) {
       if (!html.includes(`hreflang="${hreflang}"`)) {

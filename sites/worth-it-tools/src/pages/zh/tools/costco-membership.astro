@@ -3,32 +3,61 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import { costcoGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
+import { trustBlockFromDecisionGuide } from '../../../lib/trustBlock';
+import {
+  amount,
+  capReachedAt,
+  costcoTw,
+  ntd,
+  percent,
+  perMonth,
+  savingsBreakeven,
+  zhDate,
+} from '../../../lib/rates';
 
 const locale = 'zh';
 const decisionGuide = costcoGuides.zh;
 if (!decisionGuide) throw new Error('Missing Traditional Chinese membership guide');
-const title = 'Costco 會員回本計算機：金星與尊榮哪個划算？';
-const description = 'Costco 會員值不值得計算機，估算金星、商業、尊榮會員的月消費打平點與年度淨效益。';
+
+const gold = costcoTw.tiers.gold_star;
+const business = costcoTw.tiers.business;
+const executive = costcoTw.tiers.executive;
+const rewardRate = executive.reward_rate;
+const rewardCap = executive.reward_cap ?? 0;
+
+// 兩個門檻都由資料源推導，頁面上不寫死任何一個。
+const upgradeBreakeven = costcoTw.breakeven_qualified_spend;
+const upgradeMonthly = perMonth(upgradeBreakeven);
+const capReached = capReachedAt(executive);
+const demoSavingsRate = 0.15;
+const basicBreakeven = savingsBreakeven(gold.annual_fee, demoSavingsRate);
+
+const title = `Costco 會員回本計算機：金星與${executive.name}哪個划算？`;
+const description = `好市多會員值不值得？用官網現行年費分開算兩題：辦會員的回本消費，以及升級${executive.name}需要多少合格消費。`;
 const faq = [
   {
-    question: 'Costco 會員打平點怎麼算？',
-    answer: '計算機用年費除以預估省下比例和回饋率。以年費 NT$1,350、假設省 15% 來看，月消費約 NT$750 就接近打平。',
+    question: '好市多會員要花多少才回本？',
+    answer: `這題看的是年費除以你自己量出來的省錢率，跟${executive.name}回饋無關。以${gold.name}年費 ${ntd(gold.annual_fee)}、實測省錢率 ${percent(demoSavingsRate)} 為例，一年約 ${ntd(basicBreakeven)} 的可比較消費才打平。省錢率是你的假設，不是好市多的承諾。`,
   },
   {
-    question: '尊榮會員一定比較划算嗎？',
-    answer: '不一定。尊榮會員要有足夠消費，2% 回饋才有機會抵過較高年費。工具會用同一個月消費比較各等級。',
+    question: `${executive.name}要刷多少才值得升級？`,
+    answer: `這是另一題：升級價差 ${ntd(costcoTw.upgrade_delta)} 除以 ${percent(rewardRate)} 合格回饋，等於一年 ${ntd(upgradeBreakeven)}、每月約 ${ntd(upgradeMonthly)} 的合格消費。加油、菸酒、禮券、電信與美食廣場不列入合格消費，所以發票總額要比這條線更高。`,
+  },
+  {
+    question: `${executive.name}的回饋有上限嗎？`,
+    answer: `有。年度回饋上限是 ${ntd(rewardCap)}，換算成合格年消費約 ${ntd(capReached)}。超過之後再刷，這個計算機不會再增加回饋。`,
+  },
+  {
+    question: '為什麼要分成兩題算？',
+    answer: '因為它們的分母不同。「該不該辦會員」比的是年費和你實際省下的價差；「該不該升級」比的只有多付的年費和多拿的回饋。把兩者混在一起，會把同一份省錢效益算兩次，結論就會偏樂觀。',
   },
   {
     question: '假設省下比例要填多少？',
-    answer: '請用你常買商品相對一般通路的真實差價。預設 15% 是估算，不代表每樣商品都比較便宜。',
+    answer: '請用你常買品項的實測價差：同品牌、同規格、同單位價格，對照你原本會去的量販店或電商。預設值只是示範，不代表每樣商品都比較便宜；如果大包裝常放到過期，請把這個數字往下調。',
   },
   {
-    question: '加油、餐飲或其他服務可以算進去嗎？',
-    answer: '只有在它們是你的正常消費，且符合你設定的省錢或回饋假設時才建議算入。',
-  },
-  {
-    question: '這會完全符合 Costco 官方規則嗎？',
-    answer: '不會。這是規劃工具，實際年費、回饋上限、排除項目和會員條款仍以官方公告為準。',
+    question: '這會完全符合好市多官方規則嗎？',
+    answer: `不會。這是試算工具，不是財務建議。年費、回饋率、上限、排除項目與會員條款以官方公告為準，本頁數字最後查核日為 ${zhDate(costcoTw.checked)}。`,
   },
 ];
 const related = [
@@ -36,98 +65,201 @@ const related = [
   { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
   { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
-  { title: '量販會員的數學', href: localizedPath(locale, '/costco-math') },
+  { title: '好市多會員的數學', href: localizedPath(locale, '/costco-math') },
+  { title: `${executive.name}值得升級嗎？`, href: localizedPath(locale, '/is-costco-executive-membership-worth-it') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout
+  title={title}
+  description={description}
+  locale={locale}
+  tool={{ name: title }}
+  faq={faq}
+  related={related}
+  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  showReview={false}
+  trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}
+>
   <p class="intro">
-    這個 Costco 會員值不值得計算機會把年費、每月消費、預估價差和尊榮 2% 回饋放在一起算。辦卡或升級前，先看你需要多少月消費才真的回本。
+    好市多會員其實是兩個獨立的問題，這個計算機把它們分開算：<strong>辦不辦會員</strong>看年費能不能被你實測的價差蓋過；<strong>要不要升級{executive.name}</strong>只看多付的年費能不能被多拿的回饋蓋過。把兩題混在一起，就會把同一份省錢效益算兩次。
   </p>
+
+  <aside class="terms-note" aria-label="官網刊載年費與回饋條件">
+    <strong>台灣官網刊載條件，{zhDate(costcoTw.checked)} 查核：</strong>
+    {gold.name} {ntd(gold.annual_fee)}／年、{business.name} {ntd(business.annual_fee)}／年、
+    {executive.name} {ntd(executive.annual_fee)}／年，合格消費 {percent(rewardRate)} 回饋，
+    年度回饋上限 {ntd(rewardCap)}。所有欄位都可以改成你續約單上的實際金額。
+  </aside>
 
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="costco-inputs">
-      <h2 id="costco-inputs">輸入資料</h2>
+      <h2 id="costco-inputs">輸入你的年費與消費</h2>
       <div class="input-grid">
         <div class="field">
-          <label for="tier">會員等級</label>
-          <select id="tier">
-            <option value="gold">金星會員 - NT$1,350/年</option>
-            <option value="business">商業會員 - NT$1,150/年</option>
-            <option value="executive">尊榮會員 - NT$3,000/年</option>
-          </select>
-          <p class="helper">選擇你正在評估的會員方案。</p>
+          <label for="monthly-spend">每月好市多消費（總額）</label>
+          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="100" value="8000" data-range data-range-min="0" data-range-max="20000" data-range-step="500" />
+          <p class="helper">只填你原本就會花的金額。這欄只用來估「辦會員」那一題。</p>
         </div>
         <div class="field">
-          <label for="monthly-spend">每月 Costco 消費</label>
-          <input id="monthly-spend" type="number" inputmode="decimal" min="0" step="100" value="8000" data-range data-range-min="0" data-range-max="2000" data-range-step="10" />
-          <p class="helper">請填你合理會在 Costco 花的金額。</p>
+          <label for="eligible-annual-spend">每年合格消費（可累積回饋）</label>
+          <input id="eligible-annual-spend" type="number" inputmode="decimal" min="0" step="1000" placeholder="請填合格淨額" />
+          <p class="helper">從消費紀錄扣掉加油、菸酒、禮券、電信、美食廣場與退貨後的淨額，不要直接把總消費填進來。</p>
         </div>
         <div class="field">
-          <label for="savings-rate">相對一般通路省下比例 (%)</label>
-          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value="15" data-range data-range-min="0" data-range-max="25" data-range-step="0.5" />
-          <p class="helper">可自行調整的價差假設。</p>
+          <label for="base-fee">基本會員年費（{gold.name}／{business.name}）</label>
+          <input id="base-fee" type="number" inputmode="decimal" min="0" step="50" value={gold.annual_fee} />
+          <p class="helper">官網現行刊載金額；續約單金額不同時請改成你的實際費用。</p>
         </div>
         <div class="field">
-          <label for="reward-rate">尊榮會員回饋 (%)</label>
-          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value="2" />
-          <p class="helper">尊榮會員比較時使用，年回饋上限 NT$10,000。</p>
+          <label for="executive-fee">{executive.name}年費</label>
+          <input id="executive-fee" type="number" inputmode="decimal" min="0" step="50" value={executive.annual_fee} />
+          <p class="helper">計算機會自己算出升級價差，不需要你手動輸入。</p>
+        </div>
+        <div class="field">
+          <label for="savings-rate">相對其他通路的實測省錢率 (%)</label>
+          <input id="savings-rate" type="number" inputmode="decimal" min="0" step="0.1" value={demoSavingsRate * 100} data-range data-range-min="0" data-range-max="25" data-range-step="0.5" />
+          <p class="helper">你自己量出來的假設，不是好市多的價格承諾。</p>
+        </div>
+        <div class="field">
+          <label for="reward-rate">{executive.name}回饋率 (%)</label>
+          <input id="reward-rate" type="number" inputmode="decimal" min="0" step="0.1" value={rewardRate * 100} />
+          <p class="helper">官網現行名目回饋，只適用於合格消費。</p>
+        </div>
+        <div class="field">
+          <label for="reward-cap">年度回饋上限</label>
+          <input id="reward-cap" type="number" inputmode="decimal" min="0" step="1000" value={rewardCap} />
+          <p class="helper">官網現行年度上限；超過之後再刷不會再增加回饋。</p>
         </div>
       </div>
     </section>
 
     <section class="result-panel" aria-live="polite" aria-labelledby="costco-result">
-      <p class="eyebrow">判斷</p>
-      <p id="costco-result" class="verdict">輸入月消費後會顯示會員是否回本。</p>
+      <p class="eyebrow">第一題：該不該辦會員</p>
+      <p id="costco-result" class="verdict">填入每月消費後會顯示基本會員是否回本。</p>
       <div class="metric-grid">
-        <p class="metric"><span>打平月消費</span><strong id="break-even">NT$0/月</strong></p>
-        <p class="metric"><span>年度淨效益</span><strong id="net-benefit">NT$0</strong></p>
-        <p class="metric"><span>預估回饋</span><strong id="reward">NT$0</strong></p>
-        <p class="metric"><span>建議等級</span><strong id="recommended-tier">金星會員</strong></p>
+        <p class="metric"><span>基本會員回本年消費</span><strong id="basic-break-even">{ntd(0)}/年</strong></p>
+        <p class="metric"><span>估計年省下金額</span><strong id="annual-savings">{ntd(0)}</strong></p>
+        <p class="metric"><span>扣年費後淨值</span><strong id="basic-net">{ntd(0)}</strong></p>
+      </div>
+
+      <p class="eyebrow">第二題：該不該升級{executive.name}</p>
+      <p id="upgrade-result" class="verdict">填入合格年消費後會顯示升級是否划算。</p>
+      <div class="metric-grid">
+        <p class="metric"><span>升級價差</span><strong id="upgrade-fee">{ntd(0)}</strong></p>
+        <p class="metric"><span>升級回本合格年消費</span><strong id="upgrade-break-even">{ntd(0)}/年</strong></p>
+        <p class="metric"><span>你的回饋（含上限）</span><strong id="reward">{ntd(0)}</strong></p>
+        <p class="metric"><span>回饋減升級價差</span><strong id="upgrade-value">{ntd(0)}</strong></p>
+        <p class="metric"><span>回饋觸頂的合格年消費</span><strong id="cap-threshold">{ntd(0)}/年</strong></p>
       </div>
     </section>
   </div>
 
   <section class="explanation" aria-labelledby="costco-how">
-    <h2 id="costco-how">計算方式</h2>
+    <h2 id="costco-how">逐步算式</h2>
+    <ol class="formula-list">
+      <li><strong>基本會員回本年消費</strong> = 基本年費 ÷ 你的實測省錢率。以 {ntd(gold.annual_fee)} 與 {percent(demoSavingsRate)} 計算是一年 {ntd(basicBreakeven)}。</li>
+      <li><strong>估計年省下金額</strong> = 每月消費 × 12 × 省錢率。這一項和{executive.name}回饋無關。</li>
+      <li><strong>升級價差</strong> = {executive.name}年費 − 基本會員年費 = {ntd(costcoTw.upgrade_delta)}。</li>
+      <li><strong>升級回本合格年消費</strong> = 升級價差 ÷ 回饋率 = {amount(costcoTw.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>{ntd(upgradeBreakeven)}</strong>，即每月約 {ntd(upgradeMonthly)}。</li>
+      <li><strong>你的回饋</strong> = 合格年消費 × 回饋率，但不超過年度上限 {ntd(rewardCap)}，也就是合格年消費超過 {ntd(capReached)} 之後不再增加。</li>
+    </ol>
     <p>
-      年度省下金額等於每月消費乘以 12，再乘上你設定的省下比例。尊榮會員另外計入回饋率，並套用 NT$10,000 年回饋上限。年度淨效益是省下金額加回饋，再扣掉年費。
-    </p>
-    <p>
-      打平月消費就是讓年度淨效益等於 0 的消費額。如果你常買的品項在 Costco 沒有比較便宜，請把省下比例調低。
+      省錢率套用在你的總消費上，回饋只套用在合格消費上。兩個分母刻意不一樣——把被排除的加油、菸酒、禮券與美食廣場算進回饋，會讓升級看起來比實際划算。
     </p>
   </section>
 
-  <DecisionGuide content={decisionGuide} />
-  <script>
-    import { formatCurrency } from '../../../lib/money';
-    import { bindPersistentField, getItem, setItem } from '../../../lib/storage';
+  <section class="explanation" aria-labelledby="costco-eligible">
+    <h2 id="costco-eligible">什麼算「合格消費」</h2>
+    <p>
+      {executive.name}的 {percent(rewardRate)} 回饋只計入合格消費，而且官方會先扣除政府課稅後再計算。加油站、菸酒、禮券與購物金、電信服務、美食廣場、會員費本身與退貨金額都不列入。升級生效前的消費也不會補算。
+    </p>
+    <p>
+      回饋金的累積與使用是兩件事：依官方說明，回饋金需在實體賣場結帳時折抵，不是直接匯款。請以官網最新的完整排除清單為準，不要把本頁的摘要當成全部。
+    </p>
+  </section>
 
-    type TierKey = 'gold' | 'business' | 'executive';
-    interface Tier {
-      key: TierKey;
-      name: string;
-      fee: number;
+  <section class="explanation" aria-labelledby="costco-checklist">
+    <h2 id="costco-checklist">決定前的四項查核</h2>
+    <ol>
+      <li>用完整的正常年度估算，不要把一次性的家電或年節採購直接年化。</li>
+      <li>合格消費要從消費紀錄整理，不是拿信用卡帳單的好市多總額乘以回饋率。</li>
+      <li>剛好落在門檻附近就視為打平，至少再測一次消費少 20% 的保守情境。</li>
+      <li>不要為了回饋多買：多花 {ntd(1000)} 只多拿 {ntd(1000 * rewardRate)} 回饋，現金仍然少了 {ntd(1000 * (1 - rewardRate))}。</li>
+    </ol>
+  </section>
+
+  <DecisionGuide content={decisionGuide} />
+
+  <style>
+    .intro,
+    .helper,
+    .explanation {
+      color: var(--color-muted);
     }
 
+    .terms-note,
+    .input-panel,
+    .result-panel,
+    .explanation {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .terms-note {
+      margin: 1rem 0;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .explanation {
+      margin-top: 1rem;
+    }
+
+    .result-panel .eyebrow + .verdict {
+      margin-bottom: 0.5rem;
+    }
+
+    .result-panel .metric-grid + .eyebrow {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .formula-list li + li,
+    .explanation li + li {
+      margin-top: 0.55rem;
+    }
+  </style>
+
+  <script>
+    import { formatCurrency } from '../../../lib/money';
+    import { bindPersistentField } from '../../../lib/storage';
+
+    // 預設值全部來自伺服器端算好的 data/rates.json，這裡只讀欄位，
+    // 不再保留第二份費率常數——上一版就是因為兩邊各存一份才長期不一致。
     const locale = 'zh';
-    const rewardCap = 10000;
-    const tiers: Record<TierKey, Tier> = {
-      gold: { key: 'gold', name: '金星會員', fee: 1350 },
-      business: { key: 'business', name: '商業會員', fee: 1150 },
-      executive: { key: 'executive', name: '尊榮會員', fee: 3000 },
-    };
-    const tier = byId<HTMLSelectElement>('tier');
     const monthlySpend = byId<HTMLInputElement>('monthly-spend');
+    const eligibleAnnualSpend = byId<HTMLInputElement>('eligible-annual-spend');
+    const baseFee = byId<HTMLInputElement>('base-fee');
+    const executiveFee = byId<HTMLInputElement>('executive-fee');
     const savingsRate = byId<HTMLInputElement>('savings-rate');
     const rewardRate = byId<HTMLInputElement>('reward-rate');
-    const verdict = byId<HTMLElement>('costco-result');
-    const breakEven = byId<HTMLElement>('break-even');
-    const netBenefit = byId<HTMLElement>('net-benefit');
-    const reward = byId<HTMLElement>('reward');
-    const recommendedTier = byId<HTMLElement>('recommended-tier');
-    const fields = [monthlySpend, savingsRate, rewardRate];
-    const tierStorageKey = 'costco-membership:tier:zh';
+    const rewardCap = byId<HTMLInputElement>('reward-cap');
+    const inputs = [monthlySpend, eligibleAnnualSpend, baseFee, executiveFee, savingsRate, rewardRate, rewardCap];
+
+    const basicVerdict = byId<HTMLElement>('costco-result');
+    const basicBreakEven = byId<HTMLElement>('basic-break-even');
+    const annualSavings = byId<HTMLElement>('annual-savings');
+    const basicNet = byId<HTMLElement>('basic-net');
+    const upgradeVerdict = byId<HTMLElement>('upgrade-result');
+    const upgradeFee = byId<HTMLElement>('upgrade-fee');
+    const upgradeBreakEven = byId<HTMLElement>('upgrade-break-even');
+    const rewardOut = byId<HTMLElement>('reward');
+    const upgradeValue = byId<HTMLElement>('upgrade-value');
+    const capThreshold = byId<HTMLElement>('cap-threshold');
 
     function byId<T extends HTMLElement>(id: string): T {
       const element = document.getElementById(id);
@@ -135,66 +267,70 @@ const related = [
       return element as T;
     }
 
-    function readNumber(input: HTMLInputElement): number {
+    function readNonNegative(input: HTMLInputElement): number {
       const value = Number(input.value);
-      return Number.isFinite(value) ? value : 0;
+      return Number.isFinite(value) && value > 0 ? value : 0;
     }
 
-    function tierRewardRate(selectedTier: Tier): number {
-      return selectedTier.key === 'executive' ? Math.max(0, readNumber(rewardRate)) / 100 : 0;
-    }
-
-    function netFor(monthly: number, selectedTier: Tier): { net: number; rewardValue: number } {
-      const annualSpend = Math.max(0, monthly) * 12;
-      const savings = annualSpend * (Math.max(0, readNumber(savingsRate)) / 100);
-      const rewardValue = Math.min(annualSpend * tierRewardRate(selectedTier), rewardCap);
-      return { net: savings + rewardValue - selectedTier.fee, rewardValue };
-    }
-
-    function breakEvenSpend(selectedTier: Tier): number {
-      if (netFor(0, selectedTier).net >= 0) return 0;
-      let upper = 1000;
-      for (let index = 0; index < 40 && netFor(upper, selectedTier).net < 0; index += 1) {
-        upper *= 2;
-      }
-      let lower = 0;
-      for (let index = 0; index < 80; index += 1) {
-        const middle = (lower + upper) / 2;
-        if (netFor(middle, selectedTier).net >= 0) upper = middle;
-        else lower = middle;
-      }
-      return upper;
+    function money(value: number): string {
+      return formatCurrency(value, locale);
     }
 
     function update(): void {
-      const selectedTier = tiers[tier.value as TierKey] ?? tiers.gold;
-      const spend = Math.max(0, readNumber(monthlySpend));
-      const result = netFor(spend, selectedTier);
-      const recommended = Object.values(tiers).reduce((best, candidate) =>
-        netFor(spend, candidate).net > netFor(spend, best).net ? candidate : best,
-      );
-      const needed = breakEvenSpend(selectedTier);
+      const base = readNonNegative(baseFee);
+      const executive = readNonNegative(executiveFee);
+      const savings = readNonNegative(savingsRate) / 100;
+      const reward = readNonNegative(rewardRate) / 100;
+      const cap = readNonNegative(rewardCap);
 
-      breakEven.textContent = `${formatCurrency(needed, locale)}/月`;
-      netBenefit.textContent = formatCurrency(result.net, locale);
-      reward.textContent = formatCurrency(result.rewardValue, locale);
-      recommendedTier.textContent = recommended.name;
+      // 第一題：辦會員。分母是總消費和實測省錢率。
+      const annualSpend = readNonNegative(monthlySpend) * 12;
+      const saved = annualSpend * savings;
+      const net = saved - base;
+      const neededSpend = savings > 0 ? base / savings : 0;
 
-      if (result.net >= 0) {
-        verdict.textContent = `值得考慮：估計年度淨效益約 ${formatCurrency(result.net, locale)}。`;
+      basicBreakEven.textContent = savings > 0 ? `${money(neededSpend)}/年` : '請先填省錢率';
+      annualSavings.textContent = money(saved);
+      basicNet.textContent = money(net);
+      if (savings <= 0) {
+        basicVerdict.textContent = '省錢率填 0 時，基本會員的年費無法靠價差回收。';
+      } else if (net >= 0) {
+        basicVerdict.textContent = `在這些假設下回本：估計一年多出 ${money(net)}。`;
       } else {
-        verdict.textContent = `目前不太划算：在這些假設下，每月約需 ${formatCurrency(needed, locale)} 才回本。`;
+        basicVerdict.textContent = `還沒回本：一年約需 ${money(neededSpend)} 的可比較消費才打平，等於每月 ${money(neededSpend / 12)}。`;
+      }
+
+      // 第二題：升級。分母只有合格消費，和上面完全分開。
+      const delta = Math.max(0, executive - base);
+      const eligible = readNonNegative(eligibleAnnualSpend);
+      const earned = Math.min(eligible * reward, cap > 0 ? cap : Number.POSITIVE_INFINITY);
+      const advantage = earned - delta;
+      const neededEligible = reward > 0 ? delta / reward : 0;
+      const capAt = reward > 0 && cap > 0 ? cap / reward : 0;
+      const capTooLow = cap > 0 && cap < delta;
+
+      upgradeFee.textContent = money(delta);
+      upgradeBreakEven.textContent = capTooLow
+        ? '上限低於升級價差，無法回本'
+        : reward > 0 ? `${money(neededEligible)}/年` : '請先填回饋率';
+      rewardOut.textContent = money(earned);
+      upgradeValue.textContent = money(advantage);
+      capThreshold.textContent = capAt > 0 ? `${money(capAt)}/年` : '—';
+
+      if (delta <= 0) {
+        upgradeVerdict.textContent = '兩個年費相同時沒有升級價差可以回收。';
+      } else if (capTooLow) {
+        upgradeVerdict.textContent = `年度回饋上限 ${money(cap)} 低於升級價差 ${money(delta)}，在這組數字下升級不可能回本。`;
+      } else if (eligible <= 0) {
+        upgradeVerdict.textContent = `填入合格年消費後才能判斷。門檻是 ${money(neededEligible)}，等於每月 ${money(neededEligible / 12)}。`;
+      } else if (advantage >= 0) {
+        upgradeVerdict.textContent = `升級划算：回饋比升級價差多 ${money(advantage)}。`;
+      } else {
+        upgradeVerdict.textContent = `升級不划算：一年少 ${money(-advantage)}，需要 ${money(neededEligible)} 的合格消費才打平。`;
       }
     }
 
-    const savedTier = getItem<TierKey>(tierStorageKey, 'gold');
-    if (tiers[savedTier]) tier.value = savedTier;
-    tier.addEventListener('change', () => {
-      setItem(tierStorageKey, tier.value);
-      update();
-    });
-
-    fields.forEach((field) => {
+    inputs.forEach((field) => {
       bindPersistentField(field, `costco-membership:${field.id}:zh`);
       field.addEventListener('input', update);
     });

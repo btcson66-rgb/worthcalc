@@ -94,42 +94,11 @@ const reviews: ReviewMap = {
       disclaimer: financialDisclaimer.zh,
     },
   },
-  'costco-membership': {
-    en: {
-      methodology:
-        'The calculator multiplies monthly warehouse spending by 12 and by your assumed savings rate. Executive tier estimates also add the entered reward rate before subtracting the annual membership fee.',
-      assumptions: [
-        'Gold Star 65/year, Executive 130/year, 15% savings, and 2% reward are editable examples and may not match current local terms.',
-        'Only spending you expect to make anyway should be included.',
-        'Savings are modeled as a percentage versus your usual stores, not as guaranteed item-by-item discounts.',
-      ],
-      example:
-        'At 250 per month and a 15% savings assumption, estimated yearly savings are 450 before membership fees and any eligible Executive reward.',
-      limitations: [
-        'Official fees, reward caps, excluded categories, gas rules, and local promotions can change.',
-        'The model does not value travel time, storage space, impulse purchases, or product availability.',
-      ],
-      lastUpdated: lastUpdated.en,
-      disclaimer: financialDisclaimer.en,
-    },
-    zh: {
-      methodology:
-        '計算機會用每月賣場消費乘以 12，再乘以你假設的省錢比例。Executive 等級也會加入輸入的回饋率，最後扣除年費。',
-      assumptions: [
-        'Gold Star 每年 65、Executive 每年 130、15% 省錢比例與 2% 回饋率都是可修改示範值，可能不同於最新當地條款。',
-        '只應輸入你原本就會消費的金額。',
-        '省錢比例是相對平常購物地點的估算，不保證每件商品都便宜。',
-      ],
-      example:
-        '若每月消費 250，假設省 15%，年省金額約 450，之後再扣會員費並加入符合資格的 Executive 回饋。',
-      limitations: [
-        '官方年費、回饋上限、排除品項、加油規則與促銷可能變動。',
-        '模型未計入交通時間、儲物空間、衝動購物或商品缺貨。',
-      ],
-      lastUpdated: lastUpdated.zh,
-      disclaimer: financialDisclaimer.zh,
-    },
-  },
+  // 'costco-membership' 的區塊已移除。它和頁面自己的 DecisionGuide 各講一套
+  // 「計算方法」與「限制」，查核日期一個 2026-07-07 一個 2026-07-18，中文版
+  // 還殘留美國的 Gold Star / Executive 年費當成台灣的示範值。兩套互相矛盾的
+  // 方法論放在同一個 YMYL 頁面上，比只有一套更糟，所以兩個好市多頁面改用
+  // showReview={false}，只留 DecisionGuide 那一套，數字統一由 data/rates.json 供給。
   'ev-vs-gas': {
     en: {
       methodology:

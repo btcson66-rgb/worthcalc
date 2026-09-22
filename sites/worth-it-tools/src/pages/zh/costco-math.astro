@@ -2,8 +2,17 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import { amount, capReachedAt, costcoTw, ntd, percent, perMonth, savingsBreakeven, zhDate } from '../../lib/rates';
 
 const locale = 'zh';
+const gold = costcoTw.tiers.gold_star;
+const business = costcoTw.tiers.business;
+const executive = costcoTw.tiers.executive;
+const rewardRate = executive.reward_rate;
+const rewardCap = executive.reward_cap ?? 0;
+const upgradeBreakeven = costcoTw.breakeven_qualified_spend;
+const conservativeSavings = 0.08;
+const basicBreakeven = savingsBreakeven(gold.annual_fee, conservativeSavings);
 const faq = [
   {
     question: '一個人住，好市多會員值得嗎？',
@@ -11,9 +20,9 @@ const faq = [
       '可以，但不是看家庭人數就能下結論。把年費、額外車程與可能浪費相加，再除以「12 × 你用相同規格購物籃實測的省錢率」，才是每月回本門檻；再跟原本就會買的品項比較。',
   },
   {
-    question: 'Costco 黑鑽卡要刷多少才回本？',
+    question: `Costco ${executive.name}要刷多少才回本？`,
     answer:
-      '以官網目前刊載的 NT$3,000 黑鑽卡與 NT$1,350 金星會員相比，升級差額是 NT$1,650。用名目 2% 計算的理論門檻為一年 NT$82,500、每月 NT$6,875；但官方排除會員費、加油站、西式餐飲部等項目，且回饋須扣除政府課稅後計算，所以實際合格消費門檻會更高。',
+      `以官網目前刊載的 ${ntd(executive.annual_fee)} ${executive.name}與 ${ntd(gold.annual_fee)} ${gold.name}相比，升級差額是 ${ntd(costcoTw.upgrade_delta)}。用名目 ${percent(rewardRate)} 計算的理論門檻為一年 ${ntd(upgradeBreakeven)}、每月約 ${ntd(perMonth(upgradeBreakeven))}；但官方排除會員費、加油站、西式餐飲部等項目，且回饋須扣除政府課稅後計算，所以實際合格消費門檻會更高。`,
   },
   {
     question: '好市多真的比一般賣場便宜多少？',
@@ -35,15 +44,15 @@ const faq = [
 
 <ArticleLayout
   title="好市多會員的數學：年費怎麼算才回本"
-  description="好市多會員值得嗎？金星、商業、黑鑽卡的回本門檻一次算清楚，2% 回饋的數學、回饋上限，附免費試算計算機。"
+  description={`好市多會員值得嗎？${gold.name}、${business.name}、${executive.name}的回本門檻一次算清楚，${percent(rewardRate)} 回饋的數學、回饋上限，附免費試算計算機。`}
   locale={locale}
   alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
-  updated="2026-07-19"
+  updated={costcoTw.checked}
 >
   <p>
     「好市多會員值得嗎？」大概是個人理財裡最乾淨的「值不值得」問題：
     你付一筆固定年費，換到比較便宜的價格，而答案幾乎只取決於一個變數——
-    你實際在那裡花多少錢。這篇文章把台灣三種會員（金星、商業、黑鑽）的
+    你實際在那裡花多少錢。這篇文章把台灣三種會員（{gold.name}、{business.name}、{executive.name}）的
     數學一次講清楚，算出回本門檻，並附上免費的
     <a href={localizedPath(locale, '/tools/costco-membership')}>Costco 會員值不值得計算機</a>，
     用你自己的數字直接得到結論。
@@ -56,10 +65,10 @@ const faq = [
     實測省錢率，每月回本消費就是 <strong>(F + C) ÷ (12 × s)</strong>。
     省錢率必須由自己的購物籃證明，不能套用網路上的通用百分比。
   </p>
-  <p>以金星會員年費 NT$1,350、實測省錢率 8% 示範，回本門檻是：</p>
+  <p>以{gold.name}年費 {ntd(gold.annual_fee)}、實測省錢率 {percent(conservativeSavings)} 示範，回本門檻是：</p>
   <ul>
-    <li>1,350 ÷ 8% = <strong>一年 NT$16,875 的可比較消費</strong></li>
-    <li>換算為<strong>每月約 NT$1,406</strong>；若實際只省 4%，門檻會加倍。</li>
+    <li>{amount(gold.annual_fee)} ÷ {percent(conservativeSavings)} = <strong>一年 {ntd(basicBreakeven)} 的可比較消費</strong></li>
+    <li>換算為<strong>每月約 {ntd(perMonth(basicBreakeven))}</strong>；若實際只省一半，門檻會加倍。</li>
   </ul>
   <p>
     這只是公式示範，不代表一般家庭一定能省 8%。住得離賣場很遠、一年只去
@@ -68,23 +77,23 @@ const faq = [
     <a href={localizedPath(locale, '/tools/costco-membership')}>計算機</a>跑一次。
   </p>
 
-  <h2>黑鑽卡的回本數學</h2>
+  <h2>{executive.name}的回本數學</h2>
   <p>
-    黑鑽（尊榮）會員年費約 NT$3,000，比金星多出約 NT$1,650，換來的是
-    店內消費約 2% 的回饋金（每年有上限，約 NT$10,000，對應約 50 萬的
-    年消費，多數家庭碰不到）。要不要升級，是跟基本會員分開的另一題：
+    {executive.name}年費 {ntd(executive.annual_fee)}，比{gold.name}多出 {ntd(costcoTw.upgrade_delta)}，換來的是
+    合格消費 {percent(rewardRate)} 的回饋金（每年上限 {ntd(rewardCap)}，對應
+    {ntd(capReachedAt(executive))} 的合格年消費，多數家庭碰不到）。要不要升級，是跟基本會員分開的另一題：
   </p>
   <ul>
-    <li>多付的約 NT$1,650 年費，必須靠 2% 回饋賺回來。</li>
-    <li>1,650 ÷ 2% = <strong>一年約 NT$82,500</strong>，即<strong>每月約 NT$6,900</strong> 的消費門檻。</li>
+    <li>多付的 {ntd(costcoTw.upgrade_delta)} 年費，必須靠 {percent(rewardRate)} 回饋賺回來。</li>
+    <li>{amount(costcoTw.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>一年 {ntd(upgradeBreakeven)}</strong>，即<strong>每月約 {ntd(perMonth(upgradeBreakeven))}</strong> 的合格消費門檻。</li>
   </ul>
   <p>
-    超過這個金額，黑鑽嚴格優於金星；低於它，你就是在為賺不滿的回饋付費。
+    超過這個金額，{executive.name}嚴格優於{gold.name}；低於它，你就是在為賺不滿的回饋付費。
     每週固定採購的家庭通常輕鬆過線；每月補一次貨的單身族通常過不了。
     <a href={localizedPath(locale, '/tools/costco-membership')}>會員計算機</a>
     會用你的消費水準同時比較各層級，直接告訴你哪一種最划算。另外，
-    做生意的人可以留意商業會員（年費約 NT$1,150），資格符合的話是
-    最便宜的入場券。
+    做生意的人可以留意{business.name}（年費 {ntd(business.annual_fee)}），資格符合的話是
+    另一個入場選項。
   </p>
 
   <h2>簡單模型沒算到的兩件事</h2>
@@ -118,7 +127,7 @@ const faq = [
     <li><a href="https://www.costco.com.tw/c/Business-Add-on-Renew/p/66">台灣好市多—會員方案與官網刊載年費</a></li>
     <li><a href="https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership2">台灣好市多—黑鑽卡 2% 回饋計算、排除項目與使用方式</a></li>
   </ul>
-  <p><small>官方條款最後查核：2026 年 7 月 19 日。年費、回饋上限與合格消費項目可能調整，加入或續約前請再確認官網。</small></p>
+  <p><small>官方條款最後查核：{zhDate(costcoTw.checked)}。年費、回饋上限與合格消費項目可能調整，加入或續約前請再確認官網。</small></p>
 
   <FAQ items={faq} />
 

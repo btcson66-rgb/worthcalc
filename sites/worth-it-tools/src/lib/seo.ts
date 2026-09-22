@@ -2,6 +2,16 @@ import { CONTENT_LOCALES, CORE_LOCALES, SITE, LOCALE_HREFLANG, type ContentLocal
 import deindexedRegistry from '../data/deindexed-urls.json';
 
 const DEINDEXED_PATHS = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
+/**
+ * Locales retired wholesale rather than URL by URL.
+ *
+ * es/fr/de went out on 2026-09-22 — 141 impressions between them against 953
+ * for en and zh, and nobody maintaining their financial localisation, which is
+ * how figures go stale without anyone noticing. One decision about three
+ * languages belongs here as a rule; writing it out as 141 url entries would
+ * disguise it as 141 separate findings.
+ */
+const DEINDEXED_LOCALES = new Set<string>(deindexedRegistry.locales ?? []);
 
 export interface SeoInput {
   /** Page title without the brand suffix. */
@@ -63,9 +73,12 @@ function pagePath(pathname: string): string {
   return pathname.endsWith('/') ? pathname : `${pathname}/`;
 }
 
-/** True for a URL in the reversible W34 soft-deindex registry. */
+/** True for a URL in the reversible soft-deindex registry, by path or by locale. */
 export function isSoftDeindexed(pathname: string): boolean {
-  return DEINDEXED_PATHS.has(pagePath(pathname));
+  const path = pagePath(pathname);
+  if (DEINDEXED_PATHS.has(path)) return true;
+  const locale = path.split('/').filter(Boolean)[0];
+  return locale !== undefined && DEINDEXED_LOCALES.has(locale);
 }
 
 function localizedPagePath(locale: ContentLocale, logical: string): string {

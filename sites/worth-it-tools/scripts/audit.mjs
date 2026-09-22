@@ -158,7 +158,7 @@ if (homepageFilesExist) {
     ['/de/ homepage', germanHomepage],
   ]) {
     check(`${label} English hreflang targets /`, alternateHref(html, 'en') === expectedRoot);
-    check(`${label} Chinese hreflang targets /zh/`, alternateHref(html, 'zh-Hant') === expectedChinese);
+    check(`${label} Chinese hreflang targets /zh/`, alternateHref(html, 'zh-TW') === expectedChinese);
     check(`${label} Spanish hreflang targets /es/`, alternateHref(html, 'es') === expectedSpanish);
     check(`${label} French hreflang targets /fr/`, alternateHref(html, 'fr') === expectedFrench);
     check(`${label} German hreflang targets /de/`, alternateHref(html, 'de') === expectedGerman);

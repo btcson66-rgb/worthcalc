@@ -46,7 +46,12 @@ export const LOCALE_LABELS: Record<ContentLocale, string> = {
 /** BCP-47 codes for the <html lang> attribute and hreflang. */
 export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
   en: 'en',
-  zh: 'zh-Hant',
+  // Region, not just script. This locale's money content is bound to Taiwanese
+  // rules and institutions -- 央行 selective credit controls, DBR, the 好市多
+  // Taiwan fee schedule -- so the region is the part a searcher in Taiwan is
+  // matched on. A script-only tag would claim Hong Kong and Macau just as
+  // strongly, and none of those figures apply there.
+  zh: 'zh-TW',
   es: 'es',
   fr: 'fr',
   de: 'de',

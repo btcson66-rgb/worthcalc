@@ -2,8 +2,15 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
+import { costcoUs, percent, perMonth, savingsBreakeven, usd } from '../../lib/rates';
 
 const locale = 'en';
+const gold = costcoUs.tiers.gold_star;
+const executive = costcoUs.tiers.executive;
+const rewardRate = executive.reward_rate;
+const upgradeBreakeven = costcoUs.breakeven_qualified_spend;
+const conservativeSavings = 0.08;
+const basicBreakeven = savingsBreakeven(gold.annual_fee, conservativeSavings);
 const faq = [
   {
     question: 'Is a Costco membership worth it for a single person?',
@@ -13,7 +20,7 @@ const faq = [
   {
     question: 'How much do I need to spend for an Executive membership to break even?',
     answer:
-      'The Executive upgrade costs about $65 more per year and earns a 2% reward on most warehouse purchases. Two percent of your annual spend must exceed $65, which happens at roughly $3,250 a year, or about $271 a month. Below that, Gold Star is the better tier.',
+      `The ${executive.name} upgrade costs ${usd(costcoUs.upgrade_delta)} more per year and earns a ${percent(rewardRate)} reward on eligible warehouse purchases. That reward must exceed ${usd(costcoUs.upgrade_delta)}, which happens at ${usd(upgradeBreakeven)} a year of eligible spend, or about ${usd(perMonth(upgradeBreakeven), 2)} a month. Below that, ${gold.name} is the better tier.`,
   },
   {
     question: 'How much cheaper is Costco than a regular supermarket, really?',
@@ -60,11 +67,11 @@ const faq = [
     not a universal warehouse-club fact.
   </p>
   <p>
-    With a $65 annual fee and an independently measured 8% savings rate, the
+    With a {usd(gold.annual_fee)} annual fee and an independently measured {percent(conservativeSavings)} savings rate, the
     illustrative threshold is:
   </p>
   <ul>
-    <li>$65 ÷ 8% = <strong>$812.50 of comparable spending per year</strong></li>
+    <li>{usd(gold.annual_fee)} ÷ {percent(conservativeSavings)} = <strong>{usd(basicBreakeven, 2)} of comparable spending per year</strong></li>
     <li>That is roughly <strong>$67.71 a month</strong>; at 4%, the threshold doubles.</li>
   </ul>
   <p>
@@ -79,14 +86,14 @@ const faq = [
 
   <h2>The Executive membership break-even</h2>
   <p>
-    The Executive tier costs about $130 a year — roughly $65 more than Gold
+    The {executive.name} tier costs {usd(executive.annual_fee)} a year — {usd(costcoUs.upgrade_delta)} more than Gold
     Star — and adds a 2% annual reward on most warehouse purchases (capped at
     a fairly high annual maximum that most households never reach). The
     upgrade question is separate from the basic membership question:
   </p>
   <ul>
-    <li>The extra $65 fee must be covered by the 2% reward.</li>
-    <li>$65 ÷ 2% = <strong>$3,250 of annual spend</strong>, or about <strong>$271 a month</strong>.</li>
+    <li>The extra {usd(costcoUs.upgrade_delta)} fee must be covered by the {percent(rewardRate)} reward.</li>
+    <li>{usd(costcoUs.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>{usd(upgradeBreakeven)} of eligible annual spend</strong>, or about <strong>{usd(perMonth(upgradeBreakeven), 2)} a month</strong>.</li>
   </ul>
   <p>
     Spend more than that and Executive strictly beats Gold Star; spend less

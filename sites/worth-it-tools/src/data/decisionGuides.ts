@@ -1,5 +1,6 @@
 import type { Locale } from '../consts';
 import type { DecisionGuideContent } from '../types/decisionGuide';
+import { capReachedAt, costcoTw, costcoUs, ntd, percent, savingsBreakeven, usd } from '../lib/rates';
 
 const labels: Record<Locale, DecisionGuideContent['labels']> = {
   en: {
@@ -1468,46 +1469,65 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
   },
 };
 
+// 好市多這一段的每個數字都由 data/rates.json 推導。上一版把 NT$1,350 /
+// NT$1,650 / NT$82,500 直接寫在字串裡，官方 2026 年調價後整段就變成錯的，
+// 而且和同一頁另一個區塊互相矛盾。scripts/verify-rates.mjs 現在會擋下重演。
+const twGold = costcoTw.tiers.gold_star;
+const twExecutive = costcoTw.tiers.executive;
+const twRewardRate = twExecutive.reward_rate;
+const twRewardCap = twExecutive.reward_cap ?? 0;
+const twDemoSavings = 0.15;
+const twConservativeSavings = 0.08;
+
+const usGold = costcoUs.tiers.gold_star;
+const usExecutive = costcoUs.tiers.executive;
+const usRewardRate = usExecutive.reward_rate;
+const usRewardCap = usExecutive.reward_cap ?? 0;
+const usDemoSavings = 0.15;
+const usConservativeSavings = 0.08;
+
 export const costcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
   en: {
     id: 'membership-break-even-method',
     labels: labels.en,
-    directAnswer: 'Run two separate tests. A basic membership breaks even when realistic shopping savings cover its fee. The Executive upgrade breaks even when its extra 2% reward covers the extra fee. At current U.S. fees, the $65 upgrade divided by 2% equals $3,250 of eligible annual spend; purchases excluded from the reward must stay out of that figure.',
+    directAnswer: `Run two separate tests. A basic membership breaks even when realistic shopping savings cover its fee. The ${usExecutive.name} upgrade breaks even when its extra ${percent(usRewardRate)} reward covers the extra fee. At current U.S. fees, the ${usd(costcoUs.upgrade_delta)} upgrade divided by ${percent(usRewardRate)} equals ${usd(costcoUs.breakeven_qualified_spend)} of eligible annual spend; purchases excluded from the reward must stay out of that figure.`,
     inputs: ['Annual fee for each tier', 'Eligible monthly spend', 'Savings versus the stores you would otherwise use', 'Reward rate, exclusions, and annual cap', 'Waste or impulse purchases caused by bulk shopping', 'Travel cost and time if the warehouse is out of the way'],
     formula: 'Basic break-even spend = annual fee ÷ realistic savings rate; upgrade break-even spend = extra annual fee ÷ extra eligible reward rate',
-    workedExample: 'At a 15% savings assumption, Gold Star breaks even at $65 ÷ 0.15 = $433.33 a year. Executive costs $65 more and earns 2% on eligible spend, so it catches Gold Star at $65 ÷ 0.02 = $3,250 a year. These answer different questions and should not be combined.',
+    workedExample: `At a ${percent(usDemoSavings)} savings assumption, ${usGold.name} breaks even at ${usd(usGold.annual_fee)} ÷ ${usDemoSavings} = ${usd(savingsBreakeven(usGold.annual_fee, usDemoSavings), 2)} a year. ${usExecutive.name} costs ${usd(costcoUs.upgrade_delta)} more and earns ${percent(usRewardRate)} on eligible spend, so it catches ${usGold.name} at ${usd(costcoUs.upgrade_delta)} ÷ ${usRewardRate} = ${usd(costcoUs.breakeven_qualified_spend)} a year. These answer different questions and should not be combined.`,
     sensitivity: [
-      { scenario: 'Conservative basic tier', input: '8% savings', result: '$812.50/year to cover a $65 fee' },
-      { scenario: 'Base case', input: '15% savings', result: '$433.33/year to cover a $65 fee' },
-      { scenario: 'Executive upgrade', input: '2% reward on eligible spend', result: '$3,250/year to cover the extra $65' },
+      { scenario: 'Conservative basic tier', input: `${percent(usConservativeSavings)} savings`, result: `${usd(savingsBreakeven(usGold.annual_fee, usConservativeSavings), 2)}/year to cover a ${usd(usGold.annual_fee)} fee` },
+      { scenario: 'Base case', input: `${percent(usDemoSavings)} savings`, result: `${usd(savingsBreakeven(usGold.annual_fee, usDemoSavings), 2)}/year to cover a ${usd(usGold.annual_fee)} fee` },
+      { scenario: `${usExecutive.name} upgrade`, input: `${percent(usRewardRate)} reward on eligible spend`, result: `${usd(costcoUs.breakeven_qualified_spend)}/year to cover the extra ${usd(costcoUs.upgrade_delta)}` },
+      { scenario: 'Reward cap reached', input: `${usd(usRewardCap)} annual cap`, result: `No further reward above ${usd(capReachedAt(usExecutive))} of eligible spend` },
     ],
     cta: { label: 'Test your own membership assumptions', href: '/en/tools/costco-membership/' },
     limitations: ['The savings rate is a user assumption, not a claim that every warehouse item is cheaper.', 'Reward exclusions, caps, taxes, fees, and tier terms can change; confirm current official terms.', 'Do not count spending you would make only because you bought the membership.'],
     sources: [
       { label: 'Costco Customer Service — Executive Membership', href: 'https://customerservice.costco.com/app/answers/detail/a_id/1205/' },
-      { label: 'Costco — Executive Rewards terms', href: 'https://www.costco.com/executive-rewards.html' },
+      { label: 'Costco — Executive Rewards terms', href: costcoUs.source },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: costcoUs.checked,
   },
   zh: {
     id: 'membership-break-even-method',
     labels: labels.zh,
-    directAnswer: '要分開算兩題：基本會員是「實際價差省下的錢能否蓋過年費」；升級尊榮會員則是「多出的回饋能否蓋過多付的年費」。請只計入符合回饋資格、而且原本就會購買的金額，不能為了湊回本而增加消費。',
+    directAnswer: `要分開算兩題：基本會員是「實際價差省下的錢能否蓋過年費」；升級${twExecutive.name}則是「多出的回饋能否蓋過多付的年費」。請只計入符合回饋資格、而且原本就會購買的金額，不能為了湊回本而增加消費。`,
     inputs: ['各會員等級的最新年費', '真正符合回饋資格的月消費', '和原本常去商店相比的實際省錢比例', '回饋率、排除項目與年度上限', '大包裝造成的浪費或衝動購物', '繞路、停車與搬運的額外成本'],
     formula: '基本會員打平消費 = 年費 ÷ 實際省錢率；升級打平消費 = 多付年費 ÷ 多出的合格回饋率',
-    workedExample: '假設基本會員年費 NT$1,350、實際省錢率 15%，一年消費 NT$9,000 可打平。若升級多付 NT$1,650、合格回饋率 2%，則需要 NT$82,500 的合格年消費才能靠回饋補回差額。兩個門檻回答不同問題，不可混為一談。',
+    workedExample: `假設基本會員年費 ${ntd(twGold.annual_fee)}、實際省錢率 ${percent(twDemoSavings)}，一年消費 ${ntd(savingsBreakeven(twGold.annual_fee, twDemoSavings))} 可打平。若升級多付 ${ntd(costcoTw.upgrade_delta)}、合格回饋率 ${percent(twRewardRate)}，則需要 ${ntd(costcoTw.breakeven_qualified_spend)} 的合格年消費才能靠回饋補回差額。兩個門檻回答不同問題，不可混為一談。`,
     sensitivity: [
-      { scenario: '保守價差', input: '省錢率 8%', result: '基本年費 NT$1,350 需年消費 NT$16,875' },
-      { scenario: '基準情境', input: '省錢率 15%', result: '基本年費 NT$1,350 需年消費 NT$9,000' },
-      { scenario: '尊榮升級', input: '多付 NT$1,650、回饋 2%', result: '合格年消費需 NT$82,500' },
+      { scenario: '保守價差', input: `省錢率 ${percent(twConservativeSavings)}`, result: `基本年費 ${ntd(twGold.annual_fee)} 需年消費 ${ntd(savingsBreakeven(twGold.annual_fee, twConservativeSavings))}` },
+      { scenario: '基準情境', input: `省錢率 ${percent(twDemoSavings)}`, result: `基本年費 ${ntd(twGold.annual_fee)} 需年消費 ${ntd(savingsBreakeven(twGold.annual_fee, twDemoSavings))}` },
+      { scenario: `升級${twExecutive.name}`, input: `多付 ${ntd(costcoTw.upgrade_delta)}、回饋 ${percent(twRewardRate)}`, result: `合格年消費需 ${ntd(costcoTw.breakeven_qualified_spend)}` },
+      { scenario: '回饋觸頂', input: `年度上限 ${ntd(twRewardCap)}`, result: `合格年消費超過 ${ntd(capReachedAt(twExecutive))} 後不再增加回饋` },
     ],
     cta: { label: '用自己的數字重算會員回本', href: '/zh/tools/costco-membership/' },
-    limitations: ['省錢率是使用者假設，不代表每件商品都比其他通路便宜。', '年費、回饋上限、排除項目與會員條款可能變動，請以官方最新公告為準。', '只計算原本就會發生的消費；為回饋多買的支出不是收益。'],
+    limitations: ['省錢率是使用者假設，不代表每件商品都比其他通路便宜。', '年費、回饋上限、排除項目與會員條款可能變動，請以官方最新公告為準。', '只計算原本就會發生的消費；為回饋多買的支出不是收益。', '回饋只計入合格消費：加油、菸酒、禮券、電信與美食廣場不列入，官方並先扣除政府課稅。'],
     sources: [
-      { label: 'Costco 好市多台灣 — 會員權益與最新方案', href: 'https://www.costco.com.tw/membership' },
-      { label: 'Costco 官方 — Executive Rewards 條款', href: 'https://www.costco.com/executive-rewards.html' },
+      { label: 'Costco 好市多台灣 — 會員權益與最新方案', href: costcoTw.source },
+      { label: 'Costco 官方 — Executive Rewards 條款', href: costcoUs.source },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: costcoTw.checked,
   },
 };
 

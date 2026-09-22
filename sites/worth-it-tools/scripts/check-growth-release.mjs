@@ -4,7 +4,7 @@ import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
-const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
+const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const pairs = {
   'mortgage-payoff': 'extra-mortgage-payments-guide',
   'credit-card-payoff': 'credit-card-minimum-payment-trap',

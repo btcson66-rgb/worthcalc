@@ -4,7 +4,7 @@ import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
 const locales = ['en', 'zh', 'es', 'fr', 'de'];
-const hreflangs = ['en', 'zh-Hant', 'es', 'fr', 'de', 'x-default'];
+const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
 const releasedHomeLocales = [...locales];
@@ -63,9 +63,12 @@ for (const slug of releasedSupplemental) for (const locale of locales) {
   const url = `https://worthcalc.win/${locale}/${slug}/`;
   verifySitemap(url);
 }
+// Through verifySitemap, like every other loop in this file: it asserts
+// presence for an indexable URL and absence for a soft-deindexed one. Asserting
+// presence unconditionally made retiring a locale impossible without editing
+// this check, which is backwards -- the registry is meant to be the control.
 for (const locale of ['zh', 'es', 'fr', 'de']) {
-  const url = `https://worthcalc.win/${locale}/`;
-  if (!sitemap.includes(`<loc>${url}</loc>`)) failures.push(`Sitemap missing ${url}`);
+  verifySitemap(`https://worthcalc.win/${locale}/`);
 }
 if (sitemap.includes('<loc>https://worthcalc.win/en/</loc>')) failures.push('Sitemap must exclude compatibility /en/ homepage');
 

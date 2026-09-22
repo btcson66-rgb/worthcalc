@@ -6,6 +6,14 @@
     "reviewDate": "2026-09-14",
     "rollback": "Set urls to an empty array and rebuild the site."
   },
+  "localeDecision": {
+    "source": "GSC export 2026-09-22 (trailing 28 days)",
+    "criterion": "es, fr and de together drew 141 impressions and 2 clicks, against 953 for en and zh. Nobody maintains financial localisation for those three languages, so their figures go stale unnoticed -- the exact failure this batch of work exists to stop. Retiring them as a locale is one decision about three languages, not 141 decisions about individual URLs, so it is recorded as a rule rather than expanded into the url list.",
+    "decisionDate": "2026-09-22",
+    "reviewDate": "2026-12-22",
+    "rollback": "Set locales to an empty array and rebuild. The pages are never deleted or redirected, so nothing else has to be restored."
+  },
+  "locales": ["es", "fr", "de"],
   "urls": [
     "https://worthcalc.win/de/about/",
     "https://worthcalc.win/de/bnpl-vs-credit-card-installments/",

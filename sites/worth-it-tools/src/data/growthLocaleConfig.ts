@@ -27,7 +27,7 @@ export const localeFinanceConfig: Record<WorthCalcLocale, LocaleFinanceConfig> =
     legalDisclaimer: 'General educational estimate only; lenders and contracts may use different definitions and rules.',
   },
   zh: {
-    locale: 'zh', htmlLang: 'zh-Hant-TW', region: '台灣', currency: 'TWD', currencyDigits: 0,
+    locale: 'zh', htmlLang: 'zh-TW', region: '台灣', currency: 'TWD', currencyDigits: 0,
     decimalSeparator: '.', groupSeparator: ',', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
     mortgageTerminology: ['年利率', '本息平均攤還', '本金', '利息', '寬限期', '提前清償違約金'],
     homeCostFields: ['房貸本息', '房屋稅', '地價稅', '管理費', '修繕準備金', '契稅與登記相關費用'],

@@ -10,6 +10,10 @@ import deindexedRegistry from './src/data/deindexed-urls.json' with { type: 'jso
 const SITE_URL = process.env.SITE_URL || 'https://worthcalc.win';
 const resolveSitemapLastmod = createSitemapLastmodResolver();
 const deindexedPaths = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
+// Locales retired wholesale; see localeDecision in the registry for the evidence.
+const deindexedLocales = new Set(deindexedRegistry.locales ?? []);
+const isDeindexed = (pathname) =>
+  deindexedPaths.has(pathname) || deindexedLocales.has(pathname.split('/').filter(Boolean)[0]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -43,7 +47,7 @@ export default defineConfig({
     sitemap({
       // /en/ remains available for old links, but / is the canonical English
       // homepage. Hreflang is emitted in each page head by src/lib/seo.ts.
-      filter: (page) => page !== `${SITE_URL}/en/` && !deindexedPaths.has(new URL(page).pathname),
+      filter: (page) => page !== `${SITE_URL}/en/` && !isDeindexed(new URL(page).pathname),
       serialize: (item) => ({
         ...item,
         lastmod: resolveSitemapLastmod(item.url).lastmod,

@@ -8,7 +8,7 @@ const locales = ['en', 'zh', 'es', 'fr', 'de'];
 // 2026-07-25 (see the "i18n expansion policy" section in README.md). Package 001
 // is an approved editorial exception: its manifest intentionally contains a
 // small set of single-language routes. The SEO package guide system is a
-// separate approved bilingual (en + zh-Hant) surface, so /guides/ routes are
+// separate approved bilingual (en + zh-TW) surface, so /guides/ routes are
 // validated as a pair without requiring the frozen locales. What IS a defect is a *partially*
 // localized frozen-language route or a page that declares hreflang for a version
 // that does not exist.
@@ -190,8 +190,8 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/digital-photo-frame-electricity-cost-per-display-day-used',
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
-const expectedLang = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };
-const hreflangFor = { en: 'en', zh: 'zh-Hant', es: 'es', fr: 'fr', de: 'de' };
+const expectedLang = { en: 'en', zh: 'zh-TW', es: 'es', fr: 'fr', de: 'de' };
+const hreflangFor = { en: 'en', zh: 'zh-TW', es: 'es', fr: 'fr', de: 'de' };
 const sitemapFile = join(dist, 'sitemap-0.xml');
 const sitemap = existsSync(sitemapFile) ? readFileSync(sitemapFile, 'utf8') : '';
 const routes = new Map();

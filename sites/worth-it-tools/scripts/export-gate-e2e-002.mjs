@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 import { build } from 'esbuild';
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 
@@ -42,9 +42,39 @@ await page.locator('.wc-gate input[type=email]').fill('audit@example.test');
 const download = page.waitForEvent('download');
 await page.locator('.wc-gate button[type=submit]').click();
 checks.failure_fallback = (await download).suggestedFilename() === 'fixture.txt' && await page.locator('#fallback').innerText() === 'fallback';
-const privacy = readFileSync(resolve(root, 'src/pages/en/privacy.astro'), 'utf8');
-checks.privacy_disclosure = /export feature/i.test(privacy) && /email/i.test(privacy);
+const pageSources = [];
+function walk(folder) {
+  for (const entry of readdirSync(folder, { withFileTypes: true })) {
+    const path = resolve(folder, entry.name);
+    if (entry.isDirectory()) walk(path);
+    else if (entry.name.endsWith('.astro')) pageSources.push(path);
+  }
+}
+walk(resolve(root, 'src/pages'));
+checks.no_production_page_import = pageSources.every(path => !/ExportButtons|requestGatedDownload/.test(readFileSync(path, 'utf8')));
+const calculatorSlugs = ['home-affordability', 'mortgage-payoff', 'rent-vs-buy', 'cashback-breakeven', 'credit-card-payoff', 'debt-strategy', 'dti-calculator', 'installment-true-apr', 'car-affordability', 'commute-cost', 'cost-per-mile', 'ev-vs-gas', 'latte-factor', 'costco-membership', 'subscription-audit', 'compound-growth', 'salary-converter', 'budget-builder'];
+const entryCounts = { production: 0, candidate: 0 };
+const httpReadbacks = {};
+for (const [surface, origin] of Object.entries({ production: 'https://worthcalc.win', candidate: base })) {
+  httpReadbacks[surface] = await Promise.all(calculatorSlugs.map(async slug => {
+    const response = await fetch(`${origin}/en/tools/${slug}/`, { signal: AbortSignal.timeout(20000) });
+    const html = await response.text();
+    const entries = (html.match(/data-export-actions|class="wc-gate"/g) || []).length;
+    entryCounts[surface] += entries;
+    return { slug, status: response.status, entries };
+  }));
+}
+checks.no_live_email_export_entry = Object.values(httpReadbacks).every(rows => rows.every(row => row.status === 200 && row.entries === 0));
+const privacy = {};
+for (const locale of ['en', 'zh']) {
+  await page.goto(`${base}/${locale}/privacy/`, { waitUntil: 'domcontentloaded' });
+  privacy[locale] = await page.locator('main').innerText();
+}
+checks.privacy_current_feature = /newsletter/i.test(privacy.en) && /Brevo/i.test(privacy.en)
+  && /電子報/.test(privacy.zh) && /Brevo/.test(privacy.zh)
+  && !/send the file to my inbox|send the exported file to my inbox/i.test(privacy.en)
+  && !/把.*檔案寄到信箱/.test(privacy.zh);
 await browser.close();
-writeFileSync(resolve(output, 'WORTHCALC-EXPORT-GATE-E2E-002.json'), JSON.stringify({ base, checks, pass: Object.values(checks).every(Boolean) }, null, 2));
+writeFileSync(resolve(output, 'WORTHCALC-EXPORT-GATE-E2E-002.json'), JSON.stringify({ base, entryCounts, httpReadbacks, checks, pass: Object.values(checks).every(Boolean) }, null, 2));
 console.log(JSON.stringify(checks));
 if (Object.values(checks).some(value => !value)) process.exitCode = 1;

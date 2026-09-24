@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 
 const base = process.env.WORTHCALC_E2E_BASE || 'http://127.0.0.1:4321';
 const out = new URL('../docs/full-audit-002/', import.meta.url);
@@ -10,10 +10,33 @@ const slugs = [
   'car-affordability', 'commute-cost', 'cost-per-mile', 'ev-vs-gas', 'latte-factor',
   'costco-membership', 'subscription-audit', 'compound-growth', 'salary-converter', 'budget-builder',
 ];
+// A missing Reset button is an explicit capability, not a functional failure.
+const capabilities = {
+  'home-affordability': { resetMode: 'button' },
+  'mortgage-payoff': { resetMode: 'button' },
+  'rent-vs-buy': { resetMode: 'none', calculationMode: 'automatic' },
+  'cashback-breakeven': { resetMode: 'none', calculationMode: 'automatic' },
+  'credit-card-payoff': { resetMode: 'button' },
+  'debt-strategy': { resetMode: 'button' },
+  'dti-calculator': { resetMode: 'button' },
+  'installment-true-apr': { resetMode: 'none', calculationMode: 'automatic' },
+  'car-affordability': { resetMode: 'button' },
+  'commute-cost': { resetMode: 'none', calculationMode: 'automatic' },
+  'cost-per-mile': { resetMode: 'none', calculationMode: 'automatic' },
+  'ev-vs-gas': { resetMode: 'none', calculationMode: 'automatic' },
+  'latte-factor': { resetMode: 'none', calculationMode: 'automatic' },
+  'costco-membership': { resetMode: 'none', calculationMode: 'automatic' },
+  'subscription-audit': { resetMode: 'none', calculationMode: 'automatic', persistence: 'localStorage' },
+  'compound-growth': { resetMode: 'button' },
+  'salary-converter': { resetMode: 'button' },
+  'budget-builder': { resetMode: 'button', persistence: 'localStorage' },
+};
+const validCheck = value => value === true || value === 'NOT_APPLICABLE';
 const browser = await chromium.launch({ headless: true });
 const rows = [];
 for (const slug of slugs) {
-  const row = { slug, checks: {}, errors: [] };
+  const capability = capabilities[slug];
+  const row = { slug, capability, checks: {}, errors: [] };
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, acceptDownloads: true });
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   const page = await context.newPage();
@@ -27,11 +50,21 @@ for (const slug of slugs) {
     row.checks.mobile = await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 3);
     const growth = page.locator('[data-growth-calculator]');
     if (await growth.count()) {
+      if (capability.resetMode !== 'button') throw new Error(`${slug} capability mismatch: expected Reset button`);
       await page.locator('[data-action="example"]').first().click();
       row.checks.example = await page.locator('[data-growth-calculator] input[data-field]').first().inputValue() !== '';
       await page.locator('[data-action="calculate"]').first().click();
       row.checks.calculate = await page.locator('[data-metric]').first().innerText() !== '—';
       row.checks.no_nan = !(await growth.innerText()).includes('NaN');
+      await page.locator('[data-action="copy"]').first().click();
+      row.checks.copy = (await page.evaluate(() => navigator.clipboard.readText())).includes(await page.title());
+      const exportDownload = page.waitForEvent('download');
+      await page.locator('[data-action="csv"]').first().click();
+      const csv = await exportDownload;
+      const csvBody = readFileSync(await csv.path(), 'utf8');
+      row.checks.csv = csv.suggestedFilename() === `${slug}.csv` && csvBody.includes(',') && csvBody.trim().split(/\r?\n/).length >= 2;
+      await page.locator('[data-action="print"]').first().click();
+      row.checks.print = await page.evaluate(() => window.__worthcalcPrinted === true);
       const set = async (id, value) => page.locator(`[data-growth-calculator] [data-field="${id}"]`).fill(String(value));
       const metric = async (id) => Number((await page.locator(`[data-metric="${id}"]`).innerText()).replace(/[^0-9.-]/g, ''));
       if (await page.locator('.growth-advanced summary').count()) await page.locator('.growth-advanced summary').click();
@@ -40,13 +73,6 @@ for (const slug of slugs) {
         await set('scheduledPayment', 0); await set('extraMonthly', 0); await set('lumpAmount', 0);
         await page.locator('[data-action="calculate"]').first().click();
         row.checks.fixture = Math.abs(await metric('scheduledPaymentOut') - 100) < 0.01 && await metric('baselineMonths') === 12;
-        await page.locator('[data-action="copy"]').first().click();
-        row.checks.copy = (await page.evaluate(() => navigator.clipboard.readText())).includes('Mortgage');
-        const download = page.waitForEvent('download');
-        await page.locator('[data-action="csv"]').first().click();
-        row.checks.csv = (await download).suggestedFilename() === 'mortgage-payoff.csv';
-        await page.locator('[data-action="print"]').first().click();
-        row.checks.print = await page.evaluate(() => window.__worthcalcPrinted === true);
       }
       if (slug === 'dti-calculator') {
         await set('grossIncome', 8000); await set('housingPayment', 2000);
@@ -81,6 +107,7 @@ for (const slug of slugs) {
         row.checks.clear = await page.evaluate(() => !localStorage.getItem('worthcalc:budget-builder'));
       }
     } else {
+      if (capability.resetMode !== 'none' || capability.calculationMode !== 'automatic') throw new Error(`${slug} capability mismatch: expected automatic calculator`);
       const input = page.locator('main input[type=number]').first();
       const verdict = page.locator('.result-panel .verdict, .result-panel .headline-result').first();
       row.checks.example = await input.count() > 0 && await input.inputValue() !== '';
@@ -91,6 +118,10 @@ for (const slug of slugs) {
       await page.waitForTimeout(30);
       row.checks.calculate = await verdict.count() > 0 && !(await verdict.innerText()).includes('Enter ') && !(await verdict.innerText()).includes('NaN');
       const originalInput = await input.inputValue();
+      const initialResult = await page.locator('.result-panel').first().innerText();
+      await input.fill(String(Number(originalInput) * 1.5 + 10));
+      await input.dispatchEvent('input');
+      row.checks.recompute = await page.locator('.result-panel').first().innerText() !== initialResult;
       await input.fill('0');
       await input.dispatchEvent('input');
       row.checks.edge = !(await verdict.innerText()).includes('NaN');
@@ -100,21 +131,44 @@ for (const slug of slugs) {
       await input.fill('');
       await input.dispatchEvent('input');
       row.checks.validation = !(await verdict.innerText()).includes('NaN');
-      await page.reload({ waitUntil: 'domcontentloaded' });
-      row.checks.reset = await input.inputValue() === originalInput;
+      row.checks.reset = 'NOT_APPLICABLE';
       row.checks.no_nan = !(await page.locator('main').innerText()).includes('NaN');
+      if (slug === 'subscription-audit') {
+        await input.fill('123.45');
+        await input.dispatchEvent('input');
+        row.checks.save = await page.evaluate(() => !!localStorage.getItem('sts:subscription-audit:rows'));
+        await page.reload({ waitUntil: 'domcontentloaded' });
+        row.checks.restore = await input.inputValue() === '123.45';
+      }
     }
     const zh = await page.goto(`${base}/zh/tools/${slug}/`, { waitUntil: 'domcontentloaded' });
     row.checks.locale = zh?.status() === 200 && (await page.locator('html').getAttribute('lang'))?.startsWith('zh');
+    const freshContext = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const freshPage = await freshContext.newPage();
+    const freshResponse = await freshPage.goto(`${base}/en/tools/${slug}/`, { waitUntil: 'domcontentloaded' });
+    if (capability.resetMode === 'button') {
+      await freshPage.locator('[data-action="example"]').first().click();
+      await freshPage.locator('[data-action="calculate"]').first().click();
+      row.checks.fresh_context = freshResponse?.status() === 200 && await freshPage.locator('[data-metric]').first().innerText() !== '—';
+    } else {
+      const freshInput = freshPage.locator('main input[type=number]').first();
+      const freshResult = freshPage.locator('.result-panel').first();
+      row.checks.fresh_context = freshResponse?.status() === 200 && await freshInput.inputValue() !== ''
+        && !(await freshResult.innerText()).includes('NaN') && !(await freshResult.innerText()).includes('Infinity');
+    }
+    await freshContext.close();
   } catch (error) {
     row.errors.push(error.stack || String(error));
   }
   row.checks.console = row.errors.length === 0;
-  row.pass = Object.values(row.checks).every(Boolean);
+  row.pass = Object.values(row.checks).every(validCheck);
   rows.push(row);
   console.log(`${row.pass ? 'PASS' : 'FAIL'} ${slug} ${JSON.stringify(row.checks)}`);
   await context.close();
 }
 await browser.close();
-writeFileSync(new URL('WORTHCALC-CALCULATOR-E2E-002.json', out), JSON.stringify({ base, rows }, null, 2));
+writeFileSync(new URL('WORTHCALC-CALCULATOR-E2E-002.json', out), JSON.stringify({ base, rows,
+  summary: { pass: rows.filter(row => row.pass).length, fail: rows.filter(row => !row.pass).length,
+    resetApplicable: rows.filter(row => row.capability.resetMode === 'button').length,
+    resetNotApplicable: rows.filter(row => row.capability.resetMode === 'none').length } }, null, 2));
 if (rows.some((row) => !row.pass)) process.exitCode = 1;

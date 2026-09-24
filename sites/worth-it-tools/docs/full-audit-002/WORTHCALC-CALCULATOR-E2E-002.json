@@ -1,0 +1,347 @@
+{
+  "base": "http://127.0.0.1:4322",
+  "rows": [
+    {
+      "slug": "home-affordability",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "mortgage-payoff",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "fixture": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "rent-vs-buy",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "cashback-breakeven",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "credit-card-payoff",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "fixture": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "debt-strategy",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "dti-calculator",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "fixture": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "installment-true-apr",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "car-affordability",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "commute-cost",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "cost-per-mile",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "ev-vs-gas",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "latte-factor",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "costco-membership",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "subscription-audit",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": false,
+        "no_nan": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": false
+    },
+    {
+      "slug": "compound-growth",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "salary-converter",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "budget-builder",
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "save": true,
+        "restore": true,
+        "clear": true,
+        "locale": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    }
+  ]
+}

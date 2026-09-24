@@ -1,0 +1,11 @@
+{
+  "base": "http://127.0.0.1:4322",
+  "checks": {
+    "panel": true,
+    "invalid_email": true,
+    "email_gate": true,
+    "failure_fallback": true,
+    "privacy_disclosure": true
+  },
+  "pass": true
+}

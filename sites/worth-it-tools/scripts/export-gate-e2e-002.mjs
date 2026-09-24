@@ -1,0 +1,50 @@
+import { chromium } from 'playwright';
+import { build } from 'esbuild';
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const fixture = resolve(root, 'dist/__audit-gate-002');
+const output = resolve(root, 'docs/full-audit-002');
+mkdirSync(fixture, { recursive: true });
+mkdirSync(output, { recursive: true });
+await build({ entryPoints: [resolve(root, 'src/lib/downloadGate.ts')], outfile: resolve(fixture, 'gate.js'), bundle: true, format: 'esm', platform: 'browser' });
+writeFileSync(resolve(fixture, 'index.html'), `<!doctype html><html lang="en"><head><title>Gate E2E fixture</title></head><body>
+<button id="download">Export TXT</button><div id="mount"></div><span id="fallback"></span>
+<script type="module">
+import {requestGatedDownload} from './gate.js';
+const labels={title:'Email export',desc:'Enter email',emailPlaceholder:'Email',submit:'Send',sending:'Sending',sentEmail:'Sent to {email}',sentLocal:'Downloaded locally',invalidEmail:'Invalid email',privacyNote:'Email is used for delivery',changeEmail:'Change email'};
+document.querySelector('#download').onclick=()=>requestGatedDownload({tool:'fixture',labels,anchor:document.querySelector('#mount'),getFile:()=>({blob:new Blob(['fixture text'],{type:'text/plain'}),filename:'fixture.txt'}),fallback:()=>{document.querySelector('#fallback').textContent='fallback';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['fixture text']));a.download='fixture.txt';a.click();URL.revokeObjectURL(a.href)}});
+</script></body></html>`);
+const browser = await chromium.launch({ headless: true });
+const context = await browser.newContext({ acceptDownloads: true });
+const page = await context.newPage();
+const base = process.env.WORTHCALC_E2E_BASE || 'http://127.0.0.1:4321';
+const checks = {};
+await page.route('https://roomfeng.win/api/download-gate', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, delivery: 'email' }) }));
+await page.goto(`${base}/__audit-gate-002/`);
+await page.locator('#download').click();
+checks.panel = await page.locator('.wc-gate input[type=email]').count() === 1;
+await page.locator('.wc-gate input[type=email]').fill('invalid');
+await page.locator('.wc-gate button[type=submit]').click();
+checks.invalid_email = (await page.locator('.wc-gate-status').innerText()).includes('Invalid');
+await page.locator('.wc-gate input[type=email]').fill('audit@example.test');
+await page.locator('.wc-gate button[type=submit]').click();
+await page.waitForFunction(() => document.querySelector('.wc-gate-status')?.textContent?.includes('Sent to audit@example.test'));
+checks.email_gate = await page.evaluate(() => localStorage.getItem('wc_gate_email') === 'audit@example.test');
+await page.evaluate(() => localStorage.removeItem('wc_gate_email'));
+await page.unrouteAll();
+await page.route('https://roomfeng.win/api/download-gate', route => route.abort());
+await page.reload();
+await page.locator('#download').click();
+await page.locator('.wc-gate input[type=email]').fill('audit@example.test');
+const download = page.waitForEvent('download');
+await page.locator('.wc-gate button[type=submit]').click();
+checks.failure_fallback = (await download).suggestedFilename() === 'fixture.txt' && await page.locator('#fallback').innerText() === 'fallback';
+const privacy = readFileSync(resolve(root, 'src/pages/en/privacy.astro'), 'utf8');
+checks.privacy_disclosure = /export feature/i.test(privacy) && /email/i.test(privacy);
+await browser.close();
+writeFileSync(resolve(output, 'WORTHCALC-EXPORT-GATE-E2E-002.json'), JSON.stringify({ base, checks, pass: Object.values(checks).every(Boolean) }, null, 2));
+console.log(JSON.stringify(checks));
+if (Object.values(checks).some(value => !value)) process.exitCode = 1;

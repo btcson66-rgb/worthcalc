@@ -1,0 +1,4069 @@
+[
+  {
+    "path": "/",
+    "locale": "root",
+    "canonical": "https://worthcalc.win/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/ar/guides/annual-cost-savings-calculator/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/annual-cost-savings-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/introductory-discount-renewal-cost/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/introductory-discount-renewal-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/monthly-vs-annual-total-cost/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/monthly-vs-annual-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/one-time-switching-cost-payback/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/one-time-switching-cost-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/recurring-costs-annual-total/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/recurring-costs-annual-total/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/savings-break-even-use-period/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/savings-break-even-use-period/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-buy-now-pay-later/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-buy-now-pay-later/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-convenience-delivery/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-convenience-delivery/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-extended-warranty/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-extended-warranty/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-free-shipping-threshold/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-free-shipping-threshold/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-home-service-plan/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-home-service-plan/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-rental-car/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-rental-car/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/true-cost-of-upgrade-feature/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/true-cost-of-upgrade-feature/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/ar/guides/unused-membership-capacity-cost/",
+    "locale": "ar",
+    "canonical": "https://worthcalc.win/ar/guides/unused-membership-capacity-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/about/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/about/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/annual-fee-card-breakeven/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/annual-fee-card-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/bnpl-vs-credit-card-installments/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/bnpl-vs-credit-card-installments/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/budget-with-irregular-income/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/budget-with-irregular-income/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/bulk-buying-vs-small-packages/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/bulk-buying-vs-small-packages/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/bulk-buying-waste-math/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/bulk-buying-waste-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/car-lease-vs-buy-total-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/car-lease-vs-buy-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/cashback-caps-real-reward-rate/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/cashback-caps-real-reward-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/changelog/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/changelog/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/contact/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/contact/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/cost-per-use-expensive-item/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/cost-per-use-expensive-item/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/costco-math/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/costco-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/credit-card-minimum-payment-trap/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/credit-card-minimum-payment-trap/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/delivery-membership-break-even/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/delivery-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/disclaimer/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/disclaimer/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/energy-efficient-appliance-payback/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/energy-efficient-appliance-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/ev-vs-gas-total-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/ev-vs-gas-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/extra-mortgage-payments-guide/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/extra-mortgage-payments-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/full-commute-cost-including-time/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/full-commute-cost-including-time/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/guides/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/guides/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/gym-membership-cost-per-visit/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/gym-membership-cost-per-visit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/home-vs-public-ev-charging-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/home-vs-public-ev-charging-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/hourly-vs-annual-salary/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/hourly-vs-annual-salary/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/how-compound-growth-works/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/how-compound-growth-works/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/how-much-home-can-you-afford/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/how-much-home-can-you-afford/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/how-to-calculate-dti/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/how-to-calculate-dti/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/is-an-extended-warranty-worth-it/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/is-an-extended-warranty-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/is-costco-executive-membership-worth-it/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/is-costco-executive-membership-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/meal-prep-vs-takeout-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/meal-prep-vs-takeout-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/monthly-vs-annual-subscription/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/monthly-vs-annual-subscription/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/new-vs-used-car-total-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/new-vs-used-car-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/paid-membership-break-even/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/paid-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/pay-raise-vs-inflation-purchasing-power/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/pay-raise-vs-inflation-purchasing-power/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/price-per-wear-clothing-shoes/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/price-per-wear-clothing-shoes/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/privacy/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/privacy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/rent-vs-buy-breakeven-year/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/rent-vs-buy-breakeven-year/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/rent-vs-buy-guide/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/rent-vs-buy-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/repair-or-replace-decision-formula/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/repair-or-replace-decision-formula/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/reusable-vs-disposable-break-even/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/reusable-vs-disposable-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/snowball-vs-avalanche/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/snowball-vs-avalanche/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/subscription-creep/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/subscription-creep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/terms/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/terms/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/budget-builder/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/budget-builder/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/car-affordability/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/car-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/cashback-breakeven/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/cashback-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/commute-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/commute-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/compound-growth/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/compound-growth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/costco-membership/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/costco-membership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/credit-card-payoff/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/credit-card-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/debt-strategy/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/debt-strategy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/dti-calculator/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/dti-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/ev-vs-gas/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/ev-vs-gas/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/home-affordability/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/home-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/installment-true-apr/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/installment-true-apr/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/latte-factor/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/latte-factor/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/mortgage-payoff/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/mortgage-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/rent-vs-buy/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/rent-vs-buy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/salary-converter/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/salary-converter/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/tools/subscription-audit/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/tools/subscription-audit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/true-cost-of-car-ownership/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/true-cost-of-car-ownership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/true-hourly-wage-after-commuting-work-expenses/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/true-hourly-wage-after-commuting-work-expenses/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/upfront-fees-financing-cost/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/upfront-fees-financing-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/upgrade-your-phone-or-keep-it/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/upgrade-your-phone-or-keep-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/work-from-home-vs-commuting-hidden-costs/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/work-from-home-vs-commuting-hidden-costs/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/de/zero-interest-installments-truth/",
+    "locale": "de",
+    "canonical": "https://worthcalc.win/de/zero-interest-installments-truth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/about/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/about/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/annual-fee-card-breakeven/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/annual-fee-card-breakeven/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/annual-vs-monthly-billing/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/annual-vs-monthly-billing/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/apr-vs-apy/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/apr-vs-apy/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/average-commuting-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/average-commuting-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/bnpl-vs-credit-card-installments/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/bnpl-vs-credit-card-installments/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/budget-with-irregular-income/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/budget-with-irregular-income/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/bulk-buying-vs-small-packages/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/bulk-buying-vs-small-packages/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/bulk-buying-waste-math/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/bulk-buying-waste-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/car-lease-vs-buy-total-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/car-lease-vs-buy-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/cashback-caps-real-reward-rate/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/cashback-caps-real-reward-rate/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/changelog/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/changelog/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/contact/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/contact/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/cost-per-use-expensive-item/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/cost-per-use-expensive-item/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/costco-math/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/costco-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/credit-card-minimum-payment-trap/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/credit-card-minimum-payment-trap/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/delivery-membership-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/delivery-membership-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/disclaimer/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/disclaimer/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/emergency-fund-irregular-income/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/emergency-fund-irregular-income/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/energy-efficient-appliance-payback/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/energy-efficient-appliance-payback/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/ev-vs-gas-total-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/ev-vs-gas-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/extended-warranty-math/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/extended-warranty-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/extra-mortgage-payments-guide/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/extra-mortgage-payments-guide/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/free-shipping-threshold/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/free-shipping-threshold/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/freelancer-pricing-decision-engine/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/freelancer-pricing-decision-engine/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/full-commute-cost-including-time/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/full-commute-cost-including-time/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/guides/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/guides/ai-tool-realized-time-savings-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/ai-tool-realized-time-savings-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/amortization-schedule-explained/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/amortization-schedule-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/annual-bills-cash-flow-low-point/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/annual-bills-cash-flow-low-point/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/annual-bills-monthly-equivalent/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/annual-cost-savings-calculator/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/annual-cost-savings-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/annual-plan-cancellation-risk-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/annual-plan-cancellation-risk-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/annual-vs-monthly-insurance-payment/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/annual-vs-monthly-insurance-payment/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/auto-loan-negative-equity-rollover-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/auto-loan-negative-equity-rollover-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/balance-transfer-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/balance-transfer-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/benefits-replacement-cost-vs-salary/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/benefits-replacement-cost-vs-salary/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/bonus-volatility-fixed-cost-capacity/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/bonus-volatility-fixed-cost-capacity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/car-down-payment-vs-liquidity/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/car-loan-60-vs-72-vs-84-early-exit/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/car-loan-60-vs-72-vs-84-early-exit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cash-discount-vs-financing/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cash-discount-vs-financing/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cash-flow-buffer-vs-emergency-fund/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cash-runway-before-quitting-job/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cash-vs-financing-car-liquidity/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cash-vs-financing-car-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/childcare-return-to-work-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/childcare-return-to-work-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/clothes-dryer-cost-per-load-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/clothes-dryer-cost-per-load-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cloud-storage-cost-per-retained-gb/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cloud-storage-cost-per-retained-gb/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/cost-of-delaying-savings-goal/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/cost-of-delaying-savings-goal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/debt-consolidation-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/debt-consolidation-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/debt-to-assets-ratio-personal/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/debt-to-assets-ratio-personal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/dishwasher-cost-per-cycle-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/dishwasher-cost-per-cycle-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/electricity-cost-per-kwh-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/electricity-cost-per-kwh-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/event-ticket-cost-per-attended-hour/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/event-ticket-cost-per-attended-hour/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/financial-runway-months/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/financial-runway-months/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/fixed-vs-variable-rate/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/fixed-vs-variable-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/freelance-minimum-billable-rate/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/freelance-minimum-billable-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/fulltime-vs-parttime-childcare-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/fulltime-vs-parttime-childcare-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/high-vs-low-insurance-deductible-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/high-vs-low-insurance-deductible-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/home-internet-cost-per-gb-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/home-internet-cost-per-gb-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/hvac-cost-per-operating-hour-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/hvac-cost-per-operating-hour-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/insurance-deductible-cash-reserve/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/introductory-discount-renewal-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/introductory-discount-renewal-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/language-class-cost-per-completed-session/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/language-class-cost-per-completed-session/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/laundry-cost-per-load/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/laundry-cost-per-load/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/led-lighting-cost-per-hour-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/led-lighting-cost-per-hour-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/loan-refinance-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/loan-refinance-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/meal-delivery-plan-cost-per-eaten-meal/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/meal-delivery-plan-cost-per-eaten-meal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/mobile-data-cost-per-gb-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/mobile-data-cost-per-gb-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/monthly-vs-annual-total-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/monthly-vs-annual-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/mortgage-points-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/mortgage-points-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/mortgage-recast-vs-refinance-vs-extra-principal/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/mortgage-recast-vs-refinance-vs-extra-principal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/natural-gas-cost-per-therm-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/natural-gas-cost-per-therm-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/one-time-switching-cost-payback/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/one-time-switching-cost-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/oven-stove-cost-per-cooking-hour-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/oven-stove-cost-per-cooking-hour-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/personal-liquidity-ratio/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/post-debt-payoff-lifestyle-creep/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/post-debt-payoff-lifestyle-creep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/prepay-rent-discount-vs-liquidity/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/prepay-rent-discount-vs-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/real-vs-nominal-return/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/real-vs-nominal-return/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/recurring-costs-annual-total/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/recurring-costs-annual-total/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/refrigerator-cost-per-day-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/refrigerator-cost-per-day-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/relocation-higher-salary-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/relocation-higher-salary-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/remote-work-pay-cut-cash-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/remote-work-pay-cut-cash-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/rent-increase-vs-moving-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/rent-increase-vs-moving-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/savings-break-even-use-period/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/savings-break-even-use-period/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/sinking-fund-by-deadline/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/sinking-fund-by-deadline/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/software-add-on-cost-per-active-seat/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/software-add-on-cost-per-active-seat/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/trade-in-vs-private-sale-net-proceeds/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/trade-in-vs-private-sale-net-proceeds/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/training-certification-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/training-certification-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/unused-membership-capacity-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/unused-membership-capacity-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/water-bill-cost-per-gallon-used/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/water-bill-cost-per-gallon-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/water-heater-cost-per-gallon-heated/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/water-heater-cost-per-gallon-heated/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/guides/windfall-debt-vs-cash-allocation/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/guides/windfall-debt-vs-cash-allocation/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/gym-membership-cost-per-visit/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/gym-membership-cost-per-visit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/home-vs-public-ev-charging-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/home-vs-public-ev-charging-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/hourly-vs-annual-salary/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/hourly-vs-annual-salary/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/how-compound-growth-works/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/how-compound-growth-works/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/how-much-home-can-you-afford/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/how-much-home-can-you-afford/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/how-to-calculate-dti/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/how-to-calculate-dti/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/installment-apr-table/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/installment-apr-table/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/is-an-extended-warranty-worth-it/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/is-an-extended-warranty-worth-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/is-costco-executive-membership-worth-it/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/is-costco-executive-membership-worth-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/job-offer-true-value-decision-engine/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/job-offer-true-value-decision-engine/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/loan-term-monthly-payment-vs-total-interest/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/meal-prep-vs-takeout-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/meal-prep-vs-takeout-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/money/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/credit-card-apr-2026/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/credit-card-apr-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/electricity-price-per-kwh-2026/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/electricity-price-per-kwh-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/idle-cash-cost-2026/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/idle-cash-cost-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/insurance-deductible-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/insurance-deductible-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/irs-mileage-rate-2026/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/irs-mileage-rate-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/mortgage-rate-2026-payment-impact/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/mortgage-rate-2026-payment-impact/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/money/streaming-prices-2026/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/money/streaming-prices-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/monthly-vs-annual-subscription/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/monthly-vs-annual-subscription/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/net-worth-vs-liquid-net-worth/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/new-vs-used-car-total-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/new-vs-used-car-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/opportunity-cost-everyday/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/opportunity-cost-everyday/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/paid-membership-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/paid-membership-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/pay-raise-vs-inflation-purchasing-power/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/price-in-work-hours/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/price-in-work-hours/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/price-per-wear-clothing-shoes/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/price-per-wear-clothing-shoes/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/privacy/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/privacy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/rent-vs-buy-breakeven-year/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/rent-vs-buy-breakeven-year/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/rent-vs-buy-guide/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/rent-vs-buy-guide/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/repair-or-replace-decision-formula/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/repair-or-replace-decision-formula/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/return-to-office-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/return-to-office-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/reusable-vs-disposable-break-even/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/reusable-vs-disposable-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/rule-of-72-explained/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/rule-of-72-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/savings-rate-gross-vs-net/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/savings-rate-gross-vs-net/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/snowball-vs-avalanche/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/snowball-vs-avalanche/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/subscription-creep/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/subscription-creep/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/sunk-cost-fallacy-everyday/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/sunk-cost-fallacy-everyday/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/en/terms/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/terms/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/appliance-running-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/appliance-running-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/budget-builder/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/budget-builder/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/car-affordability/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/car-affordability/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/cashback-breakeven/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/cashback-breakeven/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/commute-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/commute-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/compound-growth/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/compound-growth/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/cost-per-mile/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/cost-per-mile/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/costco-membership/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/costco-membership/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/credit-card-payoff/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/credit-card-payoff/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/debt-strategy/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/debt-strategy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/dti-calculator/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/dti-calculator/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/ev-vs-gas/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/ev-vs-gas/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/home-affordability/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/home-affordability/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/installment-true-apr/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/installment-true-apr/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/latte-factor/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/latte-factor/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/mortgage-payoff/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/mortgage-payoff/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/rent-vs-buy/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/rent-vs-buy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/salary-converter/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/salary-converter/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/tools/subscription-audit/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/tools/subscription-audit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/debt-credit/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/debt-credit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/everyday/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/everyday/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/housing/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/housing/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/income-savings/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/income-savings/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/memberships/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/memberships/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/topics/transportation/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/topics/transportation/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/true-cost-of-car-ownership/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/true-cost-of-car-ownership/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/true-hourly-wage-after-commuting-work-expenses/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/upfront-fees-financing-cost/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/upfront-fees-financing-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/upgrade-your-phone-or-keep-it/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/upgrade-your-phone-or-keep-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/work-from-home-vs-commuting-hidden-costs/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/work-from-home-vs-commuting-hidden-costs/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/en/zero-interest-installments-truth/",
+    "locale": "en",
+    "canonical": "https://worthcalc.win/en/zero-interest-installments-truth/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/es/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/about/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/about/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/annual-fee-card-breakeven/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/annual-fee-card-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/bnpl-vs-credit-card-installments/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/bnpl-vs-credit-card-installments/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/budget-with-irregular-income/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/budget-with-irregular-income/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/bulk-buying-vs-small-packages/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/bulk-buying-vs-small-packages/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/bulk-buying-waste-math/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/bulk-buying-waste-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/car-lease-vs-buy-total-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/car-lease-vs-buy-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/cashback-caps-real-reward-rate/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/cashback-caps-real-reward-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/changelog/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/changelog/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/contact/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/contact/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/cost-per-use-expensive-item/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/cost-per-use-expensive-item/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/costco-math/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/costco-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/credit-card-minimum-payment-trap/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/credit-card-minimum-payment-trap/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/delivery-membership-break-even/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/delivery-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/disclaimer/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/disclaimer/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/energy-efficient-appliance-payback/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/energy-efficient-appliance-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/ev-vs-gas-total-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/ev-vs-gas-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/extra-mortgage-payments-guide/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/extra-mortgage-payments-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/full-commute-cost-including-time/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/full-commute-cost-including-time/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/guides/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/guides/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/gym-membership-cost-per-visit/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/gym-membership-cost-per-visit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/home-vs-public-ev-charging-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/home-vs-public-ev-charging-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/hourly-vs-annual-salary/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/hourly-vs-annual-salary/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/how-compound-growth-works/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/how-compound-growth-works/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/how-much-home-can-you-afford/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/how-much-home-can-you-afford/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/how-to-calculate-dti/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/how-to-calculate-dti/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/is-an-extended-warranty-worth-it/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/is-an-extended-warranty-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/is-costco-executive-membership-worth-it/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/is-costco-executive-membership-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/meal-prep-vs-takeout-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/meal-prep-vs-takeout-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/monthly-vs-annual-subscription/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/monthly-vs-annual-subscription/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/new-vs-used-car-total-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/new-vs-used-car-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/paid-membership-break-even/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/paid-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/pay-raise-vs-inflation-purchasing-power/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/pay-raise-vs-inflation-purchasing-power/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/price-per-wear-clothing-shoes/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/price-per-wear-clothing-shoes/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/privacy/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/privacy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/rent-vs-buy-breakeven-year/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/rent-vs-buy-breakeven-year/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/rent-vs-buy-guide/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/rent-vs-buy-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/repair-or-replace-decision-formula/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/repair-or-replace-decision-formula/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/reusable-vs-disposable-break-even/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/reusable-vs-disposable-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/snowball-vs-avalanche/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/snowball-vs-avalanche/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/subscription-creep/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/subscription-creep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/terms/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/terms/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/budget-builder/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/budget-builder/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/car-affordability/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/car-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/cashback-breakeven/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/cashback-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/commute-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/commute-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/compound-growth/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/compound-growth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/costco-membership/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/costco-membership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/credit-card-payoff/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/credit-card-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/debt-strategy/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/debt-strategy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/dti-calculator/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/dti-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/ev-vs-gas/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/ev-vs-gas/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/home-affordability/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/home-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/installment-true-apr/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/installment-true-apr/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/latte-factor/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/latte-factor/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/mortgage-payoff/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/mortgage-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/rent-vs-buy/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/rent-vs-buy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/salary-converter/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/salary-converter/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/tools/subscription-audit/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/tools/subscription-audit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/true-cost-of-car-ownership/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/true-cost-of-car-ownership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/true-hourly-wage-after-commuting-work-expenses/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/true-hourly-wage-after-commuting-work-expenses/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/upfront-fees-financing-cost/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/upfront-fees-financing-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/upgrade-your-phone-or-keep-it/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/upgrade-your-phone-or-keep-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/work-from-home-vs-commuting-hidden-costs/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/work-from-home-vs-commuting-hidden-costs/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/es/zero-interest-installments-truth/",
+    "locale": "es",
+    "canonical": "https://worthcalc.win/es/zero-interest-installments-truth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/about/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/about/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/annual-fee-card-breakeven/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/annual-fee-card-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/bnpl-vs-credit-card-installments/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/bnpl-vs-credit-card-installments/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/budget-with-irregular-income/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/budget-with-irregular-income/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/bulk-buying-vs-small-packages/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/bulk-buying-vs-small-packages/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/bulk-buying-waste-math/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/bulk-buying-waste-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/car-lease-vs-buy-total-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/car-lease-vs-buy-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/cashback-caps-real-reward-rate/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/cashback-caps-real-reward-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/changelog/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/changelog/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/contact/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/contact/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/cost-per-use-expensive-item/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/cost-per-use-expensive-item/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/costco-math/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/costco-math/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/credit-card-minimum-payment-trap/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/credit-card-minimum-payment-trap/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/delivery-membership-break-even/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/delivery-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/disclaimer/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/disclaimer/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/energy-efficient-appliance-payback/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/energy-efficient-appliance-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/ev-vs-gas-total-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/ev-vs-gas-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/extra-mortgage-payments-guide/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/extra-mortgage-payments-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/full-commute-cost-including-time/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/full-commute-cost-including-time/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/guides/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/guides/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/gym-membership-cost-per-visit/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/gym-membership-cost-per-visit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/home-vs-public-ev-charging-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/home-vs-public-ev-charging-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/hourly-vs-annual-salary/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/hourly-vs-annual-salary/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/how-compound-growth-works/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/how-compound-growth-works/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/how-much-home-can-you-afford/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/how-much-home-can-you-afford/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/how-to-calculate-dti/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/how-to-calculate-dti/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/is-an-extended-warranty-worth-it/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/is-an-extended-warranty-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/is-costco-executive-membership-worth-it/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/is-costco-executive-membership-worth-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/meal-prep-vs-takeout-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/meal-prep-vs-takeout-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/monthly-vs-annual-subscription/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/monthly-vs-annual-subscription/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/new-vs-used-car-total-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/new-vs-used-car-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/paid-membership-break-even/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/paid-membership-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/pay-raise-vs-inflation-purchasing-power/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/pay-raise-vs-inflation-purchasing-power/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/price-per-wear-clothing-shoes/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/price-per-wear-clothing-shoes/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/privacy/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/privacy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/rent-vs-buy-breakeven-year/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/rent-vs-buy-breakeven-year/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/rent-vs-buy-guide/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/rent-vs-buy-guide/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/repair-or-replace-decision-formula/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/repair-or-replace-decision-formula/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/reusable-vs-disposable-break-even/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/reusable-vs-disposable-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/snowball-vs-avalanche/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/snowball-vs-avalanche/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/subscription-creep/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/subscription-creep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/terms/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/terms/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/budget-builder/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/budget-builder/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/car-affordability/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/car-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/cashback-breakeven/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/cashback-breakeven/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/commute-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/commute-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/compound-growth/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/compound-growth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/costco-membership/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/costco-membership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/credit-card-payoff/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/credit-card-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/debt-strategy/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/debt-strategy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/dti-calculator/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/dti-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/ev-vs-gas/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/ev-vs-gas/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/home-affordability/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/home-affordability/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/installment-true-apr/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/installment-true-apr/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/latte-factor/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/latte-factor/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/mortgage-payoff/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/mortgage-payoff/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/rent-vs-buy/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/rent-vs-buy/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/salary-converter/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/salary-converter/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/tools/subscription-audit/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/tools/subscription-audit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/true-cost-of-car-ownership/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/true-cost-of-car-ownership/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/true-hourly-wage-after-commuting-work-expenses/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/true-hourly-wage-after-commuting-work-expenses/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/upfront-fees-financing-cost/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/upfront-fees-financing-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/upgrade-your-phone-or-keep-it/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/upgrade-your-phone-or-keep-it/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/work-from-home-vs-commuting-hidden-costs/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/work-from-home-vs-commuting-hidden-costs/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/fr/zero-interest-installments-truth/",
+    "locale": "fr",
+    "canonical": "https://worthcalc.win/fr/zero-interest-installments-truth/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/annual-cost-savings-calculator/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/annual-cost-savings-calculator/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/introductory-discount-renewal-cost/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/introductory-discount-renewal-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/monthly-vs-annual-total-cost/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/monthly-vs-annual-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/one-time-switching-cost-payback/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/one-time-switching-cost-payback/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/recurring-costs-annual-total/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/recurring-costs-annual-total/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/savings-break-even-use-period/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/savings-break-even-use-period/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-buy-now-pay-later/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-buy-now-pay-later/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-convenience-delivery/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-convenience-delivery/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-extended-warranty/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-extended-warranty/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-free-shipping-threshold/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-free-shipping-threshold/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-home-service-plan/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-home-service-plan/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-rental-car/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-rental-car/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/true-cost-of-upgrade-feature/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/true-cost-of-upgrade-feature/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/hi/guides/unused-membership-capacity-cost/",
+    "locale": "hi",
+    "canonical": "https://worthcalc.win/hi/guides/unused-membership-capacity-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/about/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/about/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/annual-fee-card-breakeven/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/annual-fee-card-breakeven/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/annual-vs-monthly-billing/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/annual-vs-monthly-billing/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/apr-vs-apy/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/apr-vs-apy/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/average-commuting-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/average-commuting-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/bnpl-vs-credit-card-installments/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/bnpl-vs-credit-card-installments/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/budget-with-irregular-income/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/budget-with-irregular-income/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/bulk-buying-vs-small-packages/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/bulk-buying-vs-small-packages/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/bulk-buying-waste-math/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/bulk-buying-waste-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/car-lease-vs-buy-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/car-lease-vs-buy-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/cashback-caps-real-reward-rate/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/cashback-caps-real-reward-rate/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/changelog/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/changelog/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/contact/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/contact/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/cost-per-use-expensive-item/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/cost-per-use-expensive-item/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/costco-math/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/costco-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/credit-card-minimum-payment-trap/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/credit-card-minimum-payment-trap/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/delivery-membership-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/delivery-membership-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/disclaimer/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/disclaimer/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/emergency-fund-how-much/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/emergency-fund-how-much/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/emergency-fund-irregular-income/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/emergency-fund-irregular-income/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/emergency-fund-vs-debt-payoff/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/emergency-fund-vs-debt-payoff/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/emergency-fund-vs-sinking-fund/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/emergency-fund-vs-sinking-fund/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/energy-efficient-appliance-payback/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/energy-efficient-appliance-payback/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/ev-vs-gas-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/ev-vs-gas-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/extended-warranty-math/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/extended-warranty-math/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/extra-mortgage-payments-guide/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/extra-mortgage-payments-guide/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/free-shipping-threshold/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/free-shipping-threshold/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/freelancer-pricing-decision-engine/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/freelancer-pricing-decision-engine/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/full-commute-cost-including-time/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/full-commute-cost-including-time/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/guides/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/guides/ai-tool-realized-time-savings-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/ai-tool-realized-time-savings-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/amortization-schedule-explained/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/annual-bill-cluster-cash-low-point/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/annual-bill-cluster-cash-low-point/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/annual-expenses-monthly-equivalent/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/annual-plan-cancellation-risk-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/auto-loan-negative-equity-rollover-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/auto-loan-negative-equity-rollover-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/balance-transfer-fee-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/balance-transfer-fee-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/base-salary-vs-bonus-fixed-cost-capacity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/car-down-payment-vs-liquidity/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/car-loan-60-72-84-early-exit/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/car-loan-60-72-84-early-exit/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/car-major-repair-hold-period-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/car-major-repair-hold-period-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/cash-discount-vs-financing/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/cash-discount-vs-financing/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/cash-flow-buffer-vs-emergency-fund/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/cash-runway-before-quitting-job/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/cash-runway-before-quitting-job/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/cash-vs-car-loan-liquidity-adjusted/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/cash-vs-car-loan-liquidity-adjusted/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/childcare-deposit-enrollment-cashflow/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/childcare-deposit-enrollment-cashflow/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/childcare-return-to-work-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/childcare-return-to-work-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/commission-income-tax-reserve-cashflow/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/commission-income-tax-reserve-cashflow/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/cost-of-delaying-savings-goal/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/cost-of-delaying-savings-goal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/debt-consolidation-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/debt-consolidation-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/debt-free-fixed-cost-creep/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/debt-free-fixed-cost-creep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/debt-paydown-interest-vs-cashflow/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/debt-to-assets-ratio-personal/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/debt-to-assets-ratio-personal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/down-payment-vs-post-purchase-liquidity/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/down-payment-vs-post-purchase-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/effective-interest-rate-explained/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/electricity-cost-per-kwh-used/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/electricity-cost-per-kwh-used/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/emergency-fund-rebuild-after-move/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/emergency-fund-rebuild-after-use/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/employer-benefits-replacement-cost-vs-cash/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/employer-benefits-replacement-cost-vs-cash/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/extra-payment-personal-loan/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/extra-payment-personal-loan/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/extra-principal-before-car-trade-vs-cash/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/extra-principal-before-car-trade-vs-cash/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/extra-room-home-office-incremental-rent-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/extra-room-home-office-incremental-rent-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/financial-runway-months/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/financial-runway-months/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/fixed-cost-ratio-personal-budget/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/fixed-vs-variable-rate-scenario/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/freelance-minimum-billable-rate/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/freelance-minimum-billable-rate/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/high-vs-low-deductible-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/high-vs-low-deductible-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/how-much-cash-to-keep/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/inflation-adjusted-savings-goal/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/insurance-annual-vs-monthly-payment/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/insurance-annual-vs-monthly-payment/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/insurance-deductible-cash-reserve/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/insurance-deductible-cash-reserve/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/interest-only-period-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/job-change-pay-gap-cashflow/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/joint-account-minimum-cash-floor/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/joint-account-minimum-cash-floor/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/lifestyle-inflation-raise-capture/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/lifestyle-inflation-raise-capture/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/loan-refinance-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/loan-refinance-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/minimum-cash-balance-checking/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/minimum-cash-balance-checking/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/monthly-extra-vs-annual-lump-sum/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/monthly-extra-vs-annual-lump-sum/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/monthly-payment-affordability-vs-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/mortgage-fee-rate-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/mortgage-fee-rate-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/mortgage-recast-vs-refinance-vs-prepay/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/net-worth-tracking-frequency/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/net-worth-tracking-frequency/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/overtime-marginal-take-home-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/overtime-marginal-take-home-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/paycheck-budgeting-limitations/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/paycheck-budgeting-limitations/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/personal-liquidity-ratio/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/personal-liquidity-ratio/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/post-debt-payoff-cashflow-plan/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/post-debt-payoff-cashflow-plan/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/prepay-rent-discount-vs-liquidity/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/prepay-rent-discount-vs-liquidity/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/principal-equal-vs-payment-equal-amortization/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/principal-equal-vs-payment-equal-amortization/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/professional-membership-replacement-value-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/professional-membership-replacement-value-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/promo-apr-payoff-deadline/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/promo-apr-payoff-deadline/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/real-vs-nominal-return/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/real-vs-nominal-return/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/relocation-for-higher-salary-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/relocation-for-higher-salary-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/remote-work-pay-cut-cash-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/remote-work-pay-cut-cash-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/rent-increase-vs-moving-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/rent-increase-vs-moving-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/rental-deposit-liquidity-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/return-to-work-fulltime-vs-parttime/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/return-to-work-fulltime-vs-parttime/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/save-first-vs-installment-purchase/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/save-first-vs-installment-purchase/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/shared-expenses-income-split/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/shared-expenses-income-split/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/side-hustle-equipment-billable-utilization-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/side-hustle-equipment-billable-utilization-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/signing-bonus-vs-higher-base-clawback-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/single-income-household-stress-test/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/single-income-household-stress-test/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/sinking-fund-by-deadline/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/sinking-fund-by-deadline/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/step-rate-loan-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/subscription-opportunity-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/subscription-opportunity-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/trade-in-vs-private-sale-net-proceeds/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/trade-in-vs-private-sale-net-proceeds/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/training-certification-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/training-certification-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/variable-bonus-income-fixed-obligations/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/variable-bonus-income-fixed-obligations/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/windfall-debt-vs-cash-allocation/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/windfall-debt-vs-cash-allocation/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/guides/work-equipment-reimbursement-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/guides/work-equipment-reimbursement-break-even/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/gym-membership-cost-per-visit/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/gym-membership-cost-per-visit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/home-vs-public-ev-charging-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/home-vs-public-ev-charging-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/hourly-vs-annual-salary/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/hourly-vs-annual-salary/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/how-compound-growth-works/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/how-compound-growth-works/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/how-much-home-can-you-afford/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/how-much-home-can-you-afford/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/how-to-calculate-dti/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/how-to-calculate-dti/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/how-to-calculate-net-worth/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/how-to-calculate-net-worth/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/how-to-calculate-savings-rate/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/how-to-calculate-savings-rate/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/installment-apr-table/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/installment-apr-table/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/is-an-extended-warranty-worth-it/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/is-an-extended-warranty-worth-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/is-costco-executive-membership-worth-it/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/is-costco-executive-membership-worth-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/job-offer-true-value-decision-engine/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/job-offer-true-value-decision-engine/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/liquid-net-worth-explained/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/liquid-net-worth-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/loan-term-vs-total-interest/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/loan-term-vs-total-interest/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/meal-prep-vs-takeout-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/meal-prep-vs-takeout-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/credit-card-apr-2026/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/credit-card-apr-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/electricity-price-per-kwh-2026/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/electricity-price-per-kwh-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/idle-cash-cost-2026/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/idle-cash-cost-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/insurance-deductible-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/insurance-deductible-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/irs-mileage-rate-2026/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/irs-mileage-rate-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/mortgage-rate-2026-payment-impact/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/mortgage-rate-2026-payment-impact/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/money/streaming-prices-2026/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/money/streaming-prices-2026/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/monthly-vs-annual-subscription/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/monthly-vs-annual-subscription/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/new-vs-used-car-total-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/new-vs-used-car-total-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/opportunity-cost-everyday/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/opportunity-cost-everyday/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/paid-membership-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/paid-membership-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/pay-raise-vs-inflation-purchasing-power/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/price-in-work-hours/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/price-in-work-hours/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/price-per-wear-clothing-shoes/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/price-per-wear-clothing-shoes/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/privacy/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/privacy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/rent-vs-buy-breakeven-year/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/rent-vs-buy-breakeven-year/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/rent-vs-buy-guide/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/rent-vs-buy-guide/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/repair-or-replace-decision-formula/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/repair-or-replace-decision-formula/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/return-to-office-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/return-to-office-cost/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/reusable-vs-disposable-break-even/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/reusable-vs-disposable-break-even/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/rule-of-72-explained/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/rule-of-72-explained/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/simple-vs-compound-interest/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/simple-vs-compound-interest/",
+    "robots": "index,follow",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/snowball-vs-avalanche/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/snowball-vs-avalanche/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/subscription-creep/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/subscription-creep/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/sunk-cost-fallacy-everyday/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/sunk-cost-fallacy-everyday/",
+    "robots": "noindex,follow",
+    "in_sitemap": false
+  },
+  {
+    "path": "/zh/terms/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/terms/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/appliance-electricity-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/appliance-electricity-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/budget-builder/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/budget-builder/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/car-affordability/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/car-affordability/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/cashback-breakeven/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/cashback-breakeven/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/commute-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/commute-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/compound-growth/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/compound-growth/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/cost-per-mile/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/cost-per-mile/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/costco-membership/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/costco-membership/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/credit-card-payoff/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/credit-card-payoff/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/debt-strategy/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/debt-strategy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/dti-calculator/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/dti-calculator/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/ev-vs-gas/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/ev-vs-gas/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/home-affordability/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/home-affordability/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/installment-true-apr/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/installment-true-apr/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/latte-factor/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/latte-factor/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/mortgage-payoff/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/mortgage-payoff/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/rent-vs-buy/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/rent-vs-buy/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/salary-converter/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/salary-converter/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/tools/subscription-audit/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/tools/subscription-audit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/debt-credit/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/debt-credit/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/everyday/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/everyday/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/housing/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/housing/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/income-savings/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/income-savings/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/memberships/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/memberships/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/topics/transportation/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/topics/transportation/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/true-cost-of-car-ownership/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/true-cost-of-car-ownership/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/true-hourly-wage-after-commuting-work-expenses/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/true-hourly-wage-after-commuting-work-expenses/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/upfront-fees-financing-cost/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/upfront-fees-financing-cost/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/upgrade-your-phone-or-keep-it/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/upgrade-your-phone-or-keep-it/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/work-from-home-vs-commuting-hidden-costs/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/work-from-home-vs-commuting-hidden-costs/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  },
+  {
+    "path": "/zh/zero-interest-installments-truth/",
+    "locale": "zh",
+    "canonical": "https://worthcalc.win/zh/zero-interest-installments-truth/",
+    "robots": "index, follow, max-image-preview:large",
+    "in_sitemap": true
+  }
+]

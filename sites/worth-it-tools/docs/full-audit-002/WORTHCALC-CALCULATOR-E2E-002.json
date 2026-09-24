@@ -1,0 +1,471 @@
+{
+  "base": "http://127.0.0.1:4388",
+  "rows": [
+    {
+      "slug": "home-affordability",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "mortgage-payoff",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "fixture": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "rent-vs-buy",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "cashback-breakeven",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "credit-card-payoff",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "fixture": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "debt-strategy",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "dti-calculator",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "fixture": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "installment-true-apr",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "car-affordability",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "commute-cost",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "cost-per-mile",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "ev-vs-gas",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "latte-factor",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "costco-membership",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "subscription-audit",
+      "capability": {
+        "resetMode": "none",
+        "calculationMode": "automatic",
+        "persistence": "localStorage"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "recompute": true,
+        "edge": true,
+        "negative": true,
+        "validation": true,
+        "reset": "NOT_APPLICABLE",
+        "no_nan": true,
+        "save": true,
+        "restore": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "compound-growth",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "salary-converter",
+      "capability": {
+        "resetMode": "button"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    },
+    {
+      "slug": "budget-builder",
+      "capability": {
+        "resetMode": "button",
+        "persistence": "localStorage"
+      },
+      "checks": {
+        "route": true,
+        "render": true,
+        "mobile": true,
+        "example": true,
+        "calculate": true,
+        "no_nan": true,
+        "copy": true,
+        "csv": true,
+        "print": true,
+        "reset": true,
+        "validation": true,
+        "negative": true,
+        "save": true,
+        "restore": true,
+        "clear": true,
+        "locale": true,
+        "fresh_context": true,
+        "console": true
+      },
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "summary": {
+    "pass": 18,
+    "fail": 0,
+    "resetApplicable": 9,
+    "resetNotApplicable": 9
+  }
+}

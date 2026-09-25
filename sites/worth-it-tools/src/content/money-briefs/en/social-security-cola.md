@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "social-security-cola-2026"
+briefSlug: "social-security-cola"
 locale: "en"
 cluster: "rates"
 title: "The 2026 COLA Is 2.8% — but Medicare Part B Rose About 10%"
 description: "Social Security's 2026 cost-of-living adjustment is 2.8% while the standard Part B premium rises to $202.90, up $17.90. On a $2,000 benefit that premium eats 32% of the raise."
 answer: "The 2026 COLA is 2.8%; the standard Medicare Part B premium rises $17.90 to $202.90, roughly 10%. On a $2,000 monthly benefit the COLA adds $56 and Part B takes $17.90 back — 32% of the raise. The raise is fully consumed at a benefit of about $639 a month, which is why the size of your own benefit, not the COLA percentage, decides what you actually gain."
-publishAt: "2026-10-16"
+publishAt: "2026-10-21"
 lastReviewed: "2026-09-19"
 relatedTool: "/en/tools/budget-builder/"
 relatedToolLabel: "budget builder"
@@ -33,7 +33,7 @@ faq:
   - q: "Should I plan around the COLA?"
     a: "Plan around the net figure, not the headline. Take your own benefit, multiply by the COLA, subtract your own Part B change — including any income-related adjustment — and use that number in the budget. For many households the useful planning figure is roughly half the headline percentage."
 related:
-  - "/en/money/medicare-part-b-2026/"
+  - "/en/money/medicare-part-b-premium/"
   - "/en/money/emergency-fund-size-2026/"
   - "/en/pay-raise-vs-inflation-purchasing-power/"
 draft: false

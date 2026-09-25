@@ -1,89 +1,103 @@
-# Prompt for Claude chat — US English briefs (paste whole thing)
+# Prompt for Claude chat — US English briefs (paste the whole thing)
 
 ---
 
-You are writing **28 US-market English money briefs** (Markdown + YAML front matter) for worthcalc.win. A separate engineering pass will validate format and ship them.
+You are writing US-market English money briefs (Markdown + YAML front matter) for worthcalc.win. A separate engineering pass validates format, recomputes every worked example, and ships them.
 
-## Rule #1: only numbers from official pages you actually opened in this conversation
+There are two parts. **Do Part A first** — it fixes pages that are already scheduled.
 
-1. Every figure (limits, rates, thresholds, dollar amounts) must come from a page you **opened with your web tool in this conversation**: `irs.gov`, `ssa.gov`, `cms.gov`, `medicare.gov`, `healthcare.gov`, `treasurydirect.gov`, `federalreserve.gov`, `consumerfinance.gov`, `eia.gov`, `energy.gov`, `bls.gov`, `fdic.gov`, `studentaid.gov`, `dol.gov`, `ecfr.gov`, `congress.gov`, or another `.gov` primary source.
-2. **Never** cite news, blogs, NerdWallet, Investopedia, or memory.
-3. `verifiedDate` = the date you opened that page (today). A URL you did not open must not appear in `sources`.
-4. If you can't open an official page for a topic, **skip it and pick another**. List skipped topics and why at the end.
+## Rule #1: only numbers from official pages you opened in this conversation
+
+1. Every figure (limits, rates, thresholds, dollar amounts) must come from a page you **opened with your web tool in this conversation**: `irs.gov`, `ssa.gov`, `cms.gov`, `medicare.gov`, `healthcare.gov`, `aspe.hhs.gov`, `treasurydirect.gov`, `trumpaccounts.gov`, `home.treasury.gov`, `studentaid.gov`, `consumerfinance.gov`, `federalreserve.gov`, `eia.gov`, `bls.gov`, `fdic.gov`, `dol.gov`, `ecfr.gov`, `congress.gov`, or another `.gov` primary source.
+2. **Never** cite news, blogs, NerdWallet, Investopedia, calculator sites, or memory. Projections ("expected to be…") are not figures — don't use them.
+3. `verifiedDate` = the date you opened that page. A URL you did not open must not appear in `sources`.
+4. If you can't open an official page for a topic, **skip it** and say so at the end.
 5. After each article, outside the file, add an **evidence table**:
 
    | Figure | Source URL | Exact sentence from the page (verbatim) |
    |---|---|---|
 
-   Cover every official figure in the article. Verbatim — this is used for human spot checks.
+   Cover every official figure. Verbatim — it is used for human spot checks.
 
-## Content rules
+## Part A — fix and update scheduled pages
 
-- English only (US).
-- No investment advice, no forecasts. The site's stance: lay the arithmetic out so the reader can check it.
-- One search intent per article. No near-duplicate variants (e.g. not separate pages for single vs married of the same topic).
-- `limits` must include at least: this is a calculation, not financial/tax advice; no guarantee of eligibility/approval; not a substitute for a professional (CPA, advisor, the agency).
-- Body: an official-figures table, the formula (indented code block), one concrete worked example, and a "What would flip the answer" section. Length similar to the template.
-- Tax-year figures: say which tax year. If 2027 figures are not yet published by the agency, write about 2026 and say so — do not guess 2027.
+These files already exist on the site. For each one, return the **complete replacement file** for both `en` and `zh` (the zh file is the Traditional Chinese twin with the same `briefSlug`, same numbers, same sources). Keep `briefSlug`, `relatedTool`, `cluster` and `related` unless a fix requires otherwise.
 
-## Front matter rules (wrong format = build failure)
+| # | briefSlug | What's wrong / what to do | When | publishAt |
+|---|---|---|---|---|
+| A1 | `hsa-contribution-limits` | The current draft states 2026 limits as $4,300 / $8,550 — those are the **2025** limits. Rewrite with the official 2026 and 2027 limits (IRS Rev. Proc. 2025-19 and the 2027 Rev. Proc.), catch-up, and HDHP minimum deductibles. Keep the payroll-FICA angle. Set `draft: false`. | Now | 2026-10-17 |
+| A2 | `overtime-vs-second-job` | The FAQ says overtime and a second job are taxed at the same marginal rate. For 2025–2028 the premium portion of qualified overtime is deductible (the IRS "no tax on overtime" guidance: cap, phase-out, what counts). Rework the math and FAQ so the comparison includes that deduction. Set `draft: false`. | Now | 2026-11-04 |
+| A3 | `social-security-cola` | Currently about the 2026 COLA. SSA announces the 2027 COLA on 2026-10-14. Rewrite around the 2027 COLA from the SSA announcement, keep the Part B offset angle (use the 2026 Part B figure until CMS publishes 2027). | After 10-14 | 2026-10-21 |
+| A4 | `standard-deduction` | Update to the 2027 standard deduction once the IRS publishes the tax-year 2027 inflation adjustments. If not yet published, don't guess — tell me and skip. | After IRS release | 2026-11-18 |
+| A5 | `401k-contribution-limits` | Update to 2027 limits once the IRS announces them. Same rule: no projections. | After IRS release | 2026-11-19 |
+| A6 | `medicare-part-b-premium` | Update to the 2027 Part B premium and deductible once CMS publishes them. | After CMS release | 2026-11-24 |
+
+Titles for A3–A6 should lead with the new year's figure (e.g. "The 2027 COLA Is X% — …"). The URL has no year on purpose: the same page gets updated every year.
+
+## Part B — new briefs (English only, 1 per day)
+
+### Content rules
+
+- US English. No investment advice, no forecasts. The site's stance: lay the arithmetic out so the reader can check it.
+- **One search intent per article.** No variants (no separate single/married or per-state pages).
+- **No year in the slug.** The page is updated each year in place.
+- The competition on these topics is dozens of bare "XX calculator" sites. Win on what they skip: the formula shown, a worked example with real numbers, the phase-outs and exceptions, and "What would flip the answer".
+- `limits` must include at least: a calculation, not financial/tax advice; no guarantee of eligibility/approval; not a substitute for a professional (CPA, advisor, the agency).
+- Body: official-figures table, the formula (indented code block), one concrete worked example, "What would flip the answer". Length similar to the template.
+- Say which tax year every figure belongs to.
+
+### Front matter rules (wrong format = build failure)
 
 - `contentType: brief`, `locale: "en"`, `draft: false`
-- `briefSlug`: lowercase kebab-case, identical to the filename
-- `cluster`: exactly one of `rates` / `protection` / `ownership` / `earning`
-- `publishAt`: per schedule below; `lastReviewed`: today
+- `briefSlug`: lowercase kebab-case, identical to the filename, no year
+- `cluster`: one of `rates` / `protection` / `ownership` / `earning`
+- `publishAt`: per the schedule below; `lastReviewed`: the date you wrote it
 - `relatedTool`: one of these only, format `/en/tools/<slug>/`:
   `appliance-running-cost` `budget-builder` `car-affordability` `cashback-breakeven` `commute-cost` `compound-growth` `cost-per-mile` `costco-membership` `credit-card-payoff` `debt-strategy` `dti-calculator` `ev-vs-gas` `home-affordability` `installment-true-apr` `latte-factor` `mortgage-payoff` `rent-vs-buy` `salary-converter` `subscription-audit`
 - `relatedToolLabel`: short lowercase tool name, e.g. "budget builder"
-- `sources`: ≥1, each with `label`, `url`, `verifiedDate` (YYYY-MM-DD)
-- `faq`: ≥2; `limits`: ≥3
-- `related`: 2–3 other briefs, format `/en/money/<slug>/` (existing slugs below are fine)
-- Double-quote all YAML strings; use single quotes inside a string instead of double quotes.
+- `sources` ≥1 (each `label`, `url`, `verifiedDate` YYYY-MM-DD); `faq` ≥2; `limits` ≥3
+- `related`: 2–3 briefs, format `/en/money/<slug>/` (slugs from this list or the existing list below)
+- Title: put the search phrase first, keep it under ~60 characters.
+- Description: under ~155 characters.
+- Double-quote all YAML strings; use single quotes inside a string.
 
-## Schedule (2 per day)
+### Schedule and topics (in this order)
 
-2026-10-10 through 2026-10-23, two per day, 28 total. Fill in writing order; dates may shift as a block later.
+| publishAt | briefSlug | Topic | Official source | relatedTool | cluster |
+|---|---|---|---|---|---|
+| 2026-10-12 | medicare-part-d-out-of-pocket-cap | Part D out-of-pocket cap: what it saves a heavy-prescription year | CMS / medicare.gov | budget-builder | protection |
+| 2026-10-13 | medicare-irmaa-brackets | IRMAA: the income cliff that raises Part B and D | CMS / SSA | budget-builder | protection |
+| 2026-10-14 | no-tax-on-overtime-deduction | No tax on overtime: only the half-time premium counts | IRS | salary-converter | earning |
+| 2026-10-15 | no-tax-on-tips-deduction | No tax on tips: cap, phase-out, who qualifies | IRS | salary-converter | earning |
+| 2026-10-16 | car-loan-interest-deduction | Car loan interest deduction: US-assembled, $10,000 cap, phase-out | IRS | car-affordability | ownership |
+| 2026-10-17 | senior-deduction-65 | The extra deduction at 65: what it's worth by bracket | IRS | budget-builder | earning |
+| 2026-10-18 | aca-premium-tax-credit-cliff | ACA subsidy cliff at 400% FPL: $1 over, what it costs | healthcare.gov / IRS / ASPE poverty guidelines | budget-builder | protection |
+| 2026-10-19 | salt-deduction-cap | SALT cap: when itemizing beats the standard deduction | IRS | home-affordability | ownership |
+| 2026-10-20 | trump-account-vs-529 | Trump account vs 529: the $1,000 seed and where the next dollar goes | IRS / Treasury / trumpaccounts.gov | compound-growth | earning |
+| 2026-10-21 | dependent-care-fsa-limit | Dependent care FSA vs the child care credit | IRS | budget-builder | earning |
+| 2026-10-22 | rap-student-loan-payment | RAP student loan payment: the formula, step by step | studentaid.gov | debt-strategy | earning |
+| 2026-10-23 | treasury-bills-vs-high-yield-savings | T-bills vs high-yield savings after state tax | TreasuryDirect / IRS | compound-growth | rates |
+| 2026-10-24 | used-ev-after-tax-credit | Used EV math after the federal credits ended | IRS / energy.gov / fueleconomy.gov | ev-vs-gas | ownership |
+| 2026-10-25 | capital-gains-zero-percent-bracket | The 0% capital gains bracket: how much gain is tax-free | IRS | compound-growth | earning |
+| 2026-10-26 | tax-loss-harvesting-limit | Tax-loss harvesting: the $3,000 offset and the wash-sale rule | IRS Topic 409 / Pub 550 | compound-growth | earning |
+| 2026-10-27 | required-minimum-distributions | Your first RMD: the amount, the deadline, the penalty | IRS | compound-growth | earning |
+| 2026-10-28 | 401k-early-withdrawal-cost | Cashing out a 401(k) early: 10% plus tax, the real cost | IRS Topic 558 | compound-growth | earning |
+| 2026-10-29 | roth-ira-income-limits | Roth IRA income phase-out: how much you can still put in | IRS | compound-growth | earning |
+| 2026-10-30 | child-tax-credit | Child Tax Credit: amount, refundable part, phase-out | IRS | budget-builder | earning |
+| 2026-10-31 | self-employment-tax | Self-employment tax: 15.3% on 92.35%, and the half you deduct | IRS Topic 554 | salary-converter | earning |
+| 2026-11-01 | estimated-tax-safe-harbor | Quarterly estimated tax: the 100% / 110% safe harbor | IRS Pub 505 | budget-builder | earning |
+| 2026-11-02 | sep-ira-vs-solo-401k | SEP IRA vs Solo 401(k): which lets you put away more | IRS | compound-growth | earning |
+| 2026-11-03 | i-bonds-rate | I bonds: fixed rate + inflation rate, and the 1-year lock | TreasuryDirect | compound-growth | rates |
+| 2026-11-04 | federal-tax-brackets | Federal tax brackets: marginal vs effective rate, worked through | IRS (use 2027 if released, else 2026) | salary-converter | earning |
 
-## Candidate topics (pick 28 you can source officially)
-
-| Topic | Official source | relatedTool |
-|---|---|---|
-| Capital gains 0% bracket: how much gain you can realize tax-free | IRS tax-year inflation adjustments / Topic 409 | salary-converter |
-| Tax-loss harvesting: the $3,000 ordinary-income offset | IRS Topic 409 / Pub 550 | compound-growth |
-| Wash-sale rule: what 30 days actually blocks | IRS Pub 550 | compound-growth |
-| Required minimum distributions: first RMD and the penalty | IRS RMD FAQs | compound-growth |
-| 401(k) early withdrawal: 10% penalty + tax, the real cost | IRS Topic 558 | compound-growth |
-| Roth IRA income phase-out 2026 | IRS | compound-growth |
-| Saver's Credit: who qualifies and how much | IRS | salary-converter |
-| Child Tax Credit 2026 | IRS | budget-builder |
-| Earned Income Tax Credit 2026 tables | IRS | salary-converter |
-| Dependent care FSA limit vs child care credit | IRS Pub 503 | budget-builder |
-| Health FSA 2026 limit and carryover / use-it-or-lose-it | IRS | budget-builder |
-| SALT deduction cap 2026 | IRS / enacted law | home-affordability |
-| Mortgage points: break-even months | IRS Topic 504 / CFPB | mortgage-payoff |
-| Home office deduction: simplified $5/sq ft vs actual | IRS Topic 509 / Pub 587 | budget-builder |
-| Self-employment tax 15.3% and the 92.35% base | IRS Topic 554 | salary-converter |
-| Quarterly estimated tax safe harbor (100%/110%) | IRS Pub 505 | budget-builder |
-| SEP IRA vs Solo 401(k) contribution limits | IRS | compound-growth |
-| Gift tax annual exclusion 2026 | IRS | budget-builder |
-| Social Security claiming at 62 vs 67 vs 70 | SSA | compound-growth |
-| Social Security earnings test 2026 | SSA | salary-converter |
-| Medicare IRMAA 2026 brackets | CMS / SSA | budget-builder |
-| Medicare Part D 2026 out-of-pocket cap | CMS | budget-builder |
-| ACA marketplace premium tax credit: the cliff | healthcare.gov / IRS | budget-builder |
-| I bonds current rate: fixed + inflation parts | TreasuryDirect | compound-growth |
-| T-bills vs high-yield savings after state tax | TreasuryDirect / IRS | compound-growth |
-| 529 plan: qualified expenses and the Roth rollover | IRS Pub 970 | compound-growth |
-| Credit card minimum payment: how long payoff takes | CFPB / Fed | credit-card-payoff |
-| Winter heating cost outlook by fuel | EIA Winter Fuels Outlook | appliance-running-cost |
-
-**Do not duplicate** existing briefs (en): 401k-contribution-limits-2026, airline-points-cash-value, auto-loan-rate-by-credit-score-2026, buy-now-or-wait-price-increase, car-repair-vs-trade-in, childcare-cost-2026, credit-card-apr-2026, credit-score-points-dollar-value, dental-insurance-vs-cash, disability-insurance-break-even, electricity-price-per-kwh-2026, emergency-fund-size-2026, employer-match-vs-debt-payoff, gas-vs-ev-cost-per-mile-2026, gym-membership-vs-pay-per-visit, heat-pump-payback-2026, home-improvement-roi-before-selling, home-warranty-break-even, hsa-limits-2026, hsa-vs-fsa-decision, idle-cash-cost-2026, inflation-adjusted-raise-2026, insurance-deductible-break-even, internet-plan-cost-2026, ira-vs-401k-priority-2026, irs-mileage-rate-2026, lease-buyout-break-even, medicare-part-b-2026, mortgage-rate-2026-payment-impact, mortgage-refinance-break-even, moving-for-a-job-full-cost, overtime-vs-second-job, pay-off-car-loan-early-or-invest, pet-insurance-break-even, phone-upgrade-trade-in-timing, pmi-removal-timing, rent-increase-move-or-stay, rental-car-insurance-decline, roth-vs-traditional-break-even, salary-raise-vs-bonus, savings-vs-cd-2026, should-i-file-an-insurance-claim, side-hustle-true-hourly-rate, social-security-cola-2026, solar-payback-2026, standard-deduction-2026, streaming-prices-2026, student-loan-degree-roi, student-loan-rate-2026, term-vs-whole-life-cost, tsa-precheck-break-even, umbrella-insurance-break-even.
-Also existing standalone pages: annual-fee card break-even, annual vs monthly billing, commuting cost, bulk buying, Costco, extended warranty, free shipping threshold, installment APR, opportunity cost, price in work hours, rent vs buy, return-to-office cost, rule of 72, subscription creep, sunk cost, zero-interest installments.
+**Do not duplicate** existing English briefs: 401k-contribution-limits, airline-points-cash-value, auto-loan-rate-by-credit-score-2026, buy-now-or-wait-price-increase, car-repair-vs-trade-in, childcare-cost-2026, credit-card-apr-2026, credit-score-points-dollar-value, dental-insurance-vs-cash, disability-insurance-break-even, electricity-price-per-kwh-2026, emergency-fund-size-2026, employer-match-vs-debt-payoff, gas-vs-ev-cost-per-mile-2026, gym-membership-vs-pay-per-visit, heat-pump-payback-2026, home-improvement-roi-before-selling, home-warranty-break-even, hsa-contribution-limits, hsa-vs-fsa-decision, idle-cash-cost-2026, inflation-adjusted-raise-2026, insurance-deductible-break-even, internet-plan-cost-2026, ira-vs-401k-priority-2026, irs-mileage-rate-2026, lease-buyout-break-even, medicare-part-b-premium, mortgage-rate-2026-payment-impact, mortgage-refinance-break-even, moving-for-a-job-full-cost, overtime-vs-second-job, pay-off-car-loan-early-or-invest, pet-insurance-break-even, phone-upgrade-trade-in-timing, pmi-removal-timing, rent-increase-move-or-stay, rental-car-insurance-decline, roth-vs-traditional-break-even, salary-raise-vs-bonus, savings-vs-cd-2026, should-i-file-an-insurance-claim, side-hustle-true-hourly-rate, social-security-cola, solar-payback-2026, standard-deduction, streaming-prices-2026, student-loan-degree-roi, student-loan-rate-2026, term-vs-whole-life-cost, tsa-precheck-break-even, umbrella-insurance-break-even.
+Also existing pages: credit card minimum payment trap, extra mortgage payments, mortgage points break-even, rent vs buy, rule of 72, true cost of car ownership, how much home can you afford, APR vs APY, snowball vs avalanche.
 
 ## Output
 
-- 4 batches of 7; one reply per batch. Wait for "continue" before the next.
-- Put the 7 files in a zip too, plus one BATCH file containing each file and its evidence table:
+- Part A in one reply (only the items whose official figures are out; say which are pending).
+- Part B in 4 batches of 6; one reply per batch; wait for "continue".
+- Each batch: a zip of the files, plus one BATCH markdown file with each file and its evidence table:
 
   ````
   ### File: <slug>.md
@@ -92,64 +106,61 @@ Also existing standalone pages: annual-fee card break-even, annual vs monthly bi
   ```
   **Evidence**
   | Figure | Source URL | Exact sentence |
-  ...
   ````
 
-- After the last batch: a summary table — publishAt | slug | topic | official source URLs.
+- At the end: a summary table — publishAt | slug | topic | official source URLs.
 
-## Template (match this structure and tone)
+## Template (structure and tone — replace every bracket)
 
 ```markdown
 ---
 contentType: brief
-briefSlug: "hsa-limits-2026"
+briefSlug: "[slug]"
 locale: "en"
-cluster: "protection"
-title: "The 2026 HSA Limits Are $4,300 and $8,550 — and Payroll Contributions Dodge FICA Too"
-description: "Health savings account limits for 2026 are $4,300 for individual coverage and $8,550 for family, plus $1,000 at 55. Contributed through payroll, $4,300 avoids about $1,275 of tax at a 22% bracket."
-answer: "For 2026 the HSA limit is $4,300 for individual coverage and $8,550 for family, with a $1,000 catch-up from age 55. Contributed through payroll it escapes income tax and the 7.65% FICA that a 401(k) deferral does not: at a 22% marginal rate, $4,300 avoids about $1,275."
-publishAt: "2026-10-17"
-lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/budget-builder/"
-relatedToolLabel: "budget builder"
-formula: "tax avoided on a payroll HSA contribution = contribution × (marginal income tax rate + payroll tax rate); for a direct contribution, income tax rate only"
+cluster: "[cluster]"
+title: "[Search phrase first]: [the key number] — [the catch]"
+description: "[One or two sentences with the official figures and what the page works out.]"
+answer: "[3–4 sentences a reader could quote: the official figures with their tax year, the worked result, and the condition that changes it.]"
+publishAt: "[YYYY-MM-DD]"
+lastReviewed: "[YYYY-MM-DD]"
+relatedTool: "/en/tools/[tool]/"
+relatedToolLabel: "[tool name]"
+formula: "[plain-text formula]"
 limits:
-  - "This is a calculation, not tax advice. Eligibility requires enrolment in a qualifying high-deductible health plan and no disqualifying other coverage, conditions this page cannot check for you."
-  - "The FICA advantage applies to contributions made through an employer's cafeteria plan by payroll deduction."
-  - "Withdrawals are tax-free only for qualified medical expenses. IRS Publication 969 defines what qualifies."
+  - "This is a calculation, not tax or financial advice. [Eligibility conditions this page cannot check.]"
+  - "[What the figure excludes or where it changes.] Eligibility is decided by [agency]; this page does not guarantee it."
+  - "[Where the rules can change; confirm with the agency or a CPA before acting.]"
 sources:
-  - label: "IRS — Publication 969, Health Savings Accounts and Other Tax-Favored Health Plans"
-    url: "https://www.irs.gov/publications/p969"
-    verifiedDate: "2026-09-19"
+  - label: "[Agency] — [page title]"
+    url: "[official URL you opened]"
+    verifiedDate: "[YYYY-MM-DD]"
 faq:
-  - q: "Why is an HSA better than a 401(k) dollar for dollar?"
-    a: "Because a payroll HSA contribution avoids payroll tax as well as income tax, while a 401(k) deferral avoids income tax only."
-  - q: "What happens to the money if I stay healthy?"
-    a: "It stays yours. Unlike an FSA there is no use-it-or-lose-it deadline."
+  - q: "[Real question people search]"
+    a: "[Direct answer with the number.]"
+  - q: "[Second question]"
+    a: "[Direct answer.]"
 related:
-  - "/en/money/401k-contribution-limits-2026/"
-  - "/en/money/insurance-deductible-break-even/"
+  - "/en/money/[slug]/"
+  - "/en/money/[slug]/"
 draft: false
 ---
 
-## The 2026 limits
+## The [year] figures
 
-| | 2026 |
+| | [year] |
 | --- | ---: |
-| Self-only coverage | **$4,300** |
-| Family coverage | **$8,550** |
-| Catch-up, age 55+ | $1,000 |
+| [item] | **[figure]** |
 
 ## The formula
 
-    tax avoided = contribution × (marginal rate + 7.65%)
+    [formula]
 
 ## Worked example
 
-At a 22% bracket, $4,300 through payroll avoids 4,300 × 29.65% = **$1,275**.
+[Concrete numbers, every step shown.]
 
 ## What would flip the answer
 
-- **The plan itself loses.** A high-deductible plan is only worth it if premium savings minus worst-case exposure still wins.
-- **Direct contribution.** Outside payroll you save income tax only.
+- **[Condition].** [How it changes the result.]
+- **[Condition].** [How it changes the result.]
 ```

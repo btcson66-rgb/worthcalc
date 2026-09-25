@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "standard-deduction-2026"
+briefSlug: "standard-deduction"
 locale: "en"
 cluster: "rates"
 title: "The 2026 Standard Deduction Is $32,200 Joint — Why a Big Mortgage Still Falls Short"
 description: "Standard deduction for 2026: $32,200 married filing jointly, $16,100 single, $24,150 head of household. First-year interest on a $400,000 mortgage at 6.95% is $27,671 — $4,529 short of the joint threshold on its own."
 answer: "For 2026 the standard deduction is $32,200 filing jointly, $16,100 single and $24,150 for head of household. Itemising only pays above those figures. A $400,000 mortgage at 6.95% produces $27,671 of first-year interest — the largest deduction most households will ever have, and still $4,529 short of the joint threshold by itself."
-publishAt: "2026-10-18"
+publishAt: "2026-11-18"
 lastReviewed: "2026-09-19"
 relatedTool: "/en/tools/mortgage-payoff/"
 relatedToolLabel: "mortgage payoff calculator"
@@ -34,7 +34,7 @@ faq:
     a: "It can, where the timing is yours to choose. Making two years of charitable gifts in one calendar year, or paying a deductible expense in December rather than January, can push one year above the threshold while the other takes the standard deduction. It only works on deductions whose timing is genuinely discretionary — mortgage interest is not one of them."
 related:
   - "/en/money/mortgage-rate-2026-payment-impact/"
-  - "/en/money/401k-contribution-limits-2026/"
+  - "/en/money/401k-contribution-limits/"
   - "/en/money/mortgage-refinance-break-even/"
 draft: false
 ---

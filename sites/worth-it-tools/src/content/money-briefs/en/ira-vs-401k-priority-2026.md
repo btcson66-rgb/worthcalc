@@ -33,7 +33,7 @@ faq:
   - q: "Does a Roth option change the order?"
     a: "It changes which account, not which order. Match first, then fees, then the Roth-versus-traditional decision inside whichever wrapper you landed on. Treating Roth as a separate step in the queue is how people end up skipping a match to fund an IRA, which is the one clearly wrong answer."
 related:
-  - "/en/money/401k-contribution-limits-2026/"
+  - "/en/money/401k-contribution-limits/"
   - "/en/money/roth-vs-traditional-break-even/"
   - "/en/money/employer-match-vs-debt-payoff/"
 draft: false

@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "social-security-cola-2026"
+briefSlug: "social-security-cola"
 locale: "zh"
 cluster: "rates"
 title: "2026 年社安生活成本調整是 2.8%——但 Medicare Part B 漲了約 10%"
 description: "2026 年社會安全生活成本調整為 2.8%，而 Part B 標準保費升到每月 202.90 美元、調漲 17.90 美元。以每月 2,000 美元的給付計算，保費吃掉 32% 的調升。"
 answer: "2026 年 COLA 為 2.8%；Medicare Part B 標準保費調漲 17.90 美元至 202.90 美元，約 10%。以每月 2,000 美元給付計算，COLA 加 56 美元、Part B 拿回 17.90 美元——吃掉 32%。給付約每月 639 美元時，調升會被完全吃光，所以決定你實際拿到多少的是「你自己的給付金額」，不是那個 COLA 百分比。"
-publishAt: "2026-10-16"
+publishAt: "2026-10-21"
 lastReviewed: "2026-09-19"
 relatedTool: "/zh/tools/budget-builder/"
 relatedToolLabel: "預算規劃計算機"
@@ -33,7 +33,7 @@ faq:
   - q: "該用 COLA 來做規劃嗎？"
     a: "用淨值規劃，不要用標題數字。拿你自己的給付乘以 COLA，減掉你自己的 Part B 變動（包含任何所得連動調整），把那個數字放進預算。對許多家庭來說，實用的規劃數字大約是標題百分比的一半。"
 related:
-  - "/zh/money/medicare-part-b-2026/"
+  - "/zh/money/medicare-part-b-premium/"
   - "/zh/money/emergency-fund-size-2026/"
   - "/zh/pay-raise-vs-inflation-purchasing-power/"
 draft: false

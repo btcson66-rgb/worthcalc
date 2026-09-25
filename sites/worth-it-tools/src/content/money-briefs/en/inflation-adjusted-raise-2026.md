@@ -8,8 +8,8 @@ description: "Real raise = (1 + nominal) ÷ (1 + inflation) − 1. Against the 2
 answer: "Divide, do not subtract. A 3% raise against 2.8% inflation is (1.03 ÷ 1.028) − 1 = 0.19% in real terms — on a $70,000 salary, $136 of actual gain from a $2,100 increase. Anything below the inflation rate is a pay cut denominated in dollars that went up, which is why the number to negotiate against is the price level, not last year's salary."
 publishAt: "2026-11-08"
 lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/inflation-purchasing-power/"
-relatedToolLabel: "inflation and purchasing power calculator"
+relatedTool: "/en/pay-raise-vs-inflation-purchasing-power/"
+relatedToolLabel: "real purchasing power calculator"
 formula: "real raise = ((1 + nominal raise) ÷ (1 + inflation rate)) − 1; real salary change in dollars = new salary ÷ (1 + inflation) − old salary"
 limits:
   - "The 2.8% used here is the statutory cost-of-living adjustment set for 2026, which is one published measure of price change and not the only one. The current CPI series on the BLS page below will differ from it, sometimes materially."
@@ -37,7 +37,7 @@ faq:
     a: "For a forward-looking negotiation, the most recent twelve-month CPI change is the more defensible number, because it describes the period you are being paid for. The COLA is a statutory figure calculated from a fixed quarterly window and set in advance, which makes it a clean, dated benchmark but a lagging one."
 related:
   - "/en/money/salary-raise-vs-bonus/"
-  - "/en/money/social-security-cola-2026/"
+  - "/en/money/social-security-cola/"
   - "/en/money/side-hustle-true-hourly-rate/"
 draft: false
 ---

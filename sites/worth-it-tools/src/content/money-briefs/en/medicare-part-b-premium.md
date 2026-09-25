@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "medicare-part-b-2026"
+briefSlug: "medicare-part-b-premium"
 locale: "en"
 cluster: "protection"
 title: "Medicare Part B Is $202.90 in 2026 — and the Late-Enrolment Penalty Never Expires"
 description: "The standard Part B premium rises $17.90 to $202.90 for 2026. Delaying enrolment two years without qualifying coverage adds 20% permanently — about $9,739 over a twenty-year retirement."
 answer: "The standard 2026 Part B premium is $202.90 a month, up $17.90 from $185. The figure that costs more than the increase is the late-enrolment penalty: 10% for each full 12-month period you could have enrolled and did not, added for as long as you have Part B. A two-year delay is 20%, about $40.58 a month, roughly $9,739 across twenty years."
-publishAt: "2026-10-20"
+publishAt: "2026-11-24"
 lastReviewed: "2026-09-19"
 relatedTool: "/en/tools/budget-builder/"
 relatedToolLabel: "budget builder"
@@ -33,8 +33,8 @@ faq:
   - q: "Can the premium increase make my Social Security payment go down?"
     a: "For most beneficiaries a hold-harmless provision prevents that. It does not apply to everyone — notably those newly enrolled, those paying income-related amounts, and those whose premiums are not deducted from the benefit — and it only stops the number falling; it does not restore the raise."
 related:
-  - "/en/money/social-security-cola-2026/"
-  - "/en/money/hsa-limits-2026/"
+  - "/en/money/social-security-cola/"
+  - "/en/money/hsa-contribution-limits/"
   - "/en/money/insurance-deductible-break-even/"
 draft: false
 ---

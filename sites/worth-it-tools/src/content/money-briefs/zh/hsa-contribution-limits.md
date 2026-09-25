@@ -1,6 +1,6 @@
 ---
 contentType: brief
-briefSlug: "hsa-limits-2026"
+briefSlug: "hsa-contribution-limits"
 locale: "zh"
 cluster: "protection"
 title: "2026 年 HSA 上限 4,300 與 8,550 美元——而且薪資扣繳還能避開 FICA"
@@ -33,10 +33,10 @@ faq:
   - q: "年度結束後還能補提上一年的嗎？"
     a: "某一稅務年度的 HSA 提撥，一般可以做到該年度的申報截止日為止。這在這類帳戶中很少見，而且在你要到準備報稅時才看清楚自己狀況時很好用。確切規則見 Publication 969，包括年中資格變動時上限如何按比例計算。"
 related:
-  - "/zh/money/401k-contribution-limits-2026/"
+  - "/zh/money/401k-contribution-limits/"
   - "/zh/money/insurance-deductible-break-even/"
   - "/zh/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## 2026 年的上限

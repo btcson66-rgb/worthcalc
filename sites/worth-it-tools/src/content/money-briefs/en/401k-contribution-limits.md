@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "401k-contribution-limits-2026"
+briefSlug: "401k-contribution-limits"
 locale: "en"
 cluster: "earning"
 title: "The 2026 401(k) Limit Is $24,500 — and the 60-to-63 Window Is Use-It-or-Lose-It"
 description: "Elective deferrals rise to $24,500 for 2026, catch-up to $8,000 at 50, and a larger $11,250 catch-up applies only at ages 60 to 63. That four-year window is worth $13,000 of extra sheltered space and then closes."
 answer: "For 2026 the 401(k) elective deferral limit is $24,500, the age-50 catch-up is $8,000, and a larger catch-up of $11,250 applies only to ages 60 through 63 — a total of $35,750 in those four years. The extra $3,250 a year exists for exactly four years and cannot be made up later: $13,000 of sheltered space that closes at 64."
-publishAt: "2026-10-15"
+publishAt: "2026-11-19"
 lastReviewed: "2026-09-19"
 relatedTool: "/en/tools/compound-growth/"
 relatedToolLabel: "compound growth calculator"
@@ -33,7 +33,7 @@ faq:
   - q: "Does the IRA limit interact with the 401(k) limit?"
     a: "They are separate limits — $24,500 and $7,500 in 2026 — so a 401(k) at the cap does not stop an IRA contribution. What a workplace plan can restrict is the deductibility of a traditional IRA contribution above certain income levels, which is a different question from whether you may contribute at all."
 related:
-  - "/en/money/hsa-limits-2026/"
+  - "/en/money/hsa-contribution-limits/"
   - "/en/money/employer-match-vs-debt-payoff/"
   - "/en/money/roth-vs-traditional-break-even/"
 draft: false

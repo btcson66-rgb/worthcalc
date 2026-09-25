@@ -9,7 +9,7 @@ answer: "依新北市稅捐稽徵處的使用牌照稅稅額表，自用小客�
 publishAt: "2026-10-01"
 lastReviewed: "2026-09-23"
 relatedTool: "/zh/tools/car-affordability/"
-relatedToolLabel: "購車負擔計算機"
+relatedToolLabel: "購車可負擔度計算機"
 formula: "每年固定稅費 = 使用牌照稅（依排氣量）+ 公路養管費（依排氣量與燃料）；每月攤提 = 每年固定稅費 ÷ 12"
 limits:
   - "這是計算，不是財務建議。本頁只包含牌照稅與公路養管費，不含保險、油錢、停車、保養、貸款利息與折舊，這些通常比稅費更大。"

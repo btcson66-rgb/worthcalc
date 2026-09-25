@@ -213,6 +213,15 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
           csvRows = [['year','ending balance','contributions','growth','real balance'], ...result.yearly.map((row) => [row.year,row.endingBalance,row.contributionsToDate,row.growthToDate,row.realBalance])];
         }
 
+        // Every calculator shows Export CSV. Slugs without a detailed schedule
+        // still export the calculated metrics instead of leaving the button inert.
+        if (!csvRows.length) {
+          csvRows = [['metric', 'value'], ...config.definition.metrics.map((metric) => [
+            metric.label,
+            metrics[metric.id] == null ? '' : String(metrics[metric.id]),
+          ])];
+        }
+
         // Only the slugs that declared a chart get one; see GrowthChart.
         const chartHost = root.querySelector<HTMLElement>('[data-chart]');
         const chartSpec = config.definition.chart;

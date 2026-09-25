@@ -1,0 +1,203 @@
+{
+  "base": "http://127.0.0.1:4388",
+  "entryCounts": {
+    "production": 0,
+    "candidate": 0
+  },
+  "httpReadbacks": {
+    "production": [
+      {
+        "slug": "home-affordability",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "mortgage-payoff",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "rent-vs-buy",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "cashback-breakeven",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "credit-card-payoff",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "debt-strategy",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "dti-calculator",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "installment-true-apr",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "car-affordability",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "commute-cost",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "cost-per-mile",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "ev-vs-gas",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "latte-factor",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "costco-membership",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "subscription-audit",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "compound-growth",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "salary-converter",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "budget-builder",
+        "status": 200,
+        "entries": 0
+      }
+    ],
+    "candidate": [
+      {
+        "slug": "home-affordability",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "mortgage-payoff",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "rent-vs-buy",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "cashback-breakeven",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "credit-card-payoff",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "debt-strategy",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "dti-calculator",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "installment-true-apr",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "car-affordability",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "commute-cost",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "cost-per-mile",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "ev-vs-gas",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "latte-factor",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "costco-membership",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "subscription-audit",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "compound-growth",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "salary-converter",
+        "status": 200,
+        "entries": 0
+      },
+      {
+        "slug": "budget-builder",
+        "status": 200,
+        "entries": 0
+      }
+    ]
+  },
+  "checks": {
+    "panel": true,
+    "invalid_email": true,
+    "email_gate": true,
+    "failure_fallback": true,
+    "no_production_page_import": true,
+    "no_live_email_export_entry": true,
+    "privacy_current_feature": true
+  },
+  "pass": true
+}

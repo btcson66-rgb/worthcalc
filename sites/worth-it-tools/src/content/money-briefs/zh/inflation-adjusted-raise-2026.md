@@ -8,8 +8,8 @@ description: "實質加薪 =（1 + 名目）÷（1 + 通膨）− 1。對照 202
 answer: "要用除的，不是用減的。3% 加薪對上 2.8% 通膨，實質是 (1.03 ÷ 1.028) − 1 = 0.19%——在年薪 70,000 美元上，2,100 美元的加薪只換到 136 美元的真實獲得。任何低於通膨率的加薪都是減薪，只是以變大的數字計價。所以談判時要對照的基準是物價水準，不是去年的薪水。"
 publishAt: "2026-11-08"
 lastReviewed: "2026-09-19"
-relatedTool: "/zh/tools/inflation-purchasing-power/"
-relatedToolLabel: "通膨與購買力換算工具"
+relatedTool: "/zh/pay-raise-vs-inflation-purchasing-power/"
+relatedToolLabel: "實質購買力計算機"
 formula: "實質加薪 =((1 + 名目加薪)÷(1 + 通膨率))− 1；以金額表示的實質薪資變動 = 新薪資 ÷(1 + 通膨)− 原薪資"
 limits:
   - "此處使用的 2.8% 是 2026 年法定生活成本調整，它是物價變動的其中一項公告衡量，不是唯一的一項。下方勞工統計局頁面上的當期 CPI 數列會與它不同，有時差距不小。"
@@ -37,7 +37,7 @@ faq:
     a: "如果是向前看的談判，最近十二個月的 CPI 變動是比較站得住的數字，因為它描述的正是你被支付的那段期間。COLA 是依固定季度窗口計算、事先公告的法定數字，所以它是一個乾淨、有日期的基準，但它是落後的。"
 related:
   - "/zh/money/salary-raise-vs-bonus/"
-  - "/zh/money/social-security-cola-2026/"
+  - "/zh/money/social-security-cola/"
   - "/zh/money/side-hustle-true-hourly-rate/"
 draft: false
 ---

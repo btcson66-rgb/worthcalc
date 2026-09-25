@@ -33,7 +33,7 @@ faq:
   - q: "既然 HSA 比較好，為什麼還有人用 FSA？"
     a: "因為多數人根本沒有 HSA 可用。它需要符合條件的高自付額計畫，如果雇主沒提供，或高自付額計畫對你家的風險結構並不划算，FSA 就是檯面上唯一的稅務優惠帳戶。真正的比較對象通常是「FSA 或什麼都沒有」。"
 related:
-  - "/zh/money/hsa-limits-2026/"
+  - "/zh/money/hsa-contribution-limits/"
   - "/zh/money/insurance-deductible-break-even/"
   - "/zh/money/emergency-fund-size-2026/"
 draft: false

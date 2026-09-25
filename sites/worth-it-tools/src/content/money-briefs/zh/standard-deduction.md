@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "standard-deduction-2026"
+briefSlug: "standard-deduction"
 locale: "zh"
 cluster: "rates"
 title: "2026 年標準扣除額夫妻合報 32,200 美元——為什麼大筆房貸還是不夠"
 description: "2026 年標準扣除額：夫妻合報 32,200 美元、單身 16,100 美元、家戶長 24,150 美元。40 萬美元房貸以 6.95% 計算，第一年利息 27,671 美元——單靠它還差 4,529 美元才到合報門檻。"
 answer: "2026 年標準扣除額為夫妻合報 32,200 美元、單身 16,100 美元、家戶長 24,150 美元。列舉扣除只有超過這些數字才有用。40 萬美元、6.95% 的房貸第一年產生 27,671 美元利息——那是多數家庭一生中最大的一筆扣除額，單靠它仍然差合報門檻 4,529 美元。"
-publishAt: "2026-10-18"
+publishAt: "2026-11-18"
 lastReviewed: "2026-09-19"
 relatedTool: "/zh/tools/mortgage-payoff/"
 relatedToolLabel: "房貸提前還款計算機"
@@ -34,7 +34,7 @@ faq:
     a: "在時點由你決定時有用。把兩年的慈善捐贈集中在同一個曆年，或把一筆可扣除支出安排在十二月而不是一月，可以讓其中一年跨過門檻、另一年拿標準扣除額。它只對「時點真的可自由選擇」的扣除有效——房貸利息不是其中之一。"
 related:
   - "/zh/money/mortgage-rate-2026-payment-impact/"
-  - "/zh/money/401k-contribution-limits-2026/"
+  - "/zh/money/401k-contribution-limits/"
   - "/zh/money/mortgage-refinance-break-even/"
 draft: false
 ---

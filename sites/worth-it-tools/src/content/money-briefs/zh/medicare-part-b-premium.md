@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "medicare-part-b-2026"
+briefSlug: "medicare-part-b-premium"
 locale: "zh"
 cluster: "protection"
 title: "2026 年 Medicare Part B 每月 202.90 美元——而延遲加保的罰則永不消失"
 description: "2026 年 Part B 標準保費調漲 17.90 美元至 202.90 美元。在沒有合格保障的情況下延後兩年加保，會永久加收 20%——二十年約 9,739 美元。"
 answer: "2026 年 Part B 標準保費為每月 202.90 美元，比 185 美元調漲 17.90 美元。比調漲更貴的是延遲加保罰則：每滿 12 個月「可以加保卻沒加保」就加收 10%，而且只要你持有 Part B 就一直加。延後兩年是 20%，約每月 40.58 美元，二十年約 9,739 美元。"
-publishAt: "2026-10-20"
+publishAt: "2026-11-24"
 lastReviewed: "2026-09-19"
 relatedTool: "/zh/tools/budget-builder/"
 relatedToolLabel: "預算規劃計算機"
@@ -33,8 +33,8 @@ faq:
   - q: "保費調漲會讓我的社安給付變少嗎？"
     a: "對多數受益人，hold-harmless 條款會避免這種情況。它不適用於所有人——特別是新加保者、支付所得連動金額者，以及保費並非從給付中扣除者——而且它只阻止數字下降，不會把調升還給你。"
 related:
-  - "/zh/money/social-security-cola-2026/"
-  - "/zh/money/hsa-limits-2026/"
+  - "/zh/money/social-security-cola/"
+  - "/zh/money/hsa-contribution-limits/"
   - "/zh/money/insurance-deductible-break-even/"
 draft: false
 ---

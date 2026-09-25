@@ -33,8 +33,8 @@ faq:
   - q: "兩種各放一半是策略還是避險？"
     a: "是避險，而且是站得住腳的避險。同時持有兩種，讓你在退休時可以選擇從哪個帳戶提領，進而逐年管理邊際稅率——把傳統型提領到低稅級的頂端，超過的部分從 Roth 提。正因為將來的稅率不可知，這份彈性才有價值。"
 related:
-  - "/zh/money/401k-contribution-limits-2026/"
-  - "/zh/money/hsa-limits-2026/"
+  - "/zh/money/401k-contribution-limits/"
+  - "/zh/money/hsa-contribution-limits/"
   - "/zh/money/employer-match-vs-debt-payoff/"
 draft: false
 ---

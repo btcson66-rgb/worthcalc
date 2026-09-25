@@ -1,6 +1,6 @@
 ---
 contentType: brief
-briefSlug: "hsa-limits-2026"
+briefSlug: "hsa-contribution-limits"
 locale: "en"
 cluster: "protection"
 title: "The 2026 HSA Limits Are $4,300 and $8,550 — and Payroll Contributions Dodge FICA Too"
@@ -33,10 +33,10 @@ faq:
   - q: "Can I contribute for last year after it has ended?"
     a: "HSA contributions for a tax year can generally be made up to that year's filing deadline, which is unusual among these accounts and useful if your position becomes clear only when you prepare the return. Publication 969 sets out the exact rules, including how mid-year eligibility changes prorate the limit."
 related:
-  - "/en/money/401k-contribution-limits-2026/"
+  - "/en/money/401k-contribution-limits/"
   - "/en/money/insurance-deductible-break-even/"
   - "/en/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## The 2026 limits

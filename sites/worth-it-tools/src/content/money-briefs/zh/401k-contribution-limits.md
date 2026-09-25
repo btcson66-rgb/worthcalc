@@ -1,12 +1,12 @@
 ---
 contentType: brief
-briefSlug: "401k-contribution-limits-2026"
+briefSlug: "401k-contribution-limits"
 locale: "zh"
 cluster: "earning"
 title: "2026 年 401(k) 上限 24,500 美元——而 60 到 63 歲那個窗口過期不補"
 description: "2026 年員工提撥上限升至 24,500 美元，50 歲追加額為 8,000 美元，而 11,250 美元的較高追加額只適用 60 至 63 歲。那四年的窗口價值 13,000 美元的額外免稅空間，之後就關閉。"
 answer: "2026 年 401(k) 員工提撥上限為 24,500 美元，50 歲以上追加額 8,000 美元，而 60 至 63 歲適用較高的 11,250 美元追加額——那四年最多可提撥 35,750 美元。每年多出來的 3,250 美元只存在四年，事後無法補提：13,000 美元的免稅空間，64 歲那年就關上。"
-publishAt: "2026-10-15"
+publishAt: "2026-11-19"
 lastReviewed: "2026-09-19"
 relatedTool: "/zh/tools/compound-growth/"
 relatedToolLabel: "複利成長計算機"
@@ -33,7 +33,7 @@ faq:
   - q: "IRA 的上限跟 401(k) 的上限會互相影響嗎？"
     a: "它們是分開的上限——2026 年分別是 24,500 與 7,500 美元——所以 401(k) 提滿並不妨礙你再提 IRA。職場退休計畫真正會限制的，是所得超過一定水準時傳統型 IRA 提撥的「可扣除性」，那跟「能不能提撥」是不同的問題。"
 related:
-  - "/zh/money/hsa-limits-2026/"
+  - "/zh/money/hsa-contribution-limits/"
   - "/zh/money/employer-match-vs-debt-payoff/"
   - "/zh/money/roth-vs-traditional-break-even/"
 draft: false

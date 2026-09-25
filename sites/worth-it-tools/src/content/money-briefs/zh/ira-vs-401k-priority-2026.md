@@ -33,7 +33,7 @@ faq:
   - q: "有 Roth 選項會改變順序嗎？"
     a: "它改變的是「哪個帳戶」，不是「哪個先」。先拿提撥，再比費用，最後才在選定的架構裡決定 Roth 或傳統。把 Roth 當成排序裡的獨立一步，正是有些人跳過雇主提撥去存 IRA 的原因，而那是唯一明確錯誤的答案。"
 related:
-  - "/zh/money/401k-contribution-limits-2026/"
+  - "/zh/money/401k-contribution-limits/"
   - "/zh/money/roth-vs-traditional-break-even/"
   - "/zh/money/employer-match-vs-debt-payoff/"
 draft: false

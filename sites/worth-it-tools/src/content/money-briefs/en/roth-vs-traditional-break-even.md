@@ -33,8 +33,8 @@ faq:
   - q: "Is splitting between the two a real strategy or a hedge?"
     a: "A hedge, and a defensible one. Holding both gives you a choice of which account to draw from in retirement, which lets you manage the marginal rate year by year — taking traditional withdrawals up to the top of a low bracket and Roth above it. That flexibility has value precisely because the future rate is unknowable."
 related:
-  - "/en/money/401k-contribution-limits-2026/"
-  - "/en/money/hsa-limits-2026/"
+  - "/en/money/401k-contribution-limits/"
+  - "/en/money/hsa-contribution-limits/"
   - "/en/money/employer-match-vs-debt-payoff/"
 draft: false
 ---

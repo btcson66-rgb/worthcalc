@@ -39,7 +39,7 @@ related:
   - "/en/money/side-hustle-true-hourly-rate/"
   - "/en/money/salary-raise-vs-bonus/"
   - "/en/money/moving-for-a-job-full-cost/"
-draft: false
+draft: true
 ---
 
 ## Both paths, in the same unit

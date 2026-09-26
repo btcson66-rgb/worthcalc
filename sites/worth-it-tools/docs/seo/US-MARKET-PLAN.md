@@ -1,6 +1,33 @@
 # 美國英文市場 SEO 計畫（2026-09-25）
 
-## 1. 現在的曝光從哪裡來
+
+## 0. 2026-09-26 更新：新的 Search Console 資料（近 3 個月）
+
+原始檔在 `docs/audits/gsc-2026-09-26/`。
+
+**最重要的事：曝光幾乎歸零。** 每週曝光從 7/20 那週的 293 次，掉到 7/27 起每週 20–40 次，9 月降到個位數，9/21 那週只剩 1 次。時間點和 `config/url-budget.json` 記錄的 7 月事件吻合（5 天內從 41 個網址暴增到 341 個）。Google 很可能把整站判定為量產低品質內容，排名是整站一起掉，不是個別頁面的問題。
+
+9/15 已經把約 930 個低品質網址下架、sitemap 收斂到約 300 個。恢復要等 Google 重新評估，通常以「月」計，這段期間：
+
+- **不要再大量上架**，維持現在每天 1–3 篇、每篇都有官方來源的節奏。
+- **不要大改網站結構或網址**。
+- 每 2–4 週匯出一次這份報表，看曝光有沒有回升。
+
+**每個頁面實際被搜的字：**
+
+| 頁面 | 曝光 | 平均排名 | 主要查詢 |
+|---|---:|---:|---|
+| /en/tools/costco-membership/ | 196 | 10.3 | costco membership calculator、costco executive membership calculator |
+| /en/tools/commute-cost/ | 175 | 32.9 | commute cost calculator（44 次，排名 61） |
+| /en/tools/latte-factor/ | 36 | 9.7 | latte factor calculator |
+| /en/tools/ev-vs-gas/ | 31 | 13.0 | gas vs electric vehicle calculator、total cost of ownership ev vs gas |
+
+依此調整的標題（2026-09-26）：
+
+- Costco 計算機：原標題「Is Costco Executive Membership Worth It? …」和另一篇文章 `/en/is-costco-executive-membership-worth-it/` 開頭一模一樣，兩頁搶同一個字。改成以它實際被搜的「Costco Membership Calculator」開頭。
+- 通勤計算機：它最常被搜的是「commute cost calculator」，原標題沒有這幾個字。改成以「Commute Cost Calculator」開頭。
+
+## 1. 現在的曝光從哪裡來（2026-09-15 資料）
 
 資料：`docs/audits/worthcalc-disposition-2026-09-15.csv`（GSC 90 天曝光，最新一份在 repo 裡的資料）。
 

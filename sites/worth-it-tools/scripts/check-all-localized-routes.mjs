@@ -284,7 +284,12 @@ for (const { locale, route, file } of pages) {
 let enZhOnlyRoutes = 0;
 for (const [route, present] of routes) {
   const isBilingualGuideRoute = route.startsWith('guides/');
-  const missingRequired = approvedSingleLocaleRoutes.has(route) || isBilingualGuideRoute
+  // Money briefs are market-native: a Taiwan tax brief has no English reader,
+  // a US tax brief no Traditional Chinese one. [slug].astro derives hreflang
+  // from the locales actually published, and the per-page checks above still
+  // fail any brief that declares a sibling which does not exist.
+  const isMarketBriefRoute = route.startsWith('money/');
+  const missingRequired = approvedSingleLocaleRoutes.has(route) || isBilingualGuideRoute || isMarketBriefRoute
     ? []
     : requiredLocales.filter((locale) => !present.has(locale));
   if (missingRequired.length) failures.push(`/${route}: missing required locales ${missingRequired.join(', ')}`);

@@ -6,13 +6,17 @@
  * AffiliateRecs 元件不輸出任何 HTML（AdSense 審查期間保持零輸出）。
  */
 
+/** Shared cross-site shape. Keep one affiliate URL per product. */
 export interface AffiliateProduct {
-  id: string;
+  product_id: string;
   name: string;
+  category: string;
+  image: string;
   price: string;
-  shop: string;
-  note: string;
-  url: string;
+  affiliate_url: string;
+  affiliate_network: string;
+  batch_id: string;
+  active: boolean;
 }
 
 export const productPool: AffiliateProduct[] = [];
@@ -22,6 +26,6 @@ export const toolAffiliateMap: Record<string, string[]> = {};
 export function getAffiliateProducts(toolSlug: string): AffiliateProduct[] {
   const ids = toolAffiliateMap[toolSlug] ?? [];
   return ids
-    .map((id) => productPool.find((product) => product.id === id))
+    .map((id) => productPool.find((product) => product.product_id === id))
     .filter((product): product is AffiliateProduct => Boolean(product));
 }

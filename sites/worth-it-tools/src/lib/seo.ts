@@ -81,6 +81,29 @@ export function isSoftDeindexed(pathname: string): boolean {
   return locale !== undefined && DEINDEXED_LOCALES.has(locale);
 }
 
+/**
+ * Google cuts a title link at roughly 600px, which is about 60 Latin
+ * characters; a CJK character takes about two Latin widths. A brand suffix that
+ * pushes the title past that is never shown — it only gets the keyword-bearing
+ * end of the title truncated instead — so the suffix is added only when it fits.
+ */
+export const TITLE_WIDTH_BUDGET = 60;
+
+/** Approximate SERP width of a title in Latin-character units. */
+export function titleWidth(text: string): number {
+  let width = 0;
+  for (const char of text) {
+    width += /[\u1100-\u115F\u2E80-\uA4CF\uAC00-\uD7A3\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFF60\uFFE0-\uFFE6]/u.test(char) ? 2 : 1;
+  }
+  return width;
+}
+
+export function brandedTitle(title: string): string {
+  if (title.includes(SITE.name)) return title;
+  const branded = `${title} | ${SITE.name}`;
+  return titleWidth(branded) <= TITLE_WIDTH_BUDGET ? branded : title;
+}
+
 function localizedPagePath(locale: ContentLocale, logical: string): string {
   if (!logical && locale === 'en') return '/';
   return logical ? `/${locale}/${logical}/` : `/${locale}/`;
@@ -89,7 +112,7 @@ function localizedPagePath(locale: ContentLocale, logical: string): string {
 /** Resolve raw SEO input into everything the <head> needs. */
 export function resolveSeo(input: SeoInput): ResolvedSeo {
   const base = origin(input);
-  const fullTitle = input.titleOverride ?? (input.title ? `${input.title} | ${SITE.name}` : SITE.name);
+  const fullTitle = input.titleOverride ?? (input.title ? brandedTitle(input.title) : SITE.name);
   const currentPath = pagePath(input.url.pathname);
   const canonicalPath = input.locale === 'en' && currentPath === '/en/' ? '/' : currentPath;
   const canonical = absolute(base, canonicalPath);
@@ -298,7 +321,9 @@ export function webSiteJsonLd(site?: URL, options: EntityJsonLdOptions = {}): ob
     name: SITE.name,
     url: `${base}/`,
     publisher: { '@id': organizationId(site) },
-    inLanguage: CORE_LOCALES.map((locale) => LOCALE_HREFLANG[locale]),
+    // Only languages the site still offers to search: es/fr/de pages are live
+    // but noindex, so naming them here would describe a site Google can't see.
+    inLanguage: CORE_LOCALES.filter((locale) => !DEINDEXED_LOCALES.has(locale)).map((locale) => LOCALE_HREFLANG[locale]),
     ...(options.description ? { description: options.description } : {}),
     ...(options.topics?.length
       ? { about: options.topics.map((name) => ({ '@type': 'Thing', name })) }

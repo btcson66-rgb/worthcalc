@@ -18,7 +18,7 @@ import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 import FAQ from '../../../components/FAQ.astro';
 import RelatedLinks from '../../../components/RelatedLinks.astro';
 import { localizedCorePath, useTranslations } from '../../../i18n/utils';
-import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '../../../lib/seo';
+import { articleJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
 import { isPublished, publishCutoff } from '../../../lib/publication';
 import { isoDate } from '../../../lib/trustBlock';
 import { briefCopy, moneyHubPath } from '../../../lib/moneyBriefs';
@@ -118,7 +118,8 @@ const relatedLinks = liveRelated.map((href) => ({
       site: Astro.site,
     }),
     breadcrumbJsonLd(crumbs, Astro.site),
-    faqJsonLd(faqItems),
+    // No faqJsonLd here: <FAQ> below emits the FAQPage block itself, and a
+    // second copy is a duplicate-FAQPage error in Search Console.
   ]}
 >
   <p class="brief-answer"><strong>{copy.answerLabel}</strong> {data.answer}</p>

@@ -82,5 +82,9 @@ const resolvedDescription = s4TitleOverride?.description ?? description;
       <slot />
     </main>
     <Footer />
+    <script>
+      import { installAffiliateAnalytics } from '../lib/affiliateAnalytics';
+      installAffiliateAnalytics();
+    </script>
   </body>
 </html>

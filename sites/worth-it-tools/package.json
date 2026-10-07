@@ -1,6 +1,6 @@
 {
   "name": "worth-it-tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "WorthCalc — free, fast, browser-based tools.",
   "type": "module",
   "private": true,

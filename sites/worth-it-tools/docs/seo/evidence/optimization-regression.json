@@ -1,0 +1,34 @@
+{
+  "result": "PASS",
+  "before_pages": 628,
+  "after_pages": 631,
+  "allowed_paths": [
+    "/cdn-cgi/l/email-protection",
+    "/en/money/rental-car-insurance-decline/",
+    "/zh/money/car-loan-vs-cash/",
+    "/zh/money/rental-car-insurance-decline/",
+    "/zh/money/savings-insurance-irr/"
+  ],
+  "errors": [],
+  "editorial_changes": [
+    {
+      "path": "/en/tools/costco-membership/",
+      "field": "description",
+      "before": "Executive pays 2% back on most purchases. Enter your monthly Costco spend to see the exact break-even point and whether the $130 tier beats Gold Star for you.",
+      "after": "Enter reward-eligible spending, membership fees and the reward rate to compare Gold Star with Executive, including the break-even spend and reward cap."
+    },
+    {
+      "path": "/en/tools/subscription-audit/",
+      "field": "description",
+      "before": "List every recurring charge, see the annual total and cost per use, and find which ones to cancel or switch to annual billing.",
+      "after": "Enter purchase cost, weekly frequency and an alternative cost to compare annual spending. Explore contributions and modeled growth without a promised return."
+    },
+    {
+      "path": "/en/costco-math/",
+      "field": "description",
+      "before": "Unit price, spoilage and storage, membership fee per trip. The formulas, then a calculator.",
+      "after": "Compare Costco membership costs using your spending, savings rate and extra costs. Find the break-even spend and compare Gold Star with Executive rewards."
+    }
+  ],
+  "scope": "Static production/local crawl comparison; does not establish deployment or search indexing."
+}

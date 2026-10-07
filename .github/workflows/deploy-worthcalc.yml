@@ -28,6 +28,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -105,6 +106,26 @@ jobs:
           # already covers the whole domain. The HTML-tag path in SEO.astro
           # (PUBLIC_GSC_VERIFICATION env var) still exists for future use if a
           # URL-prefix property is ever added; set the repo variable again if so.
+      - name: Restore last accepted IndexNow baseline
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for run_id in $(gh run list --workflow deploy-worthcalc.yml --branch main --status completed --limit 20 --json databaseId --jq '.[].databaseId'); do
+            count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts" --jq '[.artifacts[] | select(.name == "worthcalc-indexnow-accepted" and .expired == false)] | length')
+            if [ "$count" != "0" ]; then
+              gh run download "$run_id" --name worthcalc-indexnow-accepted --dir indexnow-prior
+              cp indexnow-prior/indexnow-accepted.json indexnow-previous-accepted.json
+              break
+            fi
+          done
+      - name: Prepare changed URL plan against the last accepted baseline
+        run: node scripts/indexnow-plan.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-plan
+          path: sites/worth-it-tools/indexnow-plan.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: sites/worth-it-tools/dist
@@ -143,11 +164,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # Waits a moment so the fresh deployment serves the key file, then
-      # submits every sitemap URL to IndexNow (Bing/Yandex/Seznam/Naver).
-      - run: sleep 60 && node sites/worth-it-tools/scripts/submit-indexnow.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: indexnow-plan
+      # Only the precomputed changed/removed subset, in batches of at most 50.
+      # A first deployment initializes its baseline without a full-site submit.
+      - run: sleep 60 && node sites/worth-it-tools/scripts/submit-indexnow.mjs indexnow-plan.json
         env:
           INDEXNOW_KEY: a0971145939fb4fcb7b5ff0e736761fc
+      - uses: actions/upload-artifact@v4
+        with:
+          name: worthcalc-indexnow-accepted
+          path: indexnow-accepted.json
+          if-no-files-found: error
+          retention-days: 90
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: indexnow-submission-log
+          path: indexnow-submission-log.json
+          if-no-files-found: warn
 
   gsc-submit:
     needs: deploy

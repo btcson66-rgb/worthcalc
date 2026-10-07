@@ -1,7 +1,7 @@
 {
   "/en/tools/costco-membership/": {
     "title": "Costco Membership Calculator: Is Executive Worth It? (2026)",
-    "description": "Executive pays 2% back on most purchases. Enter your monthly Costco spend to see the exact break-even point and whether the $130 tier beats Gold Star for you."
+    "description": "Enter reward-eligible spending, membership fees and the reward rate to compare Gold Star with Executive, including the break-even spend and reward cap."
   },
   "/en/tools/commute-cost/": {
     "title": "Commute Cost Calculator: Per Mile, Month & Year (2026)",
@@ -21,7 +21,7 @@
   },
   "/en/tools/subscription-audit/": {
     "title": "Subscription Audit Calculator: Your Yearly Cost (2026)",
-    "description": "List every recurring charge, see the annual total and cost per use, and find which ones to cancel or switch to annual billing."
+    "description": "Enter purchase cost, weekly frequency and an alternative cost to compare annual spending. Explore contributions and modeled growth without a promised return."
   },
   "/en/is-costco-executive-membership-worth-it/": {
     "title": "Is Costco Executive Membership Worth It? The Math for 2026",
@@ -109,7 +109,7 @@
   },
   "/en/costco-math/": {
     "title": "Costco Math: When Bulk Buying Actually Saves Money (2026)",
-    "description": "Unit price, spoilage and storage, membership fee per trip. The formulas, then a calculator."
+    "description": "Compare Costco membership costs using your spending, savings rate and extra costs. Find the break-even spend and compare Gold Star with Executive rewards."
   },
   "/zh/tools/costco-membership/": {
     "title": "好市多黑鑽卡值得升級嗎？回本金額計算機（2026）",

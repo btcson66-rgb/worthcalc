@@ -1,0 +1,1890 @@
+{
+  "origin": "https://worthcalc.win/",
+  "canonical_origin": "https://worthcalc.win/",
+  "captured_at": "2026-10-07T05:34:56.680510+00:00",
+  "max_pages": 0,
+  "pages": 628,
+  "homepage_anchor_reachable": 628,
+  "sitemap_unique_urls": 227,
+  "sitemaps": [
+    {
+      "url": "https://worthcalc.win/sitemap-index.xml",
+      "status": 200,
+      "content_type": "application/xml",
+      "error": null,
+      "kind": "sitemapindex",
+      "references": 1,
+      "unique_references": 1
+    },
+    {
+      "url": "https://worthcalc.win/sitemap-0.xml",
+      "status": 200,
+      "content_type": "application/xml",
+      "error": null,
+      "kind": "urlset",
+      "references": 227,
+      "unique_references": 227
+    }
+  ],
+  "robots_status": 200,
+  "robots_available": true,
+  "status_counts": {
+    "200": 627,
+    "404": 1
+  },
+  "indexable": 228,
+  "noindex": 400,
+  "fetch_errors": 0,
+  "sitemap_errors": [],
+  "invalid_sitemap_members": [],
+  "broken_internal_links": [
+    {
+      "source": "https://worthcalc.win/en/contact/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/en/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/en/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/en/terms/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/de/about/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/de/changelog/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/de/contact/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/de/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/de/terms/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/es/about/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/es/changelog/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/es/contact/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/es/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/es/terms/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/fr/about/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/fr/changelog/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/fr/contact/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/fr/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/fr/terms/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/zh/contact/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/zh/privacy/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    },
+    {
+      "source": "https://worthcalc.win/zh/terms/",
+      "target": "https://worthcalc.win/cdn-cgi/l/email-protection",
+      "status": 404
+    }
+  ],
+  "redirect_internal_links": [],
+  "unverified_internal_links": [],
+  "robots_blocked_not_fetched": [],
+  "redirect_chains": [],
+  "hreflang_issues": [],
+  "metadata_qa": [
+    {
+      "url": "https://worthcalc.win/",
+      "title_length": 60,
+      "description_length": 175,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/about/",
+      "title_length": 15,
+      "description_length": 103,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/annual-fee-card-breakeven/",
+      "title_length": 59,
+      "description_length": 101,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/changelog/",
+      "title_length": 21,
+      "description_length": 64,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/contact/",
+      "title_length": 17,
+      "description_length": 109,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/disclaimer/",
+      "title_length": 22,
+      "description_length": 107,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/ev-vs-gas-total-cost/",
+      "title_length": 59,
+      "description_length": 117,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/guides/",
+      "title_length": 22,
+      "description_length": 150,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/money/",
+      "title_length": 24,
+      "description_length": 218,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power/",
+      "title_length": 54,
+      "description_length": 88,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/privacy/",
+      "title_length": 26,
+      "description_length": 119,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/rent-vs-buy-guide/",
+      "title_length": 60,
+      "description_length": 98,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/terms/",
+      "title_length": 24,
+      "description_length": 79,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/",
+      "title_length": 27,
+      "description_length": 164,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/cashback-breakeven/",
+      "title_length": 42,
+      "description_length": 120,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/commute-cost/",
+      "title_length": 54,
+      "description_length": 158,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/compound-growth/",
+      "title_length": 60,
+      "description_length": 119,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/costco-membership/",
+      "title_length": 59,
+      "description_length": 158,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/dti-calculator/",
+      "title_length": 49,
+      "description_length": 156,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/ev-vs-gas/",
+      "title_length": 57,
+      "description_length": 128,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/home-affordability/",
+      "title_length": 58,
+      "description_length": 132,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/installment-true-apr/",
+      "title_length": 53,
+      "description_length": 117,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/rent-vs-buy/",
+      "title_length": 57,
+      "description_length": 139,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/subscription-audit/",
+      "title_length": 54,
+      "description_length": 126,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/debt-credit/",
+      "title_length": 25,
+      "description_length": 93,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/everyday/",
+      "title_length": 31,
+      "description_length": 97,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/housing/",
+      "title_length": 35,
+      "description_length": 95,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/income-savings/",
+      "title_length": 36,
+      "description_length": 96,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/memberships/",
+      "title_length": 39,
+      "description_length": 100,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/topics/transportation/",
+      "title_length": 43,
+      "description_length": 96,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses/",
+      "title_length": 50,
+      "description_length": 123,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/zero-interest-installments-truth/",
+      "title_length": 60,
+      "description_length": 97,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/",
+      "title_length": 30,
+      "description_length": 61,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/annual-vs-monthly-billing/",
+      "title_length": 71,
+      "description_length": 188,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/apr-vs-apy/",
+      "title_length": 79,
+      "description_length": 172,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/average-commuting-cost/",
+      "title_length": 79,
+      "description_length": 182,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/bnpl-vs-credit-card-installments/",
+      "title_length": 58,
+      "description_length": 95,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/budget-with-irregular-income/",
+      "title_length": 61,
+      "description_length": 173,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/bulk-buying-vs-small-packages/",
+      "title_length": 67,
+      "description_length": 126,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/bulk-buying-waste-math/",
+      "title_length": 65,
+      "description_length": 169,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/car-lease-vs-buy-total-cost/",
+      "title_length": 64,
+      "description_length": 158,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/cashback-caps-real-reward-rate/",
+      "title_length": 67,
+      "description_length": 135,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/costco-math/",
+      "title_length": 57,
+      "description_length": 91,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/credit-card-minimum-payment-trap/",
+      "title_length": 66,
+      "description_length": 154,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/delivery-membership-break-even/",
+      "title_length": 51,
+      "description_length": 133,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/emergency-fund-irregular-income/",
+      "title_length": 80,
+      "description_length": 178,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/energy-efficient-appliance-payback/",
+      "title_length": 78,
+      "description_length": 142,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/extended-warranty-math/",
+      "title_length": 84,
+      "description_length": 217,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/extra-mortgage-payments-guide/",
+      "title_length": 58,
+      "description_length": 111,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/full-commute-cost-including-time/",
+      "title_length": 64,
+      "description_length": 151,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/gym-membership-cost-per-visit/",
+      "title_length": 59,
+      "description_length": 143,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/home-vs-public-ev-charging-cost/",
+      "title_length": 71,
+      "description_length": 144,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/hourly-vs-annual-salary/",
+      "title_length": 62,
+      "description_length": 149,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/how-compound-growth-works/",
+      "title_length": 75,
+      "description_length": 148,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/how-to-calculate-dti/",
+      "title_length": 62,
+      "description_length": 174,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/is-an-extended-warranty-worth-it/",
+      "title_length": 78,
+      "description_length": 154,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/is-costco-executive-membership-worth-it/",
+      "title_length": 58,
+      "description_length": 132,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/",
+      "title_length": 76,
+      "description_length": 186,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/auto-loan-rate-by-credit-score-2026/",
+      "title_length": 67,
+      "description_length": 195,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/childcare-cost-2026/",
+      "title_length": 75,
+      "description_length": 190,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/credit-card-apr-2026/",
+      "title_length": 76,
+      "description_length": 203,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/electricity-price-per-kwh-2026/",
+      "title_length": 83,
+      "description_length": 183,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/emergency-fund-size-2026/",
+      "title_length": 72,
+      "description_length": 210,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/employer-match-vs-debt-payoff/",
+      "title_length": 59,
+      "description_length": 151,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/money/heat-pump-payback-2026/",
+      "title_length": 70,
+      "description_length": 224,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/idle-cash-cost-2026/",
+      "title_length": 77,
+      "description_length": 211,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/insurance-deductible-break-even/",
+      "title_length": 60,
+      "description_length": 207,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/irs-mileage-rate-2026/",
+      "title_length": 58,
+      "description_length": 196,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/mortgage-rate-2026-payment-impact/",
+      "title_length": 82,
+      "description_length": 181,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/mortgage-refinance-break-even/",
+      "title_length": 71,
+      "description_length": 199,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/pet-insurance-break-even/",
+      "title_length": 58,
+      "description_length": 155,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/money/pmi-removal-timing/",
+      "title_length": 60,
+      "description_length": 190,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/should-i-file-an-insurance-claim/",
+      "title_length": 65,
+      "description_length": 205,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/side-hustle-true-hourly-rate/",
+      "title_length": 66,
+      "description_length": 147,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/solar-payback-2026/",
+      "title_length": 68,
+      "description_length": 198,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/streaming-prices-2026/",
+      "title_length": 68,
+      "description_length": 204,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/money/tsa-precheck-break-even/",
+      "title_length": 64,
+      "description_length": 157,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/monthly-vs-annual-subscription/",
+      "title_length": 51,
+      "description_length": 129,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/",
+      "title_length": 77,
+      "description_length": 184,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/new-vs-used-car-total-cost/",
+      "title_length": 69,
+      "description_length": 153,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/paid-membership-break-even/",
+      "title_length": 54,
+      "description_length": 124,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/rent-vs-buy-breakeven-year/",
+      "title_length": 60,
+      "description_length": 154,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/repair-or-replace-decision-formula/",
+      "title_length": 80,
+      "description_length": 160,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/savings-rate-gross-vs-net/",
+      "title_length": 69,
+      "description_length": 178,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/snowball-vs-avalanche/",
+      "title_length": 75,
+      "description_length": 176,
+      "signals": [
+        "title_length_signal",
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/subscription-creep/",
+      "title_length": 51,
+      "description_length": 95,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/appliance-running-cost/",
+      "title_length": 54,
+      "description_length": 162,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/budget-builder/",
+      "title_length": 55,
+      "description_length": 99,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/car-affordability/",
+      "title_length": 57,
+      "description_length": 120,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/cost-per-mile/",
+      "title_length": 51,
+      "description_length": 116,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/credit-card-payoff/",
+      "title_length": 55,
+      "description_length": 111,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/debt-strategy/",
+      "title_length": 57,
+      "description_length": 107,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/latte-factor/",
+      "title_length": 57,
+      "description_length": 124,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/mortgage-payoff/",
+      "title_length": 56,
+      "description_length": 107,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/tools/salary-converter/",
+      "title_length": 53,
+      "description_length": 147,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/true-cost-of-car-ownership/",
+      "title_length": 54,
+      "description_length": 156,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/en/upfront-fees-financing-cost/",
+      "title_length": 53,
+      "description_length": 113,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/upgrade-your-phone-or-keep-it/",
+      "title_length": 73,
+      "description_length": 142,
+      "signals": [
+        "title_length_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/en/work-from-home-vs-commuting-hidden-costs/",
+      "title_length": 61,
+      "description_length": 138,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/about/",
+      "title_length": 12,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/annual-fee-card-breakeven/",
+      "title_length": 35,
+      "description_length": 51,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/changelog/",
+      "title_length": 16,
+      "description_length": 25,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/contact/",
+      "title_length": 12,
+      "description_length": 44,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/disclaimer/",
+      "title_length": 16,
+      "description_length": 42,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/ev-vs-gas-total-cost/",
+      "title_length": 29,
+      "description_length": 55,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/guides/",
+      "title_length": 16,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/",
+      "title_length": 16,
+      "description_length": 64,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power/",
+      "title_length": 23,
+      "description_length": 26,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/privacy/",
+      "title_length": 17,
+      "description_length": 71,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/rent-vs-buy-guide/",
+      "title_length": 31,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/terms/",
+      "title_length": 16,
+      "description_length": 34,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/",
+      "title_length": 17,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/cashback-breakeven/",
+      "title_length": 22,
+      "description_length": 30,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/commute-cost/",
+      "title_length": 30,
+      "description_length": 55,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/compound-growth/",
+      "title_length": 24,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/costco-membership/",
+      "title_length": 25,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/dti-calculator/",
+      "title_length": 29,
+      "description_length": 47,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/ev-vs-gas/",
+      "title_length": 32,
+      "description_length": 41,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/home-affordability/",
+      "title_length": 28,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/installment-true-apr/",
+      "title_length": 26,
+      "description_length": 38,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/rent-vs-buy/",
+      "title_length": 23,
+      "description_length": 40,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/subscription-audit/",
+      "title_length": 23,
+      "description_length": 35,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/debt-credit/",
+      "title_length": 17,
+      "description_length": 35,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/everyday/",
+      "title_length": 18,
+      "description_length": 33,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/housing/",
+      "title_length": 19,
+      "description_length": 31,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/income-savings/",
+      "title_length": 20,
+      "description_length": 30,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/memberships/",
+      "title_length": 17,
+      "description_length": 29,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/topics/transportation/",
+      "title_length": 19,
+      "description_length": 36,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/true-hourly-wage-after-commuting-work-expenses/",
+      "title_length": 32,
+      "description_length": 37,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/zero-interest-installments-truth/",
+      "title_length": 36,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/annual-vs-monthly-billing/",
+      "title_length": 30,
+      "description_length": 63,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/apr-vs-apy/",
+      "title_length": 36,
+      "description_length": 55,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/average-commuting-cost/",
+      "title_length": 31,
+      "description_length": 62,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/bnpl-vs-credit-card-installments/",
+      "title_length": 37,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/budget-with-irregular-income/",
+      "title_length": 33,
+      "description_length": 56,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/bulk-buying-vs-small-packages/",
+      "title_length": 26,
+      "description_length": 39,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/bulk-buying-waste-math/",
+      "title_length": 26,
+      "description_length": 56,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/car-lease-vs-buy-total-cost/",
+      "title_length": 35,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/cashback-caps-real-reward-rate/",
+      "title_length": 30,
+      "description_length": 47,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/cost-per-use-expensive-item/",
+      "title_length": 36,
+      "description_length": 41,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/costco-math/",
+      "title_length": 29,
+      "description_length": 58,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/credit-card-minimum-payment-trap/",
+      "title_length": 28,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/delivery-membership-break-even/",
+      "title_length": 25,
+      "description_length": 44,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/emergency-fund-how-much/",
+      "title_length": 36,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/emergency-fund-irregular-income/",
+      "title_length": 33,
+      "description_length": 47,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/emergency-fund-vs-debt-payoff/",
+      "title_length": 29,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/emergency-fund-vs-sinking-fund/",
+      "title_length": 40,
+      "description_length": 75,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/energy-efficient-appliance-payback/",
+      "title_length": 25,
+      "description_length": 40,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/extended-warranty-math/",
+      "title_length": 36,
+      "description_length": 76,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/extra-mortgage-payments-guide/",
+      "title_length": 36,
+      "description_length": 50,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/full-commute-cost-including-time/",
+      "title_length": 33,
+      "description_length": 44,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/gym-membership-cost-per-visit/",
+      "title_length": 35,
+      "description_length": 42,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/home-vs-public-ev-charging-cost/",
+      "title_length": 33,
+      "description_length": 48,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/hourly-vs-annual-salary/",
+      "title_length": 27,
+      "description_length": 54,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/how-compound-growth-works/",
+      "title_length": 36,
+      "description_length": 55,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/how-much-home-can-you-afford/",
+      "title_length": 25,
+      "description_length": 54,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/how-to-calculate-dti/",
+      "title_length": 35,
+      "description_length": 65,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/how-to-calculate-net-worth/",
+      "title_length": 30,
+      "description_length": 58,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/how-to-calculate-savings-rate/",
+      "title_length": 31,
+      "description_length": 54,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/is-an-extended-warranty-worth-it/",
+      "title_length": 34,
+      "description_length": 49,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/is-costco-executive-membership-worth-it/",
+      "title_length": 27,
+      "description_length": 53,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/loan-term-vs-total-interest/",
+      "title_length": 38,
+      "description_length": 59,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/meal-prep-vs-takeout-cost/",
+      "title_length": 36,
+      "description_length": 39,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/auto-loan-rate-by-credit-score-2026/",
+      "title_length": 33,
+      "description_length": 87,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/car-road-fee-license-tax-fixed-cost/",
+      "title_length": 37,
+      "description_length": 88,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/central-bank-rate-mortgage-payment/",
+      "title_length": 41,
+      "description_length": 110,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/childcare-cost-2026/",
+      "title_length": 42,
+      "description_length": 89,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/credit-card-apr-2026/",
+      "title_length": 31,
+      "description_length": 86,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/dependent-exemption-tax-savings/",
+      "title_length": 37,
+      "description_length": 103,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/electricity-price-per-kwh-2026/",
+      "title_length": 33,
+      "description_length": 69,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/emergency-fund-size-2026/",
+      "title_length": 28,
+      "description_length": 89,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/employer-match-vs-debt-payoff/",
+      "title_length": 39,
+      "description_length": 62,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/heat-pump-payback-2026/",
+      "title_length": 28,
+      "description_length": 87,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/house-tax-owner-occupied-vs-non/",
+      "title_length": 38,
+      "description_length": 108,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/idle-cash-cost-2026/",
+      "title_length": 42,
+      "description_length": 88,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/insurance-deductible-break-even/",
+      "title_length": 32,
+      "description_length": 81,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/irs-mileage-rate-2026/",
+      "title_length": 37,
+      "description_length": 85,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/itemized-vs-standard-deduction/",
+      "title_length": 35,
+      "description_length": 93,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/labor-insurance-old-age-lump-sum-vs-annuity/",
+      "title_length": 30,
+      "description_length": 85,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/labor-pension-contribution-wage-table/",
+      "title_length": 41,
+      "description_length": 93,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/labor-pension-voluntary-contribution-tax/",
+      "title_length": 34,
+      "description_length": 77,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/land-value-tax-owner-occupied-rate/",
+      "title_length": 30,
+      "description_length": 84,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/mortgage-grace-period-end-payment/",
+      "title_length": 40,
+      "description_length": 93,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/mortgage-prepay-vs-invest/",
+      "title_length": 43,
+      "description_length": 89,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/mortgage-rate-2026-payment-impact/",
+      "title_length": 41,
+      "description_length": 107,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/mortgage-refinance-break-even/",
+      "title_length": 25,
+      "description_length": 72,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/national-pension-vs-labor-insurance/",
+      "title_length": 35,
+      "description_length": 114,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/nhi-premium-insured-salary-grade/",
+      "title_length": 41,
+      "description_length": 113,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/nhi-supplementary-premium/",
+      "title_length": 40,
+      "description_length": 111,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/pet-insurance-break-even/",
+      "title_length": 28,
+      "description_length": 68,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/pmi-removal-timing/",
+      "title_length": 41,
+      "description_length": 87,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/rent-subsidy-300b-amount/",
+      "title_length": 40,
+      "description_length": 79,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/should-i-file-an-insurance-claim/",
+      "title_length": 34,
+      "description_length": 64,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/side-hustle-true-hourly-rate/",
+      "title_length": 29,
+      "description_length": 70,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/solar-payback-2026/",
+      "title_length": 41,
+      "description_length": 95,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/streaming-prices-2026/",
+      "title_length": 30,
+      "description_length": 75,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/taipower-summer-rates-ac-bill/",
+      "title_length": 32,
+      "description_length": 87,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/taipower-summer-vs-non-summer-rates/",
+      "title_length": 40,
+      "description_length": 79,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/taipower-time-of-use-vs-tiered/",
+      "title_length": 37,
+      "description_length": 106,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/time-deposit-early-withdrawal/",
+      "title_length": 35,
+      "description_length": 80,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/tpass-commuter-pass-breakeven/",
+      "title_length": 38,
+      "description_length": 92,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/tsa-precheck-break-even/",
+      "title_length": 38,
+      "description_length": 57,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/year-end-bonus-withholding-tax/",
+      "title_length": 36,
+      "description_length": 87,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/money/youth-home-loan-3-subsidy-value/",
+      "title_length": 43,
+      "description_length": 95,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/monthly-vs-annual-subscription/",
+      "title_length": 35,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/new-vs-used-car-total-cost/",
+      "title_length": 35,
+      "description_length": 45,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/paid-membership-break-even/",
+      "title_length": 32,
+      "description_length": 40,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/price-per-wear-clothing-shoes/",
+      "title_length": 34,
+      "description_length": 36,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/rent-vs-buy-breakeven-year/",
+      "title_length": 32,
+      "description_length": 49,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/repair-or-replace-decision-formula/",
+      "title_length": 34,
+      "description_length": 47,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/reusable-vs-disposable-break-even/",
+      "title_length": 34,
+      "description_length": 37,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/simple-vs-compound-interest/",
+      "title_length": 32,
+      "description_length": 48,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/snowball-vs-avalanche/",
+      "title_length": 35,
+      "description_length": 51,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/subscription-creep/",
+      "title_length": 28,
+      "description_length": 70,
+      "signals": []
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/appliance-electricity-cost/",
+      "title_length": 32,
+      "description_length": 51,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/budget-builder/",
+      "title_length": 23,
+      "description_length": 48,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/car-affordability/",
+      "title_length": 27,
+      "description_length": 54,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/cost-per-mile/",
+      "title_length": 29,
+      "description_length": 33,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/credit-card-payoff/",
+      "title_length": 27,
+      "description_length": 51,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/debt-strategy/",
+      "title_length": 25,
+      "description_length": 36,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/latte-factor/",
+      "title_length": 26,
+      "description_length": 33,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/mortgage-payoff/",
+      "title_length": 25,
+      "description_length": 52,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/tools/salary-converter/",
+      "title_length": 25,
+      "description_length": 37,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/true-cost-of-car-ownership/",
+      "title_length": 29,
+      "description_length": 49,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/upfront-fees-financing-cost/",
+      "title_length": 29,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/upgrade-your-phone-or-keep-it/",
+      "title_length": 26,
+      "description_length": 43,
+      "signals": [
+        "short_description_signal"
+      ]
+    },
+    {
+      "url": "https://worthcalc.win/zh/work-from-home-vs-commuting-hidden-costs/",
+      "title_length": 29,
+      "description_length": 47,
+      "signals": [
+        "short_description_signal"
+      ]
+    }
+  ],
+  "metadata_signal_counts": {
+    "long_description_signal": 39,
+    "short_description_signal": 118,
+    "title_length_signal": 31
+  },
+  "limitations": [
+    "Static HTML anchors only; JS-generated routes not discovered.",
+    "Incoming links count distinct source URLs, including navigation; contextual relevance needs review.",
+    "Bing/Ahrefs page-level status unavailable unless supplied separately.",
+    "Length is an advisory signal, never a standalone failure.",
+    "Files and query/state links recorded as unverified, not counted as broken.",
+    "No search indexing or traffic guarantee."
+  ]
+}

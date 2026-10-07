@@ -80,6 +80,28 @@ function extractLinks(html) {
   return links;
 }
 
+// Breadcrumb JSON-LD can advertise dead routes even when every anchor is valid.
+function extractBreadcrumbLinks(html) {
+  const links = [];
+  function visit(value) {
+    if (Array.isArray(value)) { value.forEach(visit); return; }
+    if (!value || typeof value !== 'object') return;
+    if (value['@type'] === 'BreadcrumbList') {
+      for (const item of value.itemListElement ?? []) {
+        const raw = typeof item.item === 'string' ? item.item : item.item?.['@id'];
+        if (!raw) continue;
+        const url = new URL(raw, 'https://worthcalc.win');
+        if (url.origin === 'https://worthcalc.win') links.push(url.pathname);
+      }
+    }
+    Object.values(value).forEach(visit);
+  }
+  for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    visit(JSON.parse(match[1]));
+  }
+  return links;
+}
+
 // og:image and twitter:image live in meta content, so the href/src sweep above
 // never saw them. /og-default.png was referenced by every page on the site and
 // 404'd -- long enough that Meta's crawler had fetched the missing file 45 times
@@ -145,7 +167,7 @@ for (const file of htmlFiles) {
     }
   }
 
-  for (const rawLink of extractLinks(html)) {
+  for (const rawLink of [...extractLinks(html), ...extractBreadcrumbLinks(html)]) {
     if (isSkipped(rawLink)) continue;
 
     const sitePath = toSitePath(file, rawLink);

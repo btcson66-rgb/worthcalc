@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "before_pages": 628,
+  "after_pages": 631,
+  "allowed_paths": [
+    "/cdn-cgi/l/email-protection",
+    "/en/money/rental-car-insurance-decline/",
+    "/zh/money/car-loan-vs-cash/",
+    "/zh/money/rental-car-insurance-decline/",
+    "/zh/money/savings-insurance-irr/"
+  ],
+  "errors": [],
+  "editorial_changes": [
+    {
+      "path": "/en/costco-math/",
+      "field": "description",
+      "before": "Unit price, spoilage and storage, membership fee per trip. The formulas, then a calculator.",
+      "after": "Compare Costco membership costs using your spending, savings rate and extra costs. Find the break-even spend and compare Gold Star with Executive rewards."
+    }
+  ],
+  "scope": "Static production/local crawl comparison; does not establish deployment or search indexing."
+}

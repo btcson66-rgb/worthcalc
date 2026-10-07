@@ -1,0 +1,5306 @@
+{
+  "source": "C:\\Users\\User\\Downloads\\worthcalc.win-Performance-on-Search-2026-10-07.zip",
+  "zip_sha256": "69ad2ffe1489814221f100aa2f71497734163399a15d35192ba4eabef9ebea7f",
+  "date_from": "2026-07-05",
+  "date_to": "2026-10-04",
+  "clicks": 10.0,
+  "impressions": 853.0,
+  "ctr_percent": 1.1723329425556859,
+  "pages": [
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/costco-membership/",
+      "點擊": "3",
+      "曝光": "196",
+      "點閱率": "1.53%",
+      "排名": "10.32"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/commute-cost/",
+      "點擊": "0",
+      "曝光": "175",
+      "點閱率": "0%",
+      "排名": "32.86"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/",
+      "點擊": "2",
+      "曝光": "120",
+      "點閱率": "1.67%",
+      "排名": "48.38"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/latte-factor/",
+      "點擊": "0",
+      "曝光": "36",
+      "點閱率": "0%",
+      "排名": "9.72"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/ev-vs-gas/",
+      "點擊": "0",
+      "曝光": "32",
+      "點閱率": "0%",
+      "排名": "12.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/installment-true-apr/",
+      "點擊": "0",
+      "曝光": "21",
+      "點閱率": "0%",
+      "排名": "14.24"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/annual-fee-card-breakeven",
+      "點擊": "0",
+      "曝光": "20",
+      "點閱率": "0%",
+      "排名": "8.05"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/contact/",
+      "點擊": "0",
+      "曝光": "19",
+      "點閱率": "0%",
+      "排名": "3.21"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/subscription-audit/",
+      "點擊": "0",
+      "曝光": "19",
+      "點閱率": "0%",
+      "排名": "11.68"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/is-costco-executive-membership-worth-it/",
+      "點擊": "0",
+      "曝光": "18",
+      "點閱率": "0%",
+      "排名": "23.89"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/upfront-fees-financing-cost",
+      "點擊": "0",
+      "曝光": "18",
+      "點閱率": "0%",
+      "排名": "54.72"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/commute-cost",
+      "點擊": "0",
+      "曝光": "17",
+      "點閱率": "0%",
+      "排名": "33.82"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/upfront-fees-financing-cost/",
+      "點擊": "0",
+      "曝光": "16",
+      "點閱率": "0%",
+      "排名": "57.38"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/about/",
+      "點擊": "0",
+      "曝光": "15",
+      "點閱率": "0%",
+      "排名": "4.13"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/home-vs-public-ev-charging-cost/",
+      "點擊": "0",
+      "曝光": "14",
+      "點閱率": "0%",
+      "排名": "87.79"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/is-costco-executive-membership-worth-it/",
+      "點擊": "1",
+      "曝光": "13",
+      "點閱率": "7.69%",
+      "排名": "6.46"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/changelog/",
+      "點擊": "0",
+      "曝光": "13",
+      "點閱率": "0%",
+      "排名": "3.69"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/costco-membership",
+      "點擊": "1",
+      "曝光": "12",
+      "點閱率": "8.33%",
+      "排名": "9.58"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/annual-fee-card-breakeven/",
+      "點擊": "0",
+      "曝光": "11",
+      "點閱率": "0%",
+      "排名": "7.45"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/",
+      "點擊": "1",
+      "曝光": "10",
+      "點閱率": "10%",
+      "排名": "2.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/rent-vs-buy/",
+      "點擊": "0",
+      "曝光": "10",
+      "點閱率": "0%",
+      "排名": "5.1"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/debt-strategy/",
+      "點擊": "0",
+      "曝光": "10",
+      "點閱率": "0%",
+      "排名": "6.9"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/ev-vs-gas/",
+      "點擊": "0",
+      "曝光": "10",
+      "點閱率": "0%",
+      "排名": "8.7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/ev-vs-gas-total-cost/",
+      "點擊": "0",
+      "曝光": "10",
+      "點閱率": "0%",
+      "排名": "14.4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/privacy/",
+      "點擊": "0",
+      "曝光": "9",
+      "點閱率": "0%",
+      "排名": "5.89"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/cashback-breakeven",
+      "點擊": "0",
+      "曝光": "9",
+      "點閱率": "0%",
+      "排名": "11.11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/about/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "4.12"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/budget-builder/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "4.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/contact/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "6.12"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/changelog/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "6.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/disclaimer/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "6.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/cashback-breakeven/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/commute-cost/",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "40.88"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/terms/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/privacy/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "6.14"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/rent-vs-buy-guide/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "13"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/dti-calculator/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "23.57"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/dti-calculator/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "54.29"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/monthly-vs-annual-subscription/",
+      "點擊": "0",
+      "曝光": "7",
+      "點閱率": "0%",
+      "排名": "70"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/latte-factor/",
+      "點擊": "1",
+      "曝光": "6",
+      "點閱率": "16.67%",
+      "排名": "8.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/compound-growth/",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "1.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/contact",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "3.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/subscription-audit/",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "4.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power/",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "23.17"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/extra-mortgage-payments-guide/",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "67.83"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/latte-factor/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "2.8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "4.2"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/car-affordability/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "4.6"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/costco-membership/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "6.8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/costco-math/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "7.4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/is-costco-executive-membership-worth-it/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "10.8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/zero-interest-installments-truth/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "22.4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/monthly-vs-annual-subscription/",
+      "點擊": "0",
+      "曝光": "5",
+      "點閱率": "0%",
+      "排名": "41.4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/disclaimer/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "1.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "2.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/changelog",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "3.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/mortgage-payoff/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "5.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/credit-card-payoff/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/subscription-creep/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/zero-interest-installments-truth/",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "9"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "14.75"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/debt-strategy/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "1.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "2.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/compound-growth/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/ev-vs-gas-total-cost/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "3.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/ev-vs-gas/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "6.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/dti-calculator/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "6.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/budget-builder/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/privacy",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "7.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/zero-interest-installments-truth",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/ev-vs-gas-total-cost/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "22.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/is-costco-executive-membership-worth-it/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "28.33"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/zero-interest-installments-truth/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "35.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/rent-vs-buy/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "35.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/pay-raise-vs-inflation-purchasing-power/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "48"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/full-commute-cost-including-time/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "57.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/bnpl-vs-credit-card-installments/",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "86.67"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/installment-true-apr/",
+      "點擊": "1",
+      "曝光": "2",
+      "點閱率": "50%",
+      "排名": "6"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/snowball-vs-avalanche/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "1"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/terms",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/budget-with-irregular-income/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "3.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/budget-builder/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "3.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/subscription-audit/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/credit-card-payoff",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/privacy/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "5.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/cashback-caps-real-reward-rate/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "5.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "6"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/cashback-breakeven/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/is-costco-executive-membership-worth-it/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/how-to-calculate-dti/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/commute-cost",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/ev-vs-gas-total-cost/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/dti-calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/ev-vs-gas",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "9"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/subscription-creep",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "9.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/installment-true-apr",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "9.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/full-commute-cost-including-time",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "12"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/ev-vs-gas/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "14.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/subscription-creep/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "15"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/commute-cost/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "38"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/subscription-audit",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "46"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/true-cost-of-car-ownership/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "49.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/true-cost-of-car-ownership/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "53.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/pay-raise-vs-inflation-purchasing-power",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "69"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/upfront-fees-financing-cost/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "71.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/zero-interest-installments-truth/",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "94.5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/salary-converter",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "1"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/cashback-breakeven",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "1"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/debt-strategy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "1"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/monthly-vs-annual-subscription/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "2"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/zero-interest-installments-truth/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "2"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/upfront-fees-financing-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "2"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/rent-vs-buy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/commute-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/installment-true-apr/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "3"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/cashback-caps-real-reward-rate/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/monthly-vs-annual-subscription/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/ev-vs-gas-total-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/privacy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/how-compound-growth-works/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/credit-card-payoff/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/credit-card-payoff/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "4"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/credit-card-payoff",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/terms",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/rent-vs-buy/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "6"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/credit-card-minimum-payment-trap/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/installment-true-apr/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/cashback-caps-real-reward-rate",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "7"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/tools/salary-converter/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/tools/rent-vs-buy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/disclaimer/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/terms/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/car-affordability/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/installment-true-apr",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/commute-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "9"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/commute-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/changelog/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/cashback-breakeven/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/credit-card-payoff/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/tools/mortgage-payoff",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/ev-vs-gas-total-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/terms/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/work-from-home-vs-commuting-hidden-costs/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/pay-raise-vs-inflation-purchasing-power/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/ev-vs-gas-total-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "11"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/commute-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "12"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/annual-fee-card-breakeven/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "17"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/full-commute-cost-including-time",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/en/home-vs-public-ev-charging-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/new-vs-used-car-total-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "29"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/zh/annual-fee-card-breakeven/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "62"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/es/cashback-caps-real-reward-rate/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "69"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/new-vs-used-car-total-cost/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "70"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/ev-vs-gas",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "85"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/ev-vs-gas/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "88"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/fr/tools/ev-vs-gas",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "93"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/rent-vs-buy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "94"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/ev-vs-gas-total-cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "95"
+    },
+    {
+      "熱門網頁": "https://worthcalc.win/de/tools/installment-true-apr/",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "98"
+    }
+  ],
+  "queries": [
+    {
+      "熱門查詢項目": "commute cost calculator",
+      "點擊": "0",
+      "曝光": "43",
+      "點閱率": "0%",
+      "排名": "60.79"
+    },
+    {
+      "熱門查詢項目": "costco membership calculator",
+      "點擊": "1",
+      "曝光": "11",
+      "點閱率": "9.09%",
+      "排名": "13.18"
+    },
+    {
+      "熱門查詢項目": "latte factor calculator",
+      "點擊": "0",
+      "曝光": "9",
+      "點閱率": "0%",
+      "排名": "12"
+    },
+    {
+      "熱門查詢項目": "costco executive membership calculator",
+      "點擊": "0",
+      "曝光": "8",
+      "點閱率": "0%",
+      "排名": "10.5"
+    },
+    {
+      "熱門查詢項目": "upfront cost",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "66.33"
+    },
+    {
+      "熱門查詢項目": "annual cost savings calculator",
+      "點擊": "0",
+      "曝光": "6",
+      "點閱率": "0%",
+      "排名": "97.5"
+    },
+    {
+      "熱門查詢項目": "costco executive membership",
+      "點擊": "1",
+      "曝光": "4",
+      "點閱率": "25%",
+      "排名": "7.25"
+    },
+    {
+      "熱門查詢項目": "commuting cost calculator",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "55.75"
+    },
+    {
+      "熱門查詢項目": "calculate commuting costs",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "59.75"
+    },
+    {
+      "熱門查詢項目": "calcular subida ipc nomina",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "68.25"
+    },
+    {
+      "熱門查詢項目": "車馬費行情",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "75.75"
+    },
+    {
+      "熱門查詢項目": "upfront purchase",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "81"
+    },
+    {
+      "熱門查詢項目": "充電樁一度電多少錢",
+      "點擊": "0",
+      "曝光": "4",
+      "點閱率": "0%",
+      "排名": "92.25"
+    },
+    {
+      "熱門查詢項目": "costco calculator membership",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門查詢項目": "costco calculator",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "17"
+    },
+    {
+      "熱門查詢項目": "audit cost calculator",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "21.67"
+    },
+    {
+      "熱門查詢項目": "costco rewards calculator",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "23.33"
+    },
+    {
+      "熱門查詢項目": "upfront payment",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "69.33"
+    },
+    {
+      "熱門查詢項目": "commute calculator cost",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "70"
+    },
+    {
+      "熱門查詢項目": "commuting costs",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "78"
+    },
+    {
+      "熱門查詢項目": "充電樁電費",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "81.33"
+    },
+    {
+      "熱門查詢項目": "家用充電樁電費",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "maintenance savings calculator",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "86.33"
+    },
+    {
+      "熱門查詢項目": "cost vs value calculator",
+      "點擊": "0",
+      "曝光": "3",
+      "點閱率": "0%",
+      "排名": "92"
+    },
+    {
+      "熱門查詢項目": "a few times a week, scott treats himself to a small latte from his favorite \ncoffee shop. each latte costs $3.55. if scott bought 15 lattes last month, \nhow much did he spend?",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "7.5"
+    },
+    {
+      "熱門查詢項目": "does annual fee count towards minimum spend",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門查詢項目": "is it worth it calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "46"
+    },
+    {
+      "熱門查詢項目": "neuwagen wertverlust rechner",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "49.5"
+    },
+    {
+      "熱門查詢項目": "should you pay upfront fee on a loan",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "59.5"
+    },
+    {
+      "熱門查詢項目": "upfront costs",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "59.5"
+    },
+    {
+      "熱門查詢項目": "commuter cost calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "64.5"
+    },
+    {
+      "熱門查詢項目": "is costco executive worth it",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "65"
+    },
+    {
+      "熱門查詢項目": "calculate commute cost",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "66"
+    },
+    {
+      "熱門查詢項目": "cost of commuting per mile",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "69"
+    },
+    {
+      "熱門查詢項目": "paying an extra mortgage payment",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "70"
+    },
+    {
+      "熱門查詢項目": "cost of commute calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "74"
+    },
+    {
+      "熱門查詢項目": "worth the cost",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "elektroauto gesamtkosten rechner",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "86.5"
+    },
+    {
+      "熱門查詢項目": "worth cost",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "89"
+    },
+    {
+      "熱門查詢項目": "taux d'effort calcul",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "90.5"
+    },
+    {
+      "熱門查詢項目": "what am i worth calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "90.5"
+    },
+    {
+      "熱門查詢項目": "cost upfront",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "91"
+    },
+    {
+      "熱門查詢項目": "billed annually",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "95.5"
+    },
+    {
+      "熱門查詢項目": "recurring costs calculator",
+      "點擊": "0",
+      "曝光": "2",
+      "點閱率": "0%",
+      "排名": "98"
+    },
+    {
+      "熱門查詢項目": "7 a day",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "2"
+    },
+    {
+      "熱門查詢項目": "交通費",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "2"
+    },
+    {
+      "熱門查詢項目": "you're pleased to learn that your annual salary review has resulted in a \n\\[4\\%\\] raise. however, the inflation rate has also been \\[4\\%\\] over the \nsame timeframe. how does this affect your purchasing power? choose 1 \nanswer: a it increases your purchasing power. b it decreases your \npurchasing power. c it leaves your purchasing power unchanged.",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "5"
+    },
+    {
+      "熱門查詢項目": "quel est le coût total de possession sur cinq ans d'une voiture électrique \nau luxembourg, assurance et recharge comprises ?",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "8"
+    },
+    {
+      "熱門查詢項目": "通勤費計算",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "9"
+    },
+    {
+      "熱門查詢項目": "calculator+costco",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門查詢項目": "carte costco prix france",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門查詢項目": "costco executive reward break even 3250",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門查詢項目": "costco+calculus",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "10"
+    },
+    {
+      "熱門查詢項目": "weekly groceries",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "14"
+    },
+    {
+      "熱門查詢項目": "coûts voiture électrique vs voiture essence calculateur",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "16"
+    },
+    {
+      "熱門查詢項目": "jährliche prozentsatz-kreditkarte",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "17"
+    },
+    {
+      "熱門查詢項目": "electric car charging cost per mile",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門查詢項目": "jährliche pendelkosten auto berechnen pendlerkosten deutschland wie \nberechnen pendelkosten auto",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門查詢項目": "what is commuting cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "20"
+    },
+    {
+      "熱門查詢項目": "total cost of ownership electric car vs gas",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "21"
+    },
+    {
+      "熱門查詢項目": "upfront charge",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "24"
+    },
+    {
+      "熱門查詢項目": "audit fee calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "32"
+    },
+    {
+      "熱門查詢項目": "costco executive membership break even",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "36"
+    },
+    {
+      "熱門查詢項目": "what is upfront cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "36"
+    },
+    {
+      "熱門查詢項目": "how much to make costco executive worth it",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "39"
+    },
+    {
+      "熱門查詢項目": "costco membership executive how much to break even",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "41"
+    },
+    {
+      "熱門查詢項目": "信用卡回饋計算機",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "43"
+    },
+    {
+      "熱門查詢項目": "should i rent or buy",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "44"
+    },
+    {
+      "熱門查詢項目": "commute gas cost calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "46"
+    },
+    {
+      "熱門查詢項目": "up-front cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "48"
+    },
+    {
+      "熱門查詢項目": "gas vs electric vehicle calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "50"
+    },
+    {
+      "熱門查詢項目": "installment price",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "50"
+    },
+    {
+      "熱門查詢項目": "cost of commuting calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "51"
+    },
+    {
+      "熱門查詢項目": "cost to commute calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "52"
+    },
+    {
+      "熱門查詢項目": "commute calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "55"
+    },
+    {
+      "熱門查詢項目": "high upfront costs",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "56"
+    },
+    {
+      "熱門查詢項目": "is it better to pay bills monthly or yearly",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "57"
+    },
+    {
+      "熱門查詢項目": "average cost of transportation per month",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "58"
+    },
+    {
+      "熱門查詢項目": "cost to commute",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "59"
+    },
+    {
+      "熱門查詢項目": "what percent of costco members are executive",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "61"
+    },
+    {
+      "熱門查詢項目": "信用卡年費",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "62"
+    },
+    {
+      "熱門查詢項目": "commuting calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "64"
+    },
+    {
+      "熱門查詢項目": "how much does worthpoint cost per month",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "64"
+    },
+    {
+      "熱門查詢項目": "member cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "64"
+    },
+    {
+      "熱門查詢項目": "commuting cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "65"
+    },
+    {
+      "熱門查詢項目": "transportation cost calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "66"
+    },
+    {
+      "熱門查詢項目": "kilometergeld rechner",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "68"
+    },
+    {
+      "熱門查詢項目": "what is the costco executive membership",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "68"
+    },
+    {
+      "熱門查詢項目": "how much will a",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "69"
+    },
+    {
+      "熱門查詢項目": "reembolso o cashback es un tipo de bono que devuelve",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "69"
+    },
+    {
+      "熱門查詢項目": "up front fee",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "70"
+    },
+    {
+      "熱門查詢項目": "how much should i pay for",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "74"
+    },
+    {
+      "熱門查詢項目": "calculating worth",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "75"
+    },
+    {
+      "熱門查詢項目": "member cost burden index",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "75"
+    },
+    {
+      "熱門查詢項目": "upfront fee meaning",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "75"
+    },
+    {
+      "熱門查詢項目": "commute expense calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "76"
+    },
+    {
+      "熱門查詢項目": "how much should this cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "77"
+    },
+    {
+      "熱門查詢項目": "how much would",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "79"
+    },
+    {
+      "熱門查詢項目": "annual billing",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "80"
+    },
+    {
+      "熱門查詢項目": "how much this will cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "81"
+    },
+    {
+      "熱門查詢項目": "cost of commute",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "82"
+    },
+    {
+      "熱門查詢項目": "how much would that be worth",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "82"
+    },
+    {
+      "熱門查詢項目": "gas or electric car calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "how much does my commute cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "installment 0%",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "making double payments on mortgage",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "83"
+    },
+    {
+      "熱門查詢項目": "total cost of ownership ev vs gas",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "84"
+    },
+    {
+      "熱門查詢項目": "true cost of commuting",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "85"
+    },
+    {
+      "熱門查詢項目": "calcul taux effort",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "86"
+    },
+    {
+      "熱門查詢項目": "how do i know how much to pay",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "86"
+    },
+    {
+      "熱門查詢項目": "double mortgage payment",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "87"
+    },
+    {
+      "熱門查詢項目": "how much would you pay for",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "87"
+    },
+    {
+      "熱門查詢項目": "maintenance fee calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "87"
+    },
+    {
+      "熱門查詢項目": "calcul taux d'effort",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "88"
+    },
+    {
+      "熱門查詢項目": "how much my",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "88"
+    },
+    {
+      "熱門查詢項目": "true value calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "88"
+    },
+    {
+      "熱門查詢項目": "abonnement annuel",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "90"
+    },
+    {
+      "熱門查詢項目": "how much would it take",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "92"
+    },
+    {
+      "熱門查詢項目": "0 kosten",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "93"
+    },
+    {
+      "熱門查詢項目": "simulateur tco voiture",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "93"
+    },
+    {
+      "熱門查詢項目": "零卡0利率",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "93"
+    },
+    {
+      "熱門查詢項目": "how much would this cost",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "94"
+    },
+    {
+      "熱門查詢項目": "mieten oder kaufen rechner",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "94"
+    },
+    {
+      "熱門查詢項目": "elektroauto unterhaltskosten",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "95"
+    },
+    {
+      "熱門查詢項目": "what does billed annually mean",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "95"
+    },
+    {
+      "熱門查詢項目": "make extra mortgage payments",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "96"
+    },
+    {
+      "熱門查詢項目": "simulador alquiler",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "96"
+    },
+    {
+      "熱門查詢項目": "分期 0 利率",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "96"
+    },
+    {
+      "熱門查詢項目": "effektiver jahreszins rechner",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "98"
+    },
+    {
+      "熱門查詢項目": "cost of calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "99"
+    },
+    {
+      "熱門查詢項目": "paiement mensuel",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "100"
+    },
+    {
+      "熱門查詢項目": "true cost calculator",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "100"
+    },
+    {
+      "熱門查詢項目": "kfz steuerklassen",
+      "點擊": "0",
+      "曝光": "1",
+      "點閱率": "0%",
+      "排名": "105"
+    }
+  ],
+  "tables": {
+    "dates": [
+      {
+        "日期": "2026-07-05",
+        "點擊": "0",
+        "曝光": "11",
+        "點閱率": "0%",
+        "排名": "38.8"
+      },
+      {
+        "日期": "2026-07-06",
+        "點擊": "1",
+        "曝光": "14",
+        "點閱率": "7.14%",
+        "排名": "23.6"
+      },
+      {
+        "日期": "2026-07-07",
+        "點擊": "0",
+        "曝光": "11",
+        "點閱率": "0%",
+        "排名": "18.4"
+      },
+      {
+        "日期": "2026-07-08",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "24.4"
+      },
+      {
+        "日期": "2026-07-09",
+        "點擊": "0",
+        "曝光": "21",
+        "點閱率": "0%",
+        "排名": "21.8"
+      },
+      {
+        "日期": "2026-07-10",
+        "點擊": "0",
+        "曝光": "24",
+        "點閱率": "0%",
+        "排名": "23.9"
+      },
+      {
+        "日期": "2026-07-11",
+        "點擊": "0",
+        "曝光": "46",
+        "點閱率": "0%",
+        "排名": "16.7"
+      },
+      {
+        "日期": "2026-07-12",
+        "點擊": "1",
+        "曝光": "37",
+        "點閱率": "2.7%",
+        "排名": "16.5"
+      },
+      {
+        "日期": "2026-07-13",
+        "點擊": "1",
+        "曝光": "28",
+        "點閱率": "3.57%",
+        "排名": "18.1"
+      },
+      {
+        "日期": "2026-07-14",
+        "點擊": "0",
+        "曝光": "35",
+        "點閱率": "0%",
+        "排名": "33.2"
+      },
+      {
+        "日期": "2026-07-15",
+        "點擊": "1",
+        "曝光": "23",
+        "點閱率": "4.35%",
+        "排名": "20.4"
+      },
+      {
+        "日期": "2026-07-16",
+        "點擊": "0",
+        "曝光": "28",
+        "點閱率": "0%",
+        "排名": "27.4"
+      },
+      {
+        "日期": "2026-07-17",
+        "點擊": "0",
+        "曝光": "16",
+        "點閱率": "0%",
+        "排名": "25.9"
+      },
+      {
+        "日期": "2026-07-18",
+        "點擊": "0",
+        "曝光": "30",
+        "點閱率": "0%",
+        "排名": "13.4"
+      },
+      {
+        "日期": "2026-07-19",
+        "點擊": "0",
+        "曝光": "21",
+        "點閱率": "0%",
+        "排名": "21.9"
+      },
+      {
+        "日期": "2026-07-20",
+        "點擊": "1",
+        "曝光": "28",
+        "點閱率": "3.57%",
+        "排名": "16.4"
+      },
+      {
+        "日期": "2026-07-21",
+        "點擊": "0",
+        "曝光": "33",
+        "點閱率": "0%",
+        "排名": "15.8"
+      },
+      {
+        "日期": "2026-07-22",
+        "點擊": "0",
+        "曝光": "59",
+        "點閱率": "0%",
+        "排名": "15.1"
+      },
+      {
+        "日期": "2026-07-23",
+        "點擊": "1",
+        "曝光": "80",
+        "點閱率": "1.25%",
+        "排名": "16.5"
+      },
+      {
+        "日期": "2026-07-24",
+        "點擊": "1",
+        "曝光": "87",
+        "點閱率": "1.15%",
+        "排名": "29"
+      },
+      {
+        "日期": "2026-07-25",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "14.7"
+      },
+      {
+        "日期": "2026-07-26",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "14"
+      },
+      {
+        "日期": "2026-07-27",
+        "點擊": "0",
+        "曝光": "10",
+        "點閱率": "0%",
+        "排名": "29.9"
+      },
+      {
+        "日期": "2026-07-28",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "日期": "2026-07-29",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "日期": "2026-07-30",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "83.3"
+      },
+      {
+        "日期": "2026-07-31",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "47"
+      },
+      {
+        "日期": "2026-08-01",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "47.8"
+      },
+      {
+        "日期": "2026-08-02",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "49.6"
+      },
+      {
+        "日期": "2026-08-03",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "88.5"
+      },
+      {
+        "日期": "2026-08-04",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "95.3"
+      },
+      {
+        "日期": "2026-08-05",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "29.5"
+      },
+      {
+        "日期": "2026-08-06",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "75"
+      },
+      {
+        "日期": "2026-08-07",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-08-08",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "89"
+      },
+      {
+        "日期": "2026-08-09",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "2.5"
+      },
+      {
+        "日期": "2026-08-10",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "48.5"
+      },
+      {
+        "日期": "2026-08-11",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "54.9"
+      },
+      {
+        "日期": "2026-08-12",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "74.2"
+      },
+      {
+        "日期": "2026-08-13",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "86.5"
+      },
+      {
+        "日期": "2026-08-14",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "88.7"
+      },
+      {
+        "日期": "2026-08-15",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "66.8"
+      },
+      {
+        "日期": "2026-08-16",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "79"
+      },
+      {
+        "日期": "2026-08-17",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "44.3"
+      },
+      {
+        "日期": "2026-08-18",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "82"
+      },
+      {
+        "日期": "2026-08-19",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "20.8"
+      },
+      {
+        "日期": "2026-08-20",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "48.1"
+      },
+      {
+        "日期": "2026-08-21",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "80.2"
+      },
+      {
+        "日期": "2026-08-22",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "97.3"
+      },
+      {
+        "日期": "2026-08-23",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "86"
+      },
+      {
+        "日期": "2026-08-24",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "89.7"
+      },
+      {
+        "日期": "2026-08-25",
+        "點擊": "1",
+        "曝光": "6",
+        "點閱率": "16.67%",
+        "排名": "64"
+      },
+      {
+        "日期": "2026-08-26",
+        "點擊": "1",
+        "曝光": "3",
+        "點閱率": "33.33%",
+        "排名": "52.7"
+      },
+      {
+        "日期": "2026-08-27",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "90.5"
+      },
+      {
+        "日期": "2026-08-28",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "日期": "2026-08-29",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "54.8"
+      },
+      {
+        "日期": "2026-08-30",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "37.4"
+      },
+      {
+        "日期": "2026-08-31",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-01",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-02",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "日期": "2026-09-03",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "32.2"
+      },
+      {
+        "日期": "2026-09-04",
+        "點擊": "1",
+        "曝光": "3",
+        "點閱率": "33.33%",
+        "排名": "5.3"
+      },
+      {
+        "日期": "2026-09-05",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "日期": "2026-09-06",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "36"
+      },
+      {
+        "日期": "2026-09-07",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "日期": "2026-09-08",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "4.5"
+      },
+      {
+        "日期": "2026-09-09",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "66.5"
+      },
+      {
+        "日期": "2026-09-10",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "91.5"
+      },
+      {
+        "日期": "2026-09-11",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "7.7"
+      },
+      {
+        "日期": "2026-09-12",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "日期": "2026-09-13",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "日期": "2026-09-14",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-15",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "6.8"
+      },
+      {
+        "日期": "2026-09-16",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-17",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "72.5"
+      },
+      {
+        "日期": "2026-09-18",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9.5"
+      },
+      {
+        "日期": "2026-09-19",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-20",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-21",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "日期": "2026-09-22",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-23",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-24",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "日期": "2026-09-25",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "30.6"
+      },
+      {
+        "日期": "2026-09-26",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "日期": "2026-09-27",
+        "點擊": "0",
+        "曝光": "0",
+        "點閱率": "",
+        "排名": ""
+      },
+      {
+        "日期": "2026-09-28",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "99"
+      },
+      {
+        "日期": "2026-09-29",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "86"
+      },
+      {
+        "日期": "2026-09-30",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "日期": "2026-10-01",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "67"
+      },
+      {
+        "日期": "2026-10-02",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "82"
+      },
+      {
+        "日期": "2026-10-03",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "90"
+      },
+      {
+        "日期": "2026-10-04",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "73"
+      }
+    ],
+    "queries": [
+      {
+        "熱門查詢項目": "costco membership calculator",
+        "點擊": "1",
+        "曝光": "11",
+        "點閱率": "9.09%",
+        "排名": "13.18"
+      },
+      {
+        "熱門查詢項目": "costco executive membership",
+        "點擊": "1",
+        "曝光": "4",
+        "點閱率": "25%",
+        "排名": "7.25"
+      },
+      {
+        "熱門查詢項目": "commute cost calculator",
+        "點擊": "0",
+        "曝光": "43",
+        "點閱率": "0%",
+        "排名": "60.79"
+      },
+      {
+        "熱門查詢項目": "latte factor calculator",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "熱門查詢項目": "costco executive membership calculator",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "10.5"
+      },
+      {
+        "熱門查詢項目": "upfront cost",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "66.33"
+      },
+      {
+        "熱門查詢項目": "annual cost savings calculator",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "97.5"
+      },
+      {
+        "熱門查詢項目": "commuting cost calculator",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "55.75"
+      },
+      {
+        "熱門查詢項目": "calculate commuting costs",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "59.75"
+      },
+      {
+        "熱門查詢項目": "calcular subida ipc nomina",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "68.25"
+      },
+      {
+        "熱門查詢項目": "車馬費行情",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "75.75"
+      },
+      {
+        "熱門查詢項目": "upfront purchase",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "81"
+      },
+      {
+        "熱門查詢項目": "充電樁一度電多少錢",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "92.25"
+      },
+      {
+        "熱門查詢項目": "costco calculator membership",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門查詢項目": "costco calculator",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "17"
+      },
+      {
+        "熱門查詢項目": "audit cost calculator",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "21.67"
+      },
+      {
+        "熱門查詢項目": "costco rewards calculator",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "23.33"
+      },
+      {
+        "熱門查詢項目": "upfront payment",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "69.33"
+      },
+      {
+        "熱門查詢項目": "commute calculator cost",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "70"
+      },
+      {
+        "熱門查詢項目": "commuting costs",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "78"
+      },
+      {
+        "熱門查詢項目": "充電樁電費",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "81.33"
+      },
+      {
+        "熱門查詢項目": "家用充電樁電費",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "maintenance savings calculator",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "86.33"
+      },
+      {
+        "熱門查詢項目": "cost vs value calculator",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "92"
+      },
+      {
+        "熱門查詢項目": "a few times a week, scott treats himself to a small latte from his favorite \ncoffee shop. each latte costs $3.55. if scott bought 15 lattes last month, \nhow much did he spend?",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7.5"
+      },
+      {
+        "熱門查詢項目": "does annual fee count towards minimum spend",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門查詢項目": "is it worth it calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "46"
+      },
+      {
+        "熱門查詢項目": "neuwagen wertverlust rechner",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "49.5"
+      },
+      {
+        "熱門查詢項目": "should you pay upfront fee on a loan",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "59.5"
+      },
+      {
+        "熱門查詢項目": "upfront costs",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "59.5"
+      },
+      {
+        "熱門查詢項目": "commuter cost calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "64.5"
+      },
+      {
+        "熱門查詢項目": "is costco executive worth it",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "65"
+      },
+      {
+        "熱門查詢項目": "calculate commute cost",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "66"
+      },
+      {
+        "熱門查詢項目": "cost of commuting per mile",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "69"
+      },
+      {
+        "熱門查詢項目": "paying an extra mortgage payment",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "70"
+      },
+      {
+        "熱門查詢項目": "cost of commute calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "74"
+      },
+      {
+        "熱門查詢項目": "worth the cost",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "elektroauto gesamtkosten rechner",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "86.5"
+      },
+      {
+        "熱門查詢項目": "worth cost",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "89"
+      },
+      {
+        "熱門查詢項目": "taux d'effort calcul",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "90.5"
+      },
+      {
+        "熱門查詢項目": "what am i worth calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "90.5"
+      },
+      {
+        "熱門查詢項目": "cost upfront",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "91"
+      },
+      {
+        "熱門查詢項目": "billed annually",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "95.5"
+      },
+      {
+        "熱門查詢項目": "recurring costs calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "98"
+      },
+      {
+        "熱門查詢項目": "7 a day",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "熱門查詢項目": "交通費",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "熱門查詢項目": "you're pleased to learn that your annual salary review has resulted in a \n\\[4\\%\\] raise. however, the inflation rate has also been \\[4\\%\\] over the \nsame timeframe. how does this affect your purchasing power? choose 1 \nanswer: a it increases your purchasing power. b it decreases your \npurchasing power. c it leaves your purchasing power unchanged.",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門查詢項目": "quel est le coût total de possession sur cinq ans d'une voiture électrique \nau luxembourg, assurance et recharge comprises ?",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門查詢項目": "通勤費計算",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "熱門查詢項目": "calculator+costco",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門查詢項目": "carte costco prix france",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門查詢項目": "costco executive reward break even 3250",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門查詢項目": "costco+calculus",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門查詢項目": "weekly groceries",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "14"
+      },
+      {
+        "熱門查詢項目": "coûts voiture électrique vs voiture essence calculateur",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "16"
+      },
+      {
+        "熱門查詢項目": "jährliche prozentsatz-kreditkarte",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "17"
+      },
+      {
+        "熱門查詢項目": "electric car charging cost per mile",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門查詢項目": "jährliche pendelkosten auto berechnen pendlerkosten deutschland wie \nberechnen pendelkosten auto",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門查詢項目": "what is commuting cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門查詢項目": "total cost of ownership electric car vs gas",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "21"
+      },
+      {
+        "熱門查詢項目": "upfront charge",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "24"
+      },
+      {
+        "熱門查詢項目": "audit fee calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "32"
+      },
+      {
+        "熱門查詢項目": "costco executive membership break even",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "36"
+      },
+      {
+        "熱門查詢項目": "what is upfront cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "36"
+      },
+      {
+        "熱門查詢項目": "how much to make costco executive worth it",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "39"
+      },
+      {
+        "熱門查詢項目": "costco membership executive how much to break even",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "41"
+      },
+      {
+        "熱門查詢項目": "信用卡回饋計算機",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "43"
+      },
+      {
+        "熱門查詢項目": "should i rent or buy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "44"
+      },
+      {
+        "熱門查詢項目": "commute gas cost calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "46"
+      },
+      {
+        "熱門查詢項目": "up-front cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "48"
+      },
+      {
+        "熱門查詢項目": "gas vs electric vehicle calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "50"
+      },
+      {
+        "熱門查詢項目": "installment price",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "50"
+      },
+      {
+        "熱門查詢項目": "cost of commuting calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "51"
+      },
+      {
+        "熱門查詢項目": "cost to commute calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "52"
+      },
+      {
+        "熱門查詢項目": "commute calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "55"
+      },
+      {
+        "熱門查詢項目": "high upfront costs",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "56"
+      },
+      {
+        "熱門查詢項目": "is it better to pay bills monthly or yearly",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "57"
+      },
+      {
+        "熱門查詢項目": "average cost of transportation per month",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "58"
+      },
+      {
+        "熱門查詢項目": "cost to commute",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "59"
+      },
+      {
+        "熱門查詢項目": "what percent of costco members are executive",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "61"
+      },
+      {
+        "熱門查詢項目": "信用卡年費",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "62"
+      },
+      {
+        "熱門查詢項目": "commuting calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "64"
+      },
+      {
+        "熱門查詢項目": "how much does worthpoint cost per month",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "64"
+      },
+      {
+        "熱門查詢項目": "member cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "64"
+      },
+      {
+        "熱門查詢項目": "commuting cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "65"
+      },
+      {
+        "熱門查詢項目": "transportation cost calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "66"
+      },
+      {
+        "熱門查詢項目": "kilometergeld rechner",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "68"
+      },
+      {
+        "熱門查詢項目": "what is the costco executive membership",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "68"
+      },
+      {
+        "熱門查詢項目": "how much will a",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "69"
+      },
+      {
+        "熱門查詢項目": "reembolso o cashback es un tipo de bono que devuelve",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "69"
+      },
+      {
+        "熱門查詢項目": "up front fee",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "70"
+      },
+      {
+        "熱門查詢項目": "how much should i pay for",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "74"
+      },
+      {
+        "熱門查詢項目": "calculating worth",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "75"
+      },
+      {
+        "熱門查詢項目": "member cost burden index",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "75"
+      },
+      {
+        "熱門查詢項目": "upfront fee meaning",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "75"
+      },
+      {
+        "熱門查詢項目": "commute expense calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "76"
+      },
+      {
+        "熱門查詢項目": "how much should this cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "77"
+      },
+      {
+        "熱門查詢項目": "how much would",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "79"
+      },
+      {
+        "熱門查詢項目": "annual billing",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "80"
+      },
+      {
+        "熱門查詢項目": "how much this will cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "81"
+      },
+      {
+        "熱門查詢項目": "cost of commute",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "82"
+      },
+      {
+        "熱門查詢項目": "how much would that be worth",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "82"
+      },
+      {
+        "熱門查詢項目": "gas or electric car calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "how much does my commute cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "installment 0%",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "making double payments on mortgage",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "83"
+      },
+      {
+        "熱門查詢項目": "total cost of ownership ev vs gas",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "84"
+      },
+      {
+        "熱門查詢項目": "true cost of commuting",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "85"
+      },
+      {
+        "熱門查詢項目": "calcul taux effort",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "86"
+      },
+      {
+        "熱門查詢項目": "how do i know how much to pay",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "86"
+      },
+      {
+        "熱門查詢項目": "double mortgage payment",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "87"
+      },
+      {
+        "熱門查詢項目": "how much would you pay for",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "87"
+      },
+      {
+        "熱門查詢項目": "maintenance fee calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "87"
+      },
+      {
+        "熱門查詢項目": "calcul taux d'effort",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "88"
+      },
+      {
+        "熱門查詢項目": "how much my",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "88"
+      },
+      {
+        "熱門查詢項目": "true value calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "88"
+      },
+      {
+        "熱門查詢項目": "abonnement annuel",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "90"
+      },
+      {
+        "熱門查詢項目": "how much would it take",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "92"
+      },
+      {
+        "熱門查詢項目": "0 kosten",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "93"
+      },
+      {
+        "熱門查詢項目": "simulateur tco voiture",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "93"
+      },
+      {
+        "熱門查詢項目": "零卡0利率",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "93"
+      },
+      {
+        "熱門查詢項目": "how much would this cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "94"
+      },
+      {
+        "熱門查詢項目": "mieten oder kaufen rechner",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "94"
+      },
+      {
+        "熱門查詢項目": "elektroauto unterhaltskosten",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "95"
+      },
+      {
+        "熱門查詢項目": "what does billed annually mean",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "95"
+      },
+      {
+        "熱門查詢項目": "make extra mortgage payments",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "96"
+      },
+      {
+        "熱門查詢項目": "simulador alquiler",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "96"
+      },
+      {
+        "熱門查詢項目": "分期 0 利率",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "96"
+      },
+      {
+        "熱門查詢項目": "effektiver jahreszins rechner",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "98"
+      },
+      {
+        "熱門查詢項目": "cost of calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "99"
+      },
+      {
+        "熱門查詢項目": "paiement mensuel",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "100"
+      },
+      {
+        "熱門查詢項目": "true cost calculator",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "100"
+      },
+      {
+        "熱門查詢項目": "kfz steuerklassen",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "105"
+      }
+    ],
+    "pages": [
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/costco-membership/",
+        "點擊": "3",
+        "曝光": "196",
+        "點閱率": "1.53%",
+        "排名": "10.32"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/",
+        "點擊": "2",
+        "曝光": "120",
+        "點閱率": "1.67%",
+        "排名": "48.38"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/is-costco-executive-membership-worth-it/",
+        "點擊": "1",
+        "曝光": "13",
+        "點閱率": "7.69%",
+        "排名": "6.46"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/costco-membership",
+        "點擊": "1",
+        "曝光": "12",
+        "點閱率": "8.33%",
+        "排名": "9.58"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/",
+        "點擊": "1",
+        "曝光": "10",
+        "點閱率": "10%",
+        "排名": "2.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/latte-factor/",
+        "點擊": "1",
+        "曝光": "6",
+        "點閱率": "16.67%",
+        "排名": "8.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/installment-true-apr/",
+        "點擊": "1",
+        "曝光": "2",
+        "點閱率": "50%",
+        "排名": "6"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/commute-cost/",
+        "點擊": "0",
+        "曝光": "175",
+        "點閱率": "0%",
+        "排名": "32.86"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/latte-factor/",
+        "點擊": "0",
+        "曝光": "36",
+        "點閱率": "0%",
+        "排名": "9.72"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/ev-vs-gas/",
+        "點擊": "0",
+        "曝光": "32",
+        "點閱率": "0%",
+        "排名": "12.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/installment-true-apr/",
+        "點擊": "0",
+        "曝光": "21",
+        "點閱率": "0%",
+        "排名": "14.24"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/annual-fee-card-breakeven",
+        "點擊": "0",
+        "曝光": "20",
+        "點閱率": "0%",
+        "排名": "8.05"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/contact/",
+        "點擊": "0",
+        "曝光": "19",
+        "點閱率": "0%",
+        "排名": "3.21"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/subscription-audit/",
+        "點擊": "0",
+        "曝光": "19",
+        "點閱率": "0%",
+        "排名": "11.68"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/is-costco-executive-membership-worth-it/",
+        "點擊": "0",
+        "曝光": "18",
+        "點閱率": "0%",
+        "排名": "23.89"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/upfront-fees-financing-cost",
+        "點擊": "0",
+        "曝光": "18",
+        "點閱率": "0%",
+        "排名": "54.72"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/commute-cost",
+        "點擊": "0",
+        "曝光": "17",
+        "點閱率": "0%",
+        "排名": "33.82"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/upfront-fees-financing-cost/",
+        "點擊": "0",
+        "曝光": "16",
+        "點閱率": "0%",
+        "排名": "57.38"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/about/",
+        "點擊": "0",
+        "曝光": "15",
+        "點閱率": "0%",
+        "排名": "4.13"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/home-vs-public-ev-charging-cost/",
+        "點擊": "0",
+        "曝光": "14",
+        "點閱率": "0%",
+        "排名": "87.79"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/changelog/",
+        "點擊": "0",
+        "曝光": "13",
+        "點閱率": "0%",
+        "排名": "3.69"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/annual-fee-card-breakeven/",
+        "點擊": "0",
+        "曝光": "11",
+        "點閱率": "0%",
+        "排名": "7.45"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/rent-vs-buy/",
+        "點擊": "0",
+        "曝光": "10",
+        "點閱率": "0%",
+        "排名": "5.1"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/debt-strategy/",
+        "點擊": "0",
+        "曝光": "10",
+        "點閱率": "0%",
+        "排名": "6.9"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/ev-vs-gas/",
+        "點擊": "0",
+        "曝光": "10",
+        "點閱率": "0%",
+        "排名": "8.7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/ev-vs-gas-total-cost/",
+        "點擊": "0",
+        "曝光": "10",
+        "點閱率": "0%",
+        "排名": "14.4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/privacy/",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "5.89"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/cashback-breakeven",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "11.11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/about/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "4.12"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/budget-builder/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "4.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/contact/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "6.12"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/changelog/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "6.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/disclaimer/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "6.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/cashback-breakeven/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/commute-cost/",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "40.88"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/terms/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/privacy/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "6.14"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/rent-vs-buy-guide/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "13"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/dti-calculator/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "23.57"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/dti-calculator/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "54.29"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/monthly-vs-annual-subscription/",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "70"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/compound-growth/",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "1.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/contact",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "3.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/subscription-audit/",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "4.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power/",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "23.17"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/extra-mortgage-payments-guide/",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "67.83"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/latte-factor/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "2.8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "4.2"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/car-affordability/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "4.6"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/costco-membership/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "6.8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/costco-math/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "7.4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/is-costco-executive-membership-worth-it/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "10.8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/zero-interest-installments-truth/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "22.4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/monthly-vs-annual-subscription/",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "41.4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/disclaimer/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "1.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "2.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/changelog",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "3.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/mortgage-payoff/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "5.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/credit-card-payoff/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/subscription-creep/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/zero-interest-installments-truth/",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/pay-raise-vs-inflation-purchasing-power",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "14.75"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/debt-strategy/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "1.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "2.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/compound-growth/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/ev-vs-gas-total-cost/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "3.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/ev-vs-gas/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "6.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/dti-calculator/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "6.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/budget-builder/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/privacy",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "7.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/zero-interest-installments-truth",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/ev-vs-gas-total-cost/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "22.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/is-costco-executive-membership-worth-it/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "28.33"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/zero-interest-installments-truth/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "35.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/rent-vs-buy/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "35.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/pay-raise-vs-inflation-purchasing-power/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "48"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/full-commute-cost-including-time/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "57.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/bnpl-vs-credit-card-installments/",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "86.67"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/snowball-vs-avalanche/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/terms",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/budget-with-irregular-income/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "3.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/budget-builder/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "3.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/subscription-audit/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/credit-card-payoff",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/privacy/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "5.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/cashback-caps-real-reward-rate/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "5.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/true-hourly-wage-after-commuting-work-expenses/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "6"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/cashback-breakeven/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/is-costco-executive-membership-worth-it/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/how-to-calculate-dti/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/commute-cost",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/ev-vs-gas-total-cost/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/dti-calculator",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/ev-vs-gas",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/subscription-creep",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/installment-true-apr",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/full-commute-cost-including-time",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/ev-vs-gas/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "14.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/subscription-creep/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "15"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/commute-cost/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "38"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/subscription-audit",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "46"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/true-cost-of-car-ownership/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "49.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/true-cost-of-car-ownership/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "53.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/pay-raise-vs-inflation-purchasing-power",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "69"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/upfront-fees-financing-cost/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "71.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/zero-interest-installments-truth/",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "94.5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/salary-converter",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/cashback-breakeven",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/debt-strategy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/monthly-vs-annual-subscription/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/zero-interest-installments-truth/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/upfront-fees-financing-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/rent-vs-buy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/commute-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/installment-true-apr/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/cashback-caps-real-reward-rate/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/monthly-vs-annual-subscription/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/ev-vs-gas-total-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/privacy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/how-compound-growth-works/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/credit-card-payoff/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/credit-card-payoff/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "4"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/credit-card-payoff",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/terms",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/rent-vs-buy/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "6"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/credit-card-minimum-payment-trap/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/installment-true-apr/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/cashback-caps-real-reward-rate",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/tools/salary-converter/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/tools/rent-vs-buy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/disclaimer/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/terms/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/car-affordability/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/installment-true-apr",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/commute-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/commute-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/changelog/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/cashback-breakeven/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/credit-card-payoff/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/tools/mortgage-payoff",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/ev-vs-gas-total-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/terms/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/work-from-home-vs-commuting-hidden-costs/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/pay-raise-vs-inflation-purchasing-power/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/ev-vs-gas-total-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "11"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/commute-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/annual-fee-card-breakeven/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "17"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/full-commute-cost-including-time",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/en/home-vs-public-ev-charging-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "20"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/new-vs-used-car-total-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "29"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/zh/annual-fee-card-breakeven/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "62"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/es/cashback-caps-real-reward-rate/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "69"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/new-vs-used-car-total-cost/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "70"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/ev-vs-gas",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "85"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/ev-vs-gas/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "88"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/fr/tools/ev-vs-gas",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "93"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/rent-vs-buy",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "94"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/ev-vs-gas-total-cost",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "95"
+      },
+      {
+        "熱門網頁": "https://worthcalc.win/de/tools/installment-true-apr/",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "98"
+      }
+    ],
+    "countries": [
+      {
+        "國家/地區": "美國",
+        "點擊": "4",
+        "曝光": "412",
+        "點閱率": "0.97%",
+        "排名": "28.31"
+      },
+      {
+        "國家/地區": "台灣",
+        "點擊": "2",
+        "曝光": "84",
+        "點閱率": "2.38%",
+        "排名": "27.68"
+      },
+      {
+        "國家/地區": "加拿大",
+        "點擊": "1",
+        "曝光": "68",
+        "點閱率": "1.47%",
+        "排名": "15.99"
+      },
+      {
+        "國家/地區": "越南",
+        "點擊": "1",
+        "曝光": "36",
+        "點閱率": "2.78%",
+        "排名": "38.47"
+      },
+      {
+        "國家/地區": "法國",
+        "點擊": "1",
+        "曝光": "23",
+        "點閱率": "4.35%",
+        "排名": "34.87"
+      },
+      {
+        "國家/地區": "西班牙",
+        "點擊": "1",
+        "曝光": "18",
+        "點閱率": "5.56%",
+        "排名": "33.17"
+      },
+      {
+        "國家/地區": "英國",
+        "點擊": "0",
+        "曝光": "34",
+        "點閱率": "0%",
+        "排名": "31.03"
+      },
+      {
+        "國家/地區": "德國",
+        "點擊": "0",
+        "曝光": "21",
+        "點閱率": "0%",
+        "排名": "32.71"
+      },
+      {
+        "國家/地區": "巴西",
+        "點擊": "0",
+        "曝光": "11",
+        "點閱率": "0%",
+        "排名": "19.36"
+      },
+      {
+        "國家/地區": "墨西哥",
+        "點擊": "0",
+        "曝光": "11",
+        "點閱率": "0%",
+        "排名": "46.64"
+      },
+      {
+        "國家/地區": "澳洲",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "18.67"
+      },
+      {
+        "國家/地區": "菲律賓",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "59.11"
+      },
+      {
+        "國家/地區": "印度",
+        "點擊": "0",
+        "曝光": "9",
+        "點閱率": "0%",
+        "排名": "62.56"
+      },
+      {
+        "國家/地區": "印尼",
+        "點擊": "0",
+        "曝光": "8",
+        "點閱率": "0%",
+        "排名": "44.38"
+      },
+      {
+        "國家/地區": "馬來西亞",
+        "點擊": "0",
+        "曝光": "7",
+        "點閱率": "0%",
+        "排名": "47.29"
+      },
+      {
+        "國家/地區": "荷蘭",
+        "點擊": "0",
+        "曝光": "6",
+        "點閱率": "0%",
+        "排名": "18.5"
+      },
+      {
+        "國家/地區": "日本",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "4.8"
+      },
+      {
+        "國家/地區": "巴基斯坦",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "31.8"
+      },
+      {
+        "國家/地區": "泰國",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "35.6"
+      },
+      {
+        "國家/地區": "烏克蘭",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "25.5"
+      },
+      {
+        "國家/地區": "俄羅斯",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "33.75"
+      },
+      {
+        "國家/地區": "摩洛哥",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "46.25"
+      },
+      {
+        "國家/地區": "土耳其",
+        "點擊": "0",
+        "曝光": "4",
+        "點閱率": "0%",
+        "排名": "61"
+      },
+      {
+        "國家/地區": "中國",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "國家/地區": "孟加拉",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "50.33"
+      },
+      {
+        "國家/地區": "阿爾及利亞",
+        "點擊": "0",
+        "曝光": "3",
+        "點閱率": "0%",
+        "排名": "59"
+      },
+      {
+        "國家/地區": "以色列",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "4.5"
+      },
+      {
+        "國家/地區": "羅馬尼亞",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "國家/地區": "新加坡",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "國家/地區": "南韓",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9.5"
+      },
+      {
+        "國家/地區": "奈及利亞",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "9.5"
+      },
+      {
+        "國家/地區": "比利時",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "國家/地區": "阿根廷",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "26"
+      },
+      {
+        "國家/地區": "義大利",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "38"
+      },
+      {
+        "國家/地區": "香港",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "39.5"
+      },
+      {
+        "國家/地區": "約旦",
+        "點擊": "0",
+        "曝光": "2",
+        "點閱率": "0%",
+        "排名": "63.5"
+      },
+      {
+        "國家/地區": "瑞士",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "1"
+      },
+      {
+        "國家/地區": "玻利維亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "國家/地區": "捷克",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "國家/地區": "秘魯",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "2"
+      },
+      {
+        "國家/地區": "匈牙利",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "3"
+      },
+      {
+        "國家/地區": "阿拉伯聯合大公國",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "國家/地區": "厄瓜多",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "國家/地區": "巴布亞紐幾內亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "5"
+      },
+      {
+        "國家/地區": "亞美尼亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "7"
+      },
+      {
+        "國家/地區": "貝南",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "國家/地區": "白俄羅斯",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "國家/地區": "希臘",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "國家/地區": "盧森堡",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "國家/地區": "斯洛維尼亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "8"
+      },
+      {
+        "國家/地區": "哥倫比亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "國家/地區": "哥斯大黎加",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "國家/地區": "尚比亞",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "9"
+      },
+      {
+        "國家/地區": "巴貝多",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "國家/地區": "瓜地洛普",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "國家/地區": "伊拉克",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "國家/地區": "卡達",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "國家/地區": "瑞典",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "10"
+      },
+      {
+        "國家/地區": "奧地利",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "國家/地區": "埃及",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "12"
+      },
+      {
+        "國家/地區": "沙烏地阿拉伯",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "32"
+      },
+      {
+        "國家/地區": "紐西蘭",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "53"
+      },
+      {
+        "國家/地區": "南非",
+        "點擊": "0",
+        "曝光": "1",
+        "點閱率": "0%",
+        "排名": "99"
+      }
+    ],
+    "devices": [
+      {
+        "裝置": "行動裝置",
+        "點擊": "7",
+        "曝光": "279",
+        "點閱率": "2.51%",
+        "排名": "13.28"
+      },
+      {
+        "裝置": "桌面",
+        "點擊": "3",
+        "曝光": "569",
+        "點閱率": "0.53%",
+        "排名": "36.43"
+      },
+      {
+        "裝置": "平板電腦",
+        "點擊": "0",
+        "曝光": "5",
+        "點閱率": "0%",
+        "排名": "20.2"
+      }
+    ],
+    "appearance": [],
+    "filters": [
+      {
+        "篩選器": "搜尋類型",
+        "值": "網路"
+      },
+      {
+        "篩選器": "日期",
+        "值": "前 3 個月"
+      }
+    ]
+  },
+  "limitations": [
+    "Independent page/query/country tables cannot be joined as query-to-page evidence.",
+    "Three-month history spans earlier noindex and content policies; eligibility must use current crawl.",
+    "Query counts can omit anonymized queries and need not sum to chart totals.",
+    "No attribution or post-change improvement proven."
+  ]
+}

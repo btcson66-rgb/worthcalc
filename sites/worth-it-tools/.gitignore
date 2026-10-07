@@ -27,3 +27,15 @@ Thumbs.db
 # OG 圖產生器的中間產物（scripts/generate-og-images.mjs 每次會重寫）
 .og-data-dist/
 tsconfig.ogdata.json
+
+# SEO cross audit: retain raw public responses and screenshots locally
+docs/seo/evidence/**/responses/
+docs/seo/evidence/**/*.png
+docs/seo/evidence/**/*.zip
+docs/seo/evidence/**/*.pdf
+__pycache__/
+
+# Keep verbose crawl graphs and test console logs local
+docs/seo/evidence/**/*.log
+docs/seo/evidence/**/links.json
+docs/seo/evidence/**/indexability.csv

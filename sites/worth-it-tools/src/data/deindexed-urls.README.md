@@ -14,5 +14,5 @@
 `locales` now also lists `hi`, `ar` and `en`; see `rebuildDecision` in the JSON.
 
 - `en`: built, `noindex,follow`, not in the sitemap, no hreflang. Kept for human visitors via the language switcher.
-- `es`, `fr`, `de`, `hi`, `ar`: no routes are built any more (`LOCALES`, `CORE_LOCALES` and `CONTENT_LOCALES` in `src/consts.ts` list only `en` and `zh`). They remain in `locales` so the check scripts, which skip soft-deindexed URLs, keep skipping them. Their source files are dormant until P1b.
+- `es`, `fr`, `de`, `hi`, `ar`: no routes are built any more (`LOCALES`, `CORE_LOCALES` and `CONTENT_LOCALES` in `src/consts.ts` list only `en` and `zh`). They remain in `locales` so the check scripts, which skip soft-deindexed URLs, keep skipping them. Their source files, data and translations were deleted in P1b (2026-10-15); restore them from git history to bring a locale back.
 - Rollback for English indexing: remove `en` from `locales` and rebuild.

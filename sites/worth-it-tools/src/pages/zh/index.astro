@@ -1,14 +1,35 @@
 ---
-import HomePage from '../../components/HomePage.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { homeContent, homeJsonLd } from '../../lib/home';
-import { getFeaturedCalculators } from '../../lib/catalog';
-
-const locale = 'zh';
-const content = homeContent[locale];
-const featured = await getFeaturedCalculators(locale);
+/*
+ * /zh/ is a redirect stub. The Traditional Chinese homepage is `/`
+ * (SEO rebuild P1, 2026-10-15), so the same-language alias must not compete with it.
+ *
+ * Signals, all pointing the same way: `<meta http-equiv="refresh">` sends a
+ * visitor to `/` immediately, `rel=canonical` names `/`, and `noindex,follow`
+ * keeps the alias itself out of the index while letting a crawler follow the
+ * link. It is deliberately NOT built on BaseLayout: no header, no analytics, no
+ * AdSense loader (an ad request on a page that exists only to redirect would be
+ * an ad on an empty page), no hreflang, and no structured data. It is not in the
+ * sitemap (astro.config.mjs) and no internal link points at it.
+ *
+ * Static hosting cannot send a real 301, which is why the meta refresh exists.
+ */
+const origin = (Astro.site?.origin ?? 'https://worthcalc.win').replace(/\/$/, '');
+const target = `${origin}/`;
 ---
 
-<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site, featured)} entity={content.entity}>
-  <HomePage locale={locale} />
-</BaseLayout>
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WorthCalc 首頁</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={target} />
+    <meta http-equiv="refresh" content="0; url=/" />
+    <meta name="theme-color" content="#0f9e95" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <p>WorthCalc 首頁已移到 <a href="/">worthcalc.win</a>，正在轉址。</p>
+  </body>
+</html>

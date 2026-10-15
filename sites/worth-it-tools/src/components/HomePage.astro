@@ -40,12 +40,12 @@ const showMoneyHub = (BRIEF_LOCALES as readonly string[]).includes(locale);
 const moneyHub = showMoneyHub ? { href: moneyHubPath(locale), label: briefCopy(locale).hubTitle } : null;
 const secondaryTopics = TOPIC_IDS.filter((topic) => !PRIMARY_TOPIC_IDS.includes(topic));
 
+// Since the 2026-10-15 rebuild this component only renders the English homepage
+// (/en/, noindex, kept for human visitors). The Chinese homepage is `/`
+// (HomePageTw.astro); es/fr/de no longer exist.
 const homeLinks = [
-  { href: '/', label: 'English homepage / 英文首頁' },
-  { href: '/zh/', label: '中文首頁' },
-  { href: '/es/', label: 'Página de inicio en español' },
-  { href: '/fr/', label: 'Accueil français' },
-  { href: '/de/', label: 'Deutsche Startseite' },
+  { href: '/', label: '中文首頁 / Traditional Chinese (Taiwan) homepage' },
+  { href: '/en/', label: 'English homepage' },
 ].filter((link) => link.href !== Astro.url.pathname);
 
 const zhDecisionLinks = locale === 'zh'

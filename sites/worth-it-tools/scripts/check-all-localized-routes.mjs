@@ -3,7 +3,11 @@ import { join, relative, resolve, sep } from 'node:path';
 import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// 2026-10-15 rebuild: es, fr and de are retired (no routes are built) and en is
+// noindex. Only en and zh have directories to walk. The frozen-locale rules further
+// down stay in place (a route that has some but not all of es/fr/de would still be
+// flagged) and are simply never triggered while those locales do not exist.
+const locales = ['en', 'zh'];
 // en + zh are required for normal new routes. es/fr/de are frozen as of
 // 2026-07-25 (see the "i18n expansion policy" section in README.md). Package 001
 // is an approved editorial exception: its manifest intentionally contains a
@@ -191,6 +195,9 @@ const approvedStagedEditorialRoutes = new Set([
 ]);
 const frozenLocales = ['es', 'fr', 'de'];
 const expectedLang = { en: 'en', zh: 'zh-TW', es: 'es', fr: 'fr', de: 'de' };
+// /zh/ is a redirect stub for the homepage `/` (zh-Hant-TW, outside this walk). It is
+// not a localized page, so it is excluded from route discovery and from the page checks.
+const isRedirectStub = (html) => /<meta http-equiv="refresh"/i.test(html) && /<meta name="robots" content="noindex/i.test(html);
 const hreflangFor = { en: 'en', zh: 'zh-TW', es: 'es', fr: 'fr', de: 'de' };
 const sitemapFile = join(dist, 'sitemap-0.xml');
 const sitemap = existsSync(sitemapFile) ? readFileSync(sitemapFile, 'utf8') : '';
@@ -217,6 +224,7 @@ for (const locale of locales) {
     continue;
   }
   for (const file of walkHtml(localeDir)) {
+    if (isRedirectStub(readFileSync(file, 'utf8'))) continue;
     localizedPages += 1;
     const rel = relative(localeDir, file).split(sep).join('/');
     const route = rel === 'index.html' ? '' : rel.replace(/\/index\.html$/, '');
@@ -235,13 +243,12 @@ for (const { locale, route, file } of pages) {
   if (!html.includes(`lang="${expectedLang[locale]}"`)) failures.push(`/${locale}/${route}: wrong html lang`);
   if (!html.includes('rel="canonical"')) failures.push(`/${locale}/${route}: missing canonical`);
 
-  const path = locale === 'en' && route === '' ? '' : `${locale}/${route}${route ? '/' : ''}`;
+  const path = `${locale}/${route}${route ? '/' : ''}`;
   const url = `https://worthcalc.win/${path}`;
-  // /en/ is a compatibility alias for the canonical root homepage. A
-  // soft-deindexed German route is intentionally outside the hreflang cluster.
-  const compatibilityDefault = locale === 'en' && route === '';
+  // en is entirely soft-deindexed (noindex, no hreflang cluster); a soft-deindexed
+  // route is intentionally outside the hreflang cluster.
   const softDeindexed = isSoftDeindexedUrl(url);
-  const expectedHreflangs = compatibilityDefault || softDeindexed
+  const expectedHreflangs = softDeindexed
     ? []
     : expectedHreflangsFor(
       url,
@@ -252,7 +259,7 @@ for (const { locale, route, file } of pages) {
   for (const tag of expectedHreflangs) {
     if (!html.includes(`hreflang="${tag}"`)) failures.push(`/${locale}/${route}: missing hreflang=${tag}`);
   }
-  if (!compatibilityDefault && !softDeindexed && !html.includes('hreflang="x-default"')) {
+  if (!softDeindexed && !html.includes('hreflang="x-default"')) {
     failures.push(`/${locale}/${route}: missing hreflang=x-default`);
   }
 
@@ -283,6 +290,8 @@ for (const { locale, route, file } of pages) {
 // Route-level coverage rules.
 let enZhOnlyRoutes = 0;
 for (const [route, present] of routes) {
+  // The Chinese homepage is `/` (outside locale directories); /en/ alone is expected.
+  if (route === '') continue;
   const isBilingualGuideRoute = route.startsWith('guides/');
   // Money briefs are market-native: a Taiwan tax brief has no English reader,
   // a US tax brief no Traditional Chinese one. [slug].astro derives hreflang
@@ -312,6 +321,6 @@ if (failures.length) {
 
 console.log(
   `All localized routes check passed: ${routes.size} logical routes, ${localizedPages} localized pages; ` +
-    `${routes.size - enZhOnlyRoutes} fully five-language, ${enZhOnlyRoutes} en+zh only (i18n freeze, see README). ` +
-    'Canonical, indexable hreflang and sitemap coverage complete; soft-deindexed German routes are excluded as configured.',
+    `${routes.size} routes across en and zh (${enZhOnlyRoutes} outside the staged-editorial allow-list). ` +
+    'Canonical, indexable hreflang and sitemap coverage complete; every /en/ route is soft-deindexed (noindex, no sitemap, no hreflang) as configured; es/fr/de/hi/ar are retired.',
 );

@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -74,7 +75,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { repairCost: 220, remainingMonths: 18, currentResaleLater: 60, tradeInNow: 220, newPhonePrice: 850, upgradeFees: 40, transferCost: 25, currentPlanMonthly: 15, newPlanMonthly: 25, newHoldingMonths: 36, newResaleLater: 220 }, copy: { heading: 'Monatsrechner: Smartphone behalten oder wechseln', intro: 'Normieren Sie Haltedauern und vergleichen Sie Gerät plus gleichartige Tarife.', repairCost: 'Reparatur und Diagnose heute', remainingMonths: 'Nutzbare Monate nach Reparatur', currentResaleLater: 'Altgerätewert nach dem Behalten', tradeInNow: 'Garantierter Ankauf heute', newPhonePrice: 'Gesamtpreis des neuen Smartphones', upgradeFees: 'Aktivierung/Zubehör/Wechsel', transferCost: 'Datenumzug und Einrichtung', currentPlanMonthly: 'Heutiger Tarif pro Monat', newPlanMonthly: 'Neuer Tarif pro Monat', newHoldingMonths: 'Haltedauer des neuen Geräts', newResaleLater: 'Späterer Restwert des neuen Geräts', keepDeviceMonthly: 'Behalten: Gerät/Monat', upgradeDeviceMonthly: 'Wechsel: Gerät/Monat', keepFullMonthly: 'Behalten: gesamt/Monat', upgradeFullMonthly: 'Wechsel: gesamt/Monat', breakEvenTradeIn: 'Ankauf für den Gleichstand', verdictKeep: 'Behalten ist monatlich günstiger um', verdictUpgrade: 'Wechsel ist monatlich günstiger um', privacy: 'Planungsmodell. Keine Ausfall-, Ankauf-, Gutschrift- oder Update-Prognose.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = phoneUpgradeGuides[locale]!;

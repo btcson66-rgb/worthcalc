@@ -1,13 +1,19 @@
-import { CONTENT_LOCALES, CORE_LOCALES, DEFAULT_LOCALE, type ContentLocale } from '../consts';
+import { CONTENT_LOCALES, CORE_LOCALES, DEFAULT_LOCALE, HOME_LOCALE, type ContentLocale } from '../consts';
 import { ui, type UIKey } from './ui';
 
-/** Extract the active locale from a URL pathname (/en/..., /zh/...). */
+/**
+ * Extract the active locale from a URL pathname (/en/..., /zh/...).
+ *
+ * An unprefixed path (`/`, `/404`) belongs to HOME_LOCALE: the root of the site
+ * is the Traditional Chinese homepage, so the header, footer and 404 shell
+ * around it must be Chinese too.
+ */
 export function getLocaleFromUrl(url: URL): ContentLocale {
   const [, maybeLocale] = url.pathname.split('/');
   if ((CONTENT_LOCALES as string[]).includes(maybeLocale)) {
     return maybeLocale as ContentLocale;
   }
-  return DEFAULT_LOCALE;
+  return HOME_LOCALE;
 }
 
 /** Return a translator bound to a locale, with fallback to the default locale. */
@@ -22,7 +28,8 @@ export function useTranslations(locale: ContentLocale) {
 /**
  * Build a locale-prefixed, absolute (site-relative) path.
  * `localizedPath('zh', '/tools/word-counter')` -> '/zh/tools/word-counter/'
- * `localizedPath('en', '/')` -> '/'
+ * `localizedPath('zh', '/')` -> '/'   (HOME_LOCALE's homepage is the site root)
+ * `localizedPath('en', '/')` -> '/en/'
  *
  * The trailing slash is mandatory: the site is built with
  * `build.format: 'directory'`, so the host 301-redirects every slashless
@@ -33,16 +40,16 @@ export function useTranslations(locale: ContentLocale) {
  */
 export function localizedPath(locale: ContentLocale, path = '/'): string {
   const clean = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
-  if (clean === '') return locale === DEFAULT_LOCALE ? '/' : `/${locale}/`;
+  if (clean === '') return locale === HOME_LOCALE ? '/' : `/${locale}/`;
   return `/${locale}${clean}/`;
 }
 
 /**
- * Link to a route in the complete five-language site shell. Keeping this
- * helper central makes any future staged locale release explicit.
+ * Link to a route in the built site shell (en and zh). A locale that has no
+ * routes falls back to HOME_LOCALE rather than to a URL that would 404.
  */
 export function localizedCorePath(locale: ContentLocale, path = '/'): string {
-  const coreLocale = (CORE_LOCALES as readonly string[]).includes(locale) ? locale : DEFAULT_LOCALE;
+  const coreLocale = (CORE_LOCALES as readonly string[]).includes(locale) ? locale : HOME_LOCALE;
   return localizedPath(coreLocale, path);
 }
 
@@ -55,7 +62,7 @@ export function switchLocalePath(url: URL, target: ContentLocale): string {
   if ((CONTENT_LOCALES as string[]).includes(segments[0])) {
     segments.shift();
   }
-  if (segments.length === 0) return target === DEFAULT_LOCALE ? '/' : `/${target}/`;
+  if (segments.length === 0) return target === HOME_LOCALE ? '/' : `/${target}/`;
   return `/${[target, ...segments].join('/')}/`;
 }
 

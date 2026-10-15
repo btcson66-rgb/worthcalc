@@ -3,7 +3,10 @@ import { join, resolve } from 'node:path';
 import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// 2026-10-15 rebuild: only en (noindex) and zh have routes; es/fr/de are retired.
+// `hreflangs` keeps the retired tags so the "advertises soft-deindexed hreflang"
+// assertion still proves no page names them.
+const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const pairs = {
   'mortgage-payoff': 'extra-mortgage-payments-guide',
@@ -62,4 +65,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Growth release check passed: 45 tools + 45 articles, indexable hreflang/canonical/sitemap coverage, one H1, calculator actions, and inflation block.');
+console.log(`Growth release check passed: ${Object.keys(pairs).length} tool/article pairs x ${locales.length} built locales, canonical/hreflang/sitemap coverage (en is noindex), one H1, calculator actions, and inflation block.`);

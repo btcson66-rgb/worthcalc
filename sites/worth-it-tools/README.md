@@ -89,6 +89,33 @@ Content routes are locale-prefixed: `/en/...` for English and `/zh/...` for Trad
 
 To add a language, add the locale to `LOCALES` and the locale maps in `src/consts.ts`, add UI strings in `src/i18n/ui.ts`, then create matching `src/pages/<locale>/` pages.
 
+### SEO rebuild P1 (2026-10-15): Traditional Chinese (Taiwan) only
+
+This supersedes the expansion policy below. The site is rebuilt as 台灣人的金錢決策計算機:
+
+- **Homepage.** `/` is the Traditional Chinese homepage (`lang="zh-Hant-TW"`, canonical `/`,
+  `src/pages/index.astro` + `src/components/HomePageTw.astro` + `src/lib/homeTw.ts`).
+  `/zh/` is only a `noindex` redirect stub (meta refresh + canonical `/`) and is not in the sitemap.
+  The root locale is `HOME_LOCALE` in `src/consts.ts`; `localizedPath('zh', '/')` returns `/`.
+- **English.** `/en/**` is built for human visitors (language switcher) but is `noindex`, out of the
+  sitemap and out of hreflang (`en` is in `locales` of `src/data/deindexed-urls.json`).
+- **Retired locales.** `es`, `fr`, `de`, `hi` and `ar` have no routes: `LOCALES`, `CORE_LOCALES` and
+  `CONTENT_LOCALES` in `src/consts.ts` list only `en` and `zh`, the content collections load only
+  `{en,zh}/**`, and the es/fr/de-only pages were deleted. Their source files stay in the repository,
+  dormant, until P1b decides what to delete. Do not add routes for them.
+- **Author.** Every zh calculator and article page carries a byline (`AuthorByline.astro`) naming
+  Benson Lai, linked to `/zh/about/`, with the page's last-verified date and a visible
+  not-financial-advice notice. JSON-LD `author` is a `Person` (name and url only -- no credential, no
+  job title); `publisher` stays the Organization. Never add a qualification that the owner has not supplied.
+- **Structured data.** No `FAQPage` or `HowTo` anywhere (Google retired the FAQ rich result on
+  2026-06-15). The visible FAQ content stays. Calculator schema is `WebApplication`.
+- **No scheduled releases.** `deploy-worthcalc.yml` has no `schedule`; money briefs dated after
+  2026-10-15 are `draft: true` and only a human flips them.
+- **Disposition audit.** `docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv` proposes
+  keep / rewrite / merge_into / remove for every sitemap page. Nothing was deleted in P1; P1b executes
+  the approved rows. The homepage may only link to `keep` rows.
+- **Gate.** `npm run check:rebuild-p1` (part of `npm run verify`) pins all of the above against `dist/`.
+
 ### i18n expansion policy (2026-07-25, SEO audit)
 
 `es`/`fr`/`de` already cover 195 of the site's 333 sitemap URLs (59%) but had **zero

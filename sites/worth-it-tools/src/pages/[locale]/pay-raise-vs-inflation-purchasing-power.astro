@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -30,7 +31,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { oldPay: 48000, raiseRate: 2, inflationRate: 2.3 }, fields: fields.de, copy: { heading: 'Rechner für die reale Gehaltserhöhung', intro: 'Amtliche VPI-Änderung für denselben Anfang und dasselbe Ende eingeben.', output1: 'Neues Nominalgehalt', output2: 'Exakte reale Veränderung', output3: 'Gehalt in Preisen der Vorperiode', verdictPositive: 'Die Erhöhung erhält oder steigert die durchschnittliche VPI-Kaufkraft.', verdictNegative: 'Die Erhöhung erhält die durchschnittliche VPI-Kaufkraft nicht.', privacy: 'Bruttoszenario; Eingaben bleiben im Browser.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as L;
 const article = articles[locale];
 const guide = raiseInflationGuides[locale]!;

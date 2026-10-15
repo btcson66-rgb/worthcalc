@@ -24,13 +24,33 @@ export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
 export type ContentLocale = Locale | 'hi' | 'ar';
 export type CoreLocale = Locale;
 
-/** Every locale with at least one completed, indexable route. */
-export const LOCALES: Locale[] = ['en', 'zh', 'es', 'fr', 'de'];
-/** Locales currently supported by the staged editorial content programme. */
-export const CONTENT_LOCALES: ContentLocale[] = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
+/*
+ * SEO rebuild P1 (2026-10-15): the site is a Traditional Chinese (Taiwan) money
+ * calculator. Only two locales still have routes:
+ *
+ *   zh  the indexed site. Its homepage is `/` (HOME_LOCALE); /zh/ is a redirect stub.
+ *   en  kept for human visitors behind the language switcher, but noindex and
+ *       out of the sitemap and out of hreflang (see src/data/deindexed-urls.json).
+ *
+ * es, fr, de, hi and ar are retired: no route is built for them. Their source
+ * files are still in the repository, dormant, until P1b decides what to delete;
+ * the `Locale` / `ContentLocale` types keep naming them so that dormant data
+ * files still type-check. Every list below is what is BUILT, not what is typed.
+ */
+
+/** Locales that still have built routes. */
+export const LOCALES: Locale[] = ['en', 'zh'];
+/** Locales the editorial content programme still publishes into. */
+export const CONTENT_LOCALES: ContentLocale[] = ['en', 'zh'];
 /** Locales with a complete homepage, legal pages, and calculator catalogue. */
-export const CORE_LOCALES: CoreLocale[] = ['en', 'zh', 'es', 'fr', 'de'];
+export const CORE_LOCALES: CoreLocale[] = ['en', 'zh'];
 export const DEFAULT_LOCALE: Locale = 'en';
+/**
+ * The locale served at the site root `/`. Its homepage is `/`, every other
+ * locale's homepage is `/<locale>/`. This is deliberately separate from
+ * DEFAULT_LOCALE, which only decides the translation fallback.
+ */
+export const HOME_LOCALE: Locale = 'zh';
 
 /** Human-readable language names for the language switcher. */
 export const LOCALE_LABELS: Record<ContentLocale, string> = {

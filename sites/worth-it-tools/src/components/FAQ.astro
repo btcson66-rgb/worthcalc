@@ -1,6 +1,5 @@
 ---
 import type { FaqItem } from '../lib/seo';
-import { faqJsonLd } from '../lib/seo';
 import { getLocaleFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
@@ -12,6 +11,8 @@ const { items, heading } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const resolvedHeading = heading ?? t('tool.faqHeading');
+// Visible content only. No FAQPage structured data: the FAQ rich result was
+// retired by Google on 2026-06-15 and scripts/check-rebuild-p1.mjs forbids it.
 ---
 
 {items.length > 0 && (
@@ -25,6 +26,5 @@ const resolvedHeading = heading ?? t('tool.faqHeading');
         </details>
       ))}
     </div>
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd(items))} />
   </section>
 )}

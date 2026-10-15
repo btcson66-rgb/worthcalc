@@ -430,7 +430,8 @@ for (const page of pages.values()) {
   const canonical = livePage?.canonical || page.canonical;
   const cPath = canonicalPath(canonical);
   const cStatus = targetStatus(cPath, pages, liveMap);
-  const canonicalSelf = cPath === page.path || (page.path === '/en/' && cPath === '/');
+  // /zh/ is the redirect stub for the homepage (2026-10-15 rebuild; it used to be /en/).
+  const canonicalSelf = cPath === page.path || (page.path === '/zh/' && cPath === '/');
   const indexable = isIndexable(page, livePage);
   const inSitemap = sitemapSet.has(page.path);
   const inlinkCount = graph.inlinks.get(page.path) ?? 0;
@@ -516,7 +517,7 @@ for (const page of pages.values()) {
 }
 
 const unexpectedCanonicalCollisions = [...canonicalGroups.entries()]
-  .filter(([path, paths]) => paths.length > 1 && !(path === '/' && paths.every((candidate) => candidate === '/' || candidate === '/en/')))
+  .filter(([path, paths]) => paths.length > 1 && !(path === '/' && paths.every((candidate) => candidate === '/' || candidate === '/zh/')))
   .map(([canonical, paths]) => ({ canonical, paths: paths.join(' | ') }));
 const orphanRows = [...sitemapSet]
   .filter((path) => pages.has(path) && isIndexable(pages.get(path), liveMap?.get(path)) && (graph.inlinks.get(path) ?? 0) === 0)

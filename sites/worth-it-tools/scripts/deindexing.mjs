@@ -15,6 +15,8 @@ export const softDeindexedLocales = new Set(deindexedRegistry.locales ?? []);
 
 // Mirrors LOCALE_HREFLANG in src/consts.ts. These scripts run under plain node
 // with no TypeScript loader, so the table cannot be imported from there.
+// Mirrors HOME_LOCALE in src/consts.ts (same reason: plain node, no TypeScript loader).
+const HOME_LOCALE = 'zh';
 const LOCALE_HREFLANG = { en: 'en', zh: 'zh-TW', es: 'es', fr: 'fr', de: 'de', hi: 'hi', ar: 'ar' };
 
 export function isSoftDeindexedUrl(url) {
@@ -37,7 +39,8 @@ export function expectedHreflangsFor(url, candidates) {
   return candidates.filter((hreflang) => {
     const siblingLocale = localeByHreflang[hreflang];
     if (!siblingLocale) return true;
-    const siblingPath = !logical && siblingLocale === 'en'
+    // The homepage of HOME_LOCALE (zh since the 2026-10-15 rebuild) is the site root.
+    const siblingPath = !logical && siblingLocale === HOME_LOCALE
       ? '/'
       : `/${siblingLocale}/${logical ? `${logical}/` : ''}`;
     return !isSoftDeindexedUrl(new URL(siblingPath, current.origin).href);

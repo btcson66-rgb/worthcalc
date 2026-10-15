@@ -52,12 +52,18 @@ function reverseHtml(html, pathname) {
   );
 }
 
+// The /zh/ redirect stub (2026-10-15 rebuild) is not a content page: it is noindex,
+// has a meta refresh and exists only to forward to `/`, so it carries no social metadata.
+const isRedirectStub = (html) => /<meta http-equiv="refresh"/i.test(html) && /<meta name="robots" content="noindex/i.test(html);
+
 const byImage = new Map();
 const missing = [];
 const notGenerated = [];
 for (const p of pages) {
   const pathname = sitePath(p);
-  const m = OG.exec(reverseHtml(readFileSync(p, 'utf8'), pathname));
+  const html = readFileSync(p, 'utf8');
+  if (isRedirectStub(html)) continue;
+  const m = OG.exec(reverseHtml(html, pathname));
   if (!m) {
     missingOgMeta.push(pathname);
     continue;

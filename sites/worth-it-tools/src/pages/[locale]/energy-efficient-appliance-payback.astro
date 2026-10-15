@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro'; import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
 import DecisionMathCalculator from '../../components/DecisionMathCalculator.astro';
@@ -67,7 +68,7 @@ const calculators = {
   fr: { currency: 'EUR' as const, defaults: { standardPrice: 600, efficientPrice: 850, rebate: 0, energyDifference: .5, usesPerYear: 220, electricityRate: .25, lifeYears: 10 }, fields: commonFields.fr, copy: { heading: 'Calculateur d’amortissement énergétique', intro: 'Comparez les mêmes unités, capacités et le prix du kWh réellement évité.', output1: 'Économie d’énergie annuelle', output2: 'Amortissement simple', output3: 'Gain net sur la détention', verdictPositive: 'Le surcoût est amorti pendant la durée indiquée.', verdictNegative: 'Le surcoût n’est pas amorti pendant la durée indiquée.', unit: 'ans', privacy: 'Modèle énergie seulement. Vérifiez unités, aide, tarif, capacité et programme.' } },
   de: { currency: 'EUR' as const, defaults: { standardPrice: 650, efficientPrice: 900, rebate: 0, energyDifference: .6, usesPerYear: 220, electricityRate: .35, lifeYears: 10 }, fields: commonFields.de, copy: { heading: 'Energie-Amortisationsrechner', intro: 'Vergleichen Sie gleiche Label-Einheiten, Größe und den tatsächlich vermiedenen Strompreis.', output1: 'Jährliche Stromersparnis', output2: 'Einfache Amortisation', output3: 'Nettovorteil der Nutzungsdauer', verdictPositive: 'Der Aufpreis amortisiert sich in der angegebenen Dauer.', verdictNegative: 'Der Aufpreis amortisiert sich nicht in der angegebenen Dauer.', unit: 'Jahre', privacy: 'Reines Energiemodell. Einheiten, Förderung, Tarif, Größe und Programm prüfen.' } },
 };
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale]; const guide = appliancePaybackGuides[locale]!; const calculator = calculators[locale];
 ---

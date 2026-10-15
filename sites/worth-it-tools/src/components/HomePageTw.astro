@@ -1,0 +1,111 @@
+---
+/*
+ * The Traditional Chinese (Taiwan) homepage, served at `/`.
+ *
+ * It replaces the English general-finance homepage (SEO rebuild P1, 2026-10-15).
+ * Layout: hero, five situation groups of Taiwan-specific pages, how figures are
+ * checked, the author, a visible "not financial advice" notice, a visible FAQ
+ * (no FAQPage structured data -- see src/components/FAQ.astro). All copy and
+ * links live in src/lib/homeTw.ts.
+ */
+import { homeTw } from '../lib/homeTw';
+import FAQ from './FAQ.astro';
+
+const kindLabel = { calculator: '計算機', article: '文章' } as const;
+---
+
+<section class="hero">
+  <span class="hero__eyebrow">💸 {homeTw.eyebrow}</span>
+  <h1>{homeTw.heading}<span class="accent">{homeTw.accent}</span></h1>
+  <p>{homeTw.intro}</p>
+  <ul class="hero__badges">
+    {homeTw.badges.map((badge) => <li>{badge}</li>)}
+  </ul>
+</section>
+
+<section class="home-notice" aria-label="免責聲明" data-ymyl-disclaimer>
+  <p><strong>{homeTw.disclaimerLead}</strong>{homeTw.disclaimer} <a href="/zh/disclaimer/">完整免責聲明</a></p>
+</section>
+
+<section class="home-situations" aria-labelledby="home-situations-heading">
+  <h2 id="home-situations-heading">{homeTw.groupsHeading}</h2>
+  <p class="section-lead">{homeTw.groupsLead}</p>
+  {homeTw.groups.map((group) => (
+    <section class="home-group" id={group.id} aria-labelledby={`home-group-${group.id}`}>
+      <h3 id={`home-group-${group.id}`}>{group.heading}</h3>
+      <p class="section-lead">{group.lead}</p>
+      <div class="guide-grid">
+        {group.items.map((item) => (
+          <article class="guide-card">
+            <h4><a href={item.href}>{item.title}</a></h4>
+            <p>{item.blurb}</p>
+            <span class="home-kind" data-kind={item.kind}>{kindLabel[item.kind]}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</section>
+
+<section class="home-library" aria-labelledby="home-more-heading">
+  <h2 id="home-more-heading">{homeTw.moreHeading}</h2>
+  <p class="section-lead">{homeTw.moreLead}</p>
+  <ul class="home-library__links">
+    <li><a href="/zh/tools/">全部計算機</a></li>
+    <li><a href="/zh/money/">金錢速查（附日期與出處的數字）</a></li>
+  </ul>
+</section>
+
+<section class="home-trust" aria-labelledby="home-method-heading">
+  <h2 id="home-method-heading">{homeTw.methodHeading}</h2>
+  <p>{homeTw.method}</p>
+  <h3>{homeTw.authorLead}</h3>
+  <p>{homeTw.authorBody} <a href="/zh/about/">作者：Benson Lai</a></p>
+</section>
+
+<FAQ items={homeTw.faq} heading={homeTw.faqHeading} />
+
+<style>
+  .home-notice {
+    margin-block: 1rem 2rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--color-border);
+    border-inline-start: 4px solid #b4530a;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .home-notice p {
+    margin: 0;
+  }
+
+  .home-group {
+    margin-top: 2rem;
+  }
+
+  .home-group h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .guide-card h4 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+  }
+
+  .home-kind {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0.1rem 0.55rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+
+  .home-kind[data-kind='calculator'] {
+    color: #0b6b66;
+    border-color: #0b6b66;
+  }
+</style>

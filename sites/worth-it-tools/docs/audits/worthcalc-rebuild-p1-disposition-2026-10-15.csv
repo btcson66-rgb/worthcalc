@@ -1,0 +1,144 @@
+url,type,title,taiwan_specific,has_official_source,source_examples,last_checked_date,gsc_impressions_28d,proposed_action,reason
+https://worthcalc.win/,hub,台灣人的金錢決策計算機,yes,no,,,4,keep,新繁中首頁（台灣人的金錢決策計算機）：只連到本表標為 keep 的頁面，依五個情境分組；曝光數是改版前英文首頁的數字。
+https://worthcalc.win/zh/about/,legal,關於 WorthCalc 與作者 Benson Lai,partial,no,,2026-10-15,,keep,本次改寫為作者頁（Benson Lai、查核方法、更新與勘誤政策、回報管道），只寫可查證事實；所有計算機與文章頁的署名連到這裡。
+https://worthcalc.win/zh/annual-fee-card-breakeven/,article,信用卡年費要刷多少才回本？用增量回饋算真正門檻,yes,yes,law.fsc.gov.tw,2026-07-18,1,keep,金管會信用卡契約規範與費用揭露規範，NT$ 算例與增量回饋公式，2026-07-18 查核。
+https://worthcalc.win/zh/annual-vs-monthly-billing/,article,年繳還是月繳？訂閱折扣的損益兩平算法,no,no,,2026-07-20,,merge_into:https://worthcalc.win/zh/monthly-vs-annual-subscription/,沒有來源與台灣內容；與 /zh/monthly-vs-annual-subscription/ 意圖重複（年繳 vs 月繳的損益兩平）。
+https://worthcalc.win/zh/apr-vs-apy/,article,APR、APY、利率差在哪？借錢看 APR，存錢看 APY 的完整原因,no,yes,www.consumerfinance.gov,2026-08-29,,remove,通用概念，來源全是美國 CFPB，台灣在地內容只有兩處提及。
+https://worthcalc.win/zh/average-commuting-cost/,article,平均通勤成本與車馬費行情：不用虛構平均數，也能算出可比較的基準,yes,yes,www.cpc.com.tw; www.motc.gov.tw; www.dgbas.gov.tw,2026-09-15,,keep,連到中油、交通部、主計總處，教讀者用自己的距離與車種算基準；2026-09-15 查核。
+https://worthcalc.win/zh/bnpl-vs-credit-card-installments/,article,先買後付 vs 信用卡分期：用總成本與扣款時間比較,yes,yes,www.banking.gov.tw; law.fsc.gov.tw,2026-07-18,,keep,金管會與銀行局規範、NT$ 算例，說明先買後付在台灣的契約差異，2026-07-18 查核。
+https://worthcalc.win/zh/budget-with-irregular-income/,article,接案、業績抽成收入不固定，月預算該怎麼抓？,yes,yes,www.mof.gov.tw; www.nhi.gov.tw,2026-07-31,2,keep,台灣綜所稅與二代健保補充保費對接案族的影響，連到財政部與健保署；GSC 28 天有曝光（平均排名 3.5）。
+https://worthcalc.win/zh/bulk-buying-vs-small-packages/,article,大包裝真的比較省嗎？耗損、效期、會員與保存成本計算器,partial,yes,www.fda.gov.tw,2026-07-19,,remove,只有 NT$ 算例與食藥署食品保存連結；通用日常省錢題目，不屬於五個情境。
+https://worthcalc.win/zh/bulk-buying-waste-math/,article,大包裝真的便宜嗎？把「丟掉的那部分」算進去的有效單價,no,yes,www.fda.gov.tw,2026-07-19,,remove,與 /zh/bulk-buying-vs-small-packages/ 意圖重複（大包裝有效單價），且沒有台灣來源；兩頁都不屬於五個情境，一併建議移除。
+https://worthcalc.win/zh/car-lease-vs-buy-total-cost/,article,租賃還是買車？總成本、里程限制與轉售風險怎麼算,yes,yes,www.ey.gov.tw; motclaw.motc.gov.tw,2026-07-19,,keep,台灣汽車租賃契約與稅費，連到行政院與交通部法規；NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/cashback-caps-real-reward-rate/,article,信用卡回饋上限怎麼算？找出真正回饋率,yes,yes,law.banking.gov.tw; event.esunbank.com.tw; www.cathaybk.com.tw,2026-07-19,,keep,台灣信用卡回饋上限、指定通路與排除項目，連到銀行局與發卡銀行公告；NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/changelog/,legal,更新紀錄,no,no,,2026-07-19,,rewrite,內容停在 v1.1/v1.2「五語」版本，已不符合現況（es/fr/de/hi/ar 已退役），需改寫成台灣版的更新紀錄。
+https://worthcalc.win/zh/contact/,legal,聯絡 WorthCalc,partial,no,,2026-07-03,,keep,錯誤回報與聯絡管道（作者頁引用此頁）；內容含台灣情境說明，無需改動。
+https://worthcalc.win/zh/cost-per-use-expensive-item/,article,高價物品每次使用成本：預期、實際與損益次數計算器,partial,yes,cpc.ey.gov.tw,2026-07-19,,remove,通用「每次使用成本」題目，僅有 NT$ 算例與消保處連結；不屬於五個情境。
+https://worthcalc.win/zh/costco-math/,article,好市多會員的數學：年費怎麼算才回本,yes,yes,www.costco.com.tw,2026-09-22,,keep,台灣金星/商業/黑鑽卡三種會員的回本模型，連到好市多台灣官網，2026-09-22 查核。與計算機頁互補，P1b 可再看 GSC 決定是否合併。
+https://worthcalc.win/zh/credit-card-minimum-payment-trap/,article,信用卡只繳最低應繳，利息怎麼算？循環利率15%上限是什麼,yes,yes,law.fsc.gov.tw; www.foi.org.tw,2026-07-31,,keep,台灣循環利息日計息公式、15% 上限、最低應繳組成，連到金管會與金融消費評議機構，2026-07-31 查核。
+https://worthcalc.win/zh/delivery-membership-break-even/,article,外送會員一年要用幾次才回本,partial,yes,cpc.ey.gov.tw; www.uber.com,2026-07-19,,rewrite,外送會員回本算法可用，但主題通用；需補台灣現行平台方案價格與官方來源（目前引用消保處指引與平台頁面）。
+https://worthcalc.win/zh/disclaimer/,legal,免責聲明,partial,no,,2026-07-03,,keep,YMYL 必備的免責聲明，首頁與每個計算機/文章頁的免責提示都連到這裡。
+https://worthcalc.win/zh/emergency-fund-how-much/,article,緊急預備金要存多少？3 個月、6 個月不是唯一答案,no,yes,www.consumerfinance.gov; www.federalreserve.gov,2026-08-29,,rewrite,緊急預備金在台灣有需求，但全文是通用寫法、來源是美國 CFPB/Fed；需改用主計總處家庭收支與勞動部資料重寫。吸收另外三篇同題頁面。
+https://worthcalc.win/zh/emergency-fund-irregular-income/,article,收入不固定，緊急預備金怎麼存？接案、自營與獎金制的現金流做法,no,yes,www.consumerfinance.gov,2026-08-29,,merge_into:https://worthcalc.win/zh/emergency-fund-how-much/,通用內容、美國 CFPB 來源；與 /zh/emergency-fund-how-much/ 意圖重複，另有 /zh/budget-with-irregular-income/ 涵蓋台灣接案族。
+https://worthcalc.win/zh/emergency-fund-vs-debt-payoff/,article,先存緊急預備金，還是先還債？用利率、現金流與再借款風險做判斷,no,yes,www.consumerfinance.gov,2026-08-29,,merge_into:https://worthcalc.win/zh/emergency-fund-how-much/,通用內容、美國 CFPB 來源；與 /zh/emergency-fund-how-much/ 意圖重疊。
+https://worthcalc.win/zh/emergency-fund-vs-sinking-fund/,article,緊急預備金 vs 目標基金：哪些支出其實不算「緊急」？,no,yes,www.consumerfinance.gov,2026-08-29,,merge_into:https://worthcalc.win/zh/emergency-fund-how-much/,通用內容、無台灣來源；與 /zh/emergency-fund-how-much/ 意圖重疊。
+https://worthcalc.win/zh/energy-efficient-appliance-payback/,article,節能家電多久回本？用價差、耗電、使用頻率與電價試算,yes,yes,service.moea.gov.tw; law.moea.gov.tw; hc1.taipower.com.tw,2026-07-19,,keep,台電電價與能源署效率分級，NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/ev-vs-gas-total-cost/,article,電動車和油車怎麼比較五年總持有成本,yes,yes,law-out.mof.gov.tw; www.citax.gov.tw; motclaw.motc.gov.tw,2026-07-19,,keep,財政部、牌照稅、交通部法規，五年總持有成本；吸收 /zh/tools/ev-vs-gas/。2026-07-19 查核。
+https://worthcalc.win/zh/extended-warranty-math/,article,延長保固值得買嗎？期望值算法與三個真的該買的例外,no,no,,2026-07-21,,merge_into:https://worthcalc.win/zh/is-an-extended-warranty-worth-it/,沒有來源、台灣內容只有一處；與 /zh/is-an-extended-warranty-worth-it/（消保處來源）意圖重複。
+https://worthcalc.win/zh/extra-mortgage-payments-guide/,article,房貸多繳划不划算？寬限期、提前清償違約金一次搞懂,yes,yes,www.ey.gov.tw; www.mof.gov.tw; www.ba.org.tw,2026-07-31,,keep,台灣房貸寬限期、提前清償違約金、青安貸款限制，連到行政院、財政部與銀行公會，2026-07-31 查核。
+https://worthcalc.win/zh/full-commute-cost-including-time/,article,通勤不只油錢：如何把時間也算進每月通勤成本,yes,yes,www.iot.gov.tw; www.cpc.com.tw,2026-07-19,,keep,運研所與中油來源，NT$ 算例，把通勤時間成本算進月成本，2026-07-19 查核。
+https://worthcalc.win/zh/guides/,hub,全部指南,partial,no,,,,rewrite,目錄頁，列出所有指南含待改寫/待移除者；P1b 處理完個別頁面後須依 keep 清單重排。
+https://worthcalc.win/zh/gym-membership-cost-per-visit/,article,健身房會員每次成本怎麼算？一個月要去幾次才划算,partial,yes,www.ey.gov.tw; www.moe.gov.tw,2026-07-19,,rewrite,會員與訂閱情境內，連到體育署/教育部定型化契約；但題目通用，需補台灣現行健身房費用與契約來源。
+https://worthcalc.win/zh/home-vs-public-ev-charging-cost/,article,充電樁一度電多少錢？家用與公共充電電費怎麼比？,yes,yes,hc2.taipower.com.tw; www.motc.gov.tw; motclaw.motc.gov.tw,2026-07-19,,keep,台電電價與充電業者費率、交通部法規，NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/hourly-vs-annual-salary/,article,時薪換算年薪怎麼算才公平？加班費倍率與基本工資要先搞懂,yes,yes,www.mol.gov.tw; law.moj.gov.tw,2026-07-31,,keep,台灣基本工資、加班費倍率（勞基法），連到勞動部與全國法規資料庫，2026-07-31 查核。
+https://worthcalc.win/zh/how-compound-growth-works/,article,複利怎麼算？定存利率追不上通膨時，錢放哪裡才有感,partial,yes,www.stat.gov.tw; rate.bot.com.tw,2026-07-31,,rewrite,有「台灣的複利環境」一節並連到主計總處與臺銀牌告，但主題通用；需連結勞退自提等台灣情境。
+https://worthcalc.win/zh/how-much-home-can-you-afford/,article,購屋能力怎麼算？房貸成數、房屋稅與地價稅都要算進去,yes,yes,www.cbc.gov.tw; www.mof.gov.tw; lvr.land.moi.gov.tw,2026-07-31,,keep,央行選擇性信用管制、房屋稅、地價稅、實價登錄，連到央行與財政部，2026-07-31 查核。
+https://worthcalc.win/zh/how-to-calculate-dti/,article,負債比怎麼算？DBR22倍跟房貸月付比是兩件事,yes,yes,www.ba.org.tw; law.fsc.gov.tw; www.cbc.gov.tw,2026-07-31,,keep,DBR 22 倍與房貸月付比，連到銀行公會、金管會與央行，2026-07-31 查核。
+https://worthcalc.win/zh/how-to-calculate-net-worth/,article,淨資產怎麼算？資產、負債與「看起來有錢」的差別,no,yes,www.consumerfinance.gov,2026-08-29,,remove,通用概念，來源是美國 CFPB，沒有台灣內容。
+https://worthcalc.win/zh/how-to-calculate-savings-rate/,article,儲蓄率怎麼算？用稅前收入還是稅後收入，還本金算不算？,no,yes,files.consumerfinance.gov; www.consumerfinance.gov,2026-08-29,,remove,通用概念，來源是美國 CFPB，沒有台灣內容。
+https://worthcalc.win/zh/is-an-extended-warranty-worth-it/,article,延長保固值得買嗎？比較價格、故障機率與維修費,partial,yes,cpc.ey.gov.tw,2026-07-19,,rewrite,延長保固期望值算法可用，連到消保處；主題通用，需補台灣常見延保方案與官方來源。吸收 /zh/extended-warranty-math/。
+https://worthcalc.win/zh/is-costco-executive-membership-worth-it/,article,好市多黑鑽卡會員值得升級嗎？回本門檻與 2% 排除項目,yes,yes,www.costco.com.tw,2026-07-19,,merge_into:https://worthcalc.win/zh/tools/costco-membership/,與 /zh/tools/costco-membership/ 標題與意圖相同（黑鑽卡值不值得升級），後者查核日較新（2026-09-22）。
+https://worthcalc.win/zh/loan-term-vs-total-interest/,article,貸款期數越長越輕鬆？月付變低，總利息為什麼可能更高,no,yes,www.consumerfinance.gov,2026-08-29,,remove,通用貸款期數題目，來源是美國 CFPB，沒有台灣內容。
+https://worthcalc.win/zh/meal-prep-vs-takeout-cost/,article,自煮備餐還是外食？食材、時間、耗損與外送費計算器,partial,yes,www.fda.gov.tw,2026-07-19,,remove,通用日常題目，只有 NT$ 算例與食藥署食品保存連結；不屬於五個情境。
+https://worthcalc.win/zh/money/,hub,金錢速查,partial,no,,2026-09-18,,rewrite,金錢速查目錄，目前混有 27 篇美國數據速查；P1b 移除後只應剩台灣速查。
+https://worthcalc.win/zh/money/ac-energy-grade-payback/,brief,冷氣一級比三級省多少電？少用約 17%，價差多久回本看電價級距,yes,yes,law.moea.gov.tw; www.taipower.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自經濟部能源署與台電並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/airline-points-cash-value/,brief,一點到底值多少：要用「你本來真的會買的那張票」來估價,no,yes,www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/auto-loan-rate-by-credit-score-2026/,brief,"同一台車，差 12,000 美元：2026 年各信用等級的車貸利率",no,yes,www.federalreserve.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.federalreserve.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/buy-now-or-wait-price-increase/,brief,現在買還是再等？公告的漲幅要先贏過你的融資成本,no,yes,www.bls.gov; www.federalreserve.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.bls.gov、www.federalreserve.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/car-loan-vs-cash/,brief,車貸還是付現？貸 40 萬、3 年、7.79%，比付現多花約 3.6 萬,yes,yes,www.bankchb.com; rate.bot.com.tw; www.bot.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自臺銀牌告與銀行車貸公告並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/car-road-fee-license-tax-fixed-cost/,brief,"養車的固定稅費：1,800cc 和 2,000cc 一年差 5,490 元",yes,yes,www.tax.ntpc.gov.tw; www.thb.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自公路局與新北市稅務局並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/central-bank-rate-mortgage-payment/,brief,"央行升息半碼，1,000 萬房貸每月多繳多少？約 638 元——前提是銀行全數反映",yes,yes,www.cbc.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自央行並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/childcare-cost-2026/,brief,"托嬰每月 1,230 美元：2026 年第二份收入實際值多少",no,yes,www.irs.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.irs.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/credit-card-apr-2026/,brief,2026 年美國信用卡循環利率逼近 24%：固定月付的真實代價,no,yes,www.federalreserve.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.federalreserve.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/credit-score-points-dollar-value/,brief,你的信用分數值多少錢：用「你將要借的錢」去替它定價,no,yes,www.consumerfinance.gov; www.federalreserve.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.consumerfinance.gov、www.federalreserve.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/dependent-exemption-tax-savings/,brief,多報一位扶養親屬能省多少稅？115 年度是 10.1 萬元乘上你的邊際稅率,yes,yes,www.mof.gov.tw; www.ntbt.gov.tw; law.moj.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自財政部與稅務入口網並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/e-scooter-subsidy-2026/,brief,115 年電動機車補助多少？中央約 1.1–1.5 萬，加縣市可達 3 萬以上,yes,yes,meid.nat.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自環境部電動機車補助並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/electricity-price-per-kwh-2026/,brief,2026 年美國電價約每度 18.3 美分——換算成電器帳單是多少,no,yes,www.eia.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.eia.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/emergency-fund-size-2026/,brief,2026 年緊急預備金該存多少：算必要支出，不是算總支出,no,yes,www.consumerfinance.gov; www.fdic.gov,2026-09-18,,merge_into:https://worthcalc.win/zh/emergency-fund-how-much/,美國 CFPB/FDIC 數據；意圖與 /zh/emergency-fund-how-much/（待改寫成台灣版）重複。
+https://worthcalc.win/zh/money/employer-match-vs-debt-payoff/,brief,雇主提撥配比 vs 信用卡：92% 的報酬勝過 24%,no,yes,www.investor.gov; www.federalreserve.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.investor.gov、www.federalreserve.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/freeway-etc-commute-toll/,brief,國道 ETC 通勤費怎麼算？每天來回 50 公里約 32 元，一個月 704 元,yes,yes,www.freeway.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自高速公路局計程收費並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/heat-pump-payback-2026/,brief,2026 年熱泵回本期：要比的是「差額」，不是整台的價格,no,yes,www.irs.gov; www.energy.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.irs.gov、www.energy.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/home-warranty-break-even/,brief,居家保固回本點：比價之前先把出勤費加進去,no,yes,consumer.ftc.gov,2026-09-18,,remove,全文以美國數據與來源寫成（consumer.ftc.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/house-tax-owner-occupied-vs-non/,brief,房屋稅自住 1.2%、非自住最高 4.8%：同一間房子，稅額可以差到 4 倍,yes,yes,law.moj.gov.tw; www.mof.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自全國法規資料庫與財政部並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/idle-cash-cost-2026/,brief,"2026 年存款利率：25,000 美元放錯戶頭，一年差多少",no,yes,www.fdic.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.fdic.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/insurance-deductible-break-even/,brief,調高自付額：決定勝負的是「多久理賠一次」,no,yes,www.healthcare.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.healthcare.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/irs-mileage-rate-2026/,brief,2026 年美國國稅局里程費率年中調整：先 72.5 美分，後 76 美分,no,yes,www.irs.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.irs.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/itemized-vs-standard-deduction/,brief,115 年度標準扣除額 13.6 萬：有房貸的夫妻也不一定列舉比較划算,yes,yes,www.mof.gov.tw; www.ntbt.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自財政部與稅務入口網並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/labor-insurance-old-age-lump-sum-vs-annuity/,brief,勞保老年給付一次領還是月領？年資 30 年，大約 8 年回本,yes,yes,www.bli.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自勞保局並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/labor-pension-contribution-wage-table/,brief,"勞退雇主提繳多少？月薪 45,000 元每月 2,748 元，先查分級表再乘 6%",yes,yes,www.bli.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自勞保局並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/labor-pension-voluntary-contribution-tax/,brief,"勞退自提 6% 一年省多少稅？從 1,649 元到 13,190 元",yes,yes,www.bli.gov.tw; www.ntbt.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自勞保局與稅務入口網並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/land-value-tax-owner-occupied-rate/,brief,地價稅自用住宅千分之二：沒申請，就按千分之十起跳，差 5 倍,yes,yes,law.moj.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自全國法規資料庫並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/lease-buyout-break-even/,brief,租賃買斷：要算的不只是價差，還有你因此避掉的還車費用,no,yes,consumer.ftc.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（consumer.ftc.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/mortgage-grace-period-end-payment/,brief,"房貸寬限期結束，月付會跳多少？1,000 萬新青安從 1.6 萬跳到 3.4 萬",yes,yes,www.tcb-bank.com.tw; www.mof.gov.tw; www.cbc.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自合作金庫、財政部與央行並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/mortgage-prepay-vs-invest/,brief,"房貸提前還 100 萬，還是放定存？2.275% 對 1.7%，一年差 5,750 元",yes,yes,rate.bot.com.tw; www.tcb-bank.com.tw; law.fsc.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自臺銀牌告、合作金庫與金管會並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/mortgage-rate-2026-payment-impact/,brief,2026 年 9 月美國 30 年期房貸利率升至 6.95%：每一次變動的月付代價,no,no,,2026-09-18,,remove,全文以美國數據與來源寫成（www.freddiemac.com、fred.stlouisfed.org），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/mortgage-refinance-break-even/,brief,房貸轉貸回本點：月數，以及沒有人標價的「年期重置」,no,yes,www.consumerfinance.gov,2026-09-18,,rewrite,轉貸回本點在台灣有需求（房貸轉貸），但全文是美國 Freddie Mac/CFPB 資料與 PMI 情境；需以台灣銀行轉貸條件重寫。
+https://worthcalc.win/zh/money/moving-for-a-job-full-cost/,brief,"為了加薪 12,000 美元搬家：第一年是負的，第 16 個月才回本",no,yes,www.bls.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.bls.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/national-pension-vs-labor-insurance/,brief,"國民年金每月繳 1,329 元，繳 20 年後每月領約 6,792 元",yes,yes,www.bli.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自勞保局並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/nhi-premium-insured-salary-grade/,brief,"健保費怎麼算？月薪 45,000 元自付 710 元，多一位眷屬就再加 710 元",yes,yes,www.nhi.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自健保署並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/nhi-supplementary-premium/,brief,二代健保補充保費怎麼算？獎金超過投保金額 4 倍、單筆 2 萬元就扣 2.11%,yes,yes,www.nhi.gov.tw; www.mol.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自健保署與勞動部並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/pay-off-car-loan-early-or-invest/,brief,提前還清車貸還是拿去投資？利率就是全部的答案,no,yes,www.consumerfinance.gov; www.investor.gov,2026-09-18,,merge_into:https://worthcalc.win/zh/money/car-loan-vs-cash/,美國利率與稅制；車貸提前還款 vs 投資的取捨，台灣版已由 /zh/money/car-loan-vs-cash/ 與房貸版涵蓋。
+https://worthcalc.win/zh/money/pet-insurance-break-even/,brief,寵物保險：一年要看多少獸醫才回本,no,yes,consumer.ftc.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（consumer.ftc.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/phone-contract-subsidy-value/,brief,"手機綁約補貼值多少？中華電信 599 綁 24 個月補 3,000 元",yes,yes,www.cht.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自中華電信並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/pmi-removal-timing/,brief,取消房貸保險（PMI）的時點：可以申請的那個月，以及每月多還 300 美元買到什麼,no,yes,www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/rent-subsidy-300b-amount/,brief,"租金補貼每月領多少？臺北單身青年 3,600 元，新北新生兒家庭 8,000 元",yes,yes,pip.moi.gov.tw; glrs.moi.gov.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自內政部與全國租金補貼平台並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/rental-car-insurance-decline/,brief,租車櫃檯的免責額保險該不該拒買？先確認你的備援是「主位」還是「次位」,no,yes,consumer.ftc.gov; www.consumerfinance.gov,2026-09-18,,remove,全文以美國數據與來源寫成（consumer.ftc.gov、www.consumerfinance.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/savings-insurance-irr/,brief,儲蓄險 IRR 怎麼算？繳 6 年領 64 萬，年化只有約 1.85%,yes,yes,www.fsc.gov.tw; rate.bot.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自金管會與臺銀牌告並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/should-i-file-an-insurance-claim/,brief,這筆理賠該不該申請？加費會讓小額理賠變成虧損,no,yes,www.consumerfinance.gov; www.healthcare.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.consumerfinance.gov、www.healthcare.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/side-hustle-true-hourly-rate/,brief,副業的真實時薪：自僱稅讓它少掉一半,no,yes,www.irs.gov; www.dol.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.irs.gov、www.dol.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/solar-payback-2026/,brief,2026 年沒有 30% 抵稅的太陽能回本期：大約多加四年,no,yes,www.irs.gov; www.eia.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.irs.gov、www.eia.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/streaming-prices-2026/,brief,八個串流服務現在一個月要 139 美元：2026 年訂閱健檢,no,yes,consumer.ftc.gov; www.bls.gov,2026-09-18,,remove,全文以美國數據與來源寫成（consumer.ftc.gov、www.bls.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/taipower-summer-rates-ac-bill/,brief,夏天開冷氣一個月多少電費？同樣 240 度，要看你原本就用了多少,yes,yes,www.taipower.com.tw; www3.moeaea.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自台電與能源署並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/taipower-summer-vs-non-summer-rates/,brief,同樣用 500 度，夏月比非夏月多繳約 175 元——差距從第 121 度才開始,yes,yes,www.taipower.com.tw; www3.moeaea.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自台電與能源署並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/taipower-time-of-use-vs-tiered/,brief,時間電價划算嗎？夏月平日 09:00–24:00 全算尖峰，門檻比你想的高,yes,yes,www.taipower.com.tw; www3.moeaea.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自台電與能源署並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/time-deposit-early-withdrawal/,brief,"定存中途解約少多少利息？100 萬存 7 個月解約只拿 6,837 元",yes,yes,www.bot.com.tw; rate.bot.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自臺灣銀行並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/tpass-commuter-pass-breakeven/,brief,"TPASS 月票划不划算？1,200 元除以你的單程票價，就是要搭幾趟才回本",yes,yes,www.thb.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自公路局 TPASS並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/tsa-precheck-break-even/,brief,TSA PreCheck 回本點：一年大約飛兩趟就夠,no,yes,www.tsa.gov; www.transportation.gov,2026-09-18,,remove,全文以美國數據與來源寫成（www.tsa.gov、www.transportation.gov），與台灣的制度、利率與費率無關。
+https://worthcalc.win/zh/money/year-end-bonus-withholding-tax/,brief,"年終獎金 90,501 元起先扣 5%——但這 5% 不是你最後要繳的稅",yes,yes,www.mof.gov.tw; law.moj.gov.tw; www.ntbt.gov.tw,2026-09-23,,keep,台灣制度/費率速查，數字取自財政部與稅務入口網並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/money/youth-home-loan-3-subsidy-value/,brief,新青安 3.0 補貼值多少？貸 40 年省 25.5 萬，比 30 年多付 143 萬,yes,yes,www.mof.gov.tw; www.tcb-bank.com.tw; rate.bot.com.tw,2026-09-24,,keep,台灣制度/費率速查，數字取自財政部、合作金庫與臺銀牌告並附查核日期，算式與限制完整。
+https://worthcalc.win/zh/monthly-vs-annual-subscription/,article,訂閱月繳還是年繳？用使用月數與取消風險算出答案,partial,yes,cpc.ey.gov.tw,2026-07-18,,rewrite,會員與訂閱情境的核心頁，NT$ 算例可用；但引用的是消保處通則，需補台灣現行訂閱價格來源。吸收 /zh/annual-vs-monthly-billing/。
+https://worthcalc.win/zh/new-vs-used-car-total-cost/,article,新車還是中古車？折舊、維修、貸款與轉售怎麼比較,yes,yes,www.ey.gov.tw; www.thb.gov.tw; law.fsc.gov.tw,2026-07-19,,keep,公路局與行政院來源、中古車買賣定型化契約，NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/paid-membership-break-even/,article,付費會員要用幾次才回本？會員回本計算方法,partial,yes,cpc.ey.gov.tw,2026-07-19,,rewrite,通用範本頁，與好市多/外送/健身房頁的邏輯重疊；僅引用消保處通則。P1b 時應併入具體情境頁或補台灣方案。
+https://worthcalc.win/zh/pay-raise-vs-inflation-purchasing-power/,article,加薪有追上通膨嗎？計算實質購買力變化,yes,yes,www.stat.gov.tw,2026-07-19,,keep,主計總處 CPI，台灣勞退/健保提繳影響，NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/price-per-wear-clothing-shoes/,article,每次穿著成本怎麼算？用真實次數比較衣服和鞋子,partial,yes,law.moea.gov.tw; www.bsmi.gov.tw,2026-07-19,,remove,通用日常題目，只有 NT$ 算例與服飾標示連結；不屬於五個情境。
+https://worthcalc.win/zh/privacy/,legal,隱私權政策,no,no,,2026-09-24,,keep,法務必備（AdSense/Cookie 揭露），非內容頁。
+https://worthcalc.win/zh/rent-vs-buy-breakeven-year/,article,買房住幾年才可能比租屋划算？損益年分計算,yes,yes,www.gov.tw; www.mof.gov.tw; lvr.land.moi.gov.tw,2026-07-19,,keep,實價登錄、房地合一稅、財政部來源，損益年分逐年計算，2026-07-19 查核；吸收 /zh/tools/rent-vs-buy/。
+https://worthcalc.win/zh/rent-vs-buy-guide/,article,租屋還是買房？真正會改變答案的關鍵數字,yes,yes,lvr.land.moi.gov.tw; www.etax.nat.gov.tw,2026-07-18,,keep,實價登錄、財政部電子申報來源，NT$ 算例，2026-07-18 查核。
+https://worthcalc.win/zh/repair-or-replace-decision-formula/,article,維修還是換新？家電、手機與車輛的實用判斷公式,partial,yes,cpc.ey.gov.tw; www.ey.gov.tw,2026-07-19,,rewrite,大型支出情境（家電/手機/車輛），連到消保處與行政院；內容通用，需補台灣維修行情與官方來源。
+https://worthcalc.win/zh/reusable-vs-disposable-break-even/,article,重複使用或一次性用品：真正回本次數與每次成本,partial,yes,oaout.moenv.gov.tw; hwms.moenv.gov.tw,2026-07-19,,remove,通用環保/日常題目，只有環境部連結；不屬於五個情境。
+https://worthcalc.win/zh/simple-vs-compound-interest/,article,簡單利息 vs 複利差在哪？存款、投資與債務為什麼不能只看年利率,no,yes,www.investor.gov; www.consumerfinance.gov,2026-08-29,,merge_into:https://worthcalc.win/zh/how-compound-growth-works/,通用概念、美國來源；與 /zh/how-compound-growth-works/ 意圖重複。
+https://worthcalc.win/zh/snowball-vs-avalanche/,article,卡債、信貸一起還：雪球法還是雪崩法比較快清完？,yes,yes,law.fsc.gov.tw; www.ba.org.tw,2026-07-31,,keep,台灣循環利率上限 15%、卡債協商機制，連到金管會與銀行公會，2026-07-31 查核。
+https://worthcalc.win/zh/subscription-creep/,article,訂閱通膨：你一年到底花了多少錢？,partial,yes,support.apple.com; support.google.com,2026-07-18,,rewrite,會員與訂閱情境，引用的是 Apple/Google 說明頁；需補台灣現行訂閱價格與查核日期。
+https://worthcalc.win/zh/terms/,legal,使用條款,no,no,,2026-07-03,,keep,法務必備，非內容頁。
+https://worthcalc.win/zh/tools/,hub,全部計算機,partial,no,,,,rewrite,目錄頁，列出所有計算機含待改寫/待移除者；P1b 處理完個別頁面後須依 keep 清單重排。
+https://worthcalc.win/zh/tools/appliance-electricity-cost/,tool,家電一天用多少電？每小時、每月電費怎麼算？,partial,yes,www.taipower.com.tw; www.u-power.com.tw; www.energystar.gov,2026-09-15,,rewrite,電價用台電，但 43 項家電耗電資料全取自美國 ENERGY STAR / EIA，需改用台灣能源署能源效率標示與實測資料。
+https://worthcalc.win/zh/tools/budget-builder/,tool,不固定收入月預算建立器,yes,yes,www.mof.gov.tw; www.nhi.gov.tw,2026-07-31,,keep,含台灣使用情境（綜所稅、二代健保補充保費），連到財政部與健保署；計算機可用。建議 P1b 補正式「資料來源」區塊。
+https://worthcalc.win/zh/tools/car-affordability/,tool,汽車負擔能力與完整月成本計算機,yes,yes,law.moj.gov.tw; www.cali.org.tw,2026-07-31,,keep,含台灣使用情境（強制險、牌照稅、燃料費），連到全國法規資料庫與壽險公會；計算機可用。建議 P1b 補正式來源區塊。
+https://worthcalc.win/zh/tools/cashback-breakeven/,tool,信用卡回饋打平計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/annual-fee-card-breakeven/,預設值是美元量級（年費 95、迎新禮 200、雜貨 500），沒有任何來源；與 /zh/annual-fee-card-breakeven/（金管會來源、NT$ 算例）意圖重複。
+https://worthcalc.win/zh/tools/commute-cost/,tool,通勤每公里花多少？油錢、時間與回辦公室成本計算機,yes,yes,vipmbr.cpc.com.tw; www.taipower.com.tw; www.fueleconomy.gov.tw,2026-07-07,,keep,機車/汽車/大眾運輸/TPASS/計程車的通勤成本，預設用中油牌價與台電電價並連到官方；計算機可用。建議補正式來源區塊。
+https://worthcalc.win/zh/tools/compound-growth/,tool,複利成長與儲蓄目標計算機,partial,yes,www.stat.gov.tw; rate.bot.com.tw,2026-07-31,,rewrite,主題不依賴台灣規則（複利），僅附台灣使用情境與主計總處/臺銀牌告連結；需連結勞退自提等台灣情境，或併入退休相關頁。
+https://worthcalc.win/zh/tools/cost-per-mile/,tool,這台車每公里到底花多少？完整養車成本計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/tools/commute-cost/,只有 NT$ 預設值、沒有來源；每公里成本已是 /zh/tools/commute-cost/ 的一個區塊，意圖重複。
+https://worthcalc.win/zh/tools/costco-membership/,tool,Costco 會員回本計算機：金星與黑鑽卡會員哪個划算？,yes,yes,www.costco.com.tw,2026-09-22,,keep,好市多台灣官網會員條件，2026-09-22 查核；金星/商業/黑鑽卡回本與升級，計算機可用。吸收 /zh/is-costco-executive-membership-worth-it/（同一問題）。
+https://worthcalc.win/zh/tools/credit-card-payoff/,tool,信用卡循環利息與清償時間計算機,yes,yes,law.fsc.gov.tw; www.foi.org.tw,2026-07-31,1,keep,台灣循環利率上限 15%、最低應繳組成，連到金管會；三種還款模式，計算機可用。
+https://worthcalc.win/zh/tools/debt-strategy/,tool,債務雪球法 vs 雪崩法比較工具,yes,yes,law.fsc.gov.tw; www.ba.org.tw,2026-07-31,,keep,台灣循環利率上限與信貸優惠利率到期情境，連到金管會與銀行公會；雪球/雪崩並排，計算機可用。
+https://worthcalc.win/zh/tools/dti-calculator/,tool,負債比 DBR 與房貸收支比計算機,yes,yes,www.ba.org.tw; www.cbc.gov.tw,2026-07-31,,keep,DBR 22 倍與房貸收支比兩個台灣審核比率，連到銀行公會與央行；計算機可用。
+https://worthcalc.win/zh/tools/ev-vs-gas/,tool,電動機車 vs 油車總持有成本計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/ev-vs-gas-total-cost/,只有 NT$ 預設值、沒有來源；與 /zh/ev-vs-gas-total-cost/（財政部/牌照稅/交通部來源）意圖完全重複。
+https://worthcalc.win/zh/tools/home-affordability/,tool,房屋負擔能力與完整持有成本計算機,yes,yes,www.cbc.gov.tw; lvr.land.moi.gov.tw,2026-07-31,,keep,依央行選擇性信用管制、房屋稅、地價稅反推可負擔房價，連到央行與實價登錄；計算機可用。
+https://worthcalc.win/zh/tools/installment-true-apr/,tool,分期付款真實 APR 計算機,partial,no,,2026-07-07,,rewrite,計算機本身可用，但沒有任何台灣來源，也沒有台灣算例；需補金管會總費用年百分率規範與台灣分期情境。
+https://worthcalc.win/zh/tools/latte-factor/,tool,拿鐵因子日常習慣成本計算機,no,no,,2026-07-07,,remove,通用「每天一杯咖啡」題目，與台灣在地需求無關，沒有來源，也不屬於五個情境。
+https://worthcalc.win/zh/tools/mortgage-payoff/,tool,房貸多繳與提前清償試算工具,yes,yes,www.ey.gov.tw; www.ba.org.tw,2026-07-31,1,keep,台灣使用情境（提前清償違約金、青安貸款），連到財政部/行政院與銀行公會；GSC 28 天有曝光；計算機可用。
+https://worthcalc.win/zh/tools/rent-vs-buy/,tool,租屋 vs 買房計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/rent-vs-buy-breakeven-year/,通用計算機、沒有來源；與 /zh/rent-vs-buy-breakeven-year/（含實價登錄、房地合一稅來源）意圖重複。
+https://worthcalc.win/zh/tools/salary-converter/,tool,時薪、月薪與年薪換算工具,yes,yes,www.mol.gov.tw; law.moj.gov.tw,2026-07-31,,keep,台灣基本工資、勞退、健保、所得稅情境，連到勞動部與全國法規資料庫；計算機可用。
+https://worthcalc.win/zh/tools/subscription-audit/,tool,訂閱支出健檢計算機,partial,no,,2026-07-07,,rewrite,會員與訂閱情境內的核心計算機，但沒有任何來源或台灣價格；需補台灣現行訂閱價格來源與查核日期。
+https://worthcalc.win/zh/topics/debt-credit/,hub,債務與信用,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/topics/everyday/,hub,日常回本門檻,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/topics/housing/,hub,住房與負擔能力,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/topics/income-savings/,hub,收入、儲蓄與成長,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/topics/memberships/,hub,訂閱與會員,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/topics/transportation/,hub,交通與持有成本,no,no,,,,merge_into:https://worthcalc.win/,自動產生的主題清單頁，沒有原創內容；新首頁已依情境分組，意圖重複。
+https://worthcalc.win/zh/true-cost-of-car-ownership/,article,養車一個月多少錢？牌照稅、燃料費、強制險都算進去才是真成本,yes,yes,law.moj.gov.tw; www.cali.org.tw,2026-07-31,,keep,台灣牌照稅、燃料使用費、強制險，連到全國法規資料庫與壽險公會，2026-07-31 查核。
+https://worthcalc.win/zh/true-hourly-wage-after-commuting-work-expenses/,article,扣掉通勤和工作支出後，你的真實時薪是多少,partial,yes,www.mol.gov.tw,2026-07-19,,rewrite,通勤情境，連到勞動部；算法可用但通用，需補台灣通勤成本來源。
+https://worthcalc.win/zh/upfront-fees-financing-cost/,article,開辦費與手續費如何拉高分期真實成本,yes,yes,law.fsc.gov.tw; www.ba.org.tw,2026-07-18,1,keep,金管會消費者信用交易廣告總費用年百分率規範與銀行公會，NT$ 算例，2026-07-18 查核。
+https://worthcalc.win/zh/upgrade-your-phone-or-keep-it/,article,手機該換還是繼續用？比較維修、舊換新、資費與每月成本,partial,yes,cpc.ey.gov.tw; enews.moenv.gov.tw,2026-07-19,,rewrite,大型支出情境，連到消保處與環境部舊機回收；需補台灣電信方案與官方來源。
+https://worthcalc.win/zh/work-from-home-vs-commuting-hidden-costs/,article,在家工作還是通勤？比較每月隱藏成本,yes,yes,laws.mol.gov.tw; hc1.taipower.com.tw; hc2.taipower.com.tw,2026-07-19,,keep,勞動部居家工作規範、台電電價與運研所來源，NT$ 算例，2026-07-19 查核。
+https://worthcalc.win/zh/zero-interest-installments-truth/,article,0 利率分期真的零利率嗎？分期手續費年利率怎麼算,yes,yes,law.fsc.gov.tw,2026-07-18,,keep,金管會分期廣告規範，NT$ 算例與有效年率公式，2026-07-18 查核。

@@ -26,8 +26,11 @@ for (const file of htmlFiles) {
   checked++;
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const target = new URL(match[1].replaceAll('&amp;', '&'), url);
-    if (target.origin === origin && target.pathname === '/en/') offenders.push(`${route} -> ${match[1]}`);
+    // /zh/ is only a noindex redirect stub for the homepage `/` (2026-10-15
+    // rebuild); /en/ is the human-only English page and is reached through the
+    // language switcher, which is not an internal-link-equity problem.
+    if (target.origin === origin && target.pathname === '/zh/') offenders.push(`${route} -> ${match[1]}`);
   }
 }
-assert.equal(offenders.length, 0, `Indexable canonical pages link to /en/:\n${offenders.join('\n')}`);
-console.log(`[canonical-home-links] PASS — ${checked} indexable canonical pages, 0 /en/ homepage links`);
+assert.equal(offenders.length, 0, `Indexable canonical pages link to the /zh/ redirect stub (link to / instead):\n${offenders.join('\n')}`);
+console.log(`[canonical-home-links] PASS — ${checked} indexable canonical pages, 0 links to the /zh/ stub`);

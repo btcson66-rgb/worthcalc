@@ -2,7 +2,13 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 
 const dist = resolve('dist');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// 2026-10-15 rebuild: es, fr and de are retired (no routes), so a topic is "complete"
+// when both built locales (en, zh) carry it with every required marker, not all five.
+// The release floors below were five-locale counts. home (6 -> 2), legal (30 -> 12) and the
+// per-variant counts (145 -> 58) are re-based to en + zh; html, tool and editorial keep their
+// original floors because the built output still clears them.
+// P1b will remove or merge more pages, and will have to lower these again with evidence.
+const locales = ['en', 'zh'];
 const requiredMarkers = [
   'class="direct-answer"',
   'class="formula"',
@@ -46,12 +52,12 @@ const briefRoutes = [
 
 const releaseFloor = {
   html: 237,
-  home: 6,
-  legal: 30,
+  home: 2,
+  legal: 12,
   tool: 40,
   editorial: 160,
-  alignedVariants: 145,
-  compliantVariants: 145,
+  alignedVariants: 58,
+  compliantVariants: 58,
   completeTopics: 29,
 };
 
@@ -77,8 +83,8 @@ const counts = { error: 0, home: 0, legal: 0, tool: 0, editorial: 0 };
 
 for (const path of paths) {
   if (path === '/404.html') counts.error += 1;
-  else if (path === '/' || /^\/(?:en|zh|es|fr|de)\/$/.test(path)) counts.home += 1;
-  else if (/^\/(?:en|zh|es|fr|de)\/tools\//.test(path)) counts.tool += 1;
+  else if (path === '/' || /^\/(?:en|zh)\/$/.test(path)) counts.home += 1;
+  else if (/^\/(?:en|zh)\/tools\//.test(path)) counts.tool += 1;
   else if (legalSlugs.has(path.split('/').filter(Boolean).at(-1))) counts.legal += 1;
   else counts.editorial += 1;
 }
@@ -102,16 +108,16 @@ for (const topic of briefRoutes) {
   topicRows.push({ id: topic.id, route: topic.slug, present, compliant });
 }
 
-const completeTopics = topicRows.filter((topic) => topic.present === 5 && topic.compliant === 5).length;
+const completeTopics = topicRows.filter((topic) => topic.present === locales.length && topic.compliant === locales.length).length;
 
 console.log('WorthCalc editorial brief coverage');
 console.log(`- Total built HTML: ${htmlFiles.length}`);
 console.log(`- Page classes: ${JSON.stringify(counts)}`);
-console.log(`- Task-aligned article variants: ${alignedVariants}/145`);
-console.log(`- Fully brief-compliant variants: ${compliantVariants}/145`);
-console.log(`- Complete five-language topics: ${completeTopics}/29`);
+console.log(`- Task-aligned article variants: ${alignedVariants}/${locales.length * briefRoutes.length}`);
+console.log(`- Fully brief-compliant variants: ${compliantVariants}/${locales.length * briefRoutes.length}`);
+console.log(`- Complete two-language (en + zh) topics: ${completeTopics}/${briefRoutes.length}`);
 for (const topic of topicRows) {
-  console.log(`  #${topic.id} ${topic.route}: ${topic.present}/5 present, ${topic.compliant}/5 fully structured`);
+  console.log(`  #${topic.id} ${topic.route}: ${topic.present}/${locales.length} present, ${topic.compliant}/${locales.length} fully structured`);
 }
 
 const classifiedPages = Object.values(counts).reduce((sum, count) => sum + count, 0);

@@ -118,8 +118,8 @@ const relatedLinks = liveRelated.map((href) => ({
       site: Astro.site,
     }),
     breadcrumbJsonLd(crumbs, Astro.site),
-    // No faqJsonLd here: <FAQ> below emits the FAQPage block itself, and a
-    // second copy is a duplicate-FAQPage error in Search Console.
+    // No FAQPage block: Google retired the FAQ rich result on 2026-06-15, and the
+    // <FAQ> below renders the questions as visible content only.
   ]}
 >
   <p class="brief-answer"><strong>{copy.answerLabel}</strong> {data.answer}</p>

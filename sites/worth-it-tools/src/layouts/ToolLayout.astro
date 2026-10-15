@@ -14,7 +14,8 @@ import TrustBlock from '../components/TrustBlock.astro';
 import TopicLinks from '../components/TopicLinks.astro';
 import BaseLayout from './BaseLayout.astro';
 import type { TrustBlockProps } from '../types/trustBlock';
-import { fallbackTrustBlock } from '../lib/trustBlock';
+import { fallbackTrustBlock, isoDate } from '../lib/trustBlock';
+import AuthorByline from '../components/AuthorByline.astro';
 
 interface RelatedLink {
   title: string;
@@ -122,6 +123,7 @@ const reviewLabels = {
 >
   <Breadcrumb items={crumbs} />
   <h1>{title}</h1>
+  <AuthorByline locale={locale} lastVerified={isoDate(resolvedTrustBlock.lastReviewed)} />
   <AdSlot noindex={noindex} />
   <section class="tool">
     <slot />

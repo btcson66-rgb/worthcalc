@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -31,7 +32,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { grossPay: 3800, takeHomePay: 2600, paidHours: 173.33, unpaidHours: 5, commuteHours: 20, workCosts: 300, targetHourly: 12 }, fields: fields.de, copy: { heading: 'Rechner für den tatsächlichen Netto-Stundenwert', intro: 'Einen Abrechnungszeitraum und echte Abrechnungswerte verwenden.', output1: 'Netto je gebundener Stunde', output2: 'Brutto je bezahlter Stunde', output3: 'Gesamte gebundene Stunden', verdictPositive: 'Der tatsächliche Netto-Stundenwert erreicht Ihr persönliches Ziel.', verdictNegative: 'Der tatsächliche Netto-Stundenwert liegt unter Ihrem persönlichen Ziel.', privacy: 'Persönlicher Vergleich, keine rechtliche Lohnfeststellung.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as L;
 const article = articles[locale];
 const guide = trueHourlyWageGuides[locale]!;

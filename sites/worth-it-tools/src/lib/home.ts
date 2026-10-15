@@ -1,4 +1,4 @@
-import { LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
+import { HOME_LOCALE, LOCALE_HREFLANG, SITE, type CoreLocale } from '../consts';
 import type { EntityJsonLdOptions, FaqItem } from './seo';
 import { organizationId, webSiteId } from './seo';
 
@@ -719,7 +719,7 @@ export interface HomeFeaturedItem {
 export function homeJsonLd(locale: CoreLocale, site?: URL, featured?: readonly HomeFeaturedItem[]): object[] {
   const content = homeContent[locale];
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
-  const pageUrl = locale === 'en' ? `${origin}/` : `${origin}/${locale}/`;
+  const pageUrl = locale === HOME_LOCALE ? `${origin}/` : `${origin}/${locale}/`;
   // The ItemList has to describe what the page actually renders, so the caller
   // passes the same featured selection the homepage lays out.
   const featuredItems = featured ?? content.tools;

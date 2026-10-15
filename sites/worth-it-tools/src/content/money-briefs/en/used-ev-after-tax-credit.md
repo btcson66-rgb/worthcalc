@@ -8,7 +8,7 @@ description: "The federal used-EV credit ended for purchases after Sept. 30, 202
 answer: "For a 2026 used-EV purchase, do not subtract the expired federal previously-owned clean vehicle credit. A practical comparison is purchase-price difference plus energy cost per mile. Using July 2026 U.S. residential electricity at 18.31¢/kWh, Sept. 21, 2026 regular gasoline at $4.478/gal, EPA/DOE efficiency of 28 kWh/100 miles for a 2023 Chevrolet Bolt EV and 35 mpg for a 2023 Toyota Corolla, the national energy-cost inputs are about 5.13¢/mile for the Bolt and 12.79¢/mile for the Corolla."
 publishAt: "2026-10-24"
 lastReviewed: "2026-09-27"
-relatedTool: "/en/tools/ev-vs-gas/"
+relatedTool: "/en/ev-vs-gas-total-cost/"
 relatedToolLabel: "ev vs gas"
 formula: "break-even years = purchase-price premium / annual energy-cost savings"
 limits:

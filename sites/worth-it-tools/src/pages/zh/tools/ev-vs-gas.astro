@@ -29,13 +29,13 @@ const faq = [
 ];
 const related = [
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
-  { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
   { title: '分期付款真實 APR 計算機', href: localizedPath(locale, '/tools/installment-true-apr') },
   { title: '指南：電動車和油車怎麼比較五年總持有成本', href: localizedPath(locale, '/ev-vs-gas-total-cost') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']}>
   <p class="intro">
     這個電動機車 vs 油車成本計算機用台灣常見情境，比較 Gogoro 類電動機車和 125cc 油車的總持有成本。你可以調整里程、電池資費、油價和保養費，看哪一邊真的省。
   </p>
@@ -109,7 +109,7 @@ const related = [
       打平年會比較購車價差和每年營運成本差。模型刻意保持簡單，如果保險、停車、牌照稅或二手殘值對你很重要，請另外加回自己的估算。
     </p>
     <p>
-      如果你只想知道單一車輛的能源與持有成本每公里是多少，請改用<a href={localizedPath(locale, '/tools/cost-per-mile')}>每公里成本計算機</a>；本頁則專門處理電動車與油車的整體持有成本比較。
+      如果你只想知道單一車輛的能源與持有成本每公里是多少，請改用<a href={localizedPath(locale, '/tools/commute-cost')}>通勤成本計算機</a>的「直接填每公里成本」欄位；本頁則專門處理電動車與油車的整體持有成本比較。
     </p>
     <p>
       如果你的問題是「充電樁一度電多少錢」或想比較家充與公共充電的每月電費，請接著看<a href={localizedPath(locale, '/home-vs-public-ev-charging-cost')}>家用與公共充電樁電費比較</a>；那一頁讓你填台電方案、公共業者單價與家充工程成本。

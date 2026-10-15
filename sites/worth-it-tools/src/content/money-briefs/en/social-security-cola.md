@@ -34,7 +34,6 @@ faq:
     a: "Plan around the net figure, not the headline. Take your own benefit, multiply by the COLA, subtract your own Part B change — including any income-related adjustment — and use that number in the budget. For many households the useful planning figure is roughly half the headline percentage."
 related:
   - "/en/money/medicare-part-b-premium/"
-  - "/en/money/emergency-fund-size-2026/"
   - "/en/pay-raise-vs-inflation-purchasing-power/"
 draft: true
 ---

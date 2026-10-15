@@ -29,13 +29,13 @@ const faq = [
 ];
 const related = [
   { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
-  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
-  { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'Annual-fee card break-even guide', href: localizedPath(locale, '/annual-fee-card-breakeven') },
+  { title: 'Rent vs buy: break-even year', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
   { title: 'The truth about 0% installments', href: localizedPath(locale, '/zero-interest-installments-truth') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
   <p class="intro">
     Use this installment plan true APR calculator to turn a flat handling fee or 0% installment offer into a real annualized borrowing cost. It helps you compare BNPL real interest rate offers with a simple APR threshold before you commit.
   </p>

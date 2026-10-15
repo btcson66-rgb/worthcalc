@@ -1,0 +1,129 @@
+{
+  "decision": {
+    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC",
+    "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target. Exception (CEO P1b verdict, 2026-10-15): /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ stay real calculator pages; only their English mirrors are stubs.",
+    "rollback": "Delete the entry, restore the page source from git history, rebuild."
+  },
+  "stubs": [
+    {
+      "from": "/zh/annual-vs-monthly-billing/",
+      "to": "/zh/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/en/annual-vs-monthly-billing/",
+      "to": "/en/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/zh/emergency-fund-irregular-income/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/emergency-fund-vs-debt-payoff/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/emergency-fund-vs-sinking-fund/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/extended-warranty-math/",
+      "to": "/zh/is-an-extended-warranty-worth-it/"
+    },
+    {
+      "from": "/en/extended-warranty-math/",
+      "to": "/en/is-an-extended-warranty-worth-it/"
+    },
+    {
+      "from": "/zh/is-costco-executive-membership-worth-it/",
+      "to": "/zh/tools/costco-membership/"
+    },
+    {
+      "from": "/en/is-costco-executive-membership-worth-it/",
+      "to": "/en/tools/costco-membership/"
+    },
+    {
+      "from": "/zh/money/emergency-fund-size-2026/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/money/pay-off-car-loan-early-or-invest/",
+      "to": "/zh/money/car-loan-vs-cash/"
+    },
+    {
+      "from": "/zh/simple-vs-compound-interest/",
+      "to": "/zh/how-compound-growth-works/"
+    },
+    {
+      "from": "/en/tools/cashback-breakeven/",
+      "to": "/en/annual-fee-card-breakeven/"
+    },
+    {
+      "from": "/zh/tools/cost-per-mile/",
+      "to": "/zh/tools/commute-cost/"
+    },
+    {
+      "from": "/en/tools/cost-per-mile/",
+      "to": "/en/tools/commute-cost/"
+    },
+    {
+      "from": "/en/tools/ev-vs-gas/",
+      "to": "/en/ev-vs-gas-total-cost/"
+    },
+    {
+      "from": "/zh/tools/rent-vs-buy/",
+      "to": "/zh/rent-vs-buy-breakeven-year/"
+    },
+    {
+      "from": "/en/tools/rent-vs-buy/",
+      "to": "/en/rent-vs-buy-breakeven-year/"
+    },
+    {
+      "from": "/zh/topics/debt-credit/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/debt-credit/",
+      "to": "/en/"
+    },
+    {
+      "from": "/zh/topics/everyday/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/everyday/",
+      "to": "/en/"
+    },
+    {
+      "from": "/zh/topics/housing/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/housing/",
+      "to": "/en/"
+    },
+    {
+      "from": "/zh/topics/income-savings/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/income-savings/",
+      "to": "/en/"
+    },
+    {
+      "from": "/zh/topics/memberships/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/memberships/",
+      "to": "/en/"
+    },
+    {
+      "from": "/zh/topics/transportation/",
+      "to": "/"
+    },
+    {
+      "from": "/en/topics/transportation/",
+      "to": "/en/"
+    }
+  ]
+}

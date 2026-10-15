@@ -29,32 +29,6 @@ export const seoPackage084Guides: Record<string, SeoPackage084GuideMeta> = {
     "breadcrumbLabel": "Paper Shredder Electricity Cost Per Shredding Session Used: Count Motor Cycles",
     "schemaFile": "084__en__paper-shredder-electricity-cost-per-shredding-session-used.json"
   },
-  "es/paper-shredder-electricity-cost-per-shredding-session-used": {
-    "key": "es/paper-shredder-electricity-cost-per-shredding-session-used",
-    "packageId": "084",
-    "locale": "es",
-    "articleSlug": "paper-shredder-electricity-cost-per-shredding-session-used",
-    "title": "Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor",
-    "seoTitle": "Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor | WorthCalc",
-    "metaDescription": "Calcula el coste eléctrico de una destructora por sesión con energía medida del motor, reversa, atascos y espera, separando bolsas y mantenimiento.",
-    "excerpt": "Calcula el coste eléctrico de una destructora por sesión con energía medida del motor, reversa, atascos y espera, separando bolsas y mantenimiento.",
-    "canonical": "https://worthcalc.win/es/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor",
-    "ogDescription": "Calcula el coste eléctrico de una destructora por sesión con energía medida del motor, reversa, atascos y espera, separando bolsas y mantenimiento.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor",
-    "imageBrief": "paper-shredder-electricity-cost-per-shredding-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/es/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/",
-      "/es/guides/smart-speaker-electricity-cost-per-listening-hour-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de una destructora por sesión: cuenta los ciclos del motor",
-    "schemaFile": "084__es__paper-shredder-electricity-cost-per-shredding-session-used.json"
-  },
   "zh/paper-shredder-electricity-cost-per-shredding-session-used": {
     "key": "zh/paper-shredder-electricity-cost-per-shredding-session-used",
     "packageId": "084",
@@ -81,56 +55,4 @@ export const seoPackage084Guides: Record<string, SeoPackage084GuideMeta> = {
     "breadcrumbLabel": "碎紙機每次碎紙工作電費：計入馬達循環",
     "schemaFile": "084__zh__paper-shredder-electricity-cost-per-shredding-session-used.json"
   },
-  "hi/paper-shredder-electricity-cost-per-shredding-session-used": {
-    "key": "hi/paper-shredder-electricity-cost-per-shredding-session-used",
-    "packageId": "084",
-    "locale": "hi",
-    "articleSlug": "paper-shredder-electricity-cost-per-shredding-session-used",
-    "title": "Paper shredder electricity cost per shredding session used: count motor cycles",
-    "seoTitle": "Paper shredder electricity cost per shredding session used: count motor cycles | WorthCalc",
-    "metaDescription": "Measured motor, reverse, jam-clearing और standby energy से paper shredder की प्रति shredding session लागत निकालें; bags और maintenance अलग रखें।",
-    "excerpt": "Measured motor, reverse, jam-clearing और standby energy से paper shredder की प्रति shredding session लागत निकालें; bags और maintenance अलग रखें।",
-    "canonical": "https://worthcalc.win/hi/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Paper shredder electricity cost per shredding session used: count motor cycles",
-    "ogDescription": "Measured motor, reverse, jam-clearing और standby energy से paper shredder की प्रति shredding session लागत निकालें; bags और maintenance अलग रखें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Paper shredder electricity cost per shredding session used: count motor cycles",
-    "imageBrief": "paper-shredder-electricity-cost-per-shredding-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/hi/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/hi/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/",
-      "/hi/guides/smart-speaker-electricity-cost-per-listening-hour-used/"
-    ],
-    "breadcrumbLabel": "Paper shredder electricity cost per shredding session used: count motor cycles",
-    "schemaFile": "084__hi__paper-shredder-electricity-cost-per-shredding-session-used.json"
-  },
-  "ar/paper-shredder-electricity-cost-per-shredding-session-used": {
-    "key": "ar/paper-shredder-electricity-cost-per-shredding-session-used",
-    "packageId": "084",
-    "locale": "ar",
-    "articleSlug": "paper-shredder-electricity-cost-per-shredding-session-used",
-    "title": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
-    "seoTitle": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك | WorthCalc",
-    "metaDescription": "احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة.",
-    "excerpt": "احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة.",
-    "canonical": "https://worthcalc.win/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
-    "ogDescription": "احسب تكلفة كهرباء آلة تمزيق الورق لكل جلسة من طاقة المحرك والعكس وإزالة الانسداد والاستعداد المقاسة، مع فصل الأكياس والصيانة.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
-    "imageBrief": "paper-shredder-electricity-cost-per-shredding-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/",
-      "/ar/guides/smart-speaker-electricity-cost-per-listening-hour-used/"
-    ],
-    "breadcrumbLabel": "تكلفة كهرباء آلة تمزيق الورق لكل جلسة: احسب دورات المحرك",
-    "schemaFile": "084__ar__paper-shredder-electricity-cost-per-shredding-session-used.json"
-  }
 };

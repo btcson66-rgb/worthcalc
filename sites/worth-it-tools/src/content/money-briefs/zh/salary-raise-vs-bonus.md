@@ -32,10 +32,7 @@ faq:
     a: "弱很多。兩年下來，同樣 3,000 美元的調薪價值約 6,090 美元，對上 3,000 美元的獎金——仍然比較好，但是兩倍而不是二十七倍。而且新雇主是按市場價值替你定價，不是按你的舊基數，這會進一步削弱複利的論點。"
   - q: "有沒有次級效應？"
     a: "有好幾個，而且全都指向同一邊。雇主退休金配比、退休金提撥與部分福利是按薪資百分比計算的，所以調薪會提高它們，獎金通常不會。未來的升遷與市場調整，也常常是以現行基數的百分比報價。"
-related:
-  - "/zh/money/moving-for-a-job-full-cost/"
-  - "/zh/money/employer-match-vs-debt-payoff/"
-  - "/zh/money/side-hustle-true-hourly-rate/"
+related: []
 draft: true
 ---
 

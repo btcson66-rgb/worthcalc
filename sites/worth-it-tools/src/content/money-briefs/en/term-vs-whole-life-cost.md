@@ -34,8 +34,6 @@ faq:
     a: "When you need cover that does not expire: a dependant who will need support for life, an estate that will owe tax and lack liquidity, or a business agreement funded by a policy. In those cases term does not solve the problem at any price, and the rate comparison on this page is beside the point."
 related:
   - "/en/money/disability-insurance-break-even/"
-  - "/en/money/pet-insurance-break-even/"
-  - "/en/money/emergency-fund-size-2026/"
 draft: true
 ---
 

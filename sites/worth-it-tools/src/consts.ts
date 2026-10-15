@@ -20,8 +20,8 @@ export const SITE = {
   logo: '/favicon.svg',
 } as const;
 
-export type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
-export type ContentLocale = Locale | 'hi' | 'ar';
+export type Locale = 'en' | 'zh';
+export type ContentLocale = Locale;
 export type CoreLocale = Locale;
 
 /*
@@ -32,10 +32,10 @@ export type CoreLocale = Locale;
  *   en  kept for human visitors behind the language switcher, but noindex and
  *       out of the sitemap and out of hreflang (see src/data/deindexed-urls.json).
  *
- * es, fr, de, hi and ar are retired: no route is built for them. Their source
- * files are still in the repository, dormant, until P1b decides what to delete;
- * the `Locale` / `ContentLocale` types keep naming them so that dormant data
- * files still type-check. Every list below is what is BUILT, not what is typed.
+ * es, fr, de, hi and ar are retired and their content, data and translations were
+ * deleted in P1b (2026-10-15), so the `Locale` / `ContentLocale` types name only
+ * the two locales that exist. Bringing one back means restoring its content from
+ * git history and widening these types again.
  */
 
 /** Locales that still have built routes. */
@@ -56,11 +56,6 @@ export const HOME_LOCALE: Locale = 'zh';
 export const LOCALE_LABELS: Record<ContentLocale, string> = {
   en: 'English',
   zh: '中文',
-  es: 'Español',
-  fr: 'Français',
-  de: 'Deutsch',
-  hi: 'हिन्दी',
-  ar: 'العربية',
 };
 
 /** BCP-47 codes for the <html lang> attribute and hreflang. */
@@ -72,11 +67,6 @@ export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
   // matched on. A script-only tag would claim Hong Kong and Macau just as
   // strongly, and none of those figures apply there.
   zh: 'zh-TW',
-  es: 'es',
-  fr: 'fr',
-  de: 'de',
-  hi: 'hi',
-  ar: 'ar',
 };
 
 /**
@@ -91,11 +81,6 @@ export const LOCALE_HREFLANG: Record<ContentLocale, string> = {
 export const LOCALE_DIR: Record<ContentLocale, 'ltr' | 'rtl'> = {
   en: 'ltr',
   zh: 'ltr',
-  es: 'ltr',
-  fr: 'ltr',
-  de: 'ltr',
-  hi: 'ltr',
-  ar: 'rtl',
 };
 
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';

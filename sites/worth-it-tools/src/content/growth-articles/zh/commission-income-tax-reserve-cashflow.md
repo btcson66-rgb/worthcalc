@@ -287,7 +287,7 @@ $$
 ## Related Guides
 
 - [獎金制收入固定支出](https://worthcalc.win/zh/guides/variable-bonus-income-fixed-obligations/)
-- [收入不固定緊急預備金](https://worthcalc.win/zh/emergency-fund-irregular-income/)
+- [收入不固定緊急預備金](https://worthcalc.win/zh/emergency-fund-how-much/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程

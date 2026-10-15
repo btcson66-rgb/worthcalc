@@ -8,7 +8,7 @@ description: "一次 2,900 美元的搬家攤到 12 個月租約，是每月 242
 answer: "把押金、搬家工人、各項規費、空窗期重疊租金與請假時間算進去，搬一次家約 2,900 美元。攤到 12 個月租約是每月 242 美元，所以低於 242 美元的漲幅，接受比避開更便宜。多數續約漲幅都落在這條線以下——房東的籌碼是你的搬家成本，不是市場行情。"
 publishAt: "2026-11-03"
 lastReviewed: "2026-09-19"
-relatedTool: "/zh/tools/rent-vs-buy/"
+relatedTool: "/zh/rent-vs-buy-breakeven-year/"
 relatedToolLabel: "租屋 vs 買房計算機"
 formula: "打平月漲幅 = 搬家總成本 ÷ 新租約月數；只有在每月省下的租金超過這個數字時，搬家才划算"
 limits:
@@ -36,9 +36,7 @@ faq:
   - q: "可以拿這個去談判嗎？"
     a: "可以，而且這是本頁最有用的一件事。你的打平點同時也是房東的天花板：超過它你就走，而重新出租要付出一個月空置加上週轉成本。他能收的，是略低於你打平點的那個漲幅——這代表落在兩者之間的還價，是一個真實可談的區間，而不是一廂情願。"
 related:
-  - "/zh/money/moving-for-a-job-full-cost/"
   - "/zh/money/mortgage-refinance-break-even/"
-  - "/zh/money/buy-now-or-wait-price-increase/"
 draft: true
 ---
 

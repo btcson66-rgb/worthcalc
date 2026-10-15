@@ -29,32 +29,6 @@ export const seoPackage091Guides: Record<string, SeoPackage091GuideMeta> = {
     "breadcrumbLabel": "Electric Pencil Sharpener Cost Per Sharpening Session Used: Count Repeated Cycles",
     "schemaFile": "091__en__electric-pencil-sharpener-electricity-cost-per-sharpening-session-used.json"
   },
-  "es/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used": {
-    "key": "es/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "packageId": "091",
-    "locale": "es",
-    "articleSlug": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "title": "Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos",
-    "seoTitle": "Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos | WorthCalc",
-    "metaDescription": "Estima el coste eléctrico de un sacapuntas eléctrico por sesión con ciclos del motor y espera medidos, separando virutas y cuchilla.",
-    "excerpt": "Estima el coste eléctrico de un sacapuntas eléctrico por sesión con ciclos del motor y espera medidos, separando virutas y cuchilla.",
-    "canonical": "https://worthcalc.win/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos",
-    "ogDescription": "Estima el coste eléctrico de un sacapuntas eléctrico por sesión con ciclos del motor y espera medidos, separando virutas y cuchilla.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos",
-    "imageBrief": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/",
-      "/es/guides/desk-fan-electricity-cost-per-cooling-hour-used/",
-      "/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-      "/es/guides/projector-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de un sacapuntas eléctrico por sesión: cuenta los ciclos",
-    "schemaFile": "091__es__electric-pencil-sharpener-electricity-cost-per-sharpening-session-used.json"
-  },
   "zh/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used": {
     "key": "zh/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
     "packageId": "091",
@@ -81,56 +55,4 @@ export const seoPackage091Guides: Record<string, SeoPackage091GuideMeta> = {
     "breadcrumbLabel": "電動削鉛筆機每次削筆工作電費：計入重複循環",
     "schemaFile": "091__zh__electric-pencil-sharpener-electricity-cost-per-sharpening-session-used.json"
   },
-  "hi/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used": {
-    "key": "hi/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "packageId": "091",
-    "locale": "hi",
-    "articleSlug": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "title": "Electric pencil sharpener cost per sharpening session used: count repeated cycles",
-    "seoTitle": "Electric pencil sharpener cost per sharpening session used: count repeated cycles | WorthCalc",
-    "metaDescription": "Measured motor cycles और standby energy से electric pencil sharpener की प्रति sharpening session cost निकालें; pencil waste और blade replacement अलग रखें।",
-    "excerpt": "Measured motor cycles और standby energy से electric pencil sharpener की प्रति sharpening session cost निकालें; pencil waste और blade replacement अलग रखें।",
-    "canonical": "https://worthcalc.win/hi/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Electric pencil sharpener cost per sharpening session used: count repeated cycles",
-    "ogDescription": "Measured motor cycles और standby energy से electric pencil sharpener की प्रति sharpening session cost निकालें; pencil waste और blade replacement अलग रखें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Electric pencil sharpener cost per sharpening session used: count repeated cycles",
-    "imageBrief": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/electric-stapler-electricity-cost-per-stapling-session-used/",
-      "/hi/guides/desk-fan-electricity-cost-per-cooling-hour-used/",
-      "/hi/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-      "/hi/guides/projector-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "Electric pencil sharpener cost per sharpening session used: count repeated cycles",
-    "schemaFile": "091__hi__electric-pencil-sharpener-electricity-cost-per-sharpening-session-used.json"
-  },
-  "ar/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used": {
-    "key": "ar/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "packageId": "091",
-    "locale": "ar",
-    "articleSlug": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used",
-    "title": "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة",
-    "seoTitle": "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة | WorthCalc",
-    "metaDescription": "قدّر تكلفة مبراة القلم الكهربائية لكل جلسة من دورات المحرك والاستعداد المقاسة، مع فصل بقايا القلم واستبدال الشفرة.",
-    "excerpt": "قدّر تكلفة مبراة القلم الكهربائية لكل جلسة من دورات المحرك والاستعداد المقاسة، مع فصل بقايا القلم واستبدال الشفرة.",
-    "canonical": "https://worthcalc.win/ar/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة",
-    "ogDescription": "قدّر تكلفة مبراة القلم الكهربائية لكل جلسة من دورات المحرك والاستعداد المقاسة، مع فصل بقايا القلم واستبدال الشفرة.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة",
-    "imageBrief": "electric-pencil-sharpener-electricity-cost-per-sharpening-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/electric-stapler-electricity-cost-per-stapling-session-used/",
-      "/ar/guides/desk-fan-electricity-cost-per-cooling-hour-used/",
-      "/ar/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-      "/ar/guides/projector-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "تكلفة مبراة القلم الكهربائية لكل جلسة: احسب الدورات المتكررة",
-    "schemaFile": "091__ar__electric-pencil-sharpener-electricity-cost-per-sharpening-session-used.json"
-  }
 };

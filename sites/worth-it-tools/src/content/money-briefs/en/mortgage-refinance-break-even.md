@@ -33,8 +33,6 @@ faq:
   - q: "How do I refinance without resetting the term?"
     a: "Ask for a term equal to the months remaining on your current loan, or take the 30-year and pay it at the shorter loan's payment. Both reach the same place. The second keeps the lower required payment as a safety valve in a bad year, which is why many people prefer it."
 related:
-  - "/en/money/mortgage-rate-2026-payment-impact/"
-  - "/en/money/pmi-removal-timing/"
   - "/en/extra-mortgage-payments-guide/"
 draft: false
 ---

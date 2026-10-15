@@ -48,9 +48,7 @@ faq:
   - q: "第二份工作有明顯勝出的時候嗎？"
     a: "有，三種情況：它本身開出真正的溢價，例如需要證照或不友善時段的工作；它是遠距的，這會讓交通與大部分無償時間歸零；以及它在累積某個東西——技能、客戶名單、一門生意——而那個價值根本不在時薪裡。第三種是唯一一種「輸掉時薪比較仍然正確」的情況。"
 related:
-  - "/zh/money/side-hustle-true-hourly-rate/"
   - "/zh/money/salary-raise-vs-bonus/"
-  - "/zh/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

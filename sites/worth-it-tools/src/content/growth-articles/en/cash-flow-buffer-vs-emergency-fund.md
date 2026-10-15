@@ -252,6 +252,5 @@ Concepts are aligned with CFPB consumer guidance on emergency savings and cash-f
 
 ## Related WorthCalc guides
 
-- [Emergency Fund for Irregular Income](/en/emergency-fund-irregular-income/)
 - [Annual Bills to Monthly Budget](/en/guides/annual-bills-monthly-equivalent/)
 - [Savings Rate: Gross vs. Net Income](/en/savings-rate-gross-vs-net/)

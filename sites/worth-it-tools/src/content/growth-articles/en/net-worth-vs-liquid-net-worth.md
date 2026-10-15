@@ -166,7 +166,6 @@ These four numbers tell a much richer story than one headline balance. A home pu
 
 ## Related WorthCalc pages
 
-- https://worthcalc.win/en/emergency-fund-irregular-income/
 - https://worthcalc.win/en/tools/budget-builder/
 - https://worthcalc.win/en/savings-rate-gross-vs-net/
 

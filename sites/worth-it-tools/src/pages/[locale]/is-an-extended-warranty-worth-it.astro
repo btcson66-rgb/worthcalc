@@ -8,7 +8,7 @@ import FAQ from '../../components/FAQ.astro';
 import { extendedWarrantyGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type EditorialLocale = 'en' | 'zh';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'Is an extended warranty worth it? Compare price, failure risk, and repair cost',
@@ -32,47 +32,11 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '期望值負數還能買嗎？', answer: '若無法承受一次大額維修，可能願意付費換現金流穩定；但這是風險轉移，不代表數學期望值轉正。也可比較把保費存入維修準備金。' },
     ],
   },
-  es: {
-    title: '¿Merece la pena una garantía ampliada? Precio, riesgo de avería y reparación',
-    description: 'Calcula coste esperado con tu escenario de avería, exclusiones, aceptación, franquicia, gastos y límites sin inventar una tasa del producto.',
-    faq: [
-      { question: '¿Qué probabilidad de avería debo usar?', answer: 'Usa historial documentado del modelo si existe; si no, prueba escenarios bajo, central y alto muy separados. La calculadora no afirma conocer la tasa de tu producto.' },
-      { question: '¿La garantía comercial sustituye a la garantía legal?', answer: 'No. En España la protección comercial adicional puede mejorar, pero nunca reducir ni sustituir, la garantía legal mínima. No pagues por cobertura duplicada.' },
-      { question: '¿Cómo se modelan las exclusiones?', answer: 'Refleja desgaste, accidente, mantenimiento, piezas y documentación en una probabilidad prudente de aceptación. Prueba también un escenario con muchas denegaciones.' },
-      { question: '¿La franquicia se paga una sola vez?', answer: 'Depende del contrato: puede ser por reclamación, visita, aparato o reparación. Si admite varios cobros, crea un escenario de varias averías.' },
-      { question: '¿Puede interesar con valor esperado negativo?', answer: 'Puede proteger liquidez ante una factura grande, pero es transferencia de riesgo, no ganancia esperada. Compara con reservar el precio del plan.' },
-    ],
-  },
-  fr: {
-    title: 'Une extension de garantie est-elle rentable ? Prix, risque de panne et réparation',
-    description: 'Calculez le coût attendu avec vos scénarios de panne, exclusions, acceptation, franchise, frais et plafonds sans inventer un taux produit.',
-    faq: [
-      { question: 'Quelle probabilité de panne utiliser ?', answer: 'Prenez un historique documenté du modèle s’il existe ; sinon testez des scénarios bas, central et haut très espacés. Le calculateur ne prétend pas connaître le taux de votre appareil.' },
-      { question: 'L’extension remplace-t-elle la garantie légale ?', answer: 'Non. La garantie commerciale est facultative, s’ajoute aux garanties légales et ne peut pas les remplacer. Isolez les mois et pannes qu’elle couvre réellement en plus.' },
-      { question: 'Comment intégrer les exclusions ?', answer: 'Traduisez pièces, usure, casse, entretien, justificatifs et réseau imposé en taux d’acceptation prudent, puis testez un scénario de nombreux refus.' },
-      { question: 'La franchise est-elle payée une seule fois ?', answer: 'Le contrat décide : par dossier, intervention, appareil ou pièce. Si plusieurs prélèvements sont possibles, créez un scénario à plusieurs sinistres.' },
-      { question: 'Une valeur attendue négative peut-elle être acceptable ?', answer: 'Elle peut lisser une grosse facture pour un budget fragile, mais c’est un transfert de risque, pas un rendement positif. Comparez avec une épargne réparation.' },
-    ],
-  },
-  de: {
-    title: 'Lohnt sich eine Garantieverlängerung? Preis, Ausfallrisiko und Reparaturkosten',
-    description: 'Berechnen Sie den Erwartungswert mit eigenen Ausfall-, Ausschluss-, Anerkennungs-, Selbstbeteiligungs- und Leistungsgrenzen statt erfundener Quoten.',
-    faq: [
-      { question: 'Welche Ausfallwahrscheinlichkeit soll ich einsetzen?', answer: 'Nutzen Sie belegte Modelldaten, falls vorhanden; sonst weit auseinanderliegende niedrige, mittlere und hohe Szenarien. Der Rechner kennt die Quote Ihres Geräts nicht.' },
-      { question: 'Ist Garantieverlängerung dasselbe wie Gewährleistung?', answer: 'Nein. Gewährleistung ist ein gesetzliches Recht gegenüber dem Verkäufer; Garantie oder Geräteversicherung sind zusätzliche freiwillige beziehungsweise vertragliche Leistungen.' },
-      { question: 'Wie bilde ich Ausschlüsse ab?', answer: 'Überführen Sie Verschleiß, Akku, Sturz, Wartung, Nachweise, Werkstattbindung und Zeitwert in eine vorsichtige Anerkennungsquote und testen Sie viele Ablehnungen.' },
-      { question: 'Fällt die Selbstbeteiligung nur einmal an?', answer: 'Das bestimmt der Vertrag. Sie kann je Schaden, Besuch, Gerät oder Reparatur gelten. Mehrere mögliche Belastungen brauchen ein Mehrschadensszenario.' },
-      { question: 'Kann ein negativer Erwartungswert trotzdem sinnvoll sein?', answer: 'Er kann Liquidität vor einer großen Rechnung schützen, ist aber Risikotransfer statt positiver Erwartungswert. Vergleichen Sie mit einer Reparaturrücklage.' },
-    ],
-  },
 };
 
 const calculators = {
   en: { currency: 'USD' as const, defaults: { planPrice: 199, failureProbability: 25, approvalProbability: 80, repairCost: 600, deductible: 75, claimCost: 25, payoutCap: 1000 }, copy: { heading: 'Extended warranty expected-cost calculator', intro: 'Enter your own low/base/high failure and approval scenarios. No product failure rate is supplied.', planPrice: 'Plan price', failureProbability: 'Failure probability during covered period (%)', approvalProbability: 'Claim approval after exclusions (%)', repairCost: 'Representative repair cost', deductible: 'Deductible', claimCost: 'Shipping/diagnosis/claim costs', payoutCap: 'Per-claim payout cap', selfFundExpected: 'Expected cost if self-funded', planExpected: 'Expected total cost with plan', expectedPayout: 'Expected plan payout', netValue: 'Plan net expected value', breakEvenProbability: 'Break-even failure probability', verdictPlan: 'Plan is lower in expected cost by', verdictSelf: 'Self-funding is lower in expected cost by', privacy: 'Educational scenario, not a product failure prediction or coverage determination. Read the actual contract.' } },
   zh: { currency: 'TWD' as const, defaults: { planPrice: 3990, failureProbability: 30, approvalProbability: 75, repairCost: 12000, deductible: 1000, claimCost: 300, payoutCap: 15000 }, copy: { heading: '延長保固期望成本計算器', intro: '故障與核准率由你做低／中／高情境；系統不提供假精準產品故障率。', planPrice: '方案完整價格', failureProbability: '保障期間故障機率（%）', approvalProbability: '扣除除外後核准率（%）', repairCost: '代表性維修金額', deductible: '自負額', claimCost: '檢測／寄送／申請成本', payoutCap: '單次給付上限', selfFundExpected: '自行準備維修金期望成本', planExpected: '買方案期望總成本', expectedPayout: '方案期望給付', netValue: '方案淨期望值', breakEvenProbability: '損益故障機率', verdictPlan: '買方案期望成本較低', verdictSelf: '自行準備期望成本較低', privacy: '一般教育情境，不預測產品故障或認定理賠。請讀實際契約。' } },
-  es: { currency: 'EUR' as const, defaults: { planPrice: 149, failureProbability: 25, approvalProbability: 80, repairCost: 500, deductible: 50, claimCost: 20, payoutCap: 1000 }, copy: { heading: 'Calculadora de coste esperado de garantía ampliada', intro: 'Introduce escenarios propios de avería y aceptación. No se proporciona una tasa inventada del producto.', planPrice: 'Precio total del plan', failureProbability: 'Probabilidad de avería cubierta (%)', approvalProbability: 'Aceptación tras exclusiones (%)', repairCost: 'Reparación representativa', deductible: 'Franquicia', claimCost: 'Diagnóstico/envío/reclamación', payoutCap: 'Límite por reclamación', selfFundExpected: 'Coste esperado sin plan', planExpected: 'Coste total esperado con plan', expectedPayout: 'Pago esperado del plan', netValue: 'Valor esperado neto del plan', breakEvenProbability: 'Avería de equilibrio', verdictPlan: 'El plan tiene menor coste esperado por', verdictSelf: 'Autofinanciar tiene menor coste esperado por', privacy: 'Escenario educativo; no predice averías ni resuelve cobertura. Lee el contrato real.' } },
-  fr: { currency: 'EUR' as const, defaults: { planPrice: 179, failureProbability: 25, approvalProbability: 75, repairCost: 600, deductible: 60, claimCost: 30, payoutCap: 800 }, copy: { heading: 'Calculateur de coût attendu d’une extension de garantie', intro: 'Saisissez vos scénarios de panne et d’acceptation. Aucun taux de panne produit n’est inventé.', planPrice: 'Prix total de l’extension', failureProbability: 'Probabilité de panne couverte (%)', approvalProbability: 'Acceptation après exclusions (%)', repairCost: 'Réparation représentative', deductible: 'Franchise', claimCost: 'Diagnostic/envoi/dossier', payoutCap: 'Plafond par sinistre', selfFundExpected: 'Coût attendu sans extension', planExpected: 'Coût total attendu avec extension', expectedPayout: 'Prestation attendue', netValue: 'Valeur attendue nette', breakEvenProbability: 'Panne d’équilibre', verdictPlan: 'L’extension coûte moins en espérance de', verdictSelf: 'L’épargne réparation coûte moins en espérance de', privacy: 'Scénario pédagogique : ni prédiction de panne ni décision de couverture. Lisez le contrat.' } },
-  de: { currency: 'EUR' as const, defaults: { planPrice: 169, failureProbability: 25, approvalProbability: 70, repairCost: 650, deductible: 100, claimCost: 20, payoutCap: 800 }, copy: { heading: 'Erwartungskosten-Rechner für Garantieverlängerungen', intro: 'Geben Sie eigene Ausfall- und Anerkennungsszenarien ein. Eine erfundene Produktquote wird nicht vorgegeben.', planPrice: 'Gesamtpreis des Vertrags', failureProbability: 'Ausfall im zusätzlichen Zeitraum (%)', approvalProbability: 'Anerkennung nach Ausschlüssen (%)', repairCost: 'Typische gedeckte Reparatur', deductible: 'Selbstbeteiligung', claimCost: 'Diagnose/Versand/Schadenkosten', payoutCap: 'Leistungsgrenze je Schaden', selfFundExpected: 'Erwartete Eigenvorsorge', planExpected: 'Erwartete Gesamtkosten mit Vertrag', expectedPayout: 'Erwartete Vertragsleistung', netValue: 'Nettoerwartungswert', breakEvenProbability: 'Break-even-Ausfall', verdictPlan: 'Vertrag hat niedrigere Erwartungskosten um', verdictSelf: 'Eigenvorsorge hat niedrigere Erwartungskosten um', privacy: 'Bildungsszenario, keine Ausfallprognose oder Deckungsentscheidung. Vertrag lesen.' } },
 };
 
 export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
@@ -82,7 +46,7 @@ const guide = extendedWarrantyGuides[locale]!;
 const calculator = calculators[locale];
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh']}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>An extended warranty is not automatically “peace of mind for pennies.” Its price must be compared with the probability-weighted repair cost it actually removes after exclusions, deductibles, claim friction and payout limits.</p>
@@ -104,45 +68,25 @@ const calculator = calculators[locale];
     <p>行政院消保處說明，業者提出的品質保證是獨立擔保，應依保證內容負責。付費延長方案的履約者可能不同；要記錄原廠、零售商、第三方、生效日與重疊月數。</p>
     <h2>除外不能只藏在備註</h2>
     <p>耗材、人為損壞、泡水、未定期保養、指定維修點、事前授權、發票與序號都可能影響核准。把它們轉成保守核准率，再用 30%、60%、90% 之類的情境測試，而非宣稱一定理賠。</p>
+    <h2>結帳前的三個快篩</h2>
+    <p>以下是本站的經驗法則，不是統計結論；精確結論仍要回到上方的計算機。</p>
+    <ul>
+      <li><strong>方案價格占商品價格太高。</strong>延保價格超過商品價的 15% 左右，期望值通常很難追上，可以先拒絕再算。</li>
+      <li><strong>壞了修得起。</strong>預期維修費低於商品價的 30% 左右，壞了自己修得起，通常不需要靠保固對沖。</li>
+      <li><strong>原廠保固與延保常重疊。</strong>「延長兩年」可能從購買日起算，真正多出來的只有最後一年；先問清楚起算日，再把真正新增的期間放進計算。</li>
+    </ul>
+    <h2>公式說不買、但可以買的三種情況</h2>
+    <ol>
+      <li><strong>單次維修費逼近重買價：</strong>高階手機的螢幕與主機板、輕薄筆電的整板更換，故障實質上等於重買。這時保固對沖的是大額損失，要用維修費的真實高值重跑期望值，結論可能翻正。</li>
+      <li><strong>故障率高的品類：</strong>含馬達、水路與移動零件的電器（掃地機器人、洗衣機、咖啡機）通常比純電子品更容易故障，同一條公式會算出不同答案。</li>
+      <li><strong>壞不起的設備：</strong>靠它吃飯的工作機、獨居長輩的冷氣，買的是「壞掉當天就有人來修」的確定性，不是期望值。為確定性付溢價是合理的風險偏好，只要你知道自己買的是安心，不是划算。</li>
+    </ol>
+    <h2>付錢前先查兩層免費保障</h2>
+    <p>不少信用卡內建延長原廠保固的權益，付費延保前先查你的卡片權益頁，並留好發票與保卡；要留意單件上限、是否需要登錄與保留完整單據。台灣的新品另有法定的瑕疵擔保責任，再加上多數原廠的一年保固，延保真正「加保」的往往只有後面的年份，把這段真實區間放進公式，分母會更小。</p>
+    <p>另一個做法是把每次拒絕延保省下的錢轉進固定帳戶，累積成自己的維修基金；前提是真的存下來，而且承受得起基金還小時就遇上一次大維修。</p>
     <h2>分期購買方案要加融資成本</h2>
     <p>若方案跟商品一起分期，實際價格不是標價。也要查終止退費、轉售能否移轉、每次自負額與累計上限；把保費另存維修準備金當比較組。</p>
     <p class="privacy-note">一般教育用途，不是保險、保固、法律、產品安全或財務建議。</p>
-  </>}
-  {locale === 'es' && <>
-    <p>Una garantía ampliada no se compara con la reparación más cara imaginable, sino con el coste que probablemente evita durante el periodo realmente adicional, después de exclusiones, franquicia, trámites y límites.</p>
-    <DecisionGuide content={guide} />
-    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
-    <h2>No pagues por sustituir la garantía legal</h2>
-    <p>En España, los bienes nuevos tienen con carácter general tres años de garantía legal. La garantía comercial adicional puede mejorar esa protección, pero nunca reducirla ni sustituirla. Aísla los meses y averías que añade de verdad.</p>
-    <h2>El documento y la publicidad obligan al garante</h2>
-    <p>Identifica garante, bien cubierto, duración, territorio, procedimiento y ventajas adicionales. Si el contrato exige taller, autorización, mantenimiento o documentación, refleja el riesgo de denegación en vez de usar aceptación del 100%.</p>
-    <h2>Compara con un fondo de reparación</h2>
-    <p>Reservar los 149 € mantiene flexibilidad para una batería, pantalla o avería excluida. La garantía puede proteger liquidez, pero deben valorarse también desistimiento, cancelación, transferencia y solvencia del garante.</p>
-    <p class="privacy-note">Información educativa; no es asesoramiento de seguro, garantía, jurídico, de seguridad o financiero.</p>
-  </>}
-  {locale === 'fr' && <>
-    <p>Une extension de garantie ne se compare pas à la panne la plus chère imaginable. Il faut isoler la période supplémentaire et le montant réellement transféré après franchise, exclusions, main-d’œuvre, déplacement, plafond et refus.</p>
-    <DecisionGuide content={guide} />
-    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
-    <h2>La garantie commerciale reste facultative</h2>
-    <p>Service-Public précise qu’elle s’ajoute aux garanties légales sans les remplacer. Le contrat écrit doit identifier contenu, exclusions, prix, durée, territoire et garant. Une case précochée ne vaut pas accord à une extension payante.</p>
-    <h2>Repérez la couverture qui manque vraiment</h2>
-    <p>Une batterie, la main-d’œuvre, le déplacement ou certaines fonctions peuvent être exclus. Vérifiez également la valeur d’usage en cas de remplacement, l’appareil de prêt, l’immobilisation et la transmission à l’acheteur suivant.</p>
-    <h2>Faites trois scénarios de panne et de refus</h2>
-    <p>Le taux de panne n’est pas universel. Testez une panne rare, centrale et forte, puis recommencez avec une acceptation plus faible. Si la garantie légale couvre encore la période, ne comptez pas deux fois la même protection.</p>
-    <p class="privacy-note">Information générale, pas un conseil d’assurance, de garantie, juridique, de sécurité ou financier.</p>
-  </>}
-  {locale === 'de' && <>
-    <p>Eine Garantieverlängerung wird nicht gegen den teuersten denkbaren Schaden gerechnet, sondern gegen die Reparaturkosten, die sie im zusätzlichen Zeitraum nach Selbstbeteiligung, Ausschlüssen, Zeitwert und Ablehnung tatsächlich abnimmt.</p>
-    <DecisionGuide content={guide} />
-    <ExtendedWarrantyCalculator locale={locale} {...calculator} />
-    <h2>Gewährleistung, Garantie und Geräteversicherung trennen</h2>
-    <p>Die zweijährige Gewährleistung richtet sich gegen den Verkäufer. Eine Garantie ist freiwillig; eine Geräteversicherung kann wiederum andere Risiken und Versicherungsbedingungen haben. Zahlen Sie nicht für dieselbe Störung in denselben Monaten doppelt.</p>
-    <h2>Kleingedrucktes in eine Anerkennungsquote übersetzen</h2>
-    <p>Die Verbraucherzentrale nennt typische Grenzen wie hohe Selbstbeteiligung, Ausschluss von Verschleißteilen, Ersatz durch ein ähnliches Gerät oder nur Zeitwert. Auch Diebstahl, Sturz und Flüssigkeit können enger gedeckt sein als die Werbung klingt.</p>
-    <h2>Rücklage ist die echte Vergleichsgruppe</h2>
-    <p>Wer 169 € selbst zurücklegt, kann auch eine nicht gedeckte Batterie oder Diagnose bezahlen. Ein Vertrag kann einen großen Betrag glätten, muss aber zusätzlich nach Kündigung, Übertragbarkeit, Anbieter und Reparaturnetz bewertet werden.</p>
-    <p class="privacy-note">Allgemeine Bildung, keine Versicherungs-, Garantie-, Rechts-, Sicherheits- oder Finanzberatung.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

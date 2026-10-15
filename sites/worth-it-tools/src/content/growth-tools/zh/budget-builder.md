@@ -43,7 +43,6 @@ draft: false
 
 [完成必要支出整理後，可用緊急預備金指南把每月支出轉成 1、3、6 個月壓力情境。](/zh/emergency-fund-how-much/)
 
-[年度保費、學費與維修不必全部叫緊急支出；這篇說明如何拆成目標基金。](/zh/emergency-fund-vs-sinking-fund/)
 
 ## 常見問題
 

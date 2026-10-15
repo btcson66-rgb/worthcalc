@@ -21,7 +21,7 @@ import { classifyTopic, type TopicId } from './topics';
  */
 
 export interface CalculatorEntry {
-  /** Path without the locale prefix, e.g. `/tools/rent-vs-buy`. */
+  /** Path without the locale prefix, e.g. `/tools/commute-cost`. */
   path: string;
   slug: string;
   title: string;
@@ -33,12 +33,11 @@ export interface CalculatorEntry {
 /**
  * The calculators the homepage leads with, in order.
  *
- * Every slug here exists in all five core locales, so one list serves them all;
+ * Every slug here exists in both core locales, so one list serves them all;
  * a locale that is missing one simply shows fewer cards rather than a dead link.
  */
 export const FEATURED_CALCULATOR_PATHS: readonly string[] = [
   '/tools/costco-membership',
-  '/tools/rent-vs-buy',
   '/tools/commute-cost',
   '/tools/installment-true-apr',
   '/tools/cashback-breakeven',

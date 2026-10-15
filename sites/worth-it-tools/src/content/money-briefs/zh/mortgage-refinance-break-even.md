@@ -33,8 +33,6 @@ faq:
   - q: "怎麼轉貸而不重置年期？"
     a: "要求一個等於你目前剩餘月數的年期，或者選 30 年但按較短貸款的月付去繳。兩者到達同一個地方。第二種保留了較低的「應繳月付」作為壞年頭的安全閥，這也是很多人偏好它的原因。"
 related:
-  - "/zh/money/mortgage-rate-2026-payment-impact/"
-  - "/zh/money/pmi-removal-timing/"
   - "/zh/extra-mortgage-payments-guide/"
 draft: false
 ---

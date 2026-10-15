@@ -127,17 +127,11 @@ const zhDecisionLinks = locale === 'zh'
 </section>
 
 <section class="home-site-links" aria-labelledby="home-site-links-heading">
-  <h2 id="home-site-links-heading">{locale === 'zh' ? '網站與決策入口' : locale === 'es' ? 'Sitio y decisiones' : locale === 'fr' ? 'Le site et vos décisions' : locale === 'de' ? 'Website und Entscheidungen' : 'Site and decision links'}</h2>
+  <h2 id="home-site-links-heading">{locale === 'zh' ? '網站與決策入口' : 'Site and decision links'}</h2>
   <p class="section-lead">
     {locale === 'zh'
       ? '先從適合你的語言與決策問題開始；這些正文入口會帶你到其他首頁與下一個可計算的問題。'
-      : locale === 'es'
-        ? 'Empieza por tu idioma y la decisión que quieres comprobar; estos enlaces forman parte del contenido del sitio.'
-        : locale === 'fr'
-          ? 'Commencez par votre langue et la décision à vérifier ; ces liens font partie du contenu du site.'
-          : locale === 'de'
-            ? 'Beginnen Sie mit Ihrer Sprache und der Entscheidung, die Sie prüfen möchten; diese Links gehören zum Seiteninhalt.'
-            : 'Start with your language and the decision you want to check; these links are part of the page content.'}
+      : 'Start with your language and the decision you want to check; these links are part of the page content.'}
   </p>
   <ul class="home-site-links__list">
     {homeLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}

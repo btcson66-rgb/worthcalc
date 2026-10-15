@@ -185,7 +185,6 @@ breadcrumbLabel: "手上應該留多少現金？把「現金」拆成 4 種用�
 - [現金流緩衝 vs 緊急預備金](/zh/guides/cash-flow-buffer-vs-emergency-fund/)
 - [年度支出怎麼換算每月預算？](/zh/guides/annual-expenses-monthly-equivalent/)
 - [流動淨資產是什麼？](/zh/liquid-net-worth-explained/)
-- [儲蓄率怎麼算？](/zh/how-to-calculate-savings-rate/)
 
 如果你已經把現金分層，下一步可再算「帳戶本身最低要留多少」，避免帳單日期一錯位就動用緊急預備金。
 

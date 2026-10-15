@@ -7,7 +7,14 @@ const dist = resolve('dist');
 // The release floors below were five-locale counts. home (6 -> 2), legal (30 -> 12) and the
 // per-variant counts (145 -> 58) are re-based to en + zh; html, tool and editorial keep their
 // original floors because the built output still clears them.
-// P1b will remove or merge more pages, and will have to lower these again with evidence.
+// P1b (2026-10-15) removed or merged five of the 29 brief topics (cost-per-use-expensive-item,
+// bulk-buying-vs-small-packages, meal-prep-vs-takeout-cost, reusable-vs-disposable-break-even,
+// price-per-wear-clothing-shoes) and five calculators (cashback-breakeven, cost-per-mile, ev-vs-gas,
+// latte-factor, rent-vs-buy), so the floors drop with them: tool 40 -> 32 (3 calculators x en + zh, plus the
+// zh pages of cashback-breakeven and ev-vs-gas that the CEO's P1b verdict kept as real calculator pages),
+// topics 29 -> 24 and variants 58 -> 48 (24 topics x en + zh). Measured after P1b: 32 tool pages,
+// 48/48 variants aligned and compliant, 24/24 complete topics. Redirect stubs are counted in their own
+// class so they cannot satisfy the tool or editorial floors.
 const locales = ['en', 'zh'];
 const requiredMarkers = [
   'class="direct-answer"',
@@ -41,11 +48,6 @@ const briefRoutes = [
   { id: '20', slug: 'is-an-extended-warranty-worth-it' },
   { id: '21', slug: 'upgrade-your-phone-or-keep-it' },
   { id: '22', slug: 'energy-efficient-appliance-payback' },
-  { id: '23', slug: 'cost-per-use-expensive-item' },
-  { id: '24', slug: 'bulk-buying-vs-small-packages' },
-  { id: '25', slug: 'meal-prep-vs-takeout-cost' },
-  { id: '26', slug: 'reusable-vs-disposable-break-even' },
-  { id: '27', slug: 'price-per-wear-clothing-shoes' },
   { id: '28', slug: 'true-hourly-wage-after-commuting-work-expenses' },
   { id: '29', slug: 'pay-raise-vs-inflation-purchasing-power' },
 ];
@@ -54,11 +56,11 @@ const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
-  tool: 40,
+  tool: 32,
   editorial: 160,
-  alignedVariants: 58,
-  compliantVariants: 58,
-  completeTopics: 29,
+  alignedVariants: 48,
+  compliantVariants: 48,
+  completeTopics: 24,
 };
 
 function walkHtml(dir) {
@@ -79,10 +81,17 @@ function sitePath(file) {
 const htmlFiles = walkHtml(dist);
 const paths = htmlFiles.map(sitePath);
 const legalSlugs = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
-const counts = { error: 0, home: 0, legal: 0, tool: 0, editorial: 0 };
+const counts = { error: 0, stub: 0, home: 0, legal: 0, tool: 0, editorial: 0 };
+// A redirect stub (a merged page, or /zh/) stands where a page used to be. It is not a page
+// anyone reads, so it must not count towards the tool or editorial floors below.
+const isRedirectStub = (file) => {
+  const html = readFileSync(file, 'utf8');
+  return /<meta http-equiv="refresh"/i.test(html) && /<meta name="robots" content="noindex/i.test(html);
+};
 
-for (const path of paths) {
+for (const [index, path] of paths.entries()) {
   if (path === '/404.html') counts.error += 1;
+  else if (isRedirectStub(htmlFiles[index])) counts.stub += 1;
   else if (path === '/' || /^\/(?:en|zh)\/$/.test(path)) counts.home += 1;
   else if (/^\/(?:en|zh)\/tools\//.test(path)) counts.tool += 1;
   else if (legalSlugs.has(path.split('/').filter(Boolean).at(-1))) counts.legal += 1;

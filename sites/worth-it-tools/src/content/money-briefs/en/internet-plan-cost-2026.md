@@ -35,10 +35,7 @@ faq:
     a: "Often, and it usually works — which is precisely why the plan should be priced on the assumption that you will not. A discount you have to remember to ask for every twelve months is a real discount with a real failure rate. Price the plan at the standard rate, then treat any renegotiation as an upside rather than as the base case."
   - q: "How do I compare two plans with different promotional lengths?"
     a: "Put both over the same window, ideally the longer of the two contracts, and use the effective monthly formula above. A 6-month promo at $30 and a 12-month promo at $45 are not comparable until both are spread over 24 months — and on that basis the second usually wins even though it loses on the advertised figure."
-related:
-  - "/en/money/streaming-prices-2026/"
-  - "/en/money/buy-now-or-wait-price-increase/"
-  - "/en/money/electricity-price-per-kwh-2026/"
+related: []
 draft: true
 ---
 

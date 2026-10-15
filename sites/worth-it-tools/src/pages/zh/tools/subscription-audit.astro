@@ -29,13 +29,12 @@ const faq = [
 ];
 const related = [
   { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
-  { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
-  { title: '信用卡回饋打平計算機', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
   { title: '訂閱慢慢變多的健檢指南', href: localizedPath(locale, '/subscription-creep') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
   <p class="intro">
     這個訂閱支出計算機會把月繳、季繳、年繳都換成每月成本，讓你看清 Netflix、Spotify、雲端空間和 App 會員一年會吃掉多少預算。填入使用時數後，也能看出哪個訂閱最該重新評估。
   </p>

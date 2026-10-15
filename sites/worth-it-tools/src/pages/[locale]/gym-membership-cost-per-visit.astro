@@ -8,7 +8,7 @@ import { LOCALES, type Locale } from '../../consts';
 import { gymCostGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
 
-type EditorialLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type EditorialLocale = 'en' | 'zh';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
   en: {
     title: 'Gym membership cost per visit: how often do you need to go?',
@@ -32,39 +32,6 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
       { question: '教練課費用要算進會員單次成本嗎？', answer: '若教練課是你為同一運動計畫必買的必要費用就列入；可自由選擇且單獨定價時應分開分析，避免把會籍與教練課混成一個數字。' },
     ],
   },
-  es: {
-    title: 'Coste por visita al gimnasio: cuántas veces debes ir para que compense',
-    description: 'Calcula el coste real por visita con matrícula, cuota, mantenimiento, meses sin uso, asistencia y una entrada suelta comparable.',
-    faq: [
-      { question: '¿Cómo calculo el coste por visita de un gimnasio?', answer: 'Suma matrícula y todos los pagos obligatorios de la permanencia y divide entre visitas reales. Los meses cobrados sin asistencia aumentan el coste y no añaden visitas.' },
-      { question: '¿Cuántas veces al mes tengo que ir para amortizar la cuota?', answer: 'Divide el coste total entre el precio de la entrada suelta y entre los meses activos, y redondea hacia arriba. El ejemplo necesita cuatro visitas en cada uno de once meses activos.' },
-      { question: '¿La matrícula debe incluirse aunque se pague una sola vez?', answer: 'Sí. Matrícula, tarjeta de acceso, mantenimiento y otros cargos obligatorios forman parte del coste del primer contrato. Para una renovación sin matrícula, crea un escenario separado.' },
-      { question: '¿Cómo incluyo un mes de vacaciones?', answer: 'Si pagarás la cuota y no irás, cuenta el mes como perdido. Si el contrato garantiza una pausa gratuita, ajusta los meses o el coste según esa condición concreta.' },
-      { question: '¿Es mejor pagar mensualmente o un abono anual?', answer: 'Depende de permanencia, pago anticipado, baja y asistencia. Calcula cada opción con sus cargos reales y prueba meses sin uso; la periodicidad de pago no siempre coincide con la duración contractual.' },
-    ],
-  },
-  fr: {
-    title: 'Coût par séance de sport : combien de fois faut-il y aller pour rentabiliser l’abonnement ?',
-    description: 'Calculez le coût réel par séance avec frais d’inscription, mensualité, services, mois sans fréquentation et séance à l’unité comparable.',
-    faq: [
-      { question: 'Comment calculer le coût par séance d’une salle de sport ?', answer: 'Additionnez les frais d’inscription et tous les paiements obligatoires de la durée d’engagement, puis divisez par les séances réellement prévues. Un mois payé sans fréquentation reste dans le coût et n’ajoute aucune séance.' },
-      { question: 'Combien de séances par mois faut-il pour rentabiliser un abonnement ?', answer: 'Divisez le coût total par le prix d’une séance à l’unité et par le nombre de mois actifs, puis arrondissez au nombre entier supérieur. L’exemple atteint son seuil à cinq séances pendant chacun des dix mois actifs.' },
-      { question: 'Les frais d’inscription comptent-ils dans le coût par séance ?', answer: 'Oui pour la première période contractuelle. Badge, dossier et autres frais obligatoires font partie du prix payé. Si le renouvellement n’en comporte plus, calculez-le dans un scénario séparé.' },
-      { question: 'Comment compter les vacances ou une suspension ?', answer: 'Si la mensualité reste due, le mois est un mois payé sans fréquentation. Ne retirez un mois ou un montant que si la suspension gratuite, le report ou le remboursement est confirmé par le contrat ou par écrit.' },
-      { question: 'La résiliation en trois clics met-elle fin immédiatement au paiement ?', answer: 'Pas nécessairement. Elle facilite la demande en ligne mais ne supprime pas automatiquement le préavis ou la durée d’engagement applicable. Utilisez la date d’effet confirmée pour le calcul.' },
-    ],
-  },
-  de: {
-    title: 'Fitnessstudio-Kosten pro Besuch: Wie oft müssen Sie trainieren, damit es sich lohnt?',
-    description: 'Berechnen Sie reale Kosten pro Besuch aus Aufnahmegebühr, Monatsbeitrag, Pflichtpauschalen, Ausfallmonaten und Tageskartenpreis.',
-    faq: [
-      { question: 'Wie berechne ich die Kosten pro Fitnessstudio-Besuch?', answer: 'Addieren Sie Aufnahmegebühr und alle unvermeidbaren Zahlungen der Vertragslaufzeit und teilen Sie durch die tatsächlich erwarteten Besuche. Beitragspflichtige Monate ohne Training bleiben Teil der Kosten.' },
-      { question: 'Wie oft muss ich pro Monat trainieren, damit sich der Vertrag lohnt?', answer: 'Teilen Sie die Gesamtkosten durch den Tageskartenpreis und durch die aktiven Monate und runden Sie auf. Im Beispiel sind vier Besuche in jedem der elf aktiven Monate erforderlich.' },
-      { question: 'Muss die Aufnahmegebühr eingerechnet werden?', answer: 'Ja, im ersten Vertragszeitraum. Aufnahme-, Verwaltungs-, Chip- und verpflichtende Servicegebühren gehören zu den Gesamtkosten. Eine Verlängerung ohne Aufnahmegebühr ist ein eigenes Szenario.' },
-      { question: 'Wie rechne ich Urlaub, Krankheit oder Ruhezeit?', answer: 'Ein weiter bezahlter Monat ohne Besuch ist ein Ausfallmonat. Ziehen Sie Beiträge nur ab, wenn Ruhezeit, Gutschrift oder Erstattung schriftlich bestätigt ist; ein Attest führt nicht in jedem Vertrag zum gleichen Ergebnis.' },
-      { question: 'Beendet der Kündigungsbutton sofort die Mindestlaufzeit?', answer: 'Nein. Der Button erleichtert die elektronische Kündigung, ändert aber nicht automatisch wirksame Laufzeit und Frist. Für die Kosten zählt das bestätigte Vertragsende.' },
-    ],
-  },
 };
 
 const calculators = {
@@ -80,27 +47,6 @@ const calculators = {
     defaults: { joiningFee: 1200, monthlyFee: 1288, serviceFee: 100, contractMonths: 12, missedMonths: 2, visitsPerActiveMonth: 6, dropInCost: 450 },
     copy: {
       heading: '健身房單次成本與回本計算機', intro: '請填整段契約會付的費用與真正能到館的次數，不只看廣告月費。', joiningFee: '入會／建檔／門禁卡費', monthlyFee: '每月會費', serviceFee: '每月必要設施或管理費', contractMonths: '契約付款月數', missedMonths: '繳費但完全沒去的月份', visitsPerActiveMonth: '每個有效月份到館次數', dropInCost: '同等單次票價格', totalCost: '會員總成本', totalVisits: '預計總到館次數', costPerVisit: '實際單次成本', breakEvenVisits: '最低回本次數', activeMonthSuffix: '／每個有效月份', positive: '會員方案少付', negative: '單次票方案少付', tie: '兩種方案成本大致相同。', noVisits: '沒有預計到館次數時，整筆會員費都是未使用成本。', privacy: '輸入只在瀏覽器內計算。本工具比較費用，不判定個別契約的請假、終止或退費權利。',
-    },
-  },
-  es: {
-    currency: 'EUR' as const,
-    defaults: { joiningFee: 35, monthlyFee: 29.9, serviceFee: 2, contractMonths: 12, missedMonths: 1, visitsPerActiveMonth: 4, dropInCost: 12 },
-    copy: {
-      heading: 'Calculadora de coste por visita al gimnasio', intro: 'Introduce todos los cargos de la permanencia y una asistencia realista, no solo la cuota anunciada.', joiningFee: 'Matrícula o alta', monthlyFee: 'Cuota mensual', serviceFee: 'Servicio mensual obligatorio', contractMonths: 'Meses pagados por contrato', missedMonths: 'Meses pagados sin visitas', visitsPerActiveMonth: 'Visitas por mes activo', dropInCost: 'Precio de una entrada equivalente', totalCost: 'Coste total de la membresía', totalVisits: 'Visitas previstas', costPerVisit: 'Coste efectivo por visita', breakEvenVisits: 'Visitas de equilibrio', activeMonthSuffix: 'por mes activo', positive: 'La membresía cuesta menos por', negative: 'Las entradas cuestan menos por', tie: 'Las dos opciones cuestan aproximadamente lo mismo.', noVisits: 'Sin visitas previstas, todo el coste de la membresía queda sin uso.', privacy: 'Los datos se calculan en este navegador. El resultado compara costes y no interpreta derechos de baja o devolución.',
-    },
-  },
-  fr: {
-    currency: 'EUR' as const,
-    defaults: { joiningFee: 30, monthlyFee: 34, serviceFee: 3, contractMonths: 12, missedMonths: 2, visitsPerActiveMonth: 5, dropInCost: 11 },
-    copy: {
-      heading: 'Calculateur du coût par séance', intro: 'Saisissez tous les frais de l’engagement et une fréquentation réaliste, pas seulement la mensualité affichée.', joiningFee: 'Frais d’inscription ou de badge', monthlyFee: 'Mensualité', serviceFee: 'Frais mensuels obligatoires', contractMonths: 'Mois payés pendant l’engagement', missedMonths: 'Mois payés sans fréquentation', visitsPerActiveMonth: 'Séances par mois actif', dropInCost: 'Prix d’une séance comparable', totalCost: 'Coût total de l’abonnement', totalVisits: 'Séances prévues', costPerVisit: 'Coût effectif par séance', breakEvenVisits: 'Seuil de rentabilité', activeMonthSuffix: 'par mois actif', positive: 'L’abonnement économise', negative: 'Les séances à l’unité économisent', tie: 'Les deux options coûtent presque la même chose.', noVisits: 'Sans séance prévue, la totalité de l’abonnement reste inutilisée.', privacy: 'Les données restent dans votre navigateur. Le résultat compare des coûts et ne détermine pas vos droits de résiliation ou de remboursement.',
-    },
-  },
-  de: {
-    currency: 'EUR' as const,
-    defaults: { joiningFee: 29, monthlyFee: 39.9, serviceFee: 4.9, contractMonths: 12, missedMonths: 1, visitsPerActiveMonth: 4, dropInCost: 14 },
-    copy: {
-      heading: 'Rechner für Fitnessstudio-Kosten pro Besuch', intro: 'Tragen Sie alle Pflichtkosten und realistische Besuche ein – nicht nur den beworbenen Monatsbeitrag.', joiningFee: 'Aufnahme-, Verwaltungs- oder Chipgebühr', monthlyFee: 'Monatsbeitrag', serviceFee: 'Monatliche Pflichtpauschale', contractMonths: 'Beitragspflichtige Vertragsmonate', missedMonths: 'Bezahlte Monate ohne Besuch', visitsPerActiveMonth: 'Besuche je aktivem Monat', dropInCost: 'Preis einer vergleichbaren Tageskarte', totalCost: 'Gesamtkosten des Vertrags', totalVisits: 'Erwartete Besuche', costPerVisit: 'Effektive Kosten pro Besuch', breakEvenVisits: 'Mindestbesuche', activeMonthSuffix: 'je aktivem Monat', positive: 'Der Vertrag spart', negative: 'Tageskarten sparen', tie: 'Beide Varianten kosten ungefähr gleich viel.', noVisits: 'Ohne geplante Besuche bleibt der gesamte Mitgliedsbeitrag ungenutzt.', privacy: 'Ihre Eingaben bleiben im Browser. Das Ergebnis vergleicht Kosten und entscheidet nicht über Kündigungs- oder Erstattungsrechte.',
     },
   },
 };
@@ -145,48 +91,6 @@ if (!guide) throw new Error(`Missing gym cost guide for ${locale}`);
     <h2>第一期與續約期不要混算</h2>
     <p>入會費只發生在第一期時，續約可另建一個沒有入會費的情境；但續約價、設施費或方案內容也可能改變。過去已付費用是沉沒成本，續約判斷只看下一期會付多少、實際會去幾次。</p>
     <p class="privacy-note">本頁只做一般消費成本比較，不提供運動處方，也不判定個別契約的請假、終止或退費結果。</p>
-  </>}
-  {locale === 'es' && <>
-    <p>Una cuota de 29,90 € no es el coste mensual completo si existen matrícula, mantenimiento y meses de permanencia sin asistencia. La unidad útil es la visita real. Suma todos los cargos inevitables, descuenta los meses en que sabes que no irás y compara con la entrada o instalación municipal que utilizarías de verdad.</p>
-    <DecisionGuide content={guide} />
-    <GymCostCalculator locale={locale} {...calculator} />
-    <h2>Un mes sin gimnasio perjudica dos veces</h2>
-    <p>La cuota sigue en el coste total y ese mes no aporta visitas. En el ejemplo, un mes perdido deja 11 meses activos y 44 visitas, a 9,50 € cada una. Si la asistencia baja a dos veces al mes, el coste sube a 18,99 € por visita y las entradas de 12 € cuestan 153,80 € menos.</p>
-    <h2>Compara servicios realmente equivalentes</h2>
-    <p>Clases, piscina, aparcamiento, taquilla y acceso a varias sedes pueden cambiar la comparación. No asignes valor facial a extras que no usarás. Si tu alternativa es un polideportivo municipal o un bono de diez sesiones, usa ese precio y sus condiciones, no una entrada suelta elegida para favorecer la membresía.</p>
-    <h2>Matrícula, permanencia y pago anticipado son decisiones distintas</h2>
-    <p>La matrícula afecta sobre todo al primer contrato. La permanencia determina cuántos meses debes incluir aunque dejes de ir. El pago anual añade riesgo de dinero adelantado. El Portal del Consumidor de la Comunidad de Madrid recomienda revisar baja, modalidad de pago, extras y penalización antes de firmar.</p>
-    <h2>Conserva contrato y prueba de la baja</h2>
-    <p>Consumo Responde aconseja que el procedimiento de baja figure en el contrato y que la solicitud quede documentada. Devolver un recibo no acredita por sí solo una baja. Para el cálculo, usa la fecha efectiva confirmada y no una fecha de cancelación que todavía no ha sido aceptada.</p>
-    <p class="privacy-note">La página compara costes generales de consumo. No prescribe ejercicio ni determina la validez de permanencias, penalizaciones o devoluciones concretas.</p>
-  </>}
-  {locale === 'fr' && <>
-    <p>Une mensualité de 34 € ne décrit pas le prix réel si l’inscription, le badge, les frais de service et les mois sans fréquentation restent à payer. La bonne unité de comparaison est la séance effectivement réalisée. Partez de votre agenda, puis comparez l’abonnement avec la séance à l’unité, la carte de dix entrées ou l’équipement municipal que vous utiliseriez vraiment.</p>
-    <DecisionGuide content={guide} />
-    <GymCostCalculator locale={locale} {...calculator} />
-    <h2>Deux mois sans fréquentation pèsent deux fois</h2>
-    <p>Ils restent dans les 474 € dus et n’ajoutent aucune séance. Avec cinq séances pendant chacun des dix mois actifs, le coût est de 9,48 € par séance et l’abonnement économise 76 € face à une entrée de 11 €. À trois séances par mois actif, il monte à 15,80 € et les entrées à l’unité économisent 144 €.</p>
-    <h2>Comparez la prestation que vous achèteriez réellement</h2>
-    <p>Une salle peut inclure cours collectifs, piscine, sauna, casier ou accès à plusieurs clubs, alors qu’une entrée à l’unité peut couvrir uniquement le plateau. Ne valorisez un service que s’il correspond à vos horaires et à votre usage. Si votre vraie alternative est une carte municipale ou un carnet de séances, utilisez son prix et sa durée de validité.</p>
-    <h2>Frais, engagement et renouvellement sont trois variables distinctes</h2>
-    <p>Les frais d’inscription renchérissent surtout la première période. La durée d’engagement détermine combien de mensualités restent dans le calcul si vous cessez de venir. Une reconduction tacite impose de refaire le calcul avec le prochain tarif, les nouveaux services et votre fréquentation récente, sans laisser les sommes déjà versées justifier une nouvelle année.</p>
-    <h2>Conservez le contrat et la date d’effet de la résiliation</h2>
-    <p>La DGCCRF recommande d’examiner prix, durée, conditions de résiliation et règlement intérieur avant de s’engager. La résiliation en ligne facilite la démarche pour les contrats concernés, mais ne transforme pas automatiquement une demande en remboursement ni ne supprime une période d’engagement applicable. Gardez l’accusé et calculez jusqu’à la date de fin confirmée.</p>
-    <p class="privacy-note">Cette page compare des coûts de consommation courante. Elle ne prescrit pas d’activité physique et ne tranche pas un litige de résiliation, de suspension ou de remboursement.</p>
-  </>}
-  {locale === 'de' && <>
-    <p>Ein beworbener Monatsbeitrag von 39,90 € ist nicht der vollständige Preis, wenn Aufnahmegebühr, Servicepauschale und bezahlte Ausfallmonate hinzukommen. Entscheidend sind die tatsächlich erwarteten Besuche. Vergleichen Sie den Vertrag mit der Tages- oder Zehnerkarte und dem kommunalen Angebot, das zu Ihren Trainingszeiten wirklich verfügbar ist.</p>
-    <DecisionGuide content={guide} />
-    <GymCostCalculator locale={locale} {...calculator} />
-    <h2>Ein Ausfallmonat verteuert jeden übrigen Besuch</h2>
-    <p>Der Monatsbeitrag bleibt in den 566,60 € Gesamtkosten, während der Monat keine Besuche liefert. Bei vier Besuchen in elf aktiven Monaten kostet ein Training 12,88 € und der Vertrag spart gegenüber 14-€-Tageskarten nur 49,40 €. Bei zwei Besuchen je aktivem Monat kostet jeder Besuch 25,75 €; Tageskarten sparen dann 258,60 €.</p>
-    <h2>Leistungsumfang und Erreichbarkeit müssen vergleichbar sein</h2>
-    <p>Kurse, Sauna, Getränke, Schrank, Parkplatz und mehrere Standorte können den Vergleich verändern. Setzen Sie dafür nur einen Wert an, wenn Sie die Leistung tatsächlich nutzen. Eine günstigere Zehnerkarte mit kurzer Gültigkeit kann ungeeignet sein; ein großes Filialnetz ist wertlos, wenn nur ein Studio auf Ihrem Weg liegt.</p>
-    <h2>Aufnahmegebühr und Verlängerung getrennt rechnen</h2>
-    <p>Im ersten Vertragszeitraum gehört die Aufnahmegebühr vollständig in die Rechnung. Für eine Verlängerung ohne Aufnahmegebühr erstellen Sie ein neues Szenario, prüfen aber auch geänderten Monatsbeitrag und Leistungsumfang. Bereits gezahlte Beiträge sind vergangene Kosten und kein Grund, einen künftig unpassenden Vertrag fortzusetzen.</p>
-    <h2>Mindestlaufzeit, Ruhezeit und Kündigung schriftlich prüfen</h2>
-    <p>Die Verbraucherzentrale weist darauf hin, dass Klauseln, Beitragserhöhungen und Sonderkündigungen vom Vertrag und Einzelfall abhängen. Ein Kündigungsbutton erleichtert die elektronische Erklärung, beendet aber nicht automatisch jede Mindestlaufzeit. Für den Kostenvergleich zählt das bestätigte Vertragsende; eine Lastschriftrückgabe allein ersetzt keine dokumentierte Kündigung.</p>
-    <p class="privacy-note">Diese Seite vergleicht allgemeine Verbraucherkosten. Sie gibt keine Trainingsempfehlung und entscheidet nicht über Wirksamkeit, Ruhezeit, Sonderkündigung oder Erstattung im Einzelfall.</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

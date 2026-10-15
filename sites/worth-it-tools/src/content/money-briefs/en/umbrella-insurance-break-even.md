@@ -32,10 +32,7 @@ faq:
     a: "Overwhelmingly, driving. A multi-vehicle accident with serious injuries can exceed a $300,000 auto liability limit without anything unusual happening, and household exposures such as a dog bite, a swimming pool or a teenage driver raise the probability from the same base. The risk profile follows the cars and the household, not the house price."
   - q: "How does raising my auto limits compare?"
     a: "Raising the underlying limit is usually the cheaper first move per dollar of cover, up to the point where the insurer stops offering more. Beyond that the umbrella is the only instrument available. In practice the two are not alternatives — most insurers require the higher underlying limit before they will sell you the umbrella at all."
-related:
-  - "/en/money/insurance-deductible-break-even/"
-  - "/en/money/should-i-file-an-insurance-claim/"
-  - "/en/money/emergency-fund-size-2026/"
+related: []
 draft: true
 ---
 

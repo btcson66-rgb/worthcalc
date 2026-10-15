@@ -92,7 +92,7 @@ const faq = [
   <ul>
     <li><strong>Extreme rates:</strong> above ~20% the rule overstates doubling time (72 becomes 78 by convention); at 1–2%, 70 or 69.3 fits better. In the everyday 3–12% band, 72 is at home.</li>
     <li><strong>Volatile returns:</strong> the rule assumes steady annual compounding. Real market returns wobble — treat the rule as a sketch of the average scenario, never a route map.</li>
-    <li><strong>Recurring contributions:</strong> the rule handles one lump sum only. Monthly-contribution growth needs the full future-value formula — which is exactly what the <a href={localizedPath(locale, '/tools/latte-factor')}>latte factor calculator</a>&rsquo;s future-value field computes.</li>
+    <li><strong>Recurring contributions:</strong> the rule handles one lump sum only. Monthly-contribution growth needs the full future-value formula — which is exactly what the <a href={localizedPath(locale, '/tools/compound-growth')}>compound growth calculator</a>&rsquo;s monthly-contribution field computes.</li>
   </ul>
 
   <h2>The second half is the main event: doublings of doublings</h2>
@@ -102,7 +102,7 @@ const faq = [
     12-year stretch adds as much in absolute dollars as the first 24
     years combined. That is the mathematical body of &ldquo;starting
     early wins,&rdquo; the reason
-    <a href={localizedPath(locale, '/tools/latte-factor')}>latte-factor totals</a>
+    the long-run totals of small daily habits
     feel counterintuitively large, and the reason
     <a href={localizedPath(locale, '/opportunity-cost-everyday')}>opportunity cost</a>
     weighs so heavily in long-horizon decisions: inside compounding, time

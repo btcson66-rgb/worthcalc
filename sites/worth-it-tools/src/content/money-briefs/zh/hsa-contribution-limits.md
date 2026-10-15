@@ -40,8 +40,6 @@ faq:
     a: "2026 年最低年度 deductible 為個人 1,700 美元、家庭 3,400 美元；2027 年提高到個人 1,750 美元、家庭 3,500 美元。"
 related:
   - "/zh/money/401k-contribution-limits/"
-  - "/zh/money/insurance-deductible-break-even/"
-  - "/zh/money/emergency-fund-size-2026/"
 draft: true
 ---
 

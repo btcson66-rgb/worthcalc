@@ -87,14 +87,8 @@ function sourceFileForRoute(route, contentLookup) {
     if (relativeRoute && existsSync(directoryIndex)) return { sourceFile: directoryIndex, contentDate: null };
   }
 
-  // These two catch-all routes render their content from the named data files.
-  // Prefer those content sources over a single generic wrapper for every URL.
-  if (parts[0] === 'tools' && parts.length === 2) {
-    return { sourceFile: join(projectRoot, 'src', 'data', 'coreToolContent.ts'), contentDate: null };
-  }
-
-  // A dynamic leaf such as /en/topics/housing/, served by
-  // src/pages/[locale]/topics/[topic].astro.
+  // A dynamic leaf such as /en/money/<slug>/, served by
+  // src/pages/[locale]/money/[slug].astro.
   const parentRoute = parts.slice(0, -1).join('/');
   if (parentRoute) {
     const dynamicDirectory = join(pagesRoot, '[locale]', parentRoute);
@@ -106,9 +100,6 @@ function sourceFileForRoute(route, contentLookup) {
     }
   }
 
-  if (parts.length === 1) {
-    return { sourceFile: join(projectRoot, 'src', 'data', 'legalContent.ts'), contentDate: null };
-  }
   return null;
 }
 

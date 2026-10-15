@@ -8,8 +8,8 @@ description: "Compare a car repair against a replacement on cost per remaining m
 answer: "Never compare a repair bill to the car's book value — the comparison is meaningless, because the alternative to the repair is not the car's value, it is the monthly cost of whatever replaces it. Divide each path by the months it buys: a $2,800 repair yielding 24 more months works out at $158 a month once further repairs are included, against about $506 for a replacement. The repair wins until the months it buys get short."
 publishAt: "2026-11-02"
 lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/cost-per-mile/"
-relatedToolLabel: "cost per mile calculator"
+relatedTool: "/en/tools/commute-cost/"
+relatedToolLabel: "commute cost calculator"
 formula: "repair path = (repair cost + expected further repairs) ÷ expected months gained; replacement path = (price − trade-in value + total interest) ÷ intended months of ownership, plus the change in insurance and registration"
 limits:
   - "Expected months gained is an estimate, and it is the input the answer is most sensitive to. A mechanic's opinion on what else is close to failing is worth more here than any figure on this page."
@@ -35,10 +35,7 @@ faq:
     a: "Ask the mechanic what else is near end of life, and take the shortest of those answers rather than the one you just paid to fix. A timing belt on an engine with a failing transmission does not buy three years, it buys until the transmission goes. The failure that ends the car's life is usually the second one, not the one on the invoice."
   - q: "Does still owing money on the car change it?"
     a: "It changes the replacement path, not the repair path. If the loan balance exceeds the trade-in value, the shortfall gets rolled into the new loan, and you begin the replacement already behind. That negative equity belongs in the numerator of the replacement calculation, where it often decides the comparison on its own."
-related:
-  - "/en/money/lease-buyout-break-even/"
-  - "/en/money/pay-off-car-loan-early-or-invest/"
-  - "/en/money/auto-loan-rate-by-credit-score-2026/"
+related: []
 draft: true
 ---
 

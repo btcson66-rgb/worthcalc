@@ -83,7 +83,7 @@ const faq = [
   <ul>
     <li><strong>極端報酬率</strong>：20% 以上區間 72 法則明顯高估翻倍時間（精確值更快），慣例改用 78；1–2% 低區間用 70 更貼。日常理財區間（3–12%）放心用 72。</li>
     <li><strong>波動大的報酬</strong>：法則假設固定年複利。實際市場的報酬是波動的，法則只適合當「平均情境的草圖」，不是路線圖。</li>
-    <li><strong>定期定額</strong>：72 法則只處理「單筆本金」的翻倍。每月持續投入的成長軌跡要用完整未來值公式——<a href={localizedPath(locale, '/tools/latte-factor')}>拿鐵因子計算機</a>的未來值欄位就是做這件事的。</li>
+    <li><strong>定期定額</strong>：72 法則只處理「單筆本金」的翻倍。每月持續投入的成長軌跡要用完整未來值公式——<a href={localizedPath(locale, '/tools/compound-growth')}>複利成長計算機</a>的每月投入欄位就是做這件事的。</li>
   </ul>
 
   <h2>後半場才是主場：翻倍的翻倍</h2>
@@ -91,7 +91,7 @@ const faq = [
     72 法則最值得內化的推論是「連續翻倍」：12 年翻倍的設定下，
     24 年 4 倍、36 年 8 倍。注意每一段的絕對增幅——第三個 12 年
     賺到的金額，等於前 24 年的總和。這是「越早開始差距越大」的
-    數學本體，也解釋了為什麼<a href={localizedPath(locale, '/tools/latte-factor')}>拿鐵因子</a>的
+    數學本體，也解釋了為什麼每天一杯手搖飲這類小額習慣的
     長期數字大得反直覺、為什麼<a href={localizedPath(locale, '/opportunity-cost-everyday')}>機會成本</a>在
     長期決策裡權重這麼高：時間在複利裡不是線性資源，
     是指數資源。

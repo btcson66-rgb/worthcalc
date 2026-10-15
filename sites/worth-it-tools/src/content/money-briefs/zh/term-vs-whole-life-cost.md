@@ -34,8 +34,6 @@ faq:
     a: "當你需要的是不會到期的保障時：一位終身需要扶養的家屬、一筆會產生稅負卻缺乏流動性的遺產，或一份由保單支應的企業協議。在這些情況下，定期壽險不論多便宜都解決不了問題，而本頁的費率比較也就不是重點。"
 related:
   - "/zh/money/disability-insurance-break-even/"
-  - "/zh/money/pet-insurance-break-even/"
-  - "/zh/money/emergency-fund-size-2026/"
 draft: true
 ---
 

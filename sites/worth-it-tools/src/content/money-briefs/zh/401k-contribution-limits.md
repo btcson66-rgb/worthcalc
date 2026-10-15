@@ -34,7 +34,6 @@ faq:
     a: "它們是分開的上限——2026 年分別是 24,500 與 7,500 美元——所以 401(k) 提滿並不妨礙你再提 IRA。職場退休計畫真正會限制的，是所得超過一定水準時傳統型 IRA 提撥的「可扣除性」，那跟「能不能提撥」是不同的問題。"
 related:
   - "/zh/money/hsa-contribution-limits/"
-  - "/zh/money/employer-match-vs-debt-payoff/"
   - "/zh/money/roth-vs-traditional-break-even/"
 draft: true
 ---

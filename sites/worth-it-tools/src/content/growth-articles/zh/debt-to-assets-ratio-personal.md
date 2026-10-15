@@ -220,7 +220,6 @@ DTI 定義參考美國 CFPB 公開資料；本文的負債資產比屬一般財�
 
 ## 延伸閱讀
 
-- [淨資產怎麼算？](/zh/how-to-calculate-net-worth/)
 - [流動淨資產是什麼？](/zh/liquid-net-worth-explained/)
 - [淨資產多久算一次？](/zh/guides/net-worth-tracking-frequency/)
 - [DTI／DBR 工具](/zh/tools/dti-calculator/)

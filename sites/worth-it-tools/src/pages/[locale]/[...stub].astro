@@ -1,0 +1,22 @@
+---
+/*
+ * Redirect stubs for pages the 2026-10-15 disposition (P1b) merged into another
+ * page. The source of truth is src/data/redirect-stubs.json: one entry per
+ * retired URL, naming the page that took over. Nothing else generates these
+ * paths, so a URL can never be both a real page and a stub.
+ */
+import RedirectStub from '../../components/RedirectStub.astro';
+import { redirectStubs } from '../../data/redirectStubs';
+
+export function getStaticPaths() {
+  return redirectStubs.map((stub) => {
+    const [locale, ...rest] = stub.from.split('/').filter(Boolean);
+    return { params: { locale, stub: rest.join('/') }, props: { target: stub.to } };
+  });
+}
+
+const { target } = Astro.props as { target: string };
+const lang = Astro.params.locale === 'en' ? 'en' : 'zh-TW';
+---
+
+<RedirectStub target={target} lang={lang} />

@@ -135,78 +135,6 @@ const reviews: ReviewMap = {
       disclaimer: financialDisclaimer.zh,
     },
   },
-  'rent-vs-buy': {
-    en: {
-      methodology:
-        'Buying cost combines down payment, mortgage payments, a 1.5% annual owner-cost allowance, and ending equity. Renting cost combines rent with rent growth, then subtracts the modeled investment gain on the down payment.',
-      assumptions: [
-        'Default home price 450,000, 20% down payment, 6.5% mortgage, 30-year loan, 2,500 rent, 3% rent growth, 3% appreciation, 5% investment return, and 7 holding years are examples.',
-        'The 1.5% owner-cost allowance is a simplified proxy for ownership expenses.',
-        'The crossover year is the first year when modeled buying cost is lower than modeled renting cost.',
-      ],
-      example:
-        'With a 450,000 home and 20% down payment, the model estimates mortgage payments, owner costs, ending equity, and compares that against rent plus potential investment gains.',
-      limitations: [
-        'Taxes, closing costs, HOA dues, insurance, repairs, selling costs, rent concessions, and tax deductions are not modeled separately.',
-        'Home appreciation and investment returns are uncertain and can dominate the result.',
-      ],
-      lastUpdated: lastUpdated.en,
-      disclaimer: financialDisclaimer.en,
-    },
-    zh: {
-      methodology:
-        '買房成本包含頭期款、房貸付款、每年 1.5% 的簡化持有成本，以及期末權益。租房成本包含租金與租金成長，再扣除頭期款拿去投資的估算收益。',
-      assumptions: [
-        '預設房價 450,000、頭期 20%、房貸 6.5%、30 年貸款、租金 2,500、租金成長 3%、房價成長 3%、投資報酬 5%、持有 7 年都是示範值。',
-        '1.5% 持有成本只是簡化代理值，不代表每個市場。',
-        '交叉年是模型中買房成本首次低於租房成本的年份。',
-      ],
-      example:
-        '以 450,000 房價與 20% 頭期款為例，模型估算房貸、持有成本與期末權益，再與租金及頭期款投資收益比較。',
-      limitations: [
-        '未分別列入稅費、成交成本、HOA、保險、維修、賣房成本、租金優惠或稅務扣抵。',
-        '房價增值與投資報酬高度不確定，可能主導結果。',
-      ],
-      lastUpdated: lastUpdated.zh,
-      disclaimer: financialDisclaimer.zh,
-    },
-  },
-  'latte-factor': {
-    en: {
-      methodology:
-        'The calculator multiplies cost per purchase by weekly frequency and 52 weeks. It compares that habit with an alternative cost, then compounds the difference as monthly contributions over the selected years.',
-      assumptions: [
-        'Default 6 per habit, 5 times per week, 1.50 alternative cost, 10 years, and 5% annual return are examples.',
-        'The investment return is a hypothetical annual rate, not a guaranteed return.',
-        'Savings are counted only when the alternative cost is lower than the habit cost.',
-      ],
-      example:
-        'A 6 purchase five times per week is 1,560 per year. If the alternative costs 1.50 each time, the yearly difference is 1,170 before any hypothetical investment growth.',
-      limitations: [
-        'Taxes, transaction costs, inflation, habit changes, and variable investment performance are not included.',
-        'The result is a budgeting estimate, not a recommendation to remove any specific habit.',
-      ],
-      lastUpdated: lastUpdated.en,
-      disclaimer: financialDisclaimer.en,
-    },
-    zh: {
-      methodology:
-        '計算機會用每次花費乘以每週次數與 52 週，和替代方案成本比較，再把差額視為每月投入並按指定年數複利。',
-      assumptions: [
-        '預設每次 6、每週 5 次、替代成本 1.50、10 年、年報酬 5% 都是示範值。',
-        '投資報酬率是假設年化值，不是保證收益。',
-        '只有替代方案較便宜時才計入可節省金額。',
-      ],
-      example:
-        '每次 6、每週 5 次，一年約 1,560。若替代方案每次 1.50，年差額約 1,170，再用假設報酬估算未來值。',
-      limitations: [
-        '未包含稅費、交易成本、通膨、習慣改變或投資績效波動。',
-        '結果是預算估算，不是要求取消特定習慣的建議。',
-      ],
-      lastUpdated: lastUpdated.zh,
-      disclaimer: financialDisclaimer.zh,
-    },
-  },
   'cashback-breakeven': {
     en: {
       methodology:
@@ -274,42 +202,6 @@ const reviews: ReviewMap = {
       limitations: [
         '未完整納入車輛折舊、保險、天氣、安全性、停車可得性、雇主補助或服務可靠度。',
         '成本會因城市、通勤時段與個人限制而大幅不同。',
-      ],
-      lastUpdated: lastUpdated.zh,
-      disclaimer: financialDisclaimer.zh,
-    },
-  },
-  'cost-per-mile': {
-    en: {
-      methodology:
-        'The calculator adds four annual fixed costs (depreciation, insurance, registration, finance interest) to three annual running costs (fuel or electricity, maintenance, tires), then divides the annual total by annual distance driven. Depreciation is purchase price minus expected resale value, divided by years kept. The energy rate is shown separately: imperial mode is fuel price divided by MPG, metric mode is L/100 km multiplied by price per liter and divided by 100, and electric mode is kWh per 100 miles or kilometers multiplied by price per kWh and divided by 100.',
-      assumptions: [
-        'Default imperial values of 12,000 miles a year, 30 MPG, 3.50 per gallon, 800 maintenance, 250 tires, 1,800 insurance, 250 registration, 0 finance interest, 32,000 purchase price, 14,000 resale value, and 6 years kept are example arithmetic, not typical prices for any vehicle.',
-        'Finance interest should only capture the annual interest actually paid, not loan principal, because purchase-price depreciation already represents the vehicle value consumed.',
-        'Switching between imperial and metric converts distance, fuel efficiency, fuel price, and energy use; it does not change any of the dollar-cost fields you already entered.',
-      ],
-      example:
-        'With the default inputs, annual depreciation is (32,000 − 14,000) ÷ 6 = 3,000, so fixed cost is 3,000 + 1,800 + 250 + 0 = 5,050. Fuel cost per mile is 3.50 ÷ 30 ≈ 0.117, giving an annual fuel cost of 1,400. Running cost is 1,400 + 800 + 250 = 2,450, and the annual total is 5,050 + 2,450 = 7,500. Divided by 12,000 miles, the total cost per mile is 0.625.',
-      limitations: [
-        'Parking, tolls, loan principal, the opportunity cost of cash, tax incentives, emissions costs, inflation, charger installation, and battery replacement are not modeled unless you fold an estimate into one of the existing fields.',
-        'The result describes one vehicle’s modeled annual cost, not a specific trip, a commute, or a two-vehicle comparison; more annual distance lowers the fixed-cost contribution to each mile but does not reduce the energy rate itself.',
-      ],
-      lastUpdated: lastUpdated.en,
-      disclaimer: financialDisclaimer.en,
-    },
-    zh: {
-      methodology:
-        '計算機把四項年度固定成本（折舊、保險、燃料費／牌照稅與驗車、貸款利息）加上三項年度行駛成本（油錢或電費、保養維修、輪胎）加總，再除以一年行駛距離。折舊等於購車價減預估轉售價，再除以持有年數。能源成本會另外顯示：公制是油耗（L/100 km）乘以油價再除以 100，英制是油價除以 MPG，電動車則是每 100 公里耗電度數乘以每度電價再除以 100。',
-      assumptions: [
-        '預設公制值（一年 12,000 公里、油耗 6.5 L/100km、每公升 32、每年保養 12,000、輪胎 5,000、保險 12,000、燃料費牌照稅與驗車 12,000、貸款利息 0、購車價 800,000、轉售價 350,000、持有 6 年）只是示範算式的樣本，不代表目前市場油價、稅率或任何車款行情。',
-        '貸款利息只填實際年繳利息，不要把貸款本金算進去，因為購車價與轉售價的差額已經代表車輛價值折損。',
-        '切換英制／公制只會換算距離、油耗、油價與耗電量等欄位，不會改變你已輸入的其他金額欄位。',
-      ],
-      example:
-        '以預設值計算，年折舊為 (800,000 − 350,000) ÷ 6 = 75,000，固定成本為 75,000 + 12,000 + 12,000 + 0 = 99,000。每公里油錢為 6.5 × 32 ÷ 100 = 2.08，一年油錢為 2.08 × 12,000 = 24,960。行駛成本為 24,960 + 12,000 + 5,000 = 41,960，年度總成本為 99,000 + 41,960 = 140,960。除以 12,000 公里，每公里成本約為 11.75。',
-      limitations: [
-        '未納入停車費、過路費、貸款本金、資金機會成本、稅務優惠、排放成本、通膨、充電樁安裝費與電池更換費，除非你自行把估算金額加進現有欄位。',
-        '結果是這輛車的年度模型成本，不是特定行程、通勤或兩輛車的比較；提高年行駛距離會降低固定成本分攤到每公里的比例，但不會改變能源成本本身的費率。',
       ],
       lastUpdated: lastUpdated.zh,
       disclaimer: financialDisclaimer.zh,

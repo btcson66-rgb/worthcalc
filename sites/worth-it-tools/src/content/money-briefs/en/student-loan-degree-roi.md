@@ -34,8 +34,6 @@ faq:
     a: "Materially, because it attacks the largest term. Earning $15,000 a year while studying cuts forgone earnings from $140,000 to $80,000 — a 33% reduction in total investment, far more than any plausible tuition discount. It also reduces borrowing, which compounds the effect."
 related:
   - "/en/money/student-loan-rate-2026/"
-  - "/en/money/side-hustle-true-hourly-rate/"
-  - "/en/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

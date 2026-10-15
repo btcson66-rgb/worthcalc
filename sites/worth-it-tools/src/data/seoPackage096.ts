@@ -29,32 +29,6 @@ export const seoPackage096Guides: Record<string, SeoPackage096GuideMeta> = {
     "breadcrumbLabel": "Laptop Docking Station Electricity Cost Per Workday Used: Separate Display Charging",
     "schemaFile": "096__en__laptop-docking-station-electricity-cost-per-workday-used.json"
   },
-  "es/laptop-docking-station-electricity-cost-per-workday-used": {
-    "key": "es/laptop-docking-station-electricity-cost-per-workday-used",
-    "packageId": "096",
-    "locale": "es",
-    "articleSlug": "laptop-docking-station-electricity-cost-per-workday-used",
-    "title": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
-    "seoTitle": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas | WorthCalc",
-    "metaDescription": "Calcula el coste de una base para portátil por jornada con energía medida de base, pantallas, USB, red y espera, dejando visible la carga de la batería.",
-    "excerpt": "Calcula el coste de una base para portátil por jornada con energía medida de base, pantallas, USB, red y espera, dejando visible la carga de la batería.",
-    "canonical": "https://worthcalc.win/es/guides/laptop-docking-station-electricity-cost-per-workday-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
-    "ogDescription": "Calcula el coste de una base para portátil por jornada con energía medida de base, pantallas, USB, red y espera, dejando visible la carga de la batería.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
-    "imageBrief": "laptop-docking-station-electricity-cost-per-workday-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/webcam-electricity-cost-per-meeting-hour-used/",
-      "/es/guides/external-hard-drive-electricity-cost-per-backup-job-used/",
-      "/es/guides/usb-charging-hub-electricity-cost-per-charging-session-used/",
-      "/es/guides/document-camera-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de una base para portátil por jornada: separa la carga y las pantallas",
-    "schemaFile": "096__es__laptop-docking-station-electricity-cost-per-workday-used.json"
-  },
   "zh/laptop-docking-station-electricity-cost-per-workday-used": {
     "key": "zh/laptop-docking-station-electricity-cost-per-workday-used",
     "packageId": "096",
@@ -81,56 +55,4 @@ export const seoPackage096Guides: Record<string, SeoPackage096GuideMeta> = {
     "breadcrumbLabel": "筆電擴充底座每工作日電費：分開螢幕與充電負載",
     "schemaFile": "096__zh__laptop-docking-station-electricity-cost-per-workday-used.json"
   },
-  "hi/laptop-docking-station-electricity-cost-per-workday-used": {
-    "key": "hi/laptop-docking-station-electricity-cost-per-workday-used",
-    "packageId": "096",
-    "locale": "hi",
-    "articleSlug": "laptop-docking-station-electricity-cost-per-workday-used",
-    "title": "Laptop docking station electricity cost per workday: display और charging अलग रखें",
-    "seoTitle": "Laptop docking station electricity cost per workday: display और charging अलग रखें | WorthCalc",
-    "metaDescription": "Dock, display output, USB charging और idle की measured energy से प्रति workday लागत निकालें और laptop battery load को अलग दिखाएं।",
-    "excerpt": "Dock, display output, USB charging और idle की measured energy से प्रति workday लागत निकालें और laptop battery load को अलग दिखाएं।",
-    "canonical": "https://worthcalc.win/hi/guides/laptop-docking-station-electricity-cost-per-workday-used/",
-    "robots": "index,follow",
-    "ogTitle": "Laptop docking station electricity cost per workday: display और charging अलग रखें",
-    "ogDescription": "Dock, display output, USB charging और idle की measured energy से प्रति workday लागत निकालें और laptop battery load को अलग दिखाएं।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Laptop docking station electricity cost per workday: display और charging अलग रखें",
-    "imageBrief": "laptop-docking-station-electricity-cost-per-workday-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/webcam-electricity-cost-per-meeting-hour-used/",
-      "/hi/guides/external-hard-drive-electricity-cost-per-backup-job-used/",
-      "/hi/guides/usb-charging-hub-electricity-cost-per-charging-session-used/",
-      "/hi/guides/document-camera-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "Laptop docking station electricity cost per workday: display और charging अलग रखें",
-    "schemaFile": "096__hi__laptop-docking-station-electricity-cost-per-workday-used.json"
-  },
-  "ar/laptop-docking-station-electricity-cost-per-workday-used": {
-    "key": "ar/laptop-docking-station-electricity-cost-per-workday-used",
-    "packageId": "096",
-    "locale": "ar",
-    "articleSlug": "laptop-docking-station-electricity-cost-per-workday-used",
-    "title": "تكلفة قاعدة توصيل الحاسوب المحمول لكل يوم عمل: افصل الشاشة والشحن",
-    "seoTitle": "تكلفة قاعدة توصيل الحاسوب المحمول لكل يوم عمل: افصل الشاشة والشحن | WorthCalc",
-    "metaDescription": "احسب تكلفة قاعدة توصيل الحاسوب لكل يوم عمل من الطاقة المقاسة للقاعدة والشاشة وUSB والخمول، مع إبقاء حمل بطارية الحاسوب واضحاً.",
-    "excerpt": "احسب تكلفة قاعدة توصيل الحاسوب لكل يوم عمل من الطاقة المقاسة للقاعدة والشاشة وUSB والخمول، مع إبقاء حمل بطارية الحاسوب واضحاً.",
-    "canonical": "https://worthcalc.win/ar/guides/laptop-docking-station-electricity-cost-per-workday-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة قاعدة توصيل الحاسوب المحمول لكل يوم عمل: افصل الشاشة والشحن",
-    "ogDescription": "احسب تكلفة قاعدة توصيل الحاسوب لكل يوم عمل من الطاقة المقاسة للقاعدة والشاشة وUSB والخمول، مع إبقاء حمل بطارية الحاسوب واضحاً.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة قاعدة توصيل الحاسوب المحمول لكل يوم عمل: افصل الشاشة والشحن",
-    "imageBrief": "laptop-docking-station-electricity-cost-per-workday-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/webcam-electricity-cost-per-meeting-hour-used/",
-      "/ar/guides/external-hard-drive-electricity-cost-per-backup-job-used/",
-      "/ar/guides/usb-charging-hub-electricity-cost-per-charging-session-used/",
-      "/ar/guides/document-camera-electricity-cost-per-presentation-hour-used/"
-    ],
-    "breadcrumbLabel": "تكلفة قاعدة توصيل الحاسوب المحمول لكل يوم عمل: افصل الشاشة والشحن",
-    "schemaFile": "096__ar__laptop-docking-station-electricity-cost-per-workday-used.json"
-  }
 };

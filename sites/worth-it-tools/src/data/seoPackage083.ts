@@ -29,32 +29,6 @@ export const seoPackage083Guides: Record<string, SeoPackage083GuideMeta> = {
     "breadcrumbLabel": "Label Maker Electricity Cost Per Labeling Session Used: Include Warm-Up and Standby",
     "schemaFile": "083__en__label-maker-electricity-cost-per-labeling-session-used.json"
   },
-  "es/label-maker-electricity-cost-per-labeling-session-used": {
-    "key": "es/label-maker-electricity-cost-per-labeling-session-used",
-    "packageId": "083",
-    "locale": "es",
-    "articleSlug": "label-maker-electricity-cost-per-labeling-session-used",
-    "title": "Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera",
-    "seoTitle": "Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera | WorthCalc",
-    "metaDescription": "Calcula el coste eléctrico de una rotuladora por sesión con energía medida de calentamiento, impresión, corte y espera, separando cinta y etiquetas fallidas.",
-    "excerpt": "Calcula el coste eléctrico de una rotuladora por sesión con energía medida de calentamiento, impresión, corte y espera, separando cinta y etiquetas fallidas.",
-    "canonical": "https://worthcalc.win/es/guides/label-maker-electricity-cost-per-labeling-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera",
-    "ogDescription": "Calcula el coste eléctrico de una rotuladora por sesión con energía medida de calentamiento, impresión, corte y espera, separando cinta y etiquetas fallidas.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera",
-    "imageBrief": "label-maker-electricity-cost-per-labeling-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-      "/es/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/es/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/es/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de una rotuladora por sesión: incluye calentamiento y espera",
-    "schemaFile": "083__es__label-maker-electricity-cost-per-labeling-session-used.json"
-  },
   "zh/label-maker-electricity-cost-per-labeling-session-used": {
     "key": "zh/label-maker-electricity-cost-per-labeling-session-used",
     "packageId": "083",
@@ -81,56 +55,4 @@ export const seoPackage083Guides: Record<string, SeoPackage083GuideMeta> = {
     "breadcrumbLabel": "標籤機每次工作電費：計入預熱與待機",
     "schemaFile": "083__zh__label-maker-electricity-cost-per-labeling-session-used.json"
   },
-  "hi/label-maker-electricity-cost-per-labeling-session-used": {
-    "key": "hi/label-maker-electricity-cost-per-labeling-session-used",
-    "packageId": "083",
-    "locale": "hi",
-    "articleSlug": "label-maker-electricity-cost-per-labeling-session-used",
-    "title": "Label maker electricity cost per labeling session used: include warm-up and standby",
-    "seoTitle": "Label maker electricity cost per labeling session used: include warm-up and standby | WorthCalc",
-    "metaDescription": "Measured warm-up, printing, cutting और standby energy से label maker की प्रति labeling session लागत निकालें; tape और failed labels अलग रखें।",
-    "excerpt": "Measured warm-up, printing, cutting और standby energy से label maker की प्रति labeling session लागत निकालें; tape और failed labels अलग रखें।",
-    "canonical": "https://worthcalc.win/hi/guides/label-maker-electricity-cost-per-labeling-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Label maker electricity cost per labeling session used: include warm-up and standby",
-    "ogDescription": "Measured warm-up, printing, cutting और standby energy से label maker की प्रति labeling session लागत निकालें; tape और failed labels अलग रखें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Label maker electricity cost per labeling session used: include warm-up and standby",
-    "imageBrief": "label-maker-electricity-cost-per-labeling-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-      "/hi/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/hi/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/hi/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
-    ],
-    "breadcrumbLabel": "Label maker electricity cost per labeling session used: include warm-up and standby",
-    "schemaFile": "083__hi__label-maker-electricity-cost-per-labeling-session-used.json"
-  },
-  "ar/label-maker-electricity-cost-per-labeling-session-used": {
-    "key": "ar/label-maker-electricity-cost-per-labeling-session-used",
-    "packageId": "083",
-    "locale": "ar",
-    "articleSlug": "label-maker-electricity-cost-per-labeling-session-used",
-    "title": "تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد",
-    "seoTitle": "تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد | WorthCalc",
-    "metaDescription": "قدّر تكلفة كهرباء آلة الملصقات لكل جلسة من طاقة التسخين والطباعة والقص والاستعداد المقاسة، مع فصل الشريط والملصقات الفاشلة.",
-    "excerpt": "قدّر تكلفة كهرباء آلة الملصقات لكل جلسة من طاقة التسخين والطباعة والقص والاستعداد المقاسة، مع فصل الشريط والملصقات الفاشلة.",
-    "canonical": "https://worthcalc.win/ar/guides/label-maker-electricity-cost-per-labeling-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد",
-    "ogDescription": "قدّر تكلفة كهرباء آلة الملصقات لكل جلسة من طاقة التسخين والطباعة والقص والاستعداد المقاسة، مع فصل الشريط والملصقات الفاشلة.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد",
-    "imageBrief": "label-maker-electricity-cost-per-labeling-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/paper-shredder-electricity-cost-per-shredding-session-used/",
-      "/ar/guides/laminator-electricity-cost-per-laminating-batch-used/",
-      "/ar/guides/3d-scanner-electricity-cost-per-scanning-session-used/",
-      "/ar/guides/electric-standing-desk-electricity-cost-per-adjusted-day-used/"
-    ],
-    "breadcrumbLabel": "تكلفة كهرباء آلة الملصقات لكل جلسة: أدرج التسخين والاستعداد",
-    "schemaFile": "083__ar__label-maker-electricity-cost-per-labeling-session-used.json"
-  }
 };

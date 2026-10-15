@@ -48,9 +48,7 @@ faq:
   - q: "Does a second job ever clearly win?"
     a: "Yes, in three cases: when it pays a genuine premium, such as skilled or unsociable-hours work; when it is remote, which zeroes the travel and most of the unpaid time; and when it builds something — a skill, a client list, a business — whose value is not in the hourly rate at all. The third is the only one where losing the hourly comparison can still be correct."
 related:
-  - "/en/money/side-hustle-true-hourly-rate/"
   - "/en/money/salary-raise-vs-bonus/"
-  - "/en/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

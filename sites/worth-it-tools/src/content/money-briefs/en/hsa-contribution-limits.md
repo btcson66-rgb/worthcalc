@@ -40,8 +40,6 @@ faq:
     a: "For 2026, the HDHP minimum annual deductible is $1,700 for self-only coverage and $3,400 for family coverage. For 2027, those minimums are $1,750 and $3,500."
 related:
   - "/en/money/401k-contribution-limits/"
-  - "/en/money/insurance-deductible-break-even/"
-  - "/en/money/emergency-fund-size-2026/"
 draft: true
 ---
 

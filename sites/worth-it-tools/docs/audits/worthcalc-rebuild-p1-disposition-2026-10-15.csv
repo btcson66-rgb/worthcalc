@@ -114,7 +114,7 @@ https://worthcalc.win/zh/tools/,hub,全部計算機,partial,no,,,,rewrite,目錄
 https://worthcalc.win/zh/tools/appliance-electricity-cost/,tool,家電一天用多少電？每小時、每月電費怎麼算？,partial,yes,www.taipower.com.tw; www.u-power.com.tw; www.energystar.gov,2026-09-15,,rewrite,電價用台電，但 43 項家電耗電資料全取自美國 ENERGY STAR / EIA，需改用台灣能源署能源效率標示與實測資料。
 https://worthcalc.win/zh/tools/budget-builder/,tool,不固定收入月預算建立器,yes,yes,www.mof.gov.tw; www.nhi.gov.tw,2026-07-31,,keep,含台灣使用情境（綜所稅、二代健保補充保費），連到財政部與健保署；計算機可用。建議 P1b 補正式「資料來源」區塊。
 https://worthcalc.win/zh/tools/car-affordability/,tool,汽車負擔能力與完整月成本計算機,yes,yes,law.moj.gov.tw; www.cali.org.tw,2026-07-31,,keep,含台灣使用情境（強制險、牌照稅、燃料費），連到全國法規資料庫與壽險公會；計算機可用。建議 P1b 補正式來源區塊。
-https://worthcalc.win/zh/tools/cashback-breakeven/,tool,信用卡回饋打平計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/annual-fee-card-breakeven/,預設值是美元量級（年費 95、迎新禮 200、雜貨 500），沒有任何來源；與 /zh/annual-fee-card-breakeven/（金管會來源、NT$ 算例）意圖重複。
+https://worthcalc.win/zh/tools/cashback-breakeven/,tool,信用卡回饋打平計算機,partial,no,,2026-07-07,,keep,CEO P1b 改判：互動計算機為主要內容；機車情境與汽車文章意圖不同
 https://worthcalc.win/zh/tools/commute-cost/,tool,通勤每公里花多少？油錢、時間與回辦公室成本計算機,yes,yes,vipmbr.cpc.com.tw; www.taipower.com.tw; www.fueleconomy.gov.tw,2026-07-07,,keep,機車/汽車/大眾運輸/TPASS/計程車的通勤成本，預設用中油牌價與台電電價並連到官方；計算機可用。建議補正式來源區塊。
 https://worthcalc.win/zh/tools/compound-growth/,tool,複利成長與儲蓄目標計算機,partial,yes,www.stat.gov.tw; rate.bot.com.tw,2026-07-31,,rewrite,主題不依賴台灣規則（複利），僅附台灣使用情境與主計總處/臺銀牌告連結；需連結勞退自提等台灣情境，或併入退休相關頁。
 https://worthcalc.win/zh/tools/cost-per-mile/,tool,這台車每公里到底花多少？完整養車成本計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/tools/commute-cost/,只有 NT$ 預設值、沒有來源；每公里成本已是 /zh/tools/commute-cost/ 的一個區塊，意圖重複。
@@ -122,7 +122,7 @@ https://worthcalc.win/zh/tools/costco-membership/,tool,Costco 會員回本計算
 https://worthcalc.win/zh/tools/credit-card-payoff/,tool,信用卡循環利息與清償時間計算機,yes,yes,law.fsc.gov.tw; www.foi.org.tw,2026-07-31,1,keep,台灣循環利率上限 15%、最低應繳組成，連到金管會；三種還款模式，計算機可用。
 https://worthcalc.win/zh/tools/debt-strategy/,tool,債務雪球法 vs 雪崩法比較工具,yes,yes,law.fsc.gov.tw; www.ba.org.tw,2026-07-31,,keep,台灣循環利率上限與信貸優惠利率到期情境，連到金管會與銀行公會；雪球/雪崩並排，計算機可用。
 https://worthcalc.win/zh/tools/dti-calculator/,tool,負債比 DBR 與房貸收支比計算機,yes,yes,www.ba.org.tw; www.cbc.gov.tw,2026-07-31,,keep,DBR 22 倍與房貸收支比兩個台灣審核比率，連到銀行公會與央行；計算機可用。
-https://worthcalc.win/zh/tools/ev-vs-gas/,tool,電動機車 vs 油車總持有成本計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/ev-vs-gas-total-cost/,只有 NT$ 預設值、沒有來源；與 /zh/ev-vs-gas-total-cost/（財政部/牌照稅/交通部來源）意圖完全重複。
+https://worthcalc.win/zh/tools/ev-vs-gas/,tool,電動機車 vs 油車總持有成本計算機,partial,no,,2026-07-07,,keep,CEO P1b 改判：互動計算機為主要內容；機車情境與汽車文章意圖不同
 https://worthcalc.win/zh/tools/home-affordability/,tool,房屋負擔能力與完整持有成本計算機,yes,yes,www.cbc.gov.tw; lvr.land.moi.gov.tw,2026-07-31,,keep,依央行選擇性信用管制、房屋稅、地價稅反推可負擔房價，連到央行與實價登錄；計算機可用。
 https://worthcalc.win/zh/tools/installment-true-apr/,tool,分期付款真實 APR 計算機,partial,no,,2026-07-07,,rewrite,計算機本身可用，但沒有任何台灣來源，也沒有台灣算例；需補金管會總費用年百分率規範與台灣分期情境。
 https://worthcalc.win/zh/tools/latte-factor/,tool,拿鐵因子日常習慣成本計算機,no,no,,2026-07-07,,remove,通用「每天一杯咖啡」題目，與台灣在地需求無關，沒有來源，也不屬於五個情境。

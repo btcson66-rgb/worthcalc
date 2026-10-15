@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
-const LOCALES = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
+const LOCALES = ['en', 'zh'];  // P1b: the retired locales have no pages
 const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 // 每頁都有的語言切換器會讓同一篇文章的各語言版互指。那不是發現路徑——
 // 如果整組五個語言版都沒有別的入口，Google 一個都找不到。所以互指不算數。
@@ -56,7 +56,10 @@ function isEditorial(sitePath) {
 // 同一篇文章的跨語言版本互指不算入站連結——那是語言切換器，不是發現路徑。
 const logicalRoute = (sitePath) => sitePath.split('/').filter(Boolean).slice(1).join('/');
 
-const htmlFiles = walkHtml(distDir);
+// 轉址 stub（被合併的頁面、/zh/）不是編輯型內容：它只是原頁面所在位置的轉址，
+// 沒有 H1、不進 sitemap，也不該有入站連結（check-rebuild-p1b 禁止站內連到 stub）。
+const isRedirectStub = (html) => /<meta http-equiv="refresh"/i.test(html) && /<meta name="robots" content="noindex/i.test(html);
+const htmlFiles = walkHtml(distDir).filter((file) => !isRedirectStub(readFileSync(file, 'utf8')));
 const inbound = new Map(); // 目標路徑 -> 來源路徑集合
 
 for (const file of htmlFiles) {

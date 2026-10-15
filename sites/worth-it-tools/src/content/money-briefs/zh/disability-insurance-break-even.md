@@ -34,8 +34,6 @@ faq:
     a: "算缺口，不要算替代率。拿你工作的淨所得，減掉團體保單實際會給付的淨額，然後補上那個差額——再扣掉配偶收入與緊急預備金在等待期內真正能吸收的部分。"
 related:
   - "/zh/money/term-vs-whole-life-cost/"
-  - "/zh/money/emergency-fund-size-2026/"
-  - "/zh/money/insurance-deductible-break-even/"
 draft: true
 ---
 

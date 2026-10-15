@@ -34,8 +34,6 @@ faq:
     a: "Work out the shortfall, not the replacement rate. Take your net income from working, subtract the net benefit your group policy would actually pay, and cover the gap — reduced by whatever a partner's income and your emergency fund can absorb for the waiting period."
 related:
   - "/en/money/term-vs-whole-life-cost/"
-  - "/en/money/emergency-fund-size-2026/"
-  - "/en/money/insurance-deductible-break-even/"
 draft: true
 ---
 

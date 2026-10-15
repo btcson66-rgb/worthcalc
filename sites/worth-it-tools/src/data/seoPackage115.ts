@@ -30,33 +30,6 @@ export const seoPackage115Guides: Record<string, SeoPackage115GuideMeta> = {
     "breadcrumbLabel": "Electric Insect Zapper Electricity Cost Per Overnight Used: Include Standby",
     "schemaFile": "115__en__electric-insect-zapper-electricity-cost-per-overnight-used.json"
   },
-  "es/electric-insect-zapper-electricity-cost-per-overnight-used": {
-    "key": "es/electric-insect-zapper-electricity-cost-per-overnight-used",
-    "packageId": "115",
-    "locale": "es",
-    "articleSlug": "electric-insect-zapper-electricity-cost-per-overnight-used",
-    "title": "Coste eléctrico del matainsectos por noche: incluye la espera",
-    "seoTitle": "Coste eléctrico del matainsectos por noche: incluye la espera | WorthCalc",
-    "metaDescription": "Mide un matainsectos durante una noche para estimar el coste por noche de uso.",
-    "excerpt": "Mide un matainsectos durante una noche para estimar el coste por noche de uso.",
-    "canonical": "https://worthcalc.win/es/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico del matainsectos por noche: incluye la espera",
-    "ogDescription": "Mide un matainsectos durante una noche para estimar el coste por noche de uso.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico del matainsectos por noche: incluye la espera",
-    "imageBrief": "Measured household device electricity cost",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
-      "/es/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
-      "/es/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
-      "/es/guides/garage-door-opener-electricity-cost-per-cycle-used/",
-      "/es/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico del matainsectos por noche: incluye la espera",
-    "schemaFile": "115__es__electric-insect-zapper-electricity-cost-per-overnight-used.json"
-  },
   "zh/electric-insect-zapper-electricity-cost-per-overnight-used": {
     "key": "zh/electric-insect-zapper-electricity-cost-per-overnight-used",
     "packageId": "115",
@@ -84,58 +57,4 @@ export const seoPackage115Guides: Record<string, SeoPackage115GuideMeta> = {
     "breadcrumbLabel": "電蚊拍／捕蚊燈每夜電費：把待機與啟動窗口分開",
     "schemaFile": "115__zh__electric-insect-zapper-electricity-cost-per-overnight-used.json"
   },
-  "hi/electric-insect-zapper-electricity-cost-per-overnight-used": {
-    "key": "hi/electric-insect-zapper-electricity-cost-per-overnight-used",
-    "packageId": "115",
-    "locale": "hi",
-    "articleSlug": "electric-insect-zapper-electricity-cost-per-overnight-used",
-    "title": "Electric insect zapper electricity cost per overnight: standby अलग से मापें",
-    "seoTitle": "Electric insect zapper electricity cost per overnight: standby अलग से मापें | WorthCalc",
-    "metaDescription": "Electric insect zapper को एक overnight window में मापकर प्रति night cost निकालें।",
-    "excerpt": "Electric insect zapper को एक overnight window में मापकर प्रति night cost निकालें।",
-    "canonical": "https://worthcalc.win/hi/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
-    "robots": "index,follow",
-    "ogTitle": "Electric insect zapper electricity cost per overnight: standby अलग से मापें",
-    "ogDescription": "Electric insect zapper को एक overnight window में मापकर प्रति night cost निकालें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Electric insect zapper electricity cost per overnight: standby अलग से मापें",
-    "imageBrief": "Measured household device electricity cost",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
-      "/hi/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
-      "/hi/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
-      "/hi/guides/garage-door-opener-electricity-cost-per-cycle-used/",
-      "/hi/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
-    ],
-    "breadcrumbLabel": "Electric insect zapper electricity cost per overnight: standby अलग से मापें",
-    "schemaFile": "115__hi__electric-insect-zapper-electricity-cost-per-overnight-used.json"
-  },
-  "ar/electric-insect-zapper-electricity-cost-per-overnight-used": {
-    "key": "ar/electric-insect-zapper-electricity-cost-per-overnight-used",
-    "packageId": "115",
-    "locale": "ar",
-    "articleSlug": "electric-insect-zapper-electricity-cost-per-overnight-used",
-    "title": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
-    "seoTitle": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل | WorthCalc",
-    "metaDescription": "قِس صاعق الحشرات خلال فترة ليلية كاملة لتقدير تكلفة كل ليلة استخدام.",
-    "excerpt": "قِس صاعق الحشرات خلال فترة ليلية كاملة لتقدير تكلفة كل ليلة استخدام.",
-    "canonical": "https://worthcalc.win/ar/guides/electric-insect-zapper-electricity-cost-per-overnight-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
-    "ogDescription": "قِس صاعق الحشرات خلال فترة ليلية كاملة لتقدير تكلفة كل ليلة استخدام.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
-    "imageBrief": "Measured household device electricity cost",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/aquarium-heater-electricity-cost-per-tank-day-used/",
-      "/ar/guides/terrarium-heat-lamp-electricity-cost-per-heating-hour-used/",
-      "/ar/guides/outdoor-string-lights-electricity-cost-per-evening-used/",
-      "/ar/guides/garage-door-opener-electricity-cost-per-cycle-used/",
-      "/ar/guides/electric-fireplace-electricity-cost-per-heating-hour-used/"
-    ],
-    "breadcrumbLabel": "تكلفة صاعق الحشرات لكل ليلة: افصل الاستعداد والتشغيل",
-    "schemaFile": "115__ar__electric-insect-zapper-electricity-cost-per-overnight-used.json"
-  }
 };

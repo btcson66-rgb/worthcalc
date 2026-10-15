@@ -360,10 +360,8 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
   .growth-actions button { min-height: 2.65rem; border: 1px solid var(--color-border); border-radius: .55rem; background: var(--color-surface-2); color: var(--color-text); padding: .55rem .85rem; font: inherit; font-weight: 650; cursor: pointer; }
   .growth-actions .primary { background: var(--brand); border-color: var(--brand); color: white; }
   .growth-status { color: var(--color-muted); }
-  /* The nine growth tools share these class names with LocalizedCoreCalculator,
-     but Astro scopes styles per component — so without these rules the label and
-     the value render as one unbroken run ("Target reachedYes"). Keep in sync
-     with the .metric block in LocalizedCoreCalculator.astro. */
+  /* Astro scopes styles per component, so without these rules the label and the
+     value of a growth-tool metric render as one unbroken run ("Target reachedYes"). */
   .metric-grid { display: grid; gap: 1rem; margin-top: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
   .metric-grid, .metric { min-width: 0; }
   .metric { margin: 0; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); padding: .75rem; }

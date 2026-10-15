@@ -46,15 +46,13 @@ const faq = [
 ];
 const related = [
   { title: 'Subscription Audit Calculator', href: localizedPath(locale, '/tools/subscription-audit') },
-  { title: 'Cashback Break-even Calculator', href: localizedPath(locale, '/tools/cashback-breakeven') },
+  { title: 'Annual-fee card break-even guide', href: localizedPath(locale, '/annual-fee-card-breakeven') },
   { title: 'Commute Cost Calculator', href: localizedPath(locale, '/tools/commute-cost') },
-  { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
   { title: 'The math of warehouse memberships', href: localizedPath(locale, '/costco-math') },
-  { title: 'Is Costco Executive worth it?', href: localizedPath(locale, '/is-costco-executive-membership-worth-it') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']} showReview={false} trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']} showReview={false} trustBlock={trustBlockFromDecisionGuide(decisionGuide, locale)}>
   <p class="intro">
     A Costco membership decision has two different break-even tests. First, do the price savings on purchases you already planned cover the basic membership fee? Second, does the Executive reward on <em>eligible</em> purchases cover the extra fee over Gold Star? This calculator keeps those questions separate and shows every step.
   </p>

@@ -36,7 +36,6 @@ faq:
     a: "The IRS lists the full-credit income ceiling as $200,000 for most filers and $400,000 for married couples filing jointly, assuming the other eligibility rules are met."
 related:
   - "/en/money/dependent-care-fsa-limit/"
-  - "/en/money/childcare-cost-2026/"
 draft: true
 ---
 ## The 2026 official figures

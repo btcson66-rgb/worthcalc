@@ -185,9 +185,7 @@ breadcrumbLabel: "現金流緩衝 vs 緊急預備金：兩筆錢其實在解決�
 ## 延伸閱讀
 
 - [緊急預備金要存多少？](/zh/emergency-fund-how-much/)
-- [收入不固定，緊急預備金怎麼存？](/zh/emergency-fund-irregular-income/)
 - [年度支出怎麼換算每月預算？](/zh/guides/annual-expenses-monthly-equivalent/)
-- [儲蓄率怎麼算？](/zh/how-to-calculate-savings-rate/)
 
 現金流緩衝要落地到帳戶操作時，可再用最低帳戶餘額檢查薪資日與扣款日之間的低點。
 

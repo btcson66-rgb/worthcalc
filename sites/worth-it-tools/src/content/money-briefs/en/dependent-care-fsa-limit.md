@@ -35,7 +35,6 @@ faq:
   - q: "Does choosing the $7,500 maximum always save the most tax?"
     a: "No. The best election depends on eligible expenses, plan rules, tax rates, and how the FSA coordinates with the child and dependent care credit."
 related:
-  - "/en/money/childcare-cost-2026/"
   - "/en/money/child-tax-credit/"
 draft: true
 ---

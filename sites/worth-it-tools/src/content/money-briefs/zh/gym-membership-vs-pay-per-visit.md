@@ -33,8 +33,6 @@ faq:
   - q: "那「付了錢就會去」的說法呢？"
     a: "把它當成一個可能在初期有幫助、但不能倚賴的效果。已經付錢確實傾向在前幾週推高出席率，但月費本身在你停止去之後不會繼續發揮作用——而到那時候，還在運轉的就只剩上面那組算術。這個說法站得住腳的版本是：會籍可以支撐一個已經存在的習慣，而不是製造一個。"
 related:
-  - "/zh/money/streaming-prices-2026/"
-  - "/zh/money/tsa-precheck-break-even/"
   - "/zh/money/internet-plan-cost-2026/"
 draft: true
 ---

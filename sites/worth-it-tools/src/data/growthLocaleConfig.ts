@@ -1,4 +1,4 @@
-export type WorthCalcLocale = 'en' | 'zh' | 'es' | 'fr' | 'de' | 'hi' | 'ar';
+export type WorthCalcLocale = 'en' | 'zh';
 
 export interface LocaleFinanceConfig {
   locale: WorthCalcLocale;
@@ -33,45 +33,5 @@ export const localeFinanceConfig: Record<WorthCalcLocale, LocaleFinanceConfig> =
     homeCostFields: ['房貸本息', '房屋稅', '地價稅', '管理費', '修繕準備金', '契稅與登記相關費用'],
     officialInflationAuthority: '行政院主計總處', inflationSeriesKey: 'TW_CPI_ANNUAL_AVERAGE',
     legalDisclaimer: '僅供一般教育與試算；銀行授信、稅費與契約條款仍以最新官方資料及個別契約為準。',
-  },
-  es: {
-    locale: 'es', htmlLang: 'es-ES', region: 'España', currency: 'EUR', currencyDigits: 2,
-    decimalSeparator: ',', groupSeparator: '.', defaultSalaryPaymentsPerYear: 14, illustrativeDtiPercent: null,
-    mortgageTerminology: ['TIN', 'TAE', 'sistema francés', 'cuota', 'amortización anticipada', 'comisión'],
-    homeCostFields: ['cuota hipotecaria', 'IBI', 'seguro', 'comunidad', 'mantenimiento', 'ITP/IVA/AJD', 'notaría y registro'],
-    officialInflationAuthority: 'Instituto Nacional de Estadística', inflationSeriesKey: 'ES_IPC_ANNUAL_AVERAGE',
-    legalDisclaimer: 'Estimación educativa; la TAE, las comisiones, los impuestos y la aprobación dependen de la oferta y de la normativa vigente.',
-  },
-  fr: {
-    locale: 'fr', htmlLang: 'fr-FR', region: 'France', currency: 'EUR', currencyDigits: 2,
-    decimalSeparator: ',', groupSeparator: ' ', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: 35,
-    mortgageTerminology: ['TAEG', 'mensualité', 'capital', 'intérêts', 'assurance emprunteur', 'remboursement anticipé'],
-    homeCostFields: ['mensualité', 'assurance emprunteur', 'taxe foncière', 'charges de copropriété', 'entretien', 'frais de notaire'],
-    officialInflationAuthority: 'Insee', inflationSeriesKey: 'FR_IPC_ANNUAL_AVERAGE',
-    legalDisclaimer: 'Estimation pédagogique; le taux d’effort, le TAEG, l’assurance et la décision de crédit dépendent du dossier et des règles en vigueur.',
-  },
-  de: {
-    locale: 'de', htmlLang: 'de-DE', region: 'Deutschland', currency: 'EUR', currencyDigits: 2,
-    decimalSeparator: ',', groupSeparator: '.', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
-    mortgageTerminology: ['Sollzins', 'effektiver Jahreszins', 'Annuität', 'Tilgung', 'Sondertilgung', 'Restschuld'],
-    homeCostFields: ['Annuität', 'Hausgeld', 'Instandhaltung', 'Grundsteuer', 'Versicherung', 'Grunderwerbsteuer', 'Notar und Grundbuch'],
-    officialInflationAuthority: 'Statistisches Bundesamt (Destatis)', inflationSeriesKey: 'DE_VPI_ANNUAL_AVERAGE',
-    legalDisclaimer: 'Allgemeine Rechenhilfe; Kreditprüfung, Nebenkosten, Zinsbindung und Vertragsbedingungen können abweichen.',
-  },
-  hi: {
-    locale: 'hi', htmlLang: 'hi-IN', region: 'भारत / अंतरराष्ट्रीय हिन्दी', currency: 'INR', currencyDigits: 2,
-    decimalSeparator: '.', groupSeparator: ',', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
-    mortgageTerminology: ['ब्याज दर', 'मूलधन', 'ब्याज', 'डाउन पेमेंट', 'प्रीपेमेंट', 'प्रोसेसिंग फीस'],
-    homeCostFields: ['होम लोन भुगतान', 'प्रॉपर्टी टैक्स', 'बीमा', 'मेंटेनेंस', 'सोसाइटी शुल्क', 'रजिस्ट्रेशन खर्च'],
-    officialInflationAuthority: 'भारत सरकार का सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय', inflationSeriesKey: 'IN_CPI_ANNUAL_AVERAGE',
-    legalDisclaimer: 'यह सामान्य शैक्षिक अनुमान है; ऋणदाता, अनुबंध, कर और स्थानीय नियम अलग हो सकते हैं।',
-  },
-  ar: {
-    locale: 'ar', htmlLang: 'ar', region: 'العالم العربي / استخدام عربي دولي', currency: 'USD', currencyDigits: 2,
-    decimalSeparator: '.', groupSeparator: ',', defaultSalaryPaymentsPerYear: 12, illustrativeDtiPercent: null,
-    mortgageTerminology: ['معدل الفائدة', 'أصل الدين', 'الفائدة', 'الدفعة الأولى', 'السداد المبكر', 'الرسوم'],
-    homeCostFields: ['دفعة التمويل', 'الضريبة العقارية', 'التأمين', 'الصيانة', 'رسوم الخدمات', 'تكاليف التسجيل'],
-    officialInflationAuthority: 'الجهة الإحصائية الرسمية المحلية', inflationSeriesKey: 'AR_CPI_ANNUAL_AVERAGE',
-    legalDisclaimer: 'هذا تقدير تعليمي عام؛ قد تختلف شروط المقرضين والعقود والضرائب والقواعد المحلية.',
   },
 };

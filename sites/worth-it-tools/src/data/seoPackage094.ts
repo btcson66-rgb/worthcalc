@@ -29,32 +29,6 @@ export const seoPackage094Guides: Record<string, SeoPackage094GuideMeta> = {
     "breadcrumbLabel": "Electric Foot Massager Cost Per Massage Session Used: Separate Standby and Heat",
     "schemaFile": "094__en__electric-foot-massager-electricity-cost-per-massage-session-used.json"
   },
-  "es/electric-foot-massager-electricity-cost-per-massage-session-used": {
-    "key": "es/electric-foot-massager-electricity-cost-per-massage-session-used",
-    "packageId": "094",
-    "locale": "es",
-    "articleSlug": "electric-foot-massager-electricity-cost-per-massage-session-used",
-    "title": "Coste eléctrico de un masajeador de pies por sesión: separa espera y calor",
-    "seoTitle": "Coste eléctrico de un masajeador de pies por sesión: separa espera y calor | WorthCalc",
-    "metaDescription": "Calcula el coste eléctrico de un masajeador de pies por sesión con energía medida del motor, calor, presión y espera, separando afirmaciones de confort y propiedad.",
-    "excerpt": "Calcula el coste eléctrico de un masajeador de pies por sesión con energía medida del motor, calor, presión y espera, separando afirmaciones de confort y propiedad.",
-    "canonical": "https://worthcalc.win/es/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de un masajeador de pies por sesión: separa espera y calor",
-    "ogDescription": "Calcula el coste eléctrico de un masajeador de pies por sesión con energía medida del motor, calor, presión y espera, separando afirmaciones de confort y propiedad.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de un masajeador de pies por sesión: separa espera y calor",
-    "imageBrief": "electric-foot-massager-electricity-cost-per-massage-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/projector-electricity-cost-per-presentation-hour-used/",
-      "/es/guides/e-reader-electricity-cost-per-reading-hour-used/",
-      "/es/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-      "/es/guides/electric-stapler-electricity-cost-per-stapling-session-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de un masajeador de pies por sesión: separa espera y calor",
-    "schemaFile": "094__es__electric-foot-massager-electricity-cost-per-massage-session-used.json"
-  },
   "zh/electric-foot-massager-electricity-cost-per-massage-session-used": {
     "key": "zh/electric-foot-massager-electricity-cost-per-massage-session-used",
     "packageId": "094",
@@ -81,56 +55,4 @@ export const seoPackage094Guides: Record<string, SeoPackage094GuideMeta> = {
     "breadcrumbLabel": "電動足部按摩器每次按摩工作電費：分開待機與加熱",
     "schemaFile": "094__zh__electric-foot-massager-electricity-cost-per-massage-session-used.json"
   },
-  "hi/electric-foot-massager-electricity-cost-per-massage-session-used": {
-    "key": "hi/electric-foot-massager-electricity-cost-per-massage-session-used",
-    "packageId": "094",
-    "locale": "hi",
-    "articleSlug": "electric-foot-massager-electricity-cost-per-massage-session-used",
-    "title": "Electric foot massager cost per massage session used: separate standby and heat",
-    "seoTitle": "Electric foot massager cost per massage session used: separate standby and heat | WorthCalc",
-    "metaDescription": "Measured motor, heat, pressure और standby energy से electric foot massager की प्रति massage session cost निकालें; comfort claims और ownership costs अलग रखें।",
-    "excerpt": "Measured motor, heat, pressure और standby energy से electric foot massager की प्रति massage session cost निकालें; comfort claims और ownership costs अलग रखें।",
-    "canonical": "https://worthcalc.win/hi/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "Electric foot massager cost per massage session used: separate standby and heat",
-    "ogDescription": "Measured motor, heat, pressure और standby energy से electric foot massager की प्रति massage session cost निकालें; comfort claims और ownership costs अलग रखें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Electric foot massager cost per massage session used: separate standby and heat",
-    "imageBrief": "electric-foot-massager-electricity-cost-per-massage-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/projector-electricity-cost-per-presentation-hour-used/",
-      "/hi/guides/e-reader-electricity-cost-per-reading-hour-used/",
-      "/hi/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-      "/hi/guides/electric-stapler-electricity-cost-per-stapling-session-used/"
-    ],
-    "breadcrumbLabel": "Electric foot massager cost per massage session used: separate standby and heat",
-    "schemaFile": "094__hi__electric-foot-massager-electricity-cost-per-massage-session-used.json"
-  },
-  "ar/electric-foot-massager-electricity-cost-per-massage-session-used": {
-    "key": "ar/electric-foot-massager-electricity-cost-per-massage-session-used",
-    "packageId": "094",
-    "locale": "ar",
-    "articleSlug": "electric-foot-massager-electricity-cost-per-massage-session-used",
-    "title": "تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة",
-    "seoTitle": "تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة | WorthCalc",
-    "metaDescription": "احسب تكلفة جهاز تدليك القدم لكل جلسة من طاقة المحرك والحرارة والضغط والاستعداد المقاسة، مع فصل ادعاءات الراحة وتكلفة الملكية.",
-    "excerpt": "احسب تكلفة جهاز تدليك القدم لكل جلسة من طاقة المحرك والحرارة والضغط والاستعداد المقاسة، مع فصل ادعاءات الراحة وتكلفة الملكية.",
-    "canonical": "https://worthcalc.win/ar/guides/electric-foot-massager-electricity-cost-per-massage-session-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة",
-    "ogDescription": "احسب تكلفة جهاز تدليك القدم لكل جلسة من طاقة المحرك والحرارة والضغط والاستعداد المقاسة، مع فصل ادعاءات الراحة وتكلفة الملكية.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة",
-    "imageBrief": "electric-foot-massager-electricity-cost-per-massage-session-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/projector-electricity-cost-per-presentation-hour-used/",
-      "/ar/guides/e-reader-electricity-cost-per-reading-hour-used/",
-      "/ar/guides/electric-pencil-sharpener-electricity-cost-per-sharpening-session-used/",
-      "/ar/guides/electric-stapler-electricity-cost-per-stapling-session-used/"
-    ],
-    "breadcrumbLabel": "تكلفة جهاز تدليك القدم لكل جلسة: افصل الاستعداد والتدفئة",
-    "schemaFile": "094__ar__electric-foot-massager-electricity-cost-per-massage-session-used.json"
-  }
 };

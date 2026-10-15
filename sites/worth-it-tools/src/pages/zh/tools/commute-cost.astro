@@ -36,14 +36,13 @@ const faq = [
   },
 ];
 const related = [
-  { title: '電動車 vs 燃油車總成本計算機', href: localizedPath(locale, '/tools/ev-vs-gas') },
-  { title: '租屋 vs 買房計算機', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: '電動車與油車五年總持有成本', href: localizedPath(locale, '/ev-vs-gas-total-cost') },
+  { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
   { title: 'Costco 會員回本計算機', href: localizedPath(locale, '/tools/costco-membership') },
-  { title: '拿鐵因子計算機', href: localizedPath(locale, '/tools/latte-factor') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh', 'es', 'fr', 'de']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
   <p class="intro">
     <strong>直接答案：20 km 單程 × 20 天、6.5 L/100 km、NT$32.7/L = 約 NT$1,700/月燃油；15 kWh/100 km、NT$3.80/kWh = 約 NT$456/月電費。</strong> 公式：來回公里 × 天數 × L/100 km ÷ 100 × 價格。<a href="https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx">中油來源</a>（2026-09-14）與<a href="https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true">台電來源</a>（查核 2026-09-15）；請換成自己的資料。
   </p>
@@ -231,14 +230,22 @@ const related = [
       油錢、電費只是行駛能源支出，不是完整的開車每公里成本。保養、輪胎、折舊、保險、車貸、稅費，以及為充電或加油繞路的成本，都不在能源模式內。汽車停車費和過路費會另外加入。若你要估真正的車馬費，應先用自己的帳單與里程整理完整單位成本，再放進直接成本模式，不能把油錢結果當成全部。
     </p>
 
+    <h2 id="own-cost-per-distance">自己的每公里持有成本怎麼估</h2>
+    <p>
+      要估一台車或機車完整的每公里成本，公式是「一年固定成本 + 一年行駛成本」，再除以一年行駛公里數。固定成本包含折舊、保險、燃料費與牌照稅、驗車與貸款利息；行駛成本包含油錢或電費、保養維修與輪胎。所有欄位要使用同一個年度口徑；若購車價已經透過折舊反映車輛價值的消耗，就不要又把貸款本金整筆當費用重複加入。
+    </p>
+    <p>
+      年折舊 = （購車價 − 預估轉售價）÷ 持有年數。轉售價與持有時間都不確定，建議用較保守的轉售價與不同的持有年數各測一次，不要把單一預測當成保證。固定成本是分攤到行駛距離上的：同一台車每年只開 5,000 公里，固定成本只能攤到 5,000 公里；開 20,000 公里則攤到四倍的里程，每公里固定成本明顯降低，而油錢或電費仍會隨距離增加。算出的單位成本可填入上方的「直接填每公里成本」；機車同理，改用該台機車自己的購車價、保險、稅費與油耗，不要拿汽車的數字代替。
+    </p>
+
     <h2>一年通勤會累積多少車馬費</h2>
     <p>
-      全年結果是每月試算乘以 12。最容易讓數字改變的輸入包括來回距離、每月實際進辦公室天數、每公里成本、停車費、過路費、車資，以及你是否把時間換成金額。混合辦公、輪班或淡旺季工作者，可把每月通勤天數改成具代表性的月平均。這比直接套用一個所謂的車馬費行情更貼近個人狀況，也能看出搬家、換工作地點或改搭大眾運輸後的差距。若只想知道單一車輛的持有成本每公里是多少，請使用<a href={localizedPath(locale, '/tools/cost-per-mile')}>每公里成本計算機</a>。
+      全年結果是每月試算乘以 12。最容易讓數字改變的輸入包括來回距離、每月實際進辦公室天數、每公里成本、停車費、過路費、車資，以及你是否把時間換成金額。混合辦公、輪班或淡旺季工作者，可把每月通勤天數改成具代表性的月平均。這比直接套用一個所謂的車馬費行情更貼近個人狀況，也能看出搬家、換工作地點或改搭大眾運輸後的差距。若只想知道單一車輛的持有成本每公里是多少，請看下方「自己的每公里持有成本怎麼估」，算出後填入「直接填每公里成本」。
     </p>
 
     <h2>電動車與機車比較怎麼運作</h2>
     <p>
-      電動車模式只把車輛電耗與每度電價換成單位能源成本，再套用相同的距離、通勤天數、汽車停車、過路費與時間公式。它刻意排除購車價、貸款、折舊、保險差異、維修、家用充電設備與未反映在輸入電價中的公共充電費，因此不是完整的油電車總持有成本比較；需要更完整的決策時，可使用<a href={localizedPath(locale, '/tools/ev-vs-gas')}>電動車 vs 燃油車總成本計算機</a>。
+      電動車模式只把車輛電耗與每度電價換成單位能源成本，再套用相同的距離、通勤天數、汽車停車、過路費與時間公式。它刻意排除購車價、貸款、折舊、保險差異、維修、家用充電設備與未反映在輸入電價中的公共充電費，因此不是完整的油電車總持有成本比較；需要更完整的決策時，可讀<a href={localizedPath(locale, '/ev-vs-gas-total-cost')}>電動車和油車怎麼比較五年總持有成本</a>。
     </p>
     <p>
       機車在台灣通勤不是附註選項，所以本工具讓它有獨立的每公里成本、停車費、通勤時間、月成本、年成本與單位成本。機車單位成本由你自行定義：可以只放油電，也可以把保養、輪胎和折舊估進去。汽車的停車與過路費不會自動套到機車，避免把兩種交通方式的費用混在一起。

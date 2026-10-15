@@ -33,6 +33,10 @@ const approvedSingleLocaleRoutes = new Set([
   // adding reciprocal pages would exceed the two-URL budget.
   'tools/appliance-running-cost',
   'tools/appliance-electricity-cost',
+  // P1b CEO verdict (2026-10-15): the zh calculators stay real pages (a Taiwan scooter scenario and
+  // an NT$ card model); their English mirrors are redirect stubs, so only zh is a real page.
+  'tools/cashback-breakeven',
+  'tools/ev-vs-gas',
 ]);
 // Staged editorial programmes can introduce a complete non-core language
 // cluster without pretending that the five-language product shell is complete.

@@ -340,6 +340,18 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
         path: '/tools/commute-cost',
         description: '比較機車、汽車、大眾運輸與 Uber 的每月、每年通勤花費。',
       },
+      {
+        icon: '🛵',
+        title: '電動機車 vs 油車計算機',
+        path: '/tools/ev-vs-gas',
+        description: '比較 Gogoro 類電動機車與 125cc 油車的五年總持有成本與回本年。',
+      },
+      {
+        icon: '🎁',
+        title: '信用卡回饋打平計算機',
+        path: '/tools/cashback-breakeven',
+        description: '算出年費卡要刷多少才回本，並跟免年費 1% 回饋卡直接比較。',
+      },
     ],
     methodHeading: '一套可以自行核對的決策流程',
     methodLead: '好用的計算機不應替你藏住假設，而要讓你看見答案在哪個條件下會翻轉。',

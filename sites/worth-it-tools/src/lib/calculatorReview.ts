@@ -99,6 +99,78 @@ const reviews: ReviewMap = {
   // 還殘留美國的 Gold Star / Executive 年費當成台灣的示範值。兩套互相矛盾的
   // 方法論放在同一個 YMYL 頁面上，比只有一套更糟，所以兩個好市多頁面改用
   // showReview={false}，只留 DecisionGuide 那一套，數字統一由 data/rates.json 供給。
+  'ev-vs-gas': {
+    en: {
+      methodology:
+        'EV total cost equals purchase price minus subsidy plus electricity and maintenance over the ownership period. Gas total cost equals purchase price plus fuel and maintenance over the same period.',
+      assumptions: [
+        'Default values such as 38,000 EV price, 30,000 gas-car price, 7,500 rebate, 1,200 km/month, 0.16/kWh, 3.80/gallon, and 5 years are illustrative examples.',
+        'Gas efficiency is entered in mpg and converted to kilometers per gallon.',
+        'Break-even compares the upfront price gap with annual operating savings.',
+      ],
+      example:
+        'If the EV costs more upfront but saves money on electricity and maintenance each year, the break-even year is the upfront gap divided by estimated annual savings.',
+      limitations: [
+        'Insurance, financing, taxes, registration, charger installation, resale value, battery degradation, and local incentives beyond the entered subsidy are not included.',
+        'Energy prices and maintenance costs can vary sharply by location and vehicle model.',
+      ],
+      lastUpdated: lastUpdated.en,
+      disclaimer: financialDisclaimer.en,
+    },
+    zh: {
+      methodology:
+        '電動車總成本等於購車價扣補助，再加上持有期間的電費與保養費。燃油車總成本等於購車價加上同期間油費與保養費。',
+      assumptions: [
+        '預設 38,000 電動車、30,000 燃油車、7,500 補助、每月 1,200 公里、0.16/kWh、3.80/加侖、5 年持有都是示範值。',
+        '燃油效率以 mpg 輸入，系統會轉成每加侖公里數。',
+        '損益兩平用前期價差除以每年營運成本節省估算。',
+      ],
+      example:
+        '若電動車前期較貴，但每年電費與保養省下成本，損益兩平年約等於前期價差除以每年省下金額。',
+      limitations: [
+        '未包含保險、貸款、稅費、牌照、充電樁安裝、殘值、電池衰退，以及輸入補助以外的地方優惠。',
+        '能源價格與保養成本會因地區和車款大幅不同。',
+      ],
+      lastUpdated: lastUpdated.zh,
+      disclaimer: financialDisclaimer.zh,
+    },
+  },
+  'cashback-breakeven': {
+    en: {
+      methodology:
+        'The calculator multiplies monthly spending in each category by 12 and by the entered cashback rate. It adds any welcome bonus, subtracts the annual fee, and compares the result with a no-fee 1% baseline.',
+      assumptions: [
+        'Default annual fee 95, welcome bonus 200, groceries 500 at 3%, dining 250 at 2%, other 500 at 1.5%, and the 1% no-fee baseline are editable examples.',
+        'The welcome bonus should only be included if you can earn it without extra spending.',
+        'Break-even spend assumes the same category mix as the current inputs.',
+      ],
+      example:
+        'If monthly spending totals 1,250 and the weighted reward rate beats 1%, the calculator estimates whether rewards plus bonus exceed the annual fee and the no-fee baseline.',
+      limitations: [
+        'Point-transfer value, rotating categories, reward caps, merchant coding, interest charges, and late fees are not modeled.',
+        'Actual card terms can change and should be verified with the issuer.',
+      ],
+      lastUpdated: lastUpdated.en,
+      disclaimer: financialDisclaimer.en,
+    },
+    zh: {
+      methodology:
+        '計算機會用各類別月消費乘以 12 和輸入回饋率，加入迎新禮、扣除年費，再和免年費 1% 基準卡比較。',
+      assumptions: [
+        '預設年費 95、迎新禮 200、雜貨 500 且 3%、餐飲 250 且 2%、其他 500 且 1.5%、免年費 1% 基準都是示範值。',
+        '只有在不需額外消費即可達成時，才應加入迎新禮。',
+        '損益兩平消費額假設類別消費比例和目前輸入相同。',
+      ],
+      example:
+        '若每月總消費 1,250，且加權回饋率高於 1%，工具會估算回饋加迎新禮是否足以超過年費與免年費基準。',
+      limitations: [
+        '未模型化點數轉換價值、輪替類別、回饋上限、商戶代碼、利息或遲繳費。',
+        '實際卡片條款可能改變，應向發卡機構確認。',
+      ],
+      lastUpdated: lastUpdated.zh,
+      disclaimer: financialDisclaimer.zh,
+    },
+  },
   'commute-cost': {
     en: {
       methodology:

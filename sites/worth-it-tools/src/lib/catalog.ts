@@ -40,6 +40,8 @@ export const FEATURED_CALCULATOR_PATHS: readonly string[] = [
   '/tools/costco-membership',
   '/tools/commute-cost',
   '/tools/installment-true-apr',
+  '/tools/cashback-breakeven',
+  '/tools/ev-vs-gas',
   '/tools/home-affordability',
   '/tools/dti-calculator',
   '/tools/subscription-audit',

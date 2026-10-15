@@ -1,7 +1,7 @@
 {
   "decision": {
     "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC",
-    "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target.",
+    "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target. Exception (CEO P1b verdict, 2026-10-15): /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ stay real calculator pages; only their English mirrors are stubs.",
     "rollback": "Delete the entry, restore the page source from git history, rebuild."
   },
   "stubs": [
@@ -54,10 +54,6 @@
       "to": "/zh/how-compound-growth-works/"
     },
     {
-      "from": "/zh/tools/cashback-breakeven/",
-      "to": "/zh/annual-fee-card-breakeven/"
-    },
-    {
       "from": "/en/tools/cashback-breakeven/",
       "to": "/en/annual-fee-card-breakeven/"
     },
@@ -68,10 +64,6 @@
     {
       "from": "/en/tools/cost-per-mile/",
       "to": "/en/tools/commute-cost/"
-    },
-    {
-      "from": "/zh/tools/ev-vs-gas/",
-      "to": "/zh/ev-vs-gas-total-cost/"
     },
     {
       "from": "/en/tools/ev-vs-gas/",

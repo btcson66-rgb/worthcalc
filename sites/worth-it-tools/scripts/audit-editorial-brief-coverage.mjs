@@ -10,8 +10,9 @@ const dist = resolve('dist');
 // P1b (2026-10-15) removed or merged five of the 29 brief topics (cost-per-use-expensive-item,
 // bulk-buying-vs-small-packages, meal-prep-vs-takeout-cost, reusable-vs-disposable-break-even,
 // price-per-wear-clothing-shoes) and five calculators (cashback-breakeven, cost-per-mile, ev-vs-gas,
-// latte-factor, rent-vs-buy), so the floors drop with them: tool 40 -> 30 (5 calculators x en + zh),
-// topics 29 -> 24 and variants 58 -> 48 (24 topics x en + zh). Measured after P1b: 30 tool pages,
+// latte-factor, rent-vs-buy), so the floors drop with them: tool 40 -> 32 (3 calculators x en + zh, plus the
+// zh pages of cashback-breakeven and ev-vs-gas that the CEO's P1b verdict kept as real calculator pages),
+// topics 29 -> 24 and variants 58 -> 48 (24 topics x en + zh). Measured after P1b: 32 tool pages,
 // 48/48 variants aligned and compliant, 24/24 complete topics. Redirect stubs are counted in their own
 // class so they cannot satisfy the tool or editorial floors.
 const locales = ['en', 'zh'];
@@ -55,7 +56,7 @@ const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
-  tool: 30,
+  tool: 32,
   editorial: 160,
   alignedVariants: 48,
   compliantVariants: 48,

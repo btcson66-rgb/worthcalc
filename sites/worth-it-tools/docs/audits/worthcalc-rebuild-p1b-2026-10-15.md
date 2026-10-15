@@ -13,9 +13,9 @@ work_order: P1b-WC
 
 | 項目 | 前 | 後 |
 |---|---|---|
-| sitemap URL | 143 | 89（= keep 69 + rewrite 20） |
+| sitemap URL | 143 | 91（= keep 71 + rewrite 20） |
 | `maxUrls` | 425 | 160 |
-| 建置 HTML | 426 | 356（含 33 個 stub） |
+| 建置 HTML | 426 | 356（含 31 個 stub） |
 | 全站 `<html lang>` | 首頁 zh-Hant-TW、其餘 zh-TW | 全部 zh-TW（/en/ 為 en） |
 
 ## remove（35 頁，刪除並回 404；英文鏡像一併刪除）
@@ -56,9 +56,9 @@ work_order: P1b-WC
 - `/zh/reusable-vs-disposable-break-even/`
 - `/zh/tools/latte-factor/`
 
-## merge_into（19 頁，改為 redirect stub）
+## merge_into（17 頁，改為 redirect stub）
 
-stub：`noindex,follow`、canonical 與 meta refresh 指向目標、無廣告載入器／hreflang／結構化資料、不進 sitemap。英文鏡像若有對應的英文目標頁也改為 stub（共 13 個），否則刪除。
+stub：`noindex,follow`、canonical 與 meta refresh 指向目標、無廣告載入器／hreflang／結構化資料、不進 sitemap。英文鏡像若有對應的英文目標頁也改為 stub（共 13 個，含下述兩個 CEO 改判頁的英文鏡像），否則刪除。
 
 | 被併頁 | 目標頁 | 搬到目標頁的重點 |
 |---|---|---|
@@ -71,9 +71,7 @@ stub：`noindex,follow`、canonical 與 meta refresh 指向目標、無廣告載
 | `/zh/money/emergency-fund-size-2026/` | `/zh/emergency-fund-how-much/` | 無需搬移：必要支出 vs 總支出的觀念目標頁已有，其餘為美國利率與美元算例 → emergency-fund-how-much |
 | `/zh/money/pay-off-car-loan-early-or-invest/` | `/zh/money/car-loan-vs-cash/` | 提前還清 = 確定報酬、打平點 = 貸款利率、流動性成本、先索取清償金額 → money/car-loan-vs-cash |
 | `/zh/simple-vs-compound-interest/` | `/zh/how-compound-growth-works/` | 單利複利公式與算例、複利頻率與 APY、信用卡每日週期利率、負攤還 → how-compound-growth-works |
-| `/zh/tools/cashback-breakeven/` | `/zh/annual-fee-card-breakeven/` | 多類別回饋公式與打平月消費算式（計算機本身不搬，見待判斷事項）→ annual-fee-card-breakeven |
 | `/zh/tools/cost-per-mile/` | `/zh/tools/commute-cost/` | 完整每公里持有成本公式、折舊算法、固定成本分攤 → tools/commute-cost |
-| `/zh/tools/ev-vs-gas/` | `/zh/ev-vs-gas-total-cost/` | 電動機車 vs 125cc 油車算法（購車價、補助、電池資費、40 km/L）→ ev-vs-gas-total-cost |
 | `/zh/tools/rent-vs-buy/` | `/zh/rent-vs-buy-breakeven-year/` | 無需搬移：目標頁計算機與來源更完整 → rent-vs-buy-breakeven-year |
 | `/zh/topics/debt-credit/` | `/` | 六個主題目錄頁的連結已由首頁情境分組取代；無內容可搬 |
 | `/zh/topics/everyday/` | `/` | 六個主題目錄頁的連結已由首頁情境分組取代；無內容可搬 |
@@ -97,3 +95,7 @@ stub：`noindex,follow`、canonical 與 meta refresh 指向目標、無廣告載
 - 程式內嵌翻譯：以 AST 機械移除（`decisionGuides`、`home`、`topics`、`ui`、30 個 `[locale]/*.astro` 頁與計算機元件等），`Locale` 型別收斂為 `en | zh`；`coreToolContent.ts`、`legalContent.ts`、`LocalizedCoreCalculator.astro` 因只服務退役語系而刪除。
 - 驗證：刪除前後各做一次乾淨建置，356 個 HTML 在忽略 `<style>`、資產雜湊與元素順序後完全相同；sitemap、robots、ads.txt 相同。
 - 未動：`scripts/create-seo-program-*.mjs`（一次性套件產生器，內含舊翻譯，輸出早已提交，不要重跑）、`docs/` 底下的歷史稽核紀錄、`deindexed-urls.json` 的歷史 URL 清單。
+
+## CEO P1b 改判（驗收後補）
+
+`/zh/tools/cashback-breakeven/` 與 `/zh/tools/ev-vs-gas/` 由 merge_into 改回 **keep**：恢復成完整計算機頁、放回 sitemap（89 → 91）、處置 CSV 兩列改 keep（reason：CEO P1b 改判：互動計算機為主要內容；機車情境與汽車文章意圖不同）。英文鏡像維持 stub。為避免蠶食，annual-fee-card-breakeven 的算式段落加一句連到信用卡回饋打平計算機，ev-vs-gas-total-cost 的機車段落加一句連到電動機車計算機。同時恢復這兩頁在 `/zh/tools/` 目錄、`s4TitleOverrides`、`calculatorReview` 的項目。check:rebuild-p1b 隨之為 keep 71／merge 17；`check-all-localized-routes` 把這兩條路由列為單語系（zh）核准路由；s4 標題對 31→33、工具頁底線 30→32。

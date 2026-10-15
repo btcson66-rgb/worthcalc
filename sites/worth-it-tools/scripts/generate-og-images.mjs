@@ -55,10 +55,7 @@ function loadGuides() {
 
 const TAGLINE = {
   en: ['No sign-up', '100% private', 'Free forever'],
-  es: ['Sin registro', '100% privado', 'Gratis siempre'],
   zh: ['免註冊', '完全私密', '永久免費'],
-  hi: ['बिना साइन-अप', '100% निजी', 'हमेशा मुफ़्त'],
-  ar: ['بدون تسجيل', 'خاص 100%', 'مجاني دائمًا'],
 };
 const RTL = new Set(['ar']);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

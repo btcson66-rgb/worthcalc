@@ -1,5 +1,5 @@
 ---
-type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CalculatorLocale = 'en' | 'zh';
 type CurrencyCode = 'USD' | 'TWD' | 'EUR';
 
 interface CalculatorCopy {
@@ -54,9 +54,6 @@ const { locale, currency, defaults, copy } = Astro.props;
 const localeTags: Record<CalculatorLocale, string> = {
   en: 'en-US',
   zh: 'zh-TW',
-  es: 'es-ES',
-  fr: 'fr-FR',
-  de: 'de-DE',
 };
 ---
 

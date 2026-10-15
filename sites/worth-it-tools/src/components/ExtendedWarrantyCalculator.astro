@@ -1,5 +1,5 @@
 ---
-type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CalculatorLocale = 'en' | 'zh';
 type CurrencyCode = 'USD' | 'TWD' | 'EUR';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { locale, currency, defaults, copy } = Astro.props;
-const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', };
 ---
 
 <section id="extended-warranty-calculator" class="calc" data-extended-warranty-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict-plan={copy.verdictPlan} data-verdict-self={copy.verdictSelf} data-label-a={copy.selfFundExpected} data-label-b={copy.planExpected}>

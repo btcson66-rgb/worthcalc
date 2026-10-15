@@ -1,5 +1,5 @@
 ---
-type CalculatorLocale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type CalculatorLocale = 'en' | 'zh';
 type CurrencyCode = 'USD' | 'TWD' | 'EUR';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { locale, currency, defaults, copy } = Astro.props;
-const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW', };
 ---
 
 <section id="commute-full-cost-calculator" class="calc" data-commute-full-cost-calculator data-locale={localeTags[locale]} data-currency={currency} data-verdict={copy.verdict} data-label-a={copy.cashCost} data-label-b={copy.timeCost} data-label-c={copy.fullCost}>

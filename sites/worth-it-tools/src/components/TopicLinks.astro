@@ -41,9 +41,6 @@ const siblings = isCore ? getReviewedSlugSiblings(locale, path) : [];
 const copy = {
   en: { label: 'Topic', calculators: 'All calculators', guides: 'All guides', sibling: 'Also on this question' },
   zh: { label: '所屬主題', calculators: '全部計算機', guides: '全部指南', sibling: '同一問題的另一篇' },
-  es: { label: 'Tema', calculators: 'Todas las calculadoras', guides: 'Todas las guías', sibling: 'Sobre la misma pregunta' },
-  fr: { label: 'Thème', calculators: 'Tous les calculateurs', guides: 'Tous les guides', sibling: 'Sur la même question' },
-  de: { label: 'Thema', calculators: 'Alle Rechner', guides: 'Alle Ratgeber', sibling: 'Zur selben Frage' },
 }[isCore ? coreLocale : 'en'];
 ---
 

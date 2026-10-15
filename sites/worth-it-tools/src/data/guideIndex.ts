@@ -265,14 +265,4 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/freelancer-pricing-decision-engine/', title: 'Freelancer Pricing Decision Engine' },
     { path: '/job-offer-true-value-decision-engine/', title: 'Job Offer True Value Decision Engine' },
   ],
-  es: [
-  ],
-  fr: [
-  ],
-  de: [
-  ],
-  hi: [
-  ],
-  ar: [
-  ],
 };

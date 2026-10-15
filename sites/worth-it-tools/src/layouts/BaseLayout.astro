@@ -47,7 +47,7 @@ const {
   jsonLd = [],
   entity,
 } = Astro.props;
-// Pages still pass the old five-language lists (['en', 'zh', 'es', 'fr', 'de']).
+// Pages still pass the old five-language lists (['en', 'zh']).
 // Only built locales may reach the language switcher and hreflang, otherwise
 // the switcher would link to routes that no longer exist.
 const resolvedAlternateLocales = (alternateLocales ?? [...CORE_LOCALES]).filter((loc) =>

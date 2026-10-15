@@ -24,7 +24,7 @@ interface CalculatorCopy {
 }
 
 interface Props {
-  locale: 'en' | 'zh' | 'es' | 'fr' | 'de';
+  locale: 'en' | 'zh';
   currency: 'USD' | 'TWD' | 'EUR';
   defaults: {
     membershipFee: number;
@@ -41,13 +41,7 @@ interface Props {
 const { locale, currency, defaults, copy } = Astro.props;
 const numberLocale = locale === 'zh'
   ? 'zh-TW'
-  : locale === 'es'
-    ? 'es-ES'
-    : locale === 'fr'
-      ? 'fr-FR'
-      : locale === 'de'
-        ? 'de-DE'
-        : 'en-US';
+  : 'en-US';
 ---
 
 <section

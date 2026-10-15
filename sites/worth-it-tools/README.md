@@ -128,8 +128,11 @@ The CEO approved the P1 audit; P1b carried it out (sitemap 143 -> 89 URLs, `maxU
   the sitemap. Where the target lacked something useful from the merged page, the key points were moved
   into the target (no page was added). The six topic hubs (`/<locale>/topics/*`) are stubs to the homepage.
   **No internal link may point at a stub** -- link to the target.
-- **Retired locales** (`es`, `fr`, `de`, `hi`, `ar`): content directories, schema files, OG images and
-  registry entries are deleted.
+- **Retired locales** (`es`, `fr`, `de`, `hi`, `ar`): content directories, schema files, OG images,
+  registry entries and the per-locale translations inside the data files and page templates are
+  deleted. `Locale` / `ContentLocale` in `src/consts.ts` are now `'en' | 'zh'`. The one-off
+  `scripts/create-seo-program-*.mjs` generators still contain the old es/fr/de text (their output was
+  committed long ago); do not re-run them.
 - **`<html lang>`** is `zh-TW` on every zh page including the homepage.
 - **Gate.** `npm run check:rebuild-p1b` (part of `npm run verify`) pins all of the above.
 

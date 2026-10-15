@@ -20,36 +20,6 @@ const FALLBACK_COPY: Record<ContentLocale, {
     defaults: '預設值可能過期；使用前請確認當下數字。',
     excluded: '本頁只納入列出的輸入，其他成本、條款、稅費與個人情況不在計算範圍。',
   },
-  es: {
-    method: 'Esta página aplica los datos visibles a la operación que muestra.',
-    noAdvice: 'Es un cálculo, no un asesoramiento.',
-    defaults: 'Los valores predeterminados pueden quedar desactualizados; compruebe las cifras vigentes.',
-    excluded: 'Solo se incluyen los datos indicados; otros costes, condiciones, impuestos y circunstancias quedan fuera.',
-  },
-  fr: {
-    method: 'Cette page applique les données visibles au calcul affiché.',
-    noAdvice: 'Ceci est un calcul, pas un conseil.',
-    defaults: 'Les valeurs par défaut peuvent vieillir ; vérifiez les chiffres en vigueur avant de les utiliser.',
-    excluded: 'Seules les données indiquées sont incluses ; les autres coûts, conditions, taxes et situations personnelles sont exclus.',
-  },
-  de: {
-    method: 'Diese Seite wendet die sichtbaren Eingaben auf die angezeigte Rechnung an.',
-    noAdvice: 'Dies ist eine Rechnung, keine Beratung.',
-    defaults: 'Vorgaben können veralten; prüfen Sie aktuelle Zahlen, bevor Sie sie verwenden.',
-    excluded: 'Nur die genannten Eingaben werden berücksichtigt; weitere Kosten, Bedingungen, Steuern und persönliche Umstände bleiben außen vor.',
-  },
-  hi: {
-    method: 'यह पृष्ठ दिखाई देने वाले इनपुट को पृष्ठ पर दी गई गणना में लागू करता है।',
-    noAdvice: 'यह एक गणना है, सलाह नहीं।',
-    defaults: 'डिफ़ॉल्ट मान पुराने पड़ सकते हैं; उन पर भरोसा करने से पहले मौजूदा आंकड़े जाँच लें।',
-    excluded: 'इसमें केवल सूचीबद्ध इनपुट शामिल हैं; अन्य लागतें, शर्तें, कर और व्यक्तिगत परिस्थितियाँ इस गणना से बाहर हैं।',
-  },
-  ar: {
-    method: 'تطبّق هذه الصفحة المدخلات الظاهرة على الحساب المعروض فيها.',
-    noAdvice: 'هذا حساب وليس نصيحة.',
-    defaults: 'قد تتقادم القيم الافتراضية؛ تحقق من الأرقام الحالية قبل الاعتماد عليها.',
-    excluded: 'تشمل الحسبة المدخلات المذكورة فقط؛ أما التكاليف والشروط والضرائب والظروف الشخصية الأخرى فهي خارج نطاقها.',
-  },
 };
 
 /**

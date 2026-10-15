@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
 const outPath = join(projectRoot, 'src', 'data', 'guideIndex.ts');
-const LOCALES = ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'];
+const LOCALES = ['en', 'zh'];  // P1b: the retired locales have no pages
 const LEGAL_SLUGS = new Set(['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog']);
 
 if (!existsSync(distDir)) {

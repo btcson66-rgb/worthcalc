@@ -1,5 +1,5 @@
 ---
-type Locale = 'en' | 'zh' | 'es' | 'fr' | 'de';
+type Locale = 'en' | 'zh';
 type Mode = 'appliance' | 'costPerUse' | 'bulk' | 'meal' | 'reusable' | 'pricePerWear' | 'hourlyWage' | 'raiseInflation';
 interface Field { key: string; label: string; min?: number; max?: number; step?: number; }
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   copy: { heading: string; intro: string; output1: string; output2: string; output3: string; verdictPositive: string; verdictNegative: string; unit?: string; privacy: string };
 }
 const { id, mode, locale, currency, defaults, fields, copy } = Astro.props;
-const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+const localeTags: Record<Locale, string> = { en: 'en-US', zh: 'zh-TW', };
 ---
 
 <section id={id} class="calc" data-decision-math data-mode={mode} data-locale={localeTags[locale]} data-currency={currency} data-positive={copy.verdictPositive} data-negative={copy.verdictNegative} data-unit={copy.unit || ''} data-label-a={copy.output1} data-label-b={copy.output2}>

@@ -8,7 +8,7 @@ description: "A $2,900 move spread over a 12-month lease is $242 a month. Any re
 answer: "Moving costs about $2,900 once deposits, movers, fees, overlap rent and time off work are counted. Over a 12-month lease that is $242 a month, so an increase smaller than $242 costs less to accept than to avoid. Most renewal increases land under that line, which is why the landlord's leverage is the moving cost, not the market."
 publishAt: "2026-11-03"
 lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/rent-vs-buy/"
+relatedTool: "/en/rent-vs-buy-breakeven-year/"
 relatedToolLabel: "rent vs buy calculator"
 formula: "break-even monthly increase = total cost of moving ÷ months of the new lease; moving is worth it only when the monthly rent saved exceeds that figure"
 limits:
@@ -36,9 +36,7 @@ faq:
   - q: "Can I use this to negotiate instead?"
     a: "Yes, and it is the most useful thing on this page. Your break-even is also the landlord's ceiling: above it you leave, and re-letting costs them a vacant month plus turnover. An increase just under your break-even is the one they can charge, which means a counter-offer between the two is a genuinely negotiable range rather than a hopeful one."
 related:
-  - "/en/money/moving-for-a-job-full-cost/"
   - "/en/money/mortgage-refinance-break-even/"
-  - "/en/money/buy-now-or-wait-price-increase/"
 draft: true
 ---
 

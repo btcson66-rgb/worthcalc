@@ -7,14 +7,16 @@
 //   1. The sitemap holds `/` and zh pages only. No /en/, no /zh/ stub, no other locale.
 //   2. Every /en/ page is noindex and names no hreflang alternate.
 //   3. No FAQPage or HowTo structured data anywhere (Google retired the FAQ rich result 2026-06-15).
-//   4. `/` is the Traditional Chinese homepage: lang zh-Hant-TW, canonical `/`, indexable.
+//   4. `/` is the Traditional Chinese homepage: lang zh-TW (site-wide since P1b), canonical `/`, indexable.
 //   5. /zh/ is a redirect stub: noindex, canonical `/`, meta refresh, no ad loader, no hreflang.
 //   6. Every indexable calculator/article page shows the "Benson Lai" byline linked to the
 //      author page and a visible not-financial-advice notice.
 //   7. No routes exist for the retired locales (es, fr, de, hi, ar).
 //   8. Every link on the homepage's situation groups points to a sitemap page the
 //      disposition audit marks `keep`.
-//   9. The disposition CSV covers exactly the sitemap pages, with valid actions.
+//   9. The disposition CSV covers every sitemap page, with valid actions. Since P1b the CSV is also
+//      the record of what was removed or merged: a `keep`/`rewrite` row must be a sitemap page and
+//      every other row must not be (the stub / 404 checks live in check-rebuild-p1b.mjs).
 //  10. deploy-worthcalc.yml has no `schedule` trigger, and no money brief dated after
 //      2026-10-15 is publishable (they are `draft: true` until a human flips them).
 //
@@ -22,6 +24,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseCsv } from './lib/csv.mjs';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const repoRoot = dirname(dirname(projectRoot));
@@ -111,7 +114,7 @@ for (const [path, html] of pages) {
 const home = pages.get('/');
 if (!home) fail('dist/index.html is missing');
 else {
-  if (!/<html lang="zh-Hant-TW"/.test(home)) fail('/: <html lang> is not zh-Hant-TW');
+  if (!/<html lang="zh-TW"/.test(home)) fail('/: <html lang> is not zh-TW');
   if (canonicalOf(home) !== `${origin}/`) fail(`/: canonical is ${canonicalOf(home)}`);
   if (/noindex/i.test(meta(home, 'robots'))) fail('/: homepage is noindex');
   if (!home.includes('台灣人的金錢決策計算機')) fail('/: homepage does not carry the positioning line');
@@ -177,30 +180,6 @@ for (const locale of RETIRED_LOCALES) {
 }
 
 // 8 + 9. disposition CSV
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let field = '';
-  let quoted = false;
-  for (let i = 0; i < text.length; i += 1) {
-    const ch = text[i];
-    if (quoted) {
-      if (ch === '"' && text[i + 1] === '"') { field += '"'; i += 1; }
-      else if (ch === '"') quoted = false;
-      else field += ch;
-    } else if (ch === '"') quoted = true;
-    else if (ch === ',') { row.push(field); field = ''; }
-    else if (ch === '\n' || ch === '\r') {
-      if (ch === '\r' && text[i + 1] === '\n') i += 1;
-      row.push(field); field = '';
-      if (row.length > 1 || row[0] !== '') rows.push(row);
-      row = [];
-    } else field += ch;
-  }
-  if (field !== '' || row.length) { row.push(field); rows.push(row); }
-  return rows;
-}
-
 const expectedColumns = ['url', 'type', 'title', 'taiwan_specific', 'has_official_source', 'source_examples', 'last_checked_date', 'gsc_impressions_28d', 'proposed_action', 'reason'];
 const actionCounts = new Map();
 if (!existsSync(csvPath)) fail(`missing ${relative(repoRoot, csvPath)}`);
@@ -214,7 +193,9 @@ else {
     const url = row[index.url];
     if (csvUrls.has(url)) fail(`CSV lists ${url} twice`);
     csvUrls.add(url);
-    if (!sitemapUrls.includes(url)) fail(`CSV row is not in the sitemap: ${url}`);
+    const retiredByP1b = row[index.proposed_action] === 'remove' || row[index.proposed_action].startsWith('merge_into:');
+    if (retiredByP1b && sitemapUrls.includes(url)) fail(`CSV ${url}: marked ${row[index.proposed_action]} but still in the sitemap`);
+    if (!retiredByP1b && !sitemapUrls.includes(url)) fail(`CSV row is not in the sitemap: ${url}`);
     if (!/^(tool|article|brief|hub|legal)$/.test(row[index.type])) fail(`CSV ${url}: bad type "${row[index.type]}"`);
     if (!/^(yes|partial|no)$/.test(row[index.taiwan_specific])) fail(`CSV ${url}: bad taiwan_specific "${row[index.taiwan_specific]}"`);
     if (!/^(yes|no)$/.test(row[index.has_official_source])) fail(`CSV ${url}: bad has_official_source "${row[index.has_official_source]}"`);
@@ -292,7 +273,7 @@ if (failures.length > 0) {
 const summary = [...actionCounts].map(([action, count]) => `${action}=${count}`).join(' ');
 console.log(
   `[rebuild-p1] PASS — sitemap ${sitemapUrls.length} URLs (/ + zh only); ${englishPages} English pages all noindex without hreflang; ` +
-    `${schemaBlocks} JSON-LD blocks, no FAQPage/HowTo; homepage zh-Hant-TW; /zh/ stub OK; ` +
+    `${schemaBlocks} JSON-LD blocks, no FAQPage/HowTo; homepage zh-TW; /zh/ stub OK; ` +
     `byline+notice on ${bylineChecked} calculator/article pages; no retired-locale routes; ` +
     `disposition ${summary}; ${futureBriefs} future-dated briefs are draft; no workflow schedule`,
 );

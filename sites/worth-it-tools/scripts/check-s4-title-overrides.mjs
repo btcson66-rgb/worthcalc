@@ -16,11 +16,14 @@ for (const [pathname, value] of entries) {
   if (legalSlugs.has(slug)) failures.push(pathname + ': legal title override is forbidden');
 }
 
-if (entries.length !== 63) failures.push('expected 63 title/description pairs, found ' + entries.length);
+// 63 pairs when the S4 package shipped; 31 after the 2026-10-15 P1b disposition removed the
+// overrides of retired locales (es/fr/de/hi/ar) and of pages that were removed or merged away.
+const EXPECTED_PAIRS = 31;
+if (entries.length !== EXPECTED_PAIRS) failures.push(`expected ${EXPECTED_PAIRS} title/description pairs, found ${entries.length}`);
 if (failures.length > 0) {
   console.error('[s4-titles] FAIL');
   failures.forEach((failure) => console.error('  ' + failure));
   process.exit(1);
 }
 
-console.log('[s4-titles] PASS — 63 title/description pairs; legal title overrides 0');
+console.log(`[s4-titles] PASS — ${EXPECTED_PAIRS} title/description pairs; legal title overrides 0`);

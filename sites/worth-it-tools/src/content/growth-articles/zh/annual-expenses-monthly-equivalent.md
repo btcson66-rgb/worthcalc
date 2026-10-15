@@ -225,8 +225,7 @@ breadcrumbLabel: "年度支出怎麼換算成每月預算？別再被年繳保�
 
 - [Budget Builder](/zh/tools/budget-builder/)
 - [現金流緩衝 vs 緊急預備金](/zh/guides/cash-flow-buffer-vs-emergency-fund/)
-- [緊急預備金 vs 目標基金](/zh/emergency-fund-vs-sinking-fund/)
-- [儲蓄率怎麼算？](/zh/how-to-calculate-savings-rate/)
+- [緊急預備金要存多少（含目標基金怎麼分）](/zh/emergency-fund-how-much/)
 
 把年度帳單月化後，再回頭檢查比例預算是否真的能裝下你的固定成本，而不是只看理想百分比。
 

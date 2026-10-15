@@ -12,8 +12,12 @@ const dist = resolve('dist');
 const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
-const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
-const releasedSupplemental = ['bulk-buying-waste-math', 'costco-math', 'is-costco-executive-membership-worth-it'];
+// P1b (2026-10-15): ev-vs-gas, rent-vs-buy and cashback-breakeven were merged into longer
+// guides (redirect stubs), latte-factor and bulk-buying-waste-math were removed, and
+// is-costco-executive-membership-worth-it was merged into the Costco calculator, so none of them is
+// a released page this check expects any more.
+const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'commute-cost'];
+const releasedSupplemental = ['costco-math'];
 const failures = [];
 
 function verify(path, kind) {

@@ -34,7 +34,6 @@ faq:
     a: "用淨值規劃，不要用標題數字。拿你自己的給付乘以 COLA，減掉你自己的 Part B 變動（包含任何所得連動調整），把那個數字放進預算。對許多家庭來說，實用的規劃數字大約是標題百分比的一半。"
 related:
   - "/zh/money/medicare-part-b-premium/"
-  - "/zh/money/emergency-fund-size-2026/"
   - "/zh/pay-raise-vs-inflation-purchasing-power/"
 draft: true
 ---

@@ -8,7 +8,7 @@ description: "Spend $40,000 on a kitchen that lifts the sale price by $24,000 an
 answer: "If a project recoups 60% of its cost at resale, every dollar spent returns 60 cents — a guaranteed 40% loss on the money. Pre-sale renovation is not an investment and should not be evaluated as one. The only version that pays is the small, cheap work that moves a house from unsellable to sellable, where the return is measured in days on market, not in valuation."
 publishAt: "2026-11-01"
 lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/rent-vs-buy/"
+relatedTool: "/en/rent-vs-buy-breakeven-year/"
 relatedToolLabel: "rent vs buy calculator"
 formula: "net effect on proceeds = value added at resale − project cost − financing cost over the holding period − carrying cost of the extra time on market"
 limits:
@@ -34,8 +34,6 @@ faq:
     a: "That is the alternative most worth modelling, because it is usually the cheaper one. Buyers discount a dated kitchen by roughly what they expect it to cost them to replace — often less than what it costs you, since they do it on their own schedule and their own specification. Selling at a discount hands over a problem; renovating buys it back at retail."
 related:
   - "/en/money/mortgage-refinance-break-even/"
-  - "/en/money/pmi-removal-timing/"
-  - "/en/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

@@ -33,7 +33,6 @@ faq:
   - q: "把扣除「集中」到某一年有用嗎？"
     a: "在時點由你決定時有用。把兩年的慈善捐贈集中在同一個曆年，或把一筆可扣除支出安排在十二月而不是一月，可以讓其中一年跨過門檻、另一年拿標準扣除額。它只對「時點真的可自由選擇」的扣除有效——房貸利息不是其中之一。"
 related:
-  - "/zh/money/mortgage-rate-2026-payment-impact/"
   - "/zh/money/401k-contribution-limits/"
   - "/zh/money/mortgage-refinance-break-even/"
 draft: true

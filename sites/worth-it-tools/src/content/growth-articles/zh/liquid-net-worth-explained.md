@@ -137,7 +137,6 @@ HELOC 或增貸額度代表可能的融資能力，仍需符合條件並承擔�
 
 ## Related WorthCalc pages
 
-- https://worthcalc.win/zh/how-to-calculate-net-worth/
 - https://worthcalc.win/zh/emergency-fund-how-much/
 - https://worthcalc.win/zh/tools/budget-builder/
 

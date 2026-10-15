@@ -56,7 +56,10 @@ for (const file of walkIndexHtml(distDir)) {
   if (segments.length === 2 && segments[1] === 'guides') continue; // /guides/ 目錄頁本身
   if (LEGAL_SLUGS.has(segments.at(-1))) continue;      // 法務頁由頁尾連
 
-  const heading = readFileSync(file, 'utf8').match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1];
+  const html = readFileSync(file, 'utf8');
+  // Redirect stubs (merged pages, /zh/) stand where a page used to be; they are not guides.
+  if (/<meta http-equiv="refresh"/i.test(html) && /<meta name="robots" content="noindex/i.test(html)) continue;
+  const heading = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1];
   if (!heading) { missingH1.push(sitePath); continue; }
   byLocale[locale].push({ path: `/${segments.slice(1).join('/')}/`, title: decodeText(heading) });
 }

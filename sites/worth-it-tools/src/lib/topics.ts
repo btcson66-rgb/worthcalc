@@ -31,15 +31,15 @@ export type TopicId = (typeof TOPIC_IDS)[number];
 export const PRIMARY_TOPIC_IDS: readonly TopicId[] = ['housing', 'debt-credit', 'transportation', 'everyday'];
 
 /**
- * Locales that publish standalone hub pages.
+ * Locales that publish standalone topic-hub pages: none.
  *
- * es/fr/de are frozen for new routes (see "i18n expansion policy" in
- * README.md): they had zero GSC impressions across 195 existing URLs, so
- * adding 18 more pages to them would be the exact mistake the freeze exists to
- * prevent. Those locales get the same topic grouping as headed sections on
- * their own `/tools/` and `/guides/` directories instead.
+ * The six hubs (/<locale>/topics/<topic>/) were merged into the homepage in the
+ * 2026-10-15 P1b disposition: each was a thin index over pages the homepage and
+ * the /tools/ and /guides/ directories already list. Their URLs are redirect
+ * stubs (src/data/redirect-stubs.json). Topic cards link to the matching section
+ * of the calculator directory instead (see topicHref).
  */
-export const HUB_LOCALES: readonly CoreLocale[] = ['en', 'zh'];
+export const HUB_LOCALES: readonly CoreLocale[] = [];
 
 export function hasHubPages(locale: ContentLocale): boolean {
   return (HUB_LOCALES as readonly string[]).includes(locale);

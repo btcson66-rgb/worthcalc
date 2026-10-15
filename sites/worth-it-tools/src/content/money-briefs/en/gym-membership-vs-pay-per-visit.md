@@ -33,8 +33,6 @@ faq:
   - q: "What about the argument that paying makes me go?"
     a: "Treat it as an effect that may help early and cannot be relied on. Having paid does tend to push attendance up in the first weeks, but nothing about a monthly charge keeps working once the visits have stopped — and by then the arithmetic above is the only thing still running. The defensible version of the claim is that a membership can support a habit that already exists, not that it creates one."
 related:
-  - "/en/money/streaming-prices-2026/"
-  - "/en/money/tsa-precheck-break-even/"
   - "/en/money/internet-plan-cost-2026/"
 draft: true
 ---

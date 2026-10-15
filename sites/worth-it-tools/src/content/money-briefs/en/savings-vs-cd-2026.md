@@ -32,10 +32,7 @@ faq:
     a: "That is the CD's actual argument, and it is worth more than the headline premium. If savings rates drop from 4.2% to 3.0% after three months, the CD holder keeps 4.6% for the full year while the savings balance earns roughly 3.3% blended. On $25,000 that is about $325 rather than $100 — so the premium understates the value of the lock when a cut is genuinely likely."
   - q: "Is a CD ladder a way to get both?"
     a: "Largely, yes, and it is the standard answer. Splitting the balance across terms maturing at intervals means part of it is always near maturity, so the effective penalty for needing cash falls sharply while most of the balance still earns the term rate. It costs a little yield against a single long CD and removes most of the liquidity objection."
-related:
-  - "/en/money/idle-cash-cost-2026/"
-  - "/en/money/emergency-fund-size-2026/"
-  - "/en/money/employer-match-vs-debt-payoff/"
+related: []
 draft: true
 ---
 

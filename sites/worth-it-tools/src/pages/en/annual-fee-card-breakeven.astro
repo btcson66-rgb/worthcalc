@@ -78,8 +78,8 @@ const faq = [
     This guide gives a renewal-ready method: compare the fee card with the
     realistic no-fee alternative, count only eligible purchases you already
     plan to make, and test whether caps make break-even impossible. You can then
-    replace the example with your numbers in the free
-    <a href={localizedPath(locale, '/tools/cashback-breakeven')}>credit card reward break-even calculator</a>.
+    replace the example with your own numbers using the category-by-category
+    formula in the section below.
   </p>
 
   <DecisionGuide content={guide} />
@@ -131,6 +131,22 @@ const faq = [
     Protection Bureau publishes card-plan comparison data, but the issuer's
     current pricing and rewards terms govern your account. Recheck the terms at
     renewal because fees, caps, and categories can change.
+  </p>
+
+  <h2 id="cashback-category-breakeven">Break-even monthly spend with several reward categories</h2>
+  <p>
+    When reward rates differ by category, multiply each category separately:
+    <strong>annual rewards = Σ (monthly spend in the category × 12 × that category&rsquo;s rate)</strong>,
+    and the weighted rate is annual rewards divided by total annual spend.
+    <strong>Net annual value = annual rewards + welcome bonus − annual fee</strong>. The no-fee baseline is
+    total annual spend × the no-fee card&rsquo;s rate (for example 1%). The annual-fee card wins only when its net value
+    exceeds the baseline.
+  </p>
+  <p>
+    When the bonus does not cover the fee, break-even annual spend = (annual fee − bonus) ÷ (weighted rate − no-fee rate);
+    divide by 12 for monthly spend, using your current category mix. With a $95 fee, no bonus, a 2.5% weighted rate and a 1% no-fee card,
+    $95 ÷ 1.5% is about $6,333 a year, or roughly $528 a month. If the weighted rate does not exceed the no-fee rate there is no solution:
+    no amount of spending earns the fee back through rewards. Set the bonus to zero for the renewal year.
   </p>
 
   <h2>Run first-year and renewal math separately</h2>

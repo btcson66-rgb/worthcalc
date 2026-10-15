@@ -540,7 +540,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/en/emergency-fund-irregular-income/",
       "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/"
     ],
     "breadcrumbLabel": "Financial Runway Months",
@@ -640,8 +639,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-02",
     "related": [
       "https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/",
-      "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/en/emergency-fund-irregular-income/"
+      "https://worthcalc.win/en/guides/personal-liquidity-ratio/"
     ],
     "breadcrumbLabel": "High vs. Low Insurance Deductible: Premium Break-Even and Claim Stress Test",
     "schemaFile": "006__en__high-vs-low-insurance-deductible-break-even.json"
@@ -665,7 +663,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/en/emergency-fund-irregular-income/",
       "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/"
     ],
     "breadcrumbLabel": "Insurance Deductible Cash Reserve",
@@ -1014,7 +1011,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc three-bucket allocation graphic; no investment-return promises or fixed recommended percentage.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/emergency-fund-irregular-income/",
       "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
       "https://worthcalc.win/en/guides/debt-consolidation-break-even/"
     ],
@@ -1490,8 +1486,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/zh/tools/compound-growth/",
-      "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/",
-      "https://worthcalc.win/zh/how-to-calculate-savings-rate/"
+      "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/"
     ],
     "breadcrumbLabel": "晚一年開始存錢，真的差很多嗎？用同一個目標反推「延後成本」",
     "schemaFile": "004__zh__cost-of-delaying-savings-goal.json"
@@ -1564,7 +1559,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/zh/emergency-fund-vs-debt-payoff/",
       "https://worthcalc.win/zh/guides/extra-payment-personal-loan/",
       "https://worthcalc.win/zh/tools/debt-strategy/"
     ],
@@ -1815,7 +1809,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/zh/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/zh/emergency-fund-irregular-income/",
       "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/"
     ],
     "breadcrumbLabel": "財務跑道可以撐幾個月？自由工作者、創業者別只看緊急預備金",
@@ -1865,7 +1858,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
-      "https://worthcalc.win/zh/loan-term-vs-total-interest/",
       "https://worthcalc.win/zh/guides/loan-refinance-break-even/"
     ],
     "breadcrumbLabel": "固定利率 vs 浮動利率怎麼比？不要猜未來利率，先做 3 條利率路徑壓力測試",
@@ -2139,7 +2131,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc Before/After 薪資與支出瀑布圖；呈現新增收入如何分流到固定成本、彈性消費與儲蓄，不帶道德化文案。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/how-to-calculate-savings-rate/",
       "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -2165,8 +2156,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/zh/guides/extra-payment-personal-loan/",
-      "https://worthcalc.win/zh/tools/mortgage-payoff/",
-      "https://worthcalc.win/zh/loan-term-vs-total-interest/"
+      "https://worthcalc.win/zh/tools/mortgage-payoff/"
     ],
     "breadcrumbLabel": "轉貸多久回本？別只看新利率，用剩餘期間與全部費用算 Break-Even",
     "schemaFile": "003__zh__loan-refinance-break-even.json"
@@ -2239,7 +2229,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/zh/loan-term-vs-total-interest/",
       "https://worthcalc.win/zh/tools/car-affordability/",
       "https://worthcalc.win/zh/guides/cash-discount-vs-financing/"
     ],
@@ -2365,8 +2354,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-      "https://worthcalc.win/zh/emergency-fund-irregular-income/"
+      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/"
     ],
     "breadcrumbLabel": "50/30/20 預算什麼時候會失真？比例預算不是每個人都能直接套",
     "schemaFile": "003__zh__paycheck-budgeting-limitations.json"
@@ -2465,7 +2453,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/zh/loan-term-vs-total-interest/",
       "https://worthcalc.win/zh/tools/mortgage-payoff/"
     ],
     "breadcrumbLabel": "本金平均 vs 本息平均",
@@ -2540,8 +2527,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/",
-      "https://worthcalc.win/zh/tools/compound-growth/",
-      "https://worthcalc.win/zh/simple-vs-compound-interest/"
+      "https://worthcalc.win/zh/tools/compound-growth/"
     ],
     "breadcrumbLabel": "實質報酬率 vs 名目報酬率",
     "schemaFile": "003__zh__real-vs-nominal-return.json"
@@ -2814,7 +2800,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/emergency-fund-vs-sinking-fund/",
       "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -2964,7 +2949,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-02",
     "related": [
-      "https://worthcalc.win/zh/emergency-fund-irregular-income/",
       "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -2989,7 +2973,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 三桶資金分配資訊圖；顯示安全墊缺口、債務 APR、未來已知支出，不提供固定百分比建議。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/emergency-fund-vs-debt-payoff/",
       "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
       "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/"
     ],

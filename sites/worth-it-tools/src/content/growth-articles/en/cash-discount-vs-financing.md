@@ -267,5 +267,4 @@ The method uses standard cash-flow IRR concepts. Regulated finance-charge and AP
 ## Related WorthCalc guides
 
 - [Installment True APR](/en/tools/installment-true-apr/)
-- [APR vs. APY](/en/apr-vs-apy/)
 - [Loan Term vs. Monthly Payment](/en/loan-term-monthly-payment-vs-total-interest/)

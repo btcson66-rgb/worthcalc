@@ -115,6 +115,13 @@ function parsePage(path, file, html) {
   };
 }
 
+// A redirect stub (src/components/RedirectStub.astro: the /zh/ alias and every page merged into another
+// page) is noindex, has a meta refresh, and names its target as canonical on purpose, so it is neither a
+// "non-self canonical" problem nor a canonical collision with the page that took over.
+function isRedirectStub(page) {
+  return /<meta http-equiv="refresh"/i.test(page.html) && /\bnoindex\b/i.test(page.robots);
+}
+
 function pagePathFromFile(file) {
   const rel = relative(DIST, file).split(sep).join('/');
   if (rel === '404.html') return null;
@@ -164,7 +171,6 @@ function sourceFileForRoute(path, contentLookup) {
   const dynamicCandidates = [
     ['guides', 'src/pages/[locale]/guides/[slug].astro'],
     ['tools', 'src/pages/[locale]/tools/[tool].astro'],
-    ['topics', 'src/pages/[locale]/topics/[topic].astro'],
   ];
   if (parts.length === 2) {
     const match = dynamicCandidates.find(([prefix]) => parts[0] === prefix);
@@ -181,7 +187,6 @@ function pageType(path) {
   if (path === '/' || /^\/(?:en|zh|es|fr|de|hi|ar)\/$/.test(path)) return 'home';
   if (/^\/(?:en|zh|es|fr|de|hi|ar)\/tools\/$/.test(path)) return 'tools-directory';
   if (/^\/(?:en|zh|es|fr|de|hi|ar)\/guides\/$/.test(path)) return 'guides-directory';
-  if (/^\/(?:en|zh)\/topics\/[^/]+\/$/.test(path)) return 'topic-hub';
   if (/^\/(?:en|zh|es|fr|de)\/tools\/[^/]+\/$/.test(path)) return 'calculator';
   if (/^\/(?:en|zh|es|fr|de|hi|ar)\/guides\/[^/]+\/$/.test(path)) return 'guide';
   if (/^\/(?:en|zh|es|fr|de|hi|ar)\/(?:about|privacy|terms|contact|disclaimer|changelog)\/$/.test(path)) return 'legal';
@@ -430,8 +435,8 @@ for (const page of pages.values()) {
   const canonical = livePage?.canonical || page.canonical;
   const cPath = canonicalPath(canonical);
   const cStatus = targetStatus(cPath, pages, liveMap);
-  // /zh/ is the redirect stub for the homepage (2026-10-15 rebuild; it used to be /en/).
-  const canonicalSelf = cPath === page.path || (page.path === '/zh/' && cPath === '/');
+  // Redirect stubs (/zh/ and the pages merged away in P1b) canonicalise to their target by design.
+  const canonicalSelf = cPath === page.path || isRedirectStub(page);
   const indexable = isIndexable(page, livePage);
   const inSitemap = sitemapSet.has(page.path);
   const inlinkCount = graph.inlinks.get(page.path) ?? 0;
@@ -480,7 +485,7 @@ for (const page of pages.values()) {
     in_sitemap: inSitemap,
     issue: !canonical ? 'missing-canonical' : !canonicalSelf ? 'non-self-canonical' : cStatus !== 200 ? 'canonical-target-not-200' : '',
   });
-  if (canonical) {
+  if (canonical && !isRedirectStub(page)) {
     const bucket = canonicalGroups.get(cPath) ?? [];
     bucket.push(page.path);
     canonicalGroups.set(cPath, bucket);
@@ -517,7 +522,7 @@ for (const page of pages.values()) {
 }
 
 const unexpectedCanonicalCollisions = [...canonicalGroups.entries()]
-  .filter(([path, paths]) => paths.length > 1 && !(path === '/' && paths.every((candidate) => candidate === '/' || candidate === '/zh/')))
+  .filter(([, paths]) => paths.length > 1)
   .map(([canonical, paths]) => ({ canonical, paths: paths.join(' | ') }));
 const orphanRows = [...sitemapSet]
   .filter((path) => pages.has(path) && isIndexable(pages.get(path), liveMap?.get(path)) && (graph.inlinks.get(path) ?? 0) === 0)

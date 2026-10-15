@@ -32,10 +32,7 @@ faq:
     a: "Much less. Over two years the same $3,000 raise is worth about $6,090 against a $3,000 bonus — still better, but two-fold rather than twenty-seven-fold. And a new employer prices you on market value rather than on your old base, which weakens the compounding argument further."
   - q: "Are there second-order effects?"
     a: "Several, all pointing the same way. Employer retirement matches, pension contributions and some benefits are calculated as a percentage of salary, so a raise increases them and a bonus usually does not. Future promotions and market moves are also often quoted as a percentage of the current base."
-related:
-  - "/en/money/moving-for-a-job-full-cost/"
-  - "/en/money/employer-match-vs-debt-payoff/"
-  - "/en/money/side-hustle-true-hourly-rate/"
+related: []
 draft: true
 ---
 

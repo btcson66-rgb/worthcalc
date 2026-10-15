@@ -34,8 +34,6 @@ faq:
     a: "Because the HSA is not available to most people. It requires a qualifying high-deductible plan, and if your employer does not offer one, or the high-deductible plan is the wrong risk trade for your household, the FSA is the only tax-advantaged account on the table. The comparison is usually between an FSA and nothing."
 related:
   - "/en/money/hsa-contribution-limits/"
-  - "/en/money/insurance-deductible-break-even/"
-  - "/en/money/emergency-fund-size-2026/"
 draft: true
 ---
 

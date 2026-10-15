@@ -34,8 +34,6 @@ faq:
     a: "不會。聯邦直接貸款在整個貸款期間都是固定利率，按首次撥款那一年核定的利率。念四年的借款人可能有多達四種不同利率，而整合貸款是用加權平均取代它們，不是給你更低的利率。"
 related:
   - "/zh/money/student-loan-degree-roi/"
-  - "/zh/money/credit-card-apr-2026/"
-  - "/zh/money/employer-match-vs-debt-payoff/"
 draft: true
 ---
 

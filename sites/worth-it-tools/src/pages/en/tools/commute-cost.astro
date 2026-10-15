@@ -36,10 +36,9 @@ const faq = [
   },
 ];
 const related = [
-  { title: 'EV vs Gas Car TCO Calculator', href: localizedPath(locale, '/tools/ev-vs-gas') },
-  { title: 'Rent vs Buy Calculator', href: localizedPath(locale, '/tools/rent-vs-buy') },
+  { title: 'EV vs gas total cost of ownership', href: localizedPath(locale, '/ev-vs-gas-total-cost') },
+  { title: 'Rent vs buy: break-even year', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
   { title: 'Costco Membership Calculator', href: localizedPath(locale, '/tools/costco-membership') },
-  { title: 'Latte Factor Calculator', href: localizedPath(locale, '/tools/latte-factor') },
 ];
 ---
 
@@ -213,14 +212,22 @@ const related = [
       Fuel cost per mile is not the same as the full cost of driving per mile. Fuel and electricity modes deliberately omit maintenance, tires, depreciation, insurance, financing, registration, and charging or fueling detours. Parking and tolls are added separately. If you want total ownership cost, calculate it from your own records and enter it in direct mode rather than treating the fuel-only result as complete.
     </p>
 
+    <h2 id="own-cost-per-distance">Estimating your own per-mile ownership cost</h2>
+    <p>
+      The full per-mile cost of a vehicle is (annual fixed costs + annual running costs) divided by the distance driven in a year. Fixed costs include depreciation, insurance, registration and inspection fees, and finance interest; running costs include fuel or electricity, maintenance and repairs, and tires. Use one annual basis for every field, and if the purchase price already feeds depreciation, do not also count the loan principal as a cost.
+    </p>
+    <p>
+      Annual depreciation = (purchase price − expected resale value) ÷ years of ownership. Resale value and holding period are uncertain, so test a conservative resale value and several holding periods rather than treating one forecast as a promise. Fixed costs are spread over distance: the same car driven 5,000 miles a year spreads them over 5,000 miles, while 20,000 miles spreads them over four times as many, so the fixed cost per mile falls sharply even though fuel still rises with distance. Enter the result in the direct per-mile field above.
+    </p>
+
     <h2>What a year of commuting adds up to</h2>
     <p>
-      The annual result is twelve times the monthly calculation. The largest movers are usually round-trip distance, days traveled, the selected per-distance rate, parking, tolls, fares, and commute time when you choose to value it. For hybrid or seasonal work, set workdays per month to a representative average. This keeps the annual number tied to your schedule instead of pretending everyone commutes the same number of days. For the narrower question of one vehicle's ownership cost per mile, use the <a href={localizedPath(locale, '/tools/cost-per-mile')}>cost-per-mile calculator</a>.
+      The annual result is twelve times the monthly calculation. The largest movers are usually round-trip distance, days traveled, the selected per-distance rate, parking, tolls, fares, and commute time when you choose to value it. For hybrid or seasonal work, set workdays per month to a representative average. This keeps the annual number tied to your schedule instead of pretending everyone commutes the same number of days. For the narrower question of one vehicle's ownership cost per mile, see &ldquo;Estimating your own per-mile ownership cost&rdquo; below and enter the result in the direct per-mile field.
     </p>
 
     <h2>How the EV comparison works</h2>
     <p>
-      EV mode converts your vehicle’s electricity use and your price per kWh into an energy cost per mile or kilometer. It then uses the same distance, workdays, parking, tolls, and time calculation as the car modes. This is an energy comparison, not a full EV-versus-gas ownership model: it excludes purchase price, financing, depreciation, insurance differences, maintenance, home-charger installation, public charging fees not represented by your entered price, and battery replacement. Use the <a href={localizedPath(locale, '/tools/ev-vs-gas')}>EV vs gas total-cost calculator</a> for the broader ownership decision.
+      EV mode converts your vehicle’s electricity use and your price per kWh into an energy cost per mile or kilometer. It then uses the same distance, workdays, parking, tolls, and time calculation as the car modes. This is an energy comparison, not a full EV-versus-gas ownership model: it excludes purchase price, financing, depreciation, insurance differences, maintenance, home-charger installation, public charging fees not represented by your entered price, and battery replacement. Read the <a href={localizedPath(locale, '/ev-vs-gas-total-cost')}>EV vs gas total cost of ownership comparison</a> for the broader ownership decision.
     </p>
 
     <h2>What one hour of commuting costs—and what it does not mean</h2>

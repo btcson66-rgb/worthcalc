@@ -12,6 +12,10 @@ const dist = resolve('dist');
 const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const failures = [];
+// P1b (2026-10-15): cost-per-use-expensive-item, bulk-buying-vs-small-packages,
+// meal-prep-vs-takeout-cost, reusable-vs-disposable-break-even and
+// price-per-wear-clothing-shoes were removed by the disposition audit, so they are no
+// longer routes this check expects to find.
 const editorialRoutes = [
   {
     slug: 'subscription-creep',
@@ -227,56 +231,6 @@ const editorialRoutes = [
       es: ['27,50 €', 'A–G', 'data-mode="appliance"'],
       fr: ['27,50 €', '100 cycles', 'data-mode="appliance"'],
       de: ['46,20 €', 'tatsächlichen Verbrauch', 'data-mode="appliance"'],
-    },
-  },
-  {
-    slug: 'cost-per-use-expensive-item',
-    nativeMarkers: {
-      en: ['$11/use', 'sunk', 'data-mode="costPerUse"'],
-      zh: ['NT$285', '沉沒成本', 'data-mode="costPerUse"'],
-      es: ['10 €/uso', 'tres años', 'data-mode="costPerUse"'],
-      fr: ['11,67 €/usage', 'indice de durabilité', 'data-mode="costPerUse"'],
-      de: ['9,50 €', 'Besitzaufwand', 'data-mode="costPerUse"'],
-    },
-  },
-  {
-    slug: 'bulk-buying-vs-small-packages',
-    nativeMarkers: {
-      en: ['$5.06', 'FoodKeeper', 'data-mode="bulk"'],
-      zh: ['NT$125', '食藥署', 'data-mode="bulk"'],
-      es: ['5 €/unidad', 'AESAN', 'data-mode="bulk"'],
-      fr: ['4,63 €', 'DLC', 'data-mode="bulk"'],
-      de: ['4,59 €', 'Verbrauchsdatum', 'data-mode="bulk"'],
-    },
-  },
-  {
-    slug: 'meal-prep-vs-takeout-cost',
-    nativeMarkers: {
-      en: ['$10.20', 'three to four days', 'data-mode="meal"'],
-      zh: ['NT$212', '70°C', 'data-mode="meal"'],
-      es: ['9,25 €', 'AESAN', 'data-mode="meal"'],
-      fr: ['10,40 €', '48 heures', 'data-mode="meal"'],
-      de: ['11,06 €', 'ungefähr zwei Tage', 'data-mode="meal"'],
-    },
-  },
-  {
-    slug: 'reusable-vs-disposable-break-even',
-    nativeMarkers: {
-      en: ['$0.45/use', 'FTC', 'data-mode="reusable"'],
-      zh: ['NT$11', '環境部', 'data-mode="reusable"'],
-      es: ['0,38 €/uso', 'MITECO', 'data-mode="reusable"'],
-      fr: ['0,50 €/usage', 'ADEME', 'data-mode="reusable"'],
-      de: ['0,44 €/Nutzung', 'Umweltbundesamt', 'data-mode="reusable"'],
-    },
-  },
-  {
-    slug: 'price-per-wear-clothing-shoes',
-    nativeMarkers: {
-      en: ['$2.05', 'FTC', 'data-mode="pricePerWear"'],
-      zh: ['NT$70', '服飾標示基準', 'data-mode="pricePerWear"'],
-      es: ['1,85 €/uso', 'Consumo', 'data-mode="pricePerWear"'],
-      fr: ['2,49 €/port', 'DGCCRF', 'data-mode="pricePerWear"'],
-      de: ['1,75 €/Tragen', 'Umweltbundesamt', 'data-mode="pricePerWear"'],
     },
   },
   {

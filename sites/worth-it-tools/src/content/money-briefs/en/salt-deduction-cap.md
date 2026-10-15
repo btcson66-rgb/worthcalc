@@ -33,7 +33,6 @@ faq:
     a: "No. The IRS lists $40,400 for most filers and $20,200 for married filing separately, with a MAGI-based reduction above specified thresholds."
 related:
   - "/en/money/standard-deduction/"
-  - "/en/money/mortgage-rate-2026-payment-impact/"
 draft: true
 ---
 ## The 2026 official figures

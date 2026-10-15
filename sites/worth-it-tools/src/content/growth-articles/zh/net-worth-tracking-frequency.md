@@ -216,7 +216,5 @@ breadcrumbLabel: "淨資產多久算一次？每月、每季、每年各自適�
 
 ## 延伸閱讀
 
-- [淨資產怎麼算？](/zh/how-to-calculate-net-worth/)
 - [流動淨資產是什麼？](/zh/liquid-net-worth-explained/)
 - [個人負債資產比](/zh/guides/debt-to-assets-ratio-personal/)
-- [儲蓄率怎麼算？](/zh/how-to-calculate-savings-rate/)

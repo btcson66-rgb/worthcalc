@@ -35,7 +35,6 @@ faq:
 related:
   - "/en/money/social-security-cola/"
   - "/en/money/hsa-contribution-limits/"
-  - "/en/money/insurance-deductible-break-even/"
 draft: true
 ---
 

@@ -151,7 +151,6 @@ For each offer, capture amount financed, APR, term, payment, finance charge, tot
 
 - https://worthcalc.win/en/tools/car-affordability/
 - https://worthcalc.win/en/tools/mortgage-payoff/
-- https://worthcalc.win/en/apr-vs-apy/
 
 ## Sources
 

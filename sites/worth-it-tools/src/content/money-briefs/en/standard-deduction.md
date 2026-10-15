@@ -33,7 +33,6 @@ faq:
   - q: "Does bunching deductions work?"
     a: "It can, where the timing is yours to choose. Making two years of charitable gifts in one calendar year, or paying a deductible expense in December rather than January, can push one year above the threshold while the other takes the standard deduction. It only works on deductions whose timing is genuinely discretionary — mortgage interest is not one of them."
 related:
-  - "/en/money/mortgage-rate-2026-payment-impact/"
   - "/en/money/401k-contribution-limits/"
   - "/en/money/mortgage-refinance-break-even/"
 draft: true

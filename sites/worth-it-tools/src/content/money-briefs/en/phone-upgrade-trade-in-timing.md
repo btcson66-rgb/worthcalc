@@ -35,10 +35,7 @@ faq:
     a: "It generally becomes due, either paid off at the upgrade or rolled into the new agreement. A phone with $220 outstanding does not trade in for its full value; it trades in for its value minus $220, and that subtraction is the part most upgrade offers present least clearly."
   - q: "When is the best time to trade in?"
     a: "Earlier than most people do, on resale value alone — handset values fall fastest in the first two years and flatten after. But the credit structure pushes the other way, since you must stay long enough to collect. The two forces meet at roughly the point where the device is paid off and the previous credit run has finished, which is why a phone bought outright has a genuinely freer upgrade timetable than a financed one."
-related:
-  - "/en/money/buy-now-or-wait-price-increase/"
-  - "/en/money/streaming-prices-2026/"
-  - "/en/money/credit-score-points-dollar-value/"
+related: []
 draft: true
 ---
 

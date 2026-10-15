@@ -8,7 +8,7 @@ description: "花 40,000 美元整修廚房、售價只多 24,000 美元，等�
 answer: "如果一項工程在轉售時回收成本的 60%，那每投入一美元只拿回六毛——確定虧損四成。售前裝修不是投資，也不該用投資的標準去評估。唯一划算的版本，是那些便宜的小工程，把房子從「賣不掉」變成「賣得掉」；它的報酬要用在市天數來衡量，不是用估價。"
 publishAt: "2026-11-01"
 lastReviewed: "2026-09-19"
-relatedTool: "/zh/tools/rent-vs-buy/"
+relatedTool: "/zh/rent-vs-buy-breakeven-year/"
 relatedToolLabel: "租屋 vs 買房計算機"
 formula: "對售屋淨額的影響 = 轉售時增加的價值 − 工程成本 − 持有期間的融資成本 − 多出來的在市時間持有成本"
 limits:
@@ -34,8 +34,6 @@ faq:
     a: "這才是最值得拿來對照的替代方案，因為它通常比較便宜。買方對過時廚房的折價，大致等於他們預期自己換掉它要花多少——而那往往低於你的成本，因為他們按自己的時程、自己的規格去做。降價賣是把問題交出去；整修是用零售價把它買回來。"
 related:
   - "/zh/money/mortgage-refinance-break-even/"
-  - "/zh/money/pmi-removal-timing/"
-  - "/zh/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

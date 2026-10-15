@@ -34,8 +34,6 @@ faq:
     a: "No. Federal Direct Loans are fixed for the life of the loan at the rate set for the year they were first disbursed. A borrower with four years of study has up to four different rates, and consolidation replaces them with a weighted average rather than a lower rate."
 related:
   - "/en/money/student-loan-degree-roi/"
-  - "/en/money/credit-card-apr-2026/"
-  - "/en/money/employer-match-vs-debt-payoff/"
 draft: true
 ---
 

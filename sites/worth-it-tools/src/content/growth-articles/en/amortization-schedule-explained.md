@@ -270,5 +270,4 @@ Amortization concepts are aligned with CFPB consumer explanations. Examples assu
 ## Related WorthCalc guides
 
 - [Loan Term vs. Monthly Payment](/en/loan-term-monthly-payment-vs-total-interest/)
-- [APR vs. APY](/en/apr-vs-apy/)
 - [Installment True APR](/en/tools/installment-true-apr/)

@@ -8,7 +8,7 @@ description: "At the 18.3¢/kWh US residential average, a 3.5 mi/kWh EV costs ab
 answer: "Charging at home, an efficient EV runs at roughly 5.2 cents per mile against about 10.7 cents for a 30 mpg petrol car — a saving of about $660 a year at 12,000 miles. On public DC fast charging at around 51¢/kWh the same EV costs about 14.6 cents a mile, which is more than the petrol car. Where you charge decides the answer, not what you drive."
 publishAt: "2026-10-28"
 lastReviewed: "2026-09-19"
-relatedTool: "/en/tools/ev-vs-gas/"
+relatedTool: "/en/ev-vs-gas-total-cost/"
 relatedToolLabel: "EV vs petrol total cost calculator"
 formula: "EV cost per mile = price per kWh ÷ miles per kWh; petrol cost per mile = price per gallon ÷ miles per gallon"
 limits:
@@ -35,10 +35,7 @@ faq:
     a: "A hard winter can cut real-world miles per kWh by 20 to 30%, because cabin heat comes from the same battery that moves the car. At 2.6 mi/kWh instead of 3.5, home charging rises from 5.2 to 7.0 cents a mile. That is still below the petrol car, but it halves the margin in the months you notice it most."
   - q: "What petrol price would make the two equal at home?"
     a: "At 5.2 cents a mile for the EV, a 30 mpg petrol car matches it at $1.56 a gallon. Nowhere in the US market is currently close, which is why the home-charging comparison is not sensitive to petrol prices — it is sensitive to your electricity tariff."
-related:
-  - "/en/money/electricity-price-per-kwh-2026/"
-  - "/en/money/irs-mileage-rate-2026/"
-  - "/en/money/solar-payback-2026/"
+related: []
 draft: true
 ---
 

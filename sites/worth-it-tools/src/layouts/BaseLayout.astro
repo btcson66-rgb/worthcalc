@@ -27,8 +27,6 @@ interface Props {
   alternateLocales?: ContentLocale[];
   jsonLd?: object[];
   entity?: EntityJsonLdOptions;
-  /** Overrides <html lang> only (the homepage declares zh-Hant-TW). hreflang is unaffected. */
-  htmlLang?: string;
 }
 
 const {
@@ -48,7 +46,6 @@ const {
   alternateLocales,
   jsonLd = [],
   entity,
-  htmlLang,
 } = Astro.props;
 // Pages still pass the old five-language lists (['en', 'zh', 'es', 'fr', 'de']).
 // Only built locales may reach the language switcher and hreflang, otherwise
@@ -62,7 +59,7 @@ const resolvedDescription = s4TitleOverride?.description ?? description;
 ---
 
 <!doctype html>
-<html lang={htmlLang ?? LOCALE_HREFLANG[locale]} dir={LOCALE_DIR[locale]}>
+<html lang={LOCALE_HREFLANG[locale]} dir={LOCALE_DIR[locale]}>
   <head>
     <SEO
       title={resolvedTitle}

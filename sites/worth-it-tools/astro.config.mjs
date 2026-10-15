@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import { createSitemapLastmodResolver } from './scripts/sitemap-lastmod.mjs';
 import deindexedRegistry from './src/data/deindexed-urls.json' with { type: 'json' };
+import redirectStubRegistry from './src/data/redirect-stubs.json' with { type: 'json' };
 
 // The canonical production URL. Override per-site via the SITE_URL env var.
 // MUST be an absolute origin (no trailing path) for sitemap + canonical URLs.
@@ -12,6 +13,8 @@ const resolveSitemapLastmod = createSitemapLastmodResolver();
 const deindexedPaths = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
 // Locales retired wholesale; see localeDecision in the registry for the evidence.
 const deindexedLocales = new Set(deindexedRegistry.locales ?? []);
+// Pages merged into another page (P1b) are redirect stubs and never sitemap entries.
+const redirectStubPaths = new Set(redirectStubRegistry.stubs.map((stub) => stub.from));
 const isDeindexed = (pathname) =>
   deindexedPaths.has(pathname) || deindexedLocales.has(pathname.split('/').filter(Boolean)[0]);
 
@@ -47,11 +50,15 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // / is the canonical homepage (Traditional Chinese). /zh/ is only a
-      // redirect stub pointing at it, so it never belongs in the sitemap; /en/
-      // and everything under it is noindex through the deindexed registry.
+      // / is the canonical homepage (Traditional Chinese). /zh/ and every page in
+      // src/data/redirect-stubs.json are redirect stubs, so none of them belongs
+      // in the sitemap; /en/ and everything under it is noindex through the
+      // deindexed registry.
       // Hreflang is emitted in each page head by src/lib/seo.ts.
-      filter: (page) => page !== `${SITE_URL}/zh/` && !isDeindexed(new URL(page).pathname),
+      filter: (page) =>
+        page !== `${SITE_URL}/zh/` &&
+        !redirectStubPaths.has(new URL(page).pathname) &&
+        !isDeindexed(new URL(page).pathname),
       serialize: (item) => ({
         ...item,
         lastmod: resolveSitemapLastmod(item.url).lastmod,

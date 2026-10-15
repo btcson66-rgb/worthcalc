@@ -1,0 +1,55 @@
+---
+/*
+ * A redirect stub: the page that stands where a merged page used to be.
+ *
+ * Signals, all pointing the same way: `<meta http-equiv="refresh">` sends a
+ * visitor to the target immediately, `rel=canonical` names the target, and
+ * `noindex,follow` keeps the stub itself out of the index while letting a
+ * crawler follow the link to the page that took over. Static hosting cannot
+ * send a real 301, which is why the meta refresh exists.
+ *
+ * It is deliberately NOT built on BaseLayout: no header, no analytics, no
+ * AdSense loader (an ad request on a page that exists only to redirect would be
+ * an ad on an empty page), no hreflang, and no structured data. A stub is never
+ * in the sitemap and no internal link may point at it; check-rebuild-p1b.mjs
+ * enforces both.
+ *
+ * Used for `/zh/` (the homepage lives at `/`) and for every page the P1b
+ * disposition merged into another page (src/data/redirect-stubs.json).
+ */
+interface Props {
+  /** Site-relative path of the page that took over, e.g. `/zh/tools/costco-membership/`. */
+  target: string;
+  /** Language of the stub text. */
+  lang: 'zh-TW' | 'en';
+  /** Link text for the target. Defaults to the target path itself. */
+  label?: string;
+  /** Overrides the default <title>. */
+  title?: string;
+}
+
+const { target, lang, label, title } = Astro.props;
+const origin = (Astro.site?.origin ?? 'https://worthcalc.win').replace(/\/$/, '');
+const canonical = `${origin}${target}`;
+const copy = {
+  'zh-TW': { title: 'WorthCalc 頁面已移轉', lead: '這個頁面已併入', trail: '，正在轉址。' },
+  en: { title: 'WorthCalc page moved', lead: 'This page has moved to', trail: '. Redirecting.' },
+}[lang];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ?? copy.title}</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="theme-color" content="#0f9e95" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <p>{copy.lead} <a href={target}>{label ?? target}</a>{copy.trail}</p>
+  </body>
+</html>

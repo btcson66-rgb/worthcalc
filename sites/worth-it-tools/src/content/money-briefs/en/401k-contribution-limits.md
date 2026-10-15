@@ -34,7 +34,6 @@ faq:
     a: "They are separate limits — $24,500 and $7,500 in 2026 — so a 401(k) at the cap does not stop an IRA contribution. What a workplace plan can restrict is the deductibility of a traditional IRA contribution above certain income levels, which is a different question from whether you may contribute at all."
 related:
   - "/en/money/hsa-contribution-limits/"
-  - "/en/money/employer-match-vs-debt-payoff/"
   - "/en/money/roth-vs-traditional-break-even/"
 draft: true
 ---

@@ -34,8 +34,6 @@ faq:
     a: "Yes — dental treatment is a qualified medical expense, and this is the piece most comparisons omit. Paying with pre-tax dollars cuts the effective cost of self-funding by your combined tax rate, roughly 30% for many households. That discount applies to the whole bill, including everything above the plan's annual maximum."
 related:
   - "/en/money/hsa-vs-fsa-decision/"
-  - "/en/money/insurance-deductible-break-even/"
-  - "/en/money/pet-insurance-break-even/"
 draft: true
 ---
 

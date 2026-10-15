@@ -8,8 +8,8 @@ description: "拿修車費去比的對象是「每個月的成本」，不是車
 answer: "永遠不要拿維修費去跟車子的殘值比——那個比較沒有意義，因為維修的替代方案不是車子的價值，而是「換車之後每個月要花多少」。把兩條路各自除以它買到的月數：2,800 美元的維修換到 24 個月，把後續維修算進去是每月 158 美元，換車則約每月 506 美元。在維修買到的月數變短之前，修都是贏的。"
 publishAt: "2026-11-02"
 lastReviewed: "2026-09-19"
-relatedTool: "/zh/tools/cost-per-mile/"
-relatedToolLabel: "每英里成本計算機"
+relatedTool: "/zh/tools/commute-cost/"
+relatedToolLabel: "通勤成本計算機"
 formula: "維修路徑 =（維修費 + 預期後續維修）÷ 預期多出的月數；換車路徑 =（車價 − 折抵金額 + 總利息）÷ 打算持有的月數，再加上保險與稅費的變動"
 limits:
   - "「預期多出的月數」是估計值，而答案對它最敏感。在這件事上，技師對「還有什麼快壞了」的意見，比本頁任何數字都值錢。"
@@ -36,9 +36,7 @@ faq:
   - q: "車貸還沒繳完會改變結論嗎？"
     a: "它改變的是換車路徑，不是維修路徑。如果貸款餘額高於折抵價，差額會被滾進新貸款，你等於一開始就落後。那筆負權益屬於換車路徑的分子，而它經常一項就決定了整個比較。"
 related:
-  - "/zh/money/lease-buyout-break-even/"
-  - "/zh/money/pay-off-car-loan-early-or-invest/"
-  - "/zh/money/auto-loan-rate-by-credit-score-2026/"
+  - "/zh/money/car-loan-vs-cash/"
 draft: true
 ---
 

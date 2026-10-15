@@ -1147,7 +1147,7 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Smaller rate edge', input: '$95 fee; 1-point incremental rate', result: '$9,500 eligible spend' },
       { scenario: 'Reward cap below fee', input: 'Extra rewards capped at $90', result: 'No spending-only break-even; at least $5 of certain benefits is still needed' },
     ],
-    cta: { label: 'Calculate your own card break-even point', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Calculate your own card break-even point', href: '#cashback-category-breakeven' },
     limitations: ['Do not count a one-time welcome bonus when deciding whether to renew. For the first year, include it only if the spending requirement fits purchases you already planned.', 'Point and mile values depend on the redemption you will actually make; do not use a promotional best-case valuation.', 'Paying interest or changing spending to chase rewards can overwhelm the result. This calculation assumes statement balances are paid in full and does not recommend a card.'],
     sources: [
       { label: 'Consumer Financial Protection Bureau — Terms of Credit Card Plans survey and comparison data', href: 'https://www.consumerfinance.gov/data-research/credit-card-data/terms-credit-card-plans-survey/' },
@@ -1168,7 +1168,7 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: '增量回饋縮小', input: '年費 NT$3,000、增量回饋 1%', result: '合格年消費 NT$300,000' },
       { scenario: '回饋上限低於年費', input: '額外回饋上限 NT$2,400', result: '只靠刷卡無法回本；仍差 NT$600 的確定權益' },
     ],
-    cta: { label: '用自己的年費與回饋率計算', href: '/zh/tools/cashback-breakeven/' },
+    cta: { label: '用自己的年費與回饋率計算', href: '#cashback-category-breakeven' },
     limitations: ['續卡決策不要把一次性首刷禮算進去；新卡第一年也只計入不需額外消費就能達成的確定價值。', '點數與哩程要用自己真正能兌換的價值，不用廣告中的最高理論價。', '本計算假設每期全額繳清；循環利息、預借現金或為了回饋多花錢，可能立即吃掉所有回饋。內容不是信用卡推薦或財務建議。'],
     sources: [
       { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
@@ -1189,7 +1189,7 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Ventaja reducida', input: '60 €; diferencia de 0,5 puntos', result: '12.000 € de gasto elegible' },
       { scenario: 'Tope inferior a la cuota', input: 'Cashback adicional máximo de 50 €', result: 'No se alcanza el equilibrio solo con gasto; faltan 10 € de ventajas seguras' },
     ],
-    cta: { label: 'Abrir la calculadora en inglés', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Abrir la calculadora en inglés', href: '#cashback-category-breakeven' },
     limitations: ['No uses el regalo de bienvenida para decidir una renovación. En el primer año, inclúyelo solo si cumples el gasto con compras ya previstas.', 'Los puntos, millas, seguros y accesos deben valorarse según el uso real, no según el precio publicitario.', 'La fórmula supone pago total a fin de mes. Los intereses del pago aplazado y el gasto creado para perseguir recompensas pueden anular el resultado.'],
     sources: [
       { label: 'Banco de España — comisión por emisión y mantenimiento de tarjetas', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/comisiones/comisionesproduc/comision_emision_tenencia_tarjeta.html' },
@@ -1210,7 +1210,7 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Écart plus faible', input: '54 €; écart de 0,5 point', result: '10 800 € de dépenses éligibles' },
       { scenario: 'Plafond sous la cotisation', input: 'Gain supplémentaire plafonné à 45 €', result: 'Pas de seuil par les dépenses seules; 9 € d’avantages certains restent nécessaires' },
     ],
-    cta: { label: 'Ouvrir le calculateur en anglais', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Ouvrir le calculateur en anglais', href: '#cashback-category-breakeven' },
     limitations: ['La prime de bienvenue ne sert pas à décider du renouvellement. Pour la première année, ne la comptez que si la condition de dépenses correspond à des achats déjà prévus.', 'Valorisez miles, points, assurances et salons selon votre usage probable, pas selon une valeur maximale publicitaire.', 'Le calcul suppose le paiement intégral du relevé. Les agios et les achats déclenchés pour obtenir une récompense peuvent dépasser le cashback.'],
     sources: [
       { label: 'Ministère de l’Économie — tout savoir sur les frais bancaires', href: 'https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/tout-savoir-sur-les-frais-bancaires' },
@@ -1231,7 +1231,7 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Kleinerer Vorteil', input: '72 €; 0,5 Prozentpunkte Mehrvergütung', result: '14.400 € berechtigter Umsatz' },
       { scenario: 'Deckel unter Gebühr', input: 'Zusätzlicher Cashback maximal 60 €', result: 'Kein reiner Umsatz-Break-even; 12 € sichere Leistungen fehlen' },
     ],
-    cta: { label: 'Englischen Rechner öffnen', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Englischen Rechner öffnen', href: '#cashback-category-breakeven' },
     limitations: ['Ein einmaliger Willkommensbonus gehört nicht in die Verlängerungsrechnung. Im ersten Jahr zählt er nur, wenn der Mindestumsatz ohne Zusatzkäufe erreicht wird.', 'Punkte, Meilen, Versicherungen und Loungezugang sind nur so viel wert, wie Sie tatsächlich nutzen würden.', 'Die Rechnung setzt vollständigen Rechnungsausgleich voraus. Teilzahlungszinsen oder zusätzliche Ausgaben für Bonusziele können den gesamten Vorteil übersteigen.'],
     sources: [
       { label: 'BaFin — neutraler Kontenvergleich mit Kreditkartenentgelten', href: 'https://kontenvergleich.bafin.de/de' },
@@ -1255,7 +1255,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Lower mortgage rate', input: '5.5% instead of 6.5%', result: 'Buy lower by about $7,405' },
       { scenario: 'No appreciation', input: '0% instead of 2%', result: 'Rent lower by about $48,169' },
     ],
-    cta: { label: 'Stress-test your own rent-versus-buy assumptions', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Stress-test your own rent-versus-buy assumptions', href: '/en/rent-vs-buy-breakeven-year/' },
     limitations: ['The worked example is a transparent scenario, not a forecast of mortgage rates, rent, investment returns, taxes, or home prices.', 'Tax treatment, mortgage insurance, renovations, utilities, deductions, capital-gains rules, and monthly cash-flow investing vary by household and jurisdiction.', 'Use actual Loan Estimates, local taxes, insurance quotes, maintenance history, and comparable rent. The current calculator uses a simplified owner-cost allowance and does not replace professional financial, tax, legal, or real-estate advice.'],
     sources: [
       { label: 'Consumer Financial Protection Bureau — Loan Estimate explainer', href: 'https://www.consumerfinance.gov/owning-a-home/loan-estimate/' },
@@ -1276,7 +1276,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: '核貸利率較低', input: '1.8% 取代 2.2%', result: '買房低約 NT$56,980' },
       { scenario: '房價不變', input: '房價年變動 0%', result: '租屋低約 NT$1,839,498' },
     ],
-    cta: { label: '用自己的房價、租金與年限做壓力測試', href: '/zh/tools/rent-vs-buy/' },
+    cta: { label: '用自己的房價、租金與年限做壓力測試', href: '/zh/rent-vs-buy-breakeven-year/' },
     limitations: ['所有數字都是公開公式的示範輸入，不是對台灣房價、租金、利率或投資報酬的預測。', '自住稅率、契稅、房地合一稅、仲介費、裝潢、車位、管理費與修繕因個案不同；應以契約、稅單與報價替換示範值。', '目前計算機用簡化屋主持有成本，未完整處理寬限期、變動利率、稅務與每月差額投資；結果不是購屋、投資、貸款、稅務或法律建議。'],
     sources: [
       { label: '內政部 — 不動產交易實價查詢服務網', href: 'https://lvr.land.moi.gov.tw/jsp/index.jsp' },
@@ -1297,7 +1297,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Tipo hipotecario menor', input: '2,5% en lugar de 3,25%', result: 'Comprar cuesta unos 3.668 € menos' },
       { scenario: 'Precio sin revalorización', input: '0% en lugar de 1,5%', result: 'Alquilar cuesta unos 31.003 € menos' },
     ],
-    cta: { label: 'Abrir la calculadora en inglés y probar escenarios', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Abrir la calculadora en inglés y probar escenarios', href: '/en/rent-vs-buy-breakeven-year/' },
     limitations: ['Los porcentajes del ejemplo son entradas transparentes, no una predicción del euríbor, del precio de la vivienda, del alquiler ni de una inversión.', 'ITP o IVA, AJD, tasación, registro, notaría, comisión, IBI, comunidad y fiscalidad de la venta dependen de la vivienda, la comunidad autónoma y el contrato.', 'La herramienta actual simplifica costes del propietario y no sustituye la FEIN, la FiAE, una oferta vinculante ni asesoramiento financiero, fiscal, jurídico o inmobiliario.'],
     sources: [
       { label: 'Banco de España — gastos asociados a la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html' },
@@ -1318,7 +1318,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Taux plus bas', input: '2,75% au lieu de 3,5%', result: 'Achat inférieur d’environ 5 803 €' },
       { scenario: 'Prix stable', input: '0% au lieu de 1,2%', result: 'Location inférieure d’environ 33 283 €' },
     ],
-    cta: { label: 'Ouvrir le calculateur en anglais et tester les hypothèses', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Ouvrir le calculateur en anglais et tester les hypothèses', href: '/en/rent-vs-buy-breakeven-year/' },
     limitations: ['Les taux et évolutions du scénario sont des entrées de démonstration, pas des prévisions de crédit, de loyers, de prix ou de placement.', 'Ancien, neuf, département, copropriété, PTZ, assurance, travaux, fiscalité et résidence principale modifient les frais; utilisez les actes, devis et appels de charges réels.', 'Le calculateur actuel simplifie les coûts du propriétaire et ne remplace ni une simulation de TAEG, ni le notaire, l’ADIL, ni un conseil financier, fiscal, juridique ou immobilier.'],
     sources: [
       { label: 'ANIL — frais annexes pour devenir propriétaire', href: 'https://www.anil.org/votre-besoin/acheter/financement/frais-annexes/' },
@@ -1339,7 +1339,7 @@ export const rentBuyAssumptionGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Niedrigerer Zins', input: '2,75% statt 3,5%', result: 'Mieten rund 21.534 € niedriger' },
       { scenario: 'Kein Wertzuwachs', input: '0% statt 1%', result: 'Mieten rund 76.174 € niedriger' },
     ],
-    cta: { label: 'Englischen Rechner öffnen und Annahmen testen', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Englischen Rechner öffnen und Annahmen testen', href: '/en/rent-vs-buy-breakeven-year/' },
     limitations: ['Alle Prozentsätze sind transparente Beispielwerte und keine Vorhersage für Bauzinsen, Mieten, Immobilienpreise oder Kapitalanlagen.', 'Bundesland, Maklervertrag, Objektart, WEG-Unterlagen, Sanierungsbedarf, Zinsbindung, Anschlussfinanzierung und Steuern verändern die Kosten.', 'Der aktuelle Rechner fasst Eigentümerkosten vereinfacht zusammen. Er ersetzt weder Kreditangebot und Haushaltsrechnung noch Finanzierungs-, Steuer-, Rechts- oder Immobilienberatung.'],
     sources: [
       { label: 'Verbraucherzentrale — Modelle und Planung der Immobilienfinanzierung', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/immobilienfinanzierung-diese-modelle-gibt-es-und-das-sollten-sie-beachten-5801' },
@@ -1364,7 +1364,7 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Higher selling cost', input: '7% instead of 5%', result: 'First crossover moves to year 8' },
       { scenario: 'Higher comparable rent', input: '$2,500 instead of $2,200 a month', result: 'First crossover moves to year 5' },
     ],
-    cta: { label: 'Run a fuller rent-versus-buy scenario', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Test your own numbers in the break-even calculator below', href: '#rent-buy-breakeven-calculator' },
     limitations: ['The crossover is a property of the inputs, not a forecast or a recommendation to buy in that year.', 'The simplified calculator holds the mortgage rate constant, invests only the upfront cash, and does not model monthly cash-flow differences, taxes, deductions, mortgage insurance, renovations or capital-gains treatment.', 'Use the Loan Estimate and Closing Disclosure, local tax and insurance quotes, inspection findings, actual comparable rent and a sale-cost estimate. Model liquidity, job mobility and repair risk separately.', 'A crossover within the horizon does not prove that the purchase is affordable. Budget reserves and underwriting remain separate questions.'],
     sources: [
       { label: 'Consumer Financial Protection Bureau — length of stay and rent-versus-buy assumptions', href: 'https://www.consumerfinance.gov/owning-a-home/prepare/consider-whether-its-the-right-time-for-you-to-buy/' },
@@ -1387,7 +1387,7 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: '出售成本較高', input: '6% 取代 4%', result: '第 11 年首次交叉' },
       { scenario: '可比租金較高', input: 'NT$45,000 取代 NT$38,000', result: '第 6 年首次交叉' },
     ],
-    cta: { label: '用完整租屋買房計算機檢查同一組假設', href: '/zh/tools/rent-vs-buy/' },
+    cta: { label: '用下方的損益年分計算機檢查同一組假設', href: '#rent-buy-breakeven-calculator' },
     limitations: ['模型損益年分不是房價、租金、利率或投資報酬預測，也不是叫你在該年買進或賣出。', '頁內計算器把出售稅費合併為成本率，沒有自動判定戶籍、自住、出租、取得日期、房地合一稅、土地增值稅、重購退稅或個別免稅額；必須用實際稅務資料替換。', '寬限期、變動利率、提前清償費、裝潢、重大修繕及每月現金流差額投資未完整建模。', '即使模型交叉，頭期款、緊急預備金、工作穩定與貸款負擔仍需分開判斷；本頁不提供購屋、投資、貸款、稅務或法律建議。'],
     sources: [
       { label: '我的 E 政府 — 2026 自住房地購買、持有、出售稅務整理', href: 'https://www.gov.tw/News_Content_26_597183' },
@@ -1410,7 +1410,7 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Venta más cara', input: '7% en lugar de 5%', result: 'El cruce sigue en el año 9, pero con solo 69 € de margen' },
       { scenario: 'Alquiler comparable mayor', input: '1.200 € en lugar de 1.000 € al mes', result: 'Primer cruce en el año 6' },
     ],
-    cta: { label: 'Abrir el comparador completo y probar más supuestos', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Abrir el comparador completo y probar más supuestos', href: '#rent-buy-breakeven-calculator' },
     limitations: ['El cruce pertenece al escenario y no recomienda comprar, vender ni contratar una hipoteca en ese año.', 'La calculadora mantiene el tipo constante, invierte solo el efectivo inicial y simplifica impuestos, deducciones, seguros, reformas, derramas y fiscalidad de la venta.', 'ITP o IVA y AJD, notaría, registro, tasación, agencia y condiciones de amortización dependen de comunidad autónoma, vivienda y contrato. Use FEIN, FiAE, escritura, recibos y presupuesto de salida.', 'Que comprar cruce antes no demuestra que la cuota sea asumible ni que exista liquidez para averías o cambios laborales.'],
     sources: [
       { label: 'Banco de España — cuota, capital e intereses de la hipoteca', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Cuota_hipotecaria.html' },
@@ -1434,7 +1434,7 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Revente plus coûteuse', input: '7% au lieu de 5%', result: 'Premier croisement en année 11' },
       { scenario: 'Loyer comparable plus élevé', input: '1 300 € au lieu de 1 100 €', result: 'Premier croisement en année 7' },
     ],
-    cta: { label: 'Ouvrir le comparateur complet et tester les hypothèses', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Ouvrir le comparateur complet et tester les hypothèses', href: '#rent-buy-breakeven-calculator' },
     limitations: ['L’année de croisement appartient au scénario et ne conseille ni achat, ni vente, ni crédit à cette date.', 'Le calcul maintient le taux constant, place seulement les fonds initiaux et simplifie assurance emprunteur, fiscalité, travaux irréguliers, vacance et différences mensuelles de trésorerie.', 'Résidence principale, autre logement, ancien, neuf, département, copropriété et situation du vendeur modifient frais et fiscalité. Utilisez acte, décompte du notaire, offre de prêt, taxe foncière et documents de copropriété.', 'Un croisement ne prouve pas la capacité de remboursement ni la présence d’une épargne de sécurité.'],
     sources: [
       { label: 'ANIL — frais annexes liés à l’achat et au statut de propriétaire', href: 'https://www.anil.org/votre-besoin/acheter/financement/frais-annexes/' },
@@ -1457,7 +1457,7 @@ export const rentBuyBreakevenGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Höhere Verkaufskosten', input: '7% statt 4,5%', result: 'Erster Break-even im Jahr 21' },
       { scenario: 'Höhere Vergleichsmiete', input: '1.500 € statt 1.200 €', result: 'Erster Break-even im Jahr 11' },
     ],
-    cta: { label: 'Vollständigen Vergleich öffnen und Annahmen testen', href: '/en/tools/rent-vs-buy/' },
+    cta: { label: 'Vollständigen Vergleich öffnen und Annahmen testen', href: '#rent-buy-breakeven-calculator' },
     limitations: ['Das Break-even-Jahr ist ein Szenarioergebnis und keine Empfehlung zum Kauf, Verkauf oder Abschluss einer Finanzierung.', 'Der Rechner hält den Zins konstant, investiert nur das Anfangskapital und vereinfacht Anschlussfinanzierung, Steuern, Sanierungen, Sonderumlagen und monatliche Zahlungsdifferenzen.', 'Grunderwerbsteuer, Maklervertrag, Eigennutzung, Vermietung, Anschaffungsdatum und § 23 EStG können die Steuer- und Kostenlage verändern. Verwenden Sie Vertrag, Steuerberatung, Darlehensplan und WEG-Unterlagen.', 'Ein Kosten-Break-even beweist weder Tragbarkeit der Rate noch ausreichende Liquiditätsreserve.'],
     sources: [
       { label: 'Verbraucherzentrale — Vorfälligkeitsentschädigung beim Immobilienverkauf', href: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung/baufinanzierung-vorzeitig-abloesen-ohne-extrakosten-aus-dem-baukredit-12773' },
@@ -1588,7 +1588,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Base example', input: '$2,100 category; $600 earns only 1%', result: '$102 rewards; 2.72% whole-bill rate' },
       { scenario: 'Heavy spend above cap', input: '$3,000 category; other inputs unchanged', result: '$111 rewards; 2.39% whole-bill rate' },
     ],
-    cta: { label: 'Compare the reward value with the card fee', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Compare the reward value with the card fee', href: '/en/annual-fee-card-breakeven/' },
     limitations: ['Merchant category coding is controlled by the payment network and acquirer, not by the name you see on the storefront. Confirm posted transactions instead of assuming every purchase qualifies.', 'A cap stated as reward dollars must be divided by the incremental or stated reward rate specified in the terms before it can be treated as a spend cap.', 'Returns, statement credits, account status, activation deadlines, redemption minimums, point devaluation, and program changes can reduce realized value.', 'Paying interest, late fees, or buying more to chase a category can erase rewards. This model measures rewards, not affordability, credit risk, or tax treatment.'],
     sources: [
       { label: 'CFPB — credit-card rewards program circular', href: 'https://www.consumerfinance.gov/compliance/circulars/consumer-financial-protection-circular-2024-07-design-marketing-and-administration-of-credit-card-rewards-programs/' },
@@ -1610,7 +1610,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: '本頁基準', input: '指定 NT$12,000；其中 NT$4,500 回到 1%', result: '回饋 NT$350；整期真正回饋率 1.52%' },
       { scenario: '大量超過上限', input: '指定 NT$20,000；其他與排除不變', result: '回饋 NT$430；整期真正回饋率 1.39%' },
     ],
-    cta: { label: '把實際回饋價值和年費一起比較', href: '/zh/tools/cashback-breakeven/' },
+    cta: { label: '把實際回饋價值和年費一起比較', href: '/zh/annual-fee-card-breakeven/' },
     limitations: ['「指定通路」可能依商店請款名稱、MCC、支付路徑或授權／入帳日判斷；看到品牌名稱不等於銀行一定認列。', '若公告寫的是「加碼回饋上限 NT$150」，要先確認基本回饋是否另計，再用加碼率換算消費上限，不能把 NT$150 當成可刷金額。', '正附卡合併、逐筆四捨五入、登錄名額、退貨扣回、點數效期與兌換比例都可能使實拿不同。', '循環利息、違約金或為湊回饋增加的支出不屬收益；本模型不提供辦卡、借款、稅務或信用建議。'],
     sources: [
       { label: '金融監督管理委員會銀行局 — 信用卡業務機構管理辦法第 19 條', href: 'https://law.banking.gov.tw/chi/FLAW/FLAWDOC01.aspx?lno=19&lsid=FL006433' },
@@ -1633,7 +1633,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Ejemplo base', input: '850 € en categoría; 350 € vuelven al 0,5%', result: '33,25 €; tasa efectiva del extracto 2,08%' },
       { scenario: 'Mucho gasto fuera del tope', input: '1.400 € en categoría; resto sin cambios', result: '36 €; tasa efectiva del extracto 1,67%' },
     ],
-    cta: { label: 'Comparar el valor del cashback con la cuota de la tarjeta', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Comparar el valor del cashback con la cuota de la tarjeta', href: '/en/annual-fee-card-breakeven/' },
     limitations: ['El nombre comercial no garantiza la categoría: la clasificación depende de los datos de la operación y de las reglas del emisor.', 'Si el tope está expresado como cashback máximo, hay que convertirlo con el porcentaje que indiquen las bases; no es el mismo dato que un límite de gasto.', 'Adhesión, fechas de contabilización, devoluciones, mínimos de canje, comisiones, cambios del programa y forma de pago pueden alterar el valor cobrado.', 'Los intereses de pago aplazado pueden superar el cashback. La página no recomienda una tarjeta ni evalúa solvencia, financiación, fiscalidad o idoneidad personal.'],
     sources: [
       { label: 'Banco de España — tipos de tarjeta y coste del crédito', href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/tarjetas/guia-textual/tipos-de-tarjeta/' },
@@ -1655,7 +1655,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Scénario central', input: '900 € dans la catégorie ; 300 € à 0,5 %', result: '31,10 € ; taux effectif du relevé 1,78 %' },
       { scenario: 'Dépense élevée hors plafond', input: '1 500 € dans la catégorie ; autres données identiques', result: '34,10 € ; taux effectif du relevé 1,45 %' },
     ],
-    cta: { label: 'Comparer le remboursement réel à la cotisation de la carte', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Comparer le remboursement réel à la cotisation de la carte', href: '/en/annual-fee-card-breakeven/' },
     limitations: ['En France, « cash back » peut aussi désigner un retrait d’espèces chez un commerçant. Ici, il s’agit uniquement d’un remboursement ou crédit de fidélité après achat.', 'L’inscription à l’offre, la carte précise, l’enseigne, le canal de paiement, la période et le montant minimum doivent tous correspondre aux conditions.', 'Une transaction via un tiers, retournée, annulée ou remboursée peut être exclue ou entraîner la reprise du crédit. Le délai d’affichage n’est pas un rendement supplémentaire.', 'Cotisation, intérêts, frais et achats provoqués pour atteindre un seuil peuvent dépasser le remboursement. Ce modèle ne recommande aucune carte et ne fournit pas de conseil de crédit ou fiscal.'],
     sources: [
       { label: 'Banque de France — distinguer retrait d’espèces cashback et programme de fidélité', href: 'https://www.banque-france.fr/fr/strategie-monetaire/moyens-de-paiement/politique-nationale-gestion-especes/accessibilit%C3%A9' },
@@ -1678,7 +1678,7 @@ export const cashbackCapsGuides: Record<Locale, DecisionGuideContent> = {
       { scenario: 'Basisbeispiel', input: '1.200 € Bonusumsatz; 400 € nur zu 0,5 %', result: '32,75 €; effektiver Abrechnungssatz 1,42 %' },
       { scenario: 'Hoher Umsatz über Grenze', input: '2.000 € Bonusumsatz; sonst unverändert', result: '36,75 €; effektiver Abrechnungssatz 1,19 %' },
     ],
-    cta: { label: 'Realen Bonus mit dem Kartenentgelt vergleichen', href: '/en/tools/cashback-breakeven/' },
+    cta: { label: 'Realen Bonus mit dem Kartenentgelt vergleichen', href: '/en/annual-fee-card-breakeven/' },
     limitations: ['Cashback, PAYBACK Punkte, Membership Rewards und einmalige Gutschriften haben unterschiedliche Einlösewerte und Bedingungen. Rechnen Sie nur den Wert der tatsächlich genutzten Einlösung.', 'Akzeptanzpartner, Händlereinstufung, Aktivierung, Aktionszeitraum und registrierte Karte entscheiden über die Berechtigung; Tankstellen oder andere Umsätze können ausdrücklich ausgeschlossen sein.', 'Retouren und Stornos beseitigen häufig den Bonus. Rundung, Zusatzkarten, Mindestumsatz und verzögerte Gutschrift können die Abrechnung verändern.', 'Jahresentgelt, Fremdwährungsentgelt, Sollzinsen oder Mehrkonsum können den Bonus übersteigen. Die Rechnung ist keine Karten-, Kredit-, Steuer- oder Anlageberatung.'],
     sources: [
       { label: 'BaFin — neutraler Kontenvergleich mit Kreditkartenentgelten', href: 'https://kontenvergleich.bafin.de/de' },

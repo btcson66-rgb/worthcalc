@@ -34,8 +34,6 @@ faq:
     a: "改變很大，因為它攻擊的是最大的那一項。就學期間年賺 15,000 美元，會把放棄的收入從 140,000 美元降到 80,000 美元——總投資減少 33%，遠超過任何合理的學費折扣。它同時也減少借款，效果會疊加。"
 related:
   - "/zh/money/student-loan-rate-2026/"
-  - "/zh/money/side-hustle-true-hourly-rate/"
-  - "/zh/money/moving-for-a-job-full-cost/"
 draft: true
 ---
 

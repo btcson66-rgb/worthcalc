@@ -93,8 +93,8 @@ function sourceFileForRoute(route, contentLookup) {
     return { sourceFile: join(projectRoot, 'src', 'data', 'coreToolContent.ts'), contentDate: null };
   }
 
-  // A dynamic leaf such as /en/topics/housing/, served by
-  // src/pages/[locale]/topics/[topic].astro.
+  // A dynamic leaf such as /en/money/<slug>/, served by
+  // src/pages/[locale]/money/[slug].astro.
   const parentRoute = parts.slice(0, -1).join('/');
   if (parentRoute) {
     const dynamicDirectory = join(pagesRoot, '[locale]', parentRoute);

@@ -34,8 +34,6 @@ faq:
     a: "可以——牙科治療屬於符合資格的醫療支出，而這正是多數比較漏掉的一塊。用稅前資金支付，等於把自費的實質成本依你的綜合稅率打折，對許多家庭而言約三成。這個折扣適用於整張帳單，包括年度上限之上的每一分錢。"
 related:
   - "/zh/money/hsa-vs-fsa-decision/"
-  - "/zh/money/insurance-deductible-break-even/"
-  - "/zh/money/pet-insurance-break-even/"
 draft: true
 ---
 

@@ -39,7 +39,7 @@ related:
   - "/en/money/lease-buyout-break-even/"
   - "/en/money/pay-off-car-loan-early-or-invest/"
   - "/en/money/auto-loan-rate-by-credit-score-2026/"
-draft: false
+draft: true
 ---
 
 ## The comparison the rule of thumb gets wrong

@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -74,7 +75,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { planPrice: 169, failureProbability: 25, approvalProbability: 70, repairCost: 650, deductible: 100, claimCost: 20, payoutCap: 800 }, copy: { heading: 'Erwartungskosten-Rechner für Garantieverlängerungen', intro: 'Geben Sie eigene Ausfall- und Anerkennungsszenarien ein. Eine erfundene Produktquote wird nicht vorgegeben.', planPrice: 'Gesamtpreis des Vertrags', failureProbability: 'Ausfall im zusätzlichen Zeitraum (%)', approvalProbability: 'Anerkennung nach Ausschlüssen (%)', repairCost: 'Typische gedeckte Reparatur', deductible: 'Selbstbeteiligung', claimCost: 'Diagnose/Versand/Schadenkosten', payoutCap: 'Leistungsgrenze je Schaden', selfFundExpected: 'Erwartete Eigenvorsorge', planExpected: 'Erwartete Gesamtkosten mit Vertrag', expectedPayout: 'Erwartete Vertragsleistung', netValue: 'Nettoerwartungswert', breakEvenProbability: 'Break-even-Ausfall', verdictPlan: 'Vertrag hat niedrigere Erwartungskosten um', verdictSelf: 'Eigenvorsorge hat niedrigere Erwartungskosten um', privacy: 'Bildungsszenario, keine Ausfallprognose oder Deckungsentscheidung. Vertrag lesen.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = extendedWarrantyGuides[locale]!;

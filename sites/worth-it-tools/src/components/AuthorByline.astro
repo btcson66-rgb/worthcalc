@@ -1,0 +1,84 @@
+---
+/*
+ * Byline and the always-visible "not financial advice" notice for calculator and
+ * article pages (SEO rebuild P1, 2026-10-15).
+ *
+ * Google's helpful-content guidance asks who made a page and when it was last
+ * checked; on a YMYL money site an anonymous team is a weak answer. The named
+ * author is Benson Lai (chosen and authorised by the owner). The link goes to
+ * the author page, which states only checkable facts: what he does on this site,
+ * how figures are verified, and how to report an error. No credential or job
+ * title appears anywhere, because none has been supplied.
+ *
+ * The date is the page's own last-verified date (the same value the trust block
+ * prints), not the build date.
+ */
+import type { ContentLocale } from '../consts';
+import { localizedCorePath } from '../i18n/utils';
+import { AUTHOR_NAME } from '../lib/seo';
+
+interface Props {
+  locale: ContentLocale;
+  /** ISO date (YYYY-MM-DD) the page's figures were last verified. */
+  lastVerified: string;
+}
+
+const { locale, lastVerified } = Astro.props;
+
+const copy = {
+  zh: {
+    author: '作者',
+    verified: '最後查核',
+    noticeLead: '不構成財務建議：',
+    notice:
+      '本頁的說明與試算只是一般資訊與估算，不是財務、投資、稅務、保險或法律建議，也不保證任何結果。重大決定前，請核對官方公告與你自己的契約，並諮詢合格專業人士。',
+    disclaimer: '完整免責聲明',
+  },
+  en: {
+    author: 'Author',
+    verified: 'Last verified',
+    noticeLead: 'Not financial advice: ',
+    notice:
+      'The explanations and estimates on this page are general information, not financial, investment, tax, insurance or legal advice, and they guarantee nothing. Before a major decision, check the official notice and your own contract, and consult a qualified professional.',
+    disclaimer: 'Full disclaimer',
+  },
+}[locale === 'zh' ? 'zh' : 'en'];
+
+const authorHref = localizedCorePath(locale, '/about');
+const disclaimerHref = localizedCorePath(locale, '/disclaimer');
+---
+
+<div class="author-byline" data-author-byline>
+  <p class="author-byline__line">
+    {copy.author}：<a href={authorHref} rel="author" data-author-name>{AUTHOR_NAME}</a>
+    <span aria-hidden="true"> · </span>
+    {copy.verified}：<time datetime={lastVerified}>{lastVerified}</time>
+  </p>
+  <p class="ymyl-disclaimer" role="note" data-ymyl-disclaimer>
+    <strong>{copy.noticeLead}</strong>{copy.notice}
+    <a href={disclaimerHref}>{copy.disclaimer}</a>
+  </p>
+</div>
+
+<style>
+  .author-byline {
+    margin-block: 0.25rem 1.25rem;
+  }
+
+  .author-byline__line {
+    margin: 0 0 0.5rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .ymyl-disclaimer {
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-inline-start: 4px solid #b4530a;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+</style>

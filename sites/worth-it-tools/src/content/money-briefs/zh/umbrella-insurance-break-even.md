@@ -36,7 +36,7 @@ related:
   - "/zh/money/insurance-deductible-break-even/"
   - "/zh/money/should-i-file-an-insurance-claim/"
   - "/zh/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## 打平點，以及它為何異常地低

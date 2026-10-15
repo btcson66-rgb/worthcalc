@@ -1,9 +1,8 @@
 import type { APIContext } from 'astro';
-import { SITE, CORE_LOCALES, LOCALE_HREFLANG } from '../consts';
+import { SITE } from '../consts';
 import { getCollection } from 'astro:content';
-import { getCalculators, getGuides } from '../lib/catalog';
+import { getCalculators } from '../lib/catalog';
 import { isPublished, publishCutoff } from '../lib/publication';
-import { TOPIC_IDS, topicCopy, topicPath } from '../lib/topics';
 
 export const prerender = true;
 
@@ -15,99 +14,68 @@ export const prerender = true;
  * to update is a list that goes stale.
  *
  * It is generated from the same catalogue the pages render from now, so it
- * cannot disagree with them, and it leads with the topic hubs so an assistant
- * reading it sees the site's structure before its 1,200 URLs.
+ * cannot disagree with them. Since the 2026-10-15 rebuild it describes only the
+ * Traditional Chinese (Taiwan) site.
  */
-const LOCALE_LABEL: Record<string, string> = {
-  en: 'English (default, canonical)',
-  zh: '繁體中文',
-  es: 'Español',
-  fr: 'Français',
-  de: 'Deutsch',
-};
 
 export const GET = async ({ site }: APIContext): Promise<Response> => {
   const origin = (site?.origin ?? SITE.url).replace(/\/$/, '');
   const url = (path: string) => `${origin}${path}`;
-  const calculators = (await getCalculators('en')).sort((left, right) => left.title.localeCompare(right.title, 'en'));
-  const guides = getGuides('en');
-  // Read from the collection rather than from getGuides(): guideIndex.ts is
-  // generated from a previous build and committed, so a brief released by the
-  // nightly rebuild would be missing from this file until someone regenerated
-  // it. This is the file answer engines read to find out what the site holds,
-  // and a stale list here is worse than a stale list anywhere else on the site.
+  // 2026-10-15 rebuild: the site is Traditional Chinese (Taiwan). Only the
+  // indexed locale is described here; English is built but noindex, and the
+  // other languages no longer exist.
+  const calculators = (await getCalculators('zh')).sort((left, right) => left.title.localeCompare(right.title, 'zh-Hant'));
+  // Read from the collection rather than from the generated guide index: that
+  // index is committed from a previous build, and this file is what answer
+  // engines read to learn what the site holds.
   const briefCutoff = publishCutoff();
   const briefs = (await getCollection('moneyBriefs', ({ data }) => !data.draft))
-    .filter((entry) => entry.data.locale === 'en' && isPublished(entry.data.publishAt, briefCutoff))
-    .sort((left, right) => right.data.publishAt.localeCompare(left.data.publishAt));
+    .filter((entry) => entry.data.locale === 'zh' && isPublished(entry.data.publishAt, briefCutoff))
+    .sort((left, right) => right.data.lastReviewed.getTime() - left.data.lastReviewed.getTime());
 
   const lines: string[] = [
     `# ${SITE.name} (worthcalc.win)`,
     '',
-    `> ${SITE.name} is a free set of browser-based "is it actually worth it?" calculators for`,
-    '> real money decisions: membership break-evens, rent vs buy, EV vs gas, commute cost,',
-    '> subscriptions, installment APR, debt payoff, salary conversion and budgeting.',
-    '> No account and no backend; every calculation runs client-side in the browser.',
+    '> WorthCalc 是台灣人的金錢決策計算機：信用卡與分期、會員與訂閱、交通與通勤、',
+    '> 大型支出（房貸、購車）、退休與勞保勞退。公式攤開在頁面上，頁面標明引用的官方來源與查核日期。',
+    '> 沒有帳號、沒有後端；所有計算都在瀏覽器本機執行。',
     '',
-    '- Every calculator is free and needs no sign-up. Inputs and results stay in the browser; nothing is uploaded.',
-    '- Figures shown in worked examples are editable defaults for illustration, not quoted market rates.',
-    '- Each calculator page states its formula, its assumptions and what it deliberately excludes.',
+    '- 作者與審核：Benson Lai。作者頁說明數字如何查核、如何更正與回報錯誤：' + url('/zh/about/'),
+    '- 所有計算機免費、不需註冊。輸入與結果留在瀏覽器，不會上傳。',
+    '- 範例中的數字是可修改的示意預設值，不是市場報價；頁面上的官方來源旁邊標有查核日期。',
+    '- 本站內容是一般資訊與試算，不構成財務、投資、稅務、保險或法律建議。',
+    '',
+    `- 首頁（繁體中文，台灣）：${url('/')}`,
+    '',
+    '## 計算機',
+    '',
+    `- 全部計算機索引：${url('/zh/tools/')}`,
+    '',
   ];
-
-  for (const locale of CORE_LOCALES) {
-    const path = locale === 'en' ? '/' : `/${locale}/`;
-    lines.push(`- ${LOCALE_LABEL[locale] ?? LOCALE_HREFLANG[locale]}: ${url(path)}`);
-  }
-
-  lines.push('', '## Topics', '');
-  lines.push(`Every page belongs to one of six decision topics. Each hub lists the calculators and guides for it.`, '');
-  for (const topic of TOPIC_IDS) {
-    lines.push(`- [${topicCopy.en[topic].name}](${url(`/en${topicPath(topic)}/`)}): ${topicCopy.en[topic].blurb}`);
-  }
-
-  lines.push('', '## Calculators', '');
-  lines.push(`- Directory, grouped by topic: ${url('/en/tools/')}`, '');
   for (const tool of calculators) {
-    lines.push(`- [${tool.title}](${url(`/en${tool.path}/`)}): ${tool.description}`);
-  }
-
-  lines.push('', '## Guides', '');
-  lines.push(`- Directory, grouped by topic: ${url('/en/guides/')}`, '');
-  for (const guide of guides) {
-    lines.push(`- [${guide.title}](${url(`/en${guide.path}`)})`);
+    lines.push(`- [${tool.title}](${url(`/zh${tool.path}/`)}): ${tool.description}`);
   }
 
   if (briefs.length > 0) {
-    lines.push('', '## Money briefs (dated reference figures)', '');
+    lines.push('', '## 金錢速查（附日期與出處的數字）', '');
+    lines.push(`- 索引：${url('/zh/money/')}`, '');
     lines.push(
-      `- Hub: ${url('/en/money/')}`,
-      '',
-      'Each brief states one figure from a named primary source with the date it was',
-      'verified, then applies it to the arithmetic that turns it into a decision. Unlike',
-      'the guides above, these carry figures that move; every entry below shows the date',
-      'that figure was last checked, and a brief is re-verified rather than left standing.',
+      '每一篇都以一個來自具名官方出處的數字與查核日期開頭，接著示範把這個數字變成決定的算式。',
       '',
     );
     for (const brief of briefs) {
       const checked = brief.data.lastReviewed.toISOString().slice(0, 10);
-      lines.push(`- [${brief.data.title}](${url(`/en/money/${brief.data.briefSlug}/`)}) — checked ${checked}. ${brief.data.answer}`);
+      lines.push(`- [${brief.data.title}](${url(`/zh/money/${brief.data.briefSlug}/`)}) — 查核於 ${checked}。${brief.data.answer}`);
     }
   }
 
   lines.push(
     '',
-    '## Other languages',
-    '',
-    'Traditional Chinese covers the same catalogue written for the Taiwan market, not translated:',
-    `${url('/zh/')}. Spanish, French and German exist for a subset of topics and are frozen —`,
-    'no new routes are being added to them.',
-    '',
-    '## Site index',
+    '## 網站索引',
     '',
     `- Sitemap: ${url('/sitemap-index.xml')}`,
-    `- Every calculator, grouped by topic: ${url('/en/tools/')}`,
-    `- Every guide, grouped by topic: ${url('/en/guides/')}`,
-    `- Dated reference figures, newest first: ${url('/en/money/')}`,
+    `- 全部指南：${url('/zh/guides/')}`,
+    `- 作者與查核方式：${url('/zh/about/')}`,
     '',
   );
 

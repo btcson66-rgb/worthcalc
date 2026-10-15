@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -32,7 +33,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { initial: 22, cleaning: .16, consumables: .06, uses: 100, disposablePerUse: .48 }, fields: fields.de, copy: { heading: 'Mehrweg-Gewinnschwellenrechner', intro: 'Reale Lebensdauer und produkttaugliches Spülen eintragen.', output1: 'Mehrwegkosten je Nutzung', output2: 'Einwegkosten je Nutzung', output3: 'Nutzungen bis Gewinnschwelle', verdictPositive: 'Mehrweg kostet bei dieser Nutzungszahl weniger.', verdictNegative: 'Einweg kostet bei dieser Nutzungszahl weniger.', privacy: 'Nur Finanzmodell; kein pauschaler Umweltvorteil wird abgeleitet.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as L;
 const article = articles[locale];
 const guide = reusableGuides[locale]!;

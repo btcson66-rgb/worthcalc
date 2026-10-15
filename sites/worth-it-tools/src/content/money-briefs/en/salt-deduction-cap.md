@@ -34,7 +34,7 @@ faq:
 related:
   - "/en/money/standard-deduction/"
   - "/en/money/mortgage-rate-2026-payment-impact/"
-draft: false
+draft: true
 ---
 ## The 2026 official figures
 

@@ -1,8 +1,11 @@
 // Gate on what a search result is built from, for every URL in the sitemap.
 //
 // Fails on:
-//   - more than one FAQPage JSON-LD block on a page (Search Console reports the
-//     second as a duplicate-field error; the money briefs shipped 40 of these),
+//   - any FAQPage or HowTo JSON-LD block. This used to cap FAQPage at one per
+//     page (Search Console reports a second as a duplicate-field error; the
+//     money briefs shipped 40 of these). Google retired the FAQ rich result on
+//     2026-06-15 and the 2026-10-15 rebuild removed FAQPage and HowTo from the
+//     whole site, so the cap became a ban: the visible FAQ stays, the markup goes.
 //   - the same <title> on two indexable pages (they compete for one query —
 //     the mortgage guide and the mortgage tool did exactly that),
 //   - a missing title or meta description,
@@ -52,13 +55,13 @@ for (const path of paths) {
   const html = await readFile(file, 'utf8');
   const title = decode(html.match(/<title>([^<]*)<\/title>/)?.[1]?.trim() ?? '');
   const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1]?.trim() ?? '';
-  const faqBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].filter((match) =>
-    /"@type"\s*:\s*"FAQPage"/.test(match[1]),
+  const retiredSchemaBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].filter((match) =>
+    /"@type"\s*:\s*"(FAQPage|HowTo)"/.test(match[1]),
   ).length;
 
   if (!title) failures.push(`${path}: missing <title>`);
   if (!description) failures.push(`${path}: missing meta description`);
-  if (faqBlocks > 1) failures.push(`${path}: ${faqBlocks} FAQPage JSON-LD blocks (max 1)`);
+  if (retiredSchemaBlocks > 0) failures.push(`${path}: ${retiredSchemaBlocks} FAQPage/HowTo JSON-LD block(s); both are retired site-wide`);
   if (title) {
     if (titles.has(title)) failures.push(`${path}: same <title> as ${titles.get(title)} — "${title}"`);
     else titles.set(title, path);
@@ -75,6 +78,6 @@ if (failures.length > 0) {
   process.exit(1);
 }
 console.log(
-  `[serp-snippets] PASS — ${paths.length} sitemap pages; FAQPage ≤1, titles unique, s4 titles ≤${TITLE_WIDTH_BUDGET} wide` +
+  `[serp-snippets] PASS — ${paths.length} sitemap pages; no FAQPage/HowTo, titles unique, s4 titles ≤${TITLE_WIDTH_BUDGET} wide` +
     ` (${overBudget} other titles still over budget, reported only)`,
 );

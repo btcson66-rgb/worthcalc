@@ -31,7 +31,7 @@ faq:
 related:
   - "/en/money/standard-deduction/"
   - "/en/money/capital-gains-zero-percent-bracket/"
-draft: false
+draft: true
 ---
 ## The 2026 federal brackets
 

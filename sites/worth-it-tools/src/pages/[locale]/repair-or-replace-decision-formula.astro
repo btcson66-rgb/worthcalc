@@ -1,4 +1,5 @@
 ---
+import { LOCALES } from '../../consts';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { trustBlockFromDecisionGuide } from '../../lib/trustBlock';
 import DecisionGuide from '../../components/DecisionGuide.astro';
@@ -74,7 +75,7 @@ const calculators = {
   de: { currency: 'EUR' as const, defaults: { repairQuote: 240, repairMonths: 30, recurrenceProbability: 20, recurrenceCost: 240, extraEnergyMonthly: 4, replacementPrice: 1100, replacementFees: 60, currentValue: 40, replacementMonths: 84 }, copy: { heading: 'Reparatur-oder-Ersatz-Lebensdauerrechner', intro: 'Vergleichen Sie Kosten je Nutzungsmonat mit eigenen Angeboten und Szenarien. Eine modellgenaue Ausfallrate wird nicht erfunden.', repairQuote: 'Noch zu zahlender Reparaturpreis', repairMonths: 'Verlässliche Zusatzmonate nach Reparatur', recurrenceProbability: 'Wiederholungsrisiko (%)', recurrenceCost: 'Kosten bei erneutem Fehler', extraEnergyMonthly: 'Mehrenergie des Altgeräts/Monat', replacementPrice: 'Kaufpreis Ersatz', replacementFees: 'Lieferung, Einbau, Steuer oder Übertragung', currentValue: 'Ankauf oder Wiederverkauf heute', replacementMonths: 'Erwartete Nutzungsmonate des Ersatzes', repairExpected: 'Erwartete Kosten Reparaturpfad', repairMonthly: 'Reparatur je Nutzungsmonat', replacementNet: 'Nettoersatzkosten', replacementMonthly: 'Ersatz je Nutzungsmonat', repairRatio: 'Reparaturpreis / Nettoersatz', breakEvenQuote: 'Kostendeckender Reparaturpreis', verdictRepair: 'Reparatur kostet je Nutzungsmonat weniger um', verdictReplace: 'Ersatz kostet je Nutzungsmonat weniger um', privacy: 'Bildungsorientierte Schätzung. Sicherheit, Gewährleistung, Diagnose, Ausfall und Finanzierung können vorgehen.' } },
 };
 
-export function getStaticPaths() { return ['en', 'zh', 'es', 'fr', 'de'].map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return LOCALES.map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = repairReplaceGuides[locale]!;

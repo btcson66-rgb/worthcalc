@@ -36,7 +36,7 @@ related:
   - "/en/money/mortgage-rate-2026-payment-impact/"
   - "/en/money/401k-contribution-limits/"
   - "/en/money/mortgage-refinance-break-even/"
-draft: false
+draft: true
 ---
 
 ## The 2026 figures

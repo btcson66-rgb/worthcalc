@@ -39,7 +39,7 @@ related:
   - "/en/money/buy-now-or-wait-price-increase/"
   - "/en/money/streaming-prices-2026/"
   - "/en/money/credit-score-points-dollar-value/"
-draft: false
+draft: true
 ---
 
 ## What the offer actually is

@@ -3,7 +3,13 @@ import { join, resolve } from 'node:path';
 import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// 2026-10-15 rebuild: only en and zh still have routes. The es/fr/de/hi/ar entries
+// in `nativeMarkers` below are dormant -- they describe pages that are no longer
+// built -- and are kept as data for the day a locale is revived. They are not
+// iterated. `hreflangs` still lists the retired tags on purpose: the "advertises
+// soft-deindexed hreflang" check below is what proves zh pages no longer name
+// an English (or any retired) alternate.
+const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const failures = [];
 const editorialRoutes = [
@@ -327,7 +333,8 @@ for (const article of editorialRoutes) {
       if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing ${marker}`);
     }
 
-    for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
+    // FAQPage is no longer required (and is forbidden site-wide): the FAQ rich result was retired 2026-06-15.
+    for (const schemaType of ['Article', 'BreadcrumbList']) {
       if (!html.includes(`"@type":"${schemaType}"`)) {
         failures.push(`/${locale}/${article.slug}/ missing ${schemaType} schema`);
       }
@@ -366,7 +373,8 @@ for (const article of partialEditorialRoutes) {
     for (const marker of ['class="direct-answer"', '<table', 'class="source-list"', 'class="last-verified"']) {
       if (!html.includes(marker)) failures.push(`/${locale}/${article.slug}/ missing ${marker}`);
     }
-    for (const schemaType of ['Article', 'FAQPage', 'BreadcrumbList']) {
+    // FAQPage is no longer required (and is forbidden site-wide): the FAQ rich result was retired 2026-06-15.
+    for (const schemaType of ['Article', 'BreadcrumbList']) {
       if (!html.includes(`"@type":"${schemaType}"`)) {
         failures.push(`/${locale}/${article.slug}/ missing ${schemaType} schema`);
       }
@@ -420,4 +428,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Multilingual editorial check passed: 29 complete five-locale topics, 137 added routes, 4 enriched high-value tools, 35 embedded decision calculators.');
+console.log(`Multilingual editorial check passed: ${editorialRoutes.length} editorial topics x ${locales.length} built locales (en, zh), native-market markers, sources, last-verified, Article+BreadcrumbList schema, no retired hreflang; 4 enriched high-value tools. es/fr/de are retired and not checked.`);

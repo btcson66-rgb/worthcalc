@@ -13,7 +13,15 @@
     "reviewDate": "2026-12-22",
     "rollback": "Set locales to an empty array and rebuild. The pages are never deleted or redirected, so nothing else has to be restored."
   },
-  "locales": ["es", "fr", "de"],
+  "rebuildDecision": {
+    "source": "SEO rebuild plan 2026-10-15 (Company Vault 10_Web_Department), section 4 and the owner's 2026-10-15 authorisation; work order P1-WC",
+    "criterion": "worthcalc is rebuilt as a Traditional Chinese (Taiwan) money-decision calculator. English general-finance queries rank 62-96 against NerdWallet and Bankrate, so en leaves the index entirely; hi and ar were already noindex and are retired with es, fr and de.",
+    "decisionDate": "2026-10-15",
+    "reviewDate": "2027-01-13",
+    "scope": "en is built but noindex, out of the sitemap and out of hreflang (it stays reachable for human visitors through the language switcher). es, fr, de, hi and ar are retired from the build: src/consts.ts lists only en and zh, so no route is generated for them. They stay in this list so that the check scripts, which skip soft-deindexed URLs, keep skipping them.",
+    "rollback": "Remove en from locales to put English back in the index. Bringing back a retired locale also needs it added to LOCALES / CORE_LOCALES / CONTENT_LOCALES in src/consts.ts and the literal locale lists in src/pages/[locale]/*.astro."
+  },
+  "locales": ["es", "fr", "de", "hi", "ar", "en"],
   "urls": [
     "https://worthcalc.win/de/about/",
     "https://worthcalc.win/de/bnpl-vs-credit-card-installments/",

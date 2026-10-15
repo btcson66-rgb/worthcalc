@@ -11,8 +11,13 @@ const sharedSchema = z.object({
   publicationGate: z.string().optional(),
 });
 
+/*
+ * 2026-10-15 rebuild: only en and zh are loaded. es, fr, de, hi and ar content
+ * stays in the repository, dormant, but is not part of the collection, so no
+ * route, listing or sitemap entry can be generated from it (see src/consts.ts).
+ */
 const growthTools = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/growth-tools' }),
+  loader: glob({ pattern: '{en,zh}/**/*.md', base: './src/content/growth-tools' }),
   schema: sharedSchema.extend({
     contentType: z.literal('tool'),
     toolSlug: z.string(),
@@ -21,7 +26,7 @@ const growthTools = defineCollection({
 });
 
 const growthArticles = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/growth-articles' }),
+  loader: glob({ pattern: '{en,zh}/**/*.md', base: './src/content/growth-articles' }),
   schema: sharedSchema.extend({
     contentType: z.literal('article'),
     articleSlug: z.string(),

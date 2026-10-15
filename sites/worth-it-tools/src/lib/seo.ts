@@ -1,4 +1,4 @@
-import { CONTENT_LOCALES, CORE_LOCALES, SITE, LOCALE_HREFLANG, type ContentLocale } from '../consts';
+import { CONTENT_LOCALES, CORE_LOCALES, HOME_LOCALE, SITE, LOCALE_HREFLANG, type ContentLocale } from '../consts';
 import deindexedRegistry from '../data/deindexed-urls.json';
 
 const DEINDEXED_PATHS = new Set(deindexedRegistry.urls.map((url) => new URL(url).pathname));
@@ -105,7 +105,7 @@ export function brandedTitle(title: string): string {
 }
 
 function localizedPagePath(locale: ContentLocale, logical: string): string {
-  if (!logical && locale === 'en') return '/';
+  if (!logical && locale === HOME_LOCALE) return '/';
   return logical ? `/${locale}/${logical}/` : `/${locale}/`;
 }
 
@@ -114,7 +114,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   const base = origin(input);
   const fullTitle = input.titleOverride ?? (input.title ? brandedTitle(input.title) : SITE.name);
   const currentPath = pagePath(input.url.pathname);
-  const canonicalPath = input.locale === 'en' && currentPath === '/en/' ? '/' : currentPath;
+  const canonicalPath = currentPath;
   const canonical = absolute(base, canonicalPath);
   const ogImage = absolute(base, input.image ?? SITE.defaultOgImage);
   const type = input.type ?? 'website';
@@ -132,16 +132,16 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   // A deliberately noindex page is outside the indexable translation cluster.
   // Advertising it in hreflang would make every alternate point at a target
   // Google is explicitly told not to index, and would break reciprocity for
-  // the remaining indexable locales. The legacy /en/ compatibility page is
-  // also outside the cluster because / is the canonical English homepage.
-  const compatibilityDefault = input.locale === 'en' && currentPath === '/en/';
-  const alternateLocales = softDeindexed || compatibilityDefault ? [] : (input.alternateLocales ?? [...CORE_LOCALES]);
+  // the remaining indexable locales. Since the 2026-10-15 rebuild that covers
+  // all of /en/ (noindex, human-only), so zh pages no longer name an English
+  // alternate and /en/ pages name none at all.
+  const alternateLocales = softDeindexed ? [] : (input.alternateLocales ?? [...CORE_LOCALES]);
   const indexableAlternateLocales = alternateLocales.filter((loc) => {
     const siblingPath = localizedPagePath(loc, logical);
     return !isSoftDeindexed(siblingPath);
   });
-  const xDefaultLocale = indexableAlternateLocales.includes('en')
-    ? 'en'
+  const xDefaultLocale = indexableAlternateLocales.includes(HOME_LOCALE)
+    ? HOME_LOCALE
     : (indexableAlternateLocales[0] ?? input.locale);
   const alternates = indexableAlternateLocales
     .map((loc) => ({
@@ -156,7 +156,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
   if (alternateLocales.length > 0) {
     alternates.push({
       hreflang: 'x-default',
-      href: absolute(base, logical ? localizedPagePath(xDefaultLocale, logical) : '/'),
+      href: absolute(base, localizedPagePath(xDefaultLocale, logical)),
     });
   }
 
@@ -233,18 +233,38 @@ const ORGANIZATION_SAME_AS = [
   'https://roomfeng.win/',
 ] as const;
 
-/** The resolved author entity used by every Article schema. */
-export function organizationAuthorJsonLd(site?: URL, locale: ContentLocale = 'en'): object {
+/**
+ * The named author of every Article and WebApplication schema.
+ *
+ * Until 2026-10-15 the author was the Organization "Btcson Lab" and
+ * scripts/check-schema-author.mjs failed the build on a Person. The rebuild
+ * reverses that on purpose: a YMYL money site with no named, accountable person
+ * reads as anonymous mass content. The owner chose the name (Benson Lai) and
+ * authorised its use on 2026-10-15.
+ *
+ * Only facts that can be checked go in here: a name and the author page that
+ * explains the role and the fact-checking method. No jobTitle, no credentials,
+ * no sameAs, no worksFor -- none of those have been supplied or verified, and a
+ * made-up qualification on a money page is worse than none. The publisher
+ * remains the Organization (organizationPublisherJsonLd).
+ */
+export const AUTHOR_NAME = 'Benson Lai';
+
+export function authorId(site: URL | undefined, locale: ContentLocale): string {
+  return `${resolveBase(site)}/${locale}/about/#benson-lai`;
+}
+
+export function personAuthorJsonLd(site?: URL, locale: ContentLocale = 'en'): object {
   const base = resolveBase(site);
   return {
-    '@type': 'Organization',
-    '@id': organizationId(site),
-    name: ORGANIZATION_NAME,
+    '@type': 'Person',
+    '@id': authorId(site, locale),
+    name: AUTHOR_NAME,
     url: `${base}/${locale}/about/`,
   };
 }
 
-/** The resolved publisher entity used by Article and SoftwareApplication schemas. */
+/** The resolved publisher entity used by Article and WebApplication schemas. */
 export function organizationPublisherJsonLd(site?: URL): object {
   const base = resolveBase(site);
   return {
@@ -283,18 +303,24 @@ export function organizationJsonLd(site?: URL, options: EntityJsonLdOptions = {}
  * Normalize imported package schemas at the final rendering boundary.
  *
  * Older package JSON files are immutable source artifacts and may contain an
- * outdated or person-shaped author. Replacing author/publisher here keeps the
- * source fixtures intact while ensuring every served schema uses the verified
- * organization entity.
+ * outdated or differently-shaped author. Replacing author/publisher here keeps
+ * the source fixtures intact while ensuring every served schema names the one
+ * author (a Person, see personAuthorJsonLd) and the one publisher (the
+ * Organization).
  */
 export function normalizeJsonLd(value: unknown, site?: URL, locale: ContentLocale = 'en'): unknown {
   if (Array.isArray(value)) return value.map((item) => normalizeJsonLd(item, site, locale));
+  // The homepage is `/`; /zh/ is only a redirect stub. Imported package schemas
+  // still name `https://worthcalc.win/zh/` as the breadcrumb home.
+  if (typeof value === 'string') {
+    return value === `${resolveBase(site)}/${HOME_LOCALE}/` ? `${resolveBase(site)}/` : value;
+  }
   if (!value || typeof value !== 'object') return value;
 
   const normalized: Record<string, unknown> = {};
   for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
     if (key === 'author') {
-      normalized[key] = organizationAuthorJsonLd(site, locale);
+      normalized[key] = personAuthorJsonLd(site, locale);
     } else if (key === 'publisher') {
       normalized[key] = organizationPublisherJsonLd(site);
     } else {
@@ -304,10 +330,12 @@ export function normalizeJsonLd(value: unknown, site?: URL, locale: ContentLocal
 
   const type = normalized['@type'];
   const isArticle = type === 'Article' || (Array.isArray(type) && type.includes('Article'));
-  const isSoftwareApplication = type === 'SoftwareApplication' || (Array.isArray(type) && type.includes('SoftwareApplication'));
-  if (isArticle && !normalized.author) normalized.author = organizationAuthorJsonLd(site, locale);
+  const isSoftwareApplication = ['SoftwareApplication', 'WebApplication'].some(
+    (candidate) => type === candidate || (Array.isArray(type) && type.includes(candidate)),
+  );
+  if (isArticle && !normalized.author) normalized.author = personAuthorJsonLd(site, locale);
   if (isArticle && !normalized.publisher) normalized.publisher = organizationPublisherJsonLd(site);
-  if (isSoftwareApplication && !normalized.author) normalized.author = organizationAuthorJsonLd(site, locale);
+  if (isSoftwareApplication && !normalized.author) normalized.author = personAuthorJsonLd(site, locale);
   return normalized;
 }
 
@@ -331,25 +359,15 @@ export function webSiteJsonLd(site?: URL, options: EntityJsonLdOptions = {}): ob
   };
 }
 
+/**
+ * A question/answer pair shown on the page. It is rendered as visible content
+ * only: Google dropped the FAQ rich result on 2026-06-15, so the site no longer
+ * emits FAQPage (or HowTo) structured data anywhere. scripts/check-rebuild-p1.mjs
+ * fails the build if either type reappears.
+ */
 export interface FaqItem {
   question: string;
   answer: string;
-}
-
-/** Build a schema.org FAQPage JSON-LD object. */
-export function faqJsonLd(items: FaqItem[]): object {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  };
 }
 
 export interface BreadcrumbItem {
@@ -373,7 +391,7 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[], site?: URL): object {
   };
 }
 
-/** Build a schema.org SoftwareApplication object for a tool page. */
+/** Build a schema.org WebApplication object for a calculator page. */
 export function softwareAppJsonLd(opts: {
   name: string;
   description: string;
@@ -384,14 +402,15 @@ export function softwareAppJsonLd(opts: {
   const base = (opts.site?.origin ?? SITE.url).replace(/\/$/, '');
   return {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    '@type': 'WebApplication',
     name: opts.name,
     description: opts.description,
     url: absolute(base, opts.url),
-    applicationCategory: 'UtilitiesApplication',
+    applicationCategory: 'FinanceApplication',
     operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
     inLanguage: LOCALE_HREFLANG[opts.locale],
-    author: organizationAuthorJsonLd(opts.site, opts.locale),
+    author: personAuthorJsonLd(opts.site, opts.locale),
     offers: { '@type': 'Offer', price: '0', priceCurrency: opts.locale === 'zh' ? 'TWD' : opts.locale === 'en' ? 'USD' : 'EUR' },
     publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
@@ -418,7 +437,7 @@ export function paidSoftwareAppJsonLd(opts: {
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any modern browser',
     inLanguage: LOCALE_HREFLANG[opts.locale],
-    author: organizationAuthorJsonLd(opts.site, opts.locale),
+    author: personAuthorJsonLd(opts.site, opts.locale),
     offers: {
       '@type': 'Offer',
       price: opts.price,
@@ -449,7 +468,7 @@ export function articleJsonLd(opts: {
     mainEntityOfPage: absolute(base, pagePath(opts.url)),
     inLanguage: LOCALE_HREFLANG[opts.locale],
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
-    author: organizationAuthorJsonLd(opts.site, opts.locale),
+    author: personAuthorJsonLd(opts.site, opts.locale),
     publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },
   };

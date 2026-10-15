@@ -1,14 +1,62 @@
 ---
-import HomePage from '../components/HomePage.astro';
+/*
+ * The site root is the Traditional Chinese (Taiwan) homepage -- SEO rebuild P1,
+ * 2026-10-15. It used to be the English homepage. Canonical is `/`; /zh/ is a
+ * noindex redirect stub that points here (src/pages/zh/index.astro), and /en/ is
+ * a noindex English page kept for human visitors.
+ *
+ * Why `/` rather than `/zh/`: the root is the URL every external link and every
+ * brand search already points at, and the sitemap, canonical and internal links
+ * can all name it directly. Making `/zh/` the homepage would have turned the
+ * root into the stub, and a noindex stub at the site root puts the brand URL
+ * itself in doubt. The cost of this choice is one stub file plus the HOME_LOCALE
+ * rule in src/i18n/utils.ts and src/lib/seo.ts; every other route keeps its
+ * /zh/ prefix.
+ */
+import HomePageTw from '../components/HomePageTw.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { homeContent, homeJsonLd } from '../lib/home';
-import { getFeaturedCalculators } from '../lib/catalog';
+import { homeTw } from '../lib/homeTw';
+import { organizationId, webSiteId } from '../lib/seo';
 
-const locale = 'en';
-const content = homeContent[locale];
-const featured = await getFeaturedCalculators(locale);
+const locale = 'zh';
+const origin = (Astro.site?.origin ?? 'https://worthcalc.win').replace(/\/$/, '');
+const items = homeTw.groups.flatMap((group) => group.items);
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: homeTw.title,
+    description: homeTw.description,
+    url: `${origin}/`,
+    inLanguage: 'zh-TW',
+    isPartOf: { '@id': webSiteId(Astro.site) },
+    publisher: { '@id': organizationId(Astro.site) },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.title,
+        url: `${origin}${item.href}`,
+      })),
+    },
+  },
+];
+const entity = {
+  description:
+    'WorthCalc 是台灣人的金錢決策計算機：信用卡與分期、會員與訂閱、交通與通勤、大型支出，以及退休與勞保勞退，頁面標明引用的官方來源與查核日期。',
+  topics: ['信用卡與分期', '會員與訂閱', '交通與通勤', '大型支出（房貸、購車）', '退休與勞保勞退'],
+};
 ---
 
-<BaseLayout title={content.title} description={content.description} locale={locale} jsonLd={homeJsonLd(locale, Astro.site, featured)} entity={content.entity}>
-  <HomePage locale={locale} />
+<BaseLayout
+  title={homeTw.title}
+  description={homeTw.description}
+  locale={locale}
+  htmlLang="zh-Hant-TW"
+  jsonLd={jsonLd}
+  entity={entity}
+>
+  <HomePageTw />
 </BaseLayout>

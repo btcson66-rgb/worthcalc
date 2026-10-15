@@ -64,7 +64,7 @@ const meta = {
   },
 } satisfies Record<L, { title: string; description: string; faq: { question: string; answer: string }[] }>;
 
-export function getStaticPaths() { return (['zh', 'es', 'fr', 'de'] as const).map((locale) => ({ params: { locale } })); }
+export function getStaticPaths() { return (['zh'] as const).map((locale) => ({ params: { locale } })); }
 const locale = Astro.params.locale as L;
 const page = meta[locale];
 ---

@@ -39,7 +39,7 @@ related:
   - "/zh/money/buy-now-or-wait-price-increase/"
   - "/zh/money/streaming-prices-2026/"
   - "/zh/money/credit-score-points-dollar-value/"
-draft: false
+draft: true
 ---
 
 ## 這個方案實際上是什麼

@@ -36,7 +36,7 @@ related:
   - "/zh/money/mortgage-refinance-break-even/"
   - "/zh/money/pmi-removal-timing/"
   - "/zh/money/moving-for-a-job-full-cost/"
-draft: false
+draft: true
 ---
 
 ## 沒有人真的算過的那筆帳

@@ -2,6 +2,12 @@
 
 Created: 2026-09-18
 
+> **Paused 2026-10-15 (SEO rebuild P1).** The nightly release described below no longer runs: the `schedule`
+> trigger and the `release-window` job were removed from `.github/workflows/deploy-worthcalc.yml`, and the 69 briefs
+> whose `publishAt` is after 2026-10-15 are `draft: true`. Briefs already live stay live; the English ones are noindex.
+> Resuming means a human flips `draft` for a specific brief in a reviewed PR. `scripts/check-due-briefs.mjs` is kept
+> for that day but nothing calls it.
+
 ## Why this cluster exists
 
 After the S1 consolidation on 2026-09-15 the site carried **307 indexable URLs** and

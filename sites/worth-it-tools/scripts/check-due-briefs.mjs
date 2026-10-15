@@ -1,3 +1,6 @@
+// DORMANT since 2026-10-15 (SEO rebuild P1): the scheduled deploy that called this script was removed from
+// .github/workflows/deploy-worthcalc.yml and briefs dated after that day are `draft: true`, which this script
+// ignores. Kept so the release window can be restored by a human in a reviewed PR; nothing runs it now.
 // Answers one question for the scheduled deploy: is there anything new to publish today?
 //
 // The money-brief cluster releases on a date held in each file's frontmatter

@@ -2,21 +2,92 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import AuthorMethodology from '../../components/AuthorMethodology.astro';
 import { localizedPath } from '../../i18n/utils';
-import { getLibraryCounts } from '../../lib/catalog';
+import { articleJsonLd, authorId, breadcrumbJsonLd, AUTHOR_NAME } from '../../lib/seo';
 
 const locale = 'zh';
-// 數量在建置時從實際目錄數出來。這段原本寫死「目前我們提供八個計算機」並逐一列名，
-// 但站上已經有十八個——需要靠人記得更新的數字，就是遲早會錯的數字。
-const counts = await getLibraryCounts(locale);
+// 2026-10-15: the library size sentence was removed from this page. It counted every
+// guide in the directory, including pages the rebuild is about to merge or remove, and a
+// self-description on a trust page must not claim a size the audit does not stand behind.
+// This page is the author page that every calculator and article byline links
+// to. It states only facts that can be checked: a name, what that person does on
+// this site, how figures are verified, and how an error is reported. No
+// credential, degree or job title appears, because none has been supplied.
+const title = '關於 WorthCalc 與作者 Benson Lai';
+const description = 'WorthCalc 是台灣人的金錢決策計算機。作者 Benson Lai 負責計算機開發與內容審核；這一頁說明數字如何查核、多久更新、怎麼更正與回報錯誤。';
+const updated = '2026-10-15';
+const crumbs = [
+  { name: '首頁', url: '/' },
+  { name: title, url: Astro.url.pathname },
+];
+const jsonLd = [
+  articleJsonLd({ headline: title, description, url: Astro.url.pathname, locale, dateModified: updated, site: Astro.site }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    name: title,
+    url: new URL(Astro.url.pathname, Astro.site).href,
+    inLanguage: 'zh-TW',
+    dateModified: updated,
+    mainEntity: {
+      '@type': 'Person',
+      '@id': authorId(Astro.site, locale),
+      name: AUTHOR_NAME,
+      url: new URL('/zh/about/', Astro.site).href,
+    },
+  },
+  breadcrumbJsonLd(crumbs, Astro.site),
+];
 ---
 
 <ArticleLayout
-  title="關於 WorthCalc"
-  description="WorthCalc 是一組免費的瀏覽器端計算機，專門回答一個問題：這樣做到底值不值得？"
+  title={title}
+  description={description}
   locale={locale}
-  updated="2026-09-05"
-  alternateLocales={['en', 'zh', 'es', 'fr', 'de']}
+  updated={updated}
+  breadcrumb={crumbs}
+  jsonLd={jsonLd}
+  alternateLocales={['en', 'zh']}
 >
+  <p>
+    WorthCalc 是為台灣人做的金錢決策計算機：信用卡與分期、會員與訂閱、交通與通勤、
+    大型支出、退休與勞保勞退——每一頁都用台灣的費率、法規與官方公告當依據，附上查核日期。
+  </p>
+  <h2>作者：Benson Lai</h2>
+  <p>
+    <strong>Benson Lai</strong> 負責 WorthCalc 計算機的開發與內容審核：公式怎麼設計、
+    數字取自哪一個官方來源、每一頁標示的查核日期，都由他負責。網站以 Btcson Lab 名義發布。
+  </p>
+  <p>
+    這一頁只寫可以查證的事：他在本站做什麼、數字怎麼查核、錯了怎麼更正。本站不列出任何學歷、
+    證照或職稱，也不以作者身分替任何金融商品、銀行或業者背書——數字的可信度應該來自你自己能查證的
+    官方來源與可以驗算的公式，而不是頭銜。
+  </p>
+
+  <h2>數字怎麼查核</h2>
+  <ul>
+    <li>頁面引用利率、費率、稅額、保費、補助、年費等「會變的數字」時，會在「資料來源」列出出處連結，並盡量取自主管機關或業者的官方公告。沒有列出資料來源的頁面，代表該頁只用算術與你輸入的數字，沒有引用外部數字。</li>
+    <li>每個來源旁邊標示我們實際查看的日期；每一頁最上方與最下方都有該頁的最後查核日期。</li>
+    <li>找不到官方來源的數字，頁面會直接說明，不會拿次級來源或網路平均值充數。</li>
+    <li>示意用的算例會標示為示意，不會被當成市場報價或平均值。</li>
+  </ul>
+
+  <h2>更新與勘誤政策</h2>
+  <ul>
+    <li>官方公告的數字改變，或有讀者回報錯誤時，我們會重新查核該頁、修正內容，並把該頁的最後查核日期更新為重新查核的日期。</li>
+    <li>較重大的更正會記錄在<a href={localizedPath(locale, '/changelog')}>更新紀錄</a>。</li>
+    <li>如果某一頁的數字已經無法查證，或不再適用於台灣，我們會下架或標示它，而不是讓過時的數字留在站上。</li>
+    <li>頁面上的最後查核日期如果已經很舊，請把預設值當成起點，改填你自己的最新數字。</li>
+  </ul>
+
+  <h2>如何回報錯誤</h2>
+  <p>
+    發現計算結果、費率或官方來源有問題，請寄信到
+    <a href="mailto:btcson224@gmail.com">btcson224@gmail.com</a>，並附上頁面網址、你輸入的數字、
+    畫面上的結果與你預期的結果；詳細做法見<a href={localizedPath(locale, '/contact')}>聯絡頁</a>。
+    請不要寄送身分證字號、帳號或其他敏感資料。
+  </p>
+
+  <h2>這個網站是什麼</h2>
   <p>
     「值不值得」這種問題，很多時候是靠感覺決定，而不是靠算數。分期付款寫著
     「0 利率」，真的完全不用付利息嗎？每個月扣款的訂閱服務，一年加起來到底花了
@@ -30,9 +101,7 @@ const counts = await getLibraryCounts(locale);
     本機瀏覽器中，方便下次繼續使用）。
   </p>
   <p>
-    WorthCalc 提供一系列公式透明的決策計算機，以及解釋它們的文字指南——中文版目前
-    有 {counts.calculators} 個計算機與 {counts.guides} 篇指南，全站共維護
-    {counts.languages} 種語言。這些數字是在建置頁面時從實際目錄數出來的，不會過期。
+    WorthCalc 提供一系列公式透明的決策計算機，以及解釋它們的文字指南。
     完整且最新的清單請看
     <a href={localizedPath(locale, '/tools')}>計算機索引</a>與
     <a href={localizedPath(locale, '/guides')}>指南索引</a>，兩者都依照它們回答的決策分類。

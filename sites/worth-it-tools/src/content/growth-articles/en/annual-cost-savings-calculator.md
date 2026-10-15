@@ -43,8 +43,6 @@ The [CFPB monthly budget worksheet](https://files.consumerfinance.gov/f/document
 
 The [CFPB spending guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) also points out that reviewing several months can reveal less frequent expenses. That is why a twelve-month total is often more informative than a single promotional month. This page is an educational calculator guide, not tax, legal, credit, or investment advice; check the current contract before cancelling anything.
 
-For readers who prefer another language, the same calculation is also available in [हिन्दी](/hi/guides/annual-cost-savings-calculator/) and [العربية](/ar/guides/annual-cost-savings-calculator/).
-
 ### Continue with related annual-cost guides
 
 - [Build a recurring-cost annual total](/en/guides/recurring-costs-annual-total/)

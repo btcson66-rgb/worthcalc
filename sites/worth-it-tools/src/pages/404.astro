@@ -1,45 +1,45 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'Page Not Found';
-const description = 'This WorthCalc page could not be found. Return to the calculator directory or open a practical money decision calculator.';
+// The 404 page is Traditional Chinese since the 2026-10-15 rebuild: the site is
+// a Taiwan money-calculator site and its root is the Chinese homepage. It stays
+// noindex and carries no hreflang.
+const title = '找不到頁面';
+const description = '找不到這個 WorthCalc 頁面。請回到計算機索引或首頁，繼續使用台灣的金錢決策計算機。';
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  locale="en"
+  locale="zh"
   noindex={true}
   alternateLocales={[]}
 >
   <article class="not-found">
-    <p class="eyebrow">404 error</p>
-    <h1>We could not find that page</h1>
+    <p class="eyebrow">404</p>
+    <h1>找不到這個頁面</h1>
     <p>
-      The address may be outdated, incomplete, or mistyped. No calculation was
-      performed and no financial conclusion should be drawn from this error
-      page. Use one of the verified routes below to continue.
+      網址可能已經過期、不完整或打錯了。這個錯誤頁沒有進行任何計算，也不應該據此做出任何
+      財務結論。請從下面的入口繼續。
     </p>
 
-    <div class="actions" aria-label="Recovery links">
-      <a class="button button--primary" href="/en/tools/">Browse all calculators</a>
-      <a class="button" href="/">Return to WorthCalc</a>
+    <div class="actions" aria-label="回到站內的連結">
+      <a class="button button--primary" href="/zh/tools/">瀏覽全部計算機</a>
+      <a class="button" href="/">回到 WorthCalc 首頁</a>
     </div>
 
     <section aria-labelledby="popular-tools">
-      <h2 id="popular-tools">Useful starting points</h2>
+      <h2 id="popular-tools">可以從這裡開始</h2>
       <ul>
-        <li><a href="/en/tools/costco-membership/">Costco membership break-even calculator</a></li>
-        <li><a href="/en/tools/commute-cost/">Commute cost comparison</a></li>
-        <li><a href="/en/tools/subscription-audit/">Subscription cost audit</a></li>
-        <li><a href="/en/guides/">Every decision guide, grouped by topic</a></li>
-        <li><a href="/en/about/">How WorthCalc builds and reviews calculators</a></li>
+        <li><a href="/zh/tools/costco-membership/">好市多會員回本計算機</a></li>
+        <li><a href="/zh/tools/commute-cost/">通勤成本計算機</a></li>
+        <li><a href="/zh/tools/credit-card-payoff/">信用卡循環利息與清償時間計算機</a></li>
+        <li><a href="/zh/money/">金錢速查：附日期與出處的數字</a></li>
+        <li><a href="/zh/about/">作者與數字的查核方式</a></li>
       </ul>
       <p>
-        WorthCalc provides estimates for education and planning. Replace sample
-        values with your own current bills, quotes, and contract terms, then
-        confirm important decisions with the relevant provider or a qualified
-        professional.
+        WorthCalc 提供的是教育與規劃用的估算。請把範例數字換成你自己目前的帳單、報價與契約條款，
+        重大決定前再向相關業者或合格專業人士確認。
       </p>
     </section>
   </article>

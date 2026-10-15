@@ -36,7 +36,7 @@ related:
   - "/en/money/streaming-prices-2026/"
   - "/en/money/tsa-precheck-break-even/"
   - "/en/money/internet-plan-cost-2026/"
-draft: false
+draft: true
 ---
 
 ## The break-even, which is not the problem

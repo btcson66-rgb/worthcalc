@@ -2,18 +2,15 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import AuthorMethodology from '../../components/AuthorMethodology.astro';
 import { legalContent } from '../../data/legalContent';
-import type { ContentLocale, Locale } from '../../consts';
+import type { ContentLocale } from '../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { seoPackage001 } from '../../data/seoPackage001';
 import { seoPackageGuides } from '../../data/seoPackageRegistry';
 
-type EditorialLocale = Exclude<Locale, 'en' | 'zh'>;
-
 export async function getStaticPaths() {
-  const released = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'] as const;
-  const legal = (['es', 'fr', 'de'] as EditorialLocale[]).flatMap((locale) =>
-    released.map((legal) => ({ params: { locale, legal } })),
-  );
+  // The es/fr/de legal pages that used to be listed here are retired (no routes
+  // are built for those locales any more); en and zh legal pages are static
+  // files under src/pages/en and src/pages/zh.
   const entries = await getCollection('growthArticles', ({ data }) => !data.draft);
   const localesBySlug = new Map<string, ContentLocale[]>();
   for (const entry of entries) {
@@ -25,7 +22,7 @@ export async function getStaticPaths() {
     params: { locale: entry.data.locale, legal: entry.data.articleSlug },
     props: { growthEntry: entry, alternateLocales: localesBySlug.get(entry.data.articleSlug) ?? [entry.data.locale] },
   }));
-  return [...legal, ...growth];
+  return growth;
 }
 
 const locale = Astro.params.locale as ContentLocale;

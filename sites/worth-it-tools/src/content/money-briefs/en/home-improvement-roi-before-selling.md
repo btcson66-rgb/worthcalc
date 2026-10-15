@@ -36,7 +36,7 @@ related:
   - "/en/money/mortgage-refinance-break-even/"
   - "/en/money/pmi-removal-timing/"
   - "/en/money/moving-for-a-job-full-cost/"
-draft: false
+draft: true
 ---
 
 ## The arithmetic nobody runs

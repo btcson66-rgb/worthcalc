@@ -18,10 +18,12 @@ const isDeindexed = (pathname) =>
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  // Core shell remains five-language; staged editorial routes may add hi/ar.
+  // 2026-10-15 rebuild: Traditional Chinese (Taiwan) is the site; its homepage
+  // is `/`. English is built but noindex. es/fr/de/hi/ar are retired and have
+  // no routes (see src/consts.ts).
   i18n: {
-    locales: ['en', 'zh', 'es', 'fr', 'de', 'hi', 'ar'],
-    defaultLocale: 'en',
+    locales: ['zh', 'en'],
+    defaultLocale: 'zh',
     routing: {
       prefixDefaultLocale: true,
       // Don't let Astro auto-generate a root redirect. We serve our own
@@ -45,9 +47,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // /en/ remains available for old links, but / is the canonical English
-      // homepage. Hreflang is emitted in each page head by src/lib/seo.ts.
-      filter: (page) => page !== `${SITE_URL}/en/` && !isDeindexed(new URL(page).pathname),
+      // / is the canonical homepage (Traditional Chinese). /zh/ is only a
+      // redirect stub pointing at it, so it never belongs in the sitemap; /en/
+      // and everything under it is noindex through the deindexed registry.
+      // Hreflang is emitted in each page head by src/lib/seo.ts.
+      filter: (page) => page !== `${SITE_URL}/zh/` && !isDeindexed(new URL(page).pathname),
       serialize: (item) => ({
         ...item,
         lastmod: resolveSitemapLastmod(item.url).lastmod,

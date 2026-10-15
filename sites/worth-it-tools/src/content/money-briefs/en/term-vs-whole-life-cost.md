@@ -36,7 +36,7 @@ related:
   - "/en/money/disability-insurance-break-even/"
   - "/en/money/pet-insurance-break-even/"
   - "/en/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## The comparison people run, and the one that decides it

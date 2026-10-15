@@ -3,11 +3,16 @@ import { join, resolve } from 'node:path';
 import { expectedHreflangsFor, isSoftDeindexedUrl } from './deindexing.mjs';
 
 const dist = resolve('dist');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// 2026-10-15 rebuild: the "five-language shell" is now a two-language shell. es, fr
+// and de are retired (no routes); en is built but noindex; zh is the indexed site
+// and its homepage is `/`. The file keeps its name so `npm run check:shell` and the
+// CI wiring do not change. `hreflangs` still lists the retired tags on purpose:
+// the "advertises soft-deindexed hreflang" assertion is what proves no page names
+// them.
+const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const releasedLegal = ['about', 'privacy', 'terms', 'contact', 'disclaimer', 'changelog'];
 const releasedTools = ['installment-true-apr', 'subscription-audit', 'costco-membership', 'ev-vs-gas', 'rent-vs-buy', 'commute-cost', 'latte-factor', 'cashback-breakeven'];
-const releasedHomeLocales = [...locales];
 const releasedSupplemental = ['bulk-buying-waste-math', 'costco-math', 'is-costco-executive-membership-worth-it'];
 const failures = [];
 
@@ -18,12 +23,12 @@ function verify(path, kind) {
     return;
   }
   const html = readFileSync(file, 'utf8');
-  const url = `https://worthcalc.win/${path}/`;
+  const url = path ? `https://worthcalc.win/${path}/` : 'https://worthcalc.win/';
   if (!html.includes('<h1')) failures.push(`/${path}/ missing h1`);
   if (!html.includes('rel="canonical"')) failures.push(`/${path}/ missing canonical`);
-  // /en/ is a compatibility alias for the canonical root homepage, not a
-  // member of the localized homepage hreflang cluster.
-  const expectedHreflangs = path === 'en' ? [] : expectedHreflangsFor(url, hreflangs);
+  // /en/ is noindex (soft-deindexed), so it has no hreflang cluster; expectedHreflangsFor
+  // returns [] for it. The zh pages' cluster is zh-TW + x-default only.
+  const expectedHreflangs = expectedHreflangsFor(url, hreflangs);
   for (const hreflang of expectedHreflangs) {
     if (!html.includes(`hreflang="${hreflang}"`)) failures.push(`/${path}/ missing hreflang=${hreflang}`);
   }
@@ -40,7 +45,9 @@ function verify(path, kind) {
 
 for (const slug of releasedLegal) for (const locale of locales) verify(`${locale}/${slug}`, 'legal');
 for (const slug of releasedTools) for (const locale of locales) verify(`${locale}/tools/${slug}`, 'tool');
-for (const locale of releasedHomeLocales) verify(locale, 'home');
+// The zh homepage is the site root; the English homepage is /en/ (noindex).
+verify('', 'home');
+verify('en', 'home');
 for (const slug of releasedSupplemental) for (const locale of locales) verify(`${locale}/${slug}`, 'editorial');
 
 const sitemapFile = join(dist, 'sitemap-0.xml');
@@ -67,14 +74,14 @@ for (const slug of releasedSupplemental) for (const locale of locales) {
 // presence for an indexable URL and absence for a soft-deindexed one. Asserting
 // presence unconditionally made retiring a locale impossible without editing
 // this check, which is backwards -- the registry is meant to be the control.
-for (const locale of ['zh', 'es', 'fr', 'de']) {
-  verifySitemap(`https://worthcalc.win/${locale}/`);
-}
-if (sitemap.includes('<loc>https://worthcalc.win/en/</loc>')) failures.push('Sitemap must exclude compatibility /en/ homepage');
+verifySitemap('https://worthcalc.win/');
+verifySitemap('https://worthcalc.win/en/');
+// /zh/ is the redirect stub for `/`; it is never a sitemap entry.
+if (sitemap.includes('<loc>https://worthcalc.win/zh/</loc>')) failures.push('Sitemap must exclude the /zh/ redirect stub');
 
 if (failures.length) {
-  console.error(`Five-language shell check failed (${failures.length}):`);
+  console.error(`Two-language shell check failed (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log(`Five-language shell check passed: ${releasedLegal.length}/6 legal slugs, ${releasedTools.length}/8 tool slugs, ${releasedHomeLocales.length}/5 localized homepages, ${releasedSupplemental.length} supplemental five-language routes.`);
+console.log(`Two-language shell check passed: ${releasedLegal.length}/6 legal slugs, ${releasedTools.length}/8 tool slugs x ${locales.length} locales (en, zh), zh homepage at / and English homepage at /en/, ${releasedSupplemental.length} supplemental routes. es/fr/de are retired and not checked.`);

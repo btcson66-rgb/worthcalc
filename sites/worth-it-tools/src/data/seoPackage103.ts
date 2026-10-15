@@ -29,32 +29,6 @@ export const seoPackage103Guides: Record<string, SeoPackage103GuideMeta> = {
     "breadcrumbLabel": "Water Cooler Electricity Cost Per Cooling Day Used: Separate Hot and Cold Modes",
     "schemaFile": "103__en__water-cooler-electricity-cost-per-cooling-day-used.json"
   },
-  "es/water-cooler-electricity-cost-per-cooling-day-used": {
-    "key": "es/water-cooler-electricity-cost-per-cooling-day-used",
-    "packageId": "103",
-    "locale": "es",
-    "articleSlug": "water-cooler-electricity-cost-per-cooling-day-used",
-    "title": "Coste eléctrico de un dispensador de agua por día de frío: separa modos",
-    "seoTitle": "Coste eléctrico de un dispensador de agua por día de frío: separa modos | WorthCalc",
-    "metaDescription": "Calcula el coste por día de un dispensador con energía medida de compresor, calor, dispensación y espera.",
-    "excerpt": "Calcula el coste por día de un dispensador con energía medida de compresor, calor, dispensación y espera.",
-    "canonical": "https://worthcalc.win/es/guides/water-cooler-electricity-cost-per-cooling-day-used/",
-    "robots": "index,follow",
-    "ogTitle": "Coste eléctrico de un dispensador de agua por día de frío: separa modos",
-    "ogDescription": "Calcula el coste por día de un dispensador con energía medida de compresor, calor, dispensación y espera.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Coste eléctrico de un dispensador de agua por día de frío: separa modos",
-    "imageBrief": "water-cooler-electricity-cost-per-cooling-day-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/es/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
-      "/es/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
-      "/es/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
-      "/es/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
-    ],
-    "breadcrumbLabel": "Coste eléctrico de un dispensador de agua por día de frío: separa modos",
-    "schemaFile": "103__es__water-cooler-electricity-cost-per-cooling-day-used.json"
-  },
   "zh/water-cooler-electricity-cost-per-cooling-day-used": {
     "key": "zh/water-cooler-electricity-cost-per-cooling-day-used",
     "packageId": "103",
@@ -81,56 +55,4 @@ export const seoPackage103Guides: Record<string, SeoPackage103GuideMeta> = {
     "breadcrumbLabel": "飲水機每冷卻日電費：分開冷水與熱水模式",
     "schemaFile": "103__zh__water-cooler-electricity-cost-per-cooling-day-used.json"
   },
-  "hi/water-cooler-electricity-cost-per-cooling-day-used": {
-    "key": "hi/water-cooler-electricity-cost-per-cooling-day-used",
-    "packageId": "103",
-    "locale": "hi",
-    "articleSlug": "water-cooler-electricity-cost-per-cooling-day-used",
-    "title": "Water cooler electricity cost per cooling day: hot और cold modes अलग रखें",
-    "seoTitle": "Water cooler electricity cost per cooling day: hot और cold modes अलग रखें | WorthCalc",
-    "metaDescription": "Compressor, heating, water draw और no-draw standby की measured energy से water cooler की प्रति cooling day लागत निकालें।",
-    "excerpt": "Compressor, heating, water draw और no-draw standby की measured energy से water cooler की प्रति cooling day लागत निकालें।",
-    "canonical": "https://worthcalc.win/hi/guides/water-cooler-electricity-cost-per-cooling-day-used/",
-    "robots": "index,follow",
-    "ogTitle": "Water cooler electricity cost per cooling day: hot और cold modes अलग रखें",
-    "ogDescription": "Compressor, heating, water draw और no-draw standby की measured energy से water cooler की प्रति cooling day लागत निकालें।",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "Water cooler electricity cost per cooling day: hot और cold modes अलग रखें",
-    "imageBrief": "water-cooler-electricity-cost-per-cooling-day-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/hi/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
-      "/hi/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
-      "/hi/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
-      "/hi/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
-    ],
-    "breadcrumbLabel": "Water cooler electricity cost per cooling day: hot और cold modes अलग रखें",
-    "schemaFile": "103__hi__water-cooler-electricity-cost-per-cooling-day-used.json"
-  },
-  "ar/water-cooler-electricity-cost-per-cooling-day-used": {
-    "key": "ar/water-cooler-electricity-cost-per-cooling-day-used",
-    "packageId": "103",
-    "locale": "ar",
-    "articleSlug": "water-cooler-electricity-cost-per-cooling-day-used",
-    "title": "تكلفة مبرد المياه لكل يوم تبريد: افصل الوضع البارد والساخن",
-    "seoTitle": "تكلفة مبرد المياه لكل يوم تبريد: افصل الوضع البارد والساخن | WorthCalc",
-    "metaDescription": "احسب تكلفة مبرد المياه لكل يوم تبريد من طاقة الضاغط والتسخين والسحب والاستعداد المقاسة.",
-    "excerpt": "احسب تكلفة مبرد المياه لكل يوم تبريد من طاقة الضاغط والتسخين والسحب والاستعداد المقاسة.",
-    "canonical": "https://worthcalc.win/ar/guides/water-cooler-electricity-cost-per-cooling-day-used/",
-    "robots": "index,follow",
-    "ogTitle": "تكلفة مبرد المياه لكل يوم تبريد: افصل الوضع البارد والساخن",
-    "ogDescription": "احسب تكلفة مبرد المياه لكل يوم تبريد من طاقة الضاغط والتسخين والسحب والاستعداد المقاسة.",
-    "ogImage": "/images/guides/annual-bills-monthly-equivalent-og.webp",
-    "imageAlt": "تكلفة مبرد المياه لكل يوم تبريد: افصل الوضع البارد والساخن",
-    "imageBrief": "water-cooler-electricity-cost-per-cooling-day-used comparison",
-    "lastReviewed": "2026-09-03",
-    "related": [
-      "/ar/guides/ceiling-fan-electricity-cost-per-cooling-hour-used/",
-      "/ar/guides/bathroom-ventilation-fan-electricity-cost-per-shower-used/",
-      "/ar/guides/humidifier-electricity-cost-per-humidifying-hour-used/",
-      "/ar/guides/aquarium-air-pump-electricity-cost-per-filtration-day-used/"
-    ],
-    "breadcrumbLabel": "تكلفة مبرد المياه لكل يوم تبريد: افصل الوضع البارد والساخن",
-    "schemaFile": "103__ar__water-cooler-electricity-cost-per-cooling-day-used.json"
-  }
 };

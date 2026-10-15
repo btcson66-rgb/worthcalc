@@ -2,7 +2,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const root = resolve('src/content');
-const locales = ['en', 'zh', 'es', 'fr', 'de'];
+// P1b (2026-10-15): es, fr and de content was deleted with the retired locales; only en and zh remain.
+const locales = ['en', 'zh'];
 const pairs = {
   'mortgage-payoff': 'extra-mortgage-payments-guide',
   'credit-card-payoff': 'credit-card-minimum-payment-trap',
@@ -50,4 +51,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('Growth content check passed: 50 localized tool drafts + 50 companion articles; 5 inflation pairs remain explicitly gated.');
+const pairCount = locales.length * Object.keys(pairs).length;
+console.log(`Growth content check passed: ${pairCount} localized tool drafts + ${pairCount} companion articles; ${locales.length} inflation pairs remain explicitly gated.`);

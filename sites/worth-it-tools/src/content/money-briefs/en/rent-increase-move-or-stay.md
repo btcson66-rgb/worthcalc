@@ -39,7 +39,7 @@ related:
   - "/en/money/moving-for-a-job-full-cost/"
   - "/en/money/mortgage-refinance-break-even/"
   - "/en/money/buy-now-or-wait-price-increase/"
-draft: false
+draft: true
 ---
 
 ## What moving actually costs

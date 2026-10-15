@@ -36,7 +36,7 @@ related:
   - "/zh/money/term-vs-whole-life-cost/"
   - "/zh/money/emergency-fund-size-2026/"
   - "/zh/money/insurance-deductible-break-even/"
-draft: false
+draft: true
 ---
 
 ## 標題數字與真實數字

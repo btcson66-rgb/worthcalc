@@ -39,7 +39,7 @@ related:
   - "/zh/money/moving-for-a-job-full-cost/"
   - "/zh/money/mortgage-refinance-break-even/"
   - "/zh/money/buy-now-or-wait-price-increase/"
-draft: false
+draft: true
 ---
 
 ## 搬家實際上要花多少

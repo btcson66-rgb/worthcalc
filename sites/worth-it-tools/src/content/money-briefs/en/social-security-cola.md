@@ -36,7 +36,7 @@ related:
   - "/en/money/medicare-part-b-premium/"
   - "/en/money/emergency-fund-size-2026/"
   - "/en/pay-raise-vs-inflation-purchasing-power/"
-draft: false
+draft: true
 ---
 
 ## The two figures

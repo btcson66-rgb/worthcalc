@@ -15,6 +15,10 @@
  * is deliberately stricter than rendering it with `noindex` — a noindex page is
  * still a crawled URL, and crawl budget is the thing being conserved.
  *
+ * 2026-10-15: the nightly rebuild that made this gate release briefs on their date
+ * was removed (SEO rebuild P1) and briefs dated later are `draft: true`. The date gate
+ * still decides what a manual build emits, but nothing publishes on a timer any more.
+ *
  * Determinism: the cutoff is read once per build. `PUBLISH_AS_OF` overrides it
  * so tests and the scheduled-release check can ask "what does the site look
  * like on 2026-11-01?" without waiting for 2026-11-01.

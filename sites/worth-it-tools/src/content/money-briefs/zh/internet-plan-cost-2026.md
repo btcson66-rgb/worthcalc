@@ -39,7 +39,7 @@ related:
   - "/zh/money/streaming-prices-2026/"
   - "/zh/money/buy-now-or-wait-price-increase/"
   - "/zh/money/electricity-price-per-kwh-2026/"
-draft: false
+draft: true
 ---
 
 ## 算式

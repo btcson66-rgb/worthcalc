@@ -39,7 +39,7 @@ related:
   - "/zh/money/electricity-price-per-kwh-2026/"
   - "/zh/money/irs-mileage-rate-2026/"
   - "/zh/money/solar-payback-2026/"
-draft: false
+draft: true
 ---
 
 ## 兩條並排的算式

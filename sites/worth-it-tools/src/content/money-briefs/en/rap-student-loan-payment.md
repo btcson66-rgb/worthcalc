@@ -31,7 +31,7 @@ faq:
 related:
   - "/en/money/student-loan-rate-2026/"
   - "/en/money/student-loan-degree-roi/"
-draft: false
+draft: true
 ---
 ## The RAP payment schedule
 

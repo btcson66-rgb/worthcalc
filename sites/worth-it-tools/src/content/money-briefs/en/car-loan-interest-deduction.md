@@ -31,7 +31,7 @@ faq:
 related:
   - "/en/money/used-ev-after-tax-credit/"
   - "/en/money/car-repair-vs-trade-in/"
-draft: false
+draft: true
 ---
 ## The official 2025–2028 rules
 

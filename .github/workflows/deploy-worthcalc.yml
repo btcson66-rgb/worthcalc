@@ -6,18 +6,12 @@ on:
     paths:
       - 'sites/worth-it-tools/**'
       - '.github/workflows/deploy-worthcalc.yml'
-  # Daily release window for the money-brief cluster. Those pages are gated on a
-  # publishAt date in their own frontmatter (sites/worth-it-tools/src/lib/publication.ts),
-  # so a page written today does not appear until its date arrives — and it only
-  # appears if something rebuilds the site on that date. Nothing else in this
-  # repo does that: the push trigger above fires when a human merges, which is
-  # exactly what the date gate exists to decouple from.
-  #
-  # 03:20 UTC rather than the hour: GitHub queues scheduled workflows and drops
-  # them under load at popular times, and on-the-hour crons are the most popular
-  # times there are.
-  schedule:
-    - cron: '20 3 * * *'
+  # 2026-10-15 (SEO rebuild P1): the nightly `schedule` trigger that released
+  # money briefs by publishAt date was removed. During the rebuild nothing may go
+  # live without review, and a date-gated brief going live on a cron is exactly
+  # an unreviewed page. Briefs dated after 2026-10-15 are marked `draft: true`;
+  # a human flips them when the rebuild plan says so. Deploys now happen only on
+  # a merge to main (push) or by hand (workflow_dispatch).
   workflow_dispatch:
     inputs:
       ci_only:
@@ -37,33 +31,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Scheduled runs only. A rebuild on a day with no release produces byte-identical
-  # output, so deploying it would burn ~15 minutes of CI and resubmit every sitemap
-  # URL to IndexNow for no change. This decides whether the night is a release night.
-  # Push and workflow_dispatch runs skip this job entirely and build unconditionally.
-  release-window:
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    outputs:
-      due: ${{ steps.due.outputs.due }}
-      count: ${{ steps.due.outputs.count }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - id: due
-        run: node sites/worth-it-tools/scripts/check-due-briefs.mjs
-      - name: 摘要
-        run: |
-          echo "due=${{ steps.due.outputs.due }} count=${{ steps.due.outputs.count }}" >> "$GITHUB_STEP_SUMMARY"
-
   build:
-    needs: [release-window]
-    # `always()` is required because release-window is skipped on push and
-    # workflow_dispatch; without it a skipped dependency would skip the build and
-    # no merge would ever deploy again.
-    if: always() && (github.event_name != 'schedule' || needs.release-window.outputs.due == 'true')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -132,19 +100,11 @@ jobs:
 
   deploy:
     needs: build
-    # 2026-09-19 起 push 觸發的部署全部沒有發生，原因在這一行。
-    #
-    # release-window 只在 schedule 時執行，push 時是 skipped。GitHub Actions 會把
-    # skipped 沿著 needs 鏈往下傳：一個沒有使用 always()／!cancelled() 之類狀態函式
-    # 的 if，隱含條件是 success()，而 success() 看的是整條相依closure，不只直接
-    # needs。build 自己用 always() 擋住了，下游三個 job 沒有，於是 #179（09-19，
-    # PR #170 加入 release-window 的那次）之後每一次 merge 都只 build 不部署——
-    # 對照 #176／#178（09-15，還沒有 release-window）三個 job 都正常執行。
-    #
-    # 結果是網站只靠每天 03:20 UTC 的排程更新，合併後最多 24 小時才上線。
-    # needs.<job>.result 明確檢查上游結果，取代那個隱含的 success()。
+    # 2026-10-15：release-window job 與 schedule 觸發已移除（見檔頭註解），
+    # 這裡不再有 skipped 沿 needs 鏈傳遞的問題；仍保留明確的 result 檢查，
+    # 讓 build 失敗時下游一定不會部署。
     if: always() && needs.build.result == 'success'
-      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
+      && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -155,9 +115,9 @@ jobs:
 
   indexnow:
     needs: deploy
-    # 同 deploy：明確檢查上游結果，否則 release-window 的 skipped 會傳遞下來。
+    # 同 deploy：明確檢查上游結果。
     if: always() && needs.deploy.result == 'success'
-      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
+      && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -187,9 +147,9 @@ jobs:
 
   gsc-submit:
     needs: deploy
-    # 同 deploy：明確檢查上游結果，否則 release-window 的 skipped 會傳遞下來。
+    # 同 deploy：明確檢查上游結果。
     if: always() && needs.deploy.result == 'success'
-      && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
+      && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.ci_only != true))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -36,7 +36,7 @@ related:
   - "/zh/money/disability-insurance-break-even/"
   - "/zh/money/pet-insurance-break-even/"
   - "/zh/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## 一般人做的比較，與真正決定勝負的比較

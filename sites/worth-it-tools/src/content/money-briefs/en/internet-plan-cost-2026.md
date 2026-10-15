@@ -39,7 +39,7 @@ related:
   - "/en/money/streaming-prices-2026/"
   - "/en/money/buy-now-or-wait-price-increase/"
   - "/en/money/electricity-price-per-kwh-2026/"
-draft: false
+draft: true
 ---
 
 ## The formula

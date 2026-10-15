@@ -31,7 +31,7 @@ faq:
 related:
   - "/en/money/self-employment-tax/"
   - "/en/money/federal-tax-brackets/"
-draft: false
+draft: true
 ---
 ## The federal safe-harbor figures
 

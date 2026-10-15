@@ -36,7 +36,7 @@ related:
   - "/en/money/insurance-deductible-break-even/"
   - "/en/money/should-i-file-an-insurance-claim/"
   - "/en/money/emergency-fund-size-2026/"
-draft: false
+draft: true
 ---
 
 ## The break-even, and why it is unusually low

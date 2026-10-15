@@ -36,7 +36,7 @@ related:
   - "/en/money/term-vs-whole-life-cost/"
   - "/en/money/emergency-fund-size-2026/"
   - "/en/money/insurance-deductible-break-even/"
-draft: false
+draft: true
 ---
 
 ## The headline number and the real one

@@ -39,7 +39,7 @@ related:
   - "/zh/money/lease-buyout-break-even/"
   - "/zh/money/pay-off-car-loan-early-or-invest/"
   - "/zh/money/auto-loan-rate-by-credit-score-2026/"
-draft: false
+draft: true
 ---
 
 ## 通則搞錯的那個比較

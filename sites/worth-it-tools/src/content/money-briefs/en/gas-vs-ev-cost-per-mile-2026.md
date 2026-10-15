@@ -39,7 +39,7 @@ related:
   - "/en/money/electricity-price-per-kwh-2026/"
   - "/en/money/irs-mileage-rate-2026/"
   - "/en/money/solar-payback-2026/"
-draft: false
+draft: true
 ---
 
 ## The two formulas, side by side

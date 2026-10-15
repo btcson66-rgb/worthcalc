@@ -36,7 +36,7 @@ related:
   - "/en/money/student-loan-rate-2026/"
   - "/en/money/side-hustle-true-hourly-rate/"
   - "/en/money/moving-for-a-job-full-cost/"
-draft: false
+draft: true
 ---
 
 ## The cost nobody invoices

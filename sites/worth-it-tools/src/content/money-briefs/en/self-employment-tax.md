@@ -31,7 +31,7 @@ faq:
 related:
   - "/en/money/estimated-tax-safe-harbor/"
   - "/en/money/no-tax-on-tips-deduction/"
-draft: false
+draft: true
 ---
 ## The federal self-employment tax figures
 

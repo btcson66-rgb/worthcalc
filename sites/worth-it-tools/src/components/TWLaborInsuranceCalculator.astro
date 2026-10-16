@@ -1,0 +1,109 @@
+---
+/*
+ * 勞保老年年金試算 (P2 batch 1, 2026-10-16).
+ *
+ * Arithmetic: src/lib/twLaborMath.mjs (oldAgeAnnuity, onceClaimOldAge, ...),
+ * tested by tests/tw-labor-math.test.mjs. The defaults are the first worked
+ * example on the page: average insured salary 45,800, 30 years, born in 民國 60,
+ * claiming at 65.
+ */
+const bliTrial = 'https://www.bli.gov.tw/0109187.html';
+const bliStandard = 'https://www.bli.gov.tw/0004857.html';
+---
+
+<section class="calc" data-tw-labor-insurance aria-labelledby="li-heading">
+  <header>
+    <h2 id="li-heading">勞保老年年金試算計算機</h2>
+    <p>輸入出生年次、平均月投保薪資、年資與預計請領年齡。公式與減給／增給比例照勞保局公布的標準；預設值就是下方第一個算例。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>出生年次（民國）</span><input id="li-birth" type="number" inputmode="numeric" min="1" max="130" step="1" value="60" /></label>
+      <label><span>平均月投保薪資（元，加保期間最高 60 個月的平均）</span><input id="li-salary" type="number" inputmode="numeric" min="0" step="100" value="45800" /></label>
+      <label><span>保險年資：年</span><input id="li-years" type="number" inputmode="numeric" min="0" max="60" step="1" value="30" /></label>
+      <label><span>保險年資：月（0–11）</span><input id="li-months" type="number" inputmode="numeric" min="0" max="11" step="1" value="0" /></label>
+      <label><span>預計請領年齡：歲</span><input id="li-claim-years" type="number" inputmode="numeric" min="50" max="80" step="1" value="65" /></label>
+      <label><span>預計請領年齡：月（0–11）</span><input id="li-claim-months" type="number" inputmode="numeric" min="0" max="11" step="1" value="0" /></label>
+      <label class="is-wide"><span>一次請領比較用：退保前 3 年平均月投保薪資（元；只有民國 98 年 1 月 1 日前已有勞保年資且符合條件者才有這個選項）</span><input id="li-lump-salary" type="number" inputmode="numeric" min="0" step="100" value="45800" /></label>
+      <p class="calc__note is-wide">
+        公式與調整比例來源：<a href={bliStandard}>勞保局老年給付給付標準</a>（2026-10-16 查核）。想用官方工具核對，請用勞保局的<a href={bliTrial}>老年給付整合試算</a>。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="li-status" id="li-status">—</p>
+      <dl>
+        <div><dt>法定請領年齡（依出生年次）</dt><dd id="li-statutory">—</dd></div>
+        <div><dt>公式一：薪資 × 年資 × 0.775% + 3,000</dt><dd id="li-formula-a">—</dd></div>
+        <div><dt>公式二：薪資 × 年資 × 1.55%</dt><dd id="li-formula-b">—</dd></div>
+        <div><dt>擇優後（未調整）</dt><dd id="li-base">—</dd></div>
+        <div><dt>提前減給／延後增給</dt><dd id="li-adjust">—</dd></div>
+        <div><dt>每月老年年金</dt><dd id="li-monthly">—</dd></div>
+        <div><dt>每年老年年金（× 12）</dt><dd id="li-yearly">—</dd></div>
+        <div><dt>一次請領老年給付（限 98 年前有年資者）</dt><dd id="li-lump">—</dd></div>
+        <div><dt>年金領幾個月追上一次金</dt><dd id="li-payback">—</dd></div>
+      </dl>
+      <p class="li-note" id="li-explain"></p>
+      <p class="li-note"><strong>試算結果僅供參考，以勞保局核定為準。</strong>本頁把「年金用的平均薪資」與「一次請領用的平均薪資」分開輸入；請領資格（含離職退保）與實際年資、投保薪資以勞保局資料為準。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { oldAgeAnnuity, oldAgeLumpSumUnder15, onceClaimOldAge, safeNumber } from '../lib/twLaborMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-labor-insurance]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['li-birth', 'li-salary', 'li-years', 'li-months', 'li-claim-years', 'li-claim-months', 'li-lump-salary'];
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const exact = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });
+    const money2 = (n: number) => `${exact.format(n)} 元`;
+    const pct = (n: number) => `${n > 0 ? '+' : ''}${(n * 100).toFixed(1).replace(/\.0$/, '')}%`;
+
+    const render = () => {
+      const serviceMonths = Math.round(val('li-years') * 12 + Math.min(11, Math.max(0, val('li-months'))));
+      const claimAgeMonths = Math.round(val('li-claim-years') * 12 + Math.min(11, Math.max(0, val('li-claim-months'))));
+      const r = oldAgeAnnuity({ avgSalary: val('li-salary'), serviceMonths, birthYearRoc: val('li-birth'), claimAgeMonths });
+      const lump = onceClaimOldAge({ avgSalary: val('li-lump-salary'), serviceMonths });
+      el('li-statutory').textContent = `${r.statutoryAge} 歲`;
+      el('li-formula-a').textContent = money2(r.formulaA);
+      el('li-formula-b').textContent = money2(r.formulaB);
+      el('li-lump').textContent = `${money(lump.amount)}（${Number(lump.payMonths.toFixed(2))} 個月）`;
+
+      const status = el('li-status');
+      if (r.status === 'under15') {
+        const small = oldAgeLumpSumUnder15({ avgSalary: val('li-salary'), serviceMonths });
+        status.textContent = `保險年資未滿 15 年，不能請領老年年金，改請領老年一次金：約 ${money(small)}（平均月投保薪資 × 年資，每滿 1 年 1 個月）。若加計國民年金年資滿 15 年，年滿 65 歲時可選擇請領勞保老年年金。`;
+        ['li-base', 'li-adjust', 'li-monthly', 'li-yearly', 'li-payback'].forEach((id) => { el(id).textContent = '—'; });
+        el('li-explain').textContent = '';
+        return;
+      }
+      if (r.status === 'tooEarly') {
+        status.textContent = '提前請領最多只能提前 5 年；你輸入的年齡比法定請領年齡早超過 5 年，請調高請領年齡。';
+        ['li-base', 'li-adjust', 'li-monthly', 'li-yearly', 'li-payback'].forEach((id) => { el(id).textContent = '—'; });
+        el('li-explain').textContent = '';
+        return;
+      }
+      const when = r.adjustment < 0 ? '提前請領' : r.adjustment > 0 ? '延後請領' : '依法定年齡請領';
+      status.textContent = `${when}：每月約 ${money(r.monthly)}（採公式${r.usedFormula === 'A' ? '一' : '二'}）。`;
+      el('li-base').textContent = `${money(r.base)}（公式${r.usedFormula === 'A' ? '一' : '二'}）`;
+      el('li-adjust').textContent = r.adjustment === 0 ? '無' : pct(r.adjustment);
+      el('li-monthly').textContent = money(r.monthly);
+      el('li-yearly').textContent = money(r.monthly * 12);
+      el('li-payback').textContent = lump.amount > 0 && r.monthly > 0 ? `${(lump.amount / r.monthly).toFixed(1)} 個月` : '—';
+      el('li-explain').textContent = `年資 ${r.years.toFixed(2).replace(/\.?0+$/, '')} 年；公式一 ${money2(r.formulaA)}、公式二 ${money2(r.formulaB)}，取較高者。`;
+    };
+
+    ids.forEach((id) => el<HTMLInputElement>(id).addEventListener('input', render));
+    render();
+  }
+</script>
+
+<style>
+  .li-status { margin: 0; font-weight: 750; }
+  .li-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+</style>

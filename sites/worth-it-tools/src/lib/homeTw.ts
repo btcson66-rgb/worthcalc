@@ -273,9 +273,9 @@ export const homeTw = {
       items: [
         {
           href: '/zh/money/labor-pension-contribution-wage-table/',
-          title: '勞退雇主提繳多少',
-          blurb: '先查月提繳工資分級表，再乘以提繳率。',
-          kind: 'article',
+          title: '勞退試算計算機',
+          blurb: '先對月提繳工資分級表，再乘雇主與自提的提繳率，估專戶累積。',
+          kind: 'calculator',
         },
         {
           href: '/zh/money/labor-pension-voluntary-contribution-tax/',
@@ -285,9 +285,9 @@ export const homeTw = {
         },
         {
           href: '/zh/money/labor-insurance-old-age-lump-sum-vs-annuity/',
-          title: '勞保老年給付：一次領還是月領',
-          blurb: '依年資與平均投保薪資比較兩種領法，算出大約幾年回本。',
-          kind: 'article',
+          title: '勞保老年年金試算計算機',
+          blurb: '兩個公式取高、提前減給與延後增給，並比較一次請領。',
+          kind: 'calculator',
         },
         {
           href: '/zh/money/national-pension-vs-labor-insurance/',

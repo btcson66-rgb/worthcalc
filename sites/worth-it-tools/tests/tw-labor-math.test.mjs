@@ -148,3 +148,28 @@ test('lump sums: <15 years and the pre-1998 once-claim option', () => {
   assert.equal(onceClaimOldAge({ avgSalary: 45800, serviceMonths: 360 }).amount, 2061000);
   assert.equal(onceClaimOldAge({ avgSalary: 45800, serviceMonths: 420 }).payMonths, 45); // 15 + 2 x 20 = 55, capped
 });
+
+test('the old-age brief prints the numbers the calculator produces', () => {
+  const md = readFileSync(new URL('../src/content/money-briefs/zh/labor-insurance-old-age-lump-sum-vs-annuity.md', import.meta.url), 'utf8');
+  const fmt = (n) => Math.round(n).toLocaleString('en-US');
+  const base = { avgSalary: 45800, serviceMonths: 360, birthYearRoc: 60 };
+  for (const age of [60, 61, 62, 63, 64, 65, 67, 70]) {
+    const r = oldAgeAnnuity({ ...base, claimAgeMonths: age * 12 });
+    assert.ok(md.includes(`${fmt(r.monthly)} 元 | ${fmt(r.monthly * 12)} 元 |`), `age ${age}: ${fmt(r.monthly)} / ${fmt(r.monthly * 12)}`);
+  }
+  for (const years of [15, 20, 25, 30, 35, 40]) {
+    const r = oldAgeAnnuity({ ...base, serviceMonths: years * 12, claimAgeMonths: 780 });
+    assert.ok(md.includes(`| ${years} 年 | ${fmt(r.monthly)} 元 |`), `years ${years}`);
+  }
+  for (const [salary, years, a, b, used] of [[25000, 15, '5,906.25', '5,812.5', '公式一'], [30300, 15, '6,522.375', '7,044.75', '公式二'], [45800, 15, '8,324.25', '10,648.5', '公式二']]) {
+    const r = oldAgeAnnuity({ avgSalary: salary, serviceMonths: years * 12, birthYearRoc: 60, claimAgeMonths: 780 });
+    assert.ok(md.includes(`| ${fmt(salary)} × ${years} 年 | ${a} 元 | ${b} 元 | ${used} |`), `${salary} x ${years}`);
+    assert.equal(r.usedFormula, used === '公式一' ? 'A' : 'B');
+  }
+  assert.equal(Math.round(oldAgeAnnuity({ ...base, claimAgeMonths: 64 * 12 + 6 }).monthly), 20871);
+  assert.equal(Math.round(oldAgeAnnuity({ ...base, claimAgeMonths: 780 }).monthly * 12), 255564);
+  assert.equal((onceClaimOldAge({ avgSalary: 45800, serviceMonths: 360 }).amount / oldAgeAnnuity({ ...base, claimAgeMonths: 720 }).monthly).toFixed(1), '121.0');
+  assert.equal(Math.round(3000 / 0.00775), 387097);
+  assert.equal((3000 / 0.00775 / 15).toFixed(0), '25806');
+  assert.equal(oldAgeLumpSumUnder15({ avgSalary: 30000, serviceMonths: 126 }), 315000);
+});

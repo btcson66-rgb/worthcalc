@@ -1,0 +1,137 @@
+---
+/*
+ * 信用卡循環利息計算器 (P2 batch 1, 2026-10-16), zh only.
+ *
+ * Replaces the generic growth calculator on /zh/tools/credit-card-payoff/, whose
+ * default 20.9% APR sat above the 15% legal cap and whose interest compounded,
+ * which 信用卡業務機構管理辦法第 48 條 forbids. The arithmetic is in
+ * src/lib/twCreditCardMath.mjs and is exercised by tests/tw-credit-card-math.test.mjs.
+ * The defaults are the first worked example on the page.
+ */
+const lawCap = 'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0380001&flno=47-1';
+const lawMin = 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001164';
+---
+
+<section class="calc" data-tw-credit-card data-growth-calculator aria-labelledby="cc-heading">
+  <header>
+    <h2 id="cc-heading">信用卡循環利息計算器</h2>
+    <p>輸入循環餘額與<strong>你帳單上的</strong>循環年利率，看一個月的利息、第一期最低應繳，以及只繳最低應繳與固定金額兩種還法要多久、付多少利息。預設值就是下方第一個算例。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>循環信用本金（元，上期未繳清的消費款）</span><input id="cc-balance" type="number" inputmode="numeric" min="0" step="1000" value="30000" /></label>
+      <label><span>循環信用年利率（%，請填帳單上的數字）</span><input id="cc-apr" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="15" /></label>
+      <label><span>每期計息天數（示範用 30 天）</span><input id="cc-days" type="number" inputmode="numeric" min="28" max="31" step="1" value="30" /></label>
+      <label><span>固定還款：每月繳（元）</span><input id="cc-payment" type="number" inputmode="numeric" min="0" step="500" value="3000" /></label>
+      <label><span>最低應繳中，前期未清償款項的比例（%）</span><input id="cc-minpct" type="number" inputmode="decimal" min="0" max="100" step="0.5" value="5" /></label>
+      <label><span>你的卡片最低應繳下限（元，帳單沒寫就填 0）</span><input id="cc-floor" type="number" inputmode="numeric" min="0" step="100" value="0" /></label>
+      <label class="is-wide cc-check"><input id="cc-free1000" type="checkbox" /><span>套用範本條款：繳款後剩餘不足 1,000 元，之後不再計息（要看你的契約）</span></label>
+      <div class="is-wide cc-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="reset" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide" id="cc-apr-note">
+        預設的 15% 是法律的<strong>上限</strong>（<a href={lawCap}>銀行法第 47-1 條</a>，2026-10-16 查核），不是你的利率；請改成帳單上的循環信用利率。最低應繳的 5% 取自<a href={lawMin}>金管會令</a>（2026-10-16 查核）。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="cc-status" id="cc-status">—</p>
+      <dl>
+        <div><dt>每日利息（本金 × 年利率 ÷ 365）</dt><dd id="cc-daily">—</dd></div>
+        <div><dt>一期利息</dt><dd id="cc-cycle">—</dd></div>
+        <div><dt>第一期最低應繳（5% + 利息）</dt><dd id="cc-min1">—</dd></div>
+        <div><dt>只繳最低應繳：餘額降到 1,000 元以下</dt><dd id="cc-min-1000">—</dd></div>
+        <div><dt>只繳最低應繳：繳到 0 為止</dt><dd id="cc-min-zero">—</dd></div>
+        <div><dt>固定每月還款：還清</dt><dd id="cc-fixed">—</dd></div>
+        <div><dt>固定還款比只繳最低少付的利息</dt><dd id="cc-diff">—</dd></div>
+      </dl>
+      <p class="cc-note" id="cc-explain"></p>
+      <p class="cc-note"><strong>試算結果僅供參考，以發卡銀行帳單及契約為準。</strong>簡化：每期固定天數、期末繳款、停止新增消費、利息不滾入本金（辦法第 48 條不得複利）。帳單依規定會揭露「只繳最低應繳，繳清所需的時間與總金額」，那個數字比本頁準。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { cycleInterest, dailyInterest, minimumPayment, simulate, safeNumber, APR_CAP_PCT } from '../lib/twCreditCardMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-credit-card]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const inputs = ['cc-balance', 'cc-apr', 'cc-days', 'cc-payment', 'cc-minpct', 'cc-floor', 'cc-free1000'].map((id) => el<HTMLInputElement>(id));
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const two = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });
+    const span = (months: number) => `${months} 個月（約 ${(months / 12).toFixed(1)} 年）`;
+
+    const render = () => {
+      const principal = Math.max(0, Math.round(val('cc-balance')));
+      const apr = Math.max(0, val('cc-apr'));
+      const days = Math.min(31, Math.max(28, Math.round(val('cc-days')) || 30));
+      const minPct = Math.max(0, val('cc-minpct'));
+      const floor = Math.max(0, val('cc-floor'));
+      const free = el<HTMLInputElement>('cc-free1000').checked;
+      const interest = cycleInterest(principal, apr, days);
+      const min1 = minimumPayment({ principal, interest, minPct, floor });
+      const min = simulate({ principal, aprPct: apr, days, mode: 'minimum', minPct, floor, freeUnder1000: free });
+      const fixed = simulate({ principal, aprPct: apr, days, mode: 'fixed', payment: val('cc-payment'), minPct, floor, freeUnder1000: free });
+
+      el('cc-daily').textContent = `${two.format(dailyInterest(principal, apr))} 元（日利率 ${(apr / 365).toFixed(4)}%）`;
+      el('cc-cycle').textContent = `${money(interest)}（${days} 天）`;
+      el('cc-min1').textContent = principal > 0 ? `${money(min1)}（本金 ${money(min1 - interest)} + 利息 ${money(interest)}）` : '—';
+      if (principal === 0) {
+        ['cc-daily', 'cc-cycle', 'cc-min1', 'cc-min-1000', 'cc-min-zero', 'cc-fixed', 'cc-diff'].forEach((id) => { el(id).textContent = '—'; });
+        el('cc-status').textContent = '請輸入循環信用本金。';
+        el('cc-explain').textContent = '';
+        return;
+      }
+      el('cc-min-1000').textContent = principal < 1000 ? '一開始就在 1,000 元以下' : min.monthsUnder1000 === null ? '超過 100 年' : `第 ${min.monthsUnder1000} 個月（${(min.monthsUnder1000 / 12).toFixed(1)} 年），累計利息 ${money(min.interestUntilUnder1000 ?? 0)}`;
+      el('cc-min-zero').textContent = min.payoffMonths === null ? '超過 100 年' : `${span(min.payoffMonths)}，累計利息 ${money(min.totalInterest)}`;
+      if (fixed.status === 'paymentTooLow') {
+        el('cc-fixed').textContent = `每月 ${money(val('cc-payment'))} 不夠付一期利息 ${money(interest)}，本金不會減少`;
+        el('cc-diff').textContent = '—';
+      } else {
+        el('cc-fixed').textContent = `${span(fixed.months)}，累計利息 ${money(fixed.totalInterest)}`;
+        el('cc-diff').textContent = min.payoffMonths === null ? '—' : money(min.totalInterest - fixed.totalInterest);
+      }
+      el('cc-status').textContent = principal > 0
+        ? `本金 ${money(principal)}、年利率 ${apr}%：一個月的利息約 ${money(interest)}。`
+        : '請輸入循環信用本金。';
+      el('cc-apr-note').classList.toggle('is-warning', apr > APR_CAP_PCT);
+      el('cc-explain').textContent = apr > APR_CAP_PCT
+        ? `你輸入的 ${apr}% 高於銀行法規定的信用卡循環信用利率上限 ${APR_CAP_PCT}%，請回頭核對帳單上的利率。`
+        : '';
+    };
+
+    const example: Record<string, string> = { 'cc-balance': '30000', 'cc-apr': '15', 'cc-days': '30', 'cc-payment': '3000', 'cc-minpct': '5', 'cc-floor': '0' };
+    inputs.forEach((input) => input.addEventListener('input', render));
+    inputs.forEach((input) => input.addEventListener('change', render));
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      el<HTMLInputElement>('cc-free1000').checked = false;
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { if (input.type === 'checkbox') input.checked = false; else input.value = ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .cc-check { display: flex !important; gap: 0.6rem; align-items: flex-start; }
+  .cc-check input { width: 1.25rem; height: 1.25rem; flex: none; margin-top: 0.15rem; }
+  .cc-check span { margin-bottom: 0 !important; }
+  .cc-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .cc-status { margin: 0; font-weight: 750; }
+  .cc-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .is-warning { color: #9a3412; }
+</style>

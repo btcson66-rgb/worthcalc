@@ -63,6 +63,13 @@ const moneyBriefs = defineCollection({
     publishAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     /** Which cluster the brief belongs to, for the hub's grouping. */
     cluster: z.enum(['rates', 'protection', 'ownership', 'earning']),
+    /**
+     * A brief that has been upgraded into a calculator page (P2, 2026-10-16)
+     * names the on-page calculator here. The page then renders it directly under
+     * the short answer and describes itself to search engines as a WebApplication
+     * instead of an Article. The URL does not change.
+     */
+    calculator: z.enum(['tw-labor-pension', 'tw-labor-insurance']).optional(),
     /** The calculator this brief hands the reader off to. */
     relatedTool: z.string(),
     relatedToolLabel: z.string(),

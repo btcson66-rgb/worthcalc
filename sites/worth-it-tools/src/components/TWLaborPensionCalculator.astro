@@ -1,0 +1,104 @@
+---
+/*
+ * 勞退試算 (P2 batch 1, 2026-10-16).
+ *
+ * The arithmetic lives in src/lib/twLaborMath.mjs and is exercised by
+ * tests/tw-labor-math.test.mjs, so the numbers quoted in the brief are produced
+ * by the same functions that run here. The defaults below are the first worked
+ * example on the page; pressing nothing reproduces it.
+ */
+const bliRate = 'https://www.bli.gov.tw/0108501.html';
+const bliCalc = 'https://www.bli.gov.tw/0109187.html';
+---
+
+<section class="calc" data-tw-labor-pension aria-labelledby="lp-heading">
+  <header>
+    <h2 id="lp-heading">勞退試算計算機</h2>
+    <p>輸入月薪、提繳率與預估收益率，算出月提繳工資、每月提繳金額與專戶累積。預設值就是下方第一個算例。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>每月實際工資（元）</span><input id="lp-wage" type="number" inputmode="numeric" min="0" step="100" value="45000" /></label>
+      <label><span>雇主提繳率（%，法定不得低於 6）</span><input id="lp-employer" type="number" inputmode="decimal" min="6" step="0.5" value="6" /></label>
+      <label><span>自願提繳率（%，0 至 6）</span><input id="lp-self" type="number" inputmode="decimal" min="0" max="6" step="0.5" value="0" /></label>
+      <label><span>提繳年數</span><input id="lp-years" type="number" inputmode="decimal" min="0" max="50" step="1" value="30" /></label>
+      <label>
+        <span>預估年收益率（%，由你決定）</span>
+        <input id="lp-return" type="number" inputmode="decimal" min="-50" max="50" step="0.01" value="7.64" />
+      </label>
+      <label>
+        <span>常用參考值</span>
+        <select id="lp-preset">
+          <option value="">自訂（使用左欄數字）</option>
+          <option value="0">0%：只算本金，不含收益</option>
+          <option value="7.64">7.64%：新制開辦以來平均收益率（勞保局，2026-10-16 查核）</option>
+          <option value="10.28">10.28%：近 5 年（110–114 年）平均收益率（勞保局，2026-10-16 查核）</option>
+        </select>
+      </label>
+      <label><span>月領：預估領取年限（年，示範假設）</span><input id="lp-payout-years" type="number" inputmode="decimal" min="1" max="60" step="1" value="20" /></label>
+      <label><span>月領：計算用年利率（%）</span><input id="lp-payout-rate" type="number" inputmode="decimal" min="0" max="20" step="0.0001" value="1.1473" /></label>
+      <p class="calc__note is-wide">
+        7.64% 與 10.28% 是過去的平均數，不是保證，也不是預測；勞退基金某些年度是虧損的。月領欄位的 1.1473% 是勞保局整合試算頁目前列示的利率（<a href={bliCalc}>勞保局</a>，2026-10-16 查核），領取年限 20 年是示範假設，不是官方平均餘命。來源：<a href={bliRate}>勞保局收益率說明</a>。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="lp-grade" id="lp-grade">—</p>
+      <dl>
+        <div><dt>雇主每月提繳</dt><dd id="lp-employer-monthly">—</dd></div>
+        <div><dt>自提每月</dt><dd id="lp-self-monthly">—</dd></div>
+        <div><dt>每月合計進專戶</dt><dd id="lp-total-monthly">—</dd></div>
+        <div><dt>提繳期間本金合計</dt><dd id="lp-principal">—</dd></div>
+        <div><dt>預估累積收益</dt><dd id="lp-earnings">—</dd></div>
+        <div><dt>預估專戶總額（一次領的估算）</dt><dd id="lp-balance">—</dd></div>
+        <div><dt>月領簡化估算（每月）</dt><dd id="lp-monthly-payout">—</dd></div>
+      </dl>
+      <p class="lp-note" id="lp-explain"></p>
+      <p class="lp-note"><strong>試算結果僅供參考，以勞保局公告及你的個人專戶為準。</strong>薪資不變、每月月底提繳、收益按月複利，是本頁為了好算而做的簡化。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { monthlyContribution, accumulate, levelPayout, safeNumber } from '../lib/twLaborMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-labor-pension]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const inputs = ['lp-wage', 'lp-employer', 'lp-self', 'lp-years', 'lp-return', 'lp-payout-years', 'lp-payout-rate'].map((id) => el<HTMLInputElement>(id));
+    const preset = el<HTMLSelectElement>('lp-preset');
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+
+    const render = () => {
+      const c = monthlyContribution({ actualWage: val('lp-wage'), employerRate: val('lp-employer') / 100, selfRate: val('lp-self') / 100 });
+      const a = accumulate({ totalMonthly: c.totalMonthly, years: val('lp-years'), annualReturnPct: val('lp-return') });
+      const payout = levelPayout({ balance: a.balance, payoutYears: val('lp-payout-years'), annualRatePct: val('lp-payout-rate') });
+      const range = c.high === null ? `${yuan.format(c.low)} 元以上` : `${yuan.format(c.low)}–${yuan.format(c.high)} 元`;
+      el('lp-grade').textContent = `分級表第 ${c.level} 級：實際工資 ${range}，月提繳工資 ${yuan.format(c.contribution)} 元`;
+      el('lp-employer-monthly').textContent = `${money(c.employerMonthly)}（${(c.employerRate * 100).toFixed(1).replace(/\.0$/, '')}%）`;
+      el('lp-self-monthly').textContent = `${money(c.selfMonthly)}（${(c.selfRate * 100).toFixed(1).replace(/\.0$/, '')}%）`;
+      el('lp-total-monthly').textContent = money(c.totalMonthly);
+      el('lp-principal').textContent = money(a.principal);
+      el('lp-earnings').textContent = money(a.earnings);
+      el('lp-balance').textContent = money(a.balance);
+      el('lp-monthly-payout').textContent = money(payout);
+      el('lp-explain').textContent = `${yuan.format(a.months)} 個月 × ${money(c.totalMonthly)} = ${money(a.principal)} 本金；收益率 ${val('lp-return')}% 只是你輸入的假設。`;
+    };
+
+    inputs.forEach((input) => input.addEventListener('input', render));
+    preset.addEventListener('change', () => {
+      if (preset.value !== '') el<HTMLInputElement>('lp-return').value = preset.value;
+      render();
+    });
+    el<HTMLInputElement>('lp-return').addEventListener('input', () => { preset.value = ''; });
+    render();
+  }
+</script>
+
+<style>
+  .lp-grade { margin: 0; font-weight: 750; }
+  .lp-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+</style>

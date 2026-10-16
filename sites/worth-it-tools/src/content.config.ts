@@ -22,6 +22,22 @@ const growthTools = defineCollection({
     contentType: z.literal('tool'),
     toolSlug: z.string(),
     relatedArticle: z.string(),
+    /**
+     * Optional page-specific "how this is calculated" data (P2, 2026-10-16). A
+     * tool that declares `sources` gets a trust block built from them instead of
+     * the generic fallback, which says the page cites no outside figures. That
+     * sentence is false for a page quoting Taiwanese law.
+     */
+    method: z.string().optional(),
+    formula: z.string().optional(),
+    limits: z.array(z.string()).optional(),
+    sources: z.array(z.object({
+      label: z.string(),
+      url: z.string().url(),
+      verifiedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    })).optional(),
+    /** Descriptive-anchor links to sibling tools and guides, shown under the page. */
+    related: z.array(z.object({ title: z.string(), href: z.string() })).default([]),
   }),
 });
 
@@ -63,6 +79,13 @@ const moneyBriefs = defineCollection({
     publishAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     /** Which cluster the brief belongs to, for the hub's grouping. */
     cluster: z.enum(['rates', 'protection', 'ownership', 'earning']),
+    /**
+     * A brief that has been upgraded into a calculator page (P2, 2026-10-16)
+     * names the on-page calculator here. The page then renders it directly under
+     * the short answer and describes itself to search engines as a WebApplication
+     * instead of an Article. The URL does not change.
+     */
+    calculator: z.enum(['tw-labor-pension', 'tw-labor-insurance']).optional(),
     /** The calculator this brief hands the reader off to. */
     relatedTool: z.string(),
     relatedToolLabel: z.string(),

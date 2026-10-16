@@ -1,5 +1,6 @@
 ---
 import GrowthCalculator from '../../../components/GrowthCalculator.astro';
+import TWCreditCardCalculator from '../../../components/TWCreditCardCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -28,7 +29,23 @@ const growthReview = {
   zh: { heading: '計算方法與限制', updated: '最後更新', disclaimer: '估算免責聲明', text: '僅供一般教育與情境試算；行動前請核對最新契約、利率、稅費與官方規定。' },
 }[locale];
 const growthLastReviewed = growthEntry.data.lastReviewed.toISOString().slice(0, 10);
-const trustBlock = fallbackTrustBlock(locale, growthLastReviewed);
+const fallbackBlock = fallbackTrustBlock(locale, growthLastReviewed);
+// A tool that carries its own sources (see content.config.ts) gets a trust block
+// that lists them; the others keep the generic fallback.
+const trustBlock = growthEntry.data.sources?.length
+  ? {
+    method: growthEntry.data.method ?? fallbackBlock.method,
+    formula: growthEntry.data.formula,
+    sources: growthEntry.data.sources,
+    limits: growthEntry.data.limits ?? fallbackBlock.limits,
+    lastReviewed: growthLastReviewed,
+    locale,
+  }
+  : fallbackBlock;
+// Taiwan's revolving-interest rules differ from the generic payoff model (15% cap,
+// no compounding, a statutory minimum-payment composition), so the zh page runs
+// its own calculator.
+const useTwCreditCard = locale === 'zh' && slug === 'credit-card-payoff';
 ---
 
 <ToolLayout
@@ -37,12 +54,12 @@ const trustBlock = fallbackTrustBlock(locale, growthLastReviewed);
   locale={locale}
   tool={{ name: growthEntry.data.title }}
   faq={[]}
-  related={[]}
+  related={growthEntry.data.related}
   alternateLocales={['en', 'zh']}
   showReview={false}
   trustBlock={trustBlock}
 >
-  <GrowthCalculator locale={locale} definition={growthDefinition} />
+  {useTwCreditCard ? <TWCreditCardCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

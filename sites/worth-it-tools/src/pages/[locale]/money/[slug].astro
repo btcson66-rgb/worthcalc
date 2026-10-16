@@ -18,7 +18,9 @@ import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 import FAQ from '../../../components/FAQ.astro';
 import RelatedLinks from '../../../components/RelatedLinks.astro';
 import { localizedCorePath, useTranslations } from '../../../i18n/utils';
-import { articleJsonLd, breadcrumbJsonLd } from '../../../lib/seo';
+import TWLaborInsuranceCalculator from '../../../components/TWLaborInsuranceCalculator.astro';
+import TWLaborPensionCalculator from '../../../components/TWLaborPensionCalculator.astro';
+import { articleJsonLd, breadcrumbJsonLd, softwareAppJsonLd } from '../../../lib/seo';
 import { isPublished, publishCutoff } from '../../../lib/publication';
 import { isoDate } from '../../../lib/trustBlock';
 import { briefCopy, moneyHubPath } from '../../../lib/moneyBriefs';
@@ -109,20 +111,27 @@ const relatedLinks = liveRelated.map((href) => ({
   alternateLocales={alternateLocales}
   trustBlock={trustBlock}
   jsonLd={[
-    articleJsonLd({
-      headline: data.title,
-      description: data.description,
-      url: Astro.url.pathname,
-      locale,
-      dateModified: reviewed,
-      site: Astro.site,
-    }),
+    // A brief upgraded into a calculator page describes itself as the tool it
+    // is (WebApplication, author Person); every other brief stays an Article.
+    data.calculator
+      ? softwareAppJsonLd({ name: data.title, description: data.description, url: Astro.url.pathname, locale, site: Astro.site })
+      : articleJsonLd({
+        headline: data.title,
+        description: data.description,
+        url: Astro.url.pathname,
+        locale,
+        dateModified: reviewed,
+        site: Astro.site,
+      }),
     breadcrumbJsonLd(crumbs, Astro.site),
     // No FAQPage block: Google retired the FAQ rich result on 2026-06-15, and the
     // <FAQ> below renders the questions as visible content only.
   ]}
 >
   <p class="brief-answer"><strong>{copy.answerLabel}</strong> {data.answer}</p>
+
+  {data.calculator === 'tw-labor-pension' && <TWLaborPensionCalculator />}
+  {data.calculator === 'tw-labor-insurance' && <TWLaborInsuranceCalculator />}
 
   <Content />
 

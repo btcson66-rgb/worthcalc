@@ -235,7 +235,7 @@ WorthCalc 的 **Installment True APR** 可以用實際分期現金流估算隱�
 
 ## 延伸閱讀
 
-- [簡單利息 vs 複利](/zh/how-compound-growth-works/)
+- [複利計算機：單利與複利差多少、定存對通膨、每月投入怎麼算](/zh/tools/compound-growth/)
 - [貸款攤還表怎麼看？](/zh/guides/amortization-schedule-explained/)
 - [分期真實 APR 工具](/zh/tools/installment-true-apr/)
 

@@ -40,7 +40,7 @@
           <label><span>鑑價費（依新銀行報價）</span><input id="rf-appraisal" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
           <label><span>代書／地政士費（依報價）</span><input id="rf-scrivener" type="number" inputmode="numeric" min="0" step="500" value="10000" /></label>
           <label><span>其他費用（例如帳管費，依報價）</span><input id="rf-other" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
-          <label><span>抵押權設定金額（擔保債權總金額；空白＝等於貸款餘額）</span><input id="rf-secured" type="number" inputmode="numeric" min="0" step="10000" placeholder="例如 9600000" /></label>
+          <label><span>抵押權設定金額（以銀行核定的設定金額為準，可能高於貸款餘額；空白＝暫以貸款餘額計，登記費可能偏低）</span><input id="rf-secured" type="number" inputmode="numeric" min="0" step="10000" placeholder="例如 9600000" /></label>
           <label><span>他項權利證明書張數（書狀費每張 80 元）</span><input id="rf-sheets" type="number" inputmode="numeric" min="0" max="10" step="1" value="1" /></label>
           <label><span>舊貸款提前清償違約金（% ，依你的契約；已過限制清償期間或無限制就填 0）</span><input id="rf-penalty" type="number" inputmode="decimal" min="0" max="10" step="0.05" value="0" /></label>
         </div>
@@ -128,6 +128,9 @@
       const notes: string[] = [];
       if (r.termExtensionMonths > 0) {
         notes.push(`新貸款比舊貸款多 ${r.termExtensionMonths} 個月（年期重置）：月付變低有一部分只是還得更久，所以回本月數 ① 會比 ② 樂觀。判斷時以 ② 和「跑完全程淨賺」為準；想拿到較低的月付又不多付利息，可以選較長年期、但照原本的月付去繳。`);
+      }
+      if (!(val('rf-secured') > 0)) {
+        notes.push('設定金額沒有填，登記費暫以貸款餘額 × 千分之一計；銀行核定的設定金額可能高於貸款餘額，登記費會跟著增加，請改填新銀行契約上的「擔保債權總金額」。例如中國信託的房貸流程頁面寫將抵押權金額設定為貸款金額的 1.2 倍，這是該行的做法，不是法律規定，其他銀行以其契約為準。');
       }
       if (r.monthlySaving <= 0) notes.push('新貸款的月付沒有比舊貸款低，通常只有在新年期更短、想少付總利息時才有意義。');
       el('rf-explain').textContent = notes.join(' ');

@@ -166,7 +166,7 @@ test('青安 3.0 figures in extra-mortgage-payments-guide match the official pag
 // in its tables; the test recomputes every printed row with the calculator's own functions.
 // ---------------------------------------------------------------------------------------------------------------
 import { readFileSync as readRefinanceFile } from 'node:fs';
-import { evaluateRefinance, mortgageRegistrationFee, refinanceCosts, refinanceNetAtMonth } from '../src/lib/twMortgageMath.mjs';
+import { CTBC_EXAMPLE_SECURED_RATIO, evaluateRefinance, mortgageRegistrationFee, refinanceCosts, refinanceNetAtMonth } from '../src/lib/twMortgageMath.mjs';
 
 const refiMd = readRefinanceFile(new URL('../src/content/money-briefs/zh/mortgage-refinance-break-even.md', import.meta.url), 'utf8');
 const f0 = (n) => Math.round(n).toLocaleString('en-US');
@@ -184,6 +184,22 @@ test('轉貸: statutory items -- 登記費 = 設定金額 x 千分之一, 書狀
   for (const [pct, amount] of [[0.5, 40000], [1, 80000], [2, 160000]]) assert.equal(refinanceCosts({ balance: 8000000, penaltyPct: pct }).penalty, amount);
   assert.ok(refiMd.includes('登記費 8,000 元') && refiMd.includes('登記費 9,600 元'));
   assert.ok(refiMd.includes('0.5% 是 40,000 元、1% 是 80,000 元、2% 是 160,000 元'));
+});
+
+test('轉貸: 設定金額以銀行核定為準 -- 中國信託頁面的 1.2 倍只是已查核的銀行範例, 不是預設', () => {
+  // 中國信託 房貸流程頁 (2026-10-17): 貸款 1,000 萬, 地政設定規費 = 貸款金額的 1.2 倍 x 1/1000 = 12,000
+  assert.equal(mortgageRegistrationFee(10000000 * CTBC_EXAMPLE_SECURED_RATIO), 12000);
+  assert.equal(mortgageRegistrationFee(8000000 * CTBC_EXAMPLE_SECURED_RATIO), 9600);
+  // a blank 設定金額 falls back to the balance, so the fee is lower than with a 1.2x setting
+  const blank = refinanceCosts({ balance: 8000000 });
+  const bank = refinanceCosts({ balance: 8000000, securedAmount: 8000000 * CTBC_EXAMPLE_SECURED_RATIO });
+  assert.equal(blank.registration, 8000);
+  assert.equal(bank.registration, 9600);
+  assert.equal(bank.total - blank.total, 1600);
+  for (const text of ['設定金額以銀行核定的為準，可能高於貸款餘額', '將抵押權金額設定為貸款金額的 1.2 倍', '地政設定規費：貸款金額的 1.2 倍 × 1/1000 = 12,000', '其他銀行沒有查到原文', 'https://www.ctbcbank.com/content/dam/minisite/long/loan/mortgage/mprocess.html']) {
+    assert.ok(refiMd.includes(text), text);
+  }
+  assert.ok(!refiMd.includes('設定金額空白＝貸款餘額'));
 });
 
 test('轉貸 算例一: 8,000,000 / 2.6% -> 2.1% / 費用 26,080 -- the page table, row by row', () => {

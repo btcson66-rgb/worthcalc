@@ -464,7 +464,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/how-compound-growth-works/",
       "https://worthcalc.win/en/guides/real-vs-nominal-return/",
       "https://worthcalc.win/en/tools/compound-growth/"
     ],
@@ -837,7 +836,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "https://worthcalc.win/en/tools/compound-growth/",
-      "https://worthcalc.win/en/how-compound-growth-works/",
       "https://worthcalc.win/en/savings-rate-gross-vs-net/"
     ],
     "breadcrumbLabel": "Real vs. Nominal Return",

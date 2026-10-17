@@ -43,6 +43,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 
 <script>
   import { renderBars } from '../lib/calcUi';
+  import { evaluateExtendedWarranty } from '../lib/twRepairMath.mjs';
   for (const root of document.querySelectorAll<HTMLElement>('[data-extended-warranty-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -51,20 +52,11 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
     const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
     const calculate = () => {
-      const failure = Math.min(100, value('failureProbability')) / 100;
-      const approval = Math.min(100, value('approvalProbability')) / 100;
-      const repair = value('repairCost');
-      const deductible = value('deductible');
-      const claimCost = value('claimCost');
-      const payout = Math.min(value('payoutCap'), Math.max(0, repair - deductible));
-      const approvedConsumerCost = Math.max(0, repair - payout) + claimCost;
-      const selfFundExpected = failure * repair;
-      const planExpected = value('planPrice') + failure * (approval * approvedConsumerCost + (1 - approval) * repair);
-      const expectedPayout = failure * approval * payout;
-      const netValue = selfFundExpected - planExpected;
-      const savingsPerFailure = approval * Math.max(0, payout - claimCost);
-      const breakEven = savingsPerFailure ? value('planPrice') / savingsPerFailure * 100 : Infinity;
-      const planWins = netValue >= 0;
+      const r = evaluateExtendedWarranty({
+        planPrice: value('planPrice'), failureProbability: value('failureProbability'), approvalProbability: value('approvalProbability'), repairCost: value('repairCost'),
+        deductible: value('deductible'), claimCost: value('claimCost'), payoutCap: value('payoutCap'),
+      });
+      const { selfFundExpected, planExpected, expectedPayout, netValue, breakEvenProbability: breakEven, planWins } = r;
       const chart = root.querySelector<HTMLElement>('[data-chart]');
       if (chart) renderBars(chart, [
         { label: root.dataset.labelA || '', value: selfFundExpected },

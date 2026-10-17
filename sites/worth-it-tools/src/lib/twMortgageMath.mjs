@@ -171,6 +171,15 @@ export function burdenLight(monthlyPayment, monthlyIncome) {
 export const LAND_REGISTRATION_RATE = 0.001; // 土地法第 76 條: 千分之一
 export const LAND_TITLE_SHEET_FEE = 80; // 土地法第 67 條 / 地政事務所: 每張 80 元
 
+/**
+ * 設定金額 is whatever the new bank's contract says; no statute fixes a multiple of the loan. The only bank text found
+ * (2026-10-17) is 中國信託's 房貸流程 page: 抵押權金額 = 貸款金額 x 1.2, with the example 貸款 1,000 萬 -> 地政設定規費 12,000.
+ * https://www.ctbcbank.com/content/dam/minisite/long/loan/mortgage/mprocess.html
+ * It is kept as a documented example for tests and prose only -- the calculator never applies it by itself: a blank
+ * 設定金額 falls back to the balance and the page says the fee is then understated.
+ */
+export const CTBC_EXAMPLE_SECURED_RATIO = 1.2;
+
 /** 抵押權設定登記費 = 擔保債權總金額 x 1/1000 (rounded to the dollar for display; the land office does the official rounding). */
 export function mortgageRegistrationFee(securedAmount) {
   return Math.round(Math.max(0, safeNumber(securedAmount)) * LAND_REGISTRATION_RATE);

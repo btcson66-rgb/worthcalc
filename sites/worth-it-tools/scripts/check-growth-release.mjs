@@ -16,10 +16,10 @@ const pairs = {
   'salary-converter': 'hourly-vs-annual-salary',
   'dti-calculator': 'how-to-calculate-dti',
   'home-affordability': 'how-much-home-can-you-afford',
-  'compound-growth': 'how-compound-growth-works',
 };
 // P2 batch 2 (2026-10-17): the credit-card article was merged into the tool page (redirect stub).
-const toolOnly = ['credit-card-payoff'];
+// P2 batch 5 (2026-10-17): the compound-growth article was merged into its tool the same way.
+const toolOnly = ['credit-card-payoff', 'compound-growth'];
 const sitemap = readFileSync(join(dist, 'sitemap-0.xml'), 'utf8');
 const failures = [];
 

@@ -1,6 +1,6 @@
 {
   "decision": {
-    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool; P2 batch 4 (2026-10-17, work order 2026-10-17-P2-batch4) added paid-membership-break-even (into the Costco membership tool) and subscription-creep (into the subscription audit tool)",
+    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool; P2 batch 4 (2026-10-17, work order 2026-10-17-P2-batch4) added paid-membership-break-even (into the Costco membership tool) and subscription-creep (into the subscription audit tool); P2 batch 5 (2026-10-17, work order 2026-10-17-P2-batch5) added how-compound-growth-works (into the compound-growth tool) and re-pointed the existing simple-vs-compound-interest stub straight at the tool so no stub points at another stub",
     "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target. Exception (CEO P1b verdict, 2026-10-15): /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ stay real calculator pages; only their English mirrors are stubs.",
     "rollback": "Delete the entry, restore the page source from git history, rebuild."
   },
@@ -46,6 +46,14 @@
       "to": "/en/tools/subscription-audit/"
     },
     {
+      "from": "/zh/how-compound-growth-works/",
+      "to": "/zh/tools/compound-growth/"
+    },
+    {
+      "from": "/en/how-compound-growth-works/",
+      "to": "/en/tools/compound-growth/"
+    },
+    {
       "from": "/zh/emergency-fund-irregular-income/",
       "to": "/zh/emergency-fund-how-much/"
     },
@@ -83,7 +91,7 @@
     },
     {
       "from": "/zh/simple-vs-compound-interest/",
-      "to": "/zh/how-compound-growth-works/"
+      "to": "/zh/tools/compound-growth/"
     },
     {
       "from": "/en/tools/cashback-breakeven/",

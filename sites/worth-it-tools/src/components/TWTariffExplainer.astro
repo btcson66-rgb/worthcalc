@@ -1,0 +1,134 @@
+---
+/*
+ * 台電住宅累進電價 explainer for /zh/tools/appliance-electricity-cost/ (P2 batch 5, 2026-10-17).
+ *
+ * Every number below is computed at build time from src/lib/twElectricityTariff.mjs -- the module the calculator
+ * script imports -- so the page cannot disagree with its own tool. The same figures are pinned in
+ * tests/tw-electricity-tariff.test.mjs. Wattages and hours are illustration inputs (repo guide anchors), not
+ * product facts; the tariff table is Taipower's.
+ */
+import { localizedPath } from '../i18n/utils';
+import { DEFAULT_TIERS, TARIFF_VERSION, addedCost, applianceMonthlyKwh, flatCost, monthlyBill } from '../lib/twElectricityTariff.mjs';
+
+const locale = 'zh' as const;
+const n2 = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const n1 = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const kwhFmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+// 算例一：電暖器 1,500 W x 4 小時 x 30 天，非夏月，三種全戶度數
+const heaterWatts = 1500;
+const heaterHours = 4;
+const heaterKwh = applianceMonthlyKwh(heaterWatts, heaterHours);
+const heaterBases = [100, 300, 500];
+const heaterRows = heaterBases.map((base) => ({ base, ...addedCost({ baseKwh: base, addKwh: heaterKwh, season: 'nonSummer' }) }));
+const heaterFlatRate = DEFAULT_TIERS[2].nonSummer; // 331–500 度的非夏月單價，常被拿來當「邊際單價」
+const heaterFlat = flatCost(heaterKwh, heaterFlatRate);
+
+// 算例二：移動式冷氣 932 W x 8 小時 x 30 天，夏月，兩個月一期的帳單 840 度
+const acWatts = 932;
+const acHours = 8;
+const acKwh = applianceMonthlyKwh(acWatts, acHours);
+const billKwh = 840;
+const acBase = billKwh / 2;
+const ac = addedCost({ baseKwh: acBase, addKwh: acKwh, season: 'summer' });
+const acTwoMonths = ac.added * 2;
+const wrongOneMonth = monthlyBill(billKwh, 'summer').total; // 把兩個月度數當一個月查表
+const rightTwoMonths = monthlyBill(acBase, 'summer').total * 2;
+
+const briefs = [
+  { title: '冷氣電費怎麼算：疊在原本用電後面的級距', href: localizedPath(locale, '/money/taipower-summer-rates-ac-bill') },
+  { title: '同樣度數，夏月比非夏月多繳多少', href: localizedPath(locale, '/money/taipower-summer-vs-non-summer-rates') },
+  { title: '時間電價和累進電價怎麼比', href: localizedPath(locale, '/money/taipower-time-of-use-vs-tiered') },
+];
+const pdf = 'https://www.taipower.com.tw/media/05klpxyd/1140930_114%E5%B9%B410%E6%9C%88%E9%9B%BB%E5%83%B9%E5%85%AC%E5%91%8A.pdf?mediaDL=true';
+const regulatorTable = 'https://www3.moeaea.gov.tw/ele102/Content/Messagess/contents.aspx?&MmmID=654246034110677254&MSID=1343206640732631102';
+const regulatorNews = 'https://www3.moeaea.gov.tw/ele102/Content/NewsLetter/contents.aspx?&SiteID=654246032665636316&MmmID=654246033427256710&SSize=10&MSID=1345445725427633170';
+---
+
+<section class="tariff-explainer" aria-labelledby="tariff-table-heading">
+  <h2 id="tariff-table-heading">台電住宅電價表：累進級距，夏月與非夏月</h2>
+  <p>
+    這是台電《{TARIFF_VERSION.tableTitle}》（中華民國 {TARIFF_VERSION.effectiveFromRoc}起實施）的住宅用非時間電價。夏月是 {TARIFF_VERSION.summerRange}，其餘是非夏月；單價是元／度，分段看<strong>每個月</strong>的總用電度數，每一段只對落在那一段的度數計價。
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>每月用電度數分段</th><th>夏月（元／度）</th><th>非夏月（元／度）</th></tr></thead>
+      <tbody>
+        {DEFAULT_TIERS.map((tier) => <tr><th scope="row">{tier.label}</th><td>{n2(tier.summer)}</td><td>{n2(tier.nonSummer)}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+  <h3>這是哪一版？怎麼查核的</h3>
+  <ul>
+    <li>單價逐列核對的是<a href={pdf}>台電公告 PDF</a>，{TARIFF_VERSION.pdfCheckedOn} 打開，原文是「調整後各類用戶電價表 中華民國 114 年 10 月 1 日起實施」、「夏月（6 月 1 日至 9 月 30 日） 非夏月（夏月以外時間）」。</li>
+    <li>2026-10-17 台電網站對本次查核回應 403，單價表沒有辦法再打開一次，所以當天改查主管機關：經濟部能源署「電價及費率審議資訊揭露專區」的<a href={regulatorTable}>電價表頁</a>列出的最新一版是「台灣電力公司114年下半年電價表」（2025-10-03 公布）。</li>
+    <li>同一個專區的<a href={regulatorNews}>2026-09-18 新聞稿</a>寫：115 年第 2 次電價費率審議會「本次電價調整暫不決定，留待今年12月併入第3次電價審議會審議輸配電費率時再行討論」；2026-03-27 的第 1 次審議會決議電價不調整。所以到 2026-10-17 沒有更新的住宅電價表，但 12 月的審議可能改變它。</li>
+    <li>計算機裡的電價表每一格都可以改。台電公布新表時，把新單價填進去就能重算；以台電最新公告為準。</li>
+  </ul>
+
+  <h2 id="tariff-marginal-heading">為什麼不能拿全戶平均電價去乘一台家電</h2>
+  <p>
+    累進電價下，一台家電的度數是疊在全戶原本用電的「後面」，所以適用的是那個位置的級距，不是整張帳單的平均價。算法是把有這台和沒有這台各算一次帳單，相減：
+  </p>
+  <pre><code>這台每月多付 = 帳單（原本度數 + 這台度數） − 帳單（原本度數）
+帳單（x 度）  = Σ（落在各級距內的度數 × 該級距單價）</code></pre>
+  <p>同一台家電在用電少的家庭疊在便宜的級距，在用電多的家庭疊在貴的級距，所以沒有一個「這台家電一個月電費多少」的固定答案，要先知道全戶原本用多少度。計算機上方勾選「啟用」並填全戶每月度數，就是在算這個。</p>
+
+  <h2 id="tariff-example-1-heading">算例一：同一台電暖器，在三個家庭差多少（非夏月）</h2>
+  <p>
+    電暖器 {kwhFmt(heaterWatts)} W、每天 {heaterHours} 小時、每月 30 天：{heaterWatts} ÷ 1,000 × {heaterHours} × 30 = <strong>{kwhFmt(heaterKwh)} 度</strong>。瓦數與時數是示範值，請換成你家的。
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>全戶原本每月</th><th>落在哪些級距</th><th>這台每月多付</th><th>平均每度</th><th>試算</th></tr></thead>
+      <tbody>
+        {heaterRows.map((row) => <tr>
+          <th scope="row">{row.base} 度 → {kwhFmt(row.base + row.addKwh)} 度</th>
+          <td>{row.split.map((part) => `${part.label} ${kwhFmt(part.kwh)} 度 × ${n2(part.rate)}`).join('；')}</td>
+          <td>{n1(row.added)} 元</td>
+          <td>{n2(row.averageRate)} 元</td>
+          <td><button type="button" data-tariff-example data-appliance="electric-space-heater" data-watts={heaterWatts} data-hours={heaterHours} data-season="nonSummer" data-base={row.base}>帶入計算機</button></td>
+        </tr>)}
+      </tbody>
+    </table>
+  </div>
+  <p>
+    同一台電暖器，全戶原本 100 度的家庭每月多付 {n1(heaterRows[0].added)} 元，原本 500 度的家庭多付 {n1(heaterRows[2].added)} 元，是 {(heaterRows[2].added / heaterRows[0].added).toFixed(2)} 倍。如果不分家庭，一律拿 331–500 度那一段的非夏月單價 {n2(heaterFlatRate)} 元乘上去，得到 {n1(heaterFlat)} 元，對三個家庭都不對：對 100 度的家庭高估 {n1(heaterFlat - heaterRows[0].added)} 元，對 300 度的家庭高估 {n1(heaterFlat - heaterRows[1].added)} 元，對 500 度的家庭低估 {n1(heaterRows[2].added - heaterFlat)} 元。
+  </p>
+
+  <h2 id="tariff-example-2-heading">算例二：夏月的移動式冷氣，帳單是兩個月一期</h2>
+  <p>
+    移動式冷氣 {acWatts} W、每天 {acHours} 小時、每月 30 天：{acWatts} ÷ 1,000 × {acHours} × 30 = <strong>{kwhFmt(acKwh)} 度</strong>。台電電價表註明「用戶因 2 個月抄表、收費一次，計費時各段度數係加倍計算」，所以兩個月一期的帳單上寫 {billKwh} 度，要先除以 2：每月 {acBase} 度，再用上面的每月分段查。整期都在夏月的話：
+  </p>
+  <ul>
+    <li>原本每月 {acBase} 度，加上這台變成 {kwhFmt(acBase + acKwh)} 度；落在 331–500 度那一段的有 {kwhFmt(ac.split[0].kwh)} 度（× {n2(ac.split[0].rate)} 元 = {n1(ac.split[0].cost)} 元），落在 501–700 度那一段的有 {kwhFmt(ac.split[1].kwh)} 度（× {n2(ac.split[1].rate)} 元 = {n1(ac.split[1].cost)} 元）。</li>
+    <li>每月多付 {n1(ac.split[0].cost)} + {n1(ac.split[1].cost)} = <strong>{n1(ac.added)} 元</strong>，平均每度 {n2(ac.averageRate)} 元；兩個月一期的帳單多 {n1(acTwoMonths)} 元。</li>
+    <li>若用 331–500 度夏月單價 {n2(DEFAULT_TIERS[2].summer)} 元直接乘，只得到 {n1(flatCost(acKwh, DEFAULT_TIERS[2].summer))} 元，少算 {n1(ac.added - flatCost(acKwh, DEFAULT_TIERS[2].summer))} 元，因為這台有 {kwhFmt(ac.split[1].kwh)} 度（超過一半）越過 500 度，掉進 {n2(ac.split[1].rate)} 元那一段。</li>
+  </ul>
+  <p>
+    <button type="button" data-tariff-example data-appliance="portable-ac" data-watts={acWatts} data-hours={acHours} data-season="summer" data-base={acBase}>把這題帶入計算機</button>
+  </p>
+  <p>
+    <strong>常見錯誤：</strong>把兩個月的 {billKwh} 度當成一個月去查表，整張帳單會算成 {n1(wrongOneMonth)} 元；照台電「各段度數加倍」的規則，應該是 2 × 每月 {acBase} 度的帳單 = 2 × {n1(monthlyBill(acBase, 'summer').total)} = {n1(rightTwoMonths)} 元。差了 {n1(wrongOneMonth - rightTwoMonths)} 元。
+  </p>
+
+  <h2 id="tariff-limits-heading">這個算法沒有包含什麼</h2>
+  <ul>
+    <li>只算每度電的流動電費；帳單上的其他項目、稅費都不在內，實際金額以台電帳單為準。</li>
+    <li>只適用住宅用非時間電價。用簡易型時間電價的家庭，累進分段不適用，請看<a href={briefs[2].href}>{briefs[2].title}</a>。</li>
+    <li>帳單期間橫跨 6 月 1 日或 9 月 30 日時，一期裡同時有夏月與非夏月，實際分攤以台電帳單為準，不能整期套同一欄單價。</li>
+    <li>每台家電的瓦數與使用時數是你的輸入；預設的家電清單取自指南算例，不是各品牌的實測平均。</li>
+    <li>試算僅供參考，以台電與主管機關公告為準。</li>
+  </ul>
+  <p>相關：{briefs.map((brief, index) => <><a href={brief.href}>{brief.title}</a>{index < briefs.length - 1 ? '、' : ''}</>)}。</p>
+</section>
+
+<style>
+  .tariff-explainer { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+  .tariff-explainer h2:first-child { margin-top: 0; }
+  .tariff-explainer .table-wrap { overflow-x: auto; }
+  .tariff-explainer table { width: 100%; min-width: 34rem; border-collapse: collapse; }
+  .tariff-explainer th, .tariff-explainer td { padding: 0.55rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+  .tariff-explainer pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--color-bg); border-radius: 0.6rem; }
+  @media (max-width: 760px) { .tariff-explainer { padding: 1rem; } }
+</style>

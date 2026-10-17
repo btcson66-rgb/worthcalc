@@ -7,6 +7,8 @@ import ExtendedWarrantyCalculator from '../../components/ExtendedWarrantyCalcula
 import FAQ from '../../components/FAQ.astro';
 import { extendedWarrantyGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
+import { localizedPath } from '../../i18n/utils';
+import { evaluateExtendedWarranty } from '../../lib/twRepairMath.mjs';
 
 type EditorialLocale = 'en' | 'zh';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
@@ -23,10 +25,10 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
   },
   zh: {
     title: '延長保固值得買嗎？比較價格、故障機率與維修費',
-    description: '由你輸入故障情境、除外後核准率、自負額、申請成本與給付上限，算延長保固期望成本，不捏造產品故障率。',
+    description: '由你輸入故障情境、除外後核准率、自負額、申請成本與給付上限，算延長保固期望成本與損益故障機率；附消保法、民法與電器買賣定型化契約的保固原文，不捏造產品故障率。',
     faq: [
       { question: '故障機率要填多少？', answer: '有可信型號紀錄就用可追溯資料；沒有時做保守低／中／高情境。計算器不會假裝知道你的產品故障率。' },
-      { question: '延長保固等於原廠保固嗎？', answer: '不一定。付費方案可能是服務契約，履約者也可能不是製造商；要比生效日、保障範圍、除外與真正負責的公司。' },
+      { question: '延長保固等於原廠保固嗎？', answer: '不一定。付費方案可能是服務契約，履約者也可能不是製造商；要比生效日、保障範圍、除外與真正負責的公司。原廠保固是保證書的承諾，依消費者保護法第 25 條應載明保證內容、保證期間及起算方法。' },
       { question: '除外條款怎麼放進計算？', answer: '把耗材、人損、未保養、特定零件與文件限制反映在核准率，並另跑「多數申請被拒」情境，不預設故障就全賠。' },
       { question: '自負額只付一次嗎？', answer: '看契約是每次申請、每趟、每件還是每個零件。若可能多次收取，就要用多次維修情境，不能只算一次。' },
       { question: '期望值負數還能買嗎？', answer: '若無法承受一次大額維修，可能願意付費換現金流穩定；但這是風險轉移，不代表數學期望值轉正。也可比較把保費存入維修準備金。' },
@@ -44,9 +46,21 @@ const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = extendedWarrantyGuides[locale]!;
 const calculator = calculators[locale];
+
+// ---- zh worked tables (P2 batch 5): break-even failure probability grid, computed by twRepairMath.mjs and pinned in
+// tests/tw-repair-math.test.mjs. Deductible, claim cost and approval are demo inputs, not any contract's terms.
+const gridPrices = [2000, 4000, 6000];
+const gridRepairs = [8000, 12000, 20000];
+const grid = gridPrices.map((price) => ({
+  price,
+  cells: gridRepairs.map((repair) => evaluateExtendedWarranty({ planPrice: price, failureProbability: 0, approvalProbability: 75, repairCost: repair, deductible: 1000, claimCost: 300, payoutCap: 1e9 }).breakEvenProbability),
+}));
+const cell = (p: number) => (p > 100 ? `${p.toFixed(1)}%（超過 100%）` : `${p.toFixed(1)}%`);
+const repairHref = localizedPath('zh', '/repair-or-replace-decision-formula');
+const phoneHref = localizedPath('zh', '/upgrade-your-phone-or-keep-it');
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh']}
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-10-17' : '2026-07-19'} alternateLocales={['en', 'zh']}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>An extended warranty is not automatically “peace of mind for pennies.” Its price must be compared with the probability-weighted repair cost it actually removes after exclusions, deductibles, claim friction and payout limits.</p>
@@ -61,32 +75,41 @@ const calculator = calculators[locale];
     <p class="privacy-note">General education only, not insurance, warranty, legal, product-safety or financial advice.</p>
   </>}
   {locale === 'zh' && <>
-    <p>延長保固不是把「方案價格」直接對「最貴維修」；要比的是在真正新增保障期間內，扣完除外、自負額、申請成本、上限與拒絕風險後，方案實際移轉多少期望支出。</p>
-    <DecisionGuide content={guide} />
+    <p>延長保固不是把「方案價格」直接對「最貴維修」；要比的是在真正新增保障期間內，扣完除外、自負額、申請成本、上限與拒絕風險後，方案實際移轉多少期望支出。商品壞了修還是換，請看<a href={repairHref}>家電壞了修還是換</a>；手機請看<a href={phoneHref}>手機該換還是繼續用</a>。</p>
     <ExtendedWarrantyCalculator locale={locale} {...calculator} />
+    <DecisionGuide content={guide} />
     <h2>先確認是誰承諾、何時開始</h2>
-    <p>行政院消保處說明，業者提出的品質保證是獨立擔保，應依保證內容負責。付費延長方案的履約者可能不同；要記錄原廠、零售商、第三方、生效日與重疊月數。</p>
-    <h2>除外不能只藏在備註</h2>
-    <p>耗材、人為損壞、泡水、未定期保養、指定維修點、事前授權、發票與序號都可能影響核准。把它們轉成保守核准率，再用 30%、60%、90% 之類的情境測試，而非宣稱一定理賠。</p>
-    <h2>結帳前的三個快篩</h2>
-    <p>以下是本站的經驗法則，不是統計結論；精確結論仍要回到上方的計算機。</p>
+    <p>行政院消保處說明，企業經營者就商品品質提供的保證是獨立的擔保契約，應依保證內容負責（見<a href="https://cpc.ey.gov.tw/Page/CCE4BC34D558A28A/c96be4f9-f94d-4f5f-89a8-0ebe7dc0fda0">消保處的說明</a>，2026-10-17 打開）。付費延長方案的履約者可能不同；要記錄原廠、零售商、第三方、生效日與重疊月數，重疊的月數不能算進新增保障的故障機率。</p>
+    <h2>你本來就有的保障：官方原文</h2>
+    <p>下面是 2026-10-17 在全國法規資料庫與行政院網站打開的條文，原文照錄，是「不用另外付費」的部分，判斷延保值不值得買之前先看：</p>
     <ul>
-      <li><strong>方案價格占商品價格太高。</strong>延保價格超過商品價的 15% 左右，期望值通常很難追上，可以先拒絕再算。</li>
-      <li><strong>壞了修得起。</strong>預期維修費低於商品價的 30% 左右，壞了自己修得起，通常不需要靠保固對沖。</li>
-      <li><strong>原廠保固與延保常重疊。</strong>「延長兩年」可能從購買日起算，真正多出來的只有最後一年；先問清楚起算日，再把真正新增的期間放進計算。</li>
+      <li><strong>消費者保護法第 25 條：</strong>「企業經營者對消費者保證商品或服務之品質時，應主動出具書面保證書。」保證書應載明商品名稱種類數量、保證內容、保證期間及其起算方法、製造商與經銷商名稱地址、交易日期。<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0170002">施行細則第 26 條</a>：「企業經營者未依本法第二十五條規定出具書面保證書者，仍應就其保證之品質負責。」</li>
+      <li><strong>電器買賣定型化契約應記載事項（經濟部 88 年 3 月 3 日公告）：</strong>「因非可歸責於買受人之事由，致商品於保固期間內毀損者，出賣人負維修責任；如經送修三次仍未能修復者，買受人得請求出賣人返還其所支付之價金，或更換同一種類之商品，出賣人不得拒絕。」（<a href="https://www.ey.gov.tw/File/622D89D9A3A1ADED">行政院網站全文</a>）商品是否屬於該公告範圍，以公告與你的契約為準。</li>
+      <li><strong>民法第 354 條：</strong>出賣人應擔保物「依第三百七十三條之規定危險移轉於買受人時」無滅失或減少其價值之瑕疵，也無滅失或減少其通常效用或契約預定效用之瑕疵；<strong>第 365 條：</strong>買受人依第 356 條通知後六個月間不行使，或自物之交付時起經過五年，解除權或請求權消滅（<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=B0000001">全國法規資料庫</a>）。條文的時點是「危險移轉於買受人時」，針對的是交付時就存在的瑕疵；交付後才出現的故障，要看保證書與上面的保固責任。</li>
     </ul>
-    <h2>公式說不買、但可以買的三種情況</h2>
+    <p>這些條文不能取代你的保證書與契約，也不是法律意見。它的用途是：把「保固期間已經由賣方負責的部分」排除在延保的新增保障之外，再去算延保真正多買到的期間。</p>
+    <h2>價格、維修費與核准率：什麼時候不可能回本</h2>
+    <p>損益故障率 = 方案價格 ÷［核准率 ×（核准給付 − 申請成本）］，是方案要打平所需的「保障期間故障機率」。下表固定核准率 75%、自負額 NT$1,000、申請成本 NT$300（示範值，請換成你的契約），給付上限不限：</p>
+    <div class="table-wrap" tabindex="0">
+      <table>
+        <thead><tr><th scope="col">方案價格＼一次維修費</th>{gridRepairs.map((repair) => <th scope="col">NT${repair.toLocaleString('en-US')}</th>)}</tr></thead>
+        <tbody>
+          {grid.map((row) => <tr><th scope="row">NT${row.price.toLocaleString('en-US')}</th>{row.cells.map((value) => <td>{cell(value)}</td>)}</tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p>讀法：方案 NT$4,000、一次維修 NT$12,000，要在保障期間內有 {grid[1].cells[1].toFixed(1)}% 的機率壞掉才打平；方案 NT$6,000 對 NT$8,000 的維修費，損益故障率是 {grid[2].cells[0].toFixed(1)}%，超過 100%，代表就算一定會壞，期望值也不划算。你的契約把核准率、自負額、申請成本與上限換進計算機，就是你自己的表。</p>
+    <h2>三種公式說不買、但仍可能買的情況</h2>
     <ol>
-      <li><strong>單次維修費逼近重買價：</strong>高階手機的螢幕與主機板、輕薄筆電的整板更換，故障實質上等於重買。這時保固對沖的是大額損失，要用維修費的真實高值重跑期望值，結論可能翻正。</li>
-      <li><strong>故障率高的品類：</strong>含馬達、水路與移動零件的電器（掃地機器人、洗衣機、咖啡機）通常比純電子品更容易故障，同一條公式會算出不同答案。</li>
+      <li><strong>單次維修費逼近重買價：</strong>維修費很高時，同一個方案的損益故障率會明顯下降（見上表右欄）。這時要用維修費的真實高值重跑期望值，而不是用平均維修費。</li>
       <li><strong>壞不起的設備：</strong>靠它吃飯的工作機、獨居長輩的冷氣，買的是「壞掉當天就有人來修」的確定性，不是期望值。為確定性付溢價是合理的風險偏好，只要你知道自己買的是安心，不是划算。</li>
+      <li><strong>現金流無法承受一次大額維修：</strong>延保把不確定的大額支出換成確定的小額支出。可以和把保費存進維修準備金比較，前提是真的存下來。</li>
     </ol>
-    <h2>付錢前先查兩層免費保障</h2>
-    <p>不少信用卡內建延長原廠保固的權益，付費延保前先查你的卡片權益頁，並留好發票與保卡；要留意單件上限、是否需要登錄與保留完整單據。台灣的新品另有法定的瑕疵擔保責任，再加上多數原廠的一年保固，延保真正「加保」的往往只有後面的年份，把這段真實區間放進公式，分母會更小。</p>
-    <p>另一個做法是把每次拒絕延保省下的錢轉進固定帳戶，累積成自己的維修基金；前提是真的存下來，而且承受得起基金還小時就遇上一次大維修。</p>
+    <h2>付錢前先查重疊的保障</h2>
+    <p>信用卡權益、保險或零售商方案可能有重疊的保障，條件各不相同，以各自的書面條款為準；留好發票、保證書與序號。整份延保契約要讀的是：起算日、保障範圍與除外、每次自負額、單次與累計給付上限、終止退費、能否移轉，以及誰是履約的公司。</p>
     <h2>分期購買方案要加融資成本</h2>
     <p>若方案跟商品一起分期，實際價格不是標價。也要查終止退費、轉售能否移轉、每次自負額與累計上限；把保費另存維修準備金當比較組。</p>
-    <p class="privacy-note">一般教育用途，不是保險、保固、法律、產品安全或財務建議。</p>
+    <p class="privacy-note">試算僅供參考，以保證書、契約與主管機關公告為準；一般教育用途，不是保險、保固、法律、產品安全或財務建議。</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

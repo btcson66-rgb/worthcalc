@@ -957,7 +957,7 @@ export const repairReplaceGuides: Partial<Record<Locale, DecisionGuideContent>> 
     sensitivity: [{ scenario: '低再故障', input: '10% 而非 25%', result: '維修約 NT$316.7/月' }, { scenario: '只延長 15 個月', input: '其餘不變', result: '維修約 NT$583.3/月，換新較低' }, { scenario: '無能源差', input: '每月 NT$0', result: '維修約 NT$241.7/月' }, { scenario: '報價 NT$9,000', input: '其餘不變', result: '維修約 NT$441.7/月，換新較低' }],
     cta: { label: '用書面報價比較維修與換新', href: '#repair-replace-calculator' },
     limitations: ['再故障機率與剩餘壽命是使用者情境，不是系統捏造的型號統計。', '安全性故障、召回、泡水、火損、零件停產或診斷不明時，成本低也不代表適合維修。', '車輛需另算貸款、保險、停駛、殘值與其他老化系統；手機需另看資料、電池、安全更新與折抵條款。', '已付且兩方案都拿不回的檢測費是沉沒成本。'],
-    sources: [{ label: '行政院消保處 — 手機送修應確認保固、費用與先報價同意', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/286ce994-7f56-4290-8482-4c819dc863f0' }, { label: '行政院 — 電器買賣定型化契約保證書與維修資訊', href: 'https://www.ey.gov.tw/File/622D89D9A3A1ADED' }, { label: '行政院消保處 — 永續消費與合理維修權益政策', href: 'https://cpc.ey.gov.tw/Page/77067C04C7989DA8' }], lastVerified: '2026-07-19',
+    sources: [{ label: '行政院消保處 — 手機送修應確認保固、費用與先報價同意', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/286ce994-7f56-4290-8482-4c819dc863f0' }, { label: '經濟部公告《電器買賣定型化契約應記載及不得記載事項》（行政院網站全文：中文保證書、保固期間內的維修責任、送修三次未修復可請求返還價金或更換）', href: 'https://www.ey.gov.tw/File/622D89D9A3A1ADED' }, { label: '行政院消保處 — 永續消費與合理維修權益政策', href: 'https://cpc.ey.gov.tw/Page/77067C04C7989DA8' }], lastVerified: '2026-10-17',
   },
 };
 
@@ -982,7 +982,7 @@ export const extendedWarrantyGuides: Partial<Record<Locale, DecisionGuideContent
     sensitivity: [{ scenario: '低故障', input: '15% 而非 30%', result: '方案淨值約 −NT$2,786.3' }, { scenario: '損益故障率', input: '49.7%', result: '兩方案期望成本約相同' }, { scenario: '除外較多', input: '核准率 50%', result: '損益故障率約 74.6%' }, { scenario: '零自負額與申請費', input: '都為 NT$0', result: '損益故障率約 44.3%' }],
     cta: { label: '把合約除外與自負額放進試算', href: '#extended-warranty-calculator' },
     limitations: ['計算器不提供特定型號故障率；找不到可靠資料時應使用寬幅情境。', '模型以一次代表性故障計算，多次維修、折舊換機、累計上限與耗材另做情境。', '負期望值仍可能換得現金流穩定，但不能把風險偏好說成方案會賺。', '業者品質保證、原廠保固與付費延長服務是不同承諾，先確認實際義務人。'],
-    sources: [{ label: '行政院消保處 — 品質保證為獨立擔保，業者應依內容負責', href: 'https://cpc.ey.gov.tw/Page/CCE4BC34D558A28A/c96be4f9-f94d-4f5f-89a8-0ebe7dc0fda0' }, { label: '行政院消保會 — 電子商務應揭露總價、保固、售後、終止與經常費用', href: 'https://cpc.ey.gov.tw/Page/960E744883E6A75D' }, { label: '行政院消保處 — 倡導合理保固年限、可修復資訊與多元維修', href: 'https://cpc.ey.gov.tw/Page/77067C04C7989DA8' }], lastVerified: '2026-07-19',
+    sources: [{ label: '行政院消保處 — 品質保證為獨立擔保，業者應依內容負責（引消費者保護法第 25 條與施行細則第 26 條）', href: 'https://cpc.ey.gov.tw/Page/CCE4BC34D558A28A/c96be4f9-f94d-4f5f-89a8-0ebe7dc0fda0' }, { label: '行政院消保會 — 電子商務應揭露總價、保固、售後、終止與經常費用', href: 'https://cpc.ey.gov.tw/Page/960E744883E6A75D' }, { label: '行政院消保處 — 倡導合理保固年限、可修復資訊與多元維修', href: 'https://cpc.ey.gov.tw/Page/77067C04C7989DA8' }, { label: '全國法規資料庫 — 消費者保護法（第 25 條 書面保證書）、施行細則（第 26 條）與民法（第 354、356、359、365 條 瑕疵擔保）', href: 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0170001' }, { label: '經濟部公告《電器買賣定型化契約應記載及不得記載事項》（行政院網站全文）', href: 'https://www.ey.gov.tw/File/622D89D9A3A1ADED' }], lastVerified: '2026-10-17',
   },
 };
 
@@ -1006,8 +1006,8 @@ export const phoneUpgradeGuides: Partial<Record<Locale, DecisionGuideContent>> =
     workedExample: '維修 NT$4,500，可再用 18 個月，之後殘值 NT$1,000，現行月租 NT$599。設備月成本為 NT$194.4，完整月成本 NT$793.4。新機 NT$30,000、費用 NT$1,000、資料移轉 NT$800、立即折抵 NT$6,000、36 個月後殘值 NT$8,000、新月租 NT$799；設備月成本 NT$494.4，完整月成本 NT$1,293.4。續用每月少 NT$500。',
     sensitivity: [{ scenario: '不需維修', input: '維修 NT$4,500 改 0', result: '續用完整月成本 NT$543.4' }, { scenario: '只再用九個月', input: '18 個月改九個月', result: '續用完整月成本 NT$987.9' }, { scenario: '資費不變', input: '新月租 NT$799 改 NT$599', result: '換機完整月成本 NT$1,093.4' }, { scenario: '折抵提高', input: 'NT$6,000 改 NT$12,000', result: '換機完整月成本 NT$1,126.8' }],
     cta: { label: '比較維修、折抵、資料移轉與兩種資費', href: '#phone-keep-upgrade-calculator' },
-    limitations: ['兩方案持有期可能不同，工具以每月正規化比較，不能預測手機確切故障日期。', '折抵可能經檢測調降或分月回饋；只填真正可保留且不因提前離開而失去的價值。', '維修前先確認保固、檢測費、零件、資料與報價同意；個資清除不能只靠刪除相片。', '安全更新停止、電池膨脹、無障礙需求或工作必要功能可能凌駕純金額結果。'],
-    sources: [{ label: '行政院消保處 — 手機送修前備份、IMEI、個資、保固與報價同意', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/286ce994-7f56-4290-8482-4c819dc863f0' }, { label: '環境部 — 手機回收責任、個資保障、折抵與維修循環服務', href: 'https://enews.moenv.gov.tw/moenv-news/zh-tw/News/2605' }, { label: '環境部 — 回收或交付舊手機前備份、登出與恢復原廠設定', href: 'https://enews.moenv.gov.tw/Page/3B3C62C78849F32F/6b965701-9ff8-4ff9-bb81-1dee1de3bf3a' }], lastVerified: '2026-07-19',
+    limitations: ['兩方案持有期可能不同，工具以每月正規化比較，不能預測手機確切故障日期。', '折抵可能經檢測調降或分月回饋；只填真正可保留且不因提前離開而失去的價值。', '維修前先確認保固、檢測費、零件、資料與報價同意（行政院消保處的送修注意事項）。', '資費與折抵條件以業者的書面說明為準，本頁不內建任何業者的價格。', '安全更新停止、無障礙需求或工作必要功能可能凌駕純金額結果。'],
+    sources: [{ label: '行政院消保處 — 手機送修前備份、IMEI、個資、保固與報價同意', href: 'https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/286ce994-7f56-4290-8482-4c819dc863f0' }], lastVerified: '2026-10-17',
   },
 };
 

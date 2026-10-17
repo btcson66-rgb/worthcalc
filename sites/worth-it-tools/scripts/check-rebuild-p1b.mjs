@@ -128,6 +128,13 @@ for (const stub of registry.stubs) {
   else if (refreshOf(pages.get(stub.from)) !== stub.to) fail(`${stub.from}: registry says ${stub.to}, built stub goes to ${refreshOf(pages.get(stub.from))}`);
 }
 const builtStubs = [...pages].filter(([, html]) => isRedirectStub(html)).map(([path]) => path);
+// P2 batch 5 (2026-10-17): stubs must not chain. Every registry target (including rows with no CSV merge_into row,
+// such as the topic hubs) has to be a built, real page -- never another stub, never a 404.
+for (const stub of registry.stubs) {
+  const targetPage = pages.get(stub.to);
+  if (!targetPage) fail(`${stub.from}: stub target ${stub.to} is not a built page`);
+  else if (isRedirectStub(targetPage)) fail(`${stub.from}: stub target ${stub.to} is itself a stub (chained redirect)`);
+}
 for (const path of builtStubs) {
   if (path !== '/zh/' && !registered.has(path)) fail(`${path}: a redirect stub is built but not listed in redirect-stubs.json`);
 }

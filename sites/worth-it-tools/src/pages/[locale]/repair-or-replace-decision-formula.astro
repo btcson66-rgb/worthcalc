@@ -7,6 +7,9 @@ import RepairReplaceCalculator from '../../components/RepairReplaceCalculator.as
 import FAQ from '../../components/FAQ.astro';
 import { repairReplaceGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
+import { localizedPath } from '../../i18n/utils';
+import { addedCost } from '../../lib/twElectricityTariff.mjs';
+import { evaluateRepairReplace } from '../../lib/twRepairMath.mjs';
 
 type EditorialLocale = 'en' | 'zh';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
@@ -22,14 +25,14 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
     ],
   },
   zh: {
-    title: '維修還是換新？家電、手機與車輛的實用判斷公式',
-    description: '用維修報價、修後剩餘壽命、故障再發、能源差與換新淨成本判斷，不套用「超過幾成就換」的萬用口訣。',
+    title: '家電壞了修還是換？維修報價、剩餘壽命與電費差怎麼算',
+    description: '冰箱、洗衣機、冷氣等家電壞了：先看保固期內的維修責任，過保後用維修報價、修後壽命、再故障與累進電費差，比較每個可靠使用月的成本，不套「超過幾成就換」的口訣。',
     faq: [
       { question: '維修超過新品幾成就該換？', answer: '沒有適用所有產品的固定比例。比例只能初篩，還要看修後能用多久、再故障、耗能、安全、零件和換新淨成本。' },
+      { question: '保固期內壞了，要自己花錢修嗎？', answer: '先看保證書與買賣契約。經濟部公告的電器買賣定型化契約應記載事項寫：因非可歸責於買受人的事由，商品在保固期間內毀損，出賣人負維修責任；經送修三次仍未能修復，買受人得請求返還價金或更換同一種類的商品，出賣人不得拒絕。商品是否在該公告範圍內，以公告與你的契約為準。' },
       { question: '再故障機率怎麼算？', answer: '不要查不到就假裝有精準統計。依技師診斷、同部位維修紀錄與機齡設定低／中／高機率，再乘未來可能支出。' },
       { question: '檢測費要算嗎？', answer: '已支付且不論選哪個方案都拿不回來的檢測費是沉沒成本；尚未支付、可折抵維修或換新不同的部分才影響往後決策。' },
-      { question: '手機送修前要注意什麼？', answer: '先備份、移除敏感資料並確認保固、檢測費、報價與換件同意。行政院消保處提醒，收費維修應先報價並取得同意。' },
-      { question: '車輛也能用同一公式嗎？', answer: '可初篩，但安全、停駛損失、保險、貸款餘額、殘值與其他老化零件要另外評估，不能只看單次維修。' },
+      { question: '舊家電每月多耗的電費怎麼填？', answer: '先量出舊機比新機每月多用幾度，再用台電住宅累進電價算「疊在全戶原本用電後面」的實際多付金額，不要拿全戶平均電價去乘。家電電費計算機有這個模式。' },
     ],
   },
 };
@@ -44,9 +47,25 @@ const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = repairReplaceGuides[locale]!;
 const calculator = calculators[locale];
+
+// ---- zh worked example (P2 batch 5): 舊冰箱 vs 新冰箱. Every figure below is computed by the same modules the
+// calculators use (twElectricityTariff.mjs, twRepairMath.mjs) and pinned in tests/tw-repair-math.test.mjs.
+const f1 = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const f0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const n2 = (n: number) => (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fridgeExtraKwh = 35; // 示範值：舊機比新機每月多用 35 度
+const energyNonSummer = addedCost({ baseKwh: 300, addKwh: fridgeExtraKwh, season: 'nonSummer' });
+const energySummer = addedCost({ baseKwh: 450, addKwh: fridgeExtraKwh, season: 'summer' });
+const energyYear = (8 * energyNonSummer.added + 4 * energySummer.added) / 12;
+const fridge = { repairQuote: 5000, repairMonths: 36, recurrenceProbability: 20, recurrenceCost: 4000, replacementPrice: 28000, replacementFees: 1200, currentValue: 0, replacementMonths: 120 };
+const fridgeRows = [0, 50, 100, 150].map((energy) => ({ energy, ...evaluateRepairReplace({ ...fridge, extraEnergyMonthly: energy }) }));
+const fridgeMain = fridgeRows[2];
+const toolHref = localizedPath('zh', '/tools/appliance-electricity-cost');
+const phoneHref = localizedPath('zh', '/upgrade-your-phone-or-keep-it');
+const warrantyHref = localizedPath('zh', '/is-an-extended-warranty-worth-it');
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh']}
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-10-17' : '2026-07-19'} alternateLocales={['en', 'zh']}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>The familiar “repair if it costs less than half of new” rule leaves out the most important variable: how many reliable months the repair actually buys. A $250 repair can be poor if it buys six months and excellent if it buys three years.</p>
@@ -63,18 +82,55 @@ const calculator = calculators[locale];
     <p class="privacy-note">General education only, not product-safety, vehicle, legal, tax or financial advice.</p>
   </>}
   {locale === 'zh' && <>
-    <p>「維修超過新品五成就換」不是通用答案。同一筆 NT$6,000，若只延長半年很貴，若能穩定使用 30 個月則可能合理；真正要比的是每個可靠使用月。</p>
-    <DecisionGuide content={guide} />
+    <p>「維修超過新品五成就換」不是通用答案。同一筆 NT$6,000，若只延長半年很貴，若能穩定使用 30 個月則可能合理；真正要比的是每個可靠使用月。這一頁處理<strong>家電</strong>（冰箱、洗衣機、冷氣等）過了保固之後自費的決定；手機請看<a href={phoneHref}>手機該換還是繼續用</a>，要不要加買延長保固請看<a href={warrantyHref}>延長保固值得買嗎</a>。還在保固期間的話，先看計算機下面的「先看保固」一節。</p>
     <RepairReplaceCalculator locale={locale} {...calculator} />
+    <h2>先看保固：還在保固期內，不要先算自費</h2>
+    <p>經濟部 88 年 3 月 3 日公告的《電器買賣定型化契約應記載及不得記載事項》（<a href="https://www.ey.gov.tw/File/622D89D9A3A1ADED">行政院網站全文</a>，2026-10-17 打開；行政院的<a href="https://www.ey.gov.tw/Page/DFB720D019CCCB0A/f6ba3f43-981d-4533-a555-79910d9eaeb3">定型化契約專區</a>列出的版本日期是 88-03-03）在「出賣人之瑕疵擔保責任之售後服務」寫：</p>
+    <blockquote>因非可歸責於買受人之事由，致商品於保固期間內毀損者，出賣人負維修責任；如經送修三次仍未能修復者，買受人得請求出賣人返還其所支付之價金，或更換同一種類之商品，出賣人不得拒絕。</blockquote>
+    <p>同一份公告要求出賣人在交付前給中文保證書與中文使用說明書，保證書要有保證內容、保證期間及起算方法；使用說明書要有維修服務處所與維修服務條件。<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0170001">消費者保護法第 25 條</a>也規定企業經營者保證商品品質時，應主動出具書面保證書；<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0170002">施行細則第 26 條</a>說，沒有出具保證書的，仍應就其保證的品質負責。商品是否在上述公告的範圍內、你的保固怎麼約定，以你的保證書與買賣契約為準；這一頁不是法律意見。</p>
+    <div class="table-wrap" tabindex="0"><table>
+      <thead><tr><th scope="col">你的情況</th><th scope="col">先做什麼</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">還在保固期間、不是你弄壞的</th><td>依上面的公告，先找出賣人要求維修，不進入自費比較。</td></tr>
+        <tr><th scope="row">同一件在保固期間已送修三次還沒修好</th><td>公告寫買受人可以請求返還價金或更換同種類商品；先留好三次的維修單。</td></tr>
+        <tr><th scope="row">已過保固</th><td>才用下面的計算機比較自費維修與換新。</td></tr>
+      </tbody>
+    </table></div>
+    <DecisionGuide content={guide} />
     <h2>先拿書面報價，再估再故障</h2>
-    <p>報價要寫故障部位、零件、工資、檢測費、修後保固與未包含項目。行政院消保處的手機送修提醒也指出，收費維修應先報價並取得同意。沒有型號與診斷證據時，應做低／中／高情境，不填假精準機率。</p>
+    <p>報價要寫故障部位、零件、工資、檢測費、修後保固與未包含項目。沒有型號與診斷證據時，應做低／中／高情境，不填假精準機率；行政院消保處對手機送修的提醒是「須收費的故障品，維修商應先向消費者報價並取得消費者同意」，家電送修也建議照這個順序確認。</p>
+    <h2>舊機每月多耗的電費，要用累進電價算</h2>
+    <p>計算機的「舊機每月多耗能源」是金額，不是度數。舊冰箱比新冰箱每月多用 {fridgeExtraKwh} 度（示範值，請用能源效率標示或插座電表量測），這些度數疊在全戶原本用電的後面，按<a href={toolHref}>台電住宅累進電價</a>（114 年 10 月 1 日起實施）計算：</p>
+    <ul>
+      <li>非夏月、全戶原本每月 300 度：多付 {n2(energyNonSummer.added)} 元（平均每度 {energyNonSummer.averageRate.toFixed(2)} 元）。</li>
+      <li>夏月、全戶原本每月 450 度：多付 {n2(energySummer.added)} 元（平均每度 {energySummer.averageRate.toFixed(2)} 元）。</li>
+      <li>夏月 4 個月、非夏月 8 個月加權：(8 × {n2(energyNonSummer.added)} + 4 × {n2(energySummer.added)}) ÷ 12 = {n2(energyYear)} 元，約 100 元／月，下面就填 100。</li>
+    </ul>
+    <p>夏月與非夏月的單價、版本與查核說明在<a href={toolHref}>家電電費計算機</a>。全戶用電不同，這個數字會不同；沒有一個適用所有家庭的「舊冰箱每月多花多少電費」。</p>
+    <h2>算例：冰箱維修 NT$5,000，電費差會不會翻轉結論</h2>
+    <p>示範輸入（不是行情，請換成你的報價）：維修報價 NT$5,000，修後預期再用 36 個月；20% 機率再花 NT$4,000，期望值 NT$800；新冰箱成交價 NT$28,000，加運送安裝 NT$1,200，舊機沒有折抵，新機預期用 120 個月，淨成本 NT$29,200，每月 {f1(fridgeMain.replacementMonthly)} 元。只改「舊機每月多耗能源」：</p>
+    <div class="table-wrap" tabindex="0"><table>
+      <thead><tr><th scope="col">舊機每月多耗電費</th><th scope="col">維修路徑每月</th><th scope="col">換新每月</th><th scope="col">較低的是</th><th scope="col">維修報價上限</th></tr></thead>
+      <tbody>
+        {fridgeRows.map((row) => <tr>
+          <th scope="row">{row.energy} 元</th>
+          <td>{f1(row.repairMonthly)} 元</td>
+          <td>{f1(row.replacementMonthly)} 元</td>
+          <td>{row.repairWins ? '維修' : '換新'}（少 {f1(row.difference)} 元／月）</td>
+          <td>{f0(row.breakEvenQuote)} 元</td>
+        </tr>)}
+      </tbody>
+    </table></div>
+    <p>電費差是 0 或 50 元時維修較低，是 100 元（上面用累進電價算出來的數字）時換新每月少 {f1(fridgeMain.difference)} 元，維修報價要降到 {f0(fridgeMain.breakEvenQuote)} 元以下才划算。如果拿全戶平均電價乘度數而不是疊在後面的級距，電費差會被高估或低估，結論可能跟著翻。</p>
     <h2>換新成本要扣真實折抵，也要加必要費用</h2>
-    <p>家電可能有運送、安裝與舊機處理；手機有資料移轉與配件；汽車有過戶、保險差額、貸款餘額與停駛。只有可實現的折抵或售價才能扣除。</p>
-    <h2>耗能差用帳單與標示</h2>
-    <p>把舊品多出的每月能源費乘修後月份。若同級新品功能、容量不同，先調整到相同使用量；不要用廣告宣稱直接當成帳單節省。</p>
-    <h2>保固與安全先於成本</h2>
-    <p>電器買賣定型化契約要求中文保證書與維修服務資訊。若仍在保固或有安全疑慮，先走正式處理與召回查核，不用計算器合理化自費或冒險使用。</p>
-    <p class="privacy-note">一般教育用途，不是產品安全、車輛、法律、稅務或財務建議。</p>
+    <p>運送、安裝與舊機處理要加進去；只有可實現的折抵或售價才能扣除。已付且兩方案都拿不回來的檢測費是沉沒成本，不要放進往後的比較。</p>
+    <h2>常見錯誤</h2>
+    <ul>
+      <li><strong>只比報價占新品幾成。</strong>算例中維修報價只占換新淨成本的 17.1%，但電費差一加進去結論就翻了。</li>
+      <li><strong>忘了先看保固。</strong>還在保固期間的免費維修責任，比任何自費計算都優先。</li>
+      <li><strong>把推銷話術當成再故障機率。</strong>機率用技師診斷與同部位維修紀錄設低／中／高情境，不要填看起來很精準的單一數字。</li>
+    </ul>
+    <p class="privacy-note">試算僅供參考，以保證書、買賣契約與台電、主管機關公告為準；一般教育用途，不是法律、產品安全或財務建議。</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

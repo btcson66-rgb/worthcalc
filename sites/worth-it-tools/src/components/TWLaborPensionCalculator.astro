@@ -52,8 +52,9 @@ const bliCalc = 'https://www.bli.gov.tw/0109187.html';
         <div><dt>提繳期間本金合計</dt><dd id="lp-principal">—</dd></div>
         <div><dt>預估累積收益</dt><dd id="lp-earnings">—</dd></div>
         <div><dt>預估專戶總額（一次領的估算）</dt><dd id="lp-balance">—</dd></div>
-        <div><dt>月領簡化估算（每月）</dt><dd id="lp-monthly-payout">—</dd></div>
+        <div class="lp-unofficial"><dt>月領簡化估算（每月）<span class="lp-badge">非官方・示範假設</span></dt><dd id="lp-monthly-payout">—</dd></div>
       </dl>
+      <p class="lp-note lp-payout-warning"><strong>「月領簡化估算」不是勞保局算出來的月退休金。</strong>它只是把上面的專戶總額，在你設定的領取年限與利率下平均領完；領取年限是示範假設，不是官方平均餘命。勞保局依年金生命表、平均餘命與核定利率計算，沒有公布各年齡的平均餘命，所以本頁無法算出官方月領。要看官方結果，請用<a href={bliCalc}>勞保局的整合試算</a>。</p>
       <p class="lp-note" id="lp-explain"></p>
       <p class="lp-note"><strong>試算結果僅供參考，以勞保局公告及你的個人專戶為準。</strong>薪資不變、每月月底提繳、收益按月複利，是本頁為了好算而做的簡化。</p>
     </div>
@@ -84,7 +85,7 @@ const bliCalc = 'https://www.bli.gov.tw/0109187.html';
       el('lp-principal').textContent = money(a.principal);
       el('lp-earnings').textContent = money(a.earnings);
       el('lp-balance').textContent = money(a.balance);
-      el('lp-monthly-payout').textContent = money(payout);
+      el('lp-monthly-payout').textContent = `${money(payout)}（非官方，示範假設：領 ${val('lp-payout-years')} 年、年利率 ${val('lp-payout-rate')}%）`;
       el('lp-explain').textContent = `${yuan.format(a.months)} 個月 × ${money(c.totalMonthly)} = ${money(a.principal)} 本金；收益率 ${val('lp-return')}% 只是你輸入的假設。`;
     };
 
@@ -104,4 +105,6 @@ const bliCalc = 'https://www.bli.gov.tw/0109187.html';
   .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
   .lp-grade { margin: 0; font-weight: 750; }
   .lp-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .lp-badge { display: inline-block; margin-inline-start: 0.4rem; padding: 0.05rem 0.45rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.75rem; font-weight: 700; color: #9a3412; white-space: nowrap; }
+  .lp-payout-warning { border-inline-start: 3px solid #9a3412; padding-inline-start: 0.6rem; color: inherit; }
 </style>

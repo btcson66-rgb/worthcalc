@@ -6,7 +6,6 @@ const root = resolve('src/content');
 const locales = ['en', 'zh'];
 const pairs = {
   'mortgage-payoff': 'extra-mortgage-payments-guide',
-  'credit-card-payoff': 'credit-card-minimum-payment-trap',
   'budget-builder': 'budget-with-irregular-income',
   'debt-strategy': 'snowball-vs-avalanche',
   'car-affordability': 'true-cost-of-car-ownership',
@@ -16,6 +15,9 @@ const pairs = {
   'inflation-purchasing-power': 'nominal-vs-real-purchasing-power',
   'compound-growth': 'how-compound-growth-works',
 };
+// P2 batch 2 (2026-10-17): credit-card-minimum-payment-trap was merged into credit-card-payoff
+// (redirect stub), so this tool no longer has a companion article.
+const toolOnly = ['credit-card-payoff'];
 const banned = [/lorem ipsum/i, /(^|\s)TODO(?:\s|:|$)/m, /guaranteed approval/i, /guaranteed return/i, /一定核貸/, /保證獲利/];
 const leakedEnglish = [/For this topic, the core relationship is/i, /Recommended scenarios:/i, /^Official sources for editorial verification/im, /^Use the calculator$/im, /^Editorial limits$/im];
 const failures = [];
@@ -43,6 +45,21 @@ for (const locale of locales) {
         for (const gate of ['draft: true', 'noindex: true', 'publicationGate: OFFICIAL_CPI_DATA_REQUIRED']) if (!text.includes(gate)) failures.push(`Inflation gate missing ${gate}: ${item.file}`);
       } else if (!text.includes('draft: false')) failures.push(`Publishable content is not explicitly approved: ${item.file}`);
     }
+  }
+}
+
+for (const locale of locales) {
+  for (const tool of toolOnly) {
+    const file = join(root, 'growth-tools', locale, `${tool}.md`);
+    if (!existsSync(file)) { failures.push(`Missing ${file}`); continue; }
+    const text = readFileSync(file, 'utf8');
+    if (!text.includes(`locale: ${locale}`)) failures.push(`Wrong locale: ${file}`);
+    if (!/^lastReviewed:\s*"?\d{4}-\d{2}-\d{2}"?/m.test(text)) failures.push(`Missing or invalid lastReviewed date: ${file}`);
+    if (!text.includes('https://')) failures.push(`Missing official source URL: ${file}`);
+    if ((text.match(/^# /gm) ?? []).length !== 0) failures.push(`Content body must not add a second H1: ${file}`);
+    if (text.length < (locale === 'zh' ? 1300 : 3500)) failures.push(`Content too thin (${text.length}): ${file}`);
+    if (!text.includes('draft: false')) failures.push(`Publishable content is not explicitly approved: ${file}`);
+    if (text.includes('credit-card-minimum-payment-trap')) failures.push(`Links to the merged stub credit-card-minimum-payment-trap: ${file}`);
   }
 }
 

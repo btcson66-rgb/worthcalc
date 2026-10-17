@@ -4,7 +4,7 @@ toolSlug: credit-card-payoff
 locale: en
 title: "Credit Card Payoff & Interest Calculator"
 description: "Estimate payoff time and total interest for a fixed payment or a target payoff date, including promotional APR expiry and new monthly charges."
-relatedArticle: /en/credit-card-minimum-payment-trap/
+relatedArticle: /en/snowball-vs-avalanche/
 lastReviewed: 2026-07-31
 draft: false
 ---
@@ -37,7 +37,7 @@ The calculation runs in your browser. Do not put account numbers, card numbers, 
 
 ## Related guide
 
-Read [Why Your Credit Card Statement Warns You About the Minimum Payment](/en/credit-card-minimum-payment-trap/) for the CARD Act disclosure rules, how issuers calculate minimum payments, and when a nonprofit credit counselor is the better next step.
+If you carry more than one debt, read the guide on [snowball vs avalanche](/en/snowball-vs-avalanche/) before choosing which balance gets the extra payment.
 
 ## Frequently asked questions
 

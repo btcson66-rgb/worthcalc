@@ -1,219 +1,276 @@
 ---
+/*
+ * 信用卡分期試算 (P2 batch 2, 2026-10-17). Upgrade of the old generic 分期付款真實 APR page.
+ *
+ * Every number in the prose is computed below from src/lib/twInstallmentMath.mjs, the same
+ * module the calculator runs, so the page cannot disagree with its own tool. The numbers are
+ * also pinned in tests/tw-installment-math.test.mjs. Fees and rates in the worked examples
+ * are assumptions chosen to show the arithmetic; none of them is any issuer's actual rate.
+ */
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import TWInstallmentCalculator from '../../../components/TWInstallmentCalculator.astro';
 import { localizedPath } from '../../../i18n/utils';
+import { annuityFactor, aprOfOneTimeFee, earlySettlement, evaluatePlan, irrMonthly, nominalFromMonthly } from '../../../lib/twInstallmentMath.mjs';
 
-const locale = 'zh';
-const title = '分期付款真實 APR 計算機';
-const description = '分期付款真實 APR 計算機，幫你看懂 0 利率分期、手續費和隱藏借款成本。';
+const locale = 'zh' as const;
+const title = '信用卡分期試算：手續費換算年利率與零利率陷阱';
+const description = '信用卡分期試算：輸入分期金額、期數、手續費與利率，算出總費用年百分率；附零利率分期的陷阱、提前結清與是否影響信用，依金管會標準與聯徵中心說明。';
+const checked = '2026-10-17';
+
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const p2 = (n: number) => n.toFixed(2);
+
+// 算例一：30,000 元、零利率、12 期、一次性手續費 600 元加在第 1 期帳單
+const ex1 = evaluatePlan({ listPrice: 30000, n: 12, oneTimeFee: 600 });
+const ex1Up = evaluatePlan({ listPrice: 30000, n: 12, oneTimeFee: 600, feeTiming: 'upfront' });
+const ex1Spread = irrMonthly([30000, ...Array(12).fill(-2550)]);
+const ex1Rest = ex1.schedule.rows[1].payment;
+const avgBalanceShare = 13 / 24;
+// 每期手續費 100 元
+const ex1Each = evaluatePlan({ listPrice: 30000, n: 12, perPeriodFee: 100 });
+// 算例二：60,000 元、24 期、年利率為假設值
+const ex2 = [6, 8, 10].map((rate) => ({ rate, ...evaluatePlan({ listPrice: 60000, n: 24, aprPct: rate }) }));
+const ex2Eq = evaluatePlan({ listPrice: 60000, n: 24, aprPct: 8, method: 'equalPrincipal' });
+const ex2Fee = evaluatePlan({ listPrice: 60000, n: 24, aprPct: 8, perPeriodFee: 50 });
+const ex2Main = ex2[1];
+// 算例三：現金價 28,800、分期標價 30,000 零利率零手續費
+const ex3 = evaluatePlan({ listPrice: 30000, cashPrice: 28800, n: 12 });
+// 算例四：算例一提前結清
+const earlyKs = [1, 3, 6, 9, 11];
+const early = earlyKs.map((k) => ({ ...earlySettlement({ listPrice: 30000, n: 12, oneTimeFee: 600 }, k, 0)! }));
+// 對照表
+const feePcts = [1, 2, 3, 5];
+const periods = [3, 6, 12, 24];
+// 3 期短期分期：金額小但年百分率高
+const short = evaluatePlan({ listPrice: 30000, n: 3, oneTimeFee: 900 });
+
+const sources = [
+  { label: '全國法規資料庫 — 銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準（第 2、5、6、7、8 條）', url: 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380176', verifiedDate: checked },
+  { label: '中華民國銀行公會 — 各發卡機構信用卡分期付款手續費收費標準彙整表（彙整日期 115 年 7 月 22 日）', url: 'https://www.ba.org.tw/consumerCash/details?id=11', verifiedDate: checked },
+  { label: '合作金庫商業銀行 — 青安貸款「總費用年百分率範例」（驗證年百分率是月 IRR × 12）', url: 'https://www.tcb-bank.com.tw/personal-banking/loan/mortgage/house-loan-overview/policy-loan-01', verifiedDate: checked },
+  { label: '臺灣土地銀行 — 貸款還款方式說明（本息平均攤還與本金平均攤還的公式）', url: 'https://www.landbank.com.tw/Calculate/Repayment', verifiedDate: checked },
+  { label: '金管會 — 信用卡定型化契約範本（第 14 條還款抵充順序；全文沒有分期提前清償或分期手續費條文）', url: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049932', verifiedDate: checked },
+  { label: '財團法人金融聯合徵信中心 — 個人信用評分組成', url: 'https://www.jcic.org.tw/main_ch/docDetail.aspx?uid=1555&pid=1555&docid=629', verifiedDate: checked },
+  { label: '財團法人金融聯合徵信中心 — 常見問答（DBR 22 倍：計入信用卡分期付款餘額）', url: 'https://www.jcic.org.tw/main_ch/faq.aspx', verifiedDate: checked },
+];
+
+const trustBlock = {
+  method: '把現金價當成你今天借到的錢，把每一期帳單（含手續費）當成還款，解出讓兩邊現值相等的月內部報酬率（月 IRR），再乘 12 得到總費用年百分率。有利率時，每期本息依年金法（本息平均攤還）或本金平均攤還計算。',
+  formula: '現金價 = Σ［第 k 期應繳 ÷ (1 + 月 IRR)^k］；年百分率 = 月 IRR × 12；本息平均攤還每期 = 本金 × i(1+i)^n ÷ ((1+i)^n − 1)，i = 年利率 ÷ 12',
+  sources,
+  limits: [
+    '試算結果僅供參考，以發卡銀行的分期付款約定書與帳單為準。',
+    '利率與手續費都是你輸入的數字；本頁算例用的 600 元、8% 等都是為了示範的假設值，不是任何銀行的費率。',
+    '簡化：月利率 = 年利率 ÷ 12、每期取整到元且最後一期補差額、分期從購買後一個月開始、一次性手續費加在第 1 期帳單（或購買當下）、提前結清時已繳手續費不退。各發卡機構的實際算法不同，可用「帳單上每期實際金額」欄位直接輸入。',
+    '年百分率依標準只計利息與手續費，逾期違約金不計入；「放棄現金折扣」「放棄回饋」是本頁另外列出的機會成本，不是標準定義的年百分率。',
+    '官方資料查不到的事不寫：分期提前結清的費用、已繳手續費退不退，信用卡定型化契約範本沒有規定，要看你的約定書。',
+  ],
+  lastReviewed: checked,
+  locale,
+};
+
 const faq = [
   {
-    question: '為什麼 3% 手續費不是 3% APR？',
-    answer: 'APR 會看每個月還剩多少本金。分期付款每月都在還本金，所以 12 期收一次 3% 手續費，換算後常接近 5.6% APR。',
+    question: '信用卡分期手續費 2% 等於年利率 2% 嗎？',
+    answer: `不等於。分期的本金每個月都在減少，12 期的平均欠款只有標價的 ${p2(avgBalanceShare * 100)}% 左右，手續費卻按全額收。標價 30,000 元、12 期、手續費 600 元（2%）換算後，總費用年百分率是 ${p2(ex1.aprPct)}%。`,
   },
   {
-    question: '現金價要填什麼？',
-    answer: '請填如果不分期、今天一次付清的價格。計算機會把它視為你透過分期借到的金額。',
+    question: '零利率分期真的沒有成本嗎？',
+    answer: '要分開看。「零利率」只說沒有利息，不代表沒有手續費；現金價比分期標價低時，價差就是隱含的利息（算例三：現金價 28,800 元、分期 12 期共 30,000 元，隱含年百分率約 ' + p2(ex3.aprRealPct) + '%）；分期期間是否還有信用卡回饋，要看活動辦法。',
   },
   {
-    question: '每期付款和含手續費總額都要填嗎？',
-    answer: '不用。如果每期付款有填，會優先使用每期金額；如果留空，就用總額除以期數。',
+    question: '分期提前繳清，手續費會退嗎？',
+    answer: '信用卡定型化契約範本沒有分期提前清償與手續費退費的條文（2026-10-17 查核），所以要看你簽的分期付款約定書。請先問清楚：有沒有提前結清作業費、已繳手續費退不退、結清金額怎麼算。本頁的提前結清試算假設已繳手續費不退。',
   },
   {
-    question: '這個分期真實利率有包含逾期費嗎？',
-    answer: '沒有。請只填已知的手續費或前置費用。逾期費、罰息、失去折扣都會讓實際成本更高。',
+    question: '信用卡分期會影響信用評分嗎？',
+    answer: '聯徵中心的「個人信用評分組成」頁面列出繳款行為與負債類資料，沒有提到「分期」；因此本頁不下「會扣分」或「不會扣分」的結論。能確定的是：還款是否準時屬於繳款行為；另外聯徵中心常見問答寫明，信用卡未付清的分期付款餘額會計入 DBR 22 倍（無擔保債務總餘額除以平均月收入）的計算。',
   },
   {
-    question: '可接受 APR 應該設多少？',
-    answer: '請用你自己能接受的短期借款成本。預設 10% 只是提醒門檻，不是理財建議。',
+    question: '手續費「每期」收和「一次」收，哪個比較貴？',
+    answer: `看總額和年百分率，不要看單一數字。同樣標價 30,000 元、12 期：一次收 600 元，年百分率 ${p2(ex1.aprPct)}%；每期收 100 元（共 1,200 元），年百分率 ${p2(ex1Each.aprPct)}%。每期 100 元看起來少，總額其實多一倍。`,
   },
 ];
+
 const related = [
-  { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
-  { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
-  { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
-  { title: '0 利率分期的真相', href: localizedPath(locale, '/zero-interest-installments-truth') },
+  { title: '信用卡循環利息計算器：日息、15% 上限與最低應繳', href: localizedPath(locale, '/tools/credit-card-payoff') },
+  { title: '先買後付 vs 信用卡分期：用總成本與扣款時間比較', href: localizedPath(locale, '/bnpl-vs-credit-card-installments') },
+  { title: '0 利率分期真的零利率嗎：現金價與分期價怎麼比', href: localizedPath(locale, '/zero-interest-installments-truth') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
-  <p class="intro">
-    用這個分期付款真實 APR 計算機，把 0 利率分期或一次性手續費換算成真正的年化借款成本。買東西前先算一次，比只看「零利率」更接近你的實際負擔。
-  </p>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']} showReview={false} trustBlock={trustBlock}>
+  <TWInstallmentCalculator />
 
-  <div class="calculator-grid">
-    <section class="input-panel" aria-labelledby="installment-inputs">
-      <h2 id="installment-inputs">輸入資料</h2>
-      <div class="input-grid">
-        <div class="field">
-          <label for="cash-price">現金價</label>
-          <input id="cash-price" type="number" inputmode="decimal" min="0" step="100" value="10000" />
-          <p class="helper">不分期、一次付清的價格。</p>
-        </div>
-        <div class="field">
-          <label for="installments">期數</label>
-          <input id="installments" type="number" inputmode="numeric" min="1" step="1" value="12" />
-          <p class="helper">每月付款一次的期數。</p>
-        </div>
-        <div class="field">
-          <label for="payment">每期付款金額</label>
-          <input id="payment" type="number" inputmode="decimal" min="0" step="1" placeholder="可留空" />
-          <p class="helper">有填時優先使用。</p>
-        </div>
-        <div class="field">
-          <label for="total-paid">含費用總付款</label>
-          <input id="total-paid" type="number" inputmode="decimal" min="0" step="100" value="10300" />
-          <p class="helper">每期金額留空時，會用總額除以期數。</p>
-        </div>
-        <div class="field">
-          <label for="upfront-fee">前置費用</label>
-          <input id="upfront-fee" type="number" inputmode="decimal" min="0" step="1" value="0" />
-          <p class="helper">今天另外先付的手續費或開辦費。</p>
-        </div>
-        <div class="field">
-          <label for="acceptable-apr">可接受 APR (%)</label>
-          <input id="acceptable-apr" type="number" inputmode="decimal" min="0" step="0.1" value="10" />
-          <p class="helper">你願意接受的分期成本上限。</p>
-        </div>
-      </div>
-    </section>
+  <section class="calculator-review">
+    <div class="prose">
+      <p>
+        信用卡分期的廣告常寫「零利率」「手續費 2%」，但這些數字不能直接比較：本金每個月都在還，手續費卻是按全額收。把所有付款換成<strong>總費用年百分率</strong>，才有辦法和別的資金成本放在一起看。上面的計算機做的就是這件事；下面說明公式、兩個完整算例、零利率分期的成本藏在哪裡，以及提前結清與信用的問題。
+      </p>
 
-    <section class="result-panel" aria-live="polite" aria-labelledby="installment-result">
-      <p class="eyebrow">判斷</p>
-      <p id="installment-result" class="verdict">輸入方案後會顯示真實 APR。</p>
-      <div class="metric-grid">
-        <p class="metric"><span>真實 APR</span><strong id="apr">0.0%</strong></p>
-        <p class="metric"><span>總分期成本</span><strong id="interest">NT$0</strong></p>
-        <p class="metric"><span>採用的每月付款</span><strong id="monthly-payment">NT$0</strong></p>
-        <p class="metric"><span>總付款</span><strong id="total-cost">NT$0</strong></p>
-      </div>
-    </section>
-  </div>
+      <h2>分期手續費怎麼換算成年利率</h2>
+      <p>
+        金管會主管的標準（<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380176">銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準</a>，{checked} 查核）要求銀行業在行銷廣告揭示「所有應付總費用之年百分率」（第 2 條），並規定算法（第 8 條）：
+      </p>
+      <ul>
+        <li>採<strong>內部報酬率法</strong>：把你收到的錢和你付出的每一筆錢（每期本息加手續費）折現，讓兩邊現值相等的那個利率，就是年百分率。</li>
+        <li>年百分率<strong>四捨五入到小數點後第二位</strong>；還款期數「以一年（三百六十五天）、五十二週或十二個月計算」，月繳就是一年 12 期。</li>
+        <li>還款金額依序先抵沖借款費用，再沖利息，最後才沖本金。</li>
+        <li>消費者自己違約產生的費用（例如逾期還款違約金）不計入總費用（第 7 條）。</li>
+      </ul>
+      <p>
+        月繳的做法是先解出<strong>月 IRR</strong>（讓下式成立的 m），再換成年：
+      </p>
+      <pre><code>現金價 = 第 1 期應繳 ÷ (1+m) + 第 2 期應繳 ÷ (1+m)^2 + … + 第 n 期應繳 ÷ (1+m)^n
+年百分率 = m × 12</code></pre>
+      <p>
+        標準的條文沒有寫「月 IRR 乘 12」還是「複利換算」。本頁用公開的範例對照：<a href="https://www.tcb-bank.com.tw/personal-banking/loan/mortgage/house-loan-overview/policy-loan-01">合作金庫青安貸款頁的總費用年百分率範例</a>（200 萬元、20 年、利率 2.275%、年金法、費用 5,300 元，揭露「2.30%起」，{checked} 查核）。用這組數字，月 IRR × 12 得 2.30%，複利換算 (1+m)^12 − 1 得 2.33%，只有前者吻合，所以本頁的「總費用年百分率」是月 IRR × 12，複利年化只放在旁邊對照。
+      </p>
 
-  <section class="explanation" aria-labelledby="installment-how">
-    <h2 id="installment-how">計算方式</h2>
-    <p>
-      計算機把現金價當成今天拿到的本金，再把每期付款和前置費用當成還款現金流，解出每月內部報酬率，最後年化成真實 APR。
-    </p>
-    <p>
-      一次性手續費通常比表面數字貴，因為你每個月都在還本金，但手續費是用原始價格收取。
-    </p>
-  </section>
-  <script>
-    import { aprFromMonthlyRate, formatCurrency, formatPercent, irrMonthly } from '../../../lib/money';
-    import { bindPersistentField } from '../../../lib/storage';
+      <h2>算例一：30,000 元、零利率 12 期、手續費 600 元</h2>
+      <p>
+        假設你要買 30,000 元的商品，分期方案是「零利率、12 期、一次性手續費 600 元，加在第 1 期帳單」。（600 元是示範用的假設值；每家發卡機構的手續費不同，見下方彙整表說明。）計算機的預設值就是這一題。
+      </p>
+      <ol>
+        <li>每期本金 = 30,000 ÷ 12 = {n0(ex1Rest)} 元；零利率，沒有利息。</li>
+        <li>第 1 期 = {n0(ex1Rest)} + 手續費 600 = <strong>{n0(ex1.firstPayment)} 元</strong>；第 2 到 12 期每期 {n0(ex1Rest)} 元。</li>
+        <li>總付款 = {n0(ex1.firstPayment)} + {n0(ex1Rest)} × 11 = <strong>{n0(ex1.totalPaid)} 元</strong>，比現金價多 {n0(ex1.totalCost)} 元，也就是標價的 {p2((600 / 30000) * 100)}%。</li>
+        <li>解月 IRR：30,000 = {n0(ex1.firstPayment)} ÷ (1+m) + {n0(ex1Rest)} ÷ (1+m)^2 + … + {n0(ex1Rest)} ÷ (1+m)^12，得 m = {(ex1.monthly * 100).toFixed(4)}%。</li>
+        <li>年百分率 = {(ex1.monthly * 100).toFixed(4)}% × 12 = <strong>{p2(ex1.aprPct)}%</strong>（複利年化 {p2(ex1.compoundedPct)}%）。</li>
+      </ol>
+      <p>
+        結論：手續費只有 {p2((600 / 30000) * 100)}%，換算後卻接近 {p2(ex1.aprPct)}%。原因是 12 期等額還本時，平均欠款只有標價的 (12+1) ÷ (2×12) = {p2(avgBalanceShare * 100)}%，{p2((600 / 30000) * 100)}% ÷ {p2(avgBalanceShare * 100)}% ≈ {p2(((600 / 30000) * 100) / avgBalanceShare)}%，方向和 {p2(ex1.aprPct)}% 一致。如果手續費改成購買當下先付，年百分率是 {p2(ex1Up.aprPct)}%；如果平均攤進每期（每期 2,550 元），是 {p2(nominalFromMonthly(ex1Spread) * 100)}%。收費的時點會讓結果差一點，所以輸入欄位讓你選。
+      </p>
 
-    const locale = 'zh';
-    const cashPrice = byId<HTMLInputElement>('cash-price');
-    const installments = byId<HTMLInputElement>('installments');
-    const payment = byId<HTMLInputElement>('payment');
-    const totalPaid = byId<HTMLInputElement>('total-paid');
-    const upfrontFee = byId<HTMLInputElement>('upfront-fee');
-    const acceptableApr = byId<HTMLInputElement>('acceptable-apr');
-    const verdict = byId<HTMLElement>('installment-result');
-    const aprOutput = byId<HTMLElement>('apr');
-    const interestOutput = byId<HTMLElement>('interest');
-    const monthlyPaymentOutput = byId<HTMLElement>('monthly-payment');
-    const totalCostOutput = byId<HTMLElement>('total-cost');
-    const fields = [cashPrice, installments, payment, totalPaid, upfrontFee, acceptableApr];
+      <h2>對照表：一次性手續費 × 期數 → 年百分率</h2>
+      <p>
+        下表由計算機同一個函式算出：零利率、手續費一次收、加在第 1 期帳單，百分比是手續費占標價的比例。同樣的費率，期數越短，年百分率越高。
+      </p>
+      <table>
+        <thead>
+          <tr><th>手續費占標價</th>{periods.map((n) => <th>{n} 期</th>)}</tr>
+        </thead>
+        <tbody>
+          {feePcts.map((f) => (
+            <tr><td>{f}%</td>{periods.map((n) => <td>{p2(aprOfOneTimeFee(f, n))}%</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        短期分期的年百分率看起來很嚇人，但絕對金額不大。例如標價 30,000 元、3 期、手續費 900 元（3%），年百分率 {p2(short.aprPct)}%，實際多付 {n0(short.totalCost)} 元。比較兩個方案時，年百分率和多付的金額都要看。
+      </p>
 
-    function byId<T extends HTMLElement>(id: string): T {
-      const element = document.getElementById(id);
-      if (!element) throw new Error(`Missing #${id}`);
-      return element as T;
-    }
+      <h2>算例二：有利率的分期，本息平均 vs 本金平均</h2>
+      <p>
+        有些分期方案是有利率的。利率請填約定書上的數字，下面用 6%、8%、10% 只是假設，用來看利率的影響。標價 60,000 元、24 期，月利率 i = 年利率 ÷ 12。
+      </p>
+      <p>
+        <strong>本息平均攤還</strong>（<a href="https://www.landbank.com.tw/Calculate/Repayment">土地銀行說明</a>的年金法，{checked} 查核）：每期本息固定，每月應付本息金額 = 本金 × 平均攤還率，平均攤還率 = i(1+i)^n ÷ ((1+i)^n − 1)；每月利息 = 本金餘額 × 月利率；每月本金 = 每期本息 − 當月利息。
+      </p>
+      <table>
+        <thead>
+          <tr><th>年利率（假設）</th><th>每期本息</th><th>24 期總利息</th><th>總付款</th><th>年百分率</th></tr>
+        </thead>
+        <tbody>
+          {ex2.map((r) => (
+            <tr><td>{r.rate}%</td><td>約 {n0(r.firstPayment)} 元</td><td>{n0(r.totalInterest)} 元</td><td>{n0(r.totalPaid)} 元</td><td>{p2(r.aprPct)}%</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        8% 這一列的算法：i = 8% ÷ 12 = 0.6667%，平均攤還率 = {annuityFactor(0.08 / 12, 24).toFixed(7)}，每期 = 60,000 × {annuityFactor(0.08 / 12, 24).toFixed(7)} ≈ {n0(ex2Main.firstPayment)} 元（銀行實際可能進位方式不同，最後一期補差額：{n0(ex2Main.lastPayment)} 元）。沒有手續費時，年百分率就等於約定年利率 8.00%。
+      </p>
+      <p>
+        <strong>本金平均攤還</strong>：每月本金固定 = 60,000 ÷ 24 = 2,500 元，利息 = 當月本金餘額 × 月利率，所以每期遞減。8% 時第 1 期 = 2,500 + 400 = {n0(ex2Eq.firstPayment)} 元，最後一期 {n0(ex2Eq.lastPayment)} 元，總利息 {n0(ex2Eq.totalInterest)} 元，比本息平均攤還的 {n0(ex2Main.totalInterest)} 元少 {n0(ex2Main.totalInterest - ex2Eq.totalInterest)} 元，代價是前期每期多繳。哪一種要看約定書。
+      </p>
+      <p>
+        再加手續費會怎樣？8% 加上每期手續費 50 元（假設），每期 {n0(ex2Fee.firstPayment)} 元，24 期共多付 {n0(ex2Fee.totalCost)} 元，年百分率從 8.00% 變成 {p2(ex2Fee.aprPct)}%。
+      </p>
 
-    function readNumber(input: HTMLInputElement): number {
-      const value = Number(input.value);
-      return Number.isFinite(value) ? value : 0;
-    }
+      <h2>零利率分期的陷阱：成本藏在哪</h2>
+      <h3>一、手續費</h3>
+      <p>
+        「零利率」只說沒有利息。手續費要另外看，而且收法不一：銀行公會彙整的<a href="https://www.ba.org.tw/consumerCash/details?id=11">各發卡機構信用卡分期付款手續費收費標準彙整表</a>（彙整日期 2026-07-22，{checked} 打開查核）列了 30 家發卡機構（另註明美國運通未開辦分期）。依該表：
+      </p>
+      <ul>
+        <li>「分期償還代墊消費帳款」（一般消費分期）：24 家在各期數都標 0 元，6 家有些期數或有分期卡方案收固定金額，從 50 元到 299 元不等。</li>
+        <li>「分期償還預借現金」：有承作的 14 家中，5 家收費，金額從 500 元到 2,999 元不等。</li>
+        <li>手續費是以新臺幣金額列示，不是百分比；有些發卡機構同一個項目隨期數遞增。</li>
+        <li>該表只列手續費，沒有列分期利率，所以「手續費 0 元」不等於「沒有任何成本」；利率要看各行當期活動與約定書。</li>
+      </ul>
+      <p>
+        這些是 2026-07-22 的彙整，會改變。本頁不引用任何一家的費率，請以你的分期方案和發卡銀行最新公告為準。每期收費比一次收費更容易被忽略：標價 30,000 元、12 期，一次收 600 元，年百分率 {p2(ex1.aprPct)}%；每期收 100 元，共 {n0(ex1Each.totalFees)} 元，年百分率 {p2(ex1Each.aprPct)}%。
+      </p>
 
-    function update(): void {
-      const price = Math.max(0, readNumber(cashPrice));
-      const count = Math.max(1, Math.round(readNumber(installments)));
-      const directPayment = Math.max(0, readNumber(payment));
-      const total = Math.max(0, readNumber(totalPaid));
-      const upfront = Math.max(0, readNumber(upfrontFee));
-      const threshold = Math.max(0, readNumber(acceptableApr));
-      const paymentAmount = directPayment > 0 ? directPayment : total / count;
-      const fullPaid = paymentAmount * count + upfront;
-      const financingCost = fullPaid - price;
-      const cashflows = [price - upfront, ...Array.from({ length: count }, () => -paymentAmount)];
-      const monthlyRate = irrMonthly(cashflows);
-      const apr = aprFromMonthlyRate(monthlyRate);
+      <h3>二、現金價比分期標價低</h3>
+      <p>
+        有些商品付現可以拿折扣，分期則是原價。這個價差就是隱含的利息，而且不屬於標準定義的「手續費」，廣告上的「零利率」也不會把它算進去。
+      </p>
+      <p>
+        <strong>算例三：</strong>現金價 28,800 元，分期 12 期、每期 2,500 元（共 30,000 元），零利率、零手續費。依標準只計利息與手續費，年百分率是 {p2(ex3.aprPct)}%；但你選分期等於多付 {n0(ex3.totalCost)} 元，把現金價當成借到的錢，月 IRR 是 {(ex3.monthlyReal * 100).toFixed(4)}%，隱含年百分率 <strong>{p2(ex3.aprRealPct)}%</strong>。計算機的「現金價」欄（進階選項）就是做這個比較。
+      </p>
 
-      monthlyPaymentOutput.textContent = formatCurrency(paymentAmount, locale);
-      totalCostOutput.textContent = formatCurrency(fullPaid, locale);
-      interestOutput.textContent = formatCurrency(financingCost, locale);
-      aprOutput.textContent = Number.isFinite(apr) ? formatPercent(apr) : '0.0%';
+      <h3>三、分期期間的信用卡回饋</h3>
+      <p>
+        刷卡回饋、紅利點數在分期消費上是否照給，要看卡片的活動辦法，沒有統一規定，本頁也查不到官方彙整。如果你的卡分期不給回饋，可以把放棄的回饋金額從現金價扣掉，填進進階選項的「現金價」，當成和算例三一樣的隱含成本；這個數字是你自己的假設，不是標準定義的年百分率。
+      </p>
 
-      if (price <= 0 || paymentAmount <= 0 || !Number.isFinite(apr)) {
-        verdict.textContent = '請輸入有效現金價與分期付款資料，才能計算真實 APR。';
-        return;
-      }
+      <h3>四、提前結清</h3>
+      <p>
+        提前繳清看起來能省利息，但如果手續費已經在第 1 期收掉，就不會因為提前繳清自動退回。金管會的<a href="https://law.fsc.gov.tw/LawContent.aspx?id=FL049932">信用卡定型化契約範本</a>全文只有兩處提到分期：第 14 條（還款抵沖順序的註記）和第 21 條（發卡機構變更約款、持卡人異議而終止契約時，分期付款的持卡人至少給六期緩衝期），<strong>沒有分期提前清償或手續費退費的條文</strong>（{checked} 查核）。所以提前結清要不要作業費、已繳手續費退不退，要看你簽的分期付款約定書。
+      </p>
+      <p>
+        <strong>算例四：</strong>延續算例一（手續費 600 元已在第 1 期繳掉）。假設已繳手續費不退、沒有作業費，在第 k 期繳完後一次還清剩餘本金：
+      </p>
+      <table>
+        <thead>
+          <tr><th>提前結清時點</th><th>一次還清的剩餘本金</th><th>總付款</th><th>年百分率</th></tr>
+        </thead>
+        <tbody>
+          {early.map((e) => (
+            <tr><td>第 {e.k} 期後</td><td>{n0(e.remaining)} 元</td><td>{n0(e.totalPaid)} 元</td><td>{p2(e.aprPct)}%</td></tr>
+          ))}
+          <tr><td>不提前（12 期）</td><td>—</td><td>{n0(ex1.totalPaid)} 元</td><td>{p2(ex1.aprPct)}%</td></tr>
+        </tbody>
+      </table>
+      <p>
+        多付的 600 元不變，但借的時間變短，年百分率反而更高。想提前結清前，先問銀行三件事：結清金額怎麼算、有沒有提前結清作業費、已繳手續費退不退，並請對方給書面或帳單上的金額。
+      </p>
 
-      if (apr <= threshold) {
-        verdict.textContent = `可以考慮：真實 APR 是 ${formatPercent(apr)}，低於你設定的 ${formatPercent(threshold)}。`;
-      } else {
-        verdict.textContent = `不太划算：真實 APR 是 ${formatPercent(apr)}，高於你設定的 ${formatPercent(threshold)}。`;
-      }
-    }
+      <h2>分期會影響信用嗎</h2>
+      <p>
+        只引用聯徵中心的原文。<a href="https://www.jcic.org.tw/main_ch/docDetail.aspx?uid=1555&pid=1555&docid=629">個人信用評分組成</a>（{checked} 查核）說明：
+      </p>
+      <ul>
+        <li>評分用到「繳款行為」類資料，指個人過去在信用卡、授信借貸、票據以及融資租賃交易的還款行為表現。</li>
+        <li>「負債」類資料指個人信用的擴張程度，主要包括負債總額；負債型態的例子包括信用卡有無預借現金、有無使用循環信用。</li>
+        <li>繳款行為、負債型態與負債程度多寡對評分的影響較大；各評分項目與比重聯徵中心沒有公開。</li>
+      </ul>
+      <p>
+        這一頁沒有出現「分期」兩個字，所以<strong>本頁不能告訴你分期本身會不會扣分</strong>。另一個有官方說明的地方是 <a href="https://www.jcic.org.tw/main_ch/faq.aspx">聯徵中心常見問答</a>（{checked} 查核）：金管會規定金融機構對無擔保債務（信用卡、現金卡、信用貸款）歸戶後的總餘額，除以平均月收入不宜超過 22 倍（DBR 22 倍），信用卡債務包含還沒付清的分期付款餘額與循環信用餘額；日常刷卡只要在帳單繳款截止日前全額繳清，就不會計入。也就是說，分期餘額在還清之前，會占用你申請信用貸款等無擔保借款的額度空間。
+      </p>
 
-    fields.forEach((field) => {
-      bindPersistentField(field, `installment-true-apr:${field.id}`);
-      field.addEventListener('input', update);
-    });
-    update();
-  </script>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>若現金價和分期價不同，別只看0利率；把放棄現金折扣也放進實際付款時間線。</p>
-    <p><a href="/zh/guides/cash-discount-vs-financing/">現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本</a></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/save-first-vs-installment-purchase/">先存再買 vs 分期</a></p>
-    <p></p>
+      <h2>在 Excel 裡怎麼做</h2>
+      <ol>
+        <li>每期金額固定（手續費平均攤進每期，或每期收費）：<code>=RATE(期數, -每期金額, 現金價)*12</code>。例：<code>=RATE(12,-2550,30000)*12</code> 得 {p2(nominalFromMonthly(ex1Spread) * 100)}%。</li>
+        <li>第 1 期金額不同（一次性手續費加在第 1 期）：A1 填 30000，A2 填 -{ex1.firstPayment}，A3 到 A13 各填 -{ex1Rest}，<code>=IRR(A1:A13)*12</code> 得 {p2(ex1.aprPct)}%。</li>
+        <li>有利率時的每期本息：<code>=PMT(年利率/12, 期數, -本金)</code>。例：<code>=PMT(8%/12,24,-60000)</code> 約 2,713.6 元（對應上表約 2,714 元）。</li>
+        <li>提前結清：把現金流量欄在結清的那一期改成「該期應繳 + 剩餘本金」，後面各期刪掉，再用 IRR。</li>
+        <li>想看複利年化：<code>=(1+RATE(12,-2550,30000))^12-1</code>。這和銀行揭露的年百分率不同，只用來對照。</li>
+      </ol>
+
+      <h2>常見錯誤</h2>
+      <ul>
+        <li><strong>把手續費率當年利率。</strong>2% 的手續費在 12 期換算是 {p2(ex1.aprPct)}%，不是 2%。</li>
+        <li><strong>只比每期金額。</strong>每期少收 100 元不代表便宜，要看總額與年百分率。</li>
+        <li><strong>把「零利率」當成「零成本」。</strong>手續費、現金價差、回饋損失都不在「利率」裡。</li>
+        <li><strong>以為提前繳清會退手續費。</strong>範本沒有規定，要看約定書；試算假設不退。</li>
+        <li><strong>只用年百分率比較期數不同的方案。</strong>短期方案的年百分率高，但多付的金額可能很小，要兩個都看。</li>
+        <li><strong>把分期和循環信用混為一談。</strong>循環信用是帳單沒繳清的餘額按日計息，分期是約定期數與金額；循環利息怎麼算請看<a href={localizedPath(locale, '/tools/credit-card-payoff')}>信用卡循環利息計算器</a>。</li>
+      </ul>
+      <p>
+        延伸閱讀：<a href={localizedPath(locale, '/bnpl-vs-credit-card-installments')}>先買後付與信用卡分期的總成本與扣款時間比較</a>、<a href={localizedPath(locale, '/zero-interest-installments-truth')}>0 利率分期的現金價與分期價比較</a>。
+      </p>
+    </div>
   </section>
 </ToolLayout>

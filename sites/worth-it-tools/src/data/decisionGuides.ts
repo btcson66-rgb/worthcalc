@@ -390,10 +390,10 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
     cta: { label: '用自己的年費與回饋率計算', href: '#cashback-category-breakeven' },
     limitations: ['續卡決策不要把一次性首刷禮算進去；新卡第一年也只計入不需額外消費就能達成的確定價值。', '點數與哩程要用自己真正能兌換的價值，不用廣告中的最高理論價。', '本計算假設每期全額繳清；循環利息、預借現金或為了回饋多花錢，可能立即吃掉所有回饋。內容不是信用卡推薦或財務建議。'],
     sources: [
-      { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
-      { label: '金融監督管理委員會 — 信用卡費用與利率揭露規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FE057261&media=print' },
+      { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項（99-07-27 發布，103-09-12 修正，金管銀合字第 10300245320 號；應記載事項第五點、不得記載事項第七點）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+      { label: '金融監督管理委員會 — 為保障消費者權益，有關信用卡、現金卡之利率與各項費用之揭露，請速依說明事項辦理（93-07-29 金管銀（四）字第 0934000595 號函）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FE057261&media=print' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 

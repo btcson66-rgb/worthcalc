@@ -143,3 +143,20 @@ test('房貸支出占收入: 金管會金融健檢 1/3 and 1/5 lights', () => {
   assert.equal(burdenLight(1, 0), null);
   for (const text of ['36.96%，超過 1/3', '18.5%，低於 1/5']) assert.ok(md.includes(text), text);
 });
+
+// P2 batch 3 (2026-10-17): the 青安 policy numbers in extra-mortgage-payments-guide were re-read from the
+// 行政院 and 財政部 pages on 2026-10-17. Pin the figures and the arithmetic that ties them together.
+test('青安 3.0 figures in extra-mortgage-payments-guide match the official pages and each other', () => {
+  const md = readFileSync(new URL('../src/content/growth-articles/zh/extra-mortgage-payments-guide.md', import.meta.url), 'utf8');
+  for (const s of ['第 4012 次會議', '1.775%', '1.9%', '半碼（0.125%）', '1.5 碼（0.375%）', '2029 年 7 月 31 日', '2026 年 8 月 1 日', '1,000 萬元', '1,200 萬元', '1,500 萬元', '最長 40 年']) {
+    assert.ok(md.includes(s), `missing ${s}`);
+  }
+  assert.ok(/lastReviewed: 2026-10-17/.test(md));
+  // 2 碼 = 0.5 percentage point = 0.125 (bank) + 0.375 (government); 2.275% - 0.5 = 1.775%; one 半碼 less subsidy = 1.9%
+  assert.equal(0.125 + 0.375, 0.5);
+  assert.equal(Math.round((2.275 - 0.5) * 1000) / 1000, 1.775);
+  assert.equal(Math.round((1.775 + 0.125) * 1000) / 1000, 1.9);
+  // the unsourced claim about how prepayment changes the subsidy must not return
+  assert.ok(!md.includes('補貼是依剩餘本金與補貼利率計算'));
+  assert.ok(!md.includes('提前多繳會減少未來享受補貼利率的本金基礎'));
+});

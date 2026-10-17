@@ -19,20 +19,31 @@ const disclosure =
 
 {
   products.length > 0 && (
-    <section class="affiliate-recs" aria-label={heading}>
+    <section
+      class="affiliate-recs"
+      aria-label={heading}
+      data-affiliate-module
+      data-affiliate-placement="result_card"
+      data-affiliate-surface="calculator"
+    >
       <h2>{heading}</h2>
       <div class="affiliate-grid">
-        {products.map((product) => (
+        {products.map((product, index) => (
           <a
             class="affiliate-card"
-            href={product.url}
+            href={product.affiliate_url}
             rel="sponsored nofollow noopener"
             target="_blank"
+            data-affiliate-product-id={product.product_id}
+            data-affiliate-category={product.category}
+            data-affiliate-network={product.affiliate_network}
+            data-affiliate-batch={product.batch_id}
+            data-affiliate-position={String(index + 1)}
           >
             <strong>{product.name}</strong>
-            <span class="affiliate-note">{product.note}</span>
+            <span class="affiliate-note">{product.category}</span>
             <span class="affiliate-meta">
-              {product.price}｜{product.shop}
+              {product.price}｜{product.affiliate_network}
             </span>
             <span class="affiliate-cta">{cta}</span>
           </a>
@@ -42,6 +53,62 @@ const disclosure =
     </section>
   )
 }
+
+{products.length > 0 && <script>
+  import { trackAffiliateClick, trackAffiliateItemView, trackAffiliateModuleView } from '../lib/affiliateAnalytics';
+
+  const startAffiliateTracking = () => {
+    const module = document.querySelector('[data-affiliate-module]');
+    if (!(module instanceof HTMLElement) || module.dataset.affiliateTrackingReady === 'true') return;
+    module.dataset.affiliateTrackingReady = 'true';
+    const links = Array.from(module.querySelectorAll('a[data-affiliate-product-id]'))
+      .filter((link): link is HTMLAnchorElement => link instanceof HTMLAnchorElement);
+    const context = {
+      placement: module.dataset.affiliatePlacement || 'result_card',
+      surface_type: module.dataset.affiliateSurface || 'calculator',
+    };
+    const network = [...new Set(links.map((link) => link.dataset.affiliateNetwork || 'other'))];
+    const batchId = links[0]?.dataset.affiliateBatch || 'worthcalc-catalog-legacy';
+    const moduleObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5)) {
+        trackAffiliateModuleView({ ...context, affiliate_network: network.length === 1 ? network[0] : 'mixed', batch_id: batchId });
+        moduleObserver.disconnect();
+      }
+    }, { threshold: [0.5] });
+    moduleObserver.observe(module);
+
+    const itemObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.5) continue;
+        const link = entry.target;
+        if (!(link instanceof HTMLAnchorElement)) continue;
+        trackAffiliateItemView({
+          ...context,
+          affiliate_network: link.dataset.affiliateNetwork || 'other',
+          product_id: link.dataset.affiliateProductId || 'unknown',
+          product_category: link.dataset.affiliateCategory || 'general',
+          batch_id: link.dataset.affiliateBatch || batchId,
+          card_position: Number(link.dataset.affiliatePosition || 0),
+        });
+        itemObserver.unobserve(link);
+      }
+    }, { threshold: [0.5] });
+    links.forEach((link) => {
+      itemObserver.observe(link);
+      link.addEventListener('click', () => trackAffiliateClick({
+        ...context,
+        affiliate_network: link.dataset.affiliateNetwork || 'other',
+        product_id: link.dataset.affiliateProductId || 'unknown',
+        product_category: link.dataset.affiliateCategory || 'general',
+        batch_id: link.dataset.affiliateBatch || batchId,
+        card_position: Number(link.dataset.affiliatePosition || 0),
+      }));
+    });
+    window.addEventListener('pagehide', () => { moduleObserver.disconnect(); itemObserver.disconnect(); }, { once: true });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startAffiliateTracking, { once: true });
+  else startAffiliateTracking();
+</script>}
 
 <style>
   .affiliate-recs {

@@ -1,0 +1,192 @@
+---
+/*
+ * 帳單分期試算 (P2 batch 4, 2026-10-17), zh only. The second mode of /zh/tools/installment-true-apr/.
+ *
+ * Arithmetic: evaluateBillInstallment() and billEarlySettlement() in src/lib/twInstallmentMath.mjs
+ * (tests/tw-installment-math.test.mjs). The defaults are the page's first bill-installment example.
+ * No issuer's rate or fee is built in: the rate is the 「帳單分期利率」 printed on the reader's own bill and
+ * the early-settlement charge is typed from the reader's own agreement.
+ */
+---
+
+<section class="calc" data-tw-bill-installment data-growth-calculator aria-labelledby="bp-heading">
+  <header>
+    <h3 id="bp-heading">帳單分期試算：把這期帳單的餘額拆成分期</h3>
+    <p>填<strong>你這期帳單上的數字</strong>：應繳總額、最低應繳、這期先繳多少、期數，以及帳單上的「帳單分期利率」。算出每期本息、總利息，並和「繼續用循環信用、每月繳同樣金額」比較。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>當期帳單應繳總額（元）</span><input id="bp-total" type="number" inputmode="numeric" min="0" step="1000" value="30000" /></label>
+      <label><span>當期最低應繳金額（元，帳單上有）</span><input id="bp-min" type="number" inputmode="numeric" min="0" step="100" value="3000" /></label>
+      <label><span>這期你先繳多少（元；至少要繳足最低應繳）</span><input id="bp-paid" type="number" inputmode="numeric" min="0" step="100" value="3000" /></label>
+      <label>
+        <span>分期期數</span>
+        <select id="bp-n">
+          <option value="3">3 期</option>
+          <option value="6">6 期</option>
+          <option value="12" selected>12 期</option>
+          <option value="18">18 期</option>
+          <option value="24">24 期</option>
+          <option value="30">30 期</option>
+        </select>
+      </label>
+      <label><span>帳單分期年利率（%，帳單上「帳單分期利率」欄的數字）</span><input id="bp-rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="10" /></label>
+      <label><span>目前循環信用年利率（%，比較用；法定上限 15%）</span><input id="bp-rev" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="15" /></label>
+
+      <details class="is-wide bp-advanced">
+        <summary>進階選項（可分期門檻、提前結清）</summary>
+        <div class="bp-advanced__grid">
+          <label><span>可申請分期的門檻（元：應繳總額 − 最低應繳 要達到多少；富邦、星展公告為 1,000）</span><input id="bp-threshold" type="number" inputmode="numeric" min="0" step="100" value="1000" /></label>
+          <label><span>繳完第幾期後提前結清（空白＝不提前）</span><input id="bp-early" type="number" inputmode="numeric" min="1" step="1" placeholder="例如 3" /></label>
+          <label><span>提前清償違約金／作業費（元，依你的約定書；沒有就填 0）</span><input id="bp-fee" type="number" inputmode="numeric" min="0" step="10" value="0" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide bp-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="reset" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        利率與違約金請抄<strong>你的帳單與分期約定書</strong>上的數字，本頁沒有內建任何銀行的費率。各銀行的算法有差異（見下方彙整），結果只是估算。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="bp-status" id="bp-status">—</p>
+      <dl>
+        <div><dt>分期金額（應繳總額 − 先繳）</dt><dd id="bp-financed">—</dd></div>
+        <div><dt>這期要先繳</dt><dd id="bp-now">—</dd></div>
+        <div><dt>每期本息</dt><dd id="bp-pay">—</dd></div>
+        <div><dt>總利息</dt><dd id="bp-interest">—</dd></div>
+        <div><dt>分期期間總付款（含本金）</dt><dd id="bp-total-paid">—</dd></div>
+        <div><dt>總費用年百分率（銀行公告：等於分期利率）</dt><dd id="bp-apr">—</dd></div>
+        <div><dt>若改用循環信用、每月繳同樣金額</dt><dd id="bp-revolving">—</dd></div>
+        <div id="bp-early-row" hidden><dt>提前結清的情境</dt><dd id="bp-early-out">—</dd></div>
+      </dl>
+      <p class="bp-note" id="bp-explain"></p>
+      <p class="bp-note"><strong>試算結果僅供參考，以發卡銀行的帳單與分期付款約定書為準。</strong>簡化：月利率 = 年利率 ÷ 12、每期本息取整到元（最後一期補差額）、分期從下一期帳單開始；不計結帳日到繳款截止日之間的天數、浮動利率的調整，以及信用額度占用的影響。比較用的循環信用依本站信用卡循環利息計算器的做法（日息 = 本金 × 年利率 ÷ 365，一期 30 天），與分期的「年利率 ÷ 12」基準略有不同。</p>
+      <details class="bp-schedule">
+        <summary>逐期明細</summary>
+        <div class="bp-schedule__scroll">
+          <table>
+            <thead><tr><th>期</th><th>本金</th><th>利息</th><th>應繳</th><th>剩餘本金</th></tr></thead>
+            <tbody id="bp-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { billEarlySettlement, evaluateBillInstallment, safeNumber } from '../lib/twInstallmentMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-bill-installment]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['bp-total', 'bp-min', 'bp-paid', 'bp-n', 'bp-rate', 'bp-rev', 'bp-threshold', 'bp-early', 'bp-fee'];
+    const inputs = ids.map((id) => el<HTMLInputElement | HTMLSelectElement>(id));
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const dash = '—';
+    const outputs = ['bp-financed', 'bp-now', 'bp-pay', 'bp-interest', 'bp-total-paid', 'bp-apr', 'bp-revolving'];
+
+    const render = () => {
+      const tbody = el('bp-rows');
+      tbody.textContent = '';
+      el('bp-early-row').hidden = true;
+      outputs.forEach((id) => { el(id).textContent = dash; });
+      el('bp-explain').textContent = '';
+      const total = Math.max(0, Math.round(val('bp-total')));
+      if (total <= 0) {
+        el('bp-status').textContent = '請輸入當期帳單應繳總額。';
+        return;
+      }
+      const n = Math.max(1, Math.round(val('bp-n')) || 12);
+      const aprPct = Math.max(0, val('bp-rate'));
+      const revRaw = el<HTMLInputElement>('bp-rev').value.trim();
+      const r = evaluateBillInstallment({
+        statementTotal: total,
+        minimumDue: val('bp-min'),
+        paidNow: el<HTMLInputElement>('bp-paid').value.trim() === '' ? val('bp-min') : val('bp-paid'),
+        n,
+        aprPct,
+        minFinanceable: val('bp-threshold'),
+        revolvingAprPct: revRaw === '' ? -1 : val('bp-rev'),
+      });
+      const notes: string[] = [];
+      if (!r.checks.paidAtLeastMinimum) notes.push(`這期至少要先繳足最低應繳 ${money(r.minimum)}，申請才會生效（富邦、星展的公告都這樣寫）。`);
+      if (!r.checks.financeableEnough) notes.push(`應繳總額扣掉最低應繳只剩 ${money(Math.max(0, r.total - r.minimum))}，低於你填的門檻 ${money(val('bp-threshold'))}，可能不能申請帳單分期。`);
+      if (!r.plan) {
+        el('bp-status').textContent = '先繳的金額已經等於或超過應繳總額，沒有需要分期的餘額。';
+        el('bp-explain').textContent = notes.join(' ');
+        return;
+      }
+      const p = r.plan;
+      el('bp-financed').textContent = money(r.financed);
+      el('bp-now').textContent = money(r.paid);
+      el('bp-pay').textContent = p.firstPayment === p.lastPayment ? money(p.firstPayment) : `第 1 期 ${money(p.firstPayment)}，最後一期 ${money(p.lastPayment)}`;
+      el('bp-interest').textContent = money(p.totalInterest);
+      el('bp-total-paid').textContent = money(p.totalPaid);
+      el('bp-apr').textContent = `${aprPct.toFixed(2)}%（逐期取整到元後，用 IRR 反推為 ${p.aprPct.toFixed(2)}%）`;
+      if (r.revolving) {
+        el('bp-revolving').textContent = r.revolving.status === 'paidOff'
+          ? `約 ${r.revolving.months} 個月還清，利息 ${money(r.revolving.totalInterest as number)}（${(r.revolving.extraVsInstallment as number) >= 0 ? '比分期多' : '比分期少'} ${money(Math.abs(r.revolving.extraVsInstallment as number))}）`
+          : '每月繳這個金額還不夠付利息，還不完';
+      }
+      el('bp-status').textContent = `分期 ${money(r.financed)}、${n} 期、年利率 ${aprPct.toFixed(2)}%：每期約 ${money(p.firstPayment)}，總利息 ${money(p.totalInterest)}。`;
+
+      const early = val('bp-early');
+      if (early > 0) {
+        const e = billEarlySettlement({ financed: r.financed, n, aprPct }, early, val('bp-fee'));
+        el('bp-early-row').hidden = false;
+        el('bp-early-out').textContent = e
+          ? `繳完第 ${e.k} 期後一次還清剩餘本金 ${money(e.remaining)}＋違約金 ${money(e.fee)}；省下之後的利息 ${money(e.interestAvoided)}，${e.netSaving >= 0 ? '扣掉違約金後淨省' : '但違約金比省下的利息多'} ${money(Math.abs(e.netSaving))}`
+          : `提前結清期數要在 1 到 ${n - 1} 之間`;
+      }
+      el('bp-explain').textContent = notes.join(' ');
+      for (const row of p.schedule.rows) {
+        const tr = document.createElement('tr');
+        [row.k, row.principal, row.interest, row.payment, row.balance].forEach((v, idx) => {
+          const td = document.createElement('td');
+          td.textContent = idx === 0 ? String(v) : yuan.format(Math.round(Number(v)));
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+    };
+
+    const example: Record<string, string> = { 'bp-total': '30000', 'bp-min': '3000', 'bp-paid': '3000', 'bp-n': '12', 'bp-rate': '10', 'bp-rev': '15', 'bp-threshold': '1000', 'bp-early': '', 'bp-fee': '0' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = input instanceof HTMLSelectElement ? input.options[0].value : ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden] { display: none !important; }
+  .bp-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bp-status { margin: 0; font-weight: 750; }
+  .bp-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .bp-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .bp-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+  .bp-schedule { margin-top: 0.5rem; }
+  .bp-schedule summary { cursor: pointer; font-weight: 650; }
+  .bp-schedule__scroll { overflow-x: auto; }
+  .bp-schedule table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  .bp-schedule th, .bp-schedule td { padding: 0.25rem 0.5rem; text-align: right; border-bottom: 1px solid var(--color-border); font-variant-numeric: tabular-nums; }
+</style>

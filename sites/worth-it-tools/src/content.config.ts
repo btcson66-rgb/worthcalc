@@ -85,7 +85,7 @@ const moneyBriefs = defineCollection({
      * the short answer and describes itself to search engines as a WebApplication
      * instead of an Article. The URL does not change.
      */
-    calculator: z.enum(['tw-labor-pension', 'tw-labor-insurance']).optional(),
+    calculator: z.enum(['tw-labor-pension', 'tw-labor-insurance', 'tw-mortgage-refinance']).optional(),
     /** The calculator this brief hands the reader off to. */
     relatedTool: z.string(),
     relatedToolLabel: z.string(),

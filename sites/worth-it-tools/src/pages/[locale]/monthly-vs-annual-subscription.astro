@@ -5,6 +5,7 @@ import DecisionGuide from '../../components/DecisionGuide.astro';
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES, type Locale } from '../../consts';
 import { monthlyAnnualGuides } from '../../data/decisionGuides';
+import { breakEvenMonths, monthlyVsAnnual } from '../../lib/twMembershipMath.mjs';
 import type { FaqItem } from '../../lib/seo';
 
 type EditorialLocale = 'en' | 'zh';
@@ -29,11 +30,12 @@ const articles: Record<EditorialLocale, ArticleCopy> = {
   },
   zh: {
     title: '訂閱月繳還是年繳？用使用月數與取消風險算出答案',
-    description: '用打平月數、提早停用機率、不可退費風險、續約價與現金流，比較台灣常見訂閱的月繳和年繳。',
+    description: '用打平月數、提早停用機率、不可退費風險、續約價與現金流，比較訂閱的月繳和年繳；附消保法七日解除權的例外與 Apple、Google 取消訂閱的官方做法。',
     faq: [
       { question: '年繳折扣幾折才值得選？', answer: '折扣本身不是答案。先用年費除以月費找出打平月數，再確認你有多大機率用超過那個月份；若提前停用不能退費，折扣可能只是把未來支出提早收走。' },
       { question: '年費除以月費不是整數怎麼看？', answer: '例如打平點是 9.6 個月，代表前 9 個月月繳較低，第 10 個月起年繳才低於累積月費。不要把 9.6 直接說成使用 9 個月就省。' },
-      { question: '刪除 APP 就等於取消訂閱嗎？', answer: '不是。行政院消費者保護處提醒，刪除 APP 不會自動停止訂閱；要進入原本訂閱的帳號或平台關閉自動續約，並確認取消成功。' },
+      { question: '刪除 APP 就等於取消訂閱嗎？', answer: '不是。行政院消費者保護處提醒，刪除 APP 後仍被扣款是常見消費爭議，應依下載頁面所列方式取消，並手動關閉 Google／Apple ID 的自動更新；Google Play 說明也寫明解除安裝應用程式不會連帶取消訂閱項目。' },
+      { question: '年繳扣款後反悔，七天內可以退嗎？', answer: '不一定。消費者保護法第 19 條給通訊交易七日解除權，但通訊交易解除權合理例外情事適用準則第 2 條列出例外，其中包括「非以有形媒介提供之數位內容或一經提供即為完成之線上服務，經消費者事先同意始提供」。訂閱屬不屬於例外要看平台怎麼告知與你同意了什麼，請先看平台的退款條款，沒有寫明的退費不要放進計算。' },
       { question: '免費試用後要用促銷價還是續約價計算？', answer: '用下一次真正會被扣的續約價。免費期與首期優惠已經是沉沒的促銷條件，不應拿來美化接下來一年的成本。' },
       { question: '期望成本較低就一定要選年繳嗎？', answer: '不一定。若一次付清會壓縮生活費或緊急預備金，月繳的彈性本身有價值。期望成本與最壞情境現金流要一起看。' },
     ],
@@ -51,13 +53,20 @@ const { locale } = Astro.props as { locale: EditorialLocale };
 const article = articles[locale];
 const guide = monthlyAnnualGuides[locale];
 if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
+
+// zh prose numbers come from src/lib/twMembershipMath.mjs; tests/tw-membership-math.test.mjs pins them.
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const mvaIn = { monthlyPrice: 300, annualPrice: 2880, earlyMonth: 4, probabilityFullYearPct: 80 };
+const be = breakEvenMonths(mvaIn.monthlyPrice, mvaIn.annualPrice);
+const mva = monthlyVsAnnual(mvaIn);
+const checkedOn = '2026-10-17';
 ---
 
 <ArticleLayout
   title={article.title}
   description={article.description}
   locale={locale as Locale}
-  updated="2026-07-18"
+  updated={locale === 'zh' ? checkedOn : '2026-07-18'}
   alternateLocales={LOCALES}
 
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
@@ -113,14 +122,14 @@ if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
         「年繳等於送兩個月」只是在比較標價，沒有回答你會用多久。年繳把未來十二個月的選擇一次變成今天的扣款；只有使用時間跨過打平點，而且提早停用、不能退費與現金占用的風險都可接受時，折扣才是真的省。
       </p>
       <p>
-        正確順序是先算打平月數，再算不確定性。打平月數告訴你至少要留多久；期望成本則把「用滿一年」和「提早不用」放進同一個模型。最後還要看最壞情境，因為平均省 NT$240，不代表真的第 4 個月停用時不會後悔。
+        正確順序是先算打平月數，再算不確定性。打平月數告訴你至少要留多久；期望成本則把「用滿一年」和「提早不用」放進同一個模型。最後還要看最壞情境，因為平均省 NT${n0(mva.annualSaves)}，不代表真的第 {mvaIn.earlyMonth} 個月停用時不會後悔。本頁的金額都是<strong>示範輸入</strong>，不是任何服務的價格。
       </p>
 
       <DecisionGuide content={guide} />
 
-      <h2>9.6 個月代表第 10 個月才開始省</h2>
+      <h2>{be} 個月代表第 10 個月才開始省</h2>
       <p>
-        月費 NT$300、年費 NT$2,880，單純打平是 9.6 個月。前 9 個月累積月費仍低於年費，第 10 次月繳後才反超。若只是三個月證照課、短期專案或旺季使用，年繳折扣再大，也可能比需要期間的月繳多付很多。
+        月費 NT${n0(mvaIn.monthlyPrice)}、年費 NT${n0(mvaIn.annualPrice)}，單純打平是 {n0(mvaIn.annualPrice)} ÷ {n0(mvaIn.monthlyPrice)} = {be} 個月。前 9 個月累積月費仍低於年費，第 10 次月繳後才反超。若只是三個月證照課、短期專案或旺季使用，年繳折扣再大，也可能比需要期間的月繳多付很多。
       </p>
       <p>
         免費試用與首月優惠要和續約分開。做今天的選擇時，填下一期真正會扣的價格；若第一年優惠、第二年恢復原價，就建立兩個年度情境。不要把已經用完的免費期拿來降低未來成本。
@@ -128,44 +137,40 @@ if (!guide) throw new Error(`Missing monthly vs annual guide for ${locale}`);
 
       <h2>用機率門檻檢查「我應該會一直用」</h2>
       <p>
-        本頁算例假設只會出現兩種結果：用滿 12 個月，或第 4 個月停用。這時年繳要在「用滿一年機率至少 70%」才有較低期望成本。基準估計 80% 時，月繳期望成本是 NT$3,120，年繳期望省 NT$240；若你無法誠實地說機率超過 70%，月繳彈性可能比較便宜。
+        本頁算例假設只會出現兩種結果：用滿 12 個月，或第 {mvaIn.earlyMonth} 個月停用。這時年繳要在「用滿一年機率至少 {n0(mva.tieProbabilityPct)}%」才有較低期望成本。基準估計 {mvaIn.probabilityFullYearPct}% 時，月繳期望成本是 NT${n0(mva.expectedMonthly)}，年繳期望省 NT${n0(mva.annualSaves)}；但若第 {mvaIn.earlyMonth} 個月就停用，年繳會比月繳多付 NT${n0(mva.annualLosesIfEarly)}。若你無法誠實地說機率超過 {n0(mva.tieProbabilityPct)}%，月繳彈性可能比較便宜。
       </p>
       <p>
         可按比例退費、可暫停、可降級或可轉移給家人，都會改變答案；只把契約明確保證的金額放進去。客服口頭說「通常可以處理」不等於可計入的退款。
       </p>
 
-      <h2>自動續約要另外建立一個檢查點</h2>
+      <h2>年繳扣款後反悔，七天內能退嗎</h2>
       <p>
-        行政院消費者保護會的電子商務綱領要求自動續約資訊應提示契約期限、收費金額、收款週期與取消方式。訂閱前先截圖保存下次扣款日和續約價，並在到期前留出處理時間。
+        消費者保護法第 19 條規定，通訊交易的消費者得於收受商品或接受服務後七日內解除契約，無須說明理由（<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=19">全國法規資料庫</a>，{checkedOn} 查核）。但同條授權行政院訂定「合理例外情事」，《通訊交易解除權合理例外情事適用準則》第 2 條第 5 款列出：「非以有形媒介提供之數位內容或一經提供即為完成之線上服務，經消費者事先同意始提供」，且須經企業經營者告知消費者（<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0170012">全國法規資料庫</a>，{checkedOn} 查核）。
       </p>
       <p>
-        刪除 APP 不代表取消訂閱。應回到當初付款的 Apple ID、Google 帳號或服務網站，關閉自動更新並保存成功畫面。取消後仍要檢查信用卡、電信帳單或行動支付是否繼續扣款。
+        所以年繳能不能七天內退，取決於平台有沒有事先告知並取得你的同意把它列為例外，條文本身沒有替每一種訂閱下結論。實務上先看付款頁與平台的退款條款；條款沒有寫明的退款，不要放進上面的期望成本。
       </p>
 
-      <h2>退訂條款、新服務與多人方案的經驗法則</h2>
+      <h2>自動續約與取消：Apple、Google 的官方做法</h2>
       <p>
-        年繳不全是一翻兩瞪眼，退訂政策大致分三種：<strong>按比例退款</strong>（年繳風險大減）、<strong>退款但收手續費，或只退未開始的月份</strong>（可以接受）、<strong>概不退款</strong>（最常見，上面的期望成本要全額適用）。訂閱前先花一點時間找到退款條款，並把契約實際寫明的金額才放進試算。
-      </p>
-      <p>
-        以下是本站的經驗法則，不是統計結論，請依自己的情況調整：
+        行政院消費者保護會的電子商務綱領（106-11-02 修正）第 10 點要求：如為自動續約，應告知是否須消費者主動取消，並提示契約期限、收費金額、收款之週期及取消自動續約之方式（<a href="https://cpc.ey.gov.tw/Page/960E744883E6A75D">綱領全文</a>，{checkedOn} 查核）。訂閱前先截圖保存下次扣款日和續約價，並在到期前留出處理時間。
       </p>
       <ul>
-        <li><strong>新服務先月繳。</strong>已經連續月繳三個月以上，才比較有把握它是真需求；剛註冊的服務，用滿一年的把握接近擲硬幣。錯過首購年繳優惠的那幾百元，是確認需求的合理學費。</li>
-        <li><strong>折扣不到約 15% 就先留在月繳。</strong>那點折扣通常買不回隨時退訂的彈性，尤其是概不退款、你又沒把握用滿的時候。</li>
-        <li><strong>年繳服務要進同一個行事曆。</strong>月繳每個月刷卡會提醒你「我還在付錢」，年繳一年只現身一次，是<a href="/zh/subscription-creep/">訂閱慢慢變多</a>最常藏身的地方。續約日前 7 天設提醒，並在每半年的訂閱檢視時，把年繳金額除以 12 攤回月費一起看。</li>
-        <li><strong>多人或公司方案多算一層。</strong>先看實際活躍人數除以付費席次，低於約 80% 時，先減少席次再談年繳折扣。</li>
+        <li><strong>刪除 APP 不等於取消：</strong>消保處指出，刪除 APP 後仍被扣款是常見消費爭議，應依下載頁面所列方式取消，並手動關閉 Google／Apple ID 的自動更新（<a href="https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11">消保處說明</a>，{checkedOn} 查核）。</li>
+        <li><strong>iPhone：</strong>設定 → 點你的姓名 → 訂閱項目 → 點該訂閱 → 取消訂閱項目；如果沒有「取消」按鈕，或看到紅色文字的到期訊息，表示訂閱已取消（<a href="https://support.apple.com/zh-tw/118428">Apple 支援</a>，{checkedOn} 查核）。</li>
+        <li><strong>Google Play：</strong>Google Play 的訂閱沒有使用期限，除非取消，否則每個帳單週期開始時都會收費；解除安裝應用程式不會連帶取消；即使取消，仍可在付費期間內繼續使用（<a href="https://support.google.com/googleplay/answer/7018481?hl=zh-Hant">Google Play 說明</a>，{checkedOn} 查核）。</li>
       </ul>
+      <p>
+        取消後仍要檢查信用卡、電信帳單或行動支付是否繼續扣款，並保存取消成功的畫面。
+      </p>
 
       <h2>現金流不適合時，便宜也不等於值得</h2>
       <p>
-        年繳一次拿走 NT$2,880；月繳則保留當下現金。若同一個月還有保險、稅費、學費與其他年費續約，單項折扣可能造成整體現金不足。把方案放進<a href="/zh/tools/subscription-audit/">訂閱支出健檢計算機</a>，一起看未來一年所有定期扣款。
+        年繳一次拿走 NT${n0(mvaIn.annualPrice)}；月繳則保留當下現金。若同一個月還有保險、稅費、學費與其他年費續約，單項折扣可能造成整體現金不足。年繳服務一年只扣一次，也最容易被遺忘，所以要和其他訂閱放在同一張清單：把方案放進<a href="/zh/tools/subscription-audit/">訂閱支出健檢計算機</a>，一起看未來一年所有定期扣款。外送平台的會員則看<a href="/zh/delivery-membership-break-even/">外送會員回本算法</a>，那裡的問題是「一年要下幾單」，不是月繳或年繳。
       </p>
-      <p class="privacy-note">這是一般消費成本估算，不判定個別契約的解除、退費、稅務或法律效力；實際權利以適用法規、平台與契約為準。</p>
+      <p class="privacy-note">這是一般消費成本估算，試算結果僅供參考，以平台條款與適用法規為準；不判定個別契約的解除、退費、稅務或法律效力。最後審核 {checkedOn}。</p>
     </>
   )}
-
-
-
 
   <FAQ items={article.faq} />
 </ArticleLayout>

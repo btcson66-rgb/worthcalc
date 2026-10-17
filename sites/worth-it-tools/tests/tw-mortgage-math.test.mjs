@@ -160,3 +160,128 @@ test('青安 3.0 figures in extra-mortgage-payments-guide match the official pag
   assert.ok(!md.includes('補貼是依剩餘本金與補貼利率計算'));
   assert.ok(!md.includes('提前多繳會減少未來享受補貼利率的本金基礎'));
 });
+
+// ---------------------------------------------------------------------------------------------------------------
+// P2 batch 4 (2026-10-17): 轉貸 (refinance). The page /zh/money/mortgage-refinance-break-even/ prints these numbers
+// in its tables; the test recomputes every printed row with the calculator's own functions.
+// ---------------------------------------------------------------------------------------------------------------
+import { readFileSync as readRefinanceFile } from 'node:fs';
+import { evaluateRefinance, mortgageRegistrationFee, refinanceCosts, refinanceNetAtMonth } from '../src/lib/twMortgageMath.mjs';
+
+const refiMd = readRefinanceFile(new URL('../src/content/money-briefs/zh/mortgage-refinance-break-even.md', import.meta.url), 'utf8');
+const f0 = (n) => Math.round(n).toLocaleString('en-US');
+const refiBase = { balance: 8000000, oldAprPct: 2.6, oldMonthsLeft: 300, newAprPct: 2.1 };
+
+test('轉貸: statutory items -- 登記費 = 設定金額 x 千分之一, 書狀費 80 元/張', () => {
+  assert.equal(mortgageRegistrationFee(8000000), 8000);
+  assert.equal(mortgageRegistrationFee(9600000), 9600);
+  const c = refinanceCosts({ balance: 8000000, securedAmount: 8000000, newBankFee: 8000, scrivenerFee: 10000, penaltyPct: 0 });
+  assert.deepEqual(c, { registration: 8000, titleFee: 80, penalty: 0, bank: 8000, appraisal: 0, scrivener: 10000, other: 0, total: 26080 });
+  // blank secured amount = the balance; two sheets = 160
+  assert.equal(refinanceCosts({ balance: 8000000, titleSheets: 2 }).titleFee, 160);
+  assert.equal(refinanceCosts({ balance: 8000000 }).registration, 8000);
+  // 違約金 on a full payoff is the percentage times the balance paid off
+  for (const [pct, amount] of [[0.5, 40000], [1, 80000], [2, 160000]]) assert.equal(refinanceCosts({ balance: 8000000, penaltyPct: pct }).penalty, amount);
+  assert.ok(refiMd.includes('登記費 8,000 元') && refiMd.includes('登記費 9,600 元'));
+  assert.ok(refiMd.includes('0.5% 是 40,000 元、1% 是 80,000 元、2% 是 160,000 元'));
+});
+
+test('轉貸 算例一: 8,000,000 / 2.6% -> 2.1% / 費用 26,080 -- the page table, row by row', () => {
+  const costs = 26080;
+  const same = evaluateRefinance({ ...refiBase, newMonths: 300, costs });
+  const reset = evaluateRefinance({ ...refiBase, newMonths: 360, costs });
+  assert.equal(f0(same.oldPayment), '36,294');
+  assert.equal(same.oldPayment.toFixed(2), '36293.56');
+  assert.equal(same.newPayment.toFixed(2), '34299.17');
+  assert.equal(reset.newPayment.toFixed(2), '29971.21');
+  const rows = [
+    `| 每月本息 | ${f0(same.oldPayment)} 元 | ${f0(same.newPayment)} 元 | ${f0(reset.newPayment)} 元 |`,
+    `| 每月少付 | — | ${f0(same.monthlySaving)} 元 | ${f0(reset.monthlySaving)} 元 |`,
+    `| 回本月數 ①（月付差） | — | ${same.paymentBreakEven} 個月 | ${reset.paymentBreakEven} 個月 |`,
+    `| 回本月數 ②（少付的利息 ≥ 費用） | — | ${same.interestBreakEven} 個月 | ${reset.interestBreakEven} 個月 |`,
+    `| 跑完全程的利息 | ${f0(same.totalInterestOld)} 元 | ${f0(same.totalInterestNew)} 元 | ${f0(reset.totalInterestNew)} 元 |`,
+    `| 少付的利息 | — | ${f0(same.totalInterestSaved)} 元 | ${f0(reset.totalInterestSaved)} 元 |`,
+    `| 扣掉費用後淨賺 | — | ${f0(same.netOverFullTerm)} 元 | ${f0(reset.netOverFullTerm)} 元 |`,
+    `| 持有 60 個月的淨賺 | — | ${f0(refinanceNetAtMonth(same, 60))} 元 | ${f0(refinanceNetAtMonth(reset, 60))} 元 |`,
+  ];
+  for (const row of rows) assert.ok(refiMd.includes(row), row);
+  assert.deepEqual([same.paymentBreakEven, same.interestBreakEven, reset.paymentBreakEven, reset.interestBreakEven], [14, 8, 5, 8]);
+  assert.equal(f0(same.totalInterestSaved), '598,317');
+  assert.equal(f0(reset.totalInterestSaved), '98,431');
+  assert.equal(f0(reset.monthlySaving), '6,322');
+  // 年期重置 paragraph
+  assert.equal(f0(reset.totalInterestNew - same.totalInterestNew), '499,886');
+  assert.equal(f0(Math.round(same.newPayment) - Math.round(reset.newPayment)), '4,328');
+  assert.ok(refiMd.includes('多 499,886 元') && refiMd.includes('每月多出 4,328 元'));
+  // the page's lead answer
+  assert.ok(refiMd.includes('持有 8 個月後累計少付的利息就超過費用') && refiMd.includes('月付看起來少 6,322 元，跑完全程只省 98,431 元利息，不是 598,317 元'));
+  // break-even is exactly the first month where the interest saved reaches the costs
+  assert.ok(refinanceNetAtMonth(same, 7) < 0 && refinanceNetAtMonth(same, 8) >= 0);
+});
+
+test('轉貸 算例二: 舊貸款違約金 0.5% -> 費用 66,080', () => {
+  const costs = refinanceCosts({ balance: 8000000, securedAmount: 8000000, newBankFee: 8000, scrivenerFee: 10000, penaltyPct: 0.5 });
+  assert.equal(costs.penalty, 40000);
+  assert.equal(costs.total, 66080);
+  const same = evaluateRefinance({ ...refiBase, newMonths: 300, costs: costs.total });
+  const reset = evaluateRefinance({ ...refiBase, newMonths: 360, costs: costs.total });
+  const rows = [
+    `| 回本月數 ①（月付差） | ${same.paymentBreakEven} 個月 | ${reset.paymentBreakEven} 個月 |`,
+    `| 回本月數 ②（少付的利息 ≥ 費用） | ${same.interestBreakEven} 個月 | ${reset.interestBreakEven} 個月 |`,
+    `| 跑完全程淨賺 | ${f0(same.netOverFullTerm)} 元 | ${f0(reset.netOverFullTerm)} 元 |`,
+    `| 持有 36 個月的淨賺 | ${f0(refinanceNetAtMonth(same, 36))} 元 | ${f0(refinanceNetAtMonth(reset, 36))} 元 |`,
+  ];
+  for (const row of rows) assert.ok(refiMd.includes(row), row);
+  assert.deepEqual([same.paymentBreakEven, same.interestBreakEven, reset.paymentBreakEven, reset.interestBreakEven], [34, 21, 11, 21]);
+  assert.ok(refiMd.includes('| 一次性費用 | 66,080 元 | 66,080 元 |'));
+});
+
+test('轉貸 對照表: 餘額 x 利差 -> 回本月數 ②', () => {
+  for (const balance of [3000000, 5000000, 8000000, 12000000]) {
+    const costs = refinanceCosts({ balance, newBankFee: 8000, scrivenerFee: 10000 });
+    const cells = [0.25, 0.5, 0.75, 1].map((d) => {
+      const r = evaluateRefinance({ balance, oldAprPct: 2.6, oldMonthsLeft: 300, newAprPct: 2.6 - d, newMonths: 300, costs: costs.total });
+      return `${r.interestBreakEven} 個月`;
+    });
+    const row = `| ${f0(balance)} 元 | ${f0(costs.total)} 元 | ${cells.join(' | ')} |`;
+    assert.ok(refiMd.includes(row), row);
+  }
+});
+
+test('轉貸: 先問原銀行調降利率 (費用 3,000 元)', () => {
+  const r = evaluateRefinance({ ...refiBase, newMonths: 300, costs: 3000 });
+  assert.equal(r.interestBreakEven, 1);
+  assert.equal(f0(r.netOverFullTerm), '595,317');
+  assert.equal(f0(r.netOverFullTerm - evaluateRefinance({ ...refiBase, newMonths: 300, costs: 26080 }).netOverFullTerm), '23,080');
+  assert.ok(refiMd.includes('第 1 個月就超過費用，跑完全程淨賺 595,317 元，比轉貸多 23,080 元'));
+});
+
+test('轉貸 Excel 數字: PMT 與 CUMIPMT 的封閉解', () => {
+  const pmt = (rate, n, pv) => (pv * (rate / 12) * (1 + rate / 12) ** n) / ((1 + rate / 12) ** n - 1);
+  assert.equal(pmt(0.026, 300, 8000000).toFixed(2), '36293.56');
+  assert.equal(pmt(0.021, 300, 8000000).toFixed(2), '34299.17');
+  // interest over the first 60 payments = 60 x payment - principal repaid; principal repaid = pv - balance(60)
+  const interest60 = (rate) => {
+    const i = rate / 12;
+    const p = pmt(rate, 300, 8000000);
+    const balance60 = 8000000 * (1 + i) ** 60 - p * (((1 + i) ** 60 - 1) / i);
+    return 60 * p - (8000000 - balance60);
+  };
+  assert.equal(f0(interest60(0.026)), '964,145');
+  assert.equal(f0(interest60(0.021)), '774,942');
+  assert.equal(f0(interest60(0.026) - interest60(0.021)), '189,203');
+  assert.equal(f0(interest60(0.026) - interest60(0.021) - 26080), '163,123');
+  for (const frag of ['36,293.56', '34,299.17', '964,145', '774,942', '189,203', '163,123']) assert.ok(refiMd.includes(frag), frag);
+});
+
+test('轉貸 page quotes the bank and statute figures it cites', () => {
+  // 違約金 table (bank-published tiers, 2025-09-30 open data / bank pages)
+  for (const row of [
+    '| 臺灣銀行 | 1% | 0.7% | 0.5% |', '| 臺灣土地銀行 | 1% | 0.75% | 0.5% |', '| 華南銀行 | 1% | 0.8% | 0.6% |', '| 兆豐銀行 | 1% | 0.5% | 未列 |',
+    '| 台北富邦銀行 | 1% | 0.75% | 0.5% |', '| 台新銀行 | 1% | 0.75% | 0.5% |', '| 滙豐（台灣） | 2% | 1.5% | 1% |',
+  ]) assert.ok(refiMd.includes(row), row);
+  for (const frag of ['每件 8,000 元', '7,000～10,000 元', '台新（2025/08/20）房屋貸款「調降利率」每件 3,000 元', '每次 2,000 元', '總花費在 1 萬至 3 萬元之間', '一般建議房貸利率差異達四碼（1%）以上才值得考慮', '千分之一', '每張 80 元', '塗銷登記免繳納登記費', '限制清償期間」不得超過三年', '限制 3 年 8,000 元、限制 1 年 25,000 元、無限制 50,000 元']) {
+    assert.ok(refiMd.includes(frag), frag);
+  }
+  assert.ok(refiMd.includes('試算結果僅供參考，以銀行與地政機關公告為準。'));
+});

@@ -9,12 +9,13 @@
  */
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import TWInstallmentCalculator from '../../../components/TWInstallmentCalculator.astro';
+import TWBillInstallmentCalculator from '../../../components/TWBillInstallmentCalculator.astro';
 import { localizedPath } from '../../../i18n/utils';
-import { annuityFactor, aprOfOneTimeFee, earlySettlement, evaluatePlan, irrMonthly, nominalFromMonthly } from '../../../lib/twInstallmentMath.mjs';
+import { ANNOUNCED_EARLY_FEES, annuityFactor, aprOfOneTimeFee, billEarlySettlement, earlySettlement, evaluateBillInstallment, evaluatePlan, irrMonthly, nominalFromMonthly } from '../../../lib/twInstallmentMath.mjs';
 
 const locale = 'zh' as const;
-const title = '信用卡分期試算：手續費換算年利率與零利率陷阱';
-const description = '信用卡分期試算：輸入分期金額、期數、手續費與利率，算出總費用年百分率；附零利率分期的陷阱、提前結清與是否影響信用，依金管會標準與聯徵中心說明。';
+const title = '信用卡分期試算：手續費換算年利率、零利率陷阱與帳單分期';
+const description = '信用卡分期試算：輸入分期金額、期數、手續費與利率，算出總費用年百分率；另有帳單分期模式，附三家銀行公告對照、提前結清違約金與是否影響信用。';
 const checked = '2026-10-17';
 
 const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
@@ -44,12 +45,42 @@ const periods = [3, 6, 12, 24];
 // 3 期短期分期：金額小但年百分率高
 const short = evaluatePlan({ listPrice: 30000, n: 3, oneTimeFee: 900 });
 
+// ---- 帳單分期（P2 第 4 批）----
+// 算例五：帳單 30,000、最低應繳 3,000（示範值）、先繳 3,000、分期 27,000、12 期、年利率 10%（示範值，落在三家公告的範圍內）
+const billIn = { statementTotal: 30000, minimumDue: 3000, paidNow: 3000, n: 12, aprPct: 10, revolvingAprPct: 15 };
+const bill = evaluateBillInstallment(billIn);
+const billPlan = bill.plan!;
+const billRev = bill.revolving!;
+const billRev10 = evaluateBillInstallment({ ...billIn, revolvingAprPct: 12 }).revolving!;
+const billByN = [6, 12, 18, 24, 30].map((n) => ({ n, ...evaluatePlan({ listPrice: bill.financed, n, aprPct: 10 }) }));
+const billFactor = annuityFactor(0.1 / 12, 12);
+// 富邦公告的對照表（帳單分期 10,000 元、利率 3.9%~15%），用同一個函式重算
+const fubonPublished: Record<number, [number, number]> = { 3: [3355, 3417], 6: [1686, 1740], 12: [851, 903], 18: [573, 624], 24: [434, 485], 30: [350, 402] };
+const fubonTable = [3, 6, 12, 18, 24, 30].map((n) => ({
+  n,
+  low: evaluatePlan({ listPrice: 10000, n, aprPct: 3.9 }).firstPayment,
+  high: evaluatePlan({ listPrice: 10000, n, aprPct: 15 }).firstPayment,
+  published: fubonPublished[n],
+}));
+// 算例六：提前結清（27,000、12 期、10%），三家公告的違約金／作業費
+const billEarlyKs = [1, 3, 6, 9, 11];
+const billEarly = billEarlyKs.map((k) => {
+  const base = billEarlySettlement({ financed: bill.financed, n: 12, aprPct: 10 }, k, 0)!;
+  const fees = { taishin: ANNOUNCED_EARLY_FEES.taishin(k, 12) as number, fubon: ANNOUNCED_EARLY_FEES.fubon(k, 12) as number, dbs: ANNOUNCED_EARLY_FEES.dbs(k, 12) as number };
+  return { k, remaining: base.remaining, avoided: base.interestAvoided, fees };
+});
+const money0 = (n: number) => `${n < 0 ? '−' : ''}${n0(Math.abs(n))}`;
+
 const sources = [
   { label: '全國法規資料庫 — 銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準（第 2、5、6、7、8 條）', url: 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380176', verifiedDate: checked },
   { label: '中華民國銀行公會 — 各發卡機構信用卡分期付款手續費收費標準彙整表（快照：彙整日期 115 年 7 月 22 日 = 2026-07-22）', url: 'https://www.ba.org.tw/consumerCash/details?id=11', verifiedDate: checked },
   { label: '合作金庫商業銀行 — 青安貸款「總費用年百分率範例」（驗證年百分率是月 IRR × 12）', url: 'https://www.tcb-bank.com.tw/personal-banking/loan/mortgage/house-loan-overview/policy-loan-01', verifiedDate: checked },
   { label: '臺灣土地銀行 — 貸款還款方式說明（本息平均攤還與本金平均攤還的公式）', url: 'https://www.landbank.com.tw/Calculate/Repayment', verifiedDate: checked },
   { label: '金管會 — 信用卡定型化契約範本（第 14 條還款抵充順序；全文沒有分期提前清償或分期手續費條文）', url: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049932', verifiedDate: checked },
+  { label: '台北富邦銀行 — 信用卡帳單分期（申請資格、期數、年金法、分期利率上限 15%、提前清償違約金 160／150／140 元；頁面未標發布日期，範例以 115 年 9 月 1 日為計算基準日）', url: 'https://www.fubon.com/banking/personal/credit_card/rte02/rte02.htm', verifiedDate: checked },
+  { label: '台新銀行 — 信用卡分期功能申請說明及注意事項（頁面日期 2022/05/25：年利率 6.25%~15%、無其他手續費、提前清償作業費 300／200／免收）', url: 'https://www.taishinbank.com.tw/TSB/personal/common/legal-disclaimers/TSBankPublicDisclosure-000117/', verifiedDate: checked },
+  { label: '星展銀行 — 信用卡分期付款約定條款及注意事項（帳單輕鬆分；年利率 2.99%~14.99%、年金法、提前清償違約金 300／150 元；檔名 SBI_TC_20250322，年百分率範例計算基準日 2023-02-10）', url: 'https://dbs.com.tw/iwov-resources/pdf/cards/SBI_TC_20250322.pdf', verifiedDate: checked },
+  { label: '金管會 — 最低應繳金額令（金管銀票字第 10340001781 號，104-07-01 生效；每期至少包含「每期應付之分期本金及利息」）', url: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001164', verifiedDate: checked },
   { label: '財團法人金融聯合徵信中心 — 個人信用評分組成', url: 'https://www.jcic.org.tw/main_ch/docDetail.aspx?uid=1555&pid=1555&docid=629', verifiedDate: checked },
   { label: '財團法人金融聯合徵信中心 — 常見問答（DBR 22 倍：計入信用卡分期付款餘額）', url: 'https://www.jcic.org.tw/main_ch/faq.aspx', verifiedDate: checked },
 ];
@@ -63,6 +94,7 @@ const trustBlock = {
     '利率與手續費都是你輸入的數字；本頁算例用的 600 元、8% 等都是為了示範的假設值，不是任何銀行的費率。',
     '簡化：月利率 = 年利率 ÷ 12、每期取整到元且最後一期補差額、分期從購買後一個月開始、一次性手續費加在第 1 期帳單（或購買當下）、提前結清時已繳手續費不退。各發卡機構的實際算法不同，可用「帳單上每期實際金額」欄位直接輸入。',
     '年百分率依標準只計利息與手續費，逾期違約金不計入；「放棄現金折扣」「放棄回饋」是本頁另外列出的機會成本，不是標準定義的年百分率。',
+    '帳單分期模式的利率與違約金是你輸入的數字；三家銀行的公告各自不同（利率怎麼訂、提前結清費用、可分期門檻），公告可能隨時更新，台新頁面日期為 2022/05/25，使用前請以你的帳單與約定書為準。',
     '官方資料查不到的事不寫：分期提前結清的費用、已繳手續費退不退，信用卡定型化契約範本沒有規定，要看你的約定書。',
   ],
   lastReviewed: checked,
@@ -77,6 +109,18 @@ const faq = [
   {
     question: '零利率分期真的沒有成本嗎？',
     answer: '要分開看。「零利率」只說沒有利息，不代表沒有手續費；現金價比分期標價低時，價差就是隱含的利息（算例三：現金價 28,800 元、分期 12 期共 30,000 元，隱含年百分率約 ' + p2(ex3.aprRealPct) + '%）；分期期間是否還有信用卡回饋，要看活動辦法。',
+  },
+  {
+    question: '帳單分期怎麼算？跟一般刷卡分期有什麼不同？',
+    answer: `帳單分期是把「這一期帳單還沒繳的餘額」拆成分期：分期金額 = 當期帳單應繳總額 − 你這期先繳的金額，而且至少要先繳足最低應繳，申請才會生效（富邦、星展公告）。之後每期本息併入最低應繳金額。本頁算例：帳單 30,000 元、最低應繳 3,000 元（示範值）、先繳 3,000 元，分期 ${n0(bill.financed)} 元、12 期、年利率 10%（示範值）→ 每期約 ${n0(billPlan.firstPayment)} 元、總利息 ${n0(billPlan.totalInterest)} 元。`,
+  },
+  {
+    question: '帳單分期的利率是多少？',
+    answer: '各銀行不同，而且依信用評等調整：台新頁面（2022/05/25）寫年利率 6.25%~15%；星展約定條款寫 2.99%~14.99%；富邦的分期利率 = 指數型房貸基準利率 + 加碼，上限 15%，實際利率印在每期帳單的「帳單分期利率」欄。三家都寫明總費用年百分率等於分期利率。請填你自己帳單上的數字。',
+  },
+  {
+    question: '帳單分期可以提前繳清嗎？要付違約金嗎？',
+    answer: '可以，但銀行可能收費，而且多繳不等於提前清償：星展約定條款寫溢繳款不會提前清償分期專案的剩餘本金，要主動申請。三家公告的收費不同（台新 300／200 元或免收、富邦 160／150／140 元、星展 300／150 元），算例見上方「算例六」；省下的利息大於違約金才划算。',
   },
   {
     question: '分期提前繳清，手續費會退嗎？',
@@ -100,7 +144,12 @@ const related = [
 ---
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']} showReview={false} trustBlock={trustBlock}>
-  <TWInstallmentCalculator />
+  <div class="mode-switch" role="group" aria-label="試算模式">
+    <button type="button" data-mode="item" aria-pressed="true">刷卡分期／手續費換算年利率</button>
+    <button type="button" data-mode="bill" aria-pressed="false">帳單分期（把這期帳單拆開）</button>
+  </div>
+  <div data-mode-panel="item"><TWInstallmentCalculator /></div>
+  <div data-mode-panel="bill" id="bill-installment"><TWBillInstallmentCalculator /></div>
 
   <section class="calculator-review">
     <div class="prose">
@@ -243,6 +292,101 @@ const related = [
         多付的 600 元不變，但借的時間變短，年百分率反而更高。想提前結清前，先問銀行三件事：結清金額怎麼算、有沒有提前結清作業費、已繳手續費退不退，並請對方給書面或帳單上的金額。
       </p>
 
+      <h2 id="bill-installment-guide">帳單分期怎麼算</h2>
+      <p>
+        上面計算機頂端切到「帳單分期」模式，算的是另一件事：這期帳單沒繳完的餘額，要不要拆成分期。它和一般刷卡分期的差別，直接用銀行公告的話說（{checked} 打開查核）：
+      </p>
+      <ul>
+        <li><strong>金額從帳單來：</strong>台北富邦寫「申請金額＝當期帳單應繳總額扣除當期已繳款金額（至少須繳足最低應繳金額）後剩餘未償還之金額」，自次期帳單起分期；<a href="https://www.fubon.com/banking/personal/credit_card/rte02/rte02.htm">富邦帳單分期頁</a>。</li>
+        <li><strong>至少先繳最低應繳：</strong>富邦與<a href="https://dbs.com.tw/iwov-resources/pdf/cards/SBI_TC_20250322.pdf">星展約定條款</a>都寫，申請那期要在繳款截止日前繳足最低應繳，申請才生效；兩家的可申請門檻都是「應繳總額扣掉最低應繳」達 NT$1,000。台新頁面沒有寫金額門檻，只列出哪些款項不能分期（例如已成立分期的每期應繳金額、預借現金、循環信用利息、所有費用、違約金等）。</li>
+        <li><strong>算法：</strong>三家都是年金法（本息平均攤還，台新寫「約定利率本利均攤方式」），每期本息併入該期帳單的最低應繳金額。金管會的最低應繳金額令（金管銀票字第 10340001781 號）也把「每期應付之分期本金及利息」列為最低應繳的一部分。</li>
+        <li><strong>年百分率＝分期利率：</strong>三家都寫總費用年百分率等於分期利率，也沒有另收手續費（台新：「無其他手續費」；富邦：「除另有約定外，不收取消費分期手續費」；星展的範例各項相關費用總金額為 0 元）。所以帳單分期不需要像上面的手續費那樣換算，成本就是利率。</li>
+      </ul>
+
+      <h3>三家公告的差別</h3>
+      <table>
+        <thead>
+          <tr><th>項目</th><th>台北富邦</th><th>台新</th><th>星展</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>利率</td><td>指數型房貸基準利率＋加碼，上限 15%；實際印在帳單「帳單分期利率」欄</td><td>年利率 6.25%~15%，依產品與信用狀況</td><td>約定年利率 2.99%~14.99%</td></tr>
+          <tr><td>期數</td><td>3、6、12、18、24、30</td><td>3~30 期</td><td>公告未列帳單分期的期數</td></tr>
+          <tr><td>提前清償</td><td>違約金：首期結帳日後至第二期前 160 元；第二期後至第六期前 150 元；第六期後至第十二期前 140 元（表只到第 12 期）</td><td>作業費：已入帳 1~5 期 300 元；6~11 期 200 元；12 期（含）以上免收</td><td>違約金：未到期期數超過或等同申辦期數的一半 300 元；少於一半 150 元；溢繳款不會提前清償</td></tr>
+          <tr><td>頁面日期</td><td>未標發布日期（範例以 115 年 9 月 1 日為計算基準日）</td><td>2022/05/25</td><td>檔名 SBI_TC_20250322；年百分率範例計算基準日 2023-02-10</td></tr>
+        </tbody>
+      </table>
+      <p>
+        以上只是三家的公告，不代表其他發卡機構的做法；利率與違約金可能已更新，台新頁面的日期是 2022/05/25，更要以你的帳單與約定書為準。本頁沒有內建任何銀行的費率。
+      </p>
+
+      <h3>用同一個函式重算富邦公布的對照表</h3>
+      <p>
+        富邦的頁面公布了「帳單分期金額 1 萬元、分期利率 3.9%~15%」的每期本息。下表左欄是本頁計算機的函式在 3.9% 與 15% 算出的每期本息（取整到元），右欄是富邦公布的數字，12 個格子逐格相同，也就是本頁的年金法算法和銀行公告一致。
+      </p>
+      <table>
+        <thead>
+          <tr><th>期數</th><th>本頁函式：3.9%</th><th>本頁函式：15%</th><th>富邦公布</th></tr>
+        </thead>
+        <tbody>
+          {fubonTable.map((r) => (
+            <tr><td>{r.n} 期</td><td>{n0(r.low)} 元</td><td>{n0(r.high)} 元</td><td>{n0(r.published[0])} ~ {n0(r.published[1])} 元</td></tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>算例五：帳單 30,000 元，先繳最低應繳，其餘分 12 期</h2>
+      <p>
+        假設這期帳單應繳總額 30,000 元，最低應繳 3,000 元，你先繳 3,000 元（最低應繳的金額是示範值，各行算法不同），其餘分 12 期，帳單上的帳單分期利率是年利率 10%（示範值，落在三家公告的範圍內）。計算機的預設值就是這一題。
+      </p>
+      <ol>
+        <li>分期金額 = 30,000 − 3,000 = <strong>{n0(bill.financed)} 元</strong>；這期你先繳 {n0(bill.paid)} 元。</li>
+        <li>月利率 i = 10% ÷ 12 = 0.8333%；平均攤還率 = i(1+i)^12 ÷ ((1+i)^12 − 1) = {billFactor.toFixed(7)}。</li>
+        <li>每期本息 = {n0(bill.financed)} × {billFactor.toFixed(7)} ≈ <strong>{n0(billPlan.firstPayment)} 元</strong>（最後一期 {n0(billPlan.lastPayment)} 元，補逐期取整的差額）；12 期總付款 {n0(billPlan.totalPaid)} 元，其中<strong>利息 {n0(billPlan.totalInterest)} 元</strong>。</li>
+        <li>總費用年百分率等於分期利率 10%；逐期取整到元後用 IRR 反推是 {p2(billPlan.aprPct)}%，差異來自取整。</li>
+        <li>對照：如果這 {n0(bill.financed)} 元不分期，繼續用循環信用、每月也繳 {n0(billPlan.firstPayment)} 元，循環利率取法定上限 15%（<a href={localizedPath(locale, '/tools/credit-card-payoff')}>信用卡循環利息計算器</a>的做法，日息 = 本金 × 年利率 ÷ 365，一期 30 天），要約 {billRev.months} 個月還清，利息 {n0(billRev.totalInterest as number)} 元，比分期多 {n0(billRev.extraVsInstallment as number)} 元。若你的循環利率是 12%，利息 {n0(billRev10.totalInterest as number)} 元，比分期多 {n0(billRev10.extraVsInstallment as number)} 元。</li>
+      </ol>
+      <p>
+        結論：三家公告的帳單分期利率上限都是 15%，和循環信用的法定上限（銀行法第 47-1 條）一樣，但實際適用的利率因人而異；分期的好處是每月金額和期數固定，代價是每期本息併入最低應繳、占用信用額度。是否划算，取決於你帳單上「帳單分期利率」和「循環信用利率」兩個數字，不是名稱。期數越長，月付越輕，但總利息越多（分期金額 {n0(bill.financed)} 元、10%）：
+      </p>
+      <table>
+        <thead>
+          <tr><th>期數</th><th>每期本息</th><th>總利息</th><th>總付款</th></tr>
+        </thead>
+        <tbody>
+          {billByN.map((r) => (
+            <tr><td>{r.n} 期</td><td>約 {n0(r.firstPayment)} 元</td><td>{n0(r.totalInterest)} 元</td><td>{n0(r.totalPaid)} 元</td></tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>算例六：帳單分期提前結清，違約金划不划算</h2>
+      <p>
+        延續算例五（{n0(bill.financed)} 元、12 期、10%），在繳完第 k 期後一次還清剩餘本金。提前結清省下的是「之後本來要付的利息」，要和銀行收的違約金比。下表的違約金用上面三家各自公告的收法算（只是對照，你的約定書才算數）：
+      </p>
+      <table>
+        <thead>
+          <tr><th>繳完第 k 期</th><th>剩餘本金</th><th>省下之後的利息</th><th>台新：費用／淨省</th><th>富邦：費用／淨省</th><th>星展：費用／淨省</th></tr>
+        </thead>
+        <tbody>
+          {billEarly.map((e) => (
+            <tr>
+              <td>第 {e.k} 期</td>
+              <td>{n0(e.remaining)} 元</td>
+              <td>{n0(e.avoided)} 元</td>
+              <td>{n0(e.fees.taishin)} 元／{money0(e.avoided - e.fees.taishin)} 元</td>
+              <td>{n0(e.fees.fubon)} 元／{money0(e.avoided - e.fees.fubon)} 元</td>
+              <td>{n0(e.fees.dbs)} 元／{money0(e.avoided - e.fees.dbs)} 元</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        越晚結清，省下的利息越少；到第 11 期，只剩最後一期的利息 {n0(billEarly[4].avoided)} 元，比三家公告的違約金都低，提前結清反而多付錢。規則是：<strong>省下的利息要大於違約金才划算</strong>。富邦的表只列到第 12 期，台新「12 期（含）以上免收」，星展以「未到期期數是否達申辦期數一半」分級，三家的分級方式不一樣，所以表上同一個 k 的費用不同。「繳完第 k 期」對應各行「已入帳期數」「結帳日」的說法，本頁是簡化對照，實際以約定書為準。
+      </p>
+      <p>
+        另外，星展的條款明確寫溢繳款不會提前清償分期專案未出帳的剩餘本金：想提前結清，要主動向銀行申請，不是多繳一筆就自動結清。其他銀行請看自己的約定書。
+      </p>
+
       <h2>分期會影響信用嗎</h2>
       <p>
         只引用聯徵中心的原文。<a href="https://www.jcic.org.tw/main_ch/docDetail.aspx?uid=1555&pid=1555&docid=629">個人信用評分組成</a>（{checked} 查核）說明：
@@ -290,7 +434,28 @@ const related = [
   </section>
 </ToolLayout>
 
+<script>
+  // 兩個試算模式共用同一個頁面：沒有 JavaScript 時兩個面板都顯示；有 JavaScript 時一次顯示一個。
+  const switchRoot = document.querySelector<HTMLElement>('.mode-switch');
+  if (switchRoot) {
+    const buttons = Array.from(switchRoot.querySelectorAll<HTMLButtonElement>('button[data-mode]'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-mode-panel]'));
+    const show = (mode: string) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+      panels.forEach((p) => { p.hidden = p.dataset.modePanel !== mode; });
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.mode || 'item')));
+    show(window.location.hash === '#bill-installment' || window.location.hash === '#bill-installment-guide' ? 'bill' : 'item');
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#bill-installment') show('bill');
+    });
+  }
+</script>
+
 <style>
+  .mode-switch { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-block: 0.5rem 1rem; }
+  .mode-switch button { border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); color: inherit; padding: 0.5rem 0.9rem; font: inherit; font-weight: 650; cursor: pointer; }
+  .mode-switch button[aria-pressed='true'] { border-color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
   .method-note {
     margin: 1rem 0;
     border: 1px solid var(--color-border);

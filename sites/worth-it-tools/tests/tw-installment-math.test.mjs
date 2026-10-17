@@ -166,3 +166,94 @@ test('zero-interest-installments-truth is a redirect stub to the tool, and the t
   assert.ok(stubs.some((s) => s.from === '/en/zero-interest-installments-truth/' && s.to === '/en/tools/installment-true-apr/'));
   assert.ok(!zhPage.includes('zero-interest-installments-truth'));
 });
+
+// ---------------------------------------------------------------------------------------------------------------
+// P2 batch 4 (2026-10-17): 帳單分期 mode
+// ---------------------------------------------------------------------------------------------------------------
+import { ANNOUNCED_EARLY_FEES, billEarlySettlement, evaluateBillInstallment } from '../src/lib/twInstallmentMath.mjs';
+
+test('富邦公布的帳單分期對照表（1 萬元、3.9%~15%）：12 個格子與年金法函式逐格相同', () => {
+  const published = { 3: [3355, 3417], 6: [1686, 1740], 12: [851, 903], 18: [573, 624], 24: [434, 485], 30: [350, 402] };
+  for (const [n, [lo, hi]] of Object.entries(published)) {
+    assert.equal(evaluatePlan({ listPrice: 10000, n: Number(n), aprPct: 3.9 }).firstPayment, lo, `${n} 期 3.9%`);
+    assert.equal(evaluatePlan({ listPrice: 10000, n: Number(n), aprPct: 15 }).firstPayment, hi, `${n} 期 15%`);
+  }
+  // 富邦的 100,000 元 / 12 期 / I = 1.71% 範例: 分期利率 4.62%~15%, 年百分率等於分期利率
+  assert.equal(evaluatePlan({ listPrice: 100000, n: 12, aprPct: 4.62 }).aprPct, 4.62);
+  assert.equal(evaluatePlan({ listPrice: 100000, n: 12, aprPct: 15 }).aprPct, 15);
+});
+
+test('算例五: 帳單 30,000 / 最低應繳 3,000 / 先繳 3,000 / 12 期 / 10%', () => {
+  const r = evaluateBillInstallment({ statementTotal: 30000, minimumDue: 3000, paidNow: 3000, n: 12, aprPct: 10, revolvingAprPct: 15 });
+  assert.equal(r.financed, 27000);
+  assert.deepEqual(r.checks, { paidAtLeastMinimum: true, financeableEnough: true, positive: true });
+  assert.equal(annuityFactor(0.1 / 12, 12).toFixed(7), '0.0879159');
+  assert.equal(r.plan.firstPayment, 2374);
+  assert.equal(r.plan.lastPayment, 2369);
+  assert.equal(r.plan.totalInterest, 1483);
+  assert.equal(r.plan.totalPaid, 28483);
+  assert.equal(r.plan.aprPct, 9.99); // per-bill rounding to the dollar; the bank-disclosed figure is the 10% rate itself
+  // keep revolving at 15% and pay the same amount every month
+  assert.equal(r.revolving.status, 'paidOff');
+  assert.equal(r.revolving.months, 13);
+  assert.equal(r.revolving.totalInterest, 2273);
+  assert.equal(r.revolving.extraVsInstallment, 790);
+  const at12 = evaluateBillInstallment({ statementTotal: 30000, minimumDue: 3000, paidNow: 3000, n: 12, aprPct: 10, revolvingAprPct: 12 }).revolving;
+  assert.equal(at12.totalInterest, 1780);
+  assert.equal(at12.extraVsInstallment, 297);
+  // the table by instalment count
+  const byN = Object.fromEntries([6, 12, 18, 24, 30].map((n) => [n, evaluatePlan({ listPrice: 27000, n, aprPct: 10 })]));
+  assert.deepEqual([6, 12, 18, 24, 30].map((n) => byN[n].firstPayment), [4632, 2374, 1622, 1246, 1021]);
+  assert.deepEqual([6, 12, 18, 24, 30].map((n) => byN[n].totalInterest), [792, 1483, 2188, 2904, 3624]);
+  assert.deepEqual([6, 12, 18, 24, 30].map((n) => byN[n].totalPaid), [27792, 28483, 29188, 29904, 30624]);
+});
+
+test('帳單分期的資格檢查: 至少先繳最低應繳; 應繳總額扣最低應繳要達門檻', () => {
+  const base = { statementTotal: 30000, minimumDue: 3000, n: 12, aprPct: 10 };
+  assert.equal(evaluateBillInstallment({ ...base, paidNow: 2000 }).checks.paidAtLeastMinimum, false);
+  assert.equal(evaluateBillInstallment({ ...base, statementTotal: 3900 }).checks.financeableEnough, false); // 900 < 1,000
+  assert.equal(evaluateBillInstallment({ ...base, statementTotal: 4000 }).checks.financeableEnough, true); // 1,000 >= 1,000
+  assert.equal(evaluateBillInstallment({ ...base, paidNow: 30000 }).plan, null); // nothing left to finance
+  assert.equal(evaluateBillInstallment({ ...base }).paid, 3000); // default: pay only the minimum
+  // paying more now shrinks the financed amount one for one
+  assert.equal(evaluateBillInstallment({ ...base, paidNow: 8000 }).financed, 22000);
+});
+
+test('算例六: 提前結清 (27,000 / 12 期 / 10%) 與三家公告的違約金', () => {
+  const loan = { financed: 27000, n: 12, aprPct: 10 };
+  const rows = { 1: [24851, 1258], 3: [20499, 862], 6: [13834, 405], 9: [7000, 117], 11: [2349, 20] };
+  for (const [k, [remaining, avoided]] of Object.entries(rows)) {
+    const e = billEarlySettlement(loan, Number(k), 0);
+    assert.equal(e.remaining, remaining, `k=${k} remaining`);
+    assert.equal(e.interestAvoided, avoided, `k=${k} interest avoided`);
+    // interest already paid + interest avoided = total interest
+    assert.equal(e.interestPaid + e.interestAvoided, 1483);
+  }
+  assert.equal(billEarlySettlement(loan, 12, 0), null);
+  assert.equal(billEarlySettlement(loan, 0, 0), null);
+  const fees = (k) => [ANNOUNCED_EARLY_FEES.taishin(k, 12), ANNOUNCED_EARLY_FEES.fubon(k, 12), ANNOUNCED_EARLY_FEES.dbs(k, 12)];
+  assert.deepEqual(fees(1), [300, 160, 300]);
+  assert.deepEqual(fees(3), [300, 150, 300]);
+  assert.deepEqual(fees(6), [200, 140, 300]);
+  assert.deepEqual(fees(9), [200, 140, 150]);
+  assert.deepEqual(fees(11), [200, 140, 150]);
+  // 提前結清只有省下的利息大於違約金才划算
+  assert.equal(billEarlySettlement(loan, 3, 300).netSaving, 562);
+  assert.equal(billEarlySettlement(loan, 3, 150).netSaving, 712);
+  assert.equal(billEarlySettlement(loan, 6, 300).netSaving, 105);
+  assert.equal(billEarlySettlement(loan, 9, 200).netSaving, -83);
+  assert.equal(billEarlySettlement(loan, 11, 200).netSaving, -180);
+});
+
+test('帳單分期 page text: the bank announcements it quotes are the numbers in the function and the page uses the same defaults as the component', () => {
+  const page = readFileSync(new URL('../src/pages/zh/tools/installment-true-apr.astro', import.meta.url), 'utf8');
+  const comp = readFileSync(new URL('../src/components/TWBillInstallmentCalculator.astro', import.meta.url), 'utf8');
+  assert.ok(page.includes("const billIn = { statementTotal: 30000, minimumDue: 3000, paidNow: 3000, n: 12, aprPct: 10, revolvingAprPct: 15 };"));
+  for (const frag of ['id="bp-total" type="number" inputmode="numeric" min="0" step="1000" value="30000"', 'id="bp-min" type="number" inputmode="numeric" min="0" step="100" value="3000"', 'id="bp-paid" type="number" inputmode="numeric" min="0" step="100" value="3000"', '<option value="12" selected>', 'id="bp-rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="10"', 'id="bp-rev" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="15"']) {
+    assert.ok(comp.includes(frag), frag);
+  }
+  // the three issuers' published fee tiers, as quoted on the page
+  for (const frag of ['160 元', '150 元', '140 元', '已入帳 1~5 期 300 元', '6~11 期 200 元', '未到期期數超過或等同申辦期數的一半 300 元', '少於一半 150 元', '年利率 6.25%~15%', '約定年利率 2.99%~14.99%', '上限 15%']) {
+    assert.ok(page.includes(frag), frag);
+  }
+});

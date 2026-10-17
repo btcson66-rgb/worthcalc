@@ -6,6 +6,7 @@ import DeliveryMembershipCalculator from '../../components/DeliveryMembershipCal
 import FAQ from '../../components/FAQ.astro';
 import { LOCALES, type Locale } from '../../consts';
 import { deliveryMembershipGuides } from '../../data/decisionGuides';
+import { deliveryBreakEven } from '../../lib/twMembershipMath.mjs';
 import type { FaqItem } from '../../lib/seo';
 
 type EditorialLocale = 'en' | 'zh';
@@ -23,12 +24,13 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
   },
   zh: {
     title: '外送會員一年要用幾次才回本',
-    description: '用合格訂單、免運差額、服務費差、最低消費、湊單與完全不用月份，計算外送會員一年回本次數。',
+    description: '用合格訂單、免運差額、服務費差、最低消費、湊單與完全不用月份，計算外送會員一年回本次數；價格請自行從平台頁面輸入。',
     faq: [
-      { question: '外送會員一年要訂幾次才回本？', answer: '用會員費除以每筆合格訂單淨節省後無條件進位。本頁算例年費 NT$1,199、每單淨省 NT$95，至少需要 13 筆合格訂單。' },
+      { question: '外送會員一年要訂幾次才回本？', answer: '用會員費除以每筆合格訂單淨節省後無條件進位。本頁示範輸入年費 NT$1,000、每單淨省 NT$60，至少需要 17 筆合格訂單；這些是示範數字，不是任何平台的價格。' },
       { question: '會員免運是不是等於完全沒有外送費用？', answer: '不是。服務費、小額訂單費、距離、尖峰、餐點差價、稅與小費都可能存在；一定要比較同店、同餐點、同時間的最終結帳金額。' },
       { question: '最低消費沒達到要怎麼算？', answer: '未達門檻的訂單不要列為合格；若為了湊門檻多買，應把原本不會買或可能浪費的金額從每單節省扣掉。' },
       { question: '旅遊或自己煮的月份要算嗎？', answer: '要。年費不會因當月沒下單自動減少，因此完全不用的月份要從有效月份扣除，避免拿理想化的 12 個月頻率算回本。' },
+      { question: '本頁為什麼沒有列出各平台的會員價格？', answer: '2026-10-17 查核時，foodpanda 與 Uber 的官方頁面無法從本站的查核環境打開（回應 403 或 406），所以沒有可以附上原文與查核日期的價格。請自己打開平台的會員頁面或結帳畫面，把下一期真正會扣的費用填進計算機。' },
       { question: '首月免費試用可以直接當成一年都划算嗎？', answer: '不行。試用只描述短期費用；決策要使用試用結束後的續約價、目前權益、取消路徑與你正常一年的下單習慣。' },
     ],
   },
@@ -44,9 +46,9 @@ const calculators = {
   },
   zh: {
     currency: 'TWD' as const,
-    defaults: { membershipFee: 1199, unusedMonths: 2, ordersPerActiveMonth: 3, eligibleOrderRate: 80, deliveryFeeDifference: 80, serviceFeeDifference: 15, extraSpendPerEligibleOrder: 0 },
+    defaults: { membershipFee: 1000, unusedMonths: 2, ordersPerActiveMonth: 3, eligibleOrderRate: 80, deliveryFeeDifference: 50, serviceFeeDifference: 10, extraSpendPerEligibleOrder: 0 },
     copy: {
-      heading: '外送會員回本計算機', intro: '請比較同店、同餐點、同時間的會員與非會員結帳，且只算本來就會下的訂單。', membershipFee: '下一期會員年費', unusedMonths: '完全不會用外送的月份', ordersPerActiveMonth: '每個有效月份原本會下的訂單', eligibleOrderRate: '符合指定店家與最低消費比例（%）', deliveryFeeDifference: '每筆合格訂單外送費差額', serviceFeeDifference: '每筆合格訂單服務費差額', extraSpendPerEligibleOrder: '每筆只為湊門檻的額外支出', plannedOrders: '全年預計訂單', eligibleOrders: '全年合格訂單', savingPerEligibleOrder: '每筆合格訂單淨節省', grossSavings: '扣會費前全年利益', netValue: '扣會費後年淨值', breakEvenOrders: '最低回本合格訂單', positive: '會員方案淨省', negative: '會員方案還差', tie: '會員方案剛好回本。', impossible: '每筆合格訂單沒有淨節省，這組條件下無法靠下單回本。', orderSuffix: '筆合格訂單', privacy: '輸入只留在瀏覽器。本工具比較結帳成本，不保證店家資格、未來價格、取消或退費結果。',
+      heading: '外送會員回本計算機', intro: '預設值是示範數字，不是任何平台的價格；請從平台的會員頁面與結帳畫面抄下你的數字。比較同店、同餐點、同時間的會員與非會員結帳，且只算本來就會下的訂單。', membershipFee: '下一期會員年費', unusedMonths: '完全不會用外送的月份', ordersPerActiveMonth: '每個有效月份原本會下的訂單', eligibleOrderRate: '符合指定店家與最低消費比例（%）', deliveryFeeDifference: '每筆合格訂單外送費差額', serviceFeeDifference: '每筆合格訂單服務費差額', extraSpendPerEligibleOrder: '每筆只為湊門檻的額外支出', plannedOrders: '全年預計訂單', eligibleOrders: '全年合格訂單', savingPerEligibleOrder: '每筆合格訂單淨節省', grossSavings: '扣會費前全年利益', netValue: '扣會費後年淨值', breakEvenOrders: '最低回本合格訂單', positive: '會員方案淨省', negative: '會員方案還差', tie: '會員方案剛好回本。', impossible: '每筆合格訂單沒有淨節省，這組條件下無法靠下單回本。', orderSuffix: '筆合格訂單', privacy: '輸入只留在瀏覽器。本工具比較結帳成本，不保證店家資格、未來價格、取消或退費結果。',
     },
   },
 };
@@ -60,9 +62,17 @@ const article = articles[locale];
 const guide = deliveryMembershipGuides[locale];
 const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
+
+// zh prose numbers come from src/lib/twMembershipMath.mjs (the calculator's module); see tests/tw-membership-math.test.mjs.
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const dIn = calculators.zh.defaults;
+const dArgs = { membershipFee: dIn.membershipFee, unusedMonths: dIn.unusedMonths, ordersPerActiveMonth: dIn.ordersPerActiveMonth, eligibleRatePct: dIn.eligibleOrderRate, deliverySaving: dIn.deliveryFeeDifference, serviceSaving: dIn.serviceFeeDifference, extraSpend: dIn.extraSpendPerEligibleOrder };
+const dBase = deliveryBreakEven(dArgs);
+const dHalf = deliveryBreakEven({ ...dArgs, eligibleRatePct: 50 });
+const checkedOn = '2026-10-17';
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated={locale === 'zh' ? checkedOn : '2026-07-19'} alternateLocales={LOCALES}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>“Free delivery” is not the number to divide into the annual fee. A plan can leave service fees, small-order charges, distance fees, taxes, menu-price differences, and tips untouched. Start with orders you would place anyway, then compare the final member and nonmember checkout for the same restaurant, basket, address, and time.</p>
@@ -80,17 +90,19 @@ if (!guide) throw new Error(`Missing delivery membership guide for ${locale}`);
   </>}
   {locale === 'zh' && <>
     <p>「會員免運」不等於整張外送單都免費。平台服務費、小額訂單費、距離或尖峰加價、餐點售價差、稅與小費都可能留下。先把同一家店、同一份餐點、同一時間的會員與非會員結帳畫面並排，再算真正由會員造成的差額。</p>
+    <p><strong>價格怎麼填：</strong>本頁不內建任何平台的會員價格。2026-10-17 查核時，foodpanda 與 Uber 的官方頁面無法從本站的查核環境打開（回應 403 或 406），沒有可以附上原文與查核日期的數字，所以會費、外送費差與服務費差都請你從平台的會員頁面與結帳畫面自己抄入。下面的 NT${n0(dIn.membershipFee)}、NT${n0(dIn.deliveryFeeDifference)}、NT${n0(dIn.serviceFeeDifference)} 都是為了示範算式的整數。</p>
     <DecisionGuide content={guide} />
     <DeliveryMembershipCalculator locale={locale} {...calculator} />
     <h2>最低消費不是小字，而是合格訂單比例</h2>
-    <p>預計 30 單不代表 30 單都能免運。本頁用 80% 合格率，只算 24 單；若實際只有一半符合指定店家與門檻，全年淨省會從 NT$1,081 降到 NT$226。為湊門檻多買的飲料、點心或吃不完餐點，必須從節省扣除。</p>
+    <p>預計 {n0(dBase.plannedOrders)} 單不代表 {n0(dBase.plannedOrders)} 單都能免運。本頁用 {dIn.eligibleOrderRate}% 合格率，只算 {n0(dBase.eligibleOrders)} 單；若實際只有一半符合指定店家與門檻，全年淨值會從 NT${n0(dBase.netValue)} 變成 {dHalf.netValue < 0 ? '虧 ' : ''}NT${n0(Math.abs(dHalf.netValue))}。為湊門檻多買的飲料、點心或吃不完餐點，必須從節省扣除。</p>
     <h2>服務費要看結帳差額，不要用印象填</h2>
-    <p>同一筆訂單可能免外送費但仍收平台費，也可能因活動、距離或時段出現不同費用。最穩的做法是連續記錄幾次同店同籃的會員／非會員差額；本頁 NT$80 與 NT$15 都只是透明示範輸入，不是假裝成市場平均。</p>
+    <p>同一筆訂單可能免外送費但仍收平台費，也可能因活動、距離或時段出現不同費用。最穩的做法是連續記錄幾次同店同籃的會員／非會員差額，取保守的那一次；本頁的 NT${n0(dIn.deliveryFeeDifference)} 與 NT${n0(dIn.serviceFeeDifference)} 是透明示範輸入，不是市場平均。</p>
     <h2>返鄉、旅遊與自己煮會降低一年使用次數</h2>
-    <p>年費通常不會因某月沒下單就自動縮小，所以要先扣掉完全不用的月份。若你只有十個有效月份，每月三單就是 30 單，而不是把十二個月硬乘成 36 單。預計搬家或服務區改變時，也應加入保守情境。</p>
+    <p>年費通常不會因某月沒下單自動縮小，所以要先扣掉完全不用的月份。若你只有十個有效月份，每月三單就是 {n0(dBase.plannedOrders)} 單，而不是把十二個月硬乘成 36 單。預計搬家或服務區改變時，也應加入保守情境。</p>
     <h2>試用結束前確認續約價與取消證明</h2>
-    <p>行政院消費者保護會提醒，刪除 APP 不等於取消訂閱；應依平台路徑取消並保存成功畫面。續約前重新核對費用、指定店家、最低消費與退費條款，不把首月優惠沿用成整年假設。</p>
-    <p class="privacy-note">本頁只做一般消費成本比較，不推薦特定外送平台，也不判定店家資格、取消、退費、食品安全或稅務結果。</p>
+    <p>行政院消費者保護處提醒，刪除 APP 後仍被扣款是常見消費爭議，建議依下載頁面所列的取消方式立刻取消，並手動關閉 Google／Apple ID 的自動更新（<a href="https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11">消保處說明</a>，{checkedOn} 查核）。消保會的電子商務綱領第 10 點則要求自動續約應提示契約期限、收費金額、收款週期與取消方式（<a href="https://cpc.ey.gov.tw/Page/960E744883E6A75D">電子商務消費者保護綱領</a>，106-11-02 修正版，{checkedOn} 查核）。續約前重新核對費用、指定店家、最低消費與退費條款，不把首月優惠沿用成整年假設。</p>
+    <p>接著可以到<a href="/zh/tools/subscription-audit/">訂閱支出健檢計算機</a>把會費和其他訂閱放在一起看，或用<a href="/zh/monthly-vs-annual-subscription/">月繳或年繳的比較</a>判斷月付方案是否更適合。</p>
+    <p class="privacy-note">試算結果僅供參考，以平台公告與條款為準；本頁只做一般消費成本比較，不推薦特定外送平台，也不判定店家資格、取消、退費、食品安全或稅務結果。最後審核 {checkedOn}。</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

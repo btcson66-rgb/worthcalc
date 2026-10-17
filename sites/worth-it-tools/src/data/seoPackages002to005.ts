@@ -41,7 +41,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/subscription-creep/"
+      "https://worthcalc.win/en/tools/subscription-audit/"
     ],
     "breadcrumbLabel": "AI Tool ROI Without Fantasy Hours: Measure Realized Time Savings, Rework and Recoverable Value",
     "schemaFile": "009__en__ai-tool-realized-time-savings-break-even.json"
@@ -141,7 +141,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/subscription-creep/"
+      "https://worthcalc.win/en/tools/subscription-audit/"
     ],
     "breadcrumbLabel": "Annual vs. Monthly Subscription: A Cancellation-Risk Break-Even Model",
     "schemaFile": "009__en__annual-plan-cancellation-risk-break-even.json"
@@ -241,7 +241,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/subscription-creep/"
+      "https://worthcalc.win/en/tools/subscription-audit/"
     ],
     "breadcrumbLabel": "Benefits vs. Higher Salary: Use Replacement Cost, Not Employer Sticker Value",
     "schemaFile": "009__en__benefits-replacement-cost-vs-salary.json"
@@ -266,7 +266,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/subscription-creep/"
+      "https://worthcalc.win/en/tools/subscription-audit/"
     ],
     "breadcrumbLabel": "Bonus Volatility and Fixed-Cost Capacity: Compare Offers Without Treating Target Bonus as Guaranteed Pay",
     "schemaFile": "009__en__bonus-volatility-fixed-cost-capacity.json"
@@ -888,7 +888,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
       "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/subscription-creep/"
+      "https://worthcalc.win/en/tools/subscription-audit/"
     ],
     "breadcrumbLabel": "Remote-Work Pay-Cut Break-Even: Price the Cash Savings Before You Price the Convenience",
     "schemaFile": "009__en__remote-work-pay-cut-cash-break-even.json"
@@ -1037,7 +1037,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "AI 工具訂閱真的回本嗎？不要用「宣稱節省時間」，只算你實際追回的時間與可用產出",
     "schemaFile": "009__zh__ai-tool-realized-time-savings-break-even.json"
@@ -1137,7 +1137,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本",
     "schemaFile": "009__zh__annual-plan-cancellation-risk-break-even.json"
@@ -1212,7 +1212,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "高底薪 vs 高獎金怎麼選？不要只比年薪，先測「固定支出承受力」與獎金落空風險",
     "schemaFile": "009__zh__base-salary-vs-bonus-fixed-cost-capacity.json"
@@ -1710,7 +1710,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "公司福利 vs 現金薪資怎麼比？不要用「福利標價」，只算你離職後真的要自己補的 Replacement Cost",
     "schemaFile": "009__zh__employer-benefits-replacement-cost-vs-cash.json"
@@ -1785,7 +1785,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "為居家工作多租一房值不值得？用「增量房租」比較 coworking、通勤與可計費收入",
     "schemaFile": "009__zh__extra-room-home-office-incremental-rent-break-even.json"
@@ -2478,7 +2478,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "專業會員費值不值得？不要算「感覺有用」，只算你真的會替代掉的成本",
     "schemaFile": "009__zh__professional-membership-replacement-value-break-even.json"
@@ -2577,7 +2577,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "遠距工作降薪多少才值得？用「現金節省」而不是抽象便利感算 Break-Even",
     "schemaFile": "009__zh__remote-work-pay-cut-cash-break-even.json"
@@ -2727,7 +2727,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "副業設備多久回本？不要用營收除設備費，要用「可計費利用率」算真正 Payback",
     "schemaFile": "009__zh__side-hustle-equipment-billable-utilization-break-even.json"
@@ -2752,7 +2752,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "簽約獎金 vs 更高底薪怎麼比？把留任期與 Clawback 返還條款放進 Break-Even",
     "schemaFile": "009__zh__signing-bonus-vs-higher-base-clawback-break-even.json"
@@ -2926,7 +2926,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
       "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/paid-membership-break-even/"
+      "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "通勤月票 vs 單次付費怎麼選？用「實際通勤天數」而不是每天都上班的假設算回本",
     "schemaFile": "009__zh__transit-pass-vs-pay-as-you-go-usage-break-even.json"

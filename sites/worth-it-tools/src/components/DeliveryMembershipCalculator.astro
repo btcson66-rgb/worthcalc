@@ -113,6 +113,7 @@ const numberLocale = locale === 'zh'
 
 <script>
   import { renderMeter } from '../lib/calcUi';
+  import { deliveryBreakEven } from '../lib/twMembershipMath.mjs';
   for (const root of document.querySelectorAll<HTMLElement>('[data-delivery-membership-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -129,19 +130,15 @@ const numberLocale = locale === 'zh'
 
     function calculate() {
       const membershipFee = Math.max(0, value('membershipFee'));
-      const unusedMonths = Math.min(12, Math.max(0, Math.round(value('unusedMonths'))));
-      const activeMonths = 12 - unusedMonths;
-      const ordersPerActiveMonth = Math.max(0, value('ordersPerActiveMonth'));
-      const eligibleOrderRate = Math.min(100, Math.max(0, value('eligibleOrderRate'))) / 100;
-      const deliveryFeeDifference = value('deliveryFeeDifference');
-      const serviceFeeDifference = value('serviceFeeDifference');
-      const extraSpend = Math.max(0, value('extraSpendPerEligibleOrder'));
-      const plannedOrders = activeMonths * ordersPerActiveMonth;
-      const eligibleOrders = plannedOrders * eligibleOrderRate;
-      const savingPerEligibleOrder = deliveryFeeDifference + serviceFeeDifference - extraSpend;
-      const grossSavings = eligibleOrders * savingPerEligibleOrder;
-      const netValue = grossSavings - membershipFee;
-      const breakEvenOrders = savingPerEligibleOrder > 0 ? Math.ceil(membershipFee / savingPerEligibleOrder) : 0;
+      const { plannedOrders, eligibleOrders, savingPerEligibleOrder, grossSavings, netValue, breakEvenOrders } = deliveryBreakEven({
+        membershipFee,
+        unusedMonths: value('unusedMonths'),
+        ordersPerActiveMonth: value('ordersPerActiveMonth'),
+        eligibleRatePct: value('eligibleOrderRate'),
+        deliverySaving: value('deliveryFeeDifference'),
+        serviceSaving: value('serviceFeeDifference'),
+        extraSpend: value('extraSpendPerEligibleOrder'),
+      });
 
       output('plannedOrders').textContent = formatNumber.format(plannedOrders);
       output('eligibleOrders').textContent = formatNumber.format(eligibleOrders);

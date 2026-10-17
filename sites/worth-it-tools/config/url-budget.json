@@ -49,6 +49,6 @@
   },
   "p2Batch7": {
     "on": "2026-10-17",
-    "note": "P2 batch 7 (work order 2026-10-17-P2-batch7): /zh/tools/, /zh/guides/ and /zh/money/ rewritten as scenario-grouped entrance pages with a division of labour (each content page is listed in exactly one of them; see src/lib/directoryTw.ts and scripts/check-directory-tw.mjs). No page is merged into another: after the split the three lists no longer overlap, so none of them becomes a redirect stub. Sitemap 86 -> 86 (0 pages added, 0 merged away). maxUrls unchanged at 160."
+    "note": "P2 batch 7 (work order 2026-10-17-P2-batch7): /zh/tools/, /zh/guides/ and /zh/money/ rewritten as scenario-grouped entrance pages with a division of labour (each content page is listed in exactly one of them; see src/lib/directoryTw.ts and scripts/check-directory-tw.mjs). No page is merged into another: after the split the three lists no longer overlap, so none of them becomes a redirect stub. /zh/changelog/ was rewritten in place from the merge history and the version tags (still indexable; /en/changelog/ stays noindex with the rest of en). Sitemap 86 -> 86 (0 pages added, 0 merged away). maxUrls unchanged at 160."
   }
 }

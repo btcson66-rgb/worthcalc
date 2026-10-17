@@ -1,5 +1,6 @@
 ---
 import appliances from '../data/appliances.json';
+import { DEFAULT_TIERS, TARIFF_VERSION } from '../lib/twElectricityTariff.mjs';
 
 interface Props {
   locale: 'en' | 'zh';
@@ -62,6 +63,40 @@ const embedSnippet = isZh
           ? <>電價只是可編輯起點，請改成電費單上的邊際單價。台電現行簡要電價表標示 2025-10-01 起實施；夏月為 6/1–9/30。<a href={rateSource}>查看台電官方表</a>（查核 2026-09-15）。</>
           : <>The rate is an editable starting point; replace it with your bill. The EIA table is June 2026 residential average, 18.34¢/kWh, preliminary. <a href={rateSource}>View EIA source</a> (checked 2026-09-15).</>}
       </p>
+      {isZh && <fieldset class="tariff-box is-wide" id="tariff-box">
+        <legend>用台電住宅累進電價，算這台家電實際多付多少</legend>
+        <label class="tariff-toggle"><input id="tariff-on" type="checkbox" /> <span>啟用（用全戶每月度數推算這台落在哪些級距）</span></label>
+        <div id="tariff-fields" hidden>
+          <label>
+            <span>季節</span>
+            <select id="tariff-season">
+              <option value="summer">夏月（{TARIFF_VERSION.summerRange}）</option>
+              <option value="nonSummer">非夏月（夏月以外時間）</option>
+            </select>
+          </label>
+          <label>
+            <span>全戶每月原本用電度數（不含這台；兩個月一期的帳單請把度數除以 2）</span>
+            <input id="tariff-base" type="number" inputmode="decimal" min="0" step="1" value="400" />
+          </label>
+          <p class="calc__note" id="tariff-version">電價表版本：{TARIFF_VERSION.label}，{TARIFF_VERSION.effectiveFromRoc}起實施（台電《{TARIFF_VERSION.tableTitle}》）。</p>
+          <details class="tariff-table">
+            <summary>檢視或修改電價表（單位：元／度，每月）</summary>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>每月用電度數分段</th><th>夏月</th><th>非夏月</th></tr></thead>
+                <tbody>
+                  {DEFAULT_TIERS.map((tier, index) => <tr>
+                    <th scope="row">{tier.label}</th>
+                    <td><input type="number" inputmode="decimal" min="0" step="0.01" data-tier-rate="summer" data-tier-index={index} value={tier.summer} aria-label={`${tier.label} 夏月單價`} /></td>
+                    <td><input type="number" inputmode="decimal" min="0" step="0.01" data-tier-rate="nonSummer" data-tier-index={index} value={tier.nonSummer} aria-label={`${tier.label} 非夏月單價`} /></td>
+                  </tr>)}
+                </tbody>
+              </table>
+            </div>
+            <p class="calc__note">分段上限（120／330／500／700／1000 度）依台電公告，這裡只開放改單價；台電公布新表時，把新單價填進來就能重算。<button type="button" id="tariff-reset">還原為 {TARIFF_VERSION.effectiveFromRoc}版</button></p>
+          </details>
+        </div>
+      </fieldset>}
     </div>
 
     <div class="calc__results" aria-live="polite">
@@ -72,6 +107,17 @@ const embedSnippet = isZh
         <div><dt>{isZh ? '每月（30 天）' : 'Per month (30 days)'}</dt><dd id="appliance-per-month">—</dd></div>
         <div><dt>{isZh ? '每年（365 天）' : 'Per year (365 days)'}</dt><dd id="appliance-per-year">—</dd></div>
       </dl>
+      {isZh && <div id="tariff-result" class="tariff-result" hidden>
+        <p class="result-label">累進電價下，這台每月實際多付</p>
+        <dl>
+          <div><dt>這台每月用電</dt><dd id="tariff-kwh">—</dd></div>
+          <div><dt>全戶度數</dt><dd id="tariff-range">—</dd></div>
+          <div><dt>每月多付</dt><dd id="tariff-added">—</dd></div>
+          <div><dt>平均每度</dt><dd id="tariff-avg">—</dd></div>
+          <div><dt>若用上方單一電價</dt><dd id="tariff-flat">—</dd></div>
+        </dl>
+        <ul id="tariff-split" class="tariff-split"></ul>
+      </div>}
       <p id="appliance-rank" class="rank-summary"></p>
       <ol id="appliance-ranking" class="ranking"></ol>
     </div>
@@ -115,6 +161,7 @@ const embedSnippet = isZh
 
 <script>
   import { calculateApplianceCost, rankAppliances } from '../lib/applianceMath.mjs';
+  import { DEFAULT_TIERS, TARIFF_VERSION, addedCost, applianceMonthlyKwh, flatCost } from '../lib/twElectricityTariff.mjs';
   import { bindPersistentField } from '../lib/storage';
   import applianceData from '../data/appliances.json';
 
@@ -149,9 +196,48 @@ const embedSnippet = isZh
   function updateRangeNote(item: Appliance): void {
     rangeNote.innerHTML = `${isZh ? '指南錨點範圍' : 'Guide anchor range'}: <strong>${item.watts_low}–${item.watts_high} W</strong> · ${item.source_note} <a href="${item.source_url}">${isZh ? '來源' : 'source'}</a> · ${item.verified_date}`;
   }
+  // ---- 台電住宅累進電價模式（zh only）----
+  const tariffOn = document.getElementById('tariff-on') as HTMLInputElement | null;
+  const tariffFields = document.getElementById('tariff-fields');
+  const tariffSeason = document.getElementById('tariff-season') as HTMLSelectElement | null;
+  const tariffBase = document.getElementById('tariff-base') as HTMLInputElement | null;
+  const tariffResult = document.getElementById('tariff-result');
+  const tariffVersion = document.getElementById('tariff-version');
+  const tierInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[data-tier-rate]'));
+  const currentTiers = () => DEFAULT_TIERS.map((tier, index) => {
+    const read = (kind: 'summer' | 'nonSummer') => {
+      const input = tierInputs.find((el) => el.dataset.tierRate === kind && Number(el.dataset.tierIndex) === index);
+      const value = Number(input?.value);
+      return Number.isFinite(value) && value >= 0 ? value : tier[kind];
+    };
+    return { ...tier, summer: read('summer'), nonSummer: read('nonSummer') };
+  });
+  const tiersEdited = () => currentTiers().some((tier, index) => tier.summer !== DEFAULT_TIERS[index].summer || tier.nonSummer !== DEFAULT_TIERS[index].nonSummer);
+  const yuan = (value: number) => `NT$${value.toLocaleString('zh-TW', { maximumFractionDigits: 1, minimumFractionDigits: 0 })}`;
+  function updateTariff(): void {
+    if (!tariffOn || !tariffFields || !tariffResult) return;
+    tariffFields.hidden = !tariffOn.checked;
+    tariffResult.hidden = !tariffOn.checked;
+    if (tariffVersion) {
+      tariffVersion.textContent = tiersEdited()
+        ? '電價表版本：你已手動修改單價，下面的結果不再是台電 ' + TARIFF_VERSION.effectiveFromRoc + '起實施的那一版。'
+        : '電價表版本：' + TARIFF_VERSION.label + '，' + TARIFF_VERSION.effectiveFromRoc + '起實施（台電《' + TARIFF_VERSION.tableTitle + '》）。';
+    }
+    if (!tariffOn.checked || !tariffSeason || !tariffBase) return;
+    const season = tariffSeason.value === 'summer' ? 'summer' : 'nonSummer';
+    const addKwh = applianceMonthlyKwh(finiteValue(watts), finiteValue(hours), 30);
+    const r = addedCost({ baseKwh: finiteValue(tariffBase), addKwh, season, tiers: currentTiers() });
+    byId<HTMLElement>('tariff-kwh').textContent = `${addKwh.toLocaleString('zh-TW', { maximumFractionDigits: 2 })} 度`;
+    byId<HTMLElement>('tariff-range').textContent = `${r.baseKwh.toLocaleString('zh-TW', { maximumFractionDigits: 1 })} → ${(r.baseKwh + r.addKwh).toLocaleString('zh-TW', { maximumFractionDigits: 1 })} 度`;
+    byId<HTMLElement>('tariff-added').textContent = yuan(r.added);
+    byId<HTMLElement>('tariff-avg').textContent = r.addKwh > 0 ? `${r.averageRate.toFixed(2)} 元／度` : '—';
+    byId<HTMLElement>('tariff-flat').textContent = `${yuan(flatCost(addKwh, finiteValue(rate)))}（單價 ${finiteValue(rate)} 元）`;
+    byId<HTMLElement>('tariff-split').innerHTML = r.split.map((part) => `<li>${part.label}：${part.kwh.toLocaleString('zh-TW', { maximumFractionDigits: 2 })} 度 × ${part.rate} 元 = ${yuan(part.cost)}</li>`).join('');
+  }
   function update(): void {
     const item = selected();
     const result = calculateApplianceCost({ watts: finiteValue(watts), hoursPerDay: finiteValue(hours), rate: finiteValue(rate) });
+    updateTariff();
     byId<HTMLElement>('appliance-per-hour').textContent = formatCost(result.perHour);
     byId<HTMLElement>('appliance-per-day').textContent = formatCost(result.perDay);
     byId<HTMLElement>('appliance-per-month').textContent = formatCost(result.perMonth);
@@ -172,6 +258,32 @@ const embedSnippet = isZh
     bindPersistentField(input, `appliance-cost:${input.id}:${isZh ? 'zh' : 'en'}`);
     input.addEventListener('input', update);
   });
+  [tariffOn, tariffSeason, tariffBase, ...tierInputs].forEach((input) => { input?.addEventListener('input', update); input?.addEventListener('change', update); });
+  document.getElementById('tariff-reset')?.addEventListener('click', () => {
+    tierInputs.forEach((input) => {
+      const tier = DEFAULT_TIERS[Number(input.dataset.tierIndex)];
+      input.value = String(input.dataset.tierRate === 'summer' ? tier.summer : tier.nonSummer);
+    });
+    update();
+  });
+  // Worked examples on the page: a button fills the calculator with that example's inputs.
+  document.querySelectorAll<HTMLElement>('[data-tariff-example]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const data = button.dataset;
+      if (data.appliance) select.value = data.appliance;
+      watts.value = data.watts ?? watts.value;
+      hours.value = data.hours ?? hours.value;
+      if (tariffOn) tariffOn.checked = true;
+      if (tariffSeason && data.season) tariffSeason.value = data.season;
+      if (tariffBase && data.base) tariffBase.value = data.base;
+      tierInputs.forEach((input) => {
+        const tier = DEFAULT_TIERS[Number(input.dataset.tierIndex)];
+        input.value = String(input.dataset.tierRate === 'summer' ? tier.summer : tier.nonSummer);
+      });
+      update();
+      document.getElementById('appliance-calculator-heading')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
   if (ratePlan) {
     ratePlan.addEventListener('change', () => {
       if (ratePlan.value in rateByPlan) rate.value = String(rateByPlan[ratePlan.value]);
@@ -185,6 +297,12 @@ const embedSnippet = isZh
   .appliance-calculator, .embed-panel, .appliance-method, .complete-appliance-list { margin: 2rem 0; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-soft); }
   .appliance-calculator h2, .embed-panel h2, .appliance-method h2, .complete-appliance-list h2 { margin-top: 0; }
   .direct-answer { font-size: 1.02rem; }
+  .tariff-box { border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem; display: grid; gap: 0.75rem; }
+  .tariff-box legend { font-weight: 650; padding-inline: 0.35rem; }
+  .tariff-toggle { display: flex; gap: 0.5rem; align-items: center; }
+  .tariff-table td input { width: 5.5rem; }
+  .tariff-result { margin-bottom: 1rem; }
+  .tariff-split { margin: 0.25rem 0 0; padding-left: 1.2rem; font-size: 0.9rem; color: var(--color-muted); }
   .result-label { margin-top: 0; font-weight: 750; }
   .rank-summary { margin-bottom: 0.5rem; font-size: 0.92rem; color: var(--color-muted); }
   .ranking { margin: 0; padding-left: 1.25rem; }

@@ -1,17 +1,21 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import ApplianceCostCalculator from '../../../components/ApplianceCostCalculator.astro';
+import TWTariffExplainer from '../../../components/TWTariffExplainer.astro';
 import { localizedPath } from '../../../i18n/utils';
 import type { TrustBlockProps } from '../../../types/trustBlock';
 
 const locale = 'zh';
 const title = '家電一天用多少電？每小時、每月電費怎麼算？';
-const description = '家電一天用多少電、每小時或每月電費多少？輸入瓦數、使用時數與電費單單價，再比較 40 多種有來源的家電算例。';
+const description = '家電一天用多少電、每月電費多少？輸入瓦數與使用時數，可依台電住宅累進電價（夏月／非夏月，114 年 10 月 1 日起實施）算出這台實際多付多少，電價表可修改。';
 const faq = [
   { question: '家電電費公式怎麼算？', answer: '瓦數先除以 1,000 換成 kW，再乘使用時數與你輸入的每度電價：W ÷ 1,000 × 小時 × 電價。每月用 30 天、每年用 365 天。' },
   { question: '清單裡的典型瓦數是產品平均嗎？', answer: '不是。它們是 repo 指南裡可追溯的算例錨點，可能是某段實測或工作示例；請用機身標籤、智慧插座或插座電表讀值替換。' },
   { question: '可以比較家裡哪台電器最耗電嗎？', answer: '可以先用同一個每度電價比較，但排序使用每列預設每日時數。換成你家的使用時數後，才是較有意義的規劃結果。' },
   { question: '台電基本費、維修與購買成本有算嗎？', answer: '沒有。本頁估算新增用電的邊際能源費；固定基本費、維修、耗材、購買成本與保固應另外列。' },
+  { question: '家電電費為什麼不能直接用平均電價乘？', answer: '台電住宅電價是累進的，這台家電的度數疊在全戶原本用電的後面，落在哪一段就用哪一段的單價。勾選計算機的累進電價模式、填全戶每月度數，就會算有這台和沒有這台兩張帳單的差。' },
+  { question: '兩個月一期的帳單度數要怎麼填？', answer: '台電電價表註明兩個月抄表收費一次時各段度數加倍計算，所以把帳單上的度數除以 2 當每月度數再填入；整期都在同一季節才能這樣換算，橫跨 6 月 1 日或 9 月 30 日的帳單請以台電帳單為準。' },
+  { question: '電價表是哪一版？以後調整了怎麼辦？', answer: '預設是台電 114 年 10 月 1 日起實施的住宅用非時間電價；經濟部能源署揭露專區到 2026-10-17 列出的最新一版仍是這一版，12 月審議可能改變。計算機的電價表每一格都能改，台電公布新表時把新單價填進去即可。' },
   { question: '台灣時間電價可以怎麼填？', answer: '可從台電方案起點選夏月／非夏月與簡易型時間電價的尖峰／離峰，再把數字改成你的契約與電費單。這些是可編輯起點，不是對每個家庭的適用判定。' },
 ];
 const related = [
@@ -20,11 +24,26 @@ const related = [
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
 ];
 const trustBlock: TrustBlockProps = {
-  method: '本頁先把瓦數換成 kW，再套用可見的使用時數與每度電價，估算新增用電的邊際成本。',
-  formula: 'W ÷ 1,000 × 小時 × 每度電價',
+  method: '本頁先把瓦數換成 kW，再套用可見的使用時數與每度電價，估算新增用電的邊際成本。啟用累進電價模式時，改算「有這台的帳單 − 沒有這台的帳單」，各級距只對落在該級距的度數計價。',
+  formula: 'W ÷ 1,000 × 小時 × 每度電價；累進模式：帳單（原本度數 + 這台度數） − 帳單（原本度數）',
   sources: [
     {
-      label: '台電簡要電價表（2025-10-01 起實施）',
+      label: '台灣電力公司 — 調整後各類用戶電價表（中華民國 114 年 10 月 1 日起實施；住宅用非時間電價各級距與夏月定義、兩個月帳單各段度數加倍的註記。查核日為單價逐列核對那天；2026-10-17 台電網站回應 403，無法再開一次）',
+      url: 'https://www.taipower.com.tw/media/05klpxyd/1140930_114%E5%B9%B410%E6%9C%88%E9%9B%BB%E5%83%B9%E5%85%AC%E5%91%8A.pdf?mediaDL=true',
+      verifiedDate: '2026-09-23',
+    },
+    {
+      label: '經濟部能源署 — 電價及費率審議資訊揭露專區：電價表（最新一版為「台灣電力公司114年下半年電價表」，2025-10-03 公布）',
+      url: 'https://www3.moeaea.gov.tw/ele102/Content/Messagess/contents.aspx?&MmmID=654246034110677254&MSID=1343206640732631102',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '經濟部能源署 — 審議會決議優先爭取政府撥補預算，本次電價調整暫不決定（2026-09-18；2026-03-27 的第 1 次審議會決議電價不調整）',
+      url: 'https://www3.moeaea.gov.tw/ele102/Content/NewsLetter/contents.aspx?&SiteID=654246032665636316&MmmID=654246033427256710&SSize=10&MSID=1345445725427633170',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '台電簡要電價表（2025-10-01 起實施；簡易型時間電價的預設單價）',
       url: 'https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true',
       verifiedDate: '2026-09-15',
     },
@@ -35,15 +54,17 @@ const trustBlock: TrustBlockProps = {
     },
   ],
   limits: [
-    '這是計算，不是建議。',
-    '預設值可能過期；使用前請確認當下數字。',
+    '試算僅供參考，以台電帳單與台電、主管機關公告為準。',
+    '電價表預設為台電 114 年 10 月 1 日起實施的住宅用非時間電價，只算每度電的流動電費；經濟部審議會預計 12 月再討論電價，之後可能調整，請用最新公告修改計算機的單價。',
+    '家電瓦數與時數是示範值，清單取自指南算例，不是各品牌的平均。',
     '本頁只納入列出的輸入，其他成本、條款、稅費與個人情況不在計算範圍。',
   ],
-  lastReviewed: '2026-09-15',
+  lastReviewed: '2026-10-17',
   locale,
 };
 ---
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']} trustBlock={trustBlock}>
   <ApplianceCostCalculator locale={locale} />
+  <TWTariffExplainer />
 </ToolLayout>

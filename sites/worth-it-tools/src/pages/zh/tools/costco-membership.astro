@@ -14,6 +14,7 @@ import {
   savingsBreakeven,
   zhDate,
 } from '../../../lib/rates';
+import { netOfTax, rewardOn } from '../../../lib/twCostcoMath.mjs';
 
 const locale = 'zh';
 const decisionGuide = costcoGuides.zh;
@@ -41,7 +42,7 @@ const faq = [
   },
   {
     question: `${executive.name}要刷多少才值得升級？`,
-    answer: `這是另一題：升級價差 ${ntd(costcoTw.upgrade_delta)} 除以 ${percent(rewardRate)} 合格回饋，等於一年 ${ntd(upgradeBreakeven)}、每月約 ${ntd(upgradeMonthly)} 的合格消費。加油、菸酒、禮券、電信與美食廣場不列入合格消費，所以發票總額要比這條線更高。`,
+    answer: `這是另一題：升級價差 ${ntd(costcoTw.upgrade_delta)} 除以 ${percent(rewardRate)} 合格回饋，等於一年 ${ntd(upgradeBreakeven)}、每月約 ${ntd(upgradeMonthly)} 的合格消費。官方不列入的項目（會員費、汽車、Costco 購物卡儲值、停車費、運費與安裝費、西式餐飲部、加油站等，完整清單見會員規則頁）不算合格消費，而且回饋要先扣掉營業稅再算，所以收據總額要比這條線更高。`,
   },
   {
     question: `${executive.name}的回饋有上限嗎？`,
@@ -64,7 +65,7 @@ const related = [
   { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
   { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
-  { title: '好市多會員的數學', href: localizedPath(locale, '/costco-math') },
+  { title: '好市多會員規則：家庭卡、借卡、升等與退費', href: localizedPath(locale, '/costco-math') },
 ];
 ---
 
@@ -102,7 +103,7 @@ const related = [
         <div class="field">
           <label for="eligible-annual-spend">每年合格消費（可累積回饋）</label>
           <input id="eligible-annual-spend" type="number" inputmode="decimal" min="0" step="1000" placeholder="請填合格淨額" />
-          <p class="helper">從消費紀錄扣掉加油、菸酒、禮券、電信、美食廣場與退貨後的淨額，不要直接把總消費填進來。</p>
+          <p class="helper">從消費紀錄扣掉官方不列入的項目（如加油站、西式餐飲部、Costco 購物卡儲值）、營業稅與退貨後的淨額，不要直接把收據總額填進來。</p>
         </div>
         <div class="field">
           <label for="base-fee">基本會員年費（{gold.name}／{business.name}）</label>
@@ -158,22 +159,22 @@ const related = [
     <ol class="formula-list">
       <li><strong>基本會員回本年消費</strong> = 基本年費 ÷ 你的實測省錢率。以 {ntd(gold.annual_fee)} 與 {percent(demoSavingsRate)} 計算是一年 {ntd(basicBreakeven)}。</li>
       <li><strong>估計年省下金額</strong> = 每月消費 × 12 × 省錢率。這一項和{executive.name}回饋無關。</li>
-      <li><strong>升級價差</strong> = {executive.name}年費 − 基本會員年費 = {ntd(costcoTw.upgrade_delta)}。</li>
+      <li><strong>升級價差</strong> = {executive.name}年費 − 基本會員年費 = {ntd(costcoTw.upgrade_delta)}。這是整年價差；官方說明中途升等的費用依到期日按比例計算，若你是中途升等，請把上面「{executive.name}年費」欄改成「基本年費＋櫃台實際收的升等費用」。</li>
       <li><strong>升級回本合格年消費</strong> = 升級價差 ÷ 回饋率 = {amount(costcoTw.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>{ntd(upgradeBreakeven)}</strong>，即每月約 {ntd(upgradeMonthly)}。</li>
       <li><strong>你的回饋</strong> = 合格年消費 × 回饋率，但不超過年度上限 {ntd(rewardCap)}，也就是合格年消費超過 {ntd(capReached)} 之後不再增加。</li>
     </ol>
     <p>
-      省錢率套用在你的總消費上，回饋只套用在合格消費上。兩個分母刻意不一樣——把被排除的加油、菸酒、禮券與美食廣場算進回饋，會讓升級看起來比實際划算。
+      省錢率套用在你的總消費上，回饋只套用在合格消費上。兩個分母刻意不一樣——把被排除的加油站、西式餐飲部等項目算進回饋，會讓升級看起來比實際划算。
     </p>
   </section>
 
   <section class="explanation" aria-labelledby="costco-eligible">
     <h2 id="costco-eligible">什麼算「合格消費」</h2>
     <p>
-      {executive.name}的 {percent(rewardRate)} 回饋只計入合格消費，而且官方會先扣除政府課稅後再計算。加油站、菸酒、禮券與購物金、電信服務、美食廣場、會員費本身與退貨金額都不列入。升級生效前的消費也不會補算。
+      {executive.name}的 {percent(rewardRate)} 回饋只計入合格消費，而且官方規定要<strong>先扣掉政府課稅（包括 5% 營業稅）再算</strong>。收據上含稅 {ntd(10500)} 的商品，回饋以 {ntd(netOfTax(10500))} 計，是 {ntd(rewardOn(10500, rewardRate))}，不是 {ntd(Math.round(10500 * rewardRate))}。官方不列入的項目包括：會員費、汽車、金銀條塊、捐贈、輪胎及胎壓偵測器安裝服務費、Costco 購物卡購買與儲值、停車費、商品運費／安裝費／維修費、西式餐飲部、加油站，以及官網連結的外部合作廠商會員服務；清單以官網實際公告為準（{zhDate(costcoTw.checked)} 讀取常見問答）。升級生效前的消費不會補算，商品退貨時當筆回饋會被扣回。
     </p>
     <p>
-      回饋金的累積與使用是兩件事：依官方說明，回饋金需在實體賣場結帳時折抵，不是直接匯款。請以官網最新的完整排除清單為準，不要把本頁的摘要當成全部。
+      回饋金的累積與使用是兩件事：依官方常見問答，回饋金只能在實體賣場結帳時折抵（不能用在線上購物或加油站），規章另載可用來繳會員續約年費，不是直接匯款。累計期間、核發日、家庭卡共用與退卡規則見<a href={localizedPath(locale, '/costco-math')}>好市多會員規則：家庭卡、借卡、升等與退費</a>。
     </p>
   </section>
 

@@ -21,9 +21,9 @@
     },
     "upgrade_delta": 1500,
     "breakeven_qualified_spend": 75000,
-    "breakeven_note": "1500 ÷ 2% = 75,000。這是「升級黑鑽 vs 金星」的門檻，不是「辦不辦會員」的門檻，兩者是不同問題，頁面上要分開講。回饋不適用加油、菸酒、禮券、電信與美食廣場。",
+    "breakeven_note": "1500 ÷ 2% = 75,000。這是「升級黑鑽 vs 金星」的門檻，不是「辦不辦會員」的門檻，兩者是不同問題，頁面上要分開講。回饋不適用的項目以官網「黑鑽卡 2% 回饋金」常見問答 Q1 的 12 項清單為準（2026-10-17 讀取）；舊版備註把菸酒、電信列為排除項目，官方清單沒有這兩項，已更正。升級費用依到期日按比例計算，75,000 是整年價差的理論門檻。",
     "source": "https://www.costco.com.tw/membership",
-    "checked": "2026-09-22",
+    "checked": "2026-10-17",
     "history": [
       { "until": "2025-12-31", "gold_star": 1350, "business": 1150, "executive": 3000, "upgrade_delta": 1650, "breakeven": 82500, "reward_cap": 30000 }
     ]

@@ -109,7 +109,7 @@ export const homeTw = {
         {
           href: '/zh/tools/costco-membership/',
           title: '好市多會員回本計算機',
-          blurb: '分開算「辦不辦會員」與「要不要升級黑鑽卡」，並扣掉加油、菸酒等不計回饋的項目。',
+          blurb: '分開算「辦不辦會員」與「要不要升級黑鑽卡」，並說明官方不計回饋的項目與先扣營業稅的算法。',
           kind: 'calculator',
         },
         {

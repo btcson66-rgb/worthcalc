@@ -1,139 +1,188 @@
 ---
+/*
+ * 好市多會員規則 (P2 batch 3, 2026-10-17). This URL used to repeat the break-even formulas that the
+ * calculator page /zh/tools/costco-membership/ already owns. The two pages now answer different questions:
+ *
+ *   - /zh/tools/costco-membership/  -> 「划不划算」: enter your spending, get the break-even verdict.
+ *   - this page                     -> 「規則是什麼」: who may hold which card, whether a card may be lent,
+ *                                      how upgrade / downgrade / refund / the 2% reward timeline work.
+ *
+ * Every rule below was read on 2026-10-17 from Costco Taiwan's own pages (the site is script-rendered; the text
+ * was read from its CMS endpoint). Fees come from data/rates.json, never typed here. The arithmetic comes from
+ * src/lib/twCostcoMath.mjs, the module tests/tw-costco-math.test.mjs pins. The 規章 page says 最近更新日期
+ * 2025 年 4 月 1 日 and still prints older fees than the 會員方案頁; the page says so instead of picking silently.
+ */
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
-import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
-import { amount, capReachedAt, costcoTw, ntd, percent, perMonth, savingsBreakeven, zhDate } from '../../lib/rates';
+import { costcoTw, ntd, percent, zhDate } from '../../lib/rates';
+import { accrualWindows, capSpend, executiveRefund, firstWindowMonthlyNeed, issueDate, netOfTax, proratedUpgradeIllustration, rewardOn, upgradeBreakeven, useByDate } from '../../lib/twCostcoMath.mjs';
 
-const locale = 'zh';
+const locale = 'zh' as const;
+const checked = '2026-10-17';
 const gold = costcoTw.tiers.gold_star;
 const business = costcoTw.tiers.business;
 const executive = costcoTw.tiers.executive;
-const rewardRate = executive.reward_rate;
-const rewardCap = executive.reward_cap ?? 0;
-const upgradeBreakeven = costcoTw.breakeven_qualified_spend;
-const conservativeSavings = 0.08;
-const basicBreakeven = savingsBreakeven(gold.annual_fee, conservativeSavings);
-const faq = [
-  {
-    question: '一個人住，好市多會員值得嗎？',
-    answer:
-      '可以，但不是看家庭人數就能下結論。把年費、額外車程與可能浪費相加，再除以「12 × 你用相同規格購物籃實測的省錢率」，才是每月回本門檻；再跟原本就會買的品項比較。',
-  },
-  {
-    question: `Costco ${executive.name}要刷多少才回本？`,
-    answer:
-      `以官網目前刊載的 ${ntd(executive.annual_fee)} ${executive.name}與 ${ntd(gold.annual_fee)} ${gold.name}相比，升級差額是 ${ntd(costcoTw.upgrade_delta)}。用名目 ${percent(rewardRate)} 計算的理論門檻為一年 ${ntd(upgradeBreakeven)}、每月約 ${ntd(perMonth(upgradeBreakeven))}；但官方排除會員費、加油站、西式餐飲部等項目，且回饋須扣除政府課稅後計算，所以實際合格消費門檻會更高。`,
-  },
-  {
-    question: '好市多真的比一般賣場便宜多少？',
-    answer:
-      '沒有適用所有家庭的全店固定比例。請挑你真的會買的品項，用相同品牌、規格與單位價格，對照常去的量販店、超市和電商，並把促銷、保存期限、車程與信用卡回饋算進去；計算機應輸入這個實測值，再跑一次更保守的情境。',
-  },
-  {
-    question: '計算機有考慮「buy 太多用不完」的問題嗎？',
-    answer:
-      '間接考慮——省錢比例的假設由你控制。如果大包裝在你家常常過期浪費，或每次去都多買計畫外的東西，就把假設的省錢 % 往下調，看看結論還成不成立。誠實的輸入比樂觀的輸入重要。',
-  },
-  {
-    question: '主要去好市多加油的話，會員費划算嗎？',
-    answer:
-      '很有機會划算，好市多加油站的油價通常明顯低於市價。把每月加油金額和每公升價差換算成每月省下的錢，再跟年費比較就有答案。把加油省下的金額當成消費省下的錢輸入計算機即可。',
-  },
+const rate = executive.reward_rate;
+const cap = executive.reward_cap ?? 0;
+const delta = costcoTw.upgrade_delta;
+
+const title = '好市多會員規則：家庭卡、借卡、升等與退費怎麼算';
+const description = `好市多會員卡能借給家人嗎？家庭卡誰能辦、${executive.name}升等費用怎麼收、2% 回饋金何時累計與核發、退卡怎麼退，依台灣官網與會員規章整理，附查核日期。`;
+
+const official = accrualWindows('2025-03-04', '2025-11-30');
+const mine = accrualWindows('2026-10-17', '2027-03-31');
+const mineIssue = issueDate('2027-03-31');
+const mineUseBy = useByDate(mineIssue);
+const monthsLeft = [12, 9, 6, 4];
+const used = 1200;
+const refundUsed = executiveRefund(executive.annual_fee, 'issuedUsed', used);
+const gross = 10500;
+
+const sources = [
+  { label: '台灣好市多 — 會員方案頁（年費、家庭卡、2% 回饋金）', url: 'https://www.costco.com.tw/membership', verifiedDate: checked },
+  { label: '台灣好市多 — 會員規章與條款（頁面標示最近更新日期 2025 年 4 月 1 日；會員資格、家庭卡、升等降等退費、回饋金核發與使用）', url: 'https://www.costco.com.tw/member-privileges-conditions', verifiedDate: checked },
+  { label: '台灣好市多 — 常見問與答：黑鑽卡 2% 回饋金（不列入項目、累計期間、核發與使用）', url: 'https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership2', verifiedDate: checked },
+  { label: '台灣好市多 — 常見問與答：申請黑鑽卡（升等與降等）', url: 'https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership', verifiedDate: checked },
+  { label: '台灣好市多 — 常見問與答：會員相關（家庭卡、轉借、效期與續約）', url: 'https://www.costco.com.tw/CustomerServiceFAQMembership', verifiedDate: checked },
 ];
+
+const trustBlock = {
+  method: '本頁整理好市多台灣官網公布的會員規則，不做回本判斷（回本請用計算機）。年費取自會員方案頁；日期與金額的算例由同一支程式計算，並由測試逐項核對官方範例。',
+  formula: '2% 回饋 =（含稅消費 ÷ 1.05）× 2%；累計期間 = 升等日～到期日前 3 個月月底，之後每年一個期間；核發日 = 到期月份前兩個月的 1 日；直接申辦黑鑽卡、回饋金已使用後退卡 = 年費 − 已使用回饋金',
+  sources,
+  limits: [
+    '規則以好市多官網與會員規章為準，好市多可隨時修訂；加入、升等或退卡前請向會員部櫃台確認。',
+    '官網不同頁面的年費金額不一致（會員規章與會員常見問答仍列較舊的年費），本頁採會員方案頁；實際金額以結帳畫面或櫃台為準。',
+    '升等費用「依到期日按比例計算」，官方沒有寫月數怎麼數、尾數怎麼處理；本頁的比例算例是依月數線性比例的示意，不是官方公式。',
+    '先扣營業稅的金額，本頁以整數元示意；好市多系統的進位方式官方沒有公布。',
+    '本頁不判斷你該不該辦會員或升級，也不比較其他賣場的價格。',
+  ],
+  lastReviewed: checked,
+  locale,
+};
 ---
 
-<ArticleLayout
-  title="好市多會員的數學：年費怎麼算才回本"
-  description={`好市多會員值得嗎？${gold.name}、${business.name}、${executive.name}的回本門檻一次算清楚，${percent(rewardRate)} 回饋的數學、回饋上限，附免費試算計算機。`}
-  locale={locale}
-  alternateLocales={['en', 'zh']}
-  updated={costcoTw.checked}
->
+<ArticleLayout title={title} description={description} locale={locale} alternateLocales={['en', 'zh']} updated={checked} trustBlock={trustBlock}>
   <p>
-    「好市多會員值得嗎？」大概是個人理財裡最乾淨的「值不值得」問題：
-    你付一筆固定年費，換到比較便宜的價格，而答案幾乎只取決於一個變數——
-    你實際在那裡花多少錢。這篇文章把台灣三種會員（{gold.name}、{business.name}、{executive.name}）的
-    數學一次講清楚，算出回本門檻，並附上免費的
-    <a href={localizedPath(locale, '/tools/costco-membership')}>Costco 會員值不值得計算機</a>，
-    用你自己的數字直接得到結論。
+    這一頁回答「規則」：誰可以辦哪種卡、會員卡能不能借人、家庭卡怎麼辦、{executive.name}怎麼升等與退費、2% 回饋金什麼時候算、什麼時候發。每一條都來自好市多台灣官網（{zhDate(checked)} 讀取），並附出處。要算「划不划算」，請用
+    <a href={localizedPath(locale, '/tools/costco-membership')}>Costco 會員回本計算機</a>；本頁不重複計算機裡的回本公式。
   </p>
 
-  <h2>基本模型：年費 vs 省下的錢</h2>
+  <h2>會員有哪幾種、年費多少</h2>
   <p>
-    撇開熱狗、烤雞和試吃不談，會員本質上是一筆單純的交易。令 <em>F</em>
-    為年費、<em>C</em> 為一年額外車程與浪費成本、<em>s</em> 為相同規格購物籃的
-    實測省錢率，每月回本消費就是 <strong>(F + C) ÷ (12 × s)</strong>。
-    省錢率必須由自己的購物籃證明，不能套用網路上的通用百分比。
+    官網會員方案頁（{zhDate(checked)} 讀取）列出：{gold.name} {ntd(gold.annual_fee)}、{business.name} {ntd(business.annual_fee)}、{executive.name}（金星或商業主卡都可申辦）{ntd(executive.annual_fee)}。每張主卡有一張免費家庭卡。有效期限自加入當月起算 12 個月，不論有無消費。
   </p>
-  <p>以{gold.name}年費 {ntd(gold.annual_fee)}、實測省錢率 {percent(conservativeSavings)} 示範，回本門檻是：</p>
+  <p>
+    <strong>官網各頁的年費寫法不一致。</strong>會員規章（頁面標示最近更新日期 2025 年 4 月 1 日）和會員常見問答仍寫著較舊的金星、商業年費，和會員方案頁不同。本頁與計算機採會員方案頁；你續約或升等時，請以結帳畫面或櫃台告知的金額為準。
+  </p>
+  <p>
+    商業會員的資格是公司商店行號負責人、非營利事業組織的最高職階主管、或畜牧農場負責人；金星會員是年滿 18 歲、經審核通過的個人（會員規章 A.1、A.2）。
+  </p>
+
+  <h2>家庭卡：誰能辦、怎麼辦</h2>
   <ul>
-    <li>{amount(gold.annual_fee)} ÷ {percent(conservativeSavings)} = <strong>一年 {ntd(basicBreakeven)} 的可比較消費</strong></li>
-    <li>換算為<strong>每月約 {ntd(perMonth(basicBreakeven))}</strong>；若實際只省一半，門檻會加倍。</li>
+    <li><strong>誰能辦：</strong>每張主卡一張免費家庭卡，限配偶、父母（含配偶的父母）、兄弟姊妹、年滿 18 歲子女，或居住同一地址的家人（會員常見問答 Q5）。</li>
+    <li><strong>怎麼辦：</strong>家庭卡無法線上申請。要下載或在賣場拿「會員修正表格」，由主卡會員與申請人雙方簽名，帶雙方身分證明文件或影本（要能證明親屬關係）到會員部櫃台；同址家人另要同居住地址證明。</li>
+    <li><strong>效期：</strong>家庭卡的效期和主卡相同，不論何時申請；主卡沒有續約，家庭卡也失效；主卡退卡，家庭卡同時消失（會員規章 B.2、D.1）。</li>
+    <li><strong>{executive.name}的 2%：</strong>主卡及其家庭卡的消費都累計 2%；但家庭卡要<em>使用</em>回饋金，必須由主卡申請並經好市多核准（會員規章 J.1；2% 回饋金常見問答 Q4）。</li>
+  </ul>
+
+  <h2>會員卡可以借給家人或朋友嗎</h2>
+  <p>
+    不行。會員規章 A.3 的原文是：「會員卡只限申請者本人消費使用，不得轉借或轉讓給其他任何人。」常見問答 Q11 也寫「會員卡僅限本人使用」。入場和結帳都要出示有效會員卡，而且不接受只拿條碼、圖檔或影本（會員規章 A.8）；卡上印有本人照片，目的是避免遺失時被他人使用（A.4）。
+  </p>
+  <p>
+    官方給家人的做法有兩個：辦免費家庭卡（見上節），或當來賓同行：每位會員每次最多帶兩位來賓，結帳由持卡會員付款（會員規章 F.1；常見問答 Q11）。
+  </p>
+
+  <h2>年費期限、續約與退費</h2>
+  <ul>
+    <li><strong>續約：</strong>會員卡到期後兩個月內續約，新效期從<em>原到期日</em>起算 12 個月；超過兩個月才續約，從<em>續約當天</em>起算 12 個月（會員規章 D.2；常見問答 Q6）。也就是說，晚續約不會讓效期往後延，超過兩個月還會多出一段沒有會籍的空窗。</li>
+    <li><strong>不滿意可退費：</strong>會員規章的「好市多雙重保證」寫明，在效期內不滿意可以隨時取消會員卡，退還「當年度實際所繳之會員費」（G）。</li>
+    <li><strong>退費次數有限制：</strong>過去 6 個月內辦過會員費退費，或曾辦過 2 次退費的人，好市多不接受其會員卡申請（會員規章 A.5）。</li>
+    <li><strong>副卡不能自己續約：</strong>商業副卡的續約由主卡決定並一起繳費（常見問答 Q8）。</li>
+  </ul>
+
+  <h2>升等與降等{executive.name}</h2>
+  <ul>
+    <li><strong>怎麼升：</strong>有效的金星或商業主卡，可到賣場會員部櫃台或收銀區出示會員卡辦理；升等費用「依會員到期日按比例計算」，{executive.name}的效期和原會員卡相同（申請黑鑽卡常見問答 Q1）。</li>
+    <li><strong>剩 3 個月以內不能直接升：</strong>效期逾三個月可隨時升等；效期等於或短於三個月，要先續約再升等（會員規章 H.6）。</li>
+    <li><strong>每戶一張：</strong>每一公司行號、非營利組織及每一戶限辦一張{executive.name}主卡（H.5）。商業副卡不具{executive.name}資格，也沒有 2% 回饋（H.3；申請黑鑽卡常見問答 Q3）。</li>
+    <li><strong>降等：</strong>可隨時降回金星或商業。回饋金核發前降等，退還當年度所繳的全額升等費用並取消當年度累計的 2%；核發後降等，升等費用扣掉回饋金金額後退還剩餘，已核發的回饋金仍可使用（H.7）。</li>
+  </ul>
+
+  <h3>中途升等：費用按比例，累計期間卻更短</h3>
+  <p>
+    官方只寫「按比例」，沒有寫月數怎麼數。下面是<strong>示意</strong>，假設費用依剩餘月數線性比例：整年價差 {ntd(delta)}，若到期前剩 6 個月，約是 {ntd(proratedUpgradeIllustration(delta, 6))}。但有官方明文的另一半是：2% 只累計到「到期日前 3 個月」止（見下節），所以中途升等的第一個累計期間比剩餘月數更短，要在更短的時間內賺回費用：
+  </p>
+  <table>
+    <thead>
+      <tr><th>升等時距離到期</th><th>第一個累計期間</th><th>要賺回按比例的費用，每月需合格消費（示意）</th></tr>
+    </thead>
+    <tbody>
+      {monthsLeft.map((m) => (
+        <tr><td>{m} 個月</td><td>{m - 3} 個月</td><td>{ntd(firstWindowMonthlyNeed(delta, rate, m))}</td></tr>
+      ))}
+    </tbody>
+  </table>
+  <p>
+    算法：{ntd(delta)} × 剩餘月數 ÷ 12 ÷ {percent(rate)}，再除以累計月數。整年價差的理論門檻是一年 {ntd(upgradeBreakeven(delta, rate))}，平均每月 {ntd(Math.round(upgradeBreakeven(delta, rate) / 12))}；剩得越少，第一個期間每月要花得越多。「合格消費」要先扣掉不列入的項目與營業稅，見下方。
+  </p>
+
+  <h2>2% 回饋金：累計期間、核發日與使用</h2>
+  <ul>
+    <li><strong>累計期間：</strong>從成為{executive.name}當天起，算到<strong>到期日前 3 個月止</strong>；結算後的回饋金累計到下一年度（會員規章 I.2；2% 常見問答 Q2）。線上購物以<em>商品出貨日</em>為準，不是下單付款日（I.3）。</li>
+    <li><strong>核發：</strong>「會員卡到期前兩個月的 1 號」自動核發，存在{executive.name}主卡（2% 常見問答 Q3）。核發後一年內要用完，過期無法使用，也不接受延長（會員規章 J.1、J.4）。</li>
+    <li><strong>上限：</strong>每年累計結算的回饋上限 {ntd(cap)}（I.4），相當於合格淨消費 {ntd(capSpend(cap, rate))}（{ntd(cap)} ÷ {percent(rate)}）。</li>
+    <li><strong>怎麼用：</strong>只能在台灣實體賣場結帳時折抵，西式餐飲部和加油站除外，也不能用在線上購物；可以選擇要不要折抵，不能指定折抵金額，餘額可留到期限內；不找零、不能換現金、不能買 Costco 購物卡（會員規章 J.3、J.5；2% 常見問答 Q8）。規章另寫明可用來繳會員續約年費（J.2、J.5）。</li>
+    <li><strong>退貨：</strong>該筆消費當時獲得的回饋會從已累計的回饋金扣除（I.6）。</li>
+    <li><strong>查詢：</strong>登入台灣 Costco App，「我的帳號」→「我的錢包」→「已累積 2% 消費回饋金」，或到賣場會員部櫃台查（2% 常見問答 Q7）。</li>
+  </ul>
+
+  <h3>算例一：官方的日期範例</h3>
+  <p>
+    官方常見問答的範例：會員卡到期日 2025/11/30，2025/03/04 升等。第一個累計期間是 {official[0].from.replaceAll('-', '/')} ～ {official[0].to.replaceAll('-', '/')}，第二個是 {official[1].from.replaceAll('-', '/')} ～ {official[1].to.replaceAll('-', '/')}。依官方文字，核發日是到期前兩個月的 1 號，這個例子就是 {issueDate('2025-11-30').replaceAll('-', '/')}，剛好是第一個期間結束的隔天。
+  </p>
+
+  <h3>算例二：假設你 2026-10-17 升等</h3>
+  <p>
+    假設會員卡 2027/03/31 到期。依同一套規則：第一個累計期間是 {mine[0].from.replaceAll('-', '/')} ～ {mine[0].to.replaceAll('-', '/')}（到期日前 3 個月止），回饋金在 {mineIssue.replaceAll('-', '/')} 核發，要在 {mineUseBy.replaceAll('-', '/')} 之前用完；第二個累計期間是 {mine[1].from.replaceAll('-', '/')} ～ {mine[1].to.replaceAll('-', '/')}。這是依官方文字推出的日期，實際以 Costco App 顯示為準。
+  </p>
+
+  <h2>哪些消費不累計 2%，以及先扣稅</h2>
+  <p>
+    官方常見問答（{zhDate(checked)} 讀取）列出 12 項不列入 2% 的消費：會員費（含會員禮物卡）、汽車、黃金／白銀／鉑金／鈀金條塊與鑄幣、捐贈、輪胎及胎壓偵測器安裝服務費、Costco 購物卡的購買與儲值、政府課稅、停車費、商品運費／安裝費／維修費、西式餐飲部的消費、加油站的消費，以及經官網連結的外部合作廠商的會員服務。並寫明「除外項目的增減變更，以實際公告為準」。
+  </p>
+  <p>
+    另一條常被忽略：回饋金「需扣除所有政府課稅（包括但不限於 5% 之加值型營業稅）後計算」，優惠商品則以原價扣掉優惠券與稅後的金額計算（會員規章 I.1、I.5）。<strong>算例三：</strong>收據上含稅 {ntd(gross)} 的商品，扣稅後 {ntd(netOfTax(gross))}，回饋 {ntd(netOfTax(gross))} × {percent(rate)} = {ntd(rewardOn(gross, rate))}，不是 {ntd(gross)} × {percent(rate)} = {ntd(Math.round(gross * rate))}。（扣稅後金額在這裡取整數元示意；系統怎麼進位官方沒有公布。）
+  </p>
+
+  <h2>{executive.name}退卡，回饋金怎麼處理</h2>
+  <p>會員規章 H.8 依回饋金的狀態分三種（以下是直接申辦{executive.name}的情況）：</p>
+  <ul>
+    <li><strong>核發前退卡：</strong>退還當年度所繳的{executive.name}年費，並取消所有累計的 2%。</li>
+    <li><strong>核發後、已使用一部分：</strong>年費扣掉已使用的回饋金，退還剩餘。<strong>算例四：</strong>年費 {ntd(executive.annual_fee)}，假設已用掉 {ntd(used)} 的回饋金，退 {ntd(executive.annual_fee)} − {ntd(used)} = <strong>{ntd(refundUsed)}</strong>。（{ntd(used)} 是假設。）</li>
+    <li><strong>核發後、完全沒用：</strong>退還全額年費，已核發的回饋金立即失效。</li>
   </ul>
   <p>
-    這只是公式示範，不代表一般家庭一定能省 8%。住得離賣場很遠、一年只去
-    三次，或大包裝常常放到過期，你的
-    實際省錢率就會更低，等式可能翻盤。決定前，先把自己的數字丟進
-    <a href={localizedPath(locale, '/tools/costco-membership')}>計算機</a>跑一次。
+    由金星或商業升等上來的人，退費對象是「標準會員年費加升等費用」，同樣要扣掉已使用的回饋金。退費都限於會員卡一年有效期限內，且只退當年度計算後應退的金額。也就是說，已經用掉的回饋金，退卡時會從退費裡扣回。
   </p>
 
-  <h2>{executive.name}的回本數學</h2>
-  <p>
-    {executive.name}年費 {ntd(executive.annual_fee)}，比{gold.name}多出 {ntd(costcoTw.upgrade_delta)}，換來的是
-    合格消費 {percent(rewardRate)} 的回饋金（每年上限 {ntd(rewardCap)}，對應
-    {ntd(capReachedAt(executive))} 的合格年消費，多數家庭碰不到）。要不要升級，是跟基本會員分開的另一題：
-  </p>
+  <h2>常見誤解</h2>
   <ul>
-    <li>多付的 {ntd(costcoTw.upgrade_delta)} 年費，必須靠 {percent(rewardRate)} 回饋賺回來。</li>
-    <li>{amount(costcoTw.upgrade_delta)} ÷ {percent(rewardRate)} = <strong>一年 {ntd(upgradeBreakeven)}</strong>，即<strong>每月約 {ntd(perMonth(upgradeBreakeven))}</strong> 的合格消費門檻。</li>
+    <li><strong>把收據總額乘 2%。</strong>回饋要先扣營業稅，也不含 12 項除外消費。</li>
+    <li><strong>以為家人可以借卡。</strong>規章明文不得轉借；要共用就辦家庭卡。</li>
+    <li><strong>以為回饋金能在線上購物或加油站用。</strong>只能在實體賣場結帳（西式餐飲部、加油站除外）。</li>
+    <li><strong>以為中途升等只是少付一點錢。</strong>費用按比例，但 2% 的累計期間也提早在到期前 3 個月結束。</li>
+    <li><strong>把規章頁上的年費當成現行年費。</strong>以會員方案頁與結帳金額為準。</li>
   </ul>
+
+  <h2>要算划不划算，用計算機</h2>
   <p>
-    超過這個金額，{executive.name}嚴格優於{gold.name}；低於它，你就是在為賺不滿的回饋付費。
-    每週固定採購的家庭通常輕鬆過線；每月補一次貨的單身族通常過不了。
-    <a href={localizedPath(locale, '/tools/costco-membership')}>會員計算機</a>
-    會用你的消費水準同時比較各層級，直接告訴你哪一種最划算。另外，
-    做生意的人可以留意{business.name}（年費 {ntd(business.annual_fee)}），資格符合的話是
-    另一個入場選項。
+    規則弄清楚後，「要不要辦」和「要不要升級」是兩個不同的算式，已放在<a href={localizedPath(locale, '/tools/costco-membership')}>Costco 會員回本計算機</a>：升級的整年理論門檻是 {ntd(delta)} ÷ {percent(rate)} = {ntd(upgradeBreakeven(delta, rate))}，辦會員的門檻則取決於你自己量出的省錢率。同一思路也可以用來檢查<a href={localizedPath(locale, '/annual-fee-card-breakeven')}>信用卡年費要刷多少才回本</a>。
   </p>
-
-  <h2>簡單模型沒算到的兩件事</h2>
-  <p>
-    有兩個誠實的提醒，讓這題不會變成無腦送分。第一，
-    <strong>大包裝會改變行為</strong>：份量變大時，有些家庭真的會吃得更多
-    （或浪費更多），這會悄悄侵蝕省錢率。第二，<strong>「尋寶效應」是真的</strong>
-    ——量販賣場的動線就是為了讓你發現計畫外的商品而設計的，每趟多買一件
-    一千多元的東西，可能就吃掉一整個月的價差。這兩個效應都不會出現在
-    發票上，所以計算機才讓你自己設定保守的省錢假設，而不是把任何通用
-    省錢率當成事實。
-  </p>
-
-  <h2>實際決定的步驟</h2>
-  <ol>
-    <li>估算實際的每月好市多消費——食品、汽油、藥妝、輪胎全部算進去。</li>
-    <li>用相同規格購物籃量出自己的省錢率，再測一次更低的保守情境。</li>
-    <li>把兩個數字輸入<a href={localizedPath(locale, '/tools/costco-membership')}>計算機</a>，看各層級的結論。</li>
-    <li>如果剛好卡在回本線附近，代表經濟上大致打平——這時候就用方便性決定，不用糾結數學。</li>
-  </ol>
-  <p>
-    算完會員費，很適合順手把其他固定支出也健檢一輪。同樣的思路可以用在
-    每月扣款的訂閱服務上——見
-    <a href={localizedPath(locale, '/subscription-creep')}>訂閱通膨：你一年到底花了多少錢</a>；
-    或讀<a href={localizedPath(locale, '/annual-fee-card-breakeven')}>信用卡年費要刷多少才回本</a>
-    檢查你的年費信用卡到底有沒有回本。
-  </p>
-
-  <h2>資料來源與假設</h2>
-  <ul>
-    <li><a href="https://www.costco.com.tw/c/Business-Add-on-Renew/p/66">台灣好市多—會員方案與官網刊載年費</a></li>
-    <li><a href="https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership2">台灣好市多—黑鑽卡 2% 回饋計算、排除項目與使用方式</a></li>
-  </ul>
-  <p><small>官方條款最後查核：{zhDate(costcoTw.checked)}。年費、回饋上限與合格消費項目可能調整，加入或續約前請再確認官網。</small></p>
-
-  <FAQ items={faq} />
 
   <p class="privacy-note">
-    隱私說明：會員計算機完全在你的瀏覽器執行，你輸入的消費金額不會傳送到
-    任何伺服器。文中年費為約略數字，可能隨時間調整，請以官方公告為準。
-    計算結果僅供試算參考，非投資或財務建議。
+    本頁整理官方公開規則，不是好市多的立場；規則與金額可能隨時調整，請以官網與賣場公告為準。計算機在你的瀏覽器本機執行，輸入的消費金額不會傳送到任何伺服器。
   </p>
 </ArticleLayout>

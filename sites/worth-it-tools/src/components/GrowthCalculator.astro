@@ -105,6 +105,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
 
 <script>
   import { renderBars, renderStack, renderLegendTable } from '../lib/calcUi';
+  import { GROWTH_NUMBER_LOCALE, formatGrowthMoney } from '../lib/growthMoney.mjs';
   import { calculateMortgagePayoff } from '../lib/growthCalculators/mortgagePayoff';
   import { calculateCreditCardPayoff } from '../lib/growthCalculators/creditCardPayoff';
   import { calculateBudget } from '../lib/growthCalculators/budgetBuilder';
@@ -121,8 +122,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
     copy: Record<string, string>;
   };
 
-  const currencyByLocale = { en: 'USD', zh: 'TWD', es: 'EUR', fr: 'EUR', de: 'EUR' } as const;
-  const numberLocale = { en: 'en-US', zh: 'zh-TW', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' } as const;
+  const numberLocale = GROWTH_NUMBER_LOCALE;
 
   document.querySelectorAll<HTMLElement>('[data-growth-calculator]').forEach((root) => {
     const raw = root.querySelector<HTMLScriptElement>('.growth-config')?.textContent ?? '{}';
@@ -137,7 +137,7 @@ const advancedFields = definition.fields.filter((field) => field.advanced);
     const number = (id: string) => Number((field(id) as HTMLInputElement).value);
     const checked = (id: string) => (field(id) as HTMLInputElement).checked;
     const text = (id: string) => field(id).value;
-    const money = (value: number) => new Intl.NumberFormat(numberLocale[config.locale], { style: 'currency', currency: currencyByLocale[config.locale], maximumFractionDigits: config.locale === 'zh' ? 0 : 2 }).format(value);
+    const money = (value: number) => formatGrowthMoney(config.locale, value);
     const numeric = (value: number, digits = 2) => new Intl.NumberFormat(numberLocale[config.locale], { maximumFractionDigits: digits }).format(value);
     const track = (action: string) => {
       const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;

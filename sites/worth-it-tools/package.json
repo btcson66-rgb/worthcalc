@@ -155,7 +155,7 @@
     "test:commute": "node --test tests/commute-math.test.mjs && npm run test:appliance",
     "test:appliance": "node --test tests/appliance-math.test.mjs",
     "test:topics": "node tests/topic-classification.mjs",
-    "test:tw-money": "node --test tests/tw-labor-math.test.mjs tests/tw-credit-card-math.test.mjs tests/tw-installment-math.test.mjs tests/tw-mortgage-math.test.mjs tests/tw-costco-math.test.mjs tests/tw-membership-math.test.mjs tests/tw-electricity-tariff.test.mjs tests/tw-compound-math.test.mjs tests/tw-repair-math.test.mjs",
+    "test:tw-money": "node --test tests/tw-labor-math.test.mjs tests/tw-credit-card-math.test.mjs tests/tw-installment-math.test.mjs tests/tw-mortgage-math.test.mjs tests/tw-costco-math.test.mjs tests/tw-membership-math.test.mjs tests/tw-electricity-tariff.test.mjs tests/tw-compound-math.test.mjs tests/tw-repair-math.test.mjs tests/growth-money.test.mjs",
     "test:indexnow": "node --test tests/indexnow-plan.test.mjs",
     "test:disposition": "node --test tests/apply-disposition.test.mjs",
     "audit:topics": "node scripts/audit-topic-classification.mjs",

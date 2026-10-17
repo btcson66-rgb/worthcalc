@@ -126,7 +126,7 @@ https://worthcalc.win/zh/tools/ev-vs-gas/,tool,電動機車 vs 油車總持有�
 https://worthcalc.win/zh/tools/home-affordability/,tool,房屋負擔能力與完整持有成本計算機,yes,yes,www.cbc.gov.tw; lvr.land.moi.gov.tw,2026-07-31,,keep,依央行選擇性信用管制、房屋稅、地價稅反推可負擔房價，連到央行與實價登錄；計算機可用。
 https://worthcalc.win/zh/tools/installment-true-apr/,tool,信用卡分期試算：手續費換算年利率與零利率陷阱,yes,yes,law.moj.gov.tw; www.ba.org.tw; www.jcic.org.tw,2026-10-17,,keep,P2 第 2 批已改寫為信用卡分期試算：依金管會年百分率計算標準（內部報酬率法）換算，附銀行公會手續費彙整表、聯徵中心說明與台灣算例，2026-10-17 查核。
 https://worthcalc.win/zh/tools/latte-factor/,tool,拿鐵因子日常習慣成本計算機,no,no,,2026-07-07,,remove,通用「每天一杯咖啡」題目，與台灣在地需求無關，沒有來源，也不屬於五個情境。
-https://worthcalc.win/zh/tools/mortgage-payoff/,tool,房貸多繳與提前清償試算工具,yes,yes,www.ey.gov.tw; www.ba.org.tw,2026-07-31,1,keep,台灣使用情境（提前清償違約金、青安貸款），連到財政部/行政院與銀行公會；GSC 28 天有曝光；計算機可用。
+https://worthcalc.win/zh/tools/mortgage-payoff/,tool,房貸試算：本息與本金平均攤還、寬限期、提前還款,yes,yes,www.landbank.com.tw; moneywise.fsc.gov.tw; law.fsc.gov.tw; www.cbc.gov.tw,2026-10-17,1,keep,P2 第 2 批已升級為房貸試算：本息/本金平均攤還、寬限期（央行無寬限期類別）、提前還款與違約金（金管會函原則）、月付占收入（金融健檢 1/3、1/5），利率由使用者輸入，2026-10-17 查核；GSC 28 天有曝光。
 https://worthcalc.win/zh/tools/rent-vs-buy/,tool,租屋 vs 買房計算機,partial,no,,2026-07-07,,merge_into:https://worthcalc.win/zh/rent-vs-buy-breakeven-year/,通用計算機、沒有來源；與 /zh/rent-vs-buy-breakeven-year/（含實價登錄、房地合一稅來源）意圖重複。
 https://worthcalc.win/zh/tools/salary-converter/,tool,時薪、月薪與年薪換算工具,yes,yes,www.mol.gov.tw; law.moj.gov.tw,2026-07-31,,keep,台灣基本工資、勞退、健保、所得稅情境，連到勞動部與全國法規資料庫；計算機可用。
 https://worthcalc.win/zh/tools/subscription-audit/,tool,訂閱支出健檢計算機,partial,no,,2026-07-07,,rewrite,會員與訂閱情境內的核心計算機，但沒有任何來源或台灣價格；需補台灣現行訂閱價格來源與查核日期。

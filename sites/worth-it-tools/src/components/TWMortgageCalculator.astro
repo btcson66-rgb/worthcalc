@@ -1,0 +1,211 @@
+---
+/*
+ * 房貸試算 (P2 batch 2, 2026-10-17), zh only.
+ *
+ * Replaces the generic mortgage-payoff calculator on /zh/tools/mortgage-payoff/, whose
+ * defaults (5.5%, 300 months, a US-style extra-payment model) did not describe a Taiwanese
+ * loan. The arithmetic is in src/lib/twMortgageMath.mjs and is exercised by
+ * tests/tw-mortgage-math.test.mjs. The defaults are the first worked example on the page.
+ * The interest rate is always the reader's input; no bank's rate is built in, and the 2%
+ * default is a stated assumption, not a quote.
+ */
+const lawPenalty = 'https://law.fsc.gov.tw/LawContent.aspx?id=GL003663';
+const guideBurden = 'https://moneywise.fsc.gov.tw/tabf/main/tool1.html';
+---
+
+<section class="calc" data-tw-mortgage data-growth-calculator aria-labelledby="mg-heading">
+  <header>
+    <h2 id="mg-heading">房貸試算：月付、總利息、寬限期與提前還款</h2>
+    <p>輸入貸款金額、<strong>你的房貸年利率</strong>與年限，算出每月還多少、總利息多少；可加入寬限期、提前還款與月收入。預設值就是下方的算例一，其中 2% 是示範假設，不是任何銀行的利率。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>貸款金額（元；已在還的請填目前剩餘本金）</span><input id="mg-principal" type="number" inputmode="numeric" min="0" step="100000" value="10000000" /></label>
+      <label><span>房貸年利率（%，請填約定書或通知書上的數字）</span><input id="mg-rate" type="number" inputmode="decimal" min="0" max="100" step="0.001" value="2" /></label>
+      <label><span>貸款年限（年；已在還的請填剩餘年數）</span><input id="mg-years" type="number" inputmode="decimal" min="1" max="50" step="1" value="30" /></label>
+      <label><span>寬限期（年，只繳利息；沒有就填 0，含在貸款年限內）</span><input id="mg-grace" type="number" inputmode="decimal" min="0" max="10" step="1" value="0" /></label>
+      <label>
+        <span>攤還方式</span>
+        <select id="mg-method">
+          <option value="annuity">本息平均攤還（每月金額固定）</option>
+          <option value="equalPrincipal">本金平均攤還（每月本金固定）</option>
+        </select>
+      </label>
+      <label><span>月收入（元，選填；用來看房貸支出占收入）</span><input id="mg-income" type="number" inputmode="numeric" min="0" step="1000" value="100000" /></label>
+
+      <details class="is-wide mg-advanced">
+        <summary>提前還款（部分提前清償）</summary>
+        <div class="mg-advanced__grid">
+          <label><span>在第幾個月繳完後一次還本金（空白＝不提前還）</span><input id="mg-pre-month" type="number" inputmode="numeric" min="1" step="1" placeholder="例如 1" /></label>
+          <label><span>提前還款金額（元）</span><input id="mg-pre-amount" type="number" inputmode="numeric" min="0" step="100000" placeholder="例如 1000000" /></label>
+          <label>
+            <span>還款後怎麼處理</span>
+            <select id="mg-pre-mode">
+              <option value="shorten">月付不變、縮短還款期數</option>
+              <option value="lower">期數不變、降低月付</option>
+            </select>
+          </label>
+          <label><span>違約金比例（%，依你的契約；沒有就填 0）</span><input id="mg-pen-pct" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="0" /></label>
+          <label>
+            <span>違約金計收基礎（看契約）</span>
+            <select id="mg-pen-base">
+              <option value="amount">提前償還金額</option>
+              <option value="balance">還款前的貸款餘額</option>
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <div class="is-wide mg-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="reset" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        利率、寬限期與違約金請抄<strong>你的貸款契約或銀行通知</strong>上的數字，本頁沒有內建任何銀行的利率。違約金的計收方式依<a href={lawPenalty}>金管會 109 年 2 月 3 日函</a>以貸款餘額或提前償還金額為基礎、比率逐年遞減，實際比例看契約（2026-10-17 查核）。月收入的 1/3 與 1/5 門檻來自<a href={guideBurden}>金管會金融智慧網的金融健檢</a>，是理財參考，不是銀行核貸規定。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="mg-status" id="mg-status">—</p>
+      <dl>
+        <div><dt id="mg-pay-label">每月還款</dt><dd id="mg-pay">—</dd></div>
+        <div id="mg-grace-row" hidden><dt>寬限期內每月只繳利息</dt><dd id="mg-grace-pay">—</dd></div>
+        <div id="mg-after-row" hidden><dt>寬限期結束後每月</dt><dd id="mg-after-pay">—</dd></div>
+        <div><dt>總利息</dt><dd id="mg-interest">—</dd></div>
+        <div><dt>總付款（本金＋利息）</dt><dd id="mg-total">—</dd></div>
+        <div id="mg-gracecost-row" hidden><dt>比沒有寬限期多付的利息</dt><dd id="mg-gracecost">—</dd></div>
+        <div id="mg-burden-row" hidden><dt>房貸支出占月收入</dt><dd id="mg-burden">—</dd></div>
+        <div id="mg-pre-row" hidden><dt>提前還款的效果</dt><dd id="mg-pre-out">—</dd></div>
+      </dl>
+      <p class="mg-note" id="mg-explain"></p>
+      <p class="mg-note"><strong>試算結果僅供參考，以銀行貸款契約與每月帳單為準。</strong>簡化：利率不變、每月金額不逐月四捨五入（和銀行帳單會差幾元）、提前還款在指定月份繳款後發生、不含手續費、保險與其他費用。</p>
+      <details class="mg-schedule">
+        <summary>逐年摘要</summary>
+        <div class="mg-schedule__scroll">
+          <table>
+            <thead><tr><th>第幾年</th><th>當年付款</th><th>其中利息</th><th>年底剩餘本金</th></tr></thead>
+            <tbody id="mg-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { burdenLight, prepayEffect, safeNumber, simulateMortgage } from '../lib/twMortgageMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-mortgage]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['mg-principal', 'mg-rate', 'mg-years', 'mg-grace', 'mg-method', 'mg-income', 'mg-pre-month', 'mg-pre-amount', 'mg-pre-mode', 'mg-pen-pct', 'mg-pen-base'];
+    const inputs = ids.map((id) => el<HTMLInputElement | HTMLSelectElement>(id));
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const dash = '—';
+    const rowIds = ['mg-grace-row', 'mg-after-row', 'mg-gracecost-row', 'mg-burden-row', 'mg-pre-row'];
+    const lights: Record<string, string> = { red: '超過 1/3（金融健檢的紅燈）', yellow: '在 1/5 到 1/3 之間（黃燈）', green: '低於 1/5（綠燈）' };
+
+    const render = () => {
+      const principal = Math.max(0, Math.round(val('mg-principal')));
+      const years = Math.min(50, Math.max(1, val('mg-years') || 1));
+      const grace = Math.min(Math.max(0, val('mg-grace')), years - 1 / 12);
+      const method = el<HTMLSelectElement>('mg-method').value;
+      const base = { principal, aprPct: Math.max(0, val('mg-rate')), years, graceYears: grace, method };
+      rowIds.forEach((id) => { el(id).hidden = true; });
+      const tbody = el('mg-rows');
+      tbody.textContent = '';
+      ['mg-pay', 'mg-interest', 'mg-total'].forEach((id) => { el(id).textContent = dash; });
+      el('mg-explain').textContent = '';
+      if (principal <= 0) {
+        el('mg-status').textContent = '請輸入貸款金額。';
+        return;
+      }
+      const r = simulateMortgage(base);
+      const hasGrace = r.graceMonths > 0;
+      el('mg-pay-label').textContent = method === 'equalPrincipal' ? '還本期間每月還款（首月 → 最後一個月）' : hasGrace ? '還本期間每月還款（本息平均）' : '每月還款（本息平均）';
+      el('mg-pay').textContent = method === 'equalPrincipal'
+        ? `${money(r.firstAmortPayment)} → ${money(r.lastPayment)}`
+        : money(r.firstAmortPayment);
+      el('mg-interest').textContent = money(r.totalInterest);
+      el('mg-total').textContent = money(r.totalPaid);
+      el('mg-status').textContent = `${money(principal)}、${years} 年、年利率 ${base.aprPct}%：總利息約 ${money(r.totalInterest)}。`;
+
+      if (hasGrace) {
+        el('mg-grace-row').hidden = false;
+        el('mg-grace-pay').textContent = money(r.gracePayment);
+        el('mg-after-row').hidden = false;
+        el('mg-after-pay').textContent = `${money(r.firstAmortPayment)}（比寬限期內多 ${money(r.firstAmortPayment - r.gracePayment)}）`;
+        const none = simulateMortgage({ ...base, graceYears: 0 });
+        el('mg-gracecost-row').hidden = false;
+        el('mg-gracecost').textContent = `${money(r.totalInterest - none.totalInterest)}（沒有寬限期：總利息 ${money(none.totalInterest)}）`;
+      }
+
+      const income = val('mg-income');
+      const burden = burdenLight(r.firstAmortPayment, income);
+      if (burden) {
+        el('mg-burden-row').hidden = false;
+        el('mg-burden').textContent = `${(burden.ratio * 100).toFixed(1)}%，${lights[burden.light]}${hasGrace ? '。已用寬限期結束後的月付計算' : ''}`;
+      }
+
+      const preMonth = val('mg-pre-month');
+      const preAmount = val('mg-pre-amount');
+      if (preMonth > 0 && preAmount > 0) {
+        const effect = prepayEffect(base, {
+          month: preMonth,
+          amount: preAmount,
+          mode: el<HTMLSelectElement>('mg-pre-mode').value,
+          penaltyPct: val('mg-pen-pct'),
+          penaltyBase: el<HTMLSelectElement>('mg-pen-base').value,
+        });
+        el('mg-pre-row').hidden = false;
+        const after = effect.withPrepay;
+        el('mg-pre-out').textContent = `第 ${Math.round(preMonth)} 個月後還 ${money(after.prepaid)}：總利息 ${money(after.totalInterest)}（省 ${money(effect.interestSaved)}）、${effect.monthsSaved > 0 ? `提早 ${effect.monthsSaved} 個月還清（約 ${(effect.monthsSaved / 12).toFixed(1)} 年）` : '期數不變'}、違約金 ${money(after.penalty)}，扣掉違約金後淨省 ${money(effect.netSaved)}`;
+      }
+
+      for (let y = 1; y <= Math.ceil(r.months / 12); y += 1) {
+        const slice = r.rows.slice((y - 1) * 12, y * 12);
+        const tr = document.createElement('tr');
+        [y, slice.reduce((s, x) => s + x.payment + x.extra, 0), slice.reduce((s, x) => s + x.interest, 0), slice[slice.length - 1].balance].forEach((v, idx) => {
+          const td = document.createElement('td');
+          td.textContent = idx === 0 ? String(v) : yuan.format(Math.round(v));
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+    };
+
+    const example: Record<string, string> = { 'mg-principal': '10000000', 'mg-rate': '2', 'mg-years': '30', 'mg-grace': '0', 'mg-method': 'annuity', 'mg-income': '100000', 'mg-pre-month': '', 'mg-pre-amount': '', 'mg-pre-mode': 'shorten', 'mg-pen-pct': '0', 'mg-pen-base': 'amount' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = input instanceof HTMLSelectElement ? input.options[0].value : ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden] { display: none !important; }
+  .mg-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .mg-status { margin: 0; font-weight: 750; }
+  .mg-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .mg-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .mg-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+  .mg-schedule { margin-top: 0.5rem; }
+  .mg-schedule summary { cursor: pointer; font-weight: 650; }
+  .mg-schedule__scroll { overflow-x: auto; }
+  .mg-schedule table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  .mg-schedule th, .mg-schedule td { padding: 0.25rem 0.5rem; text-align: right; border-bottom: 1px solid var(--color-border); font-variant-numeric: tabular-nums; }
+</style>

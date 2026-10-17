@@ -1,6 +1,7 @@
 ---
 import GrowthCalculator from '../../../components/GrowthCalculator.astro';
 import TWCreditCardCalculator from '../../../components/TWCreditCardCalculator.astro';
+import TWMortgageCalculator from '../../../components/TWMortgageCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -46,6 +47,8 @@ const trustBlock = growthEntry.data.sources?.length
 // no compounding, a statutory minimum-payment composition), so the zh page runs
 // its own calculator.
 const useTwCreditCard = locale === 'zh' && slug === 'credit-card-payoff';
+// Likewise the mortgage page: 本息/本金平均攤還, 寬限期, 違約金 and the 房貸支出占收入 guide.
+const useTwMortgage = locale === 'zh' && slug === 'mortgage-payoff';
 ---
 
 <ToolLayout
@@ -59,7 +62,7 @@ const useTwCreditCard = locale === 'zh' && slug === 'credit-card-payoff';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

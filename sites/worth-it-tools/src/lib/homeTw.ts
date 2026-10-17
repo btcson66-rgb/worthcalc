@@ -230,8 +230,8 @@ export const homeTw = {
         },
         {
           href: '/zh/tools/mortgage-payoff/',
-          title: '房貸多繳與提前清償試算',
-          blurb: '比較多繳本金、縮短年限與提前清償違約金。',
+          title: '房貸試算計算機',
+          blurb: '算月付與總利息，比較本息與本金平均攤還、寬限期的利息差，以及提前還款與違約金。',
           kind: 'calculator',
         },
         {

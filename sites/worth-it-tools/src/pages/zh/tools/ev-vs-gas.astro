@@ -1,6 +1,7 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { localizedPath } from '../../../i18n/utils';
+import type { TrustBlockProps } from '../../../types/trustBlock';
 
 const locale = 'zh';
 const title = '電動機車 vs 油車總持有成本計算機';
@@ -12,11 +13,11 @@ const faq = [
   },
   {
     question: '電池資費要怎麼填？',
-    answer: '請填你每月會選的電池月租或能源方案費用。如果是依里程計價，請先換算成平均月費。',
+    answer: '請填你每月會選的電池月租或能源方案費用。如果是依里程計價，請先換算成平均月費。頁面預設的 899 元只是示範值，不是 Gogoro 或任何業者的公告價；Gogoro 官網首頁 2026-10-17 標示的是「限時每月資費 $168 起」，實際金額依方案、車款與里程而不同，以官網與你的契約為準。',
   },
   {
     question: '油車油耗要填什麼？',
-    answer: '請填每公升可以騎幾公里，例如 125cc 機車常見可先用 40 km/L 作為保守估算。',
+    answer: '請填你那台車實際的每公升公里數，例如用最近幾次加滿油的里程除以加油公升數。頁面預設的 40 km/L 只是示範值，不是官方數字，也不是某一車款的標示油耗。',
   },
   {
     question: '打平年是什麼意思？',
@@ -27,15 +28,45 @@ const faq = [
     answer: '若只看金錢成本通常不划算，但你仍可能因為安靜、加速、環保或換電便利而選擇電動機車。',
   },
 ];
+const trustBlock: TrustBlockProps = {
+  method: '把購車價、補助、每月里程、電池資費、油價、油耗與保養費代入頁面所示的算式：電動機車總成本 = 購車價 − 補助 + 持有年限 ×（電池資費 × 12 + 年度保養），油車總成本 = 購車價 + 持有年限 ×（每月里程 ÷ 油耗 × 油價 × 12 + 年度保養）。預設值都是示範輸入。',
+  formula: '電動機車總成本 = 購車價 − 補助 + 年限 ×（電池月費 × 12 + 保養）；油車總成本 = 購車價 + 年限 ×（里程 ÷ 油耗 × 油價 × 12 + 保養）；打平年 =（電動購車價 − 補助 − 油車購車價）÷（油車年營運成本 − 電動年營運成本）',
+  sources: [
+    {
+      label: '經濟部產業發展署電動機車產業網 — 中央及各縣市政府補助資訊（頁面更新日期 115/10/07；中央新購補助最高 7,000 元、國產電池芯加碼 3,000 元、淘汰老舊機車並新購加碼 1,000 元；縣市加碼另計，金額依縣市與車型而不同）',
+      url: 'https://meid.nat.gov.tw/lev/subsidy/city',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '中國石油 — 汽柴油各油品調整金額計算表（調價生效日期 2026/10/12；95 無鉛汽油零售價每公升 32.7 元；預設油價 32 元是接近這個牌價的示範整數，不是牌價）',
+      url: 'https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: 'Gogoro 台灣官網首頁 — 標示「限時每月資費 $168 起」（條件以官網註記為準；預設電池資費 899 元是示範值，不是公告價）',
+      url: 'https://www.gogoro.com/tw/',
+      verifiedDate: '2026-10-17',
+    },
+  ],
+  limits: [
+    '試算僅供參考，補助、油價與電池資費以主管機關公告、中油牌價與業者契約為準。',
+    '預設的車價、里程、電池資費、油耗與保養費都是示範值，不是官方數字，也不是任何車款的報價。',
+    '未包含保險、貸款、牌照稅、停車、充電設備、殘值與電池衰退；補助預設填 0，請依你的縣市與是否汰舊換新填入。',
+    '本頁只納入列出的輸入，其他成本、條款、稅費與個人情況不在計算範圍。',
+  ],
+  lastReviewed: '2026-10-17',
+  locale,
+};
 const related = [
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
   { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
+  { title: '電動機車補助速查：中央與縣市加起來多少', href: localizedPath(locale, '/money/e-scooter-subsidy-2026') },
   { title: '信用卡分期試算', href: localizedPath(locale, '/tools/installment-true-apr') },
   { title: '指南：電動車和油車怎麼比較五年總持有成本', href: localizedPath(locale, '/ev-vs-gas-total-cost') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']} trustBlock={trustBlock}>
   <p class="intro">
     這個電動機車 vs 油車成本計算機用台灣常見情境，比較 Gogoro 類電動機車和 125cc 油車的總持有成本。你可以調整里程、電池資費、油價和保養費，看哪一邊真的省。
   </p>
@@ -54,7 +85,8 @@ const related = [
         </div>
         <div class="field">
           <label for="subsidy">電動機車補助</label>
-          <input id="subsidy" type="number" inputmode="decimal" min="0" step="500" value="3000" />
+          <input id="subsidy" type="number" inputmode="decimal" min="0" step="500" value="0" />
+          <p class="helper">預設 0。補助依車款、縣市和是否汰舊換新而不同，請查<a href="https://meid.nat.gov.tw/lev/subsidy/city" rel="noopener noreferrer">電動機車產業網</a>或本站<a href={localizedPath(locale, '/money/e-scooter-subsidy-2026')}>電動機車補助速查</a>後填入。</p>
         </div>
         <div class="field">
           <label for="km-month">每月騎乘公里</label>
@@ -63,6 +95,7 @@ const related = [
         <div class="field">
           <label for="battery-fee">電池資費月費</label>
           <input id="battery-fee" type="number" inputmode="decimal" min="0" step="50" value="899" />
+          <p class="helper">899 是示範值，請換成你方案的實際月費。</p>
         </div>
         <div class="field">
           <label for="gas-cost">油價 (每公升)</label>
@@ -71,6 +104,7 @@ const related = [
         <div class="field">
           <label for="km-per-liter">油車油耗 (km/L)</label>
           <input id="km-per-liter" type="number" inputmode="decimal" min="1" step="0.1" value="40" />
+          <p class="helper">40 是示範值，請填你那台車的實際油耗。</p>
         </div>
         <div class="field">
           <label for="ev-maintenance">電動機車年度保養</label>

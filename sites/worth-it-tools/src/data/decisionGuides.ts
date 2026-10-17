@@ -591,10 +591,10 @@ export const commuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     cta: { label: '比較機車、汽車、大眾運輸與叫車', href: '/zh/tools/commute-cost/' },
     limitations: ['每公里成本應盡量用自己的加油、充電、維修與折舊紀錄，不把示範值當成全國平均。', '短期內固定的保險與牌照費，在決定是否持有車輛時仍然重要。', '時間沒有唯一價格；可不填，或依這次決策自行設定並獨立呈現。'],
     sources: [
-      { label: '經濟部能源署 — 車輛油耗指南', href: 'https://www.fueleconomy.gov.tw/' },
-      { label: '交通部 — 交通統計與公開資訊', href: 'https://www.motc.gov.tw/' },
+      { label: '中國石油 — 汽柴油各油品調整金額計算表（調價生效日期 2026/10/12；95 無鉛汽油每公升 32.7 元）', href: 'https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx' },
+      { label: '經濟部能源署 — 電價及費率審議資訊揭露專區：電價表（最新一版為台灣電力公司114年下半年電價表，2025-10-03 公布）', href: 'https://www3.moeaea.gov.tw/ele102/Content/Messagess/contents.aspx?&MmmID=654246034110677254&MSID=1343206640732631102' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 

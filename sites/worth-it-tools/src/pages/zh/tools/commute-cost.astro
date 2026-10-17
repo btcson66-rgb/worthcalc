@@ -3,6 +3,7 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 import DecisionGuide from '../../../components/DecisionGuide.astro';
 import { commuteGuides } from '../../../data/decisionGuides';
 import { localizedPath } from '../../../i18n/utils';
+import type { TrustBlockProps } from '../../../types/trustBlock';
 
 const locale = 'zh';
 const decisionGuide = commuteGuides.zh;
@@ -35,6 +36,40 @@ const faq = [
     answer: '可以。英制使用英里、加侖、MPG 與每 100 英里耗電；公制使用公里、公升、L/100 km 與每 100 公里耗電。切換時會轉換已輸入的距離、單位成本與效率。',
   },
 ];
+const trustBlock: TrustBlockProps = {
+  method: '把單程距離、每月通勤天數與你輸入的每公里成本（或用油耗 × 油價、電耗 × 電價推算）代入公式，再加停車、過路費、車票或叫車費；時間成本只在你填時薪時才加入。頁首例子的油價與電價引自官方公告（見下方來源），下方輸入框的預設值是另外的示範值。',
+  formula: '每月現金成本 =（單程公里 × 2 × 通勤天數 × 每公里成本）+ 停車 + 過路費 + 票價；每公里油錢 = L/100 km × 油價 ÷ 100；每公里電費 = kWh/100 km × 電價 ÷ 100',
+  sources: [
+    {
+      label: '中國石油 — 汽柴油各油品調整金額計算表（調價生效日期 2026/10/12；95 無鉛汽油調整後零售價每公升 32.7 元，與前一期相同；中油每週公告，請以當期牌價為準）',
+      url: 'https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '經濟部能源署 — 電價及費率審議資訊揭露專區：電價表（最新一版為「台灣電力公司114年下半年電價表」，2025-10-03 公布）',
+      url: 'https://www3.moeaea.gov.tw/ele102/Content/Messagess/contents.aspx?&MmmID=654246034110677254&MSID=1343206640732631102',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '經濟部能源署 — 審議會決議優先爭取政府撥補預算，本次電價調整暫不決定（2026-09-18，留待 12 月再討論）',
+      url: 'https://www3.moeaea.gov.tw/ele102/Content/NewsLetter/contents.aspx?&SiteID=654246032665636316&MmmID=654246033427256710&SSize=10&MSID=1345445725427633170',
+      verifiedDate: '2026-10-17',
+    },
+    {
+      label: '台灣電力公司 — 調整後各類用戶電價表（114 年 10 月 1 日起實施；住宅用非時間電價夏月 331～500 度部分每度 3.80 元。查核日為逐列核對那天；2026-10-17 台電網站回應 403，無法再開一次）',
+      url: 'https://www.taipower.com.tw/media/05klpxyd/1140930_114%E5%B9%B410%E6%9C%88%E9%9B%BB%E5%83%B9%E5%85%AC%E5%91%8A.pdf?mediaDL=true',
+      verifiedDate: '2026-09-23',
+    },
+  ],
+  limits: [
+    '試算僅供參考，油價與電價以中油牌價、台電帳單與主管機關公告為準。',
+    '輸入框的預設值（單程 12 公里、每月 22 天、汽車每公里 8 元、停車 2,000 元、時薪 250 元等）是示範值，不是全國平均，也不是官方數字。',
+    '油錢與電費只是行駛的能源支出，不含保養、輪胎、折舊、保險、貸款與稅費；時間沒有唯一價格，可以不填。',
+    '本頁只納入列出的輸入，其他成本、條款、稅費與個人情況不在計算範圍。',
+  ],
+  lastReviewed: '2026-10-17',
+  locale,
+};
 const related = [
   { title: '電動車與油車五年總持有成本', href: localizedPath(locale, '/ev-vs-gas-total-cost') },
   { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
@@ -42,9 +77,9 @@ const related = [
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']} trustBlock={trustBlock}>
   <p class="intro">
-    <strong>直接答案：20 km 單程 × 20 天、6.5 L/100 km、NT$32.7/L = 約 NT$1,700/月燃油；15 kWh/100 km、NT$3.80/kWh = 約 NT$456/月電費。</strong> 公式：來回公里 × 天數 × L/100 km ÷ 100 × 價格。<a href="https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx">中油來源</a>（2026-09-14）與<a href="https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true">台電來源</a>（查核 2026-09-15）；請換成自己的資料。
+    <strong>直接答案：20 km 單程 × 20 天、6.5 L/100 km、NT$32.7/L = 約 NT$1,700/月燃油；15 kWh/100 km、NT$3.80/kWh = 約 NT$456/月電費。</strong> 公式：來回公里 × 天數 × L/100 km ÷ 100 × 價格。NT$32.7/L 是中油 95 無鉛汽油 2026/10/12 起的每公升牌價（<a href="https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx">中油調整金額計算表</a>，2026-10-17 查核；牌價每週公告）；NT$3.80/kWh 是台電住宅用非時間電價夏月 331～500 度部分的每度單價（114 年 10 月 1 日起實施；2026-09-23 對台電電價表逐列核對，台電網站 2026-10-17 回應 403 無法再開，改由經濟部能源署揭露專區確認最新電價表仍是 114 年下半年電價表），家用充電的度數疊在全戶用電上，落在哪一級就用哪一級的單價。這個例子的數字不是下方輸入框的預設值；要重現它，請選「燃油車」或「電動車」並填入上面的數字。請換成自己的資料。
   </p>
 
   <div class="calculator-grid">

@@ -69,9 +69,7 @@ The engine searches for the smallest monthly amount that reaches your target und
 
 The nominal balance is the raw dollar figure the projection produces; the real balance divides it by cumulative inflation to show approximate purchasing power in today's terms. Compare any savings target set in today's dollars against the real balance, not the nominal one.
 
-The calculator can model inflation-adjusted balances; the guide explains why nominal and real frameworks must not be mixed.
-
-[real-return math](/en/guides/real-vs-nominal-return/)
+The calculator can model inflation-adjusted balances. Keep the target and the return in the same framework: either both nominal, or both in today's purchasing power.
 
 ## Sources
 

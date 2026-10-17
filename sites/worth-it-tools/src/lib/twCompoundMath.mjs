@@ -120,3 +120,23 @@ export function excelPmt(rate, nper, pv, fv = 0, type = 0) {
   if (i === 0) return -(safeNumber(pv) + safeNumber(fv)) / n;
   return (-(safeNumber(fv) + safeNumber(pv) * g) * i) / ((g - 1) * (1 + i * (type ? 1 : 0)));
 }
+
+/**
+ * P2 batch 6 (2026-10-17): the 晚開始 example. The deadline stays where it was; starting `delayMonths` later leaves
+ * `totalMonths - delayMonths` monthly deposits. `principal` is assumed to be 0 in the page's example (the calculator cannot
+ * simulate an idle starting balance, so the test only cross-checks that case); with a principal this function lets it grow for
+ * the whole `totalMonths` and the deposits start late.
+ */
+export function delayedPlan({ target, principal = 0, annualReturnPct = 0, annualFeePct = 0, totalMonths, delayMonths = 0, timing = 'end' }) {
+  const monthsLeft = Math.max(0, Math.round(safeNumber(totalMonths)) - Math.round(safeNumber(delayMonths)));
+  const i = monthlyRateFromEffective(netReturnPct(annualReturnPct, annualFeePct));
+  const grownPrincipal = safeNumber(principal) * (1 + i) ** Math.round(safeNumber(totalMonths));
+  const perDollar = annuityFutureValue(1, i, monthsLeft, timing);
+  const monthly = perDollar === 0 ? Infinity : (safeNumber(target) - grownPrincipal) / perDollar;
+  return { monthsLeft, monthly, totalDeposited: monthly * monthsLeft };
+}
+
+/** Plain "名目減通膨" shortcut for the real return, in percentage points, shown next to the exact formula. */
+export function approxRealReturnPct(nominalPct, inflationPct) {
+  return safeNumber(nominalPct) - safeNumber(inflationPct);
+}

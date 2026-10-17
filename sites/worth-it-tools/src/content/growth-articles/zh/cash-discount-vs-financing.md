@@ -215,6 +215,6 @@ breadcrumbLabel: "現金價比較便宜，分期等於多貴？把「放棄現�
 
 ## 延伸閱讀
 
-- [有效利率是什麼？](/zh/guides/effective-interest-rate-explained/)
+- [名目年利率、有效年利率與總費用年百分率有什麼不同？](/zh/tools/compound-growth/)
 - [分期真實 APR 工具](/zh/tools/installment-true-apr/)
 - [先存再買 vs 分期](/zh/guides/save-first-vs-installment-purchase/)

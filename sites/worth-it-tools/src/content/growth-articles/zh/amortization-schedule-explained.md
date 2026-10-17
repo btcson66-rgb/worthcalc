@@ -237,7 +237,7 @@ breadcrumbLabel: "貸款攤還表怎麼看？為什麼前期利息多、後期�
 
 ## 延伸閱讀
 
-- [有效利率是什麼？](/zh/guides/effective-interest-rate-explained/)
+- [名目年利率、有效年利率與總費用年百分率有什麼不同？](/zh/tools/compound-growth/)
 - [信貸提前還款划算嗎？](/zh/guides/extra-payment-personal-loan/)
 - [分期真實 APR](/zh/tools/installment-true-apr/)
 

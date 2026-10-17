@@ -1,5 +1,5 @@
 url,type,title,taiwan_specific,has_official_source,source_examples,last_checked_date,gsc_impressions_28d,proposed_action,reason
-https://worthcalc.win/,hub,台灣人的金錢決策計算機,yes,no,,,4,keep,新繁中首頁（台灣人的金錢決策計算機）：只連到本表標為 keep 的頁面，依五個情境分組；曝光數是改版前英文首頁的數字。
+https://worthcalc.win/,hub,台灣人的金錢決策計算機,yes,no,,,4,keep,新繁中首頁（台灣人的金錢決策計算機）：只連到本表標為 keep 的頁面，依七個情境分組（P2 第 7 批新增「儲蓄與緊急預備金」「薪資與稅」）；曝光數是改版前英文首頁的數字。
 https://worthcalc.win/zh/about/,legal,關於 WorthCalc 與作者 Benson Lai,partial,no,,2026-10-15,,keep,本次改寫為作者頁（Benson Lai、查核方法、更新與勘誤政策、回報管道），只寫可查證事實；所有計算機與文章頁的署名連到這裡。
 https://worthcalc.win/zh/annual-fee-card-breakeven/,article,信用卡年費要刷多少才回本？用增量回饋算真正門檻,yes,yes,law.fsc.gov.tw,2026-07-18,1,keep,金管會信用卡契約規範與費用揭露規範，NT$ 算例與增量回饋公式，2026-07-18 查核。
 https://worthcalc.win/zh/annual-vs-monthly-billing/,article,年繳還是月繳？訂閱折扣的損益兩平算法,no,no,,2026-07-20,,merge_into:https://worthcalc.win/zh/monthly-vs-annual-subscription/,沒有來源與台灣內容；與 /zh/monthly-vs-annual-subscription/ 意圖重複（年繳 vs 月繳的損益兩平）。
@@ -11,7 +11,7 @@ https://worthcalc.win/zh/bulk-buying-vs-small-packages/,article,大包裝真的�
 https://worthcalc.win/zh/bulk-buying-waste-math/,article,大包裝真的便宜嗎？把「丟掉的那部分」算進去的有效單價,no,yes,www.fda.gov.tw,2026-07-19,,remove,與 /zh/bulk-buying-vs-small-packages/ 意圖重複（大包裝有效單價），且沒有台灣來源；兩頁都不屬於五個情境，一併建議移除。
 https://worthcalc.win/zh/car-lease-vs-buy-total-cost/,article,租賃還是買車？總成本、里程限制與轉售風險怎麼算,yes,yes,www.ey.gov.tw; motclaw.motc.gov.tw,2026-07-19,,keep,台灣汽車租賃契約與稅費，連到行政院與交通部法規；NT$ 算例，2026-07-19 查核。
 https://worthcalc.win/zh/cashback-caps-real-reward-rate/,article,信用卡回饋上限怎麼算？找出真正回饋率,yes,yes,law.banking.gov.tw; event.esunbank.com.tw; www.cathaybk.com.tw,2026-07-19,,keep,台灣信用卡回饋上限、指定通路與排除項目，連到銀行局與發卡銀行公告；NT$ 算例，2026-07-19 查核。
-https://worthcalc.win/zh/changelog/,legal,更新紀錄,no,no,,2026-07-19,,rewrite,內容停在 v1.1/v1.2「五語」版本，已不符合現況（es/fr/de/hi/ar 已退役），需改寫成台灣版的更新紀錄。
+https://worthcalc.win/zh/changelog/,legal,WorthCalc 更新與更正紀錄,no,no,,2026-10-17,,keep,P2 第 7 批已依合併紀錄、版本標記與各批回報改寫成實際的更新與更正紀錄；頁面維持 index（信任頁，作者頁承諾較重大的更正記在這裡），英文版隨 en 一律 noindex。
 https://worthcalc.win/zh/contact/,legal,聯絡 WorthCalc,partial,no,,2026-07-03,,keep,錯誤回報與聯絡管道（作者頁引用此頁）；內容含台灣情境說明，無需改動。
 https://worthcalc.win/zh/cost-per-use-expensive-item/,article,高價物品每次使用成本：預期、實際與損益次數計算器,partial,yes,cpc.ey.gov.tw,2026-07-19,,remove,通用「每次使用成本」題目，僅有 NT$ 算例與消保處連結；不屬於五個情境。
 https://worthcalc.win/zh/costco-math/,article,好市多會員規則：家庭卡、借卡、升等與退費怎麼算,yes,yes,www.costco.com.tw,2026-10-17,,keep,P2 第 3 批意圖分工：回本計算留在 /zh/tools/costco-membership/（黑鑽卡文章已於 P1b 併入該工具頁）；本頁改答「規則」（家庭卡、不得轉借、升等降等退費、2% 回饋金累計與核發），來源為好市多台灣官網與會員規章，2026-10-17 查核。

@@ -115,7 +115,7 @@ export const homeTw = {
         {
           href: '/zh/costco-math/',
           title: '好市多會員的數學：年費怎麼算才回本',
-          blurb: '台灣三種會員的回本模型，以及簡單模型沒算到的兩件事。',
+          blurb: '家庭卡、借卡、升等與退卡的規定，依官網與會員規章整理，附查核日期。',
           kind: 'article',
         },
         {
@@ -309,9 +309,96 @@ export const homeTw = {
         },
       ],
     },
+    {
+      id: 'savings-emergency',
+      heading: '儲蓄與緊急預備金',
+      lead: '失業時的現金缺口、複利與通膨、不固定收入的預算，以及定存的規定。',
+      items: [
+        {
+          href: '/zh/emergency-fund-how-much/',
+          title: '緊急預備金要存多少',
+          blurb: '失業給付領完之後，離職期間你還缺多少現金，才是該備的金額。',
+          kind: 'calculator',
+        },
+        {
+          href: '/zh/tools/compound-growth/',
+          title: '複利計算機',
+          blurb: '本金、每月投入、報酬率與通膨之下，幾年後有多少錢，要達成目標每月該存多少。',
+          kind: 'calculator',
+        },
+        {
+          href: '/zh/tools/budget-builder/',
+          title: '不固定收入預算建立器',
+          blurb: '收入忽高忽低，把年繳、季繳帳單攤平後，每個月該留多少。',
+          kind: 'calculator',
+        },
+        {
+          href: '/zh/budget-with-irregular-income/',
+          title: '收入不固定的月預算',
+          blurb: '接案或業績抽成的人，做預算前要先攤平哪些帳單、算進哪些稅與保費。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/money/time-deposit-early-withdrawal/',
+          title: '定存中途解約',
+          blurb: '定存中途解約，利息怎麼計算、會少拿多少。',
+          kind: 'article',
+        },
+      ],
+    },
+    {
+      id: 'income-tax',
+      heading: '薪資與稅',
+      lead: '時薪月薪年薪換算、加薪與通膨、真實時薪，以及年終獎金、扶養與扣除額對所得稅的影響。',
+      items: [
+        {
+          href: '/zh/tools/salary-converter/',
+          title: '時薪月薪年薪換算',
+          blurb: '時薪、月薪、年薪互相換算，算上加班與年終後的實際時薪。',
+          kind: 'calculator',
+        },
+        {
+          href: '/zh/hourly-vs-annual-salary/',
+          title: '時薪換算年薪',
+          blurb: '換算之前，稅前稅後、加班費倍率和基本工資要先分清楚什麼。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/true-hourly-wage-after-commuting-work-expenses/',
+          title: '扣掉通勤後的真實時薪',
+          blurb: '扣掉通勤和工作支出、算進必要的時間，一小時實際賺多少。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/pay-raise-vs-inflation-purchasing-power/',
+          title: '加薪有追上通膨嗎',
+          blurb: '加薪之後，實質購買力是變多還是變少。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/money/year-end-bonus-withholding-tax/',
+          title: '年終獎金的扣繳稅',
+          blurb: '年終獎金發下來時先被扣的稅，和隔年報稅最後要繳的稅是不是同一筆。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/money/dependent-exemption-tax-savings/',
+          title: '扶養親屬免稅額',
+          blurb: '多報一位扶養親屬，能省下多少所得稅，以及什麼情況下結論會反過來。',
+          kind: 'article',
+        },
+        {
+          href: '/zh/money/itemized-vs-standard-deduction/',
+          title: '列舉扣除還是標準扣除',
+          blurb: '有房貸、保險費和捐贈時，選哪一種扣除額比較省。',
+          kind: 'article',
+        },
+      ],
+    },
   ] as HomeTwGroup[],
   moreHeading: '找不到你的問題？',
-  moreLead: '這兩個索引列出站上所有計算機與金錢速查，包含上方沒有列出、仍在整理中的頁面。',
+  moreLead:
+    '三份索引各管一種用途，都用同一組情境分類，列出站上所有頁面，包含上方沒有列出的：計算機是打開就能輸入自己的數字，指南是先弄懂怎麼比較，金錢速查是查台灣現行的規則、費率與補助。',
   methodHeading: '數字怎麼查核',
   method:
     '每一頁引用的利率、費率、稅額與級距，都會在頁面的「資料來源」列出官方公告的連結與我們查看的日期，頁首與頁尾也標示該頁的最後查核日期。沒有列出資料來源的頁面，只用算術與你輸入的數字。計算機全部在你的瀏覽器本機執行，不會把你輸入的數字傳到伺服器。',

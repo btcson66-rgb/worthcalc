@@ -115,11 +115,11 @@ export const upfrontFeeGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     cta: { label: '輸入實拿金額與期款，反推自己的估算年率', href: '/zh/tools/installment-true-apr/' },
     limitations: ['這是現金流教育估算，不取代銀行依法揭露的總費用年百分率。正式口徑對納入費用、付款日期、基準日與變動條件有明確規則。', '費用只能計一次：若銀行從撥款扣除，就降低實際可用資金；若全額撥款後在同日另付，則記為同日現金流出，不要兩邊都扣。', '利率調整、寬限期、提前清償、綁約、保證人或擔保品等條件也會改變風險；月付負擔能力仍需單獨檢查。'],
     sources: [
-      { label: '金管會 — 消費者信用貸款手續費應合理、公開、透明', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001273' },
-      { label: '金管會 — 消費者信用交易總費用與年百分率計算標準', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL036733' },
-      { label: '中華民國銀行公會 — 銀行消費者信用貸款手續費彙整', href: 'https://www.ba.org.tw/upload/ConsumerCredit/fe7dfcc4-fd5c-48cb-bb3f-bfc16c6b0abe/%E9%8A%80%E8%A1%8C%E4%BF%A1%E7%94%A8%E8%B2%B8%E6%AC%BE%E6%89%8B%E7%BA%8C%E8%B2%BB%E5%BD%99%E6%95%B4%E8%A1%A8.pdf' },
+      { label: '金管會 — 金融機構辦理消費者信用貸款收取相關手續費，應合理、公開、透明（103-08-05 金管銀合字第 10330002771 號函）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001273' },
+      { label: '金管會 — 銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準（94-08-15 金管銀（三）字第 0943000999 號；第 7、8 條）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL036733' },
+      { label: '中華民國銀行公會 — 銀行消費者信用貸款手續費彙整表（每季更新；本頁查看的版本資料日期 115-06-30，2026-07-31 公告；在「消費者資訊 → 一般金融訊息」下載）', href: 'https://www.ba.org.tw/consumerGeneral/index' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 
@@ -390,10 +390,10 @@ export const annualFeeGuides: Record<Locale, DecisionGuideContent> = {
     cta: { label: '用自己的年費與回饋率計算', href: '#cashback-category-breakeven' },
     limitations: ['續卡決策不要把一次性首刷禮算進去；新卡第一年也只計入不需額外消費就能達成的確定價值。', '點數與哩程要用自己真正能兌換的價值，不用廣告中的最高理論價。', '本計算假設每期全額繳清；循環利息、預借現金或為了回饋多花錢，可能立即吃掉所有回饋。內容不是信用卡推薦或財務建議。'],
     sources: [
-      { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
-      { label: '金融監督管理委員會 — 信用卡費用與利率揭露規範', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FE057261&media=print' },
+      { label: '金融監督管理委員會 — 信用卡定型化契約應記載及不得記載事項（99-07-27 發布，103-09-12 修正，金管銀合字第 10300245320 號；應記載事項第五點、不得記載事項第七點）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049905&media=print' },
+      { label: '金融監督管理委員會 — 為保障消費者權益，有關信用卡、現金卡之利率與各項費用之揭露，請速依說明事項辦理（93-07-29 金管銀（四）字第 0934000595 號函）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FE057261&media=print' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 
@@ -591,10 +591,10 @@ export const commuteGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     cta: { label: '比較機車、汽車、大眾運輸與叫車', href: '/zh/tools/commute-cost/' },
     limitations: ['每公里成本應盡量用自己的加油、充電、維修與折舊紀錄，不把示範值當成全國平均。', '短期內固定的保險與牌照費，在決定是否持有車輛時仍然重要。', '時間沒有唯一價格；可不填，或依這次決策自行設定並獨立呈現。'],
     sources: [
-      { label: '經濟部能源署 — 車輛油耗指南', href: 'https://www.fueleconomy.gov.tw/' },
-      { label: '交通部 — 交通統計與公開資訊', href: 'https://www.motc.gov.tw/' },
+      { label: '中國石油 — 汽柴油各油品調整金額計算表（調價生效日期 2026/10/12；95 無鉛汽油每公升 32.7 元）', href: 'https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx' },
+      { label: '經濟部能源署 — 電價及費率審議資訊揭露專區：電價表（最新一版為台灣電力公司114年下半年電價表，2025-10-03 公布）', href: 'https://www3.moeaea.gov.tw/ele102/Content/Messagess/contents.aspx?&MmmID=654246034110677254&MSID=1343206640732631102' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 

@@ -1,70 +1,60 @@
 ---
+/*
+ * English changelog (P2 batch 7, 2026-10-17). English is built but noindex since the 2026-10-15
+ * rebuild, so this is a short mirror of /zh/changelog/ for visitors who arrive through the language
+ * switcher. The Traditional Chinese page is the full record; if the two disagree, it is right.
+ */
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { localizedPath } from '../../i18n/utils';
 
 const locale = 'en';
 ---
 
 <ArticleLayout
-  title="Changelog"
-  description="Release history for WorthCalc's free money-decision calculators."
+  title="WorthCalc changelog and corrections"
+  description="What WorthCalc actually changed, by date: pages added, rewritten, merged or retired, and the errors that were corrected."
   locale={locale}
-  updated="2026-07-19"
+  updated="2026-10-18"
   alternateLocales={['en', 'zh']}
 >
-  <h2>v1.2.0 - Native-language trust and editorial shell</h2>
-  <p><time datetime="2026-07-19">July 19, 2026</time></p>
   <p>
-    Added market-written Spanish, French, and German pages for About, Privacy,
-    Terms, Contact, Disclaimer, and this changelog. Each published family now
-    has a canonical URL, six hreflang signals including x-default, breadcrumb
-    structured data, sitemap coverage, a substantive-content floor, and a
-    375-pixel browser check. Thin existing English and Traditional Chinese
-    trust pages were expanded when the same audit exposed a gap.
+    This page records what WorthCalc actually changed: pages added, rewritten, merged or retired, and errors that were corrected.
+    Dates are the days the change was merged to the main branch and went live (Taiwan time). It carries no traffic or revenue figures.
+    If you find a wrong number, <a href={localizedPath(locale, '/contact')}>write to us</a>; the fix is recorded here and the page's check date is updated.
+    The Traditional Chinese changelog is the full record.
   </p>
-  <h2>v1.1.0 - 29 decision topics in five languages</h2>
-  <p><time datetime="2026-07-18">July 18–19, 2026</time></p>
-  <p>
-    Completed 29 editorial topics in English, Traditional Chinese, Spanish,
-    French, and German: 145 structured variants. These are not bulk
-    translations. Market terms, contracts, authorities, costs, examples, and
-    source choices are written for each audience. Every guide includes a
-    formula, assumptions, worked example, limitations, FAQ, and sources; 35
-    interactive decision calculators are embedded across the library.
-  </p>
+
+  <h2>Corrections</h2>
   <ul>
-    <li>Financing, BNPL, upfront fees, and real annual borrowing cost.</li>
-    <li>Subscriptions, memberships, cards, rewards, and spending caps.</li>
-    <li>Housing, vehicles, commuting, remote work, and the value of time.</li>
-    <li>Repair, warranties, energy, consumption, food, wages, and inflation.</li>
+    <li>
+      <time datetime="2026-10-18">2026-10-18</time> – The "assumptions" and "example" blocks on the commute-cost, electric-scooter-versus-gas and credit-card cashback break-even calculators
+      described a different set of default values than the inputs actually use. They now describe the real defaults. The scooter calculator's default subsidy was changed from 3,000 to 0 and points to the official subsidy page.
+    </li>
+    <li>
+      <time datetime="2026-10-18">2026-10-18</time> – The appliance running-cost list presented 43 wattages as sourced when they were US references and in-house examples.
+      Four (refrigerator, dehumidifier, single-unit air conditioner, monitor) are now computed from the Energy Administration's open data; the other 39 are labelled as demonstration values.
+    </li>
+    <li>
+      <time datetime="2026-10-17">2026-10-17</time> – Costco: the old text said alcohol and telecom purchases are excluded from the 2% reward; the official exclusion list has neither. Corrected to the official list.
+      Unsourced statements about late-payment interest and prepayment penalties were removed or replaced with citations. The labour-pension monthly-payout field is now labelled as a non-official illustration.
+    </li>
+    <li>
+      <time datetime="2026-10-17">2026-10-17</time> – Credit-card revolving interest: the old generic calculator defaulted to 20.9% compounded, above the 15% statutory cap in Taiwan's Banking Act;
+      replaced by a Taiwan-specific calculator.
+    </li>
   </ul>
-  <h2>v1.0.0 - WorthCalc launch</h2>
-  <p><time datetime="2026-07">July 2026</time></p>
-  <p>
-    First public release of WorthCalc, with eight free, browser-based
-    calculators that answer one question: is it actually worth it?
-  </p>
+
+  <h2>History</h2>
   <ul>
-    <li>Installment True APR Calculator — the real interest rate behind "0%" installment and BNPL plans.</li>
-    <li>Subscription Audit Calculator — total subscription cost per month, year, and 5 years.</li>
-    <li>Costco Membership Calculator — break-even spend for Gold Star and Executive tiers.</li>
-    <li>EV vs Gas Car TCO Calculator — total cost of ownership and break-even year.</li>
-    <li>Rent vs Buy Calculator — mortgage, appreciation, and invested down payment vs. renting.</li>
-    <li>Commute Cost Calculator — car, transit, rideshare, and bike compared side by side.</li>
-    <li>Latte Factor Calculator — what a daily habit costs, and its future value if invested.</li>
-    <li>Cashback Break-even Calculator — annual-fee card vs. a no-fee 1% baseline.</li>
+    <li><time datetime="2026-10-18">2026-10-18</time> – Directory pages rewritten and grouped by situation; emergency-fund and true-hourly-wage pages rebuilt for Taiwan; savings-goal guides merged into the compound-growth calculator; the five oldest-checked pages re-verified.</li>
+    <li><time datetime="2026-10-17">2026-10-17</time> – Page-by-page rebuild (first five batches): labour pension, labour insurance annuity, revolving interest, installment, mortgage and refinance calculators; Costco, membership, warranty and repair pages; several overlapping pages merged into the calculators and redirected.</li>
+    <li><time datetime="2026-10-16">2026-10-16</time> – 35 pages removed and 19 merged and redirected; retired-language content deleted. Sitemap 143 to 89 pages.</li>
+    <li><time datetime="2026-10-15">2026-10-15</time> – Rebuilt as a Taiwan money-decision site in Traditional Chinese. English left the search index; Spanish, French, German, Hindi and Arabic were retired. Sitemap 254 to 143 pages. Scheduled releases stopped.</li>
+    <li><time datetime="2026-10-07">2026-10-07</time> – Versions 1.0.1 and 1.0.2 (small fixes). These are the last version tags; changes are dated from here on. Earlier versions of this page listed 1.1.0 and 1.2.0, which were never tagged.</li>
+    <li><time datetime="2026-09-22">2026-09-22</time> – Spanish, French and German stopped being indexed.</li>
+    <li><time datetime="2026-09-15">2026-09-15</time> – Consolidation of duplicate pages: 1,233 URLs inventoried, most set to noindex, sitemap reduced to 304 pages.</li>
+    <li><time datetime="2026-09-01">2026-09-01</time> to <time datetime="2026-09-03">2026-09-03</time> – A large batch of topic pages (appliance running costs and similar); most were later noindexed or retired.</li>
+    <li><time datetime="2026-07-18">2026-07-18</time> to <time datetime="2026-07-19">2026-07-19</time> – 29 decision topics in five languages. This stage was retired on 2026-10-15.</li>
+    <li><time datetime="2026-07-03">2026-07-03</time> – Launch at worthcalc.win with eight calculators and four guides in English and Traditional Chinese.</li>
   </ul>
-  <p>
-    Also included at launch: bilingual English and Traditional Chinese pages,
-    four supporting guides on installments, subscriptions, warehouse-club math,
-    and rent vs. buy, plus a fully client-side privacy model — no calculator
-    input ever leaves your browser.
-  </p>
-  <h2>How to read this log</h2>
-  <p>
-    A version groups a visible capability. A focused correction may update a
-    formula, source, accessibility behavior, review date, or metadata without
-    changing a calculator's purpose. Traffic and revenue figures are never
-    inserted here unless they come from documented measurement. Report a
-    regression with the URL, inputs, displayed result, and expected result.
-  </p>
 </ArticleLayout>

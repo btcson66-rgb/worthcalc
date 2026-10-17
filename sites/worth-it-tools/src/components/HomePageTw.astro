@@ -3,7 +3,7 @@
  * The Traditional Chinese (Taiwan) homepage, served at `/`.
  *
  * It replaces the English general-finance homepage (SEO rebuild P1, 2026-10-15).
- * Layout: hero, five situation groups of Taiwan-specific pages, how figures are
+ * Layout: hero, seven situation groups of Taiwan-specific pages, how figures are
  * checked, the author, a visible "not financial advice" notice, a visible FAQ
  * (no FAQPage structured data -- see src/components/FAQ.astro). All copy and
  * links live in src/lib/homeTw.ts.
@@ -51,8 +51,9 @@ const kindLabel = { calculator: '計算機', article: '文章' } as const;
   <h2 id="home-more-heading">{homeTw.moreHeading}</h2>
   <p class="section-lead">{homeTw.moreLead}</p>
   <ul class="home-library__links">
-    <li><a href="/zh/tools/">全部計算機</a></li>
-    <li><a href="/zh/money/">金錢速查（附日期與出處的數字）</a></li>
+    <li><a href="/zh/tools/">全部計算機（輸入自己的數字）</a></li>
+    <li><a href="/zh/guides/">全部指南（先弄懂怎麼比較）</a></li>
+    <li><a href="/zh/money/">金錢速查（現行規則與補助，附日期與出處）</a></li>
   </ul>
 </section>
 

@@ -109,6 +109,7 @@ const numberLocale = locale === 'zh'
 
 <script>
   import { renderMeter } from '../lib/calcUi';
+  import { gymCost } from '../lib/twMembershipMath.mjs';
   for (const root of document.querySelectorAll<HTMLElement>('[data-gym-calculator]')) {
     const locale = root.dataset.locale || 'en-US';
     const currency = root.dataset.currency || 'USD';
@@ -122,20 +123,16 @@ const numberLocale = locale === 'zh'
     const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
 
     function calculate() {
-      const joiningFee = value('joiningFee');
-      const monthlyFee = value('monthlyFee');
-      const serviceFee = value('serviceFee');
-      const contractMonths = Math.max(1, Math.round(value('contractMonths')));
-      const missedMonths = Math.min(contractMonths, Math.round(value('missedMonths')));
       const visitsPerActiveMonth = value('visitsPerActiveMonth');
-      const dropInCost = value('dropInCost');
-      const activeMonths = Math.max(0, contractMonths - missedMonths);
-      const totalVisits = activeMonths * visitsPerActiveMonth;
-      const totalCost = joiningFee + contractMonths * (monthlyFee + serviceFee);
-      const alternativeCost = totalVisits * dropInCost;
-      const difference = alternativeCost - totalCost;
-      const costPerVisit = totalVisits > 0 ? totalCost / totalVisits : 0;
-      const breakEven = activeMonths > 0 && dropInCost > 0 ? Math.ceil(totalCost / (dropInCost * activeMonths)) : 0;
+      const { totalVisits, totalCost, difference, costPerVisit, breakEvenVisitsPerActiveMonth: breakEven } = gymCost({
+        joiningFee: value('joiningFee'),
+        monthlyFee: value('monthlyFee'),
+        serviceFee: value('serviceFee'),
+        contractMonths: value('contractMonths'),
+        missedMonths: value('missedMonths'),
+        visitsPerActiveMonth,
+        dropInCost: value('dropInCost'),
+      });
 
       output('totalCost').textContent = formatMoney(totalCost);
       output('totalVisits').textContent = formatNumber.format(totalVisits);

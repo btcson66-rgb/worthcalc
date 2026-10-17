@@ -1,6 +1,6 @@
 {
   "decision": {
-    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool",
+    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool; P2 batch 4 (2026-10-17, work order 2026-10-17-P2-batch4) added paid-membership-break-even (into the Costco membership tool) and subscription-creep (into the subscription audit tool)",
     "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target. Exception (CEO P1b verdict, 2026-10-15): /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ stay real calculator pages; only their English mirrors are stubs.",
     "rollback": "Delete the entry, restore the page source from git history, rebuild."
   },
@@ -28,6 +28,22 @@
     {
       "from": "/en/zero-interest-installments-truth/",
       "to": "/en/tools/installment-true-apr/"
+    },
+    {
+      "from": "/zh/paid-membership-break-even/",
+      "to": "/zh/tools/costco-membership/"
+    },
+    {
+      "from": "/en/paid-membership-break-even/",
+      "to": "/en/tools/costco-membership/"
+    },
+    {
+      "from": "/zh/subscription-creep/",
+      "to": "/zh/tools/subscription-audit/"
+    },
+    {
+      "from": "/en/subscription-creep/",
+      "to": "/en/tools/subscription-audit/"
     },
     {
       "from": "/zh/emergency-fund-irregular-income/",

@@ -29,8 +29,6 @@ const briefRoutes = [
   { id: '02', slug: 'upfront-fees-financing-cost' },
   { id: '03', slug: 'bnpl-vs-credit-card-installments' },
   { id: '04', slug: 'monthly-vs-annual-subscription' },
-  { id: '05', slug: 'subscription-creep' },
-  { id: '06', slug: 'paid-membership-break-even' },
   { id: '07', slug: 'gym-membership-cost-per-visit' },
   { id: '08', slug: 'delivery-membership-break-even' },
   { id: '09', slug: 'annual-fee-card-breakeven' },
@@ -53,15 +51,17 @@ const briefRoutes = [
 
 // P2 batch 3 (2026-10-17) merged zero-interest-installments-truth (brief topic #01) into the installment
 // tool as a redirect stub, so the topic floors drop by one topic: 24 -> 23 topics, 48 -> 46 variants.
+// P2 batch 4 (2026-10-17) merged subscription-creep (#05) into the subscription audit tool and
+// paid-membership-break-even (#06) into the Costco membership tool: 23 -> 21 topics, 46 -> 42 variants.
 const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
   tool: 32,
   editorial: 160,
-  alignedVariants: 46,
-  compliantVariants: 46,
-  completeTopics: 23,
+  alignedVariants: 42,
+  compliantVariants: 42,
+  completeTopics: 21,
 };
 
 function walkHtml(dir) {

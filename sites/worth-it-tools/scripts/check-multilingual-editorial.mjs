@@ -15,12 +15,9 @@ const failures = [];
 // price-per-wear-clothing-shoes were removed by the disposition audit, so they are no
 // longer routes this check expects to find. P2 batch 3 (2026-10-17) did the same for
 // zero-interest-installments-truth, which is now a redirect stub to /tools/installment-true-apr/.
+// P2 batch 4 (2026-10-17) did the same for subscription-creep (-> /tools/subscription-audit/) and
+// paid-membership-break-even (-> /tools/costco-membership/).
 const editorialRoutes = [
-  {
-    slug: 'subscription-creep',
-    nativeMarkers: {
-    },
-  },
   {
     slug: 'upfront-fees-financing-cost',
     nativeMarkers: {
@@ -43,13 +40,6 @@ const editorialRoutes = [
     },
   },
   {
-    slug: 'paid-membership-break-even',
-    nativeMarkers: {
-      en: ['eligible use', '$2.10', 'benefit cap'],
-      zh: ['原本就會消費', 'NT$54', '回饋上限'],
-    },
-  },
-  {
     slug: 'gym-membership-cost-per-visit',
     nativeMarkers: {
       en: ['$12.98', '$251', 'paid months with no visits', 'data-gym-calculator'],
@@ -60,7 +50,7 @@ const editorialRoutes = [
     slug: 'delivery-membership-break-even',
     nativeMarkers: {
       en: ['$6.49', '$20.82', 'minimum basket', 'data-delivery-membership-calculator'],
-      zh: ['NT$95', 'NT$1,081', '最低消費', 'data-delivery-membership-calculator'],
+      zh: ['NT$60', 'NT$440', '最低消費', 'data-delivery-membership-calculator'],
     },
   },
   {

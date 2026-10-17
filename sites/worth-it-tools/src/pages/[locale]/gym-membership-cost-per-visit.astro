@@ -6,6 +6,7 @@ import FAQ from '../../components/FAQ.astro';
 import GymCostCalculator from '../../components/GymCostCalculator.astro';
 import { LOCALES, type Locale } from '../../consts';
 import { gymCostGuides } from '../../data/decisionGuides';
+import { elapsedMonthsBy15DayRule, gymAveragePrice, gymCost, gymEarlyTermination, gymJoiningFeeCap } from '../../lib/twMembershipMath.mjs';
 import type { FaqItem } from '../../lib/seo';
 
 type EditorialLocale = 'en' | 'zh';
@@ -23,12 +24,13 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
   },
   zh: {
     title: '健身房會員每次成本怎麼算？一個月要去幾次才划算',
-    description: '把入會費、月費、設施費、缺席月份、實際到館次數與單次替代價放進同一個健身房回本計算。',
+    description: '把入會費、月費、設施費、缺席月份與到館次數算成單次成本，並依教育部健身中心契約規範看暫停會籍、中途終止怎麼退費。',
     faq: [
       { question: '健身房單次成本怎麼算？', answer: '把入會費、整段契約月費與所有必要費用相加，再除以真正會到館的總次數；有繳費但沒去的月份仍要算成本。' },
-      { question: '一個月去幾次健身房才划算？', answer: '用會員總成本除以單次票價格，再除以有效月份並無條件進位。本頁算例在十個有效月份中，每月至少要去四次。' },
+      { question: '一個月去幾次健身房才划算？', answer: '用會員總成本除以單次票價格，再除以有效月份並無條件進位。本頁示範輸入在十個有效月份中，每月至少要去四次。' },
       { question: '首月優惠或免入會費要怎麼算？', answer: '用本次契約真正會付的金額；優惠結束後若續約價不同，要另做續約情境。不要拿已經結束的首月價降低未來一年成本。' },
-      { question: '請假或暫停會員期間要算月費嗎？', answer: '依書面契約處理。若確認停權期間免繳且效期順延，可調整成本與月份；只有口頭承諾時不要先假設一定免繳。' },
+      { question: '請假或暫停會員期間要算月費嗎？', answer: '依教育部「健身中心定型化契約應記載及不得記載事項」第八點：消費者事先提出文件證明或釋明出國逾一個月、傷病、懷孕育嬰侍親、服兵役、職務異動或遷居等事由之一，業者應於七個工作日內辦理暫停會籍，停權期間免繳月費，會籍有效期間順延。實際以你簽的契約為準。' },
+      { question: '中途不想去了，可以退會嗎？會退多少？', answer: '同一份規範第十點寫明消費者於契約期間屆滿前得隨時終止契約；退費方式見本頁「中途終止會退多少」一節，手續費是否收、收多少，要看你的契約勾選哪一種。' },
       { question: '教練課費用要算進會員單次成本嗎？', answer: '若教練課是你為同一運動計畫必買的必要費用就列入；可自由選擇且單獨定價時應分開分析，避免把會籍與教練課混成一個數字。' },
     ],
   },
@@ -46,7 +48,7 @@ const calculators = {
     currency: 'TWD' as const,
     defaults: { joiningFee: 1200, monthlyFee: 1288, serviceFee: 100, contractMonths: 12, missedMonths: 2, visitsPerActiveMonth: 6, dropInCost: 450 },
     copy: {
-      heading: '健身房單次成本與回本計算機', intro: '請填整段契約會付的費用與真正能到館的次數，不只看廣告月費。', joiningFee: '入會／建檔／門禁卡費', monthlyFee: '每月會費', serviceFee: '每月必要設施或管理費', contractMonths: '契約付款月數', missedMonths: '繳費但完全沒去的月份', visitsPerActiveMonth: '每個有效月份到館次數', dropInCost: '同等單次票價格', totalCost: '會員總成本', totalVisits: '預計總到館次數', costPerVisit: '實際單次成本', breakEvenVisits: '最低回本次數', activeMonthSuffix: '／每個有效月份', positive: '會員方案少付', negative: '單次票方案少付', tie: '兩種方案成本大致相同。', noVisits: '沒有預計到館次數時，整筆會員費都是未使用成本。', privacy: '輸入只在瀏覽器內計算。本工具比較費用，不判定個別契約的請假、終止或退費權利。',
+      heading: '健身房單次成本與回本計算機', intro: '預設值是示範數字，不是任何健身房的定價。請填整段契約會付的費用與真正能到館的次數，不只看廣告月費。', joiningFee: '入會／建檔／門禁卡費', monthlyFee: '每月會費', serviceFee: '每月必要設施或管理費', contractMonths: '契約付款月數', missedMonths: '繳費但完全沒去的月份', visitsPerActiveMonth: '每個有效月份到館次數', dropInCost: '同等單次票價格', totalCost: '會員總成本', totalVisits: '預計總到館次數', costPerVisit: '實際單次成本', breakEvenVisits: '最低回本次數', activeMonthSuffix: '／每個有效月份', positive: '會員方案少付', negative: '單次票方案少付', tie: '兩種方案成本大致相同。', noVisits: '沒有預計到館次數時，整筆會員費都是未使用成本。', privacy: '輸入只在瀏覽器內計算。本工具比較費用，不判定個別契約的請假、終止或退費權利。',
     },
   },
 };
@@ -60,9 +62,28 @@ const article = articles[locale];
 const guide = gymCostGuides[locale];
 const calculator = calculators[locale];
 if (!guide) throw new Error(`Missing gym cost guide for ${locale}`);
+
+// Every number in the zh prose below comes from src/lib/twMembershipMath.mjs, the module the
+// calculator runs; tests/tw-membership-math.test.mjs pins the same numbers.
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const n2 = (n: number) => n.toFixed(2);
+const zhIn = calculators.zh.defaults;
+const gBase = gymCost(zhIn);
+const gLow = gymCost({ ...zhIn, visitsPerActiveMonth: 2 });
+const avgPrice = gymAveragePrice(gBase.totalCost, zhIn.contractMonths);
+const joiningCap = gymJoiningFeeCap(gBase.totalCost, zhIn.contractMonths);
+// 終止契約算例（入會費設為 0，避免與「入會費及其他費用得不列入退費計算範圍」混在一起）
+const termPrepaid = { contractTotal: 14400, contractMonths: 12, payment: 'prepaid' as const, paidSoFar: 14400, elapsedMonths: elapsedMonthsBy15DayRule(4, 10) };
+const tNone = gymEarlyTermination({ ...termPrepaid, feeType: 'none' });
+const tFixed = gymEarlyTermination({ ...termPrepaid, feeType: 'fixed' });
+const tPct = gymEarlyTermination({ ...termPrepaid, feeType: 'percent', feePct: 10 });
+const termMonthly = { contractTotal: 15600, contractMonths: 12, payment: 'monthly' as const, paidSoFar: 3900, elapsedMonths: elapsedMonthsBy15DayRule(3, 20), feeType: 'fixed' as const };
+const tMonthly = gymEarlyTermination(termMonthly);
+const tSeven = gymEarlyTermination({ contractTotal: 14400, contractMonths: 12, paidSoFar: 14400, elapsedMonths: 0, daysSinceStart: 5, usedFacility: false });
+const checkedOn = '2026-10-17';
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated="2026-07-19" alternateLocales={LOCALES}
+<ArticleLayout title={article.title} description={article.description} locale={locale as Locale} updated={locale === 'zh' ? checkedOn : '2026-07-19'} alternateLocales={LOCALES}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A $45 gym does not cost $45 per month when enrollment, facility charges, and paid absences are part of the contract. The decision unit is the visit you will actually make. Count every unavoidable payment, estimate zero-visit months before signing, and compare the result with the drop-in or community option you would genuinely use.</p>
@@ -79,18 +100,41 @@ if (!guide) throw new Error(`Missing gym cost guide for ${locale}`);
     <p class="privacy-note">This page compares general consumer costs. It does not recommend a fitness plan, value health outcomes, or determine contract and refund rights.</p>
   </>}
   {locale === 'zh' && <>
-    <p>「月費 NT$1,288」不等於每月只花 NT$1,288。入會費、門禁卡、設施維護費與明知會缺席的月份，都會提高真正的單次成本。先用自己能到館的時段估次數，再和運動中心單次票或課程套票比較。</p>
+    <p>「月費 NT$1,288」不等於每月只花 NT$1,288。入會費、門禁卡、設施維護費與明知會缺席的月份，都會提高真正的單次成本。先用自己能到館的時段估次數，再和運動中心單次票或課程套票比較。本頁的金額都是<strong>示範輸入</strong>，不是任何健身房的定價。</p>
     <DecisionGuide content={guide} />
     <GymCostCalculator locale={locale} {...calculator} />
     <h2>缺席月份會同時增加成本、減少次數</h2>
-    <p>綁約 12 個月但其中 2 個月完全沒去，仍要用整段付款除以其餘 10 個月的到館次數。本頁算例每月 6 次時單次 NT$297.60；若只剩每月 2 次，同一張會籍變成每次 NT$892.80，反而比 NT$450 單次票多 NT$8,856。</p>
+    <p>綁約 12 個月但其中 2 個月完全沒去，仍要用整段付款除以其餘 10 個月的到館次數。示範輸入每月 6 次時單次 NT${n2(gBase.costPerVisit)}；若只剩每月 2 次，同一張會籍變成每次 NT${n2(gLow.costPerVisit)}，反而比 NT$450 單次票多 NT${n0(-gLow.difference)}。</p>
     <h2>會籍與教練課要分開看</h2>
     <p>場館會籍可能只提供器材，教練課、團課、置物櫃、停車與毛巾另計。只有為同一計畫必付的費用才合併；可自由購買的教練課另做單堂成本，避免業者把兩份契約包在一起後看不出哪一項不划算。</p>
-    <h2>台灣契約要先看費用、期間與請假</h2>
-    <p>現行健身中心定型化契約規範涵蓋費用種類、付款方式、服務內容、契約終止、會籍暫停與履約保障。簽約前要拿到書面內容；只有條款明確保障的免繳或順延，才能從缺席月份成本中扣除。</p>
+
+    <h2>契約規範：教育部對健身中心契約的硬性規定</h2>
+    <p>教育部公告的《健身中心定型化契約應記載及不得記載事項》（110-11-01 臺教授體部字第 1100039418D 號令修正，111-01-01 生效；{checkedOn} 打開 <a href="https://www.ey.gov.tw/File/11A27ED8536A6030?A=C">行政院全球資訊網附件 PDF</a> 逐條核對）有幾條直接影響上面的算法：</p>
+    <ul>
+      <li><strong>審閱期：</strong>簽約前至少有三日契約審閱期（應記載事項第一點），不得約定放棄審閱。</li>
+      <li><strong>期間上限：</strong>契約期間不得逾三年；按月定額收取會籍費用者以十年為限（第四點）。</li>
+      <li><strong>入會費上限：</strong>入會費及其他費用總額不得逾「月平均價格」的二倍（第五點）；月平均價格 = 契約總金額 ÷ 契約月數（含贈送月數，第十點）。示範輸入的契約總金額 NT${n0(gBase.totalCost)}、12 個月，月平均價格 NT${n0(avgPrice)}，上限 NT${n0(joiningCap)}；入會費 NT$1,200 在上限內。</li>
+      <li><strong>暫停會籍：</strong>出國逾一個月、傷病、懷孕育嬰侍親、服兵役、職務異動或遷居等事由，事先提出文件證明或釋明，業者應於七個工作日內辦理暫停，停權期間免繳月費、會籍有效期間順延（第八點）。所以「請假月份」要不要算成本，先看你是否符合這些事由並照程序辦理。</li>
+      <li><strong>履約保障：</strong>業者應就收取費用的百分之五十額度提供履約保障（信託、履約保證、價金保管等擇一），按月收款或預收累計在 NT$5,000 以下者除外（第二十二點）。</li>
+      <li><strong>不得自動續約而不通知：</strong>不得事先約定屆期自動續約不另通知消費者（不得記載事項第十一點）。</li>
+      <li><strong>信用卡按月扣款：</strong>授權書應載明消費者書面提出解除、終止契約時，業者應於二十四小時內通知信用卡銀行停止扣款（第五點）。</li>
+    </ul>
+
+    <h2>中途終止會退多少</h2>
+    <p>同一份規範第十點寫明，消費者於契約期間屆滿前得隨時終止契約。因可歸責消費者的事由而中途終止時，費用這樣算（以下用本頁的函式重算，數字與測試一致）：</p>
+    <ul>
+      <li><strong>生效七日內且沒用過服務：</strong>全額退還。示範：預繳 NT$14,400，第 5 天、完全沒進場就終止，退 NT${n0(tSeven.net)}。</li>
+      <li><strong>預繳全部費用：</strong>退費 = 已繳費用 − 月平均價格 × 實際經過時間（不滿十五日以半個月計，逾十五日以一個月計），再扣手續費。</li>
+      <li><strong>月繳：</strong>業者可收「月平均價格 × 實際經過月數」，已繳不足要補、有餘額退還，再加手續費。</li>
+      <li><strong>手續費：</strong>契約須勾選一種：不收取；定額新臺幣 600 元；或不定額 =「月平均價格 × 約定使用期間未到期時間比例」的百分之○（不得逾 20%）。手續費加計應補足金額，上限 NT$6,000。入會費及其他費用於終止契約時得不列入退費計算範圍。規範原文寫的是「未到期時間比例」，本頁把它讀成未到期的月數（也就是未到期部分價值的百分之○）；契約的實際算式以契約為準。</li>
+    </ul>
+    <p><strong>算例一（預繳）：</strong>12 個月契約預繳 NT$14,400（月平均價格 NT${n0(tNone.avgPrice)}；為避免和「入會費得不列入退費」混在一起，這個算例入會費設為 0），用了 4 個月又 10 天，不滿十五日以半個月計，所以算 {tNone.usedCharge / tNone.avgPrice} 個月：已用 {n0(tNone.avgPrice)} × {tNone.usedCharge / tNone.avgPrice} = NT${n0(tNone.usedCharge)}，餘額 NT${n0(tNone.balance)}。契約勾「不收手續費」退 NT${n0(tNone.net)}；勾定額 600 元退 NT${n0(tFixed.net)}；勾 10%（未到期 {12 - termPrepaid.elapsedMonths} 個月）手續費 = {n0(tNone.avgPrice)} × {12 - termPrepaid.elapsedMonths} × 10% = NT${n0(tPct.fee)}，退 NT${n0(tPct.net)}。</p>
+    <p><strong>算例二（月繳）：</strong>12 個月契約月費 NT$1,300（契約總金額 NT$15,600，月平均價格 NT${n0(tMonthly.avgPrice)}），已繳 3 個月 NT$3,900，第 4 個月過了 20 天提出終止，逾十五日以一個月計，經過 {termMonthly.elapsedMonths} 個月：應收 NT${n0(tMonthly.usedCharge)}，還差 NT${n0(-tMonthly.balance)}；再加定額手續費 NT$600，共要補 NT${n0(-tMonthly.net)}。</p>
+    <p>兩個算例的「已用時間」都是你終止當下的實際經過時間，不是契約剩幾個月。「逾十五日」本頁讀成「超過 15 日」，剛好 15 日算半個月（規範寫「未滿十五日以半個月計，逾十五日以一個月計」，沒有明寫第 15 日；實際以契約和業者算式為準）。若是用通訊交易或訪問交易訂約（例如電話、網路），規範另寫即使已使用設施，七日內仍可依消費者保護法第 19 條解除契約。</p>
+
     <h2>第一期與續約期不要混算</h2>
     <p>入會費只發生在第一期時，續約可另建一個沒有入會費的情境；但續約價、設施費或方案內容也可能改變。過去已付費用是沉沒成本，續約判斷只看下一期會付多少、實際會去幾次。</p>
-    <p class="privacy-note">本頁只做一般消費成本比較，不提供運動處方，也不判定個別契約的請假、終止或退費結果。</p>
+    <p class="privacy-note">試算結果僅供參考，以你簽的書面契約與教育部公告為準；本頁不提供運動處方，也不判定個別契約的請假、終止或退費結果。最後審核 {checkedOn}。</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

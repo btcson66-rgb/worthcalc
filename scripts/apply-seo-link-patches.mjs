@@ -20,7 +20,7 @@ const aliases = new Map([
   ['/zh/guides/net-worth-how-to-calculate/', '/zh/how-to-calculate-net-worth/'],
   ['/zh/guides/savings-rate-calculation/', '/zh/how-to-calculate-savings-rate/'],
   ['/zh/guides/simple-vs-compound-interest/', '/zh/simple-vs-compound-interest/'],
-  ['/zh/guides/subscription-cost/', '/zh/subscription-creep/'],
+  ['/zh/guides/subscription-cost/', '/zh/tools/subscription-audit/'],
   ['/en/tools/dti-dbr/', '/en/tools/dti-calculator/'],
   ['/zh/tools/dti-dbr/', '/zh/tools/dti-calculator/'],
   ['/zh/tools/installment-apr/', '/zh/tools/installment-true-apr/'],

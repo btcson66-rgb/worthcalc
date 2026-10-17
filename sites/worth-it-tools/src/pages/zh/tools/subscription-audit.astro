@@ -1,22 +1,48 @@
 ---
+/*
+ * 訂閱支出健檢計算機 (P2 batch 4, 2026-10-17), zh.
+ *
+ * Absorbs /zh/subscription-creep/ (merged into this page as a redirect stub). The arithmetic is in
+ * src/lib/twMembershipMath.mjs (monthlyEquivalent, auditSubscriptions); the default rows below are the
+ * decision guide's worked example, and the numbers printed in the prose come from the same module.
+ */
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import DecisionGuide from '../../../components/DecisionGuide.astro';
 import { localizedPath } from '../../../i18n/utils';
+import { subscriptionGuides } from '../../../data/decisionGuides';
+import { trustBlockFromDecisionGuide } from '../../../lib/trustBlock';
+import { auditSubscriptions } from '../../../lib/twMembershipMath.mjs';
 
 const locale = 'zh';
+const checkedOn = '2026-10-17';
 const title = '訂閱支出健檢計算機';
-const description = '訂閱支出計算機，統計 Netflix、Spotify 等訂閱每月、一年和五年到底花多少。';
+const description = '把月繳、季繳、年繳的訂閱換成每月與每年成本，加上五年總額與每小時成本；附怎麼找出忘記的訂閱，以及 Apple、Google 的官方取消做法。';
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const n1 = (n: number) => (Math.round(n * 10) / 10).toString();
+// 預設列（與 decisionGuides 的算例相同）
+const demo = auditSubscriptions([
+  { price: 390, cycle: 'monthly', hours: 12 },
+  { price: 180, cycle: 'monthly', hours: 20 },
+  { price: 690, cycle: 'yearly', hours: 2 },
+]);
+const guide = subscriptionGuides.zh;
+const trustBlock = trustBlockFromDecisionGuide(guide, locale);
 const faq = [
   {
     question: '我每個月到底花多少訂閱費？',
-    answer: '把每個訂閱的名稱、價格和扣款週期填入，計算機會統一換算成每月、一年和五年成本。',
+    answer: `把每個訂閱的名稱、價格和扣款週期填入，計算機會統一換算成每月、一年和五年成本。預設的三列是示範：月繳 NT$390、NT$180，加上年繳 NT$690，合計每月 NT$${n1(demo.monthly)}、一年 NT$${n0(demo.yearly)}、五年 NT$${n0(demo.fiveYear)}（價格不變為前提）。`,
   },
   {
     question: '每小時使用成本怎麼算？',
     answer: '如果你填每月使用時數，計算機會用該訂閱的月成本除以時數。沒有填時數的項目會略過。',
   },
   {
+    question: '怎麼找出忘記的訂閱？',
+    answer: '先看信用卡與行動電話帳單的明細（消保處提醒要隨時注意 e-mail、手機簡訊、信用卡帳單或行動電話帳單），再到 Apple 的「設定 → 你的姓名 → 訂閱項目」與 Google Play 的「訂閱項目」頁面逐一檢查。年繳的訂閱一年只扣一次，所以帳單要看完整 12 個月。',
+  },
+  {
     question: '應該先取消哪個訂閱？',
-    answer: '先看月成本最高、或每小時成本偏高的服務。便宜訂閱如果幾乎沒用，也可能是浪費。',
+    answer: '先看月成本最高、或每小時成本偏高的服務。便宜訂閱如果幾乎沒用，也可能是浪費。取消方法見下方各平台的官方說明。',
   },
   {
     question: '我的訂閱清單會被保存嗎？',
@@ -28,17 +54,17 @@ const faq = [
   },
 ];
 const related = [
+  { title: '訂閱月繳還是年繳？用使用月數與取消風險算出答案', href: localizedPath(locale, '/monthly-vs-annual-subscription') },
+  { title: '外送會員一年要用幾次才回本', href: localizedPath(locale, '/delivery-membership-break-even') },
   { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
   { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
-  { title: '訂閱慢慢變多的健檢指南', href: localizedPath(locale, '/subscription-creep') },
 ];
 ---
 
-<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']}>
+<ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['en', 'zh']} showReview={false} trustBlock={trustBlock}>
   <p class="intro">
-    這個訂閱支出計算機會把月繳、季繳、年繳都換成每月成本，讓你看清 Netflix、Spotify、雲端空間和 App 會員一年會吃掉多少預算。填入使用時數後，也能看出哪個訂閱最該重新評估。
+    這個訂閱支出計算機會把月繳、季繳、年繳都換成每月成本，讓你看清影音、音樂、雲端空間和 App 會員一年會吃掉多少預算。填入使用時數後，也能看出哪個訂閱最該重新評估。預設的三列是示範，不是任何服務的價格。
   </p>
-
   <div class="calculator-grid">
     <section class="input-panel" aria-labelledby="subscription-inputs">
       <h2 id="subscription-inputs">訂閱項目</h2>
@@ -62,11 +88,46 @@ const related = [
   <section class="explanation" aria-labelledby="subscription-how">
     <h2 id="subscription-how">計算方式</h2>
     <p>
-      每一列都會先換成月成本：月繳不變、季繳除以 3、年繳除以 12。年度和五年成本是用目前價格直接推估，尚未加入漲價。
+      每一列都會先換成月成本：月繳不變、季繳除以 3、年繳除以 12。年度成本是月成本 × 12，五年成本是月成本 × 60，都是用目前價格直接推估，尚未加入漲價。
     </p>
     <p>
-      如果填入每月使用時數，工具會估算每小時成本，幫你分辨真正常用的服務和只是默默扣款的訂閱。
+      如果填入每月使用時數，工具會用月成本除以時數，估算每小時成本，幫你分辨真正常用的服務和只是默默扣款的訂閱。
     </p>
+    <p>
+      預設的三列：月繳 NT$390（每月用 12 小時）、月繳 NT$180（20 小時）、年繳 NT$690（2 小時）。月成本分別是 NT$390、NT$180、NT$690 ÷ 12 = NT${n1(demo.items[2].monthly)}，合計每月 NT${n1(demo.monthly)}；一年 NT${n0(demo.yearly)}；五年 NT${n0(demo.fiveYear)}。月費最高的影音服務每小時 NT${n1(demo.items[0].costPerHour ?? 0)}，比月費較低的音樂服務（每小時 NT${n1(demo.items[1].costPerHour ?? 0)}）貴很多；雲端空間每月只有 NT${n1(demo.items[2].monthly)}，但每月只用 2 小時，每小時 NT${n1(demo.items[2].costPerHour ?? 0)}。要把價格和使用量放在一起看，不能只看月費。
+    </p>
+  </section>
+
+  <DecisionGuide content={guide} />
+
+  <section class="explanation" aria-labelledby="subscription-find">
+    <h2 id="subscription-find">怎麼找出忘記的訂閱</h2>
+    <p>
+      行政院消費者保護處指出，常見的消費爭議是使用者忘記免費期限已過而未取消、無法取消訂閱，或刪除 APP 後仍被扣款，直到收到信用卡帳單或行動電話帳單才大吃一驚；並提醒隨時注意 e-mail、手機簡訊、信用卡帳單或行動電話帳單的明細（<a href="https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/a6cad45f-8418-4c7b-b999-9f833c96ef11">消保處說明</a>，{checkedOn} 查核）。所以健檢分四步：
+    </p>
+    <ol>
+      <li><strong>調出一整年的帳單。</strong>信用卡與銀行明細要看完整 12 個月，因為年繳訂閱一年只扣一次；行動電話帳單裡的代收項目也一起看。</li>
+      <li><strong>查平台的訂閱頁。</strong>iPhone：設定 → 點你的姓名 → 訂閱項目（<a href="https://support.apple.com/zh-tw/118428">Apple 支援</a>，{checkedOn} 查核；頁面標示發佈日期 2026 年 9 月 29 日）。找不到時，Apple 建議在電子郵件搜尋「Apple 收據」或「Apple 發票」，收據上會顯示使用的 Apple 帳號；找不到收據，可能是向其他公司購買，要看銀行或信用卡對帳單。Google Play 在 play.google.com 的「訂閱項目」頁面（<a href="https://support.google.com/googleplay/answer/7018481?hl=zh-Hant">Google Play 說明</a>，{checkedOn} 查核）。</li>
+      <li><strong>全部填進上面的計算機</strong>：名稱、價格、扣款週期，再估每月使用時數。清單只存在你的瀏覽器裡，之後冒出新扣款隨時可以回來更新。</li>
+      <li><strong>分成三類：留、降級、退。</strong>有在用、有價值的留下；實際用量用便宜方案就夠的降級；想不起來自己有訂的，查清楚扣款來源後取消。</li>
+    </ol>
+    <p>
+      取消時要注意：刪除 APP 或解除安裝不等於取消。消保處建議依下載頁面所列的取消方式立刻取消，並手動關閉 Google／Apple ID 的自動更新；Google Play 說明也寫明解除安裝應用程式不會連帶取消訂閱項目。Apple 提醒：試用訂閱若不想續訂，要在試用結束前至少 24 小時取消。取消的詳細做法與七日解除權的例外，見<a href="/zh/monthly-vs-annual-subscription/">訂閱月繳還是年繳</a>。
+    </p>
+  </section>
+
+  <section class="explanation" aria-labelledby="subscription-five">
+    <h2 id="subscription-five">五年總額才是誠實的數字</h2>
+    <p>
+      「每月只要」看起來小，「五年總共」才接近訂閱的實際壽命：你不主動退，它就一直扣下去。示範的三列每月 NT${n1(demo.monthly)}，五年是 NT${n0(demo.fiveYear)}。計算機的五年數字沒有加入漲價，所以是偏低的估計；服務漲價後的新價格，要自己改價格欄再看。
+    </p>
+    <h3>防止訂閱越訂越多的做法</h3>
+    <ul>
+      <li><strong>建立續約行事曆。</strong>開始任何試用或年繳方案時，在續約日前提醒自己；年繳最容易被遺忘。</li>
+      <li><strong>進一個、出一個。</strong>想訂新的影音平台？先暫停一個。輪流訂閱勝過無限堆疊。</li>
+      <li><strong>每半年重跑一次健檢。</strong>清單已經存在瀏覽器裡，第二次只要幾分鐘。</li>
+    </ul>
+    <p class="note">試算結果僅供參考，以各平台帳單與條款為準；價格請填下一期實際會扣的金額。最後審核 {checkedOn}。</p>
   </section>
 
   <style>
@@ -116,6 +177,7 @@ const related = [
   <script>
     import { formatCurrency } from '../../../lib/money';
     import { getItem, setItem } from '../../../lib/storage';
+    import { auditSubscriptions, monthlyEquivalent } from '../../../lib/twMembershipMath.mjs';
 
     type Cycle = 'monthly' | 'quarterly' | 'yearly';
     interface Row {
@@ -137,9 +199,9 @@ const related = [
     const largestSubscription = byId<HTMLElement>('largest-subscription');
     const breakdown = byId<HTMLElement>('subscription-breakdown');
     const defaultRows: Row[] = [
-      { id: 'netflix', name: 'Netflix', price: 390, cycle: 'monthly', hours: 12 },
-      { id: 'spotify', name: 'Spotify', price: 180, cycle: 'monthly', hours: 20 },
-      { id: 'cloud-storage', name: '雲端儲存', price: 690, cycle: 'yearly', hours: 2 },
+      { id: 'video', name: '影音服務（示範）', price: 390, cycle: 'monthly', hours: 12 },
+      { id: 'music', name: '音樂服務（示範）', price: 180, cycle: 'monthly', hours: 20 },
+      { id: 'cloud-storage', name: '雲端空間（示範）', price: 690, cycle: 'yearly', hours: 2 },
     ];
     let rows = sanitizeRows(getItem<Row[]>(storageKey, defaultRows));
 
@@ -164,14 +226,8 @@ const related = [
       return `row-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     }
 
-    function cycleMonths(cycle: Cycle): number {
-      if (cycle === 'quarterly') return 3;
-      if (cycle === 'yearly') return 12;
-      return 1;
-    }
-
     function monthlyCost(row: Row): number {
-      return Math.max(0, row.price) / cycleMonths(row.cycle);
+      return monthlyEquivalent(row.price, row.cycle);
     }
 
     function persist(): void {
@@ -269,16 +325,17 @@ const related = [
     }
 
     function update(): void {
+      const audit = auditSubscriptions(rows);
       const totals = rows.map((row) => ({ row, monthly: monthlyCost(row) }));
-      const monthly = totals.reduce((sum, item) => sum + item.monthly, 0);
+      const monthly = audit.monthly;
       const largest = totals.reduce<typeof totals[number] | null>(
         (winner, item) => (winner === null || item.monthly > winner.monthly ? item : winner),
         null,
       );
 
       monthlyTotal.textContent = formatCurrency(monthly, locale);
-      yearlyTotal.textContent = formatCurrency(monthly * 12, locale);
-      fiveYearTotal.textContent = formatCurrency(monthly * 60, locale);
+      yearlyTotal.textContent = formatCurrency(audit.yearly, locale);
+      fiveYearTotal.textContent = formatCurrency(audit.fiveYear, locale);
       largestSubscription.textContent = largest && largest.monthly > 0
         ? `${largest.row.name || '未命名'} (${formatCurrency(largest.monthly, locale)}/月)`
         : '無';
@@ -311,44 +368,4 @@ const related = [
     renderRows();
     update();
   </script>
-  <section class="prose">
-    <p>- <a href="/zh/guides/annual-plan-cancellation-risk-break-even/">延伸檢查：年繳 vs 月繳</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/ai-tool-realized-time-savings-break-even/">延伸檢查：AI 工具訂閱值不值得</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/annual-plan-cancellation-risk-break-even/">延伸檢查：年繳 vs 月繳</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/ai-tool-realized-time-savings-break-even/">延伸檢查：AI 工具訂閱值不值得</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/annual-plan-cancellation-risk-break-even/">延伸檢查：年繳 vs 月繳</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/ai-tool-realized-time-savings-break-even/">延伸檢查：AI 工具訂閱值不值得</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/annual-plan-cancellation-risk-break-even/">延伸檢查：年繳 vs 月繳</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/ai-tool-realized-time-savings-break-even/">延伸檢查：AI 工具訂閱值不值得</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/annual-plan-cancellation-risk-break-even/">延伸檢查：年繳 vs 月繳</a></p>
-    <p></p>
-  </section>
-  <section class="prose">
-    <p>- <a href="/zh/guides/ai-tool-realized-time-savings-break-even/">延伸檢查：AI 工具訂閱值不值得</a></p>
-    <p></p>
-  </section>
 </ToolLayout>

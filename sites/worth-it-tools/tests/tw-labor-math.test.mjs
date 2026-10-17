@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   PENSION_WAGE_TABLE, contributionWage, monthlyContribution, accumulate, levelPayout,
-  statutoryClaimAge, oldAgeAnnuity, oldAgeLumpSumUnder15, onceClaimOldAge,
+  statutoryClaimAge, oldAgeAnnuity, oldAgeLumpSumUnder15, onceClaimOldAge, countedServiceMonths,
 } from '../src/lib/twLaborMath.mjs';
 
 const round = (n) => Math.round(n);
@@ -172,4 +172,36 @@ test('the old-age brief prints the numbers the calculator produces', () => {
   assert.equal(Math.round(3000 / 0.00775), 387097);
   assert.equal((3000 / 0.00775 / 15).toFixed(0), '25806');
   assert.equal(oldAgeLumpSumUnder15({ avgSalary: 30000, serviceMonths: 126 }), 315000);
+});
+
+// P2 batch 3 (2026-10-17): 年滿 60 歲以後的年資. 勞保局給付標準 二、三 and 條例 §59 II.
+test('post-60 service: at most 5 years count; the 50-month ceiling; undetermined cases are not guessed', () => {
+  // 老年一次金: 2 years before 60 + 12 after -> only 5 of the 12 count
+  assert.deepEqual(countedServiceMonths({ serviceMonths: 14 * 12, monthsAfter60: 12 * 12 }), { total: 168, after: 144, counted: 84, dropped: 84 });
+  assert.equal(oldAgeLumpSumUnder15({ avgSalary: 30000, serviceMonths: 14 * 12, monthsAfter60: 12 * 12 }), 210000);
+  assert.equal(oldAgeLumpSumUnder15({ avgSalary: 30000, serviceMonths: 14 * 12 }), 420000); // if nothing were capped
+  // no post-60 service: unchanged behaviour
+  assert.equal(onceClaimOldAge({ avgSalary: 45800, serviceMonths: 360 }).payMonths, 45);
+  // 一次請領: 10 + 3 years = 13 -> 13 months
+  const b = onceClaimOldAge({ avgSalary: 45800, serviceMonths: 13 * 12, monthsAfter60: 3 * 12 });
+  assert.equal(b.determinable, true); assert.equal(b.payMonths, 13); assert.equal(b.amount, 595400);
+  // 30 + 5 years -> 50 months (ceiling), and 35 + 8 years (3 years dropped) -> 50 months
+  const c = onceClaimOldAge({ avgSalary: 45800, serviceMonths: 35 * 12, monthsAfter60: 5 * 12 });
+  assert.equal(c.payMonths, 50); assert.equal(c.amount, 2290000);
+  const d = onceClaimOldAge({ avgSalary: 45800, serviceMonths: 43 * 12, monthsAfter60: 8 * 12 });
+  assert.equal(d.payMonths, 50); assert.equal(d.dropped, 36);
+  // 30 + 2 years: the official text supports two readings that differ, so no number is returned
+  const e = onceClaimOldAge({ avgSalary: 45800, serviceMonths: 32 * 12, monthsAfter60: 2 * 12 });
+  assert.equal(e.determinable, false); assert.equal(e.payMonths, null); assert.equal(e.amount, null);
+  assert.ok(Math.abs(e.readings[0] - e.readings[1]) >= 2);
+});
+
+test('the brief prints the post-60 examples the functions produce', () => {
+  const md = readFileSync(new URL('../src/content/money-briefs/zh/labor-insurance-old-age-lump-sum-vs-annuity.md', import.meta.url), 'utf8');
+  assert.ok(md.includes('| 2 年 | 12 年 | 7 年 | 7 個月 | 30,000 元 | 210,000 元 |'));
+  assert.ok(md.includes('| 10 年 | 3 年 | 13 年 | 13 個月 | 45,800 元 | 595,400 元 |'));
+  assert.ok(md.includes('| 30 年 | 5 年 | 35 年 | 50 個月 | 45,800 元 | 2,290,000 元 |'));
+  // verbatim official sentences (勞保局 給付標準, read 2026-10-17)
+  assert.ok(md.includes('其逾60歲以後之保險年資，最多以5年計。'));
+  assert.ok(md.includes('合併60歲以前之一次請領老年給付，最高以50個月為限。'));
 });

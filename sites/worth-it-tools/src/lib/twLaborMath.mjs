@@ -191,21 +191,62 @@ export function oldAgeAnnuity({ avgSalary, serviceMonths, birthYearRoc, claimAge
   return { years, statutoryAge: statutoryMonths / 12, formulaA, formulaB, usedFormula: formulaA >= formulaB ? 'A' : 'B', base, adjustment, monthly, status };
 }
 
+/** Insured service after age 60 counts for at most 5 years in a lump sum (勞保局 給付標準 二、三; 條例 §59 II). */
+export const POST60_CAP_MONTHS = 60;
+
 /**
- * 老年一次金 (<15 年) = 平均月投保薪資 x 年資(每滿 1 年發 1 個月, 不足 1 年按月數比例).
- * Source: https://www.bli.gov.tw/0004857.html 二. (the 逾 60 歲 5-year cap is not modelled)
+ * Service months that count toward a lump sum. `serviceMonths` is the total insured service and
+ * `monthsAfter60` the part of it served after age 60; the part beyond 5 years is not counted.
+ * Source: https://www.bli.gov.tw/0004857.html 二 ("其逾60歲以後之保險年資，最多以5年計") and 三.
  */
-export function oldAgeLumpSumUnder15({ avgSalary, serviceMonths }) {
-  return Math.max(0, safeNumber(avgSalary)) * (Math.max(0, Math.round(safeNumber(serviceMonths))) / 12);
+export function countedServiceMonths({ serviceMonths, monthsAfter60 = 0 }) {
+  const total = Math.max(0, Math.round(safeNumber(serviceMonths)));
+  const after = Math.min(total, Math.max(0, Math.round(safeNumber(monthsAfter60))));
+  const dropped = Math.max(0, after - POST60_CAP_MONTHS);
+  return { total, after, counted: total - dropped, dropped };
 }
+
+/**
+ * 老年一次金 (<15 年) = 平均月投保薪資 x 年資(每滿 1 年發 1 個月, 不足 1 年按月數比例);
+ * 逾 60 歲以後的年資最多以 5 年計.
+ * Source: https://www.bli.gov.tw/0004857.html 二.
+ */
+export function oldAgeLumpSumUnder15({ avgSalary, serviceMonths, monthsAfter60 = 0 }) {
+  const { counted } = countedServiceMonths({ serviceMonths, monthsAfter60 });
+  return Math.max(0, safeNumber(avgSalary)) * (counted / 12);
+}
+
+const onceTier = (years) => Math.min(years, 15) + Math.max(0, years - 15) * 2;
 
 /**
  * 一次請領老年給付 (only for people with insured service before 98-01-01 who
  * meet 勞工保險條例 §58 II): 15 年內每年 1 個月, 超過部分每年 2 個月, 上限 45 個月.
- * Source: https://www.bli.gov.tw/0004857.html 三. (逾 60 歲 5 年併計、上限 50 個月 not modelled)
+ * 逾 60 歲繼續工作者, 逾 60 歲後的年資最多以 5 年計, 合併 60 歲以前的給付, 最高 50 個月 (條例 §59 II).
+ *
+ * The official text does not say how many months each year after 60 earns. Two readings are
+ * consistent with it -- (1) 合計: add the counted years first, then apply the 15-year tier;
+ * (2) 分開: the pre-60 amount (cap 45) plus 1 month for each counted year after 60 -- and they
+ * agree only in some cases (a combined service of 15 years or less, or a result at the 50-month
+ * ceiling). When they disagree the result is `determinable: false` and no number is returned.
+ * Source: https://www.bli.gov.tw/0004857.html 三; https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0050001&flno=59
  */
-export function onceClaimOldAge({ avgSalary, serviceMonths }) {
-  const years = Math.max(0, Math.round(safeNumber(serviceMonths))) / 12;
-  const payMonths = Math.min(45, Math.min(years, 15) + Math.max(0, years - 15) * 2);
-  return { payMonths, amount: Math.max(0, safeNumber(avgSalary)) * payMonths };
+export function onceClaimOldAge({ avgSalary, serviceMonths, monthsAfter60 = 0 }) {
+  const salary = Math.max(0, safeNumber(avgSalary));
+  const { total, after, counted, dropped } = countedServiceMonths({ serviceMonths, monthsAfter60 });
+  if (after === 0) {
+    const payMonths = Math.min(45, onceTier(total / 12));
+    return { payMonths, amount: salary * payMonths, determinable: true, counted, dropped };
+  }
+  const countedAfter = after - dropped;
+  const reading1 = Math.min(50, onceTier(counted / 12));
+  const reading2 = Math.min(50, Math.min(45, onceTier((total - after) / 12)) + countedAfter / 12);
+  const determinable = Math.abs(reading1 - reading2) < 1e-9;
+  return {
+    payMonths: determinable ? reading1 : null,
+    amount: determinable ? salary * reading1 : null,
+    determinable,
+    counted,
+    dropped,
+    readings: [reading1, reading2],
+  };
 }

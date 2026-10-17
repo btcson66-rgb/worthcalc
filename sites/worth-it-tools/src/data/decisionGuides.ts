@@ -586,9 +586,11 @@ export const costcoGuides: Partial<Record<Locale, DecisionGuideContent>> = {
       { scenario: '回饋觸頂', input: `年度上限 ${ntd(twRewardCap)}`, result: `合格年消費超過 ${ntd(capReachedAt(twExecutive))} 後不再增加回饋` },
     ],
     cta: { label: '用自己的數字重算會員回本', href: '/zh/tools/costco-membership/' },
-    limitations: ['省錢率是使用者假設，不代表每件商品都比其他通路便宜。', '年費、回饋上限、排除項目與會員條款可能變動，請以官方最新公告為準。', '只計算原本就會發生的消費；為回饋多買的支出不是收益。', '回饋只計入合格消費：加油、菸酒、禮券、電信與美食廣場不列入，官方並先扣除政府課稅。'],
+    limitations: ['省錢率是使用者假設，不代表每件商品都比其他通路便宜。', '年費、回饋上限、排除項目與會員條款可能變動，請以官方最新公告為準。', '只計算原本就會發生的消費；為回饋多買的支出不是收益。', '回饋只計入合格消費：官方常見問答列出 12 項不列入的消費（含會員費、Costco 購物卡儲值、停車費、西式餐飲部、加油站），計算前要先扣除政府課稅。'],
     sources: [
       { label: 'Costco 好市多台灣 — 會員權益與最新方案', href: costcoTw.source },
+      { label: 'Costco 好市多台灣 — 黑鑽卡 2% 回饋金常見問答（不列入項目、累計期間）', href: 'https://www.costco.com.tw/CustomerServiceFAQExecutiveMembership2' },
+      { label: 'Costco 好市多台灣 — 會員規章與條款（升等、降等、退費、回饋金核發）', href: 'https://www.costco.com.tw/member-privileges-conditions' },
       { label: 'Costco 官方 — Executive Rewards 條款', href: costcoUs.source },
     ],
     lastVerified: costcoTw.checked,

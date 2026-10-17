@@ -64,10 +64,10 @@ export const homeTw = {
           kind: 'article',
         },
         {
-          href: '/zh/zero-interest-installments-truth/',
-          title: '0 利率分期真的零利率嗎',
-          blurb: '把分期手續費與放棄的現金價折扣，換算成實際年利率。',
-          kind: 'article',
+          href: '/zh/tools/installment-true-apr/',
+          title: '信用卡分期試算：零利率陷阱',
+          blurb: '把分期手續費與放棄的現金價折扣，換算成總費用年百分率。',
+          kind: 'calculator',
         },
         {
           href: '/zh/bnpl-vs-credit-card-installments/',
@@ -109,7 +109,7 @@ export const homeTw = {
         {
           href: '/zh/tools/costco-membership/',
           title: '好市多會員回本計算機',
-          blurb: '分開算「辦不辦會員」與「要不要升級黑鑽卡」，並扣掉加油、菸酒等不計回饋的項目。',
+          blurb: '分開算「辦不辦會員」與「要不要升級黑鑽卡」，並說明官方不計回饋的項目與先扣營業稅的算法。',
           kind: 'calculator',
         },
         {

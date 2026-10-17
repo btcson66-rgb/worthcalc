@@ -46,7 +46,7 @@ const short = evaluatePlan({ listPrice: 30000, n: 3, oneTimeFee: 900 });
 
 const sources = [
   { label: '全國法規資料庫 — 銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準（第 2、5、6、7、8 條）', url: 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380176', verifiedDate: checked },
-  { label: '中華民國銀行公會 — 各發卡機構信用卡分期付款手續費收費標準彙整表（彙整日期 115 年 7 月 22 日）', url: 'https://www.ba.org.tw/consumerCash/details?id=11', verifiedDate: checked },
+  { label: '中華民國銀行公會 — 各發卡機構信用卡分期付款手續費收費標準彙整表（快照：彙整日期 115 年 7 月 22 日 = 2026-07-22）', url: 'https://www.ba.org.tw/consumerCash/details?id=11', verifiedDate: checked },
   { label: '合作金庫商業銀行 — 青安貸款「總費用年百分率範例」（驗證年百分率是月 IRR × 12）', url: 'https://www.tcb-bank.com.tw/personal-banking/loan/mortgage/house-loan-overview/policy-loan-01', verifiedDate: checked },
   { label: '臺灣土地銀行 — 貸款還款方式說明（本息平均攤還與本金平均攤還的公式）', url: 'https://www.landbank.com.tw/Calculate/Repayment', verifiedDate: checked },
   { label: '金管會 — 信用卡定型化契約範本（第 14 條還款抵充順序；全文沒有分期提前清償或分期手續費條文）', url: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL049932', verifiedDate: checked },
@@ -95,7 +95,7 @@ const faq = [
 const related = [
   { title: '信用卡循環利息計算器：日息、15% 上限與最低應繳', href: localizedPath(locale, '/tools/credit-card-payoff') },
   { title: '先買後付 vs 信用卡分期：用總成本與扣款時間比較', href: localizedPath(locale, '/bnpl-vs-credit-card-installments') },
-  { title: '0 利率分期真的零利率嗎：現金價與分期價怎麼比', href: localizedPath(locale, '/zero-interest-installments-truth') },
+  { title: '開辦費與手續費如何墊高分期成本', href: localizedPath(locale, '/upfront-fees-financing-cost') },
 ];
 ---
 
@@ -107,6 +107,12 @@ const related = [
       <p>
         信用卡分期的廣告常寫「零利率」「手續費 2%」，但這些數字不能直接比較：本金每個月都在還，手續費卻是按全額收。把所有付款換成<strong>總費用年百分率</strong>，才有辦法和別的資金成本放在一起看。上面的計算機做的就是這件事；下面說明公式、兩個完整算例、零利率分期的成本藏在哪裡，以及提前結清與信用的問題。
       </p>
+
+      <aside class="method-note" aria-label="本頁年百分率的算法與驗證依據">
+        <p>
+          <strong>本頁的「總費用年百分率」怎麼算：</strong>先解出月 IRR（讓每期付款折現後剛好等於現金價的月利率），再<strong>乘以 12</strong>。標準條文（{checked} 查核）只規定「內部報酬率法」、四捨五入到小數點後第二位、期數以十二個月計，沒有寫出「乘 12」或「複利換算」；所以本頁用合作金庫青安貸款頁公開的總費用年百分率範例反推，月 IRR × 12 得 2.30%、與該行揭露的「2.30%起」一致，複利換算得 2.33%，不一致。這個驗證只涵蓋一家銀行的一個範例，不代表每家發卡機構的內部算法；以帳單或約定書揭露的年百分率為準。
+        </p>
+      </aside>
 
       <h2>分期手續費怎麼換算成年利率</h2>
       <p>
@@ -190,7 +196,7 @@ const related = [
       <h2>零利率分期的陷阱：成本藏在哪</h2>
       <h3>一、手續費</h3>
       <p>
-        「零利率」只說沒有利息。手續費要另外看，而且收法不一：銀行公會彙整的<a href="https://www.ba.org.tw/consumerCash/details?id=11">各發卡機構信用卡分期付款手續費收費標準彙整表</a>（彙整日期 2026-07-22，{checked} 打開查核）列了 30 家發卡機構（另註明美國運通未開辦分期）。依該表：
+        「零利率」只說沒有利息。手續費要另外看，而且收法不一：銀行公會彙整的<a href="https://www.ba.org.tw/consumerCash/details?id=11">各發卡機構信用卡分期付款手續費收費標準彙整表</a>（彙整日期 2026-07-22，{checked} 打開查核）列了 30 家發卡機構（另註明美國運通未開辦分期）。這張表是<strong>2026-07-22 的快照</strong>：網頁另顯示 2024/07/26，附件檔名與表頭「本會彙整日期」都是 115 年 7 月 22 日，表末註明依各發卡行提供的資料彙整，內容是否異動請上各發卡行網站查看。依該表（除一般消費分期外，另有「分期償還代墊帳單帳款」，即帳單分期，本頁沒有統計）：
       </p>
       <ul>
         <li>「分期償還代墊消費帳款」（一般消費分期）：24 家在各期數都標 0 元，6 家有些期數或有分期卡方案收固定金額，從 50 元到 299 元不等。</li>
@@ -199,7 +205,7 @@ const related = [
         <li>該表只列手續費，沒有列分期利率，所以「手續費 0 元」不等於「沒有任何成本」；利率要看各行當期活動與約定書。</li>
       </ul>
       <p>
-        這些是 2026-07-22 的彙整，會改變。本頁不引用任何一家的費率，請以你的分期方案和發卡銀行最新公告為準。每期收費比一次收費更容易被忽略：標價 30,000 元、12 期，一次收 600 元，年百分率 {p2(ex1.aprPct)}%；每期收 100 元，共 {n0(ex1Each.totalFees)} 元，年百分率 {p2(ex1Each.aprPct)}%。
+        這些是 2026-07-22 的快照，之後可能異動。本頁不引用任何一家的費率，請以你的分期方案和發卡銀行最新公告為準。每期收費比一次收費更容易被忽略：標價 30,000 元、12 期，一次收 600 元，年百分率 {p2(ex1.aprPct)}%；每期收 100 元，共 {n0(ex1Each.totalFees)} 元，年百分率 {p2(ex1Each.aprPct)}%。
       </p>
 
       <h3>二、現金價比分期標價低</h3>
@@ -250,6 +256,15 @@ const related = [
         這一頁沒有出現「分期」兩個字，所以<strong>本頁不能告訴你分期本身會不會扣分</strong>。另一個有官方說明的地方是 <a href="https://www.jcic.org.tw/main_ch/faq.aspx">聯徵中心常見問答</a>（{checked} 查核）：金管會規定金融機構對無擔保債務（信用卡、現金卡、信用貸款）歸戶後的總餘額，除以平均月收入不宜超過 22 倍（DBR 22 倍），信用卡債務包含還沒付清的分期付款餘額與循環信用餘額；日常刷卡只要在帳單繳款截止日前全額繳清，就不會計入。也就是說，分期餘額在還清之前，會占用你申請信用貸款等無擔保借款的額度空間。
       </p>
 
+      <h2>決定前的檢查順序</h2>
+      <ol>
+        <li>先問出<strong>現金價</strong>：付現或其他付款方式的價格，包含付現才有的折扣。這是你「今天借到的錢」。</li>
+        <li>把分期要付的錢全部加總：每一期的金額，加上所有手續費與其他必要費用。</li>
+        <li>把上面兩組數字放進計算機（需要時用進階選項的「現金價」），看總費用年百分率，也看多付的金額。</li>
+        <li>和你的替代選項比：手上現金放著的利息或投資報酬、其他貸款的利率；比較要用同一種算法。</li>
+        <li>最後看負擔能力。就算費用是零，同時背好幾筆分期，每月合計的扣款仍會壓縮現金流；聯徵中心常見問答也說明，未付清的分期餘額會計入 DBR 22 倍的計算（見上一節）。</li>
+      </ol>
+
       <h2>在 Excel 裡怎麼做</h2>
       <ol>
         <li>每期金額固定（手續費平均攤進每期，或每期收費）：<code>=RATE(期數, -每期金額, 現金價)*12</code>。例：<code>=RATE(12,-2550,30000)*12</code> 得 {p2(nominalFromMonthly(ex1Spread) * 100)}%。</li>
@@ -269,8 +284,19 @@ const related = [
         <li><strong>把分期和循環信用混為一談。</strong>循環信用是帳單沒繳清的餘額按日計息，分期是約定期數與金額；循環利息怎麼算請看<a href={localizedPath(locale, '/tools/credit-card-payoff')}>信用卡循環利息計算器</a>。</li>
       </ul>
       <p>
-        延伸閱讀：<a href={localizedPath(locale, '/bnpl-vs-credit-card-installments')}>先買後付與信用卡分期的總成本與扣款時間比較</a>、<a href={localizedPath(locale, '/zero-interest-installments-truth')}>0 利率分期的現金價與分期價比較</a>。
+        延伸閱讀：<a href={localizedPath(locale, '/bnpl-vs-credit-card-installments')}>先買後付與信用卡分期的總成本與扣款時間比較</a>、<a href={localizedPath(locale, '/upfront-fees-financing-cost')}>開辦費與手續費如何墊高分期成本</a>。
       </p>
     </div>
   </section>
 </ToolLayout>
+
+<style>
+  .method-note {
+    margin: 1rem 0;
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: 0.25rem 1rem;
+  }
+</style>

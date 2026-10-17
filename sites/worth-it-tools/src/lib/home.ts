@@ -204,7 +204,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     guidesLead: 'Use the deeper guides when one calculator is not enough. Each one exposes its formula, worked example, sensitivity cases, limitations, and source trail.',
     guidesCta: 'Read guide',
     guides: [
-      { title: 'The truth about 0% installments', path: '/zero-interest-installments-truth', description: 'Separate the cash price, mandatory fees, lost discounts, and the real annualized cost.' },
+      { title: 'Installment true APR calculator', path: '/tools/installment-true-apr', description: 'Turn a handling fee or a 0% offer into an annualized cost, using the cash price as the amount financed.' },
       { title: 'Rent versus buy: the complete framework', path: '/rent-vs-buy-guide', description: 'Compare the same home and holding period, including sale proceeds and the opportunity cost of upfront cash.' },
       { title: 'EV versus gas total cost', path: '/ev-vs-gas-total-cost', description: 'Build the comparison from purchase, energy, insurance, maintenance, incentives, and resale.' },
       { title: 'Annual-fee card break-even', path: '/annual-fee-card-breakeven', description: 'Test renewal value against the no-fee card you could actually use, not against zero rewards.' },
@@ -365,7 +365,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     guidesLead: '需要比單一數字更完整的答案時，閱讀含公式、案例、敏感度、限制與官方來源的深度指南。',
     guidesCta: '閱讀指南',
     guides: [
-      { title: '零利率分期真的零成本嗎？', path: '/zero-interest-installments-truth', description: '把現金價、必要手續費、放棄折扣與真實年化成本分開核對。' },
+      { title: '信用卡分期試算：零利率陷阱', path: '/tools/installment-true-apr', description: '把手續費、現金價差換算成總費用年百分率，附提前結清與是否影響信用的官方說明。' },
       { title: '租屋還是買房完整比較', path: '/rent-vs-buy-guide', description: '以同地段、同居住期間比較房貸利息、持有成本、期末淨值與頭期款機會成本。' },
       { title: '電動車與油車總持有成本', path: '/ev-vs-gas-total-cost', description: '從購車淨價、能源、保險、保養、補助與轉售價建立完整比較。' },
       { title: '信用卡年費回本門檻', path: '/annual-fee-card-breakeven', description: '把續卡價值與實際可申辦的免年費卡比較，而不是假設替代方案零回饋。' },

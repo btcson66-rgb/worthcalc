@@ -13,15 +13,11 @@ const failures = [];
 // P1b (2026-10-15): cost-per-use-expensive-item, bulk-buying-vs-small-packages,
 // meal-prep-vs-takeout-cost, reusable-vs-disposable-break-even and
 // price-per-wear-clothing-shoes were removed by the disposition audit, so they are no
-// longer routes this check expects to find.
+// longer routes this check expects to find. P2 batch 3 (2026-10-17) did the same for
+// zero-interest-installments-truth, which is now a redirect stub to /tools/installment-true-apr/.
 const editorialRoutes = [
   {
     slug: 'subscription-creep',
-    nativeMarkers: {
-    },
-  },
-  {
-    slug: 'zero-interest-installments-truth',
     nativeMarkers: {
     },
   },

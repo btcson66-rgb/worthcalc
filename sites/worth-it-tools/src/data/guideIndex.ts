@@ -70,7 +70,6 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/budget-with-irregular-income/', title: 'How to Budget on Irregular Income Without Guessing Next Month' },
     { path: '/how-to-calculate-dti/', title: 'How to Calculate DTI (And Why 43% Isn\'t a Hard Cutoff Anymore)' },
     { path: '/full-commute-cost-including-time/', title: 'How to calculate the full cost of commuting, including your time' },
-    { path: '/zero-interest-installments-truth/', title: 'How to Calculate the Real APR of a 0% Installment Plan' },
     { path: '/paid-membership-break-even/', title: 'How to calculate whether a paid membership is worth it' },
     { path: '/upfront-fees-financing-cost/', title: 'How upfront fees change the true cost of financing' },
     { path: '/guides/hvac-cost-per-operating-hour-used/', title: 'HVAC Cost Per Operating Hour Used: Make Runtime and Seasonal Rates Comparable' },
@@ -135,7 +134,6 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/work-from-home-vs-commuting-hidden-costs/', title: 'Work from home vs commuting: compare the hidden monthly costs' },
   ],
   zh: [
-    { path: '/zero-interest-installments-truth/', title: '0 利率分期真的零利率嗎？分期手續費年利率怎麼算' },
     { path: '/guides/promo-apr-payoff-deadline/', title: '0% 優惠期到期前每月要還多少？不要把最低付款當成清償計畫' },
     { path: '/guides/paycheck-budgeting-limitations/', title: '50/30/20 預算什麼時候會失真？比例預算不是每個人都能直接套' },
     { path: '/rule-of-72-explained/', title: '72 法則：一條心算就能懂複利的捷徑（和它失準的時候）' },

@@ -25,6 +25,7 @@ const bliStandard = 'https://www.bli.gov.tw/0004857.html';
       <label><span>保險年資：月（0–11）</span><input id="li-months" type="number" inputmode="numeric" min="0" max="11" step="1" value="0" /></label>
       <label><span>預計請領年齡：歲</span><input id="li-claim-years" type="number" inputmode="numeric" min="50" max="80" step="1" value="65" /></label>
       <label><span>預計請領年齡：月（0–11）</span><input id="li-claim-months" type="number" inputmode="numeric" min="0" max="11" step="1" value="0" /></label>
+      <label class="is-wide"><span>其中年滿 60 歲以後才累積的保險年資（年；只影響一次金與一次請領，逾 5 年的部分官方不計入；沒有就填 0）</span><input id="li-after60" type="number" inputmode="decimal" min="0" max="60" step="1" value="0" /></label>
       <label class="is-wide"><span>一次請領比較用：退保前 3 年平均月投保薪資（元；只有民國 98 年 1 月 1 日前已有勞保年資且符合條件者才有這個選項）</span><input id="li-lump-salary" type="number" inputmode="numeric" min="0" step="100" value="45800" /></label>
       <p class="calc__note is-wide">
         公式與調整比例來源：<a href={bliStandard}>勞保局老年給付給付標準</a>（2026-10-16 查核）。想用官方工具核對，請用勞保局的<a href={bliTrial}>老年給付整合試算</a>。
@@ -41,7 +42,7 @@ const bliStandard = 'https://www.bli.gov.tw/0004857.html';
         <div><dt>提前減給／延後增給</dt><dd id="li-adjust">—</dd></div>
         <div><dt>每月老年年金</dt><dd id="li-monthly">—</dd></div>
         <div><dt>每年老年年金（× 12）</dt><dd id="li-yearly">—</dd></div>
-        <div><dt>一次請領老年給付（限 98 年前有年資者）</dt><dd id="li-lump">—</dd></div>
+        <div><dt>一次請領老年給付（限 98 年前有年資者；逾 60 歲年資最多計 5 年）</dt><dd id="li-lump">—</dd></div>
         <div><dt>年金領幾個月追上一次金</dt><dd id="li-payback">—</dd></div>
       </dl>
       <p class="li-note" id="li-explain"></p>
@@ -56,7 +57,7 @@ const bliStandard = 'https://www.bli.gov.tw/0004857.html';
   const root = document.querySelector<HTMLElement>('[data-tw-labor-insurance]');
   if (root) {
     const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
-    const ids = ['li-birth', 'li-salary', 'li-years', 'li-months', 'li-claim-years', 'li-claim-months', 'li-lump-salary'];
+    const ids = ['li-birth', 'li-salary', 'li-years', 'li-months', 'li-claim-years', 'li-claim-months', 'li-after60', 'li-lump-salary'];
     const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
     const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
     const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
@@ -68,16 +69,21 @@ const bliStandard = 'https://www.bli.gov.tw/0004857.html';
       const serviceMonths = Math.round(val('li-years') * 12 + Math.min(11, Math.max(0, val('li-months'))));
       const claimAgeMonths = Math.round(val('li-claim-years') * 12 + Math.min(11, Math.max(0, val('li-claim-months'))));
       const r = oldAgeAnnuity({ avgSalary: val('li-salary'), serviceMonths, birthYearRoc: val('li-birth'), claimAgeMonths });
-      const lump = onceClaimOldAge({ avgSalary: val('li-lump-salary'), serviceMonths });
+      const monthsAfter60 = Math.round(Math.max(0, val('li-after60')) * 12);
+      const lump = onceClaimOldAge({ avgSalary: val('li-lump-salary'), serviceMonths, monthsAfter60 });
       el('li-statutory').textContent = `${r.statutoryAge} 歲`;
       el('li-formula-a').textContent = money2(r.formulaA);
       el('li-formula-b').textContent = money2(r.formulaB);
-      el('li-lump').textContent = `${money(lump.amount)}（${Number(lump.payMonths.toFixed(2))} 個月）`;
+      const lumpAmount = lump.amount ?? 0;
+      el('li-lump').textContent = lump.determinable && lump.payMonths !== null
+        ? `${money(lumpAmount)}（${Number(lump.payMonths.toFixed(2))} 個月）`
+        : '官方文字沒有寫明這種情形怎麼算，本頁不給數字；請用勞保局 e 化系統試算';
 
       const status = el('li-status');
       if (r.status === 'under15') {
-        const small = oldAgeLumpSumUnder15({ avgSalary: val('li-salary'), serviceMonths });
-        status.textContent = `保險年資未滿 15 年，不能請領老年年金，改請領老年一次金：約 ${money(small)}（平均月投保薪資 × 年資，每滿 1 年 1 個月）。若加計國民年金年資滿 15 年，年滿 65 歲時可選擇請領勞保老年年金。`;
+        const small = oldAgeLumpSumUnder15({ avgSalary: val('li-salary'), serviceMonths, monthsAfter60 });
+        const cut = lump.dropped > 0 ? `；其中年滿 60 歲後的年資超過 5 年，多出的 ${Number((lump.dropped / 12).toFixed(2))} 年不計` : '';
+        status.textContent = `保險年資未滿 15 年，不能請領老年年金，改請領老年一次金：約 ${money(small)}（平均月投保薪資 × 年資，每滿 1 年 1 個月${cut}）。若加計國民年金年資滿 15 年，年滿 65 歲時可選擇請領勞保老年年金。`;
         ['li-base', 'li-adjust', 'li-monthly', 'li-yearly', 'li-payback'].forEach((id) => { el(id).textContent = '—'; });
         el('li-explain').textContent = '';
         return;
@@ -94,7 +100,7 @@ const bliStandard = 'https://www.bli.gov.tw/0004857.html';
       el('li-adjust').textContent = r.adjustment === 0 ? '無' : pct(r.adjustment);
       el('li-monthly').textContent = money(r.monthly);
       el('li-yearly').textContent = money(r.monthly * 12);
-      el('li-payback').textContent = lump.amount > 0 && r.monthly > 0 ? `${(lump.amount / r.monthly).toFixed(1)} 個月` : '—';
+      el('li-payback').textContent = lump.determinable && lumpAmount > 0 && r.monthly > 0 ? `${(lumpAmount / r.monthly).toFixed(1)} 個月` : '—';
       el('li-explain').textContent = `年資 ${r.years.toFixed(2).replace(/\.?0+$/, '')} 年；公式一 ${money2(r.formulaA)}、公式二 ${money2(r.formulaB)}，取較高者。`;
     };
 

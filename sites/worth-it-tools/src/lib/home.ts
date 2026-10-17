@@ -318,7 +318,7 @@ export const homeContent: Record<CoreLocale, HomeContent> = {
     tools: [
       {
         icon: '💳',
-        title: '分期付款真實 APR 計算機',
+        title: '信用卡分期試算',
         path: '/tools/installment-true-apr',
         description: '看穿「0 利率」分期背後的真實年利率，手續費其實是幾 % 利息。',
       },

@@ -1,0 +1,201 @@
+---
+/*
+ * 信用卡分期試算 (P2 batch 2, 2026-10-17), zh only.
+ *
+ * Replaces the generic installment calculator on /zh/tools/installment-true-apr/.
+ * The arithmetic is in src/lib/twInstallmentMath.mjs (monthly IRR, 年百分率 = monthly IRR x 12,
+ * as Taiwanese issuers disclose it) and is exercised by tests/tw-installment-math.test.mjs.
+ * The defaults are the first worked example on the page. The interest rate is always the
+ * reader's input; no issuer's rate or fee is built in.
+ */
+const lawApr = 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380176';
+---
+
+<section class="calc" data-tw-installment data-growth-calculator aria-labelledby="ip-heading">
+  <header>
+    <h2 id="ip-heading">信用卡分期試算：手續費換算年利率</h2>
+    <p>把<strong>你的分期方案上的數字</strong>填進來：分期金額、期數、手續費、有沒有利率。算出每期要繳多少、總共多付多少，以及換算成<a href={lawApr}>總費用年百分率</a>的結果。預設值就是下方的算例一。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>分期金額（元，分期方案的標價）</span><input id="ip-list" type="number" inputmode="numeric" min="0" step="1000" value="30000" /></label>
+      <label><span>期數（期，每月一期）</span><input id="ip-n" type="number" inputmode="numeric" min="1" max="120" step="1" value="12" /></label>
+      <label><span>分期年利率（%，零利率填 0；請填約定書上的數字）</span><input id="ip-rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="0" /></label>
+      <label>
+        <span>有利率時的攤還方式</span>
+        <select id="ip-method">
+          <option value="annuity">本息平均攤還（每期金額固定）</option>
+          <option value="equalPrincipal">本金平均攤還（每期本金固定）</option>
+        </select>
+      </label>
+      <label><span>一次性手續費（元，沒有就填 0）</span><input id="ip-fee1" type="number" inputmode="numeric" min="0" step="50" value="600" /></label>
+      <label>
+        <span>一次性手續費怎麼收</span>
+        <select id="ip-feetiming">
+          <option value="first">加在第 1 期帳單</option>
+          <option value="upfront">購買當下先付</option>
+        </select>
+      </label>
+      <label><span>每期手續費（元，沒有就填 0）</span><input id="ip-feen" type="number" inputmode="numeric" min="0" step="10" value="0" /></label>
+
+      <details class="is-wide ip-advanced">
+        <summary>進階選項（現金價不同、帳單金額已知、提前結清）</summary>
+        <div class="ip-advanced__grid">
+          <label><span>現金價（元，一次付清的價格；空白＝與分期金額相同）</span><input id="ip-cash" type="number" inputmode="numeric" min="0" step="100" placeholder="例如 28800" /></label>
+          <label><span>帳單上每期實際金額（元，已含利息與每期手續費；空白＝由上面算）</span><input id="ip-override" type="number" inputmode="numeric" min="0" step="1" placeholder="例如 2600" /></label>
+          <label><span>在第幾期繳完後提前結清（空白＝不提前）</span><input id="ip-early" type="number" inputmode="numeric" min="1" step="1" placeholder="例如 6" /></label>
+          <label><span>提前結清作業費（元，依約定書；沒有就填 0）</span><input id="ip-settle" type="number" inputmode="numeric" min="0" step="50" value="0" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide ip-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="reset" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        利率與手續費請抄<strong>你的分期方案或約定書</strong>上的數字，本頁沒有內建任何銀行的利率。手續費怎麼收、提前結清要不要費用、已繳手續費退不退，各發卡機構規定不同，這裡的假設見下方「限制」。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="ip-status" id="ip-status">—</p>
+      <dl>
+        <div><dt>每期應繳</dt><dd id="ip-pay">—</dd></div>
+        <div><dt>總付款</dt><dd id="ip-total">—</dd></div>
+        <div><dt>比現金價多付</dt><dd id="ip-cost">—</dd></div>
+        <div><dt>總費用年百分率（月 IRR × 12）</dt><dd id="ip-apr">—</dd></div>
+        <div><dt>月 IRR</dt><dd id="ip-monthly">—</dd></div>
+        <div><dt>複利年化（(1+月 IRR)^12 − 1，僅供對照）</dt><dd id="ip-comp">—</dd></div>
+        <div id="ip-real-row" hidden><dt>含「放棄現金折扣」的實際年百分率</dt><dd id="ip-real">—</dd></div>
+        <div id="ip-early-row" hidden><dt>提前結清的情境</dt><dd id="ip-early-out">—</dd></div>
+      </dl>
+      <p class="ip-note" id="ip-explain"></p>
+      <p class="ip-note"><strong>試算結果僅供參考，以發卡銀行的分期付款約定書與帳單為準。</strong>簡化：月利率 = 年利率 ÷ 12、每期取整到元（最後一期補差額）、分期從購買後一個月開始、已繳手續費不退。逾期違約金不計入，與標準第 7 條一致。</p>
+      <details class="ip-schedule">
+        <summary>逐期明細</summary>
+        <div class="ip-schedule__scroll">
+          <table>
+            <thead><tr><th>期</th><th>本金</th><th>利息</th><th>手續費</th><th>應繳</th><th>剩餘本金</th></tr></thead>
+            <tbody id="ip-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { evaluatePlan, earlySettlement, safeNumber } from '../lib/twInstallmentMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-installment]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['ip-list', 'ip-n', 'ip-rate', 'ip-method', 'ip-fee1', 'ip-feetiming', 'ip-feen', 'ip-cash', 'ip-override', 'ip-early', 'ip-settle'];
+    const inputs = ids.map((id) => el<HTMLInputElement | HTMLSelectElement>(id));
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const pct = (n: number) => `${n.toFixed(2)}%`;
+    const dash = '—';
+
+    const render = () => {
+      const listPrice = Math.max(0, Math.round(val('ip-list')));
+      const n = Math.min(120, Math.max(1, Math.round(val('ip-n')) || 1));
+      const rawCash = val('ip-cash');
+      const input = {
+        listPrice,
+        cashPrice: rawCash > 0 ? rawCash : listPrice,
+        n,
+        aprPct: Math.max(0, val('ip-rate')),
+        method: el<HTMLSelectElement>('ip-method').value,
+        oneTimeFee: Math.max(0, val('ip-fee1')),
+        feeTiming: el<HTMLSelectElement>('ip-feetiming').value,
+        perPeriodFee: Math.max(0, val('ip-feen')),
+        paymentOverride: Math.max(0, val('ip-override')),
+      };
+      const out = ['ip-pay', 'ip-total', 'ip-cost', 'ip-apr', 'ip-monthly', 'ip-comp'];
+      const tbody = el('ip-rows');
+      tbody.textContent = '';
+      el('ip-real-row').hidden = true;
+      el('ip-early-row').hidden = true;
+      if (listPrice <= 0) {
+        out.forEach((id) => { el(id).textContent = dash; });
+        el('ip-status').textContent = '請輸入分期金額。';
+        el('ip-explain').textContent = '';
+        return;
+      }
+      const r = evaluatePlan(input);
+      el('ip-pay').textContent = r.firstPayment === r.lastPayment ? money(r.firstPayment) : `第 1 期 ${money(r.firstPayment)}，之後約 ${money(r.schedule.rows[Math.min(1, n - 1)].payment)}，最後一期 ${money(r.lastPayment)}`;
+      el('ip-total').textContent = money(r.totalPaid);
+      el('ip-cost').textContent = `${money(r.totalCost)}（利息 ${money(r.totalInterest)}、手續費 ${money(r.totalFees)}${r.hasPriceGap ? '、價差' : ''}）`;
+      const ok = Number.isFinite(r.monthly);
+      el('ip-apr').textContent = ok ? pct(r.aprPct) : dash;
+      el('ip-monthly').textContent = ok ? `${(Math.abs(r.monthly) < 1e-9 ? 0 : r.monthly * 100).toFixed(4)}%` : dash;
+      el('ip-comp').textContent = ok ? pct(r.compoundedPct) : dash;
+      if (r.hasPriceGap && Number.isFinite(r.monthlyReal)) {
+        el('ip-real-row').hidden = false;
+        el('ip-real').textContent = pct(r.aprRealPct);
+      }
+      el('ip-status').textContent = ok
+        ? `分期 ${money(listPrice)}、${n} 期：總共多付 ${money(r.totalCost)}，換算年百分率約 ${pct(r.aprPct)}。`
+        : '這組數字算不出年百分率（例如總付款沒有高於現金價）。';
+      const note: string[] = [];
+      if (input.paymentOverride > 0) note.push('已使用你填的帳單金額；利息與本金的拆分不明，所以逐期明細與提前結清不適用。');
+      if (r.hasPriceGap) note.push('「總費用年百分率」只計利息與手續費；現金價比分期標價低的部分，另列在「含放棄現金折扣」那一行。');
+      el('ip-explain').textContent = note.join(' ');
+
+      const early = val('ip-early');
+      if (early > 0) {
+        const e = earlySettlement(input, early, val('ip-settle'));
+        el('ip-early-row').hidden = false;
+        el('ip-early-out').textContent = e
+          ? `第 ${e.k} 期繳完後一次還清剩餘 ${money(e.remaining)}${val('ip-settle') > 0 ? `＋作業費 ${money(val('ip-settle'))}` : ''}：總付款 ${money(e.totalPaid)}、多付 ${money(e.totalCost)}，年百分率 ${Number.isFinite(e.monthly) ? pct(e.aprPct) : dash}`
+          : input.paymentOverride > 0 ? '填了帳單金額時無法估算提前結清' : `提前結清期數要在 1 到 ${n - 1} 之間`;
+      }
+
+      if (input.paymentOverride <= 0) {
+        for (const row of r.schedule.rows) {
+          const tr = document.createElement('tr');
+          [row.k, row.principal, row.interest, row.fee, row.payment, row.balance].forEach((v, idx) => {
+            const td = document.createElement('td');
+            td.textContent = idx === 0 ? String(v) : yuan.format(Math.round(Number(v)));
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        }
+      }
+    };
+
+    const example: Record<string, string> = { 'ip-list': '30000', 'ip-n': '12', 'ip-rate': '0', 'ip-method': 'annuity', 'ip-fee1': '600', 'ip-feetiming': 'first', 'ip-feen': '0', 'ip-cash': '', 'ip-override': '', 'ip-early': '', 'ip-settle': '0' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = input instanceof HTMLSelectElement ? input.options[0].value : ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden] { display: none !important; }
+  .ip-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ip-status { margin: 0; font-weight: 750; }
+  .ip-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .ip-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .ip-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+  .ip-schedule { margin-top: 0.5rem; }
+  .ip-schedule summary { cursor: pointer; font-weight: 650; }
+  .ip-schedule__scroll { overflow-x: auto; }
+  .ip-schedule table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  .ip-schedule th, .ip-schedule td { padding: 0.25rem 0.5rem; text-align: right; border-bottom: 1px solid var(--color-border); font-variant-numeric: tabular-nums; }
+</style>

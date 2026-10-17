@@ -9,7 +9,7 @@ answer: "以 36 個月帳單折抵支付的舊機方案，你能拿到的只有�
 publishAt: "2026-11-05"
 lastReviewed: "2026-09-19"
 relatedTool: "/zh/tools/installment-true-apr/"
-relatedToolLabel: "分期付款真實 APR 計算機"
+relatedToolLabel: "信用卡分期試算"
 formula: "實得折抵 = 每月折抵金額 × 你留下的月數；換機實質成本 = 新機價格 − 實得折抵 + 舊機未付餘額"
 limits:
   - "報價的折抵金額以機器通過檢驗為條件。螢幕或電池瑕疵可能在你已經決定換機之後大幅砍價，而各家對這種減額的條款並不相同。"

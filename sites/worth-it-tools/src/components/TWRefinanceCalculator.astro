@@ -1,0 +1,176 @@
+---
+/*
+ * 房貸轉貸回本試算 (P2 batch 4, 2026-10-17), zh only.
+ *
+ * Arithmetic: refinanceCosts(), evaluateRefinance() and refinanceNetAtMonth() in src/lib/twMortgageMath.mjs
+ * (tests/tw-mortgage-math.test.mjs). The defaults are the first worked example on the page.
+ * No bank's rate or fee is built in: both rates, the term and every fee except the two statutory
+ * land-office items (登記費 = 擔保債權總金額 x 千分之一, 書狀費 80 元/張) are typed by the reader.
+ */
+---
+
+<section class="calc" data-tw-refinance data-growth-calculator aria-labelledby="rf-heading">
+  <header>
+    <h2 id="rf-heading">房貸轉貸回本試算</h2>
+    <p>填<strong>你的舊貸款現況</strong>、<strong>新銀行報價</strong>與各項轉貸費用。算出一次性費用合計、月付差，以及兩種回本月數：月付省下的錢多久補回費用，和「持有多久才真的賺到」。利率與年期由你輸入，本頁沒有內建任何銀行的利率。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>目前貸款餘額（元）</span><input id="rf-balance" type="number" inputmode="numeric" min="0" step="10000" value="8000000" /></label>
+      <label><span>舊貸款目前年利率（%，看最近一期帳單）</span><input id="rf-old-rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="2.6" /></label>
+      <label><span>舊貸款剩餘期數（月；25 年 = 300）</span><input id="rf-old-months" type="number" inputmode="numeric" min="1" max="480" step="1" value="300" /></label>
+      <label><span>新貸款年利率（%，新銀行書面報價）</span><input id="rf-new-rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="2.1" /></label>
+      <label>
+        <span>新貸款年期</span>
+        <select id="rf-new-term">
+          <option value="same" selected>配合舊貸款剩餘期數（不重置）</option>
+          <option value="240">20 年（240 期）</option>
+          <option value="300">25 年（300 期）</option>
+          <option value="360">30 年（360 期）</option>
+          <option value="480">40 年（480 期）</option>
+        </select>
+      </label>
+      <label><span>持有／預計再轉貸或清償的月數（算「這段期間淨賺多少」）</span><input id="rf-hold" type="number" inputmode="numeric" min="1" max="480" step="1" value="60" /></label>
+
+      <fieldset class="is-wide rf-costs">
+        <legend>轉貸的一次性費用（元；沒有就填 0）</legend>
+        <div class="rf-costs__grid">
+          <label><span>新銀行手續費／開辦費</span><input id="rf-bank-fee" type="number" inputmode="numeric" min="0" step="500" value="8000" /></label>
+          <label><span>鑑價費（依新銀行報價）</span><input id="rf-appraisal" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
+          <label><span>代書／地政士費（依報價）</span><input id="rf-scrivener" type="number" inputmode="numeric" min="0" step="500" value="10000" /></label>
+          <label><span>其他費用（例如帳管費，依報價）</span><input id="rf-other" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
+          <label><span>抵押權設定金額（擔保債權總金額；空白＝等於貸款餘額）</span><input id="rf-secured" type="number" inputmode="numeric" min="0" step="10000" placeholder="例如 9600000" /></label>
+          <label><span>他項權利證明書張數（書狀費每張 80 元）</span><input id="rf-sheets" type="number" inputmode="numeric" min="0" max="10" step="1" value="1" /></label>
+          <label><span>舊貸款提前清償違約金（% ，依你的契約；已過限制清償期間或無限制就填 0）</span><input id="rf-penalty" type="number" inputmode="decimal" min="0" max="10" step="0.05" value="0" /></label>
+        </div>
+      </fieldset>
+
+      <div class="is-wide rf-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="reset" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        登記費與書狀費是法定的（土地法第 76、67 條），其他費用都以你拿到的書面報價為準。<strong>試算結果僅供參考，以銀行與地政機關公告為準。</strong>
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="rf-status" id="rf-status">—</p>
+      <dl>
+        <div><dt>一次性費用合計</dt><dd id="rf-cost">—</dd></div>
+        <div><dt>舊貸款每月本息</dt><dd id="rf-old-pay">—</dd></div>
+        <div><dt>新貸款每月本息</dt><dd id="rf-new-pay">—</dd></div>
+        <div><dt>每月本息差</dt><dd id="rf-save">—</dd></div>
+        <div><dt>回本月數 ①：月付差補回費用</dt><dd id="rf-be-pay">—</dd></div>
+        <div><dt>回本月數 ②：累計少付的利息 ≥ 費用（真正賺到）</dt><dd id="rf-be-int">—</dd></div>
+        <div><dt>持有到指定月數的淨賺（省下利息 − 費用）</dt><dd id="rf-hold-net">—</dd></div>
+        <div><dt>跑完全程的利息：舊 → 新</dt><dd id="rf-interest">—</dd></div>
+        <div><dt>跑完全程淨賺（利息差 − 費用）</dt><dd id="rf-net-full">—</dd></div>
+      </dl>
+      <p class="rf-note" id="rf-explain"></p>
+      <ul class="rf-breakdown" id="rf-breakdown"></ul>
+      <p class="rf-note"><strong>試算結果僅供參考，以新舊銀行的書面報價、貸款契約與地政事務所核算為準。</strong>簡化：兩筆貸款都是本息平均攤還、無寬限期；利率不變；月付不逐月取整；違約金以清償當下的餘額為基礎；轉貸期間重複繳的利息、火險地震險的差異與撥款時間差不計入。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { evaluateRefinance, refinanceCosts, refinanceNetAtMonth, safeNumber } from '../lib/twMortgageMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-refinance]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['rf-balance', 'rf-old-rate', 'rf-old-months', 'rf-new-rate', 'rf-new-term', 'rf-hold', 'rf-bank-fee', 'rf-appraisal', 'rf-scrivener', 'rf-other', 'rf-secured', 'rf-sheets', 'rf-penalty'];
+    const inputs = ids.map((id) => el<HTMLInputElement | HTMLSelectElement>(id));
+    const val = (id: string) => safeNumber(el<HTMLInputElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${n < 0 ? '−' : ''}${yuan.format(Math.abs(Math.round(n)))} 元`;
+    const dash = '—';
+    const outs = ['rf-cost', 'rf-old-pay', 'rf-new-pay', 'rf-save', 'rf-be-pay', 'rf-be-int', 'rf-hold-net', 'rf-interest', 'rf-net-full'];
+
+    const render = () => {
+      outs.forEach((id) => { el(id).textContent = dash; });
+      el('rf-explain').textContent = '';
+      el('rf-breakdown').textContent = '';
+      const balance = Math.max(0, Math.round(val('rf-balance')));
+      if (balance <= 0) {
+        el('rf-status').textContent = '請輸入目前貸款餘額。';
+        return;
+      }
+      const oldMonths = Math.min(480, Math.max(1, Math.round(val('rf-old-months')) || 1));
+      const termChoice = el<HTMLSelectElement>('rf-new-term').value;
+      const newMonths = termChoice === 'same' ? oldMonths : Number(termChoice);
+      const costs = refinanceCosts({
+        balance,
+        securedAmount: val('rf-secured'),
+        newBankFee: val('rf-bank-fee'),
+        appraisalFee: val('rf-appraisal'),
+        scrivenerFee: val('rf-scrivener'),
+        otherFees: val('rf-other'),
+        titleSheets: val('rf-sheets'),
+        penaltyPct: val('rf-penalty'),
+      });
+      const r = evaluateRefinance({ balance, oldAprPct: val('rf-old-rate'), oldMonthsLeft: oldMonths, newAprPct: val('rf-new-rate'), newMonths, costs: costs.total });
+      el('rf-cost').textContent = money(costs.total);
+      el('rf-old-pay').textContent = money(r.oldPayment);
+      el('rf-new-pay').textContent = money(r.newPayment);
+      el('rf-save').textContent = r.monthlySaving > 0 ? `每月少付 ${money(r.monthlySaving)}` : `每月多付 ${money(-r.monthlySaving)}`;
+      el('rf-be-pay').textContent = r.paymentBreakEven === null ? '月付沒有變少，不適用' : `${r.paymentBreakEven} 個月`;
+      el('rf-be-int').textContent = r.interestBreakEven === null ? `在舊貸款剩下的 ${oldMonths} 個月內，少付的利息補不回費用` : `${r.interestBreakEven} 個月`;
+      const hold = Math.min(Math.max(1, Math.round(val('rf-hold')) || 1), Math.min(oldMonths, newMonths));
+      const holdNet = refinanceNetAtMonth(r, hold);
+      el('rf-hold-net').textContent = `${hold} 個月：${holdNet >= 0 ? '淨賺' : '淨虧'} ${money(Math.abs(holdNet))}`;
+      el('rf-interest').textContent = `${money(r.totalInterestOld)} → ${money(r.totalInterestNew)}`;
+      el('rf-net-full').textContent = `${r.netOverFullTerm >= 0 ? '淨賺' : '淨虧'} ${money(Math.abs(r.netOverFullTerm))}`;
+
+      const notes: string[] = [];
+      if (r.termExtensionMonths > 0) {
+        notes.push(`新貸款比舊貸款多 ${r.termExtensionMonths} 個月（年期重置）：月付變低有一部分只是還得更久，所以回本月數 ① 會比 ② 樂觀。判斷時以 ② 和「跑完全程淨賺」為準；想拿到較低的月付又不多付利息，可以選較長年期、但照原本的月付去繳。`);
+      }
+      if (r.monthlySaving <= 0) notes.push('新貸款的月付沒有比舊貸款低，通常只有在新年期更短、想少付總利息時才有意義。');
+      el('rf-explain').textContent = notes.join(' ');
+      el('rf-status').textContent = r.interestBreakEven === null
+        ? `一次性費用 ${money(costs.total)}：在舊貸款剩下的期間內，少付的利息補不回這筆費用。`
+        : `一次性費用 ${money(costs.total)}：持有超過約 ${r.interestBreakEven} 個月，少付的利息才會大於費用。`;
+
+      const items: Array<[string, number]> = [
+        ['新銀行手續費／開辦費', costs.bank], ['鑑價費', costs.appraisal], ['代書／地政士費', costs.scrivener], ['其他費用', costs.other],
+        ['抵押權設定登記費（設定金額 × 千分之一）', costs.registration], ['書狀費', costs.titleFee], ['舊貸款提前清償違約金', costs.penalty],
+      ];
+      for (const [label, amount] of items) {
+        if (amount <= 0) continue;
+        const li = document.createElement('li');
+        li.textContent = `${label}：${money(amount)}`;
+        el('rf-breakdown').appendChild(li);
+      }
+    };
+
+    const example: Record<string, string> = { 'rf-balance': '8000000', 'rf-old-rate': '2.6', 'rf-old-months': '300', 'rf-new-rate': '2.1', 'rf-new-term': 'same', 'rf-hold': '60', 'rf-bank-fee': '8000', 'rf-appraisal': '0', 'rf-scrivener': '10000', 'rf-other': '0', 'rf-secured': '', 'rf-sheets': '1', 'rf-penalty': '0' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = input instanceof HTMLSelectElement ? input.options[0].value : ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .rf-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .rf-status { margin: 0; font-weight: 750; }
+  .rf-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .rf-breakdown { margin: 0; padding-left: 1.2rem; font-size: 0.9rem; color: var(--color-muted); }
+  .rf-costs { border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem; }
+  .rf-costs legend { font-weight: 650; padding-inline: 0.35rem; }
+  .rf-costs__grid { display: grid; gap: 0.75rem; }
+</style>

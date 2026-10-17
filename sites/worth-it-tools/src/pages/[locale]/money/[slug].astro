@@ -20,6 +20,7 @@ import RelatedLinks from '../../../components/RelatedLinks.astro';
 import { localizedCorePath, useTranslations } from '../../../i18n/utils';
 import TWLaborInsuranceCalculator from '../../../components/TWLaborInsuranceCalculator.astro';
 import TWLaborPensionCalculator from '../../../components/TWLaborPensionCalculator.astro';
+import TWRefinanceCalculator from '../../../components/TWRefinanceCalculator.astro';
 import { articleJsonLd, breadcrumbJsonLd, softwareAppJsonLd } from '../../../lib/seo';
 import { isPublished, publishCutoff } from '../../../lib/publication';
 import { isoDate } from '../../../lib/trustBlock';
@@ -132,6 +133,7 @@ const relatedLinks = liveRelated.map((href) => ({
 
   {data.calculator === 'tw-labor-pension' && <TWLaborPensionCalculator />}
   {data.calculator === 'tw-labor-insurance' && <TWLaborInsuranceCalculator />}
+  {data.calculator === 'tw-mortgage-refinance' && <TWRefinanceCalculator />}
 
   <Content />
 

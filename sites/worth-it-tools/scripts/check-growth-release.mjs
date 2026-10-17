@@ -10,7 +10,6 @@ const locales = ['en', 'zh'];
 const hreflangs = ['en', 'zh-TW', 'es', 'fr', 'de', 'x-default'];
 const pairs = {
   'mortgage-payoff': 'extra-mortgage-payments-guide',
-  'credit-card-payoff': 'credit-card-minimum-payment-trap',
   'budget-builder': 'budget-with-irregular-income',
   'debt-strategy': 'snowball-vs-avalanche',
   'car-affordability': 'true-cost-of-car-ownership',
@@ -19,6 +18,8 @@ const pairs = {
   'home-affordability': 'how-much-home-can-you-afford',
   'compound-growth': 'how-compound-growth-works',
 };
+// P2 batch 2 (2026-10-17): the credit-card article was merged into the tool page (redirect stub).
+const toolOnly = ['credit-card-payoff'];
 const sitemap = readFileSync(join(dist, 'sitemap-0.xml'), 'utf8');
 const failures = [];
 
@@ -54,6 +55,13 @@ for (const locale of locales) {
     const toolHtml = existsSync(join(dist, locale, 'tools', tool, 'index.html')) ? readFileSync(join(dist, locale, 'tools', tool, 'index.html'), 'utf8') : '';
     for (const marker of ['data-growth-calculator', 'data-action="calculate"', 'data-action="example"', 'data-action="reset"', 'aria-live="polite"']) if (!toolHtml.includes(marker)) failures.push(`${toolUrl}: missing calculator marker ${marker}`);
   }
+  for (const tool of toolOnly) {
+    const toolUrl = `https://worthcalc.win/${locale}/tools/${tool}/`;
+    const file = join(dist, locale, 'tools', tool, 'index.html');
+    checkPage(file, toolUrl, '/tools/');
+    const toolHtml = existsSync(file) ? readFileSync(file, 'utf8') : '';
+    for (const marker of ['data-growth-calculator', 'data-action="calculate"', 'data-action="example"', 'data-action="reset"', 'aria-live="polite"']) if (!toolHtml.includes(marker)) failures.push(`${toolUrl}: missing calculator marker ${marker}`);
+  }
   const blockedTool = join(dist, locale, 'tools', 'inflation-purchasing-power', 'index.html');
   const blockedArticle = join(dist, locale, 'nominal-vs-real-purchasing-power', 'index.html');
   if (existsSync(blockedTool) || existsSync(blockedArticle)) failures.push(`${locale}: inflation route published before official CPI gate`);
@@ -65,4 +73,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log(`Growth release check passed: ${Object.keys(pairs).length} tool/article pairs x ${locales.length} built locales, canonical/hreflang/sitemap coverage (en is noindex), one H1, calculator actions, and inflation block.`);
+console.log(`Growth release check passed: ${Object.keys(pairs).length} tool/article pairs x ${locales.length} built locales, canonical/hreflang/sitemap coverage (en is noindex), one H1, calculator actions, and inflation block; ${toolOnly.length} tool-only page(s) checked too.`);

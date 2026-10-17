@@ -15,7 +15,7 @@ https://worthcalc.win/zh/changelog/,legal,更新紀錄,no,no,,2026-07-19,,rewrit
 https://worthcalc.win/zh/contact/,legal,聯絡 WorthCalc,partial,no,,2026-07-03,,keep,錯誤回報與聯絡管道（作者頁引用此頁）；內容含台灣情境說明，無需改動。
 https://worthcalc.win/zh/cost-per-use-expensive-item/,article,高價物品每次使用成本：預期、實際與損益次數計算器,partial,yes,cpc.ey.gov.tw,2026-07-19,,remove,通用「每次使用成本」題目，僅有 NT$ 算例與消保處連結；不屬於五個情境。
 https://worthcalc.win/zh/costco-math/,article,好市多會員的數學：年費怎麼算才回本,yes,yes,www.costco.com.tw,2026-09-22,,keep,台灣金星/商業/黑鑽卡三種會員的回本模型，連到好市多台灣官網，2026-09-22 查核。與計算機頁互補，P1b 可再看 GSC 決定是否合併。
-https://worthcalc.win/zh/credit-card-minimum-payment-trap/,article,信用卡只繳最低應繳，利息怎麼算？循環利率15%上限是什麼,yes,yes,law.fsc.gov.tw; www.foi.org.tw,2026-07-31,,keep,台灣循環利息日計息公式、15% 上限、最低應繳組成，連到金管會與金融消費評議機構，2026-07-31 查核。
+https://worthcalc.win/zh/credit-card-minimum-payment-trap/,article,信用卡只繳最低應繳，利息怎麼算？循環利率15%上限是什麼,yes,yes,law.fsc.gov.tw; www.foi.org.tw,2026-07-31,,merge_into:https://worthcalc.win/zh/tools/credit-card-payoff/,P2 第 2 批整併（CEO 指示）：計算機頁已含日息、15% 上限、最低應繳組成與只繳最低的算例，與本文同意圖；有來源的內容併入計算機頁，原網址改為轉址頁，2026-10-17。
 https://worthcalc.win/zh/delivery-membership-break-even/,article,外送會員一年要用幾次才回本,partial,yes,cpc.ey.gov.tw; www.uber.com,2026-07-19,,rewrite,外送會員回本算法可用，但主題通用；需補台灣現行平台方案價格與官方來源（目前引用消保處指引與平台頁面）。
 https://worthcalc.win/zh/disclaimer/,legal,免責聲明,partial,no,,2026-07-03,,keep,YMYL 必備的免責聲明，首頁與每個計算機/文章頁的免責提示都連到這裡。
 https://worthcalc.win/zh/emergency-fund-how-much/,article,緊急預備金要存多少？3 個月、6 個月不是唯一答案,no,yes,www.consumerfinance.gov; www.federalreserve.gov,2026-08-29,,rewrite,緊急預備金在台灣有需求，但全文是通用寫法、來源是美國 CFPB/Fed；需改用主計總處家庭收支與勞動部資料重寫。吸收另外三篇同題頁面。

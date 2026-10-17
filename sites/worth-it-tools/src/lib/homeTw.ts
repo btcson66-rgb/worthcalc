@@ -82,15 +82,9 @@ export const homeTw = {
           kind: 'article',
         },
         {
-          href: '/zh/credit-card-minimum-payment-trap/',
-          title: '只繳最低應繳，利息怎麼算',
-          blurb: '循環利息如何按日計算，為什麼只繳最低應繳本金幾乎不會減少。',
-          kind: 'article',
-        },
-        {
           href: '/zh/tools/credit-card-payoff/',
-          title: '信用卡循環利息與清償時間計算機',
-          blurb: '輸入帳單餘額與你卡片的實際利率，比較不同還法的清償時間與總利息。',
+          title: '信用卡循環利息計算器：日息、15% 上限與最低應繳',
+          blurb: '輸入帳單餘額與你卡片的實際利率，算日息，並比較只繳最低應繳與固定金額要還多久、付多少利息。',
           kind: 'calculator',
         },
         {

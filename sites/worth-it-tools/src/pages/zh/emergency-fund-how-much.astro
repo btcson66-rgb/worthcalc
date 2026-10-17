@@ -1,0 +1,227 @@
+---
+/*
+ * 緊急預備金要存多少 (P2 batch 6, 2026-10-17). The old page was a US-sourced essay (Fed / CFPB) built around "3 個月、6 個月".
+ * It is now the Taiwan version: the amount to hold is the cash gap that remains AFTER the 就業保險 失業給付 -- the rules and
+ * figures below come from the pages named in `sources`, all opened on 2026-10-17. The reader's own numbers (essential spending,
+ * how long a job search takes, cash on hand) are inputs; no "recommended number of months" is printed as an answer.
+ *
+ * Every example is produced by src/lib/twEmergencyFundMath.mjs, the module the calculator runs and tests/tw-emergency-fund-math.test.mjs
+ * pins. This page also absorbs the three pages that were merged into it as redirect stubs (irregular income, 預備金 vs 還債,
+ * 預備金 vs 目標基金).
+ */
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import TWEmergencyFundCalculator from '../../components/TWEmergencyFundCalculator.astro';
+import { localizedPath } from '../../i18n/utils';
+import { cycleInterest } from '../../lib/twCreditCardMath.mjs';
+import {
+  BENEFIT_MONTHS_AGE45_OR_DISABLED,
+  DEPOSIT_INSURANCE_LIMIT,
+  INSURED_SALARY_CAP,
+  MIN_WAGE_MONTHLY,
+  insuredSalaryFor,
+  jobSearchCoverage,
+  monthlyBenefit,
+  severancePay,
+} from '../../lib/twEmergencyFundMath.mjs';
+
+const locale = 'zh' as const;
+const checked = '2026-10-17';
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const m2 = (n: number) => String(Number(n.toFixed(2)));
+
+const title = '緊急預備金要存多少？扣掉失業給付後的缺口才是答案';
+const description = '緊急預備金不是背「3 個月、6 個月」。依就業保險法與勞保局公告，算出失業給付每月多少、最長領幾個月，再算離職期間的現金缺口。';
+
+// 算例一: 32 歲、月薪 52,000、被資遣、必要支出 40,000、找 8 個月
+const a = { pay: 52000, age: 32, dependents: 0, essential: 40000, months: 8 };
+const aInsured = insuredSalaryFor(a.pay);
+const A = jobSearchCoverage({ essentialMonthly: a.essential, avgInsuredSalary: aInsured, dependents: a.dependents, ageAtLeaving: a.age, jobSearchMonths: a.months });
+// 算例二: 47 歲、月薪 32,000、扶養 2 人、必要支出 38,000、找 12 個月
+const b = { pay: 32000, age: 47, dependents: 2, essential: 38000, months: 12 };
+const bInsured = insuredSalaryFor(b.pay);
+const B = jobSearchCoverage({ essentialMonthly: b.essential, avgInsuredSalary: bInsured, dependents: b.dependents, ageAtLeaving: b.age, jobSearchMonths: b.months });
+// 算例三: 同樣的支出與月數, 但自行離職 / 自營
+const C = jobSearchCoverage({ essentialMonthly: a.essential, avgInsuredSalary: aInsured, involuntary: false, jobSearchMonths: a.months });
+// 勞保局常見問答 11 的官方算例
+const official = monthlyBenefit({ avgInsuredSalary: 30000, dependents: 2 });
+const officialBase = monthlyBenefit({ avgInsuredSalary: 30000, dependents: 0 });
+// 算例四: 資遣費
+const sevShort = severancePay({ avgMonthlyWage: 50000, serviceYears: 6.5 });
+const sevCap = severancePay({ avgMonthlyWage: 50000, serviceYears: 20 });
+// 收入不固定的示範
+const floorGap = 60000 - 35000;
+const seasonal = floorGap * 4;
+const account = 300000;
+const earmarked = 60000 + 80000;
+const reserveOnly = account - earmarked;
+const monthlyEssential2 = 55000;
+// 卡債的月利息
+const cardInterest = cycleInterest(100000, 15, 30);
+
+const sources = [
+  { label: '全國法規資料庫 — 就業保險法（修正日期 民國 111 年 1 月 12 日）：第 5 條被保險人、第 11 條請領條件與非自願離職、第 16 條給付比率與期間、第 17 條另有工作收入的扣減、第 19-1 條眷屬加給、第 20 條起算日', url: 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0050021', verifiedDate: checked },
+  { label: '勞保局 — 失業給付「給付標準及期間」（頁面標示最後更新 2023-01-17）', url: 'https://www.bli.gov.tw/0005071.html', verifiedDate: checked },
+  { label: '勞保局 — 失業給付常見問答 11：眷屬加給的條件與官方算例（頁面標示最後更新 2023-11-30）', url: 'https://www.bli.gov.tw/0102796.html', verifiedDate: checked },
+  { label: '勞保局 — 勞工保險投保薪資分級表（115 年 1 月 1 日起適用；最高月投保薪資 45,800 元）', url: 'https://www.bli.gov.tw/0005475.html', verifiedDate: checked },
+  { label: '勞保局 — 就業保險常見問答 6：就業保險的月投保薪資準用勞工保險規定', url: 'https://www.bli.gov.tw/0101716.html', verifiedDate: checked },
+  { label: '全國法規資料庫 — 勞工退休金條例第 12 條（新制資遣費：每滿一年發給二分之一個月平均工資，最高六個月）', url: 'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030020&flno=12', verifiedDate: checked },
+  { label: '全國法規資料庫 — 勞動基準法第 16 條（預告期間）與第 2 條第 4 款（平均工資）', url: 'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=16', verifiedDate: checked },
+  { label: '勞動部 — 歷年最低工資：115 年 1 月 1 日起每月 29,500 元（114 年 10 月 21 日發布）', url: 'https://www.mol.gov.tw/1607/28162/28166/28180/70460/76761/76833/post', verifiedDate: checked },
+  { label: '中央存款保險公司 — 存款人權益保障：每一存款人在同一家要保機構的存款本金及利息，合計最高保額新臺幣 300 萬元', url: 'https://www.cdic.gov.tw/main_ch/docdetail.aspx?uid=33&pid=8&docid=9', verifiedDate: checked },
+  { label: '全國法規資料庫 — 銀行法第 47-1 條（信用卡循環信用利率不得超過年利率 15%）', url: 'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0380001&flno=47-1', verifiedDate: checked },
+];
+
+const trustBlock = {
+  method: '預備金 = 離職期間必要支出 − 失業給付 −（已有的可動用現金）。失業給付依就業保險法與勞保局公布的比率、月數與起算日計算；必要支出、找工作月數與已有現金是你輸入的數字。範例由同一支程式計算並經測試核對。',
+  formula: '失業給付 = 平均月投保薪資 ×（60% + 眷屬每人 10%，眷屬加給最多 20%）；最長 6 個月，離職時年滿 45 歲或領有身心障礙證明者最長 9 個月；求職登記後第 15 日起算。新制資遣費 = 平均月工資 × min(0.5 × 年資, 6)',
+  sources,
+  limits: [
+    '試算僅供參考，以機關公告為準；是否符合請領資格、給付金額與月數以勞保局核定為準，請向勞保局或公立就業服務機構確認。',
+    '本頁用「月薪資總額對應的月投保薪資」代替離職前 6 個月的平均月投保薪資；薪資調整過、部分工時、職訓受訓等特殊分級不在試算內。',
+    '找工作要多久沒有官方保證值（本頁查不到可引用的官方平均期間，標為無資料）；算例的 8 個月與 12 個月是示範情境，必要支出也是示範值。',
+    '一個月以 30 天計；失業給付實際撥款時間依勞保局作業，本頁只算金額，不算款項何時入帳。',
+    '勞保局頁面的更新日期為 2023 年，條文的最新修正日期為 2022 年 1 月 12 日；本頁於 2026-10-17 讀取當時的條文，法令之後若修正，以最新公告為準。',
+    '本頁不是個人化的財務、法律或勞動權益建議，也不判斷你的離職是否屬於非自願離職，該認定由公立就業服務機構與勞保局依法辦理。',
+  ],
+  lastReviewed: checked,
+  locale,
+};
+---
+
+<ArticleLayout title={title} description={description} locale={locale} alternateLocales={['zh']} updated={checked} trustBlock={trustBlock}>
+  <p>
+    先講結論：這一頁不給「存 3 個月還是 6 個月」的答案，因為網路上常見的那個數字沒有法規或官方來源。台灣的受僱勞工有一個比較具體的起點：被資遣、關廠等「非自願離職」時，
+    <a href="https://www.bli.gov.tw/0005071.html">就業保險的失業給付</a>會補一部分生活費。所以預備金該存多少，要算的是<strong>失業給付補完之後的缺口</strong>。
+    下面的計算機先放在最上面，預設值就是算例一。
+  </p>
+
+  <TWEmergencyFundCalculator />
+
+  <h2>失業給付：誰領得到、領多少、領多久</h2>
+  <p>
+    以下規則都來自<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0050021">就業保險法</a>與勞保局的<a href="https://www.bli.gov.tw/0005071.html">給付標準頁</a>（{checked} 打開）：
+  </p>
+  <ul>
+    <li><strong>資格（第 11 條）：</strong>非自願離職，辦理退保當日前 3 年內就業保險年資合計滿 1 年以上，具工作能力及繼續工作意願，向公立就業服務機構辦理求職登記，自登記之日起 14 日內仍無法推介就業或安排職業訓練。條文把「非自願離職」限於投保單位關廠、遷廠、休業、解散、破產宣告，或依勞動基準法第 11 條、第 13 條但書、第 14 條、第 20 條規定離職；定期契約屆滿離職，逾 1 個月未能就業，且離職前 1 年內契約期間合計滿 6 個月以上，也視為非自願離職。</li>
+    <li><strong>金額（第 16 條）：</strong>離職辦理退保當月起前 6 個月平均月投保薪資的 60%，按月發給。有受你扶養、無工作收入的父母、配偶、未成年子女或身心障礙子女，每 1 人加給 10%，最多加到 20%（第 19-1 條）。</li>
+    <li><strong>期間（第 16 條）：</strong>最長 6 個月；離職辦理退保時已年滿 45 歲，或領有社政主管機關核發的身心障礙證明者，最長 {BENEFIT_MONTHS_AGE45_OR_DISABLED} 個月。經濟不景氣大量失業時，中央主管機關可以延長，所以延長與否要看當時的公告，本頁不預設。</li>
+    <li><strong>起算日（第 20 條）：</strong>從求職登記之日起算的第 15 日開始，前 14 天沒有給付。</li>
+    <li><strong>邊領邊做（第 17 條）：</strong>失業期間另有工作，每月工作收入超過基本工資（115 年每月 {n0(MIN_WAGE_MONTHLY)} 元）就不能領；沒超過的話，該月工作收入加失業給付的總額中，超過平均月投保薪資 80% 的部分會被扣掉，但總額低於基本工資則不扣。</li>
+    <li><strong>月投保薪資有上限：</strong>就業保險的月投保薪資準用勞工保險規定；115 年 1 月 1 日起的分級表最高一級是 {n0(INSURED_SALARY_CAP)} 元（月薪資總額 43,901 元以上都按這一級）。所以單身者的失業給付，每月最多 {n0(INSURED_SALARY_CAP)} × 60% = {n0(monthlyBenefit({ avgInsuredSalary: INSURED_SALARY_CAP }))} 元；有 2 位以上受扶養眷屬最多 {n0(monthlyBenefit({ avgInsuredSalary: INSURED_SALARY_CAP, dependents: 2 }))} 元。</li>
+  </ul>
+  <p>
+    勞保局常見問答 11 有一個官方算例：平均月投保薪資 30,000 元、扶養 2 名眷屬，原本領 30,000 × 60% = {n0(officialBase)} 元，加給 30,000 × 10% × 2 = {n0(official - officialBase)} 元，合計 {n0(official)} 元（平均月投保薪資的 80%）。計算機用同一個函式算出同樣的 {n0(official)} 元。
+  </p>
+
+  <h2>算例一：被資遣、單身，找工作 8 個月</h2>
+  <p>
+    {a.age} 歲，月薪 {n0(a.pay)} 元，對應的月投保薪資是 {n0(aInsured)} 元（分級表最高一級），沒有受扶養眷屬，被資遣；每月必要支出 {n0(a.essential)} 元（示範值），預計找工作 {a.months} 個月：
+  </p>
+  <table>
+    <tbody>
+      <tr><th scope="row">每月失業給付</th><td>{n0(aInsured)} × 60% = {n0(A.monthly)} 元</td></tr>
+      <tr><th scope="row">可領月數</th><td>最長 {A.maxMonths} 個月；{a.months} 個月扣掉前 14 天（約 0.47 個月）後還有 {m2(a.months - 14 / 30)} 個月，所以領滿 {A.maxMonths} 個月</td></tr>
+      <tr><th scope="row">失業給付合計</th><td>{n0(A.monthly)} × {A.maxMonths} = {n0(A.benefitTotal)} 元</td></tr>
+      <tr><th scope="row">找工作期間必要支出</th><td>{n0(a.essential)} × {a.months} = {n0(A.need)} 元</td></tr>
+      <tr><th scope="row">缺口</th><td>{n0(A.need)} − {n0(A.benefitTotal)} = <strong>{n0(A.gap)} 元</strong>，約 {m2(A.gapInMonthsOfSpending)} 個月的必要支出</td></tr>
+    </tbody>
+  </table>
+  <p>
+    這個人的缺口約 {m2(A.gapInMonthsOfSpending)} 個月，不是 3 也不是 6。找工作只要多 1 個月，缺口就多 {n0(a.essential)} 元，因為失業給付已經領滿；少 2 個月（6 個月），缺口只剩 {n0(jobSearchCoverage({ essentialMonthly: a.essential, avgInsuredSalary: aInsured, ageAtLeaving: a.age, jobSearchMonths: 6 }).gap)} 元。
+  </p>
+
+  <h2>算例二：47 歲、扶養 2 人，找工作 12 個月</h2>
+  <p>
+    {b.age} 歲，月薪 {n0(b.pay)} 元，對應的月投保薪資 {n0(bInsured)} 元，扶養無工作收入的配偶與未成年子女共 {b.dependents} 人，被資遣；每月必要支出 {n0(b.essential)} 元（示範值），預計找 {b.months} 個月：
+  </p>
+  <table>
+    <tbody>
+      <tr><th scope="row">每月失業給付</th><td>{n0(bInsured)} × (60% + 10% × {b.dependents}) = {n0(B.monthly)} 元</td></tr>
+      <tr><th scope="row">可領月數</th><td>年滿 45 歲，最長 {B.maxMonths} 個月</td></tr>
+      <tr><th scope="row">失業給付合計</th><td>{n0(B.monthly)} × {B.maxMonths} = {n0(B.benefitTotal)} 元</td></tr>
+      <tr><th scope="row">找工作期間必要支出</th><td>{n0(b.essential)} × {b.months} = {n0(B.need)} 元</td></tr>
+      <tr><th scope="row">缺口</th><td>{n0(B.need)} − {n0(B.benefitTotal)} = <strong>{n0(B.gap)} 元</strong>，約 {m2(B.gapInMonthsOfSpending)} 個月的必要支出</td></tr>
+    </tbody>
+  </table>
+  <p>
+    給付比例高、領得久，但支出也高、找得久，缺口反而比算例一大。這兩個例子說明：缺口取決於你的支出、扶養人數、年齡和找工作要多久，沒有一個通用的月數。
+  </p>
+
+  <h2>算例三：自己離職，或自營、接案</h2>
+  <p>
+    同樣是每月 {n0(a.essential)} 元、找 {a.months} 個月，如果是<strong>自己提出離職</strong>，就不在上面「非自願離職」的範圍內；自營、接案沒有雇主，也沒有「被關廠、被資遣」這回事。就業保險法第 5 條寫的被保險人是「受僱勞工」，本頁不替自營或接案者判斷有沒有其他給付，請向勞保局確認；在確認之前，保守的算法是失業給付為 0：
+  </p>
+  <p>
+    {n0(a.essential)} × {a.months} = <strong>{n0(C.gap)} 元</strong>（{m2(C.gapInMonthsOfSpending)} 個月）都要自己準備，比算例一多 {n0(C.gap - A.gap)} 元。這就是「為什麼不要沒想清楚就先遞辭呈」的數字版。
+  </p>
+
+  <h2>被資遣時，另一筆錢：資遣費與預告期間</h2>
+  <p>
+    非自願離職時，雇主還要付資遣費。適用勞工退休金新制的年資，依<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030020&flno=12">勞工退休金條例第 12 條</a>，每滿 1 年發給 1/2 個月平均工資，未滿 1 年按比例，最高 6 個月，並應於終止契約後 30 日內發給。平均工資是終止前 6 個月工資總額除以總日數算出的日平均（勞動基準法第 2 條第 4 款），本頁直接用你輸入的月平均工資。
+  </p>
+  <ul>
+    <li>月平均工資 50,000 元、新制年資 6.5 年：0.5 × 6.5 = {m2(sevShort.months)} 個月，約 <strong>{n0(sevShort.amount)} 元</strong>。</li>
+    <li>同樣月平均工資、年資 20 年：0.5 × 20 = 10 個月，但最高只算 6 個月，是 <strong>{n0(sevCap.amount)} 元</strong>。</li>
+  </ul>
+  <p>
+    雇主依勞動基準法第 11 條或第 13 條但書終止契約，還要依年資提前預告：繼續工作 3 個月以上未滿 1 年 10 天、1 年以上未滿 3 年 20 天、3 年以上 30 天（第 16 條），沒預告就要給預告期間的工資。資遣費與失業給付是不同制度的錢，計算機不會自動把資遣費扣進缺口；資遣費入帳後，把它填進「已經有、可以動用的現金」即可。舊制年資的資遣費算法不同，請依勞動基準法第 17 條或向勞工局確認。
+  </p>
+
+  <h2>必要支出怎麼抓</h2>
+  <p>預備金的任務是讓你失業、停工或遇到臨時支出時，不必立刻用高成本借款。計算時把支出分三組：</p>
+  <table>
+    <thead><tr><th>類別</th><th>怎麼放進去</th><th>例子</th></tr></thead>
+    <tbody>
+      <tr><td>不能立刻停</td><td>全額</td><td>房租或房貸、基本飲食、最低應繳的債務、健保與必要保費、通勤、水電網路</td></tr>
+      <tr><td>可以縮減但不能歸零</td><td>用縮減後的金額</td><td>手機方案、交通、孩子的活動</td></tr>
+      <tr><td>可以暫停</td><td>不放進核心預備金</td><td>旅遊、娛樂、升級型訂閱、非必要購物</td></tr>
+    </tbody>
+  </table>
+  <p>
+    年繳的保費、牌照稅、學費這類一定會發生的支出，不是「緊急」，應該另外存成目標基金：每月要存 = 預計總額 ÷ 距離付款的月數（例如 12 個月後要付 36,000 元，每月存 3,000 元）。這筆錢要放進每月預算，否則必要支出會被低估。可以用<a href={localizedPath(locale, '/tools/budget-builder')}>不固定收入月預算建立器</a>把年繳與半年繳換成月平均。同一筆錢只能有一個第一順位用途：同一筆 100,000 元不能同時標成「預備金」和「明年學費」。
+  </p>
+
+  <h2>收入不固定時（自營、接案、佣金制）</h2>
+  <p>
+    收入不固定的人不要拿平均月收入乘月數。先找收入底線：列出最近 12 至 24 個月每個月實際可用的收入，看最低的幾個月與最長的連續低收入期。示範值：必要支出 60,000 元、保守收入底線 35,000 元，每個差月要補 {n0(floorGap)} 元；歷史上最長的淡季約 4 個月，光是淡季就要 {n0(floorGap)} × 4 = {n0(seasonal)} 元，這和「完全沒有收入要撐多久」是兩個不同的問題。
+  </p>
+  <p>
+    再把帳戶裡的錢分三種，不要全部叫預備金：收入波動緩衝、已知的稅款與年費保費、真正的緊急預備金。示範值：帳戶 {n0(account)} 元，其中 60,000 元是預估稅款與保費、80,000 元是淡季緩衝，真正的預備金只有 {n0(reserveOnly)} 元；必要支出每月 {n0(monthlyEssential2)} 元，只能撐 {m2(reserveOnly / monthlyEssential2)} 個月，不是 {n0(account)} ÷ {n0(monthlyEssential2)} ≈ {m2(account / monthlyEssential2)} 個月。大額入帳先分配再花：補足緩衝、撥出已知的稅費，剩下的才處理投資或消費。
+  </p>
+
+  <h2>先存預備金，還是先還卡債</h2>
+  <p>
+    這不是二選一。信用卡循環信用利率依<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0380001&flno=47-1">銀行法第 47-1 條</a>不得超過年利率 15%（{checked} 打開）。以 15% 的上限、100,000 元循環餘額、30 天算，一個月利息是 100,000 × 15% ÷ 365 × 30 = {n0(cardInterest)} 元（公式與<a href={localizedPath(locale, '/tools/credit-card-payoff')}>信用卡循環利息計算器</a>相同；你的實際利率印在帳單上）。現金完全歸零，下一次修車或醫療又會回到刷卡；但放著大筆現金、同時背著循環利息，也有看得見的成本。
+  </p>
+  <ol>
+    <li>先確保最低應繳不逾期。</li>
+    <li>建立第一層小額緩衝，吸收一件常見的小意外，金額看你的車、住房與醫療自付額，不要抄別人的數字。</li>
+    <li>之後把每月多出來的錢分兩路：一部分補緩衝，一部分加速還循環債務。</li>
+    <li>最貴的循環債務壓低、現金流穩定後，再把緩衝擴到上面算出的離職缺口。</li>
+  </ol>
+  <p>
+    把信用卡額度當預備金是同一件事的反面：額度是借款能力，用了就有利息，不是已經擁有的現金。最低應繳已經付不出來，或收到催收時，請找合格的債務協商或法律專業，不要只靠試算。
+  </p>
+
+  <h2>預備金放在哪</h2>
+  <p>
+    預備金要的是隨時拿得到、金額不會突然縮水。投資帳戶的價格可能正好在你需要用錢時下跌，不能直接算成預備金。定存提前解約會按較短存期的牌告利率再打折，細節見<a href={localizedPath(locale, '/money/time-deposit-early-withdrawal')}>定存中途解約少多少利息</a>。存款還有保障上限：依中央存款保險公司的說明（{checked} 打開），每一存款人在同一家要保機構的存款本金及利息，合計最高保額是新臺幣 {n0(DEPOSIT_INSURANCE_LIMIT / 10000)} 萬元；預備金不到這個數字的人，放在一家銀行就在保障內，超過的部分可以考慮分開存。
+  </p>
+
+  <h2>常見錯誤</h2>
+  <ul>
+    <li>用「月薪 × 月數」算：月薪 80,000 元但必要支出只有 55,000 元的人，月薪乘 6 是 480,000 元，必要支出乘 6 是 330,000 元，差 150,000 元；分母應該是需要被保護的現金流。</li>
+    <li>以為每個人都領得到失業給付：自願離職、年資不足、沒有雇主都不符合條件。</li>
+    <li>忘了前 14 天沒有給付，以及月投保薪資有上限（{n0(INSURED_SALARY_CAP)} 元）：月薪 100,000 元的人，失業給付一樣是 {n0(INSURED_SALARY_CAP)} × 60% = {n0(monthlyBenefit({ avgInsuredSalary: INSURED_SALARY_CAP }))} 元。</li>
+    <li>直接複製別人的月數，沒有用自己的支出、扶養人數與找工作時間重算。</li>
+    <li>把信用卡額度、投資帳戶或已經指定用途的錢算成預備金。</li>
+  </ul>
+
+  <h2>資料來源與查不到的部分</h2>
+  <p>
+    本頁每一項規則與數字的來源列在頁面下方的「這一頁怎麼算的」，都是 {checked} 打開確認的官方頁面。<strong>查不到、所以本頁沒有引用的：</strong>台灣失業者平均要找多久工作的官方數字（標為無資料，找工作月數請你自己輸入並跑幾種情境）；自營與接案者有哪些政府給付（請向勞保局確認）。
+  </p>
+  <p class="privacy-note">
+    試算僅供參考，以機關公告為準。計算在你的瀏覽器本機執行，輸入的數字不會上傳。想把一年內的固定支出換成月平均，用<a href={localizedPath(locale, '/tools/budget-builder')}>不固定收入月預算建立器</a>。
+  </p>
+</ArticleLayout>

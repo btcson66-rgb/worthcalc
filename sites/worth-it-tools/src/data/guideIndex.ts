@@ -180,7 +180,7 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/guides/freelance-minimum-billable-rate/', title: '接案最低報價怎麼算？不要用月薪除 160，小時費率要先補回不可計費時間與營運成本' },
     { path: '/energy-efficient-appliance-payback/', title: '節能家電多久回本？用價差、耗電、使用頻率與電價試算' },
     { path: '/money/', title: '金錢速查' },
-    { path: '/emergency-fund-how-much/', title: '緊急預備金要存多少？3 個月、6 個月不是唯一答案' },
+    { path: '/emergency-fund-how-much/', title: '緊急預備金要存多少？扣掉失業給付後的缺口才是答案' },
     { path: '/guides/emergency-fund-rebuild-after-use/', title: '緊急預備金用掉後怎麼補回？先重算缺口，再決定補回速度' },
     { path: '/guides/net-worth-tracking-frequency/', title: '淨資產多久算一次？每月、每季、每年各自適合什麼情況' },
     { path: '/guides/trade-in-vs-private-sale-net-proceeds/', title: '舊車 Trade-in vs 自己賣怎麼選？不要比報價，先比真正淨收入與時間成本' },

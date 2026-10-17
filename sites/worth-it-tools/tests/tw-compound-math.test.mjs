@@ -9,7 +9,9 @@ import { calculateCompoundGrowth } from '../.growth-test-dist/index.js';
 import {
   annuityFutureValue,
   compoundValue,
+  approxRealReturnPct,
   deflate,
+  delayedPlan,
   effectiveFromNominal,
   effectiveFromNominalMonthly,
   excelFv,
@@ -170,11 +172,115 @@ test('Excel 公式: FV / PMT with the same effective-annual monthly rate reprodu
 test('the page cites only pages that were opened on 2026-10-17 and carries the 試算僅供參考 line; no stub link', () => {
   for (const text of ['試算結果僅供參考，以銀行與主管機關公告為準', 'https://www.cbc.gov.tw/tw/np-371-1.html', 'https://www.stat.gov.tw/point.aspx?sid=t.2&n=3581&sms=11480', 'https://www.fund.gov.tw/News_Content.aspx?n=3268&s=15185', 'https://www.fund.gov.tw/News_Content.aspx?n=708&s=16920', '資料日 115 年 10 月 16 日']) assert.ok(md.includes(text), text);
   const dates = [...md.matchAll(/verifiedDate: "(\d{4}-\d{2}-\d{2})"/g)].map((m) => m[1]);
-  assert.equal(dates.length, 4);
+  assert.equal(dates.length, 5);
   assert.ok(dates.every((d) => d === '2026-10-17'));
   assert.ok(!md.includes('how-compound-growth-works') && !md.includes('simple-vs-compound-interest'));
+  // P2 batch 6: the four savings-goal articles were merged into this page and are redirect stubs now
+  for (const slug of ['real-vs-nominal-return', 'effective-interest-rate-explained', 'inflation-adjusted-savings-goal', 'cost-of-delaying-savings-goal']) assert.ok(!md.includes(slug), slug);
   assert.ok(!md.includes('rate.bot.com.tw/ir') || md.includes('沒有打開'));
   assert.ok(!/FAQPage|HowTo/.test(md));
   // the deposit-rate wording never hard-codes a rate as "the" current rate: it is dated and called a demo input
   assert.ok(md.includes('這只是示範輸入，不是預測'));
+});
+
+// ---- P2 batch 6 (2026-10-17): the four savings-goal articles were merged into this page --------------------------------
+
+test('實質報酬率: 精確式 (1+n)/(1+i)-1 vs 名目減通膨, and the 115 年 CPI months used as scenarios', () => {
+  const rows = [[1.7, 0.71, '0.98', '0.99'], [1.7, 1.72, '-0.02', '-0.02'], [1.7, 2.73, '-1.00', '-1.03'], [5, 3, '1.94', '2.00']];
+  for (const [nominal, inflation, exact, approx] of rows) {
+    assert.equal(realReturnPct(nominal, inflation).toFixed(2), exact);
+    assert.equal(approxRealReturnPct(nominal, inflation).toFixed(2), approx);
+    // the exact formula is the inverse of (1 + nominal) = (1 + real) x (1 + inflation)
+    near((1 + realReturnPct(nominal, inflation) / 100) * (1 + inflation / 100), 1 + nominal / 100, 1e-12);
+    const show = (v) => v.replace('-', '−') + '%';
+    assert.ok(md.includes(`${inflation}%`) || md.includes(`${inflation.toFixed(2)}%`), String(inflation));
+    assert.ok(md.includes(`| ${show(exact)} | ${show(approx)} |`), `${exact}/${approx} row`);
+  }
+  // the CPI months quoted next to the table are the DGBAS series already asserted in 算例二
+  const cpi = { 1: 0.71, 4: 1.72, 9: 2.73 };
+  for (const [month, value] of Object.entries(cpi)) assert.ok(md.includes(`${value.toFixed(2)}%（115 年 ${month} 月）`), month);
+  assert.ok(md.includes('(1 + 名目報酬率) ÷ (1 + 通膨率) − 1'));
+  assert.ok(md.includes('(1 + 名目) = (1 + 實質) × (1 + 通膨)'));
+});
+
+test('有效年利率: nominal annual rate compounded monthly -> effective annual rate, and the 總費用年百分率 quotation', () => {
+  const rows = [[1.7, '1.71'], [5, '5.12'], [8, '8.30'], [12, '12.68']];
+  for (const [nominal, effective] of rows) {
+    assert.equal(effectiveFromNominalMonthly(nominal).toFixed(2), effective);
+    // the Excel EFFECT(rate, 12) definition is the same closed form
+    near(effectiveFromNominalMonthly(nominal), ((1 + nominal / 100 / 12) ** 12 - 1) * 100, 1e-12);
+    assert.ok(md.includes(`| ${nominal}% | ${effective}% |`), `${nominal} row`);
+  }
+  assert.equal((effectiveFromNominalMonthly(12) - 12).toFixed(2), '0.68');
+  assert.equal((effectiveFromNominalMonthly(1.7) - 1.7).toFixed(2), '0.01');
+  for (const text of [
+    '12% 差了 0.68 個百分點，1.7% 只差 0.01 個百分點',
+    '消費者依授信利率及相關費用標準計算之應付所有總費用，以信用額度借款本金計算之年百分率',
+    '用內部報酬率法計算，並四捨五入到小數點後第二位',
+    'https://law.banking.gov.tw/Chi/FLAW/FLAWDOC01.aspx?lno=6&lsid=FL036733',
+    'https://law.banking.gov.tw/Chi/FLAW/FLAWDOC01.aspx?lno=8&lsid=FL036733',
+    '`=(1+年利率/12)^12-1`，或用 EFFECT 函數 `=EFFECT(年利率, 12)`',
+  ]) assert.ok(md.includes(text), text);
+});
+
+test('算例五: 目標先通膨調整 -- 今天 100 萬、10 年、CPI 情境, 起始 0, 月底; the calculator solves the same monthly deposit', () => {
+  const rows = [[null, '1,000,000', '8,333', '7,656'], [1.94, '1,211,843', '10,099', '9,278'], [2.07, '1,227,386', '10,228', '9,397'], [2.73, '1,309,100', '10,909', '10,023']];
+  for (const [inflation, future, need0, need17] of rows) {
+    const target = inflation === null ? 1000000 : compoundValue(1000000, inflation, 10);
+    assert.equal(f(target), future);
+    assert.equal(f(requiredMonthlyDeposit({ target, annualReturnPct: 0, years: 10 })), need0);
+    assert.equal(f(requiredMonthlyDeposit({ target, annualReturnPct: 1.7, years: 10 })), need17);
+    // 0% is just target / 120; and the calculator's own reverse solve agrees
+    near(requiredMonthlyDeposit({ target, annualReturnPct: 0, years: 10 }), target / 120, 1e-9);
+    assert.equal(f(run({ annualReturnPercent: 1.7, years: 10, targetAmount: target }).requiredMonthlyContributionForTarget), need17);
+    assert.equal(f(run({ annualReturnPercent: 0, years: 10, targetAmount: target }).requiredMonthlyContributionForTarget), need0);
+    // the future price column is the same one 算例二 prints (compound the price, not the deposit)
+    if (inflation !== null) assert.ok(md.includes(`${future} 元`), future);
+  }
+  for (const row of [
+    '| 不調整（目標固定 100 萬） | 1,000,000 元 | 8,333 元 | 7,656 元 |',
+    '| 1.94%（115 年 1–9 月平均） | 1,211,843 元 | 10,099 元 | 9,278 元 |',
+    '| 2.07%（115 年全年預測） | 1,227,386 元 | 10,228 元 | 9,397 元 |',
+    '| 2.73%（115 年 9 月） | 1,309,100 元 | 10,909 元 | 10,023 元 |',
+  ]) assert.ok(md.includes(row), row);
+  const at273 = Math.round(requiredMonthlyDeposit({ target: compoundValue(1000000, 2.73, 10), annualReturnPct: 1.7, years: 10 })) - Math.round(requiredMonthlyDeposit({ target: 1000000, annualReturnPct: 1.7, years: 10 }));
+  assert.equal(at273, 2367);
+  assert.equal(((compoundValue(1000000, 2.73, 10) / 1000000 - 1) * 100).toFixed(1), '30.9');
+  assert.equal(f(compoundValue(1000000, 2.73, 10) - 1000000), '309,100');
+  // the Excel line on the page
+  assert.equal(f(1000000 * (1 + 0.0273) ** 10), '1,309,100');
+  for (const text of ['未來目標 = 今天價格 × (1 + 通膨率)^年數', '目標高了 30.9%，每月要多存 2,367 元（10,023 − 7,656）', '`=1000000*(1+0.0273)^10` 得到 1,309,100 元', '存到 100 萬還差 309,100 元']) assert.ok(md.includes(text), text);
+});
+
+test('算例六: 晚開始 -- 目標 100 萬、期限 120 個月不變, 起始 0; delayedPlan agrees with the calculator run for the months that are left', () => {
+  const rows = [[0, 120, '8,333', '7,656', '918,726'], [12, 108, '9,259', '8,581', '926,711'], [24, 96, '10,417', '9,737', '934,743']];
+  for (const [delay, left, need0, need17, total17] of rows) {
+    const p0 = delayedPlan({ target: 1000000, annualReturnPct: 0, totalMonths: 120, delayMonths: delay });
+    const p17 = delayedPlan({ target: 1000000, annualReturnPct: 1.7, totalMonths: 120, delayMonths: delay });
+    assert.equal(p17.monthsLeft, left);
+    assert.equal(f(p0.monthly), need0);
+    assert.equal(f(p17.monthly), need17);
+    assert.equal(f(p17.totalDeposited), total17);
+    assert.equal(f(p0.totalDeposited), '1,000,000');
+    // calculator, run over the months that are left
+    assert.equal(f(run({ annualReturnPercent: 1.7, years: left / 12, targetAmount: 1000000 }).requiredMonthlyContributionForTarget), need17);
+    assert.equal(f(run({ annualReturnPercent: 0, years: left / 12, targetAmount: 1000000 }).requiredMonthlyContributionForTarget), need0);
+    // and the deposit really lands on the target
+    near(run({ monthlyContribution: p17.monthly, annualReturnPercent: 1.7, years: left / 12 }).endingBalance, 1000000, 1e-4);
+    assert.ok(md.includes(`| ${left} | ${need0} 元 | ${need17} 元 | ${total17} 元 |`), `${left} row`);
+  }
+  const base0 = delayedPlan({ target: 1000000, annualReturnPct: 0, totalMonths: 120 });
+  const base17 = delayedPlan({ target: 1000000, annualReturnPct: 1.7, totalMonths: 120 });
+  const late24 = delayedPlan({ target: 1000000, annualReturnPct: 0, totalMonths: 120, delayMonths: 24 });
+  const late24r = delayedPlan({ target: 1000000, annualReturnPct: 1.7, totalMonths: 120, delayMonths: 24 });
+  assert.equal(Math.round(late24.monthly - base0.monthly), 2083);
+  assert.equal(Math.round(late24r.monthly - base17.monthly), 2081);
+  assert.equal(f(late24r.totalDeposited - base17.totalDeposited), '16,017');
+  // delaying the deadline by the same 12 months leaves the monthly amount where it was
+  near(delayedPlan({ target: 1000000, annualReturnPct: 1.7, totalMonths: 132, delayMonths: 12 }).monthly, base17.monthly, 1e-9);
+  // with a starting balance it grows for the whole period while deposits start late
+  const withPrincipal = delayedPlan({ target: 1000000, principal: 200000, annualReturnPct: 1.7, totalMonths: 120, delayMonths: 12 });
+  assert.ok(withPrincipal.monthly < late24r.monthly && withPrincipal.monthly > 0);
+  for (const text of ['完全不計利息時晚 24 個月每月多 2,083 元，1.7% 時多 2,081 元', '晚 24 個月總共要多投入 16,017 元（934,743 − 918,726）', '每月仍是 7,656 元', '`=-PMT((1+0.017)^(1/12)-1, 108, 0, 1000000, 0)` 得到 8,581 元']) assert.ok(md.includes(text), text);
+  assert.equal(f(-excelPmt(monthlyRateFromEffective(1.7), 108, 0, 1000000, 0)), '8,581');
 });

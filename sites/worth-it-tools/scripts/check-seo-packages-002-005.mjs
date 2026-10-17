@@ -32,7 +32,8 @@ for (const locale of ['en', 'zh']) {
   }
 }
 
-if (guides.length !== 120) failures.push(`expected 120 package guides, found ${guides.length}`);
+// P2 batch 6 (2026-10-17): six package guides were merged into the compound-growth tool (redirect stubs): 120 -> 114.
+if (guides.length !== 114) failures.push(`expected 114 package guides, found ${guides.length}`);
 
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
 if (!sitemap) failures.push('dist/sitemap-0.xml is missing');

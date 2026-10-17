@@ -19,7 +19,7 @@ const pairs = {
 // P2 batch 5 (2026-10-17): how-compound-growth-works was merged into compound-growth the same way.
 const toolOnly = ['credit-card-payoff', 'compound-growth'];
 // Merged articles: no tool-only page may link to the stub they became.
-const mergedArticles = { 'credit-card-payoff': ['credit-card-minimum-payment-trap'], 'compound-growth': ['how-compound-growth-works', 'simple-vs-compound-interest'] };
+const mergedArticles = { 'credit-card-payoff': ['credit-card-minimum-payment-trap'], 'compound-growth': ['how-compound-growth-works', 'simple-vs-compound-interest', 'real-vs-nominal-return', 'effective-interest-rate-explained', 'inflation-adjusted-savings-goal', 'cost-of-delaying-savings-goal'] };
 const banned = [/lorem ipsum/i, /(^|\s)TODO(?:\s|:|$)/m, /guaranteed approval/i, /guaranteed return/i, /一定核貸/, /保證獲利/];
 const leakedEnglish = [/For this topic, the core relationship is/i, /Recommended scenarios:/i, /^Official sources for editorial verification/im, /^Use the calculator$/im, /^Editorial limits$/im];
 const failures = [];

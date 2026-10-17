@@ -446,30 +446,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Childcare vs. Returning to Work: A Take-Home Pay Break-Even Framework",
     "schemaFile": "006__en__childcare-return-to-work-break-even.json"
   },
-  "en/cost-of-delaying-savings-goal": {
-    "key": "en/cost-of-delaying-savings-goal",
-    "packageId": "004",
-    "locale": "en",
-    "articleSlug": "cost-of-delaying-savings-goal",
-    "title": "Cost of Delaying a Savings Goal: How Much More Must You Save if You Wait 12 or 24 Months?",
-    "seoTitle": "Cost of Delaying Savings: 12 vs 24 Months | WorthCalc",
-    "metaDescription": "Hold the goal and deadline constant, then calculate how delaying 12 or 24 months changes the monthly contribution. Includes 0%, 5%, and stress-test examples.",
-    "excerpt": "Waiting does not just remove a year of contributions. It also removes time for earlier dollars to compound. Keep the target and deadline fixed, then solve for the new monthly contribution.",
-    "canonical": "https://worthcalc.win/en/guides/cost-of-delaying-savings-goal/",
-    "robots": "index,follow",
-    "ogTitle": "The Cost of Delaying a Savings Goal",
-    "ogDescription": "Compare required monthly contributions when you start now, 12 months late, or 24 months late under identical assumptions.",
-    "ogImage": "/images/guides/cost-of-delaying-savings-goal.webp",
-    "imageAlt": "Savings goal timeline comparing starting now, waiting 12 months, and waiting 24 months with required monthly contribution",
-    "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/en/guides/real-vs-nominal-return/",
-      "https://worthcalc.win/en/tools/compound-growth/"
-    ],
-    "breadcrumbLabel": "Cost of Delaying a Savings Goal: How Much More Must You Save if You Wait 12 or 24 Months?",
-    "schemaFile": "004__en__cost-of-delaying-savings-goal.json"
-  },
   "en/debt-consolidation-break-even": {
     "key": "en/debt-consolidation-break-even",
     "packageId": "004",
@@ -817,30 +793,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Prepay Rent Discount vs. Liquidity: Is Paying Months Upfront Actually Worth It?",
     "schemaFile": "008__en__prepay-rent-discount-vs-liquidity.json"
   },
-  "en/real-vs-nominal-return": {
-    "key": "en/real-vs-nominal-return",
-    "packageId": "003",
-    "locale": "en",
-    "articleSlug": "real-vs-nominal-return",
-    "title": "Real vs. Nominal Return: Measure Purchasing Power, Not Just Account Growth",
-    "seoTitle": "Real vs. Nominal Return: Inflation Math | WorthCalc",
-    "metaDescription": "Convert nominal return to real purchasing-power return, include inflation and fees consistently, and avoid mixing real and nominal planning assumptions.",
-    "excerpt": "A 5% account return does not necessarily mean 5% more purchasing power. Use the exact real-return formula and test multiple inflation assumptions.",
-    "canonical": "https://worthcalc.win/en/guides/real-vs-nominal-return/",
-    "robots": "index,follow",
-    "ogTitle": "Real vs. Nominal Return: What Happened to Purchasing Power?",
-    "ogDescription": "Convert account growth into inflation-adjusted return and avoid double-counting inflation in long-term planning.",
-    "ogImage": "/images/guides/real-vs-nominal-return-en.webp",
-    "imageAlt": "Real return formula relating nominal return and inflation to purchasing power",
-    "imageBrief": "Clean WorthCalc editorial diagram with formulas, scenario comparison, no stock-photo finance imagery, no invented market data.",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/en/tools/compound-growth/",
-      "https://worthcalc.win/en/savings-rate-gross-vs-net/"
-    ],
-    "breadcrumbLabel": "Real vs. Nominal Return",
-    "schemaFile": "003__en__real-vs-nominal-return.json"
-  },
   "en/relocation-higher-salary-break-even": {
     "key": "en/relocation-higher-salary-break-even",
     "packageId": "008",
@@ -1058,7 +1010,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-08-30",
     "related": [
-      "/zh/guides/effective-interest-rate-explained/",
       "/zh/guides/loan-term-vs-monthly-payment/",
       "/zh/tools/installment-true-apr/"
     ],
@@ -1183,7 +1134,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
       "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
       "https://worthcalc.win/zh/guides/amortization-schedule-explained/"
     ],
@@ -1309,8 +1259,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-30",
     "related": [
       "/zh/tools/installment-true-apr/",
-      "/zh/guides/installment-zero-interest/",
-      "/zh/guides/effective-interest-rate-explained/"
+      "/zh/guides/installment-zero-interest/"
     ],
     "breadcrumbLabel": "現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本",
     "schemaFile": "002__zh__cash-discount-vs-financing.json"
@@ -1465,30 +1414,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "佣金、獎金、接案收入怎麼留稅款？把「入帳很多」和「真正可花」分開",
     "schemaFile": "007__zh__commission-income-tax-reserve-cashflow.json"
   },
-  "zh/cost-of-delaying-savings-goal": {
-    "key": "zh/cost-of-delaying-savings-goal",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "cost-of-delaying-savings-goal",
-    "title": "晚一年開始存錢，真的差很多嗎？用同一個目標反推「延後成本」",
-    "seoTitle": "晚一年開始存錢差多少？延後 12／24 個月的每月存款成本｜WorthCalc",
-    "metaDescription": "同一個儲蓄目標、同一個假設報酬率，晚開始會壓縮複利與投入時間。用 12、24 個月延後情境反推新的每月存款需求。",
-    "excerpt": "「晚一年」不是抽象的損失。固定目標、期限與假設後，可以直接解出新的 required monthly contribution，看到延後到底把多少壓力推到未來。",
-    "canonical": "https://worthcalc.win/zh/guides/cost-of-delaying-savings-goal/",
-    "robots": "index,follow",
-    "ogTitle": "晚一年開始存錢，月存要增加多少？",
-    "ogDescription": "固定目標與假設，直接比較現在、晚 12 個月、晚 24 個月的每月投入。",
-    "ogImage": "/images/guides/cost-of-delaying-savings-goal.webp",
-    "imageAlt": "儲蓄延後成本圖，顯示現在開始、晚一年、晚兩年所需每月存款差異",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/tools/compound-growth/",
-      "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/"
-    ],
-    "breadcrumbLabel": "晚一年開始存錢，真的差很多嗎？用同一個目標反推「延後成本」",
-    "schemaFile": "004__zh__cost-of-delaying-savings-goal.json"
-  },
   "zh/debt-consolidation-break-even": {
     "key": "zh/debt-consolidation-break-even",
     "packageId": "004",
@@ -1612,31 +1537,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "頭期款放越多越好嗎？買房前真正要算的是「交屋後還剩多少流動現金」",
     "schemaFile": "004__zh__down-payment-vs-post-purchase-liquidity.json"
-  },
-  "zh/effective-interest-rate-explained": {
-    "key": "zh/effective-interest-rate-explained",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "effective-interest-rate-explained",
-    "title": "有效利率是什麼？名目利率、有效年利率與總費用年百分率別混在一起",
-    "seoTitle": "有效利率是什麼？名目利率、EAR、APR／總費用年百分率完整比較",
-    "metaDescription": "名目利率、有效年利率與總費用年百分率不是同一個數字。用公式與案例看懂複利頻率、費用與實際借貸成本。",
-    "excerpt": "辨認不同利率名詞的數學與法規意義，避免用不能直接比較的百分比做金融決策。",
-    "canonical": "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
-    "robots": "index,follow",
-    "ogTitle": "有效利率不是另一個利率名稱：先看它在算什麼",
-    "ogDescription": "12% 名目年利率若每月複利，有效年利率約 12.68%；但借貸 APR／總費用年百分率還可能把特定費用納入，不能混成同一概念。",
-    "ogImage": "/images/guides/effective-interest-rate-explained-og.webp",
-    "imageAlt": "名目利率有效年利率與總費用年百分率比較圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/installment-true-apr/",
-      "/zh/guides/apr-vs-apy/",
-      "/zh/guides/amortization-schedule-explained/"
-    ],
-    "breadcrumbLabel": "有效利率是什麼？名目利率、有效年利率與總費用年百分率別混在一起",
-    "schemaFile": "002__zh__effective-interest-rate-explained.json"
   },
   "zh/emergency-fund-rebuild-after-move": {
     "key": "zh/emergency-fund-rebuild-after-move",
@@ -1855,7 +1755,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
       "https://worthcalc.win/zh/guides/loan-refinance-break-even/"
     ],
     "breadcrumbLabel": "固定利率 vs 浮動利率怎麼比？不要猜未來利率，先做 3 條利率路徑壓力測試",
@@ -1960,31 +1859,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "手上應該留多少現金？把「現金」拆成 4 種用途再決定",
     "schemaFile": "002__zh__how-much-cash-to-keep.json"
-  },
-  "zh/inflation-adjusted-savings-goal": {
-    "key": "zh/inflation-adjusted-savings-goal",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "inflation-adjusted-savings-goal",
-    "title": "未來目標要存多少？先做通膨調整，再算每月要存多少",
-    "seoTitle": "通膨調整儲蓄目標：未來 5、10、20 年要準備多少？｜WorthCalc",
-    "metaDescription": "今天 100 萬的目標，10 年後可能不是 100 萬。用未來價值公式把通膨加入房屋、教育、旅行等儲蓄目標，再算月提存與敏感度。",
-    "excerpt": "如果目標在多年後，先把「今天的價格」成長成未來名目價格，再談每月要存多少；否則你可能準時存到數字，卻買不起原本的東西。",
-    "canonical": "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/",
-    "robots": "index,follow",
-    "ogTitle": "今天 100 萬，10 年後要準備多少？",
-    "ogDescription": "先用通膨把目標金額推到未來，再計算月儲蓄，避免目標永遠停在今天。",
-    "ogImage": "/images/guides/inflation-adjusted-savings-goal.webp",
-    "imageAlt": "今天的儲蓄目標經通膨成長成未來目標金額的示意圖",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/real-vs-nominal-return/",
-      "https://worthcalc.win/zh/tools/compound-growth/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/"
-    ],
-    "breadcrumbLabel": "未來目標要存多少？先做通膨調整，再算每月要存多少",
-    "schemaFile": "003__zh__inflation-adjusted-savings-goal.json"
   },
   "zh/insurance-annual-vs-monthly-payment": {
     "key": "zh/insurance-annual-vs-monthly-payment",
@@ -2252,7 +2126,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/zh/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
       "https://worthcalc.win/zh/tools/mortgage-payoff/"
     ],
     "breadcrumbLabel": "房貸開辦費 vs 低利率回本",
@@ -2499,36 +2372,11 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/guides/effective-interest-rate-explained/",
       "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
       "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/"
     ],
     "breadcrumbLabel": "0% 優惠期到期前每月要還多少？不要把最低付款當成清償計畫",
     "schemaFile": "004__zh__promo-apr-payoff-deadline.json"
-  },
-  "zh/real-vs-nominal-return": {
-    "key": "zh/real-vs-nominal-return",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "real-vs-nominal-return",
-    "title": "實質報酬率 vs 名目報酬率：投資賺 5%，購買力不一定增加 5%",
-    "seoTitle": "實質報酬率 vs 名目報酬率怎麼算？通膨後才是真購買力｜WorthCalc",
-    "metaDescription": "名目報酬率沒有扣除通膨。用實質報酬率公式比較 3%、5%、6% 報酬在不同通膨下的購買力變化，並說明稅費與假設限制。",
-    "excerpt": "帳面多 5% 不代表購買力也多 5%。用精確實質報酬公式把名目報酬與通膨放在同一個分母裡，才能比較真正的購買力變化。",
-    "canonical": "https://worthcalc.win/zh/guides/real-vs-nominal-return/",
-    "robots": "index,follow",
-    "ogTitle": "實質報酬率：把通膨從帳面報酬裡扣回來",
-    "ogDescription": "5% 報酬遇上 3% 通膨，真正購買力不是簡單的 2%。",
-    "ogImage": "/images/guides/real-vs-nominal-return.webp",
-    "imageAlt": "名目報酬率、通膨率與實質報酬率之間的公式關係",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/inflation-adjusted-savings-goal/",
-      "https://worthcalc.win/zh/tools/compound-growth/"
-    ],
-    "breadcrumbLabel": "實質報酬率 vs 名目報酬率",
-    "schemaFile": "003__zh__real-vs-nominal-return.json"
   },
   "zh/relocation-for-higher-salary-break-even": {
     "key": "zh/relocation-for-higher-salary-break-even",

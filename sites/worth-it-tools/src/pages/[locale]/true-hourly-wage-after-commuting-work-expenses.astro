@@ -7,6 +7,8 @@ import DecisionMathCalculator from '../../components/DecisionMathCalculator.astr
 import FAQ from '../../components/FAQ.astro';
 import { trueHourlyWageGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
+import { MIN_WAGE_HOURLY, MIN_WAGE_MONTHLY, commuteHoursFor, surfaceHourly, trueHourly, weekdayOvertimePay } from '../../lib/twHourlyWageMath.mjs';
+import { localizedPath } from '../../i18n/utils';
 
 type L = 'en' | 'zh';
 const articles: Record<L, { title: string; description: string; faq: FaqItem[] }> = {
@@ -28,10 +30,34 @@ const locale = Astro.params.locale as L;
 const article = articles[locale];
 const guide = trueHourlyWageGuides[locale]!;
 const calculator = calculators[locale];
+
+// P2 batch 6 (2026-10-17): Taiwan scenarios for the zh page. Every figure is computed by src/lib/twHourlyWageMath.mjs, the module
+// tests/tw-hourly-wage-math.test.mjs pins to the calculator's own formula. Commute cost and take-home pay are the reader's numbers;
+// the ones below are labelled 示範值. The 最低工資 figures are 勞動部's (115-01-01), opened 2026-10-17.
+const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const n2 = (n: number) => (Math.round(n * 100) / 100).toFixed(2);
+// 情境一: 時薪 196 元的部分工時, 每天 4 小時、22 天, 通勤往返 1 小時、每天 100 元
+const s1 = { days: 22, shift: 4, trip: 1, tripCost: 100 };
+const s1Paid = s1.days * s1.shift;
+const s1Gross = MIN_WAGE_HOURLY * s1Paid;
+const s1Commute = commuteHoursFor({ roundTripHoursPerDay: s1.trip, days: s1.days });
+const s1Costs = s1.tripCost * s1.days;
+const s1True = trueHourly({ takeHome: s1Gross, workCosts: s1Costs, paidHours: s1Paid, commuteHours: s1Commute });
+// 情境二: 月薪剛好 29,500, 每週 40 小時 x 4 週 = 160 小時, 通勤往返 1.5 小時、每天 120 元
+const s2 = { days: 22, trip: 1.5, tripCost: 120, paid: 160 };
+const s2Commute = commuteHoursFor({ roundTripHoursPerDay: s2.trip, days: s2.days });
+const s2Costs = s2.tripCost * s2.days;
+const s2True = trueHourly({ takeHome: MIN_WAGE_MONTHLY, workCosts: s2Costs, paidHours: s2.paid, commuteHours: s2Commute });
+const s2Surface = surfaceHourly({ grossPay: MIN_WAGE_MONTHLY, paidHours: s2.paid });
+// 情境三: 計算機預設例子 (實領 52,000、成本 5,000、160 + 8 + 22 小時) 的 8 小時若依勞基法 §24 算加班費, 平日每小時工資額 250 元示範, 4 天各 2 小時
+const base = { takeHome: 52000, workCosts: 5000, paidHours: 160, unpaidHours: 8, commuteHours: 22 };
+const baseTrue = trueHourly(base);
+const otPay = weekdayOvertimePay({ hourlyWage: 250, hoursPerDay: 2, days: 4 });
+const otTrue = trueHourly({ ...base, takeHome: base.takeHome + otPay });
 ---
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh']}
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-10-17' : '2026-07-19'} alternateLocales={['en', 'zh']}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <><p>A job’s advertised hourly rate prices paid work only. A personal decision also needs spendable pay, required extra time, commuting and costs the employer does not reimburse.</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>Keep two clocks</h2><p>For personal comparison, count every hour the job takes from you. For labor-law questions, preserve a separate record: DOL says ordinary commuting is generally not work time, while suffered or permitted off-the-clock work and job-site travel may be compensable.</p><h2>Use the paystub boundary</h2><p>The IRS distinguishes gross pay before deductions from net take-home after deductions. Enter both from the same pay period; do not apply an average tax percentage to a different salary or location.</p><p class="privacy-note">General education, not tax, legal, employment or financial advice.</p></>}
-  {locale === 'zh' && <><p>職缺寫的時薪只看有薪時間；個人選擇還要看真正實領、必要額外時間、通勤與公司未報銷的成本。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>個人時間成本與法定工時分開</h2><p>個人比較可以把所有通勤都放入分母；但勞動部對工作時間的認定重點是是否受雇主指揮監督、提供或等待提供勞務。疑似未付工時要另存出勤、訊息與指示，不要只在計算器裡當成本。</p><h2>同一期薪資單才能對齊</h2><p>勞動部要求薪資明細列出總額、各項給付、合法扣除與實際發給。應發與實領必須取同一期，並把雇主已報銷款項排除。</p><p class="privacy-note">一般教育資訊，不是稅務、法律、勞資或財務建議。</p></>}
+  {locale === 'zh' && <><p>職缺寫的時薪只看有薪時間；個人選擇還要看真正實領、必要額外時間、通勤與公司未報銷的成本。</p><DecisionGuide content={guide}/><DecisionMathCalculator id="true-hourly-calculator" mode="hourlyWage" locale={locale} {...calculator}/><h2>個人時間成本與法定工時分開</h2><p>個人比較可以把所有通勤都放入分母；但勞動部對工作時間的認定重點是是否受雇主指揮監督、提供或等待提供勞務。疑似未付工時要另存出勤、訊息與指示，不要只在計算器裡當成本。</p><h2>同一期薪資單才能對齊</h2><p>勞動部要求薪資明細列出總額、各項給付、合法扣除與實際發給。應發與實領必須取同一期，並把雇主已報銷款項排除。</p><h2>台灣情境一：時薪 196 元的兼職，扣掉通勤後剩多少</h2><p>勞動部公告，115 年 1 月 1 日起每月最低工資 {n0(MIN_WAGE_MONTHLY)} 元、每小時最低工資 {MIN_WAGE_HOURLY} 元；每小時的數額是給約定按「時」計酬者，且只指正常工作時間內的報酬（勞動部常見問答，2026-10-17 打開）。假設你每天上 {s1.shift} 小時、一個月 {s1.days} 天，剛好領時薪 {MIN_WAGE_HOURLY} 元：應發 {MIN_WAGE_HOURLY} × {s1Paid} = {n0(s1Gross)} 元。通勤往返每天 {s1.trip} 小時、交通費每天 {s1.tripCost} 元（示範值，請填自己的），一個月 {n0(s1Commute)} 小時、{n0(s1Costs)} 元。為了只看通勤的影響，這個例子假設實領等於應發；實際請用薪資單的實領。</p><p>真實時薪＝（{n0(s1Gross)} − {n0(s1Costs)}）÷（{s1Paid} ＋ {n0(s1Commute)}）＝{n0(s1Gross - s1Costs)} ÷ {n0(s1Paid + s1Commute)}＝<strong>{n2(s1True)} 元／小時</strong>，比表面的 {MIN_WAGE_HOURLY} 元少約 {n0(MIN_WAGE_HOURLY - s1True)} 元。班短、通勤長的工作，通勤對真實時薪的影響特別大。在計算機輸入：應發與實領填 {s1Gross}、已計薪工時 {s1Paid}、必要未計時間 0、通勤總時數 {n0(s1Commute)}、未報銷成本 {s1Costs}。</p><h2>台灣情境二：月薪剛好是最低工資的全職</h2><p>勞動部說明，每月 {n0(MIN_WAGE_MONTHLY)} 元是按月計酬、每週正常工時不超過 40 小時的最低報酬（勞基法第 30 條：正常工時每日 8 小時、每週 40 小時）。以每週 40 小時 × 4 週 ＝ {s2.paid} 小時為例，表面時薪 {n0(MIN_WAGE_MONTHLY)} ÷ {s2.paid} ＝ {n2(s2Surface)} 元。通勤往返每天 {s2.trip} 小時、每天 {s2.tripCost} 元（示範值），{s2.days} 天共 {n0(s2Commute)} 小時、{n0(s2Costs)} 元，同樣假設實領等於應發：</p><p>真實時薪＝（{n0(MIN_WAGE_MONTHLY)} − {n0(s2Costs)}）÷（{s2.paid} ＋ {n0(s2Commute)}）＝{n0(MIN_WAGE_MONTHLY - s2Costs)} ÷ {n0(s2.paid + s2Commute)}＝<strong>{n2(s2True)} 元／小時</strong>。這個數字不能拿去和 196 元的法定最低時薪比，也不能用來判斷雇主有沒有短付：最低工資只看正常工作時間內的報酬，通勤時間與你自己出的交通費不在其中。它的用途是比較兩份工作，例如月薪多 2,000 元但每天多通勤 1 小時的職缺，是否真的比較好。</p><h2>通勤成本填什麼</h2><p>通勤成本請填你自己每個月實際花的錢：油費、停車費、過路費、機車折舊與保養，或大眾運輸的月票。想用月票估算，可以看<a href={localizedPath('zh', '/money/tpass-commuter-pass-breakeven')}>TPASS 通勤月票划不划算</a>（該頁的月票價格查核日是 2026-09-23；TPASS 官網 2026-10-17 回傳空白頁，本頁沒有重新引用票價，請以官網為準）。自己開車騎車的成本，用<a href={localizedPath('zh', '/tools/commute-cost')}>通勤成本計算機</a>。</p><h2>台灣情境三：「必要但未計薪」的時間如果是加班</h2><p>計算機把交接、信件、準備這類必要時間算進分母，是因為你實際投入了這些時間。但在法律上，勞動部說明的工作時間包含受雇主指揮監督下提供或等待提供勞務的時間；雇主要你延長工作時間，平日的加班費依勞基法第 24 條，前 2 小時加給 1/3 以上，再延長 2 小時加給 2/3 以上。以計算機預設的例子（實領 {n0(base.takeHome)}、成本 {n0(base.workCosts)}、{base.paidHours} ＋ {base.unpaidHours} ＋ {base.commuteHours} 小時，真實時薪 {n2(baseTrue)} 元）來說，如果那 {base.unpaidHours} 小時其實是 4 天各加班 2 小時，而你的平日每小時工資額是 250 元（示範值，請用薪資單上的數字）：250 × 2 × 4/3 × 4 ＝ {n0(otPay)} 元，補上之後真實時薪變成（{n0(base.takeHome + otPay)} − {n0(base.workCosts)}）÷ {base.paidHours + base.unpaidHours + base.commuteHours} ＝ <strong>{n2(otTrue)} 元／小時</strong>。</p><p>勞基法第 30 條要求雇主置備出勤紀錄，逐日記載到分鐘，保存 5 年，勞工申請副本時雇主不得拒絕。懷疑被短付時，先申請出勤紀錄副本，再把薪資單放在一起核對；本頁不判斷哪些時間算加班，這要看實際受指揮監督的情形，請向勞工局或勞動部申訴專線確認。</p><p class="privacy-note">一般教育資訊，不是稅務、法律、勞資或財務建議。試算僅供參考，以機關公告為準。</p></>}
   <FAQ items={article.faq}/>
 </ArticleLayout>

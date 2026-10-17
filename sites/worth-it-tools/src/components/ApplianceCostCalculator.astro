@@ -144,15 +144,17 @@ const embedSnippet = isZh
 
 <section class="complete-appliance-list" aria-labelledby="complete-appliance-list-heading">
   <h2 id="complete-appliance-list-heading">{isZh ? '完整家電清單' : 'Complete appliance list'}</h2>
-  <p>{isZh ? '以下是本 hub 合併的 repo 指南錨點；單點範圍表示目前只有一個可追溯算例，並不宣稱所有產品相同。' : 'These rows merge the repo guide anchors used by this hub. A single-point range means the repo currently has one traceable example; it is not a claim that every product is identical.'}</p>
+  <p>{isZh ? `「經濟部能源署資料」的列，瓦數是從能源署公開的能源效率標示登錄資料算出來的中位數（括號是第 25～75 百分位）；其餘的列是「示範值」，沿用本站指南的算例，不是能源署資料，也不是產品平均。能源署的標示只有部分家電公布耗電功率，電視、電腦、風扇、微波爐這類沒有可直接換算成瓦數的欄位，所以保留示範值並標明。每天使用時數一律是示範假設。` : 'Rows marked as Energy Administration data come from its published energy-label registers (median; the range is the 25th-75th percentile). The other rows are demo values carried over from the site guides: not Energy Administration data and not product averages. The registers publish power for only some appliances. Hours per day are always a demo assumption.'}</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>{isZh ? '家電' : 'Appliance'}</th><th>{isZh ? '典型瓦數' : 'Typical watts'}</th><th>{isZh ? '來源／查核日' : 'Source / checked'}</th></tr></thead>
       <tbody>
         {appliances.map((appliance) => <tr>
           <th scope="row">{appliance.name[locale]}</th>
-          <td>{appliance.watts_low}–{appliance.watts_high} W</td>
-          <td><a href={appliance.source_url}>{appliance.guide_slug}</a><br /><small>{appliance.verified_date}</small></td>
+          <td>{appliance.source_tier === 'moeaea-label' ? <><strong>{appliance.default_watts} W</strong> ({appliance.watts_low}–{appliance.watts_high} W)</> : <>{appliance.watts_low === appliance.watts_high ? `${appliance.default_watts} W` : `${appliance.watts_low}–${appliance.watts_high} W`}</>}</td>
+          <td>{appliance.source_tier === 'moeaea-label'
+            ? <><a href={appliance.source_url}>{isZh ? '經濟部能源署資料' : 'Energy Administration data'}</a>：{appliance.label_dataset}（{appliance.label_models} {isZh ? '款' : 'models'}）</>
+            : <>{isZh ? '示範值（非能源署資料）' : 'Demo value (not Energy Administration data)'}</>}<br /><small>{appliance.verified_date}</small></td>
         </tr>)}
       </tbody>
     </table>
@@ -194,7 +196,10 @@ const embedSnippet = isZh
     return formatter.format(Number.isFinite(value) ? value : 0);
   }
   function updateRangeNote(item: Appliance): void {
-    rangeNote.innerHTML = `${isZh ? '指南錨點範圍' : 'Guide anchor range'}: <strong>${item.watts_low}–${item.watts_high} W</strong> · ${item.source_note} <a href="${item.source_url}">${isZh ? '來源' : 'source'}</a> · ${item.verified_date}`;
+    const label = item.source_tier === 'moeaea-label';
+    const note = isZh ? item.zh_note : item.source_note;
+    const range = item.watts_low === item.watts_high ? `${item.default_watts} W` : `${item.watts_low}–${item.watts_high} W`;
+    rangeNote.innerHTML = `${label ? (isZh ? '能源署資料（中位數；第 25～75 百分位）' : 'Energy Administration data (median; 25th-75th percentile)') : (isZh ? '示範值' : 'Demo value')}: <strong>${range}</strong> · ${note}${label ? ` <a href="${item.source_url}">${isZh ? '資料來源' : 'source'}</a>` : ''} · ${item.verified_date}`;
   }
   // ---- 台電住宅累進電價模式（zh only）----
   const tariffOn = document.getElementById('tariff-on') as HTMLInputElement | null;

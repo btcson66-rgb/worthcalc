@@ -1,0 +1,109 @@
+---
+/*
+ * 失業期間預備金試算 (P2 batch 6, 2026-10-17).
+ *
+ * Arithmetic: src/lib/twEmergencyFundMath.mjs (insuredSalaryFor, jobSearchCoverage, ...), tested by
+ * tests/tw-emergency-fund-math.test.mjs. The defaults are the page's 算例一: 月薪 52,000 (月投保薪資 45,800), no dependents,
+ * 32 years old, 非自願離職, 每月必要支出 40,000 (示範值), 找工作 8 個月, 沒有其他可動用現金.
+ */
+const blis = 'https://www.bli.gov.tw/0005071.html';
+const law = 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0050021';
+---
+
+<section class="calc" data-tw-emergency-fund aria-labelledby="ef-heading">
+  <header>
+    <h2 id="ef-heading">離職後的現金缺口試算</h2>
+    <p>輸入月薪、必要支出與預計找工作多久，算出勞保局的失業給付補得了多少、還缺多少。預設值就是下方算例一；必要支出與找工作月數是示範值，請改成你自己的。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>目前月薪資總額（元，用來對照 115 年投保薪資分級表）</span><input id="ef-pay" type="number" inputmode="numeric" min="0" step="500" value="52000" /></label>
+      <label><span>離職時的年齡（歲）</span><input id="ef-age" type="number" inputmode="numeric" min="15" max="80" step="1" value="32" /></label>
+      <label><span>受你扶養、無工作收入的父母、配偶、未成年子女或身心障礙子女（人）</span><input id="ef-dependents" type="number" inputmode="numeric" min="0" max="20" step="1" value="0" /></label>
+      <label><span>領有社政主管機關核發的身心障礙證明</span>
+        <select id="ef-disabled"><option value="0" selected>沒有</option><option value="1">有</option></select>
+      </label>
+      <label><span>離職原因</span>
+        <select id="ef-involuntary"><option value="1" selected>非自願離職（資遣、關廠、歇業等）</option><option value="0">自願離職、自營或接案（沒有雇主）</option></select>
+      </label>
+      <label><span>退保前 3 年內，就業保險年資合計滿 1 年</span>
+        <select id="ef-years"><option value="1" selected>是</option><option value="0">否</option></select>
+      </label>
+      <label><span>離職期間每月必要支出（元；示範值，請填自己的）</span><input id="ef-essential" type="number" inputmode="numeric" min="0" step="1000" value="40000" /></label>
+      <label><span>預計找到工作要幾個月（沒有官方保證值，請跑幾種情境）</span><input id="ef-months" type="number" inputmode="decimal" min="0" max="60" step="1" value="8" /></label>
+      <label class="is-wide"><span>已經有、可以動用的現金（元；資遣費若已入帳可以算在這裡）</span><input id="ef-cash" type="number" inputmode="numeric" min="0" step="1000" value="0" /></label>
+      <p class="calc__note is-wide">
+        規則來源：<a href={blis}>勞保局「失業給付：給付標準及期間」</a>與<a href={law}>就業保險法</a>（2026-10-17 查核）。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="ef-status" id="ef-status">—</p>
+      <dl>
+        <div><dt>對應的月投保薪資（115 年分級表）</dt><dd id="ef-insured">—</dd></div>
+        <div><dt>每月失業給付</dt><dd id="ef-benefit">—</dd></div>
+        <div><dt>最長可領幾個月</dt><dd id="ef-max">—</dd></div>
+        <div><dt>找工作期間實際領到的月數（求職登記後第 15 日起算）</dt><dd id="ef-paid">—</dd></div>
+        <div><dt>失業給付合計</dt><dd id="ef-total">—</dd></div>
+        <div><dt>找工作期間必要支出合計</dt><dd id="ef-need">—</dd></div>
+        <div><dt>失業給付補不到的缺口</dt><dd id="ef-gap">—</dd></div>
+        <div><dt>缺口相當於幾個月的必要支出</dt><dd id="ef-gap-months">—</dd></div>
+        <div><dt>扣掉已有現金後，還要準備</dt><dd id="ef-reserve">—</dd></div>
+      </dl>
+      <p class="ef-note"><strong>試算僅供參考，以機關公告為準。</strong>是否符合請領資格、給付金額與月數，以勞保局核定為準；本頁用「月薪資總額對應的月投保薪資」代替你離職前 6 個月的平均月投保薪資，薪資有調整過的人會有差異。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { benefitMonthsFor, insuredSalaryFor, jobSearchCoverage, safeNumber } from '../lib/twEmergencyFundMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-emergency-fund]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['ef-pay', 'ef-age', 'ef-dependents', 'ef-disabled', 'ef-involuntary', 'ef-years', 'ef-essential', 'ef-months', 'ef-cash'];
+    const val = (id: string) => safeNumber(el<HTMLInputElement | HTMLSelectElement>(id).value);
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const months = (n: number) => `${Number(n.toFixed(2))} 個月`;
+
+    const render = () => {
+      const insured = insuredSalaryFor(val('ef-pay'));
+      const eligible = val('ef-involuntary') === 1 && val('ef-years') === 1;
+      const r = jobSearchCoverage({
+        essentialMonthly: val('ef-essential'),
+        avgInsuredSalary: insured,
+        dependents: val('ef-dependents'),
+        ageAtLeaving: val('ef-age'),
+        disabled: val('ef-disabled') === 1,
+        involuntary: eligible,
+        jobSearchMonths: val('ef-months'),
+        ownCash: val('ef-cash'),
+      });
+      el('ef-insured').textContent = money(insured);
+      el('ef-benefit').textContent = eligible ? money(r.monthly) : '0 元（不符合請領條件）';
+      el('ef-max').textContent = eligible ? `${benefitMonthsFor({ ageAtLeaving: val('ef-age'), disabled: val('ef-disabled') === 1 })} 個月` : '—';
+      el('ef-paid').textContent = eligible ? months(r.paidMonths) : '—';
+      el('ef-total').textContent = money(r.benefitTotal);
+      el('ef-need').textContent = money(r.need);
+      el('ef-gap').textContent = money(r.gap);
+      el('ef-gap-months').textContent = months(r.gapInMonthsOfSpending);
+      el('ef-reserve').textContent = money(r.reserveNeeded);
+      el('ef-status').textContent = eligible
+        ? `失業給付約補 ${money(r.benefitTotal)}，找 ${Number(val('ef-months'))} 個月工作的缺口 ${money(r.gap)}${val('ef-cash') > 0 ? `，扣掉已有現金後還要準備 ${money(r.reserveNeeded)}` : ''}。`
+        : `不符合失業給付的請領條件（非自願離職，且退保前 3 年內保險年資合計滿 1 年）時，找工作期間的必要支出 ${money(r.need)} 都要自己準備。`;
+    };
+
+    ids.forEach((id) => el(id).addEventListener('input', render));
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .ef-status { margin: 0; font-weight: 750; }
+  .ef-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+</style>

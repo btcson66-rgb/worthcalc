@@ -18,8 +18,9 @@ for (const [pathname, value] of entries) {
 
 // 63 pairs when the S4 package shipped; 31 after the 2026-10-15 P1b disposition removed the
 // overrides of retired locales (es/fr/de/hi/ar) and of pages that were removed or merged away;
-// 33 after the CEO's P1b verdict kept /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ as real pages.
-const EXPECTED_PAIRS = 33;
+// 33 after the CEO's P1b verdict kept /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ as real pages;
+// 32 after P2 batch 3 (2026-10-17) merged /en/zero-interest-installments-truth/ into the installment tool (redirect stub).
+const EXPECTED_PAIRS = 32;
 if (entries.length !== EXPECTED_PAIRS) failures.push(`expected ${EXPECTED_PAIRS} title/description pairs, found ${entries.length}`);
 if (failures.length > 0) {
   console.error('[s4-titles] FAIL');

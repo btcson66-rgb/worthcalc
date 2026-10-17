@@ -26,7 +26,6 @@ const requiredMarkers = [
 ];
 
 const briefRoutes = [
-  { id: '01', slug: 'zero-interest-installments-truth' },
   { id: '02', slug: 'upfront-fees-financing-cost' },
   { id: '03', slug: 'bnpl-vs-credit-card-installments' },
   { id: '04', slug: 'monthly-vs-annual-subscription' },
@@ -52,15 +51,17 @@ const briefRoutes = [
   { id: '29', slug: 'pay-raise-vs-inflation-purchasing-power' },
 ];
 
+// P2 batch 3 (2026-10-17) merged zero-interest-installments-truth (brief topic #01) into the installment
+// tool as a redirect stub, so the topic floors drop by one topic: 24 -> 23 topics, 48 -> 46 variants.
 const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
   tool: 32,
   editorial: 160,
-  alignedVariants: 48,
-  compliantVariants: 48,
-  completeTopics: 24,
+  alignedVariants: 46,
+  compliantVariants: 46,
+  completeTopics: 23,
 };
 
 function walkHtml(dir) {

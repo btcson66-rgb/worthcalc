@@ -45,7 +45,7 @@ function normalizeInternalLinks(body) {
     ['/zh/guides/loan-term-vs-monthly-payment/', '/zh/loan-term-vs-total-interest/'],
     ['/zh/guides/emergency-fund-vs-sinking-fund/', '/zh/emergency-fund-vs-sinking-fund/'],
     ['/zh/guides/savings-rate-calculation/', '/zh/how-to-calculate-savings-rate/'],
-    ['/zh/guides/installment-zero-interest/', '/zh/zero-interest-installments-truth/'],
+    ['/zh/guides/installment-zero-interest/', '/zh/tools/installment-true-apr/'],
     ['/zh/guides/apr-vs-apy/', '/zh/apr-vs-apy/'],
     ['/zh/guides/emergency-fund-how-much/', '/zh/emergency-fund-how-much/'],
     ['/zh/guides/emergency-fund-irregular-income/', '/zh/emergency-fund-irregular-income/'],

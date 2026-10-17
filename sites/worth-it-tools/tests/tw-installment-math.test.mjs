@@ -138,3 +138,31 @@ test('no solution -> NaN, never a made-up rate', () => {
   assert.ok(Number.isNaN(irrMonthly([-100, -50])));
   assert.ok(Number.isNaN(irrMonthly([0])));
 });
+
+// P2 batch 3 (2026-10-17): the page must say how the annual figure is computed and what it was checked
+// against, must date the bank-association snapshot, and must no longer link the merged article.
+import { readFileSync } from 'node:fs';
+const zhPage = readFileSync(new URL('../src/pages/zh/tools/installment-true-apr.astro', import.meta.url), 'utf8');
+const stubs = JSON.parse(readFileSync(new URL('../src/data/redirect-stubs.json', import.meta.url), 'utf8')).stubs;
+
+test('the page states the 月 IRR × 12 method and its verification against the 合作金庫 example', () => {
+  assert.match(zhPage, /先解出月 IRR/);
+  assert.match(zhPage, /乘以 12/);
+  assert.match(zhPage, /2\.30%/);
+  assert.match(zhPage, /2\.33%/);
+  assert.match(zhPage, /合作金庫/);
+  const r = evaluatePlan({ listPrice: 2000000, n: 240, aprPct: 2.275, oneTimeFee: 5300, feeTiming: 'upfront' });
+  assert.equal(r.aprPct, 2.3);
+  assert.equal(r.compoundedPct, 2.33);
+});
+
+test('the bank-association fee table is labelled as a dated snapshot', () => {
+  assert.match(zhPage, /2026-07-22 的快照/);
+  assert.match(zhPage, /115 年 7 月 22 日/);
+});
+
+test('zero-interest-installments-truth is a redirect stub to the tool, and the tool does not link it', () => {
+  assert.ok(stubs.some((s) => s.from === '/zh/zero-interest-installments-truth/' && s.to === '/zh/tools/installment-true-apr/'));
+  assert.ok(stubs.some((s) => s.from === '/en/zero-interest-installments-truth/' && s.to === '/en/tools/installment-true-apr/'));
+  assert.ok(!zhPage.includes('zero-interest-installments-truth'));
+});

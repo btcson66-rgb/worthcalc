@@ -64,10 +64,10 @@ export const homeTw = {
           kind: 'article',
         },
         {
-          href: '/zh/zero-interest-installments-truth/',
-          title: '0 利率分期真的零利率嗎',
-          blurb: '把分期手續費與放棄的現金價折扣，換算成實際年利率。',
-          kind: 'article',
+          href: '/zh/tools/installment-true-apr/',
+          title: '信用卡分期試算：零利率陷阱',
+          blurb: '把分期手續費與放棄的現金價折扣，換算成總費用年百分率。',
+          kind: 'calculator',
         },
         {
           href: '/zh/bnpl-vs-credit-card-installments/',

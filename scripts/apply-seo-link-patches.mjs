@@ -14,7 +14,7 @@ const aliases = new Map([
   ['/zh/guides/emergency-fund-irregular-income/', '/zh/emergency-fund-irregular-income/'],
   ['/zh/guides/emergency-fund-vs-debt-payoff/', '/zh/emergency-fund-vs-debt-payoff/'],
   ['/zh/guides/emergency-fund-vs-sinking-fund/', '/zh/emergency-fund-vs-sinking-fund/'],
-  ['/zh/guides/installment-zero-interest/', '/zh/zero-interest-installments-truth/'],
+  ['/zh/guides/installment-zero-interest/', '/zh/tools/installment-true-apr/'],
   ['/zh/guides/liquid-net-worth/', '/zh/liquid-net-worth-explained/'],
   ['/zh/guides/loan-term-vs-monthly-payment/', '/zh/loan-term-vs-total-interest/'],
   ['/zh/guides/net-worth-how-to-calculate/', '/zh/how-to-calculate-net-worth/'],

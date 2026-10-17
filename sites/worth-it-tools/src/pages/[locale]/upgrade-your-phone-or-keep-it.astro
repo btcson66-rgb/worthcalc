@@ -7,6 +7,8 @@ import PhoneKeepUpgradeCalculator from '../../components/PhoneKeepUpgradeCalcula
 import FAQ from '../../components/FAQ.astro';
 import { phoneUpgradeGuides } from '../../data/decisionGuides';
 import type { FaqItem } from '../../lib/seo';
+import { localizedPath } from '../../i18n/utils';
+import { evaluatePhoneKeepUpgrade } from '../../lib/twRepairMath.mjs';
 
 type EditorialLocale = 'en' | 'zh';
 const articles: Record<EditorialLocale, { title: string; description: string; faq: FaqItem[] }> = {
@@ -23,13 +25,13 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
   },
   zh: {
     title: '手機該換還是繼續用？比較維修、舊換新、資費與每月成本',
-    description: '用剩餘壽命、維修費、舊換新折抵、資費差額、持有月數、殘值與資料移轉成本比較續用或換機。',
+    description: '用剩餘壽命、維修費、舊換新折抵、資費差額、持有月數、殘值與資料移轉成本，把續用和換機換算成每月成本；附行政院消保處的手機送修注意事項。不內建任何業者價格。',
     faq: [
       { question: '應比較手機價格還是每月成本？', answer: '兩者都要。完整實付價揭露購買承諾；設備月成本再加相同基礎的資費，才能比較持有期不同的舊機與新機。' },
       { question: '維修後剩餘壽命怎麼填？', answer: '依電池健康、故障診斷、安全更新、零件與實際使用強度保守估計，並測試較短與較長情境，不要把原廠宣稱年限直接當結果。' },
-      { question: '分月回饋的舊換新等於現金嗎？', answer: '不一定。若要綁指定資費並持續 24 或 36 個月，提前離開可能失去尚未入帳回饋；只能填你確定能保留的經濟價值。' },
+      { question: '分月回饋的舊換新等於現金嗎？', answer: '不一定。若要綁指定資費並持續 24 或 36 個月，提前離開可能失去尚未入帳回饋；只能填你確定能保留的經濟價值。綁約補貼怎麼換算成每月價值，見手機綁約補貼值那一頁。' },
       { question: '資料移轉成本怎麼算？', answer: '可列入付費設定、雲端空間、線材，以及你自行選定的備份、驗證碼與應用程式重設時間價值；另跑一次時間價值為零的情境。' },
-      { question: '送修或折抵前要做什麼？', answer: '先備份、記錄 IMEI 與外觀、確認保固與檢測費；交付舊機前登出帳號、解除配對、移除卡片與儲存裝置、恢復原廠設定並確認資料已清除。' },
+      { question: '送修前要做什麼？', answer: '依行政院消保處的手機送修注意事項：備份個人資料並記錄 IMEI 碼與產品序號、拔除 SIM 卡並刪除涉及隱私的資料、確認保固範圍與維修費及是否收檢測處理費或行政處理費、索取維修單收執聯；收費維修須先報價並取得你同意。' },
     ],
   },
 };
@@ -44,9 +46,21 @@ const locale = Astro.params.locale as EditorialLocale;
 const article = articles[locale];
 const guide = phoneUpgradeGuides[locale]!;
 const calculator = calculators[locale];
+
+// ---- zh worked example (P2 batch 5): two repair quotes against the same upgrade. Prices are demo inputs (no carrier or
+// store price is built in); the arithmetic is src/lib/twRepairMath.mjs, pinned in tests/tw-repair-math.test.mjs.
+const f1 = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const f0 = (n: number) => Math.round(n).toLocaleString('en-US');
+const phoneBase = { currentResaleLater: 800, tradeInNow: 4000, newPhonePrice: 25000, upgradeFees: 500, transferCost: 0, currentPlanMonthly: 599, newPlanMonthly: 599, newHoldingMonths: 36, newResaleLater: 7000 };
+const small = evaluatePhoneKeepUpgrade({ ...phoneBase, repairCost: 1800, remainingMonths: 12 });
+const big = evaluatePhoneKeepUpgrade({ ...phoneBase, repairCost: 8000, remainingMonths: 12 });
+const lifeRows = [6, 12, 18, 24].map((months) => ({ months, ...evaluatePhoneKeepUpgrade({ ...phoneBase, repairCost: 1800, remainingMonths: months }) }));
+const subsidyHref = localizedPath('zh', '/money/phone-contract-subsidy-value');
+const repairHref = localizedPath('zh', '/repair-or-replace-decision-formula');
+const warrantyHref = localizedPath('zh', '/is-an-extended-warranty-worth-it');
 ---
 
-<ArticleLayout title={article.title} description={article.description} locale={locale} updated="2026-07-19" alternateLocales={['en', 'zh']}
+<ArticleLayout title={article.title} description={article.description} locale={locale} updated={locale === 'zh' ? '2026-10-17' : '2026-07-19'} alternateLocales={['en', 'zh']}
   trustBlock={trustBlockFromDecisionGuide(guide, locale)}>
   {locale === 'en' && <>
     <p>A “free upgrade” can cost more than keeping a repaired phone once the required plan, lost credits, fees and setup are counted. Compare the device economics separately, then add the service plan difference.</p>
@@ -61,16 +75,46 @@ const calculator = calculators[locale];
     <p class="privacy-note">General education only, not financial, legal, tax, security, telecom, repair or product-safety advice.</p>
   </>}
   {locale === 'zh' && <>
-    <p>「零元換機」不等於零成本。指定高資費、分月回饋、提前離開損失、啟用與移轉都可能讓換機比維修續用更貴。先算設備，再把資費差額獨立加回。</p>
-    <DecisionGuide content={guide} />
+    <p>「零元換機」不等於零成本。指定高資費、分月回饋、提前離開損失、啟用與移轉都可能讓換機比維修續用更貴。先算設備，再把資費差額獨立加回。這一頁專算手機；家電請看<a href={repairHref}>家電壞了修還是換</a>，要不要加買保固請看<a href={warrantyHref}>延長保固值得買嗎</a>。</p>
     <PhoneKeepUpgradeCalculator locale={locale} {...calculator} />
-    <h2>把舊換新廣告還原成真正可保留價值</h2>
-    <p>確認折抵是立即折價、現金還是 24／36 個月帳單回饋，並記錄指定方案、外觀與功能檢測、交件期限及提前解約損失。尚未清償的分期不是折扣。</p>
-    <h2>送修前先固定報價、資料與責任</h2>
-    <p>行政院消保處提醒先備份、記錄 IMEI 與外觀，並確認保固、檢測費、維修項目及報價同意。若有電池膨脹、過熱或其他安全異常，應先停止冒險使用並依原廠安全指引處理。</p>
-    <h2>折抵或回收不是只刪除照片</h2>
-    <p>先完成新機資料驗證，再登出帳號、解除裝置綁定、移除 SIM／記憶卡、恢復原廠設定並重新確認。保留交付、寄送與檢測結果，直到折抵入帳。</p>
-    <p class="privacy-note">一般教育資訊，不是財務、法律、稅務、資安、電信、維修或產品安全建議。</p>
+    <DecisionGuide content={guide} />
+    <h2>算例：同一支新機，兩種維修報價</h2>
+    <p>示範輸入（不是任何店家或業者的價格，請換成你的報價）：續用後舊機殘值 NT$800；新機實付價 NT$25,000、換機費 NT$500、不另計資料移轉；現在確定折抵 NT$4,000；新機持有 36 個月、期末殘值 NT$7,000；兩邊資費都是 NT$599。新機設備月成本 = ({f0(phoneBase.newPhonePrice)} + {f0(phoneBase.upgradeFees)} − {f0(phoneBase.tradeInNow)} − {f0(phoneBase.newResaleLater)}) ÷ 36 = {f1(small.upgradeDeviceMonthly)} 元，加資費後 {f1(small.upgradeFullMonthly)} 元／月。</p>
+    <div class="table-wrap" tabindex="0">
+      <table>
+        <thead><tr><th scope="col">維修報價（修後再用 12 個月）</th><th scope="col">續用完整月成本</th><th scope="col">換機完整月成本</th><th scope="col">較低的是</th><th scope="col">折抵要到多少才打平</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">NT$1,800（例如換電池）</th><td>{f1(small.keepFullMonthly)} 元</td><td>{f1(small.upgradeFullMonthly)} 元</td><td>續用，少 {f1(small.difference)} 元／月</td><td>{f0(small.breakEvenTradeIn)} 元</td></tr>
+          <tr><th scope="row">NT$8,000（例如主機板）</th><td>{f1(big.keepFullMonthly)} 元</td><td>{f1(big.upgradeFullMonthly)} 元</td><td>{big.keepWins ? '續用' : '換機'}，少 {f1(big.difference)} 元／月</td><td>{big.breakEvenTradeIn > 0 ? `${f0(big.breakEvenTradeIn)} 元` : '0 元（沒有折抵，換機也較低）'}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>同一支新機，維修報價從 1,800 變成 8,000，結論就從續用變成換機。再看修後能用多久（維修報價 NT$1,800）：</p>
+    <div class="table-wrap" tabindex="0">
+      <table>
+        <thead><tr><th scope="col">修後可再用</th><th scope="col">續用設備月成本</th><th scope="col">續用完整月成本</th><th scope="col">折抵要到多少才打平</th></tr></thead>
+        <tbody>
+          {lifeRows.map((row) => <tr><th scope="row">{row.months} 個月</th><td>{f1(row.keepDeviceMonthly)} 元</td><td>{f1(row.keepFullMonthly)} 元</td><td>{f0(row.breakEvenTradeIn)} 元</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p>修後只能再用 6 個月時，續用完整月成本是 {f1(lifeRows[0].keepFullMonthly)} 元，打平所需的折抵降到 {f0(lifeRows[0].breakEvenTradeIn)} 元；能再用 24 個月則要 {f0(lifeRows[3].breakEvenTradeIn)} 元。「修後能用多久」是你這一題最需要認真估的數字。</p>
+    <h2>送修前的注意事項（行政院消保處）</h2>
+    <p><a href="https://cpc.ey.gov.tw/Page/8644AFB8F5DCB8A3/286ce994-7f56-4290-8482-4c819dc863f0">行政院消保處「手機送修，消費者應注意事項？」</a>（2026-10-17 打開）列出八點：</p>
+    <ol>
+      <li>備份個人資料以免流失，並記錄 IMEI 碼及產品序號。</li>
+      <li>拔除 SIM 卡及刪除涉及隱私的資料。</li>
+      <li>確認保固範圍、應支付的維修費，並瞭解維修商是否收取檢測處理費或行政處理費等。</li>
+      <li>確認維修所需時間，並索取維修單客戶收執聯作為取件依據。</li>
+      <li>須收費的故障品，維修商應先向消費者報價並取得消費者同意，才可以進行更換。</li>
+      <li>取件時，應核對 IMEI 碼是否正確，如果更換非新品主機板，維修單應明列新舊主機板序號。</li>
+      <li>開機測試，確認修復後再離開。</li>
+      <li>妥善保留送修單據，以利日後糾紛舉證。</li>
+    </ol>
+    <p>計算機裡的「現在維修與檢測費」就是第 3 點與第 5 點的書面報價。</p>
+    <h2>把舊換新和綁約補貼還原成可保留的價值</h2>
+    <p>確認折抵是立即折價、現金還是 24／36 個月帳單回饋，並記錄指定方案、外觀與功能檢測、交件期限及提前解約損失；尚未清償的分期不是折扣。綁約補貼款怎麼換算成每月價值，用電信業者公告的補貼金額除以約期月數，見<a href={subsidyHref}>手機綁約補貼值多少</a>；各業者的方案與價格以業者公告為準，這一頁不內建。</p>
+    <p class="privacy-note">試算僅供參考，以維修報價、業者公告與書面契約為準；一般教育資訊，不是財務、法律、稅務、資安、電信、維修或產品安全建議。</p>
   </>}
   <FAQ items={article.faq} />
 </ArticleLayout>

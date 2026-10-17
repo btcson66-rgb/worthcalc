@@ -46,6 +46,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 
 <script>
   import { renderBars } from '../lib/calcUi';
+  import { evaluateRepairReplace } from '../lib/twRepairMath.mjs';
   for (const root of document.querySelectorAll<HTMLElement>('[data-repair-replace-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -54,19 +55,11 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
     const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
     const calculate = () => {
-      const repairMonths = Math.max(1, value('repairMonths'));
-      const replacementMonths = Math.max(1, value('replacementMonths'));
-      const probability = Math.min(100, value('recurrenceProbability')) / 100;
-      const recurrenceExpected = probability * value('recurrenceCost');
-      const energyPenalty = value('extraEnergyMonthly') * repairMonths;
-      const repairExpected = value('repairQuote') + recurrenceExpected + energyPenalty;
-      const replacementNet = Math.max(0, value('replacementPrice') + value('replacementFees') - value('currentValue'));
-      const repairMonthly = repairExpected / repairMonths;
-      const replacementMonthly = replacementNet / replacementMonths;
-      const repairRatio = replacementNet ? value('repairQuote') / replacementNet * 100 : 0;
-      const breakEvenQuote = Math.max(0, repairMonths * replacementMonthly - recurrenceExpected - energyPenalty);
-      const repairWins = repairMonthly <= replacementMonthly;
-      const difference = Math.abs(repairMonthly - replacementMonthly);
+      const r = evaluateRepairReplace({
+        repairQuote: value('repairQuote'), repairMonths: value('repairMonths'), recurrenceProbability: value('recurrenceProbability'), recurrenceCost: value('recurrenceCost'),
+        extraEnergyMonthly: value('extraEnergyMonthly'), replacementPrice: value('replacementPrice'), replacementFees: value('replacementFees'), currentValue: value('currentValue'), replacementMonths: value('replacementMonths'),
+      });
+      const { repairExpected, replacementNet, repairMonthly, replacementMonthly, repairRatio, breakEvenQuote, repairWins, difference } = r;
       const chart = root.querySelector<HTMLElement>('[data-chart]');
       if (chart) renderBars(chart, [
         { label: root.dataset.labelA || '', value: repairExpected },

@@ -47,6 +47,7 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
 
 <script>
   import { renderBars } from '../lib/calcUi';
+  import { evaluatePhoneKeepUpgrade } from '../lib/twRepairMath.mjs';
   for (const root of document.querySelectorAll<HTMLElement>('[data-phone-keep-upgrade-calculator]')) {
     const formatter = new Intl.NumberFormat(root.dataset.locale || 'en-US', { style: 'currency', currency: root.dataset.currency || 'USD', maximumFractionDigits: root.dataset.currency === 'TWD' ? 1 : 2 });
     const number = new Intl.NumberFormat(root.dataset.locale || 'en-US', { maximumFractionDigits: 1 });
@@ -55,16 +56,11 @@ const localeTags: Record<CalculatorLocale, string> = { en: 'en-US', zh: 'zh-TW',
     const value = (name: string) => Math.max(0, Number(field(name).value) || 0);
     const money = (amount: number) => root.dataset.currency === 'TWD' ? `${amount < 0 ? '-' : ''}NT$${number.format(Math.abs(amount))}` : formatter.format(amount);
     const calculate = () => {
-      const remainingMonths = Math.max(1, value('remainingMonths'));
-      const newHoldingMonths = Math.max(1, value('newHoldingMonths'));
-      const keepDeviceMonthly = (value('repairCost') - value('currentResaleLater')) / remainingMonths;
-      const upgradeGross = value('newPhonePrice') + value('upgradeFees') + value('transferCost');
-      const upgradeDeviceMonthly = (upgradeGross - value('tradeInNow') - value('newResaleLater')) / newHoldingMonths;
-      const keepFullMonthly = keepDeviceMonthly + value('currentPlanMonthly');
-      const upgradeFullMonthly = upgradeDeviceMonthly + value('newPlanMonthly');
-      const breakEvenTradeIn = Math.max(0, upgradeGross - value('newResaleLater') - newHoldingMonths * (keepFullMonthly - value('newPlanMonthly')));
-      const keepWins = keepFullMonthly <= upgradeFullMonthly;
-      const difference = Math.abs(keepFullMonthly - upgradeFullMonthly);
+      const r = evaluatePhoneKeepUpgrade({
+        repairCost: value('repairCost'), remainingMonths: value('remainingMonths'), currentResaleLater: value('currentResaleLater'), tradeInNow: value('tradeInNow'), newPhonePrice: value('newPhonePrice'),
+        upgradeFees: value('upgradeFees'), transferCost: value('transferCost'), currentPlanMonthly: value('currentPlanMonthly'), newPlanMonthly: value('newPlanMonthly'), newHoldingMonths: value('newHoldingMonths'), newResaleLater: value('newResaleLater'),
+      });
+      const { keepDeviceMonthly, upgradeDeviceMonthly, keepFullMonthly, upgradeFullMonthly, breakEvenTradeIn, keepWins, difference } = r;
       out('keepDeviceMonthly').textContent = money(keepDeviceMonthly);
       out('upgradeDeviceMonthly').textContent = money(upgradeDeviceMonthly);
       const chart = root.querySelector<HTMLElement>('[data-chart]');

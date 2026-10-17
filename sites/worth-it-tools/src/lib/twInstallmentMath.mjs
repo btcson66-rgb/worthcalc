@@ -31,6 +31,8 @@
  * 分期付款約定書 or bill, which the `paymentOverride` input accepts.
  */
 
+import { simulate as simulateRevolving } from './twCreditCardMath.mjs';
+
 export const MONTHS_PER_YEAR = 12;
 
 export function safeNumber(value, fallback = 0) {
@@ -211,3 +213,89 @@ export function aprOfOneTimeFee(feePct, n, price = 100000) {
 export function aprOfForgoneDiscount(cashPrice, listPrice, n) {
   return evaluatePlan({ listPrice, cashPrice, n, aprPct: 0 }).aprRealPct;
 }
+
+// ---------------------------------------------------------------------------------------------
+// 帳單分期 (bill installment), P2 batch 4, 2026-10-17
+// ---------------------------------------------------------------------------------------------
+/*
+ * What the issuers' own announcements say about 帳單分期, read on 2026-10-17 (three issuers; each differs
+ * in the details below, so the reader types their own bill's numbers):
+ *
+ *  - 台北富邦 https://www.fubon.com/banking/personal/credit_card/rte02/rte02.htm
+ *      申請金額 = 當期帳單應繳總額 - 當期已繳款金額 (至少須繳足最低應繳金額); 申請資格: 應繳總額扣最低應繳金額達 NT$1,000;
+ *      期數 3/6/12/18/24/30; 依「年金法」計算每期本金與利息, 自次期帳單起分期; 分期利率 = 指數型房貸基準利率 + 加碼,
+ *      上限 15%, 總費用年百分率等同分期利率; 每期本息併入最低應繳金額; 除另有約定外不收消費分期手續費;
+ *      提前清償違約金: 首期結帳日後至第二期結帳日前 160 元, 第二期後至第六期前 150 元, 第六期後至第十二期前 140 元.
+ *      Its published table (帳單分期 NT$10,000, 分期利率 3.9%~15%): 3期 3,355~3,417, 6期 1,686~1,740, 12期 851~903,
+ *      18期 573~624, 24期 434~485, 30期 350~402 -- annuityFactor() below reproduces all twelve cells (tests).
+ *  - 台新 https://www.taishinbank.com.tw/TSB/personal/common/legal-disclaimers/TSBankPublicDisclosure-000117/
+ *      (頁面日期 2022/05/25) 「約定利率本利均攤方式」, 3~30 期, 年利率 6.25%~15% 等於總費用年百分率, 無其他手續費;
+ *      提前清償作業費: 已入帳 1~5 期 300 元, 6~11 期 200 元, 12 期(含)以上免收.
+ *  - 星展 https://dbs.com.tw/iwov-resources/pdf/cards/SBI_TC_20250322.pdf
+ *      帳單輕鬆分: 當期帳單總金額扣除最低應繳金額後滿 NT$1,000; 年金法、以每一月為一期; 約定年利率 2.99%~14.99%, 範例費用總額 0 元,
+ *      年百分率等於分期利率; 溢繳款不會提前清償; 提前清償違約金: 未到期期數超過或等同申辦期數一半 300 元, 少於一半 150 元.
+ *
+ * What is NOT modelled (and said so on the page): the days between the statement date and the due date, the
+ * rounding rule of each issuer's schedule beyond "round to the dollar, last bill absorbs the difference", rate
+ * changes of a floating base rate, and the credit-limit effect.
+ */
+
+/**
+ * Bill installment from the numbers on one statement.
+ *   statementTotal   當期帳單應繳總額
+ *   minimumDue       當期最低應繳金額
+ *   paidNow          what the reader pays on this statement (>= minimumDue to be valid; default = minimumDue)
+ *   n, aprPct        instalments and the 帳單分期利率 printed on the bill (monthly rate = apr / 12, annuity)
+ *   minFinanceable   issuers' threshold on (statementTotal - minimumDue); 1,000 at 富邦 and 星展
+ *   revolvingAprPct  the 循環信用利率 on the bill, for the comparison "keep revolving and pay the same amount"
+ */
+export function evaluateBillInstallment({ statementTotal, minimumDue, paidNow, n, aprPct, minFinanceable = 1000, revolvingAprPct = 15 }) {
+  const total = Math.max(0, Math.round(safeNumber(statementTotal)));
+  const minimum = Math.min(total, Math.max(0, Math.round(safeNumber(minimumDue))));
+  const paid = Math.max(0, Math.round(safeNumber(paidNow, minimum)));
+  const financed = Math.max(0, total - paid);
+  const checks = {
+    paidAtLeastMinimum: paid >= minimum,
+    financeableEnough: total - minimum >= Math.max(0, safeNumber(minFinanceable)),
+    positive: financed > 0,
+  };
+  if (!checks.positive) return { total, minimum, paid, financed, checks, plan: null, revolving: null };
+  const plan = evaluatePlan({ listPrice: financed, n, aprPct, method: 'annuity' });
+  let revolving = null;
+  const rev = safeNumber(revolvingAprPct, -1);
+  if (rev >= 0) {
+    const sim = simulateRevolving({ principal: financed, aprPct: rev, mode: 'fixed', payment: plan.firstPayment });
+    revolving = sim.status === 'paidOff'
+      ? { status: 'paidOff', months: sim.months, totalInterest: sim.totalInterest, extraVsInstallment: sim.totalInterest - plan.totalInterest }
+      : { status: sim.status, months: null, totalInterest: null, extraVsInstallment: null };
+  }
+  return { total, minimum, paid, financed, checks, plan, revolving };
+}
+
+/**
+ * Pay off the whole remaining principal right after bill `k`. `fee` is the issuer's 提前清償違約金/作業費 that the reader types in.
+ * Returns the remaining principal, the interest still to come that settling avoids, and whether that beats the fee.
+ */
+export function billEarlySettlement({ financed, n, aprPct }, k, fee = 0) {
+  const plan = evaluatePlan({ listPrice: financed, n, aprPct, method: 'annuity' });
+  const kk = Math.round(safeNumber(k));
+  if (kk < 1 || kk >= plan.schedule.n) return null;
+  const rows = plan.schedule.rows;
+  const remaining = rows[kk - 1].balance;
+  const interestPaid = rows.slice(0, kk).reduce((sum, r) => sum + r.interest, 0);
+  const interestAvoided = rows.slice(kk).reduce((sum, r) => sum + r.interest, 0);
+  const charge = Math.max(0, safeNumber(fee));
+  return { k: kk, remaining, interestPaid, interestAvoided, fee: charge, netSaving: interestAvoided - charge, settleTotal: remaining + charge };
+}
+
+/**
+ * The early-settlement charge each of the three issuers announces (read 2026-10-17, sources in the header of this
+ * section), used only for the page's comparison table and worked examples -- the calculator takes whatever the
+ * reader types. `k` = bills already paid, `n` = instalments. Returns null where the announcement says nothing
+ * (富邦's table stops at the twelfth bill).
+ */
+export const ANNOUNCED_EARLY_FEES = {
+  fubon: (k, n) => (k < 1 || k >= n ? null : k === 1 ? 160 : k <= 5 ? 150 : k <= 11 ? 140 : null),
+  taishin: (k, n) => (k < 1 || k >= n ? null : k <= 5 ? 300 : k <= 11 ? 200 : 0),
+  dbs: (k, n) => (k < 1 || k >= n ? null : (n - k) * 2 >= n ? 300 : 150),
+};

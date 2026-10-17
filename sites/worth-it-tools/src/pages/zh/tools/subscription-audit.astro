@@ -175,7 +175,6 @@ const related = [
 </style>
 
   <script>
-    import { formatCurrency } from '../../../lib/money';
     import { getItem, setItem } from '../../../lib/storage';
     import { auditSubscriptions, monthlyEquivalent } from '../../../lib/twMembershipMath.mjs';
 
@@ -188,7 +187,8 @@ const related = [
       hours: number;
     }
 
-    const locale = 'zh';
+    const ntdFormat = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 1 });
+    const ntd = (n: number) => `NT$${ntdFormat.format(n)}`;
     const storageKey = 'subscription-audit:rows:zh';
     const rowsContainer = byId<HTMLElement>('subscription-rows');
     const addButton = byId<HTMLButtonElement>('add-row');
@@ -333,11 +333,11 @@ const related = [
         null,
       );
 
-      monthlyTotal.textContent = formatCurrency(monthly, locale);
-      yearlyTotal.textContent = formatCurrency(audit.yearly, locale);
-      fiveYearTotal.textContent = formatCurrency(audit.fiveYear, locale);
+      monthlyTotal.textContent = ntd(monthly);
+      yearlyTotal.textContent = ntd(audit.yearly);
+      fiveYearTotal.textContent = ntd(audit.fiveYear);
       largestSubscription.textContent = largest && largest.monthly > 0
-        ? `${largest.row.name || '未命名'} (${formatCurrency(largest.monthly, locale)}/月)`
+        ? `${largest.row.name || '未命名'} (${ntd(largest.monthly)}/月)`
         : '無';
 
       breakdown.textContent = '';
@@ -345,16 +345,16 @@ const related = [
         .filter((item) => item.row.hours > 0 && item.monthly > 0)
         .forEach((item) => {
           const li = document.createElement('li');
-          li.textContent = `${item.row.name || '未命名'} 每使用 1 小時約 ${formatCurrency(item.monthly / item.row.hours, locale)}。`;
+          li.textContent = `${item.row.name || '未命名'} 每使用 1 小時約 ${ntd(item.monthly / item.row.hours)}。`;
           breakdown.append(li);
         });
 
       if (monthly <= 0) {
         verdict.textContent = '新增訂閱後會顯示總成本。';
       } else if (largest && largest.monthly >= monthly * 0.35) {
-        verdict.textContent = `先檢查 ${largest.row.name || '最貴訂閱'}：它每月 ${formatCurrency(largest.monthly, locale)}，佔訂閱支出很大一部分。`;
+        verdict.textContent = `先檢查 ${largest.row.name || '最貴訂閱'}：它每月 ${ntd(largest.monthly)}，佔訂閱支出很大一部分。`;
       } else {
-        verdict.textContent = `目前訂閱每月約 ${formatCurrency(monthly, locale)}，一年約 ${formatCurrency(monthly * 12, locale)}。`;
+        verdict.textContent = `目前訂閱每月約 ${ntd(monthly)}，一年約 ${ntd(monthly * 12)}。`;
       }
     }
 

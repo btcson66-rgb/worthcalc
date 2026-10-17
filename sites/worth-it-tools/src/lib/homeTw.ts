@@ -66,7 +66,7 @@ export const homeTw = {
         {
           href: '/zh/tools/installment-true-apr/',
           title: '信用卡分期試算：零利率陷阱',
-          blurb: '把分期手續費與放棄的現金價折扣，換算成總費用年百分率。',
+          blurb: '把分期手續費與放棄的現金價折扣換算成總費用年百分率；也能試算帳單分期。',
           kind: 'calculator',
         },
         {

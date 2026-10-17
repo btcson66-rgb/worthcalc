@@ -46,5 +46,9 @@
   "p2Batch6": {
     "on": "2026-10-17",
     "note": "P2 batch 6 (work order 2026-10-17-P2-batch6), savings-goal cluster: /zh/guides/real-vs-nominal-return/, /zh/guides/inflation-adjusted-savings-goal/, /zh/guides/cost-of-delaying-savings-goal/ and /zh/guides/effective-interest-rate-explained/ merged into /zh/tools/compound-growth/ as redirect stubs (the English mirrors of the first and third stub to the English tool). All four were already noindex and outside the sitemap (soft-deindexed 2026-10-15), so the sitemap count is unchanged: 86 -> 86 (0 pages added, 0 pages leave the sitemap). maxUrls unchanged at 160."
+  },
+  "p2Batch7": {
+    "on": "2026-10-17",
+    "note": "P2 batch 7 (work order 2026-10-17-P2-batch7): /zh/tools/, /zh/guides/ and /zh/money/ rewritten as scenario-grouped entrance pages with a division of labour (each content page is listed in exactly one of them; see src/lib/directoryTw.ts and scripts/check-directory-tw.mjs). No page is merged into another: after the split the three lists no longer overlap, so none of them becomes a redirect stub. Sitemap 86 -> 86 (0 pages added, 0 merged away). maxUrls unchanged at 160."
   }
 }

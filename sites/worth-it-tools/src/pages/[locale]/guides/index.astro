@@ -2,6 +2,9 @@
 /*
  * The guide directory.
  *
+ * zh renders from src/lib/directoryTw.ts (P2 batch 7, 2026-10-17); the generic topic
+ * listing below is what en still uses (en is built but noindex).
+ *
  * The homepage used to render `guideIndex[locale]` in full — 251 links on
  * English, 296 on Chinese — because that index was the only inbound link 131
  * editorial pages had. Those links live here now, so the homepage can stop
@@ -14,6 +17,7 @@ import { localizedCorePath, localizedPath, useTranslations } from '../../../i18n
 import { getGuides, getGuidesByTopic } from '../../../lib/catalog';
 import { TOPIC_IDS, topicCopy, topicPath, hasHubPages } from '../../../lib/topics';
 import { breadcrumbJsonLd } from '../../../lib/seo';
+import DirectoryTw from '../../../components/DirectoryTw.astro';
 
 export function getStaticPaths() {
   return CORE_LOCALES.map((locale) => ({ params: { locale } }));
@@ -49,6 +53,9 @@ const crumbs = [
 const populated = TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0);
 ---
 
+{locale === 'zh' ? (
+  <DirectoryTw role="guide" />
+) : (
 <BaseLayout
   title={copy.title}
   description={copy.description}
@@ -84,3 +91,4 @@ const populated = TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length 
     </section>
   ))}
 </BaseLayout>
+)}

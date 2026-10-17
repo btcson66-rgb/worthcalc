@@ -1,0 +1,303 @@
+---
+/*
+ * One of the three Traditional Chinese (Taiwan) directory pages: /zh/tools/, /zh/guides/
+ * or /zh/money/ (P2 batch 7, 2026-10-17).
+ *
+ * All three render from src/lib/directoryTw.ts, so a page appears in exactly one of
+ * them and they group by the same scenarios. The data file explains the division of
+ * labour; scripts/check-directory-tw.mjs enforces it against the built site.
+ *
+ * Two pieces of this page come from elsewhere on purpose:
+ *   - /zh/money/ shows each brief's check date from the content collection, not from
+ *     the data file, so the date on the directory is the date on the page.
+ *   - /zh/guides/ ends with the older articles that are built but noindex (soft
+ *     de-indexed 2026-09-15 or earlier). They have no other inbound link and
+ *     scripts/check-guide-index.mjs fails any built editorial page with none.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import { localizedCorePath, localizedPath } from '../i18n/utils';
+import { getGuides } from '../lib/catalog';
+import { breadcrumbJsonLd } from '../lib/seo';
+import { isPublished, publishCutoff } from '../lib/publication';
+import { topicCopy, TOPIC_IDS, type TopicId } from '../lib/topics';
+import {
+  directoryEntries,
+  directoryGroups,
+  entriesByRole,
+  roleMeta,
+  type DirectoryEntry,
+  type DirectoryRole,
+} from '../lib/directoryTw';
+
+interface Props {
+  role: DirectoryRole;
+}
+
+const { role } = Astro.props;
+const locale = 'zh';
+const origin = (Astro.site?.origin ?? 'https://worthcalc.win').replace(/\/$/, '');
+
+const page = {
+  tool: {
+    title: '台灣金錢計算機總覽：信用卡、房貸、勞退、通勤',
+    description:
+      '輸入自己的數字就能算：信用卡分期與循環利息、房貸與轉貸、勞退與勞保年金、通勤與購車成本、會員與訂閱回本、緊急預備金。依情境分組，每個都標明它回答什麼問題。',
+    h1: '全部計算機',
+    lead: '這一頁只列「打開就是輸入框」的頁面：你填自己的帳單、薪資或貸款，立刻算出結果。每一項下面寫的是它能回答的問題；查核日期與官方來源都在各頁底部。',
+  },
+  guide: {
+    title: '金錢決策指南總覽：信用卡、房貸、通勤、薪資怎麼比',
+    description:
+      '兩個選項怎麼比、哪些數字會改變答案：信用卡年費與分期、租屋或買房、買車、通勤、訂閱與會員、薪資與通膨。依情境分組，每篇都標明它回答什麼問題。',
+    h1: '全部指南',
+    lead: '這一頁列「先弄懂怎麼比較」的文章：兩個選項的差在哪、哪些數字會翻轉結論、常見的算錯方式。想直接輸入自己的數字，請到計算機索引；想查現行的規則與費率，請到金錢速查。',
+  },
+  reference: {
+    title: '金錢速查：台灣現行費率、稅制與補助',
+    description:
+      '台灣現行的電價、稅率、補助、保費與利率規定，每頁開頭是官方出處的數字與查核日期，接著是把數字變成決定的算式。依情境分組，每頁都標明它回答什麼問題。',
+    h1: '金錢速查',
+    lead: '這一頁列「查現行規則」的短文：電價級距、房屋稅率、補助金額、健保與年金保費。每篇都以官方出處的數字和查核日期開頭；數字會變，所以日期標在每一項旁邊。',
+  },
+}[role];
+
+const crumbs = [
+  { name: '首頁', url: localizedCorePath(locale, '/') },
+  { name: page.h1, url: roleMeta[role].dir },
+];
+
+const entries = entriesByRole(role);
+const populated = directoryGroups.filter((group) => entries.some((entry) => entry.group === group.id));
+
+// Brief check dates, read from the collection so the directory cannot disagree with the page.
+const checked = new Map<string, string>();
+if (role === 'reference') {
+  const cutoff = publishCutoff();
+  const briefs = (await getCollection('moneyBriefs', ({ data }) => !data.draft)).filter(
+    (entry) => entry.data.locale === locale && isPublished(entry.data.publishAt, cutoff),
+  );
+  for (const entry of briefs) checked.set(`/zh/money/${entry.data.briefSlug}/`, entry.data.lastReviewed.toISOString().slice(0, 10));
+}
+
+// The briefs that live under /money/ but open with a calculator are listed in /tools/.
+const toolsUnderMoney = directoryEntries.filter((entry) => entry.role === 'tool' && entry.href.startsWith('/zh/money/'));
+
+// Older articles: built, noindex, and listed nowhere else. Grouped by the original six topics.
+const listed = new Set(directoryEntries.map((entry) => entry.href));
+const legacy: { topic: TopicId; items: { path: string; title: string }[] }[] = [];
+if (role === 'guide') {
+  const byTopic = new Map<TopicId, { path: string; title: string }[]>();
+  for (const guide of getGuides(locale)) {
+    if (listed.has(localizedPath(locale, guide.path))) continue;
+    const bucket = byTopic.get(guide.topic) ?? [];
+    bucket.push({ path: guide.path, title: guide.title });
+    byTopic.set(guide.topic, bucket);
+  }
+  for (const topic of TOPIC_IDS) {
+    const items = byTopic.get(topic);
+    if (items?.length) legacy.push({ topic, items: items.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hant')) });
+  }
+}
+const legacyCount = legacy.reduce((sum, group) => sum + group.items.length, 0);
+
+const abs = (href: string) => `${origin}${href}`;
+const jsonLd = [
+  breadcrumbJsonLd(crumbs, Astro.site),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: page.h1,
+    description: page.description,
+    url: abs(roleMeta[role].dir),
+    inLanguage: 'zh-TW',
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: entries.length,
+      itemListElement: entries.map((entry: DirectoryEntry, index: number) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: entry.title,
+        url: abs(entry.href),
+      })),
+    },
+  },
+];
+
+const roles: DirectoryRole[] = ['tool', 'guide', 'reference'];
+const countOf = (r: DirectoryRole) => entriesByRole(r).length;
+---
+
+<BaseLayout title={page.title} description={page.description} locale={locale} jsonLd={jsonLd}>
+  <Breadcrumb items={crumbs} includeJsonLd={false} />
+
+  <section class="directory-intro">
+    <h1>{page.h1}</h1>
+    <p class="section-lead">{page.lead}</p>
+
+    <nav class="dir-roles" aria-label="三份索引的分工">
+      <ul>
+        {roles.map((r) => (
+          <li class:list={[{ 'is-current': r === role }]}>
+            {r === role ? (
+              <strong aria-current="page">{roleMeta[r].name}（{countOf(r)} 頁）</strong>
+            ) : (
+              <a href={roleMeta[r].dir}>{roleMeta[r].name}（{countOf(r)} 頁）</a>
+            )}
+            <span>{roleMeta[r].job}</span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <p class="dir-rule">每一頁只列在其中一份索引：打開就是輸入框的列在計算機，說明與比較列在指南，現行規則與補助列在金錢速查。三份索引用同一組情境分類，可以在同一個情境之間來回跳。</p>
+
+    <nav class="directory-jump" aria-label="依情境跳到">
+      <ul>
+        {populated.map((group) => <li><a href={`#${group.id}`}>{group.heading}</a></li>)}
+      </ul>
+    </nav>
+  </section>
+
+  {populated.map((group) => {
+    const here = entries.filter((entry) => entry.group === group.id);
+    const others = roles
+      .filter((r) => r !== role)
+      .filter((r) => entriesByRole(r).some((entry) => entry.group === group.id));
+    return (
+      <section class="directory-topic" id={group.id} aria-labelledby={`dir-${group.id}`}>
+        <h2 id={`dir-${group.id}`}>{group.heading}</h2>
+        <p class="section-lead">{group.lead}</p>
+        <ul class="dir-list">
+          {here.map((entry) => (
+            <li>
+              <a href={entry.href}>{entry.title}</a>
+              <p class="dir-ask">{entry.ask}</p>
+              {role === 'reference' && checked.get(entry.href) && (
+                <p class="dir-meta">
+                  查核於 <time datetime={checked.get(entry.href)}>{checked.get(entry.href)}</time>
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+        {others.length > 0 && (
+          <p class="directory-topic__more">
+            同一情境還有：
+            {others.map((r) => <a href={`${roleMeta[r].dir}#${group.id}`}>{roleMeta[r].short}索引</a>)}
+          </p>
+        )}
+      </section>
+    );
+  })}
+
+  {role === 'reference' && toolsUnderMoney.length > 0 && (
+    <section class="directory-topic" aria-labelledby="dir-calc-under-money">
+      <h2 id="dir-calc-under-money">網址在 /money/ 下的計算機</h2>
+      <p class="section-lead">下面幾頁的網址雖然在 /money/ 底下，但打開就是輸入框，所以列在計算機索引。</p>
+      <ul class="dir-list">
+        {toolsUnderMoney.map((entry) => (
+          <li>
+            <a href={entry.href}>{entry.title}</a>
+            <p class="dir-ask">{entry.ask}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {role === 'guide' && legacy.length > 0 && (
+    <section class="directory-topic" aria-labelledby="dir-legacy">
+      <h2 id="dir-legacy">較舊的延伸文章（不收錄於搜尋結果）</h2>
+      <p class="section-lead">
+        {legacyCount} 篇早期文章仍保留在站上，但尚未依台灣的法規與官方公告重新查核，所以不列入上面的分類，也不送進搜尋引擎。請把其中的數字與規則當成思考框架，不要當成台灣現行規定。
+      </p>
+      <details class="dir-legacy">
+        <summary>展開 {legacyCount} 篇</summary>
+        {legacy.map((group) => (
+          <div id={group.topic}>
+            <h3>{topicCopy.zh[group.topic].name}</h3>
+            <ul class="directory-list">
+              {group.items.map((item) => (
+                <li><a href={localizedPath(locale, item.path)}>{item.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </details>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .dir-roles ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dir-roles li {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .dir-roles li.is-current {
+    border-color: var(--brand);
+  }
+  .dir-roles a,
+  .dir-roles strong {
+    font-weight: 700;
+  }
+  .dir-roles span {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .dir-rule {
+    margin: 0.9rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .dir-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 0.9rem 1.5rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dir-list li {
+    padding: 0.6rem 0 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .dir-list a {
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .dir-ask {
+    margin: 0.25rem 0 0;
+    line-height: 1.55;
+  }
+  .dir-meta {
+    margin: 0.2rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+  .dir-legacy {
+    margin-top: 0.75rem;
+  }
+  .dir-legacy summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .dir-legacy h3 {
+    margin: 1.25rem 0 0;
+    font-size: 1.05rem;
+  }
+</style>

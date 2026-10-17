@@ -133,9 +133,12 @@ export function topicPath(topic: TopicId): string {
  * cannot survive being passed back through localizedPath().
  */
 export function topicHref(locale: CoreLocale, topic: TopicId): string {
-  return hasHubPages(locale)
-    ? localizedPath(locale, topicPath(topic))
-    : `${localizedPath(locale, '/tools')}#${topic}`;
+  if (hasHubPages(locale)) return localizedPath(locale, topicPath(topic));
+  // zh (P2 batch 7): the scenario groups replaced the six topic sections of /zh/tools/. The
+  // only pages still classified by topic are the older noindex articles, which /zh/guides/
+  // lists by topic at the foot of the page.
+  if (locale === 'zh') return `${localizedPath(locale, '/guides')}#${topic}`;
+  return `${localizedPath(locale, '/tools')}#${topic}`;
 }
 
 /*

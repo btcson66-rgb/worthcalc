@@ -2,6 +2,10 @@
 /*
  * The calculator directory.
  *
+ * zh renders from src/lib/directoryTw.ts (P2 batch 7, 2026-10-17): scenario groups, one
+ * sentence per page, and a division of labour with /guides/ and /money/. The generic
+ * topic-based listing below is what en still uses (en is built but noindex).
+ *
  * Every calculator used to be listed on the homepage, which is how the English
  * homepage ended up carrying 304 internal links and reading as a sitemap. The
  * complete catalogue lives here now, grouped by topic; the homepage keeps a
@@ -14,6 +18,7 @@ import { localizedCorePath, localizedPath, useTranslations } from '../../../i18n
 import { getCalculators, getCalculatorsByTopic } from '../../../lib/catalog';
 import { TOPIC_IDS, topicCopy, topicPath, hasHubPages } from '../../../lib/topics';
 import { breadcrumbJsonLd } from '../../../lib/seo';
+import DirectoryTw from '../../../components/DirectoryTw.astro';
 
 export function getStaticPaths() {
   return CORE_LOCALES.map((locale) => ({ params: { locale } }));
@@ -46,6 +51,9 @@ const crumbs = [
 ];
 ---
 
+{locale === 'zh' ? (
+  <DirectoryTw role="tool" />
+) : (
 <BaseLayout
   title={copy.title}
   description={copy.description}
@@ -75,19 +83,9 @@ const crumbs = [
   <section class="directory-intro">
     <h1>{copy.title}</h1>
     <p class="section-lead">{copy.lead}</p>
-    {locale === 'zh' && (
-      <p>
-        如果你正在評估房貸或負債壓力，可先看<a href={localizedPath(locale, '/tools/dti-calculator')}>負債收入比（DTI）計算機</a>，再用<a href={localizedPath(locale, '/tools/home-affordability')}>買房負擔能力計算機</a>把收入、月付與住房預算放在同一個決策脈絡裡。
-      </p>
-    )}
     {locale === 'en' && (
       <p>
         For an electricity-use estimate, try the new <a href="/en/tools/appliance-running-cost/">appliance running-cost calculator</a> with an editable wattage, hours, rate, and source-backed appliance list.
-      </p>
-    )}
-    {locale === 'zh' && (
-      <p>
-        想估算家電電費，可直接使用新的<a href="/zh/tools/appliance-electricity-cost/">家電電費計算機</a>；瓦數、時數與每度電價都能改，並附上有來源的完整清單。
       </p>
     )}
   </section>
@@ -113,3 +111,4 @@ const crumbs = [
     </section>
   ))}
 </BaseLayout>
+)}

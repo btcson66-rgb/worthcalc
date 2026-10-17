@@ -16,6 +16,7 @@ import { getCollection } from 'astro:content';
 import type { ContentLocale, CoreLocale } from '../../../consts';
 import { localizedCorePath, useTranslations } from '../../../i18n/utils';
 import { breadcrumbJsonLd } from '../../../lib/seo';
+import DirectoryTw from '../../../components/DirectoryTw.astro';
 import { isPublished, publishCutoff } from '../../../lib/publication';
 import { BRIEF_CLUSTERS, BRIEF_LOCALES, briefCopy, moneyHubPath } from '../../../lib/moneyBriefs';
 
@@ -55,6 +56,9 @@ const hubPath = moneyHubPath(locale);
 const isoDay = (value: Date) => value.toISOString().slice(0, 10);
 ---
 
+{locale === 'zh' ? (
+  <DirectoryTw role="reference" />
+) : (
 <BaseLayout
   title={copy.hubTitle}
   description={copy.hubDescription}
@@ -101,6 +105,7 @@ const isoDay = (value: Date) => value.toISOString().slice(0, 10);
     </section>
   ))}
 </BaseLayout>
+)}
 
 <style>
   .brief-list {

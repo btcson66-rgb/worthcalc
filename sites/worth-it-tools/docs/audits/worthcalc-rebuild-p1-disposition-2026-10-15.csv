@@ -1,5 +1,5 @@
 url,type,title,taiwan_specific,has_official_source,source_examples,last_checked_date,gsc_impressions_28d,proposed_action,reason
-https://worthcalc.win/,hub,台灣人的金錢決策計算機,yes,no,,,4,keep,新繁中首頁（台灣人的金錢決策計算機）：只連到本表標為 keep 的頁面，依五個情境分組；曝光數是改版前英文首頁的數字。
+https://worthcalc.win/,hub,台灣人的金錢決策計算機,yes,no,,,4,keep,新繁中首頁（台灣人的金錢決策計算機）：只連到本表標為 keep 的頁面，依七個情境分組（P2 第 7 批新增「儲蓄與緊急預備金」「薪資與稅」）；曝光數是改版前英文首頁的數字。
 https://worthcalc.win/zh/about/,legal,關於 WorthCalc 與作者 Benson Lai,partial,no,,2026-10-15,,keep,本次改寫為作者頁（Benson Lai、查核方法、更新與勘誤政策、回報管道），只寫可查證事實；所有計算機與文章頁的署名連到這裡。
 https://worthcalc.win/zh/annual-fee-card-breakeven/,article,信用卡年費要刷多少才回本？用增量回饋算真正門檻,yes,yes,law.fsc.gov.tw,2026-07-18,1,keep,金管會信用卡契約規範與費用揭露規範，NT$ 算例與增量回饋公式，2026-07-18 查核。
 https://worthcalc.win/zh/annual-vs-monthly-billing/,article,年繳還是月繳？訂閱折扣的損益兩平算法,no,no,,2026-07-20,,merge_into:https://worthcalc.win/zh/monthly-vs-annual-subscription/,沒有來源與台灣內容；與 /zh/monthly-vs-annual-subscription/ 意圖重複（年繳 vs 月繳的損益兩平）。

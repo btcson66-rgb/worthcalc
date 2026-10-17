@@ -115,11 +115,11 @@ export const upfrontFeeGuides: Partial<Record<Locale, DecisionGuideContent>> = {
     cta: { label: '輸入實拿金額與期款，反推自己的估算年率', href: '/zh/tools/installment-true-apr/' },
     limitations: ['這是現金流教育估算，不取代銀行依法揭露的總費用年百分率。正式口徑對納入費用、付款日期、基準日與變動條件有明確規則。', '費用只能計一次：若銀行從撥款扣除，就降低實際可用資金；若全額撥款後在同日另付，則記為同日現金流出，不要兩邊都扣。', '利率調整、寬限期、提前清償、綁約、保證人或擔保品等條件也會改變風險；月付負擔能力仍需單獨檢查。'],
     sources: [
-      { label: '金管會 — 消費者信用貸款手續費應合理、公開、透明', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001273' },
-      { label: '金管會 — 消費者信用交易總費用與年百分率計算標準', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL036733' },
-      { label: '中華民國銀行公會 — 銀行消費者信用貸款手續費彙整', href: 'https://www.ba.org.tw/upload/ConsumerCredit/fe7dfcc4-fd5c-48cb-bb3f-bfc16c6b0abe/%E9%8A%80%E8%A1%8C%E4%BF%A1%E7%94%A8%E8%B2%B8%E6%AC%BE%E6%89%8B%E7%BA%8C%E8%B2%BB%E5%BD%99%E6%95%B4%E8%A1%A8.pdf' },
+      { label: '金管會 — 金融機構辦理消費者信用貸款收取相關手續費，應合理、公開、透明（103-08-05 金管銀合字第 10330002771 號函）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=GL001273' },
+      { label: '金管會 — 銀行業暨保險業辦理消費者信用交易廣告應揭示總費用範圍及年百分率計算方式標準（94-08-15 金管銀（三）字第 0943000999 號；第 7、8 條）', href: 'https://law.fsc.gov.tw/LawContent.aspx?id=FL036733' },
+      { label: '中華民國銀行公會 — 銀行消費者信用貸款手續費彙整表（每季更新；本頁查看的版本資料日期 115-06-30，2026-07-31 公告；在「消費者資訊 → 一般金融訊息」下載）', href: 'https://www.ba.org.tw/consumerGeneral/index' },
     ],
-    lastVerified: '2026-07-18',
+    lastVerified: '2026-10-17',
   },
 };
 

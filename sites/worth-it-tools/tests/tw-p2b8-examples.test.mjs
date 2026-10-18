@@ -10,6 +10,7 @@ import {
   calculateHomeAffordability,
 } from '../.growth-test-dist/index.js';
 import { ZH_GROWTH_DEFAULTS } from '../src/data/twGrowthDefaults.mjs';
+import { calculateTwDebtRatios } from '../src/lib/twDbrMath.mjs';
 
 test('hourly-vs-annual-salary: 時薪 220 × 40 小時 × 52 週 = 457,600', () => {
   const r = calculateSalaryConversion({ hourlyRate: 220, hoursPerWeek: 40, paidWeeksPerYear: 52, salaryPaymentsPerYear: 12 });
@@ -18,9 +19,14 @@ test('hourly-vs-annual-salary: 時薪 220 × 40 小時 × 52 週 = 457,600', () 
 });
 
 test('dti-calculator / how-to-calculate-dti: 月收入 80,000、房貸月付 26,000、信貸月付 12,000、無擔保餘額 480,000', () => {
+  // P2 batch 10: the zh page now runs src/lib/twDbrMath.mjs; the shared calculateDti still serves the en page.
   const r = calculateDti({ grossMonthlyIncome: 80000, housingPayment: 26000, debts: [{ id: 'loan', name: '信貸', monthlyPayment: 12000 }] });
   assert.equal(r.frontEndPercent, 32.5);
   assert.equal(r.backEndPercent, 47.5);
+  const tw = calculateTwDebtRatios({ monthlyIncome: 80000, cardBalance: 80000, creditLoanBalance: 400000, mortgagePayment: 26000, otherMonthlyPayments: 12000 });
+  assert.equal(tw.dbr, 6);
+  assert.equal(tw.mortgageRatio * 100, 32.5);
+  assert.equal(tw.totalPaymentRatio * 100, 47.5);
   assert.equal(400000 + 80000, 480000);
   assert.equal(480000 / 80000, 6); // DBR, a plain division
   assert.ok(r.frontEndPercent < 100 / 3 && r.frontEndPercent > 20, '32.5% sits between 1/3 and 1/5 (金融健檢 黃燈)');

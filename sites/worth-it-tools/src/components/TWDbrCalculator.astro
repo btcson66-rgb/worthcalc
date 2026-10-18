@@ -1,0 +1,140 @@
+---
+/*
+ * 負債比 DBR 與房貸收支比 (P2 batch 10, 2026-10-18), zh only.
+ *
+ * Replaces the US front-end / back-end DTI calculator on /zh/tools/dti-calculator/. The arithmetic is in
+ * src/lib/twDbrMath.mjs (tests/tw-dbr-math.test.mjs asserts every number the page prints). The defaults are the
+ * page's 算例二. The only built-in reference lines are the 金管會金融智慧網 ones (22 倍, 1/3, 1/5); a bank's own
+ * 收支比 ceiling is never supplied, only typed in by the reader.
+ */
+---
+
+<section class="calc" data-tw-dbr data-growth-calculator aria-labelledby="dbr-heading">
+  <header>
+    <h2 id="dbr-heading">兩個比率分開算：無擔保負債 DBR、房貸月付占收入</h2>
+    <p>輸入你的月收入、無擔保負債的未還餘額與房貸月付，對照金管會金融智慧網的 22 倍、1/3、1/5 參考線。預設值就是下方的算例二。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>平均月收入（元，稅前）</span><input id="dbr-income" type="number" inputmode="numeric" min="0" step="1000" value="80000" /></label>
+      <label><span>信用卡未還餘額（元，不是信用額度）</span><input id="dbr-card" type="number" inputmode="numeric" min="0" step="1000" value="80000" /></label>
+      <label><span>現金卡動用餘額（元）</span><input id="dbr-cashcard" type="number" inputmode="numeric" min="0" step="1000" value="0" /></label>
+      <label><span>信用貸款餘額（元）</span><input id="dbr-loan" type="number" inputmode="numeric" min="0" step="10000" value="400000" /></label>
+      <label class="is-wide"><span>房貸月付（元，本金加利息；有寬限期請填寬限期結束後的月付）</span><input id="dbr-mortgage" type="number" inputmode="numeric" min="0" step="1000" value="26000" /></label>
+
+      <details class="is-wide dbr-advanced">
+        <summary>選填：其他債務月付、承貸銀行告訴你的上限</summary>
+        <div class="dbr-advanced__grid">
+          <label><span>其他債務月付（元，信貸、車貸、卡分期等）</span><input id="dbr-other" type="number" inputmode="numeric" min="0" step="1000" value="12000" /></label>
+          <label><span>承貸銀行告訴你的月付占收入上限（%，不知道就留空）</span><input id="dbr-bank" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="本頁不預設任何銀行的數字" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide dbr-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        22 倍是金管會對銀行無擔保債務總餘額的要求；1/3、1/5 是金管會金融智慧網金融健檢對房貸月付的燈號，不是核貸門檻。銀行另算的收支比官方只寫「一定比例」、沒有公布數字，各銀行標準不同。參考線皆於 2026-10-18 查核。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="dbr-status" id="dbr-status">—</p>
+      <dl>
+        <div><dt>無擔保負債總餘額</dt><dd id="dbr-total">—</dd></div>
+        <div><dt>DBR（總餘額 ÷ 月收入）</dt><dd id="dbr-dbr">—</dd></div>
+        <div><dt>22 倍額度的剩餘空間</dt><dd id="dbr-room">—</dd></div>
+        <div><dt>房貸月付占收入</dt><dd id="dbr-ratio">—</dd></div>
+        <div><dt>房貸月付距 1/3 線</dt><dd id="dbr-third">—</dd></div>
+        <div><dt>房貸月付距 1/5 線</dt><dd id="dbr-fifth">—</dd></div>
+        <div id="dbr-all-row" hidden><dt>含其他債務月付後占收入（參考，無官方燈號）</dt><dd id="dbr-all">—</dd></div>
+        <div id="dbr-bank-row" hidden><dt>距你填的銀行上限</dt><dd id="dbr-bank-gap">—</dd></div>
+      </dl>
+      <p class="dbr-note"><strong>試算結果僅供參考，以銀行的實際審核為準。</strong>DBR 與房貸月付占收入是兩條不同的線，不要加總。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculateTwDebtRatios } from '../lib/twDbrMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-dbr]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['dbr-income', 'dbr-card', 'dbr-cashcard', 'dbr-loan', 'dbr-mortgage', 'dbr-other', 'dbr-bank'];
+    const inputs = ids.map((id) => el<HTMLInputElement>(id));
+    const raw = (id: string) => el<HTMLInputElement>(id).value.trim();
+    const val = (id: string) => (raw(id) === '' ? 0 : Number(raw(id)));
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const dash = '—';
+    const out = ['dbr-total', 'dbr-dbr', 'dbr-room', 'dbr-ratio', 'dbr-third', 'dbr-fifth'];
+    const dbrText: Record<string, string> = { red: '紅燈：超過 22 倍', yellow: '黃燈：1 到 22 倍之間', green: '綠燈：小於 1 倍' };
+    const ratioText: Record<string, string> = { red: '紅燈：超過 1/3', yellow: '黃燈：在 1/5 到 1/3 之間', green: '綠燈：小於 1/5' };
+    const room = (n: number, what: string) => (n >= 0 ? `還有 ${money(n)}的空間` : `已超出 ${money(-n)}`) + what;
+
+    const render = () => {
+      out.forEach((id) => { el(id).textContent = dash; });
+      el('dbr-all-row').hidden = true;
+      el('dbr-bank-row').hidden = true;
+      let r;
+      try {
+        r = calculateTwDebtRatios({
+          monthlyIncome: val('dbr-income'),
+          cardBalance: val('dbr-card'),
+          cashCardBalance: val('dbr-cashcard'),
+          creditLoanBalance: val('dbr-loan'),
+          mortgagePayment: val('dbr-mortgage'),
+          otherMonthlyPayments: val('dbr-other'),
+          bankLimitPercent: raw('dbr-bank') === '' ? null : val('dbr-bank'),
+        });
+      } catch {
+        el('dbr-status').textContent = '請輸入大於 0 的月收入，其餘欄位請填 0 或正數。';
+        return;
+      }
+      el('dbr-status').textContent = `DBR ${r.dbr.toFixed(2)} 倍（${dbrText[r.dbrLight]}）；房貸月付占收入 ${(r.mortgageRatio * 100).toFixed(1)}%（${ratioText[r.mortgageLight]}）。`;
+      el('dbr-total').textContent = money(r.unsecuredTotal);
+      el('dbr-dbr').textContent = `${r.dbr.toFixed(2)} 倍，${dbrText[r.dbrLight]}`;
+      el('dbr-room').textContent = room(r.dbrRoom, `（22 倍額度 ${money(r.dbrCeiling)}）`);
+      el('dbr-ratio').textContent = `${(r.mortgageRatio * 100).toFixed(1)}%，${ratioText[r.mortgageLight]}`;
+      el('dbr-third').textContent = room(r.toThird, '');
+      el('dbr-fifth').textContent = room(r.toFifth, '');
+      if (val('dbr-other') > 0) {
+        el('dbr-all-row').hidden = false;
+        el('dbr-all').textContent = `${(r.totalPaymentRatio * 100).toFixed(1)}%（月付合計 ${money(r.totalPayments)}）`;
+      }
+      if (r.bankGapPoints !== null) {
+        el('dbr-bank-row').hidden = false;
+        el('dbr-bank-gap').textContent = r.bankGapPoints >= 0 ? `低於你填的上限 ${r.bankGapPoints.toFixed(1)} 個百分點` : `高於你填的上限 ${(-r.bankGapPoints).toFixed(1)} 個百分點`;
+      }
+    };
+
+    const example: Record<string, string> = { 'dbr-income': '80000', 'dbr-card': '80000', 'dbr-cashcard': '0', 'dbr-loan': '400000', 'dbr-mortgage': '26000', 'dbr-other': '12000', 'dbr-bank': '' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden] { display: none !important; }
+  .dbr-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .dbr-status { margin: 0; font-weight: 750; }
+  .dbr-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .dbr-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .dbr-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

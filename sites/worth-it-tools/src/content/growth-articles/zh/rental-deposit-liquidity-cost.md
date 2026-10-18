@@ -184,11 +184,6 @@ breadcrumbLabel: "租屋押金要準備多少現金？把資金占用、搬家�
 ### 房東扣押金怎麼辦？
 本頁不是法律意見。應依租賃契約、實際債務與住宅租賃規定處理，有爭議可使用消保或法律諮詢管道。
 
-## 延伸閱讀與工具
-
-- [租金上漲 vs 搬家回本](https://worthcalc.win/zh/guides/rent-increase-vs-moving-break-even/)
-
-
 ## 資料來源
 
 - 行政院消費者保護處，租屋押金最多可收多少：https://www.ey.gov.tw/Page/DFB720D019CCCB0A/478917df-7599-418f-8715-fd2716b623b4

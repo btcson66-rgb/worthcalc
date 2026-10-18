@@ -91,5 +91,3 @@ sources:
 ### 什麼時候該重新試算？
 
 貸款利率變動、保險續保費率調整、油電價格明顯波動，或考慮換車型（燃油轉電動）前，都應該重新試算。
-
-- [換車前 多繳本金 還是留現金](/zh/guides/extra-principal-before-car-trade-vs-cash/)

@@ -160,15 +160,9 @@ const OVERRIDES: Record<string, TopicId> = {
   'costco-gas-detour-break-even': 'memberships',
   'mortgage-points-break-even': 'housing',
   'true-cost-of-home-service-plan': 'housing',
-  'prepay-rent-discount-vs-liquidity': 'housing',
   'cash-vs-financing-car-liquidity': 'transportation',
-  'trade-in-vs-private-sale-net-proceeds': 'transportation',
-  'auto-loan-negative-equity-rollover-cost': 'transportation',
   'annual-vs-monthly-insurance-payment': 'everyday',
   'high-vs-low-insurance-deductible-break-even': 'everyday',
-  'insurance-deductible-cash-reserve': 'income-savings',
-  'ai-tool-realized-time-savings-break-even': 'memberships',
-  'training-certification-break-even': 'income-savings',
   'freelance-minimum-billable-rate': 'income-savings',
 };
 

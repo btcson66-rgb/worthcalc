@@ -33,8 +33,8 @@ for (const locale of ['en', 'zh']) {
 }
 
 // P2 batch 6 (2026-10-17): six package guides were merged into the compound-growth tool (redirect stubs): 120 -> 114.
-// P2 batch 9 (2026-10-18): the old noindex pages were stubbed or retired in several commits (leak pages -10, stubs -39): 114 -> 65.
-if (guides.length !== 65) failures.push(`expected 65 package guides, found ${guides.length}`);
+// P2 batch 9 (2026-10-18): the old noindex pages were stubbed or retired in several commits (leak pages -10, stubs -39, zh/en retires -41): 114 -> 24.
+if (guides.length !== 24) failures.push(`expected 24 package guides, found ${guides.length}`);
 
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
 if (!sitemap) failures.push('dist/sitemap-0.xml is missing');

@@ -275,10 +275,6 @@ Use the catch-up formula with months remaining, not annual amount divided by twe
 ### Are sinking funds and emergency funds the same?
 No. Sinking funds cover expected categories; emergency funds cover genuine shocks. They can sit in the same bank account if you track them separately.
 
-Normalize recurring bills first, then compare the true monthly housing-cost difference against the one-time moving cost.
-
-[net monthly savings after moving](/en/guides/rent-increase-vs-moving-break-even/)
-
 - [Converting annual bills to a monthly equivalent is only the funding layer; add a 12-month calendar to see whether several due dates create a cash low point.](/en/guides/annual-bills-cash-flow-low-point/)
 
 ## Sources and limitations

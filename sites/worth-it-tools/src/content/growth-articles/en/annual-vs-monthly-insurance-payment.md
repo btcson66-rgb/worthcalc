@@ -234,7 +234,6 @@ Only as a clearly labeled, currently verified adjustment. Do not assume a reward
 
 ## Related Guides and Tools
 
-- [Insurance Deductible Cash Reserve](https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/)
 - [Annual Bills to Monthly Budget](https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/)
 
 

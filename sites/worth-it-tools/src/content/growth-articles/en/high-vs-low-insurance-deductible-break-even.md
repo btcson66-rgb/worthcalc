@@ -242,10 +242,6 @@ That can make the risk trade more visible, but the guide does not prescribe a un
 
 ## Related Guides and Tools
 
-- [Insurance Deductible Cash Reserve](https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/)
-- [Personal Liquidity Ratio](https://worthcalc.win/en/guides/personal-liquidity-ratio/)
-
-
 ## Sources
 
 - National Association of Insurance Commissioners, Understand Your Health Plan's Deductible: https://content.naic.org/article/consumer-insight-understand-your-health-plans-deductible

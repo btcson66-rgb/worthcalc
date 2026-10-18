@@ -53,12 +53,16 @@ const briefRoutes = [
 // tool as a redirect stub, so the topic floors drop by one topic: 24 -> 23 topics, 48 -> 46 variants.
 // P2 batch 4 (2026-10-17) merged subscription-creep (#05) into the subscription audit tool and
 // paid-membership-break-even (#06) into the Costco membership tool: 23 -> 21 topics, 46 -> 42 variants.
+// P2 batch 9 (2026-10-18) stubbed or retired 153 old noindex pages. The "editorial" class counts every built
+// page that is not a tool, legal page, home page or redirect stub -- that includes the noindex pages and the
+// noindex /en/ mirrors -- so retiring pages lowers it without touching the 21 brief topics (21/21 complete,
+// 42/42 variants) or any sitemap page. Floor re-based 160 -> 155 (measured after the zh retires).
 const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
   tool: 32,
-  editorial: 160,
+  editorial: 155,
   alignedVariants: 42,
   compliantVariants: 42,
   completeTopics: 21,

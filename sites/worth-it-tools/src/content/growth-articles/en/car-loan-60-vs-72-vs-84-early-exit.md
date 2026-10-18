@@ -237,10 +237,6 @@ Use Car Affordability for total transportation-cost capacity, then use this guid
 
 ## Related Guides and Tools
 
-- [If you may trade before payoff, add a negative-equity rollover test instead of comparing 60-, 72-, and 84-month payments in isolation.](/en/guides/auto-loan-negative-equity-rollover-cost/)
-
-- [An early vehicle exit should compare the lender payoff with both trade-in and realistic private-sale proceeds, not only the scheduled remaining balance.](/en/guides/trade-in-vs-private-sale-net-proceeds/)
-
 ## Sources
 
 - Consumer Financial Protection Bureau, How do I compare auto loan offers?: https://www.consumerfinance.gov/ask-cfpb/how-do-i-compare-auto-loan-offers-what-should-i-look-at-besides-the-monthly-payment-en-753/

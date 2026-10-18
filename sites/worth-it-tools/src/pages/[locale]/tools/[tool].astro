@@ -7,6 +7,7 @@ import TWHomeAffordCalculator from '../../../components/TWHomeAffordCalculator.a
 import TWSalaryCalculator from '../../../components/TWSalaryCalculator.astro';
 import TWDebtCalculator from '../../../components/TWDebtCalculator.astro';
 import TWCarCalculator from '../../../components/TWCarCalculator.astro';
+import TWBudgetCalculator from '../../../components/TWBudgetCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -65,6 +66,8 @@ const useTwSalary = locale === 'zh' && slug === 'salary-converter';
 const useTwDebt = locale === 'zh' && slug === 'debt-strategy';
 // ...and car-affordability: 使用牌照稅, 公路養管費 and 強制險 from the published tables; no sales tax or registration fee.
 const useTwCar = locale === 'zh' && slug === 'car-affordability';
+// ...and budget-builder: plain arithmetic on the reader's incomes and annual bills; no rate or bracket built in.
+const useTwBudget = locale === 'zh' && slug === 'budget-builder';
 ---
 
 <ToolLayout
@@ -78,7 +81,7 @@ const useTwCar = locale === 'zh' && slug === 'car-affordability';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : useTwCar ? <TWCarCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : useTwCar ? <TWCarCalculator /> : useTwBudget ? <TWBudgetCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

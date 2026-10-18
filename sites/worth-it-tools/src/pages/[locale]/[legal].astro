@@ -4,6 +4,7 @@ import type { ContentLocale } from '../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { seoPackage001 } from '../../data/seoPackage001';
 import { seoPackageGuides } from '../../data/seoPackageRegistry';
+import { fallbackTrustBlock } from '../../lib/trustBlock';
 
 export async function getStaticPaths() {
   // Growth articles only. The en and zh legal pages are static files under
@@ -32,12 +33,26 @@ const packageSchema = packageMeta
   : undefined;
 const alternateLocales = Astro.props.alternateLocales as ContentLocale[];
 const { Content: GrowthContent } = await render(growthEntry);
+const reviewedOn = growthEntry.data.lastReviewed.toISOString().slice(0, 10);
+const fallbackBlock = fallbackTrustBlock(locale, reviewedOn);
+// An article that carries its own sources (see content.config.ts) gets a trust block that lists them.
+const trustBlock = growthEntry.data.sources?.length
+  ? {
+    method: growthEntry.data.method ?? fallbackBlock.method,
+    formula: growthEntry.data.formula,
+    sources: growthEntry.data.sources,
+    limits: growthEntry.data.limits ?? fallbackBlock.limits,
+    lastReviewed: reviewedOn,
+    locale,
+  }
+  : undefined;
 ---
 <ArticleLayout
   title={growthEntry.data.title}
   description={growthEntry.data.description}
   locale={locale}
-  updated={growthEntry.data.lastReviewed.toISOString().slice(0, 10)}
+  updated={reviewedOn}
+  trustBlock={trustBlock}
   alternateLocales={alternateLocales}
   seoTitle={packageMeta?.seoTitle}
   ogTitle={packageMeta?.ogTitle}

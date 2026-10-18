@@ -47,6 +47,19 @@ const growthArticles = defineCollection({
     contentType: z.literal('article'),
     articleSlug: z.string(),
     relatedTool: z.string(),
+    /**
+     * Optional page-specific trust-block data (P2 batch 8, 2026-10-18), same shape as growthTools.
+     * An article that declares `sources` gets a trust block listing them; the others keep the
+     * generic fallback, which says the page cites no outside figures.
+     */
+    method: z.string().optional(),
+    formula: z.string().optional(),
+    limits: z.array(z.string()).optional(),
+    sources: z.array(z.object({
+      label: z.string(),
+      url: z.string().url(),
+      verifiedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    })).optional(),
   }),
 });
 

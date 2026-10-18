@@ -219,7 +219,7 @@ export const homeTw = {
         {
           href: '/zh/tools/home-affordability/',
           title: '房屋負擔能力計算機',
-          blurb: '依你設定的住房月預算，反推把房貸、稅費與管理費都算進去之後負擔得起的房價。',
+          blurb: '用房貸月付的上限反推可買的總價，依央行對你身分別的成數與寬限期規定算出頭期款。',
           kind: 'calculator',
         },
         {

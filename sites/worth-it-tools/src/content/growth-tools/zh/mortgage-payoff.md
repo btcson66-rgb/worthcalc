@@ -39,7 +39,7 @@ related:
     href: "/zh/extra-mortgage-payments-guide/"
   - title: "房貸寬限期結束，月付會跳多少（青安 3.0 算例）"
     href: "/zh/money/mortgage-grace-period-end-payment/"
-  - title: "負債比與 DTI 計算機"
+  - title: "負債比 DBR 與房貸收支比計算機"
     href: "/zh/tools/dti-calculator/"
 ---
 

@@ -1,0 +1,201 @@
+---
+/*
+ * 買房負擔能力 (P2 batch 10, 2026-10-18), zh only.
+ *
+ * Replaces the US home-affordability calculator on /zh/tools/home-affordability/ (PMI, a "住房＋其他債務" DTI
+ * ceiling, a fixed down payment). The arithmetic is in src/lib/twHomeAffordMath.mjs (tests/tw-home-afford-math.test.mjs
+ * asserts every number the page prints); the rules it applies are the 央行 不動產抵押貸款業務規定 effective 2026-09-18
+ * and the 金管會金融智慧網 金融健檢 1/3 and 1/5 lines. The defaults are the page's 算例一. The interest rate and the loan
+ * ratio the reader wants are inputs; no bank's rate or approval ratio is built in.
+ */
+import { HOME_IDENTITIES, HIGH_PRICE_THRESHOLD, TARGET_RATIOS } from '../lib/twHomeAffordMath.mjs';
+
+const identities = Object.entries(HOME_IDENTITIES).map(([value, rule]) => ({ value, label: rule.label }));
+const regions = Object.entries(HIGH_PRICE_THRESHOLD).map(([value, item]) => ({ value, label: item.label }));
+const targets = Object.entries(TARGET_RATIOS).map(([value, item]) => ({ value, label: item.label }));
+---
+
+<section class="calc" data-tw-home data-growth-calculator aria-labelledby="home-heading">
+  <header>
+    <h2 id="home-heading">用月付不超過收入 1/3 反推可買的總價</h2>
+    <p>輸入收入、你的身分別（決定央行的貸款成數與寬限期限制）、你的房貸利率與年限，反推月付不超過收入 1/3 的最高總價，並算出頭期款與寬限期的月付差。預設值就是下方的算例一，其中 8 成與 2% 是示範假設，不是任何銀行的核貸成數或利率。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>每月稅前收入（元，個人或家庭）</span><input id="home-income" type="number" inputmode="numeric" min="0" step="1000" value="150000" /></label>
+      <label class="is-wide">
+        <span>你的身分別（央行的成數上限與寬限期規定依此而不同）</span>
+        <select id="home-identity">
+          {identities.map((item) => <option value={item.value}>{item.label}</option>)}
+        </select>
+      </label>
+      <label><span>你預計貸幾成（%）；有央行上限的身分，留空＝用上限</span><input id="home-ltv" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="80" /></label>
+      <label><span>房貸年利率（%，填你的報價或想測試的數字）</span><input id="home-rate" type="number" inputmode="decimal" min="0" max="100" step="0.001" value="2" /></label>
+      <label><span>貸款年限（年）</span><input id="home-years" type="number" inputmode="decimal" min="1" max="50" step="1" value="30" /></label>
+      <label><span>寬限期（年，只繳利息；僅「名下無房貸、也無房屋」可填）</span><input id="home-grace" type="number" inputmode="decimal" min="0" max="50" step="1" value="0" /></label>
+      <label>
+        <span>月付不超過收入的哪一條線</span>
+        <select id="home-target">
+          {targets.map((item) => <option value={item.value}>{item.label}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>房屋所在地（只用來判斷是否達高價住宅門檻）</span>
+        <select id="home-region">
+          {regions.map((item) => <option value={item.value} selected={item.value === 'other'}>{item.label}</option>)}
+        </select>
+      </label>
+
+      <details class="is-wide home-advanced">
+        <summary>選填：手上的自備款、其他債務月付、每月持有成本</summary>
+        <div class="home-advanced__grid">
+          <label><span>可動用的自備款（元；填了就不會反推出自備款不夠的總價，空白＝不限制）</span><input id="home-cash" type="number" inputmode="numeric" min="0" step="100000" placeholder="例如 4000000" /></label>
+          <label><span>其他債務月付（元；只列參考，不影響反推）</span><input id="home-other" type="number" inputmode="numeric" min="0" step="1000" placeholder="例如 12000" /></label>
+          <label><span>每月其他持有成本（元，管理費、修繕準備等；只列參考）</span><input id="home-holding" type="number" inputmode="numeric" min="0" step="1000" placeholder="例如 3000" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide home-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        央行對「名下無房貸」的兩種身分沒有訂成數上限，成數要自己填；除了「名下無房貸、也無房屋」之外，其他身分央行規定都不得有寬限期。貸款成數與寬限期依<a href="https://www.cbc.gov.tw/tw/cp-4217-192880-d9bde-1.html">央行不動產抵押貸款業務規定</a>（2026-09-18 生效，2026-10-18 查核）；1/3、1/5 來自<a href="https://moneywise.fsc.gov.tw/tabf/main/tool1.html">金管會金融智慧網的金融健檢</a>，是理財參考線，不是核貸門檻。計算機沒有套用任何例外（例如換屋自住的切結、青年安心成家購屋優惠貸款），也不知道銀行實際核給幾成。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="home-status" id="home-status">—</p>
+      <dl>
+        <div><dt>最高可負擔總價（捨去到萬元）</dt><dd id="home-price">—</dd></div>
+        <div><dt>貸款成數與金額</dt><dd id="home-loan">—</dd></div>
+        <div><dt>頭期款（總價 − 貸款）</dt><dd id="home-down">—</dd></div>
+        <div><dt id="home-pay-label">每月房貸（本＋利）</dt><dd id="home-pay">—</dd></div>
+        <div><dt>房貸月付占收入</dt><dd id="home-ratio">—</dd></div>
+        <div id="home-grace-row" hidden><dt>寬限期內每月（只繳利息）</dt><dd id="home-grace-pay">—</dd></div>
+        <div id="home-nograce-row" hidden><dt>同價位、沒有寬限期的每月月付</dt><dd id="home-nograce-pay">—</dd></div>
+        <div id="home-bind-row" hidden><dt>受哪個條件限制</dt><dd id="home-bind">—</dd></div>
+        <div id="home-other-row" hidden><dt>加計其他債務月付後占收入（參考，無官方燈號）</dt><dd id="home-other-ratio">—</dd></div>
+        <div id="home-flow-row" hidden><dt>房貸月付加每月持有成本</dt><dd id="home-flow">—</dd></div>
+      </dl>
+      <ul class="home-notes" id="home-notes"></ul>
+      <p class="home-note"><strong>試算結果僅供參考，以銀行的實際核貸為準。</strong>簡化：利率與年限不變、以「總價 × 成數」為貸款（央行規定的基準是鑑價與買賣金額較低者）、每月金額不逐月四捨五入、不含契稅、代書費等一次性費用。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { HOME_IDENTITIES, solveTwHomeAffordability } from '../lib/twHomeAffordMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-home]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const ids = ['home-income', 'home-identity', 'home-ltv', 'home-rate', 'home-years', 'home-grace', 'home-target', 'home-region', 'home-cash', 'home-other', 'home-holding'];
+    const inputs = ids.map((id) => el<HTMLInputElement | HTMLSelectElement>(id));
+    const raw = (id: string) => el<HTMLInputElement>(id).value.trim();
+    const val = (id: string) => (raw(id) === '' ? 0 : Number(raw(id)));
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const dash = '—';
+    const pct = (r: number) => `${(r * 100).toFixed(1)}%`;
+    const outs = ['home-price', 'home-loan', 'home-down', 'home-pay', 'home-ratio'];
+    const rows = ['home-grace-row', 'home-nograce-row', 'home-bind-row', 'home-other-row', 'home-flow-row'];
+    const lights: Record<string, string> = { red: '超過 1/3（金融健檢的紅燈）', yellow: '在 1/5 到 1/3 之間（黃燈）', green: '低於 1/5（綠燈）' };
+    const notes = el<HTMLUListElement>('home-notes');
+    const addNote = (text: string) => { const li = document.createElement('li'); li.textContent = text; notes.appendChild(li); };
+
+    const render = () => {
+      outs.forEach((id) => { el(id).textContent = dash; });
+      rows.forEach((id) => { el(id).hidden = true; });
+      notes.textContent = '';
+      const identity = el<HTMLSelectElement>('home-identity').value as keyof typeof HOME_IDENTITIES;
+      const rule = HOME_IDENTITIES[identity];
+      if (rule.cap === null && !(val('home-ltv') > 0)) {
+        el('home-status').textContent = '這個身分央行沒有訂成數上限，請填你預計貸幾成（銀行會另外核定）。';
+        return;
+      }
+      let r;
+      try {
+        r = solveTwHomeAffordability({
+          monthlyIncome: val('home-income'),
+          identity,
+          region: el<HTMLSelectElement>('home-region').value,
+          ltvPct: val('home-ltv'),
+          aprPct: val('home-rate'),
+          years: val('home-years'),
+          graceYears: val('home-grace'),
+          target: el<HTMLSelectElement>('home-target').value,
+          cash: val('home-cash'),
+          otherDebtPayments: val('home-other'),
+          holdingCosts: val('home-holding'),
+        });
+      } catch {
+        el('home-status').textContent = '請檢查輸入：收入、年限要大於 0，利率與成數不能是負數，寬限期要短於貸款年限。';
+        return;
+      }
+      if (r.maxPrice <= 0) {
+        el('home-status').textContent = '依這組條件，月付上限太低，反推不出可買的總價；請提高收入或調整成數、年限。';
+        return;
+      }
+      const lineText = el<HTMLSelectElement>('home-target').value === 'fifth' ? '1/5' : '1/3';
+      el('home-status').textContent = `最高可負擔總價約 ${money(r.maxPrice)}（房貸月付不超過收入的 ${lineText}，也就是 ${money(r.paymentCeiling)}）。`;
+      el('home-price').textContent = money(r.maxPrice);
+      el('home-loan').textContent = `${r.ltvPct}%，${money(r.loan)}`;
+      el('home-down').textContent = `${money(r.downPayment)}（占總價 ${r.downPaymentPct.toFixed(1)}%）`;
+      el('home-pay-label').textContent = r.graceMonths > 0 ? '寬限期結束後每月房貸（本＋利，用來比 1/3）' : '每月房貸（本＋利）';
+      el('home-pay').textContent = money(r.monthlyAfterGrace);
+      el('home-ratio').textContent = `${pct(r.ratio)}，${lights[r.light]}`;
+
+      if (r.graceMonths > 0 && r.monthlyDuringGrace !== null && r.graceSavingDuring !== null && r.graceExtraAfter !== null) {
+        el('home-grace-row').hidden = false;
+        el('home-grace-pay').textContent = `${money(r.monthlyDuringGrace)}（比沒有寬限期少繳 ${money(r.graceSavingDuring)}）`;
+        el('home-nograce-row').hidden = false;
+        el('home-nograce-pay').textContent = `${money(r.monthlyNoGrace)}（寬限期結束後多繳 ${money(r.graceExtraAfter)}）`;
+      }
+      el('home-bind-row').hidden = false;
+      el('home-bind').textContent = r.binding === 'cash' ? `你填的自備款（反推到的總價受自備款限制；只看月付可到 ${money(Math.floor(r.priceByPayment / 10000) * 10000)}）` : '月付上限';
+      if (val('home-other') > 0) {
+        el('home-other-row').hidden = false;
+        el('home-other-ratio').textContent = pct(r.withOtherDebtRatio);
+      }
+      if (val('home-holding') > 0) {
+        el('home-flow-row').hidden = false;
+        el('home-flow').textContent = money(r.monthlyCashflow);
+      }
+
+      if (r.ltvClamped && r.capPct !== null) addNote(`你填的成數超過央行上限，已改用 ${r.capPct}%。`);
+      if (r.graceIgnored) addNote('這個身分央行規定不得有寬限期，你填的寬限期沒有計入。若你屬於換屋自住、先買後賣的情形，央行有切結後可放寬的規定，請洽承貸銀行。');
+      if (r.thresholdCheck === 'above') addNote(`這個總價已達${r.thresholdLabel}的高價住宅門檻（${money(r.thresholdAmount)}）。自然人購置高價住宅，央行規定成數上限 3 成、不得有寬限期，以上數字不適用；請改選「自然人購置高價住宅」重算。`);
+      if (r.thresholdCheck === 'below') addNote(`這個總價低於${r.thresholdLabel}的高價住宅門檻（${money(r.thresholdAmount)}），不屬高價住宅；請依你名下的房貸與房屋情形改選其他身分重算。`);
+    };
+
+    const example: Record<string, string> = { 'home-income': '150000', 'home-identity': 'noLoanNoHouse', 'home-ltv': '80', 'home-rate': '2', 'home-years': '30', 'home-grace': '0', 'home-target': 'third', 'home-region': 'other', 'home-cash': '', 'home-other': '', 'home-holding': '' };
+    inputs.forEach((input) => { input.addEventListener('input', render); input.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { el<HTMLInputElement>(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      inputs.forEach((input) => { input.value = input instanceof HTMLSelectElement ? (input.id === 'home-region' ? 'other' : input.options[0].value) : ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden] { display: none !important; }
+  .home-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .home-status { margin: 0; font-weight: 750; }
+  .home-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .home-notes { margin: 0; padding-inline-start: 1.1rem; font-size: 0.92rem; }
+  .home-notes:empty { display: none; }
+  .home-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .home-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

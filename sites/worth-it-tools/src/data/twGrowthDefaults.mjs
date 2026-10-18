@@ -6,14 +6,11 @@
  *   The shared default 1.5 is a US overtime rule and appears nowhere in Taiwanese law.
  * - debt1Rate 15: 銀行法第 47-1 條 caps revolving credit-card interest at 15% a year, so a 22% card is not a
  *   Taiwanese demo.
- * - homeThresholdPercent 33.3: 金管會金融智慧網 金融健檢 uses 房貸支出 <= 收入 1/3 as the reference line.
- *   The shared default 36 is the US 28/36 rule. The calculator applies it to housing + other debt payments together.
- * - mortgageInsurancePercent 0: the shared 0.6% a year above 80% LTV is US private mortgage insurance; the page
- *   does not assume any such cost and leaves the field for the user.
+ * Removed in P2 batch 10 (2026-10-18): homeThresholdPercent and mortgageInsurancePercent. The zh home-affordability and
+ * dti-calculator pages no longer use the shared calculator at all; they run src/lib/twHomeAffordMath.mjs and
+ * src/lib/twDbrMath.mjs (1/3 and 1/5 from 金管會金融智慧網 金融健檢, no mortgage insurance anywhere).
  */
 export const ZH_GROWTH_DEFAULTS = Object.freeze({
   overtimeMultiplier: 1.34,
   debt1Rate: 15,
-  homeThresholdPercent: 33.3,
-  mortgageInsurancePercent: 0,
 });

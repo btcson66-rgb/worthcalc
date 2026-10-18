@@ -21,31 +21,6 @@ export interface SeoPackageGuideMeta {
 }
 
 export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
-  "en/ai-tool-realized-time-savings-break-even": {
-    "key": "en/ai-tool-realized-time-savings-break-even",
-    "packageId": "009",
-    "locale": "en",
-    "articleSlug": "ai-tool-realized-time-savings-break-even",
-    "title": "AI Tool ROI Without Fantasy Hours: Measure Realized Time Savings, Rework and Recoverable Value",
-    "seoTitle": "AI Tool Realized-Time-Savings Break-Even | WorthCalc",
-    "metaDescription": "Evaluate an AI subscription with measured before/after task time, verification and rework. Count only saved time that becomes billable work, avoided overtime or valued leisure.",
-    "excerpt": "“Hours saved” is not an input you should guess. Measure the same class of task before and after the tool, including prompting, checking, fixing and redoing.",
-    "canonical": "https://worthcalc.win/en/guides/ai-tool-realized-time-savings-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "AI Tool Realized-Time-Savings Break-Even | WorthCalc",
-    "ogDescription": "Evaluate an AI subscription with measured before/after task time, verification and rework. Count only saved time that becomes billable work, avoided overtime or valued leisure.",
-    "ogImage": "/images/guides/ai-tool-realized-time-savings-break-even.webp",
-    "imageAlt": "AI Tool ROI Without Fantasy Hours: Measure Realized Time Savings, Rework and Recoverable Value scenario model diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/subscription-audit/"
-    ],
-    "breadcrumbLabel": "AI Tool ROI Without Fantasy Hours: Measure Realized Time Savings, Rework and Recoverable Value",
-    "schemaFile": "009__en__ai-tool-realized-time-savings-break-even.json"
-  },
   "en/amortization-schedule-explained": {
     "key": "en/amortization-schedule-explained",
     "packageId": "002",
@@ -121,31 +96,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Annual Bills to Monthly Budget: How to Normalize Irregular Expenses",
     "schemaFile": "002__en__annual-bills-monthly-equivalent.json"
   },
-  "en/annual-plan-cancellation-risk-break-even": {
-    "key": "en/annual-plan-cancellation-risk-break-even",
-    "packageId": "009",
-    "locale": "en",
-    "articleSlug": "annual-plan-cancellation-risk-break-even",
-    "title": "Annual vs. Monthly Subscription: A Cancellation-Risk Break-Even Model",
-    "seoTitle": "Annual vs Monthly: Cancellation-Risk Break-Even | WorthCalc",
-    "metaDescription": "Compare annual and monthly subscription plans using break-even months, refund rules, early-cancellation scenarios and liquidity—not the 12-month discount alone.",
-    "excerpt": "The annual discount is certain; twelve months of future use is not. Model the month you might stop, the refund rule and the cash you lock up today.",
-    "canonical": "https://worthcalc.win/en/guides/annual-plan-cancellation-risk-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "Annual vs Monthly: Cancellation-Risk Break-Even | WorthCalc",
-    "ogDescription": "Compare annual and monthly subscription plans using break-even months, refund rules, early-cancellation scenarios and liquidity—not the 12-month discount alone.",
-    "ogImage": "/images/guides/annual-plan-cancellation-risk-break-even.webp",
-    "imageAlt": "Annual vs. Monthly Subscription: A Cancellation-Risk Break-Even Model scenario model diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/subscription-audit/"
-    ],
-    "breadcrumbLabel": "Annual vs. Monthly Subscription: A Cancellation-Risk Break-Even Model",
-    "schemaFile": "009__en__annual-plan-cancellation-risk-break-even.json"
-  },
   "en/annual-vs-monthly-insurance-payment": {
     "key": "en/annual-vs-monthly-insurance-payment",
     "packageId": "006",
@@ -220,56 +170,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "Balance Transfer Break-Even: Fee, Promo Window, and Required Payoff Payment",
     "schemaFile": "004__en__balance-transfer-break-even.json"
-  },
-  "en/benefits-replacement-cost-vs-salary": {
-    "key": "en/benefits-replacement-cost-vs-salary",
-    "packageId": "009",
-    "locale": "en",
-    "articleSlug": "benefits-replacement-cost-vs-salary",
-    "title": "Benefits vs. Higher Salary: Use Replacement Cost, Not Employer Sticker Value",
-    "seoTitle": "Benefits vs Higher Salary: Replacement Cost | WorthCalc",
-    "metaDescription": "Compare job offers by valuing only benefits you would actually replace yourself. Separate cash pay, retirement, insurance, commute and nice-to-have perks.",
-    "excerpt": "A benefit is not worth its brochure price to you. The useful question is what you would actually pay to replace it if the employer stopped providing it.",
-    "canonical": "https://worthcalc.win/en/guides/benefits-replacement-cost-vs-salary/",
-    "robots": "index,follow",
-    "ogTitle": "Benefits vs Higher Salary: Replacement Cost | WorthCalc",
-    "ogDescription": "Compare job offers by valuing only benefits you would actually replace yourself. Separate cash pay, retirement, insurance, commute and nice-to-have perks.",
-    "ogImage": "/images/guides/benefits-replacement-cost-vs-salary.webp",
-    "imageAlt": "Benefits vs. Higher Salary: Use Replacement Cost, Not Employer Sticker Value scenario model diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/subscription-audit/"
-    ],
-    "breadcrumbLabel": "Benefits vs. Higher Salary: Use Replacement Cost, Not Employer Sticker Value",
-    "schemaFile": "009__en__benefits-replacement-cost-vs-salary.json"
-  },
-  "en/bonus-volatility-fixed-cost-capacity": {
-    "key": "en/bonus-volatility-fixed-cost-capacity",
-    "packageId": "009",
-    "locale": "en",
-    "articleSlug": "bonus-volatility-fixed-cost-capacity",
-    "title": "Bonus Volatility and Fixed-Cost Capacity: Compare Offers Without Treating Target Bonus as Guaranteed Pay",
-    "seoTitle": "Bonus Volatility & Fixed-Cost Capacity | WorthCalc",
-    "metaDescription": "Compare salary-plus-bonus offers by guaranteed income, bonus scenarios, fixed monthly obligations and zero-bonus stress tests—not target compensation alone.",
-    "excerpt": "Target compensation is not the same as money you can safely assign to rent, childcare or debt. Stress-test the offer using guaranteed income first.",
-    "canonical": "https://worthcalc.win/en/guides/bonus-volatility-fixed-cost-capacity/",
-    "robots": "index,follow",
-    "ogTitle": "Bonus Volatility & Fixed-Cost Capacity | WorthCalc",
-    "ogDescription": "Compare salary-plus-bonus offers by guaranteed income, bonus scenarios, fixed monthly obligations and zero-bonus stress tests—not target compensation alone.",
-    "ogImage": "/images/guides/bonus-volatility-fixed-cost-capacity.webp",
-    "imageAlt": "Bonus Volatility and Fixed-Cost Capacity: Compare Offers Without Treating Target Bonus as Guaranteed Pay scenario model diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/subscription-audit/"
-    ],
-    "breadcrumbLabel": "Bonus Volatility and Fixed-Cost Capacity: Compare Offers Without Treating Target Bonus as Guaranteed Pay",
-    "schemaFile": "009__en__bonus-volatility-fixed-cost-capacity.json"
   },
   "en/car-down-payment-vs-liquidity": {
     "key": "en/car-down-payment-vs-liquidity",
@@ -818,31 +718,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Relocating for a Higher Salary: Calculate the Break-Even Before You Move",
     "schemaFile": "008__en__relocation-higher-salary-break-even.json"
   },
-  "en/remote-work-pay-cut-cash-break-even": {
-    "key": "en/remote-work-pay-cut-cash-break-even",
-    "packageId": "009",
-    "locale": "en",
-    "articleSlug": "remote-work-pay-cut-cash-break-even",
-    "title": "Remote-Work Pay-Cut Break-Even: Price the Cash Savings Before You Price the Convenience",
-    "seoTitle": "Remote-Work Pay-Cut Break-Even | WorthCalc",
-    "metaDescription": "Calculate how much salary you can give up for remote work using avoided commute, parking, childcare-window and work costs—without inventing a universal remote-work premium.",
-    "excerpt": "Do not start with “remote work is worth 10%.” Start with the expenses that actually disappear, the expenses that appear, and the commute time you actually recover.",
-    "canonical": "https://worthcalc.win/en/guides/remote-work-pay-cut-cash-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "Remote-Work Pay-Cut Break-Even | WorthCalc",
-    "ogDescription": "Calculate how much salary you can give up for remote work using avoided commute, parking, childcare-window and work costs—without inventing a universal remote-work premium.",
-    "ogImage": "/images/guides/remote-work-pay-cut-cash-break-even.webp",
-    "imageAlt": "Remote-Work Pay-Cut Break-Even: Price the Cash Savings Before You Price the Convenience scenario model diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/subscription-audit/"
-    ],
-    "breadcrumbLabel": "Remote-Work Pay-Cut Break-Even: Price the Cash Savings Before You Price the Convenience",
-    "schemaFile": "009__en__remote-work-pay-cut-cash-break-even.json"
-  },
   "en/rent-increase-vs-moving-break-even": {
     "key": "en/rent-increase-vs-moving-break-even",
     "packageId": "005",
@@ -1065,31 +940,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲",
     "schemaFile": "002__zh__annual-expenses-monthly-equivalent.json"
-  },
-  "zh/annual-plan-cancellation-risk-break-even": {
-    "key": "zh/annual-plan-cancellation-risk-break-even",
-    "packageId": "009",
-    "locale": "zh",
-    "articleSlug": "annual-plan-cancellation-risk-break-even",
-    "title": "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本",
-    "seoTitle": "年繳 vs 月繳怎麼選？取消風險調整 Break-Even｜WorthCalc",
-    "metaDescription": "年繳方案便宜不代表一定划算。比較年繳折扣、預計使用月數、退款規則、取消風險與被鎖住的現金，算出真正回本月數。",
-    "excerpt": "一般年繳計算器只算 12×月費−年費。真正關鍵是：你要用到第幾個月，年繳折扣才足以抵掉提前不用時留下的沉沒成本？",
-    "canonical": "https://worthcalc.win/zh/guides/annual-plan-cancellation-risk-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "年繳 vs 月繳怎麼選？取消風險調整 Break-Even | WorthCalc",
-    "ogDescription": "年繳方案便宜不代表一定划算。比較年繳折扣、預計使用月數、退款規則、取消風險與被鎖住的現金，算出真正回本月數。",
-    "ogImage": "/images/guides/annual-plan-cancellation-risk-break-even.webp",
-    "imageAlt": "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本 的情境試算示意圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/tools/costco-membership/"
-    ],
-    "breadcrumbLabel": "訂閱年繳 vs 月繳，不只看折扣：把「中途不用了」的取消風險算進回本",
-    "schemaFile": "009__zh__annual-plan-cancellation-risk-break-even.json"
   },
   "zh/auto-loan-negative-equity-rollover-cost": {
     "key": "zh/auto-loan-negative-equity-rollover-cost",
@@ -1785,31 +1635,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "接案最低報價怎麼算？不要用月薪除 160，小時費率要先補回不可計費時間與營運成本",
     "schemaFile": "008__zh__freelance-minimum-billable-rate.json"
   },
-  "zh/high-vs-low-deductible-break-even": {
-    "key": "zh/high-vs-low-deductible-break-even",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "high-vs-low-deductible-break-even",
-    "title": "高自負額 vs 低自負額怎麼比？先算保費差，再做事故情境壓力測試",
-    "seoTitle": "高自負額 vs 低自負額：保費差、損益線與現金壓力測試｜WorthCalc",
-    "metaDescription": "高自負額通常換較低保費，但事故時自付更多。用保費差、自負額差與可承受現金做break-even，不杜撰事故機率。",
-    "excerpt": "高自負額把一部分風險從保險公司移回你自己手上，換取較低保費。不要自己猜事故機率；先算每年確定省多少保費，以及一次事故會多付多少。",
-    "canonical": "https://worthcalc.win/zh/guides/high-vs-low-deductible-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "高自負額真的比較省？先算損益線",
-    "ogDescription": "不用猜事故率：先比較保費差、自負額差與你能不能在事故當天拿出那筆現金。",
-    "ogImage": "/images/guides/high-vs-low-deductible-break-even.webp",
-    "imageAlt": "高低自負額方案比較，顯示年度保費、自負額與一次理賠情境總成本",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/guides/insurance-deductible-cash-reserve/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "高自負額 vs 低自負額怎麼比？先算保費差，再做事故情境壓力測試",
-    "schemaFile": "006__zh__high-vs-low-deductible-break-even.json"
-  },
   "zh/higher-salary-long-commute-vs-lower-salary-nearby": {
     "key": "zh/higher-salary-long-commute-vs-lower-salary-nearby",
     "packageId": "007",
@@ -2403,31 +2228,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "為了更高薪搬家值得嗎？把加薪、房租、通勤與搬家現金算成回本月數",
     "schemaFile": "008__zh__relocation-for-higher-salary-break-even.json"
   },
-  "zh/remote-work-pay-cut-cash-break-even": {
-    "key": "zh/remote-work-pay-cut-cash-break-even",
-    "packageId": "009",
-    "locale": "zh",
-    "articleSlug": "remote-work-pay-cut-cash-break-even",
-    "title": "遠距工作降薪多少才值得？用「現金節省」而不是抽象便利感算 Break-Even",
-    "seoTitle": "遠距工作降薪值得嗎？通勤、托育與現金 Break-Even｜WorthCalc",
-    "metaDescription": "比較遠距工作降薪與辦公室高薪工作：扣除通勤、停車、外食、托育時段、工作服與時間成本，找出你能承受的最大降薪。",
-    "excerpt": "不要問遠距「值幾％薪水」。先算每年確定省下的通勤、停車、外食與照顧時段，再把不可貨幣化的時間留在第二層。",
-    "canonical": "https://worthcalc.win/zh/guides/remote-work-pay-cut-cash-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "遠距工作降薪值得嗎？通勤、托育與現金 Break-Even | WorthCalc",
-    "ogDescription": "比較遠距工作降薪與辦公室高薪工作：扣除通勤、停車、外食、托育時段、工作服與時間成本，找出你能承受的最大降薪。",
-    "ogImage": "/images/guides/remote-work-pay-cut-cash-break-even.webp",
-    "imageAlt": "遠距工作降薪多少才值得用「現金節省」而不是抽象便利感算 Break-Even 的情境試算示意圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/tools/costco-membership/"
-    ],
-    "breadcrumbLabel": "遠距工作降薪多少才值得？用「現金節省」而不是抽象便利感算 Break-Even",
-    "schemaFile": "009__zh__remote-work-pay-cut-cash-break-even.json"
-  },
   "zh/rent-increase-vs-moving-break-even": {
     "key": "zh/rent-increase-vs-moving-break-even",
     "packageId": "005",
@@ -2652,31 +2452,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "目標基金每月要存多少？用期限反推 Sinking Fund，而不是臨到期才刷卡",
     "schemaFile": "004__zh__sinking-fund-by-deadline.json"
   },
-  "zh/step-rate-loan-total-cost": {
-    "key": "zh/step-rate-loan-total-cost",
-    "packageId": "005",
-    "locale": "zh",
-    "articleSlug": "step-rate-loan-total-cost",
-    "title": "前低後高的優惠貸款怎麼比？不要只看第一段利率，先畫完整付款路徑",
-    "seoTitle": "前低後高貸款怎麼算？分段利率與總成本完整試算｜WorthCalc",
-    "metaDescription": "前幾期低利率、之後跳升的貸款容易讓第一年月付看起來便宜。用每段利率、重算月付、利率上限與全期現金流比較真正成本。",
-    "excerpt": "第一段低利率只能描述「現在」，不能代表整筆貸款。真正需要的是把每個重訂時間點、重訂後本金、剩餘期數與利率上限全部放進付款路徑。",
-    "canonical": "https://worthcalc.win/zh/guides/step-rate-loan-total-cost/",
-    "robots": "index,follow",
-    "ogTitle": "低利率只在前面？先看優惠到期後月付",
-    "ogDescription": "先畫分段利率時間軸，再做重訂後月付與總成本壓力測試。",
-    "ogImage": "/images/guides/step-rate-loan-total-cost.webp",
-    "imageAlt": "分段利率貸款時間軸，顯示第一段優惠利率、第二段利率與重訂後月付跳升",
-    "imageBrief": "WorthCalc 貸款時間軸資訊圖；分段顯示利率、剩餘本金與月付，不宣稱未來市場利率。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/fixed-vs-variable-rate-scenario/",
-      "https://worthcalc.win/zh/guides/interest-only-period-total-cost/",
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/"
-    ],
-    "breadcrumbLabel": "分段利率貸款總成本",
-    "schemaFile": "005__zh__step-rate-loan-total-cost.json"
-  },
   "zh/subscription-opportunity-cost": {
     "key": "zh/subscription-opportunity-cost",
     "packageId": "002",
@@ -2751,31 +2526,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "自費證照／課程多久回本？不要用「可能加薪」當保證，先算可驗證的回本門檻",
     "schemaFile": "008__zh__training-certification-break-even.json"
-  },
-  "zh/transit-pass-vs-pay-as-you-go-usage-break-even": {
-    "key": "zh/transit-pass-vs-pay-as-you-go-usage-break-even",
-    "packageId": "009",
-    "locale": "zh",
-    "articleSlug": "transit-pass-vs-pay-as-you-go-usage-break-even",
-    "title": "通勤月票 vs 單次付費怎麼選？用「實際通勤天數」而不是每天都上班的假設算回本",
-    "seoTitle": "通勤月票 vs 單次付費：實際使用天數回本｜WorthCalc",
-    "metaDescription": "月票是否划算，不要假設每月 22 天都通勤。把混合辦公、請假、遠距、轉乘與非通勤使用分開，算出真正 Break-Even 使用次數。",
-    "excerpt": "真正該算的是「每月有效付費搭乘次數」。混合辦公、請假、出差、居家日都會讓月票回本點改變。",
-    "canonical": "https://worthcalc.win/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "通勤月票 vs 單次付費：實際使用天數回本 | WorthCalc",
-    "ogDescription": "月票是否划算，不要假設每月 22 天都通勤。把混合辦公、請假、遠距、轉乘與非通勤使用分開，算出真正 Break-Even 使用次數。",
-    "ogImage": "/images/guides/transit-pass-vs-pay-as-you-go-usage-break-even.webp",
-    "imageAlt": "通勤月票 vs 單次付費怎麼選用「實際通勤天數」而不是每天都上班的假設算回本 的情境試算示意圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
-      "https://worthcalc.win/zh/tools/costco-membership/"
-    ],
-    "breadcrumbLabel": "通勤月票 vs 單次付費怎麼選？用「實際通勤天數」而不是每天都上班的假設算回本",
-    "schemaFile": "009__zh__transit-pass-vs-pay-as-you-go-usage-break-even.json"
   },
   "zh/variable-bonus-income-fixed-obligations": {
     "key": "zh/variable-bonus-income-fixed-obligations",

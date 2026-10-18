@@ -213,7 +213,3 @@ breadcrumbLabel: "房貸寬限期／只繳利息真的比較輕鬆嗎？用重�
 - CFPB, *What is an interest-only loan?*: https://www.consumerfinance.gov/ask-cfpb/what-is-an-interest-only-loan-en-101/
 
 本文為教育性試算，不代表任何銀行產品條件，也不構成房貸、投資或購屋建議。
-
-如果優惠不只利率低，還包含前期只繳息，應同時檢查優惠到期後本金與月付跳升。
-
-[優惠期結束後的付款跳升](/zh/guides/step-rate-loan-total-cost/)

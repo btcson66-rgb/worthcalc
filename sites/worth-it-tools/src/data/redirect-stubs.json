@@ -188,6 +188,26 @@
     {
       "from": "/en/topics/transportation/",
       "to": "/en/"
+    },
+    {
+      "from": "/zh/guides/annual-plan-cancellation-risk-break-even/",
+      "to": "/zh/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/zh/guides/remote-work-pay-cut-cash-break-even/",
+      "to": "/zh/work-from-home-vs-commuting-hidden-costs/"
+    },
+    {
+      "from": "/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/",
+      "to": "/zh/money/tpass-commuter-pass-breakeven/"
+    },
+    {
+      "from": "/en/guides/annual-plan-cancellation-risk-break-even/",
+      "to": "/en/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/en/guides/remote-work-pay-cut-cash-break-even/",
+      "to": "/en/work-from-home-vs-commuting-hidden-costs/"
     }
   ]
 }

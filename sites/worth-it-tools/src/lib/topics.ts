@@ -154,8 +154,6 @@ export function topicHref(locale: CoreLocale, topic: TopicId): string {
 const OVERRIDES: Record<string, TopicId> = {
   'true-hourly-wage-after-commuting-work-expenses': 'income-savings',
   'simple-vs-compound-interest': 'income-savings',
-  'benefits-replacement-cost-vs-salary': 'income-savings',
-  'remote-work-pay-cut-cash-break-even': 'income-savings',
   'relocation-higher-salary-break-even': 'income-savings',
   'childcare-return-to-work-break-even': 'income-savings',
   'fulltime-vs-parttime-childcare-break-even': 'income-savings',

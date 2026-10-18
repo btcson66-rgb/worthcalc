@@ -12,9 +12,8 @@ const rateSource = isZh
   ? 'https://www.taipower.com.tw/media/dhuhrppu/%E7%B0%A1%E8%A6%81%E9%9B%BB%E5%83%B9%E8%A1%A8.pdf?mediaDL=true'
   : 'https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03';
 const publicSource = 'https://www.u-power.com.tw/qa/charge.html';
-const embedSnippet = isZh
-  ? '<iframe src="https://worthcalc.win/zh/tools/appliance-electricity-cost/" title="WorthCalc 家電電費計算機" loading="lazy"></iframe>\n<p>由 <a href="https://worthcalc.win/zh/tools/appliance-electricity-cost/">WorthCalc 家電電費計算機</a> 提供。</p>'
-  : '<iframe src="https://worthcalc.win/en/tools/appliance-running-cost/" title="WorthCalc appliance running cost calculator" loading="lazy"></iframe>\n<p>Provided by <a href="https://worthcalc.win/en/tools/appliance-running-cost/">WorthCalc appliance running cost calculator</a>.</p>';
+// The English calculator page was retired in P2 batch 9 (2026-10-18); only the zh page embeds this component now.
+const embedSnippet = '<iframe src="https://worthcalc.win/zh/tools/appliance-electricity-cost/" title="WorthCalc 家電電費計算機" loading="lazy"></iframe>\n<p>由 <a href="https://worthcalc.win/zh/tools/appliance-electricity-cost/">WorthCalc 家電電費計算機</a> 提供。</p>';
 ---
 
 <section class="calc" data-appliance-calculator data-locale={locale} aria-labelledby="appliance-calculator-heading">

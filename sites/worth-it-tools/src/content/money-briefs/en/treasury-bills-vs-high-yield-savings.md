@@ -35,7 +35,6 @@ faq:
   - q: "What happens in a 0%-state-income-tax state?"
     a: "The state-tax break-even becomes the same 3.915% because neither side loses yield to state income tax in this simplified comparison."
 related:
-  - "/en/money/i-bonds-rate/"
   - "/en/money/savings-vs-cd-2026/"
 draft: true
 ---

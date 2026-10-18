@@ -30,7 +30,6 @@ faq:
     a: "Potentially yes. Self-employment tax and federal income tax are separate calculations that can both apply to the same business profit."
 related:
   - "/en/money/estimated-tax-safe-harbor/"
-  - "/en/money/no-tax-on-tips-deduction/"
 draft: true
 ---
 ## The federal self-employment tax figures

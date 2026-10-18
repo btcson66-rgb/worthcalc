@@ -33,7 +33,6 @@ faq:
     a: "No. IRS Publication 970 says tax can be due when a distribution exceeds the beneficiary’s adjusted qualified education expenses."
 related:
   - "/en/money/roth-ira-income-limits/"
-  - "/en/money/i-bonds-rate/"
 draft: true
 ---
 ## The official figures

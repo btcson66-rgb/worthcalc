@@ -4,7 +4,7 @@ toolSlug: compound-growth
 locale: en
 title: "Compound Growth & Savings Goal Calculator"
 description: "Project contributions, fees, and inflation against a savings target, or solve for the monthly contribution needed to reach that target."
-relatedArticle: /en/savings-rate-gross-vs-net/
+relatedArticle: /en/pay-raise-vs-inflation-purchasing-power/
 lastReviewed: 2026-07-31
 draft: false
 ---
@@ -38,10 +38,6 @@ This tool provides a general educational estimate, not individualized investment
 The calculation runs in your browser. Do not put account numbers or other identifying information into a shareable link.
 
 ## Related guides
-
-The Rule of 72 shortcut, why time matters more than the rate, and how a 1% fee compounds against you over long horizons are covered by the sections above and by The Rule of 72 explained; the former standalone article now lives on this page.
-
-[Savings rate measures today’s allocation; this guide explains why that is different from a modeled future growth rate.](/en/savings-rate-gross-vs-net/)
 
 ## Frequently asked questions
 

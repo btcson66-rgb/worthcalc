@@ -91,10 +91,6 @@
     "title": "BNPL vs Credit Card Installments: Which Costs Less? (2026)",
     "description": "Fees, interest, late penalties and credit impact compared, with a calculator for your purchase."
   },
-  "/en/tools/appliance-running-cost/": {
-    "title": "Appliance Running Cost Calculator: Hour to Year (2026)",
-    "description": "Pick an appliance to load its typical wattage, enter your electricity rate and hours, and see the cost per hour, day, month and year. 40+ appliances with sources."
-  },
   "/zh/tools/appliance-electricity-cost/": {
     "title": "家電電費怎麼算？冷氣、除濕機、電熱器每小時電費計算機（2026）",
     "description": "選家電自動帶入瓦數，輸入台電電價與使用時數，算出每小時、每天、每月、每年電費。40 種以上家電附來源。"

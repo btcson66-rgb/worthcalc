@@ -42,8 +42,6 @@ The calculation runs in your browser. Do not put account numbers or other identi
 Read [How to Budget on Irregular Income Without Guessing Next Month](/en/budget-with-irregular-income/) for the income-floor method, converting annual bills into sinking funds, and setting aside money for IRS quarterly estimated taxes.
 
 
-[After the monthly plan balances, use the savings-rate guide to label gross-income and take-home versions consistently.](/en/savings-rate-gross-vs-net/)
-
 ## Frequently asked questions
 
 ### Should I use gross or take-home income?
@@ -65,10 +63,6 @@ Base essentials on a conservative income floor and treat income above that floor
 ### Does savings count as an expense line?
 
 Yes — treat it as a planned allocation with its own line, even though it builds assets rather than paying a bill.
-
-A monthly budget should also reserve for predictable annual bills. Convert them into a monthly sinking-fund requirement.
-
-[Annual Bills to Monthly Budget: How to Normalize Irregular Expenses](/en/guides/annual-bills-monthly-equivalent/)
 
 - [childcare return to work break even](/en/guides/childcare-return-to-work-break-even/)
 

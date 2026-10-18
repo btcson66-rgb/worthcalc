@@ -274,10 +274,6 @@ No. A consolidation loan generally replaces multiple debts with one new loan. De
 ### What is the biggest mistake after consolidation?
 Allowing old revolving balances to grow again while also carrying the new loan.
 
-For revolving debt, compare a consolidation loan with a promotional balance transfer using fee, payoff deadline, and post-promo APR.
-
-[balance transfer break-even](/en/guides/balance-transfer-break-even/)
-
 Before using a lump sum to reduce debt, check whether the remaining cash is enough to avoid borrowing again for known bills.
 
 [lump-sum debt payoff versus keeping cash](/en/guides/windfall-debt-vs-cash-allocation/)

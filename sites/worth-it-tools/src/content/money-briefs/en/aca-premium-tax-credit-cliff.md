@@ -33,7 +33,6 @@ faq:
     a: "No. It is an ACA income-eligibility boundary used in the premium-tax-credit analysis, not a marginal federal income-tax bracket."
 related:
   - "/en/money/dependent-care-fsa-limit/"
-  - "/en/money/medicare-irmaa-brackets/"
 draft: true
 ---
 ## Official figures for the 2027 coverage-year check

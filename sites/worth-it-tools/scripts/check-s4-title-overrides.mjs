@@ -21,7 +21,8 @@ for (const [pathname, value] of entries) {
 // 33 after the CEO's P1b verdict kept /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ as real pages;
 // 32 after P2 batch 3 (2026-10-17) merged /en/zero-interest-installments-truth/ into the installment tool (redirect stub);
 // 31 after P2 batch 4 (2026-10-17) merged /en/subscription-creep/ into the subscription audit tool (redirect stub).
-const EXPECTED_PAIRS = 31;
+// 30 after P2 batch 9 (2026-10-18) retired the English-only /en/tools/appliance-running-cost/ page (404).
+const EXPECTED_PAIRS = 30;
 if (entries.length !== EXPECTED_PAIRS) failures.push(`expected ${EXPECTED_PAIRS} title/description pairs, found ${entries.length}`);
 if (failures.length > 0) {
   console.error('[s4-titles] FAIL');

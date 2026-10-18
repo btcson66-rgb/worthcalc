@@ -98,6 +98,4 @@ sources:
 
 - [freelance minimum billable rate](/en/guides/freelance-minimum-billable-rate/)
 
-- [relocation higher salary break even](/en/guides/relocation-higher-salary-break-even/)
-
 - [接案最低報價怎麼算](/zh/guides/freelance-minimum-billable-rate/)

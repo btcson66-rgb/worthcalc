@@ -18,20 +18,15 @@ const locales = ['en', 'zh'];
 // that does not exist.
 const requiredLocales = ['en', 'zh'];
 const approvedSingleLocaleRoutes = new Set([
-  'loan-term-monthly-payment-vs-total-interest',
-  'net-worth-vs-liquid-net-worth',
-  'savings-rate-gross-vs-net',
   'emergency-fund-how-much',
   'emergency-fund-vs-debt-payoff',
   'emergency-fund-vs-sinking-fund',
   'how-to-calculate-net-worth',
   'how-to-calculate-savings-rate',
-  'liquid-net-worth-explained',
   'loan-term-vs-total-interest',
   'simple-vs-compound-interest',
   // S3 intentionally uses two market-native slugs for one appliance hub;
   // adding reciprocal pages would exceed the two-URL budget.
-  'tools/appliance-running-cost',
   'tools/appliance-electricity-cost',
   // P1b CEO verdict (2026-10-15): the zh calculators stay real pages (a Taiwan scooter scenario and
   // an NT$ card model); their English mirrors are redirect stubs, so only zh is a real page.
@@ -41,13 +36,6 @@ const approvedSingleLocaleRoutes = new Set([
 // Staged editorial programmes can introduce a complete non-core language
 // cluster without pretending that the five-language product shell is complete.
 const approvedStagedEditorialRoutes = new Set([
-  'guides/annual-cost-savings-calculator',
-  'guides/recurring-costs-annual-total',
-  'guides/monthly-vs-annual-total-cost',
-  'guides/savings-break-even-use-period',
-  'guides/introductory-discount-renewal-cost',
-  'guides/unused-membership-capacity-cost',
-  'guides/one-time-switching-cost-payback',
   'guides/subscription-price-increase-annual-impact',
   'guides/free-trial-auto-renewal-first-charge',
   'guides/pause-vs-cancel-membership-cost',
@@ -82,24 +70,6 @@ const approvedStagedEditorialRoutes = new Set([
   'guides/streaming-cost-per-watched-hour',
   'guides/online-course-cost-per-completed-lesson',
   'guides/tool-rental-cost-per-project',
-  'guides/cloud-storage-cost-per-retained-gb',
-  'guides/mobile-data-cost-per-gb-used',
-  'guides/event-ticket-cost-per-attended-hour',
-  'guides/language-class-cost-per-completed-session',
-  'guides/meal-delivery-plan-cost-per-eaten-meal',
-  'guides/software-add-on-cost-per-active-seat',
-  'guides/electricity-cost-per-kwh-used',
-  'guides/home-internet-cost-per-gb-used',
-  'guides/laundry-cost-per-load',
-  'guides/water-bill-cost-per-gallon-used',
-  'guides/natural-gas-cost-per-therm-used',
-  'guides/dishwasher-cost-per-cycle-used',
-  'guides/clothes-dryer-cost-per-load-used',
-  'guides/refrigerator-cost-per-day-used',
-  'guides/water-heater-cost-per-gallon-heated',
-  'guides/oven-stove-cost-per-cooking-hour-used',
-  'guides/hvac-cost-per-operating-hour-used',
-  'guides/led-lighting-cost-per-hour-used',
   'guides/dehumidifier-cost-per-pint-removed',
   'guides/ceiling-fan-cost-per-operating-hour-used',
   'guides/air-purifier-cost-per-clean-air-hour-used',

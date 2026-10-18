@@ -5,6 +5,7 @@ import TWMortgageCalculator from '../../../components/TWMortgageCalculator.astro
 import TWDbrCalculator from '../../../components/TWDbrCalculator.astro';
 import TWHomeAffordCalculator from '../../../components/TWHomeAffordCalculator.astro';
 import TWSalaryCalculator from '../../../components/TWSalaryCalculator.astro';
+import TWDebtCalculator from '../../../components/TWDebtCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -59,6 +60,8 @@ const useTwDbr = locale === 'zh' && slug === 'dti-calculator';
 const useTwHome = locale === 'zh' && slug === 'home-affordability';
 // P2 batch 11 (2026-10-18): 勞基法 normal hours, 勞動部 月薪 ÷ 30 ÷ 8, 第 24 條 overtime multiples, 115 年基本工資.
 const useTwSalary = locale === 'zh' && slug === 'salary-converter';
+// ...and the debt-strategy page: balances, rates and minimum payments from the bills, 銀行法 第 47-1 條 15% flag.
+const useTwDebt = locale === 'zh' && slug === 'debt-strategy';
 ---
 
 <ToolLayout
@@ -72,7 +75,7 @@ const useTwSalary = locale === 'zh' && slug === 'salary-converter';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

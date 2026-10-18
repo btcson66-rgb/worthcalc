@@ -67,11 +67,9 @@ test('budget-with-irregular-income: 年繳與半年繳換算成每月', () => {
   assert.equal((18000 * 2 + 12000) / 12, 4000); // 汽車保險 + 房屋稅
 });
 
-test('zh defaults: Taiwanese rule instead of the shared US value', () => {
-  assert.equal(ZH_GROWTH_DEFAULTS.overtimeMultiplier, 1.34); // 勞基法第 24 條 first two hours, 1 + 1/3 rounded
-  assert.ok(Math.abs((1 + 1 / 3) - 1.34) < 0.01);
-  assert.ok(ZH_GROWTH_DEFAULTS.debt1Rate <= 15); // 銀行法第 47-1 條 cap
-  // homeThresholdPercent / mortgageInsurancePercent were retired in P2 batch 10 with the US home calculator on zh
-  assert.equal('homeThresholdPercent' in ZH_GROWTH_DEFAULTS, false);
-  assert.equal('mortgageInsurancePercent' in ZH_GROWTH_DEFAULTS, false);
+test('zh defaults: every override was retired when its page got a Taiwanese component (batches 10 and 11)', () => {
+  // overtimeMultiplier / debt1Rate went with the zh salary-converter and debt-strategy components (src/lib/twSalaryMath.mjs,
+  // src/lib/twDebtMath.mjs); homeThresholdPercent / mortgageInsurancePercent went in batch 10.
+  assert.deepEqual(Object.keys(ZH_GROWTH_DEFAULTS), []);
+  assert.ok(Math.abs((1 + 1 / 3) - 1.34) < 0.01); // 勞基法第 24 條 first two hours, 1 + 1/3 rounded (the zh page uses 4/3 exactly)
 });

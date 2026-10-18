@@ -100,7 +100,7 @@ export const directoryEntries: readonly DirectoryEntry[] = [
   { role: 'tool', group: 'credit-installment', href: '/zh/tools/installment-true-apr/', title: '信用卡分期試算', ask: '「零利率」、手續費分期和帳單分期，換算成年利率各是多少？' },
   { role: 'tool', group: 'credit-installment', href: '/zh/tools/credit-card-payoff/', title: '信用卡循環利息計算器', ask: '只繳最低應繳，利息一天算多少、要還多久、總共多付多少？' },
   { role: 'tool', group: 'credit-installment', href: '/zh/tools/cashback-breakeven/', title: '信用卡回饋打平計算機', ask: '年費卡每月要刷多少，才贏過免年費的基準卡？' },
-  { role: 'tool', group: 'credit-installment', href: '/zh/tools/debt-strategy/', title: '雪球法 vs 雪崩法比較計算機', ask: '多筆債務先還哪一筆，清償日和總利息差多少？' },
+  { role: 'tool', group: 'credit-installment', href: '/zh/tools/debt-strategy/', title: '雪球法 vs 雪崩法比較計算機', ask: '多筆債務先還哪一筆，還清要幾個月、總利息差多少？' },
   { role: 'tool', group: 'credit-installment', href: '/zh/tools/dti-calculator/', title: '負債比（DBR）與收支比計算機', ask: '信貸看的 DBR 倍數和房貸看的月付收入比，你各是多少？' },
 
   { role: 'tool', group: 'membership-subscription', href: '/zh/tools/costco-membership/', title: '好市多會員回本計算機', ask: '一年在好市多花多少，辦會員、升級黑鑽才算回本？' },
@@ -126,7 +126,7 @@ export const directoryEntries: readonly DirectoryEntry[] = [
   { role: 'tool', group: 'savings-emergency', href: '/zh/tools/compound-growth/', title: '複利計算機', ask: '本金、每月投入、報酬率與通膨之下，幾年後有多少錢，要達成目標每月該存多少？' },
   { role: 'tool', group: 'savings-emergency', href: '/zh/tools/budget-builder/', title: '不固定收入預算建立器', ask: '收入忽高忽低，把年繳、季繳帳單攤平後，每個月該留多少？' },
 
-  { role: 'tool', group: 'income-tax', href: '/zh/tools/salary-converter/', title: '時薪月薪年薪換算', ask: '時薪、月薪、年薪互相換算，算上加班與年終後的實際時薪是多少？' },
+  { role: 'tool', group: 'income-tax', href: '/zh/tools/salary-converter/', title: '時薪月薪年薪換算', ask: '月薪、日薪、時薪、年薪怎麼互相換算，平日與休息日的加班費依勞基法是多少？' },
 
   // ---- 指南：先弄懂怎麼判斷 -------------------------------------------------
   { role: 'guide', group: 'credit-installment', href: '/zh/annual-fee-card-breakeven/', title: '信用卡年費要刷多少才回本', ask: '續年費卡，比起改用免年費卡，真正的回本刷卡額是多少？' },

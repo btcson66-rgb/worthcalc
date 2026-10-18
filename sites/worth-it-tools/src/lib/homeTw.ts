@@ -96,7 +96,7 @@ export const homeTw = {
         {
           href: '/zh/tools/debt-strategy/',
           title: '雪球法 vs 雪崩法比較計算機',
-          blurb: '輸入每一筆負債的餘額、利率與最低付款，並排比較兩種還法。',
+          blurb: '輸入每一筆負債的餘額、利率與最低應繳，並排比較雪球與雪崩兩種還法的月數與總利息。',
           kind: 'calculator',
         },
       ],
@@ -354,7 +354,7 @@ export const homeTw = {
         {
           href: '/zh/tools/salary-converter/',
           title: '時薪月薪年薪換算',
-          blurb: '時薪、月薪、年薪互相換算，算上加班與年終後的實際時薪。',
+          blurb: '月薪 ÷ 30 ÷ 8 換算時薪，依勞基法算平日與休息日加班費，對照 115 年基本工資。',
           kind: 'calculator',
         },
         {

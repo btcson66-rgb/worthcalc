@@ -54,5 +54,9 @@
   "p2Batch9": {
     "on": "2026-10-18",
     "note": "P2 batch 9 (work order 2026-10-18-P2-batch9, CEO-approved noindex inventory 2026-10-18): the old noindex pages were dealt with. 39 zh pages became redirect stubs (plus 10 English mirrors), 39 zh pages and 65 English pages were retired (404), 7 upgrade-later pages and 2 product pages were left as they are. None of them was in the sitemap, so the sitemap count is unchanged: 86 -> 86 (0 pages added, 0 pages leave the sitemap). maxUrls unchanged at 160."
+  },
+  "p2Batch9Products": {
+    "on": "2026-10-18",
+    "note": "P2 batch 9 follow-up (CEO 2026-10-18): the two paid-product landing pages (freelancer-pricing-decision-engine, job-offer-true-value-decision-engine; zh and en mirror) were retired (404, no stub: no same-intent page to keep) together with the PRODUCT-003/005 panels and registry. Neither was in the sitemap: 86 -> 86 (0 pages added, 0 leave the sitemap). maxUrls unchanged at 160."
   }
 }

@@ -58,12 +58,14 @@ const briefRoutes = [
 // redirect stub -- that includes the noindex pages and the noindex /en/ mirrors -- so retiring pages lowers it
 // without touching the 21 brief topics (21/21 complete, 42/42 variants) or any sitemap page. Floors re-based to
 // what was measured after the batch: editorial 160 -> 110, tool 32 -> 31 (html 252, stub 96).
+// The follow-up retirement of the two paid-product landing pages (zh + en, 4 built pages, all editorial class)
+// leaves editorial 106, html 248: editorial floor 110 -> 100 (html floor 237 still clears).
 const releaseFloor = {
   html: 237,
   home: 2,
   legal: 12,
   tool: 31,
-  editorial: 110,
+  editorial: 100,
   alignedVariants: 42,
   compliantVariants: 42,
   completeTopics: 21,

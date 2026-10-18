@@ -151,7 +151,7 @@ test('青安 3.0 figures in extra-mortgage-payments-guide match the official pag
   for (const s of ['第 4012 次會議', '1.775%', '1.9%', '半碼（0.125%）', '1.5 碼（0.375%）', '2029 年 7 月 31 日', '2026 年 8 月 1 日', '1,000 萬元', '1,200 萬元', '1,500 萬元', '最長 40 年']) {
     assert.ok(md.includes(s), `missing ${s}`);
   }
-  assert.ok(/lastReviewed: 2026-10-17/.test(md));
+  assert.ok(/lastReviewed: 2026-10-18/.test(md)); // re-opened and re-read on 2026-10-18 (P2 batch 8 item 2)
   // 2 碼 = 0.5 percentage point = 0.125 (bank) + 0.375 (government); 2.275% - 0.5 = 1.775%; one 半碼 less subsidy = 1.9%
   assert.equal(0.125 + 0.375, 0.5);
   assert.equal(Math.round((2.275 - 0.5) * 1000) / 1000, 1.775);

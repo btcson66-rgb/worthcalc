@@ -4,6 +4,23 @@ import FAQ from '../../components/FAQ.astro';
 import { localizedPath } from '../../i18n/utils';
 
 const locale = 'zh';
+const reviewed = '2026-10-18';
+const trustBlock = {
+  method:
+    '本頁只教你把自己的公里數、通勤日、油錢、折舊、停車與票價算成同口徑的年成本與月成本；所有金額都是示範值或由你輸入。頁面不轉述任何官方機關目前刊載的油價或統計數字，只列出查找當期數字的入口。',
+  formula: '全年通勤成本 = 單程公里 × 2 × 全年通勤日 × 每公里成本 + 停車 + 過路費 + 車票 + 其他只因通勤發生的費用；每月 = 全年 ÷ 12',
+  sources: [
+    { label: '台灣中油 — 國內油價調整資訊（查找當期油價的入口，本頁不轉述數字）', url: 'https://vipmbr.cpc.com.tw/mbwebs/showpriceajust.aspx', verifiedDate: reviewed },
+    { label: '交通部 — 官方網站（查找大眾運輸、通勤月票與交通統計的入口，本頁不轉述數字）', url: 'https://www.motc.gov.tw/', verifiedDate: reviewed },
+  ],
+  limits: [
+    '本文只說明成本算術，不構成稅務、勞動或財務建議。',
+    '範例中的油耗 40 公里／公升、油價 NT$32、購入價 NT$70,000、殘值 NT$25,000、保養、保險與停車費全部是示範值，不是台灣平均、現行價格或建議行情。',
+    '車馬費是公司與工作者協議的津貼或報支標準，不等於實測成本；本頁不提供車馬費「行情」。',
+  ],
+  lastReviewed: reviewed,
+  locale: 'zh' as const,
+};
 const faq = [
   {
     question: '一般通勤成本或車馬費行情是多少？',
@@ -37,6 +54,8 @@ const faq = [
   title="平均通勤成本與車馬費行情：不用虛構平均數，也能算出可比較的基準"
   description="用自己的公里數、通勤日、機車油耗、折舊、停車與車票，算出每年及每月通勤成本，再用真正適合台灣讀者的方式比較車馬費與替代方案。"
   locale={locale}
+  updated={reviewed}
+  trustBlock={trustBlock}
   alternateLocales={['en', 'zh']}
 >
   <p>
@@ -102,13 +121,12 @@ const faq = [
 
   <h2>查找當期輸入值的官方入口</h2>
   <p>
-    下列機關可作為讀者自行查找當期油價、交通或家庭支出資料的入口。
+    下列機關可作為讀者自行查找當期油價與交通資料的入口。
     本頁不轉述它們目前刊載的數字：
   </p>
   <ul>
     <li><a href="https://www.cpc.com.tw/" rel="noopener">台灣中油</a></li>
     <li><a href="https://www.motc.gov.tw/" rel="noopener">交通部</a></li>
-    <li><a href="https://www.dgbas.gov.tw/" rel="noopener">行政院主計總處</a></li>
   </ul>
 
   <FAQ items={faq} />

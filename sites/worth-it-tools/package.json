@@ -152,7 +152,7 @@
     "check:guide-index": "node scripts/check-guide-index.mjs",
     "generate:guide-index": "node scripts/generate-guide-index.mjs",
     "gsc:sitemap-health": "node scripts/gsc-submit-sitemaps.mjs --health",
-    "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs",
+    "test:growth": "tsc -p tsconfig.growth-tests.json && node tests/growth-smoke.mjs && node tests/growth-edge-cases.mjs && node --test tests/tw-p2b8-examples.test.mjs",
     "test:commute": "node --test tests/commute-math.test.mjs && npm run test:appliance",
     "test:appliance": "node --test tests/appliance-math.test.mjs tests/appliance-label.test.mjs",
     "test:topics": "node tests/topic-classification.mjs",

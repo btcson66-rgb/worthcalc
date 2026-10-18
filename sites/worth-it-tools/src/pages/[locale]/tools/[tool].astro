@@ -6,6 +6,7 @@ import TWDbrCalculator from '../../../components/TWDbrCalculator.astro';
 import TWHomeAffordCalculator from '../../../components/TWHomeAffordCalculator.astro';
 import TWSalaryCalculator from '../../../components/TWSalaryCalculator.astro';
 import TWDebtCalculator from '../../../components/TWDebtCalculator.astro';
+import TWCarCalculator from '../../../components/TWCarCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -62,6 +63,8 @@ const useTwHome = locale === 'zh' && slug === 'home-affordability';
 const useTwSalary = locale === 'zh' && slug === 'salary-converter';
 // ...and the debt-strategy page: balances, rates and minimum payments from the bills, 銀行法 第 47-1 條 15% flag.
 const useTwDebt = locale === 'zh' && slug === 'debt-strategy';
+// ...and car-affordability: 使用牌照稅, 公路養管費 and 強制險 from the published tables; no sales tax or registration fee.
+const useTwCar = locale === 'zh' && slug === 'car-affordability';
 ---
 
 <ToolLayout
@@ -75,7 +78,7 @@ const useTwDebt = locale === 'zh' && slug === 'debt-strategy';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : useTwCar ? <TWCarCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

@@ -108,7 +108,7 @@ export const directoryEntries: readonly DirectoryEntry[] = [
 
   { role: 'tool', group: 'transport-commute', href: '/zh/tools/commute-cost/', title: '通勤成本計算機', ask: '騎機車、開車、搭大眾運輸或叫車，每公里和每年各花多少？' },
   { role: 'tool', group: 'transport-commute', href: '/zh/tools/ev-vs-gas/', title: '電動機車 vs 油車計算機', ask: '電動機車比油車貴的那一段，多久才能靠省下的能源費補回來？' },
-  { role: 'tool', group: 'transport-commute', href: '/zh/tools/car-affordability/', title: '汽車負擔能力計算機', ask: '實領收入扣掉車貸、稅費、保險與停車後，買得起多貴的車？' },
+  { role: 'tool', group: 'transport-commute', href: '/zh/tools/car-affordability/', title: '汽車負擔能力計算機', ask: '實領收入扣掉牌照稅、養管費、強制險、車貸與停車後，買得起多貴的車？' },
   { role: 'tool', group: 'transport-commute', href: '/zh/home-vs-public-ev-charging-cost/', title: '家用與公共充電電費比較', ask: '家裡裝充電樁和用公共充電站，每度電、每月差多少，樁多久回本？' },
 
   { role: 'tool', group: 'big-spending', href: '/zh/tools/home-affordability/', title: '房屋負擔能力計算機', ask: '以你的收入和房貸月付上限，加上你的身分別適用的貸款成數，買得起多少總價、要準備多少頭期款？' },

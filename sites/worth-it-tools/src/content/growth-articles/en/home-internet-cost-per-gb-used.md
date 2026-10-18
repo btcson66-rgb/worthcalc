@@ -30,7 +30,7 @@ FCC broadband labels are designed to show pricing, introductory rates, data allo
 
 ## Common mistakes and related guides
 
-Compare this fixed-service unit cost with the [electricity cost per kWh guide](/en/guides/electricity-cost-per-kwh-used/) and the [mobile data cost guide](/en/guides/mobile-data-cost-per-gb-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring annual costs guide](/en/guides/recurring-costs-annual-total/) keep billing timing visible.
+Compare this fixed-service unit cost with the electricity cost per kWh guide and the [mobile data cost guide](/en/guides/mobile-data-cost-per-gb-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring annual costs guide](/en/guides/recurring-costs-annual-total/) keep billing timing visible.
 
 Record fixed charges and actual use separately, and confirm that the allowance, promotion, and overage belong to the same cycle. If household members or habits change, the denominator changes too; do not use one peak month as a full-year proxy.
 

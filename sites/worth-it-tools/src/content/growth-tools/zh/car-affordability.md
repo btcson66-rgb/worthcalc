@@ -92,18 +92,4 @@ sources:
 
 貸款利率變動、保險續保費率調整、油電價格明顯波動，或考慮換車型（燃油轉電動）前，都應該重新試算。
 
-車貸報價若只突出月付，建議再看月付得起與總成本合理為何是兩個不同問題。
-
-[月付幻覺](/zh/guides/monthly-payment-affordability-vs-total-cost/)
-
-工具估出可負擔車價後，再比較不同頭期款會如何改變月付、總利息與交車後現金跑道。
-
-[車貸頭期款 vs 買車後現金](/zh/guides/car-down-payment-vs-liquidity/)
-
-- [車貸60 72 84期怎麼選](/zh/guides/car-loan-60-72-84-early-exit/)
-
-- [現金買車 vs 車貸](/zh/guides/cash-vs-car-loan-liquidity-adjusted/)
-
-- [車子大修後要開多久才回本](/zh/guides/car-major-repair-hold-period-break-even/)
-
 - [換車前 多繳本金 還是留現金](/zh/guides/extra-principal-before-car-trade-vs-cash/)

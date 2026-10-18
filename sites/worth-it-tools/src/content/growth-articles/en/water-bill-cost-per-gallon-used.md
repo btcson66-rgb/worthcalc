@@ -30,7 +30,7 @@ EPA WaterSense explains that one CCF equals 748 gallons and that water use varie
 
 ## Common mistakes and related guides
 
-For other household unit costs, compare the [laundry cost guide](/en/guides/laundry-cost-per-load/), [electricity cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural gas cost guide](/en/guides/natural-gas-cost-per-therm-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring costs guide](/en/guides/recurring-costs-annual-total/) help track seasonal bills.
+For other household unit costs, compare the [laundry cost guide](/en/guides/laundry-cost-per-load/), electricity cost guide, and [natural gas cost guide](/en/guides/natural-gas-cost-per-therm-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring costs guide](/en/guides/recurring-costs-annual-total/) help track seasonal bills.
 
 If the bill rises, compare volume, days, and fixed charges first, then check for leaks or seasonal irrigation. A device’s theoretical flow is not realized savings; verify later bills using the same meter period.
 

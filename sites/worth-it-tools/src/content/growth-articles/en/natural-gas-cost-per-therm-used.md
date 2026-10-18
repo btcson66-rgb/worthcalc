@@ -30,7 +30,7 @@ EIA explains that natural gas may be priced per therm, MMBtu, Ccf, or cubic foot
 
 ## Common mistakes and related guides
 
-For other household unit costs, compare the [water bill cost guide](/en/guides/water-bill-cost-per-gallon-used/), [electricity cost guide](/en/guides/electricity-cost-per-kwh-used/), [home internet guide](/en/guides/home-internet-cost-per-gb-used/), and [dishwasher cost guide](/en/guides/dishwasher-cost-per-cycle-used/). The [recurring costs guide](/en/guides/recurring-costs-annual-total/) helps track seasonal bills.
+For other household unit costs, compare the [water bill cost guide](/en/guides/water-bill-cost-per-gallon-used/), electricity cost guide, [home internet guide](/en/guides/home-internet-cost-per-gb-used/), and [dishwasher cost guide](/en/guides/dishwasher-cost-per-cycle-used/). The [recurring costs guide](/en/guides/recurring-costs-annual-total/) helps track seasonal bills.
 
 If the bill rises, compare therms, bill days, weather, and fixed charges, then check the heat-content conversion. Do not treat one cold month as an annual average; if equipment changes, track its cost separately from fuel.
 

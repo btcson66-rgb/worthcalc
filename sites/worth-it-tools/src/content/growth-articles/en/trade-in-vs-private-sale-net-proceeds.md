@@ -327,7 +327,6 @@ This is a decision framework, not a vehicle appraisal, tax opinion, or legal gui
 
 - [Negative Equity Auto Loan Rollover](https://worthcalc.win/en/guides/auto-loan-negative-equity-rollover-cost/)
 - [Car Affordability Calculator](https://worthcalc.win/en/tools/car-affordability/)
-- [Car Down Payment vs. Liquidity](https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/)
 
 ## How to turn the model into an operating rule
 

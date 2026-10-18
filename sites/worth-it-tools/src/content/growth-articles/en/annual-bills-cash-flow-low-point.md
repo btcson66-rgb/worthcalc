@@ -374,7 +374,7 @@ Not always. If major automatic debits happen before payday, calculate the minimu
 ## Related Guides
 
 - [Annual Bills to Monthly Equivalent](https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/) — convert yearly obligations into a steady-state monthly funding amount.
-- [Sinking Fund by Deadline](https://worthcalc.win/en/guides/sinking-fund-by-deadline/) — calculate catch-up funding when a known bill has a specific due date.
+- Sinking Fund by Deadline — calculate catch-up funding when a known bill has a specific due date.
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/) — establish the recurring monthly baseline before adding annual timing.
 
 ## Sources & Limitations

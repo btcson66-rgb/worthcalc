@@ -30,7 +30,7 @@ ENERGY STAR notes that dryer efficiency and cycle time are measured under define
 
 ## Common mistakes and related guides
 
-For related completed-use costs, compare the [laundry guide](/en/guides/laundry-cost-per-load/), [dishwasher guide](/en/guides/dishwasher-cost-per-cycle-used/), [electricity guide](/en/guides/electricity-cost-per-kwh-used/), [natural gas guide](/en/guides/natural-gas-cost-per-therm-used/), and [refrigerator daily-cost guide](/en/guides/refrigerator-cost-per-day-used/).
+For related completed-use costs, compare the [laundry guide](/en/guides/laundry-cost-per-load/), [dishwasher guide](/en/guides/dishwasher-cost-per-cycle-used/), electricity guide, [natural gas guide](/en/guides/natural-gas-cost-per-therm-used/), and [refrigerator daily-cost guide](/en/guides/refrigerator-cost-per-day-used/).
 
 If monthly cost rises, compare loads, moisture, settings, time, and rates before blaming the appliance. Check the filter and maintenance, and do not use the product annual estimate as your actual cost per load.
 

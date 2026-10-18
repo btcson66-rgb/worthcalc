@@ -26,7 +26,7 @@ effective refrigerator cost per day = (annual kWh × effective energy rate + ann
 
 Compare the label estimate with a plug meter or utility interval data when available. Door openings, ambient heat, ice making, defrost, seals, size, and whether the appliance is a second unit can move actual use. Compare cost per day and cost per refrigerated cubic foot separately.
 
-Compare this with the [previous guide](/en/guides/led-lighting-cost-per-hour-used/), [next guide](/en/guides/water-heater-cost-per-gallon-heated/), [electricity unit-cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
+Compare this with the [previous guide](/en/guides/led-lighting-cost-per-hour-used/), [next guide](/en/guides/water-heater-cost-per-gallon-heated/), electricity unit-cost guide, and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
 
 ## Limits and common mistakes
 

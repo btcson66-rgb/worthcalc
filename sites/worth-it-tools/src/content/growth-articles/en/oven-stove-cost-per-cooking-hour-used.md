@@ -26,7 +26,7 @@ effective cooking-hour cost = (fuel + delivery charges + maintenance + equipment
 
 Compare a short stovetop simmer, a preheated oven, and a batch-cooking session. Electric cooking criteria use defined events and test assumptions, while gas bills may use therms or volume; convert units using the bill or utility heat content instead of mixing them.
 
-Compare this with the [previous guide](/en/guides/water-heater-cost-per-gallon-heated/), [next guide](/en/guides/hvac-cost-per-operating-hour-used/), [electricity unit-cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
+Compare this with the [previous guide](/en/guides/water-heater-cost-per-gallon-heated/), [next guide](/en/guides/hvac-cost-per-operating-hour-used/), electricity unit-cost guide, and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
 
 ## Limits and common mistakes
 

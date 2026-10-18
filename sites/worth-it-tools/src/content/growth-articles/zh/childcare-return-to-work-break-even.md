@@ -203,8 +203,6 @@ breadcrumbLabel: "托育費多少才值得回職場？用稅後收入、通勤�
 ## 延伸閱讀與工具
 
 - [共同生活費按收入分攤](https://worthcalc.win/zh/guides/shared-expenses-income-split/)
-- [財務跑道月份](https://worthcalc.win/zh/guides/financial-runway-months/)
-- [50/30/20 預算限制](https://worthcalc.win/zh/guides/paycheck-budgeting-limitations/)
 
 
 ## 資料來源

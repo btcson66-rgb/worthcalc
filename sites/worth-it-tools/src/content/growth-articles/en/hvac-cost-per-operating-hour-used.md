@@ -26,7 +26,7 @@ effective HVAC hour cost = (energy + delivery charges + maintenance + equipment 
 
 Compare mild and extreme-weather weeks, not just thermostat settings. Duct leakage, insulation, humidity, short cycling, fan-only time, auxiliary heat, and installation quality can change runtime and delivered comfort. Treat comfort as an outcome, not a promised savings claim.
 
-Compare this with the [previous guide](/en/guides/oven-stove-cost-per-cooking-hour-used/), [next guide](/en/guides/led-lighting-cost-per-hour-used/), [electricity unit-cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
+Compare this with the [previous guide](/en/guides/oven-stove-cost-per-cooking-hour-used/), [next guide](/en/guides/led-lighting-cost-per-hour-used/), electricity unit-cost guide, and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
 
 ## Limits and common mistakes
 

@@ -281,7 +281,6 @@ $$
 
 - [托育費 vs 回職場 Break-Even](https://worthcalc.win/zh/guides/childcare-return-to-work-break-even/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)
-- [財務跑道](https://worthcalc.win/zh/guides/financial-runway-months/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程
 

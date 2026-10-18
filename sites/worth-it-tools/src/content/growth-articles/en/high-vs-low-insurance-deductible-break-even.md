@@ -244,7 +244,6 @@ That can make the risk trade more visible, but the guide does not prescribe a un
 
 - [Insurance Deductible Cash Reserve](https://worthcalc.win/en/guides/insurance-deductible-cash-reserve/)
 - [Personal Liquidity Ratio](https://worthcalc.win/en/guides/personal-liquidity-ratio/)
-- [Cash-Flow Buffer vs. Emergency Fund](https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/)
 
 
 ## Sources

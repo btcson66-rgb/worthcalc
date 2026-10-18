@@ -241,5 +241,3 @@ IRS 說明 gig work 收入應申報，自僱承包者可能需要 estimated taxe
 ## Related Guides
 
 - [Irregular Income Budget](https://worthcalc.win/en/budget-with-irregular-income/)
-- [佣金／接案稅款準備](https://worthcalc.win/zh/guides/commission-income-tax-reserve-cashflow/)
-- [True Hourly Wage](https://worthcalc.win/en/price-in-work-hours/)

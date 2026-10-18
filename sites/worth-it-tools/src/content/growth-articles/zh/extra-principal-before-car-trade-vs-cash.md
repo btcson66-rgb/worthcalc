@@ -216,5 +216,4 @@ CFPB 建議換車前確認 payoff amount 與 trade-in value，並說明將負資
 ## Related Guides
 
 - [負資產滾入新車貸](https://worthcalc.win/zh/guides/auto-loan-negative-equity-rollover-cost/)
-- [60／72／84 期提前換車](https://worthcalc.win/zh/guides/car-loan-60-72-84-early-exit/)
 - [Car Affordability](https://worthcalc.win/zh/tools/car-affordability/)

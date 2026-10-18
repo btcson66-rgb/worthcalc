@@ -297,9 +297,7 @@ Cash-flow calendar 的用途是提前準備，不是教你拖延已到期的義�
 
 ## Related Guides
 
-- [年度支出換算月預算](https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)
-- [Sinking Fund by Deadline](https://worthcalc.win/zh/guides/sinking-fund-by-deadline/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程
 

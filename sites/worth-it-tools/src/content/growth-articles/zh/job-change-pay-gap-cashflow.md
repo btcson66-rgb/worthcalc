@@ -196,7 +196,7 @@ $$
 - 交通；
 - 家具。
 
-這時應把 [搬家後緊急預備金重建](https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/) 與 pay-gap 模型合併看最低現金點。
+這時應把 搬家後緊急預備金重建 與 pay-gap 模型合併看最低現金點。
 
 ## Decision Matrix
 
@@ -327,7 +327,6 @@ $$
 
 ## Related Guides
 
-- [財務跑道](https://worthcalc.win/zh/guides/financial-runway-months/)
 - [帳戶最低現金餘額](https://worthcalc.win/zh/guides/minimum-cash-balance-checking/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)
 

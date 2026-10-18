@@ -94,18 +94,6 @@ sources:
 收入結構改變、稅率或保費門檻調整，或新增年度性支出項目時，都應該重新檢視預算分配。
 
 
-如果月預算看起來足夠但扣款日仍會缺錢，可進一步用「現金流緩衝 vs 緊急預備金」按日期找出最低帳戶餘額。
-
-[現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題](/zh/guides/cash-flow-buffer-vs-emergency-fund/)
-
-除了月繳帳單，也要把年繳保費、稅金與維修換算成月提存，避免高估每月結餘。
-
-[年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲](/zh/guides/annual-expenses-monthly-equivalent/)
-
-若 50/30/20 套不進你的房租、債務或不固定收入，可改用現況固定成本底線與 cash-flow budget。
-
-[比例預算限制](/zh/guides/paycheck-budgeting-limitations/)
-
 完整預算之外，可以把無法快速取消的固定義務除以實領收入，追蹤預算彈性。
 
 [固定成本比率](/zh/guides/fixed-cost-ratio-personal-budget/)
@@ -120,10 +108,6 @@ sources:
 
 - [托育費 回職場 划算嗎](/zh/guides/childcare-return-to-work-break-even/)
 
-- [工作 offer 不只看薪資；把通勤、餐飲、托育與額外工作成本放回家庭預算，再比較真正每月差額。](/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/)
-
-- [cash runway before quitting job](/en/guides/cash-runway-before-quitting-job/)
-
 - [freelance minimum billable rate](/en/guides/freelance-minimum-billable-rate/)
 
 - [prepay rent discount vs liquidity](/en/guides/prepay-rent-discount-vs-liquidity/)
@@ -132,13 +116,9 @@ sources:
 
 - [certification break even](/en/guides/training-certification-break-even/)
 
-- [離職前要準備多少現金](/zh/guides/cash-runway-before-quitting-job/)
-
 - [接案最低報價怎麼算](/zh/guides/freelance-minimum-billable-rate/)
 
 - [共同家庭帳戶最低餘額](/zh/guides/joint-account-minimum-cash-floor/)
-
-- [加班 到底多賺多少](/zh/guides/overtime-marginal-take-home-cost/)
 
 - [租金預繳折扣 值得嗎](/zh/guides/prepay-rent-discount-vs-liquidity/)
 

@@ -30,7 +30,7 @@ ENERGY STAR reports that certified full-sized clothes washers use less water per
 
 ## Common mistakes and related guides
 
-For other real-use denominators, compare the [home internet cost guide](/en/guides/home-internet-cost-per-gb-used/), [electricity cost guide](/en/guides/electricity-cost-per-kwh-used/), and [water bill cost guide](/en/guides/water-bill-cost-per-gallon-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring costs guide](/en/guides/recurring-costs-annual-total/) help place recurring laundry spending in cash flow.
+For other real-use denominators, compare the [home internet cost guide](/en/guides/home-internet-cost-per-gb-used/), electricity cost guide, and [water bill cost guide](/en/guides/water-bill-cost-per-gallon-used/). The [annual cost guide](/en/guides/annual-cost-savings-calculator/) and [recurring costs guide](/en/guides/recurring-costs-annual-total/) help place recurring laundry spending in cash flow.
 
 Record consumed resources and equipment allocation separately so you can see whether cost rises from water, energy, detergent, drying, or underfilled loads. Put special-care clothes in a separate scenario so they do not distort ordinary laundry.
 

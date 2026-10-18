@@ -302,7 +302,6 @@ $$
 
 - [托育費 vs 回職場 Break-Even](https://worthcalc.win/zh/guides/childcare-return-to-work-break-even/)
 - [全職 vs 兼職回職場](https://worthcalc.win/zh/guides/return-to-work-fulltime-vs-parttime/)
-- [財務跑道](https://worthcalc.win/zh/guides/financial-runway-months/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程
 

@@ -161,7 +161,6 @@ const OVERRIDES: Record<string, TopicId> = {
   'mortgage-points-break-even': 'housing',
   'true-cost-of-home-service-plan': 'housing',
   'prepay-rent-discount-vs-liquidity': 'housing',
-  'car-down-payment-vs-liquidity': 'transportation',
   'cash-vs-financing-car-liquidity': 'transportation',
   'trade-in-vs-private-sale-net-proceeds': 'transportation',
   'auto-loan-negative-equity-rollover-cost': 'transportation',

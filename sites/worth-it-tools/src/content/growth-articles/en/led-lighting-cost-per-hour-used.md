@@ -26,7 +26,7 @@ effective lighting cost per hour = (watts ÷ 1000 × hours × electricity rate +
 
 Compare the same light output rather than only bulb wattage. ENERGY STAR explains that LEDs can be much more efficient than incandescent lighting and that rated life concerns lumen depreciation; brightness, controls, heat, and actual switching patterns still matter.
 
-Compare this with the [previous guide](/en/guides/hvac-cost-per-operating-hour-used/), [next guide](/en/guides/refrigerator-cost-per-day-used/), [electricity unit-cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
+Compare this with the [previous guide](/en/guides/hvac-cost-per-operating-hour-used/), [next guide](/en/guides/refrigerator-cost-per-day-used/), electricity unit-cost guide, and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
 
 ## Limits and common mistakes
 

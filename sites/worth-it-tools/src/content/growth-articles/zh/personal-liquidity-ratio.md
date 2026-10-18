@@ -308,10 +308,6 @@ https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/
 
 延伸閱讀：WorthCalc《淨資產 vs 流動淨資產》、《緊急預備金要存多少？》、《財務跑道可以撐幾個月？》。
 
-買房頭期款決定完成後，別只看房貸本金，也要把交屋後剩餘現金換成可支撐月數。
-
-[交屋後流動性](/zh/guides/down-payment-vs-post-purchase-liquidity/)
-
 流動性比率足夠不代表每個事故情境都能吸收；可再測自負額、臨時支出與收入中斷同時發生。
 
 [理賠後還剩多少流動性](/zh/guides/insurance-deductible-cash-reserve/)

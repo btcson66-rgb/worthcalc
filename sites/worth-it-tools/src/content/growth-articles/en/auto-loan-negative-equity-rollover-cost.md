@@ -282,7 +282,6 @@ This page is an educational calculation framework. It does not predict vehicle d
 
 - [Car Affordability Calculator](https://worthcalc.win/en/tools/car-affordability/)
 - [Car Loan 60 vs 72 vs 84 Months: Early Exit](https://worthcalc.win/en/guides/car-loan-60-vs-72-vs-84-early-exit/)
-- [Car Down Payment vs. Liquidity](https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/)
 
 ## How to turn the model into an operating rule
 

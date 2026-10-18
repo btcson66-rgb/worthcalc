@@ -218,8 +218,6 @@ $$
 ## Related Guides
 
 - [Car Affordability Calculator](https://worthcalc.win/zh/tools/car-affordability/)
-- [車貸 60／72／84 期提前換車](https://worthcalc.win/zh/guides/car-loan-60-72-84-early-exit/)
-- [車貸頭期款 vs 買車後流動性](https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程
 

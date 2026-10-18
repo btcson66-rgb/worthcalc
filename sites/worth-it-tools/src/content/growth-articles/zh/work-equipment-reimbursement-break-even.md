@@ -204,6 +204,5 @@ $$
 
 ## Related Guides
 
-- [True Hourly Wage](https://worthcalc.win/en/price-in-work-hours/)
 - [Training Break-Even](https://worthcalc.win/zh/guides/training-certification-break-even/)
 - [換工作薪資空窗](https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/)

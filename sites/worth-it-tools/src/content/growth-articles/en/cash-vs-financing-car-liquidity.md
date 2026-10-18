@@ -253,11 +253,6 @@ Use Car Affordability for the full transportation budget, then use this guide to
 
 ## Related Guides and Tools
 
-- [Cash-Flow Buffer vs. Emergency Fund](https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/)
-- [Car Down Payment vs. Liquidity](https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/)
-- [Cash Discount vs. Financing](https://worthcalc.win/en/guides/cash-discount-vs-financing/)
-
-
 ## Sources
 
 - CFPB, What things can I negotiate when shopping for a car or auto loan?: https://www.consumerfinance.gov/ask-cfpb/what-things-can-i-negotiate-when-shopping-for-a-car-or-auto-loan-en-2132/

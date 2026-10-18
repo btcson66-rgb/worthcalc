@@ -275,14 +275,6 @@ Use the catch-up formula with months remaining, not annual amount divided by twe
 ### Are sinking funds and emergency funds the same?
 No. Sinking funds cover expected categories; emergency funds cover genuine shocks. They can sit in the same bank account if you track them separately.
 
-Annual bills can shorten practical runway even when the simple average ratio looks comfortable, so place them in the monthly schedule.
-
-[runway low-cash point](/en/guides/financial-runway-months/)
-
-Once an annual bill is normalized monthly, use the deadline version to handle late starts and changing balances.
-
-[sinking fund by deadline](/en/guides/sinking-fund-by-deadline/)
-
 Normalize recurring bills first, then compare the true monthly housing-cost difference against the one-time moving cost.
 
 [net monthly savings after moving](/en/guides/rent-increase-vs-moving-break-even/)
@@ -298,7 +290,6 @@ The framework is consistent with CFPB consumer budgeting guidance on irregular a
 
 ## Related WorthCalc guides
 
-- [Cash-Flow Buffer vs. Emergency Fund](/en/guides/cash-flow-buffer-vs-emergency-fund/)
 - [Savings Rate: Gross vs. Net](/en/savings-rate-gross-vs-net/)
 - [Budget Builder](/en/tools/budget-builder/)
 

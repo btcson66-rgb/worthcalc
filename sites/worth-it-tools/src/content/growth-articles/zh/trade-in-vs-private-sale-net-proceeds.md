@@ -260,7 +260,6 @@ $$
 
 - [舊車負資產滾進新車貸](https://worthcalc.win/zh/guides/auto-loan-negative-equity-rollover-cost/)
 - [Car Affordability](https://worthcalc.win/zh/tools/car-affordability/)
-- [車貸頭期款 vs 流動性](https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/)
 
 ## 如何把這個模型放進 WorthCalc 的日常決策流程
 

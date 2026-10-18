@@ -331,5 +331,4 @@ This page uses cash-flow and emergency-savings principles: planned housing payme
 ## Related Guides
 
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/)
-- [Cash Runway Before Quitting](https://worthcalc.win/en/guides/cash-runway-before-quitting-job/)
 - [Annual Bills to Monthly Budget](https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/)

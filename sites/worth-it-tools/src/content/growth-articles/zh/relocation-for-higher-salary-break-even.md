@@ -222,6 +222,5 @@ $$
 
 ## Related Guides
 
-- [工作價格換算成真實時薪](https://worthcalc.win/en/price-in-work-hours/)
 - [換工作薪資空窗](https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)

@@ -198,8 +198,6 @@ WorthCalc 不給「50%投資、30%存款」這種通用比例，因為每個人�
 
 ## 延伸閱讀與工具
 
-- [還債先看利率還是月付釋放](https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/)
-- [緊急預備金用掉後補回](https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/)
 - [固定成本率](https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/)
 
 

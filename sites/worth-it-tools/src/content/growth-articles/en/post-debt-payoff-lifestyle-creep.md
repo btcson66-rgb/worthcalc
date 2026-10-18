@@ -408,7 +408,7 @@ It preserves the old payment habit while changing the recipient from a lender to
 ## Related Guides
 
 - [Credit Card Payoff Calculator](https://worthcalc.win/en/tools/credit-card-payoff/) — model the payment path before the balance reaches zero.
-- [Financial Runway Months](https://worthcalc.win/en/guides/financial-runway-months/) — verify whether the eliminated payment actually increases resilience to an income interruption.
+- Financial Runway Months — verify whether the eliminated payment actually increases resilience to an income interruption.
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/) — create the new post-payoff monthly baseline and track whether fixed commitments rise again.
 
 ## Sources & Limitations

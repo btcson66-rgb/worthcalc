@@ -65,10 +65,6 @@ Yes — subtract any remaining payoff on the trade-in from its value first.
 
 No — it's an editable personal budgeting choice, not a lender rule.
 
-Once you have an affordable vehicle price, compare the payment savings from a larger down payment with the cash reserve you give up.
-
-[car down payment versus liquidity](/en/guides/car-down-payment-vs-liquidity/)
-
 - [60 vs 72 vs 84 month car loan](/en/guides/car-loan-60-vs-72-vs-84-early-exit/)
 
 - [pay cash for car vs finance](/en/guides/cash-vs-financing-car-liquidity/)

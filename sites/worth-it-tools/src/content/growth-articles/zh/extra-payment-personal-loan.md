@@ -243,14 +243,5 @@ breadcrumbLabel: "信貸提前還款划算嗎？先算省下利息，再扣違�
 
 ## 延伸閱讀
 
-- [貸款攤還表怎麼看？](/zh/guides/amortization-schedule-explained/)
 - [先存預備金還是先還債？](/zh/emergency-fund-how-much/)
 - [DTI／DBR 工具](/zh/tools/dti-calculator/)
-
-如果同時有多筆債務，不只要算提前還款省息，也要看清掉哪一筆能最快降低每月固定付款。
-
-[月付釋放](/zh/guides/debt-paydown-interest-vs-cashflow/)
-
-提前還本金之外，也可把轉貸的一次性費用、月付差與持有期間放在同一張 break-even 表比較。
-
-[轉貸回本點](/zh/guides/loan-refinance-break-even/)

@@ -26,7 +26,7 @@ effective cost per gallon heated = (energy + delivery charges + maintenance + eq
 
 Compare high-demand and low-demand weeks. A storage tank can have a meaningful standby component even when few gallons are drawn; a heat-pump water heater has operating conditions, backup resistance, installation space, and temperature limits to investigate. Separate water, sewer, and heating costs.
 
-Compare this with the [previous guide](/en/guides/refrigerator-cost-per-day-used/), [next guide](/en/guides/oven-stove-cost-per-cooking-hour-used/), [electricity unit-cost guide](/en/guides/electricity-cost-per-kwh-used/), and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
+Compare this with the [previous guide](/en/guides/refrigerator-cost-per-day-used/), [next guide](/en/guides/oven-stove-cost-per-cooking-hour-used/), electricity unit-cost guide, and [natural-gas unit-cost guide](/en/guides/natural-gas-cost-per-therm-used/).
 
 ## Limits and common mistakes
 

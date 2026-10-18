@@ -366,7 +366,6 @@ This page is an educational cash-flow framework. Eligibility for tax credits, em
 
 - [Childcare vs. Returning to Work Break-Even](https://worthcalc.win/en/guides/childcare-return-to-work-break-even/)
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/)
-- [Financial Runway Months](https://worthcalc.win/en/guides/financial-runway-months/)
 
 ## How to turn the model into an operating rule
 

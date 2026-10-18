@@ -321,10 +321,7 @@ IRS guidance explains that qualifying work-related education can receive differe
 
 - https://www.irs.gov/taxtopics/tc513
 - https://www.irs.gov/publications/p970
-- https://worthcalc.win/en/price-in-work-hours/
 
 ## Related Guides
 
-- [Price in Work Hours](https://worthcalc.win/en/price-in-work-hours/)
-- [Cash Runway Before Quitting](https://worthcalc.win/en/guides/cash-runway-before-quitting-job/)
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/)

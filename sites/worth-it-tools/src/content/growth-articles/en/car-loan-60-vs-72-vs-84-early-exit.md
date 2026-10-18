@@ -237,10 +237,6 @@ Use Car Affordability for total transportation-cost capacity, then use this guid
 
 ## Related Guides and Tools
 
-- [Amortization Schedule Explained](https://worthcalc.win/en/guides/amortization-schedule-explained/)
-- [Car Down Payment vs. Liquidity](https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/)
-- [Cash Discount vs. Financing](https://worthcalc.win/en/guides/cash-discount-vs-financing/)
-
 - [If you may trade before payoff, add a negative-equity rollover test instead of comparing 60-, 72-, and 84-month payments in isolation.](/en/guides/auto-loan-negative-equity-rollover-cost/)
 
 - [An early vehicle exit should compare the lender payoff with both trade-in and realistic private-sale proceeds, not only the scheduled remaining balance.](/en/guides/trade-in-vs-private-sale-net-proceeds/)

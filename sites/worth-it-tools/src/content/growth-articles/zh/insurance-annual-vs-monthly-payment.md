@@ -205,8 +205,6 @@ WorthCalc 不假設「所有年繳都便宜X%」，只使用你拿到的真實�
 
 ## 延伸閱讀與工具
 
-- [年度支出換算月預算](https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/)
-- [目標基金期限反推](https://worthcalc.win/zh/guides/sinking-fund-by-deadline/)
 - [保險自負額現金準備](https://worthcalc.win/zh/guides/insurance-deductible-cash-reserve/)
 
 

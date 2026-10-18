@@ -21,31 +21,6 @@ export interface SeoPackageGuideMeta {
 }
 
 export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
-  "en/amortization-schedule-explained": {
-    "key": "en/amortization-schedule-explained",
-    "packageId": "002",
-    "locale": "en",
-    "articleSlug": "amortization-schedule-explained",
-    "title": "Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments",
-    "seoTitle": "Amortization Schedule Explained: Formula, Examples, and Extra Payments",
-    "metaDescription": "Learn how a fixed-payment amortization schedule splits principal and interest, why interest is heavier early, and how extra principal changes payoff timing and total interest.",
-    "excerpt": "Understand each row of an amortization table and use it to evaluate payoff, refinancing, or extra-principal decisions.",
-    "canonical": "https://worthcalc.win/en/guides/amortization-schedule-explained/",
-    "robots": "index,follow",
-    "ogTitle": "Amortization Schedule Explained: The Payment Can Stay Flat While the Mix Changes",
-    "ogDescription": "A $30,000 loan at 6% for 36 months has a payment of about $912.66, but the interest portion falls as principal declines. Follow the first rows.",
-    "ogImage": "/images/guides/amortization-schedule-explained-og.webp",
-    "imageAlt": "amortization schedule principal interest balance chart",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/en/guides/loan-term-vs-monthly-payment/",
-      "/en/guides/apr-vs-apy/",
-      "/en/tools/installment-true-apr/"
-    ],
-    "breadcrumbLabel": "Amortization Schedule Explained: Principal, Interest, Balance, and Extra Payments",
-    "schemaFile": "002__en__amortization-schedule-explained.json"
-  },
   "en/annual-bills-cash-flow-low-point": {
     "key": "en/annual-bills-cash-flow-low-point",
     "packageId": "007",
@@ -164,37 +139,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/guides/debt-consolidation-break-even/",
-      "https://worthcalc.win/en/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/en/guides/loan-refinance-break-even/"
+      "https://worthcalc.win/en/guides/debt-consolidation-break-even/"
     ],
     "breadcrumbLabel": "Balance Transfer Break-Even: Fee, Promo Window, and Required Payoff Payment",
     "schemaFile": "004__en__balance-transfer-break-even.json"
-  },
-  "en/car-down-payment-vs-liquidity": {
-    "key": "en/car-down-payment-vs-liquidity",
-    "packageId": "005",
-    "locale": "en",
-    "articleSlug": "car-down-payment-vs-liquidity",
-    "title": "Car Down Payment vs. Liquidity: Lower Loan Payment or More Cash After Purchase?",
-    "seoTitle": "Car Down Payment vs. Liquidity: Cost Trade-Off | WorthCalc",
-    "metaDescription": "Compare a larger car down payment with keeping more cash. Model the monthly payment, interest, post-purchase runway, and early-sale loan balance.",
-    "excerpt": "A bigger down payment lowers the amount financed, but it does not make the car itself cheaper. The decision is how much future loan cost you avoid versus how much cash flexibility you give up today.",
-    "canonical": "https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/",
-    "robots": "index,follow",
-    "ogTitle": "Car Down Payment vs. Liquidity",
-    "ogDescription": "Compare the lower payment and interest from a bigger down payment with the cash reserve you lose at purchase.",
-    "ogImage": "/images/guides/car-down-payment-vs-liquidity.webp",
-    "imageAlt": "Car down payment comparison showing amount financed, monthly payment, total interest, and cash remaining after purchase",
-    "imageBrief": "WorthCalc decision graphic comparing 10% and 20% down on the same car price; no manufacturer logos, dealer offers, or promised rates.",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/en/tools/car-affordability/",
-      "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/"
-    ],
-    "breadcrumbLabel": "Car Down Payment vs. Liquidity",
-    "schemaFile": "005__en__car-down-payment-vs-liquidity.json"
   },
   "en/car-loan-60-vs-72-vs-84-early-exit": {
     "key": "en/car-loan-60-vs-72-vs-84-early-exit",
@@ -215,86 +163,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-02",
     "related": [
       "https://worthcalc.win/en/tools/car-affordability/",
-      "https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/",
       "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/"
     ],
     "breadcrumbLabel": "Car Loan 60 vs. 72 vs. 84 Months: Compare the Balance at an Early Exit, Not Just the Payment",
     "schemaFile": "006__en__car-loan-60-vs-72-vs-84-early-exit.json"
-  },
-  "en/cash-discount-vs-financing": {
-    "key": "en/cash-discount-vs-financing",
-    "packageId": "002",
-    "locale": "en",
-    "articleSlug": "cash-discount-vs-financing",
-    "title": "Cash Discount vs. Financing: The Discount You Give Up Is Part of the Borrowing Cost",
-    "seoTitle": "Cash Discount vs. Financing: Calculate the Implied Cost of Installments",
-    "metaDescription": "A $9,500 cash price versus $10,000 paid over 12 months is not simply a 5.26% financing rate. Put every payment on a timeline and calculate the implied annual cost.",
-    "excerpt": "Translate a cash-price discount into a time-based financing cost, then compare that cost with the value of keeping liquidity.",
-    "canonical": "https://worthcalc.win/en/guides/cash-discount-vs-financing/",
-    "robots": "index,follow",
-    "ogTitle": "Cash Discount vs. Financing: Turn the Price Difference Into a Real Cost",
-    "ogDescription": "A $9,500 cash price versus $10,000 over 12 equal payments has a 5.26% price gap, but the simplified implied effective annual financing cost is about 10%.",
-    "ogImage": "/images/guides/cash-discount-vs-financing-og.webp",
-    "imageAlt": "cash discount versus installment financing timeline diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/en/tools/installment-true-apr/",
-      "/en/guides/apr-vs-apy/",
-      "/en/guides/loan-term-vs-monthly-payment/"
-    ],
-    "breadcrumbLabel": "Cash Discount vs. Financing: The Discount You Give Up Is Part of the Borrowing Cost",
-    "schemaFile": "002__en__cash-discount-vs-financing.json"
-  },
-  "en/cash-flow-buffer-vs-emergency-fund": {
-    "key": "en/cash-flow-buffer-vs-emergency-fund",
-    "packageId": "002",
-    "locale": "en",
-    "articleSlug": "cash-flow-buffer-vs-emergency-fund",
-    "title": "Cash-Flow Buffer vs. Emergency Fund: They Solve Different Problems",
-    "seoTitle": "Cash-Flow Buffer vs. Emergency Fund: How Much of Each Do You Need?",
-    "metaDescription": "A cash-flow buffer covers predictable timing gaps; an emergency fund covers genuine shocks. Use a dated cash-flow map, worked examples, and a risk matrix to size each layer.",
-    "excerpt": "Separate predictable timing risk from true financial emergencies before deciding how much cash to hold.",
-    "canonical": "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/",
-    "robots": "index,follow",
-    "ogTitle": "Cash-Flow Buffer vs. Emergency Fund: Two Different Jobs for Cash",
-    "ogDescription": "One layer prevents normal bills from colliding with payday. The other protects you when income or necessary expenses change unexpectedly. Calculate both.",
-    "ogImage": "/images/guides/cash-flow-buffer-vs-emergency-fund-og.webp",
-    "imageAlt": "cash flow buffer and emergency fund two-layer diagram",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/en/tools/budget-builder/",
-      "/en/guides/emergency-fund-irregular-income/",
-      "/en/guides/annual-bills-monthly-equivalent/"
-    ],
-    "breadcrumbLabel": "Cash-Flow Buffer vs. Emergency Fund: They Solve Different Problems",
-    "schemaFile": "002__en__cash-flow-buffer-vs-emergency-fund.json"
-  },
-  "en/cash-runway-before-quitting-job": {
-    "key": "en/cash-runway-before-quitting-job",
-    "packageId": "008",
-    "locale": "en",
-    "articleSlug": "cash-runway-before-quitting-job",
-    "title": "Cash Runway Before Quitting Your Job: Build a Dated Bridge to the Next Reliable Income",
-    "seoTitle": "Cash Runway Before Quitting a Job | WorthCalc",
-    "metaDescription": "Calculate how many weeks your cash can cover after quitting. Model fixed bills, one-time exit costs, first-paycheck timing and a protected cash floor.",
-    "excerpt": "Your bank balance is not all runway. Separate a protected cash floor, known transition costs, monthly burn, annual bills, and the date of the next reliable paycheck.",
-    "canonical": "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/",
-    "robots": "index,follow",
-    "ogTitle": "Cash Runway Before Quitting a Job | WorthCalc",
-    "ogDescription": "Calculate how many weeks your cash can cover after quitting. Model fixed bills, one-time exit costs, first-paycheck timing and a protected cash floor.",
-    "ogImage": "/images/guides/cash-runway-before-quitting-job.webp",
-    "imageAlt": "Job resignation cash timeline showing protected floor, transition cash, monthly burn, annual bills, final paycheck, and first reliable new paycheck",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/budget-with-irregular-income/",
-      "https://worthcalc.win/en/guides/financial-runway-months/",
-      "https://worthcalc.win/en/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "Cash Runway Before Quitting Your Job: Build a Dated Bridge to the Next Reliable Income",
-    "schemaFile": "008__en__cash-runway-before-quitting-job.json"
   },
   "en/cash-vs-financing-car-liquidity": {
     "key": "en/cash-vs-financing-car-liquidity",
@@ -315,7 +187,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-02",
     "related": [
       "https://worthcalc.win/en/tools/car-affordability/",
-      "https://worthcalc.win/en/guides/car-down-payment-vs-liquidity/",
       "https://worthcalc.win/en/guides/personal-liquidity-ratio/"
     ],
     "breadcrumbLabel": "Pay Cash for a Car vs. Finance: A Liquidity-Adjusted Cost Test",
@@ -340,7 +211,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-02",
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/guides/financial-runway-months/",
       "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/"
     ],
     "breadcrumbLabel": "Childcare vs. Returning to Work: A Take-Home Pay Break-Even Framework",
@@ -364,8 +234,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/en/guides/amortization-schedule-explained/",
       "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/"
     ],
     "breadcrumbLabel": "Debt Consolidation Break-Even: Lower Payment vs. Lower Total Cost",
@@ -396,30 +264,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Personal Debt-to-Assets Ratio: A Balance-Sheet Metric, Not a Lending DTI Rule",
     "schemaFile": "002__en__debt-to-assets-ratio-personal.json"
   },
-  "en/financial-runway-months": {
-    "key": "en/financial-runway-months",
-    "packageId": "003",
-    "locale": "en",
-    "articleSlug": "financial-runway-months",
-    "title": "Financial Runway Months: How Long Can Your Cash Flow Last?",
-    "seoTitle": "Financial Runway Months: Cash-Flow Stress Test | WorthCalc",
-    "metaDescription": "Calculate financial runway from accessible cash, stress spending, and conservative income. Use monthly cash-flow scenarios to find the real low-cash point.",
-    "excerpt": "For freelancers and variable-income households, runway is more useful when it includes conservative income, essential spending and known future cash outflows—not just cash divided by average spending.",
-    "canonical": "https://worthcalc.win/en/guides/financial-runway-months/",
-    "robots": "index,follow",
-    "ogTitle": "Financial Runway Months: Build a Base, Stress and Zero-Income Case",
-    "ogDescription": "Turn accessible cash and essential spending into a dynamic runway instead of relying on a single emergency-fund number.",
-    "ogImage": "/images/guides/financial-runway-months-en.webp",
-    "imageAlt": "Financial runway months formula showing cash, conservative income and essential expenses",
-    "imageBrief": "Clean WorthCalc editorial diagram with formulas, scenario comparison, no stock-photo finance imagery, no invented market data.",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/en/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/"
-    ],
-    "breadcrumbLabel": "Financial Runway Months",
-    "schemaFile": "003__en__financial-runway-months.json"
-  },
   "en/fixed-vs-variable-rate": {
     "key": "en/fixed-vs-variable-rate",
     "packageId": "003",
@@ -438,9 +282,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "Clean WorthCalc editorial diagram with formulas, scenario comparison, no stock-photo finance imagery, no invented market data.",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/",
-      "https://worthcalc.win/en/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/en/guides/amortization-schedule-explained/"
+      "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/"
     ],
     "breadcrumbLabel": "Fixed vs. Variable Rate",
     "schemaFile": "003__en__fixed-vs-variable-rate.json"
@@ -464,7 +306,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/en/budget-with-irregular-income/",
-      "https://worthcalc.win/en/price-in-work-hours/",
       "https://worthcalc.win/en/tools/budget-builder/"
     ],
     "breadcrumbLabel": "Freelance Minimum Billable Rate: Price for Taxes, Non-Billable Time, Benefits and Profit",
@@ -543,31 +384,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "Insurance Deductible Cash Reserve",
     "schemaFile": "005__en__insurance-deductible-cash-reserve.json"
   },
-  "en/loan-refinance-break-even": {
-    "key": "en/loan-refinance-break-even",
-    "packageId": "003",
-    "locale": "en",
-    "articleSlug": "loan-refinance-break-even",
-    "title": "Loan Refinance Break-Even: How Long Until a Lower Rate Actually Pays Off?",
-    "seoTitle": "Loan Refinance Break-Even: Fees & Holding Period | WorthCalc",
-    "metaDescription": "Calculate refinance break-even from fees and monthly savings, then compare remaining balances, holding periods, term extensions, and payoff costs.",
-    "excerpt": "A lower rate is not enough. Compare upfront costs, monthly savings, the remaining term and the length of time you expect to keep the new loan.",
-    "canonical": "https://worthcalc.win/en/guides/loan-refinance-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "Loan Refinance Break-Even: Lower Rate, Real Cost",
-    "ogDescription": "Find out how many months it takes to recover refinance costs—and when a lower payment can still cost more.",
-    "ogImage": "/images/guides/loan-refinance-break-even-en.webp",
-    "imageAlt": "Loan refinance break-even formula with upfront costs divided by monthly payment savings",
-    "imageBrief": "Clean WorthCalc editorial diagram with formulas, scenario comparison, no stock-photo finance imagery, no invented market data.",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/en/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/en/loan-term-monthly-payment-vs-total-interest/",
-      "https://worthcalc.win/en/tools/mortgage-payoff/"
-    ],
-    "breadcrumbLabel": "Loan Refinance Break-Even",
-    "schemaFile": "003__en__loan-refinance-break-even.json"
-  },
   "en/mortgage-points-break-even": {
     "key": "en/mortgage-points-break-even",
     "packageId": "005",
@@ -586,7 +402,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc editorial chart showing zero-point and point-paid mortgage offers, cumulative cost lines, and break-even month; no lender logos or advertised rates.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/guides/loan-refinance-break-even/",
       "https://worthcalc.win/en/guides/mortgage-recast-vs-refinance-vs-extra-principal/",
       "https://worthcalc.win/en/tools/mortgage-payoff/"
     ],
@@ -611,9 +426,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/en/tools/mortgage-payoff/",
-      "https://worthcalc.win/en/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/en/guides/amortization-schedule-explained/"
+      "https://worthcalc.win/en/tools/mortgage-payoff/"
     ],
     "breadcrumbLabel": "Mortgage Recast vs. Refinance vs. Extra Principal: Lower Payment, Lower Rate, or Faster Payoff?",
     "schemaFile": "004__en__mortgage-recast-vs-refinance-vs-extra-principal.json"
@@ -636,9 +449,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "Clean WorthCalc editorial diagram with formulas, scenario comparison, no stock-photo finance imagery, no invented market data.",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/",
-      "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/",
-      "https://worthcalc.win/en/guides/financial-runway-months/"
+      "https://worthcalc.win/en/net-worth-vs-liquid-net-worth/"
     ],
     "breadcrumbLabel": "Personal Liquidity Ratio",
     "schemaFile": "003__en__personal-liquidity-ratio.json"
@@ -687,7 +498,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/",
       "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/"
     ],
     "breadcrumbLabel": "Prepay Rent Discount vs. Liquidity: Is Paying Months Upfront Actually Worth It?",
@@ -711,8 +521,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/",
       "https://worthcalc.win/en/tools/budget-builder/"
     ],
     "breadcrumbLabel": "Relocating for a Higher Salary: Calculate the Break-Even Before You Move",
@@ -737,36 +545,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/en/rent-vs-buy-breakeven-year/",
-      "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/",
-      "https://worthcalc.win/en/guides/financial-runway-months/"
+      "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/"
     ],
     "breadcrumbLabel": "Rent Increase vs. Moving Break-Even",
     "schemaFile": "005__en__rent-increase-vs-moving-break-even.json"
-  },
-  "en/sinking-fund-by-deadline": {
-    "key": "en/sinking-fund-by-deadline",
-    "packageId": "004",
-    "locale": "en",
-    "articleSlug": "sinking-fund-by-deadline",
-    "title": "Sinking Fund by Deadline: How Much to Save Each Month for a Known Future Expense",
-    "seoTitle": "Sinking Fund by Deadline: Monthly Savings Formula | WorthCalc",
-    "metaDescription": "Turn a known future bill into a monthly savings target using goal amount, current balance, and remaining pay periods. Includes catch-up and irregular-income examples.",
-    "excerpt": "When the bill is predictable, convert it into a small recurring contribution now. The basic model is the remaining goal gap divided by the number of contributions left before the deadline.",
-    "canonical": "https://worthcalc.win/en/guides/sinking-fund-by-deadline/",
-    "robots": "index,follow",
-    "ogTitle": "Sinking Fund by Deadline",
-    "ogDescription": "Turn a future annual bill or planned purchase into a monthly or per-paycheck target, then recalculate when you fall behind.",
-    "ogImage": "/images/guides/sinking-fund-by-deadline.webp",
-    "imageAlt": "Sinking fund timeline showing goal, current saved balance, deadline, remaining pay periods, and monthly contribution",
-    "imageBrief": "WorthCalc editorial infographic focused on transparent formulas, timelines, scenario comparisons and decision math; do not invent lender quotes, approval claims, market averages or guaranteed investment outcomes.",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/",
-      "https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/",
-      "https://worthcalc.win/en/guides/financial-runway-months/"
-    ],
-    "breadcrumbLabel": "Sinking Fund by Deadline: How Much to Save Each Month for a Known Future Expense",
-    "schemaFile": "004__en__sinking-fund-by-deadline.json"
   },
   "en/trade-in-vs-private-sale-net-proceeds": {
     "key": "en/trade-in-vs-private-sale-net-proceeds",
@@ -811,9 +593,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/en/tools/budget-builder/",
-      "https://worthcalc.win/en/guides/cash-runway-before-quitting-job/"
+      "https://worthcalc.win/en/tools/budget-builder/"
     ],
     "breadcrumbLabel": "Training or Certification Break-Even: How Much Extra Income Must the Course Create?",
     "schemaFile": "008__en__training-certification-break-even.json"
@@ -861,35 +641,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "AI 工具訂閱真的回本嗎？不要用「宣稱節省時間」，只算你實際追回的時間與可用產出",
     "schemaFile": "009__zh__ai-tool-realized-time-savings-break-even.json"
-  },
-  "zh/amortization-schedule-explained": {
-    "key": "zh/amortization-schedule-explained",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "amortization-schedule-explained",
-    "title": "貸款攤還表怎麼看？為什麼前期利息多、後期本金多",
-    "seoTitle": "貸款攤還表怎麼看？本金、利息、餘額與提前還款完整解析",
-    "metaDescription": "看懂本息平均攤還表：月付公式、每期利息與本金、剩餘餘額、總利息，以及提前還款如何改變後續現金流。",
-    "excerpt": "讀懂固定付款貸款中每一期的利息、本金與餘額，不被「每月都繳一樣」誤導。",
-    "canonical": "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-    "robots": "index,follow",
-    "ogTitle": "貸款攤還表：每月一樣，裡面的本金與利息卻一直變",
-    "ogDescription": "用 30 萬、年利率 6%、36 期完整示例，拆出月付、前幾期本金利息與總成本，再看提前還款如何改變結果。",
-    "ogImage": "/images/guides/amortization-schedule-explained-og.webp",
-    "imageAlt": "貸款攤還表本金利息與餘額變化圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/guides/loan-term-vs-monthly-payment/",
-      "/zh/tools/installment-true-apr/"
-    ],
-    "breadcrumbLabel": "貸款攤還表怎麼看？為什麼前期利息多、後期本金多",
-    "schemaFile": "002__zh__amortization-schedule-explained.json"
   },
   "zh/annual-bill-cluster-cash-low-point": {
     "key": "zh/annual-bill-cluster-cash-low-point",
@@ -915,31 +670,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     ],
     "breadcrumbLabel": "年繳帳單都擠在同一季怎麼辦？用年度現金最低點安排保險、稅費與會員續約",
     "schemaFile": "007__zh__annual-bill-cluster-cash-low-point.json"
-  },
-  "zh/annual-expenses-monthly-equivalent": {
-    "key": "zh/annual-expenses-monthly-equivalent",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "annual-expenses-monthly-equivalent",
-    "title": "年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲",
-    "seoTitle": "年度支出怎麼換算每月預算？年繳保費、稅金與維修完整算法",
-    "metaDescription": "把年繳保費、牌照稅、學費、維修與會員費換算成每月提存，並用 catch-up 公式處理已經來不及從年初開始存的情況。",
-    "excerpt": "把非每月發生但可預期的支出攤回月度預算，減少到期時動用信用或預備金。",
-    "canonical": "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-    "robots": "index,follow",
-    "ogTitle": "年度支出不是意外：把年繳費用攤回每月",
-    "ogDescription": "年繳保費、稅金、學費和維修不應每次都變成「突發支出」。用兩條公式建立月提存與中途補存計畫。",
-    "ogImage": "/images/guides/annual-expenses-monthly-equivalent-og.webp",
-    "imageAlt": "年度支出換算每月預算與提存時間線",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/budget-builder/",
-      "/zh/guides/cash-flow-buffer-vs-emergency-fund/",
-      "/zh/guides/emergency-fund-vs-sinking-fund/"
-    ],
-    "breadcrumbLabel": "年度支出怎麼換算成每月預算？別再被年繳保費、稅金與維修偷襲",
-    "schemaFile": "002__zh__annual-expenses-monthly-equivalent.json"
   },
   "zh/auto-loan-negative-equity-rollover-cost": {
     "key": "zh/auto-loan-negative-equity-rollover-cost",
@@ -983,10 +713,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageAlt": "信用卡餘額轉移時間軸，顯示轉移費、0% 優惠期、每月還款與到期後 APR",
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/"
-    ],
+    "related": [],
     "breadcrumbLabel": "信用卡餘額轉移划算嗎？0% 優惠也要把轉移費、期限與到期 APR 算進去",
     "schemaFile": "004__zh__balance-transfer-fee-break-even.json"
   },
@@ -1009,185 +736,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "高底薪 vs 高獎金怎麼選？不要只比年薪，先測「固定支出承受力」與獎金落空風險",
     "schemaFile": "009__zh__base-salary-vs-bonus-fixed-cost-capacity.json"
-  },
-  "zh/car-down-payment-vs-liquidity": {
-    "key": "zh/car-down-payment-vs-liquidity",
-    "packageId": "005",
-    "locale": "zh",
-    "articleSlug": "car-down-payment-vs-liquidity",
-    "title": "車貸頭期款放多少？不要只降月付，先算買車後還剩多少現金",
-    "seoTitle": "車貸頭期款放多少？月付、利息與流動性完整比較｜WorthCalc",
-    "metaDescription": "車貸頭期越高，借款與月付通常越低，但也會吃掉買車後現金。用同一車價比較 20% 與 40% 頭期、總利息、現金跑道與負資產風險。",
-    "excerpt": "多放頭期款不是把車「買便宜」，而是把一部分未來貸款改成今天先付現金。真正要比較的是少借多少、少付多少利息，以及交車後還有多少安全墊。",
-    "canonical": "https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/",
-    "robots": "index,follow",
-    "ogTitle": "車貸頭期款越多越好嗎？",
-    "ogDescription": "用相同車價比較不同頭期下的月付、總利息與剩餘現金。",
-    "ogImage": "/images/guides/car-down-payment-vs-liquidity.webp",
-    "imageAlt": "汽車頭期款兩方案比較圖，顯示貸款本金、月付、總利息與交車後現金",
-    "imageBrief": "WorthCalc 汽車財務決策資訊圖；顯示同一車價下兩種頭期款、貸款本金、月付與現金跑道，不使用品牌車款或假利率廣告。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/tools/car-affordability/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
-    ],
-    "breadcrumbLabel": "車貸頭期款 vs 流動性",
-    "schemaFile": "005__zh__car-down-payment-vs-liquidity.json"
-  },
-  "zh/car-loan-60-72-84-early-exit": {
-    "key": "zh/car-loan-60-72-84-early-exit",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "car-loan-60-72-84-early-exit",
-    "title": "車貸 60／72／84 期怎麼比？不要只看月付，先看第 2、3 年剩餘本金",
-    "seoTitle": "車貸60、72、84期怎麼選？剩餘本金與提前換車風險｜WorthCalc",
-    "metaDescription": "比較車貸60、72、84期，不只看月付與總利息。用同一貸款本金計算第24、36月剩餘本金、提前換車淨權益與負資產風險。",
-    "excerpt": "拉長車貸期數可以讓月付下降，但同時讓本金下降得更慢。若你可能第2、3年換車，真正要看的不是84期月付多低，而是那一天還欠多少。",
-    "canonical": "https://worthcalc.win/zh/guides/car-loan-60-72-84-early-exit/",
-    "robots": "index,follow",
-    "ogTitle": "車貸 60／72／84 期：第 3 年你還欠多少？",
-    "ogDescription": "用同一本金比較月付、總利息、第24／36月剩餘本金與提前換車負資產風險。",
-    "ogImage": "/images/guides/car-loan-60-72-84-early-exit.webp",
-    "imageAlt": "60期、72期與84期車貸比較，顯示月付、總利息與第24第36月剩餘本金",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/tools/car-affordability/",
-      "https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/",
-      "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
-    ],
-    "breadcrumbLabel": "車貸 60／72／84 期怎麼比？不要只看月付，先看第 2、3 年剩餘本金",
-    "schemaFile": "006__zh__car-loan-60-72-84-early-exit.json"
-  },
-  "zh/car-major-repair-hold-period-break-even": {
-    "key": "zh/car-major-repair-hold-period-break-even",
-    "packageId": "008",
-    "locale": "zh",
-    "articleSlug": "car-major-repair-hold-period-break-even",
-    "title": "車子大修後還要開多久才回本？把維修費、換車成本與持有期放進同一張表",
-    "seoTitle": "車子大修後要開多久才回本？維修 vs 換車完整算法｜WorthCalc",
-    "metaDescription": "車子要修 5 萬、9 萬甚至更多時，不要只問修不修。用維修後可靠月份、換車完整月成本、停車與保險差、停駛成本與退出價值，算這次大修至少要買到幾個月才合理。",
-    "excerpt": "把「修 9 萬很貴」改成「這 9 萬至少要換到多少可靠使用月數」。本頁用未來成本而非沉沒成本，建立修車與換車的同期間比較。",
-    "canonical": "https://worthcalc.win/zh/guides/car-major-repair-hold-period-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "車子大修後要開多久才回本？維修 vs 換車完整算法 | WorthCalc",
-    "ogDescription": "車子要修 5 萬、9 萬甚至更多時，不要只問修不修。用維修後可靠月份、換車完整月成本、停車與保險差、停駛成本與退出價值，算這次大修至少要買到幾個月才合理。",
-    "ogImage": "/images/guides/car-major-repair-hold-period-break-even.webp",
-    "imageAlt": "汽車大修報價、修後可靠月份、換車總月成本與最低回本月份的比較圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/repair-or-replace-decision-formula/",
-      "https://worthcalc.win/en/new-vs-used-car-total-cost/",
-      "https://worthcalc.win/zh/tools/car-affordability/"
-    ],
-    "breadcrumbLabel": "車子大修後還要開多久才回本？把維修費、換車成本與持有期放進同一張表",
-    "schemaFile": "008__zh__car-major-repair-hold-period-break-even.json"
-  },
-  "zh/cash-discount-vs-financing": {
-    "key": "zh/cash-discount-vs-financing",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "cash-discount-vs-financing",
-    "title": "現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本",
-    "seoTitle": "現金折扣 vs 分期怎麼算？把價差換成真實融資成本",
-    "metaDescription": "現金價 95,000、分期總價 100,000，不是只差 5.26%。把付款時間放進 IRR，算出隱含年化融資成本，再比較流動性價值。",
-    "excerpt": "把現金折扣與分期總價的差額換成時間化融資成本，避免把價差百分比誤當 APR。",
-    "canonical": "https://worthcalc.win/zh/guides/cash-discount-vs-financing/",
-    "robots": "index,follow",
-    "ogTitle": "現金價 vs 分期：價差不是完整利率",
-    "ogDescription": "95,000 現金買或 100,000 分 12 期，表面價差 5.26%；把 12 個付款時點算進去，教學模型的隱含有效年成本約 10%。",
-    "ogImage": "/images/guides/cash-discount-vs-financing-og.webp",
-    "imageAlt": "現金折扣與分期隱含融資成本比較圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/installment-true-apr/",
-      "/zh/guides/installment-zero-interest/"
-    ],
-    "breadcrumbLabel": "現金價比較便宜，分期等於多貴？把「放棄現金折扣」換算成融資成本",
-    "schemaFile": "002__zh__cash-discount-vs-financing.json"
-  },
-  "zh/cash-flow-buffer-vs-emergency-fund": {
-    "key": "zh/cash-flow-buffer-vs-emergency-fund",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "cash-flow-buffer-vs-emergency-fund",
-    "title": "現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題",
-    "seoTitle": "現金流緩衝 vs 緊急預備金｜怎麼分、要留多少？完整計算法",
-    "metaDescription": "現金流緩衝與緊急預備金不是同一筆錢。用日期現金流、最低帳戶餘額與支出風險，算出各自需要多少，並附完整案例與檢查表。",
-    "excerpt": "先處理「錢什麼時候進出」，再處理真正的意外。這篇把兩種安全墊拆開計算，避免把所有現金都混成一筆。",
-    "canonical": "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/",
-    "robots": "index,follow",
-    "ogTitle": "現金流緩衝 vs 緊急預備金：兩筆錢怎麼分？",
-    "ogDescription": "一筆處理帳單日期錯位，一筆處理失業、醫療與突發事件。用案例、公式和敏感度分析算出你的安全墊。",
-    "ogImage": "/images/guides/cash-flow-buffer-vs-emergency-fund-og.webp",
-    "imageAlt": "現金流緩衝與緊急預備金兩層安全墊示意圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/budget-builder/",
-      "/zh/guides/emergency-fund-how-much/",
-      "/zh/guides/annual-expenses-monthly-equivalent/"
-    ],
-    "breadcrumbLabel": "現金流緩衝 vs 緊急預備金：兩筆錢其實在解決不同問題",
-    "schemaFile": "002__zh__cash-flow-buffer-vs-emergency-fund.json"
-  },
-  "zh/cash-runway-before-quitting-job": {
-    "key": "zh/cash-runway-before-quitting-job",
-    "packageId": "008",
-    "locale": "zh",
-    "articleSlug": "cash-runway-before-quitting-job",
-    "title": "離職前要準備多少現金？不要只用「幾個月預備金」，改做離職現金跑道",
-    "seoTitle": "離職前要準備多少現金？離職 Cash Runway 完整算法｜WorthCalc",
-    "metaDescription": "準備離職時，不要直接用存款 ÷ 平均月支出。扣掉不能碰的安全底線、離職一次性成本與年度大帳單，再用下一筆可靠收入的日期建立真正的離職現金跑道。",
-    "excerpt": "離職跑道不是存款除平均支出。先保護不可動用底線、加入保險與年度帳單，再用日期而不是月平均找出真正能撐多久。",
-    "canonical": "https://worthcalc.win/zh/guides/cash-runway-before-quitting-job/",
-    "robots": "index,follow",
-    "ogTitle": "離職前要準備多少現金？離職 Cash Runway 完整算法 | WorthCalc",
-    "ogDescription": "準備離職時，不要直接用存款 ÷ 平均月支出。扣掉不能碰的安全底線、離職一次性成本與年度大帳單，再用下一筆可靠收入的日期建立真正的離職現金跑道。",
-    "ogImage": "/images/guides/cash-runway-before-quitting-job.webp",
-    "imageAlt": "離職日、最後薪資、每月必要支出、年度大帳單、下一份可靠收入與最低現金點的時間軸",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/",
-      "https://worthcalc.win/zh/guides/financial-runway-months/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "離職前要準備多少現金？不要只用「幾個月預備金」，改做離職現金跑道",
-    "schemaFile": "008__zh__cash-runway-before-quitting-job.json"
-  },
-  "zh/cash-vs-car-loan-liquidity-adjusted": {
-    "key": "zh/cash-vs-car-loan-liquidity-adjusted",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "cash-vs-car-loan-liquidity-adjusted",
-    "title": "現金買車 vs 車貸怎麼比？把確定利息與買車後流動性放同一模型",
-    "seoTitle": "現金買車 vs 車貸：利息、現金跑道與流動性完整比較｜WorthCalc",
-    "metaDescription": "現金買車省下融資成本，但會一次吃掉大量現金；車貸保留流動性但增加確定利息。用同一車價做流動性調整比較。",
-    "excerpt": "現金買車的優勢是少一筆確定融資成本；車貸的優勢是把現金留在手上。不要先假設投資報酬，只要先比較「確定利息」和「買車後還能撐多久」。",
-    "canonical": "https://worthcalc.win/zh/guides/cash-vs-car-loan-liquidity-adjusted/",
-    "robots": "index,follow",
-    "ogTitle": "現金買車還是車貸？先把流動性算進去",
-    "ogDescription": "不要用假設投資報酬替車貸辯護；先比較確定利息、交車後現金與壓力情境。",
-    "ogImage": "/images/guides/cash-vs-car-loan-liquidity-adjusted.webp",
-    "imageAlt": "現金買車與車貸比較，顯示融資成本、買車後現金與緊急跑道",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/tools/car-affordability/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/guides/car-down-payment-vs-liquidity/"
-    ],
-    "breadcrumbLabel": "現金買車 vs 車貸怎麼比？把確定利息與買車後流動性放同一模型",
-    "schemaFile": "006__zh__cash-vs-car-loan-liquidity-adjusted.json"
   },
   "zh/childcare-deposit-enrollment-cashflow": {
     "key": "zh/childcare-deposit-enrollment-cashflow",
@@ -1232,37 +784,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-02",
     "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-      "https://worthcalc.win/zh/guides/single-income-household-stress-test/"
+      "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "托育費多少才值得回職場？用稅後收入、通勤與福利做 Break-Even",
     "schemaFile": "006__zh__childcare-return-to-work-break-even.json"
-  },
-  "zh/commission-income-tax-reserve-cashflow": {
-    "key": "zh/commission-income-tax-reserve-cashflow",
-    "packageId": "007",
-    "locale": "zh",
-    "articleSlug": "commission-income-tax-reserve-cashflow",
-    "title": "佣金、獎金、接案收入怎麼留稅款？把「入帳很多」和「真正可花」分開",
-    "seoTitle": "佣金／接案收入稅款怎麼留？現金分桶完整方法｜WorthCalc",
-    "metaDescription": "佣金、接案與獎金收入入帳時，不要把全部都當可花現金。用已知扣繳、預估稅務義務、營運成本與淡季緩衝建立稅款準備金。",
-    "excerpt": "大額入帳不是等於可支配所得。先把代收／成本／稅務準備與淡季緩衝分開，再決定真正能進生活帳戶的金額。",
-    "canonical": "https://worthcalc.win/zh/guides/commission-income-tax-reserve-cashflow/",
-    "robots": "index,follow",
-    "ogTitle": "佣金／接案收入稅款怎麼留？現金分桶完整方法",
-    "ogDescription": "佣金、接案與獎金收入入帳時，不要把全部都當可花現金。用已知扣繳、預估稅務義務、營運成本與淡季緩衝建立稅款準備金。",
-    "ogImage": "/images/guides/commission-income-tax-reserve-cashflow.webp",
-    "imageAlt": "一筆佣金或接案收入入帳後拆成稅款、營運成本、淡季緩衝與可支配現金四個桶",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "/zh/guides/variable-bonus-income-fixed-obligations/",
-      "/zh/guides/emergency-fund-irregular-income/",
-      "/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "佣金、獎金、接案收入怎麼留稅款？把「入帳很多」和「真正可花」分開",
-    "schemaFile": "007__zh__commission-income-tax-reserve-cashflow.json"
   },
   "zh/debt-consolidation-break-even": {
     "key": "zh/debt-consolidation-break-even",
@@ -1281,11 +806,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageAlt": "債務整合比較表，顯示多筆舊債、新整合貸款、月付、總利息與期限",
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
-    ],
+    "related": [],
     "breadcrumbLabel": "債務整合划算嗎？不要只看月付變低，用期限重置與總成本算 Break-Even",
     "schemaFile": "004__zh__debt-consolidation-break-even.json"
   },
@@ -1314,30 +835,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "債務還清後為什麼還是沒錢？小心月付消失後被新的固定支出吃掉",
     "schemaFile": "007__zh__debt-free-fixed-cost-creep.json"
   },
-  "zh/debt-paydown-interest-vs-cashflow": {
-    "key": "zh/debt-paydown-interest-vs-cashflow",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "debt-paydown-interest-vs-cashflow",
-    "title": "還債先看利率，還是先釋放月付？數學成本與現金流壓力要分開算",
-    "seoTitle": "還債先看利率還是先釋放月付？比較利息與現金流｜WorthCalc",
-    "metaDescription": "高利率優先通常可省利息，但先清小額債務可能更快釋放月付。用利息成本、月付釋放、最低還款與現金流壓力比較兩種目標。",
-    "excerpt": "「最省利息」和「最快讓每月多出現金」是兩個不同目標。這篇把兩者分開計算，再用壓力情境決定優先順序。",
-    "canonical": "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
-    "robots": "index,follow",
-    "ogTitle": "還債先看利率還是先釋放月付？",
-    "ogDescription": "把總利息與每月現金流分開算，選擇符合你真正目標的還債順序。",
-    "ogImage": "/images/guides/debt-paydown-interest-vs-cashflow.webp",
-    "imageAlt": "多筆債務比較圖，分別以利率成本與月付釋放速度排序",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/extra-payment-personal-loan/",
-      "https://worthcalc.win/zh/tools/debt-strategy/"
-    ],
-    "breadcrumbLabel": "還債先看利率，還是先釋放月付？數學成本與現金流壓力要分開算",
-    "schemaFile": "003__zh__debt-paydown-interest-vs-cashflow.json"
-  },
   "zh/debt-to-assets-ratio-personal": {
     "key": "zh/debt-to-assets-ratio-personal",
     "packageId": "002",
@@ -1363,81 +860,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "個人負債資產比怎麼算？它和 DTI、DBR 完全不是同一件事",
     "schemaFile": "002__zh__debt-to-assets-ratio-personal.json"
   },
-  "zh/down-payment-vs-post-purchase-liquidity": {
-    "key": "zh/down-payment-vs-post-purchase-liquidity",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "down-payment-vs-post-purchase-liquidity",
-    "title": "頭期款放越多越好嗎？買房前真正要算的是「交屋後還剩多少流動現金」",
-    "seoTitle": "頭期款放多少？別只降房貸，先算交屋後流動性｜WorthCalc",
-    "metaDescription": "提高頭期款能降低貸款，但現金一旦投入房屋就不容易取回。用可動用資金、頭期款、交易／搬家成本與交屋後現金，做 Before/After Liquidity 比較。",
-    "excerpt": "頭期款越高，房貸通常越低；但現金一旦變成房屋權益，就不再是隨時可用的流動資產。真正要比較的是「貸款少多少」和「交屋後現金少多少」。",
-    "canonical": "https://worthcalc.win/zh/guides/down-payment-vs-post-purchase-liquidity/",
-    "robots": "index,follow",
-    "ogTitle": "頭期款越多越好嗎？先算交屋後現金",
-    "ogDescription": "用 Before/After Liquidity 比較較高頭期款與較高房貸，而不是只追求最低貸款金額。",
-    "ogImage": "/images/guides/down-payment-vs-post-purchase-liquidity.webp",
-    "imageAlt": "買房頭期款與交屋後流動現金比較圖，顯示可用資金、頭期款、費用與剩餘現金",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/"
-    ],
-    "breadcrumbLabel": "頭期款放越多越好嗎？買房前真正要算的是「交屋後還剩多少流動現金」",
-    "schemaFile": "004__zh__down-payment-vs-post-purchase-liquidity.json"
-  },
-  "zh/emergency-fund-rebuild-after-move": {
-    "key": "zh/emergency-fund-rebuild-after-move",
-    "packageId": "007",
-    "locale": "zh",
-    "articleSlug": "emergency-fund-rebuild-after-move",
-    "title": "搬家把緊急預備金花掉了怎麼補？先重建最低安全墊，再恢復完整目標",
-    "seoTitle": "搬家後緊急預備金怎麼補回？重建順序完整指南｜WorthCalc",
-    "metaDescription": "押金、搬家費、家具與重疊租金可能快速消耗現金。用搬家後必要支出、最低安全墊、已知新支出與每月可補回金額，規劃恢復路徑。",
-    "excerpt": "搬家後最危險的不是帳面存款變少，而是新的必要支出結構還沒穩定。先建立最低安全墊，再用真實三個月支出逐步把完整預備金補回。",
-    "canonical": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-move/",
-    "robots": "index,follow",
-    "ogTitle": "搬家後緊急預備金怎麼補回？重建順序完整指南",
-    "ogDescription": "押金、搬家費、家具與重疊租金可能快速消耗現金。用搬家後必要支出、最低安全墊、已知新支出與每月可補回金額，規劃恢復路徑。",
-    "ogImage": "/images/guides/emergency-fund-rebuild-after-move.webp",
-    "imageAlt": "搬家前後現金餘額、最低安全墊與逐月補回緊急預備金的時間軸",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "/zh/guides/rental-deposit-liquidity-cost/",
-      "/zh/guides/financial-runway-months/",
-      "/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "搬家把緊急預備金花掉了怎麼補？先重建最低安全墊，再恢復完整目標",
-    "schemaFile": "007__zh__emergency-fund-rebuild-after-move.json"
-  },
-  "zh/emergency-fund-rebuild-after-use": {
-    "key": "zh/emergency-fund-rebuild-after-use",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "emergency-fund-rebuild-after-use",
-    "title": "緊急預備金用掉後怎麼補回？先重算缺口，再決定補回速度",
-    "seoTitle": "緊急預備金用掉後怎麼補回？缺口與補回速度完整算法｜WorthCalc",
-    "metaDescription": "緊急預備金真的被用掉後，不是立刻回到原本存款率就好。用目標金額、剩餘餘額、補回期限與第二次衝擊情境，算出可執行的重建計畫。",
-    "excerpt": "真正的重點不是「趕快存回去」，而是先把新目標、剩餘現金、下一波已知支出與可承受月存額放在同一張重建表。",
-    "canonical": "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/",
-    "robots": "index,follow",
-    "ogTitle": "緊急預備金用掉後怎麼補回？",
-    "ogDescription": "先算缺口、期限與第二次衝擊，再排出不會把日常現金流壓垮的補回計畫。",
-    "ogImage": "/images/guides/emergency-fund-rebuild-after-use.webp",
-    "imageAlt": "緊急預備金重建時間軸，顯示目標、現有餘額、每月補回與第二次支出情境",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/emergency-fund-how-much/",
-      "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "緊急預備金用掉後怎麼補回？先重算缺口，再決定補回速度",
-    "schemaFile": "004__zh__emergency-fund-rebuild-after-use.json"
-  },
   "zh/employer-benefits-replacement-cost-vs-cash": {
     "key": "zh/employer-benefits-replacement-cost-vs-cash",
     "packageId": "009",
@@ -1457,7 +879,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "公司福利 vs 現金薪資怎麼比？不要用「福利標價」，只算你離職後真的要自己補的 Replacement Cost",
@@ -1507,7 +928,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/guides/auto-loan-negative-equity-rollover-cost/",
-      "https://worthcalc.win/zh/guides/car-loan-60-72-84-early-exit/",
       "https://worthcalc.win/zh/tools/car-affordability/"
     ],
     "breadcrumbLabel": "準備一年後換車，現在該多繳車貸本金還是留現金？負資產與流動性一起算",
@@ -1532,35 +952,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "為居家工作多租一房值不值得？用「增量房租」比較 coworking、通勤與可計費收入",
     "schemaFile": "009__zh__extra-room-home-office-incremental-rent-break-even.json"
-  },
-  "zh/financial-runway-months": {
-    "key": "zh/financial-runway-months",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "financial-runway-months",
-    "title": "財務跑道可以撐幾個月？自由工作者、創業者別只看緊急預備金",
-    "seoTitle": "財務跑道怎麼算？用現金、保守收入與必要支出算 Runway｜WorthCalc",
-    "metaDescription": "財務跑道不是只用現金除以支出。自由工作者與收入不固定者可加入保守收入、必要支出與一次性付款，計算 base、stress、zero-income 三種 runway。",
-    "excerpt": "對自由工作者或創業者，真正重要的不只是「存了幾個月」，而是現金、保守收入、必要支出與已知大額付款一起作用後，能撐多久。",
-    "canonical": "https://worthcalc.win/zh/guides/financial-runway-months/",
-    "robots": "index,follow",
-    "ogTitle": "財務跑道：你的現金流能撐幾個月？",
-    "ogDescription": "建立 base、stress、zero-income 三條 runway，不用單一月數假裝未來確定。",
-    "ogImage": "/images/guides/financial-runway-months.webp",
-    "imageAlt": "財務跑道計算圖，現金加保守收入減必要支出後換算可支撐月數",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/personal-liquidity-ratio/",
-      "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/"
-    ],
-    "breadcrumbLabel": "財務跑道可以撐幾個月？自由工作者、創業者別只看緊急預備金",
-    "schemaFile": "003__zh__financial-runway-months.json"
   },
   "zh/fixed-cost-ratio-personal-budget": {
     "key": "zh/fixed-cost-ratio-personal-budget",
@@ -1580,9 +975,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-      "https://worthcalc.win/zh/guides/paycheck-budgeting-limitations/"
+      "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "固定成本占收入多少才有彈性？把房租、債務與訂閱變成自己的 Fixed-Cost Ratio",
     "schemaFile": "004__zh__fixed-cost-ratio-personal-budget.json"
@@ -1604,9 +997,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageAlt": "固定利率與浮動利率三種利率路徑情境比較圖",
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/loan-refinance-break-even/"
-    ],
+    "related": [],
     "breadcrumbLabel": "固定利率 vs 浮動利率怎麼比？不要猜未來利率，先做 3 條利率路徑壓力測試",
     "schemaFile": "003__zh__fixed-vs-variable-rate-scenario.json"
   },
@@ -1628,62 +1019,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/budget-with-irregular-income/",
-      "https://worthcalc.win/zh/guides/commission-income-tax-reserve-cashflow/",
-      "https://worthcalc.win/en/price-in-work-hours/"
+      "https://worthcalc.win/en/budget-with-irregular-income/"
     ],
     "breadcrumbLabel": "接案最低報價怎麼算？不要用月薪除 160，小時費率要先補回不可計費時間與營運成本",
     "schemaFile": "008__zh__freelance-minimum-billable-rate.json"
-  },
-  "zh/higher-salary-long-commute-vs-lower-salary-nearby": {
-    "key": "zh/higher-salary-long-commute-vs-lower-salary-nearby",
-    "packageId": "007",
-    "locale": "zh",
-    "articleSlug": "higher-salary-long-commute-vs-lower-salary-nearby",
-    "title": "高薪遠通勤 vs 低薪近工作怎麼選？把交通、時間與額外生活成本換成同一模型",
-    "seoTitle": "高薪遠通勤 vs 低薪近工作怎麼算？真實薪資差｜WorthCalc",
-    "metaDescription": "高薪工作離家遠，不要只比較月薪。用稅後收入、通勤現金成本、額外時間、托育延長、外食與車輛成本，算真正增加多少。",
-    "excerpt": "高薪工作只有在扣掉新增交通與由通勤衍生的現金成本後仍有足夠淨優勢，才是家庭現金流的真正加薪。",
-    "canonical": "https://worthcalc.win/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/",
-    "robots": "index,follow",
-    "ogTitle": "高薪遠通勤 vs 低薪近工作怎麼算？真實薪資差",
-    "ogDescription": "高薪工作離家遠，不要只比較月薪。用稅後收入、通勤現金成本、額外時間、托育延長、外食與車輛成本，算真正增加多少。",
-    "ogImage": "/images/guides/higher-salary-long-commute-vs-lower-salary-nearby.webp",
-    "imageAlt": "兩份工作比較稅後薪資、通勤費、每週通勤時間、托育延長與真正月淨差",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "/en/tools/commute-cost/",
-      "/en/true-hourly-wage-after-commuting-work-expenses/",
-      "/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "高薪遠通勤 vs 低薪近工作怎麼選？把交通、時間與額外生活成本換成同一模型",
-    "schemaFile": "007__zh__higher-salary-long-commute-vs-lower-salary-nearby.json"
-  },
-  "zh/how-much-cash-to-keep": {
-    "key": "zh/how-much-cash-to-keep",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "how-much-cash-to-keep",
-    "title": "手上應該留多少現金？把「現金」拆成 4 種用途再決定",
-    "seoTitle": "手上應該留多少現金？4 層現金法＋完整試算範例",
-    "metaDescription": "手上留多少現金沒有單一比例。把日常週轉、現金流緩衝、緊急預備金與已知短期支出分開，避免現金留太少或閒置過多。",
-    "excerpt": "用四層現金模型判斷應保留多少可立即動用資金，而不是套用固定百分比。",
-    "canonical": "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-    "robots": "index,follow",
-    "ogTitle": "手上應該留多少現金？先拆成 4 種用途",
-    "ogDescription": "不是「資產的 10%」就能回答。先算日常週轉、日期緩衝、緊急預備金和已知短期支出，再決定真正可投資的剩餘現金。",
-    "ogImage": "/images/guides/how-much-cash-to-keep-og.webp",
-    "imageAlt": "四層現金用途與資金桶示意圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/budget-builder/",
-      "/zh/guides/cash-flow-buffer-vs-emergency-fund/",
-      "/zh/guides/liquid-net-worth/"
-    ],
-    "breadcrumbLabel": "手上應該留多少現金？把「現金」拆成 4 種用途再決定",
-    "schemaFile": "002__zh__how-much-cash-to-keep.json"
   },
   "zh/insurance-annual-vs-monthly-payment": {
     "key": "zh/insurance-annual-vs-monthly-payment",
@@ -1703,7 +1042,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-02",
     "related": [
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
       "https://worthcalc.win/zh/guides/insurance-deductible-cash-reserve/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -1729,36 +1067,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/zh/emergency-fund-how-much/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
       "https://worthcalc.win/zh/guides/personal-liquidity-ratio/"
     ],
     "breadcrumbLabel": "保險自負額現金準備",
     "schemaFile": "005__zh__insurance-deductible-cash-reserve.json"
-  },
-  "zh/interest-only-period-total-cost": {
-    "key": "zh/interest-only-period-total-cost",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "interest-only-period-total-cost",
-    "title": "房貸寬限期／只繳利息真的比較輕鬆嗎？用重訂後月付與總利息看完整成本",
-    "seoTitle": "房貸寬限期只繳利息划算嗎？月付跳升與總成本完整試算｜WorthCalc",
-    "metaDescription": "寬限期月付較低，因為本金幾乎沒下降。用寬限期前後月付、剩餘攤還年限與總利息比較，避免只看前幾年的低月付。",
-    "excerpt": "寬限期降低的是前期付款，不是本金。真正要算的是「寬限期結束後，剩餘本金要在更短年限內攤還多少」。",
-    "canonical": "https://worthcalc.win/zh/guides/interest-only-period-total-cost/",
-    "robots": "index,follow",
-    "ogTitle": "房貸寬限期真的比較輕鬆嗎？",
-    "ogDescription": "把前期低月付、後期月付跳升與全期總利息放在同一張表。",
-    "ogImage": "/images/guides/interest-only-period-total-cost.webp",
-    "imageAlt": "房貸寬限期時間軸，前段只繳利息、後段月付跳升與本金開始下降",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/",
-      "https://worthcalc.win/zh/tools/mortgage-payoff/"
-    ],
-    "breadcrumbLabel": "房貸寬限期／只繳利息真的比較輕鬆嗎？用重訂後月付與總利息看完整成本",
-    "schemaFile": "004__zh__interest-only-period-total-cost.json"
   },
   "zh/job-change-pay-gap-cashflow": {
     "key": "zh/job-change-pay-gap-cashflow",
@@ -1834,30 +1146,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "加薪後生活膨脹",
     "schemaFile": "005__zh__lifestyle-inflation-raise-capture.json"
   },
-  "zh/loan-refinance-break-even": {
-    "key": "zh/loan-refinance-break-even",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "loan-refinance-break-even",
-    "title": "轉貸多久回本？別只看新利率，用剩餘期間與全部費用算 Break-Even",
-    "seoTitle": "轉貸多久回本？轉貸 Break-Even 完整算法與案例｜WorthCalc",
-    "metaDescription": "轉貸利率比較低不代表一定划算。用舊貸款剩餘付款、新貸款付款、設定費、違約金與持有期間算 break-even，再做利率與費用敏感度分析。",
-    "excerpt": "新利率較低只是起點。真正要算的是：總轉換成本是多少、每月實際省多少、你還會持有這筆貸款多久，以及新貸款是否重新拉長期限。",
-    "canonical": "https://worthcalc.win/zh/guides/loan-refinance-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "轉貸多久回本？先算 Break-Even 再看利率",
-    "ogDescription": "把費用、月付差、剩餘期間與提前清償條款一起算，避免「利率下降但總成本上升」。",
-    "ogImage": "/images/guides/loan-refinance-break-even.webp",
-    "imageAlt": "轉貸回本點圖示，轉貸成本除以每月節省得到回本月數",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/guides/extra-payment-personal-loan/",
-      "https://worthcalc.win/zh/tools/mortgage-payoff/"
-    ],
-    "breadcrumbLabel": "轉貸多久回本？別只看新利率，用剩餘期間與全部費用算 Break-Even",
-    "schemaFile": "003__zh__loan-refinance-break-even.json"
-  },
   "zh/minimum-cash-balance-checking": {
     "key": "zh/minimum-cash-balance-checking",
     "packageId": "003",
@@ -1876,110 +1164,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/",
       "https://worthcalc.win/zh/emergency-fund-how-much/"
     ],
     "breadcrumbLabel": "帳戶最低現金餘額怎麼抓？別把緊急預備金全部塞在活存帳戶",
     "schemaFile": "003__zh__minimum-cash-balance-checking.json"
-  },
-  "zh/monthly-extra-vs-annual-lump-sum": {
-    "key": "zh/monthly-extra-vs-annual-lump-sum",
-    "packageId": "005",
-    "locale": "zh",
-    "articleSlug": "monthly-extra-vs-annual-lump-sum",
-    "title": "每月多繳 vs 年底一次大額還款，哪個省利息？同樣一年 6 萬也會有時間差",
-    "seoTitle": "每月多繳 vs 一次大額還款哪個省？完整試算｜WorthCalc",
-    "metaDescription": "同樣一年額外還本金 6 萬，每月多繳 5,000 與年底一次還 60,000，因本金下降時間不同，利息結果會不同。用同總額公平比較並加入流動性與違約金。",
-    "excerpt": "如果總額一樣，越早真正沖還本金，通常越早降低後續計息基礎；但每月多繳也會更早失去現金彈性。要把省息和流動性放在同一模型。",
-    "canonical": "https://worthcalc.win/zh/guides/monthly-extra-vs-annual-lump-sum/",
-    "robots": "index,follow",
-    "ogTitle": "一年多還 6 萬：每月還還是年底還？",
-    "ogDescription": "同總額比較付款時點、利息差、流動性與提前清償限制。",
-    "ogImage": "/images/guides/monthly-extra-vs-annual-lump-sum.webp",
-    "imageAlt": "每月額外還款與年底一次大額還款兩條房貸本金路徑比較",
-    "imageBrief": "WorthCalc 本金路徑比較圖；同一年額外金額，顯示每月逐步降低本金與年底一次下降，不宣稱固定省息幅度。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/tools/mortgage-payoff/",
-      "https://worthcalc.win/zh/extra-mortgage-payments-guide/",
-      "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/"
-    ],
-    "breadcrumbLabel": "每月多繳 vs 年度大額還款",
-    "schemaFile": "005__zh__monthly-extra-vs-annual-lump-sum.json"
-  },
-  "zh/monthly-payment-affordability-vs-total-cost": {
-    "key": "zh/monthly-payment-affordability-vs-total-cost",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "monthly-payment-affordability-vs-total-cost",
-    "title": "月付得起不等於總成本合理：為什麼延長期數會製造「負擔得起」的錯覺？",
-    "seoTitle": "月付得起不等於買得起：月付 vs 總成本完整比較｜WorthCalc",
-    "metaDescription": "把貸款拉長可以壓低月付，但可能增加總利息、延長負債時間並壓縮未來選擇。用同本金不同期數比較月付、總成本與收入占比。",
-    "excerpt": "同一個價格只要把期數拉長，月付就能變得「看起來可以」。這篇同時比較月付、總利息、負債年限與壓力情境，避免只被月付數字說服。",
-    "canonical": "https://worthcalc.win/zh/guides/monthly-payment-affordability-vs-total-cost/",
-    "robots": "index,follow",
-    "ogTitle": "月付得起，不代表總成本合理",
-    "ogDescription": "延長期數可以讓任何大數字看起來更小；真正要比較的是總付款與未來現金流。",
-    "ogImage": "/images/guides/monthly-payment-affordability-vs-total-cost.webp",
-    "imageAlt": "同一筆貸款在不同期數下的月付與總利息比較",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/tools/car-affordability/",
-      "https://worthcalc.win/zh/guides/cash-discount-vs-financing/"
-    ],
-    "breadcrumbLabel": "月付得起不等於總成本合理",
-    "schemaFile": "003__zh__monthly-payment-affordability-vs-total-cost.json"
-  },
-  "zh/mortgage-fee-rate-break-even": {
-    "key": "zh/mortgage-fee-rate-break-even",
-    "packageId": "005",
-    "locale": "zh",
-    "articleSlug": "mortgage-fee-rate-break-even",
-    "title": "房貸開辦費比較低利率怎麼選？用持有期算真正的 Break-Even",
-    "seoTitle": "房貸開辦費 vs 低利率怎麼選？回本月數完整算法｜WorthCalc",
-    "metaDescription": "同樣房貸金額，較低利率可能搭配較高開辦費。用月付差、總費用年百分率、預計持有期與提前轉貸情境，算出多付費用多久才回本。",
-    "excerpt": "房貸不能只比名目利率。把一次性開辦費、月付差與預計保留貸款多久放在同一條時間軸，才知道低利率是否真的值得付更多前置費。",
-    "canonical": "https://worthcalc.win/zh/guides/mortgage-fee-rate-break-even/",
-    "robots": "index,follow",
-    "ogTitle": "房貸低利率值得多付開辦費嗎？",
-    "ogDescription": "用費用差、月付差與持有期算 Break-Even，不再只看利率小數點。",
-    "ogImage": "/images/guides/mortgage-fee-rate-break-even.webp",
-    "imageAlt": "兩個房貸方案比較圖，顯示開辦費、利率、月付差與回本月份",
-    "imageBrief": "WorthCalc 編輯型資訊圖：左側兩個房貸報價，右側累積成本折線交叉點；只使用示範數字，不放銀行 Logo、假核貸或保證利率。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/zh/tools/mortgage-payoff/"
-    ],
-    "breadcrumbLabel": "房貸開辦費 vs 低利率回本",
-    "schemaFile": "005__zh__mortgage-fee-rate-break-even.json"
-  },
-  "zh/mortgage-recast-vs-refinance-vs-prepay": {
-    "key": "zh/mortgage-recast-vs-refinance-vs-prepay",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "mortgage-recast-vs-refinance-vs-prepay",
-    "title": "房貸 Recast、轉貸、提前還本金怎麼選？先確認你要降月付、降利率還是縮短期限",
-    "seoTitle": "房貸 Recast vs 轉貸 vs 提前還本金：三種機制完整比較｜WorthCalc",
-    "metaDescription": "手上有一筆大額資金時，recast、refinance 與提前還本金改善的是不同問題。用剩餘本金、利率、期數、費用與月付目標比較三種機制。",
-    "excerpt": "Recast、轉貸與多繳本金不是同義詞：一個重算月付、一個換新貸款、一個直接降本金。先決定你要改善的指標，再比較費用與契約。",
-    "canonical": "https://worthcalc.win/zh/guides/mortgage-recast-vs-refinance-vs-prepay/",
-    "robots": "index,follow",
-    "ogTitle": "Recast、轉貸、提前還本金怎麼選？",
-    "ogDescription": "把「降月付、降利率、縮期」分開，再用同一筆本金與期限比較三種房貸策略。",
-    "ogImage": "/images/guides/mortgage-recast-vs-refinance-vs-prepay.webp",
-    "imageAlt": "房貸三方案比較圖，顯示 recast、refinance、提前還本金對月付、利率、期限的影響",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/tools/mortgage-payoff/",
-      "https://worthcalc.win/zh/guides/loan-refinance-break-even/",
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/"
-    ],
-    "breadcrumbLabel": "房貸 Recast、轉貸、提前還本金怎麼選？先確認你要降月付、降利率還是縮短期限",
-    "schemaFile": "004__zh__mortgage-recast-vs-refinance-vs-prepay.json"
   },
   "zh/net-worth-tracking-frequency": {
     "key": "zh/net-worth-tracking-frequency",
@@ -2006,55 +1194,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "淨資產多久算一次？每月、每季、每年各自適合什麼情況",
     "schemaFile": "002__zh__net-worth-tracking-frequency.json"
   },
-  "zh/overtime-marginal-take-home-cost": {
-    "key": "zh/overtime-marginal-take-home-cost",
-    "packageId": "008",
-    "locale": "zh",
-    "articleSlug": "overtime-marginal-take-home-cost",
-    "title": "加班到底多賺多少？把加班費、托育、通勤、餐費與額外時間算成真正邊際收益",
-    "seoTitle": "加班到底多賺多少？真正邊際時薪與成本完整算法｜WorthCalc",
-    "metaDescription": "加班費不是全部多賺的錢。用實際增加薪資，扣掉額外托育、交通、餐費與其他因加班才發生的成本，再除以加班＋新增通勤／交接時間，算真正邊際時薪。",
-    "excerpt": "先依法／依合約算出應得加班工資，再扣「只有因加班才新增」的托育、交通與餐費；最後用新增總時間算真正邊際時薪。",
-    "canonical": "https://worthcalc.win/zh/guides/overtime-marginal-take-home-cost/",
-    "robots": "index,follow",
-    "ogTitle": "加班到底多賺多少？真正邊際時薪與成本完整算法 | WorthCalc",
-    "ogDescription": "加班費不是全部多賺的錢。用實際增加薪資，扣掉額外托育、交通、餐費與其他因加班才發生的成本，再除以加班＋新增通勤／交接時間，算真正邊際時薪。",
-    "ogImage": "/images/guides/overtime-marginal-take-home-cost.webp",
-    "imageAlt": "加班薪資流入減去托育、交通、餐費後，轉換成真正邊際現金與每小時收益的瀑布圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-01",
-    "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
-      "https://worthcalc.win/zh/guides/return-to-work-fulltime-vs-parttime/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "加班到底多賺多少？把加班費、托育、通勤、餐費與額外時間算成真正邊際收益",
-    "schemaFile": "008__zh__overtime-marginal-take-home-cost.json"
-  },
-  "zh/paycheck-budgeting-limitations": {
-    "key": "zh/paycheck-budgeting-limitations",
-    "packageId": "003",
-    "locale": "zh",
-    "articleSlug": "paycheck-budgeting-limitations",
-    "title": "50/30/20 預算什麼時候會失真？比例預算不是每個人都能直接套",
-    "seoTitle": "50/30/20 何時會失真？用固定成本與收入波動重算預算｜WorthCalc",
-    "metaDescription": "50/30/20 是簡化預算框架，不是法定標準。高房租、低收入、扶養責任、債務或收入波動時，固定比例可能失真。學會用必要支出底線重建自己的版本。",
-    "excerpt": "比例預算適合當起點，不適合當道德成績單。當住房、照護、債務或收入波動把必要支出推高時，先算固定成本底線，再建立自己的比例。",
-    "canonical": "https://worthcalc.win/zh/guides/paycheck-budgeting-limitations/",
-    "robots": "index,follow",
-    "ogTitle": "50/30/20 不是考卷：什麼時候比例預算會失真？",
-    "ogDescription": "先看必要支出與現金流，再決定比例，而不是為了湊比例扭曲現實。",
-    "ogImage": "/images/guides/paycheck-budgeting-limitations.webp",
-    "imageAlt": "50 30 20 預算比例與高固定成本情境的比較圖",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/"
-    ],
-    "breadcrumbLabel": "50/30/20 預算什麼時候會失真？比例預算不是每個人都能直接套",
-    "schemaFile": "003__zh__paycheck-budgeting-limitations.json"
-  },
   "zh/personal-liquidity-ratio": {
     "key": "zh/personal-liquidity-ratio",
     "packageId": "003",
@@ -2073,9 +1212,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 編輯型資訊圖：以公式、情境比較與數字決策為核心，不使用假金融報價、假市場數據或浮誇投資圖像。",
     "lastReviewed": "2026-08-30",
     "related": [
-      "https://worthcalc.win/zh/liquid-net-worth-explained/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
-      "https://worthcalc.win/zh/guides/financial-runway-months/"
+      "https://worthcalc.win/zh/liquid-net-worth-explained/"
     ],
     "breadcrumbLabel": "個人流動性比率怎麼算？比淨資產更快看出「現金能撐多久」",
     "schemaFile": "003__zh__personal-liquidity-ratio.json"
@@ -2098,7 +1235,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-02",
     "related": [
-      "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
       "https://worthcalc.win/zh/emergency-fund-how-much/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -2124,35 +1260,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/guides/rental-deposit-liquidity-cost/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "租金一次預繳有折扣值得嗎？把確定折扣、現金占用與提前退租條款一起算",
     "schemaFile": "008__zh__prepay-rent-discount-vs-liquidity.json"
-  },
-  "zh/principal-equal-vs-payment-equal-amortization": {
-    "key": "zh/principal-equal-vs-payment-equal-amortization",
-    "packageId": "005",
-    "locale": "zh",
-    "articleSlug": "principal-equal-vs-payment-equal-amortization",
-    "title": "本金平均攤還 vs 本息平均攤還差在哪？月付曲線、總利息與前期壓力完整比較",
-    "seoTitle": "本金平均 vs 本息平均攤還怎麼選？完整試算｜WorthCalc",
-    "metaDescription": "本息平均每月付款較平穩；本金平均前期付款較高、之後逐月下降。用 500 萬、20 年案例比較首期、末期、總利息與收入壓力。",
-    "excerpt": "兩種方法沒有神奇利率差；差異主要來自「本金下降速度」。本金平均讓本金更快下降，因此通常總利息較少，但前期月付更高。",
-    "canonical": "https://worthcalc.win/zh/guides/principal-equal-vs-payment-equal-amortization/",
-    "robots": "index,follow",
-    "ogTitle": "本金平均 vs 本息平均，到底差在哪？",
-    "ogDescription": "同本金、同利率、同期數直接比較首期、末期、總利息與現金流壓力。",
-    "ogImage": "/images/guides/principal-equal-vs-payment-equal-amortization.webp",
-    "imageAlt": "本金平均與本息平均攤還月付曲線比較，顯示固定月付與逐月下降月付",
-    "imageBrief": "WorthCalc 雙曲線圖；本息平均為近水平月付，本金平均逐月下降，旁列累計利息，不使用銀行品牌。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/zh/tools/mortgage-payoff/"
-    ],
-    "breadcrumbLabel": "本金平均 vs 本息平均",
-    "schemaFile": "005__zh__principal-equal-vs-payment-equal-amortization.json"
   },
   "zh/professional-membership-replacement-value-break-even": {
     "key": "zh/professional-membership-replacement-value-break-even",
@@ -2173,7 +1284,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "專業會員費值不值得？不要算「感覺有用」，只算你真的會替代掉的成本",
@@ -2196,10 +1306,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageAlt": "0% APR 優惠期倒數圖，顯示餘額、剩餘月份、每月目標付款與到期後利率",
     "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
     "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/amortization-schedule-explained/",
-      "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/"
-    ],
+    "related": [],
     "breadcrumbLabel": "0% 優惠期到期前每月要還多少？不要把最低付款當成清償計畫",
     "schemaFile": "004__zh__promo-apr-payoff-deadline.json"
   },
@@ -2221,7 +1328,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
       "https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
@@ -2246,9 +1352,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "WorthCalc 租屋決策資訊圖：新舊租屋兩條累積成本線、搬家一次性成本與回本點；不使用房仲品牌或假市場租金。",
     "lastReviewed": "2026-08-31",
     "related": [
-      "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-      "https://worthcalc.win/zh/guides/financial-runway-months/"
+      "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "租金上漲 vs 搬家回本",
     "schemaFile": "005__zh__rent-increase-vs-moving-break-even.json"
@@ -2272,7 +1376,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-02",
     "related": [
       "https://worthcalc.win/zh/guides/rent-increase-vs-moving-break-even/",
-      "https://worthcalc.win/zh/guides/how-much-cash-to-keep/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "租屋押金要準備多少現金？把資金占用、搬家重疊與退還時間放進現金流",
@@ -2303,31 +1406,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "breadcrumbLabel": "全職 vs 兼職回職場怎麼選？把稅後薪資、托育、通勤、福利與時間放同一張表",
     "schemaFile": "007__zh__return-to-work-fulltime-vs-parttime.json"
   },
-  "zh/save-first-vs-installment-purchase": {
-    "key": "zh/save-first-vs-installment-purchase",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "save-first-vs-installment-purchase",
-    "title": "先存再買 vs 現在分期怎麼比？用等待時間與確定融資成本做決策",
-    "seoTitle": "先存再買 vs 分期：等待多久、融資多付多少完整比較｜WorthCalc",
-    "metaDescription": "計畫性消費要不要分期？先算存到現金價需要幾個月、分期確定多付多少，以及等待是否會造成可量化替代成本。",
-    "excerpt": "如果商品不是急需，分期的真正價格是「提前使用的時間」加上確定融資成本；先存再買的代價是等待。把等待月數、融資多付金額與必要性分開，就不會被低月付帶走。",
-    "canonical": "https://worthcalc.win/zh/guides/save-first-vs-installment-purchase/",
-    "robots": "index,follow",
-    "ogTitle": "先存再買，還是現在分期？先算等待幾個月",
-    "ogDescription": "把存款等待時間與分期確定成本放同一表，不用「月付看起來不高」做決策。",
-    "ogImage": "/images/guides/save-first-vs-installment-purchase.webp",
-    "imageAlt": "先存再買與立即分期比較，顯示等待月數、總融資成本與現金餘額",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/guides/cash-discount-vs-financing/",
-      "https://worthcalc.win/zh/tools/installment-apr/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "先存再買 vs 現在分期怎麼比？用等待時間與確定融資成本做決策",
-    "schemaFile": "006__zh__save-first-vs-installment-purchase.json"
-  },
   "zh/shared-expenses-income-split": {
     "key": "zh/shared-expenses-income-split",
     "packageId": "005",
@@ -2347,8 +1425,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-08-31",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/",
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/"
+      "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/"
     ],
     "breadcrumbLabel": "共同生活費收入比例分攤",
     "schemaFile": "005__zh__shared-expenses-income-split.json"
@@ -2372,7 +1449,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "副業設備多久回本？不要用營收除設備費，要用「可計費利用率」算真正 Payback",
@@ -2397,85 +1473,10 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "lastReviewed": "2026-09-01",
     "related": [
       "https://worthcalc.win/zh/tools/budget-builder/",
-      "https://worthcalc.win/zh/price-in-work-hours/",
       "https://worthcalc.win/zh/tools/costco-membership/"
     ],
     "breadcrumbLabel": "簽約獎金 vs 更高底薪怎麼比？把留任期與 Clawback 返還條款放進 Break-Even",
     "schemaFile": "009__zh__signing-bonus-vs-higher-base-clawback-break-even.json"
-  },
-  "zh/single-income-household-stress-test": {
-    "key": "zh/single-income-household-stress-test",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "single-income-household-stress-test",
-    "title": "單薪家庭收入中斷怎麼測？從必要支出算現金跑道與削減順序",
-    "seoTitle": "單薪家庭收入中斷壓力測試：現金跑道、必要支出與削減順序｜WorthCalc",
-    "metaDescription": "單薪家庭最大的風險是收入來源集中。用必要支出、可動用現金、可延後支出與替代收入，計算失去收入後能撐多久。",
-    "excerpt": "單薪家庭不一定要套固定「6個月」規則；先建立零收入情境，把必要支出、可暫停支出、保險自付、債務最低付款與可動用現金排成月份，才知道真正跑道。",
-    "canonical": "https://worthcalc.win/zh/guides/single-income-household-stress-test/",
-    "robots": "index,follow",
-    "ogTitle": "單薪家庭失去收入後可以撐多久？",
-    "ogDescription": "用零收入、削減後支出與替代收入三情境計算家庭現金跑道。",
-    "ogImage": "/images/guides/single-income-household-stress-test.webp",
-    "imageAlt": "單薪家庭收入中斷現金跑道表，顯示必要支出、可削減支出與月份",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/guides/financial-runway-months/",
-      "https://worthcalc.win/zh/emergency-fund-how-much/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "單薪家庭收入中斷怎麼測？從必要支出算現金跑道與削減順序",
-    "schemaFile": "006__zh__single-income-household-stress-test.json"
-  },
-  "zh/sinking-fund-by-deadline": {
-    "key": "zh/sinking-fund-by-deadline",
-    "packageId": "004",
-    "locale": "zh",
-    "articleSlug": "sinking-fund-by-deadline",
-    "title": "目標基金每月要存多少？用期限反推 Sinking Fund，而不是臨到期才刷卡",
-    "seoTitle": "Sinking Fund 每月要存多少？期限反推完整算法｜WorthCalc",
-    "metaDescription": "年繳保費、旅費、家電、學費等已知未來支出，可以用目標金額、已有餘額與剩餘月數反推每月要存多少，並處理晚開始與收入不固定情境。",
-    "excerpt": "只要金額與日期大致已知，就不該等到帳單出現才處理。把剩餘缺口除以剩餘繳款次數，就能把一次大額支出拆成小額現金流。",
-    "canonical": "https://worthcalc.win/zh/guides/sinking-fund-by-deadline/",
-    "robots": "index,follow",
-    "ogTitle": "Sinking Fund 每月要存多少？",
-    "ogDescription": "用目標、現有餘額與截止日反推每月預留額，並處理晚開始與不固定收入。",
-    "ogImage": "/images/guides/sinking-fund-by-deadline.webp",
-    "imageAlt": "Sinking Fund 期限儲蓄時間軸，顯示目標金額、目前餘額、剩餘月份與每月投入",
-    "imageBrief": "WorthCalc 編輯型資訊圖：以透明公式、時間軸、情境比較與數字決策為核心；不得使用假銀行報價、假核貸結果、假市場平均或保證性投資訊息。",
-    "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/annual-expenses-monthly-equivalent/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "目標基金每月要存多少？用期限反推 Sinking Fund，而不是臨到期才刷卡",
-    "schemaFile": "004__zh__sinking-fund-by-deadline.json"
-  },
-  "zh/subscription-opportunity-cost": {
-    "key": "zh/subscription-opportunity-cost",
-    "packageId": "002",
-    "locale": "zh",
-    "articleSlug": "subscription-opportunity-cost",
-    "title": "訂閱的機會成本怎麼算？每月499元，10年不只是59,880元",
-    "seoTitle": "訂閱機會成本怎麼算？月費、年費與長期複利情境完整試算",
-    "metaDescription": "每月499元訂閱10年直接支出59,880元；若比較假設性儲蓄／投資情境，還可估算未來價值，但不能把預期報酬當保證。",
-    "excerpt": "把小額 recurring expense 的直接支出與假設性替代用途分開，判斷訂閱是否值得保留。",
-    "canonical": "https://worthcalc.win/zh/guides/subscription-opportunity-cost/",
-    "robots": "index,follow",
-    "ogTitle": "訂閱的機會成本：先算確定支出，再看假設性未來價值",
-    "ogDescription": "每月 499 元十年直接支出 59,880 元；若每月改存並假設 3%、5%、7% 年化，結果更高，但後者是情境，不是保證。",
-    "ogImage": "/images/guides/subscription-opportunity-cost-og.webp",
-    "imageAlt": "每月訂閱直接成本與假設未來價值比較圖",
-    "imageBrief": "",
-    "lastReviewed": "2026-08-30",
-    "related": [
-      "/zh/tools/compound-growth/",
-      "/zh/tools/budget-builder/",
-      "/zh/guides/savings-rate-calculation/"
-    ],
-    "breadcrumbLabel": "訂閱的機會成本怎麼算？每月499元，10年不只是59,880元",
-    "schemaFile": "002__zh__subscription-opportunity-cost.json"
   },
   "zh/trade-in-vs-private-sale-net-proceeds": {
     "key": "zh/trade-in-vs-private-sale-net-proceeds",
@@ -2520,36 +1521,11 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
       "https://worthcalc.win/zh/guides/relocation-for-higher-salary-break-even/",
       "https://worthcalc.win/zh/tools/budget-builder/"
     ],
     "breadcrumbLabel": "自費證照／課程多久回本？不要用「可能加薪」當保證，先算可驗證的回本門檻",
     "schemaFile": "008__zh__training-certification-break-even.json"
-  },
-  "zh/variable-bonus-income-fixed-obligations": {
-    "key": "zh/variable-bonus-income-fixed-obligations",
-    "packageId": "006",
-    "locale": "zh",
-    "articleSlug": "variable-bonus-income-fixed-obligations",
-    "title": "獎金制收入怎麼抓固定支出？不要用最好月份養固定成本",
-    "seoTitle": "獎金制收入預算：用收入底線抓固定支出與獎金平滑帳戶｜WorthCalc",
-    "metaDescription": "業務獎金、佣金、績效獎金收入波動大時，不要用最好月份決定房租、車貸與訂閱。用base-pay floor、12月收入分布與獎金平滑帳戶壓力測試。",
-    "excerpt": "獎金制收入最危險的不是收入低，而是把高峰月份當常態，讓房租、車貸、訂閱等固定義務跟著長高。先找收入底線，再讓獎金進平滑帳戶。",
-    "canonical": "https://worthcalc.win/zh/guides/variable-bonus-income-fixed-obligations/",
-    "robots": "index,follow",
-    "ogTitle": "獎金制收入不要用平均月薪養固定支出",
-    "ogDescription": "用收入底線、低月份壓力測試與獎金平滑帳戶決定可承擔固定成本。",
-    "ogImage": "/images/guides/variable-bonus-income-fixed-obligations.webp",
-    "imageAlt": "浮動收入12個月柱狀圖與固定支出水平線，顯示高低收入月份與平滑帳戶",
-    "imageBrief": "",
-    "lastReviewed": "2026-09-02",
-    "related": [
-      "https://worthcalc.win/zh/guides/fixed-cost-ratio-personal-budget/",
-      "https://worthcalc.win/zh/tools/budget-builder/"
-    ],
-    "breadcrumbLabel": "獎金制收入怎麼抓固定支出？不要用最好月份養固定成本",
-    "schemaFile": "006__zh__variable-bonus-income-fixed-obligations.json"
   },
   "zh/windfall-debt-vs-cash-allocation": {
     "key": "zh/windfall-debt-vs-cash-allocation",
@@ -2568,10 +1544,7 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageAlt": "年終獎金分配決策圖，分成現金安全墊、高利率債務與目標支出三個資金桶",
     "imageBrief": "WorthCalc 三桶資金分配資訊圖；顯示安全墊缺口、債務 APR、未來已知支出，不提供固定百分比建議。",
     "lastReviewed": "2026-08-31",
-    "related": [
-      "https://worthcalc.win/zh/guides/debt-paydown-interest-vs-cashflow/",
-      "https://worthcalc.win/zh/guides/emergency-fund-rebuild-after-use/"
-    ],
+    "related": [],
     "breadcrumbLabel": "年終獎金還債 vs 留現金",
     "schemaFile": "005__zh__windfall-debt-vs-cash-allocation.json"
   },
@@ -2593,7 +1566,6 @@ export const seoPackageGuides: Record<string, SeoPackageGuideMeta> = {
     "imageBrief": "",
     "lastReviewed": "2026-09-01",
     "related": [
-      "https://worthcalc.win/en/price-in-work-hours/",
       "https://worthcalc.win/zh/guides/training-certification-break-even/",
       "https://worthcalc.win/zh/guides/job-change-pay-gap-cashflow/"
     ],

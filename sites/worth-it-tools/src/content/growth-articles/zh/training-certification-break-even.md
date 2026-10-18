@@ -210,6 +210,5 @@ $$
 
 ## Related Guides
 
-- [True Wage / Work Hours](https://worthcalc.win/en/price-in-work-hours/)
 - [高薪搬家回本](https://worthcalc.win/zh/guides/relocation-for-higher-salary-break-even/)
 - [Budget Builder](https://worthcalc.win/zh/tools/budget-builder/)

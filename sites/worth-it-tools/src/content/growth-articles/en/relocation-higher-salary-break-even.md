@@ -294,6 +294,4 @@ This is an educational cash-flow framework, not tax, employment, housing, or leg
 
 ## Related Guides
 
-- [True Hourly Wage](https://worthcalc.win/en/price-in-work-hours/)
-- [Cash Runway Before Quitting](https://worthcalc.win/en/guides/cash-runway-before-quitting-job/)
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/)

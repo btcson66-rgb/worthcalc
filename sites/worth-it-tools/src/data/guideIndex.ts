@@ -32,7 +32,6 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/ev-vs-gas-total-cost/', title: 'EV vs gas car: how to compare total cost of ownership' },
     { path: '/extra-mortgage-payments-guide/', title: 'Extra Mortgage Payments: What They Actually Save You' },
     { path: '/guides/freelance-minimum-billable-rate/', title: 'Freelance Minimum Billable Rate: Price for Taxes, Non-Billable Time, Benefits and Profit' },
-    { path: '/freelancer-pricing-decision-engine/', title: 'Freelancer Pricing Decision Engine' },
     { path: '/gym-membership-cost-per-visit/', title: 'Gym membership cost per visit: how often do you need to go?' },
     { path: '/home-vs-public-ev-charging-cost/', title: 'Home charging vs public charging: what does an EV really cost per mile?' },
     { path: '/hourly-vs-annual-salary/', title: 'Hourly vs. Annual Salary: How to Compare Two Job Offers Fairly' },
@@ -43,7 +42,6 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/full-commute-cost-including-time/', title: 'How to calculate the full cost of commuting, including your time' },
     { path: '/upfront-fees-financing-cost/', title: 'How upfront fees change the true cost of financing' },
     { path: '/is-an-extended-warranty-worth-it/', title: 'Is an extended warranty worth it? Compare price, failure risk, and repair cost' },
-    { path: '/job-offer-true-value-decision-engine/', title: 'Job Offer True Value Decision Engine' },
     { path: '/car-lease-vs-buy-total-cost/', title: 'Lease vs buy a car: compare total cost, mileage, and resale risk' },
     { path: '/money/', title: 'Money briefs' },
     { path: '/monthly-vs-annual-subscription/', title: 'Monthly vs annual subscription: when does annual billing save money?' },
@@ -99,7 +97,5 @@ export const guideIndex: Record<ContentLocale, GuideIndexEntry[]> = {
     { path: '/car-lease-vs-buy-total-cost/', title: '租賃還是買車？總成本、里程限制與轉售風險怎麼算' },
     { path: '/rent-vs-buy-guide/', title: '租屋還是買房？真正會改變答案的關鍵數字' },
     { path: '/guides/rental-deposit-liquidity-cost/', title: '租屋押金要準備多少現金？把資金占用、搬家重疊與退還時間放進現金流' },
-    { path: '/freelancer-pricing-decision-engine/', title: 'Freelancer Pricing Decision Engine' },
-    { path: '/job-offer-true-value-decision-engine/', title: 'Job Offer True Value Decision Engine' },
   ],
 };

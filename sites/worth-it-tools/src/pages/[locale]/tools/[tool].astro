@@ -11,7 +11,6 @@ import TWBudgetCalculator from '../../../components/TWBudgetCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import PaidProductPanel from '../../../components/PaidProductPanel.astro';
 import type { Locale } from '../../../consts';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 
@@ -88,7 +87,4 @@ const useTwBudget = locale === 'zh' && slug === 'budget-builder';
     <p class="estimate-disclaimer"><strong>{growthReview.disclaimer}:</strong> {growthReview.text}</p>
     <div class="prose"><GrowthContent /></div>
   </section>
-  {slug === 'salary-converter' && (
-    <PaidProductPanel productId="PRODUCT-003" locale={locale} placement={`worthcalc_${locale}_salary_converter`} />
-  )}
 </ToolLayout>

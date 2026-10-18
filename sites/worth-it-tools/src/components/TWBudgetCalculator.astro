@@ -1,0 +1,171 @@
+---
+/*
+ * 不固定收入月預算 (P2 batch 11, 2026-10-18), zh only.
+ *
+ * Replaces the shared 50/20/15/10 budget calculator on /zh/tools/budget-builder/. The arithmetic is in src/lib/twBudgetMath.mjs
+ * (tests/tw-budget-math.test.mjs asserts every number the page prints). The defaults are the page's 算例一. It is plain
+ * arithmetic: incomes, bills, the 補充保費 / 所得稅 estimates and the reserve months are the reader's numbers; no rate,
+ * bracket or threshold is built in (the 6-month reserve is this site's own suggestion, not an official rule).
+ */
+const bills = [
+  { name: '所得稅', amount: '36000', times: '1' },
+  { name: '保險', amount: '18000', times: '2' },
+  { name: '房屋稅', amount: '12000', times: '1' },
+  { name: '', amount: '', times: '1' },
+  { name: '', amount: '', times: '1' },
+  { name: '', amount: '', times: '1' },
+];
+---
+
+<section class="calc" data-tw-budget data-growth-calculator aria-labelledby="budget-heading">
+  <header>
+    <h2 id="budget-heading">把忽高忽低的收入和年繳帳單，換成一個能規劃的月預算</h2>
+    <p>輸入近幾個月的收入與年繳、半年繳、季繳帳單，選一個預算基準，算出每月該提列多少、淡季會缺多少、緊急預備金還差多少。預設值就是下方的算例一，全部是示範值。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label class="is-wide"><span>近幾個月的每月收入（元，3 到 24 個月，用逗號或空白隔開）</span><input id="bud-incomes" type="text" inputmode="text" value="85000, 140000, 30000, 110000, 95000, 70000" /></label>
+      <label>
+        <span>預算基準</span>
+        <select id="bud-mode">
+          <option value="average" selected>平均</option>
+          <option value="lowest3">最低三個月的平均</option>
+          <option value="worst">最差的一個月</option>
+        </select>
+      </label>
+      <label><span>每月固定支出（元：房租或房貸、伙食、水電、交通…）</span><input id="bud-fixed" type="number" inputmode="numeric" min="0" step="1000" value="40000" /></label>
+
+      <div class="is-wide bud-bills" role="group" aria-label="年繳、半年繳、季繳帳單">
+        {bills.map((bill, i) => (
+          <fieldset class="bud-bill" data-row={i}>
+            <legend>帳單 {i + 1}{i < 3 ? '' : '（選填）'}</legend>
+            <label><span>名稱</span><input data-field="name" type="text" maxlength="20" value={bill.name} placeholder="例如：保險" /></label>
+            <label><span>每次金額（元）</span><input data-field="amount" type="number" inputmode="numeric" min="0" step="1000" value={bill.amount} /></label>
+            <label><span>一年繳幾次（年繳 1、半年繳 2、季繳 4）</span><input data-field="times" type="number" inputmode="decimal" min="1" max="12" step="1" value={bill.times} /></label>
+          </fieldset>
+        ))}
+      </div>
+
+      <label class="is-wide"><span>每月預估的補充保費與其他就源扣繳款（元；你自己或會計估的金額，沒有填 0）</span><input id="bud-withhold" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
+      <label><span>緊急預備金要幾個月的必要支出（6 是本站建議，非官方規定）</span><input id="bud-months" type="number" inputmode="decimal" min="0" max="36" step="1" value="6" /></label>
+      <label><span>目前的預備金餘額（元）</span><input id="bud-balance" type="number" inputmode="numeric" min="0" step="10000" value="0" /></label>
+
+      <div class="is-wide bud-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        計算機只做算術，不內建稅率或保費費率：所得稅與補充保費請填你估的金額。每月提列 = 每次金額 × 一年繳幾次 ÷ 12。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="bud-status" id="bud-status">—</p>
+      <dl>
+        <div><dt>帳單每月提列合計</dt><dd id="bud-o-bills">—</dd></div>
+        <div><dt>每月必要支出（固定 + 提列 + 扣繳款）</dt><dd id="bud-o-required">—</dd></div>
+        <div><dt>平均／最低三個月平均／最差月份</dt><dd id="bud-o-three">—</dd></div>
+        <div><dt>預算基準的月收入</dt><dd id="bud-o-base">—</dd></div>
+        <div><dt>基準下每月可分配</dt><dd id="bud-o-surplus">—</dd></div>
+        <div><dt>最差月份的缺口</dt><dd id="bud-o-worst">—</dd></div>
+        <div><dt>收入低於必要支出的月數</dt><dd id="bud-o-lean">—</dd></div>
+        <div><dt>緊急預備金目標</dt><dd id="bud-o-target">—</dd></div>
+        <div><dt>還差多少、要存幾個月</dt><dd id="bud-o-gap">—</dd></div>
+      </dl>
+      <p class="bud-note"><strong>試算結果僅供參考，以你的實際收入、帳單與稅單為準。</strong>不替你報稅，也不計算補充保費。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculateIrregularBudget, parseIncomes } from '../lib/twBudgetMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-budget]');
+  if (root) {
+    const q = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const input = (id: string) => q<HTMLInputElement>(id);
+    const num = (id: string) => (input(id).value.trim() === '' ? 0 : Number(input(id).value));
+    const billEls = Array.from(root.querySelectorAll<HTMLElement>('.bud-bill'));
+    const bf = (row: HTMLElement, name: string) => row.querySelector<HTMLInputElement>(`[data-field="${name}"]`)!;
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const yuan2 = new Intl.NumberFormat('zh-TW', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const money2 = (n: number) => `${yuan2.format(n)} 元`;
+    const signed = (n: number) => (n < 0 ? `−${money2(-n)}` : money2(n));
+    const dash = '—';
+    const outs = ['bud-o-bills', 'bud-o-required', 'bud-o-three', 'bud-o-base', 'bud-o-surplus', 'bud-o-worst', 'bud-o-lean', 'bud-o-target', 'bud-o-gap'];
+
+    const render = () => {
+      outs.forEach((id) => { q(id).textContent = dash; });
+      let r;
+      try {
+        const incomes = parseIncomes(input('bud-incomes').value);
+        const bills = billEls
+          .map((row) => ({ name: bf(row, 'name').value, amount: bf(row, 'amount').value.trim(), timesPerYear: bf(row, 'times').value.trim() }))
+          .filter((b) => b.amount !== '')
+          .map((b) => ({ ...b, timesPerYear: b.timesPerYear === '' ? '1' : b.timesPerYear }));
+        r = calculateIrregularBudget({
+          incomes,
+          mode: q<HTMLSelectElement>('bud-mode').value,
+          fixedMonthly: num('bud-fixed'),
+          bills,
+          withholdingMonthly: num('bud-withhold'),
+          reserveMonths: input('bud-months').value.trim() === '' ? 6 : num('bud-months'),
+          reserveBalance: num('bud-balance'),
+        });
+      } catch {
+        q('bud-status').textContent = '請輸入 1 到 24 個月的收入（只能是 0 或正數，用逗號或空白隔開）；帳單一年繳 1 到 12 次，其餘欄位填 0 或正數。';
+        return;
+      }
+      q('bud-o-bills').textContent = `${money2(r.billsMonthly)}（${r.billRows.map((b) => `${b.name} ${money2(b.monthly)}`).join('、') || '無帳單'}）`;
+      q('bud-o-required').textContent = money2(r.required);
+      q('bud-o-three').textContent = `${money2(r.average)}／${money2(r.lowest3)}／${money2(r.worst)}`;
+      q('bud-o-base').textContent = money2(r.baseline);
+      q('bud-o-surplus').textContent = signed(r.surplus);
+      q('bud-o-worst').textContent = r.worstGap < 0 ? `缺 ${money2(-r.worstGap)}（最差月份 ${money(r.worst)}）` : `沒有缺口（最差月份 ${money(r.worst)}，高於必要支出 ${money2(r.worstGap)}）`;
+      q('bud-o-lean').textContent = `${r.leanMonths} 個月`;
+      q('bud-o-target').textContent = money(r.reserveTarget);
+      q('bud-o-gap').textContent = r.reserveGap === 0 ? '已達標' : `還差 ${money(r.reserveGap)}；${r.monthsToReserve === null ? '這個基準下每月可分配不是正數，存不起來' : `每月可分配全數存入約需 ${r.monthsToReserve} 個月`}`;
+      q('bud-status').textContent = r.surplus >= 0
+        ? `基準月收入 ${money2(r.baseline)}，每月必要支出 ${money2(r.required)}，每月可分配 ${money2(r.surplus)}；最差月份${r.worstGap < 0 ? `缺 ${money2(-r.worstGap)}` : '沒有缺口'}。`
+        : `基準月收入 ${money2(r.baseline)} 低於每月必要支出 ${money2(r.required)}，每月缺 ${money2(-r.surplus)}。`;
+    };
+
+    const exampleBills = [['所得稅', '36000', '1'], ['保險', '18000', '2'], ['房屋稅', '12000', '1'], ['', '', '1'], ['', '', '1'], ['', '', '1']];
+    const watched = [input('bud-incomes'), q<HTMLSelectElement>('bud-mode'), input('bud-fixed'), input('bud-withhold'), input('bud-months'), input('bud-balance'), ...billEls.flatMap((row) => Array.from(row.querySelectorAll('input')))] as HTMLElement[];
+    watched.forEach((el) => { el.addEventListener('input', render); el.addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      input('bud-incomes').value = '85000, 140000, 30000, 110000, 95000, 70000';
+      q<HTMLSelectElement>('bud-mode').value = 'average';
+      input('bud-fixed').value = '40000';
+      input('bud-withhold').value = '0';
+      input('bud-months').value = '6';
+      input('bud-balance').value = '0';
+      billEls.forEach((row, i) => { bf(row, 'name').value = exampleBills[i][0]; bf(row, 'amount').value = exampleBills[i][1]; bf(row, 'times').value = exampleBills[i][2]; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      ['bud-incomes', 'bud-fixed', 'bud-withhold', 'bud-months', 'bud-balance'].forEach((id) => { input(id).value = ''; });
+      billEls.forEach((row) => { bf(row, 'name').value = ''; bf(row, 'amount').value = ''; bf(row, 'times').value = '1'; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .bud-bills { display: grid; gap: 0.75rem; }
+  .bud-bill { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0; padding: 0.75rem; border: 1px solid var(--color-border, #d7d7d7); border-radius: 0.5rem; min-width: 0; }
+  .bud-bill legend { font-weight: 650; padding-inline: 0.25rem; }
+  .bud-bill > label { min-width: 0; }
+  .bud-bill input { width: 100%; min-width: 0; }
+  .bud-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bud-status { margin: 0; font-weight: 750; }
+  .bud-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+</style>

@@ -1,0 +1,182 @@
+---
+/*
+ * 時薪、日薪、月薪、年薪換算與加班費 (P2 batch 11, 2026-10-18), zh only.
+ *
+ * Replaces the shared salary converter on /zh/tools/salary-converter/. The arithmetic is in src/lib/twSalaryMath.mjs
+ * (tests/tw-salary-math.test.mjs asserts every number the page prints). The defaults are the page's 算例二. What is built in
+ * is only a published rule (月薪 ÷ 30 ÷ 8, 勞基法 第 24 條 multiples, 115 年基本工資 29,500 / 196, the 46-hour limit);
+ * the wage, hours, overtime pattern and any year-end bonus months are the reader's inputs, and the bonus defaults to 0.
+ */
+---
+
+<section class="calc" data-tw-salary data-growth-calculator aria-labelledby="salary-heading">
+  <header>
+    <h2 id="salary-heading">時薪、日薪、月薪、年薪互換，再加上加班費</h2>
+    <p>選你的薪資怎麼約定的，輸入金額；月薪換時薪用勞動部的算法（月薪 ÷ 30 ÷ 8），加班費依勞基法第 24 條的法定下限倍率。預設值就是下方的算例二。所有金額都是稅前。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label>
+        <span>薪資約定方式</span>
+        <select id="sal-basis">
+          <option value="monthly" selected>月薪</option>
+          <option value="daily">日薪</option>
+          <option value="hourly">時薪</option>
+          <option value="annual">年薪</option>
+        </select>
+      </label>
+      <label><span id="sal-amount-label">月薪（元，稅前）</span><input id="sal-amount" type="number" inputmode="decimal" min="0" step="100" value="36000" /></label>
+
+      <label data-show="annual" hidden><span>年薪分成幾個月發（契約寫 13.5 個月就填 13.5；不確定填 12）</span><input id="sal-months" type="number" inputmode="decimal" min="1" max="36" step="0.5" value="12" /></label>
+      <label data-show="daily hourly" hidden><span>每日正常工時（小時，上限 8）</span><input id="sal-hpd" type="number" inputmode="decimal" min="0" max="8" step="0.5" value="8" /></label>
+      <label data-show="daily hourly" hidden><span>每週出勤日數</span><input id="sal-dpw" type="number" inputmode="decimal" min="0" max="7" step="1" value="5" /></label>
+      <label data-show="daily hourly" hidden><span>一年計薪週數</span><input id="sal-weeks" type="number" inputmode="decimal" min="1" max="53" step="1" value="52" /></label>
+      <label data-show="monthly annual"><span>每週實際工時（小時；只用在「實際工時時薪」，比較工作用）</span><input id="sal-cmp" type="number" inputmode="decimal" min="1" max="84" step="0.5" value="40" /></label>
+      <label data-show="monthly daily hourly"><span>契約約定的年終獎金（月數；沒約定填 0，法律沒有規定月數）</span><input id="sal-bonus" type="number" inputmode="decimal" min="0" max="36" step="0.5" value="0" /></label>
+
+      <details class="is-wide sal-ot" open>
+        <summary>加班（選填，平均每個月）</summary>
+        <div class="sal-ot__grid">
+          <label><span>平日每次加班幾小時（0 到 4）</span><input id="sal-wd-h" type="number" inputmode="decimal" min="0" max="4" step="0.5" value="3" /></label>
+          <label><span>一個月平日加班幾天</span><input id="sal-wd-d" type="number" inputmode="decimal" min="0" max="31" step="1" value="10" /></label>
+          <label><span>休息日每次出勤幾小時（0 到 12）</span><input id="sal-rd-h" type="number" inputmode="decimal" min="0" max="12" step="0.5" value="10" /></label>
+          <label><span>一個月休息日出勤幾次</span><input id="sal-rd-n" type="number" inputmode="decimal" min="0" max="31" step="1" value="1" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide sal-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        月薪 ÷ 30 ÷ 8 是勞動部說明的慣用算法，勞資雙方另有約定的以約定為準；加班費倍率是法定下限（平日 4/3、5/3，休息日 4/3、5/3、8/3），雇主可以給更高；例假日、國定假日與輪班不在本計算機範圍。基本工資 115 年月薪 29,500 元、時薪 196 元，皆於 2026-10-18 查核。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="sal-status" id="sal-status">—</p>
+      <dl>
+        <div><dt>月薪（日薪與年薪制為平均）</dt><dd id="sal-monthly">—</dd></div>
+        <div><dt>日薪</dt><dd id="sal-daily">—</dd></div>
+        <div><dt>平日每小時工資額（時薪）</dt><dd id="sal-hourly">—</dd></div>
+        <div><dt>實際工時時薪（比較兩份工作用）</dt><dd id="sal-eff">—</dd></div>
+        <div><dt>年薪（不含加班）</dt><dd id="sal-annual">—</dd></div>
+        <div id="sal-bonus-row" hidden><dt>其中約定的年終獎金</dt><dd id="sal-bonus-out">—</dd></div>
+        <div><dt>對照 115 年基本工資</dt><dd id="sal-floor">—</dd></div>
+        <div><dt>平日加班費（每月）</dt><dd id="sal-wd-pay">—</dd></div>
+        <div><dt>休息日加班費（每月）</dt><dd id="sal-rd-pay">—</dd></div>
+        <div><dt>含加班的月收入</dt><dd id="sal-total-month">—</dd></div>
+        <div><dt>含加班的年收入（每月同樣加班）</dt><dd id="sal-total-year">—</dd></div>
+        <div><dt>每月加班時數</dt><dd id="sal-hours">—</dd></div>
+      </dl>
+      <p class="sal-note"><strong>試算結果僅供參考，以勞動契約、薪資單與勞動主管機關的解釋為準。</strong>不含所得稅、勞健保費與勞退自提。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { convertWithOvertime, OVERTIME_MONTH_LIMIT, OVERTIME_MONTH_LIMIT_WITH_CONSENT } from '../lib/twSalaryMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-salary]');
+  if (root) {
+    const el = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const input = (id: string) => el<HTMLInputElement>(id);
+    const num = (id: string) => {
+      const raw = input(id).value.trim();
+      return raw === '' ? 0 : Number(raw);
+    };
+    const ids = ['sal-basis', 'sal-amount', 'sal-months', 'sal-cmp', 'sal-hpd', 'sal-dpw', 'sal-weeks', 'sal-bonus', 'sal-wd-h', 'sal-wd-d', 'sal-rd-h', 'sal-rd-n'];
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const yuan2 = new Intl.NumberFormat('zh-TW', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const money2 = (n: number) => `${yuan2.format(n)} 元`;
+    const dash = '—';
+    const outs = ['sal-monthly', 'sal-daily', 'sal-hourly', 'sal-eff', 'sal-annual', 'sal-floor', 'sal-wd-pay', 'sal-rd-pay', 'sal-total-month', 'sal-total-year', 'sal-hours'];
+    const labels: Record<string, string> = { monthly: '月薪（元，稅前）', daily: '日薪（元，稅前）', hourly: '時薪（元，稅前）', annual: '年薪（元，稅前）' };
+
+    const syncVisibility = () => {
+      const basis = input('sal-basis').value;
+      root.querySelectorAll<HTMLElement>('[data-show]').forEach((node) => {
+        node.hidden = !(node.dataset.show ?? '').split(' ').includes(basis);
+      });
+      el('sal-amount-label').textContent = labels[basis] ?? labels.monthly;
+    };
+
+    const render = () => {
+      syncVisibility();
+      outs.forEach((id) => { el(id).textContent = dash; });
+      el('sal-bonus-row').hidden = true;
+      const basis = input('sal-basis').value;
+      let r;
+      try {
+        r = convertWithOvertime({
+          basis,
+          amount: num('sal-amount'),
+          paymentMonths: num('sal-months') || 12,
+          hoursPerDay: input('sal-hpd').value.trim() === '' ? 8 : num('sal-hpd'),
+          daysPerWeek: input('sal-dpw').value.trim() === '' ? 5 : num('sal-dpw'),
+          weeks: input('sal-weeks').value.trim() === '' ? 52 : num('sal-weeks'),
+          bonusMonths: num('sal-bonus'),
+          compareWeeklyHours: input('sal-cmp').value.trim() === '' ? 40 : num('sal-cmp'),
+          weekdayHoursPerDay: num('sal-wd-h'),
+          weekdayDays: num('sal-wd-d'),
+          restDayHoursPerVisit: num('sal-rd-h'),
+          restDayVisits: num('sal-rd-n'),
+        });
+      } catch {
+        el('sal-status').textContent = '請輸入大於 0 的薪資；每日工時不超過 8 小時，平日每次加班 0 到 4 小時，休息日每次出勤 0 到 12 小時，其餘欄位填 0 或正數。';
+        return;
+      }
+      const notes: string[] = [];
+      if (r.warnings.includes('weeklyHoursOver40')) notes.push('每週出勤時數超過 40 小時：超過的部分是延長工時，請改放進加班欄位。');
+      if (r.overtime.overConsentLimit) notes.push(`每月加班 ${r.overtime.hours} 小時，超過 ${OVERTIME_MONTH_LIMIT_WITH_CONSENT} 小時。`);
+      else if (r.overtime.overMonthLimit) notes.push(`每月加班 ${r.overtime.hours} 小時，超過 ${OVERTIME_MONTH_LIMIT} 小時，需經工會或勞資會議同意才能到 ${OVERTIME_MONTH_LIMIT_WITH_CONSENT} 小時。`);
+      el('sal-status').textContent = `時薪 ${money2(r.hourly)}、日薪 ${money2(r.daily)}、月薪 ${money(r.monthly)}、年薪 ${money(r.annualGross)}（不含加班）。${notes.join(' ')}`;
+      el('sal-monthly').textContent = money(r.monthly);
+      el('sal-daily').textContent = money2(r.daily);
+      el('sal-hourly').textContent = money2(r.hourly);
+      el('sal-eff').textContent = money2(r.effectiveHourly);
+      el('sal-annual').textContent = money(r.annualGross);
+      if (r.bonus > 0) {
+        el('sal-bonus-row').hidden = false;
+        el('sal-bonus-out').textContent = `${money(r.bonus)}（${num('sal-bonus')} 個月，依你填的約定）`;
+      }
+      const floorName = r.floorKind === 'monthly' ? '月' : '每小時';
+      el('sal-floor').textContent = r.belowFloor
+        ? `低於 115 年${floorName}最低工資 ${yuan.format(r.floor)} 元（差 ${yuan2.format(-r.floorGap)} 元）`
+        : `未低於 115 年${floorName}最低工資 ${yuan.format(r.floor)} 元`;
+      el('sal-wd-pay').textContent = money(r.overtime.weekday);
+      el('sal-rd-pay').textContent = money(r.overtime.restDay);
+      el('sal-total-month').textContent = money(r.monthlyWithOvertime);
+      el('sal-total-year').textContent = money(r.annualWithOvertime);
+      el('sal-hours').textContent = `${r.overtime.hours} 小時（平日 ${r.overtime.weekdayHours}、休息日 ${r.overtime.restDayHours}）`;
+    };
+
+    const example: Record<string, string> = { 'sal-basis': 'monthly', 'sal-amount': '36000', 'sal-months': '12', 'sal-cmp': '40', 'sal-hpd': '8', 'sal-dpw': '5', 'sal-weeks': '52', 'sal-bonus': '0', 'sal-wd-h': '3', 'sal-wd-d': '10', 'sal-rd-h': '10', 'sal-rd-n': '1' };
+    ids.forEach((id) => { input(id).addEventListener('input', render); input(id).addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { input(id).value = value; });
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      ids.forEach((id) => { if (id !== 'sal-basis') input(id).value = ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden], .calc__controls [hidden] { display: none !important; }
+  .sal-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .sal-status { margin: 0; font-weight: 750; }
+  .sal-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .sal-ot summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .sal-ot__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

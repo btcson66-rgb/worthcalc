@@ -4,6 +4,10 @@ import TWCreditCardCalculator from '../../../components/TWCreditCardCalculator.a
 import TWMortgageCalculator from '../../../components/TWMortgageCalculator.astro';
 import TWDbrCalculator from '../../../components/TWDbrCalculator.astro';
 import TWHomeAffordCalculator from '../../../components/TWHomeAffordCalculator.astro';
+import TWSalaryCalculator from '../../../components/TWSalaryCalculator.astro';
+import TWDebtCalculator from '../../../components/TWDebtCalculator.astro';
+import TWCarCalculator from '../../../components/TWCarCalculator.astro';
+import TWBudgetCalculator from '../../../components/TWBudgetCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -56,6 +60,14 @@ const useTwMortgage = locale === 'zh' && slug === 'mortgage-payoff';
 const useTwDbr = locale === 'zh' && slug === 'dti-calculator';
 // ...and the home-affordability page: 央行 loan ratios, 寬限期 rule, 1/3 line (no PMI, no US DTI).
 const useTwHome = locale === 'zh' && slug === 'home-affordability';
+// P2 batch 11 (2026-10-18): 勞基法 normal hours, 勞動部 月薪 ÷ 30 ÷ 8, 第 24 條 overtime multiples, 115 年基本工資.
+const useTwSalary = locale === 'zh' && slug === 'salary-converter';
+// ...and the debt-strategy page: balances, rates and minimum payments from the bills, 銀行法 第 47-1 條 15% flag.
+const useTwDebt = locale === 'zh' && slug === 'debt-strategy';
+// ...and car-affordability: 使用牌照稅, 公路養管費 and 強制險 from the published tables; no sales tax or registration fee.
+const useTwCar = locale === 'zh' && slug === 'car-affordability';
+// ...and budget-builder: plain arithmetic on the reader's incomes and annual bills; no rate or bracket built in.
+const useTwBudget = locale === 'zh' && slug === 'budget-builder';
 ---
 
 <ToolLayout
@@ -69,7 +81,7 @@ const useTwHome = locale === 'zh' && slug === 'home-affordability';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : useTwDebt ? <TWDebtCalculator /> : useTwCar ? <TWCarCalculator /> : useTwBudget ? <TWBudgetCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

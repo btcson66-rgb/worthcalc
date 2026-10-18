@@ -1,0 +1,226 @@
+---
+/*
+ * 汽車負擔能力與養車月成本 (P2 batch 11, 2026-10-18), zh only.
+ *
+ * Replaces the shared car calculator on /zh/tools/car-affordability/ (sales tax, registration fee, a lump "taxes and fees").
+ * The arithmetic is in src/lib/twCarMath.mjs (tests/tw-car-math.test.mjs asserts every number the page prints). The defaults
+ * are the page's 算例一. 使用牌照稅 (使用牌照稅法 附表一 / 附表四), 公路養管費 (徵收及分配辦法 附表二) and 強制險 (保發中心 公式) are looked
+ * up from the published tables and each has an override box; income, 任意險, 油電, 保養, 停車, the loan rate and term and the
+ * 交通支出上限 are the reader's inputs. The EV 免徵 box is the reader's: 使用牌照稅法 第 5 條 says 地方政府 "得" 免徵.
+ */
+import { CAR_AGE_SEX } from '../lib/twCarMath.mjs';
+
+const ageBands = Object.entries(CAR_AGE_SEX).map(([value, band]) => ({ value, label: band.label }));
+const levels = Array.from({ length: 10 }, (_, i) => i + 1);
+---
+
+<section class="calc" data-tw-car data-growth-calculator aria-labelledby="car-heading">
+  <header>
+    <h2 id="car-heading">從實領收入反推買得起多貴的車，牌照稅、養管費、強制險都算進去</h2>
+    <p>輸入收入與支出、車的條件與貸款，稅費與強制險依官方表格自動帶入（可覆寫成你的帳單金額）。預設值就是下方的算例一，其中收入、任意險、油電、利率 3% 與交通支出上限 15% 都是示範值。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <label><span>每月實領收入（元）</span><input id="car-income" type="number" inputmode="numeric" min="0" step="1000" value="90000" /></label>
+      <label><span>其他債務月付（元）</span><input id="car-debt" type="number" inputmode="numeric" min="0" step="500" value="0" /></label>
+      <label><span>必要生活支出（元／月）</span><input id="car-living" type="number" inputmode="numeric" min="0" step="1000" value="40000" /></label>
+      <label><span>每月儲蓄目標（元）</span><input id="car-savings" type="number" inputmode="numeric" min="0" step="1000" value="10000" /></label>
+
+      <label>
+        <span>動力</span>
+        <select id="car-drive">
+          <option value="petrol" selected>汽油（含油電混合）</option>
+          <option value="diesel">柴油</option>
+          <option value="ev">電動（完全以電能為動力）</option>
+        </select>
+      </label>
+      <label data-show="petrol diesel"><span>汽缸總排氣量（cc）</span><input id="car-cc" type="number" inputmode="numeric" min="1" step="1" value="1800" /></label>
+      <label data-show="ev" hidden><span>馬達最大馬力（英制 HP）</span><input id="car-hp" type="number" inputmode="decimal" min="1" step="1" value="200" /></label>
+      <label class="is-wide car-check" data-show="ev" hidden><input id="car-exempt" type="checkbox" /><span>我所在的縣市已免徵電動汽車使用牌照稅（法條是「得免徵」，由縣市決定，沒勾就照稅額表計算）</span></label>
+
+      <label>
+        <span>強制險：性別</span>
+        <select id="car-sex"><option value="male" selected>男</option><option value="female">女</option></select>
+      </label>
+      <label>
+        <span>強制險：年齡區間</span>
+        <select id="car-age">
+          {ageBands.map((band) => <option value={band.value} selected={band.value === '31-60'}>{band.label}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>強制險：費率等級（第一次投保是第 4 級）</span>
+        <select id="car-level">
+          {levels.map((level) => <option value={level} selected={level === 4}>第 {level} 級</option>)}
+        </select>
+      </label>
+      <label><span>前一年酒後駕車紀錄次數</span><input id="car-drunk" type="number" inputmode="numeric" min="0" step="1" value="0" /></label>
+
+      <label><span>任意險（元／年）</span><input id="car-optional" type="number" inputmode="numeric" min="0" step="1000" value="18000" /></label>
+      <label><span id="car-fuel-label">油費（元／月）</span><input id="car-fuel" type="number" inputmode="numeric" min="0" step="500" value="3500" /></label>
+      <label><span>保養與維修準備金（元／月）</span><input id="car-maint" type="number" inputmode="numeric" min="0" step="500" value="1500" /></label>
+      <label><span>停車與通行費（元／月）</span><input id="car-parking" type="number" inputmode="numeric" min="0" step="500" value="2500" /></label>
+
+      <label><span>頭期款（元）</span><input id="car-down" type="number" inputmode="numeric" min="0" step="10000" value="200000" /></label>
+      <label><span>舊車折抵淨值（元）</span><input id="car-trade" type="number" inputmode="numeric" min="0" step="10000" value="0" /></label>
+      <label><span>車貸年利率（%，填銀行報價；3% 是示範）</span><input id="car-apr" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="3" /></label>
+      <label><span>貸款期數（月）</span><input id="car-term" type="number" inputmode="numeric" min="1" max="120" step="1" value="60" /></label>
+      <label class="is-wide"><span>交通支出上限（占實領收入的 %，你自己的預算規則；15% 是示範）</span><input id="car-cap" type="number" inputmode="decimal" min="1" max="100" step="0.5" value="15" /></label>
+
+      <details class="is-wide car-advanced">
+        <summary>選填：覆寫稅費金額、其他一次性費用</summary>
+        <div class="car-advanced__grid">
+          <label><span>使用牌照稅（元／年；空白＝依稅額表）</span><input id="car-ov-tax" type="number" inputmode="numeric" min="0" step="10" placeholder="例如稅單上的金額" /></label>
+          <label><span>公路養管費（元／年；空白＝依費額表）</span><input id="car-ov-fee" type="number" inputmode="numeric" min="0" step="10" placeholder="排氣量不在表內時必填" /></label>
+          <label><span>強制險（元／年；空白＝依公式）</span><input id="car-ov-ins" type="number" inputmode="numeric" min="0" step="10" placeholder="例如保單上的金額" /></label>
+          <label><span>其他一次性購車費用（元，如領牌規費、貸款手續費；貨物稅與營業稅已含在車價內）</span><input id="car-onetime" type="number" inputmode="numeric" min="0" step="1000" value="0" /></label>
+        </div>
+      </details>
+
+      <div class="is-wide car-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        牌照稅依使用牌照稅法附表一、附表四，養管費依徵收及分配辦法附表二，強制險依保險事業發展中心 113 年 4 月 17 日修正的公式（115 年 7 月 1 日起給付標準提高，保費以保險公司報價為準），皆於 2026-10-18 查核。貨物稅與營業稅已含在車價內；離島、營業用與減免情形不處理。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="car-status" id="car-status">—</p>
+      <dl>
+        <div><dt>使用牌照稅（每年）</dt><dd id="car-o-tax">—</dd></div>
+        <div><dt>公路養管費（每年）</dt><dd id="car-o-fee">—</dd></div>
+        <div><dt>強制險（每年）</dt><dd id="car-o-ins">—</dd></div>
+        <div><dt>每年固定稅費與保險（含任意險）</dt><dd id="car-o-fixed">—</dd></div>
+        <div><dt>每月持有成本（不含車貸）</dt><dd id="car-o-hold">—</dd></div>
+        <div><dt>條件 B：交通上限 − 持有成本</dt><dd id="car-o-b">—</dd></div>
+        <div><dt>條件 A：收入 − 債務 − 生活 − 儲蓄 − 持有成本</dt><dd id="car-o-a">—</dd></div>
+        <div><dt>可用的車貸月付（取較小者）</dt><dd id="car-o-pay">—</dd></div>
+        <div><dt>可貸本金</dt><dd id="car-o-prin">—</dd></div>
+        <div><dt>最高車價（本金 + 頭期款 + 折抵 − 一次性費用）</dt><dd id="car-o-price">—</dd></div>
+        <div><dt>貸款總利息</dt><dd id="car-o-int">—</dd></div>
+      </dl>
+      <p class="car-note"><strong>試算結果僅供參考，以稅單、保單與銀行報價為準。</strong>最高車價是預算上限，不是建議價格。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculateTwCar } from '../lib/twCarMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-car]');
+  if (root) {
+    const q = <T extends HTMLElement>(id: string) => root.querySelector<T>(`#${id}`)!;
+    const input = (id: string) => q<HTMLInputElement>(id);
+    const select = (id: string) => q<HTMLSelectElement>(id);
+    const num = (id: string) => (input(id).value.trim() === '' ? 0 : Number(input(id).value));
+    const optional = (id: string) => (input(id).value.trim() === '' ? null : Number(input(id).value));
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const yuan2 = new Intl.NumberFormat('zh-TW', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const money2 = (n: number) => `${yuan2.format(n)} 元`;
+    const dash = '—';
+    const outs = ['car-o-tax', 'car-o-fee', 'car-o-ins', 'car-o-fixed', 'car-o-hold', 'car-o-b', 'car-o-a', 'car-o-pay', 'car-o-prin', 'car-o-price', 'car-o-int'];
+    const ids = ['car-income', 'car-debt', 'car-living', 'car-savings', 'car-drive', 'car-cc', 'car-hp', 'car-exempt', 'car-sex', 'car-age', 'car-level', 'car-drunk', 'car-optional', 'car-fuel', 'car-maint', 'car-parking', 'car-down', 'car-trade', 'car-apr', 'car-term', 'car-cap', 'car-ov-tax', 'car-ov-fee', 'car-ov-ins', 'car-onetime'];
+
+    const syncVisibility = () => {
+      const drive = select('car-drive').value;
+      root.querySelectorAll<HTMLElement>('[data-show]').forEach((node) => {
+        node.hidden = !(node.dataset.show ?? '').split(' ').includes(drive);
+      });
+      q('car-fuel-label').textContent = drive === 'ev' ? '電費（元／月）' : '油費（元／月）';
+    };
+
+    const render = () => {
+      syncVisibility();
+      outs.forEach((id) => { q(id).textContent = dash; });
+      const drive = select('car-drive').value;
+      let r;
+      try {
+        r = calculateTwCar({
+          takeHome: num('car-income'),
+          otherDebtPayments: num('car-debt'),
+          livingCosts: num('car-living'),
+          savingsTarget: num('car-savings'),
+          downPayment: num('car-down'),
+          tradeIn: num('car-trade'),
+          oneTimeCosts: num('car-onetime'),
+          aprPct: num('car-apr'),
+          termMonths: num('car-term'),
+          transportCapPct: num('car-cap'),
+          drivetrain: drive,
+          cc: num('car-cc'),
+          hp: num('car-hp'),
+          evExempt: input('car-exempt').checked,
+          licenseTaxOverride: optional('car-ov-tax'),
+          roadFeeOverride: optional('car-ov-fee'),
+          compulsoryOverride: optional('car-ov-ins'),
+          ageBand: select('car-age').value,
+          sex: select('car-sex').value,
+          level: Number(select('car-level').value),
+          drunkRecords: num('car-drunk'),
+          optionalInsuranceYear: num('car-optional'),
+          fuelMonthly: num('car-fuel'),
+          maintenanceMonthly: num('car-maint'),
+          parkingMonthly: num('car-parking'),
+        });
+      } catch (error) {
+        const message = String((error as Error).message ?? '');
+        if (message.startsWith('roadFee')) root.querySelector<HTMLDetailsElement>('.car-advanced')!.open = true;
+        q('car-status').textContent = message.startsWith('roadFee')
+          ? '這個排氣量不在公路養管費費額表（自用小客車列 251 到 8,000cc）內，請在「覆寫」欄填你的養管費金額。'
+          : '請輸入大於 0 的實領收入、排氣量或馬力、期數（最多 120 期）與交通支出上限，其餘欄位填 0 或正數。';
+        return;
+      }
+      q('car-o-tax').textContent = r.licenseTaxExempt ? '0 元（所在縣市已免徵）' : money(r.licenseTax);
+      q('car-o-fee').textContent = r.roadFeeExempt ? '0 元（電動汽車免徵）' : money(r.roadFee);
+      q('car-o-ins').textContent = money(r.compulsory);
+      q('car-o-fixed').textContent = `${money(r.fixedYear)}（每月 ${money2(r.fixedMonthly)}）`;
+      q('car-o-hold').textContent = money2(r.holdingMonthly);
+      q('car-o-b').textContent = `${money2(r.afterCap)}（上限 ${money(r.capBudget)}）`;
+      q('car-o-a').textContent = money2(r.afterLiving);
+      q('car-o-pay').textContent = r.affordablePayment > 0 ? `${money2(r.affordablePayment)}（${r.binding === 'cap' ? '交通上限先卡住' : '生活支出先卡住'}）` : '0 元（持有成本已超過預算）';
+      q('car-o-prin').textContent = money(r.principal);
+      q('car-o-price').textContent = r.maxPrice > 0 ? money(r.maxPrice) : '0 元';
+      q('car-o-int').textContent = money(r.totalInterest);
+      q('car-status').textContent = r.affordablePayment > 0
+        ? `可用車貸月付 ${money2(r.affordablePayment)}，最高車價約 ${money(r.maxPrice)}；每月持有成本 ${money2(r.holdingMonthly)}，每年固定稅費與保險 ${money(r.fixedYear)}。`
+        : `每月持有成本 ${money2(r.holdingMonthly)} 已超過你的預算，沒有可拿來付車貸的金額；請降低持有成本、調高交通上限或減少其他支出。`;
+    };
+
+    const example: Record<string, string> = {
+      'car-income': '90000', 'car-debt': '0', 'car-living': '40000', 'car-savings': '10000', 'car-drive': 'petrol', 'car-cc': '1800', 'car-hp': '200',
+      'car-sex': 'male', 'car-age': '31-60', 'car-level': '4', 'car-drunk': '0', 'car-optional': '18000', 'car-fuel': '3500', 'car-maint': '1500', 'car-parking': '2500',
+      'car-down': '200000', 'car-trade': '0', 'car-apr': '3', 'car-term': '60', 'car-cap': '15', 'car-ov-tax': '', 'car-ov-fee': '', 'car-ov-ins': '', 'car-onetime': '0',
+    };
+    ids.forEach((id) => { input(id).addEventListener('input', render); input(id).addEventListener('change', render); });
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      Object.entries(example).forEach(([id, value]) => { input(id).value = value; });
+      input('car-exempt').checked = false;
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      ids.forEach((id) => { if (!['car-drive', 'car-sex', 'car-age', 'car-level', 'car-exempt'].includes(id)) input(id).value = ''; });
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results dl > div { flex-wrap: wrap; }
+  .calc__results dd { margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: end; white-space: normal; }
+  .calc__results [hidden], .calc__controls [hidden] { display: none !important; }
+  .car-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .car-check { display: flex; align-items: flex-start; gap: 0.5rem; }
+  .car-check input { width: auto; margin-top: 0.25rem; }
+  .car-status { margin: 0; font-weight: 750; }
+  .car-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .car-advanced summary { cursor: pointer; font-weight: 650; padding-block: 0.35rem; }
+  .car-advanced__grid { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

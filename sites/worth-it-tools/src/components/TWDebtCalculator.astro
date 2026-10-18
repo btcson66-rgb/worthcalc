@@ -1,0 +1,221 @@
+---
+/*
+ * 雪球法 vs 雪崩法 (P2 batch 11, 2026-10-18), zh only.
+ *
+ * Replaces the shared debt-strategy calculator on /zh/tools/debt-strategy/. The arithmetic is in src/lib/twDebtMath.mjs
+ * (tests/tw-debt-math.test.mjs asserts every number the page prints). The defaults are the page's 算例一. Balances, rates and
+ * minimum payments are the reader's own bill numbers; the only built-in lines are 銀行法 第 47-1 條 (15% on 信用卡循環信用
+ * and 現金卡) and the 金管會 最低應繳金額令 floor for a card, both used to warn, never to fill a field.
+ */
+const rows = [
+  { name: '信用卡', kind: 'card', balance: '120000', rate: '15', min: '8000' },
+  { name: '小額分期', kind: 'loan', balance: '40000', rate: '6', min: '2000' },
+  { name: '信用貸款', kind: 'loan', balance: '300000', rate: '9', min: '7000' },
+  { name: '', kind: 'loan', balance: '', rate: '', min: '' },
+  { name: '', kind: 'loan', balance: '', rate: '', min: '' },
+  { name: '', kind: 'loan', balance: '', rate: '', min: '' },
+];
+---
+
+<section class="calc" data-tw-debt data-growth-calculator aria-labelledby="debt-heading">
+  <header>
+    <h2 id="debt-heading">比較雪球法與雪崩法：哪個順序先還清、少付多少利息</h2>
+    <p>輸入每一筆債務的餘額、年利率與帳單上的最低應繳（至少填 1 筆，最多 6 筆，空白的列會略過），再填每月額外能還多少。預設值就是下方的算例一。</p>
+  </header>
+
+  <div class="calc__body">
+    <div class="calc__controls">
+      <div class="is-wide debt-table" role="group" aria-label="債務清單">
+        {rows.map((row, i) => (
+          <fieldset class="debt-row" data-row={i}>
+            <legend>第 {i + 1} 筆{i < 3 ? '' : '（選填）'}</legend>
+            <label class="debt-row__name"><span>名稱</span><input data-field="name" type="text" maxlength="20" value={row.name} placeholder="例如：信用卡" /></label>
+            <label>
+              <span>類型</span>
+              <select data-field="kind">
+                <option value="card" selected={row.kind === 'card'}>信用卡或現金卡</option>
+                <option value="loan" selected={row.kind === 'loan'}>其他（信貸、車貸等）</option>
+              </select>
+            </label>
+            <label><span>未還餘額（元）</span><input data-field="balance" type="number" inputmode="numeric" min="0" step="1000" value={row.balance} /></label>
+            <label><span>年利率（%）</span><input data-field="rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value={row.rate} /></label>
+            <label><span>最低應繳（元／月）</span><input data-field="min" type="number" inputmode="numeric" min="0" step="100" value={row.min} /></label>
+          </fieldset>
+        ))}
+      </div>
+
+      <label class="is-wide"><span>每月額外還的金額（元，除了所有最低應繳之外；可填 0）</span><input id="debt-extra" type="number" inputmode="numeric" min="0" step="500" value="5000" /></label>
+
+      <div class="is-wide debt-actions">
+        <button type="button" class="primary" data-action="calculate">開始計算</button>
+        <button type="button" data-action="example">載入範例</button>
+        <button type="button" data-action="reset">清除重設</button>
+      </div>
+      <p class="calc__note is-wide">
+        銀行法第 47-1 條的 15% 上限只管信用卡循環信用與現金卡，信貸、車貸、學貸不受限制；最低應繳請填帳單上的金額，本頁不替銀行計算。月利息用「餘額 × 年利率 ÷ 12」、不逐月四捨五入，最低應繳視為固定金額，不處理新刷卡、優惠利率到期與協商。法條與函令皆於 2026-10-18 查核。
+      </p>
+    </div>
+
+    <div class="calc__results" aria-live="polite">
+      <p class="debt-status" id="debt-status">—</p>
+      <ul class="debt-warnings" id="debt-warnings" hidden></ul>
+      <div class="debt-table-wrap" id="debt-result" hidden>
+        <table class="debt-result-table">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">雪球法（餘額小的先還）</th><th scope="col">雪崩法（利率高的先還）</th><th scope="col">只繳最低應繳</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">還款順序</th><td id="r-order-sn">—</td><td id="r-order-av">—</td><td>無額外金額</td></tr>
+            <tr><th scope="row">全部還清</th><td id="r-months-sn">—</td><td id="r-months-av">—</td><td id="r-months-min">—</td></tr>
+            <tr><th scope="row">第一筆還清</th><td id="r-first-sn">—</td><td id="r-first-av">—</td><td id="r-first-min">—</td></tr>
+            <tr><th scope="row">每筆還清的月份</th><td id="r-each-sn">—</td><td id="r-each-av">—</td><td id="r-each-min">—</td></tr>
+            <tr><th scope="row">總利息</th><td id="r-int-sn">—</td><td id="r-int-av">—</td><td id="r-int-min">—</td></tr>
+            <tr><th scope="row">總繳款</th><td id="r-paid-sn">—</td><td id="r-paid-av">—</td><td id="r-paid-min">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="debt-gap" id="debt-gap" hidden></p>
+      <p class="debt-note"><strong>試算結果僅供參考，以帳單與合約為準。</strong>每月預算 = 所有最低應繳 + 每月額外金額，維持不變。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { compareStrategies, formatMonths, inputWarnings, normalizeDebts, CARD_RATE_CAP_PCT } from '../lib/twDebtMath.mjs';
+
+  const root = document.querySelector<HTMLElement>('[data-tw-debt]');
+  if (root) {
+    const q = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector)!;
+    const rowEls = Array.from(root.querySelectorAll<HTMLElement>('.debt-row'));
+    const field = (row: HTMLElement, name: string) => row.querySelector<HTMLInputElement | HTMLSelectElement>(`[data-field="${name}"]`)!;
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (n: number) => `${yuan.format(Math.round(n))} 元`;
+    const setText = (id: string, text: string) => { q(`#${id}`).textContent = text; };
+
+    const readDebts = () =>
+      rowEls
+        .map((row) => ({
+          name: field(row, 'name').value,
+          kind: field(row, 'kind').value as 'card' | 'loan',
+          balance: field(row, 'balance').value.trim(),
+          ratePct: field(row, 'rate').value.trim(),
+          minPayment: field(row, 'min').value.trim(),
+        }))
+        .filter((d) => d.balance !== '' || d.ratePct !== '' || d.minPayment !== '')
+        .map((d) => ({ ...d, ratePct: d.ratePct === '' ? '0' : d.ratePct, minPayment: d.minPayment === '' ? '0' : d.minPayment }));
+
+    const warningText = (w: ReturnType<typeof inputWarnings>[number]) => {
+      if (w.code === 'cardRateOverCap') return `${w.name}：你填的年利率 ${w.ratePct}% 超過銀行法第 47-1 條對信用卡循環信用與現金卡的 ${CARD_RATE_CAP_PCT}% 上限，請核對帳單。`;
+      if (w.code === 'neverPaidDown') return `${w.name}：最低應繳 ${money(w.minPayment ?? 0)} 不夠付第 1 個月的利息 ${money(w.interest ?? 0)}，只繳最低應繳餘額不會下降。`;
+      return `${w.name}：你填的最低應繳 ${money(w.minPayment ?? 0)} 低於依金管會令推算的下限 ${money(w.floor ?? 0)}（餘額 5% 加當月循環利息，僅限只有舊餘額的信用卡），請核對帳單。`;
+    };
+
+    const clearResults = () => {
+      q('#debt-result').hidden = true;
+      q('#debt-gap').hidden = true;
+      q('#debt-warnings').hidden = true;
+      q('#debt-warnings').textContent = '';
+    };
+
+    const render = () => {
+      clearResults();
+      const debts = readDebts();
+      const extraRaw = q<HTMLInputElement>('#debt-extra').value.trim();
+      let normalized;
+      try {
+        normalized = normalizeDebts(debts);
+        if (extraRaw !== '' && !(Number(extraRaw) >= 0)) throw new RangeError('extra');
+      } catch {
+        setText('debt-status', debts.length === 0 ? '請至少填一筆債務的餘額、年利率與最低應繳。' : '每一筆債務的餘額要大於 0，年利率在 0 到 100 之間，最低應繳與每月額外金額填 0 或正數。');
+        return;
+      }
+      const extra = extraRaw === '' ? 0 : Number(extraRaw);
+      const c = compareStrategies(debts, extra);
+      const warns = inputWarnings(debts);
+      if (warns.length) {
+        const list = q('#debt-warnings');
+        warns.forEach((w) => { const li = document.createElement('li'); li.textContent = warningText(w); list.appendChild(li); });
+        list.hidden = false;
+      }
+      const names = normalized.map((d) => d.name);
+      const each = (months: (number | null)[]) => names.map((n, i) => `${n} ${months[i] === null ? '還不完' : `第 ${months[i]} 個月`}`).join('、');
+      const first = (r: { firstPayoffMonth: number }) => (Number.isFinite(r.firstPayoffMonth) ? `第 ${r.firstPayoffMonth} 個月` : '無');
+      const monthsText = (r: { months: number | null }) => (r.months === null ? '還不完（超過 100 年）' : `${r.months} 個月（${formatMonths(r.months)}）`);
+      const totalText = (r: { finished: boolean }, n: number) => (r.finished ? money(n) : '—');
+      const fill = (suffix: 'sn' | 'av' | 'min', r: ReturnType<typeof compareStrategies>['snowball']) => {
+        if (suffix !== 'min') setText(`r-order-${suffix}`, r.orderNames.join(' → '));
+        setText(`r-months-${suffix}`, monthsText(r));
+        setText(`r-first-${suffix}`, first(r));
+        setText(`r-each-${suffix}`, each(r.payoffMonth));
+        setText(`r-int-${suffix}`, totalText(r, r.totalInterest));
+        setText(`r-paid-${suffix}`, totalText(r, r.totalPaid));
+      };
+      fill('sn', c.snowball);
+      fill('av', c.avalanche);
+      fill('min', c.minimumOnly);
+      q('#debt-result').hidden = false;
+
+      const gap = q('#debt-gap');
+      if (c.interestGap !== null && c.monthsGap !== null) {
+        const g = Math.round(c.interestGap);
+        const m = c.monthsGap;
+        gap.textContent = g === 0 && m === 0
+          ? '兩種順序的結果相同：不需要選。'
+          : `雪崩法比雪球法${g >= 0 ? '少' : '多'}付約 ${money(Math.abs(c.interestGap))}利息，${m === 0 ? '還清月數相同' : `${m > 0 ? '早' : '晚'} ${Math.abs(m)} 個月還清`}。`;
+        gap.hidden = false;
+      }
+      const best = c.avalanche.finished ? c.avalanche : c.snowball;
+      setText('debt-status', best.finished
+        ? `雪球法 ${c.snowball.months} 個月、總利息 ${money(c.snowball.totalInterest)}；雪崩法 ${c.avalanche.months} 個月、總利息 ${money(c.avalanche.totalInterest)}；每月預算 ${money(c.snowball.budget)}。`
+        : `在每月預算 ${money(c.snowball.budget)} 下，100 年內還不完：最低應繳小於月息，請提高最低應繳或每月額外金額。`);
+    };
+
+    const example = [
+      ['信用卡', 'card', '120000', '15', '8000'],
+      ['小額分期', 'loan', '40000', '6', '2000'],
+      ['信用貸款', 'loan', '300000', '9', '7000'],
+      ['', 'loan', '', '', ''],
+      ['', 'loan', '', '', ''],
+      ['', 'loan', '', '', ''],
+    ];
+    rowEls.forEach((row) => row.querySelectorAll('input, select').forEach((el) => { el.addEventListener('input', render); el.addEventListener('change', render); }));
+    q('#debt-extra').addEventListener('input', render);
+    root.querySelector('[data-action="calculate"]')?.addEventListener('click', render);
+    root.querySelector('[data-action="example"]')?.addEventListener('click', () => {
+      rowEls.forEach((row, i) => {
+        const [name, kind, balance, rate, min] = example[i];
+        field(row, 'name').value = name;
+        field(row, 'kind').value = kind;
+        field(row, 'balance').value = balance;
+        field(row, 'rate').value = rate;
+        field(row, 'min').value = min;
+      });
+      q<HTMLInputElement>('#debt-extra').value = '5000';
+      render();
+    });
+    root.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      rowEls.forEach((row) => { ['name', 'balance', 'rate', 'min'].forEach((n) => { field(row, n).value = ''; }); });
+      q<HTMLInputElement>('#debt-extra').value = '';
+      render();
+    });
+    render();
+  }
+</script>
+
+<style>
+  .calc__results > * { min-width: 0; }
+  .calc__results [hidden], .calc__controls [hidden] { display: none !important; }
+  .debt-table { display: grid; gap: 0.75rem; }
+  .debt-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0; padding: 0.75rem; border: 1px solid var(--color-border, #d7d7d7); border-radius: 0.5rem; min-width: 0; }
+  .debt-row legend { font-weight: 650; padding-inline: 0.25rem; }
+  .debt-row > label { min-width: 0; }
+  .debt-row input, .debt-row select { width: 100%; min-width: 0; }
+  .debt-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .debt-status { margin: 0; font-weight: 750; }
+  .debt-warnings { margin: 0; padding-inline-start: 1.1rem; color: var(--color-muted); font-size: 0.92rem; }
+  .debt-gap { margin: 0; font-weight: 650; }
+  .debt-note { margin: 0; font-size: 0.9rem; color: var(--color-muted); }
+  .debt-table-wrap { overflow-x: auto; }
+  .debt-result-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .debt-result-table th, .debt-result-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--color-border, #d7d7d7); text-align: start; vertical-align: top; overflow-wrap: anywhere; }
+</style>

@@ -111,7 +111,7 @@ export const directoryEntries: readonly DirectoryEntry[] = [
   { role: 'tool', group: 'transport-commute', href: '/zh/tools/car-affordability/', title: '汽車負擔能力計算機', ask: '實領收入扣掉車貸、稅費、保險與停車後，買得起多貴的車？' },
   { role: 'tool', group: 'transport-commute', href: '/zh/home-vs-public-ev-charging-cost/', title: '家用與公共充電電費比較', ask: '家裡裝充電樁和用公共充電站，每度電、每月差多少，樁多久回本？' },
 
-  { role: 'tool', group: 'big-spending', href: '/zh/tools/home-affordability/', title: '房屋負擔能力計算機', ask: '以你的收入、負債和頭期款，扣掉稅費與管理費後，買得起多少總價的房子？' },
+  { role: 'tool', group: 'big-spending', href: '/zh/tools/home-affordability/', title: '房屋負擔能力計算機', ask: '以你的收入和房貸月付上限，加上你的身分別適用的貸款成數，買得起多少總價、要準備多少頭期款？' },
   { role: 'tool', group: 'big-spending', href: '/zh/tools/mortgage-payoff/', title: '房貸試算', ask: '這筆房貸每月付多少、總利息多少，本息與本金平均攤還、寬限期和提前還款各差在哪？' },
   { role: 'tool', group: 'big-spending', href: '/zh/money/mortgage-refinance-break-even/', title: '房貸轉貸試算', ask: '轉貸要花的費用，要幾個月才能被省下的利息補回來？' },
   { role: 'tool', group: 'big-spending', href: '/zh/tools/appliance-electricity-cost/', title: '家電電費計算機', ask: '一台家電每小時、每天、每月的電費是多少？' },

@@ -79,7 +79,8 @@ test('算例三: DBR 24 倍 is red and 100,000 over the 22x line', () => {
   assert.equal(r.dbrRoom, -100000);
   assert.equal(f(1200000 / 22), '54,545'); // exact 54,545.45; the page rounds UP to the first whole yuan that is enough
   assert.equal(Math.ceil(1200000 / 22), 54546);
-  assert.ok(54546 * 22 >= 1200000 && 54545 * 22 < 1200000);
+  assert.ok(54546 * 22 >= 1200000);
+  assert.ok(54545 * 22 < 1200000);
   for (const text of ['| 無擔保總餘額 | 300,000 + 200,000 + 700,000 | 1,200,000 元 |', '| DBR | 1,200,000 ÷ 50,000 | 24 倍，紅燈 |', '| 22 倍額度 | 22 × 50,000 | 1,100,000 元 |', '| 超出 | 1,200,000 − 1,100,000 | 超出 100,000 元 |', '1,200,000 ÷ 22 約 54,546 元以上']) {
     assert.ok(md.includes(text), text);
   }

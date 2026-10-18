@@ -52,6 +52,11 @@ function need(name, value, { positive = false } = {}) {
  * otherMonthlyPayments     其他債務月付 (信貸、車貸、卡分期…), optional
  * bankLimitPercent         承貸銀行告訴你的月付占收入上限 (%), optional -- never supplied by the page
  */
+/**
+ * @param {{ monthlyIncome: number | string, cardBalance?: number | string, cashCardBalance?: number | string,
+ *   creditLoanBalance?: number | string, mortgagePayment?: number | string, otherMonthlyPayments?: number | string,
+ *   bankLimitPercent?: number | string | null }} input
+ */
 export function calculateTwDebtRatios({
   monthlyIncome,
   cardBalance = 0,
@@ -59,7 +64,7 @@ export function calculateTwDebtRatios({
   creditLoanBalance = 0,
   mortgagePayment = 0,
   otherMonthlyPayments = 0,
-  bankLimitPercent = null,
+  bankLimitPercent = undefined,
 }) {
   const income = need('monthlyIncome', monthlyIncome, { positive: true });
   const card = need('cardBalance', cardBalance);
@@ -81,7 +86,7 @@ export function calculateTwDebtRatios({
   const totalPayments = mortgage + other;
   const totalPaymentRatio = totalPayments / income;
   let bankGapPoints = null;
-  if (bankLimitPercent !== null && bankLimitPercent !== '' && safeNumber(bankLimitPercent, NaN) > 0) {
+  if (bankLimitPercent != null && safeNumber(bankLimitPercent, NaN) > 0) {
     bankGapPoints = safeNumber(bankLimitPercent) - totalPaymentRatio * 100;
   }
 

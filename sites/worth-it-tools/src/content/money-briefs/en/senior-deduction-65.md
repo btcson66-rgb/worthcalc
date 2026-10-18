@@ -33,7 +33,6 @@ faq:
     a: "Yes. IRS guidance says the deduction begins to phase out above specified MAGI thresholds."
 related:
   - "/en/money/standard-deduction/"
-  - "/en/money/medicare-irmaa-brackets/"
 draft: true
 ---
 ## The 2025–2028 official figures

@@ -1,6 +1,6 @@
 {
   "decision": {
-    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool; P2 batch 4 (2026-10-17, work order 2026-10-17-P2-batch4) added paid-membership-break-even (into the Costco membership tool) and subscription-creep (into the subscription audit tool); P2 batch 5 (2026-10-17, work order 2026-10-17-P2-batch5) added how-compound-growth-works (into the compound-growth tool) and re-pointed the existing simple-vs-compound-interest stub straight at the tool so no stub points at another stub; P2 batch 6 (2026-10-17, work order 2026-10-17-P2-batch6) added the four savings-goal guides (real-vs-nominal-return, inflation-adjusted-savings-goal, cost-of-delaying-savings-goal, effective-interest-rate-explained) as stubs into the compound-growth tool",
+    "source": "docs/audits/worthcalc-rebuild-p1-disposition-2026-10-15.csv (rows marked merge_into), approved by the CEO on 2026-10-15; work order P1b-WC. P2 batch 2 (2026-10-17, work order 2026-10-17-P2-batch2) added the credit-card-minimum-payment-trap merge on the CEO's instruction; P2 batch 3 (2026-10-17, work order 2026-10-17-P2-batch3) added the zero-interest-installments-truth merge into the installment tool; P2 batch 4 (2026-10-17, work order 2026-10-17-P2-batch4) added paid-membership-break-even (into the Costco membership tool) and subscription-creep (into the subscription audit tool); P2 batch 5 (2026-10-17, work order 2026-10-17-P2-batch5) added how-compound-growth-works (into the compound-growth tool) and re-pointed the existing simple-vs-compound-interest stub straight at the tool so no stub points at another stub; P2 batch 6 (2026-10-17, work order 2026-10-17-P2-batch6) added the four savings-goal guides (real-vs-nominal-return, inflation-adjusted-savings-goal, cost-of-delaying-savings-goal, effective-interest-rate-explained) as stubs into the compound-growth tool; P2 batch 9 (2026-10-18, work order 2026-10-18-P2-batch9, CEO-approved noindex inventory of the same date) turned 39 old noindex zh guides and articles whose intent a keep page already covers into stubs (each pointing straight at a sitemap keep page), with 10 English mirrors stubbed to the English mirror of the same target; the remaining English mirrors whose target has no English page were retired (404) instead",
     "rule": "A page merged into another page is replaced by a redirect stub: noindex,follow, canonical to the target, meta refresh. Stubs are not in the sitemap, carry no ad loader, hreflang or structured data, and no internal link may point at one. The English mirror of a merged page is stubbed to the English mirror of the target. Exception (CEO P1b verdict, 2026-10-15): /zh/tools/cashback-breakeven/ and /zh/tools/ev-vs-gas/ stay real calculator pages; only their English mirrors are stubs.",
     "rollback": "Delete the entry, restore the page source from git history, rebuild."
   },
@@ -188,6 +188,202 @@
     {
       "from": "/en/topics/transportation/",
       "to": "/en/"
+    },
+    {
+      "from": "/zh/guides/annual-plan-cancellation-risk-break-even/",
+      "to": "/zh/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/zh/guides/remote-work-pay-cut-cash-break-even/",
+      "to": "/zh/work-from-home-vs-commuting-hidden-costs/"
+    },
+    {
+      "from": "/zh/guides/transit-pass-vs-pay-as-you-go-usage-break-even/",
+      "to": "/zh/money/tpass-commuter-pass-breakeven/"
+    },
+    {
+      "from": "/en/guides/annual-plan-cancellation-risk-break-even/",
+      "to": "/en/monthly-vs-annual-subscription/"
+    },
+    {
+      "from": "/en/guides/remote-work-pay-cut-cash-break-even/",
+      "to": "/en/work-from-home-vs-commuting-hidden-costs/"
+    },
+    {
+      "from": "/zh/guides/amortization-schedule-explained/",
+      "to": "/zh/tools/mortgage-payoff/"
+    },
+    {
+      "from": "/zh/guides/annual-expenses-monthly-equivalent/",
+      "to": "/zh/tools/budget-builder/"
+    },
+    {
+      "from": "/zh/guides/car-down-payment-vs-liquidity/",
+      "to": "/zh/money/car-loan-vs-cash/"
+    },
+    {
+      "from": "/zh/guides/car-loan-60-72-84-early-exit/",
+      "to": "/zh/true-cost-of-car-ownership/"
+    },
+    {
+      "from": "/zh/guides/car-major-repair-hold-period-break-even/",
+      "to": "/zh/repair-or-replace-decision-formula/"
+    },
+    {
+      "from": "/zh/guides/cash-discount-vs-financing/",
+      "to": "/zh/tools/installment-true-apr/"
+    },
+    {
+      "from": "/zh/guides/cash-flow-buffer-vs-emergency-fund/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/cash-runway-before-quitting-job/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/cash-vs-car-loan-liquidity-adjusted/",
+      "to": "/zh/money/car-loan-vs-cash/"
+    },
+    {
+      "from": "/zh/guides/commission-income-tax-reserve-cashflow/",
+      "to": "/zh/budget-with-irregular-income/"
+    },
+    {
+      "from": "/zh/guides/debt-paydown-interest-vs-cashflow/",
+      "to": "/zh/snowball-vs-avalanche/"
+    },
+    {
+      "from": "/zh/guides/down-payment-vs-post-purchase-liquidity/",
+      "to": "/zh/how-much-home-can-you-afford/"
+    },
+    {
+      "from": "/zh/guides/electricity-cost-per-kwh-used/",
+      "to": "/zh/tools/appliance-electricity-cost/"
+    },
+    {
+      "from": "/zh/guides/emergency-fund-rebuild-after-move/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/emergency-fund-rebuild-after-use/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/financial-runway-months/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/higher-salary-long-commute-vs-lower-salary-nearby/",
+      "to": "/zh/true-hourly-wage-after-commuting-work-expenses/"
+    },
+    {
+      "from": "/zh/guides/how-much-cash-to-keep/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/interest-only-period-total-cost/",
+      "to": "/zh/money/mortgage-grace-period-end-payment/"
+    },
+    {
+      "from": "/zh/guides/loan-refinance-break-even/",
+      "to": "/zh/money/mortgage-refinance-break-even/"
+    },
+    {
+      "from": "/zh/guides/monthly-extra-vs-annual-lump-sum/",
+      "to": "/zh/extra-mortgage-payments-guide/"
+    },
+    {
+      "from": "/zh/guides/monthly-payment-affordability-vs-total-cost/",
+      "to": "/zh/true-cost-of-car-ownership/"
+    },
+    {
+      "from": "/zh/guides/mortgage-fee-rate-break-even/",
+      "to": "/zh/money/mortgage-refinance-break-even/"
+    },
+    {
+      "from": "/zh/guides/mortgage-recast-vs-refinance-vs-prepay/",
+      "to": "/zh/extra-mortgage-payments-guide/"
+    },
+    {
+      "from": "/zh/guides/overtime-marginal-take-home-cost/",
+      "to": "/zh/hourly-vs-annual-salary/"
+    },
+    {
+      "from": "/zh/guides/paycheck-budgeting-limitations/",
+      "to": "/zh/budget-with-irregular-income/"
+    },
+    {
+      "from": "/zh/guides/principal-equal-vs-payment-equal-amortization/",
+      "to": "/zh/tools/mortgage-payoff/"
+    },
+    {
+      "from": "/zh/guides/save-first-vs-installment-purchase/",
+      "to": "/zh/tools/installment-true-apr/"
+    },
+    {
+      "from": "/zh/guides/single-income-household-stress-test/",
+      "to": "/zh/emergency-fund-how-much/"
+    },
+    {
+      "from": "/zh/guides/sinking-fund-by-deadline/",
+      "to": "/zh/tools/compound-growth/"
+    },
+    {
+      "from": "/zh/guides/subscription-opportunity-cost/",
+      "to": "/zh/tools/subscription-audit/"
+    },
+    {
+      "from": "/zh/guides/variable-bonus-income-fixed-obligations/",
+      "to": "/zh/budget-with-irregular-income/"
+    },
+    {
+      "from": "/zh/installment-apr-table/",
+      "to": "/zh/tools/installment-true-apr/"
+    },
+    {
+      "from": "/zh/price-in-work-hours/",
+      "to": "/zh/true-hourly-wage-after-commuting-work-expenses/"
+    },
+    {
+      "from": "/zh/return-to-office-cost/",
+      "to": "/zh/work-from-home-vs-commuting-hidden-costs/"
+    },
+    {
+      "from": "/zh/rule-of-72-explained/",
+      "to": "/zh/tools/compound-growth/"
+    },
+    {
+      "from": "/en/guides/amortization-schedule-explained/",
+      "to": "/en/tools/mortgage-payoff/"
+    },
+    {
+      "from": "/en/guides/cash-discount-vs-financing/",
+      "to": "/en/tools/installment-true-apr/"
+    },
+    {
+      "from": "/en/guides/loan-refinance-break-even/",
+      "to": "/en/money/mortgage-refinance-break-even/"
+    },
+    {
+      "from": "/en/guides/sinking-fund-by-deadline/",
+      "to": "/en/tools/compound-growth/"
+    },
+    {
+      "from": "/en/installment-apr-table/",
+      "to": "/en/tools/installment-true-apr/"
+    },
+    {
+      "from": "/en/price-in-work-hours/",
+      "to": "/en/true-hourly-wage-after-commuting-work-expenses/"
+    },
+    {
+      "from": "/en/return-to-office-cost/",
+      "to": "/en/work-from-home-vs-commuting-hidden-costs/"
+    },
+    {
+      "from": "/en/rule-of-72-explained/",
+      "to": "/en/tools/compound-growth/"
     }
   ]
 }

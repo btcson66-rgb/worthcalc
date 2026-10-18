@@ -184,13 +184,6 @@ breadcrumbLabel: "租屋押金要準備多少現金？把資金占用、搬家�
 ### 房東扣押金怎麼辦？
 本頁不是法律意見。應依租賃契約、實際債務與住宅租賃規定處理，有爭議可使用消保或法律諮詢管道。
 
-## 延伸閱讀與工具
-
-- [租金上漲 vs 搬家回本](https://worthcalc.win/zh/guides/rent-increase-vs-moving-break-even/)
-- [手上應該留多少現金](https://worthcalc.win/zh/guides/how-much-cash-to-keep/)
-- [現金流緩衝 vs 緊急預備金](https://worthcalc.win/zh/guides/cash-flow-buffer-vs-emergency-fund/)
-
-
 ## 資料來源
 
 - 行政院消費者保護處，租屋押金最多可收多少：https://www.ey.gov.tw/Page/DFB720D019CCCB0A/478917df-7599-418f-8715-fd2716b623b4
@@ -200,5 +193,3 @@ breadcrumbLabel: "租屋押金要準備多少現金？把資金占用、搬家�
 ## 資料來源與限制
 
 本文是一般財務教育與情境試算，不是個人化貸款、保險、稅務、法律或投資建議。所有利率、保費、補助、費用、核貸與契約條件都可能因機構、時間與個人條件而不同；真正決策前應以最新書面報價、保單、契約與主管機關資料為準。WorthCalc 不會把市場平均、核准率或未來報酬率偷偷填進公式。
-
-- [押金、搬家與重複租金會暫時占用現金；搬完後應重新計算最低安全墊與完整預備金目標。](/zh/guides/emergency-fund-rebuild-after-move/)

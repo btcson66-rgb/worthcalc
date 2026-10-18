@@ -276,12 +276,6 @@ No. It can make the measurable cash-flow trade visible; the final family and car
 
 ## Related Guides and Tools
 
-- [Financial Runway Months](https://worthcalc.win/en/guides/financial-runway-months/)
-- [Cash-Flow Buffer vs. Emergency Fund](https://worthcalc.win/en/guides/cash-flow-buffer-vs-emergency-fund/)
-- [Annual Bills to Monthly Budget](https://worthcalc.win/en/guides/annual-bills-monthly-equivalent/)
-
-- [If the question is not simply return versus stay home, compare 2-, 3-, 4-, and 5-day schedules because childcare tiers can make marginal workdays behave differently.](/en/guides/fulltime-vs-parttime-childcare-break-even/)
-
 ## Sources
 
 - IRS Publication 503, Child and Dependent Care Expenses: https://www.irs.gov/publications/p503

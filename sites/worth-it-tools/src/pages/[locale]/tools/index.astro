@@ -83,11 +83,6 @@ const crumbs = [
   <section class="directory-intro">
     <h1>{copy.title}</h1>
     <p class="section-lead">{copy.lead}</p>
-    {locale === 'en' && (
-      <p>
-        For an electricity-use estimate, try the new <a href="/en/tools/appliance-running-cost/">appliance running-cost calculator</a> with an editable wattage, hours, rate, and source-backed appliance list.
-      </p>
-    )}
   </section>
 
   {TOPIC_IDS.filter((topic) => (grouped.get(topic) ?? []).length > 0).map((topic) => (

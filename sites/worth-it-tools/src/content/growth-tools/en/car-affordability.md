@@ -41,8 +41,6 @@ The calculation runs in your browser. Do not put account numbers or other identi
 
 Read [The 20/4/10 Rule: How Much Car You Can Actually Afford](/en/true-cost-of-car-ownership/) for the reasoning behind the 20/4/10 guideline, first-year depreciation estimates, and why a longer loan term can leave you underwater.
 
-[Before choosing a longer term to hit a payment target, compare the lower payment with the extra interest and longer debt horizon.](/en/loan-term-monthly-payment-vs-total-interest/)
-
 ## Frequently asked questions
 
 ### Why use take-home income for this calculation?
@@ -64,14 +62,6 @@ Yes — subtract any remaining payoff on the trade-in from its value first.
 ### Is the percentage cap a lending requirement?
 
 No — it's an editable personal budgeting choice, not a lender rule.
-
-Once you have an affordable vehicle price, compare the payment savings from a larger down payment with the cash reserve you give up.
-
-[car down payment versus liquidity](/en/guides/car-down-payment-vs-liquidity/)
-
-- [60 vs 72 vs 84 month car loan](/en/guides/car-loan-60-vs-72-vs-84-early-exit/)
-
-- [pay cash for car vs finance](/en/guides/cash-vs-financing-car-liquidity/)
 
 ## Sources
 

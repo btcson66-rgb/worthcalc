@@ -365,5 +365,4 @@ IRS guidance confirms that gig-economy income is taxable even when part-time or 
 ## Related Guides
 
 - [Budgeting With Irregular Income](https://worthcalc.win/en/budget-with-irregular-income/)
-- [Price in Work Hours](https://worthcalc.win/en/price-in-work-hours/)
 - [Budget Builder](https://worthcalc.win/en/tools/budget-builder/)

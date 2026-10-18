@@ -315,7 +315,3 @@ https://www.consumerfinance.gov/ask-cfpb/for-an-adjustable-rate-mortgage-arm-wha
 https://www.cbc.gov.tw/
 
 本文為一般財務教育，不預測利率，也不推薦特定貸款產品。
-
-除了固定與浮動利率，也要留意前期優惠、後期跳升的分段方案；這類產品必須逐段重算月付。
-
-[前低後高／分段利率付款路徑](/zh/guides/step-rate-loan-total-cost/)

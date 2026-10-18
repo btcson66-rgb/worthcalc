@@ -50,5 +50,9 @@
   "p2Batch7": {
     "on": "2026-10-17",
     "note": "P2 batch 7 (work order 2026-10-17-P2-batch7): /zh/tools/, /zh/guides/ and /zh/money/ rewritten as scenario-grouped entrance pages with a division of labour (each content page is listed in exactly one of them; see src/lib/directoryTw.ts and scripts/check-directory-tw.mjs). No page is merged into another: after the split the three lists no longer overlap, so none of them becomes a redirect stub. /zh/changelog/ was rewritten in place from the merge history and the version tags (still indexable; /en/changelog/ stays noindex with the rest of en). Sitemap 86 -> 86 (0 pages added, 0 merged away). maxUrls unchanged at 160."
+  },
+  "p2Batch9": {
+    "on": "2026-10-18",
+    "note": "P2 batch 9 (work order 2026-10-18-P2-batch9, CEO-approved noindex inventory 2026-10-18): the old noindex pages were dealt with. 39 zh pages became redirect stubs (plus 10 English mirrors), 39 zh pages and 65 English pages were retired (404), 7 upgrade-later pages and 2 product pages were left as they are. None of them was in the sitemap, so the sitemap count is unchanged: 86 -> 86 (0 pages added, 0 pages leave the sitemap). maxUrls unchanged at 160."
   }
 }

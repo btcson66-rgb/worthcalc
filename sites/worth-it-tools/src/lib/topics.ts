@@ -154,25 +154,13 @@ export function topicHref(locale: CoreLocale, topic: TopicId): string {
 const OVERRIDES: Record<string, TopicId> = {
   'true-hourly-wage-after-commuting-work-expenses': 'income-savings',
   'simple-vs-compound-interest': 'income-savings',
-  'benefits-replacement-cost-vs-salary': 'income-savings',
-  'remote-work-pay-cut-cash-break-even': 'income-savings',
-  'relocation-higher-salary-break-even': 'income-savings',
   'childcare-return-to-work-break-even': 'income-savings',
-  'fulltime-vs-parttime-childcare-break-even': 'income-savings',
   'costco-gas-detour-break-even': 'memberships',
-  'mortgage-points-break-even': 'housing',
   'true-cost-of-home-service-plan': 'housing',
-  'prepay-rent-discount-vs-liquidity': 'housing',
-  'car-down-payment-vs-liquidity': 'transportation',
-  'cash-vs-financing-car-liquidity': 'transportation',
-  'trade-in-vs-private-sale-net-proceeds': 'transportation',
-  'auto-loan-negative-equity-rollover-cost': 'transportation',
-  'annual-vs-monthly-insurance-payment': 'everyday',
-  'high-vs-low-insurance-deductible-break-even': 'everyday',
-  'insurance-deductible-cash-reserve': 'income-savings',
-  'ai-tool-realized-time-savings-break-even': 'memberships',
-  'training-certification-break-even': 'income-savings',
   'freelance-minimum-billable-rate': 'income-savings',
+  // The one override that places a slug in `everyday`: tests/topic-classification.mjs asserts that an override
+  // into the fallback topic is still reported as an override. The page itself was retired in P2 batch 9.
+  'annual-vs-monthly-insurance-payment': 'everyday',
 };
 
 interface Rule {

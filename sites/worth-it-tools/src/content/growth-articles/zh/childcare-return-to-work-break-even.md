@@ -200,13 +200,6 @@ breadcrumbLabel: "托育費多少才值得回職場？用稅後收入、通勤�
 ### WorthCalc 的角色是什麼？
 把可量化的家庭現金流透明化，最後決定仍由家庭自己做。
 
-## 延伸閱讀與工具
-
-- [共同生活費按收入分攤](https://worthcalc.win/zh/guides/shared-expenses-income-split/)
-- [財務跑道月份](https://worthcalc.win/zh/guides/financial-runway-months/)
-- [50/30/20 預算限制](https://worthcalc.win/zh/guides/paycheck-budgeting-limitations/)
-
-
 ## 資料來源
 
 - 衛生福利部，未滿2歲幼兒照顧政策／托育補助：https://www.mohw.gov.tw/DOIM/cp-5130-58003-1.html
@@ -216,7 +209,3 @@ breadcrumbLabel: "托育費多少才值得回職場？用稅後收入、通勤�
 ## 資料來源與限制
 
 本文是一般財務教育與情境試算，不是個人化貸款、保險、稅務、法律或投資建議。所有利率、保費、補助、費用、核貸與契約條件都可能因機構、時間與個人條件而不同；真正決策前應以最新書面報價、保單、契約與主管機關資料為準。WorthCalc 不會把市場平均、核准率或未來報酬率偷偷填進公式。
-
-- [若回職場不是單純「工作或不工作」，可進一步比較全職、兼職不同托育費率與邊際工作天數。](/zh/guides/return-to-work-fulltime-vs-parttime/)
-
-- [托育月費的長期 break-even 為正，不代表回職場前沒有訂金、註冊與首月預繳造成的 startup cash peak。](/zh/guides/childcare-deposit-enrollment-cashflow/)

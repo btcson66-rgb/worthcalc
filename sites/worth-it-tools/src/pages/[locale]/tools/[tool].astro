@@ -4,6 +4,7 @@ import TWCreditCardCalculator from '../../../components/TWCreditCardCalculator.a
 import TWMortgageCalculator from '../../../components/TWMortgageCalculator.astro';
 import TWDbrCalculator from '../../../components/TWDbrCalculator.astro';
 import TWHomeAffordCalculator from '../../../components/TWHomeAffordCalculator.astro';
+import TWSalaryCalculator from '../../../components/TWSalaryCalculator.astro';
 import { getGrowthToolDefinition, type GrowthToolSlug } from '../../../data/growthToolDefinitions';
 import { fallbackTrustBlock } from '../../../lib/trustBlock';
 import ToolLayout from '../../../layouts/ToolLayout.astro';
@@ -56,6 +57,8 @@ const useTwMortgage = locale === 'zh' && slug === 'mortgage-payoff';
 const useTwDbr = locale === 'zh' && slug === 'dti-calculator';
 // ...and the home-affordability page: 央行 loan ratios, 寬限期 rule, 1/3 line (no PMI, no US DTI).
 const useTwHome = locale === 'zh' && slug === 'home-affordability';
+// P2 batch 11 (2026-10-18): 勞基法 normal hours, 勞動部 月薪 ÷ 30 ÷ 8, 第 24 條 overtime multiples, 115 年基本工資.
+const useTwSalary = locale === 'zh' && slug === 'salary-converter';
 ---
 
 <ToolLayout
@@ -69,7 +72,7 @@ const useTwHome = locale === 'zh' && slug === 'home-affordability';
   showReview={false}
   trustBlock={trustBlock}
 >
-  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
+  {useTwCreditCard ? <TWCreditCardCalculator /> : useTwMortgage ? <TWMortgageCalculator /> : useTwDbr ? <TWDbrCalculator /> : useTwHome ? <TWHomeAffordCalculator /> : useTwSalary ? <TWSalaryCalculator /> : <GrowthCalculator locale={locale} definition={growthDefinition} />}
   <section class="calculator-review">
     <h2>{growthReview.heading}</h2>
     <p class="last-updated"><strong>{growthReview.updated}:</strong> {growthLastReviewed}</p>

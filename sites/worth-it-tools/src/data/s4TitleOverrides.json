@@ -56,8 +56,8 @@
     "description": "How one extra payment a year or a bi-weekly schedule changes total interest and payoff date, with a calculator."
   },
   "/zh/tools/subscription-audit/": {
-    "title": "你的訂閱一年花多少？訂閱盤點計算機（2026）",
-    "description": "列出所有定期扣款，看年度總額與每次使用成本，找出該取消或改年繳的項目。"
+    "title": "每月固定支出與訂閱盤點計算機：一年花多少錢試算（2026）",
+    "description": "把影音、雲端、App 等月繳／季繳／年繳定期扣款換算成每月、一年與五年總支出，並依使用時數算出每小時成本；附找出遺忘訂閱與 Apple、Google 官方取消步驟。"
   },
   "/en/pay-raise-vs-inflation-purchasing-power/": {
     "title": "Did Your Raise Beat Inflation? Purchasing Power (2026)",
@@ -92,8 +92,8 @@
     "description": "Fees, interest, late penalties and credit impact compared, with a calculator for your purchase."
   },
   "/zh/tools/appliance-electricity-cost/": {
-    "title": "家電電費怎麼算？冷氣、除濕機、電熱器每小時電費計算機（2026）",
-    "description": "選家電自動帶入瓦數，輸入台電電價與使用時數，算出每小時、每天、每月、每年電費。40 種以上家電附來源。"
+    "title": "家電電費計算機：冷氣、除濕機、冰箱每月電費與台電累進試算",
+    "description": "家電一天用多少電、每月電費多少？輸入瓦數與每日時數，支援台電住宅累進電價（夏月／非夏月六級距）試算實際增加電費；內建能源署冷氣、除濕機、冰箱、螢幕登錄中位數。"
   },
   "/en/tools/home-affordability/": {
     "title": "How Much House Can You Afford? Full Cost Calculator (2026)",
@@ -116,7 +116,7 @@
     "description": "輸入油價、油耗、電價與每百公里耗電，比較每公里成本、每年油電費用與五年持有總成本。"
   },
   "/zh/tools/cashback-breakeven/": {
-    "title": "信用卡年費值得嗎？回饋回本計算機（2026）",
-    "description": "輸入年費、回饋率與每月消費，算出多少消費額才能把年費賺回來。"
+    "title": "信用卡年費值得嗎？年費回本與打平月消費計算機（2026）",
+    "description": "輸入信用卡年費、首刷禮與餐飲／網購／一般消費回饋率，對照 1% 免年費基準卡，算出年度淨價值與回本所需的每月刷卡金額。"
   }
 }

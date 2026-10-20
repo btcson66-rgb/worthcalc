@@ -2,8 +2,8 @@
 contentType: tool
 toolSlug: credit-card-payoff
 locale: zh
-title: "信用卡循環利息計算器：日息、15% 上限與最低應繳"
-description: "信用卡循環利息計算器：輸入你帳單上的循環利率，算每日利息、一期利息、第一期最低應繳，以及只繳最低應繳或固定金額要還多久、付多少利息。"
+title: "信用卡循環利息與最低應繳清償試算：日息、15%上限計算機"
+description: "信用卡只繳最低應繳要還多久、利息怎麼算？輸入帳單未清償本金與循環利率（法定上限15%），立即試算每日利息、當期最低應繳（5%本金＋利息），並比較只繳最低與固定月付的清償月數與總利息。"
 relatedArticle: /zh/snowball-vs-avalanche/
 lastReviewed: 2026-10-17
 draft: false
@@ -41,7 +41,13 @@ related:
     href: "/zh/tools/installment-true-apr/"
   - title: "卡債與信貸一起還：雪球法還是雪崩法"
     href: "/zh/snowball-vs-avalanche/"
+  - title: "雪球法 vs 雪崩法多筆債務還款比較計算機"
+    href: "/zh/tools/debt-strategy/"
+  - title: "負債比 DBR 22 倍與收支比計算機"
+    href: "/zh/tools/dti-calculator/"
 ---
+
+**決策重點速覽：** 台灣信用卡循環利息依《銀行法》第 47-1 條上限為年利率 15%，且依《信用卡業務機構管理辦法》第 48 條**不得複利計息**；但若每期只繳最低應繳（前期未清償本金 5%＋當期循環利息），本金每月僅減少 5%，清償期會拉長至數年。若同時背負多張卡債與信貸，可搭配<a href="/zh/tools/debt-strategy/">多筆債務還款順序計算機</a>與<a href="/zh/tools/dti-calculator/">負債比 DBR 22 倍計算機</a>一起評估。
 
 ## 循環利息怎麼算
 

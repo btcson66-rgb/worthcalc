@@ -34,8 +34,8 @@ const faq = [
 ---
 
 <ArticleLayout
-  title="信用卡年費要刷多少才回本？用增量回饋算真正門檻"
-  description="不要只拿總回饋除年費。用免年費替代卡、一般消費定義、回饋上限與確定權益，算出信用卡年費真正回本刷卡額。"
+  title="信用卡年費回本計算：要刷多少才划算？增量回饋與免年費門檻"
+  description="信用卡年費值得繳嗎？要刷多少才回本？用「淨年費÷增量回饋率」比較年費卡與免年費替代卡，扣掉一般消費排除、每月回饋上限與一次性首刷禮，算出第一年與續卡的打平月消費。"
   locale={locale}
   updated="2026-10-17"
   alternateLocales={LOCALES}
@@ -49,7 +49,7 @@ const faq = [
   <p>
     台灣信用卡還常見指定通路、登錄名額、每月上限、一般消費排除與刷滿免年費條件。
     因此不能直接拿廣告最大回饋率乘全年帳單。本指南先說明主管機關的契約規範要求發卡機構載明什麼，再把你自己的
-    消費放進下方「多類別回饋怎麼算打平月消費」的算式；文中的金額與回饋率都是示範輸入，不是任何一張卡的實際條件。
+    消費放進下方「多類別回饋怎麼算打平月消費」的算式（或直接開啟<a href={localizedPath(locale, '/tools/cashback-breakeven')}>信用卡年費回饋打平計算機</a>與<a href={localizedPath(locale, '/cashback-caps-real-reward-rate')}>信用卡回饋上限計算機</a>）；文中的金額與回饋率都是示範輸入，不是任何一張卡的實際條件。
   </p>
 
   <DecisionGuide content={guide} />
@@ -121,7 +121,7 @@ const faq = [
   <p>
     最後把可能的正收益和管理成本一起看。為了每年多 NT$300，需要每月登錄、切換卡片、追回饋入帳，
     未必比固定使用免年費卡更穩定。相同的機會成本方法也能用在會員制消費，可延伸閱讀
-    <a href={localizedPath(locale, '/costco-math')}>好市多會員年費回本計算</a>。
+    <a href={localizedPath(locale, '/costco-math')}>好市多會員年費規則</a>與<a href={localizedPath(locale, '/tools/costco-membership')}>好市多黑鑽卡回本計算機</a>。
   </p>
 
   <FAQ items={faq} />

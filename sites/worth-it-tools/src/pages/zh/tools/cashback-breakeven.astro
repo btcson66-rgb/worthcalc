@@ -3,8 +3,8 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { localizedPath } from '../../../i18n/utils';
 
 const locale = 'zh';
-const title = '信用卡回饋打平計算機';
-const description = '信用卡回饋打平計算機，估算年費卡是否值得、回饋率、月消費、首刷禮與 1% 免年費基準。';
+const title = '信用卡年費回本與回饋打平計算機';
+const description = '輸入信用卡年費、首刷禮與餐飲／網購／一般消費回饋率，對照 1% 免年費基準卡，算出年度淨價值與回本所需的每月刷卡金額。';
 const faq = [
   {
     question: '怎麼判斷年費信用卡值不值得？',
@@ -32,6 +32,7 @@ const related = [
   { title: '訂閱支出健檢計算機', href: localizedPath(locale, '/tools/subscription-audit') },
   { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
   { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
+  { title: '信用卡回饋上限與真正回饋率試算', href: localizedPath(locale, '/cashback-caps-real-reward-rate') },
 ];
 ---
 

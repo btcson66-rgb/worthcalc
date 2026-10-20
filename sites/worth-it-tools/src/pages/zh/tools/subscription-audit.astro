@@ -15,7 +15,7 @@ import { auditSubscriptions } from '../../../lib/twMembershipMath.mjs';
 
 const locale = 'zh';
 const checkedOn = '2026-10-17';
-const title = '訂閱支出健檢計算機';
+const title = '訂閱支出健檢與每月固定扣款盤點計算機';
 const description = '把月繳、季繳、年繳的訂閱換成每月與每年成本，加上五年總額與每小時成本；附怎麼找出忘記的訂閱，以及 Apple、Google 的官方取消做法。';
 const n0 = (n: number) => Math.round(n).toLocaleString('en-US');
 const n1 = (n: number) => (Math.round(n * 10) / 10).toString();
@@ -58,6 +58,8 @@ const related = [
   { title: '外送會員一年要用幾次才回本', href: localizedPath(locale, '/delivery-membership-break-even') },
   { title: 'Costco 會員值不值得計算機', href: localizedPath(locale, '/tools/costco-membership') },
   { title: '年費卡損益兩平完整指南', href: localizedPath(locale, '/annual-fee-card-breakeven') },
+  { title: '接案、業務收入不穩定預算分配法：月預算與稅費預留試算', href: localizedPath(locale, '/budget-with-irregular-income') },
+  { title: '健身房會員每次成本怎麼算？一個月要去幾次才划算', href: localizedPath(locale, '/gym-membership-cost-per-visit') },
 ];
 ---
 

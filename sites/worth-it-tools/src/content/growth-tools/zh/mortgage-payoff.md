@@ -47,7 +47,7 @@ related:
     href: "/zh/money/mortgage-refinance-break-even/"
 ---
 
-**決策重點速覽：** 評估房貸月付與提前還款時，先區分「本息平均攤還」與「本金平均攤還」的前期月付與總利息差距，再看部分提前還款時銀行是採「月付不變、縮短期數」（省息幅度通常超過降低月付的兩倍）還是「期數不變、降低月付」，並扣掉契約約定的提前清償違約金。若考慮轉貸降息或比較定存，可對照<a href="/zh/money/mortgage-refinance-break-even/">房貸轉貸回本月數試算</a>與<a href="/zh/money/mortgage-prepay-vs-invest/">提前還房貸 vs 放定存比較</a>。
+**決策重點速覽：** 評估房貸月付與提前還款時，先區分「本息平均攤還」與「本金平均攤還」的前期月付與總利息差距，再看部分提前還款時銀行是採「月付不變、縮短期數」（越早還，省息比降低月付多越多；算例三約 2.2 倍）還是「期數不變、降低月付」，並扣掉契約約定的提前清償違約金。若考慮轉貸降息或比較定存，可對照<a href="/zh/money/mortgage-refinance-break-even/">房貸轉貸回本月數試算</a>與<a href="/zh/money/mortgage-prepay-vs-invest/">提前還房貸 vs 放定存比較</a>。
 
 ## 房貸月付怎麼算：本息平均攤還與本金平均攤還
 

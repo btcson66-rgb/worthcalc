@@ -24,7 +24,7 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
     ],
   },
   zh: {
-    title: '延長保固值得買嗎？比較價格、故障機率與維修費',
+    title: '延長保固值得買嗎？損益故障機率與維修期望值試算',
     description: '由你輸入故障情境、除外後核准率、自負額、申請成本與給付上限，算延長保固期望成本與損益故障機率；附消保法、民法與電器買賣定型化契約的保固原文，不捏造產品故障率。',
     faq: [
       { question: '故障機率要填多少？', answer: '有可信型號紀錄就用可追溯資料；沒有時做保守低／中／高情境。計算器不會假裝知道你的產品故障率。' },
@@ -76,6 +76,7 @@ const phoneHref = localizedPath('zh', '/upgrade-your-phone-or-keep-it');
   </>}
   {locale === 'zh' && <>
     <p>延長保固不是把「方案價格」直接對「最貴維修」；要比的是在真正新增保障期間內，扣完除外、自負額、申請成本、上限與拒絕風險後，方案實際移轉多少期望支出。商品壞了修還是換，請看<a href={repairHref}>家電壞了修還是換</a>；手機請看<a href={phoneHref}>手機該換還是繼續用</a>。</p>
+    <p><strong>決策重點速覽：</strong>判斷付費延長保固是否划算，核心公式為<code>損益故障機率 = 方案價格 ÷［核准率 ×（核准給付 − 申請成本）］</code>。先扣除原廠保固重疊期間，再比較方案價格與預期單次維修費（扣除自負額與除外條款後）；若損益故障機率遠高於合理故障率（甚至超過 100%），將保費自行存入維修準備金通常比買延保更划算。</p>
     <ExtendedWarrantyCalculator locale={locale} {...calculator} />
     <DecisionGuide content={guide} />
     <h2>先確認是誰承諾、何時開始</h2>

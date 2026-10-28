@@ -9,18 +9,45 @@
  * links live in src/lib/homeTw.ts.
  */
 import { homeTw } from '../lib/homeTw';
+import { evaluatePlan } from '../lib/twInstallmentMath.mjs';
 import FAQ from './FAQ.astro';
 
 const kindLabel = { calculator: '計算機', article: '文章' } as const;
+
+// Hero worked example. The defaults are 算例一 of /zh/tools/installment-true-apr/ and the arithmetic is the same
+// tested module that page uses, so the two can never disagree. No issuer's rate or fee is built in.
+const demoInput = { listPrice: 30000, n: 12, oneTimeFee: 600 };
+const demo = evaluatePlan({ ...demoInput, cashPrice: demoInput.listPrice, aprPct: 0, feeTiming: 'first', perPeriodFee: 0 });
+const yuan = (value: number) => `${new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 }).format(Math.round(value))} 元`;
 ---
 
-<section class="hero">
-  <span class="hero__eyebrow">💸 {homeTw.eyebrow}</span>
-  <h1>{homeTw.heading}<span class="accent">{homeTw.accent}</span></h1>
-  <p>{homeTw.intro}</p>
-  <ul class="hero__badges">
-    {homeTw.badges.map((badge) => <li>{badge}</li>)}
-  </ul>
+<section class="hero ledger-hero">
+  <div class="ledger-hero__copy">
+    <p class="hero__eyebrow ledger-kicker">{homeTw.eyebrow}</p>
+    <h1>{homeTw.heading}<span class="accent">{homeTw.accent}</span></h1>
+    <p>{homeTw.intro}</p>
+    <ul class="hero__badges">
+      {homeTw.badges.map((badge) => <li>{badge}</li>)}
+    </ul>
+  </div>
+
+  <aside class="ledger-demo" data-ledger-demo aria-labelledby="ledger-demo-title">
+    <p class="ledger-demo__tag">試算示範・信用卡分期</p>
+    <h2 class="ledger-demo__title" id="ledger-demo-title">標榜零利率，真的沒多付嗎？</h2>
+    <div class="ledger-demo__fields">
+      <label><span>分期金額（元）</span><input type="number" inputmode="numeric" min="0" step="1000" value={demoInput.listPrice} data-demo-field="listPrice" /></label>
+      <label><span>期數</span><input type="number" inputmode="numeric" min="1" max="120" step="1" value={demoInput.n} data-demo-field="n" /></label>
+      <label><span>一次性手續費（元）</span><input type="number" inputmode="numeric" min="0" step="50" value={demoInput.oneTimeFee} data-demo-field="oneTimeFee" /></label>
+    </div>
+    <dl class="ledger-demo__receipt" aria-live="polite">
+      <div><dt>第 1 期應繳</dt><dd class="num" data-demo-out="first">{yuan(demo.firstPayment)}</dd></div>
+      <div><dt>總付款</dt><dd class="num" data-demo-out="total">{yuan(demo.totalPaid)}</dd></div>
+      <div><dt>比現金價多付</dt><dd class="num" data-demo-out="cost">{yuan(demo.totalCost)}</dd></div>
+      <div class="ledger-demo__apr"><dt>總費用年百分率</dt><dd class="num" data-demo-out="apr">{demo.aprPct.toFixed(2)}%</dd></div>
+    </dl>
+    <p class="ledger-demo__note">零利率、只收手續費的情境，月 IRR × 12。預設值是信用卡分期試算頁的算例一；請換成你方案上的數字，本站不內建任何銀行的費率。</p>
+    <a class="ledger-demo__more" href="/zh/tools/installment-true-apr/">打開完整的信用卡分期試算</a>
+  </aside>
 </section>
 
 <section class="home-notice" aria-label="免責聲明" data-ymyl-disclaimer>
@@ -28,10 +55,12 @@ const kindLabel = { calculator: '計算機', article: '文章' } as const;
 </section>
 
 <section class="home-situations" aria-labelledby="home-situations-heading">
+  <p class="ledger-kicker" aria-hidden="true">索引</p>
   <h2 id="home-situations-heading">{homeTw.groupsHeading}</h2>
   <p class="section-lead">{homeTw.groupsLead}</p>
-  {homeTw.groups.map((group) => (
+  {homeTw.groups.map((group, index) => (
     <section class="home-group" id={group.id} aria-labelledby={`home-group-${group.id}`}>
+      <span class="home-group__no" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       <h3 id={`home-group-${group.id}`}>{group.heading}</h3>
       <p class="section-lead">{group.lead}</p>
       <div class="guide-grid">
@@ -66,47 +95,389 @@ const kindLabel = { calculator: '計算機', article: '文章' } as const;
 
 <FAQ items={homeTw.faq} heading={homeTw.faqHeading} />
 
+<script>
+  import { evaluatePlan, safeNumber } from '../lib/twInstallmentMath.mjs';
+
+  document.querySelectorAll<HTMLElement>('[data-ledger-demo]').forEach((root) => {
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-demo-field="${name}"]`)!;
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-demo-out="${name}"]`)!;
+    const yuan = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+    const money = (value: number) => `${yuan.format(Math.round(value))} 元`;
+
+    const render = () => {
+      const listPrice = Math.max(0, Math.round(safeNumber(field('listPrice').value)));
+      const n = Math.min(120, Math.max(1, Math.round(safeNumber(field('n').value)) || 1));
+      const oneTimeFee = Math.max(0, safeNumber(field('oneTimeFee').value));
+      if (listPrice <= 0) {
+        ['first', 'total', 'cost', 'apr'].forEach((name) => { out(name).textContent = '—'; });
+        return;
+      }
+      const r = evaluatePlan({ listPrice, cashPrice: listPrice, n, aprPct: 0, oneTimeFee, feeTiming: 'first', perPeriodFee: 0 });
+      out('first').textContent = money(r.firstPayment);
+      out('total').textContent = money(r.totalPaid);
+      out('cost').textContent = money(r.totalCost);
+      out('apr').textContent = Number.isFinite(r.aprPct) ? `${r.aprPct.toFixed(2)}%` : '—';
+    };
+
+    root.querySelectorAll('input').forEach((input) => input.addEventListener('input', render));
+  });
+</script>
+
 <style>
+  /* ── Masthead hero ───────────────────────────────────────────────────── */
+
+  .ledger-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(1.75rem, 5vw, 4rem);
+    align-items: start;
+    margin: 0 0 var(--space-6);
+    padding: clamp(0.5rem, 3vw, 1.75rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+    border: 0;
+    border-bottom: 3px double var(--rule-strong);
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+  }
+
+  .ledger-hero .hero__eyebrow {
+    display: flex;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--brass);
+  }
+
+  .ledger-hero h1 {
+    margin: 0 0 1.1rem;
+    font-size: clamp(2.3rem, 5.6vw, 3.9rem);
+    line-height: 1.12;
+  }
+
+  .ledger-hero h1 .accent {
+    display: block;
+    width: fit-content;
+    background: linear-gradient(transparent 72%, var(--brass-soft) 72%, var(--brass-soft) 94%, transparent 94%);
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: var(--ledger);
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .ledger-hero__copy > p:not(.hero__eyebrow) {
+    max-width: 36em;
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.04rem;
+    line-height: 1.85;
+  }
+
+  .ledger-hero .hero__badges {
+    display: grid;
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--rule-strong);
+    list-style: none;
+  }
+
+  .ledger-hero .hero__badges li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
+
+  .ledger-hero .hero__badges li::before {
+    content: "✓";
+    display: grid;
+    flex: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ledger);
+    color: var(--color-surface);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  /* ── Worked-example receipt ──────────────────────────────────────────── */
+
+  .ledger-demo {
+    position: relative;
+    padding: 1.4rem 1.4rem 1.2rem;
+    border: 1px solid var(--rule-strong);
+    border-top: 6px solid var(--ledger);
+    background: var(--color-surface);
+    box-shadow: 0 1px 0 var(--rule), 0 22px 44px -18px rgb(15 42 34 / 28%);
+  }
+
+  .ledger-demo::after {
+    content: "";
+    position: absolute;
+    inset: auto -1px -9px;
+    height: 9px;
+    background:
+      linear-gradient(-45deg, transparent 6px, var(--color-surface) 6px) 0 0 / 12px 9px repeat-x,
+      linear-gradient(45deg, transparent 6px, var(--color-surface) 6px) 0 0 / 12px 9px repeat-x;
+    filter: drop-shadow(0 1px 0 var(--rule-strong));
+  }
+
+  .ledger-demo__tag {
+    margin: 0 0 0.35rem;
+    color: var(--brass);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .ledger-demo__title {
+    margin: 0 0 1rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    line-height: 1.35;
+  }
+
+  .ledger-demo__fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 0.6rem;
+  }
+
+  .ledger-demo__fields label {
+    display: grid;
+    gap: 0.3rem;
+    color: var(--color-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .ledger-demo__fields input {
+    width: 100%;
+    min-height: 2.6rem;
+    padding: 0.35rem 0.55rem;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ledger-demo__receipt {
+    margin: 1.1rem 0 0;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .ledger-demo__receipt div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px dotted var(--color-border-strong);
+  }
+
+  .ledger-demo__receipt dt { color: var(--color-muted); font-size: 0.92rem; }
+  .ledger-demo__receipt dd { margin: 0; color: var(--color-text); font-size: 1.05rem; font-weight: 750; }
+
+  .ledger-demo__receipt .ledger-demo__apr {
+    align-items: center;
+    padding: 0.8rem 0 0.4rem;
+    border-bottom: 3px double var(--rule-strong);
+  }
+
+  .ledger-demo__apr dt { color: var(--color-text); font-weight: 750; }
+
+  .ledger-demo__apr dd {
+    color: var(--ledger);
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .ledger-demo__note {
+    margin: 0.8rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .ledger-demo__more {
+    display: inline-flex;
+    margin-top: 0.8rem;
+    color: var(--ledger);
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .ledger-demo__more::after { content: "→"; margin-inline-start: 0.35rem; }
+  .ledger-demo__more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── Notice ──────────────────────────────────────────────────────────── */
+
   .home-notice {
-    margin-block: 1rem 2rem;
+    margin-block: 0 2.5rem;
     padding: 0.8rem 1rem;
     border: 1px solid var(--color-border);
-    border-inline-start: 4px solid #b4530a;
-    border-radius: var(--radius);
+    border-inline-start: 4px solid var(--brass);
     background: var(--color-surface);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.92rem;
+    line-height: 1.65;
   }
 
   .home-notice p {
     margin: 0;
   }
 
+  /* ── Situation index ─────────────────────────────────────────────────── */
+
+  .home-situations > h2 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  }
+
   .home-group {
-    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 0.9fr) minmax(0, 2fr);
+    grid-template-areas:
+      "no head list"
+      "no lead list";
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(1rem, 3vw, 2rem);
+    margin-top: 0;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--rule-strong);
+    scroll-margin-top: 5rem;
+  }
+
+  .home-group:first-of-type { margin-top: 1.5rem; }
+
+  .home-group__no {
+    grid-area: no;
+    color: var(--brass);
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: lining-nums;
   }
 
   .home-group h3 {
-    margin-bottom: 0.25rem;
+    grid-area: head;
+    margin: 0 0 0.4rem;
+    font-family: var(--serif);
+    font-size: 1.3rem;
   }
 
+  .home-group > .section-lead {
+    grid-area: lead;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .home-group .guide-grid {
+    grid-area: list;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.5rem;
+    margin: 0;
+  }
+
+  .home-group .guide-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.15rem;
+    padding: 0.75rem 4.2rem 0.85rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    transition: background 0.15s ease;
+  }
+
+  .home-group .guide-card:hover { background: linear-gradient(90deg, var(--brand-softer), transparent); }
+
   .guide-card h4 {
-    margin: 0 0 0.35rem;
-    font-size: 1.05rem;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .guide-card h4 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .guide-card h4 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  .guide-card:hover h4 a { color: var(--ledger); text-decoration: underline; text-underline-offset: 3px; }
+
+  .home-group .guide-card p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
   }
 
   .home-kind {
+    position: absolute;
+    top: 0.85rem;
+    right: 0;
     display: inline-block;
-    margin-top: 0.25rem;
-    padding: 0.1rem 0.55rem;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
+    padding: 0.05rem 0.45rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 2px;
     color: var(--color-muted);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   .home-kind[data-kind='calculator'] {
-    color: #0b6b66;
-    border-color: #0b6b66;
+    border-color: var(--ledger);
+    background: var(--ledger);
+    color: var(--color-surface);
+  }
+
+  .home-library,
+  .home-trust { margin-top: 2.5rem; }
+
+  @media (max-width: 960px) {
+    .ledger-hero { grid-template-columns: minmax(0, 1fr); }
+    .home-group {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-areas:
+        "no head"
+        "no lead"
+        "list list";
+      grid-template-rows: auto auto auto;
+    }
+    .home-group .guide-grid { margin-top: 0.75rem; }
+  }
+
+  @media (max-width: 640px) {
+    .home-group .guide-grid { grid-template-columns: minmax(0, 1fr); }
+    .ledger-demo__fields { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; }
+    .ledger-demo__fields label { font-size: 0.72rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-group .guide-card { transition: none; }
   }
 </style>

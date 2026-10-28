@@ -16,15 +16,10 @@ const t = useTranslations(locale);
   <div class="site-header__inner">
     <a class="brand" href={localizedCorePath(locale, '/')} aria-label={SITE.name}>
       <svg class="brand__mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="brandMark" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#14a99e" />
-            <stop offset="1" stop-color="#0b6b66" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#brandMark)" />
+        <rect x="1" y="1" width="30" height="30" rx="4" fill="#1f8a63" />
+        <rect x="1.75" y="1.75" width="28.5" height="28.5" rx="3.25" fill="none" stroke="#e2c58b" stroke-width="1.5" />
         <path d="M8 16.5l4.2 4.4L24 9.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
-        <circle cx="10.5" cy="10.5" r="1.7" fill="#fff" opacity="0.9" />
+        <path d="M8 25h16" stroke="#e2c58b" stroke-width="1.6" stroke-linecap="round" />
       </svg>
       <span class="brand__name">Worth<b>Calc</b></span>
     </a>

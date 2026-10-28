@@ -21,7 +21,7 @@
   },
   "/en/upfront-fees-financing-cost/": {
     "title": "Should You Pay an Upfront Loan Fee? Calculator (2026)",
-    "description": "Compare paying a fee now against a higher rate later. See the break-even month and the total cost of each option."
+    "description": "Are upfront loan fees worth the cost? Compare net proceeds, origination fees, monthly payment, and cash-flow APR to see the true cost of financing."
   },
   "/en/annual-fee-card-breakeven/": {
     "title": "Is a Card Annual Fee Worth It? Break-Even Calculator (2026)",
@@ -37,7 +37,7 @@
   },
   "/zh/tools/commute-cost/": {
     "title": "每天通勤到底花多少錢？每公里、每年通勤成本計算機（2026）",
-    "description": "油錢（油耗或電耗）、停車、過路費、折舊和你的時間成本，算出每公里與每年總支出，比較開車、大眾運輸、機車與叫車。"
+    "description": "每天通勤到底花多少錢？輸入油價油耗、TPASS 月票、停車費、過路費與時間價值，一鍵算出每公里、每月與每年通勤總成本，比較開車、捷運公車與機車。"
   },
   "/en/tools/budget-builder/": {
     "title": "Monthly Budget Calculator That Actually Balances (2026)",
@@ -105,7 +105,7 @@
   },
   "/zh/tools/debt-strategy/": {
     "title": "雪球法還是雪崩法還債比較快？比較計算機（2026）",
-    "description": "輸入各筆餘額、利率與每月可還金額，比較兩種還法的清償日期與總利息差多少。"
+    "description": "多筆信貸與卡債怎麼還最省利息？輸入各筆債務餘額、年利率、最低應繳與每月額外還款預算，一鍵比較雪崩法（高利優先）與雪球法（小額優先）的清償時間與總利息差距。"
   },
   "/zh/tools/salary-converter/": {
     "title": "月薪換算時薪是多少？時薪月薪年薪換算器（2026）",
@@ -113,7 +113,7 @@
   },
   "/zh/tools/ev-vs-gas/": {
     "title": "電動車和汽油車哪個便宜？每公里成本與五年總成本計算機（2026）",
-    "description": "輸入油價、油耗、電價與每百公里耗電，比較每公里成本、每年油電費用與五年持有總成本。"
+    "description": "電動機車（Gogoro、Ionex）與燃油機車哪個划算？輸入電池資費、油價油耗、保養、牌照稅、燃料費與補助，比較每公里成本與五年總持有成本。"
   },
   "/zh/tools/cashback-breakeven/": {
     "title": "信用卡年費值得嗎？年費回本與打平月消費計算機（2026）",

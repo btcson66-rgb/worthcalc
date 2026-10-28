@@ -59,6 +59,7 @@ const trustBlock: TrustBlockProps = {
 };
 const related = [
   { title: '通勤成本計算機', href: localizedPath(locale, '/tools/commute-cost') },
+  { title: '買車負擔能力與養車月成本計算機', href: localizedPath(locale, '/tools/car-affordability') },
   { title: '買房住幾年才比租屋划算', href: localizedPath(locale, '/rent-vs-buy-breakeven-year') },
   { title: '電動機車補助速查：中央與縣市加起來多少', href: localizedPath(locale, '/money/e-scooter-subsidy-2026') },
   { title: '信用卡分期試算', href: localizedPath(locale, '/tools/installment-true-apr') },
@@ -68,7 +69,7 @@ const related = [
 
 <ToolLayout title={title} description={description} locale={locale} tool={{ name: title }} faq={faq} related={related} alternateLocales={['zh']} trustBlock={trustBlock}>
   <p class="intro">
-    這個電動機車 vs 油車成本計算機用台灣常見情境，比較 Gogoro 類電動機車和 125cc 油車的總持有成本。你可以調整里程、電池資費、油價和保養費，看哪一邊真的省。
+    這個電動機車 vs 油車成本計算機用台灣常見情境，比較 Gogoro 類電動機車和 125cc 油車的總持有成本。你可以調整里程、電池資費、油價和保養費，看哪一邊真的省。<strong>決策重點速覽：</strong>電動機車因需固定繳納月租電池資費，月里程較低時每公里能源成本通常高於 125cc 燃油機車；判斷是否划算應比較<code>五年總持有成本 =（新車價 − 購車補助）+ 60 個月電池資費或油錢 + 五年保養耗材</code>，看看購車補助與保養價差能否抵銷每月的能源費差額。
   </p>
 
   <div class="calculator-grid">

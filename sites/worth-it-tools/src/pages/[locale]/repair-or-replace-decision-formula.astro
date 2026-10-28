@@ -83,6 +83,7 @@ const warrantyHref = localizedPath('zh', '/is-an-extended-warranty-worth-it');
   </>}
   {locale === 'zh' && <>
     <p>「維修超過新品五成就換」不是通用答案。同一筆 NT$6,000，若只延長半年很貴，若能穩定使用 30 個月則可能合理；真正要比的是每個可靠使用月。這一頁處理<strong>家電</strong>（冰箱、洗衣機、冷氣等）過了保固之後自費的決定；手機請看<a href={phoneHref}>手機該換還是繼續用</a>，要不要加買延長保固請看<a href={warrantyHref}>延長保固值得買嗎</a>。還在保固期間的話，先看計算機下面的「先看保固」一節。</p>
+    <p><strong>決策重點速覽：</strong>過保家電該修還是換，請比較兩條路徑的<strong>每個可用月成本</strong>：<code>維修每月成本 =（維修報價 + 再故障期望支出）÷ 修後可用月數 + 舊機每月多耗累進電費</code>，對比<code>換新每月成本 =（新機成交價 + 安裝運費 − 舊機折抵）÷ 新機可用月數</code>。若維修每月成本高於換新，或還在原廠保固期內（應先由出賣人負免費維修責任），就不應自費大修。</p>
     <RepairReplaceCalculator locale={locale} {...calculator} />
     <h2>先看保固：還在保固期內，不要先算自費</h2>
     <p>經濟部 88 年 3 月 3 日公告的《電器買賣定型化契約應記載及不得記載事項》（<a href="https://www.ey.gov.tw/File/622D89D9A3A1ADED">行政院網站全文</a>，2026-10-17 打開；行政院的<a href="https://www.ey.gov.tw/Page/DFB720D019CCCB0A/f6ba3f43-981d-4533-a555-79910d9eaeb3">定型化契約專區</a>列出的版本日期是 88-03-03）在「出賣人之瑕疵擔保責任之售後服務」寫：</p>

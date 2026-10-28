@@ -34,8 +34,8 @@ const faq = [
 ---
 
 <ArticleLayout
-  title="租屋還是買房？真正會改變答案的關鍵數字"
-  description="用持有年限、房貸利息、買賣成本、稅費修繕、租金成長、房價變動與頭期款機會成本，做台灣租屋買房敏感度試算。"
+  title="台灣租屋還是買房划算？房貸利息、稅費與機會成本試算指南"
+  description="台灣租屋還是買房划算？把預計自住年限、房貸利息、買賣契稅與仲介費、房屋稅與地價稅、租金成長與頭期款機會成本全部攤開，做租屋 vs 買房敏感度試算。"
   locale={locale}
   updated="2026-07-18"
   alternateLocales={LOCALES}
@@ -49,7 +49,10 @@ const faq = [
   <p>
     真正有用的做法，是先設定「同一種居住品質」和預計自住年限，再找出哪些假設一調整就讓答案翻盤。
     下方先用可查核公式展開，接著可將自己的數字放進
-    <a href={localizedPath(locale, '/rent-vs-buy-breakeven-year')}>買房住幾年才比租屋划算的損益年分計算</a>做壓力測試。
+    <a href={localizedPath(locale, '/rent-vs-buy-breakeven-year')}>買房住幾年才比租屋划算的損益年分計算</a>做壓力測試，並搭配<a href={localizedPath(locale, '/tools/home-affordability')}>買房負擔能力計算機</a>與<a href={localizedPath(locale, '/how-much-home-can-you-afford')}>可負擔房價試算指南</a>核對每月收支比。
+  </p>
+  <p>
+    <strong>決策重點速覽：</strong>比較租屋與買房不能只看「房租 vs 房貸月付」，因為房貸月付裡的本金會轉為房屋淨值，而買房真正消耗的不可回收成本是<code>房貸利息 + 買入契稅規費仲介 + 每年房屋稅地價稅管理修繕 + 未來賣出仲介稅費 + 頭期款機會成本</code>。若預計居住年數短於買賣雙邊交易摩擦成本的攤提年限，租屋往往更具財務彈性。
   </p>
 
   <DecisionGuide content={guide} />

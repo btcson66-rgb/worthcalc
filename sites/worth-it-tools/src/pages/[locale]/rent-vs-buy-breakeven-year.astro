@@ -23,8 +23,8 @@ const articles: Record<EditorialLocale, { title: string; description: string; fa
     ],
   },
   zh: {
-    title: '買房住幾年才可能比租屋划算？損益年分計算',
-    description: '逐年比較房貸餘額、買賣成本、房屋稅與修繕、租金成長、房價變動及頭期款機會成本，找出首次損益交叉年。',
+    title: '買房住幾年才比租屋划算？租屋 vs 買房損益交叉年試算',
+    description: '買房要住幾年才比租屋划算？逐年比較房貸剩餘本金、買賣契稅與仲介費、房屋稅與修繕、租金成長及頭期款機會成本，找出首次損益交叉年。',
     faq: [
       { question: '台灣買房住滿六年就一定比租屋划算嗎？', answer: '不一定。連續持有、設籍並實際居住滿六年可能影響自住房地租稅優惠，但財務損益還取決於房價、利率、買賣費用、稅費、修繕、租金與頭期款機會報酬。' },
       { question: '為什麼不能把整筆房貸月付都當成本？', answer: '月付中的利息是成本，本金會降低房貸餘額並形成權益。計算器先記錄所有現金支出，再在預計出售年扣除清償房貸後可回收的淨售屋款，避免把本金重複算成損失。' },
@@ -92,6 +92,7 @@ if (!guide) throw new Error(`Missing rent-buy break-even guide for ${locale}`);
   {locale === 'zh' && <>
     <p>「買房至少住五年」和「自住滿六年」是兩種不同概念。前者只是常見口訣，後者可能牽涉台灣自住房地租稅條件；兩者都不會自動算出你的房貸利息、房貸餘額、買賣費用、修繕與租金。</p>
     <p>真正的問題是：若分別在第 1 年、第 2 年到第 30 年出售，哪一年清償房貸並扣除賣出成本後，買房淨成本第一次不高於租屋？這一頁逐年找交叉，而不是先決定答案再挑假設。</p>
+    <p><strong>決策重點速覽：</strong>判斷買房要住幾年才比租屋划算，關鍵在於逐年比較<code>買房累積淨成本 = 頭期款與買入規費 + 歷年房貸月付與持有稅費修繕 + 前期現金機會成本 −（當年預估售價 − 賣出仲介稅費 − 當年房貸剩餘本金）</code>與<code>租屋累積淨成本 = 歷年租金總和</code>。先用<a href="/zh/tools/home-affordability/">買房負擔能力計算機</a>與<a href="/zh/how-much-home-can-you-afford/">可負擔房價試算指南</a>確認收支比與頭期款安全後，再用下方計算器找出首次損益交叉年。</p>
     <DecisionGuide content={guide} />
     <RentBuyBreakevenCalculator locale={locale} {...calculator} />
 

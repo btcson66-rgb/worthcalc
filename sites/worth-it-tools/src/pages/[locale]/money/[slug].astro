@@ -69,6 +69,8 @@ const t = useTranslations(locale);
 const copy = briefCopy(locale);
 const { Content } = await render(entry);
 const reviewed = isoDate(data.lastReviewed.toISOString().slice(0, 10));
+// `updated` (when set) is the date the body last changed; `reviewed` stays the date the sources were checked.
+const modified = data.updated ?? reviewed;
 
 const crumbs = [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
@@ -107,7 +109,7 @@ const relatedLinks = liveRelated.map((href) => ({
   title={data.title}
   description={data.description}
   locale={locale}
-  updated={reviewed}
+  updated={modified}
   breadcrumb={crumbs}
   alternateLocales={alternateLocales}
   trustBlock={trustBlock}
@@ -121,7 +123,9 @@ const relatedLinks = liveRelated.map((href) => ({
         description: data.description,
         url: Astro.url.pathname,
         locale,
-        dateModified: reviewed,
+        // datePublished is only emitted for briefs that carry `updated`: publishAt is their release date.
+        datePublished: data.updated ? data.publishAt : undefined,
+        dateModified: modified,
         site: Astro.site,
       }),
     breadcrumbJsonLd(crumbs, Astro.site),

@@ -90,6 +90,11 @@ const moneyBriefs = defineCollection({
     briefSlug: z.string(),
     /** Release date, inclusive. See PUBLISH_AS_OF in src/lib/publication.ts. */
     publishAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    /**
+     * Date the body was last edited, when that is later than `lastReviewed` (the date the sources were
+     * re-checked). Set only when text was added without re-verifying the sources; drives dateModified.
+     */
+    updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     /** Which cluster the brief belongs to, for the hub's grouping. */
     cluster: z.enum(['rates', 'protection', 'ownership', 'earning']),
     /**

@@ -5,6 +5,10 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { seoPackage001 } from '../../data/seoPackage001';
 import { seoPackageGuides } from '../../data/seoPackageRegistry';
 import { fallbackTrustBlock } from '../../lib/trustBlock';
+import { articleJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+import { localizedCorePath, useTranslations } from '../../i18n/utils';
+import { GUIDE_DATES } from '../../data/pageDates';
+import MoneyBridge from '../../components/MoneyBridge.astro';
 
 export async function getStaticPaths() {
   // Growth articles only. The en and zh legal pages are static files under
@@ -46,12 +50,34 @@ const trustBlock = growthEntry.data.sources?.length
     locale,
   }
   : undefined;
+
+// Guides with sourced dates (src/data/pageDates.ts) describe themselves as an Article with datePublished and
+// dateModified. Passing jsonLd turns off the layout's own breadcrumb node, so it is added here.
+const guideDates = locale === 'zh' && !packageSchema ? GUIDE_DATES[growthEntry.data.articleSlug] : undefined;
+const t = useTranslations(locale);
+const guideJsonLd = guideDates
+  ? [
+    articleJsonLd({
+      headline: growthEntry.data.title,
+      description: growthEntry.data.description,
+      url: Astro.url.pathname,
+      locale,
+      datePublished: guideDates.datePublished,
+      dateModified: guideDates.dateModified,
+      site: Astro.site,
+    }),
+    breadcrumbJsonLd([
+      { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
+      { name: growthEntry.data.title, url: Astro.url.pathname },
+    ], Astro.site),
+  ]
+  : undefined;
 ---
 <ArticleLayout
   title={growthEntry.data.title}
   description={growthEntry.data.description}
   locale={locale}
-  updated={reviewedOn}
+  updated={guideDates?.dateModified ?? reviewedOn}
   trustBlock={trustBlock}
   alternateLocales={alternateLocales}
   seoTitle={packageMeta?.seoTitle}
@@ -60,8 +86,9 @@ const trustBlock = growthEntry.data.sources?.length
   robots={packageMeta?.robots}
   image={packageMeta?.ogImage}
   imageAlt={packageMeta?.imageAlt}
-  jsonLd={packageSchema ? [packageSchema] : undefined}
+  jsonLd={packageSchema ? [packageSchema] : guideJsonLd}
   showTitle={!packageMeta}
 >
   <GrowthContent />
+  <MoneyBridge path={`/${growthEntry.data.articleSlug}`} locale={locale} />
 </ArticleLayout>

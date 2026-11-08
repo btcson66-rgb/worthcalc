@@ -2,7 +2,10 @@
 import type { Locale } from '../consts';
 import type { BreadcrumbItem, FaqItem } from '../lib/seo';
 import { getCalculatorReview } from '../lib/calculatorReview';
-import { softwareAppJsonLd } from '../lib/seo';
+import { softwareAppJsonLd, techArticleJsonLd } from '../lib/seo';
+import { TOOL_CONTENT_UPDATED, TOOL_FIRST_PUBLISHED } from '../data/pageDates';
+import { TOOL_PRESETS } from '../data/toolPresets';
+import { BRIDGE_MAP } from '../data/moneyBridge';
 import { localizedCorePath, useTranslations } from '../i18n/utils';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateRecs from '../components/AffiliateRecs.astro';
@@ -16,6 +19,8 @@ import BaseLayout from './BaseLayout.astro';
 import type { TrustBlockProps } from '../types/trustBlock';
 import { fallbackTrustBlock, isoDate } from '../lib/trustBlock';
 import AuthorByline from '../components/AuthorByline.astro';
+import MoneyBridge from '../components/MoneyBridge.astro';
+import ToolPresets from '../components/ToolPresets.astro';
 
 interface RelatedLink {
   title: string;
@@ -56,6 +61,13 @@ const crumbs = breadcrumb ?? [
   { name: t('breadcrumb.home'), url: localizedCorePath(locale, '/') },
   { name: tool.name, url: Astro.url.pathname },
 ];
+const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+// zh calculators with a sourced first-publish date also describe their methodology as a TechArticle.
+const datePublished = locale === 'zh' && !noindex ? TOOL_FIRST_PUBLISHED[slug] : undefined;
+const addedContent = [
+  TOOL_PRESETS[slug] ? '情境範例' : '',
+  BRIDGE_MAP[`/tools/${slug}`] ? '延伸試算' : '',
+].filter(Boolean).join('與');
 const jsonLd = [
   softwareAppJsonLd({
     name: tool.name,
@@ -64,8 +76,18 @@ const jsonLd = [
     locale,
     site: Astro.site,
   }),
+  ...(datePublished
+    ? [techArticleJsonLd({
+      headline: title,
+      description,
+      url: Astro.url.pathname,
+      locale,
+      datePublished,
+      dateModified: TOOL_CONTENT_UPDATED,
+      site: Astro.site,
+    })]
+    : []),
 ];
-const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
 const review = getCalculatorReview(slug, locale);
 const resolvedTrustBlock = trustBlock ?? fallbackTrustBlock(locale, review?.lastUpdated);
 const reviewLabels = {
@@ -100,8 +122,14 @@ const reviewLabels = {
   <Breadcrumb items={crumbs} />
   <h1>{title}</h1>
   <AuthorByline locale={locale} lastVerified={isoDate(resolvedTrustBlock.lastReviewed)} />
+  {datePublished && (
+    <p class="content-dates">
+      首次發布 <time datetime={datePublished}>{datePublished}</time>・內容更新 <time datetime={TOOL_CONTENT_UPDATED}>{TOOL_CONTENT_UPDATED}</time>{addedContent ? `（新增${addedContent}）` : ''}
+    </p>
+  )}
   <AdSlot noindex={noindex} />
   <section class="tool">
+    <ToolPresets slug={slug} locale={locale} />
     <slot />
   </section>
   {showReview && review && (
@@ -134,6 +162,7 @@ const reviewLabels = {
   <AffiliateRecs toolSlug={slug} locale={locale} />
   {locale === 'en' && <NewsletterSignup id="tool-newsletter-signup" />}
   <p class="privacy-note">{t('tool.privacyNote')}</p>
+  <MoneyBridge path={`/tools/${slug}`} locale={locale} />
   <FAQ items={faq} />
   <RelatedLinks links={related} />
   <TopicLinks locale={locale} path={`/tools/${slug}`} />
@@ -171,6 +200,12 @@ const reviewLabels = {
 
   .calculator-review li + li {
     margin-top: 0.4rem;
+  }
+
+  .content-dates {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-block: 0.25rem 0.75rem;
   }
 
   .last-updated,

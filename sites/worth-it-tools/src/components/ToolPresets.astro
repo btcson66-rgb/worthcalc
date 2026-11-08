@@ -1,0 +1,120 @@
+---
+/*
+ * 台灣常見情境一鍵帶入: 2-3 example buttons above a calculator.
+ *
+ * Data lives in src/data/toolPresets.ts, keyed by tool slug. A click writes each value into the field whose id
+ * matches, then fires `input` and `change` on it, which is exactly what typing does, so the page's own script
+ * recomputes. Buttons are plain <button type="button"> (Tab / Enter / Space work), the whole block is rendered
+ * on the server with a fixed layout (no layout shift), and the status line is a polite live region.
+ */
+import { TOOL_PRESETS } from '../data/toolPresets';
+
+interface Props {
+  slug: string;
+  locale: string;
+}
+
+const { slug, locale } = Astro.props;
+const set = locale === 'zh' ? TOOL_PRESETS[slug] : undefined;
+---
+
+{set && (
+  <section class="tool-presets" aria-labelledby={`presets-title-${slug}`} data-tool-presets>
+    <h2 class="tool-presets__title" id={`presets-title-${slug}`}>台灣常見情境一鍵帶入</h2>
+    <p class="tool-presets__hint">以下是範例組合，不是你的實際數字、也不是任何銀行或機構的報價；點一下會把數字填進下方欄位並立刻重算，之後請改成你自己的。</p>
+    <div class="tool-presets__buttons" role="group" aria-label="情境範例">
+      {set.presets.map((preset) => (
+        <button type="button" class="tool-presets__button" aria-pressed="false" data-preset-note={preset.note} data-preset-values={JSON.stringify(preset.values)}>
+          {preset.label}
+        </button>
+      ))}
+    </div>
+    <p class="tool-presets__status" role="status" aria-live="polite" data-preset-status>尚未帶入範例。</p>
+  </section>
+)}
+
+<style>
+  .tool-presets {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    margin-block: 0 1.25rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .tool-presets__title {
+    font-size: 1.05rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .tool-presets__hint {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin: 0 0 0.6rem;
+  }
+
+  .tool-presets__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tool-presets__button {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg, #fff);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .tool-presets__button:hover,
+  .tool-presets__button[aria-pressed='true'] {
+    border-color: var(--color-primary, currentColor);
+    font-weight: 600;
+  }
+
+  .tool-presets__button:focus-visible {
+    outline: 3px solid var(--color-primary, currentColor);
+    outline-offset: 2px;
+  }
+
+  /* Reserve three lines so filling the status text never moves the calculator below. */
+  .tool-presets__status {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin: 0.6rem 0 0;
+    min-height: 4.5em;
+  }
+</style>
+
+<script>
+  function fill(id: string, value: string | number | boolean): void {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+    if (!el) return;
+    if (el instanceof HTMLInputElement && el.type === 'checkbox') el.checked = Boolean(value);
+    else el.value = String(value);
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tool-presets]').forEach((block) => {
+    const buttons = Array.from(block.querySelectorAll<HTMLButtonElement>('button[data-preset-values]'));
+    const status = block.querySelector<HTMLElement>('[data-preset-status]');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        let values: Record<string, string | number | boolean> = {};
+        try {
+          values = JSON.parse(button.dataset.presetValues ?? '{}');
+        } catch {
+          return;
+        }
+        Object.entries(values).forEach(([id, value]) => fill(id, value));
+        buttons.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+        if (status) status.textContent = `已帶入範例「${button.textContent?.trim()}」：${button.dataset.presetNote ?? ''}可以繼續修改任何欄位。`;
+      });
+    });
+  });
+</script>

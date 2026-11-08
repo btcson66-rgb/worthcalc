@@ -456,6 +456,7 @@ export function articleJsonLd(opts: {
   description: string;
   url: string;
   locale: ContentLocale;
+  datePublished?: string;
   dateModified?: string;
   site?: URL;
 }): object {
@@ -467,7 +468,39 @@ export function articleJsonLd(opts: {
     description: opts.description,
     mainEntityOfPage: absolute(base, pagePath(opts.url)),
     inLanguage: LOCALE_HREFLANG[opts.locale],
+    ...(opts.datePublished ? { datePublished: opts.datePublished } : {}),
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    author: personAuthorJsonLd(opts.site, opts.locale),
+    publisher: organizationPublisherJsonLd(opts.site),
+    isPartOf: { '@id': webSiteId(opts.site) },
+  };
+}
+
+/**
+ * TechArticle for a calculator page, emitted next to its WebApplication node (the calculator is the
+ * application; the methodology, tables and sources on the page are the technical article about it).
+ * `datePublished` is the date the page file first entered git history and `dateModified` the date its
+ * content last changed -- both come from src/data/pageDates.ts, never guessed.
+ */
+export function techArticleJsonLd(opts: {
+  headline: string;
+  description: string;
+  url: string;
+  locale: ContentLocale;
+  datePublished: string;
+  dateModified: string;
+  site?: URL;
+}): object {
+  const base = (opts.site?.origin ?? SITE.url).replace(/\/$/, '');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: opts.headline,
+    description: opts.description,
+    mainEntityOfPage: absolute(base, pagePath(opts.url)),
+    inLanguage: LOCALE_HREFLANG[opts.locale],
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
     author: personAuthorJsonLd(opts.site, opts.locale),
     publisher: organizationPublisherJsonLd(opts.site),
     isPartOf: { '@id': webSiteId(opts.site) },

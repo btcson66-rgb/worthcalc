@@ -1,0 +1,113 @@
+---
+/*
+ * "台灣在地金錢決策延伸試算": the static-link bridge from indexed pages to /zh/money/* briefs.
+ *
+ * Data-driven: src/data/moneyBridge.ts maps a page to brief slugs, so this component is the only
+ * place the markup lives. Renders nothing for a page that is not in the map, for non-zh locales,
+ * and for briefs that are not live yet (draft or publishAt in the future).
+ * Links are plain <a href> in server-rendered HTML: no script is needed for a crawler to follow them.
+ */
+import { getCollection } from 'astro:content';
+import { BRIDGE_MAP, MONEY_ANCHORS } from '../data/moneyBridge';
+import { isPublished, publishCutoff } from '../lib/publication';
+
+interface Props {
+  /** Locale-free logical path of the page, e.g. `/tools/commute-cost` or `/how-to-calculate-dti`. */
+  path: string;
+  locale: string;
+}
+
+const { path, locale } = Astro.props;
+const key = `/${path.split('/').filter(Boolean).join('/')}`;
+const slugs = locale === 'zh' ? (BRIDGE_MAP[key] ?? []) : [];
+
+let rows: { href: string; anchor: string; note: string }[] = [];
+if (slugs.length > 0) {
+  const cutoff = publishCutoff();
+  const all = await getCollection('moneyBriefs', ({ data }) => data.locale === 'zh');
+  const bySlug = new Map(all.map((entry) => [entry.data.briefSlug, entry]));
+  rows = slugs.flatMap((slug) => {
+    const entry = bySlug.get(slug);
+    const copy = MONEY_ANCHORS[slug];
+    if (!entry) throw new Error(`moneyBridge: "${slug}" (mapped from ${key}) is not a money brief`);
+    if (!copy) throw new Error(`moneyBridge: "${slug}" has no entry in MONEY_ANCHORS`);
+    if (entry.data.draft || !isPublished(entry.data.publishAt, cutoff)) return [];
+    return [{ href: `/zh/money/${slug}/`, anchor: copy.anchor, note: copy.note }];
+  });
+}
+---
+
+{rows.length > 0 && (
+  <section class="money-bridge" aria-labelledby="money-bridge-heading" data-money-bridge>
+    <h2 id="money-bridge-heading">台灣在地金錢決策延伸試算</h2>
+    <p class="money-bridge__lead">算完這一頁，下面這些短文接著回答同一個決策情境的下一個問題；每篇都附官方來源、查核日期與可驗算的案例。</p>
+    <div class="money-bridge__scroll">
+      <table>
+        <caption class="visually-hidden">延伸試算清單</caption>
+        <thead>
+          <tr><th scope="col">延伸試算</th><th scope="col">你會在那一頁看到什麼</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr>
+              <th scope="row"><a href={row.href}>{row.anchor}</a></th>
+              <td>{row.note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)}
+
+<style>
+  .money-bridge {
+    margin-block: 1.5rem;
+  }
+
+  .money-bridge__lead {
+    color: var(--color-muted);
+  }
+
+  .money-bridge__scroll {
+    overflow-x: auto;
+  }
+
+  .money-bridge table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .money-bridge th,
+  .money-bridge td {
+    border: 1px solid var(--color-border);
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .money-bridge thead th {
+    background: var(--color-surface);
+  }
+
+  .money-bridge tbody th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 40rem) {
+    .money-bridge tbody th {
+      white-space: normal;
+    }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

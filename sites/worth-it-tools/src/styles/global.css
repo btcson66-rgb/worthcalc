@@ -1087,6 +1087,20 @@ main h1 {
   overflow: hidden;
 }
 
+.ad-slot .adsbygoogle {
+  /* .ad-slot is a grid with place-items:center, so a content-less <ins> would
+     shrink to 0px wide and adsbygoogle.push() throws "No slot size for
+     availableWidth=0". Stretch it to the slot so it has a real width. */
+  justify-self: stretch;
+  width: 100%;
+}
+
+/* AdSense marks a no-fill unit with data-ad-status="unfilled": drop the empty
+   dashed box instead of leaving a bare "廣告" frame. */
+.ad-slot:has(.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none;
+}
+
 .ad-label {
   font-size: 0.8rem;
   letter-spacing: 0.04em;

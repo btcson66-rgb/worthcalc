@@ -1,5 +1,6 @@
 ---
 import { LOCALE_LABELS, LOCALES, type ContentLocale } from '../consts';
+import { isSoftDeindexed } from '../lib/seo';
 import { getLocaleFromUrl, switchLocalePath, useTranslations } from '../i18n/utils';
 
 interface Props {
@@ -9,10 +10,19 @@ interface Props {
 const { locales = [...LOCALES] } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
+// Only offer a language whose target page is indexable (same test the hreflang
+// alternates use). The whole /en/ tree is noindex, so an indexable /zh/ page
+// must not link to it: crawlers would be sent to a page that will never be
+// indexed. A noindex page may still link out to an indexable sibling, and the
+// current locale is always kept so the switcher never lists the page away.
+const offered = locales.filter(
+  (target) => target === locale || !isSoftDeindexed(switchLocalePath(Astro.url, target)),
+);
 ---
 
+{offered.length > 1 && (
 <nav class="language-switch" aria-label={t('lang.switch')}>
-  {locales.map((target) => (
+  {offered.map((target) => (
     <a
       href={switchLocalePath(Astro.url, target)}
       aria-current={target === locale ? 'true' : undefined}
@@ -21,3 +31,4 @@ const t = useTranslations(locale);
     </a>
   ))}
 </nav>
+)}

@@ -180,6 +180,4 @@ related:
 
 - [托育費 回職場 划算嗎](/zh/guides/childcare-return-to-work-break-even/)
 
-- [freelance minimum billable rate](/en/guides/freelance-minimum-billable-rate/)
-
 - [接案最低報價怎麼算](/zh/guides/freelance-minimum-billable-rate/)

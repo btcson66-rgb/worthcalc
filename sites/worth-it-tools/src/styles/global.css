@@ -1077,14 +1077,40 @@ main h1 {
 .ad-slot {
   display: grid;
   place-items: center;
+  color: var(--color-muted);
+  text-align: center;
+  overflow: hidden;
+}
+
+.ad-slot .adsbygoogle {
+  /* .ad-slot is a grid with place-items:center, so a content-less <ins> would
+     shrink to 0px wide and adsbygoogle.push() throws "No slot size for
+     availableWidth=0". Stretch it to the slot so it has a real width. */
+  justify-self: stretch;
+  width: 100%;
+}
+
+/* Until AdSense reports a filled unit the slot keeps its width (so push() has
+   a size) but is clipped to zero height. adsbygoogle.js sets an inline height
+   on the <ins> as soon as it requests an ad and only afterwards reports
+   "unfilled"; letting that height through and then collapsing it shifted tool
+   pages twice (measured CLS 0.13 at 1280px). Clipped, a pending or unfilled
+   unit leaves no empty box and moves nothing. The frame, reserved height and
+   label appear only when there is an ad to show. */
+.ad-slot:not(:has(.adsbygoogle[data-ad-status="filled"])) {
+  height: 0;
+}
+
+.ad-slot:has(.adsbygoogle[data-ad-status="filled"]) {
   min-height: 90px;
   margin: 1.5rem 0;
   border: 1px dashed var(--color-border);
   border-radius: var(--radius);
   background: var(--color-surface-2);
-  color: var(--color-muted);
-  text-align: center;
-  overflow: hidden;
+}
+
+.ad-label {
+  display: none;
 }
 
 .ad-label {

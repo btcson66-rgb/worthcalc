@@ -354,7 +354,7 @@ export const homeTw = {
         {
           href: '/zh/tools/salary-converter/',
           title: '時薪月薪年薪換算',
-          blurb: '月薪 ÷ 30 ÷ 8 換算時薪，依勞基法算平日與休息日加班費，對照 115 年基本工資。',
+          blurb: '月薪 ÷ 30 ÷ 8 換算時薪，依勞基法算平日與休息日加班費，對照基本工資（2027 年起 30,900 元、205 元）。',
           kind: 'calculator',
         },
         {

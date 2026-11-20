@@ -64,7 +64,7 @@
         <div><dt>實際工時時薪（比較兩份工作用）</dt><dd id="sal-eff">—</dd></div>
         <div><dt>年薪（不含加班）</dt><dd id="sal-annual">—</dd></div>
         <div id="sal-bonus-row" hidden><dt>其中約定的年終獎金</dt><dd id="sal-bonus-out">—</dd></div>
-        <div><dt>對照 115 年基本工資</dt><dd id="sal-floor">—</dd></div>
+        <div><dt>對照現行基本工資（2027 年 1 月 1 日起自動改用 30,900 元、205 元）</dt><dd id="sal-floor">—</dd></div>
         <div><dt>平日加班費（每月）</dt><dd id="sal-wd-pay">—</dd></div>
         <div><dt>休息日加班費（每月）</dt><dd id="sal-rd-pay">—</dd></div>
         <div><dt>含加班的月收入</dt><dd id="sal-total-month">—</dd></div>
@@ -124,6 +124,8 @@
           weekdayDays: num('sal-wd-d'),
           restDayHoursPerVisit: num('sal-rd-h'),
           restDayVisits: num('sal-rd-n'),
+          // 最低工資 follows the date: 2026 figures until 2026-12-31, 2027 figures from 2027-01-01.
+          asOf: new Date().toISOString().slice(0, 10),
         });
       } catch {
         el('sal-status').textContent = '請輸入大於 0 的薪資；每日工時不超過 8 小時，平日每次加班 0 到 4 小時，休息日每次出勤 0 到 12 小時，其餘欄位填 0 或正數。';
@@ -145,8 +147,8 @@
       }
       const floorName = r.floorKind === 'monthly' ? '月' : '每小時';
       el('sal-floor').textContent = r.belowFloor
-        ? `低於 115 年${floorName}最低工資 ${yuan.format(r.floor)} 元（差 ${yuan2.format(-r.floorGap)} 元）`
-        : `未低於 115 年${floorName}最低工資 ${yuan.format(r.floor)} 元`;
+        ? `低於 ${r.floorYear} 年${floorName}最低工資 ${yuan.format(r.floor)} 元（差 ${yuan2.format(-r.floorGap)} 元）`
+        : `未低於 ${r.floorYear} 年${floorName}最低工資 ${yuan.format(r.floor)} 元`;
       el('sal-wd-pay').textContent = money(r.overtime.weekday);
       el('sal-rd-pay').textContent = money(r.overtime.restDay);
       el('sal-total-month').textContent = money(r.monthlyWithOvertime);

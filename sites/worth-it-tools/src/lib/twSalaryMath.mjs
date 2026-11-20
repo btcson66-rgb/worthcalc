@@ -48,6 +48,24 @@
 
 export const MIN_WAGE_MONTHLY = 29500; // 勞動部, 115-01-01
 export const MIN_WAGE_HOURLY = 196; // 勞動部, 115-01-01
+/**
+ * 2027 (116-01-01) minimum wage, 勞動部 歷年最低工資/基本工資調整: "民國115年10月16日發布，自116年1月1日起實施，
+ * 訂定每月最低工資為30,900元，每小時最低工資為205元" (read 2026-11-20,
+ * https://www.mol.gov.tw/1607/28162/28166/28180/99861/28184/29016/post). Not in force before 2027-01-01, so the
+ * MIN_WAGE_* constants above stay on the 2026 figures; minimumWageAsOf() switches by date.
+ */
+export const MIN_WAGE_MONTHLY_2027 = 30900;
+export const MIN_WAGE_HOURLY_2027 = 205;
+export const MIN_WAGE_2027_EFFECTIVE = '2027-01-01';
+
+/** The minimum wage in force on an ISO date (YYYY-MM-DD). No date, or a date before 2027-01-01 -> the 115 figures. */
+export function minimumWageAsOf(isoDate) {
+  if (typeof isoDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(isoDate) && isoDate >= MIN_WAGE_2027_EFFECTIVE) {
+    return { year: 116, monthly: MIN_WAGE_MONTHLY_2027, hourly: MIN_WAGE_HOURLY_2027 };
+  }
+  return { year: 115, monthly: MIN_WAGE_MONTHLY, hourly: MIN_WAGE_HOURLY };
+}
+
 export const DAYS_PER_MONTH = 30; // 勞動部 月薪 ÷ 30
 export const NORMAL_DAILY_HOURS = 8; // 勞基法 第 30 條
 export const NORMAL_WEEKLY_HOURS = 40; // 勞基法 第 30 條
@@ -145,10 +163,11 @@ export function overtimePay({ hourlyWage, weekdayHoursPerDay = 0, weekdayDays = 
 }
 
 /** Minimum-wage check. kind: 'monthly' (按月計酬, full time) | 'hourly' (按時計酬, also used for 日薪 ÷ 每日工時). */
-export function minimumWageGap({ kind, amount }) {
-  const floor = kind === 'monthly' ? MIN_WAGE_MONTHLY : MIN_WAGE_HOURLY;
+export function minimumWageGap({ kind, amount, asOf }) {
+  const wage = minimumWageAsOf(asOf);
+  const floor = kind === 'monthly' ? wage.monthly : wage.hourly;
   const value = need('amount', amount);
-  return { floor, below: value < floor - 1e-9, gap: value - floor };
+  return { floor, floorYear: wage.year, below: value < floor - 1e-9, gap: value - floor };
 }
 
 /**
@@ -175,6 +194,7 @@ export function convertSalary({
   weeks = 52,
   bonusMonths = 0,
   compareWeeklyHours = NORMAL_WEEKLY_HOURS,
+  asOf,
 }) {
   const value = need('amount', amount, { positive: true });
   const warnings = [];
@@ -224,8 +244,8 @@ export function convertSalary({
 
   const floorCheck =
     hourlyBasisFloorKind === 'monthly'
-      ? minimumWageGap({ kind: 'monthly', amount: monthly })
-      : minimumWageGap({ kind: 'hourly', amount: hourly });
+      ? minimumWageGap({ kind: 'monthly', amount: monthly, asOf })
+      : minimumWageGap({ kind: 'hourly', amount: hourly, asOf });
 
   return {
     basis,
@@ -239,6 +259,7 @@ export function convertSalary({
     weeklyHours,
     floorKind: hourlyBasisFloorKind,
     floor: floorCheck.floor,
+    floorYear: floorCheck.floorYear,
     belowFloor: floorCheck.below,
     floorGap: floorCheck.gap,
     warnings,
